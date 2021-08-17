@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
+.cajaAdjunto{
+    border: 4px outset #369;
+    
+}
+
+.imgAdj{
+    width: 35px;
+    /*height: 35px;*/
+}
+
+.parrafoAdj{
+    font-family: Roboto;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(53, 67, 148);
+}
+
+.opacidadCloseAdj{
+   width: 20px;
+   height: 20px;
+   color: black;
+   cursor: pointer;
+}

@@ -1,0 +1,235 @@
+
+   @import "~@ng-select/ng-select/themes/default.theme.css";
+  #saveBtn {
+    /*display: inline;
+    position: fixed;
+    bottom: 70px;
+    right: 400px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: transparent;
+    cursor: pointer;
+    padding: 15px;
+    font-size: 18px;*/
+  }
+  
+  #saveBtn:hover {
+    /*background-color: transparent;*/ /* Add a dark-grey background on hover */
+  }
+
+  /*.nav-link {
+    background-color: #91aff0;
+  }*/
+
+  .nav .nav-item .nav-link.active {
+    background-color: #91aff0;
+  }
+
+  .fuenteTd{
+    font-size: 20px;
+  }
+
+  .tituloOne{
+    font-size: 24px;
+    color: rgb(65, 45, 7);
+    font-family: Roboto;
+    /* font-weight: 700; */
+    font-weight: 400;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  .tituloOne-Poliza{
+    font-size: 24px;
+    color: rgb(65, 45, 7);
+    font-family: Roboto;
+    /* font-weight: 700; */
+    font-weight: 400;
+    
+  }
+
+
+  .tituloTwo{
+    font-size: 13px;
+    color: rgb(133, 92, 17);
+    font-family: Roboto;
+    font-weight: 500;
+    display: flex;
+  }
+
+  .tituloThreeCheck{
+    font-size: 13px;
+    color: rgb(133, 92, 17);
+    font-family: Roboto;
+    font-weight: 500;
+  }
+
+  .respuestaTitulo{
+    font-size: 13px;
+    color: black;
+    font-family: Roboto;
+    font-weight: normal;
+  }
+
+  .colorGrillaAleatorio{
+    font-size: 12px;
+    color: black;
+    font-family: Roboto;
+    font-weight: normal;
+    background-color: #dee2e68c;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
+  }
+  .colorGrillaBlanco{
+    font-size: 12px;
+    color: black;
+    font-family: Roboto;
+    font-weight: normal;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
+  }
+  .txtCabecera{
+    font-size: 14px;
+    font-family: Roboto;
+    color: rgba(38, 41, 109, 0.6);
+    font-weight: bold;
+}
+
+.quitarEstiloCard{
+  background-color: white;
+  border:none;
+}
+
+.detallePoliza{
+  border-top: 1px solid rgba(70, 67, 67, 0.494);
+  /*cursor: none;*/
+}
+
+.cabeceraPolizas{
+  text-decoration: none;
+  color: black;
+
+}
+
+.txtCabeceraNegrita{
+  font-size: 14px;
+  font-family: Roboto;
+  color: black;
+  font-weight: 700;
+}
+
+
+.txtCabeceraNegritaListas{
+  font-weight: bold;
+  font-family: Roboto;
+  color: black;
+  font-weight: 700;
+}
+
+.containerCus{
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.containerCusDet{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.bordesCabecera{
+  box-shadow: 8px 8px 10px #c4c4c4;
+    background: #F6F6F6;
+    border-top: 1px solid #7C7C7C;
+}
+
+
+.card-header{
+  padding: 0px;
+  border-color: #27246d!important;
+  border:  1px solid;
+  
+}
+
+
+ .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  /* color: #fff; */
+  /* background-color: #007bff94; */
+  background-color: #27246d!important;
+  border-radius: inherit;
+/* color: #fff!important; */
+ }
+
+ a{
+  color: black;
+  }
+
+  .TitleLine{
+    padding-bottom: 1%;
+  position: relative;
+  z-index : 1;
+  font-size: 28px;
+  }
+  .TitleLine:before{
+  content : "";
+  position: absolute;
+  left    : 0;
+  bottom  : 0;
+  height  : 1pxs;
+  width   : 100%;  /* or 100px */
+  border-bottom:2px solid #FA7000;
+  }
+  
+  ng-select>div {
+    border: 1px solid #eee;
+    border-radius: 0.25rem 0 0 0.25rem;
+    width: 250px !important;
+  }
+  ng-select>div>div.single {
+    height: 36px;
+    width: 250px !important;
+  }
+  ng-select>div>div.single>div.value {
+    line-height: 36px;
+    width: 250px !important;
+  }
+  ng-select>div>div.single>div.toggle {
+    line-height: 36px;
+    width: 250px !important;
+  }
+
+  ng-select ng-select-single ng-select-searchable ng-select-clearable ng-select-bottom{
+  width: 250px;
+}
+ 
+.ng-select div, .ng-select input, .ng-select span {
+ 
+  font-weight: normal !important;
+}
+
+
+.statusDropdownContainer, .calendarBtnContainer{
+  padding-top: 6px;
+}
+
+.statusFilterDropdown{
+  box-shadow: -2px 2px 4px 0px #888;
+  background-color: #f2f8f9;
+  border: 1px solid #d3d3d3;
+}
+
+
+.flex-middle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.table-responsive2{
+  display: block;
+    width: 100%;
+    
+
+}

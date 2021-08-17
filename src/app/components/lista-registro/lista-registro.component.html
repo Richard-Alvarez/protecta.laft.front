@@ -1,0 +1,166 @@
+
+<div class="row mb-2 mt-2">
+    <div class="col-6">
+        <h5 class="TitleLine" >{{ this.Titulo }}</h5>
+    </div>
+    <div class="col-md-6 d-flex justify-content-between">
+     
+        <select class="form-control buttonSinBorder colorButton" [(ngModel)]="senialSeleccionada" (change)="onChangeSenial()">
+            <option *ngFor="let senial of seniales" [ngValue]="senial">{{senial.descripcion}}</option>
+        </select>
+
+        <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton" (click)="descargar()">
+            <i class="fas fa-download"></i>
+            Descargar
+        </button>
+
+        <input type="text" class="form-control buttonSinBorder colorButton" maxlength="25" placeholder="Búsqueda rápida" (keyup.enter)="Actualizar()"  [(ngModel)]="busqueda">
+    </div>
+    
+
+
+    
+
+ 
+    <div class="row borderFormat" style="padding-right: 15px;padding-left: 15px;">
+         
+            <div class="row" style="width: 100%;">
+
+                <div class="col-lg-3 form-group ">
+                    <label class="fontText">Fecha Inicio</label>            
+                    <input   type="text"
+                    (keypress) =  "quotationNumberPressed($event)"
+                           [(ngModel)]="FiltroDateIni"
+                           placeholder="Rango de Fechas"
+                           class="form-control buttonSinBorder colorButton"
+                           bsDatepicker
+                           #dpr="bsDatepicker"
+                           [maxDate]="maxDate"
+                           [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
+                  </div>
+                  <div class="col-lg-3 form-group ">
+                    <label class="fontText">Fecha Fin</label>            
+                    <input   type="text"
+                    (keypress) =  "quotationNumberPressed($event)"
+                           [(ngModel)]="FiltroDateFin"
+                           placeholder="Rango de Fechas"
+                           class="form-control buttonSinBorder colorButton"
+                           bsDatepicker
+                           #dpr="bsDatepicker"
+                           [maxDate]="maxDate"
+                           [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
+                  </div>
+            </div>
+        <!--(ngModelChange) = "SearchDate()"-->
+       
+          
+          <div class="col-lg-3">
+            <label  class="fontText">Buscar Por:</label>
+            <select class="form-control buttonSinBorder" [(ngModel)]="BoolOpciones" (change)="onChangeFiltro()">
+                <option  value="0">documento</option>
+                <option  value="1">nombres</option>
+            </select>
+        </div>
+        <div class="col-lg-8" style="padding-right: 0px;">
+                   <div *ngIf= "!checkOpcDocumento"  class="ForName">
+                       <div class="row">
+                           <div class="col-lg-4">
+                            <label class="fontText">Nombre</label>
+                            <input [(ngModel)] = "firstname"  type="text" (keypress)="valText($event,5)"  style="width: 100%;margin-right: 10px;" class="form-control buttonSinBorder" maxlength="20">
+                           </div>
+                           <div class="col-lg-4">
+                            <label class="fontText">Apellido Paterno</label>
+                            <input type="text" [(ngModel)] = "lastname"     (keypress)="valText($event,5)"  (keyup.enter)="BuscarRegistro()" style="width: 100%;margin-right: 10px;" class="form-control buttonSinBorder" maxlength="20">
+                        </div> 
+                        <div class="col-lg-4">
+                            <label class="fontText">Apellido Materno</label>
+                            <input type="text" [(ngModel)] = "lastname2"  (keypress)="valText($event,5)"   style="width: 100%;margin-right: 10px;" class="form-control buttonSinBorder" maxlength="20">
+                        </div>
+                        
+                       </div>
+                        
+                   </div> 
+                   <div  *ngIf= "checkOpcDocumento"  class="ForDocument" style="display:inline-flex;width: 100%;">
+                    <div class="row" style="width: 100%;">
+
+                       <div class="col-lg-4 tipoDoc" >
+                            <label for="" class="fontText">Tipo de documento</label>
+                            <select class="form-control buttonSinBorder" style="width: 180px;"  [(ngModel)] = "TipoDoc" >
+                                    <option value="{{tipoDocumento.id}}" *ngFor="let tipoDocumento of maestros.tiposDocumento">{{tipoDocumento.descripcion}}</option>
+                                
+                            </select>
+                       </div>
+                        <div class="col-lg-6 NroDoc" style="margin-left: 10px;">
+                                <label for="" class="fontText">Número de documento</label>
+                                <input [(ngModel)] = "NumeroDoc"  type="text" (keypress)="valText($event,2)"  (keyup.enter)="BuscarRegistro()"  maxlength="20" class="form-control buttonSinBorder" maxlength="20">
+                            
+                       </div>
+                    </div>
+                </div>
+                   
+        </div>
+        <div class="col-lg-1" style="padding-top: 25px;">
+               
+                <button style="margin-top: auto;" class="btn btn-warning text-white " (click)="BuscarRegistro()">Buscar</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-responsive">
+
+
+    <table id="tableRegistero" class="table table-striped table-lg" style="font-size: 12px;width: 100%;">
+        <thead>
+            <tr>
+                <th>Fecha Registro</th>
+                <th>Fecha Carga</th>
+                <th>ID</th>
+                <th>T.Persona</th>
+                <th>T.Doc.</th>
+                <th>N° documento</th>
+                <th>Apellido paterno</th>
+                <th>Apellido materno</th>
+                <th>Nombre o Razón Social</th>
+                <th>País</th>
+                <th>Categoria</th>
+                <th>Fecha Vigencia</th>
+                
+                <th>Señal</th>
+                
+                <th style="text-align: center;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let registro of registrosPagina ">
+                <td>{{registro.fechaRegistro}}</td>
+                <td>{{registro.fechaCarga}}</td>
+                <td>{{registro.numero}}</td>
+                <td>{{registro.persona.descripcion}}</td>
+                <td>{{registro.documento.descripcion}}</td>
+                <td>{{registro.numeroDocumento}}</td>
+                <td>{{registro.apellidoPaterno}}</td>
+                <td>{{registro.apellidoMaterno}}</td>
+                <td>{{registro.nombre}}</td>
+                <td>{{registro.pais.descripcion}}</td>
+                <td>{{registro.categoriaNombre}}</td>
+                <td>{{registro.fechaVigencia}}</td>
+                <td><span class="app-señal"  [ngStyle]="{'background-color': registro.senial.color}"></span></td>
+                
+                <td style="display: flex;"><button title="Ver" class="btn btn-link" style="color: rgba(51, 51, 51, 1);font-size: 0.90rem;" (click)="verRegistro(registro)"><i style="color : gray" class="fab fas fa-eye"></i></button>
+                    <button class="btn btn-link" title="Pólizas" style="color: rgba(51, 51, 51, 1);font-size: 0.90rem;" (click)="verReporte(registro)"><i  style="color : gray" class="fab fas fa-file-alt"></i></button></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex justify-content-center">
+    <ul class="app-pag">
+        <li class="app-pag-item" (click)="paginaPrev()"><a><i class="fas fa-chevron-left"></i></a></li>
+        <li *ngFor="let pag of paginas" class="app-pag-item {{pag.clase}}" (click)="verPagina(pag)">
+            <a>{{pag.numero}}</a></li>
+        <li class="app-pag-item" (click)="paginaNext()"><a><i class="fas fa-chevron-right"></i></a></li>
+    </ul>
+</div>

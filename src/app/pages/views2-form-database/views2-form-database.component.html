@@ -1,0 +1,107 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row mb-2 mt-2">
+            <div class="Header">
+                <div class="row borderFormat"
+                    style="display: flex;justify-content: center;align-items: center;padding-left: 750px;">
+                    <div class="col-lg-9" title="Señales" style="width: 220px;">
+                        <select [(ngModel)]="signalId" name="signalId" 
+                            class="form-control buttonSinBorder">
+                            <option value="0" selected>Señales de alerta</option>
+                            <option>Alto</option>
+                            <option>Medio</option>
+                            <option>Bajo</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                    <!-- <div class="col-lg-1" title="Volver a Inicio"
+                        style="display: flex;justify-content: center;align-items: center;">
+                        <button 
+                            style="display: flex;justify-content: center;align-items: center;"
+                            class="btn btn-warning text-white buttonSinBorder"
+                            routerLink="/forms-database">Salir</button>
+                    </div> -->
+                </div>
+                <br>
+                <div class="row borderFormat">
+                    <div class="col-lg-1">
+                        <h3>Formulario</h3>
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-1">
+                        <img src="assets/icons/rg2.png" title="Tipos de Señal" />
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-1">
+                        <img src="assets/icons/accepted.png" title="Estado de Formulario" />
+                    </div>
+                    <div class="col-lg-6">
+                      
+                    </div>
+
+                    <div class="col-lg-1" title="Exportar a PDF"
+                    style="display: flex;justify-content: center;align-items: center">
+                    <img src="assets/icons/pdf.png" title="Descargar PDF" alt="" style="cursor: pointer;"
+                       />
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <div class="col-lg-15 form-group" style="display: flex;justify-content: center;align-items: center;">
+                <label>Formulario de Verificación. Gerente Comercial de Masivos</label>
+            </div>
+        </div>      
+        <br>
+        <div class="row">
+            <div class="col-lg-5 form-group">
+                <label>Datos del formulario:</label>
+            </div>
+        </div>
+        <div class="row">
+            &nbsp; &nbsp; &nbsp; &nbsp;
+            <div class="col-lg-10">
+                <label for="txtPeriodo">1. Fecha de hora y envío: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp;30/10/20 17:55</label>
+                <br>
+                <label for="txtPeriodo">2. Nombre del Responsable: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Jorge Dongo</label>
+      
+
+            </div>
+        </div>
+     
+        
+     <div class="container">
+        <div class="scrollable">
+        <img src="assets/img/view3.png"  title="Documento llenado" />
+          </div>     
+          <div class="col-lg-2">
+        </div>
+        <div class="row borderFormat" style="display: flex;justify-content: center;align-items: center;padding-left: 350px;">
+            <div class="col-lg-1 form-group" >
+                <img src="assets/icons/user.png" title="Usuario" alt="" style="cursor: pointer;" />
+            </div>
+            <div class="col-lg-5 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Agregar Comentario" >
+             </div>
+             <button
+             style="display: flex;justify-content: center;align-items: center;"
+             class="btn btn-warning text-white ">Solicitar Complemento</button>
+        </div> 
+    </div>
+  
+</div>
+
+</main>
+<app-footer></app-footer>

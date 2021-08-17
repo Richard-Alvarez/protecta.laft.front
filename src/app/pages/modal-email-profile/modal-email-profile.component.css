@@ -1,0 +1,23 @@
+.TitleLine{
+    padding-bottom: 3%;
+    position: relative;
+    z-index: 1;
+   }
+  
+   .TitleLine:before{
+    content : "";
+    position: absolute;
+    left    : 0;
+    bottom  : 0;
+    height  : 1pxs;
+    width   : 100%;  /* or 100px */
+    border-bottom:2px solid #FA7000;
+    }
+
+    .buttonSinBorder{
+        border-radius : inherit;
+      }
+
+      .fontText{
+        font-size: 0.9rem;
+      }

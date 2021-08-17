@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
+.container{
+    font-family: 'Roboto', sans-serif;
+}
+.TitleLine{
+  padding-bottom: 1%;
+position: relative;
+z-index : 1;
+
+}
+/* .btn-warning:focus {
+  box-shadow: 0 0 0 0;
+}
+
+
+
+.btn-warning:not(:disabled):not(.disabled).active:focus, .btn-warning:not(:disabled):not(.disabled):active:focus, .show>.btn-warning.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem red ;
+} */
+
+
+.TitleLine:before{
+content : "";
+position: absolute;
+left    : 0;
+bottom  : 0;
+height  : 1pxs;
+width   : 100%;  /* or 100px */
+border-bottom:2px solid #FA7000;
+}
+.styleButtonActive{
+    background: #26296D 0% 0% no-repeat padding-box;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding: 2% 10% 2% 10%;
+    border-radius: inherit;
+    font-size: 0.9rem;
+    float: right;
+    margin-left: 3%;
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.styleButtonDisable{
+  background: transparent;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  padding: 2% 10% 2% 10%;
+  border-radius: inherit;
+  font-size: 0.9rem;
+  float: right;
+  margin-left: 3%;
+  border:1px solid #26296D;
+}
+
+
+.styleButton{
+    background: #E5EDED 0% 0% no-repeat padding-box;
+    color : rgb(27, 26, 26);
+    font-family: 'Roboto', sans-serif;
+    padding: 2% 10% 2% 10%;
+    border-radius: inherit;
+    font-size: 0.9rem;
+    float: right;
+    margin-left: 3%;
+}
+.fontText{
+    color: #555555;
+    font-size: 0.9rem;
+    margin-bottom: 0rem;
+}
+
+.Circle {
+    height: 20px;
+    width: 20px;
+    background-color:black;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .titleWeigth{
+    color: #FA7000;
+    font-weight: 700;
+  }
+  .textTitle{
+    color: #333333;
+    display: inline-grid; 
+  }
+  .Margintext{
+
+      margin-right: 10%;
+  }
+  .tr{
+    color: rgba(38, 41, 109, 0.6);
+  }
+  .table thead th{
+    border-bottom: 2px solid rgba(38, 41, 109, 1);
+  }
+  .table td, .table th{
+    border-top: none;
+  }
+  .table-sm td, .table-sm th {
+    padding: 1.1rem;
+  }
+  .table-striped tbody tr:nth-of-type(odd){
+    background: rgba(90, 149, 180, 0.05);
+  }
+.client{
+    margin-bottom: 10%;
+}
+.buttonSinBorder{
+  border-radius : inherit;
+}
+.nobor {
+  border: 2px solid transparent !important;
+}
+.supercabecera{
+  text-align: center;
+  border-bottom: 2px solid rgba(38, 41, 109, 0.8) !important;
+  color: rgba(38, 41, 109, 0.4) !important;
+  padding-bottom: 0.5rem !important;
+}
+.buttonDescargar{
+  color: rgba(38, 41, 109, 1) !important;
+  width: 35%;
+  float: right;
+  border: 1px solid rgba(38, 41, 109, 1) !important;
+  font-size: 0.9rem;
+}
+.borderFormat{
+    padding-right: 15px;padding-left: 15px;
+    padding-right: 15px;
+padding-left: 15px;
+border: 1px solid #d4d2d2;
+margin-top: 20px;
+border-top-left-radius: 20px;
+border-bottom-right-radius: 20px;
+padding: 20px;
+width: 100%;
+}
+.custom-checkbox {
+  min-height: 1rem;
+  padding-left: 0;
+  margin-right: 0;
+  cursor: pointer; 
+}
+  .custom-checkbox .custom-control-indicator {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 10px;
+    background-color:rgba(229, 237, 237, 1);
+    border-radius: 15px;
+    margin-right: 10px;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+    box-shadow: none; 
+  }
+    .custom-checkbox .custom-control-indicator:after {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background-color: #f1f1f1;
+      border-radius: 21px;
+      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+      left: -2px;
+      top: -4px;
+      -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+      transition: left .3s ease, background .3s ease, box-shadow .1s ease; 
+    }
+  .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
+    background-color: rgba(255, 122, 0, 1);
+    background-image: none;
+    box-shadow: none !important; 
+  }
+    .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator:after {
+      background-color: rgba(255, 122, 0, 1);
+      left: 15px; 
+    }
+  .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
+    box-shadow: none !important; 
+  }
+  .vertical
+  {
+  vertical-align:middle
+  }
+
+  img {
+   
+     color:blue;
+}

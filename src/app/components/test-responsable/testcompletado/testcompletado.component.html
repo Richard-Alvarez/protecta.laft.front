@@ -1,0 +1,430 @@
+<div class="row" *ngIf="getIsValidStateAllow(stateCompletado.sState)">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card" style="margin-bottom: 0;border-bottom: none;">
+                    <div class="card-header" style="background-color: white;">
+                        <div class="text-left">
+                            <div class="badge {{getClassBagdeState(stateCompletado.sState)}}"
+                                style="color: white;font-size: 20px;font-weight: bold;float: left;">
+                                C </div>
+                        </div>
+                        <div class="text-left">
+                            <div class=""
+                                style="padding-left: 5px;font-size: 20px;font-weight: bold;float: left;">
+                                 -</div>
+                        </div>
+                        <div class="text-left">
+                            <div class="badge"
+                                style="font-size: 20px;font-weight: bold;">
+                                {{capitalizarPrimeraLetra(stateCompletado.sState)}}</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card" *ngIf="(getArray(stateCompletado.sState,regimen.id)).length > 0">
+            <div>
+                <div *ngFor="let userGroup of getArrayUserGroup(regimen.id,stateCompletado.sState); let indexgroup = index">
+                    <div *ngIf="STIPO_USUARIO === 'OC' && getValidationArrayByUser(userGroup)" class="table-responsive">
+                        <div class="col-lg-3" style="display: flex;justify-content: left;">
+                            <h5 style="font-size: 18px;" class="TitleLine">{{userGroup}}
+                            </h5>
+                        </div>
+                    </div>
+                    <br>
+                    <div *ngIf="getValidationArrayByUser(userGroup)" class="card" style="border: none;background-color: white;">
+                        <div class="card-body" style="padding-bottom: 0px;">
+                            <div class="card" style="border: none;background-color: white;">
+                                <div class="card-header" style="padding-bottom: 0px;" >
+                                    <div class="row" *ngIf="STIPO_USUARIO=='RE'">
+                                        <div class="col-lg-1">
+
+                                        </div>
+                                        <div class="col-lg-11">
+                                            <div class="row">
+                                                <div class="col-lg-1" style="padding-left: 0px;">
+                                                    <div class="text-left txtCabecera">Señal</div>
+                                                </div>
+                                                <div class="col-lg-2" style="padding-left: 0px;">
+                                                    <div class="text-left txtCabecera">Fecha de movimiento</div>
+                                                </div>
+                                                <div class="col-lg-1"></div>
+                                                <div class="col-lg-3">
+                                                    <div class="text-left txtCabecera">Respuesta y Comentario</div>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <div class="text-left txtCabecera">Adjuntos</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" *ngIf="STIPO_USUARIO=='OC'">
+                                        <div class="col-lg-1">
+
+                                        </div>
+                                        <div class="col-lg-11">
+                                            <div class="row">
+                                                <div class="col-lg-11">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-lg-2" style="padding-left: 0px;">
+                                                                    <div class="text-left txtCabecera">Señal</div>
+                                                                </div>
+                                                                <div class="col-lg-4" style="padding-left: 0px;">
+                                                                    <div class="text-left txtCabecera">Fecha de
+                                                                        movimiento</div>
+                                                                </div>
+                                                                <div class="col-lg-6" style="padding-left: 0px;">
+                                                                    <div class="text-left txtCabecera">Respuesta Y
+                                                                        Comentario del responsable</div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="text-left txtCabecera">Adjuntos</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <div class="text-center txtCabecera">Revisado</div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div *ngIf="getValidationArrayByUser(userGroup)" class="card-body " style="margin-top: 0px;padding-top: 0px;">
+                        <div style="padding-left: 0px;padding-right: 0px;height: auto;max-height: 400px;overflow-y: auto;overflow-x: hidden;">
+                            <div *ngFor="let item of getArray(stateCompletado.sState,regimen.id);let index = index;"
+                                style="border:none;padding: 0px;margin: 0px;">
+                                <div class="card mt-1"
+                                    style="border:none;padding: 0px;margin: 0px;" 
+                                    *ngIf="getValidationNameEqualsResponsable(userGroup,item.NOMBRECOMPLETO); let indexequals = index">
+                                    <div id="{{stateCompletado.sCollapHead + regimen.desCorto + index}}" style="">
+                                        <div class="card-header headerSenials "
+                                            style="margin-top: 0px;padding-top: 0px;background-color: rgb(43 36 91 / 8%);">
+
+                                            <div class="row">
+                                                <div class="col-lg-1" style="padding-right: 0px;padding-left: 0px;">
+                                                    <div class="pt-4 pl-4">
+                                                        <i class="fas fa-2x fa-ellipsis-h" style="cursor: pointer;"
+                                                            data-toggle="collapse"
+                                                            attr.href="#{{stateCompletado.sHrefHead + regimen.desCorto + index}}"></i>
+                                                    </div>
+                                                    
+
+                                                </div>
+                                                <div class="col-lg-11">
+                                                    <div class="row">
+                                                        <div class="{{getColumsStyleByTypeUser()}}"
+                                                            style="padding-left: 0px;padding-right: 0px;">
+                                                            <div class="card-link unlinkeo">
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-1  pt-3">
+                                                                        <div class="text-left badge badge-danger"
+                                                                            style="font-size: 16px;font-weight: bold;">
+                                                                            {{item.SNOMBRE_ALERTA}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2  pt-3">
+                                                                        <div class="text-left">
+                                                                            <div class="txtDetalle"
+                                                                            style="text-align:justify">
+                                                                                {{item.DFECHA_ESTADO_MOVIMIENTO}}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-8"></div>
+                                                                    <div class="col-lg-1"
+                                                                        *ngIf="STIPO_USUARIO === 'OC'"></div>
+                                                                    <div class="col-lg-1  pt-3"
+                                                                        *ngIf="STIPO_USUARIO === 'RE'"></div>
+
+
+                                                                </div>
+                                                                <div class="row" *ngIf="STIPO_USUARIO === 'OC'">
+                                                                    <div class="col-lg-6">
+                                                                        <div
+                                                                            *ngFor="let pregHeadOne of item.arrPreguntasCabecera;let incPregHeadOne = index;">
+                                                                            <!-- <div class="row mt-2"
+                                                                                style="background-color: rgb(0 0 0 / 20%);"> -->
+                                                                            <div class="row mt-2"
+                                                                                style="">
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="tooltipT">
+                                                                                        <!-- <div class="tooltiptextT">
+
+                                                                                            <div class="ml-1 mr-1">
+                                                                                                {{pregHeadOne.SPREGUNTA}}
+                                                                                            </div>
+                                                                                        </div> -->
+                                                                                        <div class="txtDetalle" 
+                                                                                        style="text-align:justify">
+                                                                                            <div
+                                                                                                style="font-weight: bold;display: inline;color: royalblue;">
+                                                                                                Pregunta:</div>
+                                                                                            {{pregHeadOne.SPREGUNTA}}
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="txtDetalle">
+                                                                                        <div class="row">
+
+                                                                                             <div class="pr-2 "
+                                                                                             style="padding-left:13px;color: royalblue;font-weight: 700;display: inline;">
+                                                                                             {{pregHeadOne.SRESPUESTA}}
+                                                                                             </div>
+                                                                                             <div class="col-10" style ="text-align: justify;">
+                                                                                             {{pregHeadOne.SCOMENTARIO}}
+                                                                                             </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 pt-4 pb-4">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-7">
+                                                                                <div  ngbTooltip="{{arrInputCommentSolCompl[index]}}"  placement="{{UltimoTooltip(index,getArray(stateCompletado.sState,regimen.id))}}">
+                                                                                <input type="text" class="form-control"
+                                                                                    [(ngModel)]="arrInputCommentSolCompl[index]"
+                                                                                    id="{{'Complemento' + regimen.desCorto + index}}"
+                                                                                    placeholder="Ingrese comentario"
+                                                                                   
+                                                                                        >
+                                                                                    
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="col-lg-5">
+                                                                                <!-- <button class="btn btn-warning "
+                                                                                    (click)="solicitarComplemento(index,item)">Solicitar
+                                                                                    complemento</button> -->
+                                                                                    <button  class="btn btn-warning text-white "  (click)="solicitarComplemento(index,item)">Solicitar
+                                                                                        complemento</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12" *ngIf="STIPO_USUARIO === 'RE'">
+                                                                    <div class="row mt-2"
+                                                                        style="padding-left: 0px;padding-right: 0px;"
+                                                                        *ngFor="let pregHeadOne of item.arrPreguntasCabecera;let incPregHeadOne = index;">
+                                                                        <div class="col-lg-4" style="margin-right: 10px;    margin-left: -10px;">
+                                                                            <div class="tooltipT">
+                                                                                <!-- <div class="tooltiptextT">
+                                                                                    <div class="ml-1 mr-1">
+                                                                                        {{pregHeadOne.SPREGUNTA}}
+                                                                                    </div>
+                                                                                </div> -->
+                                                                                <div class="txtDetalle"
+                                                                                style="text-align:justify">
+                                                                                    <div
+                                                                                        style="font-weight: bold; display: inline;color: royalblue;">
+                                                                                        Pregunta:</div>
+                                                                                    {{pregHeadOne.SPREGUNTA}}
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <div class="txtDetalle"
+                                                                            style="text-align:justify">
+                                                                                <div class="row">
+                                                                                    <div class="pr-2"
+                                                                                    style="margin-left: 17px;color: royalblue;font-weight: 700;display: inline;">
+                                                                                    {{pregHeadOne.SRESPUESTA}}
+                                                                                    </div>
+                                                                                    <div class="col-10" style ="text-align: justify;">
+                                                                                    {{pregHeadOne.SCOMENTARIO}}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <app-adjuntar-files [parent]="this"
+                                                                                [item]="item" [indexInput]="index"
+                                                                                [arrFilesAdjuntos]="[]"
+                                                                                [arrFilesGuardados]="getFilesByTipoUsuario(item.arrAdjuntos,'RE')">
+                                                                            </app-adjuntar-files>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mt-3" *ngIf="STIPO_USUARIO === 'OC'">
+                                                                    <div class="col-lg-3">
+
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+                                                                        <app-adjuntar-files [parent]="this"
+                                                                            [item]="item" [indexInput]="index"
+                                                                            [arrFilesAdjuntos]="[]"
+                                                                            [arrFilesGuardados]="getFilesByTipoUsuario(item.arrAdjuntos,'RE')">
+                                                                        </app-adjuntar-files>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-2">
+                                                                                <input type="file" name="file"
+                                                                                    id="archivoFilesComplementary{{regimen.id}}-{{index}}"
+                                                                                    class="inputfile" multiple
+                                                                                    (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'ADJUNTOS-FORM','OC')" />
+                                                                                <div class="text-center">
+                                                                                    <label for="archivoFilesComplementary{{regimen.id}}-{{index}}">
+                                                                                        <i class="fas fa-paperclip fa-2x fa-lg"
+                                                                                            style="color: #706d6d;cursor:pointer">
+                                                                                            <div
+                                                                                                class="parrafoAdj text-center">
+                                                                                                Adjuntar archivo</div>
+                                                                                        </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-10">
+                                                                                <app-adjuntar-files [parent]="this"
+                                                                                    [item]="item" [indexInput]="index"
+                                                                                    [arrFilesAdjuntos]="getFilesCabecera(item, 'ADJUNTOS-FORM',regimen.id)"
+                                                                                    [arrFilesGuardados]="getFilesByTipoUsuario(item.arrAdjuntos,'OC')">
+                                                                                </app-adjuntar-files>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-1"
+                                                            style="padding-left: 25px;padding-right: 0px;padding-top: 47px;"
+                                                            *ngIf="STIPO_USUARIO === 'OC'">
+                                                            <div class="text-center">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" [(ngModel)]="arrCheckbox[index]"
+                                                                         (change)="setDataCheckboxApproved(item,index)"
+                                                                            style="height: 30px;width: 30px;"
+                                                                            class="form-check-input" value="">
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div id="{{stateCompletado.sHrefHead + regimen.desCorto + index}}"
+                                            class="collapse {{parent.getStyleShowByAlert(item.NIDALERTA)}}"
+                                            attr.data-parent="#{{stateCompletado.sCollapHead + regimen.desCorto + index}}">
+                                            
+                                            <app-button-download-report [item]="item" [regimen]="regimen" [STIPO_USUARIO]="STIPO_USUARIO" [parent]="this"></app-button-download-report>
+
+
+
+                                            <div class="card-body" style="background-color: white;">
+                                                <!--<app-nc-company-detail></app-nc-company-detail>-->
+                                                <!--<div *ngIf="STIPO_USUARIO =='OC' && (item.NIDALERTA == 3 || item.NIDALERTA == 4 || item.NIDALERTA == 5 || item.NIDALERTA == 10)">
+                                                    <img *ngIf="STIPO_USUARIO == 'OC' && item.NIDALERTA == 3"
+                                                        src="assets/icons/excel-microsoft.png" title="Descargar Excel Lista GAFI"
+                                                        alt="" style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert(item.NIDALERTA,regimen.id)" />
+                                                    <img *ngIf="STIPO_USUARIO == 'OC' && item.NIDALERTA == 4"
+                                                        src="assets/icons/excel-microsoft.png"
+                                                        title="Descargar Excel Notas de Crédito" alt=""
+                                                        style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert(item.NIDALERTA,regimen.id)" />
+                                                    <img *ngIf="STIPO_USUARIO == 'OC' && item.NIDALERTA == 5"
+                                                        src="assets/icons/excel-microsoft.png"
+                                                        title="Descargar Excel Direcciones Duplicadas" alt=""
+                                                        style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert(item.NIDALERTA,regimen.id)" />
+                                                    <img *ngIf="STIPO_USUARIO == 'OC'  && item.NIDALERTA == 10"
+                                                        src="assets/icons/excel-microsoft.png" 
+                                                        title="Descargar Cliente Riesgo Alto"
+                                                        alt="" style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert(item.NIDALERTA,regimen.id)" />
+                                                    Descargar Registro
+                                                </div>-->
+                                                <div *ngIf="item.NIDALERTA !== 2">
+
+                                                    <app-c1-detail-company [parent]="this" [objAlerta]="item" [objState]="stateCompletado"></app-c1-detail-company>
+                                                    <div class="">
+                                                        <!--CONVERSACION-->
+                                                        <app-comments-alerts-state
+                                                        [parent]="this"
+                                                            [arrConversacion]="item.arrConversacionCabecera">
+                                                        </app-comments-alerts-state>
+                                                    </div>
+
+
+
+                                                </div>
+                                                <!--<div *ngIf="item.NIDALERTA === 2">
+                                                    <app-view-c2-form></app-view-c2-form>
+                                                </div>-->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                            
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-lg-10">
+
+                            </div>
+                            <div class="col-lg-2 text-right"    >
+                                <button type="button" class="btn btn-warning text-white " *ngIf="STIPO_USUARIO==='OC'"
+                                    (click)="aprobarFormularios()">
+                                    Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="card" *ngIf="(getArray(stateCompletado.sState,regimen.id)).length == 0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <p class="text-center">{{parent.cadenaEstadosSinForm}}</p>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

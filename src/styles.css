@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+/*@import url('~@swimlane/ngx-datatable/index.css');
+@import url('~@swimlane/ngx-datatable/themes/material.css');
+@import url('~@swimlane/ngx-datatable/assets/icons.css');*/
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.btn-light {
+    background:rgba(250, 253, 253, 1) !important
+    /*background:rgba(229, 237, 237, 1) !important;*/
+}
+.app-main{
+    margin-top: 40px !important;
+    margin-bottom: 60px !important ;
+}
+
+.text-small{
+    font-size: 12px !important;
+}
+
+ .btn-warning:focus {
+  box-shadow: 0 0 0 0;
+}
+.btn-warning:not(:disabled):not(.disabled).active:focus, .btn-warning:not(:disabled):not(.disabled):active:focus, .show>.btn-warning.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem transparent ;
+}
+.bg-warning, .btn-warning{
+    background-color: #fd7e14 !important;
+    border-bottom: #fd7e14;
+    border-color:#fd7e14;
+
+}
+
+.text-warning{
+    color:  #fd7e14 !important;
+}
+
+.app-señal{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.custom-control-input-danger:checked~.custom-control-label::before{
+    background-color:#EA2E49!important;
+    border-color: #EA2E49!important;
+}
+
+.custom-control-input-warning:checked~.custom-control-label::before{
+    background-color:#FB8414 !important;
+    border-color: #FB8414;
+}
+
+.custom-control-input-green:checked~.custom-control-label::before{
+    background-color:#FBED14 !important;
+    border-color: #FBED14;
+}
+.custom-control-input-medio:checked~.custom-control-label::before{
+    background-color : rgb(152, 214, 77) !important;
+    border-color:rgb(152, 214, 77) !important;;
+}
+.custom-control-input-Retirado:checked~.custom-control-label::before{
+    background-color : #9CA0A4 !important;
+    border-color:#9CA0A4 !important;;
+}
+
+.app-button-rounded{
+    border-radius: 30px !important;
+    margin-right: 5px !important;
+}
+
+.app-opcion-selected{
+/*border-bottom: solid darkorange;*/
+background: rgba(38, 41, 109, 1) !important;
+   color: #fff !important;
+}
+.app-opcion-selected:hover{
+    /*border-bottom: solid darkorange;*/
+    background: rgba(38, 41, 109, 1) !important;
+        color: white !important;
+    }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; }
+.TitleLine{
+    padding-bottom: 10%;
+  position: relative;
+  z-index : 1;
+
+}
+.TitleLine:before{
+  content : "";
+  position: absolute;
+  left    : 0;
+  bottom  : 0;
+  height  : 1px;
+  width   : 10%;  /* or 100px */
+  border-bottom:2px solid #FA7000;
+}
+.btnBlue{
+    color: #fff !important;
+    background-color: rgba(38, 41, 109, 1) !important;
+    border-color:  rgba(38, 41, 109, 1) !important;
+}
+.buttonSinBorder{
+    border-radius : inherit !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+.colorButton{
+    color: #B4B5D9 !important;
+    border: 1px solid #B4B5D9 !important;
+}
+.colorButton:hover{
+    background: transparent !important;
+
+}
+.colorButton::placeholder{
+    color: #B4B5D9 !important;
+
+}
+
+.abrirCuerpo {
+    margin-left: 0px;
+}
+
+.cerrarCuerpo {
+    margin-left: 350px;
+}
+
+.mi-paginado ul.pagination {
+    width: fit-content !important;
+    margin: auto !important;
+  }
+
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color:rgba(255, 122, 0, 1);
+    /* border-color: #aeff5e; */
+    border-color: rgba(255, 122, 0, 1);
+  }
+
+  .page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: rgba(255, 122, 0, 1);
+    background-color: #fff;
+  }
+
+  .page-item.disabled .page-link {
+    color: #868e96;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    /* border-color: #718393; */
+  }
+/* 
+  .page-link:focus{
+    box-shadow: rgba(255, 122, 0, 1);
+    background-color: rgba(255, 122, 0, 1);
+  } */
+  .page-link:focus,
+  .page-link:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(255, 122, 0, 1);
+    /* border-color: #aeff5e; */
+    border-color: rgba(255, 122, 0, 1);
+   outline: none;
+    box-shadow: none;
+  }
+
+  #swal2-title.swal2-title {
+    margin: 0px;
+    font-size: 40px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.21);
+    margin-bottom: 28px;
+  }
+  .tooltip-inner{
+    max-width: 600px;
+    /* width: 500px; */
+    background-color: rgb(71, 69, 69);
+
+    z-index: 100000999
+}
+
+
+   /* .prueba{
+    border-color:
+    #fd7e14!important;
+    color:
+    #fd7e14!important;
+
+
+  }  */
+
+  .OcultarBorde{
+    display: flex !important;
+    outline:none !important;
+  }
+
+  /* .btn{
+  /*.btn{
+    border: 0;
+    border-radius: 5px;
+    background: initial;
+     color: #fff;
+    font-size: 1.0625em;
+  }*/
+
+  .btnSinBordeCustom{
+    border-radius: 7px;
+    width: 150px;
+  }
+
+/*
+  .buttonSinBorder{
+    border-radius : 20px;
+    width: 150px;
+  }*/
+
+
+
+  .ng-select div, .ng-select input, .ng-select span {
+ 
+    font-weight: normal !important;
+  }
+  
+  ng-select>div {
+    border: 1px solid #eee;
+    border-radius: 0.25rem 0 0 0.25rem;
+    width: 250px !important;
+  }
+  ng-select>div>div.single {
+    height: 36px;
+    width: 250px !important;
+  }
+  ng-select>div>div.single>div.value {
+    line-height: 36px;
+    width: 250px !important;
+  }
+  ng-select>div>div.single>div.toggle {
+    line-height: 36px;
+    width: 250px !important;
+    
+  }
+
+  ng-select ng-select-single ng-select-searchable ng-select-clearable ng-select-bottom{
+  width: 250px;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid #b2c6d9 !important;
+}
+
+.ng-dropdown-panel.ng-select-top {
+  top: 100% !important;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-color: #e6e6e6;
+  margin-bottom: -1px;
+}

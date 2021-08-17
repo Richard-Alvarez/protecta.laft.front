@@ -1,0 +1,103 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <div class="container">
+        <div class="row mb-2 mt-2">
+            <div class="col-lg-10">
+                <div class="Header">
+                    <h3>Módulo de Trabajo - Plaft</h3>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <select id="" name="" class="form-control">
+                    <option>Señal de alerta</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="col-lg-6">            
+            </div>
+            <div class="col-lg-1">
+                <span>Filtro</span>
+            </div>
+            <div class="col-lg-2">
+                 <select id="" name="" class="form-control">
+                    <option value="">Todos</option>
+                </select>               
+            </div>
+            <div class="col-lg-1">
+                <span>Filtro</span>
+            </div>
+            <div class="col-lg-2">
+                 <select id="" name="" class="form-control">
+                    <option value="">Todos</option>
+                </select>               
+            </div>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="col-lg-1">
+                <h5>Selec. Todo</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <input type="checkbox" class="form-control">
+                                </th>
+                                <th scope="col">Señal</th>
+                                <th scope="col">Resumen</th>
+                                <th scope="col">Período</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Check</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of rows">
+                                <td>
+                                    <input type="checkbox" class="form-control">
+                                </td>
+                                <td>{{row.senal}}</td>
+                                <td>{{row.resumen}}</td>
+                                <td>{{row.periodo}}</td>
+                                <td>{{row.fecha}}</td>
+                                <td>
+                                    <i class="fas fa-check-circle"></i> 
+                                </td>
+                                <td>{{row.estado}}</td>
+                                <td>
+                                    <button class="btn btn-primary">...</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="col-lg-6">            
+            </div>
+            <div class="col-lg-1">
+                <span>Período</span>
+            </div>
+            <div class="col-lg-2">
+                 <select id="" name="" class="form-control">
+                    <option value="">Todos</option>
+                </select>               
+            </div>
+            <div class="col-lg-1">
+                <span>Régimen</span>
+            </div>
+            <div class="col-lg-2">
+                 <select id="" name="" class="form-control">
+                    <option value="">Todos</option>
+                </select>               
+            </div>
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>

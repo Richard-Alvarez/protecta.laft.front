@@ -1,0 +1,311 @@
+<app-navbar></app-navbar>
+<main class="container-fluid app-main">
+    <div class="row  pl-5 pr-5">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>
+    <div class="">
+        
+<!--<div class="card">
+            <div class="card-header">
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item">
+                        <a class="colorLetra nav-link active" data-toggle="tab" href="#home1"
+                            style="font-size:17px;padding: 16px;">Opciones por perfil</a>-->
+                            
+        <div class="container-fluid pl-5 pr-5">
+            <div class="card-header bordesCabecera" style="background: white;">
+                <ul class="nav nav-pills nav-justified" >
+                    <li class="nav-item">
+                        <a class="colorLetra nav-link active" data-toggle="tab" href="#home1"
+                        style="font-size:17px;">Opciones por perfil</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="colorLetra nav-link" data-toggle="tab" href="#home2"
+                        style="font-size:17px;">Historial</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" style="padding-bottom: 80px;">
+                    <div id="home1" class="mb-2 mt-2 tab-pane active">
+                        <div class="Header">
+                            <div class=""
+                                style="display: flex;justify-content: left;align-items: left;padding-right: 800px;">
+                                <div class="col-lg-17">
+                                    <h4 class="TitleLine pb-2">Opciones de perfiles</h4>
+                                </div>
+                            </div>
+                            <br>
+                            <!--<div class="d-flex form-group">
+                                <div class="txtCabecera" style="text-align:center ;width: 108px"
+                                    *ngFor="let name of arrayCabecera">
+                                    {{name}}
+                                </div>
+                            </div>
+                            <div style="padding-left: 0px;
+                            padding-right: 0px;
+                            height: auto;
+                            max-height: 400px;
+                            overflow-y: auto;
+                            overflow-x: hidden;">
+                                <div class="d-flex form-group" *ngFor="let item of arrayRecurse">
+                                    <div class="txtDetalle" style="text-align:center;width: 108px;">{{item.sNameMenu}}
+                                    </div>
+                                    <div class="txtDetalle" style="text-align:center ;width: 108px;">
+                                        {{item.sNameSubMenu}}</div>
+                                    <div class="txtDetalle" style="text-align:center ;width: 108px;">
+                                        {{item.sDescription}}</div>
+                                    <div class="txtDetalle" style="text-align:center ;width: 108px;"
+                                        *ngFor="let prof of item.profile">
+                                        <input class="form-check-input2" type="checkbox" [(ngModel)]="prof.isChecked"
+                                            (change)="onChange(prof)">-->
+
+                            <div class="borderFormat">
+                            <div class="desplace">
+                                <div class="d-flex form-group row-head" >
+                                    <div class="txtCabecera columns-table">Menú</div>
+                                    <div class="txtCabecera columns-table">Submenú</div>
+                                    <div  class="txtCabecera text-center columns-table-fijo"  *ngFor="let name of arrayCabecera;let index = index">
+                                        {{name}}
+                                    </div>
+                                </div> 
+                                <div class="d-flex form-group " id="pintaGrilla"  *ngFor="let item of arrayRecurse">
+                                    <div class="txtDetalle rows-table">{{item.sNameMenu}}</div>
+                                    <div class="txtDetalle rows-table">{{item.sNameSubMenu}}</div>
+                                    <!-- <div class="txtDetalle" style="text-align:center ;width: 108px;">{{item.sDescription}}</div> -->
+                                    <div class="txtDetalle rows-table-fijo" *ngFor="let prof of item.profile">
+                                        <input class="form-check-input2" 
+                                        type="checkbox" 
+                                        [(ngModel)]="prof.isChecked"    
+                                        (change)="onChange(prof)"
+                                        >          
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="" style="padding-top: 2%;padding-bottom: 2%;    margin-left: -23px;
+                            ">
+                                <div class="row"style="padding-left: 16px">
+                                    <!-- <div class="col-md-3">
+
+                                    </div> -->
+                                    <div class="col-md-6 d-flex justify-content-between " style="padding: 0px 200px 0px 0px;">
+                                        <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"
+                                             
+                                            (click)="getExcel()">
+                                            <div class="row">
+                                                <div class="col-1"></div>
+                                                <div class="col-4" style="text-align: right;padding-right: 15px;padding-left: 0px;"> <img src="assets/icons/excel-microsoft.png" style="width: 24px;"/></div>
+                                                <div class="col-6" style="color: black;padding-left: 5px;text-align: left;"> Descargar Registro</div>
+                                            </div>
+                                        </button>
+                                         <!-- <div class="col-md-3">
+
+                                    </div> -->
+                                        
+                                
+                                    </div>
+                                    <!-- <div class="col-2" ></div> -->
+                                    <div class="col-6 text-right" >
+                                        <button class="btn btn-warning text-white margin-right:50 px " style="width: 100px;"
+                                            (click)="save()">Guardar</button>
+                                    </div>
+                                    <!-- <div class="col-md-3">
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                            <!-- <div class="form pt-3">
+                    <div class="d-flex justify-content-between">
+                        <img src="../../../../assets/icons/excel-microsoft.png" title="Descargar Excel"
+                            alt="" style="cursor: pointer;height:40px;width: 35px;" (click)="getExcel()" />
+                        <button 
+                            class="btn btn-warning text-white buttonSinBorder" (click)="save()">Guardar</button>
+                    </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div id="home2" class="tab-pane fade">
+                        <div class="container2" style="padding: -20px;">
+                            <div class="Header">
+                                <!--<div class="row">
+                                    <div
+                                        style="display: flex;justify-content: center;align-items: center;padding-right: 800px;">
+                                        <div class="col-lg-17">
+                                            <h4 class="TitleLine">Historial</h4>
+                                        </div>-->
+                            <div class="">
+                                <div   style="display: flex;justify-content: left;align-items: left;padding-right: 500px;">
+                                    <div class="col-lg-17">
+                                        <h4 class="TitleLine">Historial de Configuración</h4>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label class="fontText2">Perfiles:</label>
+                                        <select  [(ngModel)]="profiles" name="profile"
+                                            (change)="changeProfile()" class="form-control buttonSinBorder">
+                                            <option value="0" selected>Seleccione</option>
+                                            <option value="-1" selected>Todos</option>
+                                            <option *ngFor="let item of arrayResponseProfile" value="{{item.profileId}}"
+                                                id="profileIdSelected">
+                                                {{item.profileName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+<!--<div class="row">
+                                    <div class="col-lg-14 borderFormat">
+                                        <table class="table table-striped table-sm">
+                                            <thead>
+                                                <tr
+                                                    style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                    <th>Fecha y hora de configuración</th>
+                                                    <th>Opción modificada</th>
+                                                    <th>Acción realizada</th>
+                                                    <th>Usuario responsable</th>
+                                                    <th>Perfil</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of arrayResponseHistory">
+                                                    <td>{{item.dFechaRegistro}}</td>
+                                                    <td>{{item.sOpcion}}</td>
+                                                    <td>{{item.sAccion}}</td>
+                                                    <td>{{item.sUsuarioName}}</td>
+                                                    <td>{{item.sProfileName}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="container" style="padding-top: 2%;padding-bottom: 2%;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+
+                                                </div>
+                                                <div class="col-md-6 d-flex justify-content-between ">
+                                                    <button
+                                                        class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"
+                                                        (click)="getExcelHistory()">
+                                                        <i class="fas fa-download"></i>
+                                                        Descargar Registros del historial
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                
+                            </div>
+                            <div class="borderFormat">
+                            <div class="d-flex form-group"  style="border-bottom: 2px solid #26296D;" >
+                                <!-- <div  class="txtCabecera" style="text-align:center ;width: 18%">
+                                    Menu
+                                 </div>
+                                 <div  class="txtCabecera" style="text-align:center ;width: 18%">
+                                    SubMenu
+                                 </div>
+                                 <div  class="txtCabecera" style="text-align:center ;width: 16%">
+                                    Perfil
+                                 </div>
+                                 <div  class="txtCabecera" style="text-align:center ;width: 16%">
+                                    Usuario responsable
+                                 </div>
+                                 <div  class="txtCabecera" style="text-align:center ;width: 16%">
+                                    Acción realizada
+                                 </div>
+                                 <div  class="txtCabecera" style="text-align:center ;width: 16%">
+                                   Fecha de modificación
+                                 </div> -->
+                                 <div  class="txtCabecera2" style="text-align:left ;width: 20%">
+                                  Perfil modificado
+                                 </div>
+                                 <div  class="txtCabecera2" style="text-align:left ;width: 20%">
+                                   Opción modificada
+                                 </div>
+                                 <div  class="txtCabecera2" style="text-align:left ;width: 20%">
+                                   Acción realizada
+                                 </div>
+                                 <div  class="txtCabecera2" style="text-align:left ;width: 20%">
+                                    Fecha de modificación
+                                  </div>
+                                  <div  class="txtCabecera2" style="text-align:left ;width: 20%">
+                                    Usuario responsable
+                                  </div>
+                             </div>
+                             <div class="desplace">
+                                 <div class="d-flex form-group"  id="pintaGrillaHistory" *ngFor="let item of arrayResponseHistory">
+                                     <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sProfileName}}</div>
+                                     <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sOpcion}}</div>
+                                     <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sAccion}}</div>
+                                    <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.dFechaRegistro}}</div>                                     
+                                    <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sUsuarioName}}</div>
+                                     <!-- <div class="txtDetalle" style="text-align:center ;width: 18%;">{{item.sMenu}}</div>
+                                     <div class="txtDetalle" style="text-align:center ;width: 18%;">{{item.sSubMenu}}</div>
+                                     <div class="txtDetalle" style="text-align:center ;width: 16%;">{{item.sProfileName}}</div>
+                                     <div class="txtDetalle" style="text-align:center ;width: 16%;">{{item.sUsuarioName}}</div>
+                                     <div class="txtDetalle" style="text-align:center ;width: 16%;">{{item.sAccion}}</div>
+                                     <div class="txtDetalle" style="text-align:center;width: 16%;">{{item.dFechaRegistro}}</div>                                      -->
+                                 </div> 
+                             </div>
+                             <div class="" style="padding-top: 2%;padding-bottom: 2%;">
+                                <div class="row">
+                                    <!-- <div class="col-md-3">
+                    
+                                    </div> -->
+                                    <div class="col-md-6 d-flex justify-content-between " style="padding: 0px 200px 0px 0px;">
+                                        <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton " 
+                                            (click)="getExcelHistory()">
+                                            <div class="row">
+                                                
+                                                <div class="col-3" style="text-align: right;padding-right: 15px;padding-left: 0px;margin-right: -15px;"> <img src="assets/icons/excel-microsoft.png" style="width: 24px;"/></div>
+                                                <div class="col-6" style="color: black;padding-left: 5px;text-align: left;"> Descargar historial de configuración</div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>            
+                            </div>
+                        </div>
+                            <!-- <div class="row">
+                                <div class="col-lg-14 borderFormat">
+                                    <table class="table table-striped table-sm">
+                                        <thead>
+                                            <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                <th>Fecha y hora de configuración</th>
+                                                <th>Opción modificada</th>
+                                                <th>Acción realizada</th>
+                                                <th>Usuario responsable</th>
+                                                <th>Perfil</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of arrayResponseHistory">
+                                                <td>{{item.dFechaRegistro}}</td>
+                                                <td>{{item.sOpcion}}</td>
+                                                <td>{{item.sAccion}}</td>
+                                                <td>{{item.sUsuarioName}}</td>
+                                                <td>{{item.sProfileName}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                              
+                                </div>
+                            </div> -->
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br>
+</main>
+<app-footer></app-footer>

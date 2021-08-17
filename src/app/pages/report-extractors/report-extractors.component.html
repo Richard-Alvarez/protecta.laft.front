@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+<main class="container app-main" >
+    <div class="row">
+        <button class="btn btn-link text-secondary" style="padding-left: 25px;" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <div class="container">
+        <div class="">
+            <!-- <div class="row" style="display: flex;justify-content: center;align-items: center;padding-left: 900px;">
+                <div class="col-sm-11 col-md-11 col-lg-11">
+                </div>
+                <div class="col-sm-1 col-md-1 col-lg-1" title="Volver a Inicio"
+                    style="display: flex;justify-content: center;align-items: center;">
+                    <button style="display: flex;justify-content: center;align-items: center;"
+                        class="btn btn-warning text-white buttonSinBorder" routerLink="/home">Salir</button>
+                </div>
+            </div>
+            <br> -->
+            <div class="row" style="display: flex;justify-content: left;align-items: left;">
+                <div class="col-lg-30" style="margin-left: 15px;">
+                    <h4 class="TitleLine">Operaciones únicas y múltiples</h4>
+                </div>
+            </div>
+                <div class=" borderFormat">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="nav-item">
+                            <a class="nav-link active text-body" data-toggle="tab" href="#home1"
+                                style="text-decoration: none;">Generador de Reportes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" data-toggle="tab" href="#home3"
+                                style="text-decoration: none;">Información Complementaria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" data-toggle="tab" href="#home2"
+                                style="text-decoration: none;">Monitoreo de Reportes</a>
+                        </li>
+                      
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+                    <div id="home1" class=" tab-pane active">
+                        <app-reportes-sbs></app-reportes-sbs>
+                    </div>
+                    <div id="home2" class=" tab-pane fade">
+                        <app-monitoring-reportes-sbs></app-monitoring-reportes-sbs>
+                    </div>
+                    <div id="home3" class=" tab-pane fade">
+                        <app-report-sbs-info-complementary></app-report-sbs-info-complementary>
+                    </div>
+                </div>
+                
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>

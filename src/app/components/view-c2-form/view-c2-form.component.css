@@ -1,0 +1,17 @@
+.headerSenials{
+    border:none;
+  }
+  
+  .headerSenials:hover{
+    border: 1px solid #8a8a8a;
+  }  
+
+  table{
+   
+    width: 100%;
+}
+
+
+th,td{
+  table-layout: fixed;
+}

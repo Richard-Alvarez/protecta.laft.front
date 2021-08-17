@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<!-- <main class="container app-main"> -->
+    <main class="container">
+    <br>
+    <br>
+    <div class="row borderFormat"
+    style="display: flex;justify-content: center;align-items: center;" >
+        <div class="col-lg-16">
+            <!-- <h4>Bienvenido a la plataforma LAFT</h4> -->
+            <h4 style="font-weight: 500;color: #2b0d61;">Bienvenido(a) {{this.NombreCompleto}}</h4>
+        </div>
+        <div class="col-lg-16" *ngIf="UsuariosRE()" style="display: flex;justify-content: center;align-items: center;font-size: 25px !important;">
+            <!-- <h4>Bienvenido a la plataforma LAFT</h4> -->
+            <h4 style="font-size: 25px !important;color: #2b0d61;">Ahora podrás gestionar tu bandeja de formularios de forma inmediata.</h4>
+        </div>
+        <!-- <div class="col-md-5">
+            <app-lista-historia [historias] = "historias"></app-lista-historia>
+        </div> -->
+        <!-- <div class="col-md-7">
+            <app-grafico-estadistico  
+                [cargas]="cargas" 
+                (changeCarga)="changeCarga($event)">
+            </app-grafico-estadistico>
+        </div> -->
+
+        <!-- <div class="col-12 mt-3">
+            <app-lista-registro [Titulo] = "tittle"     [searchCarga] = "boolCambioCarga" [registros]="carga.registros"></app-lista-registro>
+        </div> -->
+    </div>
+</main>
+<app-footer></app-footer>
+
+

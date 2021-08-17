@@ -1,0 +1,485 @@
+<app-navbar></app-navbar>
+<main id="cont" class="container app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" (click)="back()" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Volver
+        </button>
+    </div>
+    <div class="container">
+        <div class="row mb-2 mt-2">
+            <div class="Header">
+                <div class="row" style="display: flex;justify-content: left;align-items: left;padding-right: 650px;">
+                    <div class="col-lg-21">
+                        <h4 class="TitleLine">Cuestionario de señales</h4>
+                    </div>
+                </div>
+                <div class="row" style="display: flex;justify-content: left;align-items: center;">
+                    <div class="col-lg-10">
+                    </div>
+                    <div *ngIf="fromFormsDatabase" class="col-lg-2" title="Exportar a PDF">
+                        <img src="assets/icons/pdf.png" title="Descargar PDF" height="300px" (click)="convertirPdf()"
+                            alt="" style="cursor: pointer;" />
+                    </div>
+                </div>
+
+                <div *ngIf="fromFormsDatabase" class="borderFormat">
+                    <div class="row">
+                        <div class="col-lg-4"><b>Verificado por:</b> {{datosCabecera.SOFICIAL_CUMPLIMIENTO}}</div>
+                        <div class="col-lg-6"><b>Perfil:</b> {{datosCabecera.SPERFIL}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4"><b>Fecha Est.:</b> {{DFECHA_ESTADO_MOVIMIENTO}}</div>
+                        <div class="col-lg-4"><b>Fecha Rpta.:</b> {{DFECHA_ESTADO_MOVIMIENTO}}</div>
+                        <div class="col-lg-4"><b>Responsable:</b> {{datosCabecera.NOMBRECOMPLETO}}</div>
+                    </div>
+                </div>
+                <div class="mt-4 mb-1 mr-2">
+                    <span>Responda las siguientes preguntas</span>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4> Señal de alerta {{datosCabecera.SNOMBRE_ALERTA}} al {{SPERIODO_FECHA}} -
+                                    {{DESREGIMEN}}</h4>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12" *ngIf="NIDALERTA != 3">
+                                <div class="row">
+                                </div>
+                                <ng-container *ngFor="let preg of questionsHeaderList; let i = index">
+                                    <div class="row mb-2 mt-2">
+                                        <div class="col-lg-7">{{preg.SPREGUNTA}}</div>
+
+                                        <div *ngIf="preg.NIDALERTA == 1" class="col-lg-1">
+                                            <label>Verdadero</label>
+
+                                        </div>
+
+                                        <div *ngIf="preg.NIDALERTA != 1" class="col-lg-1">
+                                            <label>Si</label>
+
+                                        </div>
+
+                                        <div class="col-lg-1">
+                                            <input type="radio" [value]="1"
+                                                [(ngModel)]="answersHeaderList[i].NRESPUESTA"
+                                                name="rdoQuestionHeader{{i}}" id="rdoQuestionHeader{{i}}"
+                                                [disabled]="disableFormItems">
+                                        </div>
+
+                                        <div *ngIf="preg.NIDALERTA == 1" class="col-lg-1">
+                                            <label>Falso</label>
+
+                                        </div>
+
+                                        <div *ngIf="preg.NIDALERTA != 1" class="col-lg-1"
+                                            style="display: flex;justify-content: right;align-items: right;">
+                                            <label>No</label>
+
+                                        </div>
+
+                                        <div class="col-lg-1">
+                                            <input type="radio" [value]="2"
+                                                [(ngModel)]="answersHeaderList[i].NRESPUESTA"
+                                                name="rdoQuestionHeader{{i}}" id="rdoQuestionHeader{{i + 1}}"
+                                                [disabled]="disableFormItems">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-7">{{preg.SRANGO_FECHA}}</div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="col-lg-8" *ngIf="NIDALERTA == 3">
+                                <div class="row">
+                                </div>
+                                <ng-container *ngFor="let preg of questionsHeaderList; let i = index">
+                                    <div class="row mb-2 mt-2">
+                                        <div class="col-lg-8">{{preg.SPREGUNTA}}</div>
+                                        <div class="col-lg-1">
+                                            <span>Sí</span>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <input type="radio" [value]="1"
+                                                [(ngModel)]="answersHeaderList[i].NRESPUESTA"
+                                                name="rdoQuestionHeader{{i}}" id="rdoQuestionHeader{{i}}"
+                                                [disabled]="disableFormItems">
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <span>No</span>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <input type="radio" [value]="2"
+                                                [(ngModel)]="answersHeaderList[i].NRESPUESTA"
+                                                name="rdoQuestionHeader{{i}}" id="rdoQuestionHeader{{i + 1}}"
+                                                [disabled]="disableFormItems">
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="col-lg-4 ">
+                                <br>
+                                <h6 class="mt-2 mb-2">Comentarios</h6>
+                                <textarea class="mt-2" id="" name="" style="width: 100%; 
+                                margin: 0; 
+                                padding: 0;  " rows="5" [(ngModel)]="SCOMENTARIO" [disabled]="disableFormItems"
+                                    maxlength="500"></textarea>
+                            </div>
+                        </div>
+                        <img *ngIf="STIPO_USUARIO_LOGIN == 'OC' && NIDALERTA == 3"
+                            src="../../../../assets/icons/excel-microsoft.png" title="Descargar Excel Lista GAFI"
+                            alt="" style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert()" />
+                        <img *ngIf="STIPO_USUARIO_LOGIN == 'OC' && NIDALERTA == 4"
+                            src="../../../../assets/icons/excel-microsoft.png"
+                            title="Descargar Excel Notas de Crédito" alt=""
+                            style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert()" />
+                        <img *ngIf="STIPO_USUARIO_LOGIN == 'OC' && NIDALERTA == 5"
+                            src="../../../../assets/icons/excel-microsoft.png"
+                            title="Descargar Excel Direcciones Duplicadas" alt=""
+                            style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert()" />
+                        <img *ngIf="STIPO_USUARIO_LOGIN == 'OC'  && NIDALERTA == 10"
+                            src="../../../../assets/icons/excel-microsoft.png" title="Descargar Cliente Riesgo Alto"
+                            alt="" style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert()" />
+                        <hr *ngIf="NIDALERTA == 4444">
+                        <div class="row" *ngIf="NIDALERTA == 1" style="padding-left: 800px;">
+                            <span>Seleccionar todo:</span>
+                        </div>
+                        <div class="row" *ngIf="NIDALERTA == 1" style="padding-left: 835px;">
+                            <div class="col-lg-1">
+                                <input [disabled]="disableFormItems" type="checkbox" [(ngModel)]="uniMark"
+                                    (change)="markAll($event)">
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="NIDALERTA == 4444">
+                            <div class="col-lg-14">
+                                <div class="table-responsive" style="height: 500px;overflow-y: visible;">
+                                    <table class="table table-striped table-sm" style="font-size: 13px;">
+                                        <thead>
+                                            <tr
+                                                style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                <th title="Cliente" scope="col" style="text-align: left;">Cliente</th>
+                                                <th title="Tipo de documento" scope="col" style="text-align: left;">
+                                                    Tip.Doc</th>
+                                                <th title="Nro. de documento" scope="col" style="text-align: left;">
+                                                    Nro.Doc</th>
+                                                <th title="Producto" scope="col" style="text-align: left;">Producto</th>
+                                                <th title="Póliza" scope="col" style="text-align: left;">Póliza</th>
+                                                <th title="Tipo de comprobante" scope="col" style="text-align: left;">
+                                                    Tip.Comp.</th>
+                                                <th title="Nro. de comprobante" scope="col" style="text-align: left;">
+                                                    Nro.Comp.</th>
+                                                <th title="Estado de pago" scope="col" style="text-align: center;">Pago
+                                                    en
+                                                    Efectivo</th>
+                                                <th title="Motivo" scope="col" style="text-align: left;">Motivo</th>
+                                            </tr>
+                                            <br>
+                                        </thead>
+                                        <ng-container
+                                            *ngIf="paylist!=null && paylist.length>0; then showGrid else hideGrid">
+                                        </ng-container>
+                                    </table>
+                                    <ng-template #hideGrid>
+                                        <tbody>
+                                            <tr style="text-align: center;">
+                                                <td colspan="10"></td>
+                                            </tr>
+                                        </tbody>
+                                    </ng-template>
+                                    <ng-template #showGrid>
+                                        <tbody>
+                                            <tr *ngFor="let item of paylist; let index = index">
+                                                <td class="text-left">{{item.NOMCLIENTE}}</td>
+                                                <td class="text-left">{{item.DESTIPODOC}}</td>
+                                                <td class="text-left">{{item.NRODOC}}</td>
+                                                <td class="text-left">{{item.DESPRODUCTO}}</td>
+                                                <td class="text-left">{{item.NPOLICY}}</td>
+                                                <td class="text-left">{{item.DESTIPOCOMP}}</td>
+                                                <td class="text-left">{{item.NROCOMP}}</td>
+                                                <td class="text-center">
+                                                    <input [disabled]="disableFormItems" type="checkbox"
+                                                        [(ngModel)]="paylist[index].SESTADOPAGEFEC">
+                                                </td>
+                                                <textarea [disabled]="disableFormItems" placeholder="Detalle el Motivo"
+                                                    [(ngModel)]="paylist[index].DESMOTIVO" class="text-left"></textarea>
+                                            </tr>
+                                        </tbody>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4" *ngIf="NIDALERTA == 3">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">N°</th>
+                                                <th scope="col">País</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of countryList; let i = index">
+                                                <td>{{i + 1}}</td>
+                                                <td>
+                                                    {{item.SNOMBRE_PAIS_GAFI}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="questionsList.length > 0">
+                            <div class="table-responsive"
+                                style="height: 500px;width:1100px;overflow-y: visible;overflow-x: auto;">
+                                <table class="table table-striped table-md" style="font-size: 13px;">
+                                    <thead>
+                                        <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                            <th scope="col" style="text-align: center;">N°</th>
+                                            <th scope="col" style="text-align: center;">RUC</th>
+                                            <th scope="col" style="text-align: center;">Razón Social</th>
+                                            <th scope="col" style="text-align: center;">Producto</th>
+                                            <th scope="col" style="text-align: center;" colspan="5"
+                                                *ngFor="let preg of questionsList">
+                                                {{preg}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of questionDetailList; let i = index">
+                                            <td style="text-align: center;">{{i + 1}}</td>
+                                            <td>{{item.SRUC}}</td>
+                                            <td>{{item.SNOMBRE_CLIENTE}}</td>
+                                            <td>{{item.SPRODUCTO}}</td>
+                                            <ng-container *ngFor="let preg of questionsList; let j = index">
+                                                <td>
+                                                    <span>Sí</span>
+                                                </td>
+                                                <td>
+                                                    <input type="radio" [value]="1"
+                                                        [(ngModel)]="answersDetailList[getAnswerDetailIndex(j, i)].NRESPUESTA"
+                                                        name="rdoQd{{getAnswerDetailIndex(j, i)}}"
+                                                        [disabled]="disableFormItems">
+                                                </td>
+                                                <td>
+                                                    <span>No</span>
+                                                </td>
+                                                <td>
+                                                    <input type="radio" [value]="2"
+                                                        [(ngModel)]="answersDetailList[getAnswerDetailIndex(j, i)].NRESPUESTA"
+                                                        name="rdoQd{{getAnswerDetailIndex(j, i)}}"
+                                                        [disabled]="disableFormItems">
+                                                </td>
+                                                <td>
+                                                    <div class="tooltipT ">                                                            
+                                                        <span class="tooltiptextT">
+                                                            
+                                                            <div class="ml-1 mr-1">
+                                                                {{answersDetailList[getAnswerDetailIndex(j, i)].SCOMENTARIO}}
+                                                            </div>
+                                                        </span>
+                                                        <input type="text" placeholder="Agregar comentario"
+                                                                maxlength="500"
+                                                                [(ngModel)]="answersDetailList[getAnswerDetailIndex(j, i)].SCOMENTARIO"
+                                                                [disabled]="disableFormItems">
+                                                    </div>
+                                                        
+                                                
+                                                </td>
+                                            </ng-container>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="mt-2" *ngIf="NIDALERTA == 1">
+                            <button class="btn btn-warning text-white " (click)="openModal(null)"
+                                [disabled]="disableFormItems" title="Agregar Empresa">Agregar Empresa</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <!-- <h6 class="col-lg-4 mt-2 mb-2">Responsable</h6> -->
+                                    <div class="col">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-5"></div>
+                                        <div class="col">
+                                            <h6 class="fontText" style="font-size: 18px;">Comentarios</h6>
+                                        </div>
+                                        <div class="col"></div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive mt-2" style="height: 200px;;overflow-y: visible;">
+                                    <table class="table table-striped table-sm" style="font-size: 13px;">
+                                        <thead>
+                                            <tr
+                                                style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                <th style="text-align: center;justify-content: center;">Fecha</th>
+                                                <th
+                                                    style="text-align: center;justify-content: center;">Usuario</th>
+                                                <th style="text-align: center;justify-content: center;">Comentario</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of commentHeaderList">
+                                                <td class="text-center">{{item.DFECHA_REGISTRO}}</td>
+                                                <td class="text-center">{{item.NOMBRECOMPLETO}}</td>
+                                                <td class="text-left" style="width: 600px;">
+                                                    <div *ngIf="item.STIPO_USUARIO == 'OC'" class="arrow_box_oc {{attachFileStyle(item)}}">                                                        
+                                                        <span style="font-family: Arial, Helvetica, sans-serif;" *ngIf="attachFileStyle(item) == 'attached'" 
+                                                            (click)="downloadFile(datosCabecera.SNOMBRE_ALERTA, item.SCOMENTARIO)">
+                                                            {{item.SCOMENTARIO}}
+                                                        </span>
+                                                        <span style="font-family: Arial, Helvetica, sans-serif;"  *ngIf="attachFileStyle(item) != 'attached'">
+                                                            {{item.SCOMENTARIO}}
+                                                        </span>
+                                                    </div>
+                                                    <div *ngIf="item.STIPO_USUARIO == 'RE'" class="arrow_box_re {{attachFileStyle(item)}}" >
+                                                        <span style="font-family: Arial, Helvetica, sans-serif;"  *ngIf="attachFileStyle(item) == 'attached'" 
+                                                            (click)="downloadFile(datosCabecera.SNOMBRE_ALERTA, item.SCOMENTARIO)">
+                                                            {{item.SCOMENTARIO}}
+                                                        </span>
+                                                        <span style="font-family: Arial, Helvetica, sans-serif;"  *ngIf="attachFileStyle(item) != 'attached'">
+                                                            {{item.SCOMENTARIO}}
+                                                        </span>
+
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                           <div [hidden]="enableAttachFiles('RE')" class="col-lg-6">
+                                
+                               <div class="table-responsive">
+                                   <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="text-center">Archivos adjuntados del Responsable
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!--
+                                            <tr *ngFor="let file of getListFilesToShow(datosCabecera.SNOMBRE_ALERTA, 'RE'); let index = index">
+                                                <td class="text-center" style="padding-bottom: 0%;padding-right: 0%;">
+                                                    <a style="cursor: pointer; text-decoration-line: underline"
+                                                        (click)="downloadFile(datosCabecera.SNOMBRE_ALERTA, file.name)">
+                                                        <span>{{file.name}}</span>
+                                                    </a>
+                                                </td>
+                                            </tr> -->
+                                            <tr *ngFor="let file of getFiles(datosCabecera.SNOMBRE_ALERTA, 'RE'); let index = index">
+                                                <td class="text-center" style="padding-bottom: 0%;padding-right: 0%;">
+                                                    {{file.name}}
+                                                </td>
+                                                <td class="text-left">
+                                                    <img src="assets/icons/cancelar.png" title="Quitar Archivo" alt=""
+                                                        style="display: flex;justify-content: center;align-items: center;"
+                                                        (click)="removeSelectedFile(index, datosCabecera.SNOMBRE_ALERTA,STIPO_USUARIO_LOGIN)"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                  </table>
+                               </div>
+                                <div [hidden]="enableAttachFiles('RE')" class="mt-3">
+                                    <input [disabled]="enableAttachFilesClipRE('RE')" type="file" name="file" id="archivo0"
+                                        class="inputfile"
+                                        (change)="uploadFiles($event, datosCabecera.SNOMBRE_ALERTA, STIPO_USUARIO_LOGIN)"
+                                        multiple />
+                                    <label for="archivo0"><i class="fas fa-paperclip fa-2x fa-lg"
+                                            style="color: #706d6d;"></i></label>
+                                    Adjuntar archivo
+                                </div>
+                            </div>
+                           <div [hidden]="enableAttachFiles('OC')" class="col-lg-6">
+                        
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="text-center">Archivos adjuntados del Oficial de
+                                                    Cumplimiento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!--
+                                            <tr *ngFor="let file of getListFilesToShow(datosCabecera.SNOMBRE_ALERTA, 'OC'); let index = index">
+                                                <td class="text-center" style="padding-bottom: 0%;padding-right: 0%;">
+                                                    <a style="cursor: pointer; text-decoration-line: underline"
+                                                        (click)="downloadFile(datosCabecera.SNOMBRE_ALERTA, file.name)">
+                                                        <span>{{file.name}}</span>
+                                                    </a>
+                                                </td>
+                                            </tr> -->
+                                            <tr *ngFor="let file of getFiles(datosCabecera.SNOMBRE_ALERTA, 'OC'); let index = index">
+                                                <td class="text-center" style="padding-bottom: 0%;padding-right: 0%;">
+                                                    {{file.name}}
+                                                </td>
+                                                <td class="text-left">
+                                                    <img src="assets/icons/cancelar.png" title="Quitar Archivo" alt=""
+                                                        style="display: flex;justify-content: center;align-items: center;"
+                                                        (click)="removeSelectedFile(index, datosCabecera.SNOMBRE_ALERTA,STIPO_USUARIO_LOGIN)" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                               <div [hidden]="enableAttachFiles('OC')" class="mt-3">
+                                    <input [disabled]="enableAttachFilesClip('OC')" type="file" name="file" id="archivo1"
+                                        class="inputfile"
+                                        (change)="uploadFiles($event, datosCabecera.SNOMBRE_ALERTA, STIPO_USUARIO_LOGIN)"
+                                        multiple />
+                                    <label for="archivo1"><i class="fas fa-paperclip fa-2x fa-lg"
+                                            style="color: #706d6d;"></i></label>
+                                    Adjuntar archivo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-1 mb-3">
+                        <div *ngIf="hiddenEnviar" class="col-lg-1">
+                            <button class="btn btn-warning text-white " (click)="save()"
+                                [disabled]="disableFormItems" title="Enviar">Enviar
+                            </button>
+                        </div>
+
+                        <div class="col-lg-1">
+                            <button class="btn btn-warning text-white " (click)="cancel()"
+                                title="Cancelar">Cancelar
+                            </button>
+                        </div>
+                        <div  class="col-lg-5 form-group ml-4" *ngIf="complimentaryIsVisible()">
+                            <textarea style="width: 100%; 
+                                margin: 0; 
+                                padding: 0;  " rows="5" class="form-control" type="text" placeholder="Comentario"
+                                [(ngModel)]="SCOMPLIMENTARY" [disabled]="disableComplimentary"></textarea>
+                        </div>
+                        <div class="col-lg-1" *ngIf="complimentaryIsVisible()">
+                            <button class="btn btn-warning text-white " (click)="sendComplimentary()"
+                                title="Enviar complemento" [disabled]="disableComplimentary">Solicitar complemento
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</main>
+<br>
+<app-footer></app-footer>

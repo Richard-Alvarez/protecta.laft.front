@@ -1,0 +1,287 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+<br>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 style="margin-bottom: 0px;"> Preview de actualización</h4>
+            <span class="text-small">Detalle de los cambios que realizará esta actualización</span>
+        </div>
+        <div class="col-md-6 text-right">
+            <!--<button class="btn btn-outline-info mr-1 buttonSinBorder colorButton" (click)="descargar()">
+                <i class="fas fa-download "></i>
+                Descargar
+            </button>-->
+            <button class="btn btn-outline-dark mr-1 buttonSinBorder " style="border: none;font-size: 0.9rem;" routerLink="/home">
+                <i class="fas fa-times"></i>
+                Cancelar actualización
+            </button>
+            <button class="btn btn-warning text-white buttonSinBorder paddingButton " (click)="grabar()">
+                <i class="fas fa-bolt"></i>
+                PROCESAR
+            </button>
+        </div>
+    </div>
+<br>
+    <div class="row mt-3">
+        <div class="col-md-9">
+            <button *ngFor="let header of headers"
+                class="mr-1 btn btn-light {{header.class}} {{header.selected}} buttonPreview buttonSinBorder" (click)="verHeader(header)">
+                <span class="{{header.icon}}"></span>
+                {{header.name}}({{header.registros.length}})
+            </button>
+        </div>
+
+        <div class="col-md-3">
+            <input type="text" class="form-control buttonSinBorder colorButton" placeholder="Búsqueda rápida" [(ngModel)]="busqueda">
+        </div>
+    </div>
+<br>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div *ngIf="header.id==0 || header.id==1 || header.id==2">
+                <app-tabla-registros
+                    [registros]="header.registros | filtro: {numero: busqueda, numeroDocumento: busqueda, nombre: busqueda, apellidoPaterno: busqueda, apellidoMaterno:busqueda} : false"
+                    [items]="50" [accion]="'Editar'" (onAccion)="editarRegistro($event)">
+                </app-tabla-registros>
+            </div>
+
+            <div *ngIf="header.id==3">
+                <div class="mt-2 mb-2">
+                    <button class="btn btn-sm btn-warning text-white  buttonSinBorder buttonopc" [disabled]="registrosEditados.length==0"
+                        (click)="conservarTodos()">
+                        <i class="fas fa-check-double"></i>
+                        Conservar todos
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table   class="table table-borderless tableActualiz"  style="font-size: 12px;" >
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th></th>
+                                <th>T.Doc.</th>
+                                <th>N° documento</th>
+                                <th>Apellido paterno</th>
+                                <th>Apellido materno</th>
+                                <th>Nombre o Razón Social</th>
+                                <th>País</th>
+                                <th>Señal</th>
+                                <th>Fecha Registro</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let registroEditado of header.registros" 
+                            style="border: solid 1px gray;">
+                            <tr class="text-danger">
+                                <td rowspan="2" class="text-dark" style="vertical-align: middle;">
+                                    {{registroEditado.original.numero}}
+                                </td>
+                                <td><span>Original</span></td>  
+                                <td>{{registroEditado.original.documento.descripcion}}</td>
+                                <td>{{registroEditado.original.numeroDocumento}}</td>
+                                <td>{{registroEditado.original.apellidoPaterno}}</td>
+                                <td>{{registroEditado.original.apellidoMaterno}}</td>
+                                <td>{{registroEditado.original.nombre}}</td>
+                                <td>{{registroEditado.original.pais.descripcion}}</td>
+                                <td><span class="app-señal"
+                                        [ngStyle]="{'background-color': registroEditado.original.senial.color}"></span>
+                                </td>
+                                <td>{{registroEditado.original.fechaRegistro}}</td>
+                                <td rowspan="2">
+                                    <button class="btn btn-link text-small" (click)="conservarRegistroEditado(registroEditado)">Conservar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>Nuevo</span></td>
+                                <td>{{registroEditado.nuevo.documento.descripcion}}</td>
+                                <td>{{registroEditado.nuevo.numeroDocumento}}</td>
+                                <td>{{registroEditado.nuevo.apellidoPaterno}}</td>
+                                <td>{{registroEditado.nuevo.apellidoMaterno}}</td>
+                                <td>{{registroEditado.nuevo.nombre}}</td>
+                                <td>{{registroEditado.nuevo.pais.descripcion}}</td>
+                                <td><span class="app-señal"
+                                        [ngStyle]="{'background-color': registroEditado.nuevo.senial.color}"></span>
+                                </td>
+                                <td>{{registroEditado.nuevo.fechaRegistro}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div *ngIf="header.id==4">
+                <div class="">
+                    <button class="btn btn-sm btn-warning text-white  buttonSinBorder buttonopc" [disabled]="registrosOmitidos.length==0"
+                        (click)="agregarTodos()">
+                        <i class="fas fa-user-plus"></i>
+                        Agregar todos
+                    </button>
+                </div>
+                <app-tabla-registros
+                    [registros]="registrosOmitidos | filtro: {numero: busqueda, numeroDocumento: busqueda, nombre: busqueda, apellidoPaterno: busqueda, apellidoMaterno:busqueda} : false"
+                    [items]="50" [accion]="'Agregar'" (onAccion)="agregarRegistroOmitido($event)">
+                </app-tabla-registros>
+            </div>
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>
+
+
+<div class="modal fade" id="carga-editar-modal" tabindex="-1" role="dialog" aria-labelledby="carga-editar-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content paddingModel">
+            <div class="modal-header">
+                <h5 class="modal-title paddingTitle" id="carga-editar-modal-label">Preview de información</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body paddingModel">
+                <div class="form-row">
+                    <div class="col-12">
+                        <p class="text-danger" *ngIf="registroSeleccionado.error" style="font-weight: lighter;">
+                            Error: <br> {{registroSeleccionado.error}}
+                        </p>
+                    </div>
+                    <div class="col-md-12">
+                    <div class="col-md-4"    style="padding-left: 0px;">
+                        <label for="">Fecha Registro (*)</label>
+                        <input type="date"
+                        class="form-control buttonSinBorder" maxlength="35" 
+                        [ngModel]="registroSeleccionado.fechaRegistro | strDate : 's'"
+                        (ngModelChange)="registroSeleccionado.fechaRegistro=$event"
+                        >
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Tipo de persona (*)</label>
+                        <select (change)="onChangeTipoDoc($event)" name="" id="" class="form-control buttonSinBorder" [(ngModel)]="registroSeleccionado.persona.id">
+                            <option value="0">(Seleccione)</option>
+                            <option value="{{tipoPersona.id}}" *ngFor="let tipoPersona of maestros.tiposPersona">
+                                {{tipoPersona.descripcion}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Tipo de documento (*)</label>
+                        <select   name="" id="" class="form-control buttonSinBorder" [(ngModel)]="registroSeleccionado.documento.id">
+                                <option value="0">(Seleccione)</option>
+                            <option value="{{tipoDocumento.id}}" *ngFor="let tipoDocumento of maestros.tiposDocumento">
+                                {{tipoDocumento.descripcion}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Número de documento</label>
+                        <input type="text" (keypress) = "documentNumberKeyPress($event)" class="form-control buttonSinBorder" maxlength="20" placeholder="N° Documento" [(ngModel)]="registroSeleccionado.numeroDocumento">
+                    </div>
+                    <div *ngIf="!IsEmpresa" class="col-md-6">
+                        <label for="">Apellido paterno</label>
+                        <input type="text" (keypress)="valText($event, 5)"  class="form-control buttonSinBorder" maxlength="35" [(ngModel)]="registroSeleccionado.apellidoPaterno">
+                    </div>
+                    <div  *ngIf="!IsEmpresa" class="col-md-6">
+                        <label for="">Apellido materno</label>
+                        <input type="text" class="form-control buttonSinBorder"  maxlength="35" [(ngModel)]="registroSeleccionado.apellidoMaterno">
+                    </div>
+                    <div class="col-md-8">
+                        <label for="">Nombre o Razón Social</label>
+                        <input type="text" class="form-control buttonSinBorder" maxlength="80" [(ngModel)]="registroSeleccionado.nombre">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">País</label>
+                        <select name="" id="" class="form-control buttonSinBorder" [(ngModel)]="registroSeleccionado.pais.id">
+                            <option value="{{pais.id}}" *ngFor="let pais of maestros.paises">{{pais.descripcion}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+
+       
+                        <div class="custom-control custom-switch mr-3 " style="display: inline-block;">
+                            <input type="radio" [value]="1" [(ngModel)]="registroSeleccionado.senial.id"
+                                class="custom-control-input custom-control-input-danger buttonSinBorder" name="senial"
+                                id="customSwitch1">
+                            <label class="custom-control-label" for="customSwitch1">
+                                    Extremo
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+                            <input type="radio" [value]="2" [(ngModel)]="registroSeleccionado.senial.id"
+                                class="custom-control-input custom-control-input-warning buttonSinBorder" name="senial"
+                                id="customSwitch2">
+                            <label class="custom-control-label" for="customSwitch2">
+                               Muy Alto
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+                            <input type="radio" [value]="3" [(ngModel)]="registroSeleccionado.senial.id"
+                                class="custom-control-input custom-control-input-green buttonSinBorder" name="senial"
+                                id="customSwitch3">
+                            <label class="custom-control-label" for="customSwitch3">
+                                Alto
+                            </label>
+                        </div>
+
+
+                        <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+                                <input type="radio" [value]="4" [(ngModel)]="registroSeleccionado.senial.id"
+                                    class="custom-control-input custom-control-input-medio buttonSinBorder" name="senial"
+                                    id="customSwitch4">
+                                <label class="custom-control-label" for="customSwitch4">
+                                        Medio
+                                </label>
+                            </div>
+
+
+                            <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+                                    <input type="radio" [value]="5" [(ngModel)]="registroSeleccionado.senial.id"
+                                        class="custom-control-input custom-control-input-Retirado buttonSinBorder" name="senial"
+                                        id="customSwitch5">
+                                    <label class="custom-control-label retirado" for="customSwitch5">
+                                            Retirado
+                                    </label>
+                                </div>
+
+
+
+                        <div class="custom-control custom-switch mr-3" style="display: inline-block;float: right;">
+                                <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" [(ngModel)]="registroSeleccionado.liberado" name="registroSeleccionado.liberado"  class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                        Registro Liberado
+                                    </label>
+                             <!--  <input type="checkbox"
+                                    [(ngModel)]="registro.liberado" name="registro.liberado"
+                                    class="custom-control-input custom-control-input-warning" 
+                                   >
+                                <label class="custom-control-label" for="customSwitch4">
+                                    Registro liberado
+                                </label>-->
+                            </div>
+                    </div>
+               
+                    <div class="col-md-12">
+                        <label for="">Observaciones</label>
+                        <textarea name="" id="" rows="4"  class="form-control buttonSinBorder"
+                            [(ngModel)]="registroSeleccionado.observacion"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer paddingModel">
+                <button type="button" style="    FONT-SIZE: 1.1rem;
+                background: transparent !important;
+                margin-right: 1.5rem;" class="btn btn-light buttonSinBorder" data-dismiss="modal">Cancelar</button>
+                <button type="button" style="PADDING: 0.7rem 3rem 0.7rem 3rem;" class="btn btn-warning text-white buttonSinBorder"  
+                    (click)="grabarEdicion($event)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
+.arrow_box_oc {
+    position: relative;
+    background: #FCD182;
+    border: 1px solid #8a8a8a;
+  }
+  .arrow_box_oc:after, .arrow_box_oc:before {
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  .arrow_box_oc:after {
+    border-color: rgba(255, 205, 105, 0);
+    border-right-color: #FCD182;
+    border-width: 5px;
+    margin-top: -5px;
+  }
+  .arrow_box_oc:before {
+    border-color: rgba(138, 138, 138, 0);
+    border-right-color:  rgba(136, 183, 213, 0);
+    border-width: 6px;
+    margin-top: -6px;
+  }

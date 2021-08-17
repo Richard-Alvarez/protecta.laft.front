@@ -1,0 +1,65 @@
+.txtCabecera{
+  text-align: center;
+  font-size: 14px;
+  font-family: Roboto;
+  color: rgba(38, 41, 109, 0.6);
+  font-weight: bold;
+}
+
+.txtDetalle{
+  text-align: center;
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.txtDetallePequenio{
+  font-size: 12px;
+  font-family: Roboto;
+}
+
+.etiquetaAsig{
+  font-size: 14px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  color: royalblue;
+  display: inline;
+}
+.etiquetaText{
+  font-size: 14px;
+  font-family: 'Roboto';
+  color: black;
+  display: inline;
+}
+
+.buttonSinBorder{
+  border-radius : inherit;
+}
+div#pintaGrilla:nth-child(even) {
+  /* background: #FF00CC;  */
+  background: rgba(90, 149, 180, 0.05); 
+}
+
+.desplace{
+  padding-left: 0px;
+  padding-right: 0px;
+  height: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.TitleLine{
+padding-bottom: 0.1%;
+position: relative;
+z-index : 1;
+
+}
+.TitleLine:before{
+content : "";
+position: absolute;
+left    : 0;
+bottom  : 0;
+height  : 1pxs;
+width   : 100%;  /* or 100px */
+border-bottom:2px solid #FA7000;
+}

@@ -1,0 +1,246 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row mb-2 mt-2">
+            <div class="Header">
+                <div class="row borderFormat"
+                    style="display: flex;justify-content: left;align-items: left;padding-left: 700px;">
+                    <div class="col-lg-10" title="Señales"
+                        style="display: flex;justify-content: center;align-items: center;">
+                        <select [(ngModel)]="signalId" name="signalId" class="form-control buttonSinBorder">
+                            <option value="0" selected>Formulario: Reportar Cliente</option>
+                            <option>Alto</option>
+                            <option>Medio</option>
+                            <option>Bajo</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-1" title="Volver a Inicio"
+                        style="display: flex;justify-content: center;align-items: center;">
+                        <button style="display: flex;justify-content: center;align-items: center;"
+                            class="btn btn-warning text-white " routerLink="/work-module">Salir</button>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+
+                <h3>Módulo de Trabajo - Señal de Alerta</h3>
+
+                <br>
+
+                <br>
+                <div class="row borderFormat" style="display: flex;justify-content: left;align-items: left">
+                    <!-- Tabla -->
+                    <div class="col-lg-9">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm" style="font-size: 12px;">
+                                <thead>
+                                    <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                        <th scope="col" style="text-align: center;">Tipo de Señal</th>
+                                        <th scope="col" style="text-align: center;">Resumen</th>
+                                        <th scope="col" style="text-align: center;">Periódo</th>
+                                        <th scope="col" style="text-align: center;">Fecha</th>
+                                        <th scope="col" style="text-align: center;">Check</th>
+                                        <th scope="col" style="text-align: center;">Estado</th>
+                                        <th scope="col" style="text-align: center;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">
+                                            <img src="assets/icons/c3.png" title="Tipos de Señal" />
+                                        </td>
+                                        <td class="text-center">SFL</td>
+                                        <td class="text-center">Trim II 2020</td>
+                                        <td class="text-center">Agosto</td>
+                                        <td class="text-center">
+                                            <img src="assets/icons/zcheck.png" title="Acceder" alt=""
+                                                style="cursor: pointer;" />
+
+                                        </td>
+                                        <td class="text-center">
+                                            <img src="assets/icons/accepted.png" title="Acceder" alt=""
+                                                style="cursor: pointer;" />
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-1" title="Exportar a excel"
+                        style="display: flex;justify-content: right;align-items: center;">
+                        <img src="assets/icons/word.png" title="Descargar Word" alt="" style="cursor: pointer;" />
+                    </div>
+                    <div class="col-lg-1" title="Descargar PDF"
+                        style="display: flex;justify-content: right;align-items: center;">
+                        <img src="assets/icons/pdf.png" title="Descargar PDF" alt="" style="cursor: pointer;" />
+                    </div>
+                    <div class="col-lg-1" title="Exportar a excel"
+                        style="display: flex;justify-content: right;align-items: center;">
+                        <button class="btn btn-warning text-white " routerLink="/home">Grabar</button>
+                    </div>
+
+                </div>
+                <div class="row borderFormat" style="display: flex;justify-content: left;align-items: left">
+                    <!-- Tabla -->
+                    <div class="col-lg-9">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm" style="font-size: 12px;">
+                                <thead>
+                                    <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                        <th scope="col" style="text-align: center;">Tipo de Señal</th>
+                                        <th scope="col" style="text-align: center;">Nombre</th>
+                                        <th scope="col" style="text-align: center;">Cargo</th>
+                                        <th scope="col" style="text-align: center;">Periódo</th>
+                                        <th scope="col" style="text-align: center;">Fecha Envío</th>
+                                        <th scope="col" style="text-align: center;">Fecha Respuesta</th>
+                                        <th scope="col" style="text-align: center;">Estado</th>
+                                        <th scope="col" style="text-align: center;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">
+                                            <img src="assets/icons/c3.png" title="Tipos de Señal" />
+                                        </td>
+                                        <td class="text-center">Diego R.</td>
+                                        <td class="text-center">Gerente de CM</td>
+                                        <td class="text-center">Trimestre II 2020</td>
+                                        <td class="text-center">20/08/2020</td>
+                                        <td class="text-center">26/08/2020</td>
+                                        <td class="text-center">
+                                            <img src="assets/icons/accepted.png" title="Aceptado" alt=""
+                                                style="cursor: pointer;" />
+
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="col-md-2 text-center pull-center pr-2"
+                                                src="assets/icons/view.png">
+                                                <!-- <img src="assets/icons/view.png" title="Ver detalle de formulario" alt=""
+                                                style="cursor: pointer;" /> -->
+                                                <button class="btn" data-toggle="dropdown">
+                                                    <span class="fas fa-bars" style="font-size: 20px;"></span>
+                                                </button>
+                                                <div class="dropdown-menu arrow pull-right" style="">
+                                                    <a class="dropdown-item" routerLink="/warning-signs-tray">Ver
+                                                        más</a>
+                                                    <a class="dropdown-item" >Solicitar Complemento</a>
+                                                    <a class="dropdown-item">Descargar Informe</a>
+                                                    <a class="dropdown-item">Cancelar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-log-6">
+                        <input type="file" name="file" id="file" class="inputfile" />
+                        <label for="file" class="btn btn-warning text-white buttonSinBorder">Adjuntar archivo</label>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">Archivos adjuntados</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center" style="padding-bottom: 0%;padding-right: 0%;">
+                                            Documento.xls</td>
+                                        <td class="text-left">
+                                            <img src="assets/icons/cancelar.png" title="Quitar Archivo" alt=""
+                                                style="display: flex;justify-content: center;align-items: center;" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" style="padding-bottom: 0%;padding-right:0%">
+                                            Documento.pdf</td>
+                                        <td class="text-left">
+                                            <img src="assets/icons/cancelar.png" title="Quitar Archivo" alt=""
+                                                style="display: flex;justify-content: center;align-items: center;" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" style="padding-bottom: 0%;padding-right:0%">
+                                            Documento.doc</td>
+                                        <td class="text-left">
+                                            <img src="assets/icons/cancelar.png" title="Quitar Archivo" alt=""
+                                                style="display: flex;justify-content: center;align-items: center;" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 form-group" style="padding-left: 200px;">
+                        <label>Comentarios:</label>
+                        <div class="row" style="display: flex;justify-content: left;align-items: left">
+                            <div class="col-lg-2" title="Usuario"
+                                style="display: flex;justify-content: right;align-items: center;">
+                                <img src="assets/icons/user.png" title="Usuario" alt="" style="cursor: pointer;" />
+                            </div>
+                            <div class="row" title="Exportar a excel"
+                                style="display: flex;justify-content: right;align-items: center;padding-left: 20px;">
+                                <span>Jim Burnnings &nbsp;<b>AUTHOR</b> &nbsp; 30, August 2020</span>
+                            </div>
+                        </div>
+                        <div class="row"
+                            style="display: flex;justify-content: left;align-items: left;padding-left: 20px;">
+                            <span>Thank you for write-up.</span>
+                        </div>
+                        <div class="row"
+                            style="display: flex;justify-content: left;align-items: left;padding-left: 20px;">
+                            <span>You've mentioned the reasons fo changing the name</span>
+                        </div>
+                        <div class="row"
+                            style="display: flex;justify-content: left;align-items: left;padding-left: 20px;">
+                            <span><b>Reply · Edit · Delete · Like</b></span>
+                        </div>
+                        <div class="row" style="display: flex;justify-content: left;align-items: left">
+                            <div class="col-lg-10 form-group">
+                                <div class="row" style="display: flex;justify-content: left;align-items: left">
+
+                                    <div class="col-lg-1 form-group">
+                                        <img src="assets/icons/user.png" title="Usuario" alt=""
+                                            style="cursor: pointer;" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                    </div>
+
+                                    <div class="col-lg-8 form-group">
+                                        <br>
+                                        <input type="text" class="form-control buttonSinBorder"
+                                            placeholder="Agregar Comentario">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+            </div>
+        </div>
+        <br><br>
+    </div>
+</main>
+<app-footer></app-footer>

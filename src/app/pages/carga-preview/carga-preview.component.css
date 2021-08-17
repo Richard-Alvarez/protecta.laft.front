@@ -1,0 +1,164 @@
+.app-pag{
+    display: inline-block;
+    font-size: 12px;
+}
+
+.app-pag-item{
+    list-style: none;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+}
+
+.app-pag-item a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    text-align: center;
+    color: #212121;
+    padding: 4px;
+    text-decoration: none;
+    cursor:pointer;
+    
+}
+
+.app-pag-select a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: coral;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    padding: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    cursor:pointer;
+}
+
+.app-pag-item a:hover{
+    background-color: coral;
+    color: white;
+    opacity: 0.7;
+}
+.buttonPreview{
+    
+    padding: 1% 3% 1% 3%;
+    font-size: 0.8rem;
+}
+.paddingButton{
+    font-size: 0.9rem;
+    margin-left: 20px;
+    padding: 1.5% 7% 1.5% 7%;
+}
+.paddingButton{
+    font-size: 0.9rem;
+    margin-left: 20px;
+    padding: 1.5% 7% 1.5% 7%;
+}
+.buttonopc{
+    font-size: 0.9rem;
+    /* margin-left: 20px; */
+    /* padding: 1.5% 7% 1.5% 7%; */
+    padding: 10px 20px 10px 20px;
+}
+.paddingModel{
+    padding-left: 1.5rem;
+    background:  rgba(250, 253, 253, 1);
+    padding-right: 1.5rem;
+}
+.paddingTitle{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.7rem;
+}
+label{
+    color: rgba(85, 85, 85, 1) !important;
+    margin-bottom: 0 !important;
+    font-size:  0.9rem;
+}
+select,input{
+    height: 2.8rem !important;
+    border: 1px solid rgba(180, 181, 217, 1);
+    
+}
+textarea{
+    border: 1px solid rgba(180, 181, 217, 1);
+}
+.form-row div{
+    padding-right: 1rem;
+    padding-bottom: 1.5rem;
+}
+.modal-header{
+    border: none;
+}
+
+.tableActualiz tr th{
+    font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+.custom-checkbox {
+    min-height: 1rem;
+    padding-left: 0;
+    margin-right: 0;
+    cursor: pointer; 
+  }
+    .custom-checkbox .custom-control-indicator {
+      content: "";
+      display: inline-block;
+      position: relative;
+      width: 30px;
+      height: 10px;
+      background-color:rgba(229, 237, 237, 1);
+      border-radius: 15px;
+      margin-right: 10px;
+      -webkit-transition: background .3s ease;
+      transition: background .3s ease;
+      vertical-align: middle;
+      margin: 0 16px;
+      box-shadow: none; 
+    }
+      .custom-checkbox .custom-control-indicator:after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: #f1f1f1;
+        border-radius: 21px;
+        box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+        left: -2px;
+        top: -4px;
+        -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+        transition: left .3s ease, background .3s ease, box-shadow .1s ease; 
+      }
+    .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
+      background-color: rgba(255, 122, 0, 1);
+      background-image: none;
+      box-shadow: none !important; 
+    }
+      .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator:after {
+        background-color: rgba(255, 122, 0, 1);
+        left: 15px; 
+      }
+    .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
+      box-shadow: none !important; 
+    }
+
+  
+    .retirado:checked~.custom-control-label::before{
+        color: #fff;
+        background-color:black !important;
+    }
+

@@ -1,0 +1,77 @@
+.app-pag{
+    display: inline-block;
+    font-size: 14px;
+}
+/*
+.app-pag-item{
+    list-style: none;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+}
+
+.app-pag-item a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    text-align: center;
+    color: #212121;
+    padding: 4px;
+    text-decoration: none;
+    cursor:pointer;
+    
+}
+
+.app-pag-select a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: coral;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    padding: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    cursor:pointer;
+}
+
+.app-pag-item a:hover{
+    background-color: coral;
+    color: white;
+    opacity: 0.7;
+}*/
+
+#tableRegistero tr th{
+    vertical-align: middle;
+    width: 10%;
+    color: rgba(38, 41, 109, 0.6);
+    border-top: 0px;
+    border-bottom: 2px solid rgba(38, 41, 109, 1);
+    font-weight: 500;
+}
+#tableRegistero tr td{
+    vertical-align: inherit;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  
+    background-color: rgba(90, 149, 180, 0.05);
+}
+.fontText{
+    font-size: 14px;
+}
+.borderFormat{
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+padding-left: 15px;
+border: 1px solid #d4d2d2;
+margin-top: 20px;
+border-top-left-radius: 20px;
+border-bottom-right-radius: 20px;
+padding: 20px;
+width: 100%;
+}

@@ -1,0 +1,148 @@
+
+<main class="container app-main">
+    <!--<div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>-->
+    <div class="" style="padding-left: 3px; width: 1080px;">
+        <div class="row borderFormat" style="padding-left: 70px;">
+            <div class="row">
+                <div class="col-md-6 col-lg-2 form-group">
+                    <label class="fontText">Inicio de Ejecución:</label>
+                    <input [disabled]="startDateOff" type="text" [(ngModel)]="bsValueIni"
+                        placeholder="DESDE" class="form-control buttonSinBorder colorButton" bsDatepicker
+                        #dpr="bsDatepicker" [maxDate]="maxDate"
+                        [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
+                </div>
+                <div class="col-md-6 col-lg-2 form-group ">
+                    <label class="fontText">Fin de Ejecución:</label>
+                    <input [disabled]="endDateOff" type="text" [(ngModel)]="bsValueFin" placeholder="HASTA"
+                        class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
+                        [maxDate]="maxDate"
+                        [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
+                </div>
+                <div class="col-md-1 col-lg-1 form-group"  style="display: flex;justify-content: center;align-items: center;padding-top: 40px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;">
+                    <input (change)="setControlsForProcess($event)" [(ngModel)]="SearchActivated"
+                        name="SearchByIdReport" style="height: 20px;width: 20px; " class="" type="checkbox">
+                </div>
+                <div class="col-md-5 col-lg-3 form-group ">
+                    <label for="" class="fontText">Buscar por ID(*):</label>
+                    <input [disabled]="IdReportOff" [(ngModel)]="IdReport" type="text" maxlength="40"
+                        class="form-control buttonSinBorder" maxlength="40" style="text-transform:uppercase;"
+                        placeholder="Ingrese el id">
+                </div>
+                <div class="col-md-0 col-lg-1 form-group">
+                </div>
+                <div class="col-md-6 col-lg-2 form-group" style="padding-top: 35px;">
+                    <button style="margin-top: auto;width: 150px;" class="btn btn-warning text-white "
+                        (click)="searchReports()">Buscar</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="tableLista" style="padding-right: 13px;"> 
+            <div class="table-responsive borderFormat">
+                <table class="table table-striped table-sm" style="font-size: 14px;">
+                    <thead>
+                        <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;" >
+                            <th style="padding-left: 15px;">Estado</th>
+                            <th style="padding-left: 13px;">ID</th>
+                            <th style="padding-left: 13px;">Fecha de Inicio de Reporte</th>
+                            <th style="padding-left: 13px;">Fecha de Fin de Reporte</th>
+                            <th style="padding-left: 13px;">Tipo de Cambio</th>
+                            <!-- <th style="text-align: center;">Tipo de Operación</th>
+                            <th style="text-align: center;">Origen</th> -->
+                            <th style="padding-left: 13px;">Fecha de proceso de ejecución</th>
+                            <!-- <th style="text-align: center;">Tipo de Archivo</th> -->
+                            <th style="text-align: center;">Descargar</th>
+                        </tr>
+                    </thead>
+                    <ng-container
+                        *ngIf="processlist!=null && processlist.length>0; then showGrid else hideGrid">
+                    </ng-container>
+                </table>
+                <ng-template #hideGrid>
+                    <tbody>
+                        <tr style="text-align: center;">
+                            <td colspan="10"></td>
+                        </tr>
+                    </tbody>
+                </ng-template>
+                <ng-template #showGrid>
+                    <tbody>
+                        <tr *ngFor="let item of processlistToShow; let row_no = index">
+                            <td class="text-center">
+                                <img *ngIf="item.estado == 'PENDIENTE'" src="assets/icons/loadingtc.gif"
+                                    title="Cargando" alt="Cargando" />
+                                <img *ngIf="item.estado == 'PROCESANDO'" src="assets/icons/loadingtc.gif"
+                                    title="Cargando" alt="Cargando" />
+                                <img *ngIf="item.estado == 'PENDIENTE INFORMACIÓN'" src="assets/icons/verifyct.png"
+                                    title="Finalizado" alt="Finalizado" />
+                                <img *ngIf="item.estado == 'FINALIZADO'" src="assets/icons/verifyct.png"
+                                    title="Finalizado" alt="Finalizado" />
+                                <img *ngIf="item.estado == 'ERROR'" src="assets/icons/incorrecttc.png"
+                                    title="Incorrecto" alt="Incorrecto" />
+                                <img *ngIf="item.estado == 'FINALIZADO CON ADVERTENCIA'" src="assets/icons/warntc.png"
+                                    title="Reporte sin datos" alt="Reporte sin datos" />
+                            </td>
+                            <td class="text-center">{{item.id}}</td>
+                            <td class="text-center">{{item.fechaInicioReporte}}</td>
+                            <td class="text-center">{{item.fechaFinReporte}}</td>
+                            <td class="text-center">{{item.tipoCambio}}</td>
+                            <!-- <td class="text-center">{{item.operType}}</td>                            
+                            <td class="text-center">{{item.origin}}</td> -->
+                            <td class="text-center">{{item.fechaProcesoEjecucion}}</td>                            
+                            <!-- <td class="text-center">{{item.fileType}}</td> -->
+                            <td class="text-center">
+                                <img *ngIf="item.tipoDeArchivo == 'xls'" src="assets/icons/xlsx-icon-2.png"
+                                    title="Descargar Excel" alt="" style="cursor: pointer;height:40px;width: 35px;"
+                                    (click)="getCsvFile(item.id)" />
+                                
+                                <img *ngIf="item.tipoDeArchivo == 'txt'" src="assets/icons/txt-icon-3.png"
+                                    title="Descargar Texto Plano" alt="" style="cursor: pointer;height:40px;width: 35px;"
+                                    (click)="getTextPlainFile(item.id)" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </ng-template>
+            </div>            
+        </div>    
+        <ng-container *ngIf="processlist!=null && processlist.length>0; then showPagination"></ng-container>
+        <ng-template #showPagination>
+            <div class="row mt-4" style="padding-left: 700px;">
+                <div class="col-sm-12">
+                    <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
+                        [collectionSize]="totalItems" [maxSize]="maxSize"
+                        (pageChange)="pageChanged(currentPage)">
+                        <ng-template ngbPaginationPrevious>Anterior</ng-template>
+                        <ng-template ngbPaginationNext>Siguiente</ng-template>
+                    </ngb-pagination>
+                </div>
+            </div>
+        </ng-template>
+
+
+
+
+
+
+
+        <div class="container" style="padding-top: 2%;">
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-between" style="width: 300px;">
+                    <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"
+                        (click)="exportListToExcel()">
+                        <i class="fas fa-download"></i>
+                        Descargar Registros
+                    </button>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>            
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>

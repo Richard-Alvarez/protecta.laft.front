@@ -1,0 +1,334 @@
+<div class="container">
+    <!-- <div class="row mb-2 mt-2">
+        <div class="Header">
+            <div class="row borderFormat" style="display: flex;justify-content: left;align-items: left;padding-left: 700px;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-1" title="Volver" style="display: flex;justify-content: center;align-items: center;">
+                    <button class="btn btn-warning text-white buttonSinBorder" routerLink="/c2-form">Salir</button>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div> -->
+    <ul class="nav nav-pills nav-justified">
+        <li class="nav-item">
+            <a class="nav-link active text-body" data-toggle="tab" href="#home1"
+                style="text-decoration: none;">Listas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-body" data-toggle="tab" href="#home2"
+                style="text-decoration: none;">Direcciones</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-body" data-toggle="tab" href="#home3"
+                style="text-decoration: none;">Pólizas vigentes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-body" data-toggle="tab" href="#home4"
+                style="text-decoration: none;">Movimientos LAFT</a>
+        </li>
+    </ul>
+    <div class="tab-content" style="padding-bottom: 80px;">
+        <div id="home1" class="container tab-pane active">
+            <div>
+                <br>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm" style="font-size: 12px;">
+                            <thead>
+                                <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                    <th scope="col">Nombres Completos</th>
+                                    <th scope="col">Tipo y Número de Documento</th>
+                                    <th scope="col">Fecha de Nacimiento</th>
+                                    <th scope="col">Edad</th>
+                                    <th scope="col">Ocupación</th>
+                                    <th scope="col">Cargo</th>
+                                    <th scope="col">Zona Geográfica</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fuenteTd">{{formData.NOMBRECOMPLETO}}</td>
+                                    <td class="fuenteTd">{{formData.STIPO_NUM_DOC}} {{formData.SNUM_DOCUMENTO}} </td>
+                                    <td class="fuenteTd">{{formData.SFECHA_NACIMIENTO}}</td>
+                                    <td class="fuenteTd">{{formData.NEDAD}}</td>
+                                    <td class="fuenteTd">{{formData.SOCUPACION}}</td>
+                                    <td class="fuenteTd">{{formData.SCARGO}}</td>
+                                    <td class="fuenteTd">{{formData.SZONA_GEOGRAFICA}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <h5>Listas Internacionales</h5>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm" style="font-size: 12px;">
+                            <thead>
+                                <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                    <th scope="col">Tipo de documento</th>
+                                    <th scope="col">Nro. de documento</th>
+                                    <th scope="col">Nombres</th>                               
+                                    <th scope="col">Tipo de Búsqueda</th>
+                                    <th scope="col">Origen</th>
+                                    <th scope="col">Porcentaje aprox.</th>
+                                    <th scope="col">Desmarcar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of internationalList; let i = index">
+                                    <td>{{item.STIPOIDEN}}</td>
+                                    <td>{{item.SNUM_DOCUMENTO}}</td>
+                                    <td>{{item.SNOM_COMPLETO}}</td>
+                                    <td>{{item.STIPO_BUSQUEDA}}</td>
+                                    <td>{{item.SORIGEN}}</td>
+                                    <td>{{item.NPORC_APROXIMA_BUSQ}}</td>
+                                    <td>
+                                        <input type="checkbox" [(ngModel)]="uncheckInternationalLists[i]"> 
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <h5>PEP</h5>
+                </div>
+                <div class="row">                      
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm" style="font-size: 12px;">
+                            <thead>
+                                <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                    <th scope="col">Tipo de documento</th>
+                                    <th scope="col">Nro. de documento</th>
+                                    <th scope="col">Nombres</th>
+                                    <th scope="col">Tipo de Búsqueda</th>
+                                    <th scope="col">Origen</th>
+                                    <th scope="col">Porcentaje aprox.</th>
+                                    <th scope="col">Desmarcar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of pepList; let i = index">
+                                    <td>{{item.STIPOIDEN}}</td>
+                                    <td>{{item.SNUM_DOCUMENTO}}</td>
+                                    <td>{{item.SNOM_COMPLETO}}</td>
+                                    <td>{{item.STIPO_BUSQUEDA}}</td>
+                                    <td>{{item.SORIGEN}}</td>
+                                    <td>{{item.NPORC_APROXIMA_BUSQ}}</td>
+                                    <td>
+                                        <input type="checkbox" [(ngModel)]="uncheckPepLists[i]">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>              
+                
+                <div class="row">
+                    <h5>Familiares PEP</h5>
+                </div>
+                <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-sm" style="font-size: 12px;">
+                                    <thead>
+                                        <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                            <th scope="col">Tipo de documento</th>
+                                            <th scope="col">Nro. de documento</th>
+                                            <th scope="col">Nombres</th>
+                                            <th scope="col">Tipo de Búsqueda</th>
+                                            <th scope="col">Origen</th>
+                                            <th scope="col">Porcentaje aprox.</th>
+                                            <th scope="col">Desmarcar</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of familiesPepList; let i = index">
+                                            <td>{{item.STIPOIDEN}}</td>
+                                            <td>{{item.SNUM_DOCUMENTO}}</td>
+                                            <td>{{item.SNOM_COMPLETO}}</td>
+                                            <td>{{item.STIPO_BUSQUEDA}}</td>
+                                            <td>{{item.SORIGEN}}</td>
+                                            <td>{{item.NPORC_APROXIMA_BUSQ}}</td>
+                                            <td>
+                                                <input type="checkbox" [(ngModel)]="uncheckFamiliesPepList[i]">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>            
+                    </div>
+                <div class="row">
+                    <h5>Lista Especial</h5>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm" style="font-size: 12px;">
+                            <thead>
+                                <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                    <th scope="col">Nombres</th>
+                                    <th scope="col">Tipo de Búsqueda</th>
+                                    <th scope="col">Número de documento</th>
+                                    <th scope="col">Origen</th>
+                                    <th scope="col">Porcentaje aprox.</th>
+                                    <th scope="col">Desmarcar</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of espList; let i = index">
+                                    <td>{{item.SNOM_COMPLETO}}</td>
+                                    <td>{{item.STIPO_BUSQUEDA}}</td>
+                                    <td>{{item.SNUM_DOCUMENTO}}</td>
+                                    <td>{{item.SORIGEN}}</td>
+                                    <td>{{item.NPORC_APROXIMA_BUSQ}}</td>
+                                    <td>
+                                        <input type="checkbox" [(ngModel)]="uncheckListEspecial[i]">
+                                    </td>
+                               </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <h5>Lista SAC</h5>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm" style="font-size: 12px;">
+                            <thead>
+                                <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                    <th scope="col">Nombres</th>
+                                    <th scope="col">Tipo de Búsqueda</th>
+                                    <th scope="col">Número de documento</th>
+                                    <th scope="col">Origen</th>
+                                    <!-- <th scope="col">Porcentaje aprox.</th>
+                                    <th scope="col">Desmarcar</th> -->
+                               </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of sacList; let i = index">
+                                    <td>{{item.SNOM_COMPLETO}}</td>
+                                    <td>{{item.STIPO_BUSQUEDA}}</td>
+                                    <td>{{item.SNUM_DOCUMENTO}}</td>
+                                    <td>{{item.SORIGEN}}</td>
+                                    <!-- <td>{{item.NPORC_APROXIMA_BUSQ}}</td>
+                                    <td>
+                                        <input type="checkbox" [(ngModel)]="uncheckSacList[i]">
+                                    </td> -->
+                               </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-11" ></div>
+                    <div class="col-lg-1" >
+                        <button class="btn btn-warning" (click)="save()"
+                            [disabled]="disableFormItems" title="Guardar">Guardar
+                        </button>
+                    </div>                  
+                </div>  
+            </div>
+        </div>
+        <div id="home2" class="container tab-pane fade">
+            <div>
+                <div class="row">
+                    <h5>Lista de Direcciones</h5>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm" style="font-size: 12px;">
+                            <thead>
+                                <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;"> 
+                                    <th scope="col">Dirección</th>
+                                    <th scope="col">Fecha de Registro</th>
+                                    <th scope="col">Fecha de Anulación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of processlistToShowAdress">
+                                    <td>{{item.DIRECCION}}</td>
+                                    <td>{{item.DCOMPDATE}}</td>
+                                    <td>{{item.DNULLDATE}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+        
+                </div>
+                <ng-container *ngIf="processlistToShowAdress!=null && processlistToShowAdress.length>0; then showPagination"></ng-container>
+                <ng-template #showPagination>
+                    <div class="row mt-4" style="padding-left: 350px;">
+                        <div class="col-sm-12">
+                            <ngb-pagination [(page)]="currentPageAdress" [pageSize]="itemsPerPageAdress"
+                                [collectionSize]="totalItemsAdress" [maxSize]="maxSizeAdress"
+                                (pageChange)="pageChanged(currentPageAdress)">
+                                <ng-template ngbPaginationPrevious>Anterior</ng-template>
+                                <ng-template ngbPaginationNext>Siguiente</ng-template>
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div id="home3" class="container tab-pane fade">
+            <div><div class="row">
+                <h5>Pólizas Vigentes</h5>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm" style="font-size: 12px;">
+                        <thead>
+                            <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;"> 
+                                <th scope="col" class="text-center">N° de póliza</th>
+                                <th scope="col" class="text-center">Producto</th>
+                                <th scope="col" class="text-center">Fecha de inicio de póliza</th>
+                                <th scope="col" class="text-center">Fecha de fin de póliza</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of policyList">
+                                <td class="text-center">{{item.SNUM_POLIZA}}</td>
+                                <td class="text-center">{{item.SPRODUCTO}}</td>
+                                <td class="text-center">{{item.DFEC_INI_POLIZA}}</td>
+                                <td class="text-center">{{item.DFEC_FIN_POLIZA}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div></div>
+        </div>
+        <div id="home4" class="container tab-pane fade">
+            <div><div class="row">
+                <h5>Movimientos LAFT </h5>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm" style="font-size: 12px;">
+                        <thead>
+                            <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;"> 
+                                <th scope="col">Periódo</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Tipo Lista</th>
+                                <th scope="col">Fecha de registro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of movementHistory">
+                                <td>{{item.NPERIODO_PROCESO}}</td>
+                                <td>{{item.SNOM_COMPLETO_BUSQ}}</td>
+                                <td>{{item.SDESTIPOLISTA}}</td>
+                                <td>{{item.DFECHA_REGISTRO}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div></div>
+        </div>
+    </div>
+         
+    
+</div>

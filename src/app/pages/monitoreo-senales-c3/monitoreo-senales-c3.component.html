@@ -1,0 +1,122 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>
+     <div class="container">
+         <div class="row mb-2 mt-2">
+             <div class="Header">
+                 <div class="col-lg-12">
+                     <h3>Monitoreo de riesgos LAFT</h3>
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtUsuario">Usuario</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Usuario" id="txtUsuario" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtCargo">Cargo</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Cargo" id="txtCargo" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtPeriodo">Período</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Período" id="txtPeriodo" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">             
+             <div class="col-lg-12">
+                 <span>Responda las siguientes preguntas, recuerde tiene carácter de declaración jurada</span>
+             </div>
+         </div>
+         <div class="card">
+             <div class="card-body">
+                 <div class="row">                     
+                     <div class="col-lg-12">
+                         <h6>C3 - Trimestres II 2020</h6>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-lg-8">
+                         <div class="row">                             
+                             <div class="col-lg-12">
+                                 <span>Antes de responder revise el archivo y consulte con quien corresponda</span>
+                             </div>
+                         </div>
+                         <div class="row">
+                             Ha tenido el caso de cliente domiciliado en/ ha modificado su domicilio a países
+                             considerados paraísos fiscales o países donde existe conocida actividad
+                             terrorista, considerados como no cooperantes por el GAFI o sujetos a
+                             sanciones OFAC
+                         </div>
+                     </div>
+                     <div class="col-lg-1">
+                         <span>Sí</span>
+                         <input type="radio">
+                     </div>
+                     <div class="col-lg-1">
+                         <span>No</span>
+                         <input type="radio">
+                     </div>
+                     <div class="col-lg-2">
+                         <div class="row">
+                             <input type="text" [disabled]="true"  placeholder="Agregar un comentario">
+                         </div>
+                         <div class="row mt-2">
+                             <input type="file">
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="table-responsive">
+                         <table class="table">
+                             <thead>
+                                 <tr>
+                                     <th scope="col">N°</th>
+                                     <th scope="col">País</th>
+                                </tr>
+                             </thead>
+                             <tbody>
+                                 <tr>
+                                     <td>1</td>
+                                     <td>País 1</td>
+                                </tr>
+                                 <tr>
+                                     <td>2</td>
+                                     <td>País 2</td>
+                                </tr>
+                                 <tr>
+                                     <td>3</td>
+                                     <td>País 3</td>
+                                 </tr>
+                             </tbody>
+                         </table>
+                     </div>
+                 </div>
+            </div>
+         </div>
+         <div class="btn-group pull-right">
+             <button class="btn btn-warning text-white buttonSinBorder" 
+                 title="Enviar">Enviar
+            </button>
+             <button class="btn btn-warning text-white buttonSinBorder" 
+                 title="Cancelar">Cancelar
+            </button>
+         </div>
+    </div>
+</main>
+<app-footer></app-footer>

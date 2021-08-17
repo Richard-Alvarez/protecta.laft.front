@@ -1,0 +1,208 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row mb-2 mt-2">
+            <div class="Header">
+            
+            </div>
+            <div class="row borderFormat">
+                <div class="col-lg-1">
+                    <h3>Formulario</h3>
+                </div>
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-1">
+                    <img src="assets/icons/c3.png" title="Tipos de Señal" />
+                </div>
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-1">
+                    <img src="assets/icons/pending.png" title="Estado de Formulario" />
+                </div>
+                <div class="col-lg-6">
+                  
+                </div>
+    
+                <div class="col-lg-1" title="Exportar a PDF"
+                style="display: flex;justify-content: center;align-items: center">
+                <img src="assets/icons/pdf.png" title="Descargar PDF" alt="" style="cursor: pointer;"
+                   />
+            </div>
+            </div>
+  
+        <div class="row borderFormat" style="display: flex;justify-content: center;align-items: center;">
+            <div class="col-lg-1 form-group">
+                <label for="txtUsuario">Usuario:</label>
+            </div>
+            <div class="col-lg-2 form-group" style="padding-left: 0px;">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Usuario" id="txtUsuario"
+                    [disabled]="true">
+            </div>
+
+            <div class="col-lg-1 form-group">
+                <label for="txtCargo">Cargo:</label>
+            </div>
+            <div class="col-lg-2 form-group" style="padding-left: 0px;">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Cargo" id="txtCargo"
+                    [disabled]="true">
+            </div>
+
+            <div class="col-lg-1 form-group">
+                <label for="txtPeriodo">Período:</label>
+            </div>
+            <div class="col-lg-2 form-group" style="padding-left: 0px;">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Período" id="txtPeriodo"
+                    [disabled]="true">
+            </div>
+               </div>
+  
+        <div class="row">
+            <div class="col-lg-12">
+                <span>Responda las siguientes preguntas, recuerde tiene carácter de declaración jurada</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <br>
+                    <div class="col-lg-12">
+                        <h4>C3 - Trimestres II 2020</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <!-- <div class="col-lg-12">
+                                 <span>Antes de responder revise el archivo y consulte con quien corresponda</span>
+                             </div> -->
+                        </div>
+                        <div class="row">
+                            Ha tenido el caso de cliente domiciliado en/ ha modificado su domicilio a países
+                            considerados paraísos fiscales o países donde existe conocida actividad
+                            terrorista, considerados como no cooperantes por el GAFI o sujetos a
+                            sanciones OFAC
+                        </div>
+                        <br>
+                        <br>
+                       
+                    </div>
+                    <div class="col-lg-1">
+                        <span>Sí</span>
+                        <input type="radio">
+                    </div>
+                    <div class="col-lg-1">
+                        <span>No</span>
+                        <input type="radio">
+                    </div>
+              
+                        <br>                    
+                    </div>
+                    
+                    <span>&nbsp; &nbsp;<b>LISTA PAISES GAFI:</b></span>
+                    <div class="row"  style="padding-left: 100px;">      
+                <div class="col-log-6">
+                
+                    <div class="table-responsive">
+                       
+                        
+                        <table class="table">
+                            <thead>
+                                
+                                <tr>
+                                    <th scope="col">N°</th>
+                                    <th scope="col">País</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>País 1</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>País 2</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>País 3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+         
+                </div>   
+                <div class="row">   
+                <div class="col-lg-3">
+                    <h6>Comentarios</h6>
+                    <textarea id="" name="" cols="40" rows="5"></textarea>
+            </div> 
+            <div class="col-lg-5">
+               
+        </div>  
+            <div class="col-log-6">
+                <input type="file" name="file" id="file" class="inputfile" />
+                <label for="file" class="btn btn-warning text-white buttonSinBorder">Adjuntar archivo</label>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Archivos adjuntados</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center" style="padding-bottom: 0%;padding-right: 0%;">Documento.xls</td>
+                                <td class="text-left">
+                                    <img src="assets/icons/cancelar.png" title="Quitar Archivo" alt=""
+                                    style="display: flex;justify-content: center;align-items: center;" />
+                                </td>
+                           </tr>
+                            <tr>
+                                <td class="text-center" style="padding-bottom: 0%;padding-right:0%">Documento.pdf</td>
+                                <td class="text-left">
+                                    <img src="assets/icons/cancelar.png" title="Quitar Archivo" alt=""
+                                    style="display: flex;justify-content: center;align-items: center;"/>
+                                </td>
+                           </tr>
+                            <tr>
+                                <td class="text-center" style="padding-bottom: 0%;padding-right:0%">Documento.doc</td>
+                                <td class="text-left">
+                                    <img src="assets/icons/cancelar.png" title="Quitar Archivo" alt=""
+                                    style="display: flex;justify-content: center;align-items: center;"/>
+                                </td>
+                            </tr>                                  
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
+        </div>     
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-1">
+                <button class="btn btn-warning text-white buttonSinBorder" title="Enviar">Enviar
+                </button>
+            </div>
+            <div class="col-lg-2">
+               
+            </div>
+
+            <div class="col-lg-1">
+                <button class="btn btn-warning text-white buttonSinBorder" routerLink="/alert-management"
+                    title="Cancelar">Cancelar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</main>
+<app-footer></app-footer>

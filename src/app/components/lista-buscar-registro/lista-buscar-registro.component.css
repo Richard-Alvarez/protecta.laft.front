@@ -1,0 +1,7 @@
+.ListStyleSearch{   
+    padding: 15px 30px 15px 30px;
+    cursor: pointer;
+}
+.ListStyleSearch:hover{   
+    background: rgba(229, 237, 237, 1)
+}

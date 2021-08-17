@@ -1,0 +1,35 @@
+
+<div class="modal fade app-lista-busqueda" id="lista-buscar-registro-modal" tabindex="-1" role="dialog" 
+aria-labelledby="lista-buscar-registro-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content mt-5">
+            <div class="modal-body">
+                <ul   class="list-group list-group-flush">
+                 
+                    <li   class="list-group-item ListStyleSearch" *ngFor="let registro of registros"   (click)="verRegistro(registro)">
+                        <div>
+                            <strong style="font-weight: 500;font-size: 0.9rem;">
+                                {{registro.nombre}}
+                                {{registro.apellidoPaterno}}
+                                {{registro.apellidoMaterno}}
+                            </strong>
+                        </div>
+                        <div class="row d-flex justify-content-between text-secondary text-small">
+                            <div class="col-4">
+                                    {{registro.documento.descripcion}} {{registro.numeroDocumento}}
+                            </div>
+                            <div class="col-4">
+                                    {{registro.pais.descripcion}} 
+                            </div>
+                            <div class="col-4 text-right">
+                                <span class="app-señal" [ngStyle]="{'background-color': registro.senial.color}"></span>
+                            </div>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

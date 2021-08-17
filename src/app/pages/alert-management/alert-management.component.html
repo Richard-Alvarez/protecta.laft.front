@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>
+     <div class="container">
+         <div class="row mb-2 mt-2">
+             <div class="Header">
+               <h4 class="TitleLine">Cuestionario de señales</h4>                
+             </div>
+         </div>
+         <div class="row">  
+            <div class="col-lg-3">       
+            <h5 class="TitleLine">{{first.NOMBRECOMPLETO}}</h5>
+        </div>       
+         </div>       
+         <div class="row">
+             <div class="table-responsive borderFormat">
+                 <table class="table table-striped table-sm" style="font-size: 15px;">
+                     <thead>
+                         <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">                          
+                             <th scope="col" style="text-align: center;">Periódo</th>
+                             <th scope="col" style="text-align: center;">Descripción de la señal</th>
+                             <th scope="col" style="text-align: center;">Señal</th>
+                             <th scope="col" style="text-align: center;">Fecha de movimiento</th>
+                             <th scope="col" style="text-align: center;">Estado</th>
+                             <th scope="col" style="text-align: center;">Ver</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr *ngFor="let item of alertFormsList">
+                             <td class="text-center">{{item.NPERIODO_PROCESO}}</td>
+                             <td class="text-left" title="{{item.SDESCRIPCION_ALERTA}}">{{item.SDESCRIPCION_ALERTA1_CORTA}}</td>
+                             <td class="text-center">
+                                 <label *ngFor="let alerta of item.SNOMBRE_ALERTA.split(', ')" class="senal text-center">{{alerta}}</label>
+                             </td>
+                             <td class="text-center">{{item.DFECHA_ESTADO_MOVIMIENTO}}</td>
+                             <td class="text-center">
+                                 <label *ngIf="item.SESTADO == '1'" class="pendiente">{{item.SNOMBRE_ESTADO}}</label>
+                                 <label *ngIf="item.SESTADO == '2'" class="completado">{{item.SNOMBRE_ESTADO}}</label>
+                                 <label *ngIf="item.SESTADO == '3'" class="devuelto">{{item.SNOMBRE_ESTADO}}</label>
+                             </td>
+                             <td class="text-center">
+                                <img src="assets/icons/view.png" title="Acceder" alt=""
+                                    style="cursor: pointer;"  routerLink="{{this.getForm(item)}}" (click)="guardarAlerta(item)"/>                                   
+                            </td>
+                         </tr>
+                     </tbody>
+                 </table>               
+             </div>
+         </div>
+     </div>
+</main>
