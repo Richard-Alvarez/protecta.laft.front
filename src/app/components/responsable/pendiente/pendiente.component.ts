@@ -24,6 +24,7 @@ import { SbsreportService } from 'src/app/services/sbsreport.service';
 })
 export class PendienteComponent implements OnInit {
     STIPO_USUARIO;
+    setText:any = {}
     objRadioHeader:any = {};
     InputRespHeaderAll:number = 0
     arrInputRespHeader:any = []
@@ -957,6 +958,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     if (arrPreguntasCabecera == null) {
         return {code: 0}
     }
+        
+
     if( tamañoArr > 0 ){  
       for (let i = 0; i < arrPreguntasCabecera.length; i++) {
         let cabecera = arrPreguntasCabecera[i]
@@ -1064,9 +1067,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     //return objResp
   }
 
-  
 
-  getColorGrilla(indice){
+getColorGrilla(indice){
     if(indice % 2 === 0) {
         return 'colorGrillaAleatorio'
     }else{
@@ -1305,7 +1307,20 @@ getAlerta(alerta){
 }
 }
 
-
+setLabelData(alerta){
+  if(alerta == "C3"){
+    return 'Clientes con direcciones en paises GAFI'
+  }
+  else if(alerta == "S1"){
+    return 'evoluciones rentas'
+  }
+  else if(alerta == "T1"){
+    return 'Declaraciones Juradas y File'
+  }
+  else{
+    return 'Adjuntar Sustento'
+  }
+} 
 
 
 
