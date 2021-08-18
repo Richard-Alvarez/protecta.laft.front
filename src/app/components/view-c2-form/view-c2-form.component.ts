@@ -430,17 +430,35 @@ export class ViewC2FormComponent implements OnInit {
             this.linkactual = link[link.length-1].trim()
             console.log(" this.internationalList link",this.linkactual)
             if(this.linkactual == "contraparte"){
-                let dataSend = {NIDALERTA: 33,NIDREGIMEN : 0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 3  }
+                let dataSend = {
+                    NIDALERTA: 33,
+                    NIDREGIMEN : 0, 
+                    NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, 
+                    NIDGRUPOSENAL: 3,
+                    NIDPROVEEDOR: 1
+                }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
                 console.log(" this.internationalList",  this.internationalList)
             }else if(this.linkactual == "colaborador"){
-                let dataSend = {NIDALERTA: 35,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2  }
+                let dataSend = {
+                    NIDALERTA: 35,
+                    NIDREGIMEN :0, 
+                    NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, 
+                    NIDGRUPOSENAL: 2,
+                    NIDPROVEEDOR: 1
+                }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
                 console.log(" this.internationalList",  this.internationalList)
             }else{
-                let dataSend = {NIDALERTA: this.alertData.NIDALERTA,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 1  }
+                let dataSend = {
+                    NIDALERTA: this.alertData.NIDALERTA,
+                    NIDREGIMEN : this.regimen.id, 
+                    NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, 
+                    NIDGRUPOSENAL: 1,
+                    NIDPROVEEDOR:  this.regimen.id == 1 ? 4 : 1 
+                }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
                 console.log(" this.internationalList",  this.internationalList)
