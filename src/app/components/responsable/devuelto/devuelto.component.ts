@@ -1015,7 +1015,20 @@ async getArchivoSustento(item){
     console.error("error en descargar: ",error)
   }
 }
-
+setLabelData(alerta){
+  if(alerta == "C3"){
+    return 'Clientes con direcciones en paises GAFI'
+  }
+  else if(alerta == "S1"){
+    return 'Devoluciones Rentas'
+  }
+  else if(alerta == "T1"){
+    return 'Declaraciones Juradas y File'
+  }
+  else{
+    return 'Adjuntar Sustento'
+  }
+} 
   
 
 

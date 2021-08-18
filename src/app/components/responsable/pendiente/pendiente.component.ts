@@ -1312,7 +1312,7 @@ setLabelData(alerta){
     return 'Clientes con direcciones en paises GAFI'
   }
   else if(alerta == "S1"){
-    return 'evoluciones rentas'
+    return 'Devoluciones Rentas'
   }
   else if(alerta == "T1"){
     return 'Declaraciones Juradas y File'

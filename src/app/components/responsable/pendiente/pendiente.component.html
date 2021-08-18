@@ -348,25 +348,25 @@
                                                                                                 <div class="col-lg-2">
                                                                                                     <div class="text-left">
                                                                                                         <label class="form-check-label">
-                                                      <input type="radio"
-                                                        (change)="setDataInputTextResp(index,incPregHeadOne,'1')"
-                                                        value=1 class="form-check-input"
-                                                        name="optradioz{{index + '' + incPregHeadOne}}"
-                                                        id="optradioz1{{index + '' + incPregHeadOne}}"
-                                                        [checked]="getCheckedByQuestionHead(index,incPregHeadOne,'1')">Sí
-                                                    </label>
+                                                                                                            <input type="radio"
+                                                                                                                    (change)="setDataInputTextResp(index,incPregHeadOne,'1')"
+                                                                                                                    value=1 class="form-check-input"
+                                                                                                                    name="optradioz{{index + '' + incPregHeadOne}}"
+                                                                                                                    id="optradioz1{{index + '' + incPregHeadOne}}"
+                                                                                                                    [checked]="getCheckedByQuestionHead(index,incPregHeadOne,'1')">Sí
+                                                                                                        </label>
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="col-lg-2">
                                                                                                     <div class="text-left">
                                                                                                         <label class="form-check-label">
-                                                      <input type="radio"
-                                                        (change)="setDataInputTextResp(index,incPregHeadOne,'2')"
-                                                        value=2 class="form-check-input"
-                                                        name="optradioz{{index + '' + incPregHeadOne}}"
-                                                        id="optradioz2{{index + '' + incPregHeadOne}}"
-                                                        [checked]="getCheckedByQuestionHead(index,incPregHeadOne,'2')">No
-                                                    </label>
+                                                                                                            <input type="radio"
+                                                                                                                    (change)="setDataInputTextResp(index,incPregHeadOne,'2')"
+                                                                                                                    value=2 class="form-check-input"
+                                                                                                                    name="optradioz{{index + '' + incPregHeadOne}}"
+                                                                                                                    id="optradioz2{{index + '' + incPregHeadOne}}"
+                                                                                                                    [checked]="getCheckedByQuestionHead(index,incPregHeadOne,'2')">No
+                                                                                                        </label>
                                                                                                     </div>
 
                                                                                                 </div>
@@ -404,13 +404,10 @@
                                                                                         <input type="file" name="file" id="archivo{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'ADJUNTOS-FORM','RE')" />
                                                                                         <div class="text-center">
                                                                                             <label for="archivo{{regimen.id}}-{{index}}">
-                                                <i class="fas fa-paperclip fa-2x fa-lg"
-                                                  style="color: #706d6d;cursor:pointer">
-                                                  <div class="parrafoAdj text-center">
-                                                    Adjuntar archivo
-                                                  </div>
-                                                </i>
-                                              </label>
+                                                                                                <i class="fas fa-paperclip fa-2x fa-lg" style="color: #706d6d;cursor:pointer">
+                                                                                                    <div class="parrafoAdj text-center">Adjuntar archivo</div>
+                                                                                                </i>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-8" style="left: 15px;">
@@ -484,14 +481,14 @@
 
 
 
-                                                                        <div class="col-lg-2">
+                                                                        <div class="col-lg-2" >
                                                                             <div class="d-flex ustify-content-between">
                                                                                 <div class="col-lg-4">
                                                                                     <input type="file" name="file" [(ngModel)]="dataMultiplex" id="archivoSustento{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesInforme($event,item.NIDALERTA_CABECERA,item.NIDALERTA,'ADJUNTOS-SUSTENTO')" />
                                                                                     <div class="text-center">
                                                                                         <label for="archivoSustento{{regimen.id}}-{{index}}" style="cursor: pointer;">
                                                                                             <img src="assets/icons/excel-microsoft.png" style="width: 38px;"/>
-                                                                                                <div class="parrafoAdj text-center">
+                                                                                                <div class="parrafoAdj text-center" style="width: 140px;">
                                                                                                        <div class="" *ngIf=" item.NIDALERTA == 4 ">Adjuntar Plantilla</div>
                                                                                                        <div class="" *ngIf=" item.NIDALERTA != 4 ">{{setLabelData(item.SNOMBRE_ALERTA)}}</div>    
                                                                                                 </div>
