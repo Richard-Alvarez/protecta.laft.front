@@ -131,7 +131,7 @@ export class ViewC2FormComponent implements OnInit {
        this.linkactual = link[link.length-1].trim()
 
         let data: any = {};
-        if( this.linkactual == "contraparte"){
+        if( this.linkactual == "proveedor"){
             data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
             data.P_NIDALERTA = this.alertData.NIDALERTA;
             data.P_NIDREGIMEN = 0;
@@ -429,7 +429,7 @@ export class ViewC2FormComponent implements OnInit {
             let link = URLactual.split("/")
             this.linkactual = link[link.length-1].trim()
             console.log(" this.internationalList link",this.linkactual)
-            if(this.linkactual == "contraparte"){
+            if(this.linkactual == "proveedor"){
                 let dataSend = {NIDALERTA: 33,NIDREGIMEN : 0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 3  }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
@@ -462,7 +462,7 @@ export class ViewC2FormComponent implements OnInit {
             let link = URLactual.split("/")
             this.linkactual = link[link.length-1].trim()
 
-            if(this.linkactual == "contraparte"){
+            if(this.linkactual == "proveedor"){
                 let dataSend = {NIDALERTA: 33,NIDREGIMEN : 0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 3  }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 
@@ -521,7 +521,7 @@ export class ViewC2FormComponent implements OnInit {
         
         let objFocusPosition:any = {}
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
-        if(this.linkactual == "contraparte")
+        if(this.linkactual == "proveedor")
             this.regimen.id = 1;
         objFocusPosition.regimen = this.regimen
         objFocusPosition.estado = this.state
@@ -577,7 +577,7 @@ export class ViewC2FormComponent implements OnInit {
             this.linkactual = link[link.length-1].trim()
             this.core.loader.show();
             let data: any = {};
-            if( this.linkactual == "contraparte"){
+            if( this.linkactual == "proveedor"){
                 data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
                 data.P_NIDALERTA = this.alertData.NIDALERTA;
                 data.P_NIDREGIMEN = 0;

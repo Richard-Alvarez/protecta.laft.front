@@ -146,7 +146,7 @@ export class CompletadoComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
       console.log("La data cuando enviar el complemento", data)
-      if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+      if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
         data["NREGIMEN"] = 0
        }
        console.log("La data cuando enviar el complemento 2",  data["NREGIMEN"])
@@ -292,7 +292,7 @@ export class CompletadoComponent implements OnInit {
 
   async solicitarComplemento(indice,pregHead){
     debugger
-    if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+    if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
       pregHead["NREGIMEN"] = 0
      }
      console.log("this.arrInputCommentSolCompl[indice] ", this.arrInputCommentSolCompl[indice])
@@ -343,7 +343,7 @@ export class CompletadoComponent implements OnInit {
           console.log("this.arrInputCommentSolCompl[indice] ", this.arrInputCommentSolCompl[indice])
           console.log("this.arrInputCommentSolCompl ", this.arrInputCommentSolCompl)
           let respFilterArrRespon:any = await this.enviarSolicitarComplemento(indice,pregHead)
-          if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+          if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
             pregHead["NREGIMEN"] = 0
           }
           let objSenial:any = pregHead
@@ -524,7 +524,7 @@ export class CompletadoComponent implements OnInit {
   }
 
   async UpdateCheckboxForm(data){
-    if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+    if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
       data["NREGIMEN"] = 0
      }
 

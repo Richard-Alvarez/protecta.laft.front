@@ -27,7 +27,7 @@ import { WarningSignsTrayComponent } from './warning-signs-tray/warning-signs-tr
 import { WarningSign4WorkModuleComponent } from './warning-sign4-work-module/warning-sign4-work-module.component';
 import { ViewWarningc2DatabaseComponent } from './view-warningc2-database/view-warningc2-database.component';
 import { ViewWarningrg2DatabaseComponent } from './view-warningrg2-database/view-warningrg2-database.component';
-import {ContraparteComponent} from'./components/responsable/contraparte/contraparte.component';
+import {ProveedorComponent} from'./components/responsable/proveedor/proveedor.component';
 
 import { TimePericitySettingsComponent } from './time-pericity-settings/time-pericity-settings.component';
 import { InternationalListMaintenanceComponent } from './international-list-maintenance/international-list-maintenance.component';
@@ -102,7 +102,7 @@ const routes: Routes = [
   { path: 'c2-detail', component: C2DetailComponent },
   { path: 'c3-form', component: C3FormComponent },
   { path: 'rg-form', component: RgFormComponent },
-  { path: 'contraparte',component: ContraparteComponent},
+  { path: 'proveedor',component: ProveedorComponent},
   
   { path: 'colaborador', component: ColaboradorComponent },
   { path: 'perfiles', component: PerfilesComponent },
