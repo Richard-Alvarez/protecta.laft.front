@@ -1,0 +1,341 @@
+<div class="row" *ngIf="getIsValidStateAllow(stateInformeTerminado.sState)">
+    <div class="col-lg-12">
+
+        <div class="row">
+            
+                
+                <div class="col-lg-3">
+                    <div data-toggle="collapse" 
+                    data-target="#detalleInformeTerminado" style="cursor: pointer;">
+                        <div class="card" style="margin-bottom: 0;border-bottom: none;">
+                            <div class="card-header" style="background-color: white;">
+                                <div class="text-left">
+                                    <div class="badge {{getClassBagdeState(stateInformeTerminado.sState)}}"
+                                        style="color: white;font-size: 20px;font-weight: bold;float: left;">
+                                        IT </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class=""
+                                        style="padding-left: 5px;font-size: 20px;font-weight: bold;float: left;">
+                                         -</div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="badge "
+                                        style="font-size: 20px;font-weight: bold;">
+                                        {{capitalizarPrimeraLetra(stateInformeTerminado.sState)}}</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+            <div class="col-lg-9">
+
+            </div>
+        </div>
+
+
+
+    </div>
+    
+
+    <div class="col-lg-12">
+        <div class="card" *ngIf="(getArray(stateInformeTerminado.sState,regimen.id)).length > 0">
+            <div>
+                
+                <div class="card" style="border: none;background-color: white;">
+                    <div class="card-body" style="padding-bottom: 0px;">
+                        <div class="card" style="border: none;background-color: white;">
+                            <div class="card-header" style="padding-bottom: 0px;">
+                                <div class="row">
+                                    <div class="col-lg-1">
+
+                                    </div>
+                                    <div class="col-lg-11">
+                                        <div class="row">
+                                            <div class="col-lg-1">
+                                                <div class="text-left txtCabecera">Señal</div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="text-left txtCabecera">Descripción de alerta</div>
+                                            </div>
+                                            <!--<div class="col-lg-1">
+                                                <div class="text-center txtCabecera">Descargar Papel de trabajo
+                                                </div>
+                                            </div>-->
+                                            <div class="col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="text-left txtCabecera">Descargar último informe
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="col-lg-4" style="margin-left: 30px;padding-right: 0px;">
+    
+                                                    </div>-->
+                                                    <div class="col-lg-4" style="padding-left: 70px">
+                                                        <div class="text-left txtCabecera">Acción</div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="card-body " style="margin-top: 0px;padding-top: 0px;">
+                    <div *ngFor="let item of arrResponsable;let index = index;"
+                        style="border:none;padding: 0px;margin: 0px;">
+                        <div class="card mt-1"
+                            style="border:none;padding: 0px;margin: 0px;"
+                            >
+                            <div id="{{'acordion'+stateInformeTerminado.sState + regimen.desCorto + index}}">
+                                <div class="card-header headerSenials "
+                                    style="margin-top: 0px;padding-top: 0px;background-color: rgb(43 36 91 / 8%)">
+
+                                    <div class="row">
+                                        <div class="col-lg-1">
+                                            <div class="pt-4 pl-4">
+                                                <i class="fas fa-2x fa-ellipsis-h" style="cursor: pointer;"
+                                                    data-toggle="collapse"
+                                                    attr.href="#{{'collap'+'Alert'+item.NIDALERTA+'Regimen'+regimen.id+stateInformeTerminado.sState+'Head' + regimen.desCorto +index}}"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-11">
+                                            <div class="row">
+                                                <div class="col-lg-12  ">
+                                                    <div class="card-link unlinkeo">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-1 pt-3">
+                                                                <div class="text-left badge badge-danger "
+                                                                    style="font-size: 16px;font-weight: bold;">
+                                                                    {{item.SNOMBRE_ALERTA}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5 pt-2">
+                                                                <div class="text-left">
+                                                                    <div class="txtDetalle"
+                                                                    style="text-align:justify">
+                                                                        {{item.SDESCRIPCION_ALERTA}}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <!--<div class="col-lg-1 pt-2">
+                                                                <div class="text-center">
+                                                                    <i class="fas fa-file-word fa-3x"
+                                                                        style="color: rgb(74, 81, 131);"></i>
+                                                                </div>
+                                                            </div>-->
+                                                            <div class="col-lg-6">
+                                                                <div class="row">
+                                                                    <div class="col-lg-2 pt-2">
+                                                                        <div class="text-center">
+                                                                            <i class="fas fa-file-pdf fa-3x"
+                                                                                style="color: #ba493d;cursor:pointer;"  (click)="downloadInformes(item)"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 pt-2" style="margin-left: 30px;padding-right: 0px;">
+    
+                                                                    </div>
+                                                                    
+                                                                    <div class="col-lg-4 pt-2" style="padding-left: 40px">
+                                                                        <button class="btn btn-dark" (click)="revertirSenial(item)">Revertir Señal</button>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <!--<div class="row">
+                                                        <div class="col-lg-3" style="padding-left: 0px;padding-right: 0px;">
+                                                            <div class="text-left txtCabecera" >Informes adjuntos</div>
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index" [arrFilesAdjuntos]="getFiles(item, STIPO_USUARIO)"></app-adjuntar-files>
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="text-left txtCabecera">Archivos adjuntos</div>
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                           <app-adjuntar-files [parent]="this" 
+                                                           [item]="item" 
+                                                           [indexInput]="index" 
+                                                           [arrFilesAdjuntos]="[]"
+                                                           [arrFilesGuardados]="item.arrAdjuntos"></app-adjuntar-files>
+                                                                
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div id="{{'collap'+'Alert'+item.NIDALERTA+'Regimen'+regimen.id+stateInformeTerminado.sState+'Head' + regimen.desCorto +index}}"
+                                    class="collapse"
+                                    attr.data-parent="#{{'acordion'+ stateInformeTerminado.sState + regimen.desCorto + index}}">
+                                    <!--<app-button-download-report [item]="item" [regimen]="regimen" [STIPO_USUARIO]="STIPO_USUARIO" [parent]="this"></app-button-download-report>-->
+                                    <div class="card-body" style="background-color: white;">
+                                        
+                                        <div *ngIf="item.NIDALERTA !== 2">
+                                            <div class="card" style="border: 0px;padding-bottom: 0px;">
+                                                <div class="card-header"
+                                                    style="border: 0px;padding-bottom: 0px;">
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="txtCabecera text-left">Responsable</div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="txtCabecera text-left">Fecha de
+                                                                movimiento</div>
+                                                        </div>
+                                                        <div class="col-lg-1">
+                                                            <div class="txtCabecera text-left">Resp.</div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="txtCabecera text-left">Comentarios</div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr style="margin-top: 0px;margin-bottom: 0px;">
+                                            <div
+                                                id="{{'acordionResponsable'+stateInformeTerminado.sState+'Any'+index}}">
+                                                <div class="card mt-1" style="border: 0px;padding-top: 0px;"
+                                                    *ngFor="let itemResponsableInfoTerm of item.arrUsuariosForm;let incItemRespPenInfo = index;">
+                                                    <div class="card-header headerSenials"
+                                                        style="padding-top: 0px;">
+
+                                                        <div class="row text-dark" >
+                                                                  
+                                                            <!--<div class="col-lg-2">
+                                                                <div tooltip="La información proporcionada por el cliente es inconsistente o de difícil verificación por parte de PROTECTA." placement="top">La información proporcionada por el cliente es inc...</div>
+                                                            </div>-->
+                                                            <div class="col-lg-3">
+                                                                <a class="card-link" data-toggle="collapse" href="#collapseResponsable{{index+'-'+incItemRespPenInfo}}">
+                                                                <div class="text-left text-dark">{{itemResponsableInfoTerm.NOMBRECOMPLETO}}</div>
+                                                            </a>
+                                                            </div>
+                                                        
+                                                        
+                                                            <div class="col-lg-3">
+                                                                <a class="card-link" data-toggle="collapse" href="#collapseResponsable{{index+'-'+incItemRespPenInfo}}">
+                                                                <div class="text-left text-dark">{{itemResponsableInfoTerm.DFECHA_ESTADO_MOVIMIENTO}}</div></a>
+                                                            </div>
+                                                        
+                                                        
+                                                            <div class="col-lg-1">
+                                                                <a class="card-link" data-toggle="collapse" href="#collapseResponsable{{index+'-'+incItemRespPenInfo}}">
+                                                                <div class="text-left text-dark" style ="text-align: justify;">{{itemResponsableInfoTerm.SRESPUESTA}}</div></a>
+                                                            </div>
+                                                        
+                                                        
+                                                            <div class="col-lg-3">
+                                                                <a class="card-link" data-toggle="collapse" href="#collapseResponsable{{index+'-'+incItemRespPenInfo}}">
+                                                                <div class="text-left text-dark" style ="text-align: justify;">{{itemResponsableInfoTerm.SCOMENTARIO}}</div></a>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                              
+                                                          </div>
+                                                    
+                                                    </div>
+                                                    </div>
+                                                    <div id="collapseResponsable{{index+'-'+incItemRespPenInfo}}"
+                                                        class="collapse"
+                                                        attr.data-parent="#{{'acordionResponsable'+stateInformeTerminado.sState+'Any'+index}}">
+                                                        <div class="card-body" style="border: 0px;">
+                                                            <div *ngIf="item.NIDALERTA !== 2">
+                                                                <div *ngIf="item.NIDALERTA === 1" class="">
+                                                                    <!--C1 detalle de preguntas
+                                                                    <app-c1-detail-company [parent]="this" [objAlerta]="itemResponsableInfoTerm"
+                                                                        [objState]="statePendienteInforme"></app-c1-detail-company>-->
+            
+                                                                </div>
+            
+            
+                                                                <div class="">
+                                                                    <!--CONVERSACION-->
+                                                                    <app-comments-alerts-state
+                                                                    [parent]="this"
+                                                                        [arrConversacion]="itemResponsableInfoTerm.arrConversacionCabecera">
+                                                                    </app-comments-alerts-state>
+                                                                </div>
+                                                            </div>
+                                                            
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="item.NIDALERTA === 2" >
+                                            <app-view-c2-form [vistaOrigen]="'C2-BANDEJA'" [objAlertaC2]="item" [regimen]="regimen" [valueIdCollap]="'collap'+'Alert'+item.NIDALERTA+'Regimen'+regimen.id+stateInformeTerminado.sState+'Head' + regimen.desCorto +index" [state]="stateInformeTerminado.sState"></app-view-c2-form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="card" *ngIf="arrResponsable.length == 0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <p class="text-center">{{parent.cadenaEstadosSinSenial}}</p>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

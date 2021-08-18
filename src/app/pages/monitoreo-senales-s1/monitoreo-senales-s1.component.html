@@ -1,0 +1,125 @@
+<app-navbar></app-navbar>
+     <div class="container">
+         <div class="row mb-2 mt-2">
+             <div class="Header">
+                 <div class="col-lg-12">
+                     <h3>Monitoreo de riesgos LAFT</h3>
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtUsuario">Usuario</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Usuario" id="txtUsuario" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtCargo">Cargo</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Cargo" id="txtCargo" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtPeriodo">Período</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Período" id="txtPeriodo" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">             
+             <div class="col-lg-12">
+                 <span>Responda las siguientes preguntas, recuerde tiene carácter de declaración jurada</span>
+             </div>
+         </div>
+         <div class="card">
+             <div class="card-body">
+                 <div class="row">                     
+                     <div class="col-lg-4">
+                         <h6>S1 - Trimestres II 2020</h6>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-lg-8">
+                         <div class="row">                             
+                             <div class="col-lg-12">
+                                 <span>Antes de responder revise el archivo y consulte con quien corresponda</span>
+                             </div>
+                         </div>
+                         <div class="row">
+                             Cancelación anticipada de pólizas con devolución de la prima al asegurado sin un propósito claro o en
+                             circunstancias no usuales, especialmente cuando el pago es realizado en efectivo o la devolución es a
+                             orden de un tercero sin aparente relación
+                         </div>
+                     </div>
+                     <div class="col-lg-1">
+                         <span>Sí</span>
+                         <input type="radio">
+                     </div>
+                     <div class="col-lg-1">
+                         <span>No</span>
+                         <input type="radio">
+                     </div>
+                     <div class="col-lg-2">
+                         <i class="fas fa-file-excel"></i>
+                         <div>Consolidado NC</div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-lg-12">
+                         <div class="table-responsive">
+                             <table class="table">
+                                 <thead>
+                                     <tr>
+                                         <th scope="col">Contratante</th>
+                                         <th scope="col">Producto</th>
+                                         <th scope="col">Cod. Cliente</th>
+                                         <th scope="col">Póliza</th>
+                                         <th scope="col">Comprobante</th>
+                                         <th scope="col">Fecha</th>
+                                         <th scope="col">Motivo</th>
+                                         <th scope="col">Comentario</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr>
+                                         <td>Contratante 1</td>
+                                         <td>Producto 1</td>
+                                         <td>11111111111</td>
+                                         <td>11111111111</td>
+                                         <td>11111111111</td>
+                                         <td>24/09/2020</td>
+                                         <td><input type="text" placeholder="Agregar un motivo"></td>
+                                         <td><input type="text" placeholder="Agregar un comentario"></td>
+                                     </tr>
+                                     <tr>
+                                         <td>Contratante 2</td>
+                                         <td>Producto 2</td>
+                                         <td>11111111111</td>
+                                         <td>11111111111</td>
+                                         <td>11111111111</td>
+                                         <td>24/09/2020</td>
+                                         <td><input type="text" placeholder="Agregar un motivo"></td>
+                                         <td><input type="text" placeholder="Agregar un comentario"></td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+         </div>
+         <div class="btn-group pull-right">
+             <button class="btn btn-warning text-white buttonSinBorder" 
+                 title="Enviar">Enviar
+            </button>
+             <button class="btn btn-warning text-white buttonSinBorder" 
+                 title="Cancelar">Cancelar
+            </button>
+         </div>
+    </div>
+<app-footer></app-footer>

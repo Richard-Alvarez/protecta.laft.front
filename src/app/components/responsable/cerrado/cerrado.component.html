@@ -1,0 +1,644 @@
+<div class="row" *ngIf="getIsValidStateAllow('CERRADO')">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card" style="margin-bottom: 0;border-bottom: none;">
+                    <div class="card-header" style="background-color: white;">
+                        <div class="text-center">
+                            <div class="badge {{getClassBagdeState('CERRADO')}}"
+                                style="font-size: 18px;font-weight: bold;">
+                                CERRADO</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card" *ngIf="(getArray('CERRADO',regimen.id)).length > 0">
+            <div>
+                <div *ngFor="let userGroup of getArrayUserGroup(regimen.id,'CERRADO');">
+                    <!--<div *ngIf="STIPO_USUARIO === 'OC'" class="table-responsive">
+                        <div class="col-lg-3"
+                            style="display: flex;justify-content: left;">
+                            <h5 style="font-size: 18px;" class="TitleLine">{{userGroup}}
+                            </h5>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1">
+
+                        </div>
+                        <div class="col-lg-11">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    
+                                </div>
+                                <div class="col">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-lg-1">
+
+                        </div>
+                        <div class="col-lg-11">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    Responder todos los formularios.
+                                </div>
+                                <div class="col-lg-8">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="card" style="border: none;background-color: white;">
+                        <div class="card-body" style="padding-bottom: 0px;">
+                            <div class="card" style="border: none;background-color: white;">
+                                <div class="card-header" style="padding-bottom: 0px;">
+                                    <div class="row">
+                                        <div class="col-lg-1">
+
+                                        </div>
+                                        <div class="col-lg-11">
+                                            <div class="row">
+                                                <div class="col-lg-1">
+                                                    <div class="text-left txtCabecera">Señal</div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="text-left txtCabecera">Descripción de alerta</div>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <div class="text-center txtCabecera">Papel de trabajo</div>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="text-center txtCabecera">Adjuntos</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+
+                    
+                    
+                    <div class="card-body " style="margin-top: 0px;padding-top: 0px;">
+                        <div *ngFor="let item of getArray('CERRADO',regimen.id);let index = index;"
+                        style="border:none;background-color: rgb(241, 225, 201);padding: 0px;margin: 0px;">
+                            <div class="card mt-1" 
+                            style="border:none;background-color: rgb(241, 225, 201);padding: 0px;margin: 0px;"
+                            *ngIf="getValidationNameEqualsResponsable(userGroup,item.NOMBRECOMPLETO);">
+                                <div id="{{'acordionCERRADO' + regimen.desCorto + index}}">
+                                    <div class="card-header headerSenials " style="margin-top: 0px;padding-top: 0px;">
+                                        
+                                        <div class="row">
+                                            <div class="col-lg-1">
+                                                <div class="pt-4 pl-4">
+                                                    <i class="fas fa-2x fa-ellipsis-h"
+                                                        style="cursor: pointer;"
+                                                        data-toggle="collapse"
+                                                        attr.href="#{{'collapCERRADOHead' + regimen.desCorto + index}}"
+                                                    ></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-11">
+                                                <div class="row" >
+                                                    <div class="col-lg-12  ">
+                                                        <div class="card-link unlinkeo">
+                                                            
+                                                            <div class="row">
+                                                                <div class="col-lg-1 pt-2">
+                                                                    <div class="text-left badge badge-danger"
+                                                                                style="font-size: 16px;font-weight: bold;">
+                                                                                {{item.SNOMBRE_ALERTA}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3 pt-2">
+                                                                    <div
+                                                                                class="text-left">
+                                                                                <div
+                                                                                    class="txtDetalle"
+                                                                                    style="text-align: justify;">
+                                                                                    {{item.SDESCRIPCION_ALERTA}}
+                                                                                </div>
+                                                                            </div>
+                                                                    
+                                                                </div>
+                                                                <div class="col-lg-1 pt-2" >
+                                                                    <div class="text-center">
+                                                                        <i class="fas fa-file-pdf fa-3x" style="color: rgb(192, 71, 40);"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-7">
+                                                                    <div class="left-text">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-1">
+                                                                                <input type="file" name="file" id="archivo0"
+                                                                                    class="inputfile" multiple />
+                                                                                <div class="text-center mt-3">
+                                                                                    <label for="archivo0">
+                                                                                        <i class="fas fa-paperclip fa-2x fa-lg"
+                                                                                            style="color: #706d6d;cursor:pointer">
+                                                                                            <div class="parrafoAdj text-center">Adjuntar archivo</div>
+                                                                                        </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                    
+                                                                                
+                                                                            </div>
+                                                                            <div class="col-lg-11">
+                                                                                <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index" [arrFilesAdjuntos]="getFiles(item, STIPO_USUARIO)"></app-adjuntar-files>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                
+                                                                
+
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div id="{{'collapCERRADOHead' + regimen.desCorto + index}}"
+                                        class="collapse"
+                                        attr.data-parent="#{{'acordionCERRADO' + regimen.desCorto + index}}">
+                                        <div class="card-body" style="background-color: white;">
+                                            <div *ngIf="item.NIDALERTA !== 2">
+                                                <div class="card" style="border: 0px;padding-bottom: 0px;">
+                                                    <div class="card-header" style="border: 0px;padding-bottom: 0px;">
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="txtCabecera text-center">Responsable</div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="txtCabecera text-center">Fecha de movimiento</div>
+                                                            </div>
+                                                            <div class="col-lg-1">
+                                                                <div class="txtCabecera text-center">Resp.</div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="txtCabecera text-center">Comentarios</div>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr style="margin-top: 0px;margin-bottom: 0px;">
+                                                <div id="acordionResponsableCerradoAny{{index}}">
+                                                    <div class="card mt-1" style="border: 0px;padding-top: 0px;" *ngFor="let itemResponsableCerr of arrResponsablesByCerrado;let incItemRespCerr = index;">
+                                                        <div class="card-header headerSenials" style="padding-top: 0px;">
+                                                         
+                                                              <div class="row text-dark" >
+                                                                  
+                                                                      <!--<div class="col-lg-2">
+                                                                          <div tooltip="La información proporcionada por el cliente es inconsistente o de difícil verificación por parte de PROTECTA." placement="top">La información proporcionada por el cliente es inc...</div>
+                                                                      </div>-->
+                                                                      <div class="col-lg-3">
+                                                                          <a class="card-link" data-toggle="collapse" href="#collapseResponsable{{incItemRespCerr}}">
+                                                                          <div class="text-center text-dark">{{itemResponsableCerr.usuario}}</div>
+                                                                      </a>
+                                                                      </div>
+                                                                  
+                                                                  
+                                                                      <div class="col-lg-3">
+                                                                          <a class="card-link" data-toggle="collapse" href="#collapseResponsable{{incItemRespCerr}}">
+                                                                          <div class="text-center text-dark">{{itemResponsableCerr.fecha_movimiento}}</div></a>
+                                                                      </div>
+                                                                  
+                                                                  
+                                                                      <div class="col-lg-1">
+                                                                          <a class="card-link" data-toggle="collapse" href="#collapseResponsable{{incItemRespCerr}}">
+                                                                          <div class="text-center text-dark">{{itemResponsableCerr.respuesta}}</div></a>
+                                                                      </div>
+                                                                  
+                                                                  
+                                                                      <div class="col-lg-3">
+                                                                          <a class="card-link" data-toggle="collapse" href="#collapseResponsable{{incItemRespCerr}}">
+                                                                          <div class="text-center text-dark">{{itemResponsableCerr.comentario}}</div></a>
+                                                                      </div>
+                                                                      <div class="col-lg-2">
+                                                                        
+                                                                    </div>
+                                                              
+                                                              </div>
+                                                        </div>
+                                                        <div id="collapseResponsable{{incItemRespCerr}}" class="collapse" attr.data-parent="#acordionResponsableCerradoAny{{index}}">
+                                                            <div class="card-body" style="border: 0px;">
+                                                                
+                                                                <div class="row">
+                                                                    <!--CONVERSACION-->
+                                                                    <div class="table-responsive mt-2"
+                                                                    style="height: 400px;overflow-y: visible;">
+                                                                        <table
+                                                                            class="table table-striped table-md"
+                                                                            style="font-size: 13px;">
+                                                                            <thead>
+                                                                                <tr
+                                                                                style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                                                    <th
+                                                                                        style="text-align: center;justify-content: center;">
+                                                                                        Fecha</th>
+                                                                                    <th
+                                                                                        style="text-align: center;justify-content: center;">
+                                                                                        Usuario</th>
+                                                                                    <th
+                                                                                        style="text-align: center;justify-content: center;">
+                                                                                        Comentario
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        class="text-center">
+                                                                                        28/12/2020
+                                                                                        16:14</td>
+                                                                                    <td
+                                                                                        class="text-center">
+                                                                                        German
+                                                                                        Salinas</td>
+                                                                                    <td class="text-left"
+                                                                                        style="width: 600px;">
+                                                                                        <div
+                                                                                            class="arrow_box_oc {{attachFileStyle(item)}}">
+                                                                                            <span
+                                                                                                class="ml-1 mr-1"
+                                                                                                style="font-family: Arial, Helvetica, sans-serif;">
+                                                                                                Esto
+                                                                                                es
+                                                                                                un
+                                                                                                comentario
+                                                                                            </span>
+                                                                                        </div>
+                
+                
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        class="text-center">
+                                                                                        28/12/2020
+                                                                                        16:12</td>
+                                                                                    <td
+                                                                                        class="text-center">
+                                                                                        German
+                                                                                        Salinas</td>
+                                                                                    <td class="text-left"
+                                                                                        style="width: 600px;">
+                                                                                        <div
+                                                                                            class="arrow_box_oc {{attachFileStyle(item)}}">
+                                                                                            <span
+                                                                                                style="font-family: Arial, Helvetica, sans-serif;">
+                                                                                                Esto
+                                                                                                es
+                                                                                                un
+                                                                                                comentario
+                                                                                                2
+                                                                                            </span>
+                                                                                        </div>
+                
+                
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        class="text-center">
+                                                                                        28/12/2020
+                                                                                        16:10</td>
+                                                                                    <td
+                                                                                        class="text-center">
+                                                                                        German
+                                                                                        Salinas</td>
+                                                                                    <td class="text-left"
+                                                                                        style="width: 600px;">
+                                                                                        <div
+                                                                                            class="arrow_box_oc {{attachFileStyle(item)}}">
+                                                                                            <span
+                                                                                                style="font-family: Arial, Helvetica, sans-serif;">
+                                                                                                Esto
+                                                                                                es
+                                                                                                un
+                                                                                                comentario
+                                                                                                3
+                                                                                            </span>
+                                                                                        </div>
+                
+                
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    
+                                                                    <!--ADJUNTAR ARCHIVOS-->
+                                                                    <!--<div class="mt-3">
+                                                                        <input type="file" name="file" id="archivo0"
+                                                                            class="inputfile" multiple />
+                                                                        <label for="archivo0"><i
+                                                                                class="fas fa-paperclip fa-2x fa-lg"
+                                                                                style="color: #706d6d;"></i></label>
+                                                                        Adjuntar archivo
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col"
+                                                                                        class="text-center">
+                                                                                        Archivos adjuntados del
+                                                                                        Responsable
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="text-center"
+                                                                                        style="padding-bottom: 0%;padding-right: 0%;">
+                                                                                        imagen.jpg
+                                                                                    </td>
+                                                                                    <td class="text-left">
+                                                                                        <img src="assets/icons/cancelar.png"
+                                                                                            title="Quitar Archivo"
+                                                                                            alt=""
+                                                                                            style="display: flex;justify-content: center;align-items: center;" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="text-center"
+                                                                                        style="padding-bottom: 0%;padding-right: 0%;">
+                                                                                        protectaOne.jpg
+                                                                                    </td>
+                                                                                    <td class="text-left">
+                                                                                        <img src="assets/icons/cancelar.png"
+                                                                                            title="Quitar Archivo"
+                                                                                            alt=""
+                                                                                            style="display: flex;justify-content: center;align-items: center;cursor: pointer;" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>-->
+                                                                </div>
+                                                                <div *ngIf="item.NIDALERTA === 1" class="row">
+                                                                    <br>
+                                                                    <div class="col-lg-3"></div>
+                                                                    <div class="col-lg-2">
+                                                                        <div class="form-check">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="text-center">
+                                                                                        <label class="form-check-label">
+                                                                                            <input type="radio"
+                                                                                                class="form-check-input"
+                                                                                                name="optradioz{{index + '' + incPregHeadOne}}"
+                                                                                                id="optradioz1{{index + '' + incPregHeadOne}}"
+                                                                                                (click)="setStateTextArea(index,'1')">Sí
+                                                                                        </label>
+                                                                                    </div>
+                
+                                                                                </div>
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="text-center">
+                                                                                        <label class="form-check-label">
+                                                                                            <input type="radio"
+                                                                                                class="form-check-input"
+                                                                                                name="optradioz{{index + '' + incPregHeadOne}}"
+                                                                                                id="optradioz2{{index + '' + incPregHeadOne}}"
+                                                                                                (click)="setStateTextArea(index,'2')">No
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <input type="text" style="width: 200px;" class="form-control form-control mb-2" />
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <div class="form-check">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="text-center">
+                                                                                        <label class="form-check-label">
+                                                                                            <input type="radio"
+                                                                                                class="form-check-input"
+                                                                                                name="optradioz{{index + '' + incPregHeadOne}}"
+                                                                                                id="optradioz1{{index + '' + incPregHeadOne}}"
+                                                                                                (click)="setStateTextArea(index,'1')">Sí
+                                                                                        </label>
+                                                                                    </div>
+                
+                                                                                </div>
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="text-center">
+                                                                                        <label class="form-check-label">
+                                                                                            <input type="radio"
+                                                                                                class="form-check-input"
+                                                                                                name="optradioz{{index + '' + incPregHeadOne}}"
+                                                                                                id="optradioz2{{index + '' + incPregHeadOne}}"
+                                                                                                (click)="setStateTextArea(index,'2')">No
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+                                                                        <input type="text" style="width: 200px;" class="form-control form-control mb-2" />
+                                                                    </div>
+                                                                </div>
+                                                                <!--detalle de preguntas-->
+                                                                <div class="table-responsive"
+                                                                    style="height: auto;width:auto;overflow-y: visible;overflow-x: auto;"
+                                                                    *ngIf="item.NIDALERTA === 1">
+                                                                    <table class="table table-striped table-md"
+                                                                        style="font-size: 13px;">
+                                                                        <thead>
+                                                                            <tr
+                                                                                style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                                                <th scope="col"
+                                                                                    style="text-align: center;">
+                                                                                    N°</th>
+                                                                                <th scope="col"
+                                                                                    style="text-align: center;">
+                                                                                    RUC</th>
+                                                                                <th scope="col"
+                                                                                    style="text-align: center;">
+                                                                                    Razón
+                                                                                    Social
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    style="text-align: center;">
+                                                                                    Producto
+                                                                                </th>
+                                                                                <th style="text-align: center;"
+                                                                                    colspan="5">
+                                                                                    ¿La operación guarda
+                                                                                    relación con la
+                                                                                    actividad económica
+                                                                                    del cliente
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    style="text-align: center;"
+                                                                                    colspan="5">
+                                                                                    ¿Los precios con los cuales
+                                                                                    se están
+                                                                                    comercializando a
+                                                                                    los contratantes, se alinean
+                                                                                    a las
+                                                                                    políticas de la
+                                                                                    compañía y están dentro de
+                                                                                    los
+                                                                                    parámetros de normalidad
+                                                                                    vigentes en el mercado?
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="text-center">1</td>
+                                                                                <td class="text-center">
+                                                                                    20100904072</td>
+                                                                                <td class="text-center">
+                                                                                    COOPERATIVA DE
+                                                                                    AHORRO Y CREDITO AELU
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    Desgravamen
+                                                                                    Aelucoop</td>
+                
+                                                                                <ng-container>
+                                                                                    <td class="text-center">
+                                                                                        <span>Sí</span>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <input type="radio"
+                                                                                            [value]="1">
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <span>No</span>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <input type="radio"
+                                                                                            [value]="2">
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <input type="text"
+                                                                                            placeholder="Agregar comentario"
+                                                                                            maxlength="500">
+                                                                                    </td>
+                                                                                </ng-container>
+                
+                                                                                <ng-container>
+                                                                                    <td class="text-center">
+                                                                                        <span>Sí</span>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <input type="radio"
+                                                                                            [value]="1">
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <span>No</span>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <input type="radio"
+                                                                                            [value]="2">
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <input type="text"
+                                                                                            placeholder="Agregar comentario"
+                                                                                            maxlength="500">
+                                                                                    </td>
+                                                                                </ng-container>
+                
+                
+                
+                
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    
+                                                                    
+                                                                </div>
+                                                                <br *ngIf="item.NIDALERTA === 1">
+                                                                <div *ngIf="item.NIDALERTA === 1" class="btn btn-warning">Agregar Empresa</div>
+                                                                <br *ngIf="item.NIDALERTA === 1">
+
+                                                            </div>
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="item.NIDALERTA === 2">
+                                                <app-view-c2-form></app-view-c2-form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        
+                    </div>
+                    
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <div class="card" *ngIf="(getArray('CERRADO',regimen.id)).length == 0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <p class="text-center">No se encontro información</p>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>

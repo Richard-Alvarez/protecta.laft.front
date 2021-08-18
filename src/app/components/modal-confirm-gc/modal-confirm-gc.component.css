@@ -1,0 +1,25 @@
+.mostrar{
+    visibility: visible
+}
+.ocultar{
+    visibility: hidden
+}
+.Container{
+ /* left: 50%;
+margin-left: -375px;*/
+width: 480px;  
+top: 150px;
+ position: fixed;
+ z-index: 10001;
+ background: #fff;
+/*border: 1px solid #cccccc; */
+display: block;  
+/* -webkit-box-shadow: 0 0 10px #cccccc;
+-moz-box-shadow: 0 0 10px #cccccc;
+-o-box-shadow: 0 0 10px #cccccc;
+box-shadow: 0 0 10px #cccccc; */
+}
+
+.buttonSinBorder{
+    border-radius : inherit;
+  }

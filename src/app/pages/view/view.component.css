@@ -1,0 +1,31 @@
+.app-señal{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.app-button-rounded{
+    border-radius: 30px;
+    margin-right: 5px;
+}
+.paddingPorc{
+
+    padding-left: 5%;
+    padding-right: 5%;    
+}
+#formDetalleCliente .row{
+    padding: 10px 0px 10px 0px;
+}
+.spanFormat{
+    margin-left: 2rem;
+    background: rgba(250, 112, 0, 1);
+  
+    display: table;
+    color: white;
+    padding: 3px 10px 3px 10px;
+    font-size: 0.8rem;
+}
+.text-warning{
+    color: #fd7e14 !important;
+}

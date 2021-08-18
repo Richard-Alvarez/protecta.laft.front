@@ -1,0 +1,119 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <button class="btn btn-link text-secondary" routerLink="/home">
+        <span class="fas fa-chevron-left"></span> Pantalla Principal
+    </button>
+    <div class="d-flex justify-content-between mb-4">
+        <div>
+           
+            <h4 class="TitleLine">Configuración</h4>
+               
+         
+            <p>
+                <!--Asignar permisos a cada aplicación y productos, según semáforo.-->
+                Asignar permisos a cada aplicación, según semáforo.
+            </p>
+        </div>
+        <div>
+            <button class="btn btn-link text-secondary" routerLink="/home">
+                Cancelar
+            </button>
+            <button class="btn btn-warning text-white" (click)="grabar()">Guardar</button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+         <ng-container *ngFor="let config of configSeniales" >
+                <ng-container *ngIf="config.senial.id != 5">     
+                    <button class="btn btn-light {{config.data}}"
+                            (click)="verSenial(config)">
+                        <span class="app-señal" [ngStyle]="{background: config.senial.color}"></span> 
+                        {{config.senial.descripcion}}
+                    </button>
+              </ng-container>
+        </ng-container>
+        </div>
+        <br>
+        <div class="col-12" style="margin-top:2rem;margin-bottom: 2rem;">
+            <div class="col-6">
+                    <div class="custom-control custom-switch mr-3" style="display: inline-block;float: left;">
+                            <label class="custom-control custom-checkbox">
+                                    <input  (change) = "Validate('alert')" type="checkbox" [(ngModel)]="this.configSenial.senial.indAlert" name="this.configSenial.senial.indAlert"  class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    Enviar alerta
+                                </label>
+                         <!--  <input type="checkbox"
+                                [(ngModel)]="registro.liberado" name="registro.liberado"
+                                class="custom-control-input custom-control-input-warning" 
+                               >
+                            <label class="custom-control-label" for="customSwitch4">
+                                Registro liberado
+                            </label>-->
+                        </div>
+            </div>
+            <div class="col-6">
+                    <div class="custom-control custom-switch mr-3" style="display: inline-block;float: left;">
+                            <label class="custom-control custom-checkbox">
+                                    <input  (change) = "Validate('error')" type="checkbox"  [(ngModel)]="this.configSenial.senial.indError" name="this.configSenial.senial.indError"  class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    Bloquear 
+                                </label>
+                         <!--  <input type="checkbox"
+                                [(ngModel)]="registro.liberado" name="registro.liberado"
+                                class="custom-control-input custom-control-input-warning" 
+                               >
+                            <label class="custom-control-label" for="customSwitch4">
+                                Registro liberado
+                            </label>-->
+                        </div>
+            </div>
+                
+        </div>
+        <br>
+        <div class="col-12">
+            <table class="table table-striped table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th>Aplicaciones</th>
+                        <th style="display: none;">Productos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let configAplicacion of configSenial.aplicaciones">
+                        <td>
+                            <div class="custom-control custom-switch mr-5" style="display: inline-block;">
+                                <input type="checkbox" 
+                                        [(ngModel)]="configAplicacion.activo"
+                                        class="custom-control-input " 
+                                        (change)="changeAplicacion(configAplicacion)"
+                                        id="app-{{configAplicacion.aplicacion.id}}"
+                                        >
+                                <label class="custom-control-label" for="app-{{configAplicacion.aplicacion.id}}">
+                                    {{configAplicacion.aplicacion.descripcion}}
+                                </label>
+                            </div>
+                        </td>
+                        <td  style="display: none;">
+                            <div class="custom-control custom-switch mr-5" style="display: inline-block;"
+                                    *ngFor="let configProducto of configAplicacion.productos">
+                                <input type="checkbox" 
+                                        [(ngModel)]="configProducto.activo"
+                                        class="custom-control-input" 
+                                        id="prod-{{configAplicacion.aplicacion.id}}-{{configProducto.producto.id}}"
+                                        (change)="changeProducto(configProducto,configAplicacion)"
+                                        >
+                                <label class="custom-control-label" for="prod-{{configAplicacion.aplicacion.id}}-{{configProducto.producto.id}}">
+                                    {{configProducto.producto.descripcion}}
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>
+
+

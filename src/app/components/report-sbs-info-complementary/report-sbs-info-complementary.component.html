@@ -1,0 +1,38 @@
+<div class="borderFormat">
+    <div class="">
+        <div class="col-sm-4" style="padding-left: 400px;">
+            <input type="file" (change)="changeFile($event)" id="adjuntarSUNAT" class="inputfile" multiple>
+            <label for="adjuntarSUNAT" class="btn btn-warning" style="font-size: 16px;">
+                Cargar información de SUNAT
+            </label>
+          
+        </div>
+        <div class="col-sm">
+          <div class="row" >
+            <div class="col" *ngFor="let itemAdjunto of getFilesSUNAT();">
+                {{itemAdjunto.name}}
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row mt-2 mb-2" *ngIf="subirSunat == 1">
+        <div class="col-sm-4">
+            <label  (click)="subirArchivosSUNAT()" class="btn btn-warning">
+                Subir
+            </label>
+          
+        </div>
+    </div>
+    <div class="">
+        <div class="col-sm-4" style="padding-left: 400px;">
+            <label (click)="processArchivosPagos()" for="adjuntarPAGOS" class="btn btn-warning" style="color: white; font-size: 16px">
+                Cargar información de PAGOS
+            </label>
+
+        </div>
+        <div class="col-sm">
+            
+        </div>
+    </div>
+</div>
+ 

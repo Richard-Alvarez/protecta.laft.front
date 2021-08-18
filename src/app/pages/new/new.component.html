@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<main class="container app-main">   
+    <div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+        
+    <div class="row justify-content-md-center">
+        <div class="col-md-10">
+            <div class="d-flex justify-content-between">
+                <h4>{{registro.apellidoPaterno}} {{registro.apellidoMaterno}} {{registro.nombre}}</h4>
+                <div>
+                    <button style="    FONT-SIZE: 1.1rem;
+                    background: transparent !important;
+                    margin-right: 1.5rem;" class="btn btn-link text-dark" routerLink="/ver">Cancelar</button>
+                    <button style="PADDING: 0.7rem 3rem 0.7rem 3rem;" class="btn btn-warning text-white" (click)="grabarRegistro()">Crear Registro</button>
+                </div>
+            </div>
+
+            <app-editar-registro [registro]="registro"></app-editar-registro>
+            
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>
+

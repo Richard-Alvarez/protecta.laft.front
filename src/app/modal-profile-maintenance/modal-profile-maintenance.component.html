@@ -1,0 +1,88 @@
+<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
+   
+       <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
+</div>
+<div class="row mb-2 mt-2" style="display: flex;padding-left: 125px;">
+    <div class="Header">
+        <div class="row">
+            <div class="col-lg-19">
+                <h4 class="TitleLine">{{this.fTitle}}</h4>
+            </div>
+        </div>
+        
+    </div>
+    <br>
+        
+</div>
+<div class="row" style="padding-left: 100px;">
+    <div class="col-lg-5 form-group" title="Nombre de Alerta">
+        <span class="fontText">Nombre del perfil:</span>
+        <input [(ngModel)]="perfilName" id="usAlertNama" type="text" class="form-control buttonSinBorder">
+    </div>
+   
+    
+    
+</div>
+
+<div class="row" style="display: flex;justify-content: center;align-items: center;">
+    <div class="col-lg-10 form-group" title="Descripción de la alerta">
+        <span class="fontText">Descripción del Perfil:</span>
+        <textarea [(ngModel)]="perfilDescription" id="usAlertDescription" type="text" 
+            class="fontText form-control buttonSinBorder" style="height: 100px;">  </textarea>
+    </div>
+</div>
+
+<!-- <div class="row" style="padding-left: 100px;">
+    <div class="col-lg-3 form-group" style="">
+        <label class="fontText">Grupo:</label>
+        <select  [(ngModel)]="group" name="profile" 
+           
+            style="display: flex;justify-content: center;align-items: center;"
+            class="form-control buttonSinBorder">
+            <option value="0" selected>Seleccione</option>
+            <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="profileIdSelected">
+                {{item.SDESGRUPO_SENAL}}</option>
+            
+           
+        </select>
+    </div>
+
+
+</div> -->
+
+<div class="row" style="padding-left: 100px;"> 
+    <div class="col-12">
+        <span class="fontText">Grupo:</span>
+    </div>
+    <div class="col-lg-2  form-group" *ngFor="let item of GrupoList;let index = index">
+        <!-- <input class="form-check-input2" type="checkbox" [(ngModel)]="checkbox[item.NIDGRUPOSENAL]" (change)="consoelAux()" id="valor{{item.NIDGRUPOSENAL}}"  >        -->
+        <!-- <input class="form-check-input2" type="checkbox" id="{{index}}"  (change)="consoelAux(item.NIDGRUPOSENAL)" >     -->
+        <!-- <input class="form-check-input2" type="checkbox"  (change)="revisarCambio(obtenerClave(item, item.NIDGRUPOSENAL))" > -->
+        <!-- <input class="form-check-input2" type="checkbox" [(ngModel)]="checkbox[item.NIDGRUPOSENAL]" (change)="consoelAux2()"   >   -->
+        <input class="form-check-input2" type="checkbox" [(ngModel)]="checkbox[item.NIDGRUPOSENAL]" (change)="onCategoriaPressed(item.NIDGRUPOSENAL,$event.target.checked)"  >    
+        
+        <label for="" style="padding-left: 10px;">{{item.SDESGRUPO_SENAL}}</label>
+    </div>
+   
+
+</div>
+
+
+
+
+
+<div class="row" style="padding-left: 250px;">
+    <div class="col-lg-9 form-group" title="Guardar" style="text-align:right">
+        <br>
+        <button style="width: 100px;"
+            class="btn btn-warning text-white" (click)="GuardarCambios()" >Guardar</button>
+    </div>
+    
+    <div class="col-lg-2 form-group" title="Guardar" style="">
+        <br>
+        <button style="width: 100px; background-color: gray;"
+            class="btn text-white" (click)="closeModal('edit-modal')">Cancelar</button>
+    </div>
+</div>
+<br><br>
+

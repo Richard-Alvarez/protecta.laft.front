@@ -1,0 +1,107 @@
+<app-navbar></app-navbar>
+     <div class="container">
+         <div class="row mb-2 mt-2">
+             <div class="Header">
+                 <div class="col-lg-12">
+                     <h3>Monitoreo de riesgos LAFT</h3>
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtUsuario">Usuario</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Usuario" id="txtUsuario" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtCargo">Cargo</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Cargo" id="txtCargo" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-2 form-group">
+                <label for="txtPeriodo">Período</label>
+             </div>
+             <div class="col-lg-2 form-group">
+                <input type="text" class="form-control buttonSinBorder" placeholder="Período" id="txtPeriodo" [disabled]="true">
+             </div>
+         </div>
+         <div class="row">             
+             <div class="col-lg-12">
+                 <span>Responda las siguientes preguntas, recuerde tiene carácter de declaración jurada</span>
+             </div>
+         </div>
+         <div class="card">
+             <div class="card-body">
+                 <div class="row">                     
+                     <div class="col-lg-12">
+                         <h6>RG2 - Trimestres II 2020</h6>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-lg-12">
+                         <div class="row top">                             
+                             <div class="col-lg-12">
+                                 <span>Antes de responder revise el archivo y consulte con quien corresponda</span>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-lg-10">
+
+                                 <div class="row top">
+                                     <div class="col-lg-8">
+                                         El cliente se rehúsa a llenar los formularios requeridos por PROTECTA o proporcionar la información
+                                         necesaria para completarlos
+                                     </div>
+                                     <div class="col-lg-2">
+                                         <span>Sí</span>
+                                         <input type="radio">
+                                     </div>
+                                     <div class="col-lg-2">
+                                         <span>No</span>
+                                         <input type="radio">
+                                     </div>
+                                 </div>
+                                 <div class="row top">
+                                     <div class="col-lg-8">
+                                         El cliente se rehúsa a realizar la operación una vez que se le solicita formularios adicionales a los
+                                         inicialmente requeridos
+                                     </div>
+                                     <div class="col-lg-2">
+                                         <span>Sí</span>
+                                         <input type="radio">
+                                     </div>
+                                     <div class="col-lg-2">
+                                         <span>No</span>
+                                         <input type="radio">
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-lg-2">
+                                 <div class="row">
+                                     <input type="text" [disabled]="true"  placeholder="Agregar un comentario">
+                                 </div>
+                                 <div class="row mt-2">
+                                     <input type="file">
+                                 </div>
+                             </div>
+                        </div>
+                     </div>
+                 </div>
+            </div>
+         </div>
+         <div class="btn-group pull-right">
+             <button class="btn btn-warning text-white " 
+                 title="Enviar">Enviar
+            </button>
+             <button class="btn btn-warning text-white " 
+                 title="Cancelar">Cancelar
+            </button>
+         </div>
+    </div>
+<app-footer></app-footer>

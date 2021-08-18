@@ -1,0 +1,172 @@
+<br>
+<div class="form-row" id="formDetailClient">
+    
+        <div  class="col-md-3">
+                <label for="">Id Carga (*)</label>
+                <input type="text"  class="form-control buttonSinBorder" maxlength="30" [(ngModel)]="registro.numero">
+            </div>
+           <!-- <div  class="col-md-3">
+                <label for="">Secuencia (*)</label>
+                <input type="text" class="form-control buttonSinBorder"  maxlength="30" [(ngModel)]="registro.secuencia">
+            </div>-->
+             <div   class="col-md-3">
+                        <label for="">Fecha Registro (*)</label>
+                        <input type="date"
+                        class="form-control buttonSinBorder" maxlength="35" 
+                        [ngModel]="registro.fechaRegistro | strDate : 's'"
+                        (ngModelChange)="registro.fechaRegistro=$event"
+                        >
+            </div>
+    <div class="col-md-4 paddingInput ">
+        <label for="">Tipo de persona (*)</label>
+        <select class="form-control " [(ngModel)]="registro.persona.id" (change)  = "onChangeTipoDoc($event)">
+            <option value="0">(Seleccione)</option>
+            <option value="{{tipoPersona.id}}" *ngFor="let tipoPersona of maestros.tiposPersona">{{tipoPersona.descripcion}}</option>
+        </select>
+    </div>
+    <div class="col-md-4 paddingInput ">
+        <label for="">Tipo de documento</label>
+        <select class="form-control" [(ngModel)]="registro.documento.id" >
+                <option value="0">(Seleccione)</option>
+            <option value="{{tipoDocumento.id}}" *ngFor="let tipoDocumento of maestros.tiposDocumento">{{tipoDocumento.descripcion}}</option>
+        </select>
+    </div>
+    <div class="col-md-4 paddingInput">
+        <label for="">Número de documento</label>
+        <input type="text" (keypress)="documentNumberKeyPress($event)" class="form-control" maxlength="20" placeholder="N° Documento"  [(ngModel)]="registro.numeroDocumento">
+    </div>
+    <div *ngIf="!IsEmpresa" class="col-md-6 paddingInput">
+        <label for="">Apellido paterno</label>
+        <input  type="text"   (keypress)="valText($event, 5)"  class="form-control" maxlength="35"  [(ngModel)]="registro.apellidoPaterno">
+    </div>
+    <div *ngIf="!IsEmpresa" class="col-md-6 paddingInput">
+        <label for="">Apellido materno</label>
+        <input type="text"   (keypress)="valText($event, 5)"  class="form-control"  maxlength="35"   [(ngModel)]="registro.apellidoMaterno">
+    </div>
+ 
+    <div class="col-md-8 paddingInput">
+        <label for="">Nombre o Razón Social</label>
+        <input type="text" class="form-control" maxlength="80" [(ngModel)]="registro.nombre">
+    </div>
+    <div class="col-md-4 paddingInput">
+        <label for="">País</label>
+        <select class="form-control" [(ngModel)]="registro.pais.id">
+                <option value="0">(Seleccione)</option>
+            <option value="{{pais.id}}" *ngFor="let pais of maestros.paises">{{pais.descripcion}}</option>
+        </select>
+    </div>
+    <div class="col-12 paddingInput">
+        <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+            <input type="radio" 
+                    [value]="1" [(ngModel)]="registro.senial.id"
+                    class="custom-control-input custom-control-input-danger" 
+                    name="senial" id="customSwitch1">
+            <label class="custom-control-label" for="customSwitch1">
+                Extremo
+            </label>
+        </div>
+
+        <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+            <input type="radio"
+                [value]="2" [(ngModel)]="registro.senial.id"
+                class="custom-control-input custom-control-input-warning" 
+                name="senial"  id="customSwitch2">
+            <label class="custom-control-label" for="customSwitch2">
+                Muy Alto
+            </label>
+        </div>
+
+        <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+            <input type="radio"
+                [value]="3" [(ngModel)]="registro.senial.id"
+                class="custom-control-input custom-control-input-green" 
+                name="senial"  id="customSwitch3">
+            <label class="custom-control-label" for="customSwitch3">
+                Alto
+            </label>
+        </div>
+
+        <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+                <input type="radio"
+                    [value]="4" [(ngModel)]="registro.senial.id"
+                    class="custom-control-input custom-control-input-medio" 
+                    name="senial"  id="customSwitch4">
+                <label class="custom-control-label" for="customSwitch4">
+                    Medio
+                </label>
+            </div>
+            <div class="custom-control custom-switch mr-3" style="display: inline-block;">
+                    <input type="radio"
+                        [value]="5" [(ngModel)]="registro.senial.id"
+                        class="custom-control-input custom-control-input-retirado buttonSinBorder" 
+                        name="senial"  id="customSwitch5">
+                    <label class="custom-control-label" for="customSwitch5">
+                        Retirado
+                    </label>
+                </div>
+
+        <div class="custom-control custom-switch mr-3" style="display: inline-block;float: right;">
+                <label class="custom-control custom-checkbox">
+                        <input type="checkbox" [(ngModel)]="registro.liberado" name="registro.liberado"  class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        Registro Liberado
+                    </label>
+             <!--  <input type="checkbox"
+                    [(ngModel)]="registro.liberado" name="registro.liberado"
+                    class="custom-control-input custom-control-input-warning" 
+                   >
+                <label class="custom-control-label" for="customSwitch4">
+                    Registro liberado
+                </label>-->
+            </div>
+    </div>
+    <div class="col-md-12 paddingInput">
+        <label for="">Observaciones</label>
+        <textarea name="" id="" rows="4" maxlength="150" class="form-control" [(ngModel)]="registro.observacion"></textarea>
+    </div>
+    <div class="col-12 mt-5">
+        <!---<h5>Aplicaciones y productos permitidos</h5>-->
+        <h5>Aplicaciones permitidos</h5>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Aplicaciones</th>
+                    <th style="text-align: center; display: none;">Productos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let configAplicacion of registro.configRegistro.aplicaciones">
+                    <td>
+                        <div class="custom-control custom-switch mr-5" style="display: inline-block;">
+                            <input type="checkbox" 
+                                    [(ngModel)]="configAplicacion.activo"
+                                    class="custom-control-input " 
+                                    id="app-{{configAplicacion.aplicacion.id}}"
+                                    (change)="changeAplicacion(configAplicacion)"
+                                    >
+                            <label class="custom-control-label" for="app-{{configAplicacion.aplicacion.id}}">
+                                {{configAplicacion.aplicacion.descripcion}}
+                            </label>
+                        </div>
+                    </td>
+                    <td style="display: none;">
+                        <div class="custom-control custom-switch mr-5" style="display: inline-block;"
+                                *ngFor="let configProducto of configAplicacion.productos">
+                            <input type="checkbox" 
+                                    [(ngModel)]="configProducto.activo"
+                                    class="custom-control-input" 
+                                    id="prod-{{configAplicacion.aplicacion.id}}-{{configProducto.producto.id}}"
+                                    (change)="changeProducto(configProducto,configAplicacion)"
+                                    >
+                            <label class="custom-control-label" for="prod-{{configAplicacion.aplicacion.id}}-{{configProducto.producto.id}}">
+                                {{configProducto.producto.descripcion}}
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

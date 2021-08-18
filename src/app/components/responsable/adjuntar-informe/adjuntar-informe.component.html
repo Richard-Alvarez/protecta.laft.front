@@ -1,0 +1,12 @@
+
+<div class="row">
+    <div *ngFor="let adj of arrFilesAdjuntosInforme;let incAdj = index;" class="">
+        <div>
+            <div  class="parrafoAdj ml-4">{{adj}} <i class="far fa-times-circle" (click)="removeFile(incAdj)"></i></div>
+        </div>
+        
+    </div>
+    <div *ngFor="let adj of arrAdjuntosSaveInforme;let indexFile=index">
+            <div class="parrafoAdj ml-4" (click)="downloadUniversalFile(adj)">{{adj.nameCorto}}</div>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
+    <!--<i class="fas fa-times" (click)="closeModal('edit-modal')"></i>-->
+    <!-- <div>{{dataEmail.grupo + ' - ' +dataEmail.perfil}}</div> -->
+    <!-- <div class="close" aria-label="Close" (click)="closeModal('edit-modal')">
+        <span aria-hidden="true">&times;</span>
+    </div> -->
+    <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
+</div>
+<br>
+
+<div class="container">
+
+    <div class="row mb-2 " style="margin-top: -30px;display: flex;padding-left: 125px;">
+        <div class="Header">
+            <div class="row">
+                <div class="col-lg-19">
+                    <h4 class="TitleLine">Agregar Correo</h4>
+                </div>
+            </div>
+            
+        </div>
+        <br>
+            
+    </div>
+    
+    <div class="row" style="display: flex;justify-content: left;align-items: left;padding: 0px 100px;">
+        <!-- <div class="col-lg-12" title="Asunto del correo">
+            <div class="form-group">
+                <label for="comment">Grupo:</label>
+                <input class="form-control" id="usSubjectDescription"/>
+            </div>
+           
+        </div> -->
+        <div class="col-lg-3 form-group" >
+            <label class="fontText">Grupo:</label>
+            <select  [(ngModel)]="group" name="profile"
+               
+                style="display: flex;justify-content: center;align-items: center;"
+                class="form-control buttonSinBorder">
+                <option value="0" selected>Seleccione</option>
+                <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="profileIdSelected">
+                    {{item.SDESGRUPO_SENAL}}</option>
+               
+            </select>
+        </div>
+        <!-- <div class="col-lg-1 form-group"></div> -->
+        <div class="col-lg-5 form-group" >
+            <label class="fontText">Perfil:</label>
+            <select  [(ngModel)]="profiles" name="profile" 
+               
+                style="display: flex;justify-content: center;align-items: center;"
+                class="form-control buttonSinBorder">
+                <option value="0" selected>Seleccione</option>
+                <option *ngFor="let item of ProfileList" value="{{item.NIDPROFILE}}" id="profileIdSelected" >
+                    {{item.SNAME}}</option>
+            </select>
+        </div>
+        <!-- <div class="col-lg-1 form-group"></div> -->
+        <div class="col-lg-4 form-group">
+            <label class="fontText">Acción:</label>
+            <select  [(ngModel)]="action" name="profile" (change)="CambioPlantilla($event)"
+               
+                style="display: flex;justify-content: center;align-items: center;"
+                class="form-control buttonSinBorder">
+                <option value="0" selected>Seleccione</option>
+                <option *ngFor="let item of ActionList" value="{{item.NIDACCION}}" id="profileIdSelected">
+                    {{item.SDESCRIPT}}</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="row" style="display: flex;justify-content: left;align-items: left; padding: 0px 100px;">
+        <div class="col-lg-12" title="Asunto del correo">
+            <div class="form-group">
+                <label for="comment" class="fontText">Asunto:</label>
+                <textarea class="form-control" style="max-height: 100px; height:50px;min-height: 40px;" (keyup)="onKey($event)"  [(ngModel)]="asunto" id="usSubjectDescription" rows="5" maxlength="200"></textarea>
+                <span  class="fontText" >Caracteres: {{contador}} de 200</span>
+            </div>
+            <!--<span class="fontText">Asunto:</span>
+            <textarea [(ngModel)]="subjectDescription" id="usSubjectDescription" type="text"
+                class="fontText form-control buttonSinBorder" style="height: 100px;"></textarea>-->
+        </div>
+    </div>
+    <div class="row" style="display: flex;justify-content: left;align-items: left;padding: 0px 100px;">
+        <div class="col-lg-12" title="Cuerpo del mensaje de correo">
+            <div class="form-group">
+                <!-- <div  style="display: inline;" > 
+                    <label for="comment" style="">Etiquetas obligatorias para el mensaje: </label> <div style="font-weight: 500;">[Usuario], [Link], [Instruccion], [Cargo], [Perfil], [FechaFin]</div>
+                </div>
+               
+                <label for="comment">Mensaje:</label> -->
+                <div  class="row fontText" >
+                    <div  class="" style="display: inline;padding-left: 15px;">Etiquetas obligatorias para el mensaje:</div>
+                    <div  class="col-6" style="text-align: justify;font-weight: 500;padding-left: 5px;"> [Usuario], [Link], [Instruccion], [Cargo], [Perfil], [FechaFin] </div>
+                </div>
+                <label for="comment" class="fontText">Mensaje:</label>
+                <!-- <textarea class="form-control" style="max-height: 100px; height:150px;min-height: 40px;" [(ngModel)]="message" id="usMessageDescription" rows="5"></textarea> -->
+                <ckeditor  [config]="ckeConfig" [(ngModel)]="ckeditorContent" (keyup)="consoleFunc2($event)" (change)="consoleFunc($event)"> </ckeditor>
+
+            </div>
+           
+            <!-- <ckeditor [config]="ckeConfig" [(ngModel)]="ckeditorContent" (change)="consoleFunc($event)"> </ckeditor> -->
+            <!-- <ckeditor  [config]="ckeConfig" [(ngModel)]="ckeditorContent" (change)="consoleFunc($event)"> </ckeditor> -->
+
+            <!--<span class="fontText">Mensaje:</span>
+            <textarea [(ngModel)]="messsageDescription" id="usMessageDescription" type="text"
+                class="fontText form-control buttonSinBorder" style="height: 100px;"> </textarea>-->
+        </div>
+    </div>
+</div>
+<br>
+<div class="row" style="padding: 0px 150px;">
+    <div class="col-lg-7">
+
+    </div>
+    <div class="col-lg-3">
+        <!-- <button class="btn btn-warning" (click)="Save()">Guardar</button> -->
+        <button (click)="Regresar()" class="btn btn-warning text-white " style="width: 150px;">Regresar</button>
+    </div>
+    <div class="col-lg-2">
+        <!-- <button class="btn btn-warning" (click)="Save()">Guardar</button> -->
+        <button (click)="Save()" class="btn btn-warning text-white "  style="width: 150px;">Guardar</button>
+    </div>
+</div>
+<br>

@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+<main class="container-fluid app-main">
+    <div class="d-flex justify-content-between mb-4 paddingPorc">
+        <button class="btn btn-link text-secondary" routerLink="/home">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+
+        <button class="btn btn-outline-secondary buttonSinBorder" routerLink="/editar" *ngIf="core.session.editor">Editar</button>
+    </div>
+</main>    
+<div class="cuerpo paddingPorc">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-2">
+                    <div class="text-center">
+                        <span class="app-señal" [ngStyle]="{background: registro.senial.color}"></span>
+                    </div>
+                    <div class="text-center" [ngStyle]="{color: registro.senial.color}">
+                        {{registro.senial.descripcion}}
+                    </div>
+                </div>
+                <div class="col-10" style="margin-bottom: 3%;display: inline-flex;">
+                    <div class="d-flex justify-content-between" style="display: grid !important;">
+                        <h4 style="margin-bottom: 0px;font-size: 1.30rem;">{{registro.apellidoPaterno}} {{registro.apellidoMaterno}} {{registro.nombre}}</h4>
+                        <span class="TitleLine" style="  padding-bottom: 6%;">Persona {{registro.persona.descripcion}}</span>
+                    </div>
+                    <div *ngIf="registro.liberado" class="d-flex justify-content-between" style="display: grid !important;">
+                      <span class="spanFormat">Liberado</span>      
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-md-2" id="formDetalleCliente">
+                    <div class="row">
+                        <div class="col-3 text-warning">Documento:</div>
+                        <div class="col-3 ">{{registro.documento.descripcion}}</div>
+    
+                        <div class="col-3 text-warning">Número Documento:</div>
+                        <div class="col-3">{{registro.numeroDocumento}}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3 text-warning">País:</div>
+                        <div class="col-3">{{registro.pais.descripcion}}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-warning">Observaciones:</div>
+                            <div>{{registro.observacion}}</div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="text-warning">Sistemas permitidos:</div>
+                            <button class="btn btnBlue app-button-rounded"
+                                *ngFor="let sistemaPermitido of sistemasPermitidos">
+                                <span class="fas fa-check"></span>
+                                {{sistemaPermitido}}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12" style="display:  none;">
+                            <div class="text-warning">Productos permitidos:</div>
+                            <button class="btn btnBlue text-white app-button-rounded"
+                                *ngFor="let productoPermitido of productosPermitidos">
+                                <span class="fas fa-check"></span>
+                                {{productoPermitido}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <app-lista-historia [historias] = "historias"></app-lista-historia>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

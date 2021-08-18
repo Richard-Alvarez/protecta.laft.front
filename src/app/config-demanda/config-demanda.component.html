@@ -1,0 +1,92 @@
+<app-navbar></app-navbar>
+<main class="container-fluid app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" style="    padding-left: 200px;" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <div class="container-fluid">
+        <div class="row pl-5 pr-5" >
+            
+         <div class="col-12" style="padding-left: 150px;padding-right: 150px;">
+            <div class="Header">             
+                <div class="row">
+                    <div class="col-lg-19">
+                        <h4 class="TitleLine">Configuración de señales por demanda</h4>
+                    </div>
+                </div>
+                <br>
+              
+                <!-- <div class="row">
+                    <div class="col-lg-3" style="display: flex;justify-content: left;padding-left: 0px;">
+                       <h5 class="TitleLine">Lista de usuarios</h5>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class=" borderFormat">
+                       
+
+                            
+                            <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;"  >
+                                <div  class="col-3 txtCabecera" style="text-align: left;">Grupo</div>
+                                <div  class="col-3 txtCabecera"  style="text-align: left;">Regimen</div>
+                                <div  class="col-3 txtCabecera"  style="text-align: left">Señal</div>
+                                <div  class="col-3 txtCabecera"  style="text-align: center;">Seleccionar</div>
+                                
+                                
+                            </div>
+                            <div class="desplace ">
+                                <!-- <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of listToShow,let inc = index;" style="font-size: 14px">
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.nombreCompleto}}</div>
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.cargo}}</div>
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.correo}}</div>
+                                   <div class="col-3 txtDetalle"  style="text-align: left;">{{item.perfil}}</div>                                     
+                                  
+
+
+                                </div>  -->
+                                <div class="d-flex form-group row"  id="pintaGrilla"  style="font-size: 14px">
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">Cliente</div>
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">Simplificado</div>
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">C2</div>
+                                    <div class="col-3 txtDetalle text-center">
+                                        <!-- <input type="checkbox" [(ngModel)]="AlertList[index].alertStatus"> -->
+                                        <input type="checkbox">
+                                    </div>                                 
+                                </div>
+
+
+                               
+                            </div>
+
+                            
+                    </div>
+                </div>
+
+
+
+<!-- 
+                <ng-container *ngIf="UserList!=null && UserList.length>0; then showPagination"></ng-container>
+                <ng-template #showPagination>
+                    <div class="contenedor" style="display: flex;
+                    justify-content: center;padding-top: 40px;">
+                    <div class="row" style="">
+                        <div class="col-12" style="text-align: center;">
+                            <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
+                                [collectionSize]="totalItems" [maxSize]="maxSize"
+                                (pageChange)="pageChanged(currentPage)">
+                                <ng-template ngbPaginationPrevious>Anterior</ng-template>
+                                <ng-template ngbPaginationNext>Siguiente</ng-template>
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+                </ng-template> -->
+
+            </div>
+        </div>
+     </div>
+    </div>
+</main>
+<br>
+<app-footer></app-footer>

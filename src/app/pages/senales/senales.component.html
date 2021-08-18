@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<main class="container app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>
+     <div class="container">
+         <div class="row mb-2 mt-2">
+             <div class="Header">
+                 <div class="col-lg-12">
+                     <h3>Señales de alerta</h3>
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-lg-12">
+                 <h4>Diego Pérez</h4>
+             </div>
+         </div>
+         <div class="row">
+             <div class="table-responsive">
+                 <table class="table">
+                     <thead>
+                         <tr>
+                             <th scope="col">Señal</th>
+                             <th scope="col"></th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td>Señal C1</td>
+                             <td><button class="btn btn-warning" (click)="goMonitoreo()">Acceder</button></td>
+                         </tr>
+                         <tr>
+                             <td>Señal C2</td>
+                             <td><button class="btn btn-warning">Acceder</button></td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+     </div>
+</main>
+

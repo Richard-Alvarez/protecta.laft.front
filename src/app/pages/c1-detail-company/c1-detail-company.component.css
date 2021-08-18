@@ -1,0 +1,35 @@
+.txtCabecera{
+    font-size: 14px;
+    font-family: Roboto;
+    color: rgba(38, 41, 109, 0.6);
+    font-weight: bold;
+}
+
+.txtDetalle{
+    font-size: 14px;
+    font-family: Roboto;
+}
+
+.txtDetallePequenio{
+    font-size: 12px;
+    font-family: Roboto;
+}
+
+.etiquetaAsig{
+    font-size: 14px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: royalblue;
+    display: inline;
+}
+.etiquetaText{
+    font-size: 14px;
+    font-family: 'Roboto';
+    color: black;
+    display: inline;
+}
+
+.buttonSinBorder{
+    border-radius : inherit;
+  }
+  

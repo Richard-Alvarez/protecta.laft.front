@@ -1,0 +1,116 @@
+<app-navbar></app-navbar>
+<main class="container-fluid app-main">
+    <div class="row">
+        <button class="btn btn-link text-secondary" style="    padding-left: 95px;" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <div class="container-fluid">
+        <div class="row pl-5 pr-5" >
+            
+         <div class="col-12" style="padding-left: 50px;padding-right: 50px;">
+            <div class="Header">             
+                <div class="row">
+                    <div class="col-lg-19">
+                        <h4 class="TitleLine">Usuarios por perfil</h4>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4" style="padding-left: 0px;">
+                        <label class="fontText2">Perfiles:</label>
+                        <select [disabled]="profileListOff" [(ngModel)]="profiles" name="profile"
+                            (change)="changeProfile()"
+                            class="form-control buttonSinBorder">
+                            <option value="0" selected>Seleccione</option>
+                            <option value="-1" selected>Todos</option>
+                            <option *ngFor="let item of ProfileList" value="{{item.profileId}}" id="profileIdSelected">
+                                {{item.profileName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3" style="display: flex;justify-content: left;padding-left: 0px;">
+                       <h5 class="TitleLine">Lista de usuarios</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" borderFormat">
+                       
+
+                            
+                            <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;"  >
+                                <div  class="col-3 txtCabecera" style="text-align: left;">Nombre del Usuario</div>
+                                <div  class="col-3 txtCabecera"  style="text-align: left;">Perfil del Usuario</div>
+                                <div  class="col-3 txtCabecera"  style="text-align: left;">Cargo del Usuario</div>
+                                <div  class="col-3 txtCabecera"  style="text-align: left">Email del Usuario</div>
+                                
+                                
+                                
+                            </div>
+                            <div class="desplace ">
+                                <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of listToShow,let inc = index;" style="font-size: 14px">
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.nombreCompleto}}</div>
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.perfil}}</div>  
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.cargo}}</div>
+                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.correo}}</div>
+                                                                    
+                                  
+
+
+                                </div> 
+                            </div>
+
+                            <div class="" style="padding-top: 2%;padding-bottom: 2%;padding-left: 0px">
+                                <div class="row">
+                                    <!-- <div class="col-md-3">
+                    
+                                    </div> -->
+                                    <div class="col-md-6 d-flex justify-content-between " style="padding: 0px 200px 0px 0px;">
+                                        <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"
+                                            (click)="exportListToExcel()">
+                                            <div class="row">
+
+                                               <div class="col-4" style="text-align: right;padding-right: 15px;padding-left: 0px;margin-left: -20px;"> <img src="assets/icons/excel-microsoft.png" style="width: 24px;"/></div>
+                                            <!-- <i class="fas fa-download"></i> -->
+                                                <div class="col-6" style="color: black;padding-left: 5px;text-align: left;"> Descargar Registro de Usuarios</div>
+                                            </div>
+                                         </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>            
+                          
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <ng-container *ngIf="UserList!=null && UserList.length>0; then showPagination"></ng-container>
+                <ng-template #showPagination>
+                    <div class="contenedor" style="display: flex;
+                    justify-content: center;padding-top: 40px;">
+                    <div class="row" style="">
+                        <div class="col-12" style="text-align: center;">
+                            <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
+                                [collectionSize]="totalItems" [maxSize]="maxSize"
+                                (pageChange)="pageChanged(currentPage)">
+                                <ng-template ngbPaginationPrevious>Anterior</ng-template>
+                                <ng-template ngbPaginationNext>Siguiente</ng-template>
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+                </ng-template>
+
+            </div>
+        </div>
+     </div>
+    </div>
+</main>
+<br>
+<app-footer></app-footer>

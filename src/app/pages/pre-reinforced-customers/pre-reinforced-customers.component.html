@@ -1,0 +1,152 @@
+<div class="row">
+    
+
+    <!-- <div class="row mb-2 mt-2">
+        <div class="Header">
+            <div class="col-lg-12">
+                <h4 class="TitleLine">Cliente Revisado</h4>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="col-lg-6"></div> -->
+</div>
+<!--<div class="Header">-->
+    <!-- <div class="row" style="display: flex;justify-content: center;align-items: center;padding-left: 900px;">                 
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-1" title="Volver a Inicio" style="display: flex;justify-content: center;align-items: center;">
+            <button 
+                style="display: flex;justify-content: center;align-items: center;"
+                class="btn btn-warning text-white buttonSinBorder"
+                routerLink="/home">Salir</button>
+        </div>
+    </div>
+    <br> 
+    <br>-->
+    
+<!--</div>-->
+<div class="row mb-2 mt-2" style="padding-left: 15px;
+padding-right: 15px;">
+    
+
+        <div class="borderFormat"  >       
+            
+            
+            <div class="row">
+                <div class="col-lg-6">
+
+                </div>
+                <div class="col">
+                    <input class="col-lg-6" [(ngModel)]="txtBuscador" 
+                    (keyup)="setFilterResultadosClient()" 
+                        type="text"
+                        class="form-control form-control" value=""
+                        placeholder="Buscar">
+                </div>
+            </div>
+            
+            <br>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-11">
+                            <div class="row" >
+                                <div class="col-lg-2 txtCabecera">Tipo y Nro. de Documento</div>
+                                <div class="col-lg-2 txtCabecera text-left">Nombre / Razón Social</div>
+                                <div class="col-lg-6" style="padding-left: 0px;padding-right: 0px;">
+                                    <div class="row">
+                                        <div *ngFor="let type of parent.tipoListas"  class="text-left col txtCabecera text-left" >{{type.nombre}}</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-2 txtCabecera">Régimen</div>
+                                
+                                
+                            </div>
+                        </div> 
+                        
+                        <div class="col-lg-1">
+                            <div class="row">
+                                <div class="col-lg-6 txtCabecera text-center" style="padding-left: 0px">Acciones</div>
+                                <!--<div class="col-lg-12 txtCabecera text-center">Acciones</div>-->
+                            </div>
+                        </div> 
+                        
+                       
+
+                    </div>
+                    <hr class="BordeHr" style="size:10px;" >
+
+                    <div class="row " *ngFor="let item of getBuscarClient(); let i = index;">
+                        <div class="col-lg-11">
+                            <div class="row"  *ngFor="let itemCli of item.arrClientesGC;"  style="padding-bottom:15px">
+                                
+
+                                <div class="col-lg-2 txtDetalle" >{{itemCli.STIPOIDEN}} {{itemCli.SNUM_DOCUMENTO}} </div>
+                                <div class="col-lg-2 txtDetalle text-left" >
+                                    {{itemCli.SNOM_COMPLETO}}
+                                </div>
+
+                                <div class="col-lg-6" style="padding-left: 0px;padding-right: 0px;">
+                                    <div class="row">
+                                        <div class="col txtDetalle text-left {{CambiarColor(type.SDESESTADO.trim())}}"  *ngFor="let type of itemCli.arrListas;">
+                                            {{type.SDESESTADO}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="col-lg-2 txtDetalle" >
+                                    {{itemCli.SDESREGIMEN}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1" style="text-align: center; margin: auto;">
+                            <div class="row"  style="padding-bottom:15px">
+                                <div class="col-lg-12 txtDetalle" style="padding-left:0px">
+                                    <button class="btn" data-toggle="dropdown">
+                                        <span class="fas fa-bars" style="font-size: 20px;"></span>
+                                    </button>
+                                    <!-- <div class="dropdown-menu arrow pull-right dropdown" style=""> -->
+                                        <div class="dropdown-menu dropdown-menu-right" style="">
+                                        <a class="dropdown-item" (click)="setDataViewCustomer(item.obj)" routerLink="/c2-detail">Ver</a>
+                                        <a class="dropdown-item" (click)="parent.update(item.obj,item.obj.SESTADO_TRAT,'CRF','Reforzado',2)">Enviar a Reforzado</a>
+                                        <!-- <a class="dropdown-item" (click)="getOptionsClient('2',item.obj)">Quitar de Revisado</a> -->
+                                        <a class="dropdown-item" (click)="parent.update(item.obj,item.obj.SESTADO_TRAT,'CCO','Complementario',2)">Enviar a Cliente Complementario</a>
+                                        <a class="dropdown-item" (click)="getOptionsClient('1',item.obj.SESTADO_TRAT,item.obj,item.obj.NINCREMENTADOR)"  >Eliminar de Revisado</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="size:10px;"  *ngIf="arrResultados.length > 0">
+                </div>
+            </div>
+
+            
+        </div>
+        
+        
+        <!--<div class="row borderFormat"  style="display: flex;justify-content: center;align-items: center;">
+            <button 
+            style="display: flex;justify-content: center;align-items: center;"
+            class="btn btn-warning text-white"
+            (click)="getProcessClientesReforzados()"
+            >Actualizar</button>  
+        </div>
+        <div class="row borderFormat"  style="display: flex;justify-content: left;align-items: left;padding-left: 800px;">    
+            <div class="col-lg-2">
+                <button 
+                style="display: flex;justify-content: center;align-items: center;"
+                class="btn btn-warning text-white">Grabar</button>     
+            </div>
+         
+      
+         </div> -->
+    
+</div>
+<!--<app-paginacion-reutil [parent]="this" [currentPage]="initializePage" [totalItems]="arrResultados.length"></app-paginacion-reutil>-->
+
+<br><br>

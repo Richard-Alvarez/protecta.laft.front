@@ -1,0 +1,30 @@
+export class History {
+    id: number;
+    secuencia: number;
+    numero: string;
+    idCarga: number;
+    idPersona: number;
+    persona: string;
+    idPais: number;
+    pais: string;
+    idSenial: number;
+    senial: string;
+    idDocumento: number;
+    documento: string;
+    numeroDocumento: string;
+    apellidoPaterno: string;
+    apellidoMaterno: string;
+    nombre: string;
+    observacion: string;
+    fechaRegistro: string;
+    usuario: string;
+    activo: boolean
+    usuarioDB: string;
+    usuarioPC: string;
+    ip: string;
+    host: string;
+    fechaRegistroHistoria: string;
+    tipoHisoria: string;
+    cambio: string;
+    cuando: string;
+}

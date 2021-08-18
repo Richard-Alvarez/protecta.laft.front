@@ -1,0 +1,29 @@
+<div class="row mb-2 mt-2">
+    <div class="Header">
+        <div class="col-lg-12">
+            <h4 class="TitleLine" style="font-size: 18px; font-family: Roboto, Helvetica Neue, sans-serif !important">Lista de paises GAFI</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+<div class=" col-lg-12">
+    
+    
+    <!-- <div class="col-lg-10 " style="font-size: 30px;padding-top: 10px;font-family:roboto;text-align: left ;border-bottom: 2px solid rgba(250, 112, 0, 1);color: rgba(0,0,0,.87);">Lista de paises GAFI</div> -->
+
+    <div class="col-3">
+        <div >
+            <div class="row">
+                <div class="col-lg-2 txtCabecera" style="border-bottom: 2px solid rgba(38, 41, 109, 1);">N°</div>
+                <div class="col-lg-10 txtCabecera" style="border-bottom: 2px solid rgba(38, 41, 109, 1);">País</div>
+            </div>
+            <div class="desplace">
+                <div class="d-flex  form-group" id="pintaGrilla" *ngFor="let item of countryList;let i = index;">
+                    <div class="col-lg-3 txtDetalle">{{i + 1}}</div>
+                    <div class="col-lg-9 txtDetalle">{{item.SNOMBRE_PAIS_GAFI}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

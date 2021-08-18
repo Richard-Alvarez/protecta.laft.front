@@ -1,0 +1,41 @@
+<div class="card border-white">
+    <div class="card-header bg-white border-white">
+        <br>
+        <br>        
+        <div class="row">
+            <div class="col-6 text-right">
+                <label for="">Hasta el:</label>
+            </div>
+            <div class="col-6 text-right">
+                <select class="form-control" [(ngModel)]="carga" (change)="verCarga()">
+                    <option *ngFor="let carga of cargas" [ngValue]="carga">{{carga.fechaRegistroFormat}} - {{carga.id}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-8">
+                <div class="chart-wrapper">
+                  <canvas baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType" [colors] = "chartColors" [legend]="false">
+                  </canvas>
+                </div>
+            </div>
+            <div class="col-4">
+                <div style="text-align: center;">
+                        <h5 style="font-size: 2rem;margin-bottom: 0px;">{{carga.registros.length | number}}</h5>
+                        <span style="font-size: 0.8rem;">Registros</span>
+                </div>
+                
+                <ul class="app-grafico-legend">
+                    <li *ngFor="let senial of seniales" [ngStyle]="{'color': senial.color }" 
+                    class="app-grafico-legend-item">
+                        <div class="text-dark" style="font-weight: 500;">{{senial.descripcion}}: {{senial.porcentaje}}%</div>
+                        <div class="text-secondary">Registros: {{senial.cantidad}}  |  Liberados: {{senial.liberados}}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
