@@ -226,7 +226,13 @@ export class PendienteInformeComponent implements OnInit {
         // console.error("Nueva lista validacion ",validacionCantidadREvisados)
         // console.error("Nueva lista validacion informe",validacionInforme)
         if(ALERTA.NIDALERTA == 2){
-          let dataSend = {NIDALERTA: ALERTA.NIDALERTA,NIDREGIMEN : ALERTA.NREGIMEN, NPERIODO_PROCESO :this.NPERIODO_PROCESO,NIDGRUPOSENAL: 1}
+          let dataSend = {
+            NIDALERTA: ALERTA.NIDALERTA,
+            NIDREGIMEN : ALERTA.NREGIMEN, 
+            NPERIODO_PROCESO :this.NPERIODO_PROCESO,
+            NIDGRUPOSENAL: 1,
+            NIDPROVEEDOR:  ALERTA.NREGIMEN == 1 ? 4 : 1 
+          }
 
           let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
           //this.internationalList = respListaInternacional//.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO ==1)
@@ -393,9 +399,22 @@ export class PendienteInformeComponent implements OnInit {
         let validacionCantidadREvisados =  this.getObtenerLista()
         let dataSend:any = {}
         if( objAlerta.NIDALERTA == 35 ||  objAlerta.NIDALERTA == 33){
-          dataSend = {NIDALERTA: objAlerta.NIDALERTA,NIDREGIMEN : 0, NPERIODO_PROCESO :this.NPERIODO_PROCESO, NIDGRUPOSENAL: objAlerta.NIDALERTA == 35 ? 2 : 3}   
+          dataSend = {
+            NIDALERTA: objAlerta.NIDALERTA,
+            NIDREGIMEN : 0, 
+            NPERIODO_PROCESO :this.NPERIODO_PROCESO, 
+            NIDGRUPOSENAL: objAlerta.NIDALERTA == 35 ? 2 : 3,
+            NIDPROVEEDOR: 1
+          }
         }else{
-           dataSend = {NIDALERTA: objAlerta.NIDALERTA,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.NPERIODO_PROCESO}   
+          dataSend = {
+            NIDALERTA: objAlerta.NIDALERTA,
+            NIDREGIMEN : this.regimen.id, 
+            NPERIODO_PROCESO : this.NPERIODO_PROCESO,
+            NIDGRUPOSENAL: 1,
+            NIDPROVEEDOR:  this.regimen.id == 1 ? 4 : 1 
+           
+           }
         }
 
          //dataSend = {NIDALERTA: objAlerta.NIDALERTA,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.NPERIODO_PROCESO}
@@ -498,17 +517,35 @@ export class PendienteInformeComponent implements OnInit {
       let respListaInternacional:any = []
       console.log("this.NPERIODO_PROCESO",this.NPERIODO_PROCESO)
     if(this.linkactual == "contraparte"){
-      let dataSend = {NIDALERTA: 33,NIDREGIMEN : 0, NPERIODO_PROCESO :this.NPERIODO_PROCESO, NIDGRUPOSENAL: 3  }
+      let dataSend = {
+        NIDALERTA: 33,
+        NIDREGIMEN : 0, 
+        NPERIODO_PROCESO :this.NPERIODO_PROCESO, 
+        NIDGRUPOSENAL: 3 ,
+        NIDPROVEEDOR: 14
+      }
        respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
        console.log(" this.internationalList respListaInternacional",  respListaInternacional)
      
   }else if(this.linkactual == "colaborador"){
-      let dataSend = {NIDALERTA: 35,NIDREGIMEN :0, NPERIODO_PROCESO :this.NPERIODO_PROCESO, NIDGRUPOSENAL: 2  }
+    let dataSend = {
+      NIDALERTA: 35,
+      NIDREGIMEN :0, 
+      NPERIODO_PROCESO :this.NPERIODO_PROCESO, 
+      NIDGRUPOSENAL: 2  ,
+      NIDPROVEEDOR: 1
+    }
        respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
        console.log(" this.internationalList respListaInternacional",  respListaInternacional)
      
   }else{
-    let dataSend = {NIDALERTA: 2,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.NPERIODO_PROCESO ,NIDGRUPOSENAL: 1}
+    let dataSend = {
+      NIDALERTA: 2,
+      NIDREGIMEN : this.regimen.id, 
+      NPERIODO_PROCESO :this.NPERIODO_PROCESO ,
+      NIDGRUPOSENAL: 1,
+      NIDPROVEEDOR: this.regimen.id == 1 ? 4 : 1 
+    }
      respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
      console.log(" this.internationalList respListaInternacional",  respListaInternacional)
   }
