@@ -1584,7 +1584,7 @@ export class ResponsableGlobalComponent {
     // } else {
     //   return ''
     // }
-    if(this.linkactual=='proveedor'){
+    if(this.linkactual=='proveedor' ||this.linkactual =="contraparte"){
       return 'active'
     }else{
       return ''
@@ -1612,6 +1612,7 @@ export class ResponsableGlobalComponent {
   // }
 
   getRegimenDinamic() {
+    debugger
     //console.log("arrRegimen15 Usuario :", this.STIPO_USUARIO)
     if (this.STIPO_USUARIO === "RE") {
       
@@ -1655,9 +1656,12 @@ export class ResponsableGlobalComponent {
       //return [{'id':1,'descripcion':'General','desCorto':'Gral'},{'id':2,'descripcion':'Simplificado','desCorto':'Simpli'}]
     }
     else {
-      if(this.linkactual == "proveedor"){
+      if(this.linkactual == "proveedor" || this.linkactual == "contraparte" ){
         return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
+      // }else if(this.linkactual == "contraparte"){
+      //   return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
+      // }
       else{
        return [ { 'id': 1, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
       }
