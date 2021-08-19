@@ -36,6 +36,7 @@ export class UserConfigComponent implements OnInit {
   public cargo: any = '';
   public email: any = '';
   public rol: any = '';
+  public state: any = '';
 
   //Parámetros para actualizar un usuario
   public newUsId: any = '';
@@ -48,6 +49,7 @@ export class UserConfigComponent implements OnInit {
   public newUsEmail: any = '';
   public newUsSystem: any = '';
   public newUsRol: any = '';
+  public newUsState: any = '';
 
 
   //Parametrós para crear usuarios
@@ -58,6 +60,7 @@ export class UserConfigComponent implements OnInit {
   public insUsFullName: any = '';
   public insUsCargo: any = '';
   public insUsProfile: any = '';
+  public insUsState: any = '';
 
   public insUsStartDatePass: any = '';
   public insUsEndDatePass: any = '';
@@ -90,6 +93,8 @@ export class UserConfigComponent implements OnInit {
   updateUserOff = true;
   userRolOff = true;
   cargoOff = true;
+  stateOff = true;
+
 
 
   //Habilitación de controles para crear usuario
@@ -171,7 +176,8 @@ export class UserConfigComponent implements OnInit {
     this.createUs = true;
     this.userOff = true;
     this.userRolOff = true;
-    this.cargoOff = true;    
+    this.cargoOff = true;
+    this.stateOff = true;    
     this.userId = '0';
     this.cancel = true;
     this.core.loader.hide();
@@ -276,6 +282,7 @@ export class UserConfigComponent implements OnInit {
       this.updateUs = false;
       this.userRolOff = false;
       this.cargoOff = false;
+      this.stateOff = false;
       this.createUs = true;
       this.userOff = true;
 
@@ -291,6 +298,7 @@ export class UserConfigComponent implements OnInit {
       this.fullName = '';
       this.rol = '';
       this.cargo = '';
+      this.state = '';
       this.email = '';
       this.updateUs = false;
       this.userOff = true;
@@ -298,6 +306,7 @@ export class UserConfigComponent implements OnInit {
       this.userFullNameOff = true;
       this.userRolOff = true;
       this.cargoOff = true;
+      this.stateOff = true;
       this.userEmailOff = true;
 
     }
@@ -377,6 +386,7 @@ export class UserConfigComponent implements OnInit {
       this.userEmailOff = false;
       this.userRolOff = false;
       this.cargoOff = false;
+      this.stateOff = false;
       this.updateUs = true;
       this.createUs = false;
       this.userOff = false;
@@ -404,6 +414,7 @@ export class UserConfigComponent implements OnInit {
       this.userEmailOff = false;
       this.userRolOff = false;
       this.cargoOff = false;
+      this.stateOff = false;
       this.updateUs = false;
       this.createUs = true;
       this.userOff = true;
@@ -418,6 +429,7 @@ export class UserConfigComponent implements OnInit {
       this.email = '';
       this.rol = "0";
       this.cargo = "0";
+      this.state = '0';
       this.updateUs = true;
       this.createUs = false;
       this.cancel = true;
@@ -500,7 +512,28 @@ export class UserConfigComponent implements OnInit {
       })
 
       return
-    }   
+    
+    
+    }
+    if (this.state == "0") {
+      swal.fire({
+        title: 'Actualización de usuario',
+        icon: 'warning',
+        text: 'Por favor seleccione el estado',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+
+      return
+    
+    }
     if (this.email.length == 0) {
       swal.fire({
         title: 'Actualización de usuario',
@@ -548,6 +581,7 @@ export class UserConfigComponent implements OnInit {
     this.newUsCargo = (<HTMLInputElement>document.getElementById("usCargo")).value
     this.newUsEmail = (<HTMLInputElement>document.getElementById("usEmail")).value
     this.newUsRol = (<HTMLInputElement>document.getElementById("userAllRol")).value
+    this.newUsState = (<HTMLInputElement>document.getElementById("usState")).value
 
     var f = new Date();
     this.newUsUpdDate = new Date(new Date().getFullYear(), 11, 31)
@@ -771,6 +805,24 @@ export class UserConfigComponent implements OnInit {
       this.core.loader.hide();
       return
     }
+    if (this.state == "0") {
+      swal.fire({
+        title: 'Creación de usuario',
+        icon: 'warning',
+        text: 'Debe seleccionar un state',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      this.core.loader.hide();
+      return
+    }
     if (this.email.length == 0) {
       swal.fire({
         title: 'Creación de usuario',
@@ -818,6 +870,7 @@ export class UserConfigComponent implements OnInit {
     this.insUsEmail = (<HTMLInputElement>document.getElementById("usEmail")).value
     this.insUsCargo = (<HTMLInputElement>document.getElementById("usCargo")).value
     this.insUsRol = (<HTMLInputElement>document.getElementById("userAllRol")).value
+    this.insUsState = (<HTMLInputElement>document.getElementById("usState")).value
 
     var f = new Date();
     this.insUsStartDatePass = new Date();
