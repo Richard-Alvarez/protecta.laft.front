@@ -185,7 +185,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
                 await this.userConfig.InsertUpdateProfile(dataRegistro)
                 this.core.loader.hide();
 
-                for (let i = 1; i < 4; i++) { 
+                for (let i = 1; i < 5; i++) { 
       
         
                 let dataRegistroGrupos:any = {};
