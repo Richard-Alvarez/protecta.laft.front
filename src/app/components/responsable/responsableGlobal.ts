@@ -653,7 +653,7 @@ export class ResponsableGlobalComponent {
       data.NIDALERTA_CABECERA = NIDALERTA_CABECERA
       data.STIPO_CARGA = STIPO_CARGA//'INFORMES'
       data.NREGIMEN = NREGIMEN
-      if(this.linkactual == "contraparte")
+      if(this.linkactual == "proveedor")
         data.NREGIMEN = 2
       if(this.linkactual == "colaborador")
         data.NREGIMEN = 1
@@ -1584,7 +1584,7 @@ export class ResponsableGlobalComponent {
     // } else {
     //   return ''
     // }
-    if(this.linkactual=='contraparte'){
+    if(this.linkactual=='proveedor'){
       return 'active'
     }else{
       return ''
@@ -1619,7 +1619,7 @@ export class ResponsableGlobalComponent {
       if(this.linkactual == "colaborador"){
          RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
-      else if(this.linkactual == "contraparte"){
+      else if(this.linkactual == "proveedor"){
          RegimenTemp = [{ 'id': 2, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
       }else{
         RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }, { 'id': 2, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
@@ -1655,7 +1655,7 @@ export class ResponsableGlobalComponent {
       //return [{'id':1,'descripcion':'General','desCorto':'Gral'},{'id':2,'descripcion':'Simplificado','desCorto':'Simpli'}]
     }
     else {
-      if(this.linkactual == "contraparte"){
+      if(this.linkactual == "proveedor"){
         return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
       else{

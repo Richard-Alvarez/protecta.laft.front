@@ -14,11 +14,11 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 import { ResponsableGlobalComponent } from '../responsableGlobal';  
 
 @Component({ 
-  selector: 'app-contraparte',
-  templateUrl: './contraparte.component.html',
-  styleUrls: ['./contraparte.component.css']
+  selector: 'app-proveedor',
+  templateUrl: './proveedor.component.html',
+  styleUrls: ['./proveedor.component.css']
 })
-export class ContraparteComponent implements OnInit {
+export class ProveedorComponent implements OnInit {
   statePendiente: any = { sState: 'PENDIENTE', sCollapHead: 'acordionPENDIENTE', sHrefHead: 'collapPENDIENTEHead', arrayForms: 'arrResponsablesPendiente' }
   stateRevisado: any = { sState: 'REVISADO', sCollapHead: 'acordionREVISADO', sHrefHead: 'collapREVISADOHead', arrayForms: 'arrResponsablesRevisado' };
   stateCompletado: any = { sState: 'COMPLETADO', sCollapHead: 'acordionCOMPLETADO', sHrefHead: 'collapCOMPLETADOHead', arrayForms: 'arrResponsablesPendiente' };

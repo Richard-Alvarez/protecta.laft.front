@@ -49,6 +49,11 @@ export class Rutas {
   goContraparte() {
     this.router.navigate(['/contraparte']);
   }
+
+  goProveedor() {
+    this.router.navigate(['/proveedor']);
+  }
+  
   
 
 }

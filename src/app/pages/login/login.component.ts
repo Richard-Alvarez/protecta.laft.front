@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit {
                   this.core.rutas.goColaborador();
                 }break;
                 default: {
-                  this.core.rutas.goContraparte();
+                  this.core.rutas.goProveedor();
               }
             }   
 

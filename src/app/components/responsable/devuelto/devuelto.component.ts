@@ -1015,6 +1015,7 @@ async getArchivoSustento(item){
     console.error("error en descargar: ",error)
   }
 }
+
 setLabelData(alerta){
   if(alerta == "C3"){
     return 'Clientes con direcciones en paises GAFI'
@@ -1029,6 +1030,7 @@ setLabelData(alerta){
     return 'Adjuntar Sustento'
   }
 } 
+
   
 
 

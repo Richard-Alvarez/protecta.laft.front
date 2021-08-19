@@ -346,7 +346,7 @@ getFilesInformUniversal(alerta: any,STIPO_CARGA) {
   //console.log("NIDREGIMEN: ",alerta.NREGIMEN)
   //console.log("nueva lista NIDREGIMEN: ",alerta)
   //console.log("el CONSULTA this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
-  if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+  if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
     resp = this.parent.arrObjFilesInformeByAlert.filter(inform => 
         inform.NIDALERTA == alerta.NIDALERTA && 
         inform.NIDALERTA_CABECERA == alerta.NIDALERTA_CABECERA &&
@@ -389,7 +389,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     
 
      let respSetDataPendiente:any = this.setDataPendiente();
-     if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+     if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
       respSetDataPendiente["NREGIMEN"] = 0
      }
      
@@ -733,7 +733,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       senial.arrPreguntasCabecera.forEach(ans => {
         ans.NRESPUESTA = (this.arrInputRespHeader[indice])[indicePregunta]//X'MODIFICAR'
         ans.SCOMENTARIO = (this.arrInputComment[indice])[indicePregunta]
-        if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+        if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
           ans["NREGIMEN"] = 0
          }
     
@@ -958,8 +958,6 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     if (arrPreguntasCabecera == null) {
         return {code: 0}
     }
-        
-
     if( tamañoArr > 0 ){  
       for (let i = 0; i < arrPreguntasCabecera.length; i++) {
         let cabecera = arrPreguntasCabecera[i]
@@ -1067,8 +1065,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     //return objResp
   }
 
+  
 
-getColorGrilla(indice){
+  getColorGrilla(indice){
     if(indice % 2 === 0) {
         return 'colorGrillaAleatorio'
     }else{
@@ -1321,6 +1320,7 @@ setLabelData(alerta){
     return 'Adjuntar Sustento'
   }
 } 
+
 
 
 
