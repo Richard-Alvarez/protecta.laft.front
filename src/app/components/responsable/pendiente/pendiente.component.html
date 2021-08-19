@@ -492,7 +492,7 @@
                                                                                         <label for="archivoSustento{{regimen.id}}-{{index}}" style="cursor: pointer;">
                                                                                             <img src="assets/icons/excel-microsoft.png" style="width: 38px;"/>
                                                                                                 <div class="parrafoAdj text-center" style="width: 140px;">
-                                                                                                       <div class="" *ngIf=" item.NIDALERTA == 4 ">Adjuntar Plantilla</div>
+                                                                                                       <div class="" *ngIf=" item.NIDALERTA == 4 ">{{setLabelData(item.SNOMBRE_ALERTA)}}</div>
                                                                                                        <div class="" *ngIf=" item.NIDALERTA != 4 ">{{setLabelData(item.SNOMBRE_ALERTA)}}</div>     
                                                                                                 </div>
                                                                                             
