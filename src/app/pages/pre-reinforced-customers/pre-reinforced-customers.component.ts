@@ -7,6 +7,7 @@ import { CoreService } from '../../services/core.service';
 import { CustomerManagerComponent } from '../customer-manager/customer-manager.component';
 import { NgxSpinnerService } from "ngx-spinner";
 import { title } from 'process';
+import { ExcelService } from '../../services/excel.service';
 
 @Component({
   selector: 'app-pre-reinforced-customers',
@@ -39,6 +40,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
     private userConfigService: UserconfigService,
     private core: CoreService,
     private spinner: NgxSpinnerService,
+    private excelService: ExcelService,
     ) { }
 
   async ngOnInit() {
@@ -525,6 +527,107 @@ export class PreReinforcedCustomersComponent implements OnInit {
     }else{
      return ""
     }
+  }
+
+  exportListToExcel(){
+    let resultado:any = []
+    resultado = this.getBuscarClient()
+    console.log("resultado", resultado)
+    let Newresultado:any = []
+    let resultadoFinal:any = []
+    if (resultado!= null && resultado.length > 0) {
+      for(let i =0; i< resultado.length;i++){
+        //Newresultado = resultado[i].arrClientesGC
+        Newresultado.push(resultado[i].arrClientesGC)
+       }
+       for(let index = 0 ;index < Newresultado.length; index++){
+        if(Newresultado[index].length > 1){
+          Newresultado[index].forEach(element => {
+            //console.log("element", element)
+            resultadoFinal.push(element)
+          });
+        }else{
+          resultadoFinal.push(Newresultado[index][0])
+        }
+     }
+
+      //resultadoFinal.push(Newresultado)
+      console.log("Newresultado", Newresultado)
+      console.log("resultadoFinal", resultadoFinal)
+
+      let data = []
+      resultadoFinal.forEach(t => {
+       
+        let _data = {
+          "Tipo Documento" : t.STIPOIDEN,
+          "N° Documento" : t.SNUM_DOCUMENTO,
+          "Nombre / Razón Social" : t.SNOM_COMPLETO,
+          "Regimen" : t.SDESREGIMEN
+           
+        }
+        t.arrListas.forEach(element => {
+          _data[element.SDESTIPOLISTA] = element.SDESESTADO
+        });
+        //console.log("la data1111", t.arrListas)
+        data.push(_data);
+        });
+        console.log("la data", data)
+        this.excelService.exportAsExcelFile(data, "Registro de usuarios por perfil");
+    }
+  }
+
+  exportListToExcel2()
+  {
+    let resultado:any = []
+    resultado = this.getBuscarClient()
+    console.log("resultado", resultado)
+    console.log("la data length", this.arrResultadoFilter.length)
+    if (resultado!= null && resultado.length > 0) {
+      this.core.loader.show();
+      let data = []
+      debugger
+      resultado.forEach(result => {
+        console.log("dsadasdsadsa",result.arrClientesGC)
+        let _data:any ={}
+        result.arrClientesGC.forEach(element => {
+          console.log("element",element.SNOM_COMPLETO)
+           _data = {
+            "Tipo Documento" : element.STIPOIDEN,
+            "N° Documento" : element.SNUM_DOCUMENTO,
+            "Nombre / Razón Social" : element.SNOM_COMPLETO,
+            }
+            // element.arrListas.forEach(listas => {
+            //    let NombreLista = listas.SDESTIPOLISTA
+            //    _data.NombreLista = listas.SDESESTADO
+            // });
+            console.log("_data",_data)
+         
+        });
+        data.push(_data);
+        
+    });
+      console.log("la data", data)
+
+      //this.excelService.exportAsExcelFile(data, "Registro de usuarios por perfil");
+    }
+    else {
+      swal.fire({
+        title: 'Usuarios por perfil',
+        icon: 'warning',
+        text: 'Debe seleccionar un perfil',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
+    }
+    this.core.loader.hide();
   }
 
 }

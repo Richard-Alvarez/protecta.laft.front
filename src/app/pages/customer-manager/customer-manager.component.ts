@@ -2329,7 +2329,7 @@ prueba = []
   }
   arrayTabs:any = [{code:1,nombre:"Gestor de Cliente"},{code:2,nombre:"Cliente Revisado"},{code:2,nombre:"Cliente Reforzado"},{code:2,nombre:"Cliente Complementario"},{code:2,nombre:"Listas de Coincidencias"}]
   setTipoSelectPestaniaClient(tipoCliente){
-    debugger;
+    //debugger;
     this.arrSetClassSelected = this.arrSetClassSelected.map(t=> {return ''})
     this.arrSetClassSelected[tipoCliente] = 'active'
     localStorage.setItem("nSelectPestaniaClient",tipoCliente)
@@ -2372,7 +2372,7 @@ prueba = []
   }
   
   goToDetailAprobar(item,arrClientesGC){
-    debugger
+    //debugger
     console.log("EL ITEM 1 EL ARRAY DE COINCIDENCIAS : ",this.newArrayResult)
     console.log("EL ITEM 1 COINCIDENCIA : ",item)
     console.log("EL ITEM 1 COINCIDENCIA arrClientesGC: ",arrClientesGC)
