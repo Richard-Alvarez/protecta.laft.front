@@ -274,16 +274,7 @@ export class ResponsableGlobalComponent {
       let nombreArchivoSplit = (rutaSplit[4]).split(".")
       element.nameCorto = nombreArchivoSplit[0].length >= 15 ? ((nombreArchivoSplit[0].substr(0, 15)) + '....' + nombreArchivoSplit[1]) : rutaSplit[4]
     });
-    /*let arrayTmpDataAdjuntosSustento = []
-    respAdjuntosSustento.forEach(element => {
-          
-
-      let rutaSplit = (element.SRUTA_ADJUNTO).split("/")
-      element.name = rutaSplit[6]
-      let nombreArchivoSplit = (rutaSplit[6]).split(".")
-      element.nameCorto = nombreArchivoSplit[0].length >= 15 ? ((nombreArchivoSplit[0].substr(0, 15)) + '....' + nombreArchivoSplit[1]) : rutaSplit[4]
-      arrayTmpDataAdjuntosSustento.push(element)
-    })*/
+   
 
     resp.sort((a, b) => new Date(a.DFECHA_REGISTRO) < new Date(b.DFECHA_REGISTRO))
     respAdjuntos.sort((a, b) => new Date(a.DFECHA_REGISTRO) < new Date(b.DFECHA_REGISTRO))
@@ -300,8 +291,7 @@ export class ResponsableGlobalComponent {
     
     objFormByAlert.arrUsuariosForm = respWorkDetalle
     objFormByAlert.arrConversacionCabecera = []
-    //objFormByAlert.DFECHA_REVISADO = objAlerta.DFECHA_REVISADO
-    //objFormByAlert.SESTADO_REVISADO = objAlerta.SESTADO_REVISADO
+   
     objFormByAlert.arrAdjuntosInform = resp
     objFormByAlert.arrAdjuntos = respAdjuntos
     return objFormByAlert
@@ -313,12 +303,23 @@ export class ResponsableGlobalComponent {
     this.userGroupListSimpli = []
     // let data = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 1 }
     // let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 2 }
+    var URLactual = window.location + " ";
+    let link = URLactual.split("/")
+    this.linkactual = link[link.length-1].trim()
+    let valor
+    if(this.linkactual == "colaborador"){
+      valor = 2
+    }else if(this.linkactual == "contraparte"){
+      valor = 4
+    }else{
+      valor = 3
+    }
      let data = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0,NIDGRUPOSENAL: 2 }
-     let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0,NIDGRUPOSENAL: 3 }
-     let data3 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0,NIDGRUPOSENAL: 3 }
+     let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0,NIDGRUPOSENAL: valor }
+     //let data3 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0,NIDGRUPOSENAL: 4 }
     this.alertFormList = await this.userConfigService.getOfficialAlertFormList(data)
     this.alertFormListSimpli = await this.userConfigService.getOfficialAlertFormList(data2)
-    this.alertFormListContraparte = await this.userConfigService.getOfficialAlertFormList(data3)
+   //this.alertFormListContraparte = await this.userConfigService.getOfficialAlertFormList(data3)
     
 
     let numPregunta = 0
@@ -334,11 +335,12 @@ export class ResponsableGlobalComponent {
     //this.alertFormList.forEach(it => it.estado = it.SESTADO_REVISADO == '1' ? true : false)
     this.alertFormList.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
     this.alertFormListSimpli.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
+    this.alertFormListContraparte.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
     let arrPendienteInfoGral = []
     let arrPendienteInfoSimpli = []
     let arrInfoTerminadoGral = []
     let arrInfoTerminadoSimpli = []
-    //this.alertFormList.forEach(t => {t.SESTADO = "3",t.SNOMBRE_ESTADO = "PENDIENTE"});
+  
    
     console.log(this.alertFormList);
     this.alertFormList.forEach(item => {
@@ -374,20 +376,7 @@ export class ResponsableGlobalComponent {
         if (item.SESTADO === '4') {//REVISADO
           this.arrResponsablesRevisadoGral.push(item);
         }
-        /*if(item.SESTADO === '2'){//PENDIENTE-INFORME
-          let respDuplid = this.arrResponsablesPendienteInformeGral.filter(obj => obj.NIDALERTA === item.NIDALERTA)
-          if(respDuplid.length === 0){
-            
-            arrPendienteInfoGral.push(this.getDataBySenialInform(item,1));
-          }
-          
-        }
-        if(item.SESTADO === '1'){//INFORME-TERMINADO
-          let respDuplid = this.arrResponsablesPendienteInformeGral.filter(obj => obj.NIDALERTA === item.NIDALERTA)
-          if(respDuplid.length === 0){
-            arrInfoTerminadoGral.push(this.getDataBySenialInform(item,1));
-          }
-        }*/
+       
       }
 
 
@@ -411,9 +400,7 @@ export class ResponsableGlobalComponent {
         if (item.SESTADO === '4') {//REVISADO
           this.arrResponsablesCompleSimpli.push(item);
         }
-        // if(item.SESTADO === '5'){//CERRADO
-        //   this.arrResponsablesCerradoGral.push(item);
-        // }
+        
       }
       if (this.STIPO_USUARIO === 'OC') {
         if (item.SESTADO === '1') {//PENDIENTE
@@ -428,73 +415,58 @@ export class ResponsableGlobalComponent {
         if (item.SESTADO === '4') {//REVISADO
           this.arrResponsablesRevisadoSimpli.push(item);
         }
-        /*if(item.SESTADO === '1'){//PENDIENTE-INFORME
-          let respDuplid = this.arrResponsablesPendienteInformeSimpli.filter(obj => obj.NIDALERTA === item.NIDALERTA)
-          if(respDuplid.length === 0){
-            arrPendienteInfoSimpli.push(this.getDataBySenialInform(item,2));
-          }
-        }
-        if(item.SESTADO === '1'){//INFORME-TERMINADO
-          let respDuplid = this.arrResponsablesInformeTerminadoSimpli.filter(obj => obj.NIDALERTA === item.NIDALERTA)
-          if(respDuplid.length === 0){
-            arrInfoTerminadoSimpli.push(this.getDataBySenialInform(item,2));
-          }
-        }*/
+       
       }
 
 
     })
 
+    // console.log(this.alertFormListContraparte);
+    // this.alertFormListContraparte.forEach(item => {
+    //   item.NREGIMEN = 2
+    //   if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
+    //     if (item.SESTADO === '1') {//PENDIENTE
+    //       this.arrResponsablesPendienteSimpli.push(item);
+    //     }
+    //     if (item.SESTADO === '2') {//COMPLETADO
+    //       this.arrResponsablesCompleSimpli.push(item);
+    //     }
+    //     if (item.SESTADO === '3') {//DEVUELTO
+    //       this.arrResponsablesDevueltoSimpli.push(item);
+    //     }
+    //     if (item.SESTADO === '4') {//REVISADO
+    //       this.arrResponsablesCompleSimpli.push(item);
+    //     }
+        
+    //   }
+    //   if (this.STIPO_USUARIO === 'OC') {
+    //     if (item.SESTADO === '1') {//PENDIENTE
+    //       this.arrResponsablesPendienteSimpli.push(item);
+    //     }
+    //     if (item.SESTADO === '2') {//COMPLETADO
+    //       this.arrResponsablesCompleSimpli.push(item);
+    //     }
+    //     if (item.SESTADO === '3') {//DEVUELTO
+    //       this.arrResponsablesDevueltoSimpli.push(item);
+    //     }
+    //     if (item.SESTADO === '4') {//REVISADO
+    //       this.arrResponsablesRevisadoSimpli.push(item);
+    //     }
+       
+    //   }
+
+
+    // })
+
     if (this.STIPO_USUARIO === 'OC') {
 
-      /*
-      let respWorkListGeneral = await this.userConfigService.getWorkModuleList(data)
-      let respWorkListSimplificado = await this.userConfigService.getWorkModuleList(data2)
-      //console.log("el 1234 respWorkListGeneral : ",respWorkListGeneral)
-      //console.log("el 1234 respWorkListSimplificado : ",respWorkListSimplificado)
-      respWorkListGeneral.forEach(idWork => {
-        //idWork.arrAdjuntosInform.sort((a, b) => a.DFECHA_REGISTRO > b.DFECHA_REGISTRO)
-        if (idWork.SESTADO === '1') {
-          arrPendienteInfoGral.push(this.getDataBySenialInform(idWork, idWork.NIDREGIMEN));
-        }
-        if (idWork.SESTADO === '2') {
-          arrInfoTerminadoGral.push(this.getDataBySenialInform(idWork, idWork.NIDREGIMEN));
-        }
-
-      });
-      respWorkListSimplificado.forEach(idWork => {
-        //idWork.arrAdjuntosInform.sort((a, b) => a.DFECHA_REGISTRO > b.DFECHA_REGISTRO)
-        if (idWork.SESTADO === '1') {
-          arrPendienteInfoSimpli.push(this.getDataBySenialInform(idWork, idWork.NIDREGIMEN));
-        }
-        if (idWork.SESTADO === '2') {
-          arrInfoTerminadoSimpli.push(this.getDataBySenialInform(idWork, idWork.NIDREGIMEN));
-        }
-
-      });
-      let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral),
-      Promise.all(arrPendienteInfoSimpli), Promise.all(arrInfoTerminadoSimpli)])
-      */
-      //console.log("respGroupPromiseAll : ",respGroupPromiseAll)
-    ///////// PARA REGIMEN 1 Y 2 ////////////
-
-      // let arrWorkModulePromise:any = []
-      // let arrRegimenNewTmp = [1,2]
-      
-      // // console.log("REgimen Arr:",this.arrRegimen)
-      // arrRegimenNewTmp.forEach(regimenItem => {
-      //   console.log("REgimen item:",regimenItem)
-      //   let respWorkModulelist = this.getWorkModuleAll(regimenItem)
-      //   arrWorkModulePromise.push(respWorkModulelist)
-        
-      // });
-
+    
 
        ///////// PARA REGIMEN 1 Y 3 PROVEDDORES ////////////
 
 
           let arrWorkModulePromise:any = []
-       let arrRegimenNewTmp = [2,3]
+       let arrRegimenNewTmp = [2,3,4]
       
        // console.log("REgimen Arr:",this.arrRegimen)
        arrRegimenNewTmp.forEach(regimenItem => {
@@ -539,7 +511,7 @@ export class ResponsableGlobalComponent {
 
   async getAndSetWorkModuleAll(){
     let arrWorkModulePromise:any = []
-    let arrRegimenNewTmp = [2,3]
+    let arrRegimenNewTmp = [2,3,4]
     // console.log("REgimen Arr:",this.arrRegimen)
     arrRegimenNewTmp.forEach(regimenItem => {
       console.log("REgimen item:",regimenItem)
@@ -563,6 +535,8 @@ export class ResponsableGlobalComponent {
     let valor
     if(this.linkactual == "colaborador"){
       valor = 2
+    }else if(this.linkactual == "contraparte"){
+      valor = 4
     }else{
       valor = 3
     }
@@ -588,18 +562,7 @@ export class ResponsableGlobalComponent {
         }
 
       });
-      // respWorkListSimplificado.forEach(idWork => {
-      //   //idWork.arrAdjuntosInform.sort((a, b) => a.DFECHA_REGISTRO > b.DFECHA_REGISTRO)
-      //   if (idWork.SESTADO === '1') {
-      //     arrPendienteInfoSimpli.push(this.getDataBySenialInform(idWork, idWork.NIDREGIMEN));
-      //   }
-      //   if (idWork.SESTADO === '2') {
-      //     arrInfoTerminadoSimpli.push(this.getDataBySenialInform(idWork, idWork.NIDREGIMEN));
-      //   }
-
-      // });
-      // let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral),
-      //   Promise.all(arrPendienteInfoSimpli), Promise.all(arrInfoTerminadoSimpli)])
+      
       let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral)])
       //console.log("respGroupPromiseAll : ",respGroupPromiseAll)
       
@@ -611,17 +574,7 @@ export class ResponsableGlobalComponent {
   }
 
   addAlertsToPendienteInforme() {
-    /*let array = this.getArray(this.statePendienteInforme.sState, 1)
-    Object.keys(this.alertGroupForPendienteInforme).forEach(key => {
-        let objPendinteInforme = this.alertGroupForPendienteInforme[key]
-        array.push(objPendinteInforme)
-    })*/
-    /*let c2 = array[0]
-    c2.SNOMBRE_ALERTA = 'C2'
-    c2.SESTADO = "PENDIENTE-INFORME"
-    c2.SDESCRIPCION_ALERTA = 'Que se tome conocimiento por los medios de difusión pública u otro, según sea el caso, que un cliente está siendo investigado o procesado por el delito de lavado de activos, delitos precedentes, el delito de financiamiento del terrorismo y/o delitos conexos. (CON TI. Evidencias: guardar las lista negativa usada + la bd de clientes(Nombre, DNI, producto, Ocupación) -> el resultado)'
-    c2.NIDALERTA = 2
-    array.push(c2)*/
+    
   }
 
   async groupUsers(arrayForm) {
@@ -657,7 +610,7 @@ export class ResponsableGlobalComponent {
       data.NIDALERTA_CABECERA = NIDALERTA_CABECERA
       data.STIPO_CARGA = STIPO_CARGA//'INFORMES'
       data.NREGIMEN = NREGIMEN
-      if(this.linkactual == "proveedor")
+      if(this.linkactual == "proveedor" || this.linkactual == "contraparte")
         data.NREGIMEN = 2
       if(this.linkactual == "colaborador")
         data.NREGIMEN = 1
@@ -1638,7 +1591,7 @@ export class ResponsableGlobalComponent {
       if(this.linkactual == "colaborador"){
          RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
-      else if(this.linkactual == "proveedor"){
+      else if(this.linkactual == "proveedor" || this.linkactual == "contraparte" ){
          RegimenTemp = [{ 'id': 2, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
       }else{
         RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }, { 'id': 2, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
@@ -1677,7 +1630,7 @@ export class ResponsableGlobalComponent {
       if(this.linkactual == "proveedor"  ){
         return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }else if(this.linkactual == "contraparte"){
-        return [{ 'id': 3, 'descripcion': 'General', 'desCorto': 'Gral' }]
+        return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
       // }else if(this.linkactual == "contraparte"){
       //   return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
@@ -1732,11 +1685,11 @@ export class ResponsableGlobalComponent {
     }
     if (click === '2' && regimen === 1) {
       this.boolRegimenGral = false;
-      //this.boolRegimenSimpli = true;
+      
     }
     if (click === '2' && regimen === 2) {
       this.boolRegimenSimpli = false;
-      //this.boolRegimenGral = true;
+     
     }
   }
 
@@ -1763,19 +1716,7 @@ export class ResponsableGlobalComponent {
     ) {
       return false;
     }
-    /*if(this.objIconHeaderGral.id !== id 
-      && this.objIconHeaderGral.status === 'acoplar' 
-      && this.objIconHeaderGral.boton !== boton
-      && boton === 'minus'){
-      return false;
-    }
-
-    if(this.objIconHeaderGral.id !== id 
-      && this.objIconHeaderGral.status === 'desplegar' 
-      && this.objIconHeaderGral.boton !== boton
-      && boton === 'plus'){
-      return false;
-    }*/
+   
 
 
 
@@ -2060,8 +2001,7 @@ export class ResponsableGlobalComponent {
   }
 
   removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
-    //STIPO_CARGA="ADJUNTOS"
-    //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
+    
     console.log("el STIPO_CARGA: ",STIPO_CARGA)
     console.log("el dataObjAlerta: ",dataObjAlerta)
     console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesInformeByAlert)
@@ -2109,14 +2049,7 @@ export class ResponsableGlobalComponent {
     dataRequestQuestionDetail.NIDALERTA_CABECERA = data.NIDALERTA_CABECERA
     let respQuestionDetail = await this.userConfigService.getQuestionDetail(dataRequestQuestionDetail)
     return respQuestionDetail;
-    /*let arrQuestionDetailList:any = []
-    respQuestionDetail.forEach(item => {
-      arrQuestionDetailList.push(item)
-    })*/
-    ////console.log("questionsList : ",this.questionsList)
-    /*let first = this.questionsList[0]
-    this.questionDetailList = response.preguntas[first]
-    await this.fillAnswers(response)*/
+  
   }
 
   async getCommentHeaderWithAlert(objAlert, NIDALERTA_CABECERA) {
@@ -2148,28 +2081,7 @@ export class ResponsableGlobalComponent {
       arrNewConversacion.push(this.getCommentHeaderWithAlert(senial, senial.NIDALERTA_CABECERA))
     })
     let respPromiseAllComments = await Promise.all(arrNewConversacion)
-    //console.log("respPromiseAllComments 789: ",respPromiseAllComments)
-    /*switch (sState) {
-      case 'PENDIENTE':{
-        if(regimen === 1){
-          this.arrResponsablesPendienteGral = respPromiseAllComments
-        }
-        if(regimen === 1){
-          this.arrResponsablesPendienteSimpli = respPromiseAllComments
-        }
-      }break;
-      case 'COMPLETADO':{
-        if(regimen === 1){
-          this.arrResponsablesCompleGral = respPromiseAllComments
-        }
-        if(regimen === 1){
-          this.arrResponsablesCompleSimpli = respPromiseAllComments
-        }
-      }break;
-      default: {
-        //console.log("esta en el default")
-      }
-    }*/
+   
   }
 
 
@@ -2651,7 +2563,7 @@ export class ResponsableGlobalComponent {
               uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
               uploadPararms.listFiles = listFiles
               uploadPararms.listFileName = listFileName
-              //console.log("el data de uploadPararms informe 15: ",uploadPararms)
+             
               promiseUploadAttached.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
               promiseUploadFile.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
@@ -2670,7 +2582,7 @@ export class ResponsableGlobalComponent {
               uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
               uploadPararms.listFiles = listFilesAdjuntos
               uploadPararms.listFileName = listFileNameAdjuntos
-              //console.log("el data de uploadPararms informe 15: ",uploadPararms)
+             
               promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
               promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
@@ -2717,48 +2629,15 @@ export class ResponsableGlobalComponent {
             console.log("llego hasta aqui responsableGlobalTs el respServiceUpdateStatus upd: ", respServiceUpdateStatus)
             console.log("llego hasta aqui responsableGlobalTs el arrObjFilesInformeByAlert 1: ", this.arrObjFilesInformeByAlert)
             
-            //this.getAndSetWorkModuleAll()
+           
             
             await this.getAndSetWorkModuleAll()
-            /*arrAcumuladorIndiceFile.forEach(itemFIle => {
-              this.arrObjFilesInformeByAlert.splice(itemFIle, 1)
-            })
-            console.log("llego hasta aqui responsableGlobalTs el arrObjFilesInformeByAlert 2: ", this.arrObjFilesInformeByAlert)
-            const respArrayResponsable = this.getArray("PENDIENTE-INFORME", NREGIMEN)
-            console.log('llego hasta este punto?? 1 : ',respArrayResponsable)
-            console.log('llego hasta este punto?? 2 : ',respFilterAlert)
-            //let indicadorObjSplice = 0
-            let indicadorObj = 0
-            let newArrayResponsableInform = []
-            respArrayResponsable.forEach(objAler => {
-              if (objAler.NIDALERTA === NIDALERTA && objAler.NREGIMEN === NREGIMEN) {
-                //indicadorObj = indicadorObjSplice
-                //respArrayResponsable.splice(indicadorObj, 1)
-              }else{
-                newArrayResponsableInform.push(objAler)
-              }
-              indicadorObj++
-            })
-            console.log('estamos en el newArrayResponsableInform: ',newArrayResponsableInform)
-            //let setArrayRegiemn = await this.getArray("PENDIENTE-INFORME", NREGIMEN)
-            this.setArray(newArrayResponsableInform,"PENDIENTE-INFORME", NREGIMEN)
-
-
-
-            let respPushObj = this.pushObjInArrayByAlert("INFORME-TERMINADO", NREGIMEN, respFilterAlert[0])//push a informe terminado
-            console.log("el respPushObj 789 : ", respPushObj)
-            console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 PARTE 2: ",this.arrObjFilesInformeByAlert)
-            this.arrObjFilesInformeByAlert = []
-            console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 PARTE 3: ",this.arrObjFilesInformeByAlert)*/
+      
             this.core.loader.hide()
 
-            //console.log("el respPromiseAllAttached 789 : ",respPromiseAllAttached)
-            //console.log("el respPromiseAllAttached 789 respPromiseAllUploadFile : ",respPromiseAllUploadFile)0
-            /*this.userConfigService.uploadFilesByAlert(data).then(response => {
-              //console.log(response);
-            });*/
+            
           } else {
-            //////////
+            
             this.core.loader.hide()
           }
 
@@ -2850,10 +2729,7 @@ export class ResponsableGlobalComponent {
                 }
                 incrementadorFileName++
               })
-              // dataInformFile.arrFilesName = arrayFilesNamePush//listFileNameInform
-              // dataInformFile.arrFiles = arrayFilesPush//respPromiseFileInfoBinary
-              // dataInformFile.arrFilesNameCorto = arrayFilesNamesCortoPush//listFileNameCortoInform
-              // this.arrObjFilesAdjByCabecera[indiceFile] = dataInformFile
+             
             }
 
             dataInformFile.arrFilesName = arrayFilesNamePush//respSetData.listFileNameInform
@@ -2941,13 +2817,9 @@ export class ResponsableGlobalComponent {
 
   async sendFilesAdjuntosCabecera(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, SESTADO, STIPO_USU) {
     try {
-      //this.core.loader.show()
-      /*let alerta// = this.alertData.SNOMBRE_ALERTA
-      let files = this.getFiles(alerta, tipoUsuario)
-      let listFiles = this.getListFiles(alerta, tipoUsuario)
-      let listFileName = this.getListFileName(alerta, tipoUsuario)*/
+     
       console.log("el INICIO")
-      //let STIPO_CARGA = 'ADJUNTOS-FORM'
+     
 
 
       let respValidData = await this.getValidationAndData(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA)
@@ -2997,16 +2869,7 @@ export class ResponsableGlobalComponent {
         console.log("el respPromiseAllAttached : ",respPromiseAllAttached)
         console.log("el respPromiseAllUploadFile : ",respPromiseAllUploadFile)
 
-        //return true
-
-        /*let resp = await this.getAttachedFilesInformByAlert(NIDALERTA, NREGIMEN, 'INFORMES')
-        resp.forEach(element => {
-          let rutaSplit = (element.SRUTA_ADJUNTO).split("/")
-          element.name = rutaSplit[4]
-          let nombreArchivoSplit = (rutaSplit[4]).split(".")
-          element.nameCorto = nombreArchivoSplit[0].length >= 15 ? ((nombreArchivoSplit[0].substr(0, 15)) + '....' + nombreArchivoSplit[1]) : rutaSplit[4]
-        });
-        respFilterAlert[0].arrAdjuntosInform = resp*/
+      
 
         let arrAcumuladorIndiceFile = []
         let incrementadorFiles = 0
@@ -3023,24 +2886,7 @@ export class ResponsableGlobalComponent {
           this.arrObjFilesAdjByCabecera.splice(itemFile, 1)
         })
         console.log("El this.arrObjFilesAdjByCabecera : ",this.arrObjFilesAdjByCabecera)
-        //let respArrayResponsable = this.getArray(SESTADO, NREGIMEN)
-        //console.log("El respArrayResponsable : ",respArrayResponsable)
-        //let indicadorObjSplice = 0
-        /*let indicadorObj = 0
-        respArrayResponsable.forEach(objAler => {
-          if (objAler.NIDALERTA === NIDALERTA && objAler.NREGIMEN === NREGIMEN) {
-            //indicadorObj = indicadorObjSplice
-            respArrayResponsable.splice(indicadorObj, 1)
-          }
-          indicadorObj++
-        })*/
-
-
-
-        ///////let respPushObj = this.pushObjInArrayByAlert("INFORME-TERMINADO", NREGIMEN, respFilterAlert[0])//push a informe terminado
-        ///////console.log("el respPushObj 789 : ", respPushObj)
-        //console.log("el respPromiseAllAttached 789 : ",respPromiseAllAttached)
-        //console.log("el respPromiseAllAttached 789 respPromiseAllUploadFile : ",respPromiseAllUploadFile)
+       
       } else {
         return false
       }
@@ -3180,85 +3026,7 @@ export class ResponsableGlobalComponent {
   }
 
 
-  /*@HostListener("window:scroll", []) onWindowScroll() {
-    // do some stuff here when the window is scrolled
-    //console.log("el scroll")
-    const verticalOffset = window.pageYOffset 
-          || document.documentElement.scrollTop 
-          || document.body.scrollTop || 0;
-    //console.log("el scroll : ",verticalOffset)
-    let src:any = document.getElementsByTagName('section');
-    let indiceSrc = 0;
-    for(let itemSrc of src){
-      //console.log("los itemSrc : ",itemSrc)
-      //console.log("los itemSrc offsetTop: ",itemSrc.offsetTop)
-      //console.log("los itemSrc document.documentElement.scrollTop: ",document.documentElement.scrollTop)
-      //console.log("los itemSrc resta: ",(itemSrc.offsetTop - document.documentElement.scrollTop)< 20)
-      if((itemSrc.offsetTop - document.documentElement.scrollTop) < 20){
-        console.log("estas en el elemento: ",indiceSrc)
-        console.log("estas en el elemento target: ",itemSrc.id)
-        console.log("estas en el elemento value: ",itemSrc.target.name)
-        localStorage.setItem('SectionPosition',this.arrListSections[indiceSrc].nombre)
-      }
-      indiceSrc++
-    }*/
-    /*if(){
-
-    }*/
-    
-  //}
-
-  /*getEtiquetaDinamic(indice,icono){
-    if(this.boolPalomitaHeaderPlus === true && this.indiceIconDinamic === indice && icono === 1){
-      return 'showEtiqueta'
-    }
-    if(this.boolPalomitaHeaderMinus === true && this.indiceIconDinamic === indice && icono === 2){
-      return 'showEtiqueta'
-    }
-    if(this.boolPalomitaHeaderPlus === false && this.indiceIconDinamic === indice && icono === 1){
-      return 'hiddenEtiqueta'
-    }
-    if(this.boolPalomitaHeaderMinus === false && this.indiceIconDinamic === indice && icono === 2){
-      return 'hiddenEtiqueta'
-    }
-  }
-
-  setEtiquetaDinamic(indice,icono){
-    if(this.boolPalomitaHeaderPlus === true && this.indiceIconDinamic === indice && icono === 1){
-      this.boolPalomitaHeaderPlus = false;
-    }
-    if(this.boolPalomitaHeaderPlus === false && this.indiceIconDinamic === indice && icono === 1){
-      this.boolPalomitaHeaderPlus = true;
-    }
-    if(this.boolPalomitaHeaderMinus === true && this.indiceIconDinamic === indice && icono === 2){
-      this.boolPalomitaHeaderPlus = false;
-    }
-    if(this.boolPalomitaHeaderMinus === false && this.indiceIconDinamic === indice && icono === 2){
-      this.boolPalomitaHeaderPlus = true;
-    }
-  }*/
-
-  /*setPalomitaMinus(id){
-    //this.renderer.addClass(this.contenido.nativeElement, "cerrarNav");remove
-    this.renderer.addClass(this.contentIconPlus.nativeElement, "showPlus");
-    this.renderer.removeClass(this.contentIconMinus.nativeElement, "showMinus");
-    this.renderer.addClass(this.contentIconMinus.nativeElement, "hiddenMinus");
-  }
-
-  setPalomitaPlus(){
-    this.renderer.addClass(this.contentIconMinus.nativeElement, "showPlus");
-    this.renderer.removeClass(this.contentIconPlus.nativeElement, "showPlus");
-    this.renderer.addClass(this.contentIconPlus.nativeElement, "hiddenPlus");
-  }*/
-
-  /*getIdRegimem(regimen){
-    if(regimen === 1){
-      return 'regGeneral'
-    }
-    if(regimen === 2){
-      return 'regSimpli'
-    }
-  }*/
+ 
   redict(){
     document.getElementById('acordionPENDIENTE-INFORMEGral0').focus({ preventScroll : false})
   }
@@ -3277,40 +3045,8 @@ export class ResponsableGlobalComponent {
       return "Entro a Responsable"
   }
 
-  private ListaGrupos:any = []
+  
 
-
-
-  // async  getListaPerfilGrupo(valor){
-  //   this.ListaGrupos = await this.userConfigService.GetListaPerfiles() 
-  //   console.log("this.IDPERFIL",this.IDPERFIL)
-  //   console.log("this.IDPERFIL",this.ListaGrupos)
-
-  //   let NewLista = this.ListaGrupos.filter(it =>  it.NIDPROFILE ==this.IDPERFIL)
-  //   console.log("this.IDPERFIL 2",NewLista)
-  //   if(valor == 1){
-  //    let pro = NewLista.filter(lista =>  lista.SDESGRUPO_SENAL == "Proveedores")
-  //    console.log("this.IDPERFIL 3",pro)
-  //    console.log("this.IDPERFIL 4",pro.length)
-  //    if(pro.length > 0){
-  //       return 'active' 
-  //    }
-  //    else{ 
-  //      return '' 
-  //    }
-      
-  //   }else{
-  //     let col =  NewLista.filter(lista =>  lista.SDESGRUPO_SENAL == "Colaboradores")
-  //     if(col.length > 0){
-  //       return 'active'
-  //    }
-  //    else{
-  //      return ''
-  //    }
-  //   }
-
-    
-  // }
 
 
 }
