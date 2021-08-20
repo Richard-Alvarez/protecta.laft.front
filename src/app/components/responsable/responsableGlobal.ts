@@ -34,6 +34,7 @@ export class ResponsableGlobalComponent {
   NPERIODO_PROCESO;
   alertFormList: any[] = []
   alertFormListSimpli: any[] = []
+  alertFormListContraparte: any[] = []
   //userGroup: Map<string, any>
   userGroupListGral: any[] = []
   userGroupListSimpli: any[] = []
@@ -314,17 +315,20 @@ export class ResponsableGlobalComponent {
     // let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 2 }
      let data = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0,NIDGRUPOSENAL: 2 }
      let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0,NIDGRUPOSENAL: 3 }
+     let data3 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0,NIDGRUPOSENAL: 3 }
     this.alertFormList = await this.userConfigService.getOfficialAlertFormList(data)
     this.alertFormListSimpli = await this.userConfigService.getOfficialAlertFormList(data2)
-
+    this.alertFormListContraparte = await this.userConfigService.getOfficialAlertFormList(data3)
     
 
     let numPregunta = 0
     let respBusquedaGral = await this.getFormsByHead(this.alertFormList, 1, numPregunta);
     numPregunta = respBusquedaGral.numPregunta
     let respBusquedaSimpli = await this.getFormsByHead(this.alertFormListSimpli, 2, numPregunta);
+    let respBusquedaContraparte = await this.getFormsByHead(this.alertFormListContraparte, 2, numPregunta);
     this.alertFormList = respBusquedaGral.array
     this.alertFormListSimpli = respBusquedaSimpli.array
+    this.alertFormListContraparte = respBusquedaContraparte.array
     console.warn("el this.alertFormList 11114-1: ", this.alertFormList)
     console.warn("el this.alertFormList 11114-2: ", this.alertFormListSimpli)
     //this.alertFormList.forEach(it => it.estado = it.SESTADO_REVISADO == '1' ? true : false)
@@ -1584,7 +1588,21 @@ export class ResponsableGlobalComponent {
     // } else {
     //   return ''
     // }
-    if(this.linkactual=='proveedor'){
+    if(this.linkactual=='proveedor' ||this.linkactual =="contraparte"){
+      return 'active'
+    }else{
+      return ''
+    }
+  }
+
+  getShowRegimientoContraparte(indice, regimen) {
+    //await this.setVariableRegimen(regimen)
+    // if (indice === 1) {
+    //   return 'active'
+    // } else {
+    //   return ''
+    // }
+    if(this.linkactual =="contraparte"){
       return 'active'
     }else{
       return ''
@@ -1612,6 +1630,7 @@ export class ResponsableGlobalComponent {
   // }
 
   getRegimenDinamic() {
+    
     //console.log("arrRegimen15 Usuario :", this.STIPO_USUARIO)
     if (this.STIPO_USUARIO === "RE") {
       
@@ -1655,9 +1674,14 @@ export class ResponsableGlobalComponent {
       //return [{'id':1,'descripcion':'General','desCorto':'Gral'},{'id':2,'descripcion':'Simplificado','desCorto':'Simpli'}]
     }
     else {
-      if(this.linkactual == "proveedor"){
+      if(this.linkactual == "proveedor"  ){
         return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
+      }else if(this.linkactual == "contraparte"){
+        return [{ 'id': 3, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
+      // }else if(this.linkactual == "contraparte"){
+      //   return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
+      // }
       else{
        return [ { 'id': 1, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
       }

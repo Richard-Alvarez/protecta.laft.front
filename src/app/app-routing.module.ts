@@ -46,6 +46,7 @@ import { C3FormComponent } from './pages/forms/c3-form/c3-form.component';
 
 import { RgFormComponent } from './pages/forms/rg-form/rg-form.component';
 import { ColaboradorComponent } from './components/responsable/colaborador/colaborador.component';
+import { ContraparteComponent } from './components/responsable/contraparte/contraparte.component';
 import { PerfilesComponent } from './pages/perfiles/perfiles.component';
 
 //Formularios antiguos
@@ -103,7 +104,7 @@ const routes: Routes = [
   { path: 'c3-form', component: C3FormComponent },
   { path: 'rg-form', component: RgFormComponent },
   { path: 'proveedor',component: ProveedorComponent},
-  
+  { path: 'contraparte', component: ContraparteComponent },
   { path: 'colaborador', component: ColaboradorComponent },
   { path: 'perfiles', component: PerfilesComponent },
 

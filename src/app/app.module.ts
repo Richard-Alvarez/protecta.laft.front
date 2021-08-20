@@ -141,6 +141,7 @@ import { ReportSbsInfoComplementaryComponent } from './components/report-sbs-inf
 import { ModalProfileMaintenanceComponent } from './modal-profile-maintenance/modal-profile-maintenance.component';
 import { ConfigDemandaComponent } from './config-demanda/config-demanda.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ContraparteComponent } from './components/responsable/contraparte/contraparte.component';
 
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
@@ -267,6 +268,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     AbstractComponentComponent,
     ReportSbsInfoComplementaryComponent,
     ConfigDemandaComponent,
+    ContraparteComponent,
    
     //Validaciones
 //fin de formularios antiguos      
