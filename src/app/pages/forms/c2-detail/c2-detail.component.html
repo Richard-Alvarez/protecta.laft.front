@@ -35,6 +35,10 @@
                             <a class="nav-link " data-toggle="tab" href="#resumen1"
                                 style="text-decoration: none;">Información Complementaria</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#resumen2"
+                                style="text-decoration: none;">Información de Polizas</a>
+                        </li>
                         <!--<li class="nav-item">
                             <a class="nav-link text-body" data-toggle="tab" href="#perfilPadre1"
                                 style="text-decoration: none;">Seguimiento</a>
@@ -1974,6 +1978,709 @@
                         </div>
                         
                     </div>
+                </div>
+                    
+            </div>
+            <div id="resumen2" class=" tab-pane fade">
+                <div>
+                                        
+                    <div *ngIf="tipoClienteGC == 'ACEPTA-COINCID' || (tipoClienteGC == 'ACEPTA-COINCID' && tipoClienteCRF != 'CRF') ">
+                        <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
+                        <div class="row mb-2 mt-2">
+                            <div class="Header">
+                                <div class="col-lg-12">
+                                    <h4 class="TitleLine">Pólizas</h4>
+                                </div>
+                            </div>
+                        </div> 
+                        <hr>
+                        <div class="text-center tituloTwo" >{{nombreRegimen}}</div>
+                        <div class="row pl-2 pr-2">
+                            <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                            <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo / Producto</div>
+                            <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                            <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                            <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                            <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                            <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+
+                            <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de último Pago</div>
+                            <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                        </div>
+                        <div id="">
+                            <div *ngFor="let item of policyList;let inc = index;">
+                
+                                <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                    <div class="row pl-2 pr-2">
+                                        <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                        <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                        <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                *ngIf="item.SPRODUCTO != 'SOAT'">-</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                            *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                        <a class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                        <a class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</a>
+                                        <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;">{{item.SPRODUCTO}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" ></a>
+                                        <a class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</a>
+                                        <a class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" 
+                                            *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                        <a class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.FEC_PAGO}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" >VIGENTE</a>
+                                    </div>
+                                </div>
+                
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div *ngIf="tipoClienteGC == 'C2-BANDEJA' || (tipoClienteGC == 'C2-BANDEJA' && tipoClienteCRF != 'CRF')">
+                        <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
+                        <div class="row mb-2 mt-2">
+                            <div class="Header">
+                                <div class="col-lg-12">
+                                    <h4 class="TitleLine">Pólizas</h4>
+                                </div>
+                            </div>
+                        </div> 
+                        <hr>
+                        <div class="text-center tituloTwo" >{{nombreRegimen}}</div>
+                        <div class="row pl-2 pr-2">
+                            <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                            <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo / Producto</div>
+                            <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                            <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                            <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                            <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                            <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+
+                            <div *ngIf="getValidaCabeceraPlaca(99)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
+                            <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                        </div>
+                        <div id="">
+                            <div *ngFor="let item of policyList;let inc = index;">
+                
+                                <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                    <div class="row pl-2 pr-2">
+                                        <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                        <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                        <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                    *ngIf="item.SPRODUCTO != 'SOAT'">-</a> 
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                            *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                        <a class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                        <div class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</div>
+                                        <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" >{{item.SPRODUCTO}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas" ></div>
+                                        <div class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</div>
+                                        <div class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas"
+                                            *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</div>
+                                        <div class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.FEC_PAGO}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas"  >VIGENTE</div>
+                                    </div>
+                                </div>
+                
+                            </div>
+                        </div>
+                        <br>
+                        
+                    </div>
+                    <div *ngIf="tipoClienteGC == 'GC' || (tipoClienteGC == 'GC' && tipoClienteCRF != 'CRF')">
+                        <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
+                        <div class="row mb-2 mt-2">
+                            <div class="Header">
+                                <div class="col-lg-12">
+                                    <h4 class="TitleLine">Pólizas</h4>
+                                </div>
+                            </div>
+                        </div> 
+                        <hr>
+                        <div *ngIf="policyGral.length > 0 || policySimpli.length > 0">
+                            <div class="text-center tituloTwo"  *ngIf="this.IDGRUPOSENAL == 2 || this.IDGRUPOSENAL == 3" >{{nombreRegimenGral}}</div>
+                            <div *ngIf="policyGral.length > 0" class="row pl-2 pr-2">
+                                <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                                <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo / Producto</div>
+                                <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                                <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                                <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                                <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                                <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                                <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                                <div class="text-left txtCabecera {{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de último Pago</div>
+                                <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                            </div>
+                            <div id="">
+                                <div *ngIf="policyGral.length > 0 || policySimpli.length > 0">
+                                    <div *ngIf="policyGral.length > 0">
+                                        <div *ngFor="let item of policyGral;let inc = index;">
+                    
+                                            <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                                <div class="row pl-2 pr-2">
+                                                    <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                        href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                                    <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                                        href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                        href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                        href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                        href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                                    <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                        href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                            *ngIf="!getValidaCabeceraPlaca(1)">-</a>
+                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                        *ngIf="getValidaCabeceraPlaca(1)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                                    <a class="{{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                                        href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                                    <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
+                                                        href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                                    <div class="col-lg-1 cabeceraPolizas">{{item.SNUM_POLIZA}}</div>
+                                                    <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" >{{item.SPRODUCTO}}</div>
+                                                    <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                                    <div class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                                    <div class="col-lg-1 cabeceraPolizas" ></div>
+                                                    <div class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</div>
+                                                    <div class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                                        <div class="col-lg-1 cabeceraPolizas" 
+                                                            *ngIf="!getValidaCabeceraPlaca(1)">-</div>
+                                                    <div class="col-lg-1 cabeceraPolizas"
+                                                        *ngIf="getValidaCabeceraPlaca(1)">{{item.PLACA ? item.PLACA : ''}}</div>
+                                                    <div class="{{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.FEC_PAGO}}</div>
+                                                    <div class="col-lg-1 cabeceraPolizas"  >VIGENTE</div>
+                                                </div>
+                                            </div>
+                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div *ngIf="policyGral.length == 0 && this.IDGRUPOSENAL == 2 || this.IDGRUPOSENAL == 3">
+                                        <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                            <div class="text-center tituloTwo" *ngIf="this.IDGRUPOSENAL == 2 || this.IDGRUPOSENAL == 3" >{{nombreRegimenSimpli}}</div>
+                            <div *ngIf="policySimpli.length > 0" class="row pl-2 pr-2">
+                                <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                                <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo</div>
+                                <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                                <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                                <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                                <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                                <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                                <div *ngIf="getValidaCabeceraPlaca(2)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                                <div class="text-left txtCabecera {{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
+                                    <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                                </div>
+                            <div id="">
+                                <div *ngIf="policySimpli.length > 0">
+                                    <div *ngFor="let item of policySimpli;let inc = index;">
+                    
+                                        <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                            <div class="row pl-2 pr-2">
+                                                <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                                <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                                <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                             <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                                *ngIf="!getValidaCabeceraPlaca(2)">-</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                    *ngIf="getValidaCabeceraPlaca(2)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                                <a class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</div>
+                                                <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" >{{item.SPRODUCTO}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" ></div>
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</div>
+                                                <div class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                                <!--<a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                    *ngIf="!getValidaCabeceraPlaca(2)">-</div>-->
+                                                <div class="col-lg-1 cabeceraPolizas" 
+                                                    *ngIf="getValidaCabeceraPlaca(2)">{{item.PLACA ? item.PLACA : ''}}</div>
+                                                <div class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.DFEC_FIN_POLIZA}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" >VIGENTE</div>
+                                            </div>
+                                        </div>
+                        
+                                    </div>
+                                </div>
+                                
+                                <div *ngIf="policySimpli.length == 0">
+                                    <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important" >No se encontraron pólizas vigentes</div>
+                                </div>
+                            </div>
+                            <div *ngIf="policyGral.length == 0 && policySimpli.length == 0">
+                                <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important" >No se encontraron pólizas vigentes</div>
+                            </div>
+                            <br>
+                            
+
+                        </div>
+
+                        <div *ngIf="policyGral.length == 0 && policySimpli.length == 0">
+                            <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                        </div>
+                        
+                    </div>
+                    <div *ngIf="tipoClienteGC == 'CRF'">
+                        <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
+                        <div class="row mb-2 mt-2">
+                            <div class="Header">
+                                <div class="col-lg-12">
+                                    <h4 class="TitleLine">Pólizas</h4>
+                                </div>
+                            </div>
+                        </div> 
+                        <hr>
+                        <div *ngIf="policyGral.length > 0 || policySimpli.length > 0">
+                            <div class="text-center tituloTwo" >{{nombreRegimenGral}}</div>
+                            <div *ngIf="policyGral.length > 0" class="row pl-2 pr-2">
+                                <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                                <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo / Producto</div>
+                                <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                                <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                                <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                                <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                                <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                                <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de último Pago</div>
+                                <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                            </div>
+                            <div id="">
+                                <div *ngIf="policyGral.length > 0">
+                                    <div *ngFor="let item of policyGral;let inc = index;">
+                    
+                                        <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                            <div class="row pl-2 pr-2">
+                                                <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                                <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                                <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                        *ngIf="item.SPRODUCTO !== 'SOAT'">-</a>
+                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                    *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                                <a class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</div>
+                                                <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;">{{item.SPRODUCTO}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" ></div>
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</div>
+                                                <div class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" 
+                                                    *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</div>
+                                                <div class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.FEC_PAGO}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas"  >VIGENTE</div>
+                                            </div>
+                                        </div>
+                        
+                                    </div>
+                                </div>
+                                <div *ngIf="policyGral.length == 0">
+                                    <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                                </div>
+                                
+                                
+                            </div>
+                            <div class="text-center tituloTwo" >{{nombreRegimenSimpli}}</div>
+                            <div *ngIf="policySimpli.length > 0" class="row pl-2 pr-2">
+                                <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                                <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo</div>
+                                <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                                <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                                <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                                <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                                <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                                <div *ngIf="getValidaCabeceraPlaca(2)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
+                                <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                            </div>
+                            <div id="">
+                                <div *ngIf="policySimpli.length > 0">
+                                    <div *ngFor="let item of policySimpli;let inc = index;">
+                    
+                                        <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                            <div class="row pl-2 pr-2">
+                                                <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                                <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                                <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                            *ngIf="item.SPRODUCTO !== 'SOAT'">-</a>
+                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                    *ngIf="getValidaCabeceraPlaca(2)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                                <a class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                    href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</div>
+                                                <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;">{{item.SPRODUCTO}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas">{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" ></div>
+                                                <div class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</div>
+                                                <div class="col-lg-2 cabeceraPolizas">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" 
+                                                    *ngIf="getValidaCabeceraPlaca(2)">{{item.PLACA ? item.PLACA : ''}}</div>
+                                                <div class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.DFEC_FIN_POLIZA}}</div>
+                                                <div class="col-lg-1 cabeceraPolizas" >VIGENTE</div>
+                                            </div>
+                                        </div>
+                        
+                                    </div>
+                                </div>
+                                <div *ngIf="policySimpli.length == 0">
+                                    <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div *ngIf="policyGral.length == 0 && policySimpli.length == 0">
+                            <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                        </div>
+                        <br>
+                        
+                    </div>
+                    <div *ngIf="tipoClienteGC == 'CRE' || (tipoClienteGC == 'CRE'  && tipoClienteCRF != 'CRF')">
+                        <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
+                        <div class="row mb-2 mt-2">
+                            <div class="Header">
+                                <div class="col-lg-12">
+                                    <h4 class="TitleLine">Pólizas</h4>
+                                </div>
+                            </div>
+                        </div> 
+                        <hr>
+                        <div class="text-center tituloTwo" >{{nombreRegimenGral}}</div>
+                        <div *ngIf="policyGral.length > 0" class="row pl-2 pr-2">
+                            <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                            <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo / Producto</div>
+                            <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                            <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                            <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                            <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                            <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                            <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de último Pago</div>
+                            <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                        </div>
+                        <div id="">
+                            <div *ngIf="policyGral.length > 0">
+
+                            </div>
+                            <div *ngFor="let item of policyGral;let inc = index;">
+                
+                                <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                    <div class="row pl-2 pr-2">
+                                        <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                        <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                        <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                    *ngIf="item.SPRODUCTO !== 'SOAT'">-</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                            *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                        <a class="{{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                        <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
+                                            href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                        <div class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</div>
+                                        <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" >{{item.SPRODUCTO}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas" ></div>
+                                        <div class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas" ></div>
+                                        <div class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</div>
+                                        <div class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas" 
+                                            *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</div>
+                                        <div class="{{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.FEC_PAGO}}</div>
+                                        <div class="col-lg-1 cabeceraPolizas"  >VIGENTE</div>
+                                    </div>
+                                </div>
+                
+                            </div>
+                            <div *ngIf="policyGral.length == 0">
+                                <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                            </div>
+                        </div>
+                        <div class="text-center tituloTwo" >{{nombreRegimenSimpli}}</div>
+                        <div *ngIf="policySimpli.length > 0" class="row pl-2 pr-2">
+                            <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                            <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo / Producto</div>
+                            <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                            <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                            <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                            <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                            <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                            <div *ngIf="getValidaCabeceraPlaca(2)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
+                            <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                        </div>
+                        <br>
+                        <div id="">
+                            <div *ngIf="policySimpli.length > 0">
+                                <div *ngFor="let item of policySimpli;let inc = index;">
+                
+                                    <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                        <div class="row pl-2 pr-2">
+                                            <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                            <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                            <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                        *ngIf="item.SPRODUCTO !== 'SOAT'">-</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                *ngIf="getValidaCabeceraPlaca(2)">{{(item.PLACA+' ').trim() ? (item.PLACA+' ').trim()  : ''}}</a>
+                                            <a class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                            <div class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</div>
+                                            <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" >{{item.SPRODUCTO}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" ></div>
+                                            <div class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</div>
+                                            <div class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" 
+                                                *ngIf="getValidaCabeceraPlaca(2)">{{(item.PLACA+' ').trim() ? (item.PLACA+' ').trim()  : ''}}</div>
+                                            <div class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.DFEC_FIN_POLIZA}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas"  >VIGENTE</div>
+                                        </div>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                            
+                            <div *ngIf="policySimpli.length == 0">
+                                <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                            </div>
+                        </div>
+                        <br>
+                        
+                        
+                    </div>
+                    <div *ngIf="tipoClienteGC == 'CCO' || (tipoClienteGC == 'CCO' && tipoClienteCRF != 'CRF')">
+                        <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
+                        <div class="row mb-2 mt-2">
+                            <div class="Header">
+                                <div class="col-lg-12">
+                                    <h4 class="TitleLine">Pólizas</h4>
+                                </div>
+                            </div>
+                        </div> 
+                        <hr>
+                        <div class="text-center tituloTwo" >{{nombreRegimenGral}}</div>
+                        <div *ngIf="policyGral.length > 0" class="row pl-2 pr-2">
+                            <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                            <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo / Producto</div>
+                            <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                            <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                            <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                            <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                            <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                            <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de último Pago</div>
+                            <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                        </div>
+                        <div id="">
+                            <div *ngIf="policyGral.length > 0">
+                                <div *ngFor="let item of policyGral;let inc = index;">
+                
+                                    <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                        <div class="row pl-2 pr-2">
+                                            <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                            <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                            <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                    *ngIf="item.SPRODUCTO !== 'SOAT'">-</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                            <a class="{{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                            <div class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</div>
+                                            <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" >{{item.SPRODUCTO}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" ></div>
+                                            <div class="col-lg-1 cabeceraPolizas" >{{item.STIPO_CLIENTE}}</div>
+                                            <div class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" 
+                                                *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</div>
+                                            <div class="{{getValidaCabeceraPlaca(1) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.FEC_PAGO}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas"  >VIGENTE</div>
+                                        </div>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                            <div *ngIf="policyGral.length == 0">
+                                <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                            </div>
+                            
+                        </div>
+                        <div class="text-center tituloTwo" >{{nombreRegimenSimpli}}</div>
+                        <div *ngIf="policySimpli.length > 0" class="row pl-2 pr-2">
+                            <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
+                            <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo</div>
+                            <div class="col-lg-1  text-left txtCabecera">Certificado</div>
+                            <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                            <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                            <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
+                            <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                            <div *ngIf="getValidaCabeceraPlaca(2)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
+                            <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                        </div>
+                        <br>
+                        <div id="">
+                            <div *ngIf="policySimpli.length > 0">
+                                <div *ngFor="let item of policySimpli;let inc = index;">
+                    
+                                    <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                        <div class="row pl-2 pr-2">
+                                            <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
+                                            <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
+                                            <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
+                                                <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                    *ngIf="item.SPRODUCTO !== 'SOAT'">-</a>
+                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
+                                                *ngIf="getValidaCabeceraPlaca(2)">{{item.PLACA ? item.PLACA : ''}}</a>
+                                            <a class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
+                                            <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
+                                                href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                            <div class="col-lg-1 cabeceraPolizas" >{{item.SNUM_POLIZA}}</div>
+                                            <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" >{{item.SPRODUCTO}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" >{{item.NCERTIF}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" ></div>
+                                            <div class="col-lg-1 cabeceraPolizas">{{item.STIPO_CLIENTE}}</div>
+                                            <div class="col-lg-2 cabeceraPolizas" >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas" 
+                                                *ngIf="getValidaCabeceraPlaca(2)">{{item.PLACA ? item.PLACA : ''}}</div>
+                                            <div class="{{getValidaCabeceraPlaca(2) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >{{item.DFEC_FIN_POLIZA}}</div>
+                                            <div class="col-lg-1 cabeceraPolizas"  >VIGENTE</div>
+                                        </div>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                            <div *ngIf="policySimpli.length == 0">
+                                <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontraron pólizas vigentes</div>
+                            </div>
+                        </div>
+                        <br>
+                        
+                    </div>
+                    
                 </div>
                     
             </div>
