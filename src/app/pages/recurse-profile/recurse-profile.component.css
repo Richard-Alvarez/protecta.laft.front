@@ -353,3 +353,6 @@ div#pintaGrillaHistory:nth-child(odd) {
   width: 113px;
   display: inline-table;
 }
+.colorButton{
+  color: #a0a1cc !important;
+}
