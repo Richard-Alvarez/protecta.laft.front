@@ -516,7 +516,7 @@ export class PendienteInformeComponent implements OnInit {
     // let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
       let respListaInternacional:any = []
       console.log("this.NPERIODO_PROCESO",this.NPERIODO_PROCESO)
-    if(this.linkactual == "contraparte"){
+    if(this.linkactual == "proveedor"){
       let dataSend = {
         NIDALERTA: 33,
         NIDREGIMEN : 0, 
@@ -592,7 +592,7 @@ export class PendienteInformeComponent implements OnInit {
      let bolPusheo = false
     //  nuevaLista.forEach(element => {
 
-      if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+      if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
         console.log("Nueva this.regimen.id",0)
         valorSinRegimen = nuevaLista.filter(it => it.NCANTCLIXREV > 0 && it.NIDREGIMEN == 0)
   

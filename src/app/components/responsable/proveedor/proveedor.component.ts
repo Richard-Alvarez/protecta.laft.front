@@ -13,12 +13,12 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { ResponsableGlobalComponent } from '../responsableGlobal';  
 
-@Component({
-  selector: 'app-contraparte',
-  templateUrl: './contraparte.component.html',
-  styleUrls: ['./contraparte.component.css']
+@Component({ 
+  selector: 'app-proveedor',
+  templateUrl: './proveedor.component.html',
+  styleUrls: ['./proveedor.component.css']
 })
-export class ContraparteComponent implements OnInit {
+export class ProveedorComponent implements OnInit {
   statePendiente: any = { sState: 'PENDIENTE', sCollapHead: 'acordionPENDIENTE', sHrefHead: 'collapPENDIENTEHead', arrayForms: 'arrResponsablesPendiente' }
   stateRevisado: any = { sState: 'REVISADO', sCollapHead: 'acordionREVISADO', sHrefHead: 'collapREVISADOHead', arrayForms: 'arrResponsablesRevisado' };
   stateCompletado: any = { sState: 'COMPLETADO', sCollapHead: 'acordionCOMPLETADO', sHrefHead: 'collapCOMPLETADOHead', arrayForms: 'arrResponsablesPendiente' };
@@ -38,9 +38,18 @@ export class ContraparteComponent implements OnInit {
     private renderer: Renderer2,
     private modalService: NgbModal,
     private excelService: ExcelService,
-  ) {this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService) }
+   
+   )
+  { this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService)}
 
   async ngOnInit() {
+
+  //   var pathname = window.location.pathname;
+  //  alert(pathname);
+    // var URLactual = window.location + " ";
+    // let link = URLactual.split("/")
+    // this.linkactual = link[link.length-1].trim()
+    //   // alert(link[link.length-1].trim());
 
     let usuario = this.core.storage.get('usuario')
     this.STIPO_USUARIO = usuario['tipoUsuario']
@@ -52,6 +61,8 @@ export class ContraparteComponent implements OnInit {
 
    
     await this.getListaPerfilGrupo(1)
+    
+      
     
   }
 
@@ -86,6 +97,8 @@ export class ContraparteComponent implements OnInit {
      }
     }
 
+    
+  }
 
-}
+
 }

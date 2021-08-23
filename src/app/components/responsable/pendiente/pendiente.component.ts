@@ -24,6 +24,7 @@ import { SbsreportService } from 'src/app/services/sbsreport.service';
 })
 export class PendienteComponent implements OnInit {
     STIPO_USUARIO;
+    setText:any = {}
     objRadioHeader:any = {};
     InputRespHeaderAll:number = 0
     arrInputRespHeader:any = []
@@ -345,7 +346,7 @@ getFilesInformUniversal(alerta: any,STIPO_CARGA) {
   //console.log("NIDREGIMEN: ",alerta.NREGIMEN)
   //console.log("nueva lista NIDREGIMEN: ",alerta)
   //console.log("el CONSULTA this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
-  if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+  if(this.linkactual == "proveedor" || this.linkactual == "colaborador" || this.linkactual == "contraparte" ){
     resp = this.parent.arrObjFilesInformeByAlert.filter(inform => 
         inform.NIDALERTA == alerta.NIDALERTA && 
         inform.NIDALERTA_CABECERA == alerta.NIDALERTA_CABECERA &&
@@ -388,7 +389,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     
 
      let respSetDataPendiente:any = this.setDataPendiente();
-     if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+     if(this.linkactual == "proveedor" || this.linkactual == "colaborador" || this.linkactual == "contraparte"){
       respSetDataPendiente["NREGIMEN"] = 0
      }
      
@@ -732,7 +733,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       senial.arrPreguntasCabecera.forEach(ans => {
         ans.NRESPUESTA = (this.arrInputRespHeader[indice])[indicePregunta]//X'MODIFICAR'
         ans.SCOMENTARIO = (this.arrInputComment[indice])[indicePregunta]
-        if(this.linkactual == "contraparte" || this.linkactual == "colaborador"){
+        if(this.linkactual == "proveedor" || this.linkactual == "colaborador" || this.linkactual == "contraparte"){
           ans["NREGIMEN"] = 0
          }
     
@@ -1305,6 +1306,20 @@ getAlerta(alerta){
 }
 }
 
+setLabelData(alerta){
+  if(alerta == "C3"){
+    return 'Clientes con direcciones en paises GAFI'
+  }
+  else if(alerta == "S1"){
+    return 'Devoluciones Rentas'
+  }
+  else if(alerta == "T1"){
+    return 'Declaraciones Juradas y File'
+  }
+  else{
+    return 'Adjuntar Sustento'
+  }
+} 
 
 
 

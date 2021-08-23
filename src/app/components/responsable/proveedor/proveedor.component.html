@@ -22,8 +22,7 @@
         </ul> 
         </div>  -->
         <div class="tab-content" style="" >
-              <div   id="reg{{regimen.desCorto}}" *ngFor="let regimen of localResponsable.arrRegimen;let variabletabs = index;" class=" tab-pane {{localResponsable.getShowRegimientoContraparte(variabletabs,regimen)}}">  
-                <!-- <div   id="reg{{regimen.desCorto}}" *ngFor="let regimen of localResponsable.arrRegimen;let variabletabs = index;" class=" tab-pane active">  -->
+             <div   id="reg{{regimen.desCorto}}" *ngFor="let regimen of localResponsable.arrRegimen;let variabletabs = index;" class=" tab-pane {{localResponsable.getShowRegimientoTrabajdores(variabletabs,regimen)}}"> 
                
                 <!-- <div id="reg{{regimen.desCorto}}" *ngFor="let regimen of localResponsable.arrRegimen;let variabletabs = index;" class=" tab-pane {{localResponsable.getListaPerfilGrupo(1)}}">  -->
                 <div class="" style="background-color:transparent !important;">

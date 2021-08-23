@@ -10,9 +10,6 @@
     padding: 20px;
     width: 100%;
 }
-.color-card{
-  background-color:#F1E1C9;
-}
 .senal {
     background-color: #F94040;
     font-weight: bold;
@@ -82,7 +79,6 @@
 
 .unlinkeo{
     text-decoration: none;
-    width: 100%;
 }
 
 .arrow_box_oc {
@@ -117,9 +113,9 @@
   
 
 .TitleLine{
-  padding-bottom: 1%;
+  padding-bottom: 4%;
 position: relative;
-/* z-index : 1; */
+z-index : 1;
 
 }
 .TitleLine:before{
@@ -144,7 +140,21 @@ border-bottom:2px solid #FA7000;
 	z-index: -1;
 }
 
+.TitleLine{
+  padding-bottom: 4%;
+position: relative;
+z-index : 1;
 
+}
+.TitleLine:before{
+content : "";
+position: absolute;
+left    : 0;
+bottom  : 0;
+height  : 1pxs;
+width   : 100%;  /* or 100px */
+border-bottom:2px solid #FA7000;
+}
 
 .inputfile + label {
   font-size: 1.20em;
@@ -184,10 +194,6 @@ border-bottom:2px solid #FA7000;
   border: 1px solid #8a8a8a;
 }
 
-.headerSenialsV2{
-  border: 2px solid transparent;
-}
-
 .tooltipT {
   position: relative;
   display: inline-block;
@@ -195,7 +201,7 @@ border-bottom:2px solid #FA7000;
 }
 
 .tooltipT .tooltiptextT {
-   visibility: hidden; 
+  visibility: hidden;
   width: 300px;
   height: auto;
   max-width: auto;
@@ -206,9 +212,9 @@ border-bottom:2px solid #FA7000;
   border-radius: 3px;
   padding: 6px 0;
   position: absolute;
- z-index: 10;
+  z-index: 5;
   margin-left: -60px;
-  bottom: 90%;
+  bottom: 150%;
   left: 50%;
   /*border: 1px solid#0e0c0c;*/
 }
@@ -216,27 +222,23 @@ border-bottom:2px solid #FA7000;
 .tooltipT .tooltiptextT::after {
   content: "";
   position: absolute;
-  z-index: 10;
 }
 
 .tooltipT:hover .tooltiptextT {
   visibility: visible;
   opacity: 1;
-  z-index: 10;
 }
 
 .tooltipT.top .tiptext{
   margin-left: -60px;
   bottom: 150%;
   left: 50%;
-  z-index: 10;
 }
 .tooltipT.top .tiptext::after{
     margin-left: -5px;
     top: 100%;
     left: 50%;
     border-color: #2E2E2E transparent transparent transparent;
-    z-index: 10;
 }
 
 .custom-checkbox {
@@ -286,55 +288,60 @@ border-bottom:2px solid #FA7000;
   .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
     box-shadow: none !important; 
   }
-  .parrafoAdj{
-    font-family: Roboto;
-    font-size: 12px;
-    color: black;
-    font-weight: normal;
+
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    /* color: #fff; */
+    /* background-color: #007bff94; */
+    background-color: #27246d!important;
+    border-radius: inherit;
+/* color: #fff!important; */
+   }
+  li .active a {
+    /* background-color: #E0E0E0 !important; */
+    color: white;
+  }
+  ul.tabs li.active,  li.active a{
+    background: white;
+    }
+ a{
+  color: black;
   }
 
-  .txtCabecera{
-    font-size: 14px;
-    font-family: Roboto;
-    color: rgba(38, 41, 109, 0.6);
-    font-weight: bold;
-}
+  .card-header{
+    padding: 0px;
+    border-color: #27246d!important;
+    border:  1px solid;
+    
+  }
 
-.respuestaTitulo{
-  font-size: 13px;
-  color: black;
-  font-family: Roboto;
-  font-weight: normal;
-}
-
-.colorGrillaAleatorio{
-  font-size: 12px;
-  color: black;
-  font-family: Roboto;
-  font-weight: normal;
-  background-color: #dee2e68c;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-decoration: none;
-}
-.colorGrillaBlanco{
-  font-size: 12px;
-  color: black;
-  font-family: Roboto;
-  font-weight: normal;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-decoration: none;
-}
+   /*body {
+    position: relative;
+  }
+  ul.nav-pills {
+    top: 20px;
+    position: fixed;
+  }
+  div.col-8 div {
+    height: 500px;
+  }*/
 
 
-.tooltip-inner{
-  width: 400px;
- background-color: rgb(71, 69, 69);
+  .bordesCabecera{
+    box-shadow: 8px 8px 10px #c4c4c4;
+      background: #F6F6F6;
+      border-top: 1px solid #7C7C7C;
+  }
 
-}
 
 
-.buttonSinBorder{
-  border-radius : inherit;
-}
+
+
+
+
+
+
+
+
+
+
+

@@ -14,6 +14,7 @@ import { PreReinforcedCustomersComponent } from "../pre-reinforced-customers/pre
 import { ComplementaryCustomersComponent } from "../complementary-customers/complementary-customers.component";
 import { analyzeFileForInjectables, CompileShallowModuleMetadata } from "@angular/compiler";
 import { NgxSpinnerService } from "ngx-spinner";
+import { ExcelService } from '../../services/excel.service';
 
 
 //import { Validaciones } from 'src/app/utils/validacionesRegex'
@@ -87,6 +88,7 @@ export class CustomerManagerComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
+     private excelService: ExcelService,
     )
 
   {}
@@ -2329,7 +2331,7 @@ prueba = []
   }
   arrayTabs:any = [{code:1,nombre:"Gestor de Cliente"},{code:2,nombre:"Cliente Revisado"},{code:2,nombre:"Cliente Reforzado"},{code:2,nombre:"Cliente Complementario"},{code:2,nombre:"Listas de Coincidencias"}]
   setTipoSelectPestaniaClient(tipoCliente){
-    debugger;
+    //debugger;
     this.arrSetClassSelected = this.arrSetClassSelected.map(t=> {return ''})
     this.arrSetClassSelected[tipoCliente] = 'active'
     localStorage.setItem("nSelectPestaniaClient",tipoCliente)
@@ -2372,7 +2374,7 @@ prueba = []
   }
   
   goToDetailAprobar(item,arrClientesGC){
-    debugger
+    //debugger
     console.log("EL ITEM 1 EL ARRAY DE COINCIDENCIAS : ",this.newArrayResult)
     console.log("EL ITEM 1 COINCIDENCIA : ",item)
     console.log("EL ITEM 1 COINCIDENCIA arrClientesGC: ",arrClientesGC)
@@ -2801,6 +2803,74 @@ prueba = []
     console.log("ArrayResultCoincidencias",this.newArrayResult2)
   }
 
+
+  nombreExport(){
+    if(this.idGrupo == 2){
+      return "Descargar lista de coincidencias de colaborador"
+
+    }else if(this.idGrupo == 3){
+      return "Descargar lista de coincidencias de proveedor"
+    }else{
+     return "Descargar lista de coincidencias de contraparte"
+    }
+  }
+
+  exportListToExcel(variable){
+    let resultado:any = []
+    let NombreDescarga
+    if(this.idGrupo == 2){
+      NombreDescarga = "Lista de coincidencias de colaborador"
+
+    }else if(this.idGrupo == 3){
+      NombreDescarga = "Lista de coincidencias de proveedor"
+    }else{
+      NombreDescarga = "Lista de coincidencias de contraparte"
+    }
+    
+    resultado = this.newArrayResult2
+    console.log("resultado", resultado)
+    let Newresultado:any = []
+    let resultadoFinal:any = []
+    if (resultado!= null && resultado.length > 0) {
+      for(let i =0; i< resultado.length;i++){
+        
+        Newresultado.push(resultado[i].arrClientesGC)
+       }
+       for(let index = 0 ;index < Newresultado.length; index++){
+        if(Newresultado[index].length > 1){
+          Newresultado[index].forEach(element => {
+            
+            resultadoFinal.push(element)
+          });
+        }else{
+          resultadoFinal.push(Newresultado[index][0])
+        }
+     }
+
+      
+      console.log("Newresultado", Newresultado)
+      console.log("resultadoFinal", resultadoFinal)
+
+      let data = []
+      resultadoFinal.forEach(t => {
+       
+        let _data = {
+          "Tipo Documento" : t.STIPOIDEN.substr(0,3),
+          "N° Documento" : t.SNUM_DOCUMENTO,
+          "Nombre / Razón Social" : t.SNOM_COMPLETO,
+          //"Regimen" : t.SDESREGIMEN
+           
+        }
+        t.arrListas.forEach(element => {
+          _data[element.SDESTIPOLISTA] = element.SDESESTADO
+        });
+        //console.log("la data1111", t.arrListas)
+        data.push(_data);
+        });
+        console.log("la data", data)
+        this.excelService.exportAsExcelFile(data, this.nombreExport());
+    }
+  }
 
 
 

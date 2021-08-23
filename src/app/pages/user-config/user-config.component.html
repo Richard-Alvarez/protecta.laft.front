@@ -55,7 +55,7 @@
                                         style="display: flex;justify-content: center;align-items: center;width: 100px;"
                                         class="btn btn-warning text-white"
                                         (click)="enableControls()">Crear</button>
-                                </div>
+                                    </div>
 
                                 <!-- <div class="col-lg-1 " style="display: flex;padding-left: 20px;justify-content: center;align-items: center;" [hidden]="createUs"> -->
                                     <div class="col-lg-1 " style="margin-right: 40px;" [hidden]="createUs">
@@ -63,14 +63,14 @@
                                         style="display: flex;justify-content: center;align-items: center;width: 100px;"
                                         class="btn btn-warning text-white "
                                         (click)="createData()">Guardar</button>
-                                </div>
+                                    </div>
                                 <!-- <div class="col-lg-1 " style="display: flex;padding-left: 20px;justify-content: center;align-items: center;" [hidden]="updateUs"> -->
                                     <div class="col-lg-1 " style="margin-right: 40px;" [hidden]="updateUs"> 
                                     <button title="Actualizar cambios"
                                         style="display: flex;justify-content: center;align-items: center;width: 100px;"
                                         class="btn btn-warning text-white "
                                         (click)="updateData()">Guardar</button>
-                                </div>
+                                    </div>
                                 &nbsp;
                                 &nbsp;
                                 <!-- <div class="col-lg-1 " style="display: flex;padding-left: 20px;justify-content: center;align-items: center;"> -->
@@ -137,6 +137,18 @@
                                         <span class="fontText">Email (*):</span>
                                         <input [disabled]="userEmailOff" [(ngModel)]="email" id="usEmail" type="text"
                                             class="form-control buttonSinBorder">
+                                    </div>
+                                </div>
+                                <div class="row" style="display: flex;justify-content: center;align-items: center;">
+                                    <div class="col-lg-6 form-group" title="Estado del usuario">
+                                        <span class="fontText">Estado (*):</span>
+                                        <select [disabled]="stateOff" [(ngModel)]="state" id="usState" name="userAllRol"
+                                            class="form-control buttonSinBorder">
+                                            <option value="0" selected>Seleccione</option>
+                                            <!-- <option *ngFor="let item of stateList" value="{{item.}}"
+                                                id="stateSelected">
+                                                {{item.}}</option> -->
+                                        </select>
                                     </div>
                                 </div>
                             </div>

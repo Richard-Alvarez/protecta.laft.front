@@ -15,3 +15,7 @@
 th,td{
   table-layout: fixed;
 }
+
+.colorButton{
+  color: #a0a1cc !important;
+}

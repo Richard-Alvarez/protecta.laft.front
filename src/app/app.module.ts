@@ -50,7 +50,7 @@ import { WarningSign4WorkModuleComponent } from './warning-sign4-work-module/war
 import { WarningSigns2TrayComponent } from './warning-signs2-tray/warning-signs2-tray.component';
 import { ViewWarningc2DatabaseComponent } from './view-warningc2-database/view-warningc2-database.component';
 import { ViewWarningrg2DatabaseComponent } from './view-warningrg2-database/view-warningrg2-database.component';
-import { ContraparteComponent } from './components/responsable/contraparte/contraparte.component';
+import { ProveedorComponent } from './components/responsable/proveedor/proveedor.component';
 
 
 import { TimePericitySettingsComponent } from './time-pericity-settings/time-pericity-settings.component';
@@ -141,6 +141,7 @@ import { ReportSbsInfoComplementaryComponent } from './components/report-sbs-inf
 import { ModalProfileMaintenanceComponent } from './modal-profile-maintenance/modal-profile-maintenance.component';
 import { ConfigDemandaComponent } from './config-demanda/config-demanda.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ContraparteComponent } from './components/responsable/contraparte/contraparte.component';
 
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
@@ -254,7 +255,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ModalProfileMaintenanceComponent,
     RecurseProfile,
     
-    ContraparteComponent,
+    ProveedorComponent,
     ColaboradorComponent,
     NcCompanyDetailComponent,
     PerfilesComponent,
@@ -267,6 +268,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     AbstractComponentComponent,
     ReportSbsInfoComplementaryComponent,
     ConfigDemandaComponent,
+    ContraparteComponent,
    
     //Validaciones
 //fin de formularios antiguos      

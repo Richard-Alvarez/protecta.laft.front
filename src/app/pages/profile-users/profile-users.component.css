@@ -257,3 +257,6 @@ width: 100%;
       color: rgba(38, 41, 109, 0.6);
       font-weight: bold;
   }
+  .colorButton{
+    color: #a0a1cc !important;
+  }
