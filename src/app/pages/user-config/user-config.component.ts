@@ -143,6 +143,7 @@ export class UserConfigComponent implements OnInit {
 
   async ngOnInit() {
     //await this.getHistoryUser();
+    //this.state = 1
     this.core.config.rest.LimpiarDataGestor()
     this.core.loader.show();
     if (!this.core.storage.valSession('usuario')) {
@@ -157,7 +158,7 @@ export class UserConfigComponent implements OnInit {
     
 
     await this.getUsers();
-    await this.getUserState();
+    //await this.getUserState();
     await this.getProfileList();
     await this.getCargoList("0");
     var user = this.core.storage.get('usuario');
@@ -260,15 +261,16 @@ export class UserConfigComponent implements OnInit {
     // console.log("lista de usu", usu)
   }
 
-  async getUserState() {
-    this.core.loader.show();
-    this.userConfigService.getUserState().then((response) => {
-      let _data;
-      _data = (response);
-      this.ListUserState = _data;
-      this.core.loader.hide();
-    });
-  }
+  // async getUserState() {
+  //   this.core.loader.show();
+  //   this.userConfigService.getUserState().then((response) => {
+  //     let _data;
+  //     _data = (response);
+  //     this.ListUserState = _data;
+  //     console.log("this.ListUserState",this.ListUserState)
+  //     this.core.loader.hide();
+  //   });
+  // }
 
 
   async changeUser() {
@@ -358,6 +360,7 @@ export class UserConfigComponent implements OnInit {
     this.cargo = _data.cargoId;
     await this.getCargoList(this.rol);
     this.email = _data.userEmail;
+    this.state = _data.userState;
     console.log("la data que envia",_data)
     if (this.userId == '0') {
       this.editUserOff = true;
@@ -515,7 +518,7 @@ export class UserConfigComponent implements OnInit {
     
     
     }
-    if (this.state == "0") {
+    if (this.state == "-1") {
       swal.fire({
         title: 'Actualización de usuario',
         icon: 'warning',
@@ -600,6 +603,7 @@ export class UserConfigComponent implements OnInit {
     data.userEmail = this.newUsEmail === '' ? '' : this.newUsEmail;
     data.cargoId = this.newUsCargo === '' ? 0 : this.newUsCargo;
     data.valor = 1
+    data.state = this.state
 
     swal.fire({
       title: 'Actualización de usuario',
@@ -893,6 +897,7 @@ export class UserConfigComponent implements OnInit {
     data.userEmail = this.insUsEmail === '' ? '' : this.insUsEmail;
     data.cargoId = this.insUsCargo === '' ? '' : this.insUsCargo;
     data.valor = 2
+    data.state = this.state
 
 
 
