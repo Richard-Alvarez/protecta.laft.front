@@ -554,9 +554,14 @@ async getSwalOptionClient(data,dataService,indice){
     }
   }
 
-  exportListToExcel(){
+  exportListToExcel(variable){
     let resultado:any = []
-    resultado = this.getBuscarClient()
+    if(variable == 1){
+      resultado = this.getBuscarClient()
+    }else{
+      resultado = this.arrCoincidencias
+    }
+    
     console.log("resultado", resultado)
     let Newresultado:any = []
     let resultadoFinal:any = []
@@ -584,7 +589,7 @@ async getSwalOptionClient(data,dataService,indice){
       resultadoFinal.forEach(t => {
        
         let _data = {
-          "Tipo Documento" : t.STIPOIDEN,
+          "Tipo Documento" : t.STIPOIDEN.substr(0,3),
           "N° Documento" : t.SNUM_DOCUMENTO,
           "Nombre / Razón Social" : t.SNOM_COMPLETO,
           "Regimen" : t.SDESREGIMEN
