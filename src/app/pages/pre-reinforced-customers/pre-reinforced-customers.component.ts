@@ -572,7 +572,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
         data.push(_data);
         });
         console.log("la data", data)
-        this.excelService.exportAsExcelFile(data, "Registro de usuarios por perfil");
+        this.excelService.exportAsExcelFile(data, "Cliente revizado");
     }
   }
 

@@ -556,10 +556,13 @@ async getSwalOptionClient(data,dataService,indice){
 
   exportListToExcel(variable){
     let resultado:any = []
+    let NombreDescarga
     if(variable == 1){
       resultado = this.getBuscarClient()
+      NombreDescarga = "Cliente reforzado"
     }else{
       resultado = this.arrCoincidencias
+      NombreDescarga = "Cliente reforzado con coincidencias"
     }
     
     console.log("resultado", resultado)
@@ -602,7 +605,7 @@ async getSwalOptionClient(data,dataService,indice){
         data.push(_data);
         });
         console.log("la data", data)
-        this.excelService.exportAsExcelFile(data, "Registro de usuarios por perfil");
+        this.excelService.exportAsExcelFile(data, NombreDescarga);
     }
   }
 

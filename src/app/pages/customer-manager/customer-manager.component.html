@@ -468,6 +468,10 @@
             </div>
             
              <div id="lista"   class=" tab-pane {{arrSetClassSelected[4]}}">
+
+                <div class="col-md-5 d-flex justify-content-between " style="padding: 30px 0px 0px 0px; color: #a0a1cc !important;">
+                    <button (click)="exportListToExcel(idGrupo)" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> {{nombreExport()}} </button>
+               </div>
                 <div class="borderFormat">
                     <hr>
                     
