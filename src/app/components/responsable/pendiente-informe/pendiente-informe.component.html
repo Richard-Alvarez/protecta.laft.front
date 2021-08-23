@@ -269,7 +269,7 @@
                                                     alt="" style="cursor: pointer;height:40px;width: 35px;" (click)="getExcelListAlert(item.NIDALERTA,regimen.id)" />
                                                 Descargar Resultados
                                             </div>-->
-                                            <div *ngIf="item.NIDALERTA !== 2 && item.NIDALERTA !== 35 && item.NIDALERTA !== 33">
+                                            <div *ngIf="item.NIDALERTA !== 2 && item.NIDALERTA !== 35 && item.NIDALERTA !== 33 && item.NIDALERTA !== 39">
                                               
                                                 <div class="card" style="border: 0px;padding-bottom: 0px;">
                                                     <div class="card-header" style="border: 0px;padding-bottom: 0px;">
@@ -336,7 +336,7 @@
                                                         <div id="collapseResponsable{{index+'-'+incItemRespPenInfo}}" class="collapse" attr.data-parent="#{{'acordionResponsable'+statePendienteInforme.sState+'Any'+index}}">
                                                             <div class="card-body" style="border: 0px;">
                                                                 
-                                                                <div *ngIf="item.NIDALERTA !== 2 || item.NIDALERTA  !== 33 || item.NIDALERTA !== 35">
+                                                                <div *ngIf="item.NIDALERTA !== 2 || item.NIDALERTA  !== 33 || item.NIDALERTA !== 35 || item.NIDALERTA !== 39">
                                                                     <div *ngIf="item.NIDALERTA === 1" class="">
                                                                         <!--C1 detalle de preguntas
                                                                         <app-c1-detail-company [parent]="this" [objAlerta]="itemResponsablePenInfo"

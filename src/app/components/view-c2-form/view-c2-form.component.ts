@@ -451,6 +451,17 @@ export class ViewC2FormComponent implements OnInit {
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
                 console.log(" this.internationalList",  this.internationalList)
+            }else if(this.linkactual == "contraparte"){
+                let dataSend = {
+                    NIDALERTA: 39,
+                    NIDREGIMEN :0, 
+                    NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, 
+                    NIDGRUPOSENAL: 2,
+                    NIDPROVEEDOR: 1
+                }
+                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
+                this.internationalList = respListaInternacional
+                console.log(" this.internationalList",  this.internationalList)
             }else{
                 let dataSend = {
                     NIDALERTA: this.alertData.NIDALERTA,
@@ -491,7 +502,13 @@ export class ViewC2FormComponent implements OnInit {
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
                 console.log(" this.internationalList",  this.internationalList)
-            }else{
+            }else if(this.linkactual == "contraparte"){
+                let dataSend = {NIDALERTA: 39,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2  }
+                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
+                this.internationalList = respListaInternacional
+                console.log(" this.internationalList",  this.internationalList)
+            }
+            else{
                 let dataSend = {NIDALERTA: this.alertData.NIDALERTA,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 1  }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
