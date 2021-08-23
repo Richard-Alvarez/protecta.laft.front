@@ -121,7 +121,7 @@
 
                                     </thead>
                                     <tbody style="font-size: 12px;">
-                                        <tr *ngFor="let cliente of getClientsByListArr(lista.SDESTIPOLISTA);">
+                                        <tr *ngFor="let cliente of getClientsByListArr(lista);">
                                             <td scope="col" style="width: 250px">{{cliente.STIPOIDEN ? (cliente.STIPOIDEN + ' - ' +cliente.SNUM_DOCUMENTO) : ' - '}}</td>
                                             <td scope="col" style="width: 300px">{{cliente.SNOM_COMPLETO}}</td>
                                             <td scope="col" class="text-center">
