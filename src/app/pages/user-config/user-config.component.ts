@@ -402,6 +402,7 @@ export class UserConfigComponent implements OnInit {
       this.getProfileList();
       await this.getCargoList(this.rol);
       this.cancel = false;
+      this.state = -1;
 
     }
     else {
@@ -690,7 +691,7 @@ export class UserConfigComponent implements OnInit {
   }
 
   async createData() {
-
+    
     // let nombreUsu = (<HTMLInputElement>document.getElementById("usName")).value
     // // console.log("lista de LA LISTA", this.ListUser)
     //  let usu = this.ListUser.filter((it) => it.userName == (nombreUsu+' ').trim())
@@ -809,7 +810,7 @@ export class UserConfigComponent implements OnInit {
       this.core.loader.hide();
       return
     }
-    if (this.state == "0") {
+    if (this.state == "-1") {
       swal.fire({
         title: 'Creación de usuario',
         icon: 'warning',
