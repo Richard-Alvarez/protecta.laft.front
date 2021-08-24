@@ -606,6 +606,23 @@ async getSwalOptionClient(data,dataService,indice){
         });
         console.log("la data", data)
         this.excelService.exportAsExcelFile(data, NombreDescarga);
+    } else {
+     
+      swal.fire({
+        title: NombreDescarga  ,
+        icon: 'warning',
+        text: 'No se encontraron registros',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
     }
   }
 

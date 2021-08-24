@@ -15,6 +15,7 @@ import { ComplementaryCustomersComponent } from "../complementary-customers/comp
 import { analyzeFileForInjectables, CompileShallowModuleMetadata } from "@angular/compiler";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ExcelService } from '../../services/excel.service';
+import swal from 'sweetalert2';
 
 
 //import { Validaciones } from 'src/app/utils/validacionesRegex'
@@ -2818,13 +2819,16 @@ prueba = []
   exportListToExcel(variable){
     let resultado:any = []
     let NombreDescarga
+    let nombre
     if(this.idGrupo == 2){
       NombreDescarga = "Lista de coincidencias de colaborador"
-
+      nombre = "colaborador"
     }else if(this.idGrupo == 3){
       NombreDescarga = "Lista de coincidencias de proveedor"
+      nombre = "proveedor"
     }else{
       NombreDescarga = "Lista de coincidencias de contraparte"
+      nombre = "contraparte"
     }
     
     resultado = this.newArrayResult2
@@ -2869,6 +2873,24 @@ prueba = []
         });
         console.log("la data", data)
         this.excelService.exportAsExcelFile(data, this.nombreExport());
+    }
+    else {
+     
+      swal.fire({
+        title: 'Lista de coincidencias ' + nombre ,
+        icon: 'warning',
+        text: 'No se encontraron registros',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
     }
   }
 

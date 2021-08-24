@@ -142,6 +142,7 @@ import { ModalProfileMaintenanceComponent } from './modal-profile-maintenance/mo
 import { ConfigDemandaComponent } from './config-demanda/config-demanda.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ContraparteComponent } from './components/responsable/contraparte/contraparte.component';
+import { TemplateRGComponent } from './components/responsable/templates/template-rg/template-rg.component';
 
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
@@ -269,6 +270,7 @@ import { ContraparteComponent } from './components/responsable/contraparte/contr
     ReportSbsInfoComplementaryComponent,
     ConfigDemandaComponent,
     ContraparteComponent,
+    TemplateRGComponent,
    
     //Validaciones
 //fin de formularios antiguos      
