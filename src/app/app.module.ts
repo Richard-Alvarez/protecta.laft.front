@@ -143,6 +143,7 @@ import { ConfigDemandaComponent } from './config-demanda/config-demanda.componen
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ContraparteComponent } from './components/responsable/contraparte/contraparte.component';
 import { TemplateRGComponent } from './components/responsable/templates/template-rg/template-rg.component';
+import { TemplateC3Component } from './components/responsable/templates/template-c3/template-c3.component';
 
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
@@ -271,6 +272,7 @@ import { TemplateRGComponent } from './components/responsable/templates/template
     ConfigDemandaComponent,
     ContraparteComponent,
     TemplateRGComponent,
+    TemplateC3Component,
    
     //Validaciones
 //fin de formularios antiguos      
