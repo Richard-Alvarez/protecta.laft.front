@@ -685,11 +685,26 @@ setDataCheckboxApproved(item,index,checked: boolean){
      this.arrCheck.splice(index, 1);
       this.arrCheck.sort();
   }
-  //console.log("item" ,index ,item.arrUsuariosForm)
-
-  //this.arrCheck.push(item)
+  
 
   console.log("arrCheckbox",this.arrCheck)
+  
+}
+
+
+categoriaSelectedArray = [];
+onCategoriaPressed(categoriaSelected: any, checked: boolean){
+  if (checked) { //Si el elemento fue seleccionado
+    //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
+    this.categoriaSelectedArray.push(categoriaSelected);
+  } else { //Si el elemento fue deseleccionado
+    //Removemos la categoría seleccionada del arreglo de categorías seleccionadas
+    this.categoriaSelectedArray.splice(this.categoriaSelectedArray.indexOf(categoriaSelected), 1);
+  }
+  console.log("this.categoriaSelectedArray",this.categoriaSelectedArray)
+}
+
+descargarReporte(){
   
 }
 

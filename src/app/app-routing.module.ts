@@ -73,6 +73,8 @@ import { getMatFormFieldPlaceholderConflictError } from '@angular/material';
 import { TestResponsableComponent } from './../app/components/test-responsable/test-responsable/test-responsable.component';
 import { ConfigDemandaComponent } from './../app/config-demanda/config-demanda.component';
 import { TemplateRGComponent } from './../app/components/responsable/templates/template-rg/template-rg.component';
+import { TemplateC3Component } from './../app/components/responsable/templates/template-c3/template-c3.component';
+
 //fin formularios antiguos
 
 const routes: Routes = [
@@ -144,8 +146,9 @@ const routes: Routes = [
   { path: 'asign-profile-reg', component: AsignProfileRegComponent},
   { path: 'recurse-profile', component: RecurseProfile},
   { path: 'config-demanda', component: ConfigDemandaComponent},
-  { path: 'rg', component: TemplateRGComponent}
-
+  { path: 'rg', component: TemplateRGComponent},
+  { path: 'C3', component: TemplateC3Component}
+  
 
 
 ];
