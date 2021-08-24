@@ -178,7 +178,7 @@
                                                                         </div>
                                                                         <div class="col-lg-1 pt-2" style="">
                                                                             <input type="checkbox" [(ngModel)]="arrCheckbox[index]"
-                                                                            (change)="setDataCheckboxApproved(item,index)"
+                                                                            (change)="setDataCheckboxApproved(item,index,$event.target.checked)"
                                                                                style="height: 30px;width: 30px;"
                                                                                class="form-check-input" value="">
                                                                         </div>
