@@ -62,6 +62,7 @@ class Rutas {
   public urlGetAddressList: string = this.base + "monitoreoSenales/GetAddressList";
   public urlUpdateUnchecked: string = this.base + "monitoreoSenales/UpdateUnchecked";
   public urlFillReport: string = this.base + "monitoreoSenales/FillReport";
+  public urlGetAlertReportList: string = this.base + "monitoreoSenales/GetAlertReportList";
   // public urldownloadPDF: string = this.base + "monitoreoSenales/DownloadPDF";
   public urlCarga: string = this.base + "carga";
   public urlRegistro: string = this.base + "registro";

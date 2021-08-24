@@ -96,7 +96,7 @@ export class PendienteInformeComponent implements OnInit {
   }
 
   getArray(state,regimen){
-     console.log("this.arrResponsable11111111111111", this.arrResponsable)
+    //console.log("this.arrResponsable11111111111111", this.arrResponsable)
     return this.arrResponsable;
   }
 
@@ -674,6 +674,12 @@ async getArchivoSustento(item){
   } catch (error) {
     console.error("error en descargar: ",error)
   }
+}
+arrCheckbox:any = []
+setDataCheckboxApproved(item,index){
+  console.log("item",item)
+  console.log("arrCheckbox",this.arrCheckbox)
+  
 }
  
 }
