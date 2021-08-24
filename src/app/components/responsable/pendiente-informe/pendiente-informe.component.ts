@@ -677,10 +677,17 @@ async getArchivoSustento(item){
 }
 arrCheckbox:any = []
 arrCheck:any = []
-setDataCheckboxApproved(item,index){
-  console.log("item" ,index ,item.arrUsuariosForm)
+setDataCheckboxApproved(item,index,checked: boolean){
+  console.log("checked",checked)
+  if(checked){
+    this.arrCheck.push(item)
+  }else{
+     this.arrCheck.splice(index, 1);
+      this.arrCheck.sort();
+  }
+  //console.log("item" ,index ,item.arrUsuariosForm)
 
-  this.arrCheck.push(item)
+  //this.arrCheck.push(item)
 
   console.log("arrCheckbox",this.arrCheck)
   
