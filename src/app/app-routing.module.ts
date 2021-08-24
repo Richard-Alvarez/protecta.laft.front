@@ -72,6 +72,7 @@ import { RecurseProfile } from './pages/recurse-profile/recurse-profile.componen
 import { getMatFormFieldPlaceholderConflictError } from '@angular/material';
 import { TestResponsableComponent } from './../app/components/test-responsable/test-responsable/test-responsable.component';
 import { ConfigDemandaComponent } from './../app/config-demanda/config-demanda.component';
+import { TemplateRGComponent } from './../app/components/responsable/templates/template-rg/template-rg.component';
 //fin formularios antiguos
 
 const routes: Routes = [
@@ -142,7 +143,8 @@ const routes: Routes = [
   { path: 'email-profile', component: EmailProfileComponent },
   { path: 'asign-profile-reg', component: AsignProfileRegComponent},
   { path: 'recurse-profile', component: RecurseProfile},
-  { path: 'config-demanda', component: ConfigDemandaComponent}
+  { path: 'config-demanda', component: ConfigDemandaComponent},
+  { path: 'rg', component: TemplateRGComponent}
 
 
 
