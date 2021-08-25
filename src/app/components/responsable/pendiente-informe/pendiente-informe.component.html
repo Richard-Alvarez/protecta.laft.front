@@ -184,7 +184,7 @@
                                                                                class="form-check-input" value="">
                                                                         </div> -->
                                                                         <div class="col-lg-1 pt-2" style="">
-                                                                            <input type="checkbox" [(ngModel)]="arrCheckbox[index]"
+                                                                            <input type="checkbox"
                                                                             (change)="onCategoriaPressed(item,$event.target.checked)"
                                                                                style="height: 30px;width: 30px;"
                                                                                class="form-check-input" value="">
@@ -405,7 +405,7 @@
                         Descargar Reportes
                     </button>
 
-                    <app-template-rg id="exportContent"  [parent]="this" [obj]="this.categoriaSelectedArray" [nombre]="Nombre" [perfil]="Perfil" style="display: none"></app-template-rg>
+                    <app-template-rg id="exportContent"  [parent]="this" [obj]="categoriaSelectedArray" [nombre]="Nombre" [perfil]="Perfil" style="display: none"></app-template-rg>
 
                 </div>
             </div>

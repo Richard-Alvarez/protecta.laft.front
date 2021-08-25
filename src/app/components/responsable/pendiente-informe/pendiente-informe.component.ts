@@ -713,8 +713,29 @@ onCategoriaPressed(categoriaSelected: any, checked: boolean){
   this.Nombre = this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO;
   this.Perfil =this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO;
   this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
-
+  this.DataArray()
 }
+arrayData :any =[]
+DataArray(){
+  this.arrayData =[]
+  //this.arrayData
+  this.categoriaSelectedArray.forEach((t,inc) => {
+    t.arrUsuariosForm.forEach(arrUsuario => {
+      console.log("la data que enviara 1111111",arrUsuario)
+      let data:any = {}
+       data.Alerta = t.SNOMBRE_ALERTA
+       data.NombreCompleto = arrUsuario.NOMBRECOMPLETO
+       data.Cargo = arrUsuario.SCARGO
+       data.Respuesta = arrUsuario.SRESPUESTA
+       this.arrayData.push(data)
+
+    });
+      
+  });
+  console.log("la data que enviara",this.arrayData)
+}
+
+
 
 
 Export2Doc(element, filename = ''){
