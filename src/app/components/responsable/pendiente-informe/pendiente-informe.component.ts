@@ -696,6 +696,7 @@ setDataCheckboxApproved(item,index,checked: boolean){
 
 
 categoriaSelectedArray = [];
+Alerta:string = '';
 Nombre:string = '';
 Perfil:string = '';
 Respuesta:string = '';
@@ -712,16 +713,16 @@ onCategoriaPressed(categoriaSelected: any, checked: boolean){
   console.log("this.categoriaSelectedArray 2",this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO)
   this.Nombre = this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO;
   this.Perfil =this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO;
-  this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
+ // this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
   this.DataArray()
 }
 arrayData :any =[]
 DataArray(){
   this.arrayData =[]
-  //this.arrayData
+  
   this.categoriaSelectedArray.forEach((t,inc) => {
     t.arrUsuariosForm.forEach(arrUsuario => {
-      console.log("la data que enviara 1111111",arrUsuario)
+      
       let data:any = {}
        data.Alerta = t.SNOMBRE_ALERTA
        data.NombreCompleto = arrUsuario.NOMBRECOMPLETO
@@ -733,8 +734,21 @@ DataArray(){
       
   });
   console.log("la data que enviara",this.arrayData)
+  
 }
 
+
+Export(element, filename = ''){
+  this.Alerta = '';
+  this.Nombre = '';
+  this.Perfil ='';
+  this.Respuesta ='';
+  this.arrayData.forEach(data => {
+    this.Alerta =data.Alerta;
+    this.Respuesta =data.Respuesta;
+    this.Export2Doc(element,data.Alerta)
+  });
+}
 
 
 
