@@ -184,7 +184,7 @@
                                                                                class="form-check-input" value="">
                                                                         </div> -->
                                                                         <div class="col-lg-1 pt-2" style="">
-                                                                            <input type="checkbox" [(ngModel)]="arrCheckbox[index]"
+                                                                            <input type="checkbox"
                                                                             (change)="onCategoriaPressed(item,$event.target.checked)"
                                                                                style="height: 30px;width: 30px;"
                                                                                class="form-check-input" value="">
@@ -401,9 +401,12 @@
             <div class="row pb-3">
                 <div class="col-10"></div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-warning text-white " *ngIf="STIPO_USUARIO==='OC'" (click)="descargarReporte()">
+                    <button type="button" class="btn btn-warning text-white " *ngIf="STIPO_USUARIO==='OC'" (click)="Export2Doc('exportContent', 'test');">
                         Descargar Reportes
                     </button>
+
+                    <app-template-rg id="exportContent"  [parent]="this" [obj]="categoriaSelectedArray" [nombre]="Nombre" [perfil]="Perfil" style="display: none"></app-template-rg>
+
                 </div>
             </div>
             

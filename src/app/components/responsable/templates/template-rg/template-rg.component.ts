@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-informe.component';
 
 @Component({
   selector: 'app-template-rg',
@@ -9,11 +10,21 @@ export class TemplateRGComponent implements OnInit {
 
   USU_NOMBRE_COMPLETO:string = ''
   SPERFIL_NAME_USUARIO:string = ''
+  NombreBoton:string = 'Export as Doc'
   rpta711:string = ''
+  @Input() obj:any = {}
+  @Input() nombre:string
+  @Input() perfil:string
+  @Input() parent:PendienteInformeComponent
 
   constructor() { }
 
   ngOnInit() {
+    this.NombreBoton = 'Export as Doc'
+    this.USU_NOMBRE_COMPLETO = this.obj.arrUsuariosForm[0].arrUsuariosForm[0].NOMBRECOMPLETO
+    this.SPERFIL_NAME_USUARIO =  this.obj.arrUsuariosForm[0].arrUsuariosForm[0].SCARGO
+   console.log("this.categoriaSelectedArray 1111111111111",this.USU_NOMBRE_COMPLETO )
+  console.log("this.categoriaSelectedArray 222222222222",this.SPERFIL_NAME_USUARIO)
   }
 
 
