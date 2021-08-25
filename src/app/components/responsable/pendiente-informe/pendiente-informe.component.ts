@@ -698,6 +698,7 @@ setDataCheckboxApproved(item,index,checked: boolean){
 categoriaSelectedArray = [];
 Nombre:string = '';
 Perfil:string = '';
+Respuesta:string = '';
 onCategoriaPressed(categoriaSelected: any, checked: boolean){
   if (checked) { //Si el elemento fue seleccionado
     //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
@@ -711,6 +712,7 @@ onCategoriaPressed(categoriaSelected: any, checked: boolean){
   console.log("this.categoriaSelectedArray 2",this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO)
   this.Nombre = this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO;
   this.Perfil =this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO;
+  this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
 
 }
 
