@@ -7,6 +7,7 @@ import { CoreService } from '../../services/core.service';
 import { CustomerManagerComponent } from '../customer-manager/customer-manager.component';
 import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
+import { ExcelService } from '../../services/excel.service';
 @Component({
   selector: 'app-reinforced-customers',
   templateUrl: './reinforced-customers.component.html',
@@ -39,6 +40,7 @@ export class ReinforcedCustomersComponent implements OnInit {
     private core: CoreService,
     private router: Router,
     private spinner: NgxSpinnerService,
+    private excelService: ExcelService,
   ) { }
 
   async ngOnInit() {
@@ -551,4 +553,77 @@ async getSwalOptionClient(data,dataService,indice){
      return ""
     }
   }
+
+  exportListToExcel(variable){
+    let resultado:any = []
+    let NombreDescarga
+    if(variable == 1){
+      resultado = this.getBuscarClient()
+      NombreDescarga = "Cliente reforzado"
+    }else{
+      resultado = this.arrCoincidencias
+      NombreDescarga = "Cliente reforzado con coincidencias"
+    }
+    
+    console.log("resultado", resultado)
+    let Newresultado:any = []
+    let resultadoFinal:any = []
+    if (resultado!= null && resultado.length > 0) {
+      for(let i =0; i< resultado.length;i++){
+        
+        Newresultado.push(resultado[i].arrClientesGC)
+       }
+       for(let index = 0 ;index < Newresultado.length; index++){
+        if(Newresultado[index].length > 1){
+          Newresultado[index].forEach(element => {
+            
+            resultadoFinal.push(element)
+          });
+        }else{
+          resultadoFinal.push(Newresultado[index][0])
+        }
+     }
+
+      
+      console.log("Newresultado", Newresultado)
+      console.log("resultadoFinal", resultadoFinal)
+
+      let data = []
+      resultadoFinal.forEach(t => {
+       
+        let _data = {
+          "Tipo Documento" : t.STIPOIDEN.substr(0,3),
+          "N° Documento" : t.SNUM_DOCUMENTO,
+          "Nombre / Razón Social" : t.SNOM_COMPLETO,
+          "Regimen" : t.SDESREGIMEN
+           
+        }
+        t.arrListas.forEach(element => {
+          _data[element.SDESTIPOLISTA] = element.SDESESTADO
+        });
+        //console.log("la data1111", t.arrListas)
+        data.push(_data);
+        });
+        console.log("la data", data)
+        this.excelService.exportAsExcelFile(data, NombreDescarga);
+    } else {
+     
+      swal.fire({
+        title: NombreDescarga  ,
+        icon: 'warning',
+        text: 'No se encontraron registros',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
+    }
+  }
+
 }

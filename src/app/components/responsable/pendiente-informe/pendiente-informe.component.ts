@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { truncateSync } from 'fs';
+import { TemplateRGComponent } from '../templates/template-rg/template-rg.component';
 
 @Component({
   selector: 'app-pendiente-informe',
@@ -31,6 +32,8 @@ export class PendienteInformeComponent implements OnInit {
     listFilesInform:any = [] 
     listFilesInformName:any = [] 
     NPERIODO_PROCESO:number
+
+  public templateRG: TemplateRGComponent;
   @Input() regimen:any = {}
   @Input() arrResponsable:any = []
   @Input() statePendienteInforme:any = {}
@@ -96,7 +99,7 @@ export class PendienteInformeComponent implements OnInit {
   }
 
   getArray(state,regimen){
-     console.log("this.arrResponsable11111111111111", this.arrResponsable)
+    //console.log("this.arrResponsable11111111111111", this.arrResponsable)
     return this.arrResponsable;
   }
 
@@ -675,5 +678,112 @@ async getArchivoSustento(item){
     console.error("error en descargar: ",error)
   }
 }
+arrCheckbox:any = []
+arrCheck:any = []
+setDataCheckboxApproved(item,index,checked: boolean){
+  console.log("checked",checked)
+  if(checked){
+    this.arrCheck.push(item)
+  }else{
+     this.arrCheck.splice(index, 1);
+      this.arrCheck.sort();
+  }
+  
+
+  console.log("arrCheckbox",this.arrCheck)
+  
+}
+
+
+categoriaSelectedArray = [];
+Alerta:string = '';
+Nombre:string = '';
+Perfil:string = '';
+Respuesta:string = '';
+onCategoriaPressed(categoriaSelected: any, checked: boolean){
+  if (checked) { //Si el elemento fue seleccionado
+    //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
+    this.categoriaSelectedArray.push(categoriaSelected);
+  } else { //Si el elemento fue deseleccionado
+    //Removemos la categoría seleccionada del arreglo de categorías seleccionadas
+    this.categoriaSelectedArray.splice(this.categoriaSelectedArray.indexOf(categoriaSelected), 1);
+  }
+  console.log("this.categoriaSelectedArray",this.categoriaSelectedArray)
+  console.log("this.categoriaSelectedArray 1",this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO)
+  console.log("this.categoriaSelectedArray 2",this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO)
+  this.Nombre = this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO;
+  this.Perfil =this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO;
+ // this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
+  this.DataArray()
+}
+arrayData :any =[]
+DataArray(){
+  this.arrayData =[]
+  
+  this.categoriaSelectedArray.forEach((t,inc) => {
+    t.arrUsuariosForm.forEach(arrUsuario => {
+      
+      let data:any = {}
+       data.Alerta = t.SNOMBRE_ALERTA
+       data.NombreCompleto = arrUsuario.NOMBRECOMPLETO
+       data.Cargo = arrUsuario.SCARGO
+       data.Respuesta = arrUsuario.SRESPUESTA
+       this.arrayData.push(data)
+
+    });
+      
+  });
+  console.log("la data que enviara",this.arrayData)
+  
+}
+
+
+Export(element, filename = ''){
+  this.Alerta = '';
+  this.Nombre = '';
+  this.Perfil ='';
+  this.Respuesta ='';
+  this.arrayData.forEach(data => {
+    this.Alerta =data.Alerta;
+    this.Respuesta =data.Respuesta;
+    this.Export2Doc(element,data.Alerta)
+  });
+}
+
+
+
+Export2Doc(element, filename = ''){
+  var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+  var postHtml = "</body></html>";
+  var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+
+  var blob = new Blob(['\ufeff', html],{
+      type: 'application/msword'
+  });
+
+  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
+
+  filename = filename?filename+'.doc': 'document.doc';
+
+  var downloadLink = document.createElement("a");
+
+  document.body.appendChild(downloadLink);
+
+  if(navigator.msSaveOrOpenBlob){
+      navigator.msSaveOrOpenBlob(blob, filename);
+  }else{
+      downloadLink.href = url;
+
+      downloadLink.download = filename;
+
+      downloadLink.click();
+  }
+
+  document.body.removeChild(downloadLink);
+
+
+}
+
+
  
 }

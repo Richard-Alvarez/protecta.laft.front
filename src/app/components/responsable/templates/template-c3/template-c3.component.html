@@ -1,0 +1,107 @@
+<p>template-c3 works!</p>
+<div id="exportContent">
+    <div class="container" style="padding: 0px 200px;">
+      <p> 
+        <strong style="font-family: arial Narrow, serif;">Grupo de Señales de alerta - Renta Privada</strong>
+      </p>
+      <!-- <p> 
+        <strong> {{USU_NOMBRE_COMPLETO}} Richard</strong>
+      </p>
+      <p>
+        <strong> {{SPERFIL_NAME_USUARIO}} Analista</strong>
+      </p>-->
+      
+      <table border="1" cellspacing="0" cellpadding="0" align="left" width="550">
+        <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+          <tbody>
+            <tr>
+              <td width="50" style="padding-left: 10px;">
+                <p>
+                  <strong>CÓDIGO</strong>
+                </p>
+              </td>
+              <td width="380" style="padding-left: 10px;">
+                <p>
+                  <strong>SEÑAL DE ALERTA</strong>
+                </p>
+              </td>
+              <td width="80">
+                <p align="center">
+                  <strong>PRODUCTO</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td width="70">
+                <p align="center">
+                  C3
+                </p>
+              </td>
+              <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                <p>
+                    Cliente domiciliado en / o modifica su domicilio a: 
+                    países considerados paraísos fiscales o países donde 
+                    existe conocida actividad terrorista, considerados como 
+                    no cooperantes por el GAFI o sujetos a sanciones OFAC.
+                </p>
+              </td>
+              <td width="113">
+                <p style="padding-left: 20px; text-align: center;">todos los productos</p>
+              </td>
+            </tr>
+          </tbody>
+        </FONT>
+      </table>
+    </div>
+    <div>
+      <br>
+      <p>
+        <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta C3</strong>
+      </p>
+      <p style="font-family: arial Narrow, serif; text-align: justify"> La compañía tiene identificado a los países 
+        donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.</p>
+        <p>
+            <strong style="font-family: arial Narrow, serif; text-align: justify">Consulta en Base de Datos:</strong>
+        </p>
+      <dl>
+        <dt style="font-family: arial Narrow, serif; text-align: justify">
+            a) Se solicita a TI la búsqueda de información.</dt>
+        <dt style="font-family: arial Narrow, serif; text-align: justify">
+            b) El área de TI remite los resultados de la búsqueda realizada.</dt>
+        <dt style="font-family: arial Narrow, serif; text-align: justify">
+            c) Se revisa la información proporcionada.</dt>
+        </dl>
+        <br>
+        <strong style="font-family: arial Narrow, serif;">Resultados:</strong>
+        <ul>
+        <li style="font-family: arial Narrow, serif; text-align: justify"> {{rpta711}} se identificaron clientes domiciliados 
+            en/o que han modificado su domicilio a: países considerados paraísos fiscales o países donde existe conocida 
+            actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+        </li>
+    </ul>   
+
+        <strong style="font-family: arial Narrow, serif;">Consulta a las áreas: Comercial masivos y Operaciones:</strong>
+        <br>
+        <dl>
+            <dt style="font-family: arial Narrow, serif; text-align: justify">
+            a) Se solicita al área Comercial Masivos que confirme si se han presentado/identificado las siguientes situaciones: 
+            </dt>
+            <dd style="font-family: arial Narrow, serif; text-align: justify"> ● Cliente domiciliado en/o modifica su domicilio 
+                a: países considerados paraísos fiscales o países donde existe conocida actividad terrorista, considerados como 
+                no cooperantes por el GAFI o sujetos a sanciones OFAC.
+            </dd>
+            
+            <dt style="font-family: arial Narrow, serif; text-align: justify">
+            b) Se solicita al área de Operaciones los Endosos de Renta privada (Renta Total/Vida con Renta), con la finalidad 
+            de identificar actualizaciones respecto a la residencia de los clientes de renta privada.
+            </dt>
+            <dt style="font-family: arial Narrow, serif; text-align: justify">
+            c) Se revisa la información proporcionada.
+            </dt>
+        </dl>  
+    </div>
+  
+  <div class="text-center pt-5">
+    <button class="" (click)="Export2Doc('exportContent', 'test');">Export as Doc</button>
+  </div>
+

@@ -8,6 +8,7 @@ import { CustomerManagerComponent } from '../customer-manager/customer-manager.c
 import { NgxSpinnerService } from "ngx-spinner";
 import { title } from 'process';
 import { ExcelService } from '../../services/excel.service';
+import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-pre-reinforced-customers',
@@ -572,7 +573,23 @@ export class PreReinforcedCustomersComponent implements OnInit {
         data.push(_data);
         });
         console.log("la data", data)
-        this.excelService.exportAsExcelFile(data, "Registro de usuarios por perfil");
+        this.excelService.exportAsExcelFile(data, "Cliente revizado");
+    }else {
+      swal.fire({
+        title: 'Gestor de clientes',
+        icon: 'warning',
+        text: 'No hay registros',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
     }
   }
 
@@ -611,10 +628,11 @@ export class PreReinforcedCustomersComponent implements OnInit {
       //this.excelService.exportAsExcelFile(data, "Registro de usuarios por perfil");
     }
     else {
+     
       swal.fire({
-        title: 'Usuarios por perfil',
+        title: 'Cliente revisado '  ,
         icon: 'warning',
-        text: 'Debe seleccionar un perfil',
+        text: 'No se encontraron registros',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar',
@@ -627,7 +645,5 @@ export class PreReinforcedCustomersComponent implements OnInit {
       })
       return
     }
-    this.core.loader.hide();
   }
-
 }

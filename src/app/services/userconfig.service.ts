@@ -847,6 +847,19 @@ export class UserconfigService {
 
   }
 
+  GetAlertReportList(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetAlertReportList, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+
+  }
+
   getListNCAlert(data): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

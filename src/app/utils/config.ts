@@ -1,11 +1,20 @@
 class Rutas {
 
+<<<<<<< HEAD
   //private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
-  //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  private base: string = 'http://190.216.170.173/ApiLAFT/api/';
+=======
+  //private base: string = 'http://localhost:5001/api/'; 
+  //private base: string = 'http://localhost:5000/api/'; //docker
+
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+    private base: string = 'http://190.216.170.173/ApiLAFT/api/';
+>>>>>>> 1132f371fac521a3d4f19a70b4b775ab4ec3315a
  
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
   //private base: string = 'https://soatservicios.protectaseurity.pe/ApiLAFT/api/';
@@ -62,6 +71,7 @@ class Rutas {
   public urlGetAddressList: string = this.base + "monitoreoSenales/GetAddressList";
   public urlUpdateUnchecked: string = this.base + "monitoreoSenales/UpdateUnchecked";
   public urlFillReport: string = this.base + "monitoreoSenales/FillReport";
+  public urlGetAlertReportList: string = this.base + "monitoreoSenales/GetAlertReportList";
   // public urldownloadPDF: string = this.base + "monitoreoSenales/DownloadPDF";
   public urlCarga: string = this.base + "carga";
   public urlRegistro: string = this.base + "registro";

@@ -7,12 +7,13 @@
                     Fecha</th>
                 <th style="text-align: center;justify-content: center;">
                     Usuario</th>
+                    <th style="text-align: center;justify-content:center;">
+                        Estado
+                    </th>
                 <th style="text-align: center;justify-content: center;">
                     Comentario
                 </th>
-                <th style="text-align: center;justify-content:center;">
-                    Estado
-                </th>
+               
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,10 @@
                     {{chat.DFECHA_REGISTRO}}</td>
                 <td class="text-center" style="font-size: 15px;">
                     {{chat.NOMBRECOMPLETO}}</td>
+                    <td class="text-center" style="font-size: 15px;">
+                        <!-- {{chat.SESTADO}} -->
+                        Pendiente
+                    </td>
                 <td class="" style="width: 600px;">
                     <div class="arrow_box_oc {{attachFileStyle(chat)}} ">
                        <div class="text-right">
@@ -40,8 +45,7 @@
                     </div>
     
                 </td>
-                <td class="" style="font-size: 15px;">
-                    {{chat.SESTADO}}</td>
+               
             </tr>
         </tbody>
     </table>
