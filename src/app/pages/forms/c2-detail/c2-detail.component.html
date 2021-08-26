@@ -2094,7 +2094,47 @@
                                                         <tbody style="font-size: 12px;">
                                                             <h4 class="TitleLine" style="margin-top: 0px;">Datos de la Poliza</h4>
                                                             <tr class="k" style="color: rgba(38, 41, 109, 0.6); font-family: 'Roboto', sans-serif; background-color: transparent;">
-                                                                <th scope="col" style="width: 250px">Planilla</th>
+                                                                <th scope="col" style="width: 250px">Tipo de Cliente</th>
+                                                                <th scope="col" style="text-align: center;">Fecha de Emisión</th>
+                                                                <th scope="col" style="text-align: center;">Inicio de Vigencia</th>
+                                                                <th scope="col" style="text-align: center;">Fin de Vigencia</th>
+                                                            </tr>
+                                                        
+                                                            <tr style="background-color:	#e0ffff;">
+                                                                <td scope="col" style="width: 250px">{{item.SPRODUCTO}}</td>
+                                                                <td scope="col" class="text-center" >{{item.FEC_PAGO}}</td>
+                                                                <td scope="col" class="text-center">{{item.DFEC_INI_POLIZA}}</td>
+                                                                <td scope="col" class="text-center">{{item.DFEC_FIN_POLIZA}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div *ngIf="getValidaCabeceraPlaca(99)" class="table-responsive">
+                                                    <table class="table table-striped table-sm">
+                                                        <tbody style="font-size: 12px;">
+                                                            <h4 class="TitleLine" style="margin-top: 0px;">Datos de la Poliza</h4>
+                                                            <tr class="k" style="color: rgba(38, 41, 109, 0.6); font-family: 'Roboto', sans-serif; background-color: transparent;">
+                                                                <th scope="col" style="width: 250px">Tipo de Cliente</th>
+                                                                <th scope="col" style="text-align: center;">Fecha de Emisión</th>
+                                                                <th scope="col" style="text-align: center;">Inicio de Vigencia</th>
+                                                                <th scope="col" style="text-align: center;">Fin de Vigencia</th>
+                                                            </tr>
+                                                        
+                                                            <tr style="background-color:	#e0ffff;">
+                                                                <td scope="col" style="width: 250px">{{item.SPRODUCTO}}</td>
+                                                                <td scope="col" class="text-center" >{{item.FEC_PAGO}}</td>
+                                                                <td scope="col" class="text-center">{{item.DFEC_INI_POLIZA}}</td>
+                                                                <td scope="col" class="text-center">{{item.DFEC_FIN_POLIZA}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-sm">
+                                                        <tbody style="font-size: 12px;">
+                                                            <h4 class="TitleLine" style="margin-top: 0px;">Datos de la Poliza</h4>
+                                                            <tr class="k" style="color: rgba(38, 41, 109, 0.6); font-family: 'Roboto', sans-serif; background-color: transparent;">
+                                                                <th scope="col" style="width: 250px">Tipo de Cliente</th>
                                                                 <th scope="col" style="text-align: center;">Fecha de Emisión</th>
                                                                 <th scope="col" style="text-align: center;">Inicio de Vigencia</th>
                                                                 <th scope="col" style="text-align: center;">Fin de Vigencia</th>
