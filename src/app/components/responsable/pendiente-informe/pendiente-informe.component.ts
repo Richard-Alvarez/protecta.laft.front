@@ -34,10 +34,7 @@ export class PendienteInformeComponent implements OnInit {
     listFilesInformName:any = [] 
     NPERIODO_PROCESO:number
     
-    Alerta
-    Nombre
-    Perfil
-    Respuesta
+    
 
   public templateRG: TemplateRGComponent;
   @Input() regimen:any = {}
@@ -845,6 +842,12 @@ setTimeout(function(){
 
 
 arrayDataSenal= []
+Alerta:string = ''
+Nombre:string = ''
+Perfil:string = ''
+Respuesta:string = ''
+RegimenPendiente:number = 0
+
 DescargarReporte(item){
   debugger
   this.arrayDataSenal= []
@@ -852,6 +855,7 @@ DescargarReporte(item){
   this.Perfil = ''
   this.Respuesta = ''
   this.Alerta  = ''
+  this.RegimenPendiente = 0
   console.log("itemm",item)
 
     console.log("dataItem",item.arrUsuariosForm)
@@ -869,6 +873,7 @@ DescargarReporte(item){
   this.Perfil =this.arrayDataSenal[0].Cargo;
   this.Respuesta = (this.arrayDataSenal[0].Respuesta).toLowerCase()
   this.Alerta = this.arrayDataSenal[0].Alerta
+  this.RegimenPendiente = item.NREGIMEN
   
   
   this.Export2Doc("exportContent",this.Alerta)

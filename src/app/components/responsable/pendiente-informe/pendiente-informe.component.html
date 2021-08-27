@@ -416,8 +416,19 @@
 
                 </div>
             </div>
+
+        </div>
+
+        <div *ngIf="this.RegimenPendiente ==1">
             <app-template-rg  [parent]="this" [Nombre]="Nombre" 
-                        [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-rg>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-rg>
+        </div>
+
+        <div *ngIf="this.Alerta=='S2' && this.RegimenPendiente==2">
+            <app-template-s2  [parent]="this" [Nombre]="Nombre" 
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-s2>
+        </div>
+          
             
         </div>
 
@@ -434,4 +445,4 @@
         </div>
     </div>
     
-</div>
+
