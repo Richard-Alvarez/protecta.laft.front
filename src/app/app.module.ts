@@ -144,12 +144,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ContraparteComponent } from './components/responsable/contraparte/contraparte.component';
 import { TemplateRGComponent } from './components/responsable/templates/template-rg/template-rg.component';
 import { TemplateC3Component } from './components/responsable/templates/template-c3/template-c3.component';
-<<<<<<< HEAD
-import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-policy.component';
-=======
 import { TemplateS2Component } from './components/responsable/templates/template-s2/template-s2.component';
 import { TemplateC2Component } from './components/responsable/templates/template-c2/template-c2.component';
->>>>>>> 394e266cf1f8cabd17b5f8295dd5152d17ac0c31
+import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-policy.component';
+
 
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
@@ -279,12 +277,10 @@ import { TemplateC2Component } from './components/responsable/templates/template
     ContraparteComponent,
     TemplateRGComponent,
     TemplateC3Component,
-<<<<<<< HEAD
-    C2InfoPolicyComponent,
-=======
     TemplateS2Component,
     TemplateC2Component,
->>>>>>> 394e266cf1f8cabd17b5f8295dd5152d17ac0c31
+    C2InfoPolicyComponent,
+
    
     //Validaciones
 //fin de formularios antiguos      
