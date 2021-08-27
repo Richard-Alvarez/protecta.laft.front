@@ -1,0 +1,592 @@
+<!-- <p>c2-info-policy works!</p> -->
+
+<!-- <div class="containerPadre idDetallePoliza" style="display:none;"> -->
+    <div class="row quitarMarginRow colorTemplate">
+        <div class="col-md-3">
+            <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
+            <div class="card CardFlotante" style="background-color:white; display: inline-grid;">
+                <div class="card-body" style="padding-left: 15px;padding-right: 15px;">
+                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch"></strong></h4>
+                    <p class="card-text textTitle" style=" margin-bottom: 10% !important;">
+                        <span class="spancontent" id="PTitleProd" style="font-size: small !important;"></span>
+                    </p>
+                    <input type="hidden" id="CodigosPoliza" />
+                    <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza"></span></p>
+                    <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif"></span></p>
+                    <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado"></span></p>
+                    <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante"></span></p>
+                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol"></span></p>
+                    <p class="card-text textTitle" id="CardPlaca" style="display:none"><span>Placa</span><span class="spancontent" id="PCardPlaca"></span></p>
+                    <p class="card-text textTitle" id="CardPlanilla" style="display:none"><span>Planilla</span><span class="spancontent" id="PCardPlanilla"></span></p>
+                    <p class="card-text textTitle" id="CardNumCredito" style="display:none"><span>Número de Crédito</span><span class="spancontent" id="PCardNumCred"></span></p>
+                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi"></span></p>
+                    <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig"></span></p>
+                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig"></span></p>
+                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig"></span></p>
+                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda"></span></p>
+                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago"></span></p>
+
+                    <p class="card-text textTitle" style="margin-top:40%">
+                        <a href="http://soat.protecta.com.pe/soat/login.aspx" class="card-link" target="_blank">Ir a SISWEB</a>
+                        <a href="https://efacturacion.protectasecurity.pe/descarga/login" class="card-link" target="_blank">Ir a E-Fact</a>
+                        <a href="https://efacturacion.protectasecurity.pe/descarga/" class="card-link" target="_blank">Ir a E-Fact Descarga</a>
+                        <a href="http://paralifecolombia.com/WebSiteSeguros/Sesion/Salir?Lenght=0" class="card-link" target="_blank">Ir a BELCORP</a>
+                        <a href="http://rentas.protecta.com.pe/ADMNISTRACION/" class="card-link" target="_blank">Ir a Renta Total</a>
+                        <a href="https://www.apeseg.org.pe/consultas-soat/" class="card-link" target="_blank">Ir a APESEG</a>
+                        <a href="https://www.sunarp.gob.pe/ConsultaVehicular/" class="card-link" target="_blank">Ir a SUNARP</a>
+                        <a href="https://pagoefectivo.pe/pe" class="card-link" target="_blank">Ir a Pago Efectivo</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9" style="padding-right: 0px !important; margin-bottom: 3% !important;">
+            <div id="Template" style="background: white;">
+                <div class="Pestañas">
+                    <ul class="nav nav-tabs nav-justified" id="TabsDetalle">
+                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo">Información</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div id="pestInfo" class="tab-pane fade in active">
+                        <div class="PaddingPestana">
+                            <div id="InfoGenerales" style="display:none;">
+                                <h4 class="title-grid"><strong>Información de la Póliza</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PGenIniVig"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Fin  de Vigencia</span><span class="spancontent" id="PGenFinVig"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Tipo de negocio</span><span class="spancontent" id="PGenTipNeg"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Coaseguro</span><span class="spancontent" id="PGenCoaseg"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Tipo de Póliza</span><span class="spancontent" id="PGenTipPol"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Tipo de Facturación</span><span class="spancontent" id="PGenTipFact"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Tipo de Reaseguro</span><span class="spancontent" id="PGenTipReaseg"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Tipo de Renovación</span><span class="spancontent" id="PGenTipRenov"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="InfoListaCertificados" style="display:none; margin-top:5%">
+                                <div class="table-responsive">
+                                    
+                                    <table class="table table-hover table-striped" id="TableCertificados" style="width:100% !important" data-page-length="10">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3" class="nobor">
+                                                <th colspan="2" class="supercabecera">Vigencia</th>
+                                                <th colspan="2" class="nobor"></th>
+                                            </tr>
+                                            <tr class="htable headgrid" style="background:transparent;">
+                                                <th class="text-center"># Cert.</th>
+                                                <th class="text-center">Doc. Identidad</th>
+                                                <th class="text-center">Asegurado</th>
+                                                <th class="text-center">Inicio</th>
+                                                <th class="text-center">Fin</th>
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Fecha Anulacion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblCertificados">
+                                            <tr>
+                                                <td class="text-center" colspan="2">No tiene Certificados</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div id="InfoAsegurado" style="display:none;">
+                                <h4 class="title-grid"><strong id="h4Asegurado">Datos del Asegurado</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3" id="DAsegNom">
+                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegEstCivil">
+                                        <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegDocum" style="display:none;">
+                                        <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent" id="PAsegDocum"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegGenero" style="display:none;">
+                                        <p class="card-text textTitle"><span>Género</span><span class="spancontent" id="PAsegGenero"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegFecNac">
+                                        <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent" id="PAsegFecNam"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegCUSPP" style="display:none;">
+                                        <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegIniVigSCTR" style="display:none;">
+                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVigSCTR"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegFinVigSCTR" style="display:none;">
+                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVigSCTR"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3" id="DAsegIniVig" style="display:none;">
+                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVig"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegFinVig" style="display:none;">
+                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVig"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegTipPension" style="display:none;">
+                                        <p class="card-text textTitle"><span>Tipo de Pensión</span><span class="spancontent" id="PAsegTipPension"></span></p>
+                                    </div>
+                                    <div class="col-lg-4" id="DAsegTipRenta" style="display:none;">
+                                        <p class="card-text textTitle"><span>Tipo de Renta</span><span class="spancontent" id="PAsegTipRenta"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3" id="DAsegModalidad" style="display:none;">
+                                        <p class="card-text textTitle"><span>Modalidad</span><span class="spancontent" id="PAsegModalidad"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegAnDif" style="display:none;">
+                                        <p class="card-text textTitle"><span>Años Diferidos</span><span class="spancontent" id="PAsegAnDif"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegMesGarant" style="display:none;">
+                                        <p class="card-text textTitle"><span>Meses Garantizados</span><span class="spancontent" id="PAsegMesGarant"></span></p>
+                                    </div>
+                                    <div class="col-lg-4" id="DAsegMoneda" style="display:none;">
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMoneda"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3" id="DAsegReajTemp" style="display:none;">
+                                        <p class="card-text textTitle"><span>Reajuste Trimestral</span><span class="spancontent" id="PAsegReajTemp"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegPrimDef" style="display:none;">
+                                        <p class="card-text textTitle"><span>Prima Definitiva</span><span class="spancontent" id="PAsegPrimDef"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegPenDef" style="display:none;">
+                                        <p class="card-text textTitle"><span>Pensión Definitiva</span><span class="spancontent" id="PAsegPenDef"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3" id="DAsegMonedaSal" style="display:none;">
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMonedaSal"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegSalario" style="display:none;">
+                                        <p class="card-text textTitle"><span>Salario</span><span class="spancontent" id="PAsegSalario"></span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegTasa" style="display:none;">
+                                        <p class="card-text textTitle"><span>Tasa</span><span class="spancontent" id="PAsegTasa"></span></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="InfoCredito" style="display:none;">
+                                <h4 class="title-grid"><strong>Datos del Crédito</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PCredNum"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Plazo</span><span class="spancontent" id="PCredPlaz"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PCredIniVig"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PCredFinVig"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PCredMoneda"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Cálculo de Prima</span><span class="spancontent" id="PCredCalcPrim"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Monto Inicial</span><span class="spancontent" id="PCredMontInic"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Saldo Insoluto</span><span class="spancontent" id="PCredMontIns"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Cantidad de Cuotas</span><span class="spancontent" id="PCredCuot"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="InfoRentaTotal" style="display:none;">
+                                <h4 class="title-grid"><strong>Datos adicionales</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Fecha de abono</span><span class="spancontent" id="PRTAbono"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Fecha Devengue</span><span class="spancontent" id="PRTDevengue"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Años Temporales</span><span class="spancontent" id="PRTAnTemp"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Años Garantizados</span><span class="spancontent" id="PRTAnGarant"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Prima</span><span class="spancontent" id="PRTPrima"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Pensión Temp. Inicial</span><span class="spancontent" id="PRTPenTemp"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PRTMoneda"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>% Devolución</span><span class="spancontent" id="PRTDevol"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>% Seguro de Vida</span><span class="spancontent" id="PRTSegVida"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>% Seguro de Accidentes</span><span class="spancontent" id="PRTSegAcc"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Diferimiento (años)</span><span class="spancontent" id="PRTDiferi"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>% Ajuste anual</span><span class="spancontent" id="PRTAjuste"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Pensión Escalonada</span><span class="spancontent" id="PRTPensEscal"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Renta Vitalicia</span><span class="spancontent" id="PRTRentaVit"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Gasto Sepelio</span><span class="spancontent" id="PRTSepelio"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Gratificación</span><span class="spancontent" id="PRTGrati"></span></p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div id="InfoVehiculo" style="display:none;">
+                                <h4 class="title-grid"><strong>Datos del Vehículo</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Placa</span><span class="spancontent" id="PPlaca"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Marca</span><span class="spancontent" id="PMarca"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Modelo</span><span class="spancontent" id="PModelo"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Clase</span><span class="spancontent" id="PClase"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Uso</span><span class="spancontent" id="PUso"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Asientos</span><span class="spancontent" id="PAsientos"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>N° de Serie</span><span class="spancontent" id="PSerie"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Año</span><span class="spancontent" id="PAnio"></span></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="InfoDirecSOAT" style="display:none; margin-top:3%;">
+                                <h4 class="title-grid"><strong>Dirección SOAT</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Tipo Via</span><span class="spancontent" id="PTipoVia"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Dirección</span><span class="spancontent" id="PDir"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PNumero"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Tipo Interior</span><span class="spancontent" id="PTipoInterior"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Interior</span><span class="spancontent" id="PNumeroInterior"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Manzana</span><span class="spancontent" id="PManzana"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Lote</span><span class="spancontent" id="PLote"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Etapa</span><span class="spancontent" id="PEtapa"></span></p>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Tipo Conjunto</span><span class="spancontent" id="PTipoConjunto"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Nombre conjunto</span><span class="spancontent" id="PNomConjunto"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Bloque/Chalet</span><span class="spancontent" id="PChalet"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Numero/Letra</span><span class="spancontent" id="PNumLetra"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <p class="card-text textTitle"><span>Dirección Actual</span><span class="spancontent" id="PDirAct"></span></p>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                            <div id="InfoCanal" style=" margin-top:3%;">
+                                <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Nombre Canal</span><span class="spancontent" id="PCanalNom"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Fecha Apertura</span><span class="spancontent" id="PCanalFechaAp"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Tipo Canal</span><span class="spancontent" id="PCanalTipo"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Estado del Canal</span><span class="spancontent" id="PCanalEstado"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="InfoIntermediario" style="margin-top:3%;">
+                                <h4 class="title-grid"><strong>Datos del intermediario / Comercializador</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Código</span><span class="spancontent" id="PIntCod"></span></p>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PIntNom"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="InfoTarifa" style="display:none;  margin-top:3%;">
+                                <h4 class="title-grid"><strong>Tarifa</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PTarFecEmision"></span></p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="card-text textTitle"><span>Hora de Emisión</span><span class="spancontent" id="PTarHorEmision"></span></p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="card-text textTitle"><span>Lote Descargo</span><span class="spancontent" id="PTarLote"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="card-text textTitle"><span>Tarifa</span><span class="spancontent" id="PTarifaP"></span></p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="card-text textTitle"><span>Porcentaje Comisión</span><span class="spancontent" id="PTarPorcComi"></span></p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PTarMoneda"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="InfoCoberturas" style="display:none; margin-top:3%;">
+                                <h4 class="title-grid" style="font-weight:bold;">Coberturas</h4>
+                                <div class="row" style="margin-bottom:1%" id="PlanPanel">
+                                    <div class="col-lg-4">
+                                        <p class="card-text textTitle"><span>Plan / Módulo</span><span class="spancontent" id="PPlanCod"></span></p>
+                                    </div>
+                                </div>
+                                <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
+                                    <thead>
+                                        <tr class="htable headgrid" style="background:transparent;">
+                                            <th class="text-center">Código</th>
+                                            <th class="text-center">Cobertura</th>
+                                            <th class="text-center">Principal</th>
+                                            <th class="text-center">Moneda</th>
+                                            <th class="text-center">Prima</th>
+                                            <th class="text-center">Suma Asegurada</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tblContactos">
+                                        <tr>
+                                            <td class="text-center" colspan="6">No tiene Coberturas</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="InfoCoberRentas" style="display:none; margin-top:3%">
+                                <h4 class="title-grid"><strong>Coberturas</strong></h4>
+                                <table class="table table-hover table-striped" id="tableCoberturaRentas" style="width:100%">
+                                    <thead>
+                                        <tr class="htable headgrid" style="background:transparent;">
+                                            <th class="text-center">Cobertura</th>
+                                            <th class="text-center" id="GridTituloRenta"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tblCoberRent">
+                                        <tr>
+                                            <td class="text-center" colspan="2">No tiene Coberturas</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div id="InfoBeneficiarios" style="display:none;  margin-top:3%;">
+                                <h4 class="title-grid"><strong>Beneficiarios</strong></h4>
+                                <table class="table table-hover table-striped" id="tableBeneficiarios" style="width:100%">
+                                    <thead>
+                                        <tr class="htable headgrid" style="background:transparent;">
+                                            <th class="text-center">Nombres</th>
+                                            <th class="text-center">Documento</th>
+                                            <th class="text-center">Vínculo</th>
+                                            <th class="text-center">Participación</th>
+                                            <th class="text-center">Fecha Declaración</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tblContactos">
+                                        <tr>
+                                            <td class="text-center" colspan="6">No tiene Beneficiarios</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="InfoModalidadPago" style="display:none;margin-top:3%; margin-bottom:3%;">
+                                <h4 class="title-grid"><strong>Modalidad de Pago</strong></h4>
+                                <div style="width:45%; float:left">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped" id="tableCronograma" style="width:80%" data-page-length="10">
+                                            <thead>
+                                                <tr class="htable headgrid" style="background:transparent;">
+                                                    <th class="text-center">Mes</th>
+                                                    <th class="text-center">Fecha de Pagos</th>
+                                                    <th class="text-center">Pensión</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblCrono">
+                                                <tr>
+                                                    <td class="text-center" colspan="3">No tiene Cronograma</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="width:45%; float:right">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped" id="tableRescate" style="width:80%" data-page-length="10">
+                                            <thead>
+                                                <tr class="htable headgrid" style="background:transparent;">
+                                                    <th class="text-center">Mes</th>
+                                                    <th class="text-center">Monto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblRescate">
+                                                <tr>
+                                                    <td class="text-center" colspan="2">No tiene Rescates</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="titularrentavitalicia" />
+                            <div id="InfoPensiones" style="display:none;">
+                                
+                                <h4 class="title-grid" style="margin-bottom:3%"><strong id="titlebenef"></strong><span id="titlevinc"></span></h4>
+                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Modalidad de Pago</strong></h5> <br />
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Via de Pago</span><span class="spancontent" id="PPensViaPago"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Sucursal</span><span class="spancontent" id="PPensSucursal"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Banco</span><span class="spancontent" id="PPensBanco"></span></p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="card-text textTitle"><span>Tipo Cta.</span><span class="spancontent" id="PPensTipoCuenta"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PPensMoneda"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Num. Cta.</span><span class="spancontent" id="PPensNumCuenta"></span></p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="card-text textTitle"><span>CCI</span><span class="spancontent" id="PPensCCI"></span></p>
+                                    </div>
+                                </div>
+                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Receptor de Pensión</strong></h5> <br />
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Identificación</span><span class="spancontent" id="PRecepDoc"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Período de Vigencia</span><span class="spancontent" id="PRecepPerVig"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Nombres</span><span class="spancontent" id="PRecepNombre"></span></p>
+                                    </div>
+                                </div>
+                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Plan de Salud</strong></h5> <br />
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Institución</span><span class="spancontent" id="PPensInsti"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Modalidad de Pago</span><span class="spancontent" id="PPensModalPago"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Monto de Pago</span><span class="spancontent" id="PPensMontoPago"></span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Periódo Efecto</span><span class="spancontent" id="PPensPeriodoEfecto"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="margin-bottom:5%"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
