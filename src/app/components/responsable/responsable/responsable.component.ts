@@ -215,24 +215,29 @@ export class ResponsableComponent implements OnInit {
      
     })*/
 
-
-    try {
-      window.onscroll = function() {myFunction()};
-    
-        function myFunction() {
-          if (window.scrollY > 80) {
-            document.getElementById('navbar_top').classList.add('fixed-top');
-           
-          } else {
-            document.getElementById('navbar_top').classList.remove('fixed-top');
-          
-            document.body.style.paddingTop = '0';
-          } 
+    var URLactual = window.location + " ";
+    let link = URLactual.split("/")
+    let linkactual = link[link.length-1].trim()
+    if(linkactual == 'clientes'){
+      try {
+        window.onscroll = function() {myFunction()};
+      
+          function myFunction() {
+            if (window.scrollY > 80) {
+              document.getElementById('navbar_top').classList.add('fixed-top');
+             
+            } else {
+              document.getElementById('navbar_top').classList.remove('fixed-top');
             
-          } 
-    } catch (error) {
-      console.error('el error: ',error)
+              document.body.style.paddingTop = '0';
+            } 
+              
+            } 
+      } catch (error) {
+        console.error('el error: ',error)
+      }
     }
+    
     this.core.loader.hide();
 
   }

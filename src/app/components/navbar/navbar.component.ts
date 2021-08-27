@@ -1,5 +1,5 @@
 import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2,HostListener } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { UserconfigService } from '../../services/userconfig.service';
 import * as $ from 'jquery';
@@ -63,6 +63,40 @@ export class NavbarComponent implements OnInit {
    
      
     
+  }
+//   isFocusInsideComponent = false;
+// isComponentClicked = false;
+
+// @HostListener('click')
+// clickInside() {
+//     this.isFocusInsideComponent = true;
+//     this.isComponentClicked = true;
+// }
+// @HostListener('document:click')
+// clickout() {
+//     if (!this.isFocusInsideComponent && this.isComponentClicked) {
+//         // do the heavy process
+
+//         this.isComponentClicked = false;
+//         this.isFocusInsideComponent = false;
+//         console.log(" this.isComponentClicked", this.isComponentClicked)
+//     }
+//     //this.isFocusInsideComponent = false;
+//     console.log(" this.isFocusInsideComponent", this.isFocusInsideComponent)
+// }
+public text: String;
+@HostListener('click', ["$event"])
+  clickInside($event) {
+    this.text = "clicked inside";
+    $event.stopPropagation();
+    //console.log("text 1",this.text )
+  }
+  
+  @HostListener('document:click')
+  clickout() {
+      this.text = "clicked outside";
+      //console.log("text 2",this.text )
+      this.closeNav()
   }
 
   opened: boolean;
@@ -196,4 +230,6 @@ export class NavbarComponent implements OnInit {
   Home(){
     this.core.rutas.goHome();
   }
+
+  
 } 
