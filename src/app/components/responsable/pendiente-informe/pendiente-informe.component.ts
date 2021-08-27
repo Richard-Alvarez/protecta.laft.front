@@ -865,7 +865,7 @@ DescargarReporte(item){
   if(this.RespuestaGlobal.length == 0){
     this.RespuestaGlobal = 'no'
   }else{
-    this.RespuestaGlobal = 'sí'
+    this.RespuestaGlobal = 'Sí'
   }
   //console.log("RespuestaGlobal",RespuestaGlobal.length)
 
