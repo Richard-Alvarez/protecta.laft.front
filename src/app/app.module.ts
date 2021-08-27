@@ -146,6 +146,8 @@ import { TemplateRGComponent } from './components/responsable/templates/template
 import { TemplateC3Component } from './components/responsable/templates/template-c3/template-c3.component';
 import { TemplateS2Component } from './components/responsable/templates/template-s2/template-s2.component';
 import { TemplateC2Component } from './components/responsable/templates/template-c2/template-c2.component';
+import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-policy.component';
+
 
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
@@ -277,6 +279,8 @@ import { TemplateC2Component } from './components/responsable/templates/template
     TemplateC3Component,
     TemplateS2Component,
     TemplateC2Component,
+    C2InfoPolicyComponent,
+
    
     //Validaciones
 //fin de formularios antiguos      
