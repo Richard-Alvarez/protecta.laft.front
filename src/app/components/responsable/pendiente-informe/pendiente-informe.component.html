@@ -156,7 +156,8 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-2 pt-2" >
                                                                             <div class="text-center">
-                                                                                <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="fillReport(item)"></i>
+                                                                                <!-- <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="fillReport(item)"></i> -->
+                                                                                <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="DescargarReporte(item)"></i>
                                                                             </div>
                                                                         </div>
                                                                         <!--<div class="col-lg-2 pt-2" >
@@ -404,12 +405,19 @@
                     <button type="button" class="btn btn-warning text-white " *ngIf="STIPO_USUARIO==='OC'" (click)="Export('exportContent', 'test');">
                         Descargar Reportes
                     </button>
-
-                    <app-template-rg id="exportContent"  [parent]="this" [alerta]="Alerta" [respuesta]="Respuesta"  style="display: none"></app-template-rg>
+                   
+                        <!-- <app-template-rg  [parent]="this" [Nombre]="Nombre" 
+                        [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-rg> -->
+                        
+                    
+                      
+                    
+                    
 
                 </div>
             </div>
-            
+            <app-template-rg  [parent]="this" [Nombre]="Nombre" 
+                        [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-rg>
             
         </div>
 

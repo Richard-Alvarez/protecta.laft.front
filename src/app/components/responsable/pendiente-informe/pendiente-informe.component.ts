@@ -9,6 +9,7 @@ import { ResponsableComponent } from '../responsable/responsable.component';
 import { truncateSync } from 'fs';
 import { TemplateRGComponent } from '../templates/template-rg/template-rg.component';
 
+
 @Component({
   selector: 'app-pendiente-informe',
   templateUrl: './pendiente-informe.component.html',
@@ -32,6 +33,11 @@ export class PendienteInformeComponent implements OnInit {
     listFilesInform:any = [] 
     listFilesInformName:any = [] 
     NPERIODO_PROCESO:number
+    
+    Alerta
+    Nombre
+    Perfil
+    Respuesta
 
   public templateRG: TemplateRGComponent;
   @Input() regimen:any = {}
@@ -39,14 +45,16 @@ export class PendienteInformeComponent implements OnInit {
   @Input() statePendienteInforme:any = {}
   @Input() userGroupList:any = []
   @Input() parent:ResponsableComponent
+  //@Input() parent2:TemplateRGComponent
  
   
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
     private renderer: Renderer2,
-    private modalService: NgbModal,) { }
+    private modalService: NgbModal,) {this.templateRG = new TemplateRGComponent(core,userConfigService,renderer,modalService) }
 
   async ngOnInit() {
+    
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO;
     this.fillFileGroup()
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
@@ -696,10 +704,7 @@ setDataCheckboxApproved(item,index,checked: boolean){
 
 
 categoriaSelectedArray = [];
-Alerta:string = '';
-Nombre:string = '';
-Perfil:string = '';
-Respuesta:string = '';
+
 onCategoriaPressed(categoriaSelected: any, checked: boolean){
   if (checked) { //Si el elemento fue seleccionado
     //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
@@ -708,12 +713,13 @@ onCategoriaPressed(categoriaSelected: any, checked: boolean){
     //Removemos la categoría seleccionada del arreglo de categorías seleccionadas
     this.categoriaSelectedArray.splice(this.categoriaSelectedArray.indexOf(categoriaSelected), 1);
   }
-  console.log("this.categoriaSelectedArray",this.categoriaSelectedArray)
-  console.log("this.categoriaSelectedArray 1",this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO)
-  console.log("this.categoriaSelectedArray 2",this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO)
-  this.Nombre = this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO;
-  this.Perfil =this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO;
- // this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
+ // console.log("this.categoriaSelectedArray",this.categoriaSelectedArray)
+ // console.log("this.categoriaSelectedArray 1",this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO)
+ // console.log("this.categoriaSelectedArray 2",this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO)
+//   this.Nombre = this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO;
+//   this.Perfil =this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO;
+//  this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
+//  this.Alerta = this.categoriaSelectedArray[0].SNOMBRE_ALERTA
   this.DataArray()
 }
 arrayData :any =[]
@@ -738,51 +744,136 @@ DataArray(){
 }
 
 
-Export(element, filename = ''){
-  this.Alerta = '';
-  this.Nombre = '';
-  this.Perfil ='';
-  this.Respuesta ='';
-  this.arrayData.forEach(data => {
-    this.Alerta =data.Alerta;
-    this.Respuesta =data.Respuesta;
-    this.Export2Doc(element,data.Alerta)
-  });
+ async Export(element , filename = ''){
+   debugger;
+  //this.Alerta = '';
+  //this.Nombre = '';
+  //this.Perfil ='';
+  //this.Respuesta ='';
+  console.log("this.arrayData",this.arrayData)
+
+    this.arrayData.forEach(async data => {
+     console.log("this.arrayData   data",data.Alerta)
+      this.Alerta = data.Alerta;
+    this.Nombre = data.NombreCompleto;
+    this.Perfil = data.Cargo;
+    this.Respuesta = data.Respuesta;
+  //   debugger
+  //  // console.log("dsadsadsadsa11111111111111111",  await Promise.all(this.parent2.NombreBoton)) 
+     this.Export2Doc(element,data.Alerta)
+  //   this.core.loader.show();
+    
+     // await this.Export2Doc(element,data.Alerta)
+    
+  //   this.core.loader.hide();
+   });
+//  for(let i=0; i< this.arrayData.length ; i++ ){
+//     //this.Export2Doc(element,this.arrayData[i].Alerta)
+//     await this.templateRG.ngOnInit()
+//      this.Nombre = this.arrayData[i].NombreCompleto;
+//      this.Perfil =this.arrayData[i].Cargo;
+//    this.Respuesta =this.arrayData[i].Respuesta;
+//     this.Alerta = this.arrayData[i].Alerta
+//     this.Export2Doc(element,this.arrayData[i].Alerta)
+
+//    console.log("arrayData Alerta111",this.Nombre,this.Perfil,this.Respuesta,this.Alerta)
+   
+//   }
+  // this.arrayData.forEach(data => {
+  //   this.Alerta = data.Alerta;
+  //   this.Respuesta = data.Respuesta;
+  //   this.Export2Doc(element,data.Alerta)
+  //   console.log("Alerta",this.Alerta)
+  //   console.log("Alerta",data.Alerta)
+  // });
+}
+
+Nombre2(){
+  return this.Nombre
+}
+Alerta2(){
+  return this.Nombre
+}
+Perfil2(){
+  return this.Nombre
+}
+Respuesta2(){
+  return this.Nombre
 }
 
 
 
-Export2Doc(element, filename = ''){
-  var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
-  var postHtml = "</body></html>";
-  var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+ Export2Doc(element, filename = ''){
+ 
+  setTimeout(function(){
+  //console.log("dsadsadsadsa", this.parent2.valor)
+    var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+    var postHtml = "</body></html>";
+    var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+    var ht = "<p><strong>Perfil:  {{parent.Perfil}}  </strong></p> "
+    var blob = new Blob(['\ufeff', html],{
+        type: 'application/msword'
+    });
+  
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
+  
+    filename = filename?filename+'.doc': 'document.doc';
+  
+    var downloadLink = document.createElement("a");
+  
+     document.body.appendChild(downloadLink);
+  
+    if(navigator.msSaveOrOpenBlob){
+        navigator.msSaveOrOpenBlob(blob, filename);
+    }else{
+        downloadLink.href = url;
+  
+          downloadLink.download = filename;
+  
+          downloadLink.click();
+    }
+  
+     document.body.removeChild(downloadLink);
+    
+  
+  
+  },1);
 
-  var blob = new Blob(['\ufeff', html],{
-      type: 'application/msword'
-  });
-
-  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
-
-  filename = filename?filename+'.doc': 'document.doc';
-
-  var downloadLink = document.createElement("a");
-
-  document.body.appendChild(downloadLink);
-
-  if(navigator.msSaveOrOpenBlob){
-      navigator.msSaveOrOpenBlob(blob, filename);
-  }else{
-      downloadLink.href = url;
-
-      downloadLink.download = filename;
-
-      downloadLink.click();
-  }
-
-  document.body.removeChild(downloadLink);
-
+ 
 
 }
+
+arrayDataSenal= []
+DescargarReporte(item){
+  this.arrayDataSenal= []
+  this.Nombre = ''
+  this.Perfil = ''
+  this.Respuesta = ''
+  this.Alerta  = ''
+  console.log("itemm",item)
+
+    console.log("dataItem",item.arrUsuariosForm)
+ 
+  item.arrUsuariosForm.forEach((t,inc) => { 
+    let data:any = {}
+       data.Alerta = item.SNOMBRE_ALERTA
+       data.NombreCompleto = t.NOMBRECOMPLETO
+       data.Cargo = t.SCARGO
+       data.Respuesta = t.SRESPUESTA
+       this.arrayDataSenal.push(data)
+  })
+
+  this.Nombre = this.arrayDataSenal[0].NombreCompleto;
+  this.Perfil =this.arrayDataSenal[0].Cargo;
+  this.Respuesta =this.arrayDataSenal[0].Respuesta;
+  this.Alerta = this.arrayDataSenal[0].Alerta
+  
+  
+  this.Export2Doc("exportContent",this.Alerta)
+  
+  console.log("this.arrayDataSenal",this.arrayDataSenal)
+  console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta )
+} 
 
 
  
