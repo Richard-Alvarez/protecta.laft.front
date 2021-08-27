@@ -428,6 +428,11 @@
             <app-template-s2  [parent]="this" [Nombre]="Nombre" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-s2>
         </div>
+
+        <div *ngIf="this.Alerta=='C3' && this.RegimenPendiente==2">
+            <app-template-c3  [parent]="this" [Nombre]="Nombre" 
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-c3>
+        </div>
           
             
         </div>
