@@ -1,5 +1,6 @@
+<p>template-c3 works!</p>
 <div id="exportContent">
-    <div class="container" style="padding: 0px 200px;">
+  <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
       <p> 
         <strong style="font-family: arial Narrow, serif;">Grupo de Señales de alerta - Renta Privada</strong>
       </p>
@@ -10,6 +11,7 @@
         <strong> {{SPERFIL_NAME_USUARIO}} Analista</strong>
       </p>-->
       
+
       <table border="1" cellspacing="0" cellpadding="0" align="left" width="550">
         <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
           <tbody>
@@ -51,8 +53,10 @@
           </tbody>
         </FONT>
       </table>
+
+
     </div>
-    <div>
+    <div class="container" style="padding: 0px 200px;">
       <br>
       <p>
         <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta C3</strong>
@@ -73,13 +77,13 @@
         <br>
         <strong style="font-family: arial Narrow, serif;">Resultados:</strong>
         <ul>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> {{rpta711}} se identificaron clientes domiciliados 
+        <li style="font-family: arial Narrow, serif; text-align: justify"> {{this.parent.RespuestaGlobal}} se identificaron clientes domiciliados 
             en/o que han modificado su domicilio a: países considerados paraísos fiscales o países donde existe conocida 
             actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
         </li>
     </ul>   
 
-        <strong style="font-family: arial Narrow, serif;">Consulta a las áreas: Comercial masivos y Operaciones:</strong>
+        <strong style="font-family: arial Narrow, serif;">Consulta a las áreas: Comercial masivos y Operaciones</strong>
         <br>
         <dl>
             <dt style="font-family: arial Narrow, serif; text-align: justify">
@@ -98,6 +102,28 @@
             c) Se revisa la información proporcionada.
             </dt>
         </dl>  
+        <br>
+        <strong style="font-family: arial Narrow, serif;">Resultados:</strong>
+        <ul>
+        <li style="font-family: arial Narrow, serif; text-align: justify"> El área Comercial Masivos informó que {{arrayDataSenal[0].Respuesta}} se 
+          identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
+          países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+        </li>
+        <li style="font-family: arial Narrow, serif; text-align: justify"> El área de operaciones informó que {{arrayDataSenal[1].Respuesta}} se 
+          identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
+          países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+        </li>
+        <li style="font-family: arial Narrow, serif; text-align: justify"> El área Comercial Rentas informó que {{arrayDataSenal[2].Respuesta}} se 
+          identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
+          países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+        </li>
+    </ul>   
+
+    <p>Los archivos de trabajo se ubican en:</p>
+    <p>  <a href="http://190.216.170.173/LAFT/ ">http://190.216.170.173/LAFT/ </a></p>
+    
+
+    
     </div>
   
   <div class="text-center pt-5">

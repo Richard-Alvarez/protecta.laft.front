@@ -846,6 +846,7 @@ Alerta:string = ''
 Nombre:string = ''
 Perfil:string = ''
 Respuesta:string = ''
+RespuestaGlobal:string = ''
 RegimenPendiente:number = 0
 
 DescargarReporte(item){
@@ -858,14 +859,22 @@ DescargarReporte(item){
   this.RegimenPendiente = 0
   console.log("itemm",item)
 
-    console.log("dataItem",item.arrUsuariosForm)
+  console.log("dataItem",item.arrUsuariosForm)
  
+  this.RespuestaGlobal = item.arrUsuariosForm.filter((it,inc) => it.SRESPUESTA == "Sí")
+  if(this.RespuestaGlobal.length == 0){
+    this.RespuestaGlobal = 'no'
+  }else{
+    this.RespuestaGlobal = 'sí'
+  }
+  //console.log("RespuestaGlobal",RespuestaGlobal.length)
+
   item.arrUsuariosForm.forEach((t,inc) => { 
     let data:any = {}
        data.Alerta = item.SNOMBRE_ALERTA
        data.NombreCompleto = t.NOMBRECOMPLETO
        data.Cargo = t.SCARGO
-       data.Respuesta = t.SRESPUESTA
+       data.Respuesta = (t.SRESPUESTA).toLowerCase()
        this.arrayDataSenal.push(data)
   })
 

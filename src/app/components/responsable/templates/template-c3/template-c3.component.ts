@@ -1,11 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit,Input} from '@angular/core';
+import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-informe.component';
 @Component({
   selector: 'app-template-c3',
   templateUrl: './template-c3.component.html',
   styleUrls: ['./template-c3.component.css']
 })
 export class TemplateC3Component implements OnInit {
+
+
+  @Input() Nombre:string
+  @Input() Perfil:string
+  @Input() arrayDataSenal:any 
+  @Input() index:string
+  @Input() item:any
+  @Input() parent:PendienteInformeComponent
 
   constructor() { }
 
