@@ -805,7 +805,7 @@ Respuesta2(){
 
  Export2Doc(element, filename = ''){
  
-  //setTimeout(function(){
+  setTimeout(function(){
   //console.log("dsadsadsadsa", this.parent2.valor)
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
@@ -837,11 +837,44 @@ Respuesta2(){
     
   
   
-  //},1000);
+  },1);
 
  
 
 }
+
+arrayDataSenal= []
+DescargarReporte(item){
+  this.arrayDataSenal= []
+  this.Nombre = ''
+  this.Perfil = ''
+  this.Respuesta = ''
+  this.Alerta  = ''
+  console.log("itemm",item)
+
+    console.log("dataItem",item.arrUsuariosForm)
+ 
+  item.arrUsuariosForm.forEach((t,inc) => { 
+    let data:any = {}
+       data.Alerta = item.SNOMBRE_ALERTA
+       data.NombreCompleto = t.NOMBRECOMPLETO
+       data.Cargo = t.SCARGO
+       data.Respuesta = t.SRESPUESTA
+       this.arrayDataSenal.push(data)
+  })
+
+  this.Nombre = this.arrayDataSenal[0].NombreCompleto;
+  this.Perfil =this.arrayDataSenal[0].Cargo;
+  this.Respuesta =this.arrayDataSenal[0].Respuesta;
+  this.Alerta = this.arrayDataSenal[0].Alerta
+  
+  
+  this.Export2Doc("exportContent",this.Alerta)
+  
+  console.log("this.arrayDataSenal",this.arrayDataSenal)
+  console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta )
+} 
+
 
  
 }
