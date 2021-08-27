@@ -144,6 +144,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ContraparteComponent } from './components/responsable/contraparte/contraparte.component';
 import { TemplateRGComponent } from './components/responsable/templates/template-rg/template-rg.component';
 import { TemplateC3Component } from './components/responsable/templates/template-c3/template-c3.component';
+import { TemplateS2Component } from './components/responsable/templates/template-s2/template-s2.component';
 
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
@@ -273,6 +274,7 @@ import { TemplateC3Component } from './components/responsable/templates/template
     ContraparteComponent,
     TemplateRGComponent,
     TemplateC3Component,
+    TemplateS2Component,
    
     //Validaciones
 //fin de formularios antiguos      
