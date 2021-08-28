@@ -1,16 +1,16 @@
-import { Component, OnInit,Input} from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-informe.component';
+
 @Component({
-  selector: 'app-template-c3',
-  templateUrl: './template-c3.component.html',
-  styleUrls: ['./template-c3.component.css']
+  selector: 'app-template-s2',
+  templateUrl: './template-s2.component.html',
+  styleUrls: ['./template-s2.component.css']
 })
-export class TemplateC3Component implements OnInit {
-
-
+export class TemplateS2Component implements OnInit {
   @Input() Nombre:string
   @Input() Perfil:string
-  @Input() arrayDataSenal:any 
+  //@Input() Respuesta:string
+  //@Input() Alerta:string
   @Input() index:string
   @Input() item:any
   @Input() parent:PendienteInformeComponent
@@ -19,7 +19,9 @@ export class TemplateC3Component implements OnInit {
 
   ngOnInit() {
   }
+
   Export2Doc(element, filename = ''){
+  
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
     var html = preHtml+document.getElementById(element).innerHTML+postHtml;
@@ -50,4 +52,6 @@ export class TemplateC3Component implements OnInit {
 
 
 }
+
+
 }

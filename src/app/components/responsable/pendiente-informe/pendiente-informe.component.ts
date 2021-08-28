@@ -34,10 +34,7 @@ export class PendienteInformeComponent implements OnInit {
     listFilesInformName:any = [] 
     NPERIODO_PROCESO:number
     
-    Alerta
-    Nombre
-    Perfil
-    Respuesta
+    
 
   public templateRG: TemplateRGComponent;
   @Input() regimen:any = {}
@@ -805,7 +802,7 @@ Respuesta2(){
 
  Export2Doc(element, filename = ''){
  
-  setTimeout(function(){
+setTimeout(function(){
   //console.log("dsadsadsadsa", this.parent2.valor)
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
@@ -843,30 +840,49 @@ Respuesta2(){
 
 }
 
+
 arrayDataSenal= []
+Alerta:string = ''
+Nombre:string = ''
+Perfil:string = ''
+Respuesta:string = ''
+RespuestaGlobal:string = ''
+RegimenPendiente:number = 0
+
 DescargarReporte(item){
+  debugger
   this.arrayDataSenal= []
   this.Nombre = ''
   this.Perfil = ''
   this.Respuesta = ''
   this.Alerta  = ''
+  this.RegimenPendiente = 0
   console.log("itemm",item)
 
-    console.log("dataItem",item.arrUsuariosForm)
+  console.log("dataItem",item.arrUsuariosForm)
  
+  this.RespuestaGlobal = item.arrUsuariosForm.filter((it,inc) => it.SRESPUESTA == "Sí")
+  if(this.RespuestaGlobal.length == 0){
+    this.RespuestaGlobal = 'no'
+  }else{
+    this.RespuestaGlobal = 'Sí'
+  }
+  //console.log("RespuestaGlobal",RespuestaGlobal.length)
+
   item.arrUsuariosForm.forEach((t,inc) => { 
     let data:any = {}
        data.Alerta = item.SNOMBRE_ALERTA
        data.NombreCompleto = t.NOMBRECOMPLETO
        data.Cargo = t.SCARGO
-       data.Respuesta = t.SRESPUESTA
+       data.Respuesta = (t.SRESPUESTA).toLowerCase()
        this.arrayDataSenal.push(data)
   })
 
   this.Nombre = this.arrayDataSenal[0].NombreCompleto;
   this.Perfil =this.arrayDataSenal[0].Cargo;
-  this.Respuesta =this.arrayDataSenal[0].Respuesta;
+  this.Respuesta = (this.arrayDataSenal[0].Respuesta).toLowerCase()
   this.Alerta = this.arrayDataSenal[0].Alerta
+  this.RegimenPendiente = item.NREGIMEN
   
   
   this.Export2Doc("exportContent",this.Alerta)

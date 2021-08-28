@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   public susername: string;
   public spassword: string;
   public scaptcha: string;
-  public txtcaptcha: string;
+  public txtcaptcha: string = '';
   public sCaptchaError: string;
   public STIPO_USUARIO
   siteKey = '6Lez_c8UAAAAACj3LLvrRQM3g3yWJU6XzqWd-tzn';
