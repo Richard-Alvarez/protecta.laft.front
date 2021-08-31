@@ -981,9 +981,10 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
         //   return objResp
         // }
           else{
-          if((preguntaCabecera.NIDALERTA == "36" || 
-          preguntaCabecera.NIDALERTA == "37" || 
-          preguntaCabecera.NIDALERTA == "38" || 
+          if((
+            //preguntaCabecera.NIDALERTA == "36" || 
+          //preguntaCabecera.NIDALERTA == "37" || 
+          //preguntaCabecera.NIDALERTA == "38" || 
           // preguntaCabecera.NIDALERTA == "39" || 
           (preguntaCabecera.NIDALERTA == "22" && this.parent.ID_USUARIO == 24)  ||
           (preguntaCabecera.NIDALERTA == "39" && this.parent.ID_USUARIO == 35)) && 

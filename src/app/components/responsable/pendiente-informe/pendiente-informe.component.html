@@ -433,6 +433,12 @@
             <app-template-c3  [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-c3>
         </div>
+
+        <div *ngIf="this.NombreLink == 'proveedor' && this.RegimenPendiente==0">
+            <app-template-p [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-p>
+        </div>
+          
           
             
         </div>
