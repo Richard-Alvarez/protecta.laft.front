@@ -848,6 +848,7 @@ Perfil:string = ''
 Respuesta:string = ''
 RespuestaGlobal:string = ''
 RegimenPendiente:number = 0
+NombreLink:string = ''
 
 DescargarReporte(item){
   debugger
@@ -884,11 +885,19 @@ DescargarReporte(item){
   this.Alerta = this.arrayDataSenal[0].Alerta
   this.RegimenPendiente = item.NREGIMEN
   
+  if(this.linkactual == "colaborador"){
+     this.NombreLink = this.linkactual
+  }else if(this.linkactual == "proveedor"){
+     this.NombreLink = this.linkactual
+  }else{
+     this.NombreLink = this.linkactual
+  }
+
   
   this.Export2Doc("exportContent",this.Alerta)
   
   console.log("this.arrayDataSenal",this.arrayDataSenal)
-  console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta )
+  console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta ,  this.RegimenPendiente)
 } 
 
 
