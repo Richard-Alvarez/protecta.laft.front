@@ -148,7 +148,6 @@ import { TemplateS2Component } from './components/responsable/templates/template
 import { TemplateC2Component } from './components/responsable/templates/template-c2/template-c2.component';
 import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-policy.component';
 
-
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
