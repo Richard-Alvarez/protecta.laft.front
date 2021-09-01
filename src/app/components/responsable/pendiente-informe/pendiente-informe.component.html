@@ -421,22 +421,22 @@
 
         <div *ngIf="this.RegimenPendiente ==1">
             <app-template-rg  [parent]="this" [Nombre]="Nombre" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-rg>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-rg>
         </div>
 
         <div *ngIf="this.Alerta=='S2' && this.RegimenPendiente==2">
             <app-template-s2  [parent]="this" [Nombre]="Nombre" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-s2>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-s2>
         </div>
 
         <div *ngIf="this.Alerta=='C3' && this.RegimenPendiente==2">
             <app-template-c3  [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-c3>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-c3>
         </div>
 
         <div *ngIf="(this.NombreLink == 'proveedor' || this.NombreLink == 'contraparte') && this.RegimenPendiente==0">
             <app-template-p [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-p>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-p>
         </div>
           
           
