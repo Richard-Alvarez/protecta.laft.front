@@ -2,9 +2,9 @@
 
     
         
-<img src="http://190.216.170.173/LAFT/assets/img/logo.png" alt="" >
+<!--<img src="http://190.216.170.173/LAFT/assets/img/logo.png" alt="" style="width: 100px;" >
             
-   <!-- <div *ngFor="let item of parent.arrayData"> -->
+    <div *ngFor="let item of parent.arrayData"> -->
        
        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
       <!-- <p> 
@@ -193,6 +193,7 @@
         </div>
         
 
+
         <div *ngIf="parent.Alerta == 'P1$'">
             <!-- ESTO ES PARA LA p1 -->
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
@@ -371,7 +372,10 @@
                     </table>
          </div>
         </div>
-        <div *ngIf="parent.Alerta != 'P5$'">
+
+
+
+        <div *ngIf="parent.Alerta !== 'P5$'">
         <div class="container" style="padding: 0px 200px;">
         <br> 
         <p>
@@ -388,36 +392,29 @@
             </li>
         </ul>
         <p>
-            <strong></strong>
-        </p>
-            <!-- <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+        <p><strong></strong></p>
+        <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Coordinadora de Compras reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
-                configuraron como señales de alerta con relación al comportamiento de los proveedores.
-               </li>
-            </ul>  -->
-            <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente Comercial Masivos reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
+                La Coordinadora de compras reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
                 configuraron como señales de alerta con relación al comportamiento de los proveedores.
                </li>
             </ul>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de inversiones reportó que {{arrayDataSenal[1].Respuesta}} hubo situaciones que 
+                El Gerente Comercial Masivos reportó que {{arrayDataSenal[1].Respuesta}} hubo situaciones que 
                 configuraron como señales de alerta con relación al comportamiento de los proveedores.
                </li>
             </ul>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de Inversiones Inmobiliarias reportó que {{arrayDataSenal[2].Respuesta}} hubo situaciones que 
+                El Subgerente de Administración y tesorería reportó que {{arrayDataSenal[2].Respuesta}} hubo situaciones que 
                 configuraron como señales de alerta con relación al comportamiento de los proveedores.
                </li>
             </ul>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Subgerente de Administración y tesorería reportó que {{arrayDataSenal[3].Respuesta}} hubo situaciones que 
+                El Gerente de Inversiones Inmobiliarias reportó que {{arrayDataSenal[3].Respuesta}} hubo situaciones que 
                 configuraron como señales de alerta con relación al comportamiento de los proveedores.
                </li>
             </ul>
@@ -441,37 +438,29 @@
                 Se revisa la información proporcionada.
                 </li>
             </ul>
-            <p>
-                <strong></strong>
-            </p>
-                <!-- <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
-                <ul>
+            <p><strong></strong></p>
+            <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+            <ul>
                     <li style="font-family: arial Narrow, serif; text-align: justify">
-                    El Coordinadora de Compras reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
-                    configuraron como señales de alerta con relación al comportamiento de los proveedores.
-                   </li>
-                </ul>  -->
-                <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
-                    El Gerente Comercial Masivos reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
+                    La coordinadora de compras reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
                     configuraron como señales de alerta con relación al comportamiento de los proveedores.
                    </li>
                 </ul>
                 <ul>
                     <li style="font-family: arial Narrow, serif; text-align: justify">
-                    El Gerente de inversiones reportó que {{arrayDataSenal[1].Respuesta}} hubo situaciones que 
+                    El Gerente Comercial Masivos reportó que {{arrayDataSenal[1].Respuesta}} hubo situaciones que 
                     configuraron como señales de alerta con relación al comportamiento de los proveedores.
                    </li>
                 </ul>
                 <ul>
                     <li style="font-family: arial Narrow, serif; text-align: justify">
-                    El Gerente de Inversiones reportó que {{arrayDataSenal[2].Respuesta}} hubo situaciones que 
+                    El Subgerente de Administración y tesorería reportó que {{arrayDataSenal[2].Respuesta}} hubo situaciones que 
                     configuraron como señales de alerta con relación al comportamiento de los proveedores.
                    </li>
                 </ul>
                 <ul>
                     <li style="font-family: arial Narrow, serif; text-align: justify">
-                    El Subgerente de Administración y tesorería reportó que {{arrayDataSenal[3].Respuesta}} hubo situaciones que 
+                    El Gerente de Inversiones reportó que {{arrayDataSenal[3].Respuesta}} hubo situaciones que 
                     configuraron como señales de alerta con relación al comportamiento de los proveedores.
                    </li>
                 </ul>
