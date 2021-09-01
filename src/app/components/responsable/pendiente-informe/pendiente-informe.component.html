@@ -157,7 +157,8 @@
                                                                         <div class="col-lg-2 pt-2" >
                                                                             <div class="text-center">
                                                                               <!-- <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="Consultar360(item)"></i>    -->
-                                                                                 <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="DescargarReporte(item)"></i> 
+                                                                             <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="DescargarReporte(item)"></i>  
+                                                                                 <!-- <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="fillReport(item)"></i>  -->
                                                                             </div>
                                                                         </div>
                                                                         <!--<div class="col-lg-2 pt-2" >
@@ -402,9 +403,9 @@
             <div class="row pb-3">
                 <div class="col-10"></div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-warning text-white " *ngIf="STIPO_USUARIO==='OC'" (click)="Export('exportContent', 'test');">
+                    <!-- <button type="button" class="btn btn-warning text-white " *ngIf="STIPO_USUARIO==='OC'" (click)="Export('exportContent', 'test');">
                         Descargar Reportes
-                    </button>
+                    </button> -->
                    
                         <!-- <app-template-rg  [parent]="this" [Nombre]="Nombre" 
                         [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-rg> -->
@@ -437,6 +438,10 @@
         <div *ngIf="(this.NombreLink == 'proveedor' || this.NombreLink == 'contraparte') && this.RegimenPendiente==0">
             <app-template-p [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-p>
+        </div>
+        <div *ngIf="this.NombreLink == 'colaborador' && this.RegimenPendiente==0">
+            <app-template-t [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-t>
         </div>
           
           

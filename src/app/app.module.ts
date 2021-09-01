@@ -150,6 +150,7 @@ import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-poli
 import { TemplatePComponent } from './components/responsable/templates/template-p/template-p.component';
 import { TemplateTComponent } from './components/responsable/templates/template-t/template-t.component';
 
+import { UserconfigService } from './services/userconfig.service';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -314,7 +315,7 @@ import { TemplateTComponent } from './components/responsable/templates/template-
     NO_ERRORS_SCHEMA
   ],
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent],
-  providers: [],
+  providers: [UserconfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

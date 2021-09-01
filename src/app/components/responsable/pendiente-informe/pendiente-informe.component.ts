@@ -432,7 +432,7 @@ export class PendienteInformeComponent implements OnInit {
         //this.internationalList = respListaInternacional//.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO ==1)
         let respuestaFiltroLista =  respListaInternacional.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO =="1" )
         console.log("Nueva lista cambios :",respuestaFiltroLista)
-        if(!(respuestaFiltroLista.length > 0 && validacionCantidadREvisados == true) && (objAlerta.NIDALERTA == 2 || objAlerta.NIDALERTA == 35 || objAlerta.NIDALERTA == 33 )){
+        /*if(!(respuestaFiltroLista.length > 0 && validacionCantidadREvisados == true) && (objAlerta.NIDALERTA == 2 || objAlerta.NIDALERTA == 35 || objAlerta.NIDALERTA == 33 )){
           swal.fire({
             title: 'Oficial de cumplimiento',
             icon: 'warning',
@@ -448,7 +448,7 @@ export class PendienteInformeComponent implements OnInit {
             
           })
           return 
-        }
+        }*/
         /*else{
           
         }*/
@@ -740,69 +740,9 @@ DataArray(){
   
 }
 
-
- async Export(element , filename = ''){
-   debugger;
-  //this.Alerta = '';
-  //this.Nombre = '';
-  //this.Perfil ='';
-  //this.Respuesta ='';
-  console.log("this.arrayData",this.arrayData)
-
-    this.arrayData.forEach(async data => {
-     console.log("this.arrayData   data",data.Alerta)
-      this.Alerta = data.Alerta;
-    this.Nombre = data.NombreCompleto;
-    this.Perfil = data.Cargo;
-    this.Respuesta = data.Respuesta;
-  //   debugger
-  //  // console.log("dsadsadsadsa11111111111111111",  await Promise.all(this.parent2.NombreBoton)) 
-     this.Export2Doc(element,data.Alerta)
-  //   this.core.loader.show();
-    
-     // await this.Export2Doc(element,data.Alerta)
-    
-  //   this.core.loader.hide();
-   });
-//  for(let i=0; i< this.arrayData.length ; i++ ){
-//     //this.Export2Doc(element,this.arrayData[i].Alerta)
-//     await this.templateRG.ngOnInit()
-//      this.Nombre = this.arrayData[i].NombreCompleto;
-//      this.Perfil =this.arrayData[i].Cargo;
-//    this.Respuesta =this.arrayData[i].Respuesta;
-//     this.Alerta = this.arrayData[i].Alerta
-//     this.Export2Doc(element,this.arrayData[i].Alerta)
-
-//    console.log("arrayData Alerta111",this.Nombre,this.Perfil,this.Respuesta,this.Alerta)
-   
-//   }
-  // this.arrayData.forEach(data => {
-  //   this.Alerta = data.Alerta;
-  //   this.Respuesta = data.Respuesta;
-  //   this.Export2Doc(element,data.Alerta)
-  //   console.log("Alerta",this.Alerta)
-  //   console.log("Alerta",data.Alerta)
-  // });
-}
-
-Nombre2(){
-  return this.Nombre
-}
-Alerta2(){
-  return this.Nombre
-}
-Perfil2(){
-  return this.Nombre
-}
-Respuesta2(){
-  return this.Nombre
-}
-
-
-
  Export2Doc(element, filename = ''){
  
-setTimeout(function(){
+  setTimeout(function(){
   //console.log("dsadsadsadsa", this.parent2.valor)
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
@@ -831,14 +771,9 @@ setTimeout(function(){
     }
   
      document.body.removeChild(downloadLink);
-    
-  
-  
-  },1);
+    },1);
 
- 
-
-}
+ }
 
 
 arrayDataSenal= []
