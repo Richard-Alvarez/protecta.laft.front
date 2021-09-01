@@ -150,7 +150,6 @@ import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-poli
 import { TemplatePComponent } from './components/responsable/templates/template-p/template-p.component';
 import { TemplateTComponent } from './components/responsable/templates/template-t/template-t.component';
 
-
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
