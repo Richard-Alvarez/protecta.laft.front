@@ -158,6 +158,19 @@ export class UserconfigService {
     });
   }
 
+  Consulta360(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlConsulta360, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
 
 
   //Obtener la lista de opciones del perfil
