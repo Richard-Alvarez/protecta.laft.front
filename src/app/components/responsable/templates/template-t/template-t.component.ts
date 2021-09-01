@@ -22,8 +22,8 @@ export class TemplateTComponent implements OnInit {
   @Input() index:string
   @Input() item:any
   @Input() parent:PendienteInformeComponent
- Alerta
- Respuesta
+  Alerta
+  Respuesta
   USU_NOMBRE_COMPLETO:string =  ''
   NombreBoton:string = 'Export as Doc'
   rpta711:string = ''
