@@ -23,7 +23,6 @@ export class UserconfigService {
             return reject(error)
         }
     })
-
   }
 
   getPolicyList(data: any): Promise<any> {
