@@ -18,6 +18,7 @@ export class TemplateTComponent implements OnInit {
   @Input() Perfil:string
   //@Input() Respuesta:string
   //@Input() Alerta:string
+  @Input() arrayDataSenal:any 
   @Input() index:string
   @Input() item:any
   @Input() parent:PendienteInformeComponent
