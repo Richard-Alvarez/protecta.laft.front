@@ -156,9 +156,9 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-2 pt-2" >
                                                                             <div class="text-center">
-                                                                              <!-- <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="Consultar360(item)"></i>    -->
-                                                                             <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="DescargarReporte(item)"></i>  
-                                                                                 <!-- <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="fillReport(item)"></i>  -->
+                                                                             <!-- <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="Consultar360(item)"></i>    -->
+                                                                                <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="DescargarReporte(item)"></i>  
+                                                                                  <!-- <i class="fas fa-file-word fa-3x" style="color: rgb(39, 36, 109);" (click)="fillReport(item)"></i>  -->
                                                                             </div>
                                                                         </div>
                                                                         <!--<div class="col-lg-2 pt-2" >
@@ -420,7 +420,7 @@
 
         </div>
 
-        <div *ngIf="this.RegimenPendiente ==1">
+        <div *ngIf="this.RegimenPendiente ==1 && this.Alerta !='C2'">
             <app-template-rg  [parent]="this" [Nombre]="Nombre" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-rg>
         </div>
@@ -442,6 +442,11 @@
         <div *ngIf="this.NombreLink == 'colaborador' && this.RegimenPendiente==0">
             <app-template-t [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-t>
+        </div>
+
+        <div *ngIf="this.Alerta=='C2'">
+            <app-template-c2 [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-c2>
         </div>
           
           
