@@ -1,1 +1,98 @@
-<p>template-c2 works!</p>
+<div id="exportContent">
+
+    
+        
+    <!--<img src="http://190.216.170.173/LAFT/assets/img/logo.png" alt="" style="width: 100px;" >
+                
+        <div *ngFor="let item of parent.arrayData"> -->
+           
+           <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+          <!-- <p> 
+               <strong>Usuario:  {{parent.Nombre}}  </strong>
+           </p>
+           <p>
+               <strong>Perfil:  {{parent.Perfil}}  </strong>
+           </p> -->
+                 
+           <div *ngIf="parent.Alerta == 'C2'">
+           <!-- ESTO ES PARA LA C2 -->
+           <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+               <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+               <tbody>
+                   <tr>
+                   <td width="200px" style="padding-left: 10px;">
+                       <p>
+                       <strong>CÓDIGO</strong>
+                       </p>
+                   </td>
+                   <td width="400px" style="padding-left: 10px;">
+                       <p>
+                       <strong>SEÑAL DE ALERTA</strong>
+                       </p>
+                   </td>
+                   <td width="200px">
+                    <p align="center">
+                    <strong>PRODUCTO</strong>
+                    </p>
+                </td>
+                   </tr>
+                   <tr>
+                   <td width="20%">
+                       <p align="center">
+                       P1
+                       </p>
+                   </td>
+                   <td width="400" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                       <p>
+                        Que se tome conocimiento por los medios de difusión pública u otro, según sea el caso, 
+                        que un cliente está siendo investigado o procesado por el delito de lavado de activos, 
+                        delitos precedentes, el delito de financiamiento del terrorismo y/o delitos conexos.
+                       </p>
+                   </td>
+                   <td width="200" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                    <p>
+                     Todos los productos
+                    </p>
+                </td>
+                   </tr>
+               </tbody>
+               </FONT>
+           </table>
+           </div>
+        </div>
+    
+    
+            <div *ngIf="parent.Alerta == 'C2'">
+            <div class="container" style="padding: 0px 200px;">
+            <br> 
+            <p>
+                <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta C2 </strong>
+            </p>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                a) Solicita al área de Operaciones & TI que realice la búsqueda del Registro Negativo y base de PEP y Familiares 
+                de PEP contra la base de clientes con la finalidad de identificar la señal de alerta en cuestión. Para esto, la 
+                Oficialía de Cumplimiento es responsable de enviar la lista de nombres contenidos en dicho registro.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                b)	Complementariamente, esta señal de alerta se revisa mediante el “Procedimiento para el monitoreo de Listas Especiales 
+                de Seguridad” según lo indicado en el documento Sistema de Monitoreo de Operaciones – SPLAFT.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                c)	Complementariamente, esta señal de alerta se revisa mediante la búsqueda de clientes con información negativa en fuentes públicas.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                d)	En caso se identifique señal de alerta y no sea descartado como falso positivo, se procederá a analizar la inusual operación.
+                </li>
+            </ul>
+            <p>
+            <p><strong></strong></p>
+            <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+            </div>
+            </div>
+        </div>
+                
+    <div class="text-center pt-5">
+        <button class="" (click)="Export2Doc('exportContent', 'test');"></button> 
+    </div>
+    
