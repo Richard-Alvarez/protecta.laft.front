@@ -747,7 +747,6 @@ DataArray(){
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
     var html = preHtml+document.getElementById(element).innerHTML+postHtml;
-    var ht = "<p><strong>Perfil:  {{parent.Perfil}}  </strong></p> "
     var blob = new Blob(['\ufeff', html],{
         type: 'application/msword'
     });
@@ -784,8 +783,9 @@ Respuesta:string = ''
 RespuestaGlobal:string = ''
 RegimenPendiente:number = 0
 NombreLink:string = ''
+arrayDataResultado= []
 
-DescargarReporte(item){
+async DescargarReporte(item){
   debugger
   this.arrayDataSenal= []
   this.Nombre = ''
@@ -793,10 +793,12 @@ DescargarReporte(item){
   this.Respuesta = ''
   this.Alerta  = ''
   this.RegimenPendiente = 0
+  this.arrayDataResultado= []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
- 
+
+  
   this.RespuestaGlobal = item.arrUsuariosForm.filter((it,inc) => it.SRESPUESTA == "Sí")
   if(this.RespuestaGlobal.length == 0){
     this.RespuestaGlobal = 'no'
@@ -819,6 +821,16 @@ DescargarReporte(item){
   this.Respuesta = (this.arrayDataSenal[0].Respuesta).toLowerCase()
   this.Alerta = this.arrayDataSenal[0].Alerta
   this.RegimenPendiente = item.NREGIMEN
+
+  if(item.SNOMBRE_ALERTA == "C2" && item.NIDALERTA == 2){
+    let data:any = {}
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO 
+    data.NIDALERTA = item.NIDALERTA
+    data.NIDREGIMEN = this.RegimenPendiente
+    this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
+    console.log("this.arrayDataResultado",this.arrayDataResultado)
+  }
+
   
   if(this.linkactual == "colaborador"){
      this.NombreLink = this.linkactual

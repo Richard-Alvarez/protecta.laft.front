@@ -173,7 +173,7 @@ class Rutas {
   public urlProcessPagosManuales: string = this.base + "sbsReport/processPagosManuales";
   public urlGetListaCargo: string = this.base + "monitoreoSenales/GetListaCargo";
   public urlConsulta360: string = this.base + "monitoreoSenales/Consulta360";
-
+  public urlGetListaResultado: string = this.base + "monitoreoSenales/GetListaResultado";
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }

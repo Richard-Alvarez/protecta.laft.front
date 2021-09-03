@@ -7,14 +7,9 @@
         <div *ngFor="let item of parent.arrayData"> -->
            
            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
-          <!-- <p> 
-               <strong>Usuario:  {{parent.Nombre}}  </strong>
-           </p>
-           <p>
-               <strong>Perfil:  {{parent.Perfil}}  </strong>
-           </p> -->
+          
                  
-           <div *ngIf="parent.Alerta == 'C2'">
+           
            <!-- ESTO ES PARA LA C2 -->
            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -39,7 +34,7 @@
                    <tr>
                    <td width="20%">
                        <p align="center">
-                       P1
+                       C2
                        </p>
                    </td>
                    <td width="400" style="padding-left: 10px; padding-right: 10px; text-align: justify">
@@ -58,11 +53,11 @@
                </tbody>
                </FONT>
            </table>
-           </div>
+           
         </div>
     
     
-            <div *ngIf="parent.Alerta == 'C2'">
+            
             <div class="container" style="padding: 0px 200px;">
             <br> 
             <p>
@@ -89,7 +84,74 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             </div>
-            </div>
+            
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="100px" style="padding-left: 10px;border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 1pt;border-top:solid #000000 0.5pt;vertical-align:middle;background-color:#002060;padding:0.75pt 0.75pt 0.75pt 0.75pt;overflow:hidden;overflow-wrap:break-word;">
+                        <p>
+                        <strong>TIPO DOC.</strong>
+                        </p>
+                    </td>
+                    <td width="200px" style="padding-left: 10px;border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 1pt;border-top:solid #000000 0.5pt;vertical-align:middle;background-color:#002060;padding:0.75pt 0.75pt 0.75pt 0.75pt;overflow:hidden;overflow-wrap:break-word;">
+                        <p>
+                        <strong>NRO. DOC.</strong>
+                        </p>
+                    </td>
+                    <td width="200px" style="padding-left: 10px;border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 1pt;border-top:solid #000000 0.5pt;vertical-align:middle;background-color:#002060;padding:0.75pt 0.75pt 0.75pt 0.75pt;overflow:hidden;overflow-wrap:break-word;">
+                        <p align="center">
+                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                        </p>
+                    </td>
+                    <td width="400px" style="padding-left: 10px;border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 1pt;border-top:solid #000000 0.5pt;vertical-align:middle;background-color:#002060;padding:0.75pt 0.75pt 0.75pt 0.75pt;overflow:hidden;overflow-wrap:break-word;">
+                        <p>
+                        <strong>PRODUCTO</strong>
+                        </p>
+                    </td>
+                    <td width="400px" style="padding-left: 10px;border-left:solid #000000 0.5pt;border-right:solid #000000 0.5pt;border-bottom:solid #000000 1pt;border-top:solid #000000 0.5pt;vertical-align:middle;background-color:#002060;padding:0.75pt 0.75pt 0.75pt 0.75pt;overflow:hidden;overflow-wrap:break-word;">
+                        <p>
+                        <strong>INFORMACIÓN ADICIONAL</strong>
+                        </p>
+                    </td>
+                    </tr>
+                    <tr *ngFor="let item of arrayDataResultado">
+                    <td width="15%">
+                        <p align="center">
+                        {{item.STIPO_DOCUMENTO}}
+                        </p>
+                    </td>
+                    <td width="20%" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            {{item.SNUM_DOCUMENTO_BUSQ}}
+                        </p>
+                    </td>
+                    <td width="200" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                     <p>
+                        {{item.SNOM_COMPLETO_BUSQ}}
+                     </p>
+                    </td>
+                     <td width="20%">
+                        <p align="center">
+                            <!-- {{item.STIPO_DOCUMENTO}} --> Vida Ley  
+                        </p>
+                    </td>
+                    <td width="20%">
+                        <p align="center">
+                            <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
+                        </p>
+                    </td>
+                 
+                    </tr>
+                    
+                </tbody>
+                </FONT>
+            </table>
+            </div>  
+
+
+            
         </div>
                 
     <div class="text-center pt-5">
