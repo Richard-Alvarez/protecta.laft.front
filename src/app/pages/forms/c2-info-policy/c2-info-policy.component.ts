@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
+import { C2DetailComponent } from '../c2-detail/c2-detail.component';
 
 @Component({
   selector: 'app-c2-info-policy',

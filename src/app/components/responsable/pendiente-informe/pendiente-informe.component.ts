@@ -850,6 +850,7 @@ DescargarReporte(item){
        this.Resultado = response
       });
     console.log("el resultado",this.Resultado)
+
     } 
    
 }
