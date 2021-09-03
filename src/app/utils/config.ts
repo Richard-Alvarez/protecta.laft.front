@@ -1,10 +1,10 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/'; 
+  private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //  private base: string = 'http://190.216.170.173/ApiLAFT/api/';
  
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -173,7 +173,7 @@ class Rutas {
   public urlProcessPagosManuales: string = this.base + "sbsReport/processPagosManuales";
   public urlGetListaCargo: string = this.base + "monitoreoSenales/GetListaCargo";
   public urlConsulta360: string = this.base + "monitoreoSenales/Consulta360";
-
+  public urlGetListaResultado: string = this.base + "monitoreoSenales/GetListaResultado";
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }

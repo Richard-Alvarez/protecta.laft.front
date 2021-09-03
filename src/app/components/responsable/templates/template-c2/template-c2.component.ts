@@ -12,6 +12,7 @@ export class TemplateC2Component implements OnInit {
   @Input() Nombre:string
   @Input() Perfil:string
   @Input() arrayDataSenal:any 
+  @Input() arrayDataResultado:any 
   @Input() index:string
   @Input() item:any
   @Input() parent:PendienteInformeComponent
