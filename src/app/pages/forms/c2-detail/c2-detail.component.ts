@@ -2512,21 +2512,20 @@ ValidarRegimenAcepta(){
 
 Resultado:any = {}
 async Consultar360(){
-let data:any = {}
-data.Ramo = 66,
-data.Producto = 1,
-data.Poliza = 7000936826,
-data.Certificado= 0,
-data.FechaConsulta= "09/07/2021", //fecha inicio vigencia
-data.Endoso= null    //Solo para rentas
+    let data:any = {}
+    data.Ramo = 66,
+    data.Producto = 1,
+    data.Poliza = 7000936826,
+    data.Certificado= 0,
+    data.FechaConsulta= "09/07/2021", //fecha inicio vigencia
+    data.Endoso= null    //Solo para rentas
 
-await this.userConfigService.Consulta360(data).then(
-    (response) => {
-    this.Resultado = response
-    });
-console.log("el resultado",this.Resultado)
-console.log("el resultado",this.Resultado.asegurado.documento)
+    await this.userConfigService.Consulta360(data).then(
+        (response) => {
+        this.Resultado = response
+        });
+    console.log("el resultado",this.Resultado)
 
-    } 
+} 
  
 }

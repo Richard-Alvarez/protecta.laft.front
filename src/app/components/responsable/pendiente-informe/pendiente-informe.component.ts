@@ -850,11 +850,6 @@ DescargarReporte(item){
        this.Resultado = response
       });
     console.log("el resultado",this.Resultado)
-
-    console.log("el resultado2",this.Resultado.asegurado)
-
-    console.log("el resultado1",this.Resultado.asegurado.documento)
-
     } 
    
 }
