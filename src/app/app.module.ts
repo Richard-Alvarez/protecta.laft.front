@@ -151,6 +151,8 @@ import { TemplatePComponent } from './components/responsable/templates/template-
 import { TemplateTComponent } from './components/responsable/templates/template-t/template-t.component';
 
 import { UserconfigService } from './services/userconfig.service';
+import { MantenimientoComplementoComponent } from './mantenimiento-complemento/mantenimiento-complemento.component';
+import { ModalMantenimientoComplementoComponent } from './modal-mantenimiento-complemento/modal-mantenimiento-complemento.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -284,6 +286,8 @@ import { UserconfigService } from './services/userconfig.service';
     C2InfoPolicyComponent,
     TemplatePComponent,
     TemplateTComponent,
+    MantenimientoComplementoComponent,
+    ModalMantenimientoComplementoComponent,
 
    
     //Validaciones
@@ -314,7 +318,7 @@ import { UserconfigService } from './services/userconfig.service';
     
     NO_ERRORS_SCHEMA
   ],
-  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent],
+  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent],
   providers: [UserconfigService],
   bootstrap: [AppComponent]
 })
