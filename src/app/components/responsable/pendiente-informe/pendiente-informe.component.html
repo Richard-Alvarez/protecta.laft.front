@@ -442,7 +442,7 @@
         <div *ngIf="this.NombreLink == 'colaborador' && this.RegimenPendiente==0">
             <app-template-t [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-t>
-
+        </div>
 
         <div *ngIf="this.Alerta=='C2' && (this.RegimenPendiente==2  || this.RegimenPendiente==1)" >
             <app-template-c2 [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
@@ -452,7 +452,7 @@
           
           
             
-        </div>
+        
         <div class="col-lg-12">
         <div class="card" *ngIf="(getArray('CERRADO',regimen.id)).length == 0">
             <div class="card-body">
