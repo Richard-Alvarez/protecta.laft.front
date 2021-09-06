@@ -10,6 +10,9 @@ import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 import * as $ from 'jquery';
 
 import {IOption} from 'ng-select'; 
+import { element } from 'protractor';
+import { forEach } from 'jszip';
+import { O_NOFOLLOW } from 'constants';
 
 
 @Component({
@@ -2525,7 +2528,7 @@ async Consultar360(){
         this.Resultado = response
         });
     console.log("el resultado",this.Resultado)
-
+        
 } 
  
 }

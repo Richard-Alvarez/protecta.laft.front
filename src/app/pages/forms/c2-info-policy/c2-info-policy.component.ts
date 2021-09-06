@@ -33,7 +33,9 @@ export class C2InfoPolicyComponent implements OnInit {
        this.Resultado = response
       });
     console.log("el resultado",this.Resultado)
-    console.log("el resultado",this.Resultado.asegurado.documento)
+    var documento= this.Resultado.asegurado.documento;
+    console.log(documento)
+
 
     }
 
