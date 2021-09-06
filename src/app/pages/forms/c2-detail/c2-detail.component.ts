@@ -188,6 +188,7 @@ export class C2DetailComponent implements OnInit {
     console.log("La lista del unchekAllList",this.unchekAllList)
     console.log("La lista del unchekAllList NewListCheck",this.NewListCheck)
     this.Arraycheckbox()
+    console.log("this.formData",this.formData)
   }
   
  
