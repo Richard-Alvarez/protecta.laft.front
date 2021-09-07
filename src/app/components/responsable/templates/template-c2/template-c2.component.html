@@ -73,12 +73,13 @@
             <br> 
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
         </div>
-            <div *ngIf="parent.RegimenPendiente == 1">
+            <div *ngIf="parent.RegimenPendiente == 2">
             <br>
             <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
+             
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{this.Cantidad}} coincidencias exactas entre el Registro Negativo y la base 
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaMasivos.length}} coincidencias exactas entre el Registro Negativo y la base 
                     de clientes – MASIVOS vigente al cierre {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
                 </li>
             </ul>
@@ -265,11 +266,12 @@
             </table>
             <br>
         </div>  
-
+        </div>
+        <div *ngIf="parent.RegimenPendiente == 1">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) coincidencias exactas entre el Registro Negativo 
-            y la base de clientes de Rentas Vitalicias vigente al cierre del (PERIODO), por ende, se consideran como señales de alerta “C2”. 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias exactas entre el Registro Negativo 
+            y la base de clientes de Rentas Vitalicias vigente al cierre del {{parent.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
@@ -303,7 +305,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of arrayDataResultado">
+                        <tr *ngFor="let item of parent.listaRenta">
                             <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
@@ -414,8 +416,8 @@
         <strong style="font-family: arial Narrow, serif;"> LISTAS ESPECIALES DE SEGURIDAD</strong>
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron cuatro (CANTIDAD DE COINCIDENCIAS) coincidencias de la base 
-            de clientes vigente y la base de listas internacionales al cierre del (PERIODO), para lo cual, se procedió a 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron cuatro {{parent.listaEspecial.length}} coincidencias de la base 
+            de clientes vigente y la base de listas internacionales al cierre del {{parent.Periodo}}, para lo cual, se procedió a 
             validar la identidad de cada uno, finalmente, todos los casos se trataría de coincidencias parciales u homonimias con 
             discrepancia en número de documento, nacionalidad y/o fecha de nacimiento.
             </li>
@@ -471,6 +473,7 @@
                 </tbody>
             </FONT>
         </table>
+        <br> 
     </div>  
     <ul>
         <li style="font-family: arial Narrow, serif; text-align: justify">
