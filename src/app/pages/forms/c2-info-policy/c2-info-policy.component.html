@@ -6,7 +6,7 @@
             <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
             <div class="card CardFlotante" style="background-color:white; display: inline-grid;" >
                 <div class="card-body" style="padding-left: 15px;padding-right: 15px;" >
-                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch"></strong></h4>
+                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{this.DescripcionRamo}}</strong></h4>
                     <p class="card-text textTitle" style=" margin-bottom: 10% !important;">
                         <span class="spancontent" id="PTitleProd" style="font-size: small !important;"></span>
                     </p>
@@ -44,7 +44,7 @@
             <div id="Template" style="background: white;">
                 <div class="Pestañas">
                     <ul class="nav nav-tabs nav-justified" id="TabsDetalle">
-                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo" (click)="Consultar360(item)">Información</a></li>
+                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo" >Información</a></li>
                         
                     </ul>
                 </div>
