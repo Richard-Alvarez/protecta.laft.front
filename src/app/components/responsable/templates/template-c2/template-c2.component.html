@@ -74,6 +74,8 @@
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
         </div>
             <br> 
+
+            <div *ngIf="parent.RegimenPendiente == 1">
             <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -112,7 +114,7 @@
                             </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of arrayDataResultado">
+                        <tr *ngFor="let item of parent.listaMasivos">
                             <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
@@ -144,7 +146,9 @@
             </table>
             <br> 
         </div>  
+        </div> 
 
+        <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) 
@@ -332,16 +336,18 @@
             </table>
             <br>
         </div> 
-
+        </div>
         <br> 
+
+        <div *ngIf="parent.RegimenPendiente == 1">
         <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron  {{this.Cantidad}} coincidencias exactas de clientes 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron  {{parent.listaPep.length}} coincidencias exactas de clientes 
             PEP y la base de clientes vigente de RENTAS al cierre del {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
-    <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
         <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
             <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                 <tbody>
@@ -372,8 +378,8 @@
                             </p>
                             </td>
                     </tr>
-                    <tr *ngFor="let item of arrayDataResultado">
-                        <td width="14%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                    <tr *ngFor="let item of parent.listaPep">
+                        <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                         <p>
                         {{item.STIPO_DOCUMENTO}}
                         </p>
@@ -403,8 +409,8 @@
             </FONT>
         </table>
         <br> 
-    </div>  
-
+        </div>  
+        </div> 
 
 
     </div>
