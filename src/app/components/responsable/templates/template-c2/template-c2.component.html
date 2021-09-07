@@ -151,7 +151,7 @@
         <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaSoat.length}}
             coincidencias exactas entre el Registro Negativo y la base de clientes – SOAT vigente al cierre del {{this.Periodo}}, por ende, 
             se consideran como señales de alerta “C2”. 
             </li>
@@ -182,7 +182,7 @@
                             </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of arrayDataResultado">
+                        <tr *ngFor="let item of parent.listaSoat">
                             <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
@@ -239,7 +239,7 @@
                             </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of arrayDataResultado">
+                        <tr *ngFor="let item of parent.listaSoat">
                             <td width="15%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
