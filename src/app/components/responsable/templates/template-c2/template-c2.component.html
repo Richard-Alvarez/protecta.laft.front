@@ -74,6 +74,8 @@
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
         </div>
             <br> 
+
+            <div *ngIf="parent.RegimenPendiente == 1">
             <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -86,27 +88,27 @@
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
                         <tr>
-                            <td width="120px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>TIPO DOC.</strong>
                             </p>
                             </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="11%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>NRO. DOC.</strong>
                             </p>
                             </td>
-                            <td width="280px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="25%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
                             </p>
                             </td>
-                            <td width="200px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>PRODUCTO</strong>
                             </p>
                             </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="30%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>INFORMACIÓN ADICIONAL</strong>
                             </p>
@@ -144,11 +146,14 @@
             </table>
             <br> 
         </div>  
+        </div> 
 
+        <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) coincidencias exactas entre el Registro Negativo y 
-            la base de clientes – MASIVOS vigente al cierre del (PERIODO), por ende, se consideran como señales de alerta “C2”. 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) 
+            coincidencias exactas entre el Registro Negativo y la base de clientes – SOAT vigente al cierre del {{this.Periodo}}, por ende, 
+            se consideran como señales de alerta “C2”. 
             </li>
         </ul>
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
@@ -156,29 +161,29 @@
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
                         <tr>
-                            <td width="120px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="15%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                             <p>
                             <strong>TIPO DOC.</strong>
                             </p>
                             </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="11%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                             <p>
                             <strong>NRO. DOC.</strong>
                             </p>
                             </td>
-                            <td width="280px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="44" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                             <p>
                             <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
                             </p>
                             </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                             <p>
                             <strong>INFORMACIÓN ADICIONAL</strong>
                             </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaSoat">
-                            <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <tr *ngFor="let item of arrayDataResultado">
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
                             </p>
@@ -188,12 +193,12 @@
                             {{item.SNUM_DOCUMENTO_BUSQ}}
                             </p>
                             </td>
-                            <td width="280px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.SNOM_COMPLETO_BUSQ}}
                             </p>
                             </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
                             </p>
@@ -205,52 +210,52 @@
             <br>
         </div> 
 
-        <div class="container" style="padding: 0px 200px;">
             <dt><dd><strong style="font-family: arial Narrow, serif;">Información adicional</strong></dd>
-        </div>
+            <br>    
+
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
                         <tr>
-                            <td width="120px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>TIPO DOC.</strong>
                             </p>
                             </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="11%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>NRO. DOC.</strong>
                             </p>
                             </td>
-                            <td width="280px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="34%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>NOMBRE COMPLETO</strong>
                             </p>
                             </td>
-                            <td width="200px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="40%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>INFORMACIÓN ADICIONAL</strong>
                             </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaRenta">
-                            <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <tr *ngFor="let item of arrayDataResultado">
+                            <td width="15%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
                             </p>
                             </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.SNUM_DOCUMENTO_BUSQ}}
                             </p>
                             </td>
-                            <td width="280px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <td width="34%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.SNOM_COMPLETO_BUSQ}}
                             </p>
                             </td>
-                            <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <td width="40%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             <!-- {{item.STIPO_DOCUMENTO}} --> ESTO LO LLENA EL USUARIO
                             </p>
@@ -259,6 +264,7 @@
                     </tbody>
                 </FONT>
             </table>
+            <br>
         </div>  
 
         <ul>
@@ -282,7 +288,7 @@
                             <strong>NRO. DOC.</strong>
                             </p>
                             </td>
-                            <td width="280px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="180px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                             <p>
                             <strong>NOMBRE COMPLETO</strong>
                             </p>
@@ -292,7 +298,7 @@
                             <strong>PRODUCTO</strong>
                             </p>
                             </td>
-                            <td width="200px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="300px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                                 <p>
                                 <strong>INFORMACION ADICIONAL</strong>
                                 </p>
@@ -309,7 +315,7 @@
                             {{item.SNUM_DOCUMENTO_BUSQ}}
                             </p>
                             </td>
-                            <td width="280px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <td width="180px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.SNOM_COMPLETO_BUSQ}}
                             </p>
@@ -319,7 +325,7 @@
                                 <!-- {{item.STIPO_DOCUMENTO}} --> Vida Ley  
                                 </p>
                             </td>
-                            <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
                             </p>
@@ -330,9 +336,71 @@
             </table>
             <br>
         </div> 
+        </div>
+        <br> 
 
-
-
+        <div *ngIf="parent.RegimenPendiente == 1">
+        <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            De acuerdo a los resultados reportados por el área de TI, se identificaron  {{parent.listaPep.length}} coincidencias exactas de clientes 
+            PEP y la base de clientes vigente de RENTAS al cierre del {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
+            </li>
+        </ul>
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                        <td width="12%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                        <p>
+                        <strong>TIPO DOC.</strong>
+                        </p>
+                        </td>
+                        <td width="12%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                        <p>
+                        <strong>NRO. DOC.</strong>
+                        </p>
+                        </td>
+                        <td width="56%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                        <p>
+                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                        </p>
+                        </td>
+                        <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                        <p>
+                        <strong>PRODUCTO</strong>
+                        </p>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let item of parent.listaPep">
+                        <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <p>
+                        {{item.STIPO_DOCUMENTO}}
+                        </p>
+                        </td>
+                        <td width="15%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <p>
+                        {{item.SNUM_DOCUMENTO_BUSQ}}
+                        </p>
+                        </td>
+                        <td width="55%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <p>
+                        {{item.SNOM_COMPLETO_BUSQ}}
+                        </p>
+                        </td>
+                        <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <p>
+                        <!-- {{item.STIPO_DOCUMENTO}} --> Vida Ley  
+                        </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </FONT>
+        </table>
+        <br> 
+        </div>  
+        </div> 
 
     </div>
                 

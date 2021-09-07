@@ -790,6 +790,7 @@ listaSoat:any = []
 listaMasivos:any = []
 listaRenta:any = []
 listaAhorro:any = []
+listaPep:any = []
 
 async DescargarReporte(item){
   debugger
@@ -806,6 +807,7 @@ async DescargarReporte(item){
   this.listaMasivos = []
   this.listaRenta = []
   this.listaAhorro = []
+  this.listaPep = []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -849,10 +851,12 @@ async DescargarReporte(item){
     this.listaMasivos = this.arrayDataResultado.filter(it => it.Ramo != 66 || it.Ramo != 76)
     this.listaRenta = this.arrayDataResultado.filter(it => it.Ramo == 76)
     this.listaAhorro =  this.arrayDataResultado.filter(it => it.Ramo == 71)
+    this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
     console.log("this.listaSoa",this.listaSoat)
     console.log("this.listaMasivos",this.listaMasivos)
     console.log("this.listaRenta",this.listaRenta)
     console.log("this.listaAhorro",this.listaAhorro)
+    console.log("this.listaPep",this.listaPep)
     this.Cantidad = this.arrayDataResultado.length
   }
 
