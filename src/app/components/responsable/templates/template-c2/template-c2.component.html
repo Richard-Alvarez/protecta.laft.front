@@ -73,9 +73,8 @@
             <br> 
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
         </div>
-            <br> 
-
             <div *ngIf="parent.RegimenPendiente == 1">
+            <br>
             <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -88,12 +87,12 @@
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
                         <tr>
-                            <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>TIPO DOC.</strong>
                             </p>
                             </td>
-                            <td width="11%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                            <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>NRO. DOC.</strong>
                             </p>
@@ -108,7 +107,7 @@
                             <strong>PRODUCTO</strong>
                             </p>
                             </td>
-                            <td width="30%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                            <td width="28%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>INFORMACIÓN ADICIONAL</strong>
                             </p>
@@ -337,9 +336,9 @@
             <br>
         </div> 
         </div>
-        <br> 
 
         <div *ngIf="parent.RegimenPendiente == 1">
+        <br>
         <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -357,7 +356,7 @@
                         <strong>TIPO DOC.</strong>
                         </p>
                         </td>
-                        <td width="11%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                        <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                         <p>
                         <strong>NRO. DOC.</strong>
                         </p>
@@ -372,7 +371,7 @@
                         <strong>PRODUCTO</strong>
                         </p>
                         </td>
-                        <td width="30%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                        <td width="28%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                             <p>
                             <strong>INFORMACIÓN ADICIONAL</strong>
                             </p>
@@ -409,10 +408,81 @@
             </FONT>
         </table>
         <br> 
-        </div>  
+        </div>       
         </div> 
-
-
+        <br>
+        <strong style="font-family: arial Narrow, serif;"> LISTAS ESPECIALES DE SEGURIDAD</strong>
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+                •	De acuerdo a los resultados reportados por el área de TI, se identificaron cuatro (CANTIDAD DE COINCIDENCIAS) coincidencias de la base 
+                de clientes vigente y la base de listas internacionales al cierre del (PERIODO), para lo cual, se procedió a 
+                validar la identidad de cada uno, finalmente, todos los casos se trataría de coincidencias parciales u homonimias con 
+                discrepancia en número de documento, nacionalidad y/o fecha de nacimiento.
+            </li>
+        </ul>
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                        <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                        <p>
+                        <strong>TIPO DOC.</strong>
+                        </p>
+                        </td>
+                        <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                        <p>
+                        <strong>NRO. DOC.</strong>
+                        </p>
+                        </td>
+                        <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                        <p>
+                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                        </p>
+                        </td>
+                        <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                            <p>
+                            <strong>INFORMACIÓN ADICIONAL</strong>
+                            </p>
+                            </td>
+                    </tr>
+                    <tr *ngFor="let item of parent.listaPep">
+                        <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <p>
+                        {{item.STIPO_DOCUMENTO}}
+                        </p>
+                        </td>
+                        <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <p>
+                        {{item.SNUM_DOCUMENTO_BUSQ}}
+                        </p>
+                        </td>
+                        <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                        <p>
+                        {{item.SNOM_COMPLETO_BUSQ}}
+                        </p>
+                        </td>
+                        <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            -----------
+                            </p>
+                            </td>
+                    </tr>
+                </tbody>
+            </FONT>
+        </table>
+        <br> 
+    </div>  
+    <br>
+    <strong style="font-family: arial Narrow, serif;"> LISTAS ESPECIALES DE SEGURIDAD</strong>
+    <ul>
+        <li style="font-family: arial Narrow, serif; text-align: justify">
+        Si/No se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del (PERIODO)”.
+        </li>
+        <li style="font-family: arial Narrow, serif; text-align: justify">
+        Por lo tanto, se concluye que por la señal de alerta “C2” si/no se identificaron casos.
+        </li>
+    </ul>
     </div>
                 
     <div class="text-center pt-5">
