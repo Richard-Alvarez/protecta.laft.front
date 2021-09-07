@@ -784,6 +784,8 @@ RespuestaGlobal:string = ''
 RegimenPendiente:number = 0
 NombreLink:string = ''
 arrayDataResultado= []
+Periodo:string = ''
+Cantidad:number = 0
 
 async DescargarReporte(item){
   debugger
@@ -794,6 +796,8 @@ async DescargarReporte(item){
   this.Alerta  = ''
   this.RegimenPendiente = 0
   this.arrayDataResultado= []
+  this.Periodo = ''
+  this.Cantidad = 0
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -821,6 +825,10 @@ async DescargarReporte(item){
   this.Respuesta = (this.arrayDataSenal[0].Respuesta).toLowerCase()
   this.Alerta = this.arrayDataSenal[0].Alerta
   this.RegimenPendiente = item.NREGIMEN
+  let dia =  this.NPERIODO_PROCESO.toString().substr(6,2)
+  let mes =  this.NPERIODO_PROCESO.toString().substr(4,2)
+  let anno = this.NPERIODO_PROCESO.toString().substr(0,4) 
+  this.Periodo = dia + '/' + mes + '/' + anno
 
   if(item.SNOMBRE_ALERTA == "C2" && item.NIDALERTA == 2){
     let data:any = {}
@@ -829,6 +837,7 @@ async DescargarReporte(item){
     data.NIDREGIMEN = this.RegimenPendiente
     this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
     console.log("this.arrayDataResultado",this.arrayDataResultado)
+    this.Cantidad = this.arrayDataResultado.length
   }
 
   

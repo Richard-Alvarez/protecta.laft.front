@@ -55,20 +55,20 @@
             <br> 
             <dl>
                 <dt style="font-family: arial Narrow, serif; text-align: justify">
-                a) Solicita al área de Operaciones & TI que realice la búsqueda del Registro Negativo y base de PEP y Familiares 
-                de PEP contra la base de clientes con la finalidad de identificar la señal de alerta en cuestión. Para esto, la 
-                Oficialía de Cumplimiento es responsable de enviar la lista de nombres contenidos en dicho registro.
-                </dt>
+                    <dd style="font-family: arial Narrow, serif; text-align: justify"> a) Solicita al área de Operaciones & TI que realice la búsqueda del Registro Negativo y base de PEP y Familiares 
+                    de PEP contra la base de clientes con la finalidad de identificar la señal de alerta en cuestión. Para esto, la 
+                    Oficialía de Cumplimiento es responsable de enviar la lista de nombres contenidos en dicho registro.
+                    </dd>
                 <dt style="font-family: arial Narrow, serif; text-align: justify">
-                b)	Complementariamente, esta señal de alerta se revisa mediante el “Procedimiento para el monitoreo de Listas Especiales 
-                de Seguridad” según lo indicado en el documento Sistema de Monitoreo de Operaciones – SPLAFT.
-                </dt>
+                    <dd style="font-family: arial Narrow, serif; text-align: justify"> b)	Complementariamente, esta señal de alerta se revisa mediante el “Procedimiento para el monitoreo de Listas Especiales 
+                    de Seguridad” según lo indicado en el documento Sistema de Monitoreo de Operaciones – SPLAFT.
+                    </dd>
                 <dt style="font-family: arial Narrow, serif; text-align: justify">
-                c)	Complementariamente, esta señal de alerta se revisa mediante la búsqueda de clientes con información negativa en fuentes públicas.
-                </dt>
+                    <dd style="font-family: arial Narrow, serif; text-align: justify"> c)	Complementariamente, esta señal de alerta se revisa mediante la búsqueda de clientes con información negativa en fuentes públicas.
+                    </dd>
                 <dt style="font-family: arial Narrow, serif; text-align: justify">
-                d)	En caso se identifique señal de alerta y no sea descartado como falso positivo, se procederá a analizar la inusual operación.
-                </dt>
+                    <dd style="font-family: arial Narrow, serif; text-align: justify"> d)	En caso se identifique señal de alerta y no sea descartado como falso positivo, se procederá a analizar la inusual operación.
+                    </dd>
             </dl>
             <br> 
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
@@ -77,8 +77,8 @@
             <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                De acuerdo a los resultados reportados por el área de TI, se identificaron (Cantidad de la tabla) coincidencias exactas entre el Registro Negativo y la base 
-                de clientes – MASIVOS vigente al cierre (periodo), por ende, se consideran como señales de alerta “C2”. 
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{this.Cantidad}} coincidencias exactas entre el Registro Negativo y la base 
+                    de clientes – MASIVOS vigente al cierre {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
                 </li>
             </ul>
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
@@ -142,18 +142,15 @@
                     </tbody>
                 </FONT>
             </table>
-        </div>  
-        
-        <div class="container" style="padding: 0px 200px;">
             <br> 
-            <strong style="font-family: arial Narrow, serif;">Información adicional</strong>
-            <ul>
+        </div>  
+
+        <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron XX coincidencias exactas entre el Registro Negativo y la base de clientes 
-            – SOAT vigente al cierre de mes de XXXX 20XX, por ende, se consideran como señales de alerta “C2”. 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) coincidencias exactas entre el Registro Negativo y 
+            la base de clientes – MASIVOS vigente al cierre del (PERIODO), por ende, se consideran como señales de alerta “C2”. 
             </li>
-            </ul>
-        </div>
+        </ul>
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -205,19 +202,12 @@
                     </tbody>
                 </FONT>
             </table>
+            <br>
         </div> 
 
         <div class="container" style="padding: 0px 200px;">
-            <br> 
-            <strong style="font-family: arial Narrow, serif;">Información adicional</strong>
-            <ul>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron XX coincidencias exactas entre el Registro Negativo y la base de clientes 
-            – SOAT vigente al cierre de mes de XXXX 20XX, por ende, se consideran como señales de alerta “C2”. 
-            </li>
-            </ul>
+            <dt><dd><strong style="font-family: arial Narrow, serif;">Información adicional</strong></dd>
         </div>
-
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -262,7 +252,7 @@
                             </td>
                             <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
-                            <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
+                            <!-- {{item.STIPO_DOCUMENTO}} --> ESTO LO LLENA EL USUARIO
                             </p>
                             </td>
                         </tr>
@@ -270,6 +260,80 @@
                 </FONT>
             </table>
         </div>  
+
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) coincidencias exactas entre el Registro Negativo 
+            y la base de clientes de Rentas Vitalicias vigente al cierre del (PERIODO), por ende, se consideran como señales de alerta “C2”. 
+            </li>
+        </ul>
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                            <td width="120px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>TIPO DOC.</strong>
+                            </p>
+                            </td>
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>NRO. DOC.</strong>
+                            </p>
+                            </td>
+                            <td width="280px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>NOMBRE COMPLETO</strong>
+                            </p>
+                            </td>
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>PRODUCTO</strong>
+                            </p>
+                            </td>
+                            <td width="200px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>INFORMACION ADICIONAL</strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of arrayDataResultado">
+                            <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.STIPO_DOCUMENTO}}
+                            </p>
+                            </td>
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.SNUM_DOCUMENTO_BUSQ}}
+                            </p>
+                            </td>
+                            <td width="280px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.SNOM_COMPLETO_BUSQ}}
+                            </p>
+                            </td>
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                <!-- {{item.STIPO_DOCUMENTO}} --> Vida Ley  
+                                </p>
+                            </td>
+                            <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
+                            </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </FONT>
+            </table>
+            <br>
+        </div> 
+
+
+
+
     </div>
                 
     <div class="text-center pt-5">
