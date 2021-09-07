@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
-import { C2DetailComponent } from '../c2-detail/c2-detail.component';
 
 @Component({
   selector: 'app-c2-info-policy',
@@ -12,14 +11,26 @@ export class C2InfoPolicyComponent implements OnInit {
   constructor(private userConfigService: UserconfigService,) {
 
   }
+  
+  Resultado:any = {}
+  asegCodEstCiv: any;
+  asegDocumento: any;
+  asegTipoDoc: any;
+  intermedCodInter: any;
+  intermedNombre: any;
+  contratName: any;
+  canalEstadoDescEstado:any;
+  canalFecInic: any;
+  canalNombre: any;  
+  canalTipoDescrip: any;
 
-  async ngOnInit() {
+
+  ngOnInit(){
+    this.Consultar360()
   }
 
-  Resultado:any = {}
   async Consultar360(){
 
-    
     let data = {
     Ramo : 66,
     Producto : 1,
@@ -33,8 +44,16 @@ export class C2InfoPolicyComponent implements OnInit {
        this.Resultado = response
       });
     console.log("el resultado",this.Resultado)
-    console.log("el resultado",this.Resultado.asegurado.documento)
-
+    this.asegCodEstCiv= this.Resultado.asegurado.codEstadoCivil;
+    this.asegDocumento= this.Resultado.asegurado.documento;
+    this.asegTipoDoc= this.Resultado.asegurado.asegTipoDoc;
+    this.intermedCodInter= this.Resultado.intermediario.codigoIntermediario;
+    this.intermedNombre= this.Resultado.intermediario.nombre;
+    this.contratName= this.Resultado.contratante.name;
+    this.canalEstadoDescEstado= this.Resultado.canal.estado.descEstado;
+    this.canalFecInic= this.Resultado.canal.fechaInicio;
+    this.canalNombre= this.Resultado.canal.nombre;    
+    this.canalTipoDescrip= this.Resultado.canal.tipo.descripcion;
     }
 
 }
