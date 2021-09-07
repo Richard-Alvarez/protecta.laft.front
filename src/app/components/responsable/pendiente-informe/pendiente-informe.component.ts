@@ -786,6 +786,10 @@ NombreLink:string = ''
 arrayDataResultado= []
 Periodo:string = ''
 Cantidad:number = 0
+listaSoat:any = []
+listaMasivos:any = []
+listaRenta:any = []
+listaAhorro:any = []
 
 async DescargarReporte(item){
   debugger
@@ -798,6 +802,10 @@ async DescargarReporte(item){
   this.arrayDataResultado= []
   this.Periodo = ''
   this.Cantidad = 0
+  this.listaSoat = []
+  this.listaMasivos = []
+  this.listaRenta = []
+  this.listaAhorro = []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -837,6 +845,14 @@ async DescargarReporte(item){
     data.NIDREGIMEN = this.RegimenPendiente
     this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
     console.log("this.arrayDataResultado",this.arrayDataResultado)
+    this.listaSoat = this.arrayDataResultado.filter(it => it.Ramo == 66)
+    this.listaMasivos = this.arrayDataResultado.filter(it => it.Ramo != 66 || it.Ramo != 76)
+    this.listaRenta = this.arrayDataResultado.filter(it => it.Ramo == 76)
+    this.listaAhorro =  this.arrayDataResultado.filter(it => it.Ramo == 71)
+    console.log("this.listaSoa",this.listaSoat)
+    console.log("this.listaMasivos",this.listaMasivos)
+    console.log("this.listaRenta",this.listaRenta)
+    console.log("this.listaAhorro",this.listaAhorro)
     this.Cantidad = this.arrayDataResultado.length
   }
 
