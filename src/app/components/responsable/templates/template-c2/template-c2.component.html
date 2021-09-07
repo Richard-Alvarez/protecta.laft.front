@@ -174,12 +174,71 @@
                             <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
                             </p>
                             </td>
-                            <td width="200px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                             <p>
-                            <strong>PRODUCTO</strong>
+                            <strong>INFORMACIÓN ADICIONAL</strong>
+                            </p>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of arrayDataResultado">
+                            <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.STIPO_DOCUMENTO}}
+                            </p>
+                            </td>
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.SNUM_DOCUMENTO_BUSQ}}
+                            </p>
+                            </td>
+                            <td width="280px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.SNOM_COMPLETO_BUSQ}}
+                            </p>
+                            </td>
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
+                            </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </FONT>
+            </table>
+        </div> 
+
+        <div class="container" style="padding: 0px 200px;">
+            <br> 
+            <strong style="font-family: arial Narrow, serif;">Información adicional</strong>
+            <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            De acuerdo a los resultados reportados por el área de TI, se identificaron XX coincidencias exactas entre el Registro Negativo y la base de clientes 
+            – SOAT vigente al cierre de mes de XXXX 20XX, por ende, se consideran como señales de alerta “C2”. 
+            </li>
+            </ul>
+        </div>
+
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                            <td width="120px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>TIPO DOC.</strong>
                             </p>
                             </td>
                             <td width="100px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>NRO. DOC.</strong>
+                            </p>
+                            </td>
+                            <td width="280px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>NOMBRE COMPLETO</strong>
+                            </p>
+                            </td>
+                            <td width="200px" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                             <p>
                             <strong>INFORMACIÓN ADICIONAL</strong>
                             </p>
@@ -203,11 +262,6 @@
                             </td>
                             <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
-                            <!-- {{item.STIPO_DOCUMENTO}} --> Vida Ley  
-                            </p>
-                            </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                            <p>
                             <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
                             </p>
                             </td>
@@ -216,7 +270,6 @@
                 </FONT>
             </table>
         </div>  
-
     </div>
                 
     <div class="text-center pt-5">

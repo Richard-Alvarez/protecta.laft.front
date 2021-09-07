@@ -74,6 +74,7 @@ import { TestResponsableComponent } from './../app/components/test-responsable/t
 import { ConfigDemandaComponent } from './../app/config-demanda/config-demanda.component';
 import { TemplateRGComponent } from './../app/components/responsable/templates/template-rg/template-rg.component';
 import { TemplateC3Component } from './../app/components/responsable/templates/template-c3/template-c3.component';
+import { MantenimientoComplementoComponent } from './../app/mantenimiento-complemento/mantenimiento-complemento.component';
 
 //fin formularios antiguos
 
@@ -147,7 +148,8 @@ const routes: Routes = [
   { path: 'recurse-profile', component: RecurseProfile},
   { path: 'config-demanda', component: ConfigDemandaComponent},
   { path: 'rg', component: TemplateRGComponent},
-  { path: 'C3', component: TemplateC3Component}
+  { path: 'C3', component: TemplateC3Component},
+  { path: 'complemento', component: MantenimientoComplementoComponent}
   
 
 
