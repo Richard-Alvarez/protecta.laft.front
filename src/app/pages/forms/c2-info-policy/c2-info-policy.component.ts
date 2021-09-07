@@ -54,6 +54,13 @@ export class C2InfoPolicyComponent implements OnInit {
     this.canalFecInic= this.Resultado.canal.fechaInicio;
     this.canalNombre= this.Resultado.canal.nombre;    
     this.canalTipoDescrip= this.Resultado.canal.tipo.descripcion;
+
+
+
+    
+
+
+
     }
 
 }
