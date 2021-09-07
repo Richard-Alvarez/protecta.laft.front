@@ -15,6 +15,8 @@ export class TemplateC2Component implements OnInit {
   @Input() arrayDataResultado:any 
   @Input() index:string
   @Input() item:any
+  @Input() Periodo:number
+  @Input() Cantidad:number
   @Input() parent:PendienteInformeComponent
   
   constructor() {  }

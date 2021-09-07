@@ -23,8 +23,16 @@ export class MantenimientoComplementoComponent implements OnInit {
     private userConfig: UserconfigService,
   ) { }
 
-  ngOnInit() {
-    this.listcomplemento = [{"complemento" : "CC1","descripcion": "El cpomplento se asigno a la señal por algunos motivos por algun intermedio ","estado":"Activo", "fecha":"10/10/2021", "usuario" : "German", "sennal" : "C1" }]
+  async ngOnInit() {
+    // this.listcomplemento = [{"complemento" : "CC1","descripcion": "El cpomplento se asigno a la señal por algunos motivos por algun intermedio ","estado":"Activo", "fecha":"10/10/2021", "usuario" : "German", "sennal" : "C1" }]
+    this.core.loader.show()
+    await this.listaComplemento()
+    this.core.loader.hide()
+  }
+
+  async listaComplemento(){
+    this.listcomplemento = await this.userConfig.GetListaAlertaComplemento()
+    console.log("la lista de los complementos", this.listcomplemento)
   }
 
 

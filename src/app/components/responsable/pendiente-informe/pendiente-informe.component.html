@@ -446,8 +446,9 @@
 
         <div *ngIf="this.Alerta=='C2' && (this.RegimenPendiente==2  || this.RegimenPendiente==1)" >
             <app-template-c2 [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" [arrayDataResultado]="arrayDataResultado" 
-            ></app-template-c2>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" [arrayDataResultado]="arrayDataResultado"  [Periodo]="Periodo"
+            [Cantidad]="Cantidad"  
+            style="display: none"></app-template-c2>
         </div>
           
           

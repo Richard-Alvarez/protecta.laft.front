@@ -36,19 +36,19 @@
                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Complemento</div>
                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Descripción</div>
                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Estado</div>
-                                <div class="col-2 txtCabecera" style="font-size: 14px; ">Fecha de registro</div>
-                                <div class="col-1 txtCabecera" style="font-size: 14px; ">Usuario</div>
-                                <div class="col-1 txtCabecera" style="font-size: 14px; ">Señal</div>
+                                <div class="col-2 txtCabecera" style="font-size: 14px;">Fecha de registro</div>
+                                <div class="col-1 txtCabecera" style="font-size: 14px;">Usuario</div>
+                                <div class="col-1 txtCabecera" style="font-size: 14px;">Señal</div>
                                  <div class="col-1 txtCabecera text-center" style="font-size: 14px;">Editar</div>
                         </div>
 
                        <div class="row " id="pintaGrilla"  *ngFor="let item of listcomplemento;let index = index" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
-                            <div class="col-2 text-left txtDetalle">{{item.complemento}}</div>
-                            <div class="col-2 text-left txtDetalle" >{{item.descripcion}}</div>
-                            <div class="col-2 text-left txtDetalle" style="word-break: break-all; " title="">{{item.estado}}</div>
-                            <div class="col-2 text-left txtDetalle">{{item.fecha}}</div>
-                            <div class="col-1 text-left txtDetalle" >{{item.usuario}}</div> 
-                            <div class="col-1 text-left txtDetalle" >{{item.sennal}}</div>
+                            <div class="col-2 text-left txtDetalle">{{item.SNOMBRE_COMPLEMENTO}}</div>
+                            <div class="col-2 text-left txtDetalle" >{{item.SDESCRIPCION}}</div>
+                            <div class="col-2 text-left txtDetalle" style="word-break: break-all; " title="">{{item.SESTADO}}</div>
+                            <div class="col-2 text-left txtDetalle">{{item.DFECHA_REGISTRO}}</div>
+                            <div class="col-1 text-left txtDetalle" >{{item.NIDUSUARIO_MODIFICA}}</div> 
+                            <div class="col-1 text-left txtDetalle" >{{item.NIDALERTA}}</div>
                            <div class="col-1 text-center ">
                         
                                 <img src="assets/icons/edit.png" title="Editar" alt=""
