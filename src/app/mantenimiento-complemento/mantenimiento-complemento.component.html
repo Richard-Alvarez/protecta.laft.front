@@ -34,22 +34,24 @@
                 <div class="borderFormat col-12">
                         <div class="row" style="border-bottom: 2px solid #26296D;">
                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Complemento</div>
-                                <div class="col-2 txtCabecera" style="font-size: 14px;">Descripción</div>
-                                <div class="col-2 txtCabecera" style="font-size: 14px;">Estado</div>
-                                <div class="col-2 txtCabecera" style="font-size: 14px;">Fecha de registro</div>
-                                <div class="col-1 txtCabecera" style="font-size: 14px;">Usuario</div>
+                                <div class="col-3 txtCabecera" style="font-size: 14px;">Descripción</div>
+                                <div class="col-1 txtCabecera" style="font-size: 14px;">Grupo</div>
                                 <div class="col-1 txtCabecera" style="font-size: 14px;">Señal</div>
-                                 <div class="col-1 txtCabecera text-center" style="font-size: 14px;">Editar</div>
+                                <div class="col-1 txtCabecera" style="font-size: 14px;">Estado</div>
+                                <div class="col-1 txtCabecera" style="font-size: 14px;">Fecha de registro</div>
+                                <div class="col-2 txtCabecera" style="font-size: 14px;">Usuario</div>
+                                <div class="col-1 txtCabecera text-center" style="font-size: 14px;">Editar</div>
                         </div>
 
                        <div class="row " id="pintaGrilla"  *ngFor="let item of listcomplemento;let index = index" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
                             <div class="col-2 text-left txtDetalle">{{item.SNOMBRE_COMPLEMENTO}}</div>
-                            <div class="col-2 text-left txtDetalle" >{{item.SDESCRIPCION}}</div>
-                            <div class="col-2 text-left txtDetalle" style="word-break: break-all; " title="">{{item.SESTADO == 1 ? 'ACTIVADO' : 'DESACTIVADO'}}</div>
-                            <div class="col-2 text-left txtDetalle">{{item.DFECHA_REGISTRO}}</div>
-                            <div class="col-1 text-left txtDetalle" >{{item.NOMBRECOMPLETO}}</div> 
+                            <div class="col-3 text-left txtDetalle" >{{item.SDESCRIPCION}}</div>
+                            <div class="col-1 text-left txtDetalle" >{{item.SDESGRUPO_SENAL}}</div>
                             <div class="col-1 text-left txtDetalle" >{{item.SNOMBRE_ALERTA}}</div>
-                           <div class="col-1 text-center ">
+                            <div class="col-1 text-left txtDetalle" style="word-break: break-all; " title="">{{item.SESTADO == 1 ? 'ACTIVADO' : 'DESACTIVADO'}}</div>
+                            <div class="col-1 text-left txtDetalle">{{item.DFECHA_REGISTRO}}</div>
+                            <div class="col-2 text-left txtDetalle" >{{item.NOMBRECOMPLETO}}</div> 
+                            <div class="col-1 text-center ">
                         
                                 <img src="assets/icons/edit.png" title="Editar" alt=""
                                     style="cursor: pointer;width: 24px;" (click)="updateAlertFromList(item)" />
