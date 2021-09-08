@@ -2,6 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import { UserconfigService } from '../services/userconfig.service';
 import { SbsreportService } from '../services/sbsreport.service';
 import { CoreService } from './../../app/services/core.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-mantenimiento-complemento',
@@ -19,7 +20,8 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   public GrupoList:any
   public estado
   public desactivar: boolean
-
+  public Usuario
+  public idComplemento
   @Input() reference: any;
  
   @Input() public alert: any;
@@ -47,6 +49,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       this.desactivar = true
       
     }
+    this.Usuario = this.core.storage.get('usuario')
   }
 
 //   async ListaAlerta(){
@@ -70,11 +73,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
     this.reference.close(id);
   }
 
-  GuardarCambios(){
-
-  }
-
-
+  
   listData(){
     if (this.data == 'null') {
 
@@ -87,6 +86,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       this.nombreComplemento = this.data.SNOMBRE_COMPLEMENTO
       this.descripcion = this.data.SDESCRIPCION
       this.pregunta = this.data.SPREGUNTA
+      this.idComplemento = this.data.NIDCOMPLEMENTO
     }
     
   }
@@ -107,6 +107,165 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       this.SennalList = response
     })
   }
+
+  GuardarCambios2(){
+    console.log("estadooooo", this.estado)
+  }
+  async GuardarCambios(){
+
+    let respValidacion:any = this.validator()
+    if(respValidacion.code == 1){
+      swal.fire({
+              title: "Mantenimiento de complemento",
+               icon: "warning",
+               text: respValidacion.message,
+               showCancelButton: false,
+               confirmButtonColor: "#FA7000",
+               confirmButtonText: "Aceptar",
+               showCloseButton: true,
+               customClass: { 
+                 closeButton : 'OcultarBorde'
+                             },
+             }).then(async (respuesta) =>{
+                     console.log("respuesta.dismiss",respuesta.dismiss)
+                     if(!respuesta.dismiss){
+                      return
+                      }
+             })
+    }
+
+    else{
+
+      
+      if(this.data == 'null' ){
+        // Acá es para registrar
+      swal.fire({
+        title: "Mantenimiento de complemento",
+         icon: "warning",
+         text: "¿Esta seguro de registrar un complemento",
+         showCancelButton: true,
+         confirmButtonColor: "#FA7000",
+         confirmButtonText: "Aceptar",
+         showCloseButton: true,
+         customClass: { 
+           closeButton : 'OcultarBorde'
+                       },
+       }).then(async (respuesta) =>{
+               console.log("respuesta.dismiss",respuesta.dismiss)
+               if(!respuesta.dismiss){
+
+                
+                //Aca sera el registrar
+                let dataRegistro:any = {};
+                
+                dataRegistro.NIDCOMPLEMENTO = 0
+                dataRegistro.SNOMBRE_COMPLEMENTO = this.nombreComplemento
+                dataRegistro.SDESCRIPCION = this.descripcion
+                dataRegistro.SPREGUNTA = this.pregunta
+                dataRegistro.NIDALERTA = this.sennal
+                dataRegistro.NIDGRUPOSENAL = this.idGrupo
+                dataRegistro.SESTADO =  true ? 1 : 2
+                dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
+                dataRegistro.TIPOOPERACION = 'I'
+                console.log("la data que envia a registrar :", dataRegistro)
+
+                this.core.loader.show(); 
+                await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
+                this.core.loader.hide(); 
+
+                  this.closeModal('edit-modal')
+                  }else{
+                        return
+                  }
+       })
+
+  
+       
+    }else{
+      //Aca sera el actualizar
+
+      swal.fire({
+        title: "Mantenimiento de complemento",
+         icon: "warning",
+         text: "¿Esta seguro de actualizar el complemento",
+         showCancelButton: true,
+         confirmButtonColor: "#FA7000",
+         confirmButtonText: "Aceptar",
+         showCloseButton: true,
+         customClass: { 
+           closeButton : 'OcultarBorde'
+                       },
+       }).then(async (respuesta) =>{
+               console.log("respuesta.dismiss",respuesta.dismiss)
+               if(!respuesta.dismiss){
+                
+                let dataRegistro:any = {};
+                dataRegistro.NIDCOMPLEMENTO = this.idComplemento
+                dataRegistro.SNOMBRE_COMPLEMENTO = this.nombreComplemento
+                dataRegistro.SDESCRIPCION = this.descripcion
+                dataRegistro.SPREGUNTA = this.pregunta
+                dataRegistro.NIDALERTA = this.sennal
+                dataRegistro.NIDGRUPOSENAL = this.idGrupo
+                dataRegistro.SESTADO = true ? 1 : 2
+                dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
+                dataRegistro.TIPOOPERACION = 'M'
+
+                this.core.loader.show(); 
+                await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
+                this.core.loader.hide();
+
+                
+                }else{
+                 return
+               }
+            })
+  }
+  }
+}
+ 
+
+  validator(){
+    
+    let objRespuesta: any = {};
+    objRespuesta.code = 0
+    objRespuesta.message = ''
+
+    if(this.pregunta == ''){
+      objRespuesta.code = 1;
+      objRespuesta.message = "Debe ingresar la pregunta ";
+      return objRespuesta
+    }
+    if(this.idGrupo != 0){
+      objRespuesta.code = 1;
+      objRespuesta.message = "Debe seleccionar el grupo ";
+      return objRespuesta
+    }
+    if(this.sennal != 0){
+      objRespuesta.code = 1;
+      objRespuesta.message = "Debe seleccionar la señal ";
+      return objRespuesta
+    }
+    if(this.nombreComplemento == ''){
+      objRespuesta.code = 1;
+      objRespuesta.message = "Debe ingresar el nombre del complemento";
+      return objRespuesta
+    }
+    if(this.descripcion == ''){
+      objRespuesta.code = 1;
+      objRespuesta.message = "Debe ingresar la descripción del complemento";
+      return objRespuesta
+    }
+    if(this.pregunta == ''){
+      objRespuesta.code = 1;
+      objRespuesta.message = "Debe ingresar la pregunta del complemento";
+      return objRespuesta
+    }
+    
+    
+  
+    return objRespuesta
+  }
+
 
 
 }
