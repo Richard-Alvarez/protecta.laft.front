@@ -14,6 +14,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   public sennal = 0
   public descripcion
   public nombreComplemento = '' 
+  public pregunta = ''
   public idGrupo=0
   public GrupoList:any
   public estado
@@ -33,6 +34,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
     console.log("data",this.data)
     //await  this.ListaAlerta()
     await  this.getGrupoList()
+    await this.listData()
     if (this.data == 'null') {
        this.fTitle = 'Agregar complemento';
        this.desactivar = false
@@ -72,6 +74,23 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
 
   }
 
+
+  listData(){
+    if (this.data == 'null') {
+
+    }
+    else{
+      this.idGrupo = this.data.NIDGRUPOSENAL
+      this.BuscarSeñal(this.idGrupo)
+      this.sennal = this.data.NIDALERTA
+      this.estado = this.data.SESTADO == 1 ? true : false
+      this.nombreComplemento = this.data.SNOMBRE_COMPLEMENTO
+      this.descripcion = this.data.SDESCRIPCION
+      this.pregunta = this.data.SPREGUNTA
+    }
+    
+  }
+
   async changeGrupo(){
     let data:any = {}
     data.NIDGRUPOSENAL = this.idGrupo
@@ -79,6 +98,14 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       this.SennalList = response
     })
     
+  }
+
+  async BuscarSeñal(valor){
+    let data:any = {}
+    data.NIDGRUPOSENAL = valor
+    await this.sbsReportService.GetGrupoXSenal(data).then((response) => {
+      this.SennalList = response
+    })
   }
 
 

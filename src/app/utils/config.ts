@@ -176,6 +176,7 @@ class Rutas {
   public urlGetListaResultado: string = this.base + "monitoreoSenales/GetListaResultado";
   public urlGetGrupoXSenal: string = this.base + "monitoreoSenales/GetGrupoXSenal";
   public urlGetListaAlertaComplemento: string = this.base + "monitoreoSenales/GetListaAlertaComplemento";
+  public urlInsertUpdateComplemento: string = this.base + "monitoreoSenales/InsertUpdateComplemento";
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }
