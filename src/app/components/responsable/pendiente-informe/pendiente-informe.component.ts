@@ -890,6 +890,7 @@ async DescargarReporte(item){
     data.FechaConsulta= "09/07/2021", //fecha inicio vigencia
     data.Endoso= null    //Solo para rentas
     
+    
     await this.userConfigService.Consulta360(data).then(
       (response) => {
        this.Resultado = response
