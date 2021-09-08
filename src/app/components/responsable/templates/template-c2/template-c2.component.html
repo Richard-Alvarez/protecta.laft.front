@@ -327,7 +327,7 @@
                             </td>
                             <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
-                            <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
+                            {{item.STIPO_LISTA_REFERENCIA}}
                             </p>
                             </td>
                         </tr>
@@ -476,10 +476,10 @@
     </div>  
     <ul>
         <li style="font-family: arial Narrow, serif; text-align: justify">
-         {{parent.listaEspecial.length > 0 ? 'Si' : 'No'}} se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del (PERIODO)”.
+         {{parent.listaEspecial.length > 0 ? 'Si' : 'No'}} se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del {{parent.Periodo}}”.
         </li>
         <li style="font-family: arial Narrow, serif; text-align: justify">
-        Por lo tanto, se concluye que por la señal de alerta “C2” si/no se identificaron casos.
+        Por lo tanto, se concluye que por la señal de alerta “C2” {{parent.listaEspecial.length > 0 ? 'si' : 'no'}} se identificaron casos.
         </li>
     </ul>
 
