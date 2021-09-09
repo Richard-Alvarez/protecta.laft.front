@@ -1,7 +1,25 @@
 {
-    // Use IntelliSense para saber los atributos posibles.
-    // Mantenga el puntero para ver las descripciones de los existentes atributos.
-    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
-}
+    "configurations": [
+      // Based on: https://github.com/microsoft/vscode-recipes/tree/master/Angular-CLI
+      {
+        "name": "Launch ng serve & Chrome",
+        "type": "chrome",
+        "request": "launch",
+        "preLaunchTask": "npm: start",
+        "url": "http://localhost:4200/",
+  
+        // Note: The ./client directory
+        "webRoot": "${workspaceFolder}/src",
+        
+        "sourceMaps": true,
+        "sourceMapPathOverrides": {
+          "webpack:/*": "${webRoot}/*",
+          "/./*": "${webRoot}/*",
+          "/src/*": "${webRoot}/*",
+          "/*": "*",
+          "/./~/*": "${webRoot}/node_modules/*"
+        }
+      },
+    ]
+  }

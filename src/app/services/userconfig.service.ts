@@ -23,7 +23,6 @@ export class UserconfigService {
             return reject(error)
         }
     })
-
   }
 
   getPolicyList(data: any): Promise<any> {
@@ -145,10 +144,48 @@ export class UserconfigService {
     })
   }
 
+  GetListaAlertaComplemento(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaAlertaComplemento, null).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  GetListaResultado(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaResultado, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+ 
+
   sendEmail(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlEmailSender, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  Consulta360(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlConsulta360, data).subscribe((response) => {
           return resolve(response);
 
         });
@@ -335,6 +372,18 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlInsertUpdateProfileGrupos, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  InsertUpdateComplemento(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlInsertUpdateComplemento, data).subscribe(response => {
           return resolve(response)
         })
       } catch (error) {
@@ -838,6 +887,19 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlUpdateUnchecked, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+
+  }
+
+  GetAlertReportList(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetAlertReportList, data).subscribe(response => {
           return resolve(response)
         })
       } catch (error) {

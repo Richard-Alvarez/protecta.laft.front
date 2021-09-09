@@ -1,0 +1,475 @@
+<div id="exportContent">
+
+    
+        
+    <!--<img src="http://190.216.170.173/LAFT/assets/img/logo.png" alt="" style="width: 100px;" >
+                
+        <div *ngFor="let item of parent.arrayData"> -->
+           
+           <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+          <!-- <p> 
+               <strong>Usuario:  {{parent.Nombre}}  </strong>
+           </p>
+           <p>
+               <strong>Perfil:  {{parent.Perfil}}  </strong>
+           </p> -->
+                 
+           <div *ngIf="parent.Alerta == 'P1'">
+           <!-- ESTO ES PARA LA p1 -->
+           <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+               <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+               <tbody>
+                   <tr>
+                   <td width="200px" style="padding-left: 10px;">
+                       <p>
+                       <strong>CÓDIGO</strong>
+                       </p>
+                   </td>
+                   <td width="600px" style="padding-left: 10px;">
+                       <p>
+                       <strong>SEÑAL DE ALERTA</strong>
+                       </p>
+                   </td>
+                   </tr>
+                   <tr>
+                   <td width="20%">
+                       <p align="center">
+                       P1
+                       </p>
+                   </td>
+                   <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                       <p>
+                        El proveedor o contraparte se niega a proporcionar la información solicitada o
+                        la información proporcionada es inconsistente o de difícil verificación por 
+                        parte de las empresas. 
+                       </p>
+                   </td>
+                   </tr>
+               </tbody>
+               </FONT>
+           </table>
+           </div>
+    
+            <div *ngIf="parent.Alerta == 'P2'">
+            <!-- ESTO ES PARA LA P2 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="200px" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
+                    </td>
+                    <td width="600px" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td width="66" rowspan="2">
+                        <p align="center">
+                            P2
+                        </p>
+                        </td>
+                        <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            El proveedor o contraparte trata de presionar a un trabajador para no proporcionar la información solicitada. 
+                        </p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'P3'">
+            <!-- ESTO ES PARA LA P3 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="200px" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
+                    </td>
+                    <td width="600px" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td width="66">
+                        <p align="center">
+                            P3
+                        </p>
+                        </td>
+                        <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            El proveedor o contraparte indica una dirección que también es la de un negocio diferente 
+                            al declarado y/o no parece corresponder con la ocupación o actividad económica declarada por él.  
+                        </p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'P4'">
+            <!-- ESTO ES PARA LA P4 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="200px" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
+                    </td>
+                    <td width="600px" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td width="66">
+                        <p align="center">
+                            P4
+                        </p>
+                        </td>
+                        <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                        Que se tome conocimiento por los medios de difusión pública u otro, según sea el caso, 
+                        que un proveedor o contraparte o sus representantes o socios, en caso de personas jurídicas, 
+                        están siendo investigado o procesado por el delito de lavado de activos, delitos precedentes, 
+                        el delito de financiamiento del terrorismo y/o delitos conexos. 
+                        </p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'P5'">
+                <!-- ESTO ES PARA LA P5 -->
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                        <td width="200px" style="padding-left: 10px;">
+                            <p>
+                            <strong>CÓDIGO</strong>
+                            </p>
+                        </td>
+                        <td width="600px" style="padding-left: 10px;">
+                            <p>
+                            <strong>SEÑAL DE ALERTA</strong>
+                            </p>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td width="66">
+                            <p align="center">
+                             P5
+                            </p>
+                            </td>
+                            <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                            El proveedor o contraparte está domiciliado en / o modifica su domicilio a: países 
+                            considerados paraísos fiscales o países donde existe conocida actividad terrorista, 
+                            considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC. 
+                            </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </FONT>
+                </table>
+            </div>
+            
+    
+    
+            <div *ngIf="parent.Alerta == 'P1$'">
+                <!-- ESTO ES PARA LA p1 -->
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                        <td width="200px" style="padding-left: 10px;">
+                            <p>
+                            <strong>CÓDIGO</strong>
+                            </p>
+                        </td>
+                        <td width="600px" style="padding-left: 10px;">
+                            <p>
+                            <strong>SEÑAL DE ALERTA</strong>
+                            </p>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td width="20%">
+                            <p align="center">
+                            P1$
+                            </p>
+                        </td>
+                        <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                             El proveedor o contraparte se niega a proporcionar la información solicitada o
+                             la información proporcionada es inconsistente o de difícil verificación por 
+                             parte de las empresas. 
+                            </p>
+                        </td>
+                        </tr>
+                    </tbody>
+                    </FONT>
+                </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'P2$'">
+                    <!-- ESTO ES PARA LA P2 -->
+                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                        <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                            <td width="200px" style="padding-left: 10px;">
+                                <p>
+                                <strong>CÓDIGO</strong>
+                                </p>
+                            </td>
+                            <td width="600px" style="padding-left: 10px;">
+                                <p>
+                                <strong>SEÑAL DE ALERTA</strong>
+                                </p>
+                            </td>
+                            </tr>
+                            <tr>
+                                <td width="66" rowspan="2">
+                                <p align="center">
+                                    P2$
+                                </p>
+                                </td>
+                                <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    El proveedor o contraparte trata de presionar a un trabajador para no proporcionar la información solicitada. 
+                                </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </FONT>
+                    </table>
+             </div>
+    
+             <div *ngIf="parent.Alerta == 'P3$'">
+                <!-- ESTO ES PARA LA P3 -->
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                        <td width="200px" style="padding-left: 10px;">
+                            <p>
+                            <strong>CÓDIGO</strong>
+                            </p>
+                        </td>
+                        <td width="600px" style="padding-left: 10px;">
+                            <p>
+                            <strong>SEÑAL DE ALERTA</strong>
+                            </p>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td width="66">
+                            <p align="center">
+                                P3$
+                            </p>
+                            </td>
+                            <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                El proveedor o contraparte indica una dirección que también es la de un negocio diferente 
+                                al declarado y/o no parece corresponder con la ocupación o actividad económica declarada por él.  
+                            </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </FONT>
+                </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'P4$'">
+                    <!-- ESTO ES PARA LA P4 -->
+                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                        <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                            <td width="200px" style="padding-left: 10px;">
+                                <p>
+                                <strong>CÓDIGO</strong>
+                                </p>
+                            </td>
+                            <td width="600px" style="padding-left: 10px;">
+                                <p>
+                                <strong>SEÑAL DE ALERTA</strong>
+                                </p>
+                            </td>
+                            </tr>
+                            <tr>
+                                <td width="66">
+                                <p align="center">
+                                    P4$
+                                </p>
+                                </td>
+                                <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                Que se tome conocimiento por los medios de difusión pública u otro, según sea el caso, 
+                                que un proveedor o contraparte o sus representantes o socios, en caso de personas jurídicas, 
+                                están siendo investigado o procesado por el delito de lavado de activos, delitos precedentes, 
+                                el delito de financiamiento del terrorismo y/o delitos conexos. 
+                                </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </FONT>
+                    </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'P5$'">
+                        <!-- ESTO ES PARA LA P5 -->
+                        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                            <tbody>
+                                <tr>
+                                    <td width="200px" style="padding-left: 10px;">
+                                    <p>
+                                    <strong>CÓDIGO</strong>
+                                    </p>
+                                    </td>
+                                    <td width="600px" style="padding-left: 10px;">
+                                    <p>
+                                    <strong>SEÑAL DE ALERTA</strong>
+                                    </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="66">
+                                    <p align="center">
+                                        P5$
+                                    </p>
+                                    </td>
+                                    <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        El proveedor o contraparte está domiciliado en / o modifica su domicilio a: países 
+                                        considerados paraísos fiscales o países donde existe conocida actividad terrorista, 
+                                        considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC. 
+                                    </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </FONT>
+                        </table>
+             </div>
+            </div>
+    
+    
+    
+            <div *ngIf="parent.Alerta !== 'P5$'">
+            <div class="container" style="padding: 0px 200px;">
+            <br> 
+            <p>
+                <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta </strong>
+            </p>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                Se solicita a la Coordinadora de Compras, al Gerente Comercial Masivos, al Gerente de inversiones, 
+                al Gerente de Inversiones Inmobiliaria y a la Subgerente de Administración y tesorería, la información 
+                sobre si se han presentado o identificado las señales de alerta respectivas.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                Se revisa la información proporcionada.
+                </li>
+            </ul>
+            <p>
+            <p><strong></strong></p>
+            <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    La Coordinadora de compras reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
+                    configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                   </li>
+                </ul>
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    El Gerente Comercial Masivos reportó que {{arrayDataSenal[1].Respuesta}} hubo situaciones que 
+                    configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                   </li>
+                </ul>
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    El Subgerente de Administración y tesorería reportó que {{arrayDataSenal[2].Respuesta}} hubo situaciones que 
+                    configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                   </li>
+                </ul>
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    El Gerente de Inversiones Inmobiliarias reportó que {{arrayDataSenal[3].Respuesta}} hubo situaciones que 
+                    configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                   </li>
+                </ul>
+            </div>
+    
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'P5$'">
+                <div class="container" style="padding: 0px 200px;">
+                <br> 
+                <p>
+                    <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta </strong>
+                </p>
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Se solicita a la Coordinadora de Compras, al Gerente Comercial Masivos, al Gerente de inversiones, 
+                    al Gerente de Inversiones Inmobiliaria y a la Subgerente de Administración y tesorería, la información 
+                    sobre si se han presentado o identificado las señales de alerta respectivas.
+                    </li>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Se revisa la información proporcionada.
+                    </li>
+                </ul>
+                <p><strong></strong></p>
+                <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                <ul>
+                        <li style="font-family: arial Narrow, serif; text-align: justify">
+                        La coordinadora de compras reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
+                        configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                       </li>
+                    </ul>
+                    <ul>
+                        <li style="font-family: arial Narrow, serif; text-align: justify">
+                        El Gerente Comercial Masivos reportó que {{arrayDataSenal[1].Respuesta}} hubo situaciones que 
+                        configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                       </li>
+                    </ul>
+                    <ul>
+                        <li style="font-family: arial Narrow, serif; text-align: justify">
+                        El Subgerente de Administración y tesorería reportó que {{arrayDataSenal[2].Respuesta}} hubo situaciones que 
+                        configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                       </li>
+                    </ul>
+                    <ul>
+                        <li style="font-family: arial Narrow, serif; text-align: justify">
+                        El Gerente de Inversiones reportó que {{arrayDataSenal[3].Respuesta}} hubo situaciones que 
+                        configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                       </li>
+                    </ul>
+                </div>
+                
+            </div>
+    
+    </div>
+      <div class="text-center pt-5">
+        <button class="" (click)="Export2Doc('exportContent', 'test');"></button> 
+      </div>
+    

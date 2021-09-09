@@ -1,18 +1,18 @@
-<div id="cabecera" class="container-fluid {{activarStyle()}}"  
+ <div id="cabecera" class="container-fluid {{activarStyle()}}"  
 style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:0;">
     <div class="row" >
-        <div class="col-lg-1 mt-4 mb-4 ml-4 mr-2" >
+        <div class="col-lg-1 mt-4 mb-4 ml-4 mr-2 col-md-1" >
             <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" (click)="openNav()"></span>
         </div>
-        <div class="col-lg-3 mt-1 mb-1"  >
-            <!-- <img src="assets/img/protecta.png" height="20" alt=""> -->
-            <a href="/home">
+        <div class="col-lg-3 mt-1 mb-1 col-md-8"  >
+            
+            <a  (click)="Home()">
                 <img src="assets/img/logo-protecta.svg" alt="Protecta Security" >
             </a>
             
         </div>
-        <div class="col-lg-4 mt-4 mb-4">
-            <app-buscar-registro ></app-buscar-registro>
+        <div class="col-lg-4 mt-4 mb-4 col-md-1">
+           
         </div>
     </div>   
  
@@ -21,29 +21,20 @@ style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:
 <div *ngIf="Ocultar()" id="cabecera" class="container-fluid"  
 style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:0;">
     <div class="row" >
-        <div class="col-lg-1 mt-4 mb-4 ml-4 mr-2" >
+        <div class="col-1 mt-4 mb-4 ml-4 mr-2" >
             <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" ></span>
         </div>
-        <div class="col-lg-3 mt-1 mb-1" >
-            <img src="assets/img/protecta.png" height="20" alt="">
+        <div class="col-3 mt-1 mb-1 " (click)="Home()" >
+            <img src="assets/img/logo-protecta.svg" alt="Protecta Security" >
         </div>
-        <div class="col-lg-4 mt-4 mb-4">
-            <app-buscar-registro ></app-buscar-registro>
-        </div>
+       
     </div>   
 
 
 </div>
 
 <div class="sidenav" #mySidenav >
-    <!-- <div class="open-button" (click)="opened = !opened" >Open</div>
-<div 
-  *ngIf="opened"
-  class="menu" 
-  (clickOutside)="clickOutside()"
->
-  Menu items
-</div> -->
+
     <a  class="closebtn mt-1" style="cursor:pointer;" (click)="closeNav()">&times;</a>
     
     <div  *ngFor="let option of optionList; let index = index;" (click)="activeSidenav(index)" id="{{index}}">
@@ -76,4 +67,56 @@ style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:
         <a  (click)="CerrarSession()" >Cerrar Sesión</a>
     
     
-</div>
+</div> 
+
+
+<!-- <nav class="navbar  fixed-top navbar-light" style="background: rgb(240, 238, 237);">
+     
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+    <a class="navbar-brand" href="#">
+      <img src="assets/img/logo-protecta.svg" alt="Protecta Security"  width="350" height="80" class="d-inline-block align-top" >
+      
+    </a>
+  </nav>
+  
+<div id="wrapper" class="toggled">
+
+  
+    <div id="sidebar-wrapper" style="z-index: 100;">
+        <ul class="sidebar-nav">
+            <div  *ngFor="let option of optionList; let index = index;" (click)="activeSidenav(index)" id="{{index}}">
+       
+                <li *ngIf="option.nTieneHijo == 1" >
+                         
+                                <div  class="fas fa-angle-right"  style="font-size:20px;cursor:pointer;float: left;padding-top: 10px;"></div>
+                       
+                                <a   style="white-space: initial;">{{ option.sName }}</a>
+                         
+                </li>
+                
+                <li *ngIf="option.nTieneHijo == 0" [routerLink]="['/' + option.sRouterLink]">
+                    <a *ngIf="option.nTieneHijo == 1" class="fas fa-angle-right "  style="font-size:20px;cursor:pointer;float: left;padding-top: 10px;"></a>
+                    
+                    <a style="white-space: initial;">{{ option.sName }}</a>
+                    
+                </li>
+                
+                
+                
+                <li *ngFor="let subM of optionListSubMenu" class="sideNav2">
+                    
+                    <a *ngIf="subM.nFatherId == option.nResourceId" [routerLink]="['/' + subM.sRouterLink]">{{ subM.sName }}</a>
+                    
+                </li>
+                
+                <hr>
+        
+            </div>
+
+
+           
+        </ul>
+    </div>
+    
+
+</div>  -->

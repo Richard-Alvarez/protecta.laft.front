@@ -503,6 +503,23 @@ export class ComplementaryCustomersComponent implements OnInit {
         });
         console.log("la data", data)
         this.excelService.exportAsExcelFile(data, "Cliente Complementario");
+    }else {
+     
+      swal.fire({
+        title: 'Cliente complementario',
+        icon: 'warning',
+        text: 'No se encontraron registros',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
     }
   }
 

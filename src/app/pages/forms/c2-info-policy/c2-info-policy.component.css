@@ -1,0 +1,57 @@
+*{
+    font-family: Roboto;
+}
+
+
+.nav-tabs.nav-justified > li {
+    float: none;
+  }
+.CardFlotante{
+    background: white;
+    border: 1px solid #f3f3f3;
+    box-shadow: 0px 0px 2px 0px #f3f3f3;
+    padding: 10%;
+    margin-left: 10%;
+}
+.tabPoliza{
+    font-weight: bold;
+    color: #27246d;
+}
+.title-grid{
+    color: #ff7c00;
+}
+.h4, h4 {
+    font-size: 18px;
+}
+.spancontent {
+    font-size: inherit !important;
+    color: inherit !important;
+}
+.textTitle span {
+    font-size: 12px;
+    color: #8385B4;
+    word-break: keep-all;
+}
+.textTitle {
+    display: grid;
+    font-size: 14px;
+}
+p{
+    margin: 0 0 10px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+a{
+    color: #337ab7;
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover, a:focus {
+    color: #23527c;
+    text-decoration: underline;
+}
+a:active, a:hover {
+    outline: 0;
+}

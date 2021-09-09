@@ -5,12 +5,12 @@ class Rutas {
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
-  //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
+  //  private base: string = 'http://190.216.170.173/ApiLAFT/api/';
  
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
   //private base: string = 'https://soatservicios.protectaseurity.pe/ApiLAFT/api/';
   //private basePolicy: string = 'https://localhost:5001/api/';
-    private basePolicy: string = 'http://190.216.170.173/ApiPoliza/api/';
+  private basePolicy: string = 'http://190.216.170.173/ApiPoliza/api/';
   //private basePolicy: string = 'https://soatservicios.protectasecurity.pe/ApiPoliza/api/';
   //private basePolicy: string = 'https://localhost:5001/api/';
 
@@ -62,6 +62,7 @@ class Rutas {
   public urlGetAddressList: string = this.base + "monitoreoSenales/GetAddressList";
   public urlUpdateUnchecked: string = this.base + "monitoreoSenales/UpdateUnchecked";
   public urlFillReport: string = this.base + "monitoreoSenales/FillReport";
+  public urlGetAlertReportList: string = this.base + "monitoreoSenales/GetAlertReportList";
   // public urldownloadPDF: string = this.base + "monitoreoSenales/DownloadPDF";
   public urlCarga: string = this.base + "carga";
   public urlRegistro: string = this.base + "registro";
@@ -171,7 +172,11 @@ class Rutas {
   public urlProcessCargaFile: string = this.base + "sbsReport/processCargaFile";
   public urlProcessPagosManuales: string = this.base + "sbsReport/processPagosManuales";
   public urlGetListaCargo: string = this.base + "monitoreoSenales/GetListaCargo";
-
+  public urlConsulta360: string = this.base + "monitoreoSenales/Consulta360";
+  public urlGetListaResultado: string = this.base + "monitoreoSenales/GetListaResultado";
+  public urlGetGrupoXSenal: string = this.base + "monitoreoSenales/GetGrupoXSenal";
+  public urlGetListaAlertaComplemento: string = this.base + "monitoreoSenales/GetListaAlertaComplemento";
+  public urlInsertUpdateComplemento: string = this.base + "monitoreoSenales/InsertUpdateComplemento";
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }

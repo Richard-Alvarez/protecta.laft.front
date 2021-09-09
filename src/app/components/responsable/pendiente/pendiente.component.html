@@ -399,7 +399,7 @@
                                                                         </div>
                                                                         <div class="col-lg-2">
                                                                             <!-- <div *ngIf="item.NIDALERTA != 36 && item.NIDALERTA != 37 && item.NIDALERTA != 38 && !(item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)" class="col-lg-2" style="padding-left: 0px;padding-right:0px;"> -->
-                                                                                <div *ngIf=" !(item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)" class="col-lg-2" style="padding-left: 0px;padding-right:0px;">
+                                                                            <div *ngIf=" !(item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)" class="col-lg-2" style="padding-left: 0px;padding-right:0px;">
                                                                                 <div class="d-flex justify-content-between">
                                                                                     <div class="col-lg-4">
                                                                                         <input type="file" name="file" id="archivo{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'ADJUNTOS-FORM','RE')" />
@@ -414,7 +414,7 @@
                                                                                                     </label>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-8" style="left: 15px;">
+                                                                                    <div>
                                                                                         <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index" [arrFilesAdjuntos]="getFilesCabecera(item,'ADJUNTOS-FORM',regimen.id)" [arrFilesGuardados]="item.arrAdjuntos" [statusSTIPO_CARGA]="'ADJUNTOS-FORM'">
                                                                                         </app-adjuntar-files>
                                                                                     </div>
@@ -470,7 +470,7 @@
                                                                     </div>
 
                                                                     <!-- <div class="row" *ngIf="item.NIDALERTA == 3 || item.NIDALERTA == 4 || item.NIDALERTA == 36 || item.NIDALERTA == 37 || item.NIDALERTA == 38 || (item.NIDALERTA == 22 && item.NIDUSUARIO_ASIGNADO == 24) || (item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)"> -->
-                                                                        <div class="row" *ngIf="item.NIDALERTA == 3 || item.NIDALERTA == 4 || (item.NIDALERTA == 22 && item.NIDUSUARIO_ASIGNADO == 24) || (item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)">
+                                                                    <div class="row" *ngIf="item.NIDALERTA == 3 || item.NIDALERTA == 4 || (item.NIDALERTA == 22 && item.NIDUSUARIO_ASIGNADO == 24) || (item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)">
                                                                         <div class="col-lg-9"></div>
 
                                                                         <div class="col-lg-1" *ngIf=" item.NIDALERTA != 4 " style="padding-left: 0px;padding-right:0px;padding-top: 7px;"></div>
@@ -486,14 +486,14 @@
 
 
 
-                                                                        <div class="col-lg-2">
+                                                                        <div class="col-lg-2" style="margin-left: -50px;">
                                                                             <div class="d-flex ustify-content-between">
                                                                                 <div class="col-lg-4">
                                                                                     <input type="file" name="file" [(ngModel)]="dataMultiplex" id="archivoSustento{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesInforme($event,item.NIDALERTA_CABECERA,item.NIDALERTA,'ADJUNTOS-SUSTENTO')" />
                                                                                     <div class="text-center">
                                                                                         <label for="archivoSustento{{regimen.id}}-{{index}}" style="cursor: pointer;">
                                                                                             <img src="assets/icons/excel-microsoft.png" style="width: 38px;"/>
-                                                                                                <div class="parrafoAdj text-center" style="width: 140px;">
+                                                                                                <div class="parrafoAdj text-center" style="width: 140px;padding: 0px 30px 0px">
                                                                                                        <div class="" *ngIf=" item.NIDALERTA == 4 ">{{setLabelData(item.SNOMBRE_ALERTA)}}</div>
                                                                                                        <div class="" *ngIf=" item.NIDALERTA != 4 ">{{setLabelData(item.SNOMBRE_ALERTA)}}</div>     
                                                                                                 </div>

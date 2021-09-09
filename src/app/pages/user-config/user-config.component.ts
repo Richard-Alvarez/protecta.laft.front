@@ -203,10 +203,10 @@ export class UserConfigComponent implements OnInit {
     let data: any = {};
     data = {idUser: this.name}
     let getListaHistoryUser=await this.userConfigService.getListaHistoryUser(data)
-    console.log('Este es mi objeto',getListaHistoryUser)
-    console.log('Este es mi array',getListaHistoryUser.data)
-    console.log('este es use',this.name)
-    console.log('este es use',this.name)
+    //console.log('Este es mi objeto',getListaHistoryUser)
+    //console.log('Este es mi array',getListaHistoryUser.data)
+    //console.log('este es use',this.name)
+    //console.log('este es use',this.name)
 
     this.arrListUserLog = getListaHistoryUser.data
 
@@ -220,7 +220,7 @@ export class UserConfigComponent implements OnInit {
       this.ListUser = _data;
       this.core.loader.hide();
 
-     console.log("Lista de usuarios",_data)
+     //console.log("Lista de usuarios",_data)
     });
   }
  
@@ -230,9 +230,9 @@ export class UserConfigComponent implements OnInit {
     let nombreUsu = (<HTMLInputElement>document.getElementById("usName")).value
     // console.log("lista de LA LISTA", this.ListUser)
      let usu = this.ListUser.filter((it) => it.userName == (nombreUsu+' ').trim().toUpperCase())
-     console.log("el usu length : ",usu.length)
+     //console.log("el usu length : ",usu.length)
      if(usu.length != 0){
-      console.log("entro al usuario swal  ")
+      //console.log("entro al usuario swal  ")
       await swal.fire({
         title: 'Registrar Usuario',
           icon: "warning",
@@ -247,7 +247,7 @@ export class UserConfigComponent implements OnInit {
            
           // cancelButtonText: "Cancelar",
       }).then( (result) => {
-        console.log("entro al then  ")
+        //console.log("entro al then  ")
         respFinal = 2
         
       })
@@ -361,7 +361,7 @@ export class UserConfigComponent implements OnInit {
     await this.getCargoList(this.rol);
     this.email = _data.userEmail;
     this.state = _data.userState;
-    console.log("la data que envia",_data)
+    //console.log("la data que envia",_data)
     if (this.userId == '0') {
       this.editUserOff = true;
       this.EditUserActivated = false;
@@ -712,7 +712,7 @@ export class UserConfigComponent implements OnInit {
     //  }
 
     let variable:any = await this.getValidarUsuarioCreado()
-    console.log("la variable",variable)
+    //console.log("la variable",variable)
     if(variable == 2){
       return
     }

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   public susername: string;
   public spassword: string;
   public scaptcha: string;
-  public txtcaptcha: string;
+  public txtcaptcha: string = '';
   public sCaptchaError: string;
   public STIPO_USUARIO
   siteKey = '6Lez_c8UAAAAACj3LLvrRQM3g3yWJU6XzqWd-tzn';
@@ -119,10 +119,11 @@ export class LoginComponent implements OnInit {
             let resultadoPerfil =  await this.userConfigService.GetGrupoXPerfil(data) 
             console.log("resultadoPerfil",resultadoPerfil)
             let valor
+            
             if(this.STIPO_USUARIO == 'RE'){
               if(resultadoPerfil.length == 1){
                  valor = resultadoPerfil[0].NIDGRUPOSENAL
-              }else if(resultadoPerfil.length == 2){
+              }else if(resultadoPerfil.length == 2 || resultadoPerfil.length == 3){
                   let newresultado =  resultadoPerfil.filter(it => it.NIDGRUPOSENAL == 1)
                   if(newresultado.length == 1){
                     valor = 1
@@ -133,7 +134,7 @@ export class LoginComponent implements OnInit {
                   valor = 1
               }
 
-
+              console.log("valor",valor)
               switch (valor) {
                 case 1 : {
                   this.core.rutas.goClientes();
@@ -141,6 +142,9 @@ export class LoginComponent implements OnInit {
                 case 2 : {
                   this.core.rutas.goColaborador();
                 }break;
+                case 4 : {
+                  this.core.rutas.goContraparte();
+                }
                 default: {
                   this.core.rutas.goProveedor();
               }

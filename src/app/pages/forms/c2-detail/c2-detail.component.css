@@ -167,7 +167,7 @@
   }
 
   .TitleLine{
-    padding-bottom: 1%;
+  padding-bottom: 1%;
   position: relative;
   z-index : 1;
   font-size: 28px;
@@ -232,4 +232,19 @@
     width: 100%;
     
 
+}
+.headerSenials{
+  border:none;
+}
+
+.headerSenials:hover{
+  border: 1px solid #8a8a8a;
+} 
+
+.k{
+  left    : 0;
+  bottom  : 0;
+  height  : 1px;
+  width   : 100%;
+  border-bottom:3px solid #add8e6;
 }

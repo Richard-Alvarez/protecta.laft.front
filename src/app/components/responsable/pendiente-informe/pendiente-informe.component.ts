@@ -7,6 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { truncateSync } from 'fs';
+import { TemplateRGComponent } from '../templates/template-rg/template-rg.component';
+
 
 @Component({
   selector: 'app-pendiente-informe',
@@ -31,19 +33,25 @@ export class PendienteInformeComponent implements OnInit {
     listFilesInform:any = [] 
     listFilesInformName:any = [] 
     NPERIODO_PROCESO:number
+    
+    
+
+  public templateRG: TemplateRGComponent;
   @Input() regimen:any = {}
   @Input() arrResponsable:any = []
   @Input() statePendienteInforme:any = {}
   @Input() userGroupList:any = []
   @Input() parent:ResponsableComponent
+  //@Input() parent2:TemplateRGComponent
  
   
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
     private renderer: Renderer2,
-    private modalService: NgbModal,) { }
+    private modalService: NgbModal,) {this.templateRG = new TemplateRGComponent(core,userConfigService,renderer,modalService) }
 
   async ngOnInit() {
+    
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO;
     this.fillFileGroup()
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
@@ -96,7 +104,7 @@ export class PendienteInformeComponent implements OnInit {
   }
 
   getArray(state,regimen){
-     console.log("this.arrResponsable11111111111111", this.arrResponsable)
+    //console.log("this.arrResponsable11111111111111", this.arrResponsable)
     return this.arrResponsable;
   }
 
@@ -424,7 +432,7 @@ export class PendienteInformeComponent implements OnInit {
         //this.internationalList = respListaInternacional//.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO ==1)
         let respuestaFiltroLista =  respListaInternacional.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO =="1" )
         console.log("Nueva lista cambios :",respuestaFiltroLista)
-        if(!(respuestaFiltroLista.length > 0 && validacionCantidadREvisados == true) && (objAlerta.NIDALERTA == 2 || objAlerta.NIDALERTA == 35 || objAlerta.NIDALERTA == 33 )){
+        /*if(!(respuestaFiltroLista.length > 0 && validacionCantidadREvisados == true) && (objAlerta.NIDALERTA == 2 || objAlerta.NIDALERTA == 35 || objAlerta.NIDALERTA == 33 )){
           swal.fire({
             title: 'Oficial de cumplimiento',
             icon: 'warning',
@@ -440,7 +448,7 @@ export class PendienteInformeComponent implements OnInit {
             
           })
           return 
-        }
+        }*/
         /*else{
           
         }*/
@@ -675,5 +683,225 @@ async getArchivoSustento(item){
     console.error("error en descargar: ",error)
   }
 }
- 
+arrCheckbox:any = []
+arrCheck:any = []
+setDataCheckboxApproved(item,index,checked: boolean){
+  console.log("checked",checked)
+  if(checked){
+    this.arrCheck.push(item)
+  }else{
+     this.arrCheck.splice(index, 1);
+      this.arrCheck.sort();
+  }
+  
+
+  console.log("arrCheckbox",this.arrCheck)
+  
 }
+
+
+categoriaSelectedArray = [];
+
+onCategoriaPressed(categoriaSelected: any, checked: boolean){
+  if (checked) { //Si el elemento fue seleccionado
+    //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
+    this.categoriaSelectedArray.push(categoriaSelected);
+  } else { //Si el elemento fue deseleccionado
+    //Removemos la categoría seleccionada del arreglo de categorías seleccionadas
+    this.categoriaSelectedArray.splice(this.categoriaSelectedArray.indexOf(categoriaSelected), 1);
+  }
+ // console.log("this.categoriaSelectedArray",this.categoriaSelectedArray)
+ // console.log("this.categoriaSelectedArray 1",this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO)
+ // console.log("this.categoriaSelectedArray 2",this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO)
+//   this.Nombre = this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO;
+//   this.Perfil =this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO;
+//  this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
+//  this.Alerta = this.categoriaSelectedArray[0].SNOMBRE_ALERTA
+  this.DataArray()
+}
+arrayData :any =[]
+DataArray(){
+  this.arrayData =[]
+  
+  this.categoriaSelectedArray.forEach((t,inc) => {
+    t.arrUsuariosForm.forEach(arrUsuario => {
+      
+      let data:any = {}
+       data.Alerta = t.SNOMBRE_ALERTA
+       data.NombreCompleto = arrUsuario.NOMBRECOMPLETO
+       data.Cargo = arrUsuario.SCARGO
+       data.Respuesta = arrUsuario.SRESPUESTA
+       this.arrayData.push(data)
+
+    });
+      
+  });
+  console.log("la data que enviara",this.arrayData)
+  
+}
+
+ Export2Doc(element, filename = ''){
+ 
+  setTimeout(function(){
+  //console.log("dsadsadsadsa", this.parent2.valor)
+    var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+    var postHtml = "</body></html>";
+    var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+    var blob = new Blob(['\ufeff', html],{
+        type: 'application/msword'
+    });
+  
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
+  
+    filename = filename?filename+'.doc': 'document.doc';
+  
+    var downloadLink = document.createElement("a");
+  
+     document.body.appendChild(downloadLink);
+  
+    if(navigator.msSaveOrOpenBlob){
+        navigator.msSaveOrOpenBlob(blob, filename);
+    }else{
+        downloadLink.href = url;
+  
+          downloadLink.download = filename;
+  
+          downloadLink.click();
+    }
+  
+     document.body.removeChild(downloadLink);
+    },1);
+
+ }
+
+
+arrayDataSenal= []
+Alerta:string = ''
+Nombre:string = ''
+Perfil:string = ''
+Respuesta:string = ''
+RespuestaGlobal:string = ''
+RegimenPendiente:number = 0
+NombreLink:string = ''
+arrayDataResultado= []
+Periodo:string = ''
+Cantidad:number = 0
+listaSoat:any = []
+listaMasivos:any = []
+listaRenta:any = []
+listaAhorro:any = []
+listaPep:any = []
+listaEspecial:any = []
+
+async DescargarReporte(item){
+  debugger
+  this.arrayDataSenal= []
+  this.Nombre = ''
+  this.Perfil = ''
+  this.Respuesta = ''
+  this.Alerta  = ''
+  this.RegimenPendiente = 0
+  this.arrayDataResultado= []
+  this.Periodo = ''
+  this.Cantidad = 0
+  this.listaSoat = []
+  this.listaMasivos = []
+  this.listaRenta = []
+  this.listaAhorro = []
+  this.listaPep = []
+  this.listaEspecial = []
+  console.log("itemm",item)
+
+  console.log("dataItem",item.arrUsuariosForm)
+
+  
+  this.RespuestaGlobal = item.arrUsuariosForm.filter((it,inc) => it.SRESPUESTA == "Sí")
+  if(this.RespuestaGlobal.length == 0){
+    this.RespuestaGlobal = 'no'
+  }else{
+    this.RespuestaGlobal = 'Sí'
+  }
+  //console.log("RespuestaGlobal",RespuestaGlobal.length)
+
+  item.arrUsuariosForm.forEach((t,inc) => { 
+    let data:any = {}
+       data.Alerta = item.SNOMBRE_ALERTA
+       data.NombreCompleto = t.NOMBRECOMPLETO
+       data.Cargo = t.SCARGO
+       data.Respuesta = (t.SRESPUESTA).toLowerCase()
+       this.arrayDataSenal.push(data)
+  })
+
+  this.Nombre = this.arrayDataSenal[0].NombreCompleto;
+  this.Perfil =this.arrayDataSenal[0].Cargo;
+  this.Respuesta = (this.arrayDataSenal[0].Respuesta).toLowerCase()
+  this.Alerta = this.arrayDataSenal[0].Alerta
+  this.RegimenPendiente = item.NREGIMEN
+  let dia =  this.NPERIODO_PROCESO.toString().substr(6,2)
+  let mes =  this.NPERIODO_PROCESO.toString().substr(4,2)
+  let anno = this.NPERIODO_PROCESO.toString().substr(0,4) 
+  this.Periodo = dia + '/' + mes + '/' + anno
+
+  if(item.SNOMBRE_ALERTA == "C2" && item.NIDALERTA == 2){
+    let data:any = {}
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO 
+    data.NIDALERTA = item.NIDALERTA
+    data.NIDREGIMEN = this.RegimenPendiente
+    this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
+    console.log("this.arrayDataResultado",this.arrayDataResultado)
+    this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
+    this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
+    this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76)
+    this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
+    this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
+    this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
+    console.log("this.listaSoa",this.listaSoat)
+    console.log("this.listaMasivos",this.listaMasivos)
+    console.log("this.listaRenta",this.listaRenta)
+    console.log("this.listaAhorro",this.listaAhorro)
+    console.log("this.listaPep",this.listaPep)
+    console.log("this.listaEspecial",this.listaEspecial)
+    this.Cantidad = this.arrayDataResultado.length
+  }
+
+  
+  if(this.linkactual == "colaborador"){
+     this.NombreLink = this.linkactual
+  }else if(this.linkactual == "proveedor"){
+     this.NombreLink = this.linkactual
+  }else{
+     this.NombreLink = this.linkactual
+  }
+
+  
+  this.Export2Doc("exportContent",this.Alerta)
+  
+  console.log("this.arrayDataSenal",this.arrayDataSenal)
+  console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta ,  this.RegimenPendiente)
+} 
+
+  Resultado:any = {}
+  async Consultar360(){
+    let data:any = {}
+    data.Ramo = 66,
+    data.Producto = 1,
+    data.Poliza = 7000936826,
+    data.Certificado= 0,
+    data.FechaConsulta= "09/07/2021", //fecha inicio vigencia
+    data.Endoso= null    //Solo para rentas
+    
+    
+    await this.userConfigService.Consulta360(data).then(
+      (response) => {
+       this.Resultado = response
+      });
+    console.log("el resultado",this.Resultado)
+
+    } 
+   
+}
+
+
+ 
+
+
