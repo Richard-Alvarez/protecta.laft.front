@@ -1363,6 +1363,12 @@ export class C2DetailComponent implements OnInit {
     bolSoatGral:any = false
     bolSoatSimpli:any = false
     bolSoatPolicy:any = false
+
+    /* prueba param 360 */
+    /* certif: any
+    fecpoli: any
+    poliza: any */
+
     async getPolicyList(){       
          console.log("el P_NIDALERTA : ",this.formData) 
          console.log("el P_NIDALERTA 2: ",(this.formData.NTIPOCARGA == null ? 2 : this.formData.NTIPOCARGA)) 
@@ -1406,6 +1412,16 @@ export class C2DetailComponent implements OnInit {
             }
         })*/
         this.core.loader.hide();
+        
+                     /* prueba param 360 */
+        /* this.certif= this.policySimpli[0].NCERTIF;
+        this.fecpoli= this.policySimpli[0].DFEC_INI_POLIZA;
+        this.poliza= this.policySimpli[0].SNUM_POLIZA; */
+        
+        /* console.log('prueba kevin', this.policySimpli)
+        console.log('prueba kevin', this.policySimpli[0].NCERTIF)
+        console.log('prueba kevin', this.policySimpli[0].DFEC_INI_POLIZA)
+        console.log('prueba kevin', this.policySimpli[0].SNUM_POLIZA) */
     }
 
     getListCheckedById(idList){

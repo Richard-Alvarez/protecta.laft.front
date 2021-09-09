@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
+import { C2DetailComponent } from '../c2-detail/c2-detail.component';
 
 @Component({
   selector: 'app-c2-info-policy',
@@ -8,6 +9,11 @@ import { UserconfigService } from 'src/app/services/userconfig.service';
 })
 export class C2InfoPolicyComponent implements OnInit {
 
+  @Input() policyList
+  /* prueba param 360 */
+  /* @Input() certif
+  @Input() fecpoli
+  @Input() poliza */
   constructor(private userConfigService: UserconfigService,) {
 
   }
@@ -56,7 +62,6 @@ export class C2InfoPolicyComponent implements OnInit {
     planSaludModali: any;
     planSaludMonto: any;
     planSaludPeriodo: any;
-
     ramoIdRamo: any;
     tarifFecEmi: any;
     tarifHoraEmi: any;
@@ -154,6 +159,19 @@ export class C2InfoPolicyComponent implements OnInit {
     this.vehiPlaca= this.Resultado.vehiculo.placa;
     this.vehiUso= this.Resultado.vehiculo.uso;
     this.vehiVersion= this.Resultado.vehiculo.version;
+
+    console.log('prueba kevin2',this.policyList)
+    console.log('prueba kevin2',this.policyList[0].SNUM_POLIZA)
+    console.log('prueba kevin2',this.policyList[0].NCERTIF)
+    console.log('prueba kevin2',this.policyList[0].DFEC_INI_POLIZA)
+    /*valores para enviar al servicio 360*/
+    //ramo
+    //producto
+    //console.log("abcde",this.poliza) //numero de poliza
+    //console.log("abcde",this.certif) //certificado
+    //console.log("abcde",this.fecpoli) //fecha de inicio de vigencia
+    //endoso
+
   }
 
   getRamos(){
@@ -199,6 +217,14 @@ export class C2InfoPolicyComponent implements OnInit {
     console.log("el valor ", val[0].IdRamo)
     /* this.DescripcionRamo = val[0].Descripcion */
 
-  }
+  }/* 
+  filtDetalles(){
+    if (this.DescripcionRamo == 'SOAT') {
+      [show]
+    } else {
+      
+    }
+  } */
+  
         
 }
