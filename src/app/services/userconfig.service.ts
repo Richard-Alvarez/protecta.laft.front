@@ -195,6 +195,19 @@ export class UserconfigService {
     });
   }
 
+  ConsultaWC(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlConsultaWC, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
 
 
   //Obtener la lista de opciones del perfil

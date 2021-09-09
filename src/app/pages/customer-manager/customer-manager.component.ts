@@ -2473,6 +2473,7 @@ prueba = []
 
 
   async getBusquedaCoicnidencias(item,ValorArray){
+    debugger
       Swal.fire({
       title: 'Gestor de Cliente',
       icon: 'warning',
@@ -2573,7 +2574,18 @@ prueba = []
             ItemCliente.NIDREGIMEN = 99
             ItemCliente.SESTADO_REVISADO = '2'
             ItemCliente.SESTADO_TRAT = null
+
+            let data:any = {}
+            debugger
+            data.name = (ItemCliente.SNOM_COMPLETO).trim()
+            data.alertId = 2
+            data.periodId = this.NPERIODO_PROCESO
+            data.tipoCargaId = 2
             // await this.goToDetailAprobar(ItemCliente,[])
+            /* Se agreggo esta linea para consumir la api de */
+            let respuestaWC =  await this.userConfigService.ConsultaWC(data)
+            console.log("RespuestaWC",respuestaWC)
+
             await this.goToDetailAprobar(ItemCliente,ValorArray)
           } 
                  // let respuestaPromiseAll = await Promise.all(idClienteSeleccionado)
