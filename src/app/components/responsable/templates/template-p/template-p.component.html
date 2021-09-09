@@ -373,8 +373,6 @@
              </div>
             </div>
     
-    
-    
             <div *ngIf="parent.Alerta !== 'P5$'">
             <div class="container" style="padding: 0px 200px;">
             <br> 
@@ -382,10 +380,14 @@
                 <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta </strong>
             </p>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
+                <!-- <li style="font-family: arial Narrow, serif; text-align: justify">
                 Se solicita a la Coordinadora de Compras, al Gerente Comercial Masivos, al Gerente de inversiones, 
                 al Gerente de Inversiones Inmobiliaria y a la Subgerente de Administración y tesorería, la información 
                 sobre si se han presentado o identificado las señales de alerta respectivas.
+                </li> -->
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Se  la información {{parent.cargosConcatenados}} 
+                    sobre si se han presentado o identificado las señales de alerta respectivas.
                 </li>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
                 Se revisa la información proporcionada.
@@ -395,29 +397,12 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
-                    La Coordinadora de compras reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+                    La {{item.Cargo}} reportó que {{item.Respuesta}} hubo situaciones que 
                     configuraron como señales de alerta con relación al comportamiento de los proveedores.
                    </li>
                 </ul>
-                <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
-                    El Gerente Comercial Masivos reportó que {{arrayDataSenal[1].Respuesta}} hubo situaciones que 
-                    configuraron como señales de alerta con relación al comportamiento de los proveedores.
-                   </li>
-                </ul>
-                <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
-                    El Subgerente de Administración y tesorería reportó que {{arrayDataSenal[2].Respuesta}} hubo situaciones que 
-                    configuraron como señales de alerta con relación al comportamiento de los proveedores.
-                   </li>
-                </ul>
-                <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
-                    El Gerente de Inversiones Inmobiliarias reportó que {{arrayDataSenal[3].Respuesta}} hubo situaciones que 
-                    configuraron como señales de alerta con relación al comportamiento de los proveedores.
-                   </li>
-                </ul>
+                
             </div>
     
             </div>
@@ -441,29 +426,12 @@
                 <p><strong></strong></p>
                 <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
                 <ul>
-                        <li style="font-family: arial Narrow, serif; text-align: justify">
-                        La coordinadora de compras reportó que {{arrayDataSenal[0].Respuesta}} hubo situaciones que 
+                        <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+                        La {{item.Cargo}} reportó que {{item.Respuesta}} hubo situaciones que 
                         configuraron como señales de alerta con relación al comportamiento de los proveedores.
                        </li>
                     </ul>
-                    <ul>
-                        <li style="font-family: arial Narrow, serif; text-align: justify">
-                        El Gerente Comercial Masivos reportó que {{arrayDataSenal[1].Respuesta}} hubo situaciones que 
-                        configuraron como señales de alerta con relación al comportamiento de los proveedores.
-                       </li>
-                    </ul>
-                    <ul>
-                        <li style="font-family: arial Narrow, serif; text-align: justify">
-                        El Subgerente de Administración y tesorería reportó que {{arrayDataSenal[2].Respuesta}} hubo situaciones que 
-                        configuraron como señales de alerta con relación al comportamiento de los proveedores.
-                       </li>
-                    </ul>
-                    <ul>
-                        <li style="font-family: arial Narrow, serif; text-align: justify">
-                        El Gerente de Inversiones reportó que {{arrayDataSenal[3].Respuesta}} hubo situaciones que 
-                        configuraron como señales de alerta con relación al comportamiento de los proveedores.
-                       </li>
-                    </ul>
+                    
                 </div>
                 
             </div>
