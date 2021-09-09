@@ -149,12 +149,10 @@ export class ViewC2FormComponent implements OnInit {
         // data.P_NIDREGIMEN = this.regimen.id;
         let respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
         //console.warn("el respResultadosCoinciden: ",respResultadosCoinciden)
-        debugger;
         this.arrayClientesByList = respResultadosCoinciden
     }
 
     getClientsByListArr(lista){
-        debugger;
         // console.log("nom_lista lista: ", nom_lista)
         let resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
         let arrDuplid = []
