@@ -217,14 +217,6 @@ export class C2InfoPolicyComponent implements OnInit {
     console.log("el valor ", val[0].IdRamo)
     /* this.DescripcionRamo = val[0].Descripcion */
 
-  }/* 
-  filtDetalles(){
-    if (this.DescripcionRamo == 'SOAT') {
-      [show]
-    } else {
-      
-    }
-  } */
-  
+  }  
         
 }
