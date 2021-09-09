@@ -178,6 +178,8 @@ class Rutas {
   public urlGetGrupoXSenal: string = this.base + "monitoreoSenales/GetGrupoXSenal";
   public urlGetListaAlertaComplemento: string = this.base + "monitoreoSenales/GetListaAlertaComplemento";
   public urlInsertUpdateComplemento: string = this.base + "monitoreoSenales/InsertUpdateComplemento";
+  public urlValidarPolizaVigente: string = this.base + "monitoreoSenales/ValidarPolizaVigente";
+  
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }
