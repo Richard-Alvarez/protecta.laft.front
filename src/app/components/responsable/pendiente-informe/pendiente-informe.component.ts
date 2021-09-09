@@ -849,10 +849,10 @@ async DescargarReporte(item){
     data.NIDREGIMEN = this.RegimenPendiente
     this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
     console.log("this.arrayDataResultado",this.arrayDataResultado)
-    this.listaSoat = this.arrayDataResultado.filter(it => it.Ramo == 66)
-    this.listaMasivos = this.arrayDataResultado.filter(it => it.Ramo != 66 || it.Ramo != 76)
-    this.listaRenta = this.arrayDataResultado.filter(it => it.Ramo == 76)
-    this.listaAhorro =  this.arrayDataResultado.filter(it => it.Ramo == 71)
+    this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
+    this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
+    this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76)
+    this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
     this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
     this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
     console.log("this.listaSoa",this.listaSoat)
@@ -889,6 +889,7 @@ async DescargarReporte(item){
     data.Certificado= 0,
     data.FechaConsulta= "09/07/2021", //fecha inicio vigencia
     data.Endoso= null    //Solo para rentas
+    
     
     await this.userConfigService.Consulta360(data).then(
       (response) => {

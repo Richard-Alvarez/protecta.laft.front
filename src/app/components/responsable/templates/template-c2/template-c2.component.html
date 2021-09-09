@@ -52,33 +52,33 @@
         <div class="container" style="padding: 0px 200px;">
             <br>
             <strong style="font-family: arial Narrow, serif;">Monitoreo Señales de alerta C2</strong>
-            <br> 
-            <dl>
-                <dt style="font-family: arial Narrow, serif; text-align: justify">
-                    <dd style="font-family: arial Narrow, serif; text-align: justify"> a) Solicita al área de Operaciones & TI que realice la búsqueda del Registro Negativo y base de PEP y Familiares 
-                    de PEP contra la base de clientes con la finalidad de identificar la señal de alerta en cuestión. Para esto, la 
-                    Oficialía de Cumplimiento es responsable de enviar la lista de nombres contenidos en dicho registro.
-                    </dd>
-                <dt style="font-family: arial Narrow, serif; text-align: justify">
-                    <dd style="font-family: arial Narrow, serif; text-align: justify"> b)	Complementariamente, esta señal de alerta se revisa mediante el “Procedimiento para el monitoreo de Listas Especiales 
-                    de Seguridad” según lo indicado en el documento Sistema de Monitoreo de Operaciones – SPLAFT.
-                    </dd>
-                <dt style="font-family: arial Narrow, serif; text-align: justify">
-                    <dd style="font-family: arial Narrow, serif; text-align: justify"> c)	Complementariamente, esta señal de alerta se revisa mediante la búsqueda de clientes con información negativa en fuentes públicas.
-                    </dd>
-                <dt style="font-family: arial Narrow, serif; text-align: justify">
-                    <dd style="font-family: arial Narrow, serif; text-align: justify"> d)	En caso se identifique señal de alerta y no sea descartado como falso positivo, se procederá a analizar la inusual operación.
-                    </dd>
-            </dl>
+                <ol type="a">
+                    <li style="font-family: arial Narrow, serif; text-align: justify">Solicita al área de Operaciones & TI que realice 
+                    la búsqueda del Registro Negativo y base de PEP y Familiares de PEP contra la base de clientes con la finalidad 
+                    de identificar la señal de alerta en cuestión. Para esto, la Oficialía de Cumplimiento es responsable de enviar 
+                    la lista de nombres contenidos en dicho registro.
+                    </li>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">Complementariamente, esta señal de alerta se revisa 
+                    mediante el “Procedimiento para el monitoreo de Listas Especiales de Seguridad” según lo indicado en el documento 
+                    Sistema de Monitoreo de Operaciones – SPLAFT.
+                    </li>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">Complementariamente, esta señal de alerta se revisa 
+                    mediante la búsqueda de clientes con información negativa en fuentes públicas.
+                    </li>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">En caso se identifique señal de alerta y no sea 
+                    descartado como falso positivo, se procederá a analizar la inusual operación.
+                    </li>
+                </ol>
             <br> 
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
         </div>
-            <div *ngIf="parent.RegimenPendiente == 1">
+
             <br>
             <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
+                         <div *ngIf="parent.RegimenPendiente == 2">
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{this.Cantidad}} coincidencias exactas entre el Registro Negativo y la base 
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaMasivos.length}} coincidencias exactas entre el Registro Negativo y la base 
                     de clientes – MASIVOS vigente al cierre {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
                 </li>
             </ul>
@@ -131,7 +131,7 @@
                             </td>
                             <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
-                            <!-- {{item.STIPO_DOCUMENTO}} --> Vida Ley  
+                            {{item.SDESPRODUCTO}}  
                             </p>
                             </td>
                             <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
@@ -150,7 +150,7 @@
         <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaSoat.length}}
             coincidencias exactas entre el Registro Negativo y la base de clientes – SOAT vigente al cierre del {{this.Periodo}}, por ende, 
             se consideran como señales de alerta “C2”. 
             </li>
@@ -181,7 +181,7 @@
                             </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of arrayDataResultado">
+                        <tr *ngFor="let item of parent.listaSoat">
                             <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
@@ -238,7 +238,7 @@
                             </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of arrayDataResultado">
+                        <tr *ngFor="let item of parent.listaSoat">
                             <td width="15%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
@@ -265,11 +265,12 @@
             </table>
             <br>
         </div>  
-
+        </div>
+        <div *ngIf="parent.RegimenPendiente == 1">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron (CANTIDAD DE COINCIDENCIAS) coincidencias exactas entre el Registro Negativo 
-            y la base de clientes de Rentas Vitalicias vigente al cierre del (PERIODO), por ende, se consideran como señales de alerta “C2”. 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias exactas entre el Registro Negativo 
+            y la base de clientes de Rentas Vitalicias vigente al cierre del {{parent.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
@@ -303,7 +304,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of arrayDataResultado">
+                        <tr *ngFor="let item of parent.listaRenta">
                             <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
@@ -321,12 +322,12 @@
                             </td>
                             <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                <!-- {{item.STIPO_DOCUMENTO}} --> Vida Ley  
+                            {{item.SDESPRODUCTO}} 
                                 </p>
                             </td>
                             <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
-                            <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
+                            {{item.STIPO_LISTA_REFERENCIA}}
                             </p>
                             </td>
                         </tr>
@@ -395,7 +396,7 @@
                         </td>
                         <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                         <p>
-                        <!-- {{item.STIPO_DOCUMENTO}} --> Vida Ley  
+                        {{item.SDESPRODUCTO}} 
                         </p>
                         </td>
                         <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
@@ -414,8 +415,8 @@
         <strong style="font-family: arial Narrow, serif;"> LISTAS ESPECIALES DE SEGURIDAD</strong>
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron cuatro (CANTIDAD DE COINCIDENCIAS) coincidencias de la base 
-            de clientes vigente y la base de listas internacionales al cierre del (PERIODO), para lo cual, se procedió a 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias de la base 
+            de clientes vigente y la base de listas internacionales al cierre del {{parent.Periodo}}, para lo cual, se procedió a 
             validar la identidad de cada uno, finalmente, todos los casos se trataría de coincidencias parciales u homonimias con 
             discrepancia en número de documento, nacionalidad y/o fecha de nacimiento.
             </li>
@@ -471,17 +472,26 @@
                 </tbody>
             </FONT>
         </table>
+        <br>  
     </div>  
     <ul>
         <li style="font-family: arial Narrow, serif; text-align: justify">
-        Si/No se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del (PERIODO)”.
+         {{parent.listaEspecial.length > 0 ? 'Si' : 'No'}} se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del {{parent.Periodo}}”.
         </li>
         <li style="font-family: arial Narrow, serif; text-align: justify">
-        Por lo tanto, se concluye que por la señal de alerta “C2” si/no se identificaron casos.
+        Por lo tanto, se concluye que por la señal de alerta “C2” {{parent.listaEspecial.length > 0 ? 'si' : 'no'}} se identificaron casos.
         </li>
     </ul>
+
+
+
+
+
     </div>
                 
+
+
+
     <div class="text-center pt-5">
         <button class="" (click)="Export2Doc('exportContent', 'test');"></button> 
     </div>
