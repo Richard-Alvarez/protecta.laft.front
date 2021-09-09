@@ -173,6 +173,7 @@ class Rutas {
   public urlProcessPagosManuales: string = this.base + "sbsReport/processPagosManuales";
   public urlGetListaCargo: string = this.base + "monitoreoSenales/GetListaCargo";
   public urlConsulta360: string = this.base + "monitoreoSenales/Consulta360";
+  public urlConsultaWC: string = this.base + "monitoreoSenales/ConsultaWC";
   public urlGetListaResultado: string = this.base + "monitoreoSenales/GetListaResultado";
   public urlGetGrupoXSenal: string = this.base + "monitoreoSenales/GetGrupoXSenal";
   public urlGetListaAlertaComplemento: string = this.base + "monitoreoSenales/GetListaAlertaComplemento";

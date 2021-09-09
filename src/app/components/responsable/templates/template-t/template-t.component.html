@@ -282,7 +282,7 @@
                 <tr>
                     <td width="66">
                     <p align="center">
-                        RG8
+                        T8
                     </p>
                     </td>
                     <td width="600" style="padding-left: 10px; padding-right: 10px; text-align: justify">
@@ -315,10 +315,10 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que  {{arrayDataSenal[0].Respuesta}}se ha registrado suceso alguno respecto a los puntos indicados T1.
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal" >
+                El {{item.Cargo}} informó que  {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1.
                 </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
+                <!-- <li style="font-family: arial Narrow, serif; text-align: justify">
                 El Gerente Comercial Masivos informó que {{arrayDataSenal[1].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1.
                 </li>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -328,8 +328,8 @@
                 El Gerente de inversiones informó que {{arrayDataSenal[3].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1.
                 </li>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de Administración informó que  {{arrayDataSenal[4].Respuesta}}se ha registrado suceso alguno respecto a los puntos indicados T1.
-                </li>
+                El Gerente de Administración informó que  {{arrayDataSenal[4].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1.
+                </li> -->
             </ul>   
             <p><strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señal de alerta T1</strong></p>
             <ul>
@@ -343,11 +343,11 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que  {{arrayDataSenal[0].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+                El {{item.Cargo}} informó que {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
                 Respecto de los trabajadores que tienen a su cargo.
                 </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
+                <!-- <li style="font-family: arial Narrow, serif; text-align: justify">
                 El Gerente Comercial Masivos informó que  {{arrayDataSenal[1].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
                 Respecto de los trabajadores que tienen a su cargo.
                 </li>
@@ -362,7 +362,7 @@
                 <li style="font-family: arial Narrow, serif; text-align: justify">
                 El Gerente de Administración informó que  {{arrayDataSenal[4].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
                 Respecto de los trabajadores que tienen a su cargo.
-                </li>
+                </li> -->
             </ul>   
             <p><strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señal de alerta T1</strong></p>
             <ul>
@@ -389,8 +389,8 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que   {{arrayDataSenal[0].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T2.
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+                El {{item.Cargo}} informó que   {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T2.
                 </li>
             </ul>       
             </div>
@@ -408,8 +408,8 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que  {{arrayDataSenal[0].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T3.
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+                El {{item.cargo}} informó que  {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T3.
                 </li>
             </ul>
             </div>
@@ -427,8 +427,8 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que   {{arrayDataSenal[0].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T4.
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal" >
+                El {{item.Cargo}} informó que   {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T4.
                 </li>
             </ul>
             </div>
@@ -447,21 +447,10 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que  {{arrayDataSenal[0].Respuesta}}se ha registrado suceso alguno respecto a los puntos indicados T5.
+                <li style="font-family: arial Narrow, serif; text-align: justify"  *ngFor="let item of arrayDataSenal" >
+                El {{item.Cargo}} informó que {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T5.
                 </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente Comercial Masivos informó que  {{arrayDataSenal[1].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T5.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente comercial Rentas informó que  {{arrayDataSenal[2].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T5.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de inversiones informó que  {{arrayDataSenal[3].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T5.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de Administración informó que  {{arrayDataSenal[4].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T5.
-                </li>
+              
             </ul>   
             <p><strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señal de alerta T5</strong></p>
             <ul>
@@ -475,26 +464,11 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que  {{arrayDataSenal[0].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal" >
+                El {{item.Cargo}} informó que  {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
                 Respecto de los trabajadores que tienen a su cargo.
                 </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente Comercial Masivos informó que  {{arrayDataSenal[1].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente comercial Rentas informó que  {{arrayDataSenal[2].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de inversiones informó que  {{arrayDataSenal[3].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de Administración informó que  {{arrayDataSenal[4].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T1. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
+              
             </ul>   
             </div>
             <div *ngIf="parent.Alerta == 'T6'">
@@ -512,26 +486,11 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que  {{arrayDataSenal[0].Respuesta}}se ha registrado suceso alguno respecto a los puntos indicados T6. 
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal" >
+                El {{item.cargo}} informó que  {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T6. 
                 Respecto de los trabajadores que tienen a su cargo.
                 </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente Comercial Masivos informó que  {{arrayDataSenal[1].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T6. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente comercial Rentas informó que  {{arrayDataSenal[2].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T6. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de inversiones informó que  {{arrayDataSenal[3].Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T6. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de Administración informó que  {{arrayDataSenal[4].Respuesta}}se ha registrado suceso alguno respecto a los puntos indicados T6. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
+            
             </ul>   
             </div>
             <div *ngIf="parent.Alerta == 'T7'">
@@ -549,26 +508,11 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T7. 
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+                El {{item.cargo}}  informó que {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T7. 
                 Respecto de los trabajadores que tienen a su cargo.
                 </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente Comercial Masivos informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T7. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente comercial Rentas informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T7. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de inversiones informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T7. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de Administración informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T7. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
+                
             </ul>   
             </div>
             <div *ngIf="parent.Alerta == 'T8'">
@@ -586,26 +530,11 @@
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
             <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Jefe de Cultura informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T8. 
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+                El {{item.Cargo}} informó que {{item.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T8. 
                 Respecto de los trabajadores que tienen a su cargo.
                 </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente Comercial Masivos informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T8. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente comercial Rentas informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T8. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de inversiones informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T8. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                El Gerente de Administración informó que {{parent.Respuesta}} se ha registrado suceso alguno respecto a los puntos indicados T8. 
-                Respecto de los trabajadores que tienen a su cargo.
-                </li>
+                
                 </ul>  
             </div>
         </div>
