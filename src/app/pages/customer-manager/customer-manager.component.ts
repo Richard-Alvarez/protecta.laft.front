@@ -2549,6 +2549,95 @@ prueba = []
           
           //console.log("ObjListaCheckSeleccionado",ObjListaCheckSeleccionadoxNombre)
           //console.log("CheckSeleccionado",idClienteSeleccionado)
+         let dataPoliza:any = {}
+          dataPoliza.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+          dataPoliza.NIDGRUPOSENAL = this.idGrupo
+          dataPoliza.NIDALERTA = 2
+          dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
+          dataPoliza.SCLIENT = ItemCliente.SCLIENT 
+         
+         let respuestaConsultaPoliza = await  this.userConfigService.ValidarPolizaVigente(dataPoliza)
+          if( respuestaConsultaPoliza.code == 1 ){
+            Swal.fire({
+              title: 'Gestor de Cliente',
+              icon: 'warning',
+              text: respuestaConsultaPoliza.mensaje,
+              showCancelButton: false,
+              showConfirmButton: true,
+              cancelButtonColor: '#dc4545',
+              confirmButtonColor: "#FA7000",
+              confirmButtonText: 'Aceptar',
+              cancelButtonText: 'Cancelar',
+              showCloseButton: true,
+              customClass: { 
+                closeButton : 'OcultarBorde'
+               },
+            }).then(resp => {
+              if(!resp.dismiss){
+                return
+              }
+            })
+          }else{
+            let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)
+            if(respuetaService.code == 1){
+              Swal.fire({
+                title: 'Gestor de Cliente',
+                icon: 'warning',
+                text: respuetaService.mensaje,
+                showCancelButton: false,
+                showConfirmButton: true,
+                //cancelButtonColor: '#dc4545',
+                confirmButtonColor: "#FA7000",
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+                showCloseButton: true,
+                customClass: { 
+                  closeButton : 'OcultarBorde'
+                 },
+              }).then(resp => {
+                if(!resp.dismiss){
+                    return
+                  }
+              })
+
+            } else{
+
+                  let data:any = {}
+                  data.name = (ItemCliente.SNOM_COMPLETO).trim()
+                  data.alertId = 2
+                  data.periodId = this.NPERIODO_PROCESO
+                  data.tipoCargaId = 2
+                  /* Se agreggo esta linea para consumir la api de WC */
+                  let respuestaWC =  await this.userConfigService.ConsultaWC(data)
+                  console.log("RespuestaWC",respuestaWC)
+                  
+                  if(respuetaService.sStatus == 'NOT FOUND' || respuetaService.sStatus == 'ERROR'){
+                    Swal.fire({
+                      title: 'Gestor de Cliente',
+                      icon: 'warning',
+                      text: 'No se encontro registros',
+                      showCancelButton: false,
+                      showConfirmButton: true,
+                      confirmButtonColor: "#FA7000",
+                      confirmButtonText: 'Aceptar',
+                      cancelButtonText: 'Cancelar',
+                      showCloseButton: true,
+                      customClass: { 
+                        closeButton : 'OcultarBorde'
+                       },
+                    }).then(resp => {
+                      if(!resp.dismiss){
+                          return
+                        }
+                    })
+      
+                  } 
+            }
+
+            
+          }
+        
+
          let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)//this.getConfigService(ObjListaCheckSeleccionadoxDoc,ObjListaCheckSeleccionadoxNombre,objAnularCliene)
         //  console.log("respuetaService",respuetaService)
           if(respuetaService.code == 1){
@@ -2567,7 +2656,9 @@ prueba = []
                 closeButton : 'OcultarBorde'
                },
             }).then(resp => {
-              return
+              if(!resp.dismiss){
+                  return
+                }
             })
           }
           if(respuetaService.code == 0){
@@ -2575,16 +2666,7 @@ prueba = []
             ItemCliente.SESTADO_REVISADO = '2'
             ItemCliente.SESTADO_TRAT = null
 
-            let data:any = {}
-            debugger
-            data.name = (ItemCliente.SNOM_COMPLETO).trim()
-            data.alertId = 2
-            data.periodId = this.NPERIODO_PROCESO
-            data.tipoCargaId = 2
-            // await this.goToDetailAprobar(ItemCliente,[])
-            /* Se agreggo esta linea para consumir la api de */
-            let respuestaWC =  await this.userConfigService.ConsultaWC(data)
-            console.log("RespuestaWC",respuestaWC)
+           
 
             await this.goToDetailAprobar(ItemCliente,ValorArray)
           } 
@@ -2595,6 +2677,8 @@ prueba = []
   }
 
   async getConfigService(obj/*,obj2,obj3*/){
+
+
 
     let respServiceBusqCliente = await this.userConfigService.BusquedaConcidenciaXDocXName(obj)
     /*let respServiceAnularCliente = await this.userConfigService.AnularClienteResultado(obj3)

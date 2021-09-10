@@ -37,7 +37,7 @@ export class MantenimientoComplementoComponent implements OnInit {
 
 
   
-  updateAlertFromList(data: any) {
+  async updateAlertFromList(data: any) {
    
     //this.core.loader.show(); 
     const modalRef = this.modalService.open
@@ -49,9 +49,9 @@ export class MantenimientoComplementoComponent implements OnInit {
       console.log("entro al resultado del reason : ",resp)
      
      
-      
-      //await this.Lista()
-      //this.core.loader.hide();
+      this.core.loader.show()
+      await this.listaComplemento()
+      this.core.loader.hide();
     }, (reason) => {
       //this.core.loader.hide();
     });
