@@ -1354,7 +1354,7 @@ export class C2DetailComponent implements OnInit {
         this.core.loader.show();
         let respMovement = await this.userConfigService.getMovementHistory(param)
         //let arrMovementNew = []
-        debugger;
+        /* debugger; */
         this.movementHistory = respMovement//this.sNombreLista ? respMovement.filter(duplid => duplid.SDESTIPOLISTA == this.sNombreLista) : respMovement
         this.core.loader.hide();
     }
@@ -1363,6 +1363,12 @@ export class C2DetailComponent implements OnInit {
     bolSoatGral:any = false
     bolSoatSimpli:any = false
     bolSoatPolicy:any = false
+
+    /* prueba param 360 */
+    /* certif: any
+    fecpoli: any
+    poliza: any */
+
     async getPolicyList(){       
          console.log("el P_NIDALERTA : ",this.formData) 
          console.log("el P_NIDALERTA 2: ",(this.formData.NTIPOCARGA == null ? 2 : this.formData.NTIPOCARGA)) 
@@ -1406,6 +1412,16 @@ export class C2DetailComponent implements OnInit {
             }
         })*/
         this.core.loader.hide();
+        
+                     /* prueba param 360 */
+        /* this.certif= this.policySimpli[0].NCERTIF;
+        this.fecpoli= this.policySimpli[0].DFEC_INI_POLIZA;
+        this.poliza= this.policySimpli[0].SNUM_POLIZA; */
+        
+        /* console.log('prueba kevin', this.policySimpli)
+        console.log('prueba kevin', this.policySimpli[0].NCERTIF)
+        console.log('prueba kevin', this.policySimpli[0].DFEC_INI_POLIZA)
+        console.log('prueba kevin', this.policySimpli[0].SNUM_POLIZA) */
     }
 
     getListCheckedById(idList){
@@ -2515,22 +2531,5 @@ ValidarRegimenAcepta(){
     
 }
 
-Resultado:any = {}
-async Consultar360(){
-    let data:any = {}
-    data.Ramo = 66,
-    data.Producto = 1,
-    data.Poliza = 7000936826,
-    data.Certificado= 0,
-    data.FechaConsulta= "09/07/2021", //fecha inicio vigencia
-    data.Endoso= null    //Solo para rentas
 
-    await this.userConfigService.Consulta360(data).then(
-        (response) => {
-        this.Resultado = response
-        });
-    console.log("el resultado",this.Resultado)
-        
-} 
- 
 }

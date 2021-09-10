@@ -792,6 +792,7 @@ listaRenta:any = []
 listaAhorro:any = []
 listaPep:any = []
 listaEspecial:any = []
+cargosConcatenados:string = ''
 
 async DescargarReporte(item){
   debugger
@@ -810,6 +811,7 @@ async DescargarReporte(item){
   this.listaAhorro = []
   this.listaPep = []
   this.listaEspecial = []
+  this.cargosConcatenados = ''
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -829,8 +831,13 @@ async DescargarReporte(item){
        data.NombreCompleto = t.NOMBRECOMPLETO
        data.Cargo = t.SCARGO
        data.Respuesta = (t.SRESPUESTA).toLowerCase()
+       this.cargosConcatenados = this.cargosConcatenados.concat(t.SCARGO,', ')
        this.arrayDataSenal.push(data)
   })
+
+  
+
+  
 
   this.Nombre = this.arrayDataSenal[0].NombreCompleto;
   this.Perfil =this.arrayDataSenal[0].Cargo;
