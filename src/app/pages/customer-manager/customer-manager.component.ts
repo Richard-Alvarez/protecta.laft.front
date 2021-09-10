@@ -2611,7 +2611,7 @@ prueba = []
                   let respuestaWC =  await this.userConfigService.ConsultaWC(data)
                   console.log("RespuestaWC",respuestaWC)
                   
-                  if(respuetaService.sStatus == 'NOT FOUND'){
+                  if(respuetaService.sStatus == 'NOT FOUND' || respuetaService.sStatus == 'ERROR'){
                     Swal.fire({
                       title: 'Gestor de Cliente',
                       icon: 'warning',
