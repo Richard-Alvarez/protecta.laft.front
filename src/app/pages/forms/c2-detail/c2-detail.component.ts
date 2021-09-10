@@ -1354,7 +1354,7 @@ export class C2DetailComponent implements OnInit {
         this.core.loader.show();
         let respMovement = await this.userConfigService.getMovementHistory(param)
         //let arrMovementNew = []
-        /* debugger; */
+        debugger;
         this.movementHistory = respMovement//this.sNombreLista ? respMovement.filter(duplid => duplid.SDESTIPOLISTA == this.sNombreLista) : respMovement
         this.core.loader.hide();
     }
