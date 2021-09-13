@@ -801,6 +801,9 @@ ValidarP:string = ''
 listaPepMasivos:any = []
 listaPepSoat:any = []
 listaPepRenta:any = []
+listaEspecialMasivos:any = []
+listaEspecialSoat:any = []
+listaEspecialRenta:any = []
 
 async DescargarReporte(item){
   debugger
@@ -827,6 +830,9 @@ async DescargarReporte(item){
   this.listaPepMasivos = []
   this.listaPepSoat = []
   this.listaPepRenta = []
+  this.listaEspecialMasivos = []
+  this.listaEspecialSoat = []
+  this.listaEspecialRenta = []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -882,6 +888,9 @@ async DescargarReporte(item){
     this.listaPepMasivos =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 99)
     this.listaPepSoat =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
     this.listaPepRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
+    this.listaEspecialMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 99)
+    this.listaEspecialSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
+    this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
     //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
     //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
     console.log("this.listaSoa",this.listaSoat)
