@@ -798,6 +798,9 @@ ValidarRG:string = ''
 ValidarNombreTemplate:string = ''
 ValidarT:string = ''
 ValidarP:string = ''
+listaPepMasivos:any = []
+listaPepSoat:any = []
+listaPepRenta:any = []
 
 async DescargarReporte(item){
   debugger
@@ -821,6 +824,9 @@ async DescargarReporte(item){
   this.ValidarNombreTemplate = ''
   this.ValidarT = ''
   this.ValidarP = ''
+  this.listaPepMasivos = []
+  this.listaPepSoat = []
+  this.listaPepRenta = []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -873,6 +879,9 @@ async DescargarReporte(item){
     this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
     this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76 && it.NIDTIPOLISTA == 5)
     this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
+    this.listaPepMasivos =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 99)
+    this.listaPepSoat =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
+    this.listaPepRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
     //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
     //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
     console.log("this.listaSoa",this.listaSoat)
