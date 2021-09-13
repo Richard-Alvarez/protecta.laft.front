@@ -893,12 +893,17 @@ async DescargarReporte(item){
     this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
     //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
     //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
-    console.log("this.listaSoa",this.listaSoat)
+    console.log("this.listaSoat",this.listaSoat)
     console.log("this.listaMasivos",this.listaMasivos)
     console.log("this.listaRenta",this.listaRenta)
     console.log("this.listaAhorro",this.listaAhorro)
     console.log("this.listaPep",this.listaPep)
-    console.log("this.listaEspecial",this.listaEspecial)
+    console.log("this.listaPepMasivos",this.listaPepMasivos)
+    console.log("this.listaPepSoat",this.listaPepSoat)
+    console.log("this.listaPepRenta",this.listaPepRenta)
+    console.log("this.listaEspecialMasivos",this.listaEspecialMasivos)
+    console.log("this.listaEspecialSoat",this.listaEspecialSoat)
+    console.log("this.listaEspecialRenta",this.listaEspecialRenta)
     this.Cantidad = this.arrayDataResultado.length
   }
 

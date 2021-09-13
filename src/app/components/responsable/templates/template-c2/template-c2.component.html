@@ -220,7 +220,7 @@
     <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaSoat.length}}
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}}
             coincidencias exactas entre el Registro Negativo y la base de clientes – RENTAS VITALICIAS vigente al 
             cierre del {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
             </li>
@@ -525,7 +525,7 @@
     <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepSoat.length}} coincidencias 
             exactas de clientes PEP y la base de clientes vigentes - SOAT al cierre del{{this.Periodo}}, por ende, se consideran
              como señales de alerta “C2”. 
             </li>
@@ -561,7 +561,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaPep">
+                        <tr *ngFor="let item of parent.listaPepSoat">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -603,7 +603,7 @@
             <br>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
+                De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepRenta.length}} coincidencias 
                 exactas de clientes PEP y la base de clientes vigentes - RENTAS VITALICIAS al cierre del{{this.Periodo}}, por ende, se consideran
                  como señales de alerta “C2”. 
                 </li>
@@ -639,7 +639,7 @@
                                     </p>
                                 </td>
                             </tr>
-                            <tr *ngFor="let item of parent.listaPep">
+                            <tr *ngFor="let item of parent.listaPepRenta">
                                 <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
                                         {{item.STIPO_DOCUMENTO}}
@@ -839,7 +839,7 @@
     <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialMasivos.length}} coincidencias 
             de la base de clientes vigentes - MASIVOS y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
@@ -874,7 +874,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaEspecial">
+                        <tr *ngFor="let item of parent.listaEspecialMasivos">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -911,7 +911,7 @@
     <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialSoat.length}} coincidencias 
             de la base de clientes vigentes - SOAT y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
@@ -946,7 +946,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaEspecial">
+                        <tr *ngFor="let item of parent.listaEspecialSoat">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -983,7 +983,7 @@
     <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialRenta.length}} coincidencias 
             de la base de clientes vigentes - RENTAS VITALICIAS y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
@@ -1018,7 +1018,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaEspecial">
+                        <tr *ngFor="let item of parent.listaEspecialRenta">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
