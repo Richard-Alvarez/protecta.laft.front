@@ -195,6 +195,19 @@ export class UserconfigService {
     });
   }
 
+  Consulta360Previous(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlConsulta360Previous, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
   ConsultaWC(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

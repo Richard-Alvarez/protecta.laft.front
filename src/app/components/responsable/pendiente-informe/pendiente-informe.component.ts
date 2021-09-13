@@ -747,7 +747,7 @@ DataArray(){
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
     var html = preHtml+document.getElementById(element).innerHTML+postHtml;
-    console.log("El html que descarga", html)
+    // console.log("El html que descarga", html)
     var blob = new Blob(['\ufeff', html],{
         type: 'application/msword'
     });
@@ -798,6 +798,12 @@ ValidarRG:string = ''
 ValidarNombreTemplate:string = ''
 ValidarT:string = ''
 ValidarP:string = ''
+listaPepMasivos:any = []
+listaPepSoat:any = []
+listaPepRenta:any = []
+listaEspecialMasivos:any = []
+listaEspecialSoat:any = []
+listaEspecialRenta:any = []
 
 async DescargarReporte(item){
   debugger
@@ -821,6 +827,12 @@ async DescargarReporte(item){
   this.ValidarNombreTemplate = ''
   this.ValidarT = ''
   this.ValidarP = ''
+  this.listaPepMasivos = []
+  this.listaPepSoat = []
+  this.listaPepRenta = []
+  this.listaEspecialMasivos = []
+  this.listaEspecialSoat = []
+  this.listaEspecialRenta = []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -869,17 +881,29 @@ async DescargarReporte(item){
     this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
     console.log("this.arrayDataResultado",this.arrayDataResultado)
     this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
-    this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
-    this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76)
+    // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
+    this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
+    this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76 && it.NIDTIPOLISTA == 5)
     this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
-    this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
-    this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
-    console.log("this.listaSoa",this.listaSoat)
+    this.listaPepMasivos =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 99)
+    this.listaPepSoat =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
+    this.listaPepRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
+    this.listaEspecialMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 99)
+    this.listaEspecialSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
+    this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+    //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
+    //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
+    console.log("this.listaSoat",this.listaSoat)
     console.log("this.listaMasivos",this.listaMasivos)
     console.log("this.listaRenta",this.listaRenta)
     console.log("this.listaAhorro",this.listaAhorro)
     console.log("this.listaPep",this.listaPep)
-    console.log("this.listaEspecial",this.listaEspecial)
+    console.log("this.listaPepMasivos",this.listaPepMasivos)
+    console.log("this.listaPepSoat",this.listaPepSoat)
+    console.log("this.listaPepRenta",this.listaPepRenta)
+    console.log("this.listaEspecialMasivos",this.listaEspecialMasivos)
+    console.log("this.listaEspecialSoat",this.listaEspecialSoat)
+    console.log("this.listaEspecialRenta",this.listaEspecialRenta)
     this.Cantidad = this.arrayDataResultado.length
   }
 
@@ -904,6 +928,8 @@ async DescargarReporte(item){
     this.ValidarNombreTemplate = 'P'
   }else if(this.Alerta == 'S2'){
     this.ValidarNombreTemplate = 'S2'
+  }else if(this.Alerta == 'C1'){
+    this.ValidarNombreTemplate = 'C1'
   }
 
   
