@@ -114,9 +114,7 @@ export class C2DetailComponent implements OnInit {
   SESTADO_BUTTON_SAVE
   NewListCheck :any = []
   async ngOnInit() {  
-    
-    
- 
+        
     debugger;
     var paramCliente =  localStorage.getItem("paramCliente");
     // console.log("El paramCliente: ", paramCliente)
@@ -192,6 +190,10 @@ export class C2DetailComponent implements OnInit {
     console.log("La lista del unchekAllList NewListCheck",this.NewListCheck)
     this.Arraycheckbox()
     console.log("this.formData",this.formData)
+
+
+    await this.Consultar360Previous();
+
   }
   
  
@@ -1354,7 +1356,7 @@ export class C2DetailComponent implements OnInit {
         this.core.loader.show();
         let respMovement = await this.userConfigService.getMovementHistory(param)
         //let arrMovementNew = []
-        debugger;
+        /* debugger; */
         this.movementHistory = respMovement//this.sNombreLista ? respMovement.filter(duplid => duplid.SDESTIPOLISTA == this.sNombreLista) : respMovement
         this.core.loader.hide();
     }
@@ -2530,6 +2532,38 @@ ValidarRegimenAcepta(){
     }
     
 }
+ResultadoPrevious: any ={}
+detResult: any ={}
+    /* descramo360pre: any;
+    descrol360pre: any; */
+async Consultar360Previous(){
+    let data = {
+      TipoDocumento: this.formData.NTIPO_DOCUMENTO,
+      NumeroDocumento: this.formData.SNUM_DOCUMENTO,
+      //Nombres: null,
+      //Poliza: null,
+      CodAplicacion: "360",
+      //Producto: null,
+      //FechaSolicitud: null,
+      //Rol: null,
+      //Tipo: null,
+      //estado: null,
+      //Ramo: null,
+      pagina: 1,
+      NumeroResgistros: "10000000",
+      //Endoso: null,
+      Usuario: "1"
+    }
+    await this.userConfigService.Consulta360Previous(data).then(
+      (response) => {
+        this.ResultadoPrevious = response
+    });
+    console.log("360Previous",this.ResultadoPrevious)
+    this.detResult= this.ResultadoPrevious.certificados
+    /*console.log('prueba kevin3',this.formData) */
+    /* this.descramo360pre= this.ResultadoPrevious.certificados[0].ramo.descripcion;
+    this.descrol360pre= this.ResultadoPrevious.certificados[0].rol.descripcionRol; */
+  }
 
 
 }

@@ -371,7 +371,7 @@
                         </div>
                     </div>
                     
-                    <div class="row" style="">    
+                    <div class="row" >    <!-- style="" -->
                         <div class="col-lg-11"></div>       
                         <div class="col-lg-1" >
                             <!-- <button class="btn btn-warning text-white" (click)="save()"
@@ -1995,20 +1995,25 @@
                         <hr>
                         <div class="text-center tituloTwo" >{{nombreRegimen}}</div>
                         <div class="row pl-2 pr-2">
-                            <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div>
-                            <div class="col-lg-2  text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo / Producto</div>
-                            <div class="col-lg-1  text-left txtCabecera">Certificado</div>
-                            <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
-                            <div class="col-lg-1  text-left txtCabecera">Moneda</div>
-                            <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div>
-                            <div class="col-lg-2  text-left txtCabecera">Fecha inicio y fin de póliza</div>
+                            <!-- <div class="col-lg-1  text-left txtCabecera">N° de Póliza</div> -->
+                            <div class="col-lg-2  text-left txtCabecera" >Ramo</div><!-- style="padding-left: 0px;padding-right: 0px;" -->
+                            <div class=" text-left txtCabecera" style="width: 11.904%; flex: 0 0 11.904%;">Producto</div><!-- style="padding-left: 0px;padding-right: 0px;" -->
+                            <div class=" text-left txtCabecera" style="width: 11.904%; flex: 0 0 11.904%;">N° Póliza</div>
+                            <div class=" text-left txtCabecera" style="width: 11.904%;">N° Certificado</div>
+                            <div class=" text-left txtCabecera" style="width: 11.904%;">Rol</div>
+                            <!-- <div class="col-lg-1  text-left txtCabecera">Monto de Prima</div>
+                            <div class="col-lg-1  text-left txtCabecera">Moneda</div> -->
+                            <!-- <div class="col-lg-1  text-left txtCabecera">Tipo de Cliente</div> -->
+                            <!-- <div class="col-lg-1  text-left txtCabecera"></div> -->
+                            <div class=" text-left txtCabecera" style="width: 11.904%;">Inicio</div>
+                            <div class=" text-left txtCabecera" style="width: 11.904%;">Fin</div>
 
-                            <div *ngIf="getValidaCabeceraPlaca(99)" class="col-lg-1  text-left txtCabecera">Placa</div>
-                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
-                            <div class="col-lg-1  text-left txtCabecera" >Estado de Póliza</div>
+                            <!-- <div *ngIf="getValidaCabeceraPlaca(99)" class="col-lg-1  text-left txtCabecera">Placa</div> -->
+                            <!-- <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div> -->
+                            <div class="col-lg-1 text-left txtCabecera" >Estado</div>
                         </div>
                         <div id="">
-                            <div class="card" *ngFor="let item of policyList;let inc = index;">
+                            <div class="card" *ngFor="let it of detResult;let inc = index;"><!-- *ngFor="let item of policyList;let inc = index;" -->
                                 <div class="card-header headerSenials"><!---->
                                     <div class="detallePoliza {{getColorGrilla(inc)}}">
                                         <div class="row pl-2 pr-2">
@@ -2032,54 +2037,54 @@
                                                 href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
                                             <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
                                                 href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
-                                            <div class="col-lg-1 cabeceraPolizas" >
-                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
-                                                    <div >{{item.SNUM_POLIZA}}</div><!-- (click)="Consultar360(item)" -->
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" >
-                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.SPRODUCTO}}</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-1 cabeceraPolizas" >
-                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.NCERTIF}}</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-1 cabeceraPolizas" >
-                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{numberWithCommas(item.PRIMA_POLIZA)}}</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-1 cabeceraPolizas" >
-                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div ></div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-1 cabeceraPolizas" >
-                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.STIPO_CLIENTE}}</div>
-                                                </a>
-                                            </div>
                                             <div class="col-lg-2 cabeceraPolizas" >
-                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</div>
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
+                                                    <div >{{it.ramo.descripcion}}</div><!-- (click)="Consultar360(item)" -->
                                                 </a>
                                             </div>
-                                            <div class="col-lg-1 cabeceraPolizas" *ngIf="getValidaCabeceraPlaca(99)">
+                                            <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{it.producto}} </div>
+                                                </a>
+                                            </div>
+                                            <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{it.nroPolicy}}</div>
+                                                </a>
+                                            </div>
+                                            <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{it.nroCertificate}}</div>
+                                                </a>
+                                            </div>
+                                            <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{it.rol.descriptionRol}}</div>
+                                                </a>
+                                            </div>
+                                            <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{it.fechaInicioVigencia}}</div>
+                                                </a>
+                                            </div>
+                                            <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{it.fechaFinVigencia}}</div>
+                                                </a>
+                                            </div>
+                                            <!-- <div class="col-lg-1 cabeceraPolizas" *ngIf="getValidaCabeceraPlaca(99)">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                     <div >{{item.PLACA ? item.PLACA : ''}}</div>
                                                 </a>
-                                            </div>
-                                            <div class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >
+                                            </div> -->
+                                            <!-- <div class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                     <div >{{item.FEC_PAGO}}</div>
                                                 </a>
-                                            </div>
-                                            <div class="col-lg-1 cabeceraPolizas"  >
+                                            </div> -->
+                                            <div class="col-lg-1 cabeceraPolizas" >
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >VIGENTE</div>
+                                                    <div >{{it.status}}</div>
                                                 </a>
                                             </div>
                                         </div>
@@ -2151,7 +2156,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <app-c2-info-policy [policyList]="policyList"></app-c2-info-policy>
+                                        <app-c2-info-policy [policyList]="policyList" [formData]="formData"></app-c2-info-policy>
                                     </div><!---->
                                 </div><!---->
                             </div>
