@@ -291,7 +291,7 @@ export class CompletadoComponent implements OnInit {
   }
 
   async solicitarComplemento(indice,pregHead){
-    debugger
+    
     if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
       pregHead["NREGIMEN"] = 0
      }
@@ -336,7 +336,7 @@ export class CompletadoComponent implements OnInit {
                        },
          
       }).then(async (result:any) => {
-        debugger
+        
         ////console.log("result w : ",result)
         if(result.value === true){
           this.core.loader.show()
@@ -696,7 +696,7 @@ export class CompletadoComponent implements OnInit {
 
   arrNewCheck:any = []
   setDataCheckboxApproved(item,index){
-    debugger
+    
     // console.log("15 Prueba arrResponsable 15 : ", this.arrResponsable)
      console.log("15 Prueba ngModel : ", this.arrCheckbox)
     let valor = this.arrCheckbox[index]

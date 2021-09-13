@@ -153,6 +153,7 @@ import { TemplateTComponent } from './components/responsable/templates/template-
 import { UserconfigService } from './services/userconfig.service';
 import { MantenimientoComplementoComponent } from './mantenimiento-complemento/mantenimiento-complemento.component';
 import { ModalMantenimientoComplementoComponent } from './modal-mantenimiento-complemento/modal-mantenimiento-complemento.component';
+import { TemplateC1Component } from './components/responsable/templates/template-c1/template-c1.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -288,6 +289,7 @@ import { ModalMantenimientoComplementoComponent } from './modal-mantenimiento-co
     TemplateTComponent,
     MantenimientoComplementoComponent,
     ModalMantenimientoComplementoComponent,
+    TemplateC1Component,
 
    
     //Validaciones
