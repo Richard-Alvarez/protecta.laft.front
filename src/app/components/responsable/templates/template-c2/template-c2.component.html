@@ -70,7 +70,7 @@
                     </li>
                 </ol>
             <br> 
-            <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+            <strong style="font-family: arial Narrow, serif;"> Resultados Señales de alerta C2</strong>
         </div>
 
             <br>
@@ -78,8 +78,9 @@
                          <div *ngIf="parent.RegimenPendiente == 2">
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaMasivos.length}} coincidencias exactas entre el Registro Negativo y la base 
-                    de clientes – MASIVOS vigente al cierre {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaMasivos.length}} 
+                    coincidencias exactas entre el Registro Negativo y la base de clientes – MASIVOS vigente al cierre {{this.Periodo}}, 
+                    por ende, se consideran como señales de alerta “C2”. 
                 </li>
             </ul>
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
@@ -146,13 +147,16 @@
             <br> 
         </div>  
         </div> 
+        <dt> 
+            <dd><strong style="font-family: arial Narrow, serif;"> Información adicional</strong></dd>
+            <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
 
         <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaSoat.length}}
-            coincidencias exactas entre el Registro Negativo y la base de clientes – SOAT vigente al cierre del {{this.Periodo}}, por ende, 
-            se consideran como señales de alerta “C2”. 
+            coincidencias exactas entre el Registro Negativo y la base de clientes – SOAT vigente al cierre del {{this.Periodo}}, 
+            por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
@@ -208,69 +212,90 @@
             </table>
             <br>
         </div> 
+        
+    </div>
+    <dt> 
+        <dd><strong style="font-family: arial Narrow, serif;"> Información adicional</strong></dd>
+        <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
 
-            <dt><dd><strong style="font-family: arial Narrow, serif;">Información adicional</strong></dd>
-            <br>    
-
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
-            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-                    <tbody>
-                        <tr>
-                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
-                            <p>
-                            <strong>TIPO DOC.</strong>
-                            </p>
-                            </td>
-                            <td width="11%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
-                            <p>
-                            <strong>NRO. DOC.</strong>
-                            </p>
-                            </td>
-                            <td width="34%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
-                            <p>
-                            <strong>NOMBRE COMPLETO</strong>
-                            </p>
-                            </td>
-                            <td width="40%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
-                            <p>
-                            <strong>INFORMACIÓN ADICIONAL</strong>
-                            </p>
-                            </td>
-                        </tr>
-                        <tr *ngFor="let item of parent.listaSoat">
-                            <td width="15%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                            <p>
-                            {{item.STIPO_DOCUMENTO}}
-                            </p>
-                            </td>
-                            <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                            <p>
-                            {{item.SNUM_DOCUMENTO_BUSQ}}
-                            </p>
-                            </td>
-                            <td width="34%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                            <p>
-                            {{item.SNOM_COMPLETO_BUSQ}}
-                            </p>
-                            </td>
-                            <td width="40%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                            <p>
-                            <!-- {{item.STIPO_DOCUMENTO}} --> ESTO LO LLENA EL USUARIO
-                            </p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </FONT>
-            </table>
-            <br>
-        </div>  
+        <div *ngIf="parent.RegimenPendiente == 2">
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaSoat.length}}
+                coincidencias exactas entre el Registro Negativo y la base de clientes – RENTAS VITALICIAS vigente al 
+                cierre del {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="15%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>TIPO DOC.</strong>
+                                </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>NRO. DOC.</strong>
+                                </p>
+                                </td>
+                                <td width="44" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                </p>
+                                </td>
+                                <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>INFORMACIÓN ADICIONAL</strong>
+                                </p>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let item of parent.listaSoat">
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                {{item.STIPO_DOCUMENTO}}
+                                </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                {{item.SNUM_DOCUMENTO_BUSQ}}
+                                </p>
+                                </td>
+                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                {{item.SNOM_COMPLETO_BUSQ}}
+                                </p>
+                                </td>
+                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                <!-- {{item.STIPO_DOCUMENTO}} --> Oficios DIRINCRI
+                                </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div> 
+            
         </div>
+        <br> 
+        <dt> 
+            <dd><strong style="font-family: arial Narrow, serif;"> Información adicional</strong></dd>
+            <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
+        <br>
+        <dt> 
+            <dd><strong style="font-family: arial Narrow, serif;"> Conclusión</strong></dd>
+            <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
+
         <div *ngIf="parent.RegimenPendiente == 1">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias exactas entre el Registro Negativo 
-            y la base de clientes de Rentas Vitalicias vigente al cierre del {{parent.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias 
+            exactas entre el Registro Negativo y la base de clientes - RENTA TOTAL vigente al cierre del {{parent.Periodo}}, 
+            por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
@@ -300,7 +325,7 @@
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                                 <p>
-                                <strong>INFORMACION ADICIONAL</strong>
+                                <strong>DOCUMENTO DE REFERENCIA</strong>
                                 </p>
                             </td>
                         </tr>
@@ -336,7 +361,88 @@
             </table>
             <br>
         </div> 
-        </div>
+
+        <br> 
+        <dt> 
+            <dd><strong style="font-family: arial Narrow, serif;"> Resultados Señales de alerta C2</strong></dd>
+            <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
+
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias 
+            exactas entre el Registro Negativo y la base de clientes - AHORRO TOTAL vigente al cierre del {{parent.Periodo}}, 
+            por ende, se consideran como señales de alerta “C2”. 
+            </li>
+        </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="14%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>TIPO DOC.</strong>
+                                </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>NRO. DOC.</strong>
+                                </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>NOMBRE COMPLETO</strong>
+                                </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>PRODUCTO</strong>
+                                </p>
+                                </td>
+                                <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                    <strong>DOCUMENTO DE REFERENCIA</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let item of parent.listaRenta">
+                                <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                {{item.STIPO_DOCUMENTO}}
+                                </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                {{item.SNUM_DOCUMENTO_BUSQ}}
+                                </p>
+                                </td>
+                                <td width="180px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                {{item.SNOM_COMPLETO_BUSQ}}
+                                </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                {{item.SDESPRODUCTO}} 
+                                    </p>
+                                </td>
+                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                {{item.STIPO_LISTA_REFERENCIA}}
+                                </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div> 
+            </div>
+            <br> 
+            <dt> 
+            <dd><strong style="font-family: arial Narrow, serif;"> Resultados Señales de alerta C2</strong></dd>
+            <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
+
         el valor del regimen {{parent.RegimenPendiente}}
         <div *ngIf="parent.RegimenPendiente == 1">
         <br>
@@ -411,6 +517,12 @@
         <br> 
         </div>       
         </div> 
+        <br> 
+        <dt> 
+            <dd><strong style="font-family: arial Narrow, serif;"> Información adicional</strong></dd>
+            <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
+
+
         <br>
         <strong style="font-family: arial Narrow, serif;"> LISTAS ESPECIALES DE SEGURIDAD</strong>
         <ul>
