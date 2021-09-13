@@ -904,6 +904,8 @@ async DescargarReporte(item){
     this.ValidarNombreTemplate = 'P'
   }else if(this.Alerta == 'S2'){
     this.ValidarNombreTemplate = 'S2'
+  }else if(this.Alerta == 'C1'){
+    this.ValidarNombreTemplate = 'C1'
   }
 
   
