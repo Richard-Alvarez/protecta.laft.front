@@ -73,7 +73,7 @@
         </div>
 
         <br>
-            <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
+        <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
         
     <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
@@ -442,9 +442,10 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div>
 
+    <br>
+    <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
+
     <div *ngIf="parent.RegimenPendiente == 2">
-        <br>
-        <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
@@ -519,8 +520,9 @@
         <dt> 
             <dd><strong style="font-family: arial Narrow, serif;"> Información adicional</strong></dd>
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
+    </div>
 
-        <br>
+    <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
@@ -595,7 +597,9 @@
         <dt> 
             <dd><strong style="font-family: arial Narrow, serif;"> Información adicional</strong></dd>
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
-   
+    </div>   
+
+    <div *ngIf="parent.RegimenPendiente == 2">
             <br>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -674,8 +678,6 @@
     </div> 
 
     <div *ngIf="parent.RegimenPendiente == 1">
-        <br>
-        <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
@@ -752,6 +754,9 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
 
         <br>
+    </div>
+
+    <div *ngIf="parent.RegimenPendiente == 1">    
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
@@ -828,9 +833,10 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div> 
 
-    <div *ngIf="parent.RegimenPendiente == 2">
         <br>
         <strong style="font-family: arial Narrow, serif;"> LISTAS INTERNACIONALES</strong>
+
+    <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
@@ -868,7 +874,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaEspecialMasivos">
+                        <tr *ngFor="let item of parent.listaEspecial">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -900,7 +906,9 @@
             </table>
             <br>  
         </div>  
+    </div>
 
+    <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
@@ -938,7 +946,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaEspecialSoat">
+                        <tr *ngFor="let item of parent.listaEspecial">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -970,7 +978,9 @@
             </table>
             <br>  
         </div>  
+    </div>
 
+    <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
@@ -1008,7 +1018,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaEspecialRenta">
+                        <tr *ngFor="let item of parent.listaEspecial">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -1042,14 +1052,149 @@
         </div>
     </div> 
 
+    <div *ngIf="parent.RegimenPendiente == 1">
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
+            de la base de clientes vigentes - RENTA TOTAL y la base de listas internacionales al cierre del {{parent.Periodo}}.
+            </li>
+        </ul>
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                    <strong>TIPO DOC.</strong>
+                                </p>
+                            </td>
+                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                    <strong>NRO. DOC.</strong>
+                                </p>
+                            </td>
+                            <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                    <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                </p>
+                            </td>
+                            <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                <strong>PRODUCTO</strong>
+                                </p>
+                            </td>
+                            <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                    <strong>INFORMACIÓN ADICIONAL</strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of parent.listaEspecial">
+                            <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    {{item.STIPO_DOCUMENTO}}
+                                </p>
+                            </td>
+                            <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    {{item.SNUM_DOCUMENTO_BUSQ}}
+                                </p>
+                            </td>
+                            <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    {{item.SNOM_COMPLETO_BUSQ}}
+                                </p>
+                            </td>
+                            <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    {{item.SDESPRODUCTO}} 
+                                </p>
+                            </td>
+                            <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    -----------
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </FONT>
+            </table>
+            <br>  
+        </div>
+    </div> 
 
-
-
-
-
-
-
-
+    <div *ngIf="parent.RegimenPendiente == 1">
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
+            de la base de clientes vigentes - AHORRO TOTAL y la base de listas internacionales al cierre del {{parent.Periodo}}.
+            </li>
+        </ul>
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                    <strong>TIPO DOC.</strong>
+                                </p>
+                            </td>
+                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                    <strong>NRO. DOC.</strong>
+                                </p>
+                            </td>
+                            <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                    <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                </p>
+                            </td>
+                            <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                <strong>PRODUCTO</strong>
+                                </p>
+                            </td>
+                            <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <p>
+                                    <strong>INFORMACIÓN ADICIONAL</strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of parent.listaEspecial">
+                            <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    {{item.STIPO_DOCUMENTO}}
+                                </p>
+                            </td>
+                            <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    {{item.SNUM_DOCUMENTO_BUSQ}}
+                                </p>
+                            </td>
+                            <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    {{item.SNOM_COMPLETO_BUSQ}}
+                                </p>
+                            </td>
+                            <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    {{item.SDESPRODUCTO}} 
+                                </p>
+                            </td>
+                            <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    -----------
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </FONT>
+            </table>
+            <br>  
+        </div>
+    </div> 
 
     <ul>
         <li style="font-family: arial Narrow, serif; text-align: justify">
