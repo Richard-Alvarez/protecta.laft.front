@@ -52,7 +52,7 @@ export class CompletadoComponent implements OnInit {
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
-
+    await this.ConsultaComplemento()
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO
     this.OBJ_USUARIO = this.core.storage.get('usuario');
     this.NIDUSUARIO_LOGUEADO = this.OBJ_USUARIO.idUsuario//this.core.storage.get('NIDUSUARIO')
@@ -869,6 +869,21 @@ getAlerta(alerta){
 } else {
     return "Pregunta:"
 }
+}
+
+listaComplemento:any = [] 
+async ConsultaComplemento(){
+  // let data:any ={}
+  // data.NIDALERTA = item.NIDALERTA
+  // data.NIDGRUPOSENAL = 1
+  // this.listaComplemento = await this.userConfigService.GetListaComplementos(data)
+  this.listaComplemento = await this.userConfigService.GetListaAlertaComplemento()
+  //return this.listaComplemento
+}
+
+filtroComplemeto(item){
+  let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
+  return resultado
 }
 
   
