@@ -157,7 +157,7 @@ export class ViewC2FormComponent implements OnInit {
     }
 
     getClientsByListArr(lista){
-        
+        debugger;
         //console.log("respuesta de los filtros: 0 ", lista)
         //console.log("respuesta de los filtros: 1", this.arrayClientesByList)
         let resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
@@ -560,7 +560,6 @@ export class ViewC2FormComponent implements OnInit {
 
     async goToDetail(item: any,lista:any,idElement:any) {
         this.core.loader.show()
-        
         let objFocusPosition:any = {}
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
         if(this.linkactual == "proveedor")
