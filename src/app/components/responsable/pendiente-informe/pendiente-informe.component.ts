@@ -747,6 +747,7 @@ DataArray(){
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
     var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+    console.log("El html que descarga", html)
     var blob = new Blob(['\ufeff', html],{
         type: 'application/msword'
     });
@@ -758,7 +759,7 @@ DataArray(){
     var downloadLink = document.createElement("a");
   
      document.body.appendChild(downloadLink);
-  
+    
     if(navigator.msSaveOrOpenBlob){
         navigator.msSaveOrOpenBlob(blob, filename);
     }else{
@@ -793,6 +794,10 @@ listaAhorro:any = []
 listaPep:any = []
 listaEspecial:any = []
 cargosConcatenados:string = ''
+ValidarRG:string = ''
+ValidarNombreTemplate:string = ''
+ValidarT:string = ''
+ValidarP:string = ''
 
 async DescargarReporte(item){
   debugger
@@ -812,6 +817,10 @@ async DescargarReporte(item){
   this.listaPep = []
   this.listaEspecial = []
   this.cargosConcatenados = ''
+  this.ValidarRG = ''
+  this.ValidarNombreTemplate = ''
+  this.ValidarT = ''
+  this.ValidarP = ''
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -848,6 +857,9 @@ async DescargarReporte(item){
   let mes =  this.NPERIODO_PROCESO.toString().substr(4,2)
   let anno = this.NPERIODO_PROCESO.toString().substr(0,4) 
   this.Periodo = dia + '/' + mes + '/' + anno
+  this.ValidarRG = this.Alerta.substr(0,2)
+  this.ValidarT = this.Alerta.substr(0,1)
+  this.ValidarP = this.Alerta.substr(0,1)
 
   if(item.SNOMBRE_ALERTA == "C2" && item.NIDALERTA == 2){
     let data:any = {}
@@ -880,8 +892,22 @@ async DescargarReporte(item){
      this.NombreLink = this.linkactual
   }
 
+  if(this.ValidarRG == 'RG'){
+    this.ValidarNombreTemplate = 'RG'
+  }else if(this.Alerta == 'C3'){
+    this.ValidarNombreTemplate = 'C3'
+  }else if(this.ValidarT == 'T'){
+    this.ValidarNombreTemplate = 'T'
+  }else if(this.Alerta == 'C2'){
+    this.ValidarNombreTemplate = 'C2'
+  }else if(this.ValidarT == 'P'){
+    this.ValidarNombreTemplate = 'P'
+  }else if(this.Alerta == 'S2'){
+    this.ValidarNombreTemplate = 'S2'
+  }
+
   
-  this.Export2Doc("exportContent",this.Alerta)
+  this.Export2Doc(this.ValidarNombreTemplate,this.Alerta)
   
   console.log("this.arrayDataSenal",this.arrayDataSenal)
   console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta ,  this.RegimenPendiente)
