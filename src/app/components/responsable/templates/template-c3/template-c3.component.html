@@ -1,5 +1,5 @@
 
-<div id="exportContent">
+<div id="C3">
   <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
       <p> 
         <strong style="font-family: arial Narrow, serif;">Grupo de Señales de alerta - Renta Privada</strong>
@@ -52,12 +52,15 @@
             </tr>
           </tbody>
         </FONT>
+        
+      <br>
       </table>
 
 
     </div>
+    <br>
     <div class="container" style="padding: 0px 200px;">
-      <br>
+    
       <p>
         <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta C3</strong>
       </p>
@@ -105,18 +108,18 @@
         <br>
         <strong style="font-family: arial Narrow, serif;">Resultados:</strong>
         <ul>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> El área Comercial Masivos informó que {{arrayDataSenal[0].Respuesta}} se 
+        <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal"> El {{item.Cargo}} informó que {{item.Respuesta}} se 
           identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
           países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
         </li>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> El área de operaciones informó que {{arrayDataSenal[1].Respuesta}} se 
+        <!-- <li style="font-family: arial Narrow, serif; text-align: justify"> El área de operaciones informó que {{arrayDataSenal[1].Respuesta}} se 
           identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
           países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
         </li>
         <li style="font-family: arial Narrow, serif; text-align: justify"> El área Comercial Rentas informó que {{arrayDataSenal[2].Respuesta}} se 
           identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
           países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
-        </li>
+        </li> -->
     </ul>   
 
     <p>Los archivos de trabajo se ubican en:</p>

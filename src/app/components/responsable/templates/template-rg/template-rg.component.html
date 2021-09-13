@@ -1,422 +1,408 @@
-<div id="exportContent">
+<div id="RG">
 
-   
-    <p>
-        <img src="http://190.216.170.173/LAFT/assets/img/logo.png" alt="" >
-    </p>
-      
-        
-
-   <!-- <div *ngFor="let item of parent.arrayData"> -->
-       
-       <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
-      <!-- <p> 
-           <strong>Usuario:  {{parent.Nombre}}  </strong>
-       </p>
-       <p>
-           <strong>Perfil:  {{parent.Perfil}}  </strong>
-       </p> -->
-             
-       <div *ngIf="parent.Alerta == 'RG1'">
-       <!-- ESTO ES PARA LA RG1 -->
-       <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-           <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-           <tbody>
-               <tr>
-               <td width="200px" style="padding-left: 10px;">
-                   <p>
-                   <strong>CÓDIGO</strong>
-                   </p>
-               </td>
-               <td width="400px" style="padding-left: 10px;">
-                   <p>
-                   <strong>SEÑAL DE ALERTA</strong>
-                   </p>
-               </td>
-               <td width="200px">
-                   <p align="center">
-                   <strong>PRODUCTO</strong>
-                   </p>
-               </td>
-               </tr>
-               <tr>
-               <td width="20%">
-                   <p align="center">
-                   RG1
-                   </p>
-               </td>
-               <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                   <p>
-                   La información proporcionada por el cliente es
-                   inconsistente o de difícil verificación por parte de
-                   PROTECTA.
-                   </p>
-               </td>
-               <td width="113">
-                   <dl>
-                       <dt style="padding-left: 20px;">● Vida con Renta Temporal</dt>
-                       <dt style="padding-left: 20px;">● Renta Total</dt>
-                       <dt style="padding-left: 20px;">● Ahorro Total</dt>
-                       </dl> 
-               </td>
-               </tr>
-           </tbody>
-           </FONT>
-       </table>
-       </div>
-
-        <div *ngIf="parent.Alerta == 'RG2'">
-        <!-- ESTO ES PARA LA RG2 -->
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-            <tbody>
-                <tr>
-                <td width="200px" style="padding-left: 10px;">
-                    <p>
-                    <strong>CÓDIGO</strong>
-                    </p>
-                </td>
-                <td width="400px" style="padding-left: 10px;">
-                    <p>
-                    <strong>SEÑAL DE ALERTA</strong>
-                    </p>
-                </td>
-                <td width="200px">
-                    <p align="center">
-                    <strong>PRODUCTO</strong>
-                    </p>
-                </td>
-                </tr>
-                <tr>
-                    <td width="66" rowspan="2">
-                    <p align="center">
-                        RG2
-                    </p>
+    <!--    
+        <p>
+            <img src="http://190.216.170.173/LAFT/assets/img/logo.png" alt="" >
+        </p> -->
+          
+            
+    
+       <!-- <div *ngFor="let item of parent.arrayData"> -->
+           
+           <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+          <!-- <p> 
+               <strong>Usuario:  {{parent.Nombre}}  </strong>
+           </p>
+           <p>
+               <strong>Perfil:  {{parent.Perfil}}  </strong>
+           </p> -->
+                 
+           <div *ngIf="parent.Alerta == 'RG1'">
+           <!-- ESTO ES PARA LA RG1 -->
+           <table border="1" cellspacing="0" cellpadding="0" align="left" width="100&">
+               <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+               <tbody>
+                   <tr>
+                   <td width="15%" style="padding-left: 10px;">
+                       <p>
+                       <strong>CÓDIGO</strong>
+                       </p>
+                   </td>
+                   <td width="60%" style="padding-left: 10px;">
+                       <p>
+                       <strong>SEÑAL DE ALERTA</strong>
+                       </p>
+                   </td>
+                   <td width="20%">
+                       <p align="center">
+                       <strong>PRODUCTO</strong>
+                       </p>
+                   </td>
+                   </tr>
+                   <tr>
+                   <td width="20%">
+                       <p align="center">
+                       RG1
+                       </p>
+                   </td>
+                   <td width="60%" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                       <p>
+                       La información proporcionada por el cliente es
+                       inconsistente o de difícil verificación por parte de
+                       PROTECTA.
+                       </p>
+                   </td>
+                   <td width="20%">
+                       <dl>
+                           <dt style="padding-left: 20px;"> ● Vida con Renta Temporal</dt>
+                           <dt style="padding-left: 20px;"> ● Renta Total</dt>
+                           <dt style="padding-left: 20px;"> ● Ahorro Total</dt>
+                           </dl> 
+                   </td>
+                   </tr>
+               </tbody>
+               </FONT>
+           </table>
+           </div>
+    
+            <div *ngIf="parent.Alerta == 'RG2'">
+            <!-- ESTO ES PARA LA RG2 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="20%" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
                     </td>
-                    <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                    <p>
-                        El cliente se rehúsa a llenar los formularios requeridos
-                        por PROTECTA o a proporcionar la información necesaria para
-                        completarlos.
-                    </p>
+                    <td width="60%" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
                     </td>
-                    <td width="113">
-                    <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
-                    <p style="padding-left: 20px;">● Renta Total</p>
+                    <td width="20%">
+                        <p align="center">
+                        <strong>PRODUCTO</strong>
+                        </p>
                     </td>
-                </tr>
-            </tbody>
-            </FONT>
-        </table>
-        </div>
-
-        <div *ngIf="parent.Alerta == 'RG3'">
-        <!-- ESTO ES PARA LA RG3 -->
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-            <tbody>
-                <tr>
-                <td width="200px" style="padding-left: 10px;">
-                    <p>
-                    <strong>CÓDIGO</strong>
-                    </p>
-                </td>
-                <td width="400px" style="padding-left: 10px;">
-                    <p>
-                    <strong>SEÑAL DE ALERTA</strong>
-                    </p>
-                </td>
-                <td width="200px">
-                    <p align="center">
-                    <strong>PRODUCTO</strong>
-                    </p>
-                </td>
-                </tr>
-                <tr>
-                    <td width="66">
-                    <p align="center">
-                        RG3
-                    </p>
+                    <tr>
+                        <td width="20%" rowspan="2" >
+                        <p align="center">
+                            RG2
+                        </p>
+                        </td>
+                        <td width="60%" style="padding-left: 10px; padding-right: 10px; text-align: justify" rowspan="2">
+                        <p>
+                            El cliente se rehúsa a llenar los formularios requeridos
+                            por PROTECTA o a proporcionar la información necesaria para
+                            completarlos.
+                        </p>
+                        <p>
+                            El cliente se rehúsa a realizar la operación una vez que se 
+                            le solicita formularios adicionales a los inicialmente requeridos.
+                        </p>
+                        </td>
+                        <td width="20%" rowspan="2">
+                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                        <p style="padding-left: 20px;"> ● Renta Total</p>
+                        </td>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'RG3'">
+            <!-- ESTO ES PARA LA RG3 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="20%" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
                     </td>
-                    <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                    <p>
-                        El cliente trata de presionar a un trabajador para no
-                        llenar los formularios requeridos por la empresa.
-                    </p>
+                    <td width="55%" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
                     </td>
-                    <td width="113">
-                    <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
-                    <p style="padding-left: 20px;">● Renta Total</p>
+                    <td width="20%">
+                        <p align="center">
+                        <strong>PRODUCTO</strong>
+                        </p>
                     </td>
-                </tr>
-            </tbody>
-            </FONT>
-        </table>
-        </div>
-
-        <div *ngIf="parent.Alerta == 'RG4'">
-        <!-- ESTO ES PARA LA RG4 -->
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-            <tbody>
-                <tr>
-                <td width="200px" style="padding-left: 10px;">
-                    <p>
-                    <strong>CÓDIGO</strong>
-                    </p>
-                </td>
-                <td width="400px" style="padding-left: 10px;">
-                    <p>
-                    <strong>SEÑAL DE ALERTA</strong>
-                    </p>
-                </td>
-                <td width="200px">
-                    <p align="center">
-                    <strong>PRODUCTO</strong>
-                    </p>
-                </td>
-                </tr>
-                <tr>
-                    <td width="66">
-                    <p align="center">
-                        RG4
-                    </p>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                        <p align="center">
+                            RG3
+                        </p>
+                        </td>
+                        <td width="60%" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            El cliente trata de presionar a un trabajador para no
+                            llenar los formularios requeridos por la empresa.
+                        </p>
+                        </td>
+                        <td width="20%">
+                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                        <p style="padding-left: 20px;"> ● Renta Total</p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'RG4'">
+            <!-- ESTO ES PARA LA RG4 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="15%" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
                     </td>
-                    <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                    <p>
-                        Las operaciones no corresponden al perfil del cliente. El
-                        cliente solicita una póliza cuya suma asegurada no
-                        concuerda con su nivel de vida o perfil.
-                    </p>
+                    <td width="65%" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
                     </td>
-                    <td width="113">
-                    <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
-                    <p style="padding-left: 20px;">● Renta Total</p>
+                    <td width="20%">
+                        <p align="center">
+                        <strong>PRODUCTO</strong>
+                        </p>
                     </td>
-                </tr>
-            </tbody>
-            </FONT>
-        </table>
-        </div>
-
-        <div *ngIf="parent.Alerta == 'RG5'">
-        <!-- ESTO ES PARA LA RG5 -->
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-            <tbody>
-                <tr>
-                <td width="200px" style="padding-left: 10px;">
-                    <p>
-                    <strong>CÓDIGO</strong>
-                    </p>
-                </td>
-                <td width="400px" style="padding-left: 10px;">
-                    <p>
-                    <strong>SEÑAL DE ALERTA</strong>
-                    </p>
-                </td>
-                <td width="200px">
-                    <p align="center">
-                    <strong>PRODUCTO</strong>
-                    </p>
-                </td>
-                </tr>
-                <tr>
-                    <td width="66">
-                    <p align="center">
-                        RG5
-                    </p>
+                    </tr>
+                    <tr>
+                        <td width="15%">
+                        <p align="center">
+                            RG4
+                        </p>
+                        </td>
+                        <td width="65%" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            Las operaciones no corresponden al perfil del cliente. El
+                            cliente solicita una póliza cuya suma asegurada no
+                            concuerda con su nivel de vida o perfil.
+                        </p>
+                        </td>
+                        <td width="20%">
+                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                        <p style="padding-left: 20px;"> ● Renta Total</p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'RG5'">
+            <!-- ESTO ES PARA LA RG5 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="15%" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
                     </td>
-                    <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                    <p>
-                        El cliente solicita ser excluido del registro de
-                        operaciones sin causa aparente o justificada.
-                    </p>
+                    <td width="65%" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
                     </td>
-                    <td width="113">
-                    <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
-                    <p style="padding-left: 20px;">● Renta Total</p>
+                    <td width="20%">
+                        <p align="center">
+                        <strong>PRODUCTO</strong>
+                        </p>
                     </td>
-                </tr>
-            </tbody>
-            </FONT>
-        </table>
-        </div>
-
-        <div *ngIf="parent.Alerta == 'RG6'">
-        <!-- ESTO ES PARA LA RG6 -->
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-            <tbody>
-                <tr>
-                <td width="200px" style="padding-left: 10px;">
-                    <p>
-                    <strong>CÓDIGO</strong>
-                    </p>
-                </td>
-                <td width="400px" style="padding-left: 10px;">
-                    <p>
-                    <strong>SEÑAL DE ALERTA</strong>
-                    </p>
-                </td>
-                <td width="200px">
-                    <p align="center">
-                    <strong>PRODUCTO</strong>
-                    </p>
-                </td>
-                </tr>
-                <tr>
-                    <td width="66">
-                    <p align="center">
-                        RG6
-                    </p>
+                    </tr>
+                    <tr>
+                        <td width="15%">
+                        <p align="center">
+                            RG5
+                        </p>
+                        </td>
+                        <td width="65%" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            El cliente solicita ser excluido del registro de
+                            operaciones sin causa aparente o justificada.
+                        </p>
+                        </td>
+                        <td width="20%">
+                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                        <p style="padding-left: 20px;"> ● Renta Total</p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'RG6'">
+            <!-- ESTO ES PARA LA RG6 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="15%" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
                     </td>
-                    <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                    <p>
-                        El cliente solicita que los abonos se realicen en una
-                        cuenta mancomunada con una persona con la que no tiene
-                        vínculo familiar aparentemente.
-                    </p>
+                    <td width="65%" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
                     </td>
-                    <td width="113">
-                    <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
-                    <p style="padding-left: 20px;">● Renta Total</p>
+                    <td width="20%">
+                        <p align="center">
+                        <strong>PRODUCTO</strong>
+                        </p>
                     </td>
-                </tr>
-            </tbody>
-            </FONT>
-        </table>
-        </div>
-
-        <div *ngIf="parent.Alerta == 'RG7'">
-        <!-- ESTO ES PARA LA RG7 -->
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-            <tbody>
-                <tr>
-                <td width="200px" style="padding-left: 10px;">
-                    <p>
-                    <strong>CÓDIGO</strong>
-                    </p>
-                </td>
-                <td width="400px" style="padding-left: 10px;">
-                    <p>
-                    <strong>SEÑAL DE ALERTA</strong>
-                    </p>
-                </td>
-                <td width="200px">
-                    <p align="center">
-                    <strong>PRODUCTO</strong>
-                    </p>
-                </td>
-                </tr>
-                <tr>
-                    <td width="66">
-                    <p align="center">
-                        RG7
-                    </p>
+                    </tr>
+                    <tr>
+                        <td width="66">
+                        <p align="center">
+                            RG6
+                        </p>
+                        </td>
+                        <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            El cliente solicita que los abonos se realicen en una
+                            cuenta mancomunada con una persona con la que no tiene
+                            vínculo familiar aparentemente.
+                        </p>
+                        </td>
+                        <td width="113">
+                        <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
+                        <p style="padding-left: 20px;">● Renta Total</p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'RG7'">
+            <!-- ESTO ES PARA LA RG7 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="15%" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
                     </td>
-                    <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                    <p>
-                        El cliente se niega o evita dar información que permita
-                        determinar y sustentar el origen de fondos destinados para
-                        la contratación del seguro y/o estas operaciones no guardan
-                        relación con su actividad económica.
-                    </p>
+                    <td width="65%" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
                     </td>
-                    <td width="113">
-                    <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
-                    <p style="padding-left: 20px;">● Renta Total</p>
+                    <td width="20%">
+                        <p align="center">
+                        <strong>PRODUCTO</strong>
+                        </p>
                     </td>
-                </tr>
-            </tbody>
-            </FONT>
-        </table>
-        </div>  
-
-        <div *ngIf="parent.Alerta == 'RG8'">
-        <!-- ESTO ES PARA LA RG8 -->
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-            <tbody>
-                <tr>
-                <td width="200px" style="padding-left: 10px;">
-                    <p>
-                    <strong>CÓDIGO</strong>
-                    </p>
-                </td>
-                <td width="400px" style="padding-left: 10px;">
-                    <p>
-                    <strong>SEÑAL DE ALERTA</strong>
-                    </p>
-                </td>
-                <td width="200px">
-                    <p align="center">
-                    <strong>PRODUCTO</strong>
-                    </p>
-                </td>
-                </tr>
-                <tr>
-                    <td width="66">
-                    <p align="center">
-                        RG8
-                    </p>
+                    </tr>
+                    <tr>
+                        <td width="66">
+                        <p align="center">
+                            RG7
+                        </p>
+                        </td>
+                        <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            El cliente se niega o evita dar información que permita
+                            determinar y sustentar el origen de fondos destinados para
+                            la contratación del seguro y/o estas operaciones no guardan
+                            relación con su actividad económica.
+                        </p>
+                        </td>
+                        <td width="113">
+                        <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
+                        <p style="padding-left: 20px;">● Renta Total</p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>  
+    
+            <div *ngIf="parent.Alerta == 'RG8'">
+            <!-- ESTO ES PARA LA RG8 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="15%" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
                     </td>
-                    <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                    <p>
-                        Un mismo beneficiario de pólizas de seguros de vida por
-                        importes significativos, contratadas por distintas personas
-                        con las cuales no tenga relación, vínculo o parentesco
-                        aparente.
-                    </p>
+                    <td width="65%" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
                     </td>
-                    <td width="113">
-                    <p style="padding-left: 20px;">● Renta Total</p>
+                    <td width="20%">
+                        <p align="center">
+                        <strong>PRODUCTO</strong>
+                        </p>
                     </td>
-                </tr>
-            </tbody>
-            </FONT>
-        </table>
-        </div>
-
-        <div *ngIf="parent.Alerta == 'RG9'">
-        <!-- ESTO ES PARA LA RG9 -->
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-            <tbody>
-                <tr>
-                <td width="200px" style="padding-left: 10px;">
-                    <p>
-                    <strong>CÓDIGO</strong>
-                    </p>
-                </td>
-                <td width="400px" style="padding-left: 10px;">
-                    <p>
-                    <strong>SEÑAL DE ALERTA</strong>
-                    </p>
-                </td>
-                <td width="200px">
-                    <p align="center">
-                    <strong>PRODUCTO</strong>
-                    </p>
-                </td>
-                </tr>
-                <tr>
-                    <td width="66">
-                    <p align="center">
-                        RG9
-                    </p>
+                    </tr>
+                    <tr>
+                        <td width="66">
+                        <p align="center">
+                            RG8
+                        </p>
+                        </td>
+                        <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            Un mismo beneficiario de pólizas de seguros de vida por
+                            importes significativos, contratadas por distintas personas
+                            con las cuales no tenga relación, vínculo o parentesco
+                            aparente.
+                        </p>
+                        </td>
+                        <td width="113">
+                        <p style="padding-left: 20px;">● Renta Total</p>
+                        </td>
+                    </tr>
+                </tbody>
+                </FONT>
+            </table>
+            </div>
+    
+            <div *ngIf="parent.Alerta == 'RG9'">
+            <!-- ESTO ES PARA LA RG9 -->
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                    <td width="15%" style="padding-left: 10px;">
+                        <p>
+                        <strong>CÓDIGO</strong>
+                        </p>
                     </td>
-                    <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                    <p>
-                        El cliente solicita el rescate de la póliza en condiciones
-                        financieras que le son significativamente desfavorables.
-                    </p>
+                    <td width="65%" style="padding-left: 10px;">
+                        <p>
+                        <strong>SEÑAL DE ALERTA</strong>
+                        </p>
                     </td>
-                    <td width="113">
-                    <p style="padding-left: 20px;">● Renta Total</p>
+                    <td width="20%">
+                        <p align="center">
+                        <strong>PRODUCTO</strong>
+                        </p>
                     </td>
-                </tr>
+                    </tr>
             </tbody>
             </FONT>
         </table>
@@ -425,7 +411,7 @@
 
         </div>
         <div class="container" style="padding: 0px 200px;">
-        <br> 
+            <p style='margin-right:0cm;margin-left:0cm;font-size:16px;font-family:"Times New Roman",serif;margin:0cm;'><strong><span style='font-family:"Arial Narrow",sans-serif;'>&nbsp;</span></strong></p>
         <p>
             <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta:</strong>
         </p>
@@ -479,15 +465,19 @@
         <p>
             <strong></strong>
         </p>
-            <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>
-            <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
-            <ul>
-            <li style="font-family: arial Narrow, serif; text-align: justify">El área Comercial Masivos informó que  {{parent.Respuesta}} tiene casos a reportar con respecto a los clientes de renta privada y ahorro total.</li></ul>   
-        </div>
-
+        
+                <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>
+                <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify"
+                >El {{parent.Perfil}} informó que  {{parent.Respuesta}} tiene casos a reportar con respecto 
+                a los clientes de renta privada y ahorro total.</li></ul>   
+            </div>
     
-</div>
-  <div class="text-center pt-5">
-    <button class="" (click)="Export2Doc('exportContent', 'test');"></button> 
-  </div>
-
+        
+    </div>
+      <div class="text-center pt-5">
+        <button class="" (click)="Export2Doc('exportContent', 'test');"></button> 
+      </div>
+    
+    

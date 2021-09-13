@@ -147,16 +147,21 @@ export class ViewC2FormComponent implements OnInit {
         // data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
         // data.P_NIDALERTA = this.alertData.NIDALERTA;
         // data.P_NIDREGIMEN = this.regimen.id;
-        let respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
-        //console.warn("el respResultadosCoinciden: ",respResultadosCoinciden)
-        //debugger;
+        this.core.loader.show()
+        let respResultadosCoinciden:any = [] 
+        respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
+        this.core.loader.hide()
+        //console.log("el respResultadosCoinciden: ",respResultadosCoinciden)
+        
         this.arrayClientesByList = respResultadosCoinciden
     }
 
     getClientsByListArr(lista){
-        //debugger;
-        // console.log("nom_lista lista: ", nom_lista)
+        
+        //console.log("respuesta de los filtros: 0 ", lista)
+        //console.log("respuesta de los filtros: 1", this.arrayClientesByList)
         let resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
+        //console.log("respuesta de los filtros: 2", resp)
         let arrDuplid = []
         let arrRespuesta = []
         resp.forEach(itemRes => {

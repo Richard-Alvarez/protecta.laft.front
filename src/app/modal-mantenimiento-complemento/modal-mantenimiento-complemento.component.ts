@@ -164,7 +164,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                 dataRegistro.SPREGUNTA = this.pregunta
                 dataRegistro.NIDALERTA = this.sennal
                 dataRegistro.NIDGRUPOSENAL = this.idGrupo
-                dataRegistro.SESTADO =  true ? 1 : 2
+                dataRegistro.SESTADO =  this.estado == true ? 1 : 2
                 dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
                 dataRegistro.TIPOOPERACION = 'I'
                 console.log("la data que envia a registrar :", dataRegistro)
@@ -198,7 +198,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
        }).then(async (respuesta) =>{
                console.log("respuesta.dismiss",respuesta.dismiss)
                if(!respuesta.dismiss){
-                
+                console.log("this.estado ", this.estado )
                 let dataRegistro:any = {};
                 dataRegistro.NIDCOMPLEMENTO = this.idComplemento
                 dataRegistro.SNOMBRE_COMPLEMENTO = this.nombreComplemento
@@ -206,11 +206,12 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                 dataRegistro.SPREGUNTA = this.pregunta
                 dataRegistro.NIDALERTA = this.sennal
                 dataRegistro.NIDGRUPOSENAL = this.idGrupo
-                dataRegistro.SESTADO = true ? 1 : 2
+                dataRegistro.SESTADO =  this.estado == true ? 1 : 2
                 dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
                 dataRegistro.TIPOOPERACION = 'M'
 
                 this.core.loader.show(); 
+                
                 await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
                 this.core.loader.hide();
 
@@ -235,12 +236,12 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       objRespuesta.message = "Debe ingresar la pregunta ";
       return objRespuesta
     }
-    if(this.idGrupo != 0){
+    if(this.idGrupo == 0){
       objRespuesta.code = 1;
       objRespuesta.message = "Debe seleccionar el grupo ";
       return objRespuesta
     }
-    if(this.sennal != 0){
+    if(this.sennal == 0){
       objRespuesta.code = 1;
       objRespuesta.message = "Debe seleccionar la señal ";
       return objRespuesta
