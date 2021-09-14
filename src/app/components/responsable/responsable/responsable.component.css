@@ -110,7 +110,12 @@
     margin-top: -6px;
   }
 
+  .TitleLine2{
+    padding-bottom: 1%;
+  position: relative;
+  z-index : 1;
   
+  }
 
 .TitleLine{
   padding-bottom: 4%;

@@ -69,8 +69,8 @@
         <br>
         <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta S3</strong>
         <ul>
-            <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
-            El Coordinador de cobranza informo que si/no se identificaron pagos de una prima superior a la establecida con posterior 
+            <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of parent.arrayDataSenal">
+            El {{item.Cargo}} informo que {{item.Respuesta}} se identificaron pagos de una prima superior a la establecida con posterior 
             devolución de la diferencia por depósito errado.
             </li>
         </ul>   
@@ -96,7 +96,7 @@
         <br>
         <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta S3</strong>
         <ul>
-            <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+            <li style="font-family: arial Narrow, serif; text-align: justify">
                 El área de Cobranzas reportó X casos que involucran pagos de una prima superior a la establecida 
                 con posterior devolución de la diferencia por depósito errado del [Periodo].
             </li>

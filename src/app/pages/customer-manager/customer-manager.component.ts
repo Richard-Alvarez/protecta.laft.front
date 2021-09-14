@@ -2607,6 +2607,8 @@ prueba = []
                   data.alertId = 2
                   data.periodId = this.NPERIODO_PROCESO
                   data.tipoCargaId = 2
+                  data.sClient = ItemCliente.SCLIENT  
+                  data.nIdUsuario = this.objUsuario.idUsuario
                   /* Se agreggo esta linea para consumir la api de WC */
                   let respuestaWC =  await this.userConfigService.ConsultaWC(data)
                   console.log("RespuestaWC",respuestaWC)

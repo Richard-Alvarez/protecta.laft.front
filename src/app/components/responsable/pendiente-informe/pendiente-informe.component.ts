@@ -930,6 +930,12 @@ async DescargarReporte(item){
     this.ValidarNombreTemplate = 'S2'
   }else if(this.Alerta == 'C1'){
     this.ValidarNombreTemplate = 'C1'
+  }else if(this.Alerta == 'S1'){
+    this.ValidarNombreTemplate = 'S1'
+  }else if(this.Alerta == 'S3'){
+    this.ValidarNombreTemplate = 'S3'
+  }else{
+    this.ValidarNombreTemplate = this.Alerta
   }
 
   

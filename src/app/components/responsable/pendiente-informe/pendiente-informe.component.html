@@ -427,6 +427,16 @@
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  ></app-template-s2>
         </div>
 
+        <div *ngIf="this.Alerta=='S1' && this.RegimenPendiente===2">
+            <app-template-s1  [parent]="this" [Nombre]="Nombre" 
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  ></app-template-s1>
+        </div>
+
+        <div *ngIf="this.Alerta=='S3' && this.RegimenPendiente===2">
+            <app-template-s3  [parent]="this" [Nombre]="Nombre" 
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  ></app-template-s3>
+        </div>
+
         <div *ngIf="this.Alerta=='C3' && this.RegimenPendiente===2">
             <app-template-c3  [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"></app-template-c3>
