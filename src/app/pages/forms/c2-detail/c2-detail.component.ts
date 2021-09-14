@@ -2532,10 +2532,9 @@ ValidarRegimenAcepta(){
     }
     
 }
+/**/
 ResultadoPrevious: any ={}
 detResult: any ={}
-    /* descramo360pre: any;
-    descrol360pre: any; */
 async Consultar360Previous(){
     let data = {
       TipoDocumento: this.formData.NTIPO_DOCUMENTO,
@@ -2560,9 +2559,6 @@ async Consultar360Previous(){
     });
     console.log("360Previous",this.ResultadoPrevious)
     this.detResult= this.ResultadoPrevious.certificados
-    /*console.log('prueba kevin3',this.formData) */
-    /* this.descramo360pre= this.ResultadoPrevious.certificados[0].ramo.descripcion;
-    this.descrol360pre= this.ResultadoPrevious.certificados[0].rol.descripcionRol; */
   }
 
 
