@@ -2236,38 +2236,36 @@ export class C2DetailComponent implements OnInit {
         }
 
     }
-    ResultadoPrevious: any = {}
-    detResult: any = {}
-    /* descramo360pre: any;
-    descrol360pre: any; */
-    async Consultar360Previous() {
-        let data = {
-            TipoDocumento: this.formData.NTIPO_DOCUMENTO,
-            NumeroDocumento: this.formData.SNUM_DOCUMENTO,
-            //Nombres: null,
-            //Poliza: null,
-            CodAplicacion: "360",
-            //Producto: null,
-            //FechaSolicitud: null,
-            //Rol: null,
-            //Tipo: null,
-            //estado: null,
-            //Ramo: null,
-            pagina: 1,
-            NumeroResgistros: "10000000",
-            //Endoso: null,
-            Usuario: "1"
-        }
-        await this.userConfigService.Consulta360Previous(data).then(
-            (response) => {
-                this.ResultadoPrevious = response
-            });
-        console.log("360Previous", this.ResultadoPrevious)
-        this.detResult = this.ResultadoPrevious.certificados
-        /*console.log('prueba kevin3',this.formData) */
-        /* this.descramo360pre= this.ResultadoPrevious.certificados[0].ramo.descripcion;
-        this.descrol360pre= this.ResultadoPrevious.certificados[0].rol.descripcionRol; */
+    
+
+/**/
+ResultadoPrevious: any ={}
+detResult: any ={}
+async Consultar360Previous(){
+    let data = {
+      TipoDocumento: this.formData.NTIPO_DOCUMENTO,
+      NumeroDocumento: this.formData.SNUM_DOCUMENTO,
+      //Nombres: null,
+      //Poliza: null,
+      CodAplicacion: "360",
+      //Producto: null,
+      //FechaSolicitud: null,
+      //Rol: null,
+      //Tipo: null,
+      //estado: null,
+      //Ramo: null,
+      pagina: 1,
+      NumeroResgistros: "10000000",
+      //Endoso: null,
+      Usuario: "1"
     }
+    await this.userConfigService.Consulta360Previous(data).then(
+      (response) => {
+        this.ResultadoPrevious = response
+    });
+    console.log("360Previous",this.ResultadoPrevious)
+    this.detResult= this.ResultadoPrevious.certificados
+  }
 
 
 }
