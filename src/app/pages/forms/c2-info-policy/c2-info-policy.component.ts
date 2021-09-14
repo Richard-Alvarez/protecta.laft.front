@@ -11,6 +11,7 @@ import * as $ from 'jQuery';
 export class C2InfoPolicyComponent implements OnInit {
 
   @Input() detResult
+  @Input() ResultadoDetail
   
   constructor(private userConfigService: UserconfigService,) {
 
@@ -49,16 +50,16 @@ export class C2InfoPolicyComponent implements OnInit {
   /* ResultadoPrevious: any ={} */
     
   async ngOnInit(){
-    this.listaramo()
-    this.listaproducto()
-    this.listapoliza()
-    this.listacertificado()
-    this.listafechaconsulta()
-    await this.Consultar360()
+    //this.listaramo()
+    //this.listaproducto()
+    //this.listapoliza()
+    //this.listacertificado()
+    //this.listafechaconsulta()
+    //await this.Consultar360()
     /* this.ValidarProducto() */
-    this.getRamos()
-    this.ValidarRamo()
-    this.getIdRamo()
+    //this.getRamos()
+    //this.ValidarRamo()
+    //this.getIdRamo()
     this.showdata()
   }
 
@@ -226,39 +227,39 @@ console.log("prue",this.item1)
       
     } */
     //Renta vitalicia (rrvv) renta de jubilacion
-    if (this.DescripcionRamo == 'RRVV') {
-      $('#h4Asegurado').text('Datos del Titular')
-      $('#DAsegDocum').css("display","block")
-      $('#DAsegCUSPP').css("display","block")
-      $('#DAsegIniVig').css("display","block")
-      $('#DAsegFinVig').css("display","block")
-      $('#DAsegTipPension').css("display","block")
-      $('#DAsegTipRenta').css("display","block")
-      $('#DAsegModalidad').css("display","block")
-      $('#DAsegAnDif').css("display","block")
-      $('#DAsegMesGarant').css("display","block")
-      $('#DAsegMoneda').css("display","block")
-      $('#DAsegReajTemp').css("display","block")
-      $('#DAsegPrimDef').css("display","block")
-      $('#DAsegPenDef').css("display","block")
-      $('#InfoPensiones').css("display","block")
-      $('#titlebenef').text(this.asegurado.name||'(Titular)')
-      $('#PPensViaPago').text(this.pension.viaPago)
-      $('#DAsegDocum').css("display","block")
-      $('#DAsegCUSPP').css("display","block")
-      $('#DAsegIniVig').css("display","block")
-      $('#DAsegFinVig').css("display","block")
-      $('#DAsegTipPension').css("display","block")
-      $('#DAsegTipRenta').css("display","block")
-      $('#DAsegModalidad').css("display","block")
-      $('#DAsegAnDif').css("display","block")
-      $('#DAsegMesGarant').css("display","block")
-      $('#DAsegMoneda').css("display","block")
-      $('#DAsegReajTemp').css("display","block")
-      $('#DAsegPrimDef').css("display","block")
-      $('#DAsegPenDef').css("display","block")
-      $('#InfoPensiones').css("display","block")
-    }
+    // if (this.DescripcionRamo == 'RRVV') {
+    //   $('#h4Asegurado').text('Datos del Titular')
+    //   $('#DAsegDocum').css("display","block")
+    //   $('#DAsegCUSPP').css("display","block")
+    //   $('#DAsegIniVig').css("display","block")
+    //   $('#DAsegFinVig').css("display","block")
+    //   $('#DAsegTipPension').css("display","block")
+    //   $('#DAsegTipRenta').css("display","block")
+    //   $('#DAsegModalidad').css("display","block")
+    //   $('#DAsegAnDif').css("display","block")
+    //   $('#DAsegMesGarant').css("display","block")
+    //   $('#DAsegMoneda').css("display","block")
+    //   $('#DAsegReajTemp').css("display","block")
+    //   $('#DAsegPrimDef').css("display","block")
+    //   $('#DAsegPenDef').css("display","block")
+    //   $('#InfoPensiones').css("display","block")
+    //   $('#titlebenef').text(this.asegurado.name||'(Titular)')
+    //   $('#PPensViaPago').text(this.pension.viaPago)
+    //   $('#DAsegDocum').css("display","block")
+    //   $('#DAsegCUSPP').css("display","block")
+    //   $('#DAsegIniVig').css("display","block")
+    //   $('#DAsegFinVig').css("display","block")
+    //   $('#DAsegTipPension').css("display","block")
+    //   $('#DAsegTipRenta').css("display","block")
+    //   $('#DAsegModalidad').css("display","block")
+    //   $('#DAsegAnDif').css("display","block")
+    //   $('#DAsegMesGarant').css("display","block")
+    //   $('#DAsegMoneda').css("display","block")
+    //   $('#DAsegReajTemp').css("display","block")
+    //   $('#DAsegPrimDef').css("display","block")
+    //   $('#DAsegPenDef').css("display","block")
+    //   $('#InfoPensiones').css("display","block")
+    // }
     if(this.DescripcionRamo == 'SOAT'){
       $('#InfoVehiculo').css("display","block")
       $('#InfoDirecSOAT').css("display","block")

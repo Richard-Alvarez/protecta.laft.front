@@ -13,20 +13,20 @@
                         <span class="spancontent" id="PTitleProd" style="font-size: small !important;">{{this.DescripcionRamo}}</span>
                     </p>
                     <input type="hidden" id="CodigosPoliza" />
-                    <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza" >{{Resultado.nroPolicy}}</span></p>
-                    <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif">{{Resultado.nroCertificate}}</span></p>
+                    <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza" >{{ResultadoDetail.nroPolicy}}</span></p>
+                    <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif">{{ResultadoDetail.nroCertificate}}</span></p>
                     <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">Vigente</span></p>
-                    <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante">{{contratante.name}}</span></p>
-                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol">{{Resultado.rol}}</span></p>
-                    <p class="card-text textTitle" id="CardPlaca" style="display:none"><span>Placa</span><span class="spancontent" id="PCardPlaca">{{vehiPlaca}}</span></p>
-                    <p class="card-text textTitle" id="CardPlanilla" style="display:none"><span>Planilla</span><span class="spancontent" id="PCardPlanilla">{{Resultado.planilla}}</span></p>
+                    <!-- <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante">{{contratante.name}}</span></p> -->
+                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol">{{ResultadoDetail.rol}}</span></p>
+                    <!-- <p class="card-text textTitle" id="CardPlaca" style="display:none"><span>Placa</span><span class="spancontent" id="PCardPlaca">{{vehiPlaca}}</span></p> -->
+                    <p class="card-text textTitle" id="CardPlanilla" style="display:none"><span>Planilla</span><span class="spancontent" id="PCardPlanilla">{{ResultadoDetail.planilla}}</span></p>
                     <p class="card-text textTitle" id="CardNumCredito" style="display:none"><span>Número de Crédito</span><span class="spancontent" id="PCardNumCred"></span></p>
-                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi">{{Resultado.fechaEmision}}</span></p>
-                    <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig">{{Resultado.fechaPrimeraVigencia}}</span></p>
-                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">{{Resultado.fechaInicioVigencia}}</span></p>
-                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig">{{Resultado.fechaFinVigencia}}</span></p>
-                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda">{{Resultado.monedaPoliza}}</span></p>
-                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">{{Resultado.fechaEfecto}}</span></p>
+                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi">{{ResultadoDetail.fechaEmision}}</span></p>
+                    <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig">{{ResultadoDetail.fechaPrimeraVigencia}}</span></p>
+                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">{{ResultadoDetail.fechaInicioVigencia}}</span></p>
+                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig">{{ResultadoDetail.fechaFinVigencia}}</span></p>
+                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda">{{ResultadoDetail.monedaPoliza}}</span></p>
+                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">{{ResultadoDetail.fechaEfecto}}</span></p>
 
                     <!-- <p class="card-text textTitle" style="margin-top:40%">
                         <a href="http://soat.protecta.com.pe/soat/login.aspx" class="card-link" target="_blank">Ir a SISWEB</a>
@@ -113,9 +113,10 @@
 
                                 </div>
                             </div>
-                            <div id="InfoAsegurado" style="display:none;">
+                            <div id="InfoAsegurado" >
                                 <h4 class="title-grid"><strong id="h4Asegurado">Datos del Asegurado</strong></h4>
-                                <div class="row">
+                                
+                                 <div class="row">
                                     <div class="col-lg-3" id="DAsegNom">
                                         <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{asegurado.name}}</span></p>
                                     </div>
@@ -140,7 +141,7 @@
                                     <div class="col-lg-2" id="DAsegFinVigSCTR" style="display:none;">
                                         <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVigSCTR">{{asegurado.fechaFinVigencia}}</span></p>
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="row">
                                     <div class="col-lg-3" id="DAsegIniVig" style="display:none;">
                                         <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVig">{{Resultado.fechaInicioVigencia}}</span></p>

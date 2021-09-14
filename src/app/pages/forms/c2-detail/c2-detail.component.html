@@ -2016,7 +2016,7 @@
                             <div class="card" *ngFor="let it of detResult;let inc = index;"><!-- *ngFor="let item of policyList;let inc = index;" -->
                                 <div class="card-header headerSenials"><!---->
                                     <div class="detallePoliza {{getColorGrilla(inc)}}">
-                                        <div class="row pl-2 pr-2">
+                                        <div class="row pl-2 pr-2"  (click)="Consultar360(it)">
                                             <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
                                                 href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
                                             <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
@@ -2156,7 +2156,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <app-c2-info-policy [detResult]="detResult"></app-c2-info-policy>
+                                        <app-c2-info-policy [detResult]="detResult" [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
                                     </div><!---->
                                 </div><!---->
                             </div>
