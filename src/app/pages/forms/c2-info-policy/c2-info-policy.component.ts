@@ -11,132 +11,112 @@ import * as $ from 'jQuery';
 export class C2InfoPolicyComponent implements OnInit {
 
   @Input() detResult
-  /* prueba param 360 */
-  /* @Input() certif
-  @Input() fecpoli
-  @Input() poliza */
+  
   constructor(private userConfigService: UserconfigService,) {
 
   }
+  /*parametros para enviar a 360*/
+  idramo : any;
+  idproducto : any;
+  nropolicy : any;
+  nrocertificado : any;
+  fechaconsulta : any;
   /*Datos consulta360*/
   Resultado:any = {}
-    asegCuspp: any;
-    asegEstCiv: any;
-    asegSexo: any;
-    asegDocumento: any;
-    asegFecFinVig: any;
-    asegFecIniVig: any;
-    asegFecNac: any;
-    asegTipoDoc: any;
-    asegName: any;
-    asegSalario: any;
-    asegTasa: any;
-    canalEstadoDescEstado:any;
-    canalFecInic: any;
-    canalNombre: any;  
-    canalTipoDescrip: any;
-    contratName: any;
-    creditFinvig: any;
-    creditIniVig: any;
-    creditMoneda: any;
-    creditMonIni: any;
-    creditMonIns: any;
-    creditNroCred: any;
-    creditNroPremi: any;
-    creditNumCuotas: any;
-    creditSaldIns: any;
-    creditPlazo: any;
-    dirSoatDesDir: any;
-    dirSoatDesDirAct:any;
-    dirSoatDesTipoVia:any;
-    dirSoatEtapa:any;
-    dirSoatLetra: any;
-    dirSoatLote: any;
-    dirSoatManzana: any;
-    dirSoatNomTipoConj: any;
-    dirSoatNroInter: any;
-    dirSoatNumero: any;
-    dirSoatNumBloq: any;
-    dirSoatTipoBloq: any;
-    dirSoatTipoConjHa: any;
-    dirSoatTipoInterior: any;
-    intermedCodInter: any;
-    intermedNombre: any;
-    planSaludInstitu: any;
-    planSaludModali: any;
-    planSaludMonto: any;
-    planSaludPeriodo: any;
+    asegurado: any;
+    canal: any;
+    canalEstado:any;  
+    canalTipo: any;
+    contratante: any;
+    credito: any;
+    direccionSOAT: any;
+    intermediario: any;
+    pension: any;
+    pensionCuenta: any;
+    pensionTipo: any;
+    planSalud: any;
+    planSaludReceptor: any;
     ramoIdRamo: any;
-    tarifFecEmi: any;
-    tarifHoraEmi: any;
-    tarifLotDesc: any;
-    tarifPorcenComi: any;
-    tarifTarProtecta: any;
-    vehiAnio: any;
-    vehiAsientos: any;
-    vehiClase: any;
-    vehiMarca: any;
-    vehiNroSerie: any;
-    vehiPlaca: any;
-    vehiUso: any;
-    vehiVersion: any;
+    tarifa: any;
+    vehiculo: any;
     coberCodModul: any;
     coberDescModul: any;
   
   DescripcionRamo:string = ''
-  ListaRamo:any = []
+  ListadoRamo:any = []
 
   /*Datos consulta360previous*/
   /* ResultadoPrevious: any ={} */
     
   async ngOnInit(){
-    /* await this.Consultar360Previous() */
+    this.listaramo()
+    this.listaproducto()
+    this.listapoliza()
+    this.listacertificado()
+    this.listafechaconsulta()
     await this.Consultar360()
+    /* this.ValidarProducto() */
     this.getRamos()
     this.ValidarRamo()
     this.getIdRamo()
     this.showdata()
   }
 
-  /* async Consultar360Previous(){
-    let data = {
-      TipoDocumento: this.formData.NTIPO_DOCUMENTO,
-      NumeroDocumento: this.formData.SNUM_DOCUMENTO,
-      //Poliza: null,
-      CodAplicacion: "360",
-      //Producto: null,
-      //FechaSolicitud: null,
-      //Rol: null,
-      //Tipo: null,
-      //estado: null,
-      //Ramo: null,
-      pagina: 1,
-      NumeroResgistros: "10000000",
-      //Endoso: null,
-      Usuario: "1"
-    }
-    await this.userConfigService.Consulta360Previous(data).then(
-      (response) => {
-        this.ResultadoPrevious = response
+  ///**/
+  /* idRamoPru:any;
+  ValidarProducto(){
+    console.log("123asdasd", this.detResult)
+    let valor = this.detResult.filter(it => it.producto ==  "Accidentes Personales Dólares" )
+    console.log("el valor ramo ", valor)
+    console.log("el valor", valor[0].idProduct)
+    this.idRamoPru = valor[0].idProduct
+    console.log("prueba", this.idRamoPru)
+  } */
+  listaramo(){
+    console.log("detResult",this.detResult)
+    this.detResult.forEach((element,index) => {
+      console.log("detResult 2",element.ramo)
+      console.log("detResult 2",element.ramo.idRamo)
+      this.idramo= element.ramo.idRamo
     });
-    console.log("360Previous",this.ResultadoPrevious)
-    console.log('prueba kevin3',this.formData)
-  } */
-  /* ValidarProducto(){
-    let valor = this.detResult.filter(it => it.idProduct ==  )
-    console.log("el valor ", valor)
-    console.log("el valor ", valor[0].Descripcion)
-    this.DescripcionRamo = valor[0].Descripcion
-  } */
+      /* this.Consultar360(item) */
+  }
+  
+  listaproducto(){
+    this.detResult.forEach((element,index) => {
+      console.log("detResult 2",element.idProduct)
+      this.idproducto= element.idProduct
+    });
+  }
+  
+  listapoliza(){
+    this.detResult.forEach((element,index) => {
+      console.log("detResult 2",element.nroPolicy)
+      this.nropolicy= element.nroPolicy
+    });
+  }
+  listacertificado(){
+    this.detResult.forEach((element,index) => {
+      console.log("detResult 2",element.nroCertificate)
+      this.nrocertificado= element.nroCertificate
+    });
+  }
+  
+  listafechaconsulta(){
+    this.detResult.forEach((element,index) => {
+      console.log("detResult 2",element.fechaInicioVigencia)
+      this.fechaconsulta= element.fechaInicioVigencia
+    });
+  }
 
   async Consultar360(){
 
     let data = {
-    Ramo : 73,
-    Producto : 1,
-    Poliza : /* 1000011671, */6000000253,
-    Certificado: 7,
-    FechaConsulta: /* "1/09/2018", */"01/08/2020", //fecha inicio vigencia
+    Ramo : 73,//this.idramo,//73,
+    Producto : 1,//this.idproducto,//1,
+    Poliza : /* 1000011671, */ /* this.nropolicy,// */6000000253,
+    Certificado: /* this.nrocertificado,// */7,
+    FechaConsulta: /* "1/09/2018", */ /* this.fechaconsulta,// */"01/08/2020", //fecha inicio vigencia
     Endoso: null    //Solo para rentas
     }
     await this.userConfigService.Consulta360(data).then(
@@ -144,65 +124,22 @@ export class C2InfoPolicyComponent implements OnInit {
        this.Resultado = response
       });
     console.log("el resultado",this.Resultado)
-    this.asegCuspp= this.Resultado.asegurado.cuspp;
-    this.asegEstCiv= this.Resultado.asegurado.estadoCivil;
-    this.asegSexo= this.Resultado.asegurado.sexo;
-    this.asegDocumento= this.Resultado.asegurado.documento;
-    this.asegFecFinVig= this.Resultado.asegurado.fechaFinVigencia;
-    this.asegFecIniVig= this.Resultado.asegurado.fechaInicioVigencia;
-    this.asegFecNac= this.Resultado.asegurado.fechanacimiento;
-    this.asegTipoDoc= this.Resultado.asegurado.asegTipoDoc;
-    this.asegName= this.Resultado.asegurado.name;
-    this.asegSalario= this.Resultado.asegurado.salario;
-    this.asegTasa= this.Resultado.asegurado.tasa;
-    this.canalEstadoDescEstado= this.Resultado.canal.estado.descEstado;
-    this.canalFecInic= this.Resultado.canal.fechaInicio;
-    this.canalNombre= this.Resultado.canal.nombre;    
-    this.canalTipoDescrip= this.Resultado.canal.tipo.descripcion;
-    this.contratName= this.Resultado.contratante.name;
-    this.creditFinvig= this.Resultado.credito.finVigencia;
-    this.creditIniVig= this.Resultado.credito.inicioVigencia;
-    this.creditMoneda= this.Resultado.credito.moneda;
-    this.creditMonIni= this.Resultado.credito.montoInicial;
-    this.creditMonIns= this.Resultado.credito.montoInsoluto;
-    this.creditNroCred= this.Resultado.credito.nroCredito;
-    this.creditNroPremi= this.Resultado.credito.nroPremium;
-    this.creditNumCuotas= this.Resultado.credito.numerocuotas;
-    this.creditPlazo= this.Resultado.credito.plazo;
-    this.creditSaldIns= this.Resultado.credito.saldoInsoluto;
-    this.dirSoatDesDir= this.Resultado.direccionSOAT.descDireccion;
-    this.dirSoatDesDirAct= this.Resultado.direccionSOAT.direccionActual;
-    this.dirSoatDesTipoVia= this.Resultado.direccionSOAT.descTipoVia;
-    this.dirSoatEtapa= this.Resultado.direccionSOAT.etapa;
-    this.dirSoatLetra= this.Resultado.direccionSOAT.letra;
-    this.dirSoatLote= this.Resultado.direccionSOAT.lote;
-    this.dirSoatManzana= this.Resultado.direccionSOAT.manzana;
-    this.dirSoatNomTipoConj= this.Resultado.direccionSOAT.nombreTipoConj;
-    this.dirSoatNroInter= this.Resultado.direccionSOAT.nroInterior;
-    this.dirSoatNumero= this.Resultado.direccionSOAT.numero;
-    this.dirSoatNumBloq= this.Resultado.direccionSOAT.numeroBloque;
-    this.dirSoatTipoConjHa= this.Resultado.direccionSOAT.tipoConjHabi;
-    this.dirSoatTipoInterior= this.Resultado.direccionSOAT.tipoInterior;
-    this.intermedCodInter= this.Resultado.intermediario.codigoIntermediario;
-    this.intermedNombre= this.Resultado.intermediario.nombre;
-    this.planSaludInstitu= this.Resultado.planSalud.institucion;
-    this.planSaludModali= this.Resultado.planSalud.modalidad;
-    this.planSaludMonto= this.Resultado.planSalud.monto;
-    this.planSaludPeriodo= this.Resultado.planSalud.periodo;
+    this.asegurado= this.Resultado.asegurado;
+    this.canal= this.Resultado.canal;
+    this.canalEstado= this.Resultado.canal.estado; 
+    this.canalTipo= this.Resultado.canal.tipo;
+    this.contratante= this.Resultado.contratante;
+    this.credito= this.Resultado.credito;
+    this.direccionSOAT= this.Resultado.direccionSOAT;
+    this.intermediario= this.Resultado.intermediario.codigoIntermediario;
+    this.pension= this.Resultado.pension;
+    this.pensionCuenta= this.Resultado.pension.cuenta;
+    this.pensionTipo= this.Resultado.pension.tipo;
+    this.planSalud= this.Resultado.planSalud;
+    this.planSaludReceptor= this.Resultado.planSalud.receptor;
     this.ramoIdRamo = this.Resultado.ramo.idRamo;
-    this.tarifFecEmi= this.Resultado.tarifa.fechaEmision;
-    this.tarifHoraEmi= this.Resultado.tarifa.horaEmision;
-    this.tarifLotDesc= this.Resultado.tarifa.loteDescargo;
-    this.tarifPorcenComi= this.Resultado.tarifa.porcentajeComision;
-    this.tarifTarProtecta= this.Resultado.tarifa.tarifaProtecta;
-    this.vehiAnio= this.Resultado.vehiculo.anio;
-    this.vehiAsientos= this.Resultado.vehiculo.asientos;
-    this.vehiClase= this.Resultado.vehiculo.clase;
-    this.vehiMarca= this.Resultado.vehiculo.marca;
-    this.vehiNroSerie= this.Resultado.vehiculo.nroSerie;
-    this.vehiPlaca= this.Resultado.vehiculo.placa;
-    this.vehiUso= this.Resultado.vehiculo.uso;
-    this.vehiVersion= this.Resultado.vehiculo.version;
+    this.tarifa= this.Resultado.tarifa;
+    this.vehiculo= this.Resultado.vehiculo;
     this.coberCodModul= this.Resultado.coberturas[0].codigoModulo;
     this.coberDescModul= this.Resultado.coberturas[0].descModulo;
 
@@ -221,7 +158,7 @@ export class C2InfoPolicyComponent implements OnInit {
   }
 
   getRamos(){
-    this.ListaRamo = [
+    this.ListadoRamo = [
       {"IdRamo":"61","Descripcion":"ACCIDENTES PERSONALES","DescripcionCorta":null},
       {"IdRamo":"64","Descripcion":"ASISTENCIA MÉDICA","DescripcionCorta":null},
       {"IdRamo":"74","Descripcion":"DESGRAVAMEN","DescripcionCorta":null},
@@ -242,7 +179,7 @@ export class C2InfoPolicyComponent implements OnInit {
 
   ValidarRamo(){
     console.log("this.ramoIdRamo", this.ramoIdRamo)
-    let valor = this.ListaRamo.filter(it => it.IdRamo == this.ramoIdRamo )
+    let valor = this.ListadoRamo.filter(it => it.IdRamo == this.ramoIdRamo )
     console.log("el valor ", valor)
     console.log("el valor ", valor[0].Descripcion)
     this.DescripcionRamo = valor[0].Descripcion
@@ -260,7 +197,7 @@ export class C2InfoPolicyComponent implements OnInit {
 
   getIdRamo(){
     /* console.log("this.ramoIdRamo", this.DescripcionRamo) */
-    let val = this.ListaRamo.filter(it => it.Descripcion == "RENTA PARTICULAR" ) //reemplazar "" con la variable del servicio que trae
+    let val = this.ListadoRamo.filter(it => it.Descripcion == "RENTA PARTICULAR" ) //reemplazar "" con la variable del servicio que trae
     console.log("el valor ", val)
     console.log("el valor ", val[0].IdRamo)
     /* this.DescripcionRamo = val[0].Descripcion */
@@ -288,6 +225,40 @@ console.log("prue",this.item1)
       }
       
     } */
+    //Renta vitalicia (rrvv) renta de jubilacion
+    if (this.DescripcionRamo == 'RRVV') {
+      $('#h4Asegurado').text('Datos del Titular')
+      $('#DAsegDocum').css("display","block")
+      $('#DAsegCUSPP').css("display","block")
+      $('#DAsegIniVig').css("display","block")
+      $('#DAsegFinVig').css("display","block")
+      $('#DAsegTipPension').css("display","block")
+      $('#DAsegTipRenta').css("display","block")
+      $('#DAsegModalidad').css("display","block")
+      $('#DAsegAnDif').css("display","block")
+      $('#DAsegMesGarant').css("display","block")
+      $('#DAsegMoneda').css("display","block")
+      $('#DAsegReajTemp').css("display","block")
+      $('#DAsegPrimDef').css("display","block")
+      $('#DAsegPenDef').css("display","block")
+      $('#InfoPensiones').css("display","block")
+      $('#titlebenef').text(this.asegurado.name||'(Titular)')
+      $('#PPensViaPago').text(this.pension.viaPago)
+      $('#DAsegDocum').css("display","block")
+      $('#DAsegCUSPP').css("display","block")
+      $('#DAsegIniVig').css("display","block")
+      $('#DAsegFinVig').css("display","block")
+      $('#DAsegTipPension').css("display","block")
+      $('#DAsegTipRenta').css("display","block")
+      $('#DAsegModalidad').css("display","block")
+      $('#DAsegAnDif').css("display","block")
+      $('#DAsegMesGarant').css("display","block")
+      $('#DAsegMoneda').css("display","block")
+      $('#DAsegReajTemp').css("display","block")
+      $('#DAsegPrimDef').css("display","block")
+      $('#DAsegPenDef').css("display","block")
+      $('#InfoPensiones').css("display","block")
+    }
     if(this.DescripcionRamo == 'SOAT'){
       $('#InfoVehiculo').css("display","block")
       $('#InfoDirecSOAT').css("display","block")
