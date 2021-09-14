@@ -1158,6 +1158,20 @@ export class UserconfigService {
       }
     })
   }
+
+  GetListaComplementos(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaComplementos,data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        //console.log(error)
+        return reject(error)
+      }
+    })
+  }
+
   GetGrupoXPerfil(data): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

@@ -384,6 +384,15 @@
 
                                                 </div>
                                                 <div id="{{stateCompletado.sHrefHead + regimen.desCorto + index}}" class="collapse {{parent.getStyleShowByAlert(item.NIDALERTA)}}" attr.data-parent="#{{stateCompletado.sCollapHead + regimen.desCorto + index}}">
+                                                    
+                                                     <div class="row">
+                                                         <div class="col-lg-12" *ngFor="let listComplemento of filtroComplemeto(item);" >
+                                                             Nombre del complemento :  {{listComplemento.SNOMBRE_COMPLEMENTO}}  
+                                                             Descripción del complemento :  {{listComplemento.SDESCRIPCION}}
+                                                             
+                                                        </div> 
+                                                    </div> 
+
 
                                                     <app-button-download-report [item]="item" [regimen]="regimen" [STIPO_USUARIO]="STIPO_USUARIO" [parent]="this"></app-button-download-report>
 

@@ -967,7 +967,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
         console.log("comentario : ",comentario)
         console.log("comentario.length : ",comentario.length)
         
-        debugger;
+       
          if (cabecera === '1' && (comentario === null || (comentario).trim() === '')){
         // if (false){
           console.log("ENTRO EN EL IF")
