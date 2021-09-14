@@ -157,7 +157,7 @@ export class ViewC2FormComponent implements OnInit {
     }
 
     getClientsByListArr(lista){
-        debugger;
+        //ebugger;
         //console.log("respuesta de los filtros: 0 ", lista)
         //console.log("respuesta de los filtros: 1", this.arrayClientesByList)
         let resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
