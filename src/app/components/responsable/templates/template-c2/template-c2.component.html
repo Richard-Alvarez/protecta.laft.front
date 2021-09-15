@@ -365,7 +365,7 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div>
 
-    <div *ngIf="parent.RegimenPendiente == 1">
+    <!-- <div *ngIf="parent.RegimenPendiente == 1">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias 
@@ -440,7 +440,7 @@
         <dt> 
             <dd><strong style="font-family: arial Narrow, serif;"> Resultados Señales de alerta C2</strong></dd>
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
-    </div>
+    </div> -->
 
     <br>
     <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
@@ -677,10 +677,10 @@
                 <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div> 
 
-    <div *ngIf="parent.RegimenPendiente == 1">
+     <div *ngIf="parent.RegimenPendiente == 1">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialRentaParticular.length}} coincidencias 
             exactas de clientes PEP y la base de clientes vigentes - RENTA TOTAL al cierre del{{this.Periodo}}, por ende, se consideran
              como señales de alerta “C2”. 
             </li>
@@ -716,7 +716,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaPep">
+                        <tr *ngFor="let item of parent.listaEspecialRentaParticular">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -734,7 +734,7 @@
                             </td>
                             <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    {{item.SDESPRODUCTO}} 
+                                    {{item.DESRAMO}} 
                                 </p>
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
@@ -754,9 +754,9 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
 
         <br>
-    </div>
+    </div> 
 
-    <div *ngIf="parent.RegimenPendiente == 1">    
+    <!-- <div *ngIf="parent.RegimenPendiente == 1">    
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
@@ -831,7 +831,7 @@
         <dt> 
             <dd><strong style="font-family: arial Narrow, serif;"> Información adicional</strong></dd>
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
-    </div> 
+    </div>  -->
 
         <br>
         <strong style="font-family: arial Narrow, serif;"> LISTAS INTERNACIONALES</strong>
@@ -1124,7 +1124,7 @@
         </div>
     </div> 
 
-    <div *ngIf="parent.RegimenPendiente == 1">
+    <!-- <div *ngIf="parent.RegimenPendiente == 1">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
@@ -1194,7 +1194,7 @@
             </table>
             <br>  
         </div>
-    </div> 
+    </div>  -->
 
     <ul>
         <li style="font-family: arial Narrow, serif; text-align: justify">

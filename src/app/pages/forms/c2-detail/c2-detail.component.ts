@@ -115,7 +115,7 @@ export class C2DetailComponent implements OnInit {
   NewListCheck :any = []
   async ngOnInit() {  
         
-    debugger;
+    
     var paramCliente =  localStorage.getItem("paramCliente");
     // console.log("El paramCliente: ", paramCliente)
     if (paramCliente != null && paramCliente != ""){
@@ -1743,7 +1743,7 @@ export class C2DetailComponent implements OnInit {
                                         valorAlerta = 2
                                         valorIDGrupo = 1
                                     }
-                                    debugger;
+                                    // debugger;
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: valorAlerta, 
@@ -2532,10 +2532,9 @@ ValidarRegimenAcepta(){
     }
     
 }
+/**/
 ResultadoPrevious: any ={}
 detResult: any ={}
-    /* descramo360pre: any;
-    descrol360pre: any; */
 async Consultar360Previous(){
     let data = {
       TipoDocumento: this.formData.NTIPO_DOCUMENTO,
@@ -2560,10 +2559,27 @@ async Consultar360Previous(){
     });
     console.log("360Previous",this.ResultadoPrevious)
     this.detResult= this.ResultadoPrevious.certificados
-    /*console.log('prueba kevin3',this.formData) */
-    /* this.descramo360pre= this.ResultadoPrevious.certificados[0].ramo.descripcion;
-    this.descrol360pre= this.ResultadoPrevious.certificados[0].rol.descripcionRol; */
-  }
+    console.log("El resultado",this.detResult)
 
+  }
+  ResultadoDetail:any =[]
+  async Consultar360(item){
+
+    console.log("entro en el servicio de 360", item)
+    let data:any = {}
+    data.Ramo = item.ramo.idRamo,//this.idramo,//73,
+    data.Producto = item.idProduct,//this.idproducto,//1,
+    data.Poliza = item.nroPolicy,///* 1000011671, */ /* this.nropolicy,// */6000000253,
+    data.Certificado = item.nroCertificate,///* this.nrocertificado,// */7,
+    data.FechaConsulta = item.fechaInicioVigencia,///* "1/09/2018", */ /* this.fechaconsulta,// */"01/08/2020", //fecha inicio vigencia
+    data.Endoso = item.endoso,    //Solo para rentas
+    
+    console.log("entro en el servicio de 360 la data", data)
+     await this.userConfigService.Consulta360(data).then(
+       (response) => {
+        this.ResultadoDetail = response
+       });
+    console.log("entro en el servicio de 360 resultado", this.ResultadoDetail)
+  }
 
 }

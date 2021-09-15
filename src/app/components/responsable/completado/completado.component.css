@@ -118,6 +118,13 @@ position: relative;
 z-index : 1;
 
 }
+.TitleLine2{
+  padding-bottom: 1%;
+position: relative;
+z-index : 1;
+font-size: 25px;
+}
+
 .TitleLine:before{
 content : "";
 position: absolute;
@@ -127,6 +134,15 @@ height  : 1pxs;
 width   : 100%;  /* or 100px */
 border-bottom:2px solid #FA7000;
 }
+.TitleLine2:before{
+  content : "";
+  position: absolute;
+  left    : 0;
+  bottom  : 0;
+  height  : 1pxs;
+  width   : 100%;  /* or 100px */
+  border-bottom:2px solid #FA7000;
+  }
 
 .container{
     font-family: 'Roboto', sans-serif;

@@ -804,6 +804,7 @@ listaPepRenta:any = []
 listaEspecialMasivos:any = []
 listaEspecialSoat:any = []
 listaEspecialRenta:any = []
+listaEspecialRentaParticular:any = []
 
 async DescargarReporte(item){
   debugger
@@ -833,6 +834,7 @@ async DescargarReporte(item){
   this.listaEspecialMasivos = []
   this.listaEspecialSoat = []
   this.listaEspecialRenta = []
+  this.listaEspecialRentaParticular = []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -891,6 +893,7 @@ async DescargarReporte(item){
     this.listaEspecialMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 99)
     this.listaEspecialSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
     this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+    this.listaEspecialRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
     //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
     //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
     console.log("this.listaSoat",this.listaSoat)
@@ -930,6 +933,12 @@ async DescargarReporte(item){
     this.ValidarNombreTemplate = 'S2'
   }else if(this.Alerta == 'C1'){
     this.ValidarNombreTemplate = 'C1'
+  }else if(this.Alerta == 'S1'){
+    this.ValidarNombreTemplate = 'S1'
+  }else if(this.Alerta == 'S3'){
+    this.ValidarNombreTemplate = 'S3'
+  }else{
+    this.ValidarNombreTemplate = this.Alerta
   }
 
   
