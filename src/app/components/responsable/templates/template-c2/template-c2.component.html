@@ -75,7 +75,7 @@
         <br>
         <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
         
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaMasivos.length}} 
@@ -83,7 +83,7 @@
                 por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaMasivos.length !=0;else SinData" >
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -151,7 +151,7 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div> 
         
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaSoat.length}}
@@ -159,7 +159,7 @@
             por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaSoat.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -217,7 +217,7 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div>
 
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}}
@@ -225,7 +225,7 @@
             cierre del {{this.Periodo}}, por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaRenta.length !=0;else SinData" >
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -288,15 +288,15 @@
     
     </div>
 
-    <div *ngIf="parent.RegimenPendiente == 1">
+    <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialRentaParticular.length}} coincidencias 
             exactas entre el Registro Negativo y la base de clientes - RENTA PARTICULAR vigente al cierre del {{parent.Periodo}}, 
             por ende, se consideran como señales de alerta “C2”. 
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaEspecialRentaParticular.length !=0;else SinData" >
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -327,7 +327,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaRenta">
+                        <tr *ngFor="let item of parent.listaEspecialRentaParticular">
                             <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                             <p>
                             {{item.STIPO_DOCUMENTO}}
@@ -365,7 +365,7 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div>
 
-    <!-- <div *ngIf="parent.RegimenPendiente == 1">
+    <!-- <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias 
@@ -445,7 +445,7 @@
     <br>
     <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
 
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
@@ -453,7 +453,7 @@
              como señales de alerta “C2”. 
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPep.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -522,7 +522,7 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div>
 
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepSoat.length}} coincidencias 
@@ -530,7 +530,7 @@
              como señales de alerta “C2”. 
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepSoat.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -599,7 +599,7 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div>   
 
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
             <br>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -608,7 +608,7 @@
                  como señales de alerta “C2”. 
                 </li>
             </ul>
-            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepRenta.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                     <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                         <tbody>
@@ -677,15 +677,15 @@
                 <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div> 
 
-     <div *ngIf="parent.RegimenPendiente == 1">
+     <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialRentaParticular.length}} coincidencias 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalRentaParticular.length}} coincidencias 
             exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del{{this.Periodo}}, por ende, se consideran
              como señales de alerta “C2”. 
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaInternacionalRentaParticular.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -716,7 +716,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaEspecialRentaParticular">
+                        <tr *ngFor="let item of parent.listaInternacionalRentaParticular">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -734,7 +734,7 @@
                             </td>
                             <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    {{item.DESRAMO}} 
+                                    <!-- {{item.DESRAMO}}  -->
                                 </p>
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
@@ -756,9 +756,9 @@
         <br>
     </div> 
 
-    <!-- <div *ngIf="parent.RegimenPendiente == 1">    
+    <!-- <div *ngIf="parent.RegimenPendiente == 1"  >    
         <ul>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
+            <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="parent.listaPep.length !=0;else SinData">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias 
             exactas de clientes PEP y la base de clientes vigentes - AHORRO TOTAL  al cierre del{{this.Periodo}}, por ende, 
             se consideran como señales de alerta “C2”. 
@@ -836,14 +836,14 @@
         <br>
         <strong style="font-family: arial Narrow, serif;"> LISTAS INTERNACIONALES</strong>
 
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialMasivos.length}} coincidencias 
             de la base de clientes vigentes - MASIVOS y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;"  *ngIf="parent.listaEspecialMasivos.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -908,14 +908,14 @@
         </div>  
     </div>
 
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialSoat.length}} coincidencias 
             de la base de clientes vigentes - SOAT y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaEspecialSoat.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -980,14 +980,14 @@
         </div>  
     </div>
 
-    <div *ngIf="parent.RegimenPendiente == 2">
+    <div *ngIf="parent.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialRenta.length}} coincidencias 
             de la base de clientes vigentes - RENTAS VITALICIAS y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaEspecialRenta.length !=0;else SinData" >
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -1052,14 +1052,14 @@
         </div>
     </div> 
 
-    <div *ngIf="parent.RegimenPendiente == 1">
+    <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
             de la base de clientes vigentes - RENTA PARTICULAR y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaEspecial.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -1124,14 +1124,14 @@
         </div>
     </div> 
 
-    <!-- <div *ngIf="parent.RegimenPendiente == 1">
+    <!-- <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
             de la base de clientes vigentes - AHORRO TOTAL y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;"  *ngIf="parent.listaEspecial.length !=0;else SinData" >
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -1204,6 +1204,10 @@
         Por lo tanto, se concluye que por la señal de alerta “C2” {{parent.listaEspecial.length > 0 ? 'si' : 'no'}} se identificaron casos.
         </li>
     </ul>
+
+    <ng-template #SinData>
+       
+      </ng-template>
 
     </div>
                 
