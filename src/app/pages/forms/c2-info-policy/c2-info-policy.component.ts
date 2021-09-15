@@ -10,7 +10,6 @@ import * as $ from 'jQuery';
 })
 export class C2InfoPolicyComponent implements OnInit {
 
-  @Input() detResult
   @Input() ResultadoDetail
   
   constructor(private userConfigService: UserconfigService,) {
@@ -23,7 +22,7 @@ export class C2InfoPolicyComponent implements OnInit {
   nrocertificado : any;
   fechaconsulta : any;
   /*Datos consulta360*/
-  Resultado:any = {}
+  /* Resultado:any = {} */
     asegurado: any;
     canal: any;
     canalEstado:any;  
@@ -42,6 +41,7 @@ export class C2InfoPolicyComponent implements OnInit {
     vehiculo: any;
     coberCodModul: any;
     coberDescModul: any;
+    nropoli
   
   DescripcionRamo:string = ''
   ListadoRamo:any = []
@@ -50,19 +50,42 @@ export class C2InfoPolicyComponent implements OnInit {
   /* ResultadoPrevious: any ={} */
     
   async ngOnInit(){
+    
     //this.listaramo()
     //this.listaproducto()
     //this.listapoliza()
     //this.listacertificado()
     //this.listafechaconsulta()
-    //await this.Consultar360()
+    /* this.Consultar360() */
     /* this.ValidarProducto() */
     //this.getRamos()
     //this.ValidarRamo()
     //this.getIdRamo()
-    this.showdata()
+    /* this.showdata() */
   }
 
+  async pruebadatos(){
+    console.log('resultado info',this.ResultadoDetail)
+    this.asegurado= this.ResultadoDetail.asegurado;
+    this.canal= this.ResultadoDetail.canal;
+    this.canalEstado= this.ResultadoDetail.canal.estado; 
+    this.canalTipo= this.ResultadoDetail.canal.tipo;
+    this.contratante= this.ResultadoDetail.contratante;
+    this.credito= this.ResultadoDetail.credito;
+    this.direccionSOAT= this.ResultadoDetail.direccionSOAT;
+    this.intermediario= this.ResultadoDetail.intermediario;
+    this.pension= this.ResultadoDetail.pension;
+    this.pensionCuenta= this.ResultadoDetail.pension.cuenta;
+    this.pensionTipo= this.ResultadoDetail.pension.tipo;
+    this.planSalud= this.ResultadoDetail.planSalud;
+    this.planSaludReceptor= this.ResultadoDetail.planSalud.receptor;
+    this.ramoIdRamo = this.ResultadoDetail.ramo.idRamo;
+    this.tarifa= this.ResultadoDetail.tarifa;
+    this.vehiculo= this.ResultadoDetail.vehiculo;
+    this.coberCodModul= this.ResultadoDetail.coberturas[0].codigoModulo;
+    this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo;
+    this.nropoli= this.ResultadoDetail.nroPolicy;
+  }
   ///**/
   /* idRamoPru:any;
   ValidarProducto(){
@@ -73,14 +96,13 @@ export class C2InfoPolicyComponent implements OnInit {
     this.idRamoPru = valor[0].idProduct
     console.log("prueba", this.idRamoPru)
   } */
-  listaramo(){
+  /* listaramo(){
     console.log("detResult",this.detResult)
     this.detResult.forEach((element,index) => {
       console.log("detResult 2",element.ramo)
       console.log("detResult 2",element.ramo.idRamo)
       this.idramo= element.ramo.idRamo
-    });
-      /* this.Consultar360(item) */
+    });      
   }
   
   listaproducto(){
@@ -108,42 +130,42 @@ export class C2InfoPolicyComponent implements OnInit {
       console.log("detResult 2",element.fechaInicioVigencia)
       this.fechaconsulta= element.fechaInicioVigencia
     });
-  }
+  } */
 
-  async Consultar360(){
+  //Consultar360(){
 
-    let data = {
-    Ramo : 73,//this.idramo,//73,
-    Producto : 1,//this.idproducto,//1,
-    Poliza : /* 1000011671, */ /* this.nropolicy,// */6000000253,
-    Certificado: /* this.nrocertificado,// */7,
-    FechaConsulta: /* "1/09/2018", */ /* this.fechaconsulta,// */"01/08/2020", //fecha inicio vigencia
+    /* let data = {
+    Ramo : 73,
+    Producto : 1,
+    Poliza : 6000000253,
+    Certificado: 7,
+    FechaConsulta: "01/08/2020", //fecha inicio vigencia
     Endoso: null    //Solo para rentas
     }
     await this.userConfigService.Consulta360(data).then(
       (response) => {
        this.Resultado = response
-      });
-    console.log("el resultado",this.Resultado)
-    this.asegurado= this.Resultado.asegurado;
-    this.canal= this.Resultado.canal;
-    this.canalEstado= this.Resultado.canal.estado; 
-    this.canalTipo= this.Resultado.canal.tipo;
-    this.contratante= this.Resultado.contratante;
-    this.credito= this.Resultado.credito;
-    this.direccionSOAT= this.Resultado.direccionSOAT;
-    this.intermediario= this.Resultado.intermediario.codigoIntermediario;
-    this.pension= this.Resultado.pension;
-    this.pensionCuenta= this.Resultado.pension.cuenta;
-    this.pensionTipo= this.Resultado.pension.tipo;
-    this.planSalud= this.Resultado.planSalud;
-    this.planSaludReceptor= this.Resultado.planSalud.receptor;
-    this.ramoIdRamo = this.Resultado.ramo.idRamo;
-    this.tarifa= this.Resultado.tarifa;
-    this.vehiculo= this.Resultado.vehiculo;
-    this.coberCodModul= this.Resultado.coberturas[0].codigoModulo;
-    this.coberDescModul= this.Resultado.coberturas[0].descModulo;
-
+      }); */
+    /* console.log("el resultado info",this.ResultadoDetail)
+    this.asegurado= this.ResultadoDetail.asegurado;
+    this.canal= this.ResultadoDetail.canal;
+    this.canalEstado= this.ResultadoDetail.canal.estado; 
+    this.canalTipo= this.ResultadoDetail.canal.tipo;
+    this.contratante= this.ResultadoDetail.contratante;
+    this.credito= this.ResultadoDetail.credito;
+    this.direccionSOAT= this.ResultadoDetail.direccionSOAT;
+    this.intermediario= this.ResultadoDetail.intermediario.codigoIntermediario;
+    this.pension= this.ResultadoDetail.pension;
+    this.pensionCuenta= this.ResultadoDetail.pension.cuenta;
+    this.pensionTipo= this.ResultadoDetail.pension.tipo;
+    this.planSalud= this.ResultadoDetail.planSalud;
+    this.planSaludReceptor= this.ResultadoDetail.planSalud.receptor;
+    this.ramoIdRamo = this.ResultadoDetail.ramo.idRamo;
+    this.tarifa= this.ResultadoDetail.tarifa;
+    this.vehiculo= this.ResultadoDetail.vehiculo;
+    this.coberCodModul= this.ResultadoDetail.coberturas[0].codigoModulo;
+    this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo;
+ */
     /* console.log('prueba kevin2',this.policyList)
     console.log('prueba kevin2',this.policyList[0].SNUM_POLIZA)
     console.log('prueba kevin2',this.policyList[0].NCERTIF)
@@ -156,9 +178,9 @@ export class C2InfoPolicyComponent implements OnInit {
     //console.log("abcde",this.fecpoli) //fecha de inicio de vigencia
     //endoso
 
-  }
+  //}
 
-  getRamos(){
+  /* getRamos(){
     this.ListadoRamo = [
       {"IdRamo":"61","Descripcion":"ACCIDENTES PERSONALES","DescripcionCorta":null},
       {"IdRamo":"64","Descripcion":"ASISTENCIA MÉDICA","DescripcionCorta":null},
@@ -174,17 +196,17 @@ export class C2InfoPolicyComponent implements OnInit {
       {"IdRamo":"82","Descripcion":"VIDA LEY EX-TRABAJADORES","DescripcionCorta":null},
       {"IdRamo":"73","Descripcion":"VIDA LEY TRABAJADORES","DescripcionCorta":null}  
     ]
-  }
+  } */
   
 
 
-  ValidarRamo(){
+  /* ValidarRamo(){
     console.log("this.ramoIdRamo", this.ramoIdRamo)
     let valor = this.ListadoRamo.filter(it => it.IdRamo == this.ramoIdRamo )
     console.log("el valor ", valor)
     console.log("el valor ", valor[0].Descripcion)
     this.DescripcionRamo = valor[0].Descripcion
-  }
+  } */
   
     
     /* ListaEstado:any = []
@@ -196,15 +218,15 @@ export class C2InfoPolicyComponent implements OnInit {
       ]
     } */
 
-  getIdRamo(){
-    /* console.log("this.ramoIdRamo", this.DescripcionRamo) */
+  /* getIdRamo(){
+    
     let val = this.ListadoRamo.filter(it => it.Descripcion == "RENTA PARTICULAR" ) //reemplazar "" con la variable del servicio que trae
     console.log("el valor ", val)
     console.log("el valor ", val[0].IdRamo)
-    /* this.DescripcionRamo = val[0].Descripcion */
+    
 console.log("prue",this.item1)
-  }  
-  arregloprueba: any=[
+  } */  
+  /* arregloprueba: any=[
     {"zxc":"ji","":"je","hjk":"123","qsd":"jo","qwe":"ju","asd":"ja"},
     {"zxc":"jo","":"ji","hjk":"654","qsd":"ju","qwe":"ja","asd":"je"},
     {"zxc":"ju","":"je","hjk":"987","qsd":"ja","qwe":"ju","asd":"ji"},
@@ -214,8 +236,8 @@ console.log("prue",this.item1)
   item3: string ='dfg' ;
   item4: string ='jhj' ;
   item5: string ='khl' ;
-  item6: string ='yiu' ;
-  showdata(){
+  item6: string ='yiu' ; */
+  //showdata(){
     /* if(this.DescripcionRamo == "VIDA LEY TRABAJADORES") {
       
       $('#tblContactos').empty()
@@ -260,7 +282,7 @@ console.log("prue",this.item1)
     //   $('#DAsegPenDef').css("display","block")
     //   $('#InfoPensiones').css("display","block")
     // }
-    if(this.DescripcionRamo == 'SOAT'){
+    /* if(this.DescripcionRamo == 'SOAT'){
       $('#InfoVehiculo').css("display","block")
       $('#InfoDirecSOAT').css("display","block")
       $('#InfoCanal').css("display","block")
@@ -268,7 +290,7 @@ console.log("prue",this.item1)
       $('#InfoTarifa').css("display","block")
       $('#InfoCoberturas').css("display","block")
     }
-    if (this.DescripcionRamo == "VIDA INDIVIDUAL DE LARGO PLAZO"/*desgravamen credito personal*/) {
+    if (this.DescripcionRamo == "VIDA INDIVIDUAL DE LARGO PLAZO"//desgravamen credito personal) {
       $('#InfoAsegurado').css("display","block")
       $('#InfoCanal').css("display","block")
       $('#InfoIntermediario').css("display","block")
@@ -285,8 +307,8 @@ console.log("prue",this.item1)
       $('#InfoIntermediario').css("display","block")
       $('#InfoCoberturas').css("display","block")
       $('#InfoBeneficiarios').css("display","block")
-    }
-  }
+    } */
+  //}
   /* listaProducto: any;
   getproducto(){
     this.listaProducto =  [
