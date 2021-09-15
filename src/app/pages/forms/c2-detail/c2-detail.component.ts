@@ -2533,7 +2533,7 @@ ValidarRegimenAcepta(){
     
 }
 /**/
-ResultadoPrevious: any ={}
+ResultadoPrevious: any = {}
 detResult: any ={}
 async Consultar360Previous(){
     let data = {
@@ -2562,7 +2562,7 @@ async Consultar360Previous(){
     console.log("El resultado",this.detResult)
 
   }
-  ResultadoDetail:any =[]
+  ResultadoDetail:any = {}
   async Consultar360(item){
 
     console.log("entro en el servicio de 360", item)
