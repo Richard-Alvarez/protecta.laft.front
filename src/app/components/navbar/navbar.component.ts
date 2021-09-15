@@ -2,7 +2,7 @@ import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2,HostListener } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { UserconfigService } from '../../services/userconfig.service';
-import * as $ from 'jquery';
+import * as $ from 'jQuery';
 
 
 @Component({

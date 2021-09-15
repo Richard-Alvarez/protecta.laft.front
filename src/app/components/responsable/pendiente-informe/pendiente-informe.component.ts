@@ -804,6 +804,9 @@ listaPepRenta:any = []
 listaEspecialMasivos:any = []
 listaEspecialSoat:any = []
 listaEspecialRenta:any = []
+listaEspecialRentaParticular:any = []
+listaPepRentaParticular:any = []
+listaInternacionalRentaParticular:any = []
 
 async DescargarReporte(item){
   debugger
@@ -833,6 +836,9 @@ async DescargarReporte(item){
   this.listaEspecialMasivos = []
   this.listaEspecialSoat = []
   this.listaEspecialRenta = []
+  this.listaEspecialRentaParticular = []
+  this.listaPepRentaParticular = []
+  this.listaInternacionalRentaParticular = []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
@@ -891,6 +897,9 @@ async DescargarReporte(item){
     this.listaEspecialMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 99)
     this.listaEspecialSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
     this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+    this.listaEspecialRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
+    this.listaPepRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 75)
+    this.listaInternacionalRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75)
     //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
     //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
     console.log("this.listaSoat",this.listaSoat)
@@ -904,6 +913,9 @@ async DescargarReporte(item){
     console.log("this.listaEspecialMasivos",this.listaEspecialMasivos)
     console.log("this.listaEspecialSoat",this.listaEspecialSoat)
     console.log("this.listaEspecialRenta",this.listaEspecialRenta)
+    console.log("this.listaEspecialRenta",this.listaEspecialRentaParticular)
+    console.log("this.listaEspecialRenta",this.listaPepRentaParticular)
+    console.log("this.listaEspecialRenta",this.listaInternacionalRentaParticular)
     this.Cantidad = this.arrayDataResultado.length
   }
 
