@@ -680,12 +680,12 @@
      <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalRentaParticular.length}} coincidencias 
-            exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del{{this.Periodo}}, por ende, se consideran
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepRentaParticular.length}} coincidencias 
+            exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del{{this.Periodo}}, por ende, se consideran 
              como señales de alerta “C2”. 
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaInternacionalRentaParticular.length !=0;else SinData">
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepRentaParticular.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -716,7 +716,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaInternacionalRentaParticular">
+                        <tr *ngFor="let item of parent.listaPepRentaParticular">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}
@@ -1055,11 +1055,11 @@
     <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
-            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecial.length}} coincidencias 
+            De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalRentaParticular.length}} coincidencias 
             de la base de clientes vigentes - RENTA PARTICULAR y la base de listas internacionales al cierre del {{parent.Periodo}}.
             </li>
         </ul>
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaEspecial.length !=0;else SinData">
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaInternacionalRentaParticular.length !=0;else SinData">
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
@@ -1090,7 +1090,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaEspecial">
+                        <tr *ngFor="let item of parent.listaInternacionalRentaParticular">
                             <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
                                     {{item.STIPO_DOCUMENTO}}

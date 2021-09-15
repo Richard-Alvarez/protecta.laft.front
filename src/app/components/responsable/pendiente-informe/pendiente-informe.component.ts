@@ -913,9 +913,9 @@ async DescargarReporte(item){
     console.log("this.listaEspecialMasivos",this.listaEspecialMasivos)
     console.log("this.listaEspecialSoat",this.listaEspecialSoat)
     console.log("this.listaEspecialRenta",this.listaEspecialRenta)
-    console.log("this.listaEspecialRenta",this.listaEspecialRentaParticular)
-    console.log("this.listaEspecialRenta",this.listaPepRentaParticular)
-    console.log("this.listaEspecialRenta",this.listaInternacionalRentaParticular)
+    console.log("this.listaEspecialRentaParticular",this.listaEspecialRentaParticular)
+    console.log("this.listaPepRentaParticular",this.listaPepRentaParticular)
+    console.log("this.listaInternacionalRentaParticular",this.listaInternacionalRentaParticular)
     this.Cantidad = this.arrayDataResultado.length
   }
 
