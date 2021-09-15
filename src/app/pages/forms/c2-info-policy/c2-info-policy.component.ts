@@ -41,6 +41,7 @@ export class C2InfoPolicyComponent implements OnInit {
     vehiculo: any;
     coberCodModul: any;
     coberDescModul: any;
+    nropoli
   
   DescripcionRamo:string = ''
   ListadoRamo:any = []
@@ -63,16 +64,16 @@ export class C2InfoPolicyComponent implements OnInit {
     /* this.showdata() */
   }
 
-  pruebadatos(){
+  async pruebadatos(){
     console.log('resultado info',this.ResultadoDetail)
-    /* this.asegurado= this.ResultadoDetail.asegurado;
+    this.asegurado= this.ResultadoDetail.asegurado;
     this.canal= this.ResultadoDetail.canal;
     this.canalEstado= this.ResultadoDetail.canal.estado; 
     this.canalTipo= this.ResultadoDetail.canal.tipo;
     this.contratante= this.ResultadoDetail.contratante;
     this.credito= this.ResultadoDetail.credito;
     this.direccionSOAT= this.ResultadoDetail.direccionSOAT;
-    this.intermediario= this.ResultadoDetail.intermediario.codigoIntermediario;
+    this.intermediario= this.ResultadoDetail.intermediario;
     this.pension= this.ResultadoDetail.pension;
     this.pensionCuenta= this.ResultadoDetail.pension.cuenta;
     this.pensionTipo= this.ResultadoDetail.pension.tipo;
@@ -82,7 +83,8 @@ export class C2InfoPolicyComponent implements OnInit {
     this.tarifa= this.ResultadoDetail.tarifa;
     this.vehiculo= this.ResultadoDetail.vehiculo;
     this.coberCodModul= this.ResultadoDetail.coberturas[0].codigoModulo;
-    this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo; */
+    this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo;
+    this.nropoli= this.ResultadoDetail.nroPolicy;
   }
   ///**/
   /* idRamoPru:any;

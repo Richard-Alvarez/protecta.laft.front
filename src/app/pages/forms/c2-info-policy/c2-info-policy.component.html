@@ -13,7 +13,7 @@
                         <span class="spancontent" id="PTitleProd" style="font-size: small !important;"></span>
                     </p>
                     <input type="hidden" id="CodigosPoliza" />
-                    <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza" ><!-- {{ResultadoDetail.nroPolicy}} --></span></p>
+                    <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza" >{{ResultadoDetail.nroPolicy}} <!-- {{nropoli}} --></span></p>
                     <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif"><!-- {{ResultadoDetail.nroCertificate}} --></span></p>
                     <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">Vigente</span></p>
                     <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante"><!-- {{contratante.name}} --></span></p>
@@ -27,17 +27,6 @@
                     <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig"><!-- {{ResultadoDetail.fechaFinVigencia}} --></span></p>
                     <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda"><!-- {{ResultadoDetail.monedaPoliza}} --></span></p>
                     <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago"><!-- {{ResultadoDetail.fechaEfecto}} --></span></p>
-
-                    <!-- <p class="card-text textTitle" style="margin-top:40%">
-                        <a href="http://soat.protecta.com.pe/soat/login.aspx" class="card-link" target="_blank">Ir a SISWEB</a>
-                        <a href="https://efacturacion.protectasecurity.pe/descarga/login" class="card-link" target="_blank">Ir a E-Fact</a>
-                        <a href="https://efacturacion.protectasecurity.pe/descarga/" class="card-link" target="_blank">Ir a E-Fact Descarga</a>
-                        <a href="http://paralifecolombia.com/WebSiteSeguros/Sesion/Salir?Lenght=0" class="card-link" target="_blank">Ir a BELCORP</a>
-                        <a href="http://rentas.protecta.com.pe/ADMNISTRACION/" class="card-link" target="_blank">Ir a Renta Total</a>
-                        <a href="https://www.apeseg.org.pe/consultas-soat/" class="card-link" target="_blank">Ir a APESEG</a>
-                        <a href="https://www.sunarp.gob.pe/ConsultaVehicular/" class="card-link" target="_blank">Ir a SUNARP</a>
-                        <a href="https://pagoefectivo.pe/pe" class="card-link" target="_blank">Ir a Pago Efectivo</a>
-                    </p> -->
                 </div>
             </div>
         </div>
@@ -46,7 +35,7 @@
             <div id="Template" style="background: white;">
                 <div class="Pestañas">
                     <ul class="nav nav-tabs nav-justified" id="TabsDetalle">
-                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo" (click)="pruebadatos(ResultadoDetail)">Información</a></li>
+                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo" (click)="await pruebadatos()">Información</a></li>
                         <!-- <li id="PestanaSiniestro" class="active"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestSiniestro" aria-expanded="true">Siniestros</a></li> -->
                     </ul>
                 </div>
@@ -118,22 +107,22 @@
                                 
                                  <div class="row">
                                     <div class="col-lg-3" id="DAsegNom">
-                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre"><!-- {{asegurado.name}} --></span></p>
+                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{asegurado.name}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegEstCivil">
-                                        <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil"><!-- {{asegurado.estadoCivil}} --></span></p>
+                                        <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil">{{asegurado.estadoCivil}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegDocum" style="display:none;">
-                                        <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent" id="PAsegDocum"><!-- {{asegurado.tipodoc}} --> - <!-- {{asegurado.documento}} --></span></p>
+                                        <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent" id="PAsegDocum">{{asegurado.tipodoc}} - {{asegurado.documento}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegGenero" style="display:none;">
-                                        <p class="card-text textTitle"><span>Género</span><span class="spancontent" id="PAsegGenero"><!-- {{asegurado.sexo}} --></span></p>
+                                        <p class="card-text textTitle"><span>Género</span><span class="spancontent" id="PAsegGenero">{{asegurado.sexo}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegFecNac">
-                                        <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent" id="PAsegFecNam"><!-- {{asegurado.fechanacimiento}} --></span></p>
+                                        <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent" id="PAsegFecNam">{{asegurado.fechanacimiento}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegCUSPP" style="display:none;">
-                                        <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP"><!-- {{asegurado.cuspp}} --></span></p>
+                                        <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP">{{asegurado.cuspp}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegIniVigSCTR" style="display:none;">
                                         <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVigSCTR"><!-- {{asegurado.fechaInicioVigencia}} --></span></p>
@@ -377,16 +366,16 @@
                                 <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Nombre Canal</span><span class="spancontent" id="PCanalNom"><!-- {{canal.nombre}} --></span></p>
+                                        <p class="card-text textTitle"><span>Nombre Canal</span><span class="spancontent" id="PCanalNom">{{canal.nombre}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Fecha Apertura</span><span class="spancontent" id="PCanalFechaAp"><!-- {{canal.fechaInicio}} --></span></p>
+                                        <p class="card-text textTitle"><span>Fecha Apertura</span><span class="spancontent" id="PCanalFechaAp">{{canal.fechaInicio}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo Canal</span><span class="spancontent" id="PCanalTipo"><!-- {{canalTipo.descripcion}} --></span></p>
+                                        <p class="card-text textTitle"><span>Tipo Canal</span><span class="spancontent" id="PCanalTipo">{{canalTipo.descripcion}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Estado del Canal</span><span class="spancontent" id="PCanalEstado"><!-- {{canalEstado.descEstado}} --></span></p>
+                                        <p class="card-text textTitle"><span>Estado del Canal</span><span class="spancontent" id="PCanalEstado">{{canalEstado.descEstado}}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -394,10 +383,10 @@
                                 <h4 class="title-grid"><strong>Datos del intermediario / Comercializador</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Código</span><span class="spancontent" id="PIntCod"><!-- {{intermediario.codigoIntermediario}} --></span></p>
+                                        <p class="card-text textTitle"><span>Código</span><span class="spancontent" id="PIntCod">{{intermediario.codigoIntermediario}}</span></p>
                                     </div>
                                     <div class="col-lg-6">
-                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PIntNom"><!-- {{intermediario.nombre}} --></span></p>
+                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PIntNom">{{intermediario.nombre}}</span></p>
                                     </div>
                                 </div>
                             </div>

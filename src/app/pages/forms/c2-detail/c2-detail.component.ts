@@ -2566,14 +2566,14 @@ async Consultar360Previous(){
   async Consultar360(item){
 
     console.log("entro en el servicio de 360", item)
-    let data:any = {}
-    data.Ramo = item.ramo.idRamo,//this.idramo,//73,
-    data.Producto = item.idProduct,//this.idproducto,//1,
-    data.Poliza = item.nroPolicy,///* 1000011671, */ /* this.nropolicy,// */6000000253,
-    data.Certificado = item.nroCertificate,///* this.nrocertificado,// */7,
-    data.FechaConsulta = item.fechaInicioVigencia,///* "1/09/2018", */ /* this.fechaconsulta,// */"01/08/2020", //fecha inicio vigencia
-    data.Endoso = item.endoso,    //Solo para rentas
-    
+    let data:any = {
+    Ramo : item.ramo.idRamo,//this.idramo,//73,
+    Producto : item.idProduct,//this.idproducto,//1,
+    Poliza : item.nroPolicy,///* 1000011671, */ /* this.nropolicy,// */6000000253,
+    Certificado : item.nroCertificate,///* this.nrocertificado,// */7,
+    FechaConsulta : item.fechaInicioVigencia,///* "1/09/2018", */ /* this.fechaconsulta,// */"01/08/2020", //fecha inicio vigencia
+    Endoso : item.endoso,    //Solo para rentas
+    }
     console.log("entro en el servicio de 360 la data", data)
      await this.userConfigService.Consulta360(data).then(
        (response) => {

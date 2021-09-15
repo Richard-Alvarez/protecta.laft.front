@@ -668,8 +668,6 @@
                               </table>
                           </div>
                       </div>
-  
-                      
                       <div *ngIf="tipoClienteGC == 'ACEPTA-COINCID' || (tipoClienteGC == 'ACEPTA-COINCID' && tipoClienteCRF != 'CRF') ">
                           <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
                           <div class="row mb-2 mt-2">
@@ -2072,7 +2070,7 @@
                                         </div>
                                     </div>
                                 </div><!---->
-                                <div class="collapse" data-parent="#tabPanelList" tabindex="-1" id="{{'consulta'+inc}}"><!---->
+                                <div class="collapse" data-parent="#tabPanelList" tabindex="-1" id="{{'consulta'+inc}}" ><!---->
                                     <div class="card-body"><!---->
                                         <!-- <div class="row" style="display: flex;justify-content: left; align-items: left" >
                                             <div class="col-lg-12 form-group">
@@ -2139,6 +2137,7 @@
                                             </div>
                                         </div> -->
                                         <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                        
                                     </div><!---->
                                 </div><!---->
                             </div>
@@ -3456,7 +3455,7 @@
                         </div>
                     </div>
                   </div>
-                      
+                    
               </div>
           </div>
                
