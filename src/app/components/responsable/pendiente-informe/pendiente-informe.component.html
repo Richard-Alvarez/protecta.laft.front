@@ -424,48 +424,48 @@
 
         <div *ngIf="this.Alerta=='S2' && this.RegimenPendiente===2">
             <app-template-s2  [parent]="this" [Nombre]="Nombre" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  ></app-template-s2>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-s2>
         </div>
 
         <div *ngIf="this.Alerta=='S1' && this.RegimenPendiente===2">
             <app-template-s1  [parent]="this" [Nombre]="Nombre" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  ></app-template-s1>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-s1>
         </div>
 
         <div *ngIf="this.Alerta=='S3' && this.RegimenPendiente===2">
             <app-template-s3  [parent]="this" [Nombre]="Nombre" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  ></app-template-s3>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-s3>
         </div>
 
         <div *ngIf="this.Alerta=='C3' && this.RegimenPendiente===2">
             <app-template-c3  [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"></app-template-c3>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none"></app-template-c3>
         </div>
 
         <div *ngIf="this.Alerta=='C1' && this.RegimenPendiente===2">
             <app-template-c1  [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"></app-template-c1>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none"></app-template-c1>
         </div>
 
         <div *ngIf="(this.NombreLink == 'proveedor' || this.NombreLink == 'contraparte') && this.RegimenPendiente==0">
             <app-template-p [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  ></app-template-p>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-p>
         </div>
         <div *ngIf="this.NombreLink == 'colaborador' && this.RegimenPendiente==0">
             <app-template-t [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  ></app-template-t>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-t>
         </div>
 
         <div *ngIf="this.Alerta=='C2' && (this.RegimenPendiente==2  || this.RegimenPendiente==1)" >
             <app-template-c2 [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" [arrayDataResultado]="arrayDataResultado"  [Periodo]="Periodo"
-            [Cantidad]="Cantidad"  
+            [Cantidad]="Cantidad"  style="display: none"
             ></app-template-c2>
         </div>
 
         <div *ngIf="this.RegimenPendiente ===1 && (this.Alerta !='C2' ||  this.Alerta !='C3' || this.Alerta !='S2') && this.ValidarRG === 'RG'">
             <app-template-rg  [parent]="this" [Nombre]="Nombre" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" ></app-template-rg>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-rg>
         </div>
           
           
