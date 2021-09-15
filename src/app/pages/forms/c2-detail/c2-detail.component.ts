@@ -2534,6 +2534,7 @@ ValidarRegimenAcepta(){
 }
 /**/
 ResultadoPrevious: any = {}
+debugger;
 detResult: any ={}
 async Consultar360Previous(){
     let data = {
@@ -2541,7 +2542,7 @@ async Consultar360Previous(){
       NumeroDocumento: this.formData.SNUM_DOCUMENTO,
       //Nombres: null,
       //Poliza: null,
-      CodAplicacion: "360",
+      CodAplicacion: "LAFT",
       //Producto: null,
       //FechaSolicitud: null,
       //Rol: null,

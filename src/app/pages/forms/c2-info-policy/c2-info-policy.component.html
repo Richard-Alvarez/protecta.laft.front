@@ -13,20 +13,20 @@
                         <span class="spancontent" id="PTitleProd" style="font-size: small !important;"></span>
                     </p>
                     <input type="hidden" id="CodigosPoliza" />
-                    <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza" >{{ResultadoDetail.nroPolicy}} <!-- {{nropoli}} --></span></p>
-                    <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif"><!-- {{ResultadoDetail.nroCertificate}} --></span></p>
+                    <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza" >{{ResultadoDetail.nroPolicy}}</span></p>
+                    <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif">{{ResultadoDetail.nroCertificate}}</span></p>
                     <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">Vigente</span></p>
-                    <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante"><!-- {{contratante.name}} --></span></p>
-                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol"><!-- {{ResultadoDetail.rol}} --></span></p>
-                    <p class="card-text textTitle" id="CardPlaca" style="display:none"><span>Placa</span><span class="spancontent" id="PCardPlaca"><!-- {{vehiPlaca}} --></span></p>
-                    <p class="card-text textTitle" id="CardPlanilla" style="display:none"><span>Planilla</span><span class="spancontent" id="PCardPlanilla"><!-- {{ResultadoDetail.planilla}} --></span></p>
+                    <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante">{{contratante.name}}</span></p>
+                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol">{{ResultadoDetail.rol}}</span></p>
+                    <p class="card-text textTitle" id="CardPlaca" style="display:none"><span>Placa</span><span class="spancontent" id="PCardPlaca">{{vehiculo.placa}}</span></p>
+                    <p class="card-text textTitle" id="CardPlanilla" style="display:none"><span>Planilla</span><span class="spancontent" id="PCardPlanilla">{{ResultadoDetail.planilla}}</span></p>
                     <p class="card-text textTitle" id="CardNumCredito" style="display:none"><span>Número de Crédito</span><span class="spancontent" id="PCardNumCred"></span></p>
-                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi"><!-- {{ResultadoDetail.fechaEmision}} --></span></p>
-                    <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig"><!-- {{ResultadoDetail.fechaPrimeraVigencia}} --></span></p>
-                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig"><!-- {{ResultadoDetail.fechaInicioVigencia}} --></span></p>
-                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig"><!-- {{ResultadoDetail.fechaFinVigencia}} --></span></p>
-                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda"><!-- {{ResultadoDetail.monedaPoliza}} --></span></p>
-                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago"><!-- {{ResultadoDetail.fechaEfecto}} --></span></p>
+                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi">{{ResultadoDetail.fechaEmision}}</span></p>
+                    <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig">{{ResultadoDetail.fechaPrimeraVigencia}}</span></p>
+                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">{{ResultadoDetail.fechaInicioVigencia}}</span></p>
+                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig">{{ResultadoDetail.fechaFinVigencia}}</span></p>
+                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda">{{ResultadoDetail.monedaPoliza}}</span></p>
+                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">{{ResultadoDetail.fechaEfecto}}</span></p>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div id="Template" style="background: white;">
                 <div class="Pestañas">
                     <ul class="nav nav-tabs nav-justified" id="TabsDetalle">
-                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo" (click)="await pruebadatos()">Información</a></li>
+                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo" (click)="pruebadatos()">Información</a></li>
                         <!-- <li id="PestanaSiniestro" class="active"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestSiniestro" aria-expanded="true">Siniestros</a></li> -->
                     </ul>
                 </div>
@@ -125,60 +125,60 @@
                                         <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP">{{asegurado.cuspp}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegIniVigSCTR" style="display:none;">
-                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVigSCTR"><!-- {{asegurado.fechaInicioVigencia}} --></span></p>
+                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVigSCTR">{{asegurado.fechaInicioVigencia}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegFinVigSCTR" style="display:none;">
-                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVigSCTR"><!-- {{asegurado.fechaFinVigencia}} --></span></p>
+                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVigSCTR">{{asegurado.fechaFinVigencia}}</span></p>
                                     </div>
                                 </div> 
                                 <div class="row">
                                     <div class="col-lg-3" id="DAsegIniVig" style="display:none;">
-                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVig"><!-- {{ResultadoDetail.fechaInicioVigencia}} --></span></p>
+                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVig">{{ResultadoDetail.fechaInicioVigencia}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegFinVig" style="display:none;">
-                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVig"><!-- {{ResuResultadoDetailltado.fechaFinVigencia}} --></span></p>
+                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVig">{{ResultadoDetail.fechaFinVigencia}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegTipPension" style="display:none;">
-                                        <p class="card-text textTitle"><span>Tipo de Pensión</span><span class="spancontent" id="PAsegTipPension"><!-- {{pensionTipo.descripcion} --></span></p>
+                                        <p class="card-text textTitle"><span>Tipo de Pensión</span><span class="spancontent" id="PAsegTipPension">{{pensionTipo.descripcion}}</span></p>
                                     </div>
                                     <div class="col-lg-4" id="DAsegTipRenta" style="display:none;">
-                                        <p class="card-text textTitle"><span>Tipo de Renta</span><span class="spancontent" id="PAsegTipRenta"><!-- {{pension.tipoRenta}} --></span></p>
+                                        <p class="card-text textTitle"><span>Tipo de Renta</span><span class="spancontent" id="PAsegTipRenta">{{pension.tipoRenta}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3" id="DAsegModalidad" style="display:none;">
-                                        <p class="card-text textTitle"><span>Modalidad</span><span class="spancontent" id="PAsegModalidad"><!-- {{pension.modalidad}} --></span></p>
+                                        <p class="card-text textTitle"><span>Modalidad</span><span class="spancontent" id="PAsegModalidad">{{pension.modalidad}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegAnDif" style="display:none;">
-                                        <p class="card-text textTitle"><span>Años Diferidos</span><span class="spancontent" id="PAsegAnDif"><!-- {{pension.aniosDiferidos}} --></span></p>
+                                        <p class="card-text textTitle"><span>Años Diferidos</span><span class="spancontent" id="PAsegAnDif">{{pension.aniosDiferidos}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegMesGarant" style="display:none;">
-                                        <p class="card-text textTitle"><span>Meses Garantizados</span><span class="spancontent" id="PAsegMesGarant"><!-- {{pension.mesesGarantizados}} --></span></p>
+                                        <p class="card-text textTitle"><span>Meses Garantizados</span><span class="spancontent" id="PAsegMesGarant">{{pension.mesesGarantizados}}</span></p>
                                     </div>
                                     <div class="col-lg-4" id="DAsegMoneda" style="display:none;">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMoneda"><!-- {{pension.moneda}} --></span></p>
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMoneda">{{pension.moneda}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3" id="DAsegReajTemp" style="display:none;">
-                                        <p class="card-text textTitle"><span>Reajuste Trimestral</span><span class="spancontent" id="PAsegReajTemp"><!-- {{pension.reajusteTrimestral}} --></span></p>
+                                        <p class="card-text textTitle"><span>Reajuste Trimestral</span><span class="spancontent" id="PAsegReajTemp">{{pension.reajusteTrimestral}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegPrimDef" style="display:none;">
-                                        <p class="card-text textTitle"><span>Prima Definitiva</span><span class="spancontent" id="PAsegPrimDef"><!-- {{pension.primaDefinitiva}} --></span></p>
+                                        <p class="card-text textTitle"><span>Prima Definitiva</span><span class="spancontent" id="PAsegPrimDef">{{pension.primaDefinitiva}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegPenDef" style="display:none;">
-                                        <p class="card-text textTitle"><span>Pensión Definitiva</span><span class="spancontent" id="PAsegPenDef"><!-- {{pension.pensionDefinitiva}} --></span></p>
+                                        <p class="card-text textTitle"><span>Pensión Definitiva</span><span class="spancontent" id="PAsegPenDef">{{pension.pensionDefinitiva}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3" id="DAsegMonedaSal" style="display:none;">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMonedaSal"><!-- {{ResultadoDetail.monedaSalario}} --></span></p>
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMonedaSal">{{ResultadoDetail.monedaSalario}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegSalario" style="display:none;">
-                                        <p class="card-text textTitle"><span>Salario</span><span class="spancontent" id="PAsegSalario"><!-- {{asegurado.salario}} --></span></p>
+                                        <p class="card-text textTitle"><span>Salario</span><span class="spancontent" id="PAsegSalario">{{asegurado.salario}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegTasa" style="display:none;">
-                                        <p class="card-text textTitle"><span>Tasa</span><span class="spancontent" id="PAsegTasa"><!-- {{asegurado.tasa}} --></span></p>
+                                        <p class="card-text textTitle"><span>Tasa</span><span class="spancontent" id="PAsegTasa">{{asegurado.tasa}}</span></p>
                                     </div>
                                 </div>
 
@@ -187,33 +187,33 @@
                                 <h4 class="title-grid"><strong>Datos del Crédito</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PCredNum"><!-- {{credito.nroCredito}} --></span></p>
+                                        <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PCredNum">{{credito.nroCredito}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Plazo</span><span class="spancontent" id="PCredPlaz"><!-- {{credito.plazo}} --></span></p>
+                                        <p class="card-text textTitle"><span>Plazo</span><span class="spancontent" id="PCredPlaz">{{credito.plazo}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PCredIniVig"><!-- {{credito.inicioVigencia}} --></span></p>
+                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PCredIniVig">{{credito.inicioVigencia}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PCredFinVig"><!-- {{credito.finVigencia}} --></span></p>
+                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PCredFinVig">{{credito.finVigencia}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PCredMoneda"><!-- {{credito.moneda}} --></span></p>
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PCredMoneda">{{credito.moneda}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Cálculo de Prima</span><span class="spancontent" id="PCredCalcPrim"><!-- {{credito.nroPremium}} --></span></p>
+                                        <p class="card-text textTitle"><span>Cálculo de Prima</span><span class="spancontent" id="PCredCalcPrim">{{credito.nroPremium}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Monto Inicial</span><span class="spancontent" id="PCredMontInic"><!-- {{credito.montoInicial}} --></span></p>
+                                        <p class="card-text textTitle"><span>Monto Inicial</span><span class="spancontent" id="PCredMontInic">{{credito.montoInicial}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Saldo Insoluto</span><span class="spancontent" id="PCredMontIns"><!-- {{credito.saldoInsoluto}} --></span></p>
+                                        <p class="card-text textTitle"><span>Saldo Insoluto</span><span class="spancontent" id="PCredMontIns">{{credito.saldoInsoluto}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Cantidad de Cuotas</span><span class="spancontent" id="PCredCuot"><!-- {{credito.numerocuotas}} --></span></p>
+                                        <p class="card-text textTitle"><span>Cantidad de Cuotas</span><span class="spancontent" id="PCredCuot">{{credito.numerocuotas}}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -282,30 +282,30 @@
                                 <h4 class="title-grid"><strong>Datos del Vehículo</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Placa</span><span class="spancontent" id="PPlaca"><!-- {{vehiculo.placa}} --></span></p>
+                                        <p class="card-text textTitle"><span>Placa</span><span class="spancontent" id="PPlaca">{{vehiculo.placa}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Marca</span><span class="spancontent" id="PMarca"><!-- {{vehiculo.marca}} --></span></p>
+                                        <p class="card-text textTitle"><span>Marca</span><span class="spancontent" id="PMarca">{{vehiculo.marca}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Modelo</span><span class="spancontent" id="PModelo"><!-- {{vehiculo.version}} --></span></p>
+                                        <p class="card-text textTitle"><span>Modelo</span><span class="spancontent" id="PModelo">{{vehiculo.version}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Clase</span><span class="spancontent" id="PClase"><!-- {{vehiculo.clase}} --></span></p>
+                                        <p class="card-text textTitle"><span>Clase</span><span class="spancontent" id="PClase">{{vehiculo.clase}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Uso</span><span class="spancontent" id="PUso"><!-- {{vehiculo.uso}} --></span></p>
+                                        <p class="card-text textTitle"><span>Uso</span><span class="spancontent" id="PUso">{{vehiculo.uso}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Asientos</span><span class="spancontent" id="PAsientos"><!-- {{vehiculo.asientos}} --></span></p>
+                                        <p class="card-text textTitle"><span>Asientos</span><span class="spancontent" id="PAsientos">{{vehiculo.asientos}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>N° de Serie</span><span class="spancontent" id="PSerie"><!-- {{vehiculo.nroSerie}} --></span></p>
+                                        <p class="card-text textTitle"><span>N° de Serie</span><span class="spancontent" id="PSerie">{{vehiculo.nroSerie}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Año</span><span class="spancontent" id="PAnio"><!-- {{vehiculo.anio}} --></span></p>
+                                        <p class="card-text textTitle"><span>Año</span><span class="spancontent" id="PAnio">{{vehiculo.anio}}</span></p>
                                     </div>
                                 </div>
 
@@ -314,50 +314,50 @@
                                 <h4 class="title-grid"><strong>Dirección SOAT</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo Via</span><span class="spancontent" id="PTipoVia"><!-- {{direccionSOAT.descTipoVia}} --></span></p>
+                                        <p class="card-text textTitle"><span>Tipo Via</span><span class="spancontent" id="PTipoVia">{{direccionSOAT.descTipoVia}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Dirección</span><span class="spancontent" id="PDir"><!-- {{direccionSOAT.descDireccion}} --></span></p>
+                                        <p class="card-text textTitle"><span>Dirección</span><span class="spancontent" id="PDir">{{direccionSOAT.descDireccion}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PNumero"><!-- {{direccionSOAT.numero}} --></span></p>
+                                        <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PNumero">{{direccionSOAT.numero}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo Interior</span><span class="spancontent" id="PTipoInterior"><!-- {{direccionSOAT.tipoInterior}} --></span></p>
+                                        <p class="card-text textTitle"><span>Tipo Interior</span><span class="spancontent" id="PTipoInterior">{{direccionSOAT.tipoInterior}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Interior</span><span class="spancontent" id="PNumeroInterior"><!-- {{direccionSOAT.nroInterior}} --></span></p>
+                                        <p class="card-text textTitle"><span>Interior</span><span class="spancontent" id="PNumeroInterior">{{direccionSOAT.nroInterior}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Manzana</span><span class="spancontent" id="PManzana"><!-- {{direccionSOAT.manzana}} --></span></p>
+                                        <p class="card-text textTitle"><span>Manzana</span><span class="spancontent" id="PManzana">{{direccionSOAT.manzana}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Lote</span><span class="spancontent" id="PLote"><!-- {{direccionSOAT.lote}} --></span></p>
+                                        <p class="card-text textTitle"><span>Lote</span><span class="spancontent" id="PLote">{{direccionSOAT.lote}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Etapa</span><span class="spancontent" id="PEtapa"><!-- {{direccionSOAT.etapa}} --></span></p>
+                                        <p class="card-text textTitle"><span>Etapa</span><span class="spancontent" id="PEtapa">{{direccionSOAT.etapa}}</span></p>
                                     </div>
 
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo Conjunto</span><span class="spancontent" id="PTipoConjunto"><!-- {{direccionSOAT.tipoConjHabi}} --></span></p>
+                                        <p class="card-text textTitle"><span>Tipo Conjunto</span><span class="spancontent" id="PTipoConjunto">{{direccionSOAT.tipoConjHabi}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Nombre conjunto</span><span class="spancontent" id="PNomConjunto"><!-- {{direccionSOAT.nombreTipoConj}} --></span></p>
+                                        <p class="card-text textTitle"><span>Nombre conjunto</span><span class="spancontent" id="PNomConjunto">{{direccionSOAT.nombreTipoConj}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Bloque/Chalet</span><span class="spancontent" id="PChalet"><!-- {{direccionSOAT.numeroBloque}}/{{direccionSOAT.chalet}} --></span></p>
+                                        <p class="card-text textTitle"><span>Bloque/Chalet</span><span class="spancontent" id="PChalet">{{direccionSOAT.numeroBloque}}/{{direccionSOAT.chalet}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Numero/Letra</span><span class="spancontent" id="PNumLetra"><!-- {{direccionSOAT.numero}}/{{direccionSOAT.letra}} --></span></p>
+                                        <p class="card-text textTitle"><span>Numero/Letra</span><span class="spancontent" id="PNumLetra">{{direccionSOAT.numero}}/{{direccionSOAT.letra}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-10">
-                                        <p class="card-text textTitle"><span>Dirección Actual</span><span class="spancontent" id="PDirAct"><!-- {{direccionSOAT.direccionActual}} --></span></p>
+                                        <p class="card-text textTitle"><span>Dirección Actual</span><span class="spancontent" id="PDirAct">{{direccionSOAT.direccionActual}}</span></p>
                                     </div>
                                 </div>
                                 <br />
@@ -394,24 +394,24 @@
                                 <h4 class="title-grid"><strong>Tarifa</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PTarFecEmision"><!-- {{tarifa.fechaEmision}} --></span></p>
+                                        <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PTarFecEmision">{{tarifa.fechaEmision}}</span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Hora de Emisión</span><span class="spancontent" id="PTarHorEmision"><!-- {{tarifa.horaEmision}} --></span></p>
+                                        <p class="card-text textTitle"><span>Hora de Emisión</span><span class="spancontent" id="PTarHorEmision">{{tarifa.horaEmision}}</span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Lote Descargo</span><span class="spancontent" id="PTarLote"><!-- {{tarifa.loteDescargo}} --></span></p>
+                                        <p class="card-text textTitle"><span>Lote Descargo</span><span class="spancontent" id="PTarLote">{{tarifa.loteDescargo}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Tarifa</span><span class="spancontent" id="PTarifaP"><!-- {{tarifa.tarifaProtecta}} --></span></p>
+                                        <p class="card-text textTitle"><span>Tarifa</span><span class="spancontent" id="PTarifaP">{{tarifa.tarifaProtecta}}</span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Porcentaje Comisión</span><span class="spancontent" id="PTarPorcComi"><!-- {{tarifa.porcentajeComision}} --></span></p>
+                                        <p class="card-text textTitle"><span>Porcentaje Comisión</span><span class="spancontent" id="PTarPorcComi">{{tarifa.porcentajeComision}}</span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PTarMoneda"><!-- {{ResultadoDetail.monedaPoliza}} --></span></p>
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PTarMoneda">{{ResultadoDetail.monedaPoliza}}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -420,7 +420,7 @@
                                 <h4 class="title-grid" style="font-weight:bold;">Coberturas</h4>
                                 <div class="row" style="margin-bottom:1%" id="PlanPanel">
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Plan / Módulo</span><span class="spancontent" id="PPlanCod"><!-- {{coberCodModul}} - {{coberDescModul}} --></span></p>
+                                        <p class="card-text textTitle"><span>Plan / Módulo</span><span class="spancontent" id="PPlanCod">{{coberCodModul}} - {{coberDescModul}}</span></p>
                                     </div>
                                 </div>
                                 <table class="table table-hover table-striped" id="tableCobertura" style="width:100%" >
@@ -561,16 +561,16 @@
                                 <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Plan de Salud</strong></h5> <br />
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Institución</span><span class="spancontent" id="PPensInsti"><!-- {{planSalud.institucion}} --></span></p>
+                                        <p class="card-text textTitle"><span>Institución</span><span class="spancontent" id="PPensInsti">{{planSalud.institucion}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Modalidad de Pago</span><span class="spancontent" id="PPensModalPago"><!-- {{planSalud.modalidad}} --></span></p>
+                                        <p class="card-text textTitle"><span>Modalidad de Pago</span><span class="spancontent" id="PPensModalPago">{{planSalud.modalidad}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Monto de Pago</span><span class="spancontent" id="PPensMontoPago"><!-- {{planSalud.monto}} --></span></p>
+                                        <p class="card-text textTitle"><span>Monto de Pago</span><span class="spancontent" id="PPensMontoPago">{{planSalud.monto}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Periódo Efecto</span><span class="spancontent" id="PPensPeriodoEfecto"><!-- {{planSalud.periodo}} --></span></p>
+                                        <p class="card-text textTitle"><span>Periódo Efecto</span><span class="spancontent" id="PPensPeriodoEfecto">{{planSalud.periodo}}</span></p>
                                     </div>
                                 </div>
                             </div>

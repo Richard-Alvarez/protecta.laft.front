@@ -41,7 +41,6 @@ export class C2InfoPolicyComponent implements OnInit {
     vehiculo: any;
     coberCodModul: any;
     coberDescModul: any;
-    nropoli
   
   DescripcionRamo:string = ''
   ListadoRamo:any = []
@@ -81,10 +80,9 @@ export class C2InfoPolicyComponent implements OnInit {
     this.planSaludReceptor= this.ResultadoDetail.planSalud.receptor;
     this.ramoIdRamo = this.ResultadoDetail.ramo.idRamo;
     this.tarifa= this.ResultadoDetail.tarifa;
-    this.vehiculo= this.ResultadoDetail.vehiculo;
+    this.vehiculo= this.ResultadoDetail.vehiculo;/* 
     this.coberCodModul= this.ResultadoDetail.coberturas[0].codigoModulo;
-    this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo;
-    this.nropoli= this.ResultadoDetail.nroPolicy;
+    this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo; */
   }
   ///**/
   /* idRamoPru:any;
