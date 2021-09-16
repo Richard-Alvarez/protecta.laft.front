@@ -8,10 +8,10 @@
 
     <div class="row">
         <div class="col-md-6 d-flex justify-content-between " style="padding: 0px 200px 0px 0px; padding-bottom: 20px;">
-           <button  (click)="getResultadosCoincidencias()" class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar resultado de coincidencias</button>
-       <!-- <span style="font-weight: bold;">Descargar Resultados de Coincidencias</span>
+            <button (click)="getResultadosCoincidencias()" class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar resultado de coincidencias</button>
+            <!-- <span style="font-weight: bold;">Descargar Resultados de Coincidencias</span>
         <img class="ml-1 mr-1" src="assets/icons/excel-microsoft.png" (click)="getResultadosCoincidencias()" style="height:30px;cursor: pointer;" />-->
-    </div>
+        </div>
     </div>
     <div id="tabPanelListInter">
         <div class="card">
@@ -96,7 +96,7 @@
                         </a>
                     </div>
                     <div style="margin-right: -15px;width: 8%;">
-                        <div class="text-center"><img src="assets/icons/excel-microsoft.png" style="height: 30px;cursor: pointer;" (click)="getExcelListInter(lista.NIDTIPOLISTA,lista.SDESTIPOLISTA )" /></div>
+                        <div *ngIf="lista.NIDPROVEEDOR != 4" class="text-center"><img src="assets/icons/excel-microsoft.png" style="height: 30px;cursor: pointer;" (click)="getExcelListInter(lista.NIDTIPOLISTA,lista.SDESTIPOLISTA )" /></div>
                     </div>
                 </div>
 
