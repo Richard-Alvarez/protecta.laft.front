@@ -13,6 +13,8 @@
            <p>
                <strong>Perfil:  {{parent.Perfil}}  </strong>
            </p> -->
+
+           <div *ngIf="parent.NombreLink == 'proveedor'">
                  
            <div *ngIf="parent.Alerta == 'P1'">
            <!-- ESTO ES PARA LA p1 -->
@@ -192,9 +194,11 @@
                 </table>
             </div>
             
+            </div>
+
+            <div *ngIf="parent.NombreLink == 'contraparte'">
     
-    
-            <div *ngIf="parent.Alerta == 'P1$'">
+            <div *ngIf="parent.Alerta == 'P1'">
                 <!-- ESTO ES PARA LA p1 -->
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                     <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -230,7 +234,7 @@
                 </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'P2$'">
+            <div *ngIf="parent.Alerta == 'P2'">
                     <!-- ESTO ES PARA LA P2 -->
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                         <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -264,7 +268,7 @@
                     </table>
              </div>
     
-             <div *ngIf="parent.Alerta == 'P3$'">
+             <div *ngIf="parent.Alerta == 'P3'">
                 <!-- ESTO ES PARA LA P3 -->
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                     <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -299,7 +303,7 @@
                 </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'P4$'">
+            <div *ngIf="parent.Alerta == 'P4'">
                     <!-- ESTO ES PARA LA P4 -->
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                         <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -336,7 +340,7 @@
                     </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'P5$'">
+            <div *ngIf="parent.Alerta == 'P5'">
                         <!-- ESTO ES PARA LA P5 -->
                         <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                             <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -371,9 +375,12 @@
                             </FONT>
                         </table>
              </div>
+            
+
             </div>
     
-            <div *ngIf="parent.Alerta !== 'P5$'">
+            <div *ngIf="parent.NombreLink == 'proveedor'">
+            <!-- <div *ngIf="parent.Alerta !== 'P5$'"> -->
             <div class="container" style="padding: 0px 200px;">
             <br> 
             <p>
@@ -405,9 +412,11 @@
                 
             </div>
     
+            <!-- </div> -->
             </div>
-    
-            <div *ngIf="parent.Alerta == 'P5$'">
+
+            <div *ngIf="parent.NombreLink == 'contraparte'">
+            <!-- <div *ngIf="parent.Alerta == 'P5'"> -->
                 <div class="container" style="padding: 0px 200px;">
                 <br> 
                 <p>
@@ -434,8 +443,9 @@
                     
                 </div>
                 
-            </div>
-    
+            <!-- </div> -->
+             </div>
+
     </div>
       <div class="text-center pt-5">
         <button class="" (click)="Export2Doc('exportContent', 'test');"></button> 

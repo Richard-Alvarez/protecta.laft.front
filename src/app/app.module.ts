@@ -156,6 +156,7 @@ import { ModalMantenimientoComplementoComponent } from './modal-mantenimiento-co
 import { TemplateC1Component } from './components/responsable/templates/template-c1/template-c1.component';
 import { TemplateS1Component } from './components/responsable/templates/template-s1/template-s1.component';
 import { TemplateS3Component } from './components/responsable/templates/template-s3/template-s3.component';
+import { C2PolicyComponent } from './components/c2-policy/c2-policy.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -294,6 +295,7 @@ import { TemplateS3Component } from './components/responsable/templates/template
     TemplateC1Component,
     TemplateS1Component,
     TemplateS3Component,
+    C2PolicyComponent,
 
    
     //Validaciones
