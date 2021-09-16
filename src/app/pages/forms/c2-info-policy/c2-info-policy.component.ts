@@ -11,6 +11,8 @@ import * as $ from 'jQuery';
 export class C2InfoPolicyComponent implements OnInit {
 
   @Input() ResultadoDetail
+  @Input() desCor
+  @Input() prod
   
   constructor(private userConfigService: UserconfigService,) {
 
@@ -36,20 +38,21 @@ export class C2InfoPolicyComponent implements OnInit {
     pensionTipo: any;
     planSalud: any;
     planSaludReceptor: any;
+    rentaTotal: any;
     ramoIdRamo: any;
     tarifa: any;
     vehiculo: any;
     coberCodModul: any;
     coberDescModul: any;
   
-  DescripcionRamo:string = ''
-  ListadoRamo:any = []
+  /* DescripcionRamo:string = '' */
+  /* ListadoRamo:any = [] */
 
   /*Datos consulta360previous*/
   /* ResultadoPrevious: any ={} */
     
   async ngOnInit(){
-    
+    /* await this.pruebadatos() */
     //this.listaramo()
     //this.listaproducto()
     //this.listapoliza()
@@ -78,11 +81,13 @@ export class C2InfoPolicyComponent implements OnInit {
     this.pensionTipo= this.ResultadoDetail.pension.tipo;
     this.planSalud= this.ResultadoDetail.planSalud;
     this.planSaludReceptor= this.ResultadoDetail.planSalud.receptor;
+    this.rentaTotal= this.ResultadoDetail.rentaTotal;
     this.ramoIdRamo = this.ResultadoDetail.ramo.idRamo;
     this.tarifa= this.ResultadoDetail.tarifa;
     this.vehiculo= this.ResultadoDetail.vehiculo;/* 
     this.coberCodModul= this.ResultadoDetail.coberturas[0].codigoModulo;
     this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo; */
+    await this.showdata()
   }
   ///**/
   /* idRamoPru:any;
@@ -235,7 +240,7 @@ console.log("prue",this.item1)
   item4: string ='jhj' ;
   item5: string ='khl' ;
   item6: string ='yiu' ; */
-  //showdata(){
+  async showdata(){
     /* if(this.DescripcionRamo == "VIDA LEY TRABAJADORES") {
       
       $('#tblContactos').empty()
@@ -246,41 +251,52 @@ console.log("prue",this.item1)
       }
       
     } */
+
+    if (this.desCor == 'Renta Total' && this.prod == 'Rt') {
+      $('#h4Asegurado').text('Datos del titular')
+      $('#DAsegDocum').css("display","block")
+      $('#DAsegCUSPP').css("display","block")
+      $('#InfoRentaTotal').css("display","block")
+      $('#InfoCanal').css("display","none")
+      $('#InfoCoberturas').css("display","block")
+      $('#InfoBeneficiarios').css("display","block")
+    }
     //Renta vitalicia (rrvv) renta de jubilacion
-    // if (this.DescripcionRamo == 'RRVV') {
-    //   $('#h4Asegurado').text('Datos del Titular')
-    //   $('#DAsegDocum').css("display","block")
-    //   $('#DAsegCUSPP').css("display","block")
-    //   $('#DAsegIniVig').css("display","block")
-    //   $('#DAsegFinVig').css("display","block")
-    //   $('#DAsegTipPension').css("display","block")
-    //   $('#DAsegTipRenta').css("display","block")
-    //   $('#DAsegModalidad').css("display","block")
-    //   $('#DAsegAnDif').css("display","block")
-    //   $('#DAsegMesGarant').css("display","block")
-    //   $('#DAsegMoneda').css("display","block")
-    //   $('#DAsegReajTemp').css("display","block")
-    //   $('#DAsegPrimDef').css("display","block")
-    //   $('#DAsegPenDef').css("display","block")
-    //   $('#InfoPensiones').css("display","block")
-    //   $('#titlebenef').text(this.asegurado.name||'(Titular)')
-    //   $('#PPensViaPago').text(this.pension.viaPago)
-    //   $('#DAsegDocum').css("display","block")
-    //   $('#DAsegCUSPP').css("display","block")
-    //   $('#DAsegIniVig').css("display","block")
-    //   $('#DAsegFinVig').css("display","block")
-    //   $('#DAsegTipPension').css("display","block")
-    //   $('#DAsegTipRenta').css("display","block")
-    //   $('#DAsegModalidad').css("display","block")
-    //   $('#DAsegAnDif').css("display","block")
-    //   $('#DAsegMesGarant').css("display","block")
-    //   $('#DAsegMoneda').css("display","block")
-    //   $('#DAsegReajTemp').css("display","block")
-    //   $('#DAsegPrimDef').css("display","block")
-    //   $('#DAsegPenDef').css("display","block")
-    //   $('#InfoPensiones').css("display","block")
-    // }
-    /* if(this.DescripcionRamo == 'SOAT'){
+    /* if (this.desCor == 'RRVV') {
+      $('#h4Asegurado').text('Datos del Titular')
+      $('#DAsegDocum').css("display","block")
+      $('#DAsegCUSPP').css("display","block")
+      $('#DAsegIniVig').css("display","block")
+      $('#DAsegFinVig').css("display","block")
+      $('#DAsegTipPension').css("display","block")
+      $('#DAsegTipRenta').css("display","block")
+      $('#DAsegModalidad').css("display","block")
+      $('#DAsegAnDif').css("display","block")
+      $('#DAsegMesGarant').css("display","block")
+      $('#DAsegMoneda').css("display","block")
+      $('#DAsegReajTemp').css("display","block")
+      $('#DAsegPrimDef').css("display","block")
+      $('#DAsegPenDef').css("display","block")
+      $('#InfoPensiones').css("display","block")
+      $('#titlebenef').text(this.asegurado.name||'(Titular)')
+      $('#PPensViaPago').text(this.pension.viaPago)
+      $('#DAsegDocum').css("display","block")
+      $('#DAsegCUSPP').css("display","block")
+      $('#DAsegIniVig').css("display","block")
+      $('#DAsegFinVig').css("display","block")
+      $('#DAsegTipPension').css("display","block")
+      $('#DAsegTipRenta').css("display","block")
+      $('#DAsegModalidad').css("display","block")
+      $('#DAsegAnDif').css("display","block")
+      $('#DAsegMesGarant').css("display","block")
+      $('#DAsegMoneda').css("display","block")
+      $('#DAsegReajTemp').css("display","block")
+      $('#DAsegPrimDef').css("display","block")
+      $('#DAsegPenDef').css("display","block")
+      $('#InfoPensiones').css("display","block")
+    } */
+    if (this.desCor == 'SOAT'){
+      $('#InfoAsegurado').css("display","none")
       $('#InfoVehiculo').css("display","block")
       $('#InfoDirecSOAT').css("display","block")
       $('#InfoCanal').css("display","block")
@@ -288,13 +304,13 @@ console.log("prue",this.item1)
       $('#InfoTarifa').css("display","block")
       $('#InfoCoberturas').css("display","block")
     }
-    if (this.DescripcionRamo == "VIDA INDIVIDUAL DE LARGO PLAZO"//desgravamen credito personal) {
+    if (this.desCor == "VIDA INDIVIDUAL DE LARGO PLAZO") {//desgravamen credito personal
       $('#InfoAsegurado').css("display","block")
       $('#InfoCanal').css("display","block")
       $('#InfoIntermediario').css("display","block")
       $('#InfoCoberturas').css("display","block")
     }
-    if (this.DescripcionRamo == "VIDA LEY TRABAJADORES") {
+    if (this.desCor == "VIDA LEY TRABAJADORES") {
       $('#DAsegIniVig').css("display","block")
       $('#DAsegFinVig').css("display","block")
       $('#DAsegMonedaSal').css("display","block")
@@ -305,8 +321,8 @@ console.log("prue",this.item1)
       $('#InfoIntermediario').css("display","block")
       $('#InfoCoberturas').css("display","block")
       $('#InfoBeneficiarios').css("display","block")
-    } */
-  //}
+    }
+  }
   /* listaProducto: any;
   getproducto(){
     this.listaProducto =  [

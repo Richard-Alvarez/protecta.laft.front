@@ -2533,9 +2533,8 @@ ValidarRegimenAcepta(){
     
 }
 /**/
-ResultadoPrevious: any = {}
-debugger;
-detResult: any ={}
+ResultadoPrevious: any = []
+detResult: any =[]
 async Consultar360Previous(){
     let data = {
       TipoDocumento: this.formData.NTIPO_DOCUMENTO,
@@ -2563,7 +2562,12 @@ async Consultar360Previous(){
     console.log("El resultado",this.detResult)
 
   }
-  ResultadoDetail:any = {}
+
+  desc: any;
+  desCor:any;
+  prod:any;
+  estado: any;
+  ResultadoDetail:any = []
   async Consultar360(item){
 
     console.log("entro en el servicio de 360", item)
@@ -2581,6 +2585,15 @@ async Consultar360Previous(){
         this.ResultadoDetail = response
        });
     console.log("entro en el servicio de 360 resultado", this.ResultadoDetail)
+    
+    console.log("El resultado", item.ramo.descripcion)//primero no envia
+    console.log("El resultado", item.ramo.descripcionCorta)//segundo
+    console.log("El resultado", item.producto)//tercero
+
+    this.desc= item.ramo.descripcion;
+    this.desCor= item.ramo.descripcionCorta;
+    this.prod= item.producto;
+    this.estado= item.status;
   }
 
 }
