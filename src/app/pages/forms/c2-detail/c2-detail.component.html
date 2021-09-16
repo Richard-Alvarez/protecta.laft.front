@@ -39,6 +39,10 @@
                               <a class="nav-link " data-toggle="tab" href="#resumen2"
                                   style="text-decoration: none;">Información de Polizas</a>
                           </li>
+                          <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#poliza"
+                                style="text-decoration: none;">Información de Polizas</a>
+                        </li>
                           <!--<li class="nav-item">
                               <a class="nav-link text-body" data-toggle="tab" href="#perfilPadre1"
                                   style="text-decoration: none;">Seguimiento</a>
@@ -2136,7 +2140,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                        <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
                                         
                                     </div><!---->
                                 </div><!---->
@@ -2301,7 +2305,7 @@
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                                <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                                <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
                                             </div><!---->
                                         </div><!---->
                                     </div>
@@ -2457,7 +2461,7 @@
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                                <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                                <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
                                             </div><!---->
                                         </div><!---->
                                     </div>
@@ -2633,7 +2637,7 @@
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                                <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                                <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
                                             </div><!---->
                                         </div><!---->
                                     </div>
@@ -2789,7 +2793,7 @@
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                                <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                                <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
                                             </div><!---->
                                         </div><!---->
                                     </div>
@@ -2961,7 +2965,7 @@
                                                     </div>
                                                 </div>
                                             </div> -->
-                                            <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                            <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
                                         </div><!---->
                                     </div><!---->
                                 </div>
@@ -3118,7 +3122,7 @@
                                                     </div>
                                                 </div>
                                             </div> -->
-                                            <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                            <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
                                         </div><!---->
                                     </div><!---->
                                 </div>
@@ -3286,7 +3290,7 @@
                                                     </div>
                                                 </div>
                                             </div> -->
-                                            <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                            <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
                                         </div><!---->
                                     </div><!---->
                                 </div>
@@ -3443,7 +3447,8 @@
                                                     </div>
                                                 </div>
                                             </div> -->
-                                            <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy>
+                                            <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
+                                            
                                         </div><!---->
                                     </div><!---->
                                 </div>
@@ -3457,6 +3462,98 @@
                   </div>
                     
               </div>
+
+
+
+
+
+              <div id="poliza" class=" tab-pane fade">
+                <div>
+                  <div *ngIf="tipoClienteGC == 'C2-BANDEJA' || (tipoClienteGC == 'C2-BANDEJA' && tipoClienteCRF != 'CRF')" id="tabPanelList">
+                      
+                      <div class="row mb-2 mt-2">
+                          <div class="Header">
+                              <div class="col-lg-12">
+                                  <h4 class="TitleLine">Pólizas</h4>
+                              </div>
+                          </div>
+                      </div> 
+                      <hr>
+                      <div class="text-center tituloTwo" >{{nombreRegimen}}</div>
+                      <div class="row pl-2 pr-2">
+                          <div class="col-lg-2  text-left txtCabecera" >Ramo</div>
+                          <div class=" text-left txtCabecera" style="width: 11.904%; flex: 0 0 11.904%;">Producto</div>
+                          <div class=" text-left txtCabecera" style="width: 11.904%; flex: 0 0 11.904%;">N° Póliza</div>
+                          <div class=" text-left txtCabecera" style="width: 11.904%;">N° Certificado</div>
+                          <div class=" text-left txtCabecera" style="width: 11.904%;">Rol</div>
+                          <div class=" text-left txtCabecera" style="width: 11.904%;">Inicio</div>
+                          <div class=" text-left txtCabecera" style="width: 11.904%;">Fin</div>
+                          <div class="col-lg-1 text-left txtCabecera" >Estado</div>
+                      </div>
+                      <div id="">
+                          <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
+                              <div class="card-header headerSenials">
+                                  <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                      <div class="row pl-2 pr-2" >
+                                          
+                                          <div class="col-lg-2 cabeceraPolizas" >
+                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
+                                                  <div >{{item.DES_RAMO}}</div>
+                                              </a>
+                                          </div>
+                                          <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
+                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                  <div >{{item.POLIZA}} </div>
+                                              </a>
+                                          </div>
+                                          <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
+                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                  <div >{{item.DES_RAMO}}</div>
+                                              </a>
+                                          </div>
+                                          <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                  <div >{{item.DES_RAMO}}</div>
+                                              </a>
+                                          </div>
+                                          <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                  <div >{{item.DES_RAMO}}</div>
+                                              </a>
+                                          </div>
+                                          <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                  <div >{{item.DES_RAMO}}</div>
+                                              </a>
+                                          </div>
+                                          <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                  <div >{{item.FIN_VIG_POLIZA}}</div>
+                                              </a>
+                                          </div>
+                                          <div class="col-lg-1 cabeceraPolizas" >
+                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                  <div >{{item.ESTADO}}</div>
+                                              </a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="collapse" data-parent="#tabPanelList" tabindex="-1" id="{{'consulta'+inc}}" >
+                                  <div class="card-body">
+                                     
+                                      <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
+                                      <app-c2-policy [item]="item" ></app-c2-policy>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <br>
+                  </div>
+                  
+                </div>
+                  
+            </div>
           </div>
                
           

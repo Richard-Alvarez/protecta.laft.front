@@ -192,7 +192,8 @@ export class C2DetailComponent implements OnInit {
     console.log("this.formData",this.formData)
 
 
-    await this.Consultar360Previous();
+    // await this.Consultar360Previous();
+    await this.consultarPoliza();
 
   }
   
@@ -2564,7 +2565,7 @@ async Consultar360Previous(){
 
   }
   ResultadoDetail:any = {}
-  async Consultar360(item){
+  async Consultar360_2(item){
 
     console.log("entro en el servicio de 360", item)
     let data:any = {
@@ -2582,5 +2583,60 @@ async Consultar360Previous(){
        });
     console.log("entro en el servicio de 360 resultado", this.ResultadoDetail)
   }
+
+
+  ListaPoliza:any = []
+  async consultarPoliza(){
+    let data:any = {}
+        data.P_TIPO_DOC = "2"
+        data.P_NUMERO_DOC = "10549585"
+        data.P_NOMBRES = null
+        data.P_POLIZA = null
+        data.P_CODAPPLICATION ="LAFT"
+        data.P_PRODUCTO =null
+        data.P_FECHA_SOLICITUD = null
+        data.P_ROL = null
+        data.P_TIPO = null
+        data.P_ESTADO = null
+        data.P_NBRANCH = null
+        data.P_NPAGENUM = 1
+        data.P_NLIMITPERPAGE = 10000000
+        data.P_NUSER = 0
+
+        this.core.loader.show()
+        this.ListaPoliza = await this.userConfigService.GetListaPolizas(data)
+        this.core.loader.hide()
+        console.log("this.ListaPoliza", this.ListaPoliza)
+
+        // if(this.ListaPoliza.length != 0){
+        //     this.ListaPoliza.forEach(element => {
+
+        //         this.Consultar360(element)
+        //     });
+        // }
+  }
+
+  Resultado360:any = []
+  async Consultar360(item){
+
+    console.log("entro en el servicio de 360", item)
+    let data:any = {
+    Ramo : item.IDRAMO,//this.idramo,//73,
+    Producto : item.COD_PRODUCTO,//this.idproducto,//1,
+    Poliza : item.POLIZA,///* 1000011671, */ /* this.nropolicy,// */6000000253,
+    Certificado : 7,
+    FechaConsulta : item.INICIO_VIG_POLIZA,///* "1/09/2018", */ /* this.fechaconsulta,// */"01/08/2020", //fecha inicio vigencia
+    Endoso : null,    //Solo para rentas
+    }
+    console.log("entro en el servicio de 360 la data", data)
+    this.core.loader.show()
+     await this.userConfigService.Consulta360(data).then(
+       (response) => {
+        this.Resultado360 = response
+       });
+       this.core.loader.hide()
+    console.log("entro en el servicio de 360 resultado", this.Resultado360)
+  }
+
 
 }
