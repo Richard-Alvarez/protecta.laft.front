@@ -2567,6 +2567,27 @@ async Consultar360Previous(){
   desCor:any;
   prod:any;
   estado: any;
+    /**/
+    /* asegurado: any;
+    canal: any;
+    canalEstado:any;  
+    canalTipo: any;
+    contratante: any;
+    credito: any;
+    direccionSOAT: any;
+    intermediario: any;
+    pension: any;
+    pensionCuenta: any;
+    pensionTipo: any;
+    planSalud: any;
+    planSaludReceptor: any;
+    rentaTotal: any;
+    ramoIdRamo: any;
+    tarifa: any;
+    vehiculo: any;
+    coberCodModul: any;
+    coberDescModul: any; */
+    /**/
   ResultadoDetail:any = []
   async Consultar360(item){
 
@@ -2586,14 +2607,56 @@ async Consultar360Previous(){
        });
     console.log("entro en el servicio de 360 resultado", this.ResultadoDetail)
     
-    console.log("El resultado", item.ramo.descripcion)//primero no envia
+    /* console.log("El resultado", item.ramo.descripcion)//primero no envia
     console.log("El resultado", item.ramo.descripcionCorta)//segundo
-    console.log("El resultado", item.producto)//tercero
+    console.log("El resultado", item.producto)//tercero */
 
     this.desc= item.ramo.descripcion;
     this.desCor= item.ramo.descripcionCorta;
     this.prod= item.producto;
     this.estado= item.status;
-  }
+    /* this.asegurado= this.ResultadoDetail.asegurado;
+    this.canal= this.ResultadoDetail.canal;
+    this.canalEstado= this.ResultadoDetail.canal.estado; 
+    this.canalTipo= this.ResultadoDetail.canal.tipo;
+    this.contratante= this.ResultadoDetail.contratante;
+    this.credito= this.ResultadoDetail.credito;
+    this.direccionSOAT= this.ResultadoDetail.direccionSOAT;
+    this.intermediario= this.ResultadoDetail.intermediario;
+    this.pension= this.ResultadoDetail.pension;
+    this.pensionCuenta= this.ResultadoDetail.pension.cuenta;
+    this.pensionTipo= this.ResultadoDetail.pension.tipo;
+    this.planSalud= this.ResultadoDetail.planSalud;
+    this.planSaludReceptor= this.ResultadoDetail.planSalud.receptor;
+    this.rentaTotal= this.ResultadoDetail.rentaTotal;
+    this.ramoIdRamo = this.ResultadoDetail.ramo.idRamo;
+    this.tarifa= this.ResultadoDetail.tarifa;
+    this.vehiculo= this.ResultadoDetail.vehiculo; */
 
+    /* console.log('dato1',this.asegurado.documento)
+    console.log(this.canal.idIntermediario)
+    console.log(this.canalEstado.idEstado)
+    console.log(this.canalTipo.idTipo)
+    console.log(this.contratante.name)
+    console.log(this.credito.nroPremium)
+    console.log(this.direccionSOAT.direccionActual)
+    console.log(this.intermediario.nombre)
+    //console.log(this.pension)
+    //console.log(this.pensionCuenta)
+    //console.log(this.pensionTipo)
+    //console.log(this.planSalud)
+    //console.log(this.planSaludReceptor)
+    //console.log(this.rentaTotal)
+    console.log(this.ramoIdRamo)
+    console.log(this.tarifa.fechaEmision)
+    console.log('dato n',this.vehiculo.clase) */
+  }
+  /* async mostrarpoli(){
+      $('#oc').on('click', function(){
+          $()
+      })
+  }
+  async retropoli(){
+    $('#oc').on()
+} */
 }

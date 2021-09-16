@@ -5,7 +5,7 @@
 <!-- <div class="containerPadre idDetallePoliza" style="display:none;"> -->
     <div class="row quitarMarginRow colorTemplate" >
         <div class="col-md-3" >
-            <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
+            <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button>
             <div class="card CardFlotante" style="background-color:white; display: inline-grid;" >
                 <div class="card-body" style="padding-left: 15px;padding-right: 15px;" >
                     <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{desCor}}</strong></h4>
@@ -15,7 +15,7 @@
                     <input type="hidden" id="CodigosPoliza" />
                     <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza" >{{ResultadoDetail.nroPolicy}}</span></p>
                     <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif"><!-- {{ResultadoDetail.nroCertificate}} --></span></p>
-                    <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">Vigente</span></p>
+                    <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">{{status}}</span></p>
                     <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante"><!-- {{contratante.name}} --></span></p>
                     <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol"><!-- {{ResultadoDetail.rol}} --></span></p>
                     <p class="card-text textTitle" id="CardPlaca" style="display:none"><span>Placa</span><span class="spancontent" id="PCardPlaca"><!-- {{vehiculo.placa}} --></span></p>
@@ -26,7 +26,7 @@
                     <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">{{ResultadoDetail.fechaInicioVigencia}}</span></p>
                     <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig">{{ResultadoDetail.fechaFinVigencia}}</span></p>
                     <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda">{{ResultadoDetail.monedaPoliza}}</span></p>
-                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">{{rentaTotal.fecAbono}}</span></p>
+                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago"><!-- {{rentaTotal.fecAbono}} --></span></p>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@
                                 
                                  <div class="row">
                                     <div class="col-lg-3" id="DAsegNom">
-                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{asegurado.name}}</span></p>
+                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre"><!-- {{asegurado.name}} --></span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegEstCivil">
                                         <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil">{{asegurado.estadoCivil}}</span></p>
@@ -520,45 +520,45 @@
                             <div id="InfoPensiones" style="display:none;">
                                 
                                 <h4 class="title-grid" style="margin-bottom:3%"><strong id="titlebenef"></strong><span id="titlevinc"></span></h4>
-                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Modalidad de Pago</strong></h5> <br />
+                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong> Modalidad de Pago</strong></h5> <br />
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <p class="card-text textTitle"><span>Via de Pago</span><span class="spancontent" id="PPensViaPago"></span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Sucursal</span><span class="spancontent" id="PPensSucursal"></span></p>
+                                        <p class="card-text textTitle"><span>Sucursal</span><span class="spancontent" id="PPensSucursal">{{pension.sucursal}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Banco</span><span class="spancontent" id="PPensBanco"></span></p>
+                                        <p class="card-text textTitle"><span>Banco</span><span class="spancontent" id="PPensBanco">{{pension.banco}}</span></p>
                                     </div>
                                     <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Tipo Cta.</span><span class="spancontent" id="PPensTipoCuenta"></span></p>
+                                        <p class="card-text textTitle"><span>Tipo Cta.</span><span class="spancontent" id="PPensTipoCuenta">{{pensionCuenta.tipoCuenta}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PPensMoneda"></span></p>
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PPensMoneda">{{pensionCuenta.moneda}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Num. Cta.</span><span class="spancontent" id="PPensNumCuenta"></span></p>
+                                        <p class="card-text textTitle"><span>Num. Cta.</span><span class="spancontent" id="PPensNumCuenta">{{pensionCuenta.numeroCuenta}}</span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>CCI</span><span class="spancontent" id="PPensCCI"></span></p>
+                                        <p class="card-text textTitle"><span>CCI</span><span class="spancontent" id="PPensCCI">{{pensionCuenta.cci}}</span></p>
                                     </div>
                                 </div>
-                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Receptor de Pensión</strong></h5> <br />
+                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong> Receptor de Pensión</strong></h5> <br />
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Identificación</span><span class="spancontent" id="PRecepDoc"></span></p>
+                                        <p class="card-text textTitle"><span>Identificación</span><span class="spancontent" id="PRecepDoc">{{asegurado.tipodoc}} - {{asegurado.documento}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Período de Vigencia</span><span class="spancontent" id="PRecepPerVig"></span></p>
+                                        <p class="card-text textTitle"><span>Período de Vigencia</span><span class="spancontent" id="PRecepPerVig">{{ResultadoDetail.fechaInicioVigencia}} - {{ResultadoDetail.fechaFinVigencia}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Nombres</span><span class="spancontent" id="PRecepNombre"></span></p>
+                                        <p class="card-text textTitle"><span>Nombres</span><span class="spancontent" id="PRecepNombre">{{asegurado.name}}</span></p>
                                     </div>
                                 </div>
-                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Plan de Salud</strong></h5> <br />
+                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong> Plan de Salud</strong></h5> <br />
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <p class="card-text textTitle"><span>Institución</span><span class="spancontent" id="PPensInsti">{{planSalud.institucion}}</span></p>
