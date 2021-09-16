@@ -8,17 +8,17 @@
             <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
             <div class="card CardFlotante" style="background-color:white; display: inline-grid;" >
                 <div class="card-body" style="padding-left: 15px;padding-right: 15px;" >
-                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch"></strong></h4>
+                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{desCor}}</strong></h4>
                     <p class="card-text textTitle" style=" margin-bottom: 10% !important;">
-                        <span class="spancontent" id="PTitleProd" style="font-size: small !important;"></span>
+                        <span class="spancontent" id="PTitleProd" style="font-size: small !important;">{{prod}}</span>
                     </p>
                     <input type="hidden" id="CodigosPoliza" />
                     <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza" >{{ResultadoDetail.nroPolicy}}</span></p>
-                    <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif">{{ResultadoDetail.nroCertificate}}</span></p>
+                    <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif"><!-- {{ResultadoDetail.nroCertificate}} --></span></p>
                     <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">Vigente</span></p>
-                    <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante">{{contratante.name}}</span></p>
-                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol">{{ResultadoDetail.rol}}</span></p>
-                    <p class="card-text textTitle" id="CardPlaca" style="display:none"><span>Placa</span><span class="spancontent" id="PCardPlaca">{{vehiculo.placa}}</span></p>
+                    <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante"><!-- {{contratante.name}} --></span></p>
+                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol"><!-- {{ResultadoDetail.rol}} --></span></p>
+                    <p class="card-text textTitle" id="CardPlaca" style="display:none"><span>Placa</span><span class="spancontent" id="PCardPlaca"><!-- {{vehiculo.placa}} --></span></p>
                     <p class="card-text textTitle" id="CardPlanilla" style="display:none"><span>Planilla</span><span class="spancontent" id="PCardPlanilla">{{ResultadoDetail.planilla}}</span></p>
                     <p class="card-text textTitle" id="CardNumCredito" style="display:none"><span>Número de Crédito</span><span class="spancontent" id="PCardNumCred"></span></p>
                     <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi">{{ResultadoDetail.fechaEmision}}</span></p>
@@ -26,7 +26,7 @@
                     <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">{{ResultadoDetail.fechaInicioVigencia}}</span></p>
                     <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig">{{ResultadoDetail.fechaFinVigencia}}</span></p>
                     <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda">{{ResultadoDetail.monedaPoliza}}</span></p>
-                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">{{ResultadoDetail.fechaEfecto}}</span></p>
+                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">{{rentaTotal.fecAbono}}</span></p>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div id="Template" style="background: white;">
                 <div class="Pestañas">
                     <ul class="nav nav-tabs nav-justified" id="TabsDetalle">
-                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo" (click)="pruebadatos()">Información</a></li>
+                        <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo" (click)="pruebadatos()" >Información</a></li>
                         <!-- <li id="PestanaSiniestro" class="active"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestSiniestro" aria-expanded="true">Siniestros</a></li> -->
                     </ul>
                 </div>
@@ -221,64 +221,64 @@
                                 <h4 class="title-grid"><strong>Datos adicionales</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Fecha de abono</span><span class="spancontent" id="PRTAbono"></span></p>
+                                        <p class="card-text textTitle"><span>Fecha de abono</span><span class="spancontent" id="PRTAbono">{{rentaTotal.fecAbono}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Fecha Devengue</span><span class="spancontent" id="PRTDevengue"></span></p>
+                                        <p class="card-text textTitle"><span>Fecha Devengue</span><span class="spancontent" id="PRTDevengue">{{rentaTotal.fecDevengue}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Años Temporales</span><span class="spancontent" id="PRTAnTemp"></span></p>
+                                        <p class="card-text textTitle"><span>Años Temporales</span><span class="spancontent" id="PRTAnTemp">{{rentaTotal.aniosTMP}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Años Garantizados</span><span class="spancontent" id="PRTAnGarant"></span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Prima</span><span class="spancontent" id="PRTPrima"></span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Pensión Temp. Inicial</span><span class="spancontent" id="PRTPenTemp"></span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PRTMoneda"></span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Devolución</span><span class="spancontent" id="PRTDevol"></span></p>
+                                        <p class="card-text textTitle"><span>Años Garantizados</span><span class="spancontent" id="PRTAnGarant">{{rentaTotal.aniosGarant}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Seguro de Vida</span><span class="spancontent" id="PRTSegVida"></span></p>
+                                        <p class="card-text textTitle"><span>Prima</span><span class="spancontent" id="PRTPrima">{{rentaTotal.prima}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Seguro de Accidentes</span><span class="spancontent" id="PRTSegAcc"></span></p>
+                                        <p class="card-text textTitle"><span>Pensión Temp. Inicial</span><span class="spancontent" id="PRTPenTemp">{{rentaTotal.pensionInicial}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Diferimiento (años)</span><span class="spancontent" id="PRTDiferi"></span></p>
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PRTMoneda">{{rentaTotal.moneda}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Ajuste anual</span><span class="spancontent" id="PRTAjuste"></span></p>
+                                        <p class="card-text textTitle"><span>% Devolución</span><span class="spancontent" id="PRTDevol">{{rentaTotal.porcDevol}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Pensión Escalonada</span><span class="spancontent" id="PRTPensEscal"></span></p>
+                                        <p class="card-text textTitle"><span>% Seguro de Vida</span><span class="spancontent" id="PRTSegVida">{{rentaTotal.porcSegVid}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Renta Vitalicia</span><span class="spancontent" id="PRTRentaVit"></span></p>
+                                        <p class="card-text textTitle"><span>% Seguro de Accidentes</span><span class="spancontent" id="PRTSegAcc">{{rentaTotal.porcAcc}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Gasto Sepelio</span><span class="spancontent" id="PRTSepelio"></span></p>
+                                        <p class="card-text textTitle"><span>Diferimiento (años)</span><span class="spancontent" id="PRTDiferi">{{rentaTotal.diferido}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Gratificación</span><span class="spancontent" id="PRTGrati"></span></p>
+                                        <p class="card-text textTitle"><span>% Ajuste anual</span><span class="spancontent" id="PRTAjuste">{{rentaTotal.ajustAnual}}</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Pensión Escalonada</span><span class="spancontent" id="PRTPensEscal">{{rentaTotal.pensionEscalonada}}</span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Renta Vitalicia</span><span class="spancontent" id="PRTRentaVit">{{rentaTotal.indRentVit}}</span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Gasto Sepelio</span><span class="spancontent" id="PRTSepelio">{{rentaTotal.indSepel}}</span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Gratificación</span><span class="spancontent" id="PRTGrati">{{rentaTotal.indGratif}}</span></p>
                                     </div>
                                 </div>
 
 
                             </div>
-                            <div id="InfoVehiculo" style="display:none;"><!--  *ngIf="DescripcionRamo === 'SOAT'" -->
+                            <div id="InfoVehiculo" style="display:none;">
                                 <h4 class="title-grid"><strong>Datos del Vehículo</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -310,7 +310,7 @@
                                 </div>
 
                             </div>
-                            <div id="InfoDirecSOAT" style="display:none; margin-top:3%;" ><!-- *ngIf="DescripcionRamo === 'SOAT'" -->
+                            <div id="InfoDirecSOAT" style="display:none; margin-top:3%;" >
                                 <h4 class="title-grid"><strong>Dirección SOAT</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
