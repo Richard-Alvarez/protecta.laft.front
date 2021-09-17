@@ -248,3 +248,33 @@
   width   : 100%;
   border-bottom:3px solid #add8e6;
 }
+.botonEditar {
+  background-color: transparent;
+  border-color: transparent;
+  color: #FF7C00;
+  font-weight: bold;
+  /**/
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: button;
+  cursor: pointer;
+  text-transform: none;
+  overflow: visible;
+  margin: 0;
+  font: inherit;
+
+  /* -webkit-writing-mode: horizontal-tb !important; */
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  padding: 1px 6px;
+  border-width: 2px;
+  border-style: outset;
+  border-image: initial;
+} 

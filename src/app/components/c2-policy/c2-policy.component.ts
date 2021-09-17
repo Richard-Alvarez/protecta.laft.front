@@ -24,7 +24,7 @@ export class C2PolicyComponent implements OnInit {
 
     //console.log("entro la data a c2policy" ,this.item)
     await this.Consultar360(this.item)
-    //await this.SetVariables()
+    await this.SetVariables()
   }
 
   async Consultar360(item){
@@ -50,17 +50,32 @@ export class C2PolicyComponent implements OnInit {
   NroPoliza:string = ''
   NroCertificado:string = ''
   Estado:string = ''
+  FechaFinVigencia:string = ''
+  FechaEmision:string = ''
+  FechaPrimeraVigencia:string = ''
+  FechaInicioVigencia:string = ''
+  FechaEfecto:string = ''
+  Moneda:string = 'Soles'
   Contratante:any = {}
   DatosVehiculo:any = {}
   DatosSoat:any = {}
   DatosCanal:any = {}
   DatosIntermediario:any = {}
   DatosTarifa:any = {}
+  DatosAsegurado:any = {}
+  DatosCoberturas:any = {}
+
   async SetVariables(){
     this.NroPoliza = this.Resultado360.nroPolicy
     this.NroCertificado = this.Resultado360.nroCertificate == null ? 0 : this.Resultado360.nroCertificate
     this.Estado = this.Resultado360.nroPolicy
     this.Contratante = this.Resultado360.contratante
+    this.FechaFinVigencia = this.Resultado360.fechaFinVigencia
+    this.FechaEmision = this.Resultado360.fechaEmision
+    this.FechaPrimeraVigencia = this.Resultado360.fechaPrimeraVigencia  == '' ? '-' : this.Resultado360.fechaPrimeraVigencia  
+    this.FechaInicioVigencia = this.Resultado360.fechaInicioVigencia  == '' ? '-' : this.Resultado360.fechaInicioVigencia  
+    this.FechaEfecto = this.Resultado360.fechaEfecto  == '' ? '-' : this.Resultado360.fechaEfecto  
+
     this.DatosVehiculo = this.Resultado360.vehiculo
     this.DatosVehiculo.placa = this.Resultado360.vehiculo.placa == '' ? '-' : this.Resultado360.vehiculo.placa
     this.DatosVehiculo.marca = this.Resultado360.vehiculo.marca == '' ? '-' : this.Resultado360.vehiculo.marca
@@ -69,6 +84,7 @@ export class C2PolicyComponent implements OnInit {
     this.DatosVehiculo.asientos = this.Resultado360.vehiculo.asientos == '' ? '-' : this.Resultado360.vehiculo.asientos
     this.DatosVehiculo.nroSerie = this.Resultado360.vehiculo.nroSerie == '' ? '-' : this.Resultado360.vehiculo.nroSerie
     this.DatosVehiculo.anio = this.Resultado360.vehiculo.anio == '' ? '-' : this.Resultado360.vehiculo.anio
+
     this.DatosSoat = this.Resultado360.direccionSOAT
     this.DatosSoat.DescTipoVia = this.Resultado360.direccionSOAT.descTipoVia == '' ? '-' : this.Resultado360.direccionSOAT.descTipoVia
     this.DatosSoat.DireccionActual = this.Resultado360.direccionSOAT.direccionActual == '' ? '-' : this.Resultado360.direccionSOAT.direccionActual
@@ -83,25 +99,59 @@ export class C2PolicyComponent implements OnInit {
     this.DatosSoat.Chalet = this.Resultado360.direccionSOAT.chalet == '' ? '-' : this.Resultado360.direccionSOAT.chalet
     this.DatosSoat.Letra = this.Resultado360.direccionSOAT.letra == '' ? '-' : this.Resultado360.direccionSOAT.letra
     this.DatosSoat.DireccionActual = this.Resultado360.direccionSOAT.direccionActual == '' ? '-' : this.Resultado360.direccionSOAT.direccionActual
+
     this.DatosCanal  = this.Resultado360.canal
     this.DatosCanal.nombre = this.Resultado360.canal.nombre == '' ? '-' : this.Resultado360.canal.nombre
     this.DatosCanal.fechaInicio = this.Resultado360.canal.fechaInicio == '' ? '-' : this.Resultado360.canal.fechaInicio
     this.DatosCanal.tipo = this.Resultado360.canal.tipo.descripcion == '' ? '-' : this.Resultado360.canal.tipo.descripcion
-    this.DatosCanal.estado = this.Resultado360.canal.estado.descEstado == '' ? '-' : this.Resultado360.canal.estado.descEstado
-    this.DatosIntermediario = this.Resultado360.Intermediario
-    this.DatosIntermediario.CodigoIntermediario = this.Resultado360.Intermediario.CodigoIntermediario == '' ? '-' : this.Resultado360.Intermediario.CodigoIntermediario
-    this.DatosIntermediario.Nombre = this.Resultado360.Intermediario.Nombre == '' ? '-' : this.Resultado360.Intermediario.Nombre
-    this.DatosTarifa = this.Resultado360.Tarifa
-    this.DatosIntermediario.FechaEmision = this.Resultado360.Tarifa.FechaEmision == '' ? '-' : this.Resultado360.Tarifa.FechaEmision
-    this.DatosIntermediario.HoraEmision = this.Resultado360.Tarifa.HoraEmision == '' ? '-' : this.Resultado360.Tarifa.HoraEmision
-    this.DatosIntermediario.LoteDescargo = this.Resultado360.Tarifa.LoteDescargo == '' ? '-' : this.Resultado360.Tarifa.LoteDescargo
-    this.DatosIntermediario.TarifaProtecta = this.Resultado360.Tarifa.TarifaProtecta == '' ? '-' : this.Resultado360.Tarifa.TarifaProtecta
-    this.DatosIntermediario.PorcentajeComision = this.Resultado360.Tarifa.PorcentajeComision == '' ? '-' : this.Resultado360.Tarifa.PorcentajeComision
-    this.DatosIntermediario.Moneda = 'Soles'//this.Resultado360.Tarifa.Moneda == '' ? '-' : this.Resultado360.Tarifa.Moneda
+    this.DatosCanal.estado = 0//this.Resultado360.canal.estado.descEstado == '' ? '-' : this.Resultado360.canal.estado.descEstado
 
+    this.DatosIntermediario = this.Resultado360.intermediario
+    this.DatosIntermediario.CodigoIntermediario = this.Resultado360.intermediario.codigoIntermediario == '' ? '-' : this.Resultado360.intermediario.codigoIntermediario
+    this.DatosIntermediario.Nombre = this.Resultado360.intermediario.nombre == '' ? '-' : this.Resultado360.intermediario.nombre
+
+    this.DatosTarifa = this.Resultado360.tarifa
+    this.DatosTarifa.FechaEmision = this.Resultado360.tarifa.fechaEmision == '' ? '-' : this.Resultado360.tarifa.fechaEmision
+    this.DatosTarifa.HoraEmision = this.Resultado360.tarifa.horaEmision == '' ? '-' : this.Resultado360.tarifa.horaEmision
+    this.DatosTarifa.LoteDescargo = this.Resultado360.tarifa.loteDescargo == '' ? '-' : this.Resultado360.tarifa.loteDescargo
+    this.DatosTarifa.TarifaProtecta = this.Resultado360.tarifa.tarifaProtecta == '' ? '-' : this.Resultado360.tarifa.tarifaProtecta
+    this.DatosTarifa.PorcentajeComision = this.Resultado360.tarifa.porcentajeComision == '' ? '-' : this.Resultado360.tarifa.porcentajeComision
+    this.DatosTarifa.Moneda = 'Soles'
+
+    this.DatosAsegurado = this.Resultado360.asegurado
+    this.DatosAsegurado.Name = this.Resultado360.asegurado.name
+    this.DatosAsegurado.fechanacimiento = this.Resultado360.asegurado.fechanacimiento
+    this.DatosAsegurado.salario = this.Resultado360.asegurado.salario
+    this.DatosAsegurado.tasa = this.Resultado360.asegurado.tasa
+
+    //this.DatosCoberturas = this.Resultado360.asegurado
+    
+    console.log(" c2policy this.Resultado360.asegurado.length ", this.Resultado360.asegurados.length)
+    if(this.Resultado360.asegurados != []){
+      this.DatosCoberturas.CodigoModulo = this.Resultado360.coberturas[0].codigoModulo
+      this.DatosCoberturas.DescModulo = this.Resultado360.coberturas[0].descModulo
+    }else{
+      this.DatosCoberturas.CodigoModulo = ''
+      this.DatosCoberturas.DescModulo = ''
+    }
 
     console.log(" c2policy data ", this.NroPoliza)
     console.log(" c2policy data ", this.Contratante)
+
+  }
+
+  async ValidacionesMostrarData(){
+    console.log(" c2policy data  IDRAMO", this.item.IDRAMO)
+    if(this.item.IDRAMO == '66'){
+      //Esto es para SOAT
+      return 'OcultarInformacion'
+    }
+    else if(this.item.IDRAMO == '73'){
+      //Esto es para VidaLey
+      return 'OcultarInformacion'
+    }else{
+      return ''
+    }
   }
 
 }

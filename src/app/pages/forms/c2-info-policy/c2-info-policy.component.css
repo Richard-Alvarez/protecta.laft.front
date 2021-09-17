@@ -33,6 +33,25 @@ a:hover, a:focus {
 a:active, a:hover {
     outline: 0;
 }
+h5, .h5 {
+    font-size: 14px;
+}
+.lineorange {
+    background: #FF7C00;
+    position: relative;
+    display: inline-block;
+    top: -50%;
+    width: 5%;
+    height: 2px;
+    vertical-align: middle;
+}
+strong{
+    font-weight: bold;
+}
+.subtitle-grid {
+    color: #FF7C00;
+    position: relative;
+}
 
 
 /*----------------------------------------------------------------------*/
