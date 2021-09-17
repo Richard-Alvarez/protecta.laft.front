@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
-import { C2DetailComponent } from '../c2-detail/c2-detail.component';
+/* import { C2DetailComponent } from '../c2-detail/c2-detail.component'; */
 import * as $ from 'jQuery';
 
 @Component({
@@ -13,7 +13,28 @@ export class C2InfoPolicyComponent implements OnInit {
   @Input() ResultadoDetail
   @Input() desCor
   @Input() prod
-  
+  @Input() status
+
+  @Input() asegurado
+  @Input() canal
+  @Input() canalEstado  
+  @Input() canalTipo
+  @Input() contratante
+  @Input() credito
+  @Input() direccionSOAT
+  @Input() intermediario
+  @Input() pension
+  @Input() pensionCuenta
+  @Input() pensionTipo
+  @Input() planSalud
+  @Input() planSaludReceptor
+  @Input() rentaTotal
+  @Input() ramoIdRamo
+  @Input() tarifa
+  @Input() vehiculo
+  @Input() coberCodModul
+  @Input() coberDescModul
+
   constructor(private userConfigService: UserconfigService,) {
 
   }
@@ -25,7 +46,7 @@ export class C2InfoPolicyComponent implements OnInit {
   fechaconsulta : any;
   /*Datos consulta360*/
   /* Resultado:any = {} */
-    asegurado: any;
+    /* asegurado: any;
     canal: any;
     canalEstado:any;  
     canalTipo: any;
@@ -43,7 +64,7 @@ export class C2InfoPolicyComponent implements OnInit {
     tarifa: any;
     vehiculo: any;
     coberCodModul: any;
-    coberDescModul: any;
+    coberDescModul: any; */
   
   /* DescripcionRamo:string = '' */
   /* ListadoRamo:any = [] */
@@ -65,9 +86,8 @@ export class C2InfoPolicyComponent implements OnInit {
     //this.getIdRamo()
     /* this.showdata() */
   }
-
   async pruebadatos(){
-    console.log('resultado info',this.ResultadoDetail)
+    /* console.log('resultado info',this.ResultadoDetail)
     this.asegurado= this.ResultadoDetail.asegurado;
     this.canal= this.ResultadoDetail.canal;
     this.canalEstado= this.ResultadoDetail.canal.estado; 
@@ -84,7 +104,7 @@ export class C2InfoPolicyComponent implements OnInit {
     this.rentaTotal= this.ResultadoDetail.rentaTotal;
     this.ramoIdRamo = this.ResultadoDetail.ramo.idRamo;
     this.tarifa= this.ResultadoDetail.tarifa;
-    this.vehiculo= this.ResultadoDetail.vehiculo;/* 
+    this.vehiculo= this.ResultadoDetail.vehiculo; *//* 
     this.coberCodModul= this.ResultadoDetail.coberturas[0].codigoModulo;
     this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo; */
     await this.showdata()
@@ -262,7 +282,7 @@ console.log("prue",this.item1)
       $('#InfoBeneficiarios').css("display","block")
     }
     //Renta vitalicia (rrvv) renta de jubilacion
-    /* if (this.desCor == 'RRVV') {
+    if (this.desCor == 'RRVV' || this.prod == 'RRVV') {
       $('#h4Asegurado').text('Datos del Titular')
       $('#DAsegDocum').css("display","block")
       $('#DAsegCUSPP').css("display","block")
@@ -277,10 +297,12 @@ console.log("prue",this.item1)
       $('#DAsegReajTemp').css("display","block")
       $('#DAsegPrimDef').css("display","block")
       $('#DAsegPenDef').css("display","block")
+      $('#InfoCoberturas').css("display","block")
+      $('#InfoBeneficiarios').css("display","block")
       $('#InfoPensiones').css("display","block")
-      $('#titlebenef').text(this.asegurado.name||'(Titular)')
+      $('#titlebenef').text(this.asegurado.name+'(Titular)')
       $('#PPensViaPago').text(this.pension.viaPago)
-      $('#DAsegDocum').css("display","block")
+      /* $('#DAsegDocum').css("display","block")
       $('#DAsegCUSPP').css("display","block")
       $('#DAsegIniVig').css("display","block")
       $('#DAsegFinVig').css("display","block")
@@ -293,8 +315,8 @@ console.log("prue",this.item1)
       $('#DAsegReajTemp').css("display","block")
       $('#DAsegPrimDef').css("display","block")
       $('#DAsegPenDef').css("display","block")
-      $('#InfoPensiones').css("display","block")
-    } */
+      $('#InfoPensiones').css("display","block") */
+    }
     if (this.desCor == 'SOAT'){
       $('#InfoAsegurado').css("display","none")
       $('#InfoVehiculo').css("display","block")
