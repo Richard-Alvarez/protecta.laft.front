@@ -46,7 +46,7 @@ export class C2DetailComponent implements OnInit {
     selectedCargo2: any;
     selectedCargo3: any;
 
-
+    boolNameMach;
     internationalList: any[] = []
     pepList: any[] = []
     familiesPepList: any[] = []
@@ -554,12 +554,17 @@ export class C2DetailComponent implements OnInit {
                  dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
             }
             // let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
-        
+            
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
-
+            //this.boolNameMach = this.arrCoincidenciasLista.;
             console.log("el sNombreLista Marco debug : ",this.sNombreLista)
             console.log("el arrCoincidenciasLista Marco debug : ",this.arrCoincidenciasLista)
-
+            if (typeof(this.arrCoincidenciasLista) == 'object'){
+                if (this.arrCoincidenciasLista[0].arrCoincidencias.length > 0)
+                    this.boolNameMach = this.arrCoincidenciasLista[0].arrCoincidencias.map(t=>t.NIDPROVEEDOR).includes(4);
+                else
+                    this.boolNameMach = false;
+            }
             this.SCLIENT_DATA = localStorage.getItem('SCLIENT')//this.formData.SCLIENT
 
             await this.getHistorialRevisiones()
@@ -2645,6 +2650,9 @@ async Consultar360Previous(){
        this.core.loader.hide()
     console.log("entro en el servicio de 360 resultado", this.Resultado360)
   }
+  validateProveedor (){
 
+
+  }
 
 }
