@@ -2597,7 +2597,9 @@ async Consultar360Previous(){
   async consultarPoliza(){
     let data:any = {}
         data.P_TIPO_DOC = "2"
-        data.P_NUMERO_DOC = "10549585"
+        //data.P_NUMERO_DOC = "10549585" // esto es de Luis
+        data.P_NUMERO_DOC = "25623964" // esto es de celia
+        
         data.P_NOMBRES = null
         data.P_POLIZA = null
         data.P_CODAPPLICATION ="LAFT"

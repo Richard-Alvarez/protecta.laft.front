@@ -1004,3 +1004,7 @@ button.close{padding:0;cursor:pointer;background:0 0;border:0;-webkit-appearance
 .visible-print-block{display:none!important}
 .visible-print-inline{display:none!important}
 /*----------------------------------------------*/
+
+.OcultarInformacion{
+    display:none;
+}

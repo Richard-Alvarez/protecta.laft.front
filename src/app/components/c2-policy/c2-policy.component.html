@@ -4,25 +4,25 @@
             <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
             <div class="card CardFlotante" style="background-color:white; display: inline-grid;">
                 <div class="card-body" style="padding-left: 15px;padding-right: 15px;">
-                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">SOAT                          </strong></h4>
+                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{item.DES_RAMO}}                          </strong></h4>
                     <p class="card-text textTitle" style=" margin-bottom: 10% !important;">
-                        <span class="spancontent" id="PTitleProd" style="font-size: small !important;">SOAT                          </span>
+                        <span class="spancontent" id="PTitleProd" style="font-size: small !important;">{{item.DES_PRODUCTO}}                           </span>
                     </p>
                     <input type="hidden" id="CodigosPoliza" value="66" data-id="1">
                     <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza">{{this.NroPoliza}}</span></p>
                     <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif">{{this.NroCertificado}}</span></p>
-                    <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">Vigente</span></p>
+                    <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">{{item.ESTADO}}</span></p>
                     <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante">{{this.Contratante.name}}</span></p>
-                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol">Asegurado</span></p>
+                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol">{{item.ROL}}</span></p>
                     <!-- <p class="card-text textTitle" id="CardPlaca" style=""><span>Placa</span><span class="spancontent" id="PCardPlaca">{{this.DatosVehiculo.placa}}</span></p>
                     <p class="card-text textTitle" id="CardPlanilla" style=""><span>Planilla</span><span class="spancontent" id="PCardPlanilla">55523</span></p> -->
                     <p class="card-text textTitle" id="CardNumCredito" style="display:none"><span>Número de Crédito</span><span class="spancontent" id="PCardNumCred">-</span></p>
-                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi">15/07/2021</span></p>
-                    <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig">-</span></p>
-                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">15/07/2021</span></p>
-                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig">15/07/2022</span></p>
-                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda">-</span></p>
-                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">15/07/2021</span></p>
+                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi">{{this.FechaEmision}}</span></p>
+                    <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig">{{this.FechaPrimeraVigencia}}</span></p>
+                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">{{this.FechaInicioVigencia}}</span></p>
+                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig">{{this.FechaFinVigencia}}</span></p>
+                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda">{{this.Moneda}}</span></p>
+                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">{{this.FechaEfecto}}</span></p>
 
                     
                 </div>
@@ -100,39 +100,39 @@
 
                                 </div>
                             </div>
-                            <div id="InfoAsegurado" style="display:none;">
+                            <div id="InfoAsegurado" *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '80'">
                                 <h4 class="title-grid"><strong id="h4Asegurado">Datos del Asegurado</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3" id="DAsegNom">
-                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">-</span></p>
+                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{this.DatosAsegurado.Name}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegEstCivil">
-                                        <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil">-</span></p>
+                                        <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil">{{this.DatosAsegurado.estadoCivil}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegDocum" style="display:none;">
-                                        <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent" id="PAsegDocum">Dni - 10549585    </span></p>
+                                        <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent" id="PAsegDocum">Dni - 10549585</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegGenero" style="display:none;">
                                         <p class="card-text textTitle"><span>Género</span><span class="spancontent" id="PAsegGenero">-</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegFecNac">
-                                        <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent" id="PAsegFecNam">-</span></p>
+                                        <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent" id="PAsegFecNam">{{this.DatosAsegurado.fechanacimiento}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegCUSPP" style="display:none;">
                                         <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP">-</span></p>
                                     </div>
-                                    <div class="col-lg-2" id="DAsegIniVigSCTR" style="display:none;">
-                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVigSCTR">15/07/2021</span></p>
+                                    <div class="col-lg-2" id="DAsegIniVigSCTR" >
+                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVigSCTR">{{this.FechaInicioVigencia}}</span></p>
                                     </div>
-                                    <div class="col-lg-2" id="DAsegFinVigSCTR" style="display:none;">
-                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVigSCTR">15/07/2022</span></p>
+                                    <div class="col-lg-2" id="DAsegFinVigSCTR">
+                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVigSCTR">{{this.FechaFinVigencia}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-3" id="DAsegIniVig" style="">
+                                    <div class="col-lg-3" id="DAsegIniVig"style="display:none;">
                                         <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVig">15/07/2021</span></p>
                                     </div>
-                                    <div class="col-lg-2" id="DAsegFinVig" style="">
+                                    <div class="col-lg-2" id="DAsegFinVig" style="display:none;">
                                         <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVig">15/07/2022</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegTipPension" style="display:none;">
@@ -168,19 +168,19 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-3" id="DAsegMonedaSal" style="display:none;">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMonedaSal">-</span></p>
+                                    <div class="col-lg-3" id="DAsegMonedaSal">
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMonedaSal">{{this.Moneda}}</span></p>
                                     </div>
-                                    <div class="col-lg-2" id="DAsegSalario" style="display:none;">
-                                        <p class="card-text textTitle"><span>Salario</span><span class="spancontent" id="PAsegSalario">-</span></p>
+                                    <div class="col-lg-2" id="DAsegSalario" >
+                                        <p class="card-text textTitle"><span>Salario</span><span class="spancontent" id="PAsegSalario">{{this.DatosAsegurado.salario }}</span></p>
                                     </div>
-                                    <div class="col-lg-2" id="DAsegTasa" style="display:none;">
-                                        <p class="card-text textTitle"><span>Tasa</span><span class="spancontent" id="PAsegTasa">-</span></p>
+                                    <div class="col-lg-2" id="DAsegTasa">
+                                        <p class="card-text textTitle"><span>Tasa</span><span class="spancontent" id="PAsegTasa">{{this.DatosAsegurado.tasa}}</span></p>
                                     </div>
                                 </div>
 
                             </div>
-                            <div id="InfoCredito" style="display:none;">
+                            <div id="InfoCredito"  style="display:none;">
                                 <h4 class="title-grid"><strong>Datos del Crédito</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -214,7 +214,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="InfoRentaTotal" style="display:none;">
+                            <div id="InfoRentaTotal"  style="display:none;">
                                 <h4 class="title-grid"><strong>Datos adicionales</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -275,7 +275,7 @@
 
 
                             </div>
-                            <div id="InfoVehiculo" style="">
+                            <div id="InfoVehiculo" *ngIf="this.item.IDRAMO == '66'" >
                                 <h4 class="title-grid"><strong>Datos del Vehículo</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -307,7 +307,7 @@
                                 </div>
 
                             </div>
-                            <div id="InfoDirecSOAT" style="margin-top: 3%;">
+                            <div id="InfoDirecSOAT" style="margin-top: 3%;" *ngIf="this.item.IDRAMO == '66'"> 
                                 <h4 class="title-grid"><strong>Dirección SOAT</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -359,7 +359,7 @@
                                 </div>
                                 <br>
                             </div>
-                            <div id="InfoCanal" style=" margin-top:3%;">
+                            <div id="InfoCanal" style=" margin-top:3%;" >
                                 <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -387,28 +387,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="InfoTarifa" style="margin-top: 3%;">
+                            <div id="InfoTarifa" style="margin-top: 3%;" *ngIf="this.item.IDRAMO == '66'" >
                                 <h4 class="title-grid"><strong>Tarifa</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PTarFecEmision">{{this.DatosIntermediario.FechaEmision}}  </span></p>
+                                        <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PTarFecEmision">{{this.DatosTarifa.FechaEmision}}  </span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Hora de Emisión</span><span class="spancontent" id="PTarHorEmision">{{this.DatosIntermediario.HoraEmision}}</span></p>
+                                        <p class="card-text textTitle"><span>Hora de Emisión</span><span class="spancontent" id="PTarHorEmision">{{this.DatosTarifa.HoraEmision}}</span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Lote Descargo</span><span class="spancontent" id="PTarLote">{{this.DatosIntermediario.LoteDescargo}}</span></p>
+                                        <p class="card-text textTitle"><span>Lote Descargo</span><span class="spancontent" id="PTarLote">{{this.DatosTarifa.LoteDescargo}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Tarifa</span><span class="spancontent" id="PTarifaP">{{this.DatosIntermediario.TarifaProtecta}}</span></p>
+                                        <p class="card-text textTitle"><span>Tarifa</span><span class="spancontent" id="PTarifaP">{{this.DatosTarifa.TarifaProtecta}}</span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Porcentaje Comisión</span><span class="spancontent" id="PTarPorcComi">{{this.DatosIntermediario.PorcentajeComision}}</span></p>
+                                        <p class="card-text textTitle"><span>Porcentaje Comisión</span><span class="spancontent" id="PTarPorcComi">{{this.DatosTarifa.PorcentajeComision}}</span></p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PTarMoneda">{{this.DatosIntermediario.Moneda}}</span></p>
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PTarMoneda">{{this.DatosTarifa.Moneda}}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -417,7 +417,7 @@
                                 <h4 class="title-grid" style="font-weight:bold;">Coberturas</h4>
                                 <div class="row" style="margin-bottom:1%" id="PlanPanel">
                                     <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Plan / Módulo</span><span class="spancontent" id="PPlanCod"></span></p>
+                                        <p class="card-text textTitle"><span>Plan / Módulo</span><span class="spancontent" id="PPlanCod">{{this.DatosCoberturas.CodigoModulo}} - {{this.DatosCoberturas.DescModulo}}</span></p>
                                     </div>
                                 </div>
                                 <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
