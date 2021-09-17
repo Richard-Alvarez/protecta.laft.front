@@ -149,7 +149,7 @@ const routes: Routes = [
   { path: 'config-demanda', component: ConfigDemandaComponent},
   { path: 'rg', component: TemplateRGComponent},
   { path: 'C3', component: TemplateC3Component},
-  { path: 'complemento', component: MantenimientoComplementoComponent}
+  { path: 'complement-maintenance', component: MantenimientoComplementoComponent}
   
 
 

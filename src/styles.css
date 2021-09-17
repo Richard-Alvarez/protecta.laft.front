@@ -273,3 +273,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
   border-bottom-color: #e6e6e6;
   margin-bottom: -1px;
 }
+
+.pagination{
+  display: flex !important;
+  justify-content: center  !important;
+}

@@ -231,11 +231,6 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
     objRespuesta.code = 0
     objRespuesta.message = ''
 
-    if(this.pregunta == ''){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Debe ingresar la pregunta ";
-      return objRespuesta
-    }
     if(this.idGrupo == 0){
       objRespuesta.code = 1;
       objRespuesta.message = "Debe seleccionar el grupo ";
@@ -246,16 +241,19 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       objRespuesta.message = "Debe seleccionar la señal ";
       return objRespuesta
     }
+
     if(this.nombreComplemento == ''){
       objRespuesta.code = 1;
       objRespuesta.message = "Debe ingresar el nombre del complemento";
       return objRespuesta
     }
+
     if(this.descripcion == ''){
       objRespuesta.code = 1;
       objRespuesta.message = "Debe ingresar la descripción del complemento";
       return objRespuesta
     }
+
     if(this.pregunta == ''){
       objRespuesta.code = 1;
       objRespuesta.message = "Debe ingresar la pregunta del complemento";

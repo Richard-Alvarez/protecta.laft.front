@@ -4,7 +4,7 @@
             <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
             <div class="card CardFlotante" style="background-color:white; display: inline-grid;">
                 <div class="card-body" style="padding-left: 15px;padding-right: 15px;">
-                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{item.DES_RAMO}}                          </strong></h4>
+                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{item.DES_CORTA_RAMO}}                          </strong></h4>
                     <p class="card-text textTitle" style=" margin-bottom: 10% !important;">
                         <span class="spancontent" id="PTitleProd" style="font-size: small !important;">{{item.DES_PRODUCTO}}                           </span>
                     </p>
@@ -104,7 +104,7 @@
                                 <h4 class="title-grid"><strong id="h4Asegurado">Datos del Asegurado</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3" id="DAsegNom">
-                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{this.DatosAsegurado.Name}}</span></p>
+                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{this.DatosAsegurado.name}}</span></p>
                                     </div>
                                     <div class="col-lg-2" id="DAsegEstCivil">
                                         <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil">{{this.DatosAsegurado.estadoCivil}}</span></p>
@@ -180,6 +180,29 @@
                                 </div>
 
                             </div>
+                            <div id="InfoTitular" *ngIf="this.item.IDRAMO == '75'">
+                                <h4 class="title-grid"><strong id="h4Asegurado">Datos del Titular</strong></h4>
+                                <div class="row">
+                                    <div class="col-lg-3" id="DAsegNom">
+                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{this.DatosAsegurado.name }}</span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegEstCivil">
+                                        <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil">{{this.DatosAsegurado.estadoCivil}}</span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegDocum" >
+                                        <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent" id="PAsegDocum">{{this.DatosAsegurado.tipodoc}} - {{this.DatosAsegurado.documento}}</span></p>
+                                    </div>
+                                     <div class="col-lg-2" id="DAsegFecNac">
+                                        <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent" id="PAsegFecNam">{{this.DatosAsegurado.fechanacimiento}}</span></p>
+                                    </div>
+                                    <div class="col-lg-2" id="DAsegCUSPP" >
+                                        <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP">{{this.DatosAsegurado.cuspp}}</span></p>
+                                    </div>
+                                    
+                                </div>
+                                
+
+                            </div>
                             <div id="InfoCredito"  style="display:none;">
                                 <h4 class="title-grid"><strong>Datos del Crédito</strong></h4>
                                 <div class="row">
@@ -214,62 +237,62 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="InfoRentaTotal"  style="display:none;">
+                            <div id="InfoRentaTotal"  *ngIf="this.item.IDRAMO == '75'">
                                 <h4 class="title-grid"><strong>Datos adicionales</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Fecha de abono</span><span class="spancontent" id="PRTAbono">-</span></p>
+                                        <p class="card-text textTitle"><span>Fecha de abono</span><span class="spancontent" id="PRTAbono">{{this.DatosRentaTotal.fecAbono}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Fecha Devengue</span><span class="spancontent" id="PRTDevengue">-</span></p>
+                                        <p class="card-text textTitle"><span>Fecha Devengue</span><span class="spancontent" id="PRTDevengue">{{this.DatosRentaTotal.fecDevengue}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Años Temporales</span><span class="spancontent" id="PRTAnTemp">-</span></p>
+                                        <p class="card-text textTitle"><span>Años Temporales</span><span class="spancontent" id="PRTAnTemp">{{this.DatosRentaTotal.aniosTMP}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Años Garantizados</span><span class="spancontent" id="PRTAnGarant">-</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Prima</span><span class="spancontent" id="PRTPrima">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Pensión Temp. Inicial</span><span class="spancontent" id="PRTPenTemp">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PRTMoneda">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Devolución</span><span class="spancontent" id="PRTDevol">-</span></p>
+                                        <p class="card-text textTitle"><span>Años Garantizados</span><span class="spancontent" id="PRTAnGarant">{{this.DatosRentaTotal.aniosGarant}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Seguro de Vida</span><span class="spancontent" id="PRTSegVida">-</span></p>
+                                        <p class="card-text textTitle"><span>Prima</span><span class="spancontent" id="PRTPrima">{{this.DatosRentaTotal.prima}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Seguro de Accidentes</span><span class="spancontent" id="PRTSegAcc">-</span></p>
+                                        <p class="card-text textTitle"><span>Pensión Temp. Inicial</span><span class="spancontent" id="PRTPenTemp">{{this.DatosRentaTotal.pensionInicial}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Diferimiento (años)</span><span class="spancontent" id="PRTDiferi">-</span></p>
+                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PRTMoneda">{{this.DatosRentaTotal.moneda}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Ajuste anual</span><span class="spancontent" id="PRTAjuste">-</span></p>
+                                        <p class="card-text textTitle"><span>% Devolución</span><span class="spancontent" id="PRTDevol">{{this.DatosRentaTotal.porcDevol}}</span></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Pensión Escalonada</span><span class="spancontent" id="PRTPensEscal">-</span></p>
+                                        <p class="card-text textTitle"><span>% Seguro de Vida</span><span class="spancontent" id="PRTSegVida">{{this.DatosRentaTotal.porcSegVid}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Renta Vitalicia</span><span class="spancontent" id="PRTRentaVit">-</span></p>
+                                        <p class="card-text textTitle"><span>% Seguro de Accidentes</span><span class="spancontent" id="PRTSegAcc">{{this.DatosRentaTotal.porcAcc}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Gasto Sepelio</span><span class="spancontent" id="PRTSepelio">-</span></p>
+                                        <p class="card-text textTitle"><span>Diferimiento (años)</span><span class="spancontent" id="PRTDiferi">{{this.DatosRentaTotal.diferido}}</span></p>
                                     </div>
                                     <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Gratificación</span><span class="spancontent" id="PRTGrati">-</span></p>
+                                        <p class="card-text textTitle"><span>% Ajuste anual</span><span class="spancontent" id="PRTAjuste">{{this.DatosRentaTotal.ajustAnual}}</span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Pensión Escalonada</span><span class="spancontent" id="PRTPensEscal">{{this.DatosRentaTotal.pensionEscalonada}}</span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Renta Vitalicia</span><span class="spancontent" id="PRTRentaVit">{{this.DatosRentaTotal.indRentVit}}</span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Gasto Sepelio</span><span class="spancontent" id="PRTSepelio">{{this.DatosRentaTotal.indSepel}}</span></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="card-text textTitle"><span>Gratificación</span><span class="spancontent" id="PRTGrati">{{this.DatosRentaTotal.indGratif}}</span></p>
                                     </div>
                                 </div>
 
@@ -359,7 +382,7 @@
                                 </div>
                                 <br>
                             </div>
-                            <div id="InfoCanal" style=" margin-top:3%;" >
+                            <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO != '75'">
                                 <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -415,7 +438,7 @@
 
                             <div id="InfoCoberturas" style="margin-top: 3%;">
                                 <h4 class="title-grid" style="font-weight:bold;">Coberturas</h4>
-                                <div class="row" style="margin-bottom:1%" id="PlanPanel">
+                                <div class="row" style="margin-bottom:1%" id="PlanPanel"  *ngIf="this.item.IDRAMO != '75'">
                                     <div class="col-lg-4">
                                         <p class="card-text textTitle"><span>Plan / Módulo</span><span class="spancontent" id="PPlanCod">{{this.DatosCoberturas.CodigoModulo}} - {{this.DatosCoberturas.DescModulo}}</span></p>
                                     </div>
@@ -431,21 +454,41 @@
                                             <th class="text-center">Suma Asegurada</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tblContactos">
-                                        <tr>
-                                            <td class="text-center" colspan="6">No tiene Coberturas</td>
+                                    <tbody id="tblContactos" *ngIf="ListaDatosCoberturas.length !=0; else listavacia">
+                                        <tr *ngFor="let cob of ListaDatosCoberturas | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" >
+                                            <td class="text-center" >{{cob.idCobertura}}</td>
+                                            <td class="text-center" >{{cob.descripcion}}</td>
+                                            <td class="text-center" >{{cob.principal}}</td>
+                                            <td class="text-center" >{{cob.descMoneda}}</td>
+                                            <td class="text-center" >{{cob.prima}}</td>
+                                            <td class="text-center" >{{cob.sumaAsegurada}}</td>
                                         </tr>
                                     </tbody>
+                                    <ng-template #listavacia>
+                                        <tbody id="tblContactos">
+                                            <tr>
+                                                <td class="text-center" colspan="6">No tiene Coberturas</td>
+                                            </tr>
+                                        </tbody>
+                                      </ng-template>
+                                   
                                 </table>
+                                <ng-container *ngIf="ListaDatosCoberturas!=null && ListaDatosCoberturas.length>0; then showPagination"></ng-container>
+                                <ng-template #showPagination>
+                                    <ngb-pagination [pageSize] = "5" [collectionSize]="ListaDatosCoberturas.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+                                </ng-template>
+                                    
+                                
+                                
                             </div>
 
-                            <div id="InfoCoberRentas" style="display:none; margin-top:3%">
+                            <div id="InfoCoberRentas" style="margin-top:3%" *ngIf="this.item.IDRAMO != '75'">
                                 <h4 class="title-grid"><strong>Coberturas</strong></h4>
                                 <table class="table table-hover table-striped" id="tableCoberturaRentas" style="width:100%">
                                     <thead>
                                         <tr class="htable headgrid" style="background:transparent;">
                                             <th class="text-center">Cobertura</th>
-                                            <th class="text-center" id="GridTituloRenta"></th>
+                                            <th class="text-center">Renta Vitalicia</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tblCoberRent">
@@ -456,16 +499,47 @@
                                 </table>
 
                             </div>
-                            <div id="InfoBeneficiarios" style="display:none;  margin-top:3%;">
+                            <div id="InfoBeneficiarios" style="margin-top:3%;"  *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '75'">
                                 <h4 class="title-grid"><strong>Beneficiarios</strong></h4>
-                                <div id="tableBeneficiarios_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="dt-buttons"></div><table class="table table-hover table-striped dataTable no-footer dtr-inline" id="tableBeneficiarios" style="width: 100%;" role="grid">
+                                <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
                                     <thead>
-                                        <tr class="htable headgrid" style="background:transparent;" role="row"><th class="text-center sorting_disabled text-left" rowspan="1" colspan="1" style="width: 0px;">Nombres</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Documento</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Vínculo</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Participación</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Fecha Declaración</th></tr>
+                                        <tr class="htable headgrid" style="background:transparent;">
+                                            <th class="text-center">Nombres</th>
+                                            <th class="text-center">Documento</th>
+                                            <th class="text-center">Vínculo</th>
+                                            <th class="text-center">Participación</th>
+                                            <th class="text-center">Fecha Declaración</th>
+                                            
+                                        </tr>
                                     </thead>
-                                    <tbody id="tblContactos">
-                                        
-                                    <tr class="odd"><td valign="top" colspan="5" class="dataTables_empty">No tiene beneficiarios</td></tr></tbody>
-                                </table><div class="dataTables_paginate paging_simple_numbers" id="tableBeneficiarios_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="tableBeneficiarios_previous"><a href="#" aria-controls="tableBeneficiarios" data-dt-idx="0" tabindex="0">&lt;</a></li><li class="paginate_button next disabled" id="tableBeneficiarios_next"><a href="#" aria-controls="tableBeneficiarios" data-dt-idx="1" tabindex="0">&gt;</a></li></ul></div></div>
+                                    <tbody id="tblContactos" *ngIf="listaDatabeneficiarios.length !=0; else listavacia2">
+                                        <tr *ngFor="let ben of listaDatabeneficiarios.datosCliente | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index" >
+                                             <!-- <td class="text-center" >{{ben[index].DatosCliente.name}}</td>
+                                            <td class="text-center" >{{ben[index].DatosCliente.tipodoc}} {{ben[index].DatosCliente.documento}}</td>  
+                                             <td class="text-center" >{{ben.Relacion}}</td>
+                                            <td class="text-center" >{{ben.Participacion}}</td>
+                                            <td class="text-center" >{{ben.FechaDeclaracion}}</td> -->
+                                            <td class="text-center" >{{ben.name}}</td>
+                                            <td class="text-center" >{{ben.tipodoc}} {{ben.documento}}</td>  
+                                             <td class="text-center" >-</td>
+                                            <td class="text-center" >-</td>
+                                            <td class="text-center" >-</td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                    <ng-template #listavacia2>
+                                        <tbody id="tblContactos">
+                                            <tr>
+                                                <td class="text-center" colspan="6">No tiene beneficiarios</td>
+                                            </tr>
+                                        </tbody>
+                                      </ng-template>
+                                   
+                                </table>
+                                <ng-container *ngIf="listaDatabeneficiarios!=null && listaDatabeneficiarios.length>0; then showPagination2"></ng-container>
+                                <ng-template #showPagination2>
+                                    <ngb-pagination [pageSize] = "5" [collectionSize]="listaDatabeneficiarios.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+                                </ng-template>
                             </div>
                             <div id="InfoModalidadPago" style="display:none;margin-top:3%; margin-bottom:3%;">
                                 <h4 class="title-grid"><strong>Modalidad de Pago</strong></h4>
