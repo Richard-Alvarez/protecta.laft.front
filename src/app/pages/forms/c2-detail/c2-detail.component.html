@@ -210,7 +210,8 @@
                                                           <!-- <th scope="col">Tipo de documento</th>
                                                           <th scope="col">Nro. de documento</th> -->
                                                           <th scope="col" style="width:120px">Tipo y Nro. de documento</th> 
-                                                          <th scope="col">Nombres</th>                               
+                                                          <th scope="col">Nombres</th>  
+                                                          <th *ngIf="this.boolNameMach" scope="col">Termino encontrado</th>                                     
                                                           <th scope="col">Tipo de Coincidencia</th>
                                                           <th scope="col">Origen</th>
                                                           
@@ -228,6 +229,7 @@
                                                           <td>{{item.SNUM_DOCUMENTO}}</td> -->
                                                           <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                                                           <td>{{item.SNOM_COMPLETO}}</td>
+                                                          <td *ngIf="item.NIDPROVEEDOR == 4">{{item.STERMINO_COINCIDENCIA}}</td> 
                                                           <td>{{item.STIPO_BUSQUEDA}}</td>
                                                           <td>{{item.SORIGEN}}</td>
                                                           <!-- <td *ngIf="validatePorPorcentaje(itemCli.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ}}</td> -->
