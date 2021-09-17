@@ -192,8 +192,8 @@ export class C2DetailComponent implements OnInit {
     console.log("this.formData",this.formData)
 
 
-    // await this.Consultar360Previous();
-    await this.consultarPoliza();
+    await this.Consultar360Previous();
+    /* await this.consultarPoliza(); */
 
   }
   
@@ -2569,15 +2569,15 @@ async Consultar360Previous(){
 
   }
   ResultadoDetail:any = {}
-  async Consultar360_2(item){
+  async Consultar360(item){
 
     console.log("entro en el servicio de 360", item)
     let data:any = {
-    Ramo : item.ramo.idRamo,//this.idramo,//73,
-    Producto : item.idProduct,//this.idproducto,//1,
-    Poliza : item.nroPolicy,///* 1000011671, */ /* this.nropolicy,// */6000000253,
-    Certificado : item.nroCertificate,///* this.nrocertificado,// */7,
-    FechaConsulta : item.fechaInicioVigencia,///* "1/09/2018", */ /* this.fechaconsulta,// */"01/08/2020", //fecha inicio vigencia
+    Ramo : item.ramo.idRamo,
+    Producto : item.idProduct,
+    Poliza : item.nroPolicy,
+    Certificado : item.nroCertificate,
+    FechaConsulta : item.fechaInicioVigencia, //fecha inicio vigencia
     Endoso : item.endoso,    //Solo para rentas
     }
     console.log("entro en el servicio de 360 la data", data)
@@ -2587,9 +2587,9 @@ async Consultar360Previous(){
        });
     console.log("entro en el servicio de 360 resultado", this.ResultadoDetail)
     
-    console.log("El resultado", item.ramo.descripcion)//primero no envia
-    console.log("El resultado", item.ramo.descripcionCorta)//segundo
-    console.log("El resultado", item.producto)//tercero
+    //console.log("El resultado", item.ramo.descripcion)//primero no envia
+    //console.log("El resultado", item.ramo.descripcionCorta)//segundo
+    //console.log("El resultado", item.producto)//tercero
 
     // this.desc= item.ramo.descripcion;
     // this.desCor= item.ramo.descripcionCorta;
@@ -2598,7 +2598,7 @@ async Consultar360Previous(){
   }
 
 
-  ListaPoliza:any = []
+  /* ListaPoliza:any = []
   async consultarPoliza(){
     let data:any = {}
         data.P_TIPO_DOC = "2"
@@ -2627,18 +2627,18 @@ async Consultar360Previous(){
         //         this.Consultar360(element)
         //     });
         // }
-  }
+  } */
 
-  Resultado360:any = []
+  /* Resultado360:any = []
   async Consultar360(item){
 
     console.log("entro en el servicio de 360", item)
     let data:any = {
-    Ramo : item.IDRAMO,//this.idramo,//73,
-    Producto : item.COD_PRODUCTO,//this.idproducto,//1,
-    Poliza : item.POLIZA,///* 1000011671, */ /* this.nropolicy,// */6000000253,
+    Ramo : item.IDRAMO,
+    Producto : item.COD_PRODUCTO,
+    Poliza : item.POLIZA,
     Certificado : 7,
-    FechaConsulta : item.INICIO_VIG_POLIZA,///* "1/09/2018", */ /* this.fechaconsulta,// */"01/08/2020", //fecha inicio vigencia
+    FechaConsulta : item.INICIO_VIG_POLIZA,//fecha inicio vigencia
     Endoso : null,    //Solo para rentas
     }
     console.log("entro en el servicio de 360 la data", data)
@@ -2649,10 +2649,9 @@ async Consultar360Previous(){
        });
        this.core.loader.hide()
     console.log("entro en el servicio de 360 resultado", this.Resultado360)
-  }
-  validateProveedor (){
+  } */
 
 
-  }
+  
 
 }
