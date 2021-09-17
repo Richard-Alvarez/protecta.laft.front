@@ -2612,7 +2612,7 @@ async Consultar360Previous(){
         data.P_FECHA_SOLICITUD = null
         data.P_ROL = null
         data.P_TIPO = null
-        data.P_ESTADO = null
+        data.P_ESTADO = 2
         data.P_NBRANCH = null
         data.P_NPAGENUM = 1
         data.P_NLIMITPERPAGE = 10000000
@@ -2632,26 +2632,26 @@ async Consultar360Previous(){
   } 
 
    Resultado360:any = []
-  async Consultar360(item){
+//   async Consultar360(item){
 
-    console.log("entro en el servicio de 360", item)
-    let data:any = {
-    Ramo : item.IDRAMO,
-    Producto : item.COD_PRODUCTO,
-    Poliza : item.POLIZA,
-    Certificado : 7,
-    FechaConsulta : item.INICIO_VIG_POLIZA,//fecha inicio vigencia
-    Endoso : null,    //Solo para rentas
-    }
-    console.log("entro en el servicio de 360 la data", data)
-    this.core.loader.show()
-     await this.userConfigService.Consulta360(data).then(
-       (response) => {
-        this.Resultado360 = response
-       });
-       this.core.loader.hide()
-    console.log("entro en el servicio de 360 resultado", this.Resultado360)
-  } 
+//     console.log("entro en el servicio de 360", item)
+//     let data:any = {
+//     Ramo : item.IDRAMO,
+//     Producto : item.COD_PRODUCTO,
+//     Poliza : item.POLIZA,
+//     Certificado : item.NCERTIF,
+//     FechaConsulta : item.INICIO_VIG_POLIZA,//fecha inicio vigencia
+//     Endoso : null,    //Solo para rentas
+//     }
+//     console.log("entro en el servicio de 360 la data", data)
+//     this.core.loader.show()
+//      await this.userConfigService.Consulta360(data).then(
+//        (response) => {
+//         this.Resultado360 = response
+//        });
+//        this.core.loader.hide()
+//     console.log("entro en el servicio de 360 resultado", this.Resultado360)
+//   } 
 
 
   
