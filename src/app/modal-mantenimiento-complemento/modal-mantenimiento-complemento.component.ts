@@ -142,7 +142,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       swal.fire({
         title: "Mantenimiento de complemento",
          icon: "warning",
-         text: "¿Esta seguro de registrar un complemento",
+         text: "¿Esta seguro de registrar un complemento?",
          showCancelButton: true,
          confirmButtonColor: "#FA7000",
          confirmButtonText: "Aceptar",
