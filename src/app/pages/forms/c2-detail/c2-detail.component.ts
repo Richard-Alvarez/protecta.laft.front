@@ -192,8 +192,8 @@ export class C2DetailComponent implements OnInit {
     console.log("this.formData",this.formData)
 
 
-    await this.Consultar360Previous();
-    /* await this.consultarPoliza(); */
+    //await this.Consultar360Previous();
+     await this.consultarPoliza();
 
   }
   
@@ -2569,7 +2569,7 @@ async Consultar360Previous(){
 
   }
   ResultadoDetail:any = {}
-  async Consultar360(item){
+  async Consultar360_2(item){
 
     console.log("entro en el servicio de 360", item)
     let data:any = {
@@ -2598,7 +2598,7 @@ async Consultar360Previous(){
   }
 
 
-  /* ListaPoliza:any = []
+   ListaPoliza:any = []
   async consultarPoliza(){
     let data:any = {}
         data.P_TIPO_DOC = "2"
@@ -2629,9 +2629,9 @@ async Consultar360Previous(){
         //         this.Consultar360(element)
         //     });
         // }
-  } */
+  } 
 
-  /* Resultado360:any = []
+   Resultado360:any = []
   async Consultar360(item){
 
     console.log("entro en el servicio de 360", item)
@@ -2651,7 +2651,7 @@ async Consultar360Previous(){
        });
        this.core.loader.hide()
     console.log("entro en el servicio de 360 resultado", this.Resultado360)
-  } */
+  } 
 
 
   
