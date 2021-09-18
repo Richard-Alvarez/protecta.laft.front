@@ -980,10 +980,9 @@ async EnviarCompUsuario(alerta,complemento){
       data.NOMBRECOMPLETO =  element.NOMBRECOMPLETO
       data.SDESCARGO =  element.SDESCARGO
       data.SNAME =  element.SNAME
-       
-      console.log("prueba 11111",this.OBJ_USUARIO)
+      data.fullName = this.OBJ_USUARIO.fullName
       this.core.loader.show();
-      //await this.userConfigService.GetInsCormularioComplUsu(data)
+      await this.userConfigService.GetInsCormularioComplUsu(data)
       this.core.loader.hide();
     });
   
