@@ -975,9 +975,15 @@ async EnviarCompUsuario(alerta,complemento){
       data.NIDGRUPOSENAL = valorGrupo
       data.SRUTA_PDF = ''
       data.NIDAGRUPA = alerta.NIDAGRUPA
-      console.log("prueba 11111",data)
+      //Variables para el envio de correos
+      data.SEMAIL =  element.SEMAIL
+      data.NOMBRECOMPLETO =  element.NOMBRECOMPLETO
+      data.SDESCARGO =  element.SDESCARGO
+      data.SNAME =  element.SNAME
+       
+      console.log("prueba 11111",this.OBJ_USUARIO)
       this.core.loader.show();
-      await this.userConfigService.GetInsCormularioComplUsu(data)
+      //await this.userConfigService.GetInsCormularioComplUsu(data)
       this.core.loader.hide();
     });
   
