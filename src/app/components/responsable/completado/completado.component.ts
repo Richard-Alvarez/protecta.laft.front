@@ -886,5 +886,11 @@ filtroComplemeto(item){
   return resultado
 }
 
+ListUser:any = []
+userId
+AgregarUsuario(){
+  
+}
+
   
 }
