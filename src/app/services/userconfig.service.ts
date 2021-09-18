@@ -156,6 +156,18 @@ export class UserconfigService {
     })
   }
 
+  ListaUsariosComp(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlListaUsariosComp, null).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
   GetListaResultado(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
