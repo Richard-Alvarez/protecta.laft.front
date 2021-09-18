@@ -1,645 +1,840 @@
 <div class="containerPadre idDetallePoliza" style="">
-    <div class="row quitarMarginRow colorTemplate">
-        <div class="col-md-3">
-            <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
-            <div class="card CardFlotante" style="background-color:white; display: inline-grid;">
-                <div class="card-body" style="padding-left: 15px;padding-right: 15px;">
-                    <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{item.DES_CORTA_RAMO}}                          </strong></h4>
-                    <p class="card-text textTitle" style=" margin-bottom: 10% !important;">
-                        <span class="spancontent" id="PTitleProd" style="font-size: small !important;">{{item.DES_PRODUCTO}}                           </span>
-                    </p>
-                    <input type="hidden" id="CodigosPoliza" value="66" data-id="1">
-                    <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent" id="PCardNroPoliza">{{this.NroPoliza}}</span></p>
-                    <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent" id="PCardNroCertif">{{this.NroCertificado}}</span></p>
-                    <p class="card-text textTitle"><span>Estado</span><span class="spancontent" id="PCardEstado">{{item.ESTADO}}</span></p>
-                    <p class="card-text textTitle"><span>Contratante</span><span class="spancontent" id="PCardContratante">{{this.Contratante.name}}</span></p>
-                    <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol">{{item.ROL}}</span></p>
-                    <!-- <p class="card-text textTitle" id="CardPlaca" style=""><span>Placa</span><span class="spancontent" id="PCardPlaca">{{this.DatosVehiculo.placa}}</span></p>
+  <div class="row quitarMarginRow colorTemplate">
+    <div class="col-md-3">
+      <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
+      <div class="card CardFlotante" style="background-color:white; display: inline-grid;">
+        <div class="card-body" style="padding-left: 15px;padding-right: 15px;">
+          <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{item.DES_CORTA_RAMO}} </strong></h4>
+          <p class="card-text textTitle" style=" margin-bottom: 10% !important;">
+            <span class="spancontent" id="PTitleProd" style="font-size: small !important;">{{item.DES_PRODUCTO}} </span>
+          </p>
+          <input type="hidden" id="CodigosPoliza" value="66" data-id="1">
+          <p class="card-text textTitle"><span>N° Poliza</span><span class="spancontent"
+              id="PCardNroPoliza">{{this.NroPoliza}}</span></p>
+          <p class="card-text textTitle"><span>N° Certificado</span><span class="spancontent"
+              id="PCardNroCertif">{{this.NroCertificado}}</span></p>
+          <p class="card-text textTitle"><span>Estado</span><span class="spancontent"
+              id="PCardEstado">{{item.ESTADO}}</span></p>
+          <p class="card-text textTitle"><span>Contratante</span><span class="spancontent"
+              id="PCardContratante">{{this.Contratante.name}}</span></p>
+          <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent"
+              id="PCardRol">{{item.ROL}}</span></p>
+          <!-- <p class="card-text textTitle" id="CardPlaca" style=""><span>Placa</span><span class="spancontent" id="PCardPlaca">{{this.DatosVehiculo.placa}}</span></p>
                     <p class="card-text textTitle" id="CardPlanilla" style=""><span>Planilla</span><span class="spancontent" id="PCardPlanilla">55523</span></p> -->
-                    <p class="card-text textTitle" id="CardNumCredito" style="display:none"><span>Número de Crédito</span><span class="spancontent" id="PCardNumCred">-</span></p>
-                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi">{{this.FechaEmision}}</span></p>
-                    <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig">{{this.FechaPrimeraVigencia}}</span></p>
-                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">{{this.FechaInicioVigencia}}</span></p>
-                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span class="spancontent" id="PCardFecFinVig">{{this.FechaFinVigencia}}</span></p>
-                    <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent" id="PCardMoneda">{{this.Moneda}}</span></p>
-                    <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent" id="PCardUltPago">{{this.FechaEfecto}}</span></p>
+          <p class="card-text textTitle" id="CardNumCredito" style="display:none"><span>Número de Crédito</span><span
+              class="spancontent" id="PCardNumCred">-</span></p>
+          <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent"
+              id="PCardFecEmi">{{this.FechaEmision}}</span></p>
+          <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span
+              class="spancontent" id="PCardFecPrimVig">{{this.FechaPrimeraVigencia}}</span></p>
+          <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent"
+              id="PCardFecIniVig">{{this.FechaInicioVigencia}}</span></p>
+          <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Fin de Vigencia</span><span
+              class="spancontent" id="PCardFecFinVig">{{this.FechaFinVigencia}}</span></p>
+          <p class="card-text textTitle" style="margin-bottom: 10%;"><span>Moneda</span><span class="spancontent"
+              id="PCardMoneda">{{this.Moneda}}</span></p>
+          <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent"
+              id="PCardUltPago">{{this.FechaEfecto}}</span></p>
 
-                    
-                </div>
-            </div>
+
         </div>
+      </div>
+    </div>
 
-        <div class="col-md-9" style="padding-right: 0px !important; margin-bottom: 3% !important;">
-            <div id="Template" style="background: white;">
-                <!-- <div class="Pestañas">
+    <div class="col-md-9" style="padding-right: 0px !important; margin-bottom: 3% !important;">
+      <div id="Template" style="background: white;">
+        <!-- <div class="Pestañas">
                     <ul class="nav nav-tabs nav-justified" id="TabsDetalle">
                         <li class="active" id="PestanaDatosPoliza"><a class="tabPoliza" style="color:#27246d" data-toggle="tab" href="#pestInfo">Información</a></li>
                         
                     </ul>
                 </div> -->
-                <div class="tab-content">
-                    <div id="pestInfo" class="tab-pane fade in active">
-                        <div class="PaddingPestana">
-                            <div id="InfoGenerales" style="display:none;">
-                                <h4 class="title-grid"><strong>Información de la Póliza</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PGenIniVig">15/07/2021</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Fin  de Vigencia</span><span class="spancontent" id="PGenFinVig">15/07/2022</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo de negocio</span><span class="spancontent" id="PGenTipNeg">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Coaseguro</span><span class="spancontent" id="PGenCoaseg">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Tipo de Póliza</span><span class="spancontent" id="PGenTipPol">-</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo de Facturación</span><span class="spancontent" id="PGenTipFact">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Tipo de Reaseguro</span><span class="spancontent" id="PGenTipReaseg">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo de Renovación</span><span class="spancontent" id="PGenTipRenov">-</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="InfoListaCertificados" style="display:none; margin-top:5%">
-                                <div class="table-responsive">
-                                    
-                                    <table class="table table-hover table-striped" id="TableCertificados" style="width:100% !important" data-page-length="24">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="3" class="nobor">
-                                                </th><th colspan="2" class="supercabecera">Vigencia</th>
-                                                <th colspan="2" class="nobor"></th>
-                                            </tr>
-                                            <tr class="htable headgrid" style="background:transparent;">
-                                                <th class="text-center"># Cert.</th>
-                                                <th class="text-center">Doc. Identidad</th>
-                                                <th class="text-center">Asegurado</th>
-                                                <th class="text-center">Inicio</th>
-                                                <th class="text-center">Fin</th>
-                                                <th class="text-center">Estado</th>
-                                                <th class="text-center">Fecha Anulacion</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tblCertificados">
-                                            <tr>
-                                                <td class="text-center" colspan="2">No tiene Certificados</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+        <div class="tab-content">
+          <div id="pestInfo" class="tab-pane fade in active">
+            <div class="PaddingPestana">
+              <div id="InfoGenerales" style="display:none;">
+                <h4 class="title-grid"><strong>Información de la Póliza</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent"
+                        id="PGenIniVig">15/07/2021</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Fin de Vigencia</span><span class="spancontent"
+                        id="PGenFinVig">15/07/2022</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Tipo de negocio</span><span class="spancontent"
+                        id="PGenTipNeg">-</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Coaseguro</span><span class="spancontent"
+                        id="PGenCoaseg">-</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Tipo de Póliza</span><span class="spancontent"
+                        id="PGenTipPol">-</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Tipo de Facturación</span><span class="spancontent"
+                        id="PGenTipFact">-</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Tipo de Reaseguro</span><span class="spancontent"
+                        id="PGenTipReaseg">-</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Tipo de Renovación</span><span class="spancontent"
+                        id="PGenTipRenov">-</span></p>
+                  </div>
+                </div>
+              </div>
+              <div id="InfoListaCertificados" style="display:none; margin-top:5%">
+                <div class="table-responsive">
 
-                                </div>
-                            </div>
-                            <div id="InfoAsegurado" *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '80'">
-                                <h4 class="title-grid"><strong id="h4Asegurado">Datos del Asegurado</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3" id="DAsegNom">
-                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{this.DatosAsegurado.name}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegEstCivil">
-                                        <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil">{{this.DatosAsegurado.estadoCivil}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegDocum" style="display:none;">
-                                        <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent" id="PAsegDocum">Dni - 10549585</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegGenero" style="display:none;">
-                                        <p class="card-text textTitle"><span>Género</span><span class="spancontent" id="PAsegGenero">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegFecNac">
-                                        <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent" id="PAsegFecNam">{{this.DatosAsegurado.fechanacimiento}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegCUSPP" style="display:none;">
-                                        <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegIniVigSCTR" >
-                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVigSCTR">{{this.FechaInicioVigencia}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegFinVigSCTR">
-                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVigSCTR">{{this.FechaFinVigencia}}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3" id="DAsegIniVig"style="display:none;">
-                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PAsegIniVig">15/07/2021</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegFinVig" style="display:none;">
-                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PAsegFinVig">15/07/2022</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegTipPension" style="display:none;">
-                                        <p class="card-text textTitle"><span>Tipo de Pensión</span><span class="spancontent" id="PAsegTipPension">-</span></p>
-                                    </div>
-                                    <div class="col-lg-4" id="DAsegTipRenta" style="display:none;">
-                                        <p class="card-text textTitle"><span>Tipo de Renta</span><span class="spancontent" id="PAsegTipRenta">-</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3" id="DAsegModalidad" style="display:none;">
-                                        <p class="card-text textTitle"><span>Modalidad</span><span class="spancontent" id="PAsegModalidad">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegAnDif" style="display:none;">
-                                        <p class="card-text textTitle"><span>Años Diferidos</span><span class="spancontent" id="PAsegAnDif">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegMesGarant" style="display:none;">
-                                        <p class="card-text textTitle"><span>Meses Garantizados</span><span class="spancontent" id="PAsegMesGarant">-</span></p>
-                                    </div>
-                                    <div class="col-lg-4" id="DAsegMoneda" style="display:none;">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMoneda">-</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3" id="DAsegReajTemp" style="display:none;">
-                                        <p class="card-text textTitle"><span>Reajuste Trimestral</span><span class="spancontent" id="PAsegReajTemp">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegPrimDef" style="display:none;">
-                                        <p class="card-text textTitle"><span>Prima Definitiva</span><span class="spancontent" id="PAsegPrimDef">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegPenDef" style="display:none;">
-                                        <p class="card-text textTitle"><span>Pensión Definitiva</span><span class="spancontent" id="PAsegPenDef">-</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3" id="DAsegMonedaSal">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PAsegMonedaSal">{{this.Moneda}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegSalario" >
-                                        <p class="card-text textTitle"><span>Salario</span><span class="spancontent" id="PAsegSalario">{{this.DatosAsegurado.salario }}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegTasa">
-                                        <p class="card-text textTitle"><span>Tasa</span><span class="spancontent" id="PAsegTasa">{{this.DatosAsegurado.tasa}}</span></p>
-                                    </div>
-                                </div>
+                  <table class="table table-hover table-striped" id="TableCertificados" style="width:100% !important"
+                    data-page-length="24">
+                    <thead>
+                      <tr>
+                        <th colspan="3" class="nobor">
+                        </th>
+                        <th colspan="2" class="supercabecera">Vigencia</th>
+                        <th colspan="2" class="nobor"></th>
+                      </tr>
+                      <tr class="htable headgrid" style="background:transparent;">
+                        <th class="text-center"># Cert.</th>
+                        <th class="text-center">Doc. Identidad</th>
+                        <th class="text-center">Asegurado</th>
+                        <th class="text-center">Inicio</th>
+                        <th class="text-center">Fin</th>
+                        <th class="text-center">Estado</th>
+                        <th class="text-center">Fecha Anulacion</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tblCertificados">
+                      <tr>
+                        <td class="text-center" colspan="2">No tiene Certificados</td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-                            </div>
-                            <div id="InfoTitular" *ngIf="this.item.IDRAMO == '75'">
-                                <h4 class="title-grid"><strong id="h4Asegurado">Datos del Titular</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3" id="DAsegNom">
-                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PAsegNombre">{{this.DatosAsegurado.name }}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegEstCivil">
-                                        <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent" id="PAsegEstCivil">{{this.DatosAsegurado.estadoCivil}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegDocum" >
-                                        <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent" id="PAsegDocum">{{this.DatosAsegurado.tipodoc}} - {{this.DatosAsegurado.documento}}</span></p>
-                                    </div>
-                                     <div class="col-lg-2" id="DAsegFecNac">
-                                        <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent" id="PAsegFecNam">{{this.DatosAsegurado.fechanacimiento}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2" id="DAsegCUSPP" >
-                                        <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP">{{this.DatosAsegurado.cuspp}}</span></p>
-                                    </div>
-                                    
-                                </div>
-                                
+                </div>
+              </div>
+              <div id="InfoAsegurado" *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '80'">
+                <h4 class="title-grid"><strong id="h4Asegurado">Datos del Asegurado</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3" id="DAsegNom">
+                    <p class="card-text textTitle"><span>Nombre</span><span class="spancontent"
+                        id="PAsegNombre">{{this.DatosAsegurado.name}}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegEstCivil">
+                    <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent"
+                        id="PAsegEstCivil">{{this.DatosAsegurado.estadoCivil}}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegDocum" style="display:none;">
+                    <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent"
+                        id="PAsegDocum">Dni - 10549585</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegGenero" style="display:none;">
+                    <p class="card-text textTitle"><span>Género</span><span class="spancontent"
+                        id="PAsegGenero">-</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegFecNac">
+                    <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent"
+                        id="PAsegFecNam">{{this.DatosAsegurado.fechanacimiento}}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegCUSPP" style="display:none;">
+                    <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent" id="PAsegCUSPP">-</span>
+                    </p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegIniVigSCTR">
+                    <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent"
+                        id="PAsegIniVigSCTR">{{this.FechaInicioVigencia}}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegFinVigSCTR">
+                    <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent"
+                        id="PAsegFinVigSCTR">{{this.FechaFinVigencia}}</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3" id="DAsegIniVig" style="display:none;">
+                    <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent"
+                        id="PAsegIniVig">15/07/2021</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegFinVig" style="display:none;">
+                    <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent"
+                        id="PAsegFinVig">15/07/2022</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegTipPension" style="display:none;">
+                    <p class="card-text textTitle"><span>Tipo de Pensión</span><span class="spancontent"
+                        id="PAsegTipPension">-</span></p>
+                  </div>
+                  <div class="col-lg-4" id="DAsegTipRenta" style="display:none;">
+                    <p class="card-text textTitle"><span>Tipo de Renta</span><span class="spancontent"
+                        id="PAsegTipRenta">-</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3" id="DAsegModalidad" style="display:none;">
+                    <p class="card-text textTitle"><span>Modalidad</span><span class="spancontent"
+                        id="PAsegModalidad">-</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegAnDif" style="display:none;">
+                    <p class="card-text textTitle"><span>Años Diferidos</span><span class="spancontent"
+                        id="PAsegAnDif">-</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegMesGarant" style="display:none;">
+                    <p class="card-text textTitle"><span>Meses Garantizados</span><span class="spancontent"
+                        id="PAsegMesGarant">-</span></p>
+                  </div>
+                  <div class="col-lg-4" id="DAsegMoneda" style="display:none;">
+                    <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
+                        id="PAsegMoneda">-</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3" id="DAsegReajTemp" style="display:none;">
+                    <p class="card-text textTitle"><span>Reajuste Trimestral</span><span class="spancontent"
+                        id="PAsegReajTemp">-</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegPrimDef" style="display:none;">
+                    <p class="card-text textTitle"><span>Prima Definitiva</span><span class="spancontent"
+                        id="PAsegPrimDef">-</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegPenDef" style="display:none;">
+                    <p class="card-text textTitle"><span>Pensión Definitiva</span><span class="spancontent"
+                        id="PAsegPenDef">-</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3" id="DAsegMonedaSal">
+                    <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
+                        id="PAsegMonedaSal">{{this.Moneda}}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegSalario">
+                    <p class="card-text textTitle"><span>Salario</span><span class="spancontent"
+                        id="PAsegSalario">{{this.DatosAsegurado.salario }}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegTasa">
+                    <p class="card-text textTitle"><span>Tasa</span><span class="spancontent"
+                        id="PAsegTasa">{{this.DatosAsegurado.tasa}}</span></p>
+                  </div>
+                </div>
 
-                            </div>
-                            <div id="InfoCredito"  style="display:none;">
-                                <h4 class="title-grid"><strong>Datos del Crédito</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PCredNum">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Plazo</span><span class="spancontent" id="PCredPlaz"></span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent" id="PCredIniVig">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent" id="PCredFinVig">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PCredMoneda">-</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Cálculo de Prima</span><span class="spancontent" id="PCredCalcPrim">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Monto Inicial</span><span class="spancontent" id="PCredMontInic">0.00</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Saldo Insoluto</span><span class="spancontent" id="PCredMontIns">0.00</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Cantidad de Cuotas</span><span class="spancontent" id="PCredCuot">-</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="InfoRentaTotal"  *ngIf="this.item.IDRAMO == '75'">
-                                <h4 class="title-grid"><strong>Datos adicionales</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Fecha de abono</span><span class="spancontent" id="PRTAbono">{{this.DatosRentaTotal.fecAbono}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Fecha Devengue</span><span class="spancontent" id="PRTDevengue">{{this.DatosRentaTotal.fecDevengue}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Años Temporales</span><span class="spancontent" id="PRTAnTemp">{{this.DatosRentaTotal.aniosTMP}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Años Garantizados</span><span class="spancontent" id="PRTAnGarant">{{this.DatosRentaTotal.aniosGarant}}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Prima</span><span class="spancontent" id="PRTPrima">{{this.DatosRentaTotal.prima}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Pensión Temp. Inicial</span><span class="spancontent" id="PRTPenTemp">{{this.DatosRentaTotal.pensionInicial}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PRTMoneda">{{this.DatosRentaTotal.moneda}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Devolución</span><span class="spancontent" id="PRTDevol">{{this.DatosRentaTotal.porcDevol}}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Seguro de Vida</span><span class="spancontent" id="PRTSegVida">{{this.DatosRentaTotal.porcSegVid}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Seguro de Accidentes</span><span class="spancontent" id="PRTSegAcc">{{this.DatosRentaTotal.porcAcc}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Diferimiento (años)</span><span class="spancontent" id="PRTDiferi">{{this.DatosRentaTotal.diferido}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>% Ajuste anual</span><span class="spancontent" id="PRTAjuste">{{this.DatosRentaTotal.ajustAnual}}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Pensión Escalonada</span><span class="spancontent" id="PRTPensEscal">{{this.DatosRentaTotal.pensionEscalonada}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Renta Vitalicia</span><span class="spancontent" id="PRTRentaVit">{{this.DatosRentaTotal.indRentVit}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Gasto Sepelio</span><span class="spancontent" id="PRTSepelio">{{this.DatosRentaTotal.indSepel}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Gratificación</span><span class="spancontent" id="PRTGrati">{{this.DatosRentaTotal.indGratif}}</span></p>
-                                    </div>
-                                </div>
+              </div>
+              <div id="InfoTitular" *ngIf="this.item.IDRAMO == '75'">
+                <h4 class="title-grid"><strong id="h4Asegurado">Datos del Titular</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3" id="DAsegNom">
+                    <p class="card-text textTitle"><span>Nombre</span><span class="spancontent"
+                        id="PAsegNombre">{{this.DatosAsegurado.name }}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegEstCivil">
+                    <p class="card-text textTitle"><span>Estado Civil</span><span class="spancontent"
+                        id="PAsegEstCivil">{{this.DatosAsegurado.estadoCivil}}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegDocum">
+                    <p class="card-text textTitle"><span>Doc. Identidad</span><span class="spancontent"
+                        id="PAsegDocum">{{this.DatosAsegurado.tipodoc}} - {{this.DatosAsegurado.documento}}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegFecNac">
+                    <p class="card-text textTitle"><span>Fec. Nacimiento</span><span class="spancontent"
+                        id="PAsegFecNam">{{this.DatosAsegurado.fechanacimiento}}</span></p>
+                  </div>
+                  <div class="col-lg-2" id="DAsegCUSPP">
+                    <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent"
+                        id="PAsegCUSPP">{{this.DatosAsegurado.cuspp}}</span></p>
+                  </div>
+
+                </div>
 
 
-                            </div>
-                            <div id="InfoVehiculo" *ngIf="this.item.IDRAMO == '66'" >
-                                <h4 class="title-grid"><strong>Datos del Vehículo</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Placa</span><span class="spancontent" id="PPlaca">{{this.DatosVehiculo.placa}}    </span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Marca</span><span class="spancontent" id="PMarca">{{this.DatosVehiculo.marca}} </span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Modelo</span><span class="spancontent" id="PModelo">{{this.DatosVehiculo.version}} </span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Clase</span><span class="spancontent" id="PClase">{{this.DatosVehiculo.clase}} </span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Uso</span><span class="spancontent" id="PUso">{{this.DatosVehiculo.uso}} </span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Asientos</span><span class="spancontent" id="PAsientos">{{this.DatosVehiculo.asientos}} </span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>N° de Serie</span><span class="spancontent" id="PSerie">{{this.DatosVehiculo.nroSerie}} </span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Año</span><span class="spancontent" id="PAnio">{{this.DatosVehiculo.anio}} </span></p>
-                                    </div>
-                                </div>
+              </div>
+              <div id="InfoCredito" style="display:none;">
+                <h4 class="title-grid"><strong>Datos del Crédito</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PCredNum">-</span>
+                    </p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Plazo</span><span class="spancontent" id="PCredPlaz"></span>
+                    </p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent"
+                        id="PCredIniVig">-</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent"
+                        id="PCredFinVig">-</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
+                        id="PCredMoneda">-</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Cálculo de Prima</span><span class="spancontent"
+                        id="PCredCalcPrim">-</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Monto Inicial</span><span class="spancontent"
+                        id="PCredMontInic">0.00</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Saldo Insoluto</span><span class="spancontent"
+                        id="PCredMontIns">0.00</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Cantidad de Cuotas</span><span class="spancontent"
+                        id="PCredCuot">-</span></p>
+                  </div>
+                </div>
+              </div>
+              <div id="InfoRentaTotal" *ngIf="this.item.IDRAMO == '75'">
+                <h4 class="title-grid"><strong>Datos adicionales</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Fecha de abono</span><span class="spancontent"
+                        id="PRTAbono">{{this.DatosRentaTotal.fecAbono}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Fecha Devengue</span><span class="spancontent"
+                        id="PRTDevengue">{{this.DatosRentaTotal.fecDevengue}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Años Temporales</span><span class="spancontent"
+                        id="PRTAnTemp">{{this.DatosRentaTotal.aniosTMP}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Años Garantizados</span><span class="spancontent"
+                        id="PRTAnGarant">{{this.DatosRentaTotal.aniosGarant}}</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Prima</span><span class="spancontent"
+                        id="PRTPrima">{{this.DatosRentaTotal.prima}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Pensión Temp. Inicial</span><span class="spancontent"
+                        id="PRTPenTemp">{{this.DatosRentaTotal.pensionInicial}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
+                        id="PRTMoneda">{{this.DatosRentaTotal.moneda}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>% Devolución</span><span class="spancontent"
+                        id="PRTDevol">{{this.DatosRentaTotal.porcDevol}}</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>% Seguro de Vida</span><span class="spancontent"
+                        id="PRTSegVida">{{this.DatosRentaTotal.porcSegVid}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>% Seguro de Accidentes</span><span class="spancontent"
+                        id="PRTSegAcc">{{this.DatosRentaTotal.porcAcc}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Diferimiento (años)</span><span class="spancontent"
+                        id="PRTDiferi">{{this.DatosRentaTotal.diferido}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>% Ajuste anual</span><span class="spancontent"
+                        id="PRTAjuste">{{this.DatosRentaTotal.ajustAnual}}</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Pensión Escalonada</span><span class="spancontent"
+                        id="PRTPensEscal">{{this.DatosRentaTotal.pensionEscalonada}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Renta Vitalicia</span><span class="spancontent"
+                        id="PRTRentaVit">{{this.DatosRentaTotal.indRentVit}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Gasto Sepelio</span><span class="spancontent"
+                        id="PRTSepelio">{{this.DatosRentaTotal.indSepel}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Gratificación</span><span class="spancontent"
+                        id="PRTGrati">{{this.DatosRentaTotal.indGratif}}</span></p>
+                  </div>
+                </div>
 
-                            </div>
-                            <div id="InfoDirecSOAT" style="margin-top: 3%;" *ngIf="this.item.IDRAMO == '66'"> 
-                                <h4 class="title-grid"><strong>Dirección SOAT</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo Via</span><span class="spancontent" id="PTipoVia">{{this.DatosSoat.DescTipoVia}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Dirección</span><span class="spancontent" id="PDir">{{this.DatosSoat.DireccionActual}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Número</span><span class="spancontent" id="PNumero">{{this.DatosSoat.Numero}}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo Interior</span><span class="spancontent" id="PTipoInterior">{{this.DatosSoat.TipoInterior}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Interior</span><span class="spancontent" id="PNumeroInterior">{{this.DatosSoat.NroInterior}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Manzana</span><span class="spancontent" id="PManzana">{{this.DatosSoat.Manzana}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Lote</span><span class="spancontent" id="PLote">{{this.DatosSoat.Lote}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Etapa</span><span class="spancontent" id="PEtapa">{{this.DatosSoat.Etapa}}</span></p>
-                                    </div>
 
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo Conjunto</span><span class="spancontent" id="PTipoConjunto">{{this.DatosSoat.DescTipoConj}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Nombre conjunto</span><span class="spancontent" id="PNomConjunto">{{this.DatosSoat.NombreTipoConj}}</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Bloque/Chalet</span><span class="spancontent" id="PChalet">{{this.DatosSoat.Chalet}}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Numero/Letra</span><span class="spancontent" id="PNumLetra">{{this.DatosSoat.Letra}}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-10">
-                                        <p class="card-text textTitle"><span>Dirección Actual</span><span class="spancontent" id="PDirAct">{{this.DatosSoat.DireccionActual}}</span></p>
-                                    </div>
-                                </div>
-                                <br>
-                            </div>
-                            <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO != '75'">
-                                <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Nombre Canal</span><span class="spancontent" id="PCanalNom">{{this.DatosCanal.nombre }}</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Fecha Apertura</span><span class="spancontent" id="PCanalFechaAp">{{this.DatosCanal.fechaInicio }}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Tipo Canal</span><span class="spancontent" id="PCanalTipo">{{this.DatosCanal.tipo }}</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Estado del Canal</span><span class="spancontent" id="PCanalEstado">{{this.DatosCanal.estado }}</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="InfoIntermediario" style="margin-top:3%;">
-                                <h4 class="title-grid"><strong>Datos del intermediario / Comercializador</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Código</span><span class="spancontent" id="PIntCod">{{ this.DatosIntermediario.CodigoIntermediario }}</span></p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <p class="card-text textTitle"><span>Nombre</span><span class="spancontent" id="PIntNom">{{this.DatosIntermediario.Nombre}}                                                       </span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="InfoTarifa" style="margin-top: 3%;" *ngIf="this.item.IDRAMO == '66'" >
-                                <h4 class="title-grid"><strong>Tarifa</strong></h4>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PTarFecEmision">{{this.DatosTarifa.FechaEmision}}  </span></p>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Hora de Emisión</span><span class="spancontent" id="PTarHorEmision">{{this.DatosTarifa.HoraEmision}}</span></p>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Lote Descargo</span><span class="spancontent" id="PTarLote">{{this.DatosTarifa.LoteDescargo}}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Tarifa</span><span class="spancontent" id="PTarifaP">{{this.DatosTarifa.TarifaProtecta}}</span></p>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Porcentaje Comisión</span><span class="spancontent" id="PTarPorcComi">{{this.DatosTarifa.PorcentajeComision}}</span></p>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PTarMoneda">{{this.DatosTarifa.Moneda}}</span></p>
-                                    </div>
-                                </div>
-                            </div>
+              </div>
+              <div id="InfoVehiculo" *ngIf="this.item.IDRAMO == '66'">
+                <h4 class="title-grid"><strong>Datos del Vehículo</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Placa</span><span class="spancontent"
+                        id="PPlaca">{{this.DatosVehiculo.placa}} </span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Marca</span><span class="spancontent"
+                        id="PMarca">{{this.DatosVehiculo.marca}} </span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Modelo</span><span class="spancontent"
+                        id="PModelo">{{this.DatosVehiculo.version}} </span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Clase</span><span class="spancontent"
+                        id="PClase">{{this.DatosVehiculo.clase}} </span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Uso</span><span class="spancontent"
+                        id="PUso">{{this.DatosVehiculo.uso}} </span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Asientos</span><span class="spancontent"
+                        id="PAsientos">{{this.DatosVehiculo.asientos}} </span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>N° de Serie</span><span class="spancontent"
+                        id="PSerie">{{this.DatosVehiculo.nroSerie}} </span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Año</span><span class="spancontent"
+                        id="PAnio">{{this.DatosVehiculo.anio}} </span></p>
+                  </div>
+                </div>
 
-                            <div id="InfoCoberturas" style="margin-top: 3%;">
-                                <h4 class="title-grid" style="font-weight:bold;">Coberturas</h4>
-                                <div class="row" style="margin-bottom:1%" id="PlanPanel"  *ngIf="this.item.IDRAMO != '75'">
-                                    <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>Plan / Módulo</span><span class="spancontent" id="PPlanCod">{{this.DatosCoberturas.CodigoModulo}} - {{this.DatosCoberturas.DescModulo}}</span></p>
-                                    </div>
-                                </div>
-                                <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
-                                    <thead>
-                                        <tr class="htable headgrid" style="background:transparent;">
-                                            <th class="text-center">Código</th>
-                                            <th class="text-center">Cobertura</th>
-                                            <th class="text-center">Principal</th>
-                                            <th class="text-center">Moneda</th>
-                                            <th class="text-center">Prima</th>
-                                            <th class="text-center">Suma Asegurada</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tblContactos" *ngIf="ListaDatosCoberturas.length !=0; else listavacia">
-                                        <tr *ngFor="let cob of ListaDatosCoberturas | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" >
-                                            <td class="text-center" >{{cob.idCobertura}}</td>
-                                            <td class="text-center" >{{cob.descripcion}}</td>
-                                            <td class="text-center" >{{cob.principal}}</td>
-                                            <td class="text-center" >{{cob.descMoneda}}</td>
-                                            <td class="text-center" >{{cob.prima}}</td>
-                                            <td class="text-center" >{{cob.sumaAsegurada}}</td>
-                                        </tr>
-                                    </tbody>
-                                    <ng-template #listavacia>
-                                        <tbody id="tblContactos">
-                                            <tr>
-                                                <td class="text-center" colspan="6">No tiene Coberturas</td>
-                                            </tr>
-                                        </tbody>
-                                      </ng-template>
-                                   
-                                </table>
-                                <ng-container *ngIf="ListaDatosCoberturas!=null && ListaDatosCoberturas.length>0; then showPagination"></ng-container>
-                                <ng-template #showPagination>
-                                    <ngb-pagination [pageSize] = "5" [collectionSize]="ListaDatosCoberturas.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
-                                </ng-template>
-                                    
-                                
-                                
-                            </div>
+              </div>
+              <div id="InfoDirecSOAT" style="margin-top: 3%;" *ngIf="this.item.IDRAMO == '66'">
+                <h4 class="title-grid"><strong>Dirección SOAT</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Tipo Via</span><span class="spancontent"
+                        id="PTipoVia">{{this.DatosSoat.DescTipoVia}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Dirección</span><span class="spancontent"
+                        id="PDir">{{this.DatosSoat.DireccionActual}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Número</span><span class="spancontent"
+                        id="PNumero">{{this.DatosSoat.Numero}}</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Tipo Interior</span><span class="spancontent"
+                        id="PTipoInterior">{{this.DatosSoat.TipoInterior}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Interior</span><span class="spancontent"
+                        id="PNumeroInterior">{{this.DatosSoat.NroInterior}}</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Manzana</span><span class="spancontent"
+                        id="PManzana">{{this.DatosSoat.Manzana}}</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Lote</span><span class="spancontent"
+                        id="PLote">{{this.DatosSoat.Lote}}</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Etapa</span><span class="spancontent"
+                        id="PEtapa">{{this.DatosSoat.Etapa}}</span></p>
+                  </div>
 
-                            <div id="InfoCoberRentas" style="margin-top:3%" *ngIf="this.item.IDRAMO != '75'">
-                                <h4 class="title-grid"><strong>Coberturas</strong></h4>
-                                <table class="table table-hover table-striped" id="tableCoberturaRentas" style="width:100%">
-                                    <thead>
-                                        <tr class="htable headgrid" style="background:transparent;">
-                                            <th class="text-center">Cobertura</th>
-                                            <th class="text-center">Renta Vitalicia</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tblCoberRent">
-                                        <tr>
-                                            <td class="text-center" colspan="2">No tiene Coberturas</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Tipo Conjunto</span><span class="spancontent"
+                        id="PTipoConjunto">{{this.DatosSoat.DescTipoConj}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Nombre conjunto</span><span class="spancontent"
+                        id="PNomConjunto">{{this.DatosSoat.NombreTipoConj}}</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Bloque/Chalet</span><span class="spancontent"
+                        id="PChalet">{{this.DatosSoat.Chalet}}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Numero/Letra</span><span class="spancontent"
+                        id="PNumLetra">{{this.DatosSoat.Letra}}</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10">
+                    <p class="card-text textTitle"><span>Dirección Actual</span><span class="spancontent"
+                        id="PDirAct">{{this.DatosSoat.DireccionActual}}</span></p>
+                  </div>
+                </div>
+                <br>
+              </div>
+              <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO != '75'">
+                <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Nombre Canal</span><span class="spancontent"
+                        id="PCanalNom">{{this.DatosCanal.nombre }}</span></p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Fecha Apertura</span><span class="spancontent"
+                        id="PCanalFechaAp">{{this.DatosCanal.fechaInicio }}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Tipo Canal</span><span class="spancontent"
+                        id="PCanalTipo">{{this.DatosCanal.tipo }}</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Estado del Canal</span><span class="spancontent"
+                        id="PCanalEstado">{{this.DatosCanal.estado }}</span></p>
+                  </div>
+                </div>
+              </div>
+              <div id="InfoIntermediario" style="margin-top:3%;">
+                <h4 class="title-grid"><strong>Datos del intermediario / Comercializador</strong></h4>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Código</span><span class="spancontent"
+                        id="PIntCod">{{ this.DatosIntermediario.CodigoIntermediario }}</span></p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="card-text textTitle"><span>Nombre</span><span class="spancontent"
+                        id="PIntNom">{{this.DatosIntermediario.Nombre}} </span></p>
+                  </div>
+                </div>
+              </div>
+              <div id="InfoTarifa" style="margin-top: 3%;" *ngIf="this.item.IDRAMO == '66'">
+                <h4 class="title-grid"><strong>Tarifa</strong></h4>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent"
+                        id="PTarFecEmision">{{this.DatosTarifa.FechaEmision}} </span></p>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="card-text textTitle"><span>Hora de Emisión</span><span class="spancontent"
+                        id="PTarHorEmision">{{this.DatosTarifa.HoraEmision}}</span></p>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="card-text textTitle"><span>Lote Descargo</span><span class="spancontent"
+                        id="PTarLote">{{this.DatosTarifa.LoteDescargo}}</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <p class="card-text textTitle"><span>Tarifa</span><span class="spancontent"
+                        id="PTarifaP">{{this.DatosTarifa.TarifaProtecta}}</span></p>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="card-text textTitle"><span>Porcentaje Comisión</span><span class="spancontent"
+                        id="PTarPorcComi">{{this.DatosTarifa.PorcentajeComision}}</span></p>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
+                        id="PTarMoneda">{{this.DatosTarifa.Moneda}}</span></p>
+                  </div>
+                </div>
+              </div>
 
-                            </div>
-                            <div id="InfoBeneficiarios" style="margin-top:3%;"  *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '75'">
-                                <h4 class="title-grid"><strong>Beneficiarios</strong></h4>
-                                <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
-                                    <thead>
-                                        <tr class="htable headgrid" style="background:transparent;">
-                                            <th class="text-center">Nombres</th>
-                                            <th class="text-center">Documento</th>
-                                            <th class="text-center">Vínculo</th>
-                                            <th class="text-center">Participación</th>
-                                            <th class="text-center">Fecha Declaración</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tblContactos" *ngIf="listaDatabeneficiarios.length !=0; else listavacia2">
-                                        <tr *ngFor="let ben of listaDatabeneficiarios.datosCliente | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index" >
-                                             <!-- <td class="text-center" >{{ben[index].DatosCliente.name}}</td>
-                                            <td class="text-center" >{{ben[index].DatosCliente.tipodoc}} {{ben[index].DatosCliente.documento}}</td>  
-                                             <td class="text-center" >{{ben.Relacion}}</td>
-                                            <td class="text-center" >{{ben.Participacion}}</td>
-                                            <td class="text-center" >{{ben.FechaDeclaracion}}</td> -->
-                                            <td class="text-center" >{{ben.name}}</td>
-                                            <td class="text-center" >{{ben.tipodoc}} {{ben.documento}}</td>  
-                                             <td class="text-center" >-</td>
-                                            <td class="text-center" >-</td>
-                                            <td class="text-center" >-</td>
-                                            
-                                        </tr>
-                                    </tbody>
-                                    <ng-template #listavacia2>
-                                        <tbody id="tblContactos">
-                                            <tr>
-                                                <td class="text-center" colspan="6">No tiene beneficiarios</td>
-                                            </tr>
-                                        </tbody>
-                                      </ng-template>
-                                   
-                                </table>
-                                <ng-container *ngIf="listaDatabeneficiarios!=null && listaDatabeneficiarios.length>0; then showPagination2"></ng-container>
-                                <ng-template #showPagination2>
-                                    <ngb-pagination [pageSize] = "5" [collectionSize]="listaDatabeneficiarios.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
-                                </ng-template>
-                            </div>
-                            <div id="InfoModalidadPago" style="display:none;margin-top:3%; margin-bottom:3%;">
-                                <h4 class="title-grid"><strong>Modalidad de Pago</strong></h4>
-                                <div style="width:45%; float:left">
-                                    <div class="table-responsive">
-                                        <div id="tableCronograma_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="tituloCro"><span class="lineorangeB"></span> <strong class="titulogrillaD">Cronograma de Pagos</strong></div><div class="dt-buttons"><button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="tableCronograma" type="button"><span><img src="https://i.imgur.com/MHBQv8D.png" style="width:6%;"> Descargar </span></button> </div><div class="dataTables_scroll"><div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 0px; padding-right: 0px;"><table class="table table-hover table-striped dataTable no-footer" style="width: 0px; margin-left: 0px;" data-page-length="24" role="grid"><thead>
-                                                <tr class="htable headgrid" style="background:transparent;" role="row"><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Mes</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Fecha de Pagos</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Pensión</th></tr>
-                                            </thead></table></div></div><div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 200px; width: 100%;"><table class="table table-hover table-striped dataTable no-footer" id="tableCronograma" style="width: 100%;" data-page-length="24" role="grid"><thead>
-                                                <tr class="htable headgrid" style="background: transparent; height: 0px;" role="row"><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Mes</div></th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Fecha de Pagos</div></th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Pensión</div></th></tr>
-                                            </thead>
-                                            
-                                            <tbody id="tblCrono">
-                                                
-                                            <tr class="odd"><td valign="top" colspan="3" class="dataTables_empty">No se encontró cronograma</td></tr></tbody>
-                                        </table></div></div></div>
-                                    </div>
-                                </div>
-                                <div style="width:45%; float:right">
-                                    <div class="table-responsive">
-                                        <div id="tableRescate_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="tituloRes"><span class="lineorangeB"></span> <strong class="titulogrillaD">Valores de Rescate</strong></div><div class="dt-buttons"><button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="tableRescate" type="button"><span><img src="https://i.imgur.com/MHBQv8D.png" style="width:6%;"> Descargar </span></button> </div><div class="dataTables_scroll"><div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 0px; padding-right: 0px;"><table class="table table-hover table-striped dataTable no-footer" style="width: 0px; margin-left: 0px;" data-page-length="24" role="grid"><thead>
-                                                <tr class="htable headgrid" style="background:transparent;" role="row"><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Mes</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Monto</th></tr>
-                                            </thead></table></div></div><div class="dataTables_scrollBody" style="position: relative; overflow: auto; max-height: 200px; width: 100%;"><table class="table table-hover table-striped dataTable no-footer" id="tableRescate" style="width: 100%;" data-page-length="24" role="grid"><thead>
-                                                <tr class="htable headgrid" style="background: transparent; height: 0px;" role="row"><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Mes</div></th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Monto</div></th></tr>
-                                            </thead>
-                                            
-                                            <tbody id="tblRescate">
-                                                
-                                            <tr class="odd"><td valign="top" colspan="2" class="dataTables_empty">No se encontró valores de rescate</td></tr></tbody>
-                                        </table></div></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" id="titularrentavitalicia" data-asegurado="" data-vinculo=" (Titular)" data-viapago="" data-sucursal="" data-banco="" data-tipocuenta="" data-numerocuenta="" data-cci="" data-moneda="" data-institucion="" data-modalidad="" data-periodo="" data-receptordoc=" - " data-receptornom="" data-receptorper=" - ">
-                            <div id="InfoPensiones" style="display:none;">
-                                
-                                <h4 class="title-grid" style="margin-bottom:3%"><strong id="titlebenef"></strong><span id="titlevinc"> (Titular)</span></h4>
-                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Modalidad de Pago</strong></h5> <br>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Via de Pago</span><span class="spancontent" id="PPensViaPago">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Sucursal</span><span class="spancontent" id="PPensSucursal">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Banco</span><span class="spancontent" id="PPensBanco">-</span></p>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p class="card-text textTitle"><span>Tipo Cta.</span><span class="spancontent" id="PPensTipoCuenta">-</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Moneda</span><span class="spancontent" id="PPensMoneda">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Num. Cta.</span><span class="spancontent" id="PPensNumCuenta">-</span></p>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p class="card-text textTitle"><span>CCI</span><span class="spancontent" id="PPensCCI">-</span></p>
-                                    </div>
-                                </div>
-                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Receptor de Pensión</strong></h5> <br>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Identificación</span><span class="spancontent" id="PRecepDoc"> - </span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Período de Vigencia</span><span class="spancontent" id="PRecepPerVig"> - </span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Nombres</span><span class="spancontent" id="PRecepNombre">-</span></p>
-                                    </div>
-                                </div>
-                                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Plan de Salud</strong></h5> <br>
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Institución</span><span class="spancontent" id="PPensInsti">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Modalidad de Pago</span><span class="spancontent" id="PPensModalPago">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Monto de Pago</span><span class="spancontent" id="PPensMontoPago">-</span></p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p class="card-text textTitle"><span>Periódo Efecto</span><span class="spancontent" id="PPensPeriodoEfecto">-</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p style="margin-bottom:5%"></p>
-                    </div>
+              <div id="InfoCoberturas" style="margin-top: 3%;">
+                <h4 class="title-grid" style="font-weight:bold;">Coberturas</h4>
+                <div class="row" style="margin-bottom:1%" id="PlanPanel" *ngIf="this.item.IDRAMO != '75'">
+                  <div class="col-lg-4">
+                    <p class="card-text textTitle"><span>Plan / Módulo</span><span class="spancontent"
+                        id="PPlanCod">{{this.DatosCoberturas.CodigoModulo}} - {{this.DatosCoberturas.DescModulo}}</span>
+                    </p>
+                  </div>
+                </div>
+                <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
+                  <thead>
+                    <tr class="htable headgrid" style="background:transparent;">
+                      <th class="text-center">Código</th>
+                      <th class="text-center">Cobertura</th>
+                      <th class="text-center">Principal</th>
+                      <th class="text-center">Moneda</th>
+                      <th class="text-center">Prima</th>
+                      <th class="text-center">Suma Asegurada</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tblContactos" *ngIf="ListaDatosCoberturas.length !=0; else listavacia">
+                    <tr
+                      *ngFor="let cob of ListaDatosCoberturas | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                      <td class="text-center">{{cob.idCobertura}}</td>
+                      <td class="text-center">{{cob.descripcion}}</td>
+                      <td class="text-center">{{cob.principal}}</td>
+                      <td class="text-center">{{cob.descMoneda}}</td>
+                      <td class="text-center">{{cob.prima}}</td>
+                      <td class="text-center">{{cob.sumaAsegurada}}</td>
+                    </tr>
+                  </tbody>
+                  <ng-template #listavacia>
+                    <tbody id="tblContactos">
+                      <tr>
+                        <td class="text-center" colspan="6">No tiene Coberturas</td>
+                      </tr>
+                    </tbody>
+                  </ng-template>
 
-</div>
-            </div>
+                </table>
+                <ng-container *ngIf="ListaDatosCoberturas!=null && ListaDatosCoberturas.length>0; then showPagination">
+                </ng-container>
+                <ng-template #showPagination>
+                  <ngb-pagination [pageSize]="5" [collectionSize]="ListaDatosCoberturas.length" [(page)]="page"
+                    aria-label="Default pagination"></ngb-pagination>
+                </ng-template>
 
+
+
+              </div>
+
+              <div id="InfoCoberRentas" style="margin-top:3%" *ngIf="this.item.IDRAMO != '75'">
+                <h4 class="title-grid"><strong>Coberturas</strong></h4>
+                <table class="table table-hover table-striped" id="tableCoberturaRentas" style="width:100%">
+                  <thead>
+                    <tr class="htable headgrid" style="background:transparent;">
+                      <th class="text-center">Cobertura</th>
+                      <th class="text-center">Renta Vitalicia</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tblCoberRent">
+                    <tr>
+                      <td class="text-center" colspan="2">No tiene Coberturas</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+              <div id="InfoBeneficiarios" style="margin-top:3%;"
+                *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '75'">
+                <h4 class="title-grid"><strong>Beneficiarios</strong></h4>
+                <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
+                  <thead>
+                    <tr class="htable headgrid" style="background:transparent;">
+                      <th class="text-center">Nombres</th>
+                      <th class="text-center">Documento</th>
+                      <th class="text-center">Vínculo</th>
+                      <th class="text-center">Participación</th>
+                      <th class="text-center">Fecha Declaración</th>
+
+                    </tr>
+                  </thead>
+                  <tbody id="tblContactos" *ngIf="listaDatabeneficiarios.length !=0; else listavacia2">
+
+                    <tr
+                      *ngFor="let ben of listaDatabeneficiarios | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index;">
+                      <td class="text-center">{{ben.datosCliente.name}}</td>
+                      <td class="text-center">{{ben.datosCliente.tipodoc}} {{ben.datosCliente.documento}}</td>
+                      <td class="text-center">{{ben.relacion}}</td>
+                      <td class="text-center">{{ben.participacion}}</td>
+                      <td class="text-center">{{ben.fechaDeclaracion}}</td>
+
+
+                    </tr>
+                  </tbody>
+                  <ng-template #listavacia2>
+                    <tbody id="tblBeneficiarios">
+                      <tr>
+                        <td class="text-center" colspan="6">No tiene beneficiarios</td>
+                      </tr>
+                    </tbody>
+                  </ng-template>
+
+                </table>
+                <ng-container
+                  *ngIf="listaDatabeneficiarios!=null && listaDatabeneficiarios.length>0; then showPagination2">
+                </ng-container>
+                <ng-template #showPagination2>
+                  <ngb-pagination [pageSize]="5" [collectionSize]="listaDatabeneficiarios.length" [(page)]="page"
+                    aria-label="Default pagination"></ngb-pagination>
+                </ng-template>
+              </div>
+
+              <div id="InfoModalidadPago" style="margin-top: 3%; margin-bottom: 3%;" *ngIf="this.item.IDRAMO == '75'">
+                <h4 class="title-grid"><strong>Modalidad de Pago</strong></h4>
+                <div style="width:45%; float:left">
+                  <div class="table-responsive">
+                    <div id="tableCronograma_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="tituloCro"><span class="lineorangeB"></span> <strong class="titulogrillaD">Cronograma
+                                    de Pagos</strong></div>
+                            </div>
+                            <div class="col-12">
+                                <div class="dataTables_scroll">
+                                    <div class="dataTables_scrollHead"
+                                      style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+                                      <div class="row" style="font-weight: 700;">
+                                        <div class="col text-center">Mes</div>
+                                        <div class="col text-center">Fecha de Pagos</div>
+                                        <div class="col text-center">Monto</div>
+                                    </div>
+                                    </div>
+                                    <div class="dataTables_scrollBody"
+                                      style="position: relative; overflow: auto; max-height: 200px; width: 100%;">
+                                      <table class="table table-hover table-striped no-footer dataTable" id="tableCronograma"
+                                        style="width: 100%;" data-page-length="24" role="grid">
+                                       
             
+                                        <tbody id="tblCrono">
+            
+                                          <tr role="row" class="odd"  *ngFor="let cro of listaDataCronograma">
+                                            <td class=" text-center">{{cro.mes}}</td>
+                                            <td class=" text-center">{{cro.fechaPago}}</td>
+                                            <td class=" text-center">{{cro.pension}}</td>
+                                          </tr>
+                                          
+                                          
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                            </div>
+                          
+                        </div>
+                      
+                     
+                      
+                    </div>
+                  </div>
+                </div>
+                <div style="width:45%; float:right">
+                  <div class="table-responsive">
+                    <div id="tableRescate_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="tituloRes"><span class="lineorangeB"></span> <strong class="titulogrillaD">Valores de
+                                    Rescate</strong></div>
+                            </div>
+                            <div class="col-12">
+                                <div class="dataTables_scroll">
+                                    <div class="dataTables_scrollHead"
+                                      style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+                                      
+                                      <div class="row" style="font-weight: 700;">
+                                          <div class="col text-center">Mes</div>
+                                          <div class="col text-center">Monto</div>
+                                      </div>
+                                    </div>
+                                    <div class="dataTables_scrollBody"
+                                      style="position: relative; overflow: auto; max-height: 200px; width: 100%;">
+                                      <table class="table table-hover table-striped no-footer dataTable" id="tableRescate"
+                                        style="width: 100%;" data-page-length="24" role="grid">
+                                       
+            
+                                        <tbody id="tblRescate">
+            
+                                          <tr role="row" class="odd"  *ngFor="let res of listaDataRestace">
+                                            <td class=" text-center">{{res.mes}}</td>
+                                            <td class=" text-center">{{res.monto}}</td>
+                                          </tr>
+                                          
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                            </div> 
+                        </div>
+                      
+                      
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <input type="hidden" id="titularrentavitalicia" data-asegurado="" data-vinculo=" (Titular)"
+                data-viapago="" data-sucursal="" data-banco="" data-tipocuenta="" data-numerocuenta="" data-cci=""
+                data-moneda="" data-institucion="" data-modalidad="" data-periodo="" data-receptordoc=" - "
+                data-receptornom="" data-receptorper=" - ">
+              <div id="InfoPensiones" style="display:none;">
+
+                <h4 class="title-grid" style="margin-bottom:3%"><strong id="titlebenef"></strong><span id="titlevinc">
+                    (Titular)</span></h4>
+                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Modalidad de Pago</strong></h5> <br>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Via de Pago</span><span class="spancontent"
+                        id="PPensViaPago">-</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Sucursal</span><span class="spancontent"
+                        id="PPensSucursal">-</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Banco</span><span class="spancontent" id="PPensBanco">-</span>
+                    </p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text textTitle"><span>Tipo Cta.</span><span class="spancontent"
+                        id="PPensTipoCuenta">-</span></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
+                        id="PPensMoneda">-</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Num. Cta.</span><span class="spancontent"
+                        id="PPensNumCuenta">-</span></p>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="card-text textTitle"><span>CCI</span><span class="spancontent" id="PPensCCI">-</span></p>
+                  </div>
+                </div>
+                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Receptor de Pensión</strong></h5>
+                <br>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Identificación</span><span class="spancontent" id="PRecepDoc">
+                        - </span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Período de Vigencia</span><span class="spancontent"
+                        id="PRecepPerVig"> - </span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Nombres</span><span class="spancontent"
+                        id="PRecepNombre">-</span></p>
+                  </div>
+                </div>
+                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Plan de Salud</strong></h5> <br>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Institución</span><span class="spancontent"
+                        id="PPensInsti">-</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Modalidad de Pago</span><span class="spancontent"
+                        id="PPensModalPago">-</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Monto de Pago</span><span class="spancontent"
+                        id="PPensMontoPago">-</span></p>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="card-text textTitle"><span>Periódo Efecto</span><span class="spancontent"
+                        id="PPensPeriodoEfecto">-</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p style="margin-bottom:5%"></p>
+          </div>
+
         </div>
+      </div>
+
 
     </div>
+
+  </div>
 
 </div>

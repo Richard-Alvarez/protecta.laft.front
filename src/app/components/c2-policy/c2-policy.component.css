@@ -1009,3 +1009,11 @@ button.close{padding:0;cursor:pointer;background:0 0;border:0;-webkit-appearance
     display:none;
 }
 
+.titulogrillaD{
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 1.5%;
+    margin-right: 20%;
+    color: #ff6e00;
+    font-size: small;
+}
