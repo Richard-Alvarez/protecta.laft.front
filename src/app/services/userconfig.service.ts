@@ -168,6 +168,20 @@ export class UserconfigService {
     })
   }
 
+  GetListaCompUsu(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaCompUsu, null).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  
+
   GetListaResultado(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
@@ -440,7 +454,44 @@ export class UserconfigService {
       }
     })
   }
- 
+
+  GetUpdComplementoCab(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetUpdComplementoCab, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  GetInsCormularioComplUsu(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetInsCormularioComplUsu, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  GetValFormularioCompl(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetValFormularioCompl, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+  
+  
 
   insertQuestionHeader(data: any): Promise<any> {
     return new Promise((resolve, reject) => {

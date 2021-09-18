@@ -318,7 +318,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div *ngIf="STIPO_USUARIO=='RE' && item.SNOMBRE_ALERTA != 'C-RG1'">
+                                                                <div *ngIf="STIPO_USUARIO=='RE' && item.TIPO_FORM != 'S'">
                                                                     <div class="row">
                                                                         <div class="col-lg-9">
                                                                             <div *ngFor="let pregHeadOne of item.arrPreguntasCabecera;let incPregHeadOne = index;">
@@ -512,7 +512,7 @@
 
                                                                 </div>
 
-                                                                <div *ngIf="STIPO_USUARIO=='RE' && item.SNOMBRE_ALERTA == 'C-RG1'">
+                                                                <div *ngIf="STIPO_USUARIO=='RE' && item.TIPO_FORM == 'C'">
                                                                     
                                                                     <div class="row">
                                                                         <div class="col-lg-9">
@@ -570,13 +570,14 @@
                                                                         </div>
                                                                     </div>
 
-                                                                   <div>
+                                                                  <!-- <div>
                                                                     <button (click)="EnviarComplemento()" style="font-size: 15px;display: flex;;
                                                                     justify-content: center;" class="btn btn-warning text-white">Solicitar Complemento</button>
                                                                    </div>
                                                                    
-
-                                                                </div>
+                                                                    <div>
+                                                                        {{item | json}}
+                                                                    </div>  -->
 
 
                                                             </div>

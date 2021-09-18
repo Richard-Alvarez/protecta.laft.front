@@ -182,7 +182,12 @@ class Rutas {
   public urlValidarPolizaVigente: string = this.base + "monitoreoSenales/ValidarPolizaVigente";
   public urlGetListaComplementos: string = this.base + "monitoreoSenales/GetListaComplementos";
   public urlGetListaPolizas: string = this.base + "monitoreoSenales/GetListaPolizas";
+  //Para complementos
   public urlListaUsariosComp:string = this.base + "monitoreoSenales/ListaUsariosComp";
+  public urlGetUpdComplementoCab: string = this.base + "monitoreoSenales/GetUpdComplementoCab";
+  public urlGetInsCormularioComplUsu: string = this.base + "monitoreoSenales/GetInsCormularioComplUsu";
+  public urlGetValFormularioCompl: string = this.base + "monitoreoSenales/GetValFormularioCompl";
+  public urlGetListaCompUsu:string = this.base + "monitoreoSenales/GetListaCompUsu";
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

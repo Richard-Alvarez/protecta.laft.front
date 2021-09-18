@@ -26,7 +26,7 @@ export class CompletadoComponent implements OnInit {
   arrFilesAdjuntos:any = []
   arrCheckbox:any = []
   linkactual = "";
-  
+  PeriodoComp
 
     files: Map<string, any> = new Map<string, any>()
     listFiles: Map<string, any> = new Map<string, any>()
@@ -57,13 +57,16 @@ export class CompletadoComponent implements OnInit {
     this.OBJ_USUARIO = this.core.storage.get('usuario');
     this.NIDUSUARIO_LOGUEADO = this.OBJ_USUARIO.idUsuario//this.core.storage.get('NIDUSUARIO')
     this.NPERIODO_PROCESO = this.core.storage.get('NPERIODO_PROCESO')
+
+    this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
+    console.log("PeriodoComp",this.OBJ_USUARIO.idUsuario)
     await this.getTipoUsuario();
     this.fillFileGroup()
 
     // console.log("el regimen : ",this.regimen.id)
    //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   
-   await this.AgregarUsuario()
+   await this.ListaUsuarioComplemento()
   
   }
 
@@ -887,11 +890,109 @@ filtroComplemeto(item){
 }
 
 ListUser:any = []
-userId
-async AgregarUsuario(){
+userId:number = 0
+async ListaUsuarioComplemento(){
     this.ListUser = await this.userConfigService.ListaUsariosComp()
     console.log("  this.ListUser",   this.ListUser)
+
+    console.log("  this.ListUsuaurioAgregado 1",   this.ListUsuaurioAgregado.length)
+    console.log("  this.ListUsuaurioAgregado 2",   this.ListUsuaurioAgregado)
 }
+
+ListUsuaurioAgregado:any = []
+async  AgregarUsuario(){
+  let usuario = this.ListUser.filter(it => it.ID_USUARIO == this.userId)
+  let buscarrepetido = this.ListUsuaurioAgregado.filter(usu => usu.ID_USUARIO == usuario[0].ID_USUARIO)
+  console.log("  this.usuario",   usuario[0])
+  if(buscarrepetido.length == 0){
+    await this.ListUsuaurioAgregado.push(usuario[0])
+    console.log("  this.ListUsuaurioAgregado",   this.ListUsuaurioAgregado)
+  }else{
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'No se puede agregar al mismo usuario',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result){
+       return
+     }
+    }).catch(err => {
+      ////console.log("el error : ",err);
+    })
+  }
+
+  
+
+}
+
+EliminarUsuario(indice){
+  this.ListUsuaurioAgregado.splice(indice,1)
+  //console.log("  this.ListUsuaurioAgregado eliminando",   this.ListUsuaurioAgregado)
+}
+
+async EnviarCompUsuario(alerta,complemento){
+  //console.log("el itemmmmmmmmmm",alerta)
+  //console.log("el itemmmmmmmmmm 2",complemento)
+  let valorGrupo = this.getLink()
+  if(this.ListUsuaurioAgregado.length == 0){
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'No hay usuarios registrados',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result){
+       return
+     }
+    }).catch(err => {
+      ////console.log("el error : ",err);
+    })
+  }else{
+    this.ListUsuaurioAgregado.forEach(async (element) => {
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      data.NIDALERTA = alerta.NIDALERTA
+      data.NIDCOMPLEMENTO = complemento.NIDCOMPLEMENTO
+      data.NIDUSUARIO_RESPONSABLE = this.OBJ_USUARIO.idUsuario
+      data.NIDUSUARIO_ASIGNADO = element.ID_USUARIO
+      data.NIDGRUPOSENAL = valorGrupo
+      data.SRUTA_PDF = ''
+      data.NIDAGRUPA = alerta.NIDAGRUPA
+      console.log("prueba 11111",data)
+      this.core.loader.show();
+      await this.userConfigService.GetInsCormularioComplUsu(data)
+      this.core.loader.hide();
+    });
+  
+  }
+
+  
+}
+
+ getLink(){
+   if(this.linkactual == 'clientes'){
+     return 1
+   }
+
+ }
+
 
   
 }
