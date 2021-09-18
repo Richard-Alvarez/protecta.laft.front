@@ -182,7 +182,7 @@ class Rutas {
   public urlValidarPolizaVigente: string = this.base + "monitoreoSenales/ValidarPolizaVigente";
   public urlGetListaComplementos: string = this.base + "monitoreoSenales/GetListaComplementos";
   public urlGetListaPolizas: string = this.base + "monitoreoSenales/GetListaPolizas";
-  public urlListaUsariosComp:string = this.base + "monitoreoSenales/urlListaUsariosComp";
+  public urlListaUsariosComp:string = this.base + "monitoreoSenales/ListaUsariosComp";
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
