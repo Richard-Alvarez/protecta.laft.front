@@ -1,0 +1,177 @@
+<div id="S3">
+    <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+        <p> 
+          <strong style="font-family: arial Narrow, serif;">1.2.6	Devolución por depósito errado</strong>
+        </p>
+          
+        <table border="1" cellspacing="0" cellpadding="0" align="left" width="550">
+            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <tbody>
+                    <tr>
+                        <td width="50" style="padding-left: 10px;">
+                            <p>
+                                <strong>CÓDIGO</strong>
+                            </p>
+                        </td>
+                        <td width="380" style="padding-left: 10px;">
+                            <p>
+                                <strong>SEÑAL DE ALERTA</strong>
+                            </p>
+                        </td>
+                        <td width="80">
+                            <p align="center">
+                                <strong>PRODUCTO</strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="70">
+                            <p align="center">
+                                S3
+                            </p>
+                        </td>
+                        <td width="329" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                            Pago de una prima superior a la establecida con posterior devolución de la diferencia por depósito errado.
+                            </p>
+                        </td>
+                        <td width="113">
+                            <p style="padding-left: 20px; text-align: center;">todos los productos</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </FONT>
+        <br>
+        </table>
+    </div>
+      <br>
+
+    <div class="container" style="padding: 0px 200px;">
+        <p>
+            <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta S3</strong>
+        </p>
+        <ol type="a">
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            Se solicita al área de Operaciones información sobre si se han presentado/identificado la siguiente situación: 
+            </li>
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Pago de una prima superior a la establecida con posterior devolución de la diferencia por depósito errado.
+                    </li>
+                </ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            La consulta se remitió al área de cobranzas.
+            </li>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            Se revisa la información proporcionada.
+            </li>    
+        </ol>
+        <br>
+        <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta S3</strong>
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of parent.arrayDataSenal">
+            El {{item.Cargo}} informo que {{item.Respuesta}} se identificaron pagos de una prima superior a la establecida con posterior 
+            devolución de la diferencia por depósito errado.
+            </li>
+        </ul>   
+        <p>
+            <strong style="font-family: arial Narrow, serif; text-align: justify">Consulta al área de Cobranzas</strong>
+        </p>
+        <ol type="a">
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            Se solicita al área de Operaciones información sobre si se han presentado/identificado la siguiente situación: 
+            </li>
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Pago de una prima superior a la establecida con posterior devolución de la diferencia por depósito errado.
+                    </li>
+                </ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            La consulta se remitió al área de cobranzas.
+            </li>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            Se revisa la información proporcionada.
+            </li>    
+        </ol>
+        <br>
+        <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta S3</strong>
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+                El área de Cobranzas reportó X casos que involucran pagos de una prima superior a la establecida 
+                con posterior devolución de la diferencia por depósito errado del [Periodo].
+            </li>
+        </ul>   
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                            <td width="14%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>TIPO DOC.</strong>
+                            </p>
+                            </td>
+                            <td width="11%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>NRO. DOC.</strong>
+                            </p>
+                            </td>
+                            <td width="25%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>NOMBRE COMPLETO</strong>
+                            </p>
+                            </td>
+                            <td width="20%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                            <p>
+                            <strong>PRODUCTO</strong>
+                            </p>
+                            </td>
+                            <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                <p>
+                                <strong>DOCUMENTO DE REFERENCIA</strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of parent.listaRenta">
+                            <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.STIPO_DOCUMENTO}}
+                            </p>
+                            </td>
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.SNUM_DOCUMENTO_BUSQ}}
+                            </p>
+                            </td>
+                            <td width="180px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.SNOM_COMPLETO_BUSQ}}
+                            </p>
+                            </td>
+                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                            {{item.SDESPRODUCTO}} 
+                                </p>
+                            </td>
+                            <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                            <p>
+                            {{item.STIPO_LISTA_REFERENCIA}}
+                            </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </FONT>
+            </table>
+            <br>
+        </div> 
+
+      <p>Los archivos de trabajo se ubican en:</p>
+      <p>  <a href="http://190.216.170.173/LAFT/ ">http://190.216.170.173/LAFT/ </a></p>
+      
+  
+      
+      </div>
+    
+    <div class="text-center pt-5">
+      <button class="" (click)="Export2Doc('exportContent', 'test');"></button>
+    </div>

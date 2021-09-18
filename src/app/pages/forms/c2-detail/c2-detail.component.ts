@@ -10,6 +10,9 @@ import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 import * as $ from 'jquery';
 
 import {IOption} from 'ng-select'; 
+import { element } from 'protractor';
+import { forEach } from 'jszip';
+import { O_NOFOLLOW } from 'constants';
 
 
 @Component({
@@ -43,7 +46,7 @@ export class C2DetailComponent implements OnInit {
     selectedCargo2: any;
     selectedCargo3: any;
 
-
+    boolNameMach;
     internationalList: any[] = []
     pepList: any[] = []
     familiesPepList: any[] = []
@@ -111,10 +114,8 @@ export class C2DetailComponent implements OnInit {
   SESTADO_BUTTON_SAVE
   NewListCheck :any = []
   async ngOnInit() {  
+        
     
-    
- 
-    debugger;
     var paramCliente =  localStorage.getItem("paramCliente");
     // console.log("El paramCliente: ", paramCliente)
     if (paramCliente != null && paramCliente != ""){
@@ -188,6 +189,12 @@ export class C2DetailComponent implements OnInit {
     console.log("La lista del unchekAllList",this.unchekAllList)
     console.log("La lista del unchekAllList NewListCheck",this.NewListCheck)
     this.Arraycheckbox()
+    console.log("this.formData",this.formData)
+
+
+    //await this.Consultar360Previous();
+     await this.consultarPoliza();
+
   }
   
  
@@ -547,12 +554,17 @@ export class C2DetailComponent implements OnInit {
                  dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
             }
             // let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
-        
+            
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
-
+            //this.boolNameMach = this.arrCoincidenciasLista.;
             console.log("el sNombreLista Marco debug : ",this.sNombreLista)
             console.log("el arrCoincidenciasLista Marco debug : ",this.arrCoincidenciasLista)
-
+            if (typeof(this.arrCoincidenciasLista) == 'object'){
+                if (this.arrCoincidenciasLista[0].arrCoincidencias.length > 0)
+                    this.boolNameMach = this.arrCoincidenciasLista[0].arrCoincidencias.map(t=>t.NIDPROVEEDOR).includes(4);
+                else
+                    this.boolNameMach = false;
+            }
             this.SCLIENT_DATA = localStorage.getItem('SCLIENT')//this.formData.SCLIENT
 
             await this.getHistorialRevisiones()
@@ -1350,7 +1362,7 @@ export class C2DetailComponent implements OnInit {
         this.core.loader.show();
         let respMovement = await this.userConfigService.getMovementHistory(param)
         //let arrMovementNew = []
-
+        /* debugger; */
         this.movementHistory = respMovement//this.sNombreLista ? respMovement.filter(duplid => duplid.SDESTIPOLISTA == this.sNombreLista) : respMovement
         this.core.loader.hide();
     }
@@ -1359,6 +1371,12 @@ export class C2DetailComponent implements OnInit {
     bolSoatGral:any = false
     bolSoatSimpli:any = false
     bolSoatPolicy:any = false
+
+    /* prueba param 360 */
+    /* certif: any
+    fecpoli: any
+    poliza: any */
+
     async getPolicyList(){       
          console.log("el P_NIDALERTA : ",this.formData) 
          console.log("el P_NIDALERTA 2: ",(this.formData.NTIPOCARGA == null ? 2 : this.formData.NTIPOCARGA)) 
@@ -1402,6 +1420,16 @@ export class C2DetailComponent implements OnInit {
             }
         })*/
         this.core.loader.hide();
+        
+                     /* prueba param 360 */
+        /* this.certif= this.policySimpli[0].NCERTIF;
+        this.fecpoli= this.policySimpli[0].DFEC_INI_POLIZA;
+        this.poliza= this.policySimpli[0].SNUM_POLIZA; */
+        
+        /* console.log('prueba kevin', this.policySimpli)
+        console.log('prueba kevin', this.policySimpli[0].NCERTIF)
+        console.log('prueba kevin', this.policySimpli[0].DFEC_INI_POLIZA)
+        console.log('prueba kevin', this.policySimpli[0].SNUM_POLIZA) */
     }
 
     getListCheckedById(idList){
@@ -1721,6 +1749,7 @@ export class C2DetailComponent implements OnInit {
                                         valorAlerta = 2
                                         valorIDGrupo = 1
                                     }
+                                    // debugger;
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: valorAlerta, 
@@ -2508,13 +2537,123 @@ ValidarRegimenAcepta(){
         return true
     }
     
-
-    
-   
 }
+/**/
+ResultadoPrevious: any = []
+detResult: any =[]
+async Consultar360Previous(){
+    let data = {
+      TipoDocumento: this.formData.NTIPO_DOCUMENTO,
+      NumeroDocumento: this.formData.SNUM_DOCUMENTO,
+      //Nombres: null,
+      //Poliza: null,
+      CodAplicacion: "LAFT",
+      //Producto: null,
+      //FechaSolicitud: null,
+      //Rol: null,
+      //Tipo: null,
+      //estado: null,
+      //Ramo: null,
+      pagina: 1,
+      NumeroResgistros: "10000000",
+      //Endoso: null,
+      Usuario: "1"
+    }
+    await this.userConfigService.Consulta360Previous(data).then(
+      (response) => {
+        this.ResultadoPrevious = response
+    });
+    console.log("360Previous",this.ResultadoPrevious)
+    this.detResult= this.ResultadoPrevious.certificados
+    console.log("El resultado",this.detResult)
 
+  }
+  ResultadoDetail:any = {}
+  async Consultar360_2(item){
 
+    console.log("entro en el servicio de 360", item)
+    let data:any = {
+    Ramo : item.ramo.idRamo,
+    Producto : item.idProduct,
+    Poliza : item.nroPolicy,
+    Certificado : item.nroCertificate,
+    FechaConsulta : item.fechaInicioVigencia, //fecha inicio vigencia
+    Endoso : item.endoso,    //Solo para rentas
+    }
+    console.log("entro en el servicio de 360 la data", data)
+     await this.userConfigService.Consulta360(data).then(
+       (response) => {
+        this.ResultadoDetail = response
+       });
+    console.log("entro en el servicio de 360 resultado", this.ResultadoDetail)
     
+    //console.log("El resultado", item.ramo.descripcion)//primero no envia
+    //console.log("El resultado", item.ramo.descripcionCorta)//segundo
+    //console.log("El resultado", item.producto)//tercero
 
-    
+    // this.desc= item.ramo.descripcion;
+    // this.desCor= item.ramo.descripcionCorta;
+    // this.prod= item.producto;
+    // this.estado= item.status;
+  }
+
+
+   ListaPoliza:any = []
+  async consultarPoliza(){
+    let data:any = {}
+        data.P_TIPO_DOC = "2"
+        //data.P_NUMERO_DOC = "10549585" // esto es de Luis
+        data.P_NUMERO_DOC = "25623964" // esto es de celia
+        
+        data.P_NOMBRES = null
+        data.P_POLIZA = null
+        data.P_CODAPPLICATION ="LAFT"
+        data.P_PRODUCTO =null
+        data.P_FECHA_SOLICITUD = null
+        data.P_ROL = null
+        data.P_TIPO = null
+        data.P_ESTADO = 2
+        data.P_NBRANCH = null
+        data.P_NPAGENUM = 1
+        data.P_NLIMITPERPAGE = 10000000
+        data.P_NUSER = 0
+
+        this.core.loader.show()
+        this.ListaPoliza = await this.userConfigService.GetListaPolizas(data)
+        this.core.loader.hide()
+        console.log("this.ListaPoliza", this.ListaPoliza)
+
+        // if(this.ListaPoliza.length != 0){
+        //     this.ListaPoliza.forEach(element => {
+
+        //         this.Consultar360(element)
+        //     });
+        // }
+  } 
+
+   Resultado360:any = []
+//   async Consultar360(item){
+
+//     console.log("entro en el servicio de 360", item)
+//     let data:any = {
+//     Ramo : item.IDRAMO,
+//     Producto : item.COD_PRODUCTO,
+//     Poliza : item.POLIZA,
+//     Certificado : item.NCERTIF,
+//     FechaConsulta : item.INICIO_VIG_POLIZA,//fecha inicio vigencia
+//     Endoso : null,    //Solo para rentas
+//     }
+//     console.log("entro en el servicio de 360 la data", data)
+//     this.core.loader.show()
+//      await this.userConfigService.Consulta360(data).then(
+//        (response) => {
+//         this.Resultado360 = response
+//        });
+//        this.core.loader.hide()
+//     console.log("entro en el servicio de 360 resultado", this.Resultado360)
+//   } 
+
+
+  
+
 }

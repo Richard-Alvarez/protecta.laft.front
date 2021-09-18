@@ -966,6 +966,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
         let comentario = arrComentarios[i] == undefined ? "" : arrComentarios[i];
         console.log("comentario : ",comentario)
         console.log("comentario.length : ",comentario.length)
+        
+       
          if (cabecera === '1' && (comentario === null || (comentario).trim() === '')){
         // if (false){
           console.log("ENTRO EN EL IF")
@@ -981,9 +983,10 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
         //   return objResp
         // }
           else{
-          if((preguntaCabecera.NIDALERTA == "36" || 
-          preguntaCabecera.NIDALERTA == "37" || 
-          preguntaCabecera.NIDALERTA == "38" || 
+          if((
+            //preguntaCabecera.NIDALERTA == "36" || 
+          //preguntaCabecera.NIDALERTA == "37" || 
+          //preguntaCabecera.NIDALERTA == "38" || 
           // preguntaCabecera.NIDALERTA == "39" || 
           (preguntaCabecera.NIDALERTA == "22" && this.parent.ID_USUARIO == 24)  ||
           (preguntaCabecera.NIDALERTA == "39" && this.parent.ID_USUARIO == 35)) && 

@@ -827,7 +827,7 @@ export class DevueltoComponent implements OnInit {
           objResp.message='Debe responder obligatoriamente el comentario de la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'
           return objResp
         }else{
-          if((preguntaCabecera.NIDALERTA == "36" || preguntaCabecera.NIDALERTA == "37" || preguntaCabecera.NIDALERTA == "38" || preguntaCabecera.NIDALERTA == "39" || preguntaCabecera.NIDALERTA == "22") && !preguntaCabecera.isSustento)
+          if(( preguntaCabecera.NIDALERTA == "39" || preguntaCabecera.NIDALERTA == "22") && !preguntaCabecera.isSustento)
           {
            objResp.code = 1
            objResp.message='Ingrese sustento en la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'

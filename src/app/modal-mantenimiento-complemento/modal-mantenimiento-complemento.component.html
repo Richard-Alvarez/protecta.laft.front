@@ -1,0 +1,107 @@
+<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
+   
+    <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
+</div>
+<div class="row mb-2 mt-2" style="display: flex;padding-left: 125px;">
+ <div class="Header">
+     <div class="row">
+         <div class="col-lg-19">
+             <h4 class="TitleLine">{{this.fTitle}}</h4>
+         </div>
+     </div>
+     
+ </div>
+ <br>
+     
+</div>
+
+<div class="row"  style="display: flex;justify-content: left;align-items: left; padding: 0px 100px;"> 
+    
+    <div class="col-lg-5 form-group">
+        <label class="fontText">Grupo:</label>
+        <select  [(ngModel)]="idGrupo" name="profile" 
+        (change)="changeGrupo()"
+            style="display: flex;justify-content: center;align-items: center;"
+            class="form-control buttonSinBorder">
+            <option value="0" selected>Seleccione</option>
+            <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="profileIdSelected" >
+                {{item.SDESGRUPO_SENAL}}</option> 
+           
+        </select>
+    </div>
+    
+    <div class="col-lg-5 form-group" >
+        <label class="fontText">Señal:</label>
+        <select  [(ngModel)]="sennal" name="profile" 
+           
+            style="display: flex;justify-content: center;align-items: center;"
+            class="form-control buttonSinBorder">
+            <option value="0" selected>Seleccione</option>
+            <option *ngFor="let item of SennalList" value="{{item.NIDALERTA}}" id="profileIdSelected">
+                {{item.SNOMBRE_ALERTA}}</option>
+           
+        </select>
+    </div>
+
+   <div class="col-lg-2 form-group pl-5" title="Enviar recordatorio">
+        <label class="custom-control custom-checkbox">
+            <span class="fontText">Estado:</span>
+            <input type="checkbox" [(ngModel)]="estado"  name="reminderS" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+        </label>
+    </div>
+
+</div>
+
+<div class="row" style="display: flex;justify-content: left;align-items: left; padding: 0px 100px;">
+    <div class="col-lg-12 form-group" title="Nombre de Alerta">
+        <span class="fontText">Nombre del complemento:</span>
+        <input [(ngModel)]="nombreComplemento" id="usAlertNama" type="text" class="form-control buttonSinBorder">
+</div>
+</div>  
+
+
+
+<div class="row" style="display: flex;justify-content: left;align-items: left; padding: 0px 100px;">
+    <div class="col-lg-12" title="Asunto del correo">
+        <div class="form-group">
+            <label for="comment" class="fontText">Descripción del complemento:</label>
+            <textarea class="form-control" style="max-height: 100px; height:50px;min-height: 40px;"  [(ngModel)]="descripcion"  rows="5" ></textarea>
+            
+        </div>
+       
+    </div>
+</div>
+
+
+<div class="row" style="display: flex;justify-content: left;align-items: left; padding: 0px 100px;">
+    <div class="col-lg-12" title="Asunto del correo">
+        <div class="form-group">
+            <label for="comment" class="fontText">Pregunta del complemento:</label>
+            <textarea class="form-control" style="max-height: 300px; height:100px;min-height: 100px;"  [(ngModel)]="pregunta"  rows="7" ></textarea>
+            
+        </div>
+       
+    </div>
+</div>
+
+
+
+
+
+
+<div class="row" style="padding-left: 250px;">
+ <div class="col-lg-9 form-group" title="Guardar" style="text-align:right">
+     <br>
+     <button style="width: 100px;"
+         class="btn btn-warning text-white" (click)="GuardarCambios()" >Guardar</button>
+ </div>
+ 
+ <div class="col-lg-2 form-group" title="Guardar" style="">
+     <br>
+     <button style="width: 100px; background-color: gray;"
+         class="btn text-white" (click)="closeModal('edit-modal')">Cancelar</button>
+ </div>
+</div>
+<br><br>
+

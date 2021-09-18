@@ -172,7 +172,17 @@ class Rutas {
   public urlProcessCargaFile: string = this.base + "sbsReport/processCargaFile";
   public urlProcessPagosManuales: string = this.base + "sbsReport/processPagosManuales";
   public urlGetListaCargo: string = this.base + "monitoreoSenales/GetListaCargo";
-
+  public urlConsulta360: string = this.base + "monitoreoSenales/Consulta360";
+  public urlConsulta360Previous: string = this.base + "monitoreoSenales/Consulta360Previous";
+  public urlConsultaWC: string = this.base + "monitoreoSenales/ConsultaWC";
+  public urlGetListaResultado: string = this.base + "monitoreoSenales/GetListaResultado";
+  public urlGetGrupoXSenal: string = this.base + "monitoreoSenales/GetGrupoXSenal";
+  public urlGetListaAlertaComplemento: string = this.base + "monitoreoSenales/GetListaAlertaComplemento";
+  public urlInsertUpdateComplemento: string = this.base + "monitoreoSenales/InsertUpdateComplemento";
+  public urlValidarPolizaVigente: string = this.base + "monitoreoSenales/ValidarPolizaVigente";
+  public urlGetListaComplementos: string = this.base + "monitoreoSenales/GetListaComplementos";
+  public urlGetListaPolizas: string = this.base + "monitoreoSenales/GetListaPolizas";
+  
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }

@@ -23,7 +23,6 @@ export class UserconfigService {
             return reject(error)
         }
     })
-
   }
 
   getPolicyList(data: any): Promise<any> {
@@ -145,10 +144,74 @@ export class UserconfigService {
     })
   }
 
+  GetListaAlertaComplemento(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaAlertaComplemento, null).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  GetListaResultado(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaResultado, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+ 
+
   sendEmail(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlEmailSender, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  Consulta360(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlConsulta360, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  Consulta360Previous(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlConsulta360Previous, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  ConsultaWC(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlConsultaWC, data).subscribe((response) => {
           return resolve(response);
 
         });
@@ -335,6 +398,29 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlInsertUpdateProfileGrupos, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  InsertUpdateComplemento(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlInsertUpdateComplemento, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+  ValidarPolizaVigente(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlValidarPolizaVigente, data).subscribe(response => {
           return resolve(response)
         })
       } catch (error) {
@@ -1072,6 +1158,34 @@ export class UserconfigService {
       }
     })
   }
+
+  GetListaComplementos(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaComplementos,data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        //console.log(error)
+        return reject(error)
+      }
+    })
+  }
+
+  GetListaPolizas(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaPolizas,data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        //console.log(error)
+        return reject(error)
+      }
+    })
+  }
+  
+
   GetGrupoXPerfil(data): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

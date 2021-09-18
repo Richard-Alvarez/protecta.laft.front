@@ -104,7 +104,7 @@
                 </div>
                 <ng-container *ngIf="processlist!=null && processlist.length>0; then showPagination"></ng-container>
                 <ng-template #showPagination>
-                    <div class="row mt-4" style="padding-left: 350px;">
+                    <div class="row mt-4">
                         <div class="col-sm-12">
                             <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
                                 [collectionSize]="totalItems" [maxSize]="maxSize"

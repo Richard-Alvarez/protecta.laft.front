@@ -384,6 +384,49 @@
 
                                                 </div>
                                                 <div id="{{stateCompletado.sHrefHead + regimen.desCorto + index}}" class="collapse {{parent.getStyleShowByAlert(item.NIDALERTA)}}" attr.data-parent="#{{stateCompletado.sCollapHead + regimen.desCorto + index}}">
+                                                    
+                                                    <div class="row">
+                                                         <div class="col-lg-12" *ngFor="let listComplemento of filtroComplemeto(item);" >
+                                                            <div class="row mb-2 " style="padding-left: 30px;">
+                                                                <div class="Header">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-19">
+                                                                            <h4 class="TitleLine2">Complemento</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <br>
+                                                                    
+                                                            </div>
+
+                                                                           
+                                                            <div class="row pt-2">
+                                                                <div class="col-lg-3 form-group">
+                                                                    <span class="fontText">Nombre del complemento :</span>
+                                                                </div>
+                                                                <div class="col-lg-6 form-group">
+                                                                    <input [disabled]="true" id="usName" type="text"
+                                                                        class="form-control buttonSinBorder" value={{listComplemento.SNOMBRE_COMPLEMENTO}}  >
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-3 form-group">
+                                                                    <span class="fontText">Descripción del complemento :</span>
+                                                                </div>
+                                                                <div class="col-lg-6 form-group">
+                                                                    <input [disabled]="true" id="usName" type="text"
+                                                                        class="form-control buttonSinBorder" value={{listComplemento.SDESCRIPCION}}  >
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                             <!-- Nombre del complemento :  {{listComplemento.SNOMBRE_COMPLEMENTO}}  
+                                                             Descripción del complemento :  {{listComplemento.SDESCRIPCION}} -->
+                                                             
+                                                        </div> 
+                                                    </div> 
+
 
                                                     <app-button-download-report [item]="item" [regimen]="regimen" [STIPO_USUARIO]="STIPO_USUARIO" [parent]="this"></app-button-download-report>
 

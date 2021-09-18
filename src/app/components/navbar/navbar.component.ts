@@ -2,7 +2,7 @@ import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ViewChild, ElementRef, Renderer2,HostListener } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { UserconfigService } from '../../services/userconfig.service';
-import * as $ from 'jquery';
+import * as $ from 'jQuery';
 
 
 @Component({
@@ -60,7 +60,11 @@ export class NavbarComponent implements OnInit {
       this.getOptions();
     }
 
-   
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+    
      
     
   }

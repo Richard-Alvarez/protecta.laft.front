@@ -432,7 +432,7 @@ export class PendienteInformeComponent implements OnInit {
         //this.internationalList = respListaInternacional//.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO ==1)
         let respuestaFiltroLista =  respListaInternacional.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO =="1" )
         console.log("Nueva lista cambios :",respuestaFiltroLista)
-        if(!(respuestaFiltroLista.length > 0 && validacionCantidadREvisados == true) && (objAlerta.NIDALERTA == 2 || objAlerta.NIDALERTA == 35 || objAlerta.NIDALERTA == 33 )){
+        /*if(!(respuestaFiltroLista.length > 0 && validacionCantidadREvisados == true) && (objAlerta.NIDALERTA == 2 || objAlerta.NIDALERTA == 35 || objAlerta.NIDALERTA == 33 )){
           swal.fire({
             title: 'Oficial de cumplimiento',
             icon: 'warning',
@@ -448,7 +448,7 @@ export class PendienteInformeComponent implements OnInit {
             
           })
           return 
-        }
+        }*/
         /*else{
           
         }*/
@@ -740,74 +740,14 @@ DataArray(){
   
 }
 
-
- async Export(element , filename = ''){
-   debugger;
-  //this.Alerta = '';
-  //this.Nombre = '';
-  //this.Perfil ='';
-  //this.Respuesta ='';
-  console.log("this.arrayData",this.arrayData)
-
-    this.arrayData.forEach(async data => {
-     console.log("this.arrayData   data",data.Alerta)
-      this.Alerta = data.Alerta;
-    this.Nombre = data.NombreCompleto;
-    this.Perfil = data.Cargo;
-    this.Respuesta = data.Respuesta;
-  //   debugger
-  //  // console.log("dsadsadsadsa11111111111111111",  await Promise.all(this.parent2.NombreBoton)) 
-     this.Export2Doc(element,data.Alerta)
-  //   this.core.loader.show();
-    
-     // await this.Export2Doc(element,data.Alerta)
-    
-  //   this.core.loader.hide();
-   });
-//  for(let i=0; i< this.arrayData.length ; i++ ){
-//     //this.Export2Doc(element,this.arrayData[i].Alerta)
-//     await this.templateRG.ngOnInit()
-//      this.Nombre = this.arrayData[i].NombreCompleto;
-//      this.Perfil =this.arrayData[i].Cargo;
-//    this.Respuesta =this.arrayData[i].Respuesta;
-//     this.Alerta = this.arrayData[i].Alerta
-//     this.Export2Doc(element,this.arrayData[i].Alerta)
-
-//    console.log("arrayData Alerta111",this.Nombre,this.Perfil,this.Respuesta,this.Alerta)
-   
-//   }
-  // this.arrayData.forEach(data => {
-  //   this.Alerta = data.Alerta;
-  //   this.Respuesta = data.Respuesta;
-  //   this.Export2Doc(element,data.Alerta)
-  //   console.log("Alerta",this.Alerta)
-  //   console.log("Alerta",data.Alerta)
-  // });
-}
-
-Nombre2(){
-  return this.Nombre
-}
-Alerta2(){
-  return this.Nombre
-}
-Perfil2(){
-  return this.Nombre
-}
-Respuesta2(){
-  return this.Nombre
-}
-
-
-
  Export2Doc(element, filename = ''){
  
-setTimeout(function(){
+  setTimeout(function(){
   //console.log("dsadsadsadsa", this.parent2.valor)
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
     var html = preHtml+document.getElementById(element).innerHTML+postHtml;
-    var ht = "<p><strong>Perfil:  {{parent.Perfil}}  </strong></p> "
+    // console.log("El html que descarga", html)
     var blob = new Blob(['\ufeff', html],{
         type: 'application/msword'
     });
@@ -819,7 +759,7 @@ setTimeout(function(){
     var downloadLink = document.createElement("a");
   
      document.body.appendChild(downloadLink);
-  
+    
     if(navigator.msSaveOrOpenBlob){
         navigator.msSaveOrOpenBlob(blob, filename);
     }else{
@@ -831,14 +771,9 @@ setTimeout(function(){
     }
   
      document.body.removeChild(downloadLink);
-    
-  
-  
-  },1);
+    },1);
 
- 
-
-}
+ }
 
 
 arrayDataSenal= []
@@ -848,8 +783,32 @@ Perfil:string = ''
 Respuesta:string = ''
 RespuestaGlobal:string = ''
 RegimenPendiente:number = 0
+NombreLink:string = ''
+arrayDataResultado= []
+Periodo:string = ''
+Cantidad:number = 0
+listaSoat:any = []
+listaMasivos:any = []
+listaRenta:any = []
+listaAhorro:any = []
+listaPep:any = []
+listaEspecial:any = []
+cargosConcatenados:string = ''
+ValidarRG:string = ''
+ValidarNombreTemplate:string = ''
+ValidarT:string = ''
+ValidarP:string = ''
+listaPepMasivos:any = []
+listaPepSoat:any = []
+listaPepRenta:any = []
+listaEspecialMasivos:any = []
+listaEspecialSoat:any = []
+listaEspecialRenta:any = []
+listaEspecialRentaParticular:any = []
+listaPepRentaParticular:any = []
+listaInternacionalRentaParticular:any = []
 
-DescargarReporte(item){
+async DescargarReporte(item){
   debugger
   this.arrayDataSenal= []
   this.Nombre = ''
@@ -857,10 +816,34 @@ DescargarReporte(item){
   this.Respuesta = ''
   this.Alerta  = ''
   this.RegimenPendiente = 0
+  this.arrayDataResultado= []
+  this.Periodo = ''
+  this.Cantidad = 0
+  this.listaSoat = []
+  this.listaMasivos = []
+  this.listaRenta = []
+  this.listaAhorro = []
+  this.listaPep = []
+  this.listaEspecial = []
+  this.cargosConcatenados = ''
+  this.ValidarRG = ''
+  this.ValidarNombreTemplate = ''
+  this.ValidarT = ''
+  this.ValidarP = ''
+  this.listaPepMasivos = []
+  this.listaPepSoat = []
+  this.listaPepRenta = []
+  this.listaEspecialMasivos = []
+  this.listaEspecialSoat = []
+  this.listaEspecialRenta = []
+  this.listaEspecialRentaParticular = []
+  this.listaPepRentaParticular = []
+  this.listaInternacionalRentaParticular = []
   console.log("itemm",item)
 
   console.log("dataItem",item.arrUsuariosForm)
- 
+
+  
   this.RespuestaGlobal = item.arrUsuariosForm.filter((it,inc) => it.SRESPUESTA == "Sí")
   if(this.RespuestaGlobal.length == 0){
     this.RespuestaGlobal = 'no'
@@ -875,22 +858,127 @@ DescargarReporte(item){
        data.NombreCompleto = t.NOMBRECOMPLETO
        data.Cargo = t.SCARGO
        data.Respuesta = (t.SRESPUESTA).toLowerCase()
+       this.cargosConcatenados = this.cargosConcatenados.concat(t.SCARGO,', ')
        this.arrayDataSenal.push(data)
   })
+
+  
+
+  
 
   this.Nombre = this.arrayDataSenal[0].NombreCompleto;
   this.Perfil =this.arrayDataSenal[0].Cargo;
   this.Respuesta = (this.arrayDataSenal[0].Respuesta).toLowerCase()
   this.Alerta = this.arrayDataSenal[0].Alerta
   this.RegimenPendiente = item.NREGIMEN
+  let dia =  this.NPERIODO_PROCESO.toString().substr(6,2)
+  let mes =  this.NPERIODO_PROCESO.toString().substr(4,2)
+  let anno = this.NPERIODO_PROCESO.toString().substr(0,4) 
+  this.Periodo = dia + '/' + mes + '/' + anno
+  this.ValidarRG = this.Alerta.substr(0,2)
+  this.ValidarT = this.Alerta.substr(0,1)
+  this.ValidarP = this.Alerta.substr(0,1)
+
+  if(item.SNOMBRE_ALERTA == "C2" && item.NIDALERTA == 2){
+    let data:any = {}
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO 
+    data.NIDALERTA = item.NIDALERTA
+    data.NIDREGIMEN = this.RegimenPendiente
+    this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
+    console.log("this.arrayDataResultado",this.arrayDataResultado)
+    this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
+    // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
+    this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
+    this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76 && it.NIDTIPOLISTA == 5)
+    this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
+    this.listaPepMasivos =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 99)
+    this.listaPepSoat =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
+    this.listaPepRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
+    this.listaEspecialMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 99)
+    this.listaEspecialSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
+    this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+    this.listaEspecialRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
+    this.listaPepRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 75)
+    this.listaInternacionalRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75)
+    //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
+    //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
+    console.log("this.listaSoat",this.listaSoat)
+    console.log("this.listaMasivos",this.listaMasivos)
+    console.log("this.listaRenta",this.listaRenta)
+    console.log("this.listaAhorro",this.listaAhorro)
+    console.log("this.listaPep",this.listaPep)
+    console.log("this.listaPepMasivos",this.listaPepMasivos)
+    console.log("this.listaPepSoat",this.listaPepSoat)
+    console.log("this.listaPepRenta",this.listaPepRenta)
+    console.log("this.listaEspecialMasivos",this.listaEspecialMasivos)
+    console.log("this.listaEspecialSoat",this.listaEspecialSoat)
+    console.log("this.listaEspecialRenta",this.listaEspecialRenta)
+    console.log("this.listaEspecialRentaParticular",this.listaEspecialRentaParticular)
+    console.log("this.listaPepRentaParticular",this.listaPepRentaParticular)
+    console.log("this.listaInternacionalRentaParticular",this.listaInternacionalRentaParticular)
+    this.Cantidad = this.arrayDataResultado.length
+  }
+
   
+  if(this.linkactual == "colaborador"){
+     this.NombreLink = this.linkactual
+  }else if(this.linkactual == "proveedor"){
+     this.NombreLink = this.linkactual
+  }else{
+     this.NombreLink = this.linkactual
+  }
+
+  if(this.ValidarRG == 'RG'){
+    this.ValidarNombreTemplate = 'RG'
+  }else if(this.Alerta == 'C3'){
+    this.ValidarNombreTemplate = 'C3'
+  }else if(this.ValidarT == 'T'){
+    this.ValidarNombreTemplate = 'T'
+  }else if(this.Alerta == 'C2'){
+    this.ValidarNombreTemplate = 'C2'
+  }else if(this.ValidarT == 'P'){
+    this.ValidarNombreTemplate = 'P'
+  }else if(this.Alerta == 'S2'){
+    this.ValidarNombreTemplate = 'S2'
+  }else if(this.Alerta == 'C1'){
+    this.ValidarNombreTemplate = 'C1'
+  }else if(this.Alerta == 'S1'){
+    this.ValidarNombreTemplate = 'S1'
+  }else if(this.Alerta == 'S3'){
+    this.ValidarNombreTemplate = 'S3'
+  }else{
+    this.ValidarNombreTemplate = this.Alerta
+  }
+
   
-  this.Export2Doc("exportContent",this.Alerta)
+  this.Export2Doc(this.ValidarNombreTemplate,this.Alerta)
   
   console.log("this.arrayDataSenal",this.arrayDataSenal)
-  console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta )
+  console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta ,  this.RegimenPendiente)
 } 
+
+  Resultado:any = {}
+  async Consultar360(){
+    let data:any = {}
+    data.Ramo = 66,
+    data.Producto = 1,
+    data.Poliza = 7000936826,
+    data.Certificado= 0,
+    data.FechaConsulta= "09/07/2021", //fecha inicio vigencia
+    data.Endoso= null    //Solo para rentas
+    
+    
+    await this.userConfigService.Consulta360(data).then(
+      (response) => {
+       this.Resultado = response
+      });
+    console.log("el resultado",this.Resultado)
+
+    } 
+   
+}
 
 
  
-}
+
+

@@ -147,8 +147,16 @@ import { TemplateC3Component } from './components/responsable/templates/template
 import { TemplateS2Component } from './components/responsable/templates/template-s2/template-s2.component';
 import { TemplateC2Component } from './components/responsable/templates/template-c2/template-c2.component';
 import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-policy.component';
+import { TemplatePComponent } from './components/responsable/templates/template-p/template-p.component';
+import { TemplateTComponent } from './components/responsable/templates/template-t/template-t.component';
 
-
+import { UserconfigService } from './services/userconfig.service';
+import { MantenimientoComplementoComponent } from './mantenimiento-complemento/mantenimiento-complemento.component';
+import { ModalMantenimientoComplementoComponent } from './modal-mantenimiento-complemento/modal-mantenimiento-complemento.component';
+import { TemplateC1Component } from './components/responsable/templates/template-c1/template-c1.component';
+import { TemplateS1Component } from './components/responsable/templates/template-s1/template-s1.component';
+import { TemplateS3Component } from './components/responsable/templates/template-s3/template-s3.component';
+import { C2PolicyComponent } from './components/c2-policy/c2-policy.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -280,6 +288,14 @@ import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-poli
     TemplateS2Component,
     TemplateC2Component,
     C2InfoPolicyComponent,
+    TemplatePComponent,
+    TemplateTComponent,
+    MantenimientoComplementoComponent,
+    ModalMantenimientoComplementoComponent,
+    TemplateC1Component,
+    TemplateS1Component,
+    TemplateS3Component,
+    C2PolicyComponent,
 
    
     //Validaciones
@@ -310,8 +326,8 @@ import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-poli
     
     NO_ERRORS_SCHEMA
   ],
-  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent],
-  providers: [],
+  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent],
+  providers: [UserconfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

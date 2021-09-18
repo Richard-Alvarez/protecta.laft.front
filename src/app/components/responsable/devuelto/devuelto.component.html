@@ -253,7 +253,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row mt-3" *ngIf="STIPO_USUARIO=='RE' && item.NIDALERTA != 36 && item.NIDALERTA != 37 && item.NIDALERTA != 38  && !(item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)">
+                                                                <div class="row mt-3" *ngIf="STIPO_USUARIO=='RE'  && !(item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)">
                                                                     <div class="col-lg-3"></div>
                                                                     <div class="col-lg-3">
                                                                         <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index" [arrFilesAdjuntos]="[]" [arrFilesGuardados]="getFilesByTipoUsuario(item.arrAdjuntos,'OC')" [statusSTIPO_CARGA]="'ADJUNTOS-FORM'">
@@ -289,19 +289,19 @@
                                                                     </div>
 
                                                                 </div>
-                                                                <div class="row" *ngIf="STIPO_USUARIO == 'RE' && (item.NIDALERTA == 3 || item.NIDALERTA == 4 || item.NIDALERTA == 36 || item.NIDALERTA == 37 || item.NIDALERTA == 38 || (item.NIDALERTA == 22 && item.NIDUSUARIO_ASIGNADO == 24) || (item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35))">
+                                                                <div class="row" *ngIf="STIPO_USUARIO == 'RE' && (item.NIDALERTA == 3 || item.NIDALERTA == 4 || (item.NIDALERTA == 22 && item.NIDUSUARIO_ASIGNADO == 24) || (item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35))">
                                                                     <div class="col-lg-8"></div>
-                                                                    <div class="col-lg-1"></div>
-                                                                    <div class="col-lg-3">
-                                                                        <div class="d-flex justify-content-between">
+                                                                    <div class="col-lg-1" style="padding-left: 0px;padding-right:0px;padding-top: 7px;"></div>
+                                                                    <div class="col-lg-2" style="margin-left: -40px;">
+                                                                        <div class="d-flex ustify-content-between">
                                                                             <div class="col-lg-4">
                                                                                 <input type="file" name="file" id="archivoSustento{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesInforme($event,item.NIDALERTA_CABECERA,item.NIDALERTA,'ADJUNTOS-SUSTENTO')" />
                                                                                 <div class="text-center">
                                                                                     <label for="archivoSustento{{regimen.id}}-{{index}}">
                                                                                         <img src="assets/icons/excel-microsoft.png" style="width: 38px;"/>
                                                                                                 <div
-                                                                                                class="parrafoAdj text-center" style="width: 140px;">
-                                                                                                {{setLabelData(item.SNOMBRE_ALERTA)}}
+                                                                                                class="parrafoAdj text-center" style="width: 140px;padding: 0px 30px 0px">
+                                                                                                <div class="">{{setLabelData(item.SNOMBRE_ALERTA)}}</div>
                                                                                                     </div>
                                                                                                 <!--<i class="fas fa-paperclip fa-2x fa-lg"
                                                                                                     style="color: #706d6d;cursor:pointer">
@@ -310,21 +310,24 @@
                                                                                     </label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-lg-8">
-                                                                                <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index" [arrFilesAdjuntos]="getFilesInformUniversal(item,'ADJUNTOS-SUSTENTO')" [arrFilesGuardados]="[]" [statusSTIPO_CARGA]="'ADJUNTOS-SUSTENTO'">
+                                                                            <div class="col-lg-8" style="left: 15px;">
+                                                                                <app-adjuntar-files [parent]="this " [item]="item " [indexInput]="index " [arrFilesAdjuntos]="getFilesInformUniversal(item, 'ADJUNTOS-SUSTENTO') " [arrFilesGuardados]="[]
+                                                                                " [statusSTIPO_CARGA]=" 'ADJUNTOS-SUSTENTO' ">
                                                                                 </app-adjuntar-files>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row mt-3" *ngIf="STIPO_USUARIO=='OC'">
-                                                                    <div class="col-lg-4"></div>
-                                                                    <div class="col-lg-4">
-                                                                        <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index" [arrFilesAdjuntos]="[]" [arrFilesGuardados]="getFilesByTipoUsuario(item.arrAdjuntos,'OC')" [statusSTIPO_CARGA]="'ADJUNTOS-FORM'">
+                                                                <div class="row mt-3 " *ngIf="STIPO_USUARIO=='OC' ">
+                                                                    <div class="col-lg-4 "></div>
+                                                                    <div class="col-lg-4 ">
+                                                                        <app-adjuntar-files [parent]="this " [item]="item " [indexInput]="index " [arrFilesAdjuntos]="[] " [arrFilesGuardados]="getFilesByTipoUsuario(item.arrAdjuntos, 'OC')
+                                                                                " [statusSTIPO_CARGA]=" 'ADJUNTOS-FORM' ">
                                                                         </app-adjuntar-files>
                                                                     </div>
-                                                                    <div class="col-lg-4">
-                                                                        <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index" [arrFilesAdjuntos]="[]" [arrFilesGuardados]="getFilesByTipoUsuario(item.arrAdjuntos,'RE')" [statusSTIPO_CARGA]="'ADJUNTOS-FORM'">
+                                                                    <div class="col-lg-4 ">
+                                                                        <app-adjuntar-files [parent]="this " [item]="item " [indexInput]="index " [arrFilesAdjuntos]="[] " [arrFilesGuardados]="getFilesByTipoUsuario(item.arrAdjuntos, 'RE')
+                                                                                " [statusSTIPO_CARGA]=" 'ADJUNTOS-FORM' ">
                                                                         </app-adjuntar-files>
                                                                     </div>
 
@@ -345,32 +348,32 @@
 
 
                                         </div>
-                                        <div id="{{stateDevuelto.sHrefHead + regimen.desCorto + index}}" class="collapse" attr.data-parent="#{{stateDevuelto.sCollapHead + regimen.desCorto + index}}">
-                                            <app-button-download-report [item]="item" [regimen]="regimen" [STIPO_USUARIO]="STIPO_USUARIO" [parent]="this"></app-button-download-report>
+                                        <div id="{{stateDevuelto.sHrefHead + regimen.desCorto + index}} " class="collapse " attr.data-parent="#{{stateDevuelto.sCollapHead + regimen.desCorto + index}} ">
+                                            <app-button-download-report [item]="item " [regimen]="regimen " [STIPO_USUARIO]="STIPO_USUARIO " [parent]="this "></app-button-download-report>
 
-                                            <div class="card-body" style="background-color: white;">
+                                            <div class="card-body " style="background-color: white; ">
 
-                                                <div *ngIf="item.NIDALERTA != 2">
-                                                    <div *ngIf="item.NIDALERTA == 1" class="">
-                                                        <app-c1-detail-company [parent]="this" [objAlerta]="item" [objState]="stateDevuelto"></app-c1-detail-company>
+                                                <div *ngIf="item.NIDALERTA !=2 ">
+                                                    <div *ngIf="item.NIDALERTA==1 " class=" ">
+                                                        <app-c1-detail-company [parent]="this " [objAlerta]="item " [objState]="stateDevuelto "></app-c1-detail-company>
                                                     </div>
-                                                    <div *ngIf="item.NIDALERTA === 3 && STIPO_USUARIO === 'RE'" class="">
+                                                    <div *ngIf="item.NIDALERTA===3 && STIPO_USUARIO==='RE' " class=" ">
                                                         <!--detalle de preguntas-->
-                                                        <app-bandeja-lista-gafi [parent]="this" [objAlerta]="item" [objState]="stateDevuelto"></app-bandeja-lista-gafi>
+                                                        <app-bandeja-lista-gafi [parent]="this " [objAlerta]="item " [objState]="stateDevuelto "></app-bandeja-lista-gafi>
 
                                                     </div>
-                                                    <div class="">
+                                                    <div class=" ">
                                                         <!--CONVERSACION-->
 
 
-                                                        <app-comments-alerts-state [parent]="this" [arrConversacion]="item.arrConversacionCabecera">
+                                                        <app-comments-alerts-state [parent]="this " [arrConversacion]="item.arrConversacionCabecera ">
                                                         </app-comments-alerts-state>
 
                                                     </div>
 
 
                                                 </div>
-                                                <!--<div *ngIf="item.NIDALERTA === 2">
+                                                <!--<div *ngIf="item.NIDALERTA===2 ">
                                                     <app-view-c2-form></app-view-c2-form>
                                                 </div>-->
 
@@ -383,14 +386,14 @@
                             <br>
 
                         </div>
-                        <div class="row" style="padding-top: 20px;">
-                            <div class="col-lg-10">
+                        <div class="row " style="padding-top: 20px; ">
+                            <div class="col-lg-10 ">
 
                             </div>
-                            <div class="col-lg-2  text-right">
-                                <button type="button" class="btn btn-warning text-white" *ngIf="STIPO_USUARIO==='RE' && stateDevuelto.sState !== 'CERRADO'" (click)="sendForm()">Enviar</button>
-                                <!--<button type="button"
-                                    class="btn btn-warning" *ngIf="STIPO_USUARIO==='OC' && stateDevuelto.sState !== 'CERRADO' && stateDevuelto.sState !== 'PENDIENTE' && stateDevuelto.sState !== 'REVISADO'">Guardar</button>-->
+                            <div class="col-lg-2 text-right ">
+                                <button type="button " class="btn btn-warning text-white " *ngIf="STIPO_USUARIO==='RE' && stateDevuelto.sState !=='CERRADO' " (click)="sendForm() ">Enviar</button>
+                                <!--<button type="button "
+                                    class="btn btn-warning " *ngIf="STIPO_USUARIO==='OC' && stateDevuelto.sState !=='CERRADO' && stateDevuelto.sState !=='PENDIENTE' && stateDevuelto.sState !=='REVISADO' ">Guardar</button>-->
                             </div>
                         </div>
 
@@ -404,15 +407,15 @@
 
 
         </div>
-        <div class="card" *ngIf="(getArray(stateDevuelto.sState,regimen.id)).length == 0">
+        <div class="card " *ngIf="(getArray(stateDevuelto.sState,regimen.id)).length==0 ">
 
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
-                        <p class="text-center">{{parent.cadenaEstadosSinForm}}</p>
+            <div class="card-body ">
+                <div class="row ">
+                    <div class="col-lg-4 "></div>
+                    <div class="col-lg-4 ">
+                        <p class="text-center ">{{parent.cadenaEstadosSinForm}}</p>
                     </div>
-                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4 "></div>
                 </div>
             </div>
         </div>
