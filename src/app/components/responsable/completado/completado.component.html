@@ -402,23 +402,51 @@
 
                                                                            
                                                             <div class="row pt-2">
-                                                                <div class="col-lg-3 form-group">
+                                                                <div class="col-lg-2 form-group">
                                                                     <span class="fontText">Nombre del complemento :</span>
                                                                 </div>
-                                                                <div class="col-lg-6 form-group">
+                                                                <div class="col-lg-2 form-group">
                                                                     <input [disabled]="true" id="usName" type="text"
                                                                         class="form-control buttonSinBorder" value={{listComplemento.SNOMBRE_COMPLEMENTO}}  >
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
+
                                                                 <div class="col-lg-3 form-group">
                                                                     <span class="fontText">Descripción del complemento :</span>
                                                                 </div>
-                                                                <div class="col-lg-6 form-group">
+                                                                <div class="col-lg-3 form-group">
                                                                     <input [disabled]="true" id="usName" type="text"
                                                                         class="form-control buttonSinBorder" value={{listComplemento.SDESCRIPCION}}  >
                                                                 </div>
+
                                                             </div>
+
+                                                            <div class="borderFormat" style="display: flex;justify-content: center;align-items: center;">
+                                                            <div class="col-lg-2" title="Nombre del usuario" style="display: flex;justify-content: center;align-items: center;">
+                                                                <label class="fontText">Seleccionar usuario:</label>
+                                                            </div>
+                                                            <div class="col-lg-3" title="Nombre del usuario"
+                                                                style="display: flex;justify-content: center;align-items: center;">
+
+                                                                <select [(ngModel)]="userId" name="userId"
+                                                                     class="form-control buttonSinBorder">
+                                                                    <option value="0" selected>Seleccione</option>
+                                                                    <!-- <option *ngFor="let item of ListUser" value="{{item.userId}}"
+                                                                        id="userIdSelected">
+                                                                        {{item.userFullName}}</option> -->
+                                                                    <option value="1" selected>Richard Alvarez</option>
+                                                                        
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-1 " style="margin-right: 50px;">
+                                                                    <button title="Deshacer cambios"
+                                                                    style="display: flex;justify-content: center;align-items: center;width: 100px;"
+                                                                    class="btn btn-warning text-white " 
+                                                                    (click)="AgregarUsuario()">Agregar</button>
+                                                            </div>
+                                                        </div>
+                                                                                        
+                                                                
+                                                            
                                                             
                                                             
                                                              <!-- Nombre del complemento :  {{listComplemento.SNOMBRE_COMPLEMENTO}}  

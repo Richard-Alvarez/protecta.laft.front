@@ -376,8 +376,8 @@ export class ResponsableComponent implements OnInit {
     let respBusquedaSimpli = await this.getFormsByHead(this.alertFormListSimpli, 2, numPregunta);
     this.alertFormList = respBusquedaGral.array
     this.alertFormListSimpli = respBusquedaSimpli.array
-    console.warn("el this.alertFormList 11114-1: ", this.alertFormList)
-    console.warn("el this.alertFormList 11114-2: ", this.alertFormListSimpli)
+    console.log("el this.alertFormList 11114-1: ", this.alertFormList)
+    console.log("el this.alertFormList 11114-2: ", this.alertFormListSimpli)
     //this.alertFormList.forEach(it => it.estado = it.SESTADO_REVISADO == '1' ? true : false)
     this.alertFormList.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
     this.alertFormListSimpli.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
@@ -3174,5 +3174,7 @@ export class ResponsableComponent implements OnInit {
   redictBodyM(){
     document.getElementById('consulta0').focus({ preventScroll : false})
   }
+
+  
 }
 
