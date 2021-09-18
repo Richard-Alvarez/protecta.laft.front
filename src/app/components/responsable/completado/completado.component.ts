@@ -63,7 +63,7 @@ export class CompletadoComponent implements OnInit {
     // console.log("el regimen : ",this.regimen.id)
    //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   
-  
+   await this.AgregarUsuario()
   
   }
 
@@ -888,8 +888,9 @@ filtroComplemeto(item){
 
 ListUser:any = []
 userId
-AgregarUsuario(){
-  
+async AgregarUsuario(){
+    this.ListUser = await this.userConfigService.ListaUsariosComp()
+    console.log("  this.ListUser",   this.ListUser)
 }
 
   
