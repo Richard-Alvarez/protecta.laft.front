@@ -991,6 +991,7 @@ async EnviarCompUsuario(alerta,complemento){
   
 }
 
+
  getLink(){
    if(this.linkactual == 'clientes'){
      return 1
