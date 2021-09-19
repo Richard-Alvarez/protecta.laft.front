@@ -886,6 +886,7 @@ async ConsultaComplemento(){
 
 filtroComplemeto(item){
   let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
+  //console.log("resultado",item.SNOMBRE_ALERTA)
   return resultado
 }
 
@@ -970,7 +971,7 @@ async EnviarCompUsuario(alerta,complemento){
       data.NPERIODO_PROCESO = this.PeriodoComp
       data.NIDALERTA = alerta.NIDALERTA
       data.NIDCOMPLEMENTO = complemento.NIDCOMPLEMENTO
-      data.NIDUSUARIO_RESPONSABLE = this.OBJ_USUARIO.idUsuario
+      data.NIDUSUARIO_RESPONSABLE = alerta.NIDUSUARIO_ASIGNADO//this.OBJ_USUARIO.idUsuario
       data.NIDUSUARIO_ASIGNADO = element.ID_USUARIO
       data.NIDGRUPOSENAL = valorGrupo
       data.SRUTA_PDF = ''
@@ -996,7 +997,18 @@ async EnviarCompUsuario(alerta,complemento){
    if(this.linkactual == 'clientes'){
      return 1
    }
+   
 
+ }
+ ListaUsiaroxComp:any = []
+ async GetListaUsuarioComplemento(item,complemento){
+  let data:any = {}
+  data.NPERIODO_PROCESO = this.PeriodoComp
+  data.NIDALERTA = item.NIDALERTA
+  data.NIDCOMPLEMENTO = 4//complemento.NIDCOMPLEMENTO
+  data.NIDUSUARIO_RESPONSABLE = item.NIDUSUARIO_ASIGNADO
+  this.ListaUsiaroxComp = await this.userConfigService.GetListaCompUsu(data)
+  return this.ListaUsiaroxComp
  }
 
 

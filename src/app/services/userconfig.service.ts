@@ -168,13 +168,15 @@ export class UserconfigService {
     })
   }
 
-  GetListaCompUsu(): Promise<any> {
+
+  GetListaCompUsu(data): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
-        this.laft.post(this.core.config.rest.urlGetListaCompUsu, null).subscribe(response => {
+        this.laft.post(this.core.config.rest.urlGetListaComplementos,data).subscribe(response => {
           return resolve(response)
         })
       } catch (error) {
+        //console.log(error)
         return reject(error)
       }
     })
