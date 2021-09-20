@@ -33,6 +33,7 @@ export class TemplateRGComponent {
     private modalService: NgbModal,) {  }
 
   async ngOnInit() {
+    
     //debugger;
     //this.USU_NOMBRE_COMPLETO = this.parent.Nombre
     //this.Alerta = this.pendienteInforme.Alerta2()

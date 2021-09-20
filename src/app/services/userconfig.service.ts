@@ -156,6 +156,47 @@ export class UserconfigService {
     })
   }
 
+  ListaUsariosComp(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlListaUsariosComp, null).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+
+  GetListaCompUsu(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaComplementos,data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        //console.log(error)
+        return reject(error)
+      }
+    })
+  }
+
+  GetListaComplementoUsuario(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaComplementoUsuario,data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        //console.log(error)
+        return reject(error)
+      }
+    })
+  }
+
+  
+
   GetListaResultado(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
@@ -428,7 +469,44 @@ export class UserconfigService {
       }
     })
   }
- 
+
+  GetUpdComplementoCab(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetUpdComplementoCab, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  GetInsCormularioComplUsu(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetInsCormularioComplUsu, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  GetValFormularioCompl(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetValFormularioCompl, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+  
+  
 
   insertQuestionHeader(data: any): Promise<any> {
     return new Promise((resolve, reject) => {

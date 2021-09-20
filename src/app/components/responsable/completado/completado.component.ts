@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { ResponsableGlobalComponent } from '../responsableGlobal';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-completado',
@@ -26,7 +27,7 @@ export class CompletadoComponent implements OnInit {
   arrFilesAdjuntos:any = []
   arrCheckbox:any = []
   linkactual = "";
-  
+  PeriodoComp
 
     files: Map<string, any> = new Map<string, any>()
     listFiles: Map<string, any> = new Map<string, any>()
@@ -53,17 +54,22 @@ export class CompletadoComponent implements OnInit {
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
     await this.ConsultaComplemento()
+    
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO
     this.OBJ_USUARIO = this.core.storage.get('usuario');
     this.NIDUSUARIO_LOGUEADO = this.OBJ_USUARIO.idUsuario//this.core.storage.get('NIDUSUARIO')
     this.NPERIODO_PROCESO = this.core.storage.get('NPERIODO_PROCESO')
+
+    this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
+    await this.ConsultaComplementoUsuarios()
+    console.log("PeriodoComp",this.OBJ_USUARIO.idUsuario)
     await this.getTipoUsuario();
     this.fillFileGroup()
 
     // console.log("el regimen : ",this.regimen.id)
    //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   
-  
+   await this.ListaUsuarioComplemento()
   
   }
 
@@ -535,6 +541,8 @@ export class CompletadoComponent implements OnInit {
 
   aprobarFormularios(){
 
+   
+
       
     if (this.validarUnoActivo() === false) {
      
@@ -584,9 +592,9 @@ export class CompletadoComponent implements OnInit {
             }
             indiceCheckbox++
           })
-        //console.log("Checkbox : ", respCheckboxFilter)
+        console.log("Checkbox : ", respCheckboxFilter)
         //console.log("acumuladorIndices : ", acumuladorIndices)
-        
+        debugger
         let arrServiceUpdateSenial:any =[]
         respCheckboxFilter.forEach(element => {
           
@@ -605,8 +613,10 @@ export class CompletadoComponent implements OnInit {
           data.NIDALERTA_CABECERA = element.NIDALERTA_CABECERA
           // console.log("data :  ",data)
           
-        
-          arrServiceUpdateSenial.push(this.UpdateCheckboxForm(data))
+          
+            arrServiceUpdateSenial.push(this.UpdateCheckboxForm(data))
+          
+          
          
 
         });
@@ -695,10 +705,48 @@ export class CompletadoComponent implements OnInit {
 
 
   arrNewCheck:any = []
-  setDataCheckboxApproved(item,index){
+  async setDataCheckboxApproved(item,index){
+    let listaFiltroComplemento =  this.filtroComplemeto(item)
+    console.log("15 Prueba ngModel listaFiltroComplemento: ", listaFiltroComplemento)
+    if(listaFiltroComplemento.length > 0){
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      data.NIDALERTA = item.NIDALERTA
+      data.NIDCOMPLEMENTO = listaFiltroComplemento[0].NIDCOMPLEMENTO
+      data.NIDUSUARIO_RESPONSABLE = item.NIDUSUARIO_ASIGNADO
+      let resultadoValidacionComplemento = await this.userConfigService.GetValFormularioCompl(data)
+      console.log("resultadoValidacionComplemento ", resultadoValidacionComplemento)
+      if(resultadoValidacionComplemento.code == 1){
+        swal.fire({
+          title: 'Bandeja del formularios', 
+          icon: 'warning',
+          text: 'Hay complementos que todavia no se han respondido',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor:'#FA7000',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+                         },
+           
+        }).then((result) => {
+         if(!result.dismiss){
+           console.log("prueba")
+           this.arrCheckbox[index] = false
+           return
+         }
+        })
+      }
+
+    }
     
+
+
     // console.log("15 Prueba arrResponsable 15 : ", this.arrResponsable)
+    
      console.log("15 Prueba ngModel : ", this.arrCheckbox)
+     console.log("15 Prueba ngModel item : ", item)
     let valor = this.arrCheckbox[index]
     // let respFilterAlert= this.arrNewCheck.filter(it => it.NIDALERTA === item.NIDALERTA && it.NIDALERTA_CABECERA === item.NIDALERTA_CABECERA
     //  && it.NREGIMEN===  item.NREGIMEN)
@@ -709,6 +757,7 @@ export class CompletadoComponent implements OnInit {
       objNew.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
       objNew.indiceCheckbox = index
       objNew.CheckboxValue = valor
+      objNew.NIDCOMPLEMENTO = listaFiltroComplemento.NIDCOMPLEMENTO
       
     let arrValidNewCheckLength = (this.arrNewCheck.filter(it => it.indiceCheckbox === index)).length
 
@@ -881,10 +930,233 @@ async ConsultaComplemento(){
   //return this.listaComplemento
 }
 
+listaComplementoUsuario:any = [] 
+async ConsultaComplementoUsuarios(){
+   let data:any ={}
+   data.NPERIODO_PROCESO = this.PeriodoComp
+ 
+  this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  //console.log("la lista de prueba", this.listaComplementoUsuario)
+  //return this.listaComplementoUsuario
+}
+
+filtro:any = []
+filtrarcomplementoxAlerta(item){
+  //console.log("la lista de item",item)
+  let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO)
+  let cantidad = this.filtro.filter(it => it.NIDUSUARIO_ASIGNADO == item.NIDUSUARIO_ASIGNADO)
+  if(cantidad.length == 0){
+    let obj:any = {}
+    obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
+    obj.NOMBRECOMPLETO = item.NOMBRECOMPLETO
+    obj.NREGIMEN = item.NREGIMEN
+    obj.RESULTADO = resultado
+    this.filtro.push(obj)
+  }
+  
+   //onsole.log("itemitemitemitemitem this.filtro",this.filtro)
+  //return resultado
+  return this.filtro
+}
+
 filtroComplemeto(item){
+  
+  
   let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
+ 
   return resultado
 }
+
+ListUser:any = []
+userId:number = 0
+async ListaUsuarioComplemento(){
+    this.ListUser = await this.userConfigService.ListaUsariosComp()
+    console.log("  this.ListUser",   this.ListUser)
+    
+    console.log("  this.ListUsuaurioAgregado 1",   this.ListUsuaurioAgregado.length)
+    console.log("  this.ListUsuaurioAgregado 2",   this.ListUsuaurioAgregado)
+}
+
+ListUsuaurioAgregado:any = []
+async  AgregarUsuario2(){
+  let usuario = this.ListUser.filter(it => it.ID_USUARIO == this.userId)
+  let buscarrepetido = this.ListUsuaurioAgregado.filter(usu => usu.ID_USUARIO == usuario[0].ID_USUARIO)
+  console.log("  this.usuario",   usuario[0])
+  if(buscarrepetido.length == 0){
+    await this.ListUsuaurioAgregado.push(usuario[0])
+    console.log("  this.listaComplementoUsuario",   this.ListUsuaurioAgregado)
+  }else{
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'No se puede agregar al mismo usuario',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result){
+       return
+     }
+    }).catch(err => {
+      ////console.log("el error : ",err);
+    })
+  }
+
+  
+
+}
+
+async  AgregarUsuario(item,lilistComplemento){
+ 
+  let buscarrepetido:any = []
+  let usuario
+
+  // console.log("this.usuario",usuario)
+  
+  // console.log("this.filtro.RESULTADO",this.filtro.RESULTADO)
+  // console.log("this.item",item)
+  // console.log("this.lilistComplemento",lilistComplemento)
+
+  if(this.userId == 0){
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'Tiene que seleccionar un usuario',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result.dismiss){
+       return
+     }
+    })
+  }else if(this.userId != 0){
+    console.log("this.filtro",this.filtro)
+    usuario = this.ListUser.filter(it => it.ID_USUARIO == this.userId)
+    console.log("this.filtro",this.filtro[0])
+    buscarrepetido = this.filtro[0].RESULTADO.filter(usu => usu.NIDUSUARIO_ASIGNADO == usuario[0].ID_USUARIO)
+    if(buscarrepetido.length == 0 ){
+    
+      await this.filtro[0].RESULTADO.push(usuario[0])
+    }
+   }else{
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'No se puede agregar al mismo usuario',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result.dismiss){
+       return
+     }
+    })
+  }
+
+
+
+
+}
+
+EliminarUsuario(indice){
+  this.filtro[0].RESULTADO.splice(indice,1)
+  //console.log("  this.ListUsuaurioAgregado eliminando",   this.ListUsuaurioAgregado)
+}
+
+async EnviarCompUsuario(alerta,complemento){
+  
+  //console.log("el itemmmmmmmmmm 2",complemento)
+  let valorGrupo = this.getLink()
+  if(this.filtro[0].RESULTADO.length == 0){
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'No hay usuarios registrados',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result){
+       return
+     }
+    }).catch(err => {
+      ////console.log("el error : ",err);
+    })
+  }else{
+    debugger
+    this.filtro[0].RESULTADO.forEach(async (element) => {
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      data.NIDALERTA = alerta.NIDALERTA
+      data.NIDCOMPLEMENTO = complemento.NIDCOMPLEMENTO
+      data.NIDUSUARIO_RESPONSABLE = alerta.NIDUSUARIO_ASIGNADO//this.OBJ_USUARIO.idUsuario
+      data.NIDUSUARIO_ASIGNADO = element.ID_USUARIO
+      data.NIDGRUPOSENAL = valorGrupo
+      data.SRUTA_PDF = ''
+      data.NIDAGRUPA = alerta.NIDAGRUPA
+      //Variables para el envio de correos
+      data.SEMAIL =  element.SEMAIL
+      data.NOMBRECOMPLETO =  element.NOMBRECOMPLETO     
+      data.SDESCARGO =  element.SDESCARGO
+      data.SNAME =  element.SNAME
+      data.fullName = this.OBJ_USUARIO.fullName
+      this.core.loader.show();
+      if(element.CONSULTA == 'C'){
+        await this.userConfigService.GetInsCormularioComplUsu(data)
+      }
+      //await this.userConfigService.GetInsCormularioComplUsu(data)
+      this.core.loader.hide();
+    });
+  
+  }
+
+  
+}
+
+
+ getLink(){
+   if(this.linkactual == 'clientes'){
+     return 1
+   }
+   
+
+ }
+ ListaUsiaroxComp:any = []
+ async GetListaUsuarioComplemento(item,complemento){
+  let data:any = {}
+  data.NPERIODO_PROCESO = this.PeriodoComp
+  data.NIDALERTA = item.NIDALERTA
+  data.NIDCOMPLEMENTO = 4//complemento.NIDCOMPLEMENTO
+  data.NIDUSUARIO_RESPONSABLE = item.NIDUSUARIO_ASIGNADO
+  this.ListaUsiaroxComp = await this.userConfigService.GetListaCompUsu(data)
+  return this.ListaUsiaroxComp
+ }
+
 
   
 }

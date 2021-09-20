@@ -74,13 +74,19 @@ export class C2PolicyComponent implements OnInit {
   listaDatabeneficiarios:any = []
   //DatosTitular:any = {}
   DatosRentaTotal:any={}
+  listaDataRestace:any = []
+  listaDataCronograma:any = []
+
   async SetVariables(){
     this.NroPoliza = this.Resultado360.nroPolicy
     this.NroCertificado = this.Resultado360.nroCertificate == null ? 0 : this.Resultado360.nroCertificate
-    this.Estado = this.Resultado360.nroPolicy
-    this.Contratante = this.Resultado360.contratante
-    this.FechaFinVigencia = this.Resultado360.fechaFinVigencia
-    this.FechaEmision = this.Resultado360.fechaEmision
+    this.Estado = this.Resultado360.nroPolicy == '' ? '-' : this.Resultado360.nroPolicy
+
+    this.Contratante = this.Resultado360.contratante 
+    this.Contratante.name = this.Resultado360.contratante.name  == '' ? '-' : this.Resultado360.contratante.name
+
+    this.FechaFinVigencia = this.Resultado360.fechaFinVigencia == '' ? '-' : this.Resultado360.fechaFinVigencia 
+    this.FechaEmision = this.Resultado360.fechaEmision == '' ? '-' : this.Resultado360.fechaEmision 
     this.FechaPrimeraVigencia = this.Resultado360.fechaPrimeraVigencia  == '' ? '-' : this.Resultado360.fechaPrimeraVigencia  
     this.FechaInicioVigencia = this.Resultado360.fechaInicioVigencia  == '' ? '-' : this.Resultado360.fechaInicioVigencia  
     this.FechaEfecto = this.Resultado360.fechaEfecto  == '' ? '-' : this.Resultado360.fechaEfecto  
@@ -173,6 +179,9 @@ export class C2PolicyComponent implements OnInit {
     this.DatosRentaTotal.porcDevol = this.Resultado360.rentaTotal.porcDevol == '' ? '-' : this.Resultado360.rentaTotal.porcDevol
     this.DatosRentaTotal.porcSegVid = this.Resultado360.rentaTotal.porcSegVid == '' ? '-' : this.Resultado360.rentaTotal.porcSegVid
     this.DatosRentaTotal.prima = this.Resultado360.rentaTotal.prima == '' ? '-' : this.Resultado360.rentaTotal.prima
+
+    this.listaDataCronograma = this.Resultado360.cronogramas 
+    this.listaDataRestace = this.Resultado360.rescates
 
 
     

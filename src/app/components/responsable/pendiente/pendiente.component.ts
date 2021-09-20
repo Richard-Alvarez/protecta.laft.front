@@ -388,7 +388,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     }
     
 
+    
      let respSetDataPendiente:any = this.setDataPendiente();
+     
      if(this.linkactual == "proveedor" || this.linkactual == "colaborador" || this.linkactual == "contraparte"){
       respSetDataPendiente["NREGIMEN"] = 0
      }
@@ -396,11 +398,15 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
      
      console.log("el respSetDataPendiente : ",respSetDataPendiente)
     ////console.warn("respValidation 2: ",this.arrResponsable)
-    let respValidation = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
+
+    //SE COMENTO LA VALIDACION
+    let respValidation:any =  {} //await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
+     respValidation.message = ''
+    //
     console.log("respValidation 123456: ",respValidation)
     if (respValidation.message !== '') {
       swal.fire({
-        title: 'Bandeja del '+ this.sNameTipoUsuario,
+        title: 'Bandeja del 1111'+ this.sNameTipoUsuario,
        icon: 'error',
         // html:'<i class="fas fa-exclamation-triangle"></i>',
         text: respValidation.message,
@@ -481,12 +487,31 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           let arrPushFilesForm:any = []
           let arrPushResCommentsFormDetail:any = []
           console.log("la respSetDataPendiente.array 123124 : ",respSetDataPendiente.array)
+          let dataComplementario = respSetDataPendiente.array.filter(it => it.TIPO_FORM == 'C')
           respSetDataPendiente.array.forEach(senial => {
             //senial.SCOMENTARIO = this.arrInputComment[inc]
             try {
+              if(dataComplementario.length != 0){
+                console.log("la respSetDataPendiente.array 123124 2: ",dataComplementario)
+                dataComplementario.forEach(async (element) => {
+                  let data:any = {}
+                  data.NIDCOMP_CAB_USUARIO = element.NIDALERTA_CABECERA
+                  data.NIDPREGUNTA = 0
+                  data.NIDORIGEN = 0
+                  data.NIDALERTA = element.NIDALERTA
+                  data.NIDAGRUPA = element.NIDAGRUPA
+                  data.NIND_RESPUESTA = 1
+                  data.SCOMENTARIO = ''
+                  data.SRUTA_PDF = 'ruta pdf'
+
+                  debugger
+                  await this.userConfigService.GetUpdComplementoCab(data)
+                });
+              }
+
               console.log("la senial 1 : ",senial)
             
-
+              debugger
               arrPushFilesForm.push(this.parent.sendFilesAdjuntosCabecera(senial.NIDALERTA_CABECERA,senial.NIDALERTA,this.regimen.id,'ADJUNTOS-FORM',"PENDIENTE","RE"))
               console.log("la senial 2 : ",senial)
               arrPushFilesForm.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'ADJUNTOS-SUSTENTO'))
@@ -564,6 +589,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   isValidationAdjuntosForms(objAlerta){
     try {
+      debugger;
       objAlerta["NREGIMEN"] = 0
       console.log("el objalerta : ",objAlerta)
       console.log("el this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
@@ -668,6 +694,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   setDataPendiente(){
     try {
+      debugger;
       let arrResponsableNew = []
       let objAlertaNew:any = {}
       //console.log("el this.arrDetailC1 : ",this.arrDetailC1)
@@ -800,12 +827,13 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     console.log("el this.arrInputComment.length ",this.arrInputComment.length)
     console.log("el arrResponsableNew.legth ",arrResponsableNew.length)
     console.log("el arrResponsableNew ",arrResponsableNew)
-    
+    let valorComplemento = arrResponsableNew.filter(it => it.TIPO_FORM == 'C')
+    console.log("valorComplemento",valorComplemento)
     if(typeof this.arrInputComment !== 'object'){
       obj.message = 'Ocurrio un error con información'
       return obj
     }
-    if(this.arrInputComment.length === 0){
+    if(this.arrInputComment.length === 0 && valorComplemento.length != 0){
       obj.message = 'No respondió ninguna señal'
       return obj
     }
@@ -1323,6 +1351,10 @@ setLabelData(alerta){
     return 'Adjuntar Sustento'
   }
 } 
+
+EnviarComplemento(){
+    
+}
 
 
 
