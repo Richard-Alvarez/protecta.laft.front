@@ -702,7 +702,7 @@ export class ResponsableComponent implements OnInit {
     let arrPromiseAdjuntosInfo = []
     let arrPromiseAdjuntos = []
     let arrPromiseAdjuntosSustento = []
-
+    let arrPromiseAdjuntosComplemento = []
     //let tmpArrayAlerts = []
     arrayBusqueda.forEach(item => {
       
@@ -710,6 +710,7 @@ export class ResponsableComponent implements OnInit {
       arrPromiseChat.push(this.getCommentHeader(item.NIDALERTA_CABECERA))
       arrPromisePregDetail.push(this.getQuestionDetail(item))
       arrPromiseAdjuntosSustento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, regimen, 'ADJUNTOS-SUSTENTO'))
+      arrPromiseAdjuntosComplemento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, 0, 'COMPLEMENTO'))
       
       
       if(this.STIPO_USUARIO == 'RE' && item.SESTADO == "3"){
@@ -743,6 +744,7 @@ export class ResponsableComponent implements OnInit {
     let respPromisePregDetailAll = await Promise.all(arrPromisePregDetail);
     let respPromiseAdjuntosAll = await Promise.all(arrPromiseAdjuntos);
     let respPromiseAdjuntosSustentoAll = await Promise.all(arrPromiseAdjuntosSustento);
+    let respPromiseAdjuntosComplementoAll = await Promise.all(arrPromiseAdjuntosComplemento);
     console.log("respPromiseAdjuntosSustentoAll ---- 12: ",respPromiseAdjuntosSustentoAll)
     //let respPromiseAdjInfoAll = await Promise.all(arrPromiseAdjuntosInfo);
     //console.log("respPromiseAll : ",respPromiseAllPreguntas)
@@ -839,7 +841,20 @@ export class ResponsableComponent implements OnInit {
           
         })
       });
+      let arrayTmpDataAdjuntosComplemento = []
+      respPromiseAdjuntosComplementoAll.forEach(it => {
+        it.forEach(element => {
+          if(element.NIDALERTA_CABECERA == item.NIDALERTA_CABECERA && element.NIDALERTA == item.NIDALERTA){
+            let rutaSplit = (element.SRUTA_ADJUNTO).split("/")
+            element.name = rutaSplit[6]
+            let nombreArchivoSplit = (rutaSplit[6]).split(".")
+            element.nameCorto = nombreArchivoSplit[0].length >= 15 ? ((nombreArchivoSplit[0].substr(0, 15)) + '....' + nombreArchivoSplit[1]) : rutaSplit[4]
+            arrayTmpDataAdjuntosComplemento.push(element)
+          }
 
+          
+        })
+      });
       //console.error("el arrPreguntasTitleDetail 55: ",arrPreguntasTitleDetail)
       //let tamanio = 0;
       //tamanio = arrPreguntasTitleDetail.length
@@ -910,6 +925,7 @@ export class ResponsableComponent implements OnInit {
       objAlerta.arrPreguntasTitleDetail = arrPreguntasTitleDetail
       objAlerta.arrAdjuntos = arrAdjuntosNew
       objAlerta.arrAdjuntosSustento = arrayTmpDataAdjuntosSustento
+      objAlerta.arrPromiseAdjuntosComplemento = arrayTmpDataAdjuntosComplemento
       objAlerta.SCOMENTARIO_OC = objFechaComentarioOC.SCOMENTARIO
       arrayAlertList.push(objAlerta)
       indiceArray++

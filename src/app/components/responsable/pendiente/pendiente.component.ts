@@ -589,6 +589,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   isValidationAdjuntosForms(objAlerta){
     try {
+      debugger;
       objAlerta["NREGIMEN"] = 0
       console.log("el objalerta : ",objAlerta)
       console.log("el this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
@@ -693,6 +694,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   setDataPendiente(){
     try {
+      debugger;
       let arrResponsableNew = []
       let objAlertaNew:any = {}
       //console.log("el this.arrDetailC1 : ",this.arrDetailC1)
