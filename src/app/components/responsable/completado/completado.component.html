@@ -459,7 +459,7 @@
                                                                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Nombre</div>
                                                                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Perfil </div>
                                                                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Cargo</div>
-                                                                                <div class="col-2 txtCabecera" style="font-size: 14px;">Estado</div>
+                                                                                <div class="col-1 txtCabecera" style="font-size: 14px;">Estado</div>
                                                                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Email</div>
                                                                                 <div class="col-1 txtCabecera" style="font-size: 14px;">Documento</div>
                                                                                 <div class="col-1 txtCabecera text-center" style="font-size: 14px;">Elimnar</div>
@@ -473,10 +473,10 @@
                                                                                     <div class="col-2 text-left txtDetalle">{{listUsuitem.NOMBRECOMPLETO}}</div>
                                                                                     <div class="col-2 text-left txtDetalle">{{listUsuitem.SNAME}}</div>
                                                                                     <div class="col-2 text-left txtDetalle">{{listUsuitem.SDESCARGO}}</div>
-                                                                                    <div class="col-2 text-left txtDetalle">{{listUsuitem.SNOMBRE_ESTADO}}</div>
+                                                                                    <div class="col-1 text-left txtDetalle">{{listUsuitem.SNOMBRE_ESTADO}}</div>
                                                                                     <div class="col-2 text-left txtDetalle">{{listUsuitem.SEMAIL}}</div> 
-                                                                                    <div class="col-1 text-center txtDetalle" style="cursor: pointer">
-                                                                                        <a *ngIf="listUsuitem.SNOMBRE_ESTADO == 'PENDIENTE'"><i class="fas fa-file-excel" style="color:green"></i></a>
+                                                                                    <div class="col-1 text-center txtDetalle" >
+                                                                                        <a *ngIf="listUsuitem.SNOMBRE_ESTADO == 'PENDIENTE'" style="cursor: pointer"><i class="fas fa-file-excel" style="color:green"></i></a>
                                                                                     </div> 
                                                                                     
                                                                                     
