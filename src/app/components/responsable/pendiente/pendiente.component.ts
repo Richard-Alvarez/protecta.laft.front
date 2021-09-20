@@ -495,7 +495,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
                 console.log("la respSetDataPendiente.array 123124 2: ",dataComplementario)
                 dataComplementario.forEach(async (element) => {
                   let data:any = {}
-                  data.NIDALERTA_CAB_USUARIO = element.NIDALERTA_CABECERA
+                  data.NIDCOMP_CAB_USUARIO = element.NIDALERTA_CABECERA
                   data.NIDPREGUNTA = 0
                   data.NIDORIGEN = 0
                   data.NIDALERTA = element.NIDALERTA
