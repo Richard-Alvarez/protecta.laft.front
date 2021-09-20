@@ -182,6 +182,19 @@ export class UserconfigService {
     })
   }
 
+  GetListaComplementoUsuario(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaComplementoUsuario,data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        //console.log(error)
+        return reject(error)
+      }
+    })
+  }
+
   
 
   GetListaResultado(data: any): Promise<any> {

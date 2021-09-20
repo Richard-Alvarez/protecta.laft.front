@@ -54,12 +54,14 @@ export class CompletadoComponent implements OnInit {
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
     await this.ConsultaComplemento()
+    
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO
     this.OBJ_USUARIO = this.core.storage.get('usuario');
     this.NIDUSUARIO_LOGUEADO = this.OBJ_USUARIO.idUsuario//this.core.storage.get('NIDUSUARIO')
     this.NPERIODO_PROCESO = this.core.storage.get('NPERIODO_PROCESO')
 
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
+    await this.ConsultaComplementoUsuarios()
     console.log("PeriodoComp",this.OBJ_USUARIO.idUsuario)
     await this.getTipoUsuario();
     this.fillFileGroup()
@@ -714,6 +716,27 @@ export class CompletadoComponent implements OnInit {
       data.NIDUSUARIO_RESPONSABLE = item.NIDUSUARIO_ASIGNADO
       let resultadoValidacionComplemento = await this.userConfigService.GetValFormularioCompl(data)
       console.log("resultadoValidacionComplemento ", resultadoValidacionComplemento)
+      if(resultadoValidacionComplemento.code == 1){
+        swal.fire({
+          title: 'Bandeja del formularios', 
+          icon: 'warning',
+          text: 'Hay complementos que todavia no se han respondido',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor:'#FA7000',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+                         },
+           
+        }).then((result) => {
+         if(!result){
+           return
+         }
+        })
+      }
+
     }
     
 
@@ -903,6 +926,17 @@ async ConsultaComplemento(){
   // this.listaComplemento = await this.userConfigService.GetListaComplementos(data)
   this.listaComplemento = await this.userConfigService.GetListaAlertaComplemento()
   //return this.listaComplemento
+}
+
+listaComplementoUsuario:any = [] 
+async ConsultaComplementoUsuarios(){
+   let data:any ={}
+   data.NPERIODO_PROCESO = this.PeriodoComp
+  // data.NIDGRUPOSENAL = 1
+  // this.listaComplemento = await this.userConfigService.GetListaComplementos(data)
+  //this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  console.log("la lista de prueba", this.listaComplementoUsuario)
+  return this.listaComplementoUsuario
 }
 
 filtroComplemeto(item){
