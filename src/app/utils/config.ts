@@ -188,6 +188,7 @@ class Rutas {
   public urlGetInsCormularioComplUsu: string = this.base + "monitoreoSenales/GetInsCormularioComplUsu";
   public urlGetValFormularioCompl: string = this.base + "monitoreoSenales/GetValFormularioCompl";
   public urlGetListaCompUsu:string = this.base + "monitoreoSenales/GetListaCompUsu";
+  public urlGetListaComplementoUsuario:string = this.base + "monitoreoSenales/GetListaComplementoUsuario";
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
