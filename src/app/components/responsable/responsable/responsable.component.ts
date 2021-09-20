@@ -2681,8 +2681,11 @@ export class ResponsableComponent implements OnInit {
     }
   }
 
+  async addFilesComplementoResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
+    let respSetData = await this.setDataFile(event)
+    
+  }
   arrObjFilesAdjByCabecera: any = []
-
   async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
     try {
       console.log("llego a esta parte?")

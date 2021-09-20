@@ -1270,9 +1270,14 @@ UltimoTooltip(indice, longitud){
 
 async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
   console.log("el NREGIMEN : ",NREGIMEN)
+  debugger;
   await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
-
+async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
+  console.log("el NREGIMEN : ",NREGIMEN)
+  debugger;
+  await this.parent.addFilesComplementoResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
+}
  capitalizarPrimeraLetra(texto : string ) {
   //  let texto = str
     

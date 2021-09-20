@@ -2668,6 +2668,9 @@ export class ResponsableGlobalComponent {
     }
   }
 
+  async addFilesComplementoResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
+  
+  }
   arrObjFilesAdjByCabecera: any = []
 
   async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
