@@ -773,6 +773,20 @@
         </div>
       </div>
     </div>
+    <div class="card" *ngIf="(getArray(statePendiente.sState,regimen.id)).length == 0">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <p class="text-center">{{parent.cadenaEstadosSinForm}}</p>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </div>
 
 
-  </div>
+</div>
+
+
+</div>

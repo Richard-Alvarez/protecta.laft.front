@@ -409,7 +409,7 @@ export class ResponsableComponent implements OnInit {
         }*/
       }
 
-      if (this.STIPO_USUARIO === 'OC') {
+      if (this.STIPO_USUARIO === 'OC' && item.TIPO_FORM !== 'C') {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteGral.push(item);
         }
@@ -1921,10 +1921,7 @@ export class ResponsableComponent implements OnInit {
   }
 
   removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
-    //STIPO_CARGA="ADJUNTOS"
-    //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-        //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-;
+  
     console.log("el STIPO_CARGA: ",STIPO_CARGA)
     console.log("el dataObjAlerta: ",dataObjAlerta)
     console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesInformeByAlert)
