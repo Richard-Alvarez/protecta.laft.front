@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { ResponsableGlobalComponent } from '../responsableGlobal';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-completado',
@@ -53,12 +54,14 @@ export class CompletadoComponent implements OnInit {
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
     await this.ConsultaComplemento()
+    
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO
     this.OBJ_USUARIO = this.core.storage.get('usuario');
     this.NIDUSUARIO_LOGUEADO = this.OBJ_USUARIO.idUsuario//this.core.storage.get('NIDUSUARIO')
     this.NPERIODO_PROCESO = this.core.storage.get('NPERIODO_PROCESO')
 
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
+    await this.ConsultaComplementoUsuarios()
     console.log("PeriodoComp",this.OBJ_USUARIO.idUsuario)
     await this.getTipoUsuario();
     this.fillFileGroup()
@@ -538,6 +541,8 @@ export class CompletadoComponent implements OnInit {
 
   aprobarFormularios(){
 
+   
+
       
     if (this.validarUnoActivo() === false) {
      
@@ -587,9 +592,9 @@ export class CompletadoComponent implements OnInit {
             }
             indiceCheckbox++
           })
-        //console.log("Checkbox : ", respCheckboxFilter)
+        console.log("Checkbox : ", respCheckboxFilter)
         //console.log("acumuladorIndices : ", acumuladorIndices)
-        
+        debugger
         let arrServiceUpdateSenial:any =[]
         respCheckboxFilter.forEach(element => {
           
@@ -608,8 +613,10 @@ export class CompletadoComponent implements OnInit {
           data.NIDALERTA_CABECERA = element.NIDALERTA_CABECERA
           // console.log("data :  ",data)
           
-        
-          arrServiceUpdateSenial.push(this.UpdateCheckboxForm(data))
+          
+            arrServiceUpdateSenial.push(this.UpdateCheckboxForm(data))
+          
+          
          
 
         });
@@ -698,10 +705,46 @@ export class CompletadoComponent implements OnInit {
 
 
   arrNewCheck:any = []
-  setDataCheckboxApproved(item,index){
+  async setDataCheckboxApproved(item,index){
+    let listaFiltroComplemento =  this.filtroComplemeto(item)
+
+    if(listaFiltroComplemento.length > 0){
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      data.NIDALERTA = item.NIDALERTA
+      data.NIDCOMPLEMENTO = listaFiltroComplemento.NIDCOMPLEMENTO
+      data.NIDUSUARIO_RESPONSABLE = item.NIDUSUARIO_ASIGNADO
+      let resultadoValidacionComplemento = await this.userConfigService.GetValFormularioCompl(data)
+      console.log("resultadoValidacionComplemento ", resultadoValidacionComplemento)
+      if(resultadoValidacionComplemento.code == 1){
+        swal.fire({
+          title: 'Bandeja del formularios', 
+          icon: 'warning',
+          text: 'Hay complementos que todavia no se han respondido',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor:'#FA7000',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+                         },
+           
+        }).then((result) => {
+         if(!result){
+           return
+         }
+        })
+      }
+
+    }
     
+
+
     // console.log("15 Prueba arrResponsable 15 : ", this.arrResponsable)
+    console.log("15 Prueba ngModel listaFiltroComplemento: ", listaFiltroComplemento)
      console.log("15 Prueba ngModel : ", this.arrCheckbox)
+     console.log("15 Prueba ngModel item : ", item)
     let valor = this.arrCheckbox[index]
     // let respFilterAlert= this.arrNewCheck.filter(it => it.NIDALERTA === item.NIDALERTA && it.NIDALERTA_CABECERA === item.NIDALERTA_CABECERA
     //  && it.NREGIMEN===  item.NREGIMEN)
@@ -712,6 +755,7 @@ export class CompletadoComponent implements OnInit {
       objNew.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
       objNew.indiceCheckbox = index
       objNew.CheckboxValue = valor
+      objNew.NIDCOMPLEMENTO = listaFiltroComplemento.NIDCOMPLEMENTO
       
     let arrValidNewCheckLength = (this.arrNewCheck.filter(it => it.indiceCheckbox === index)).length
 
@@ -882,6 +926,17 @@ async ConsultaComplemento(){
   // this.listaComplemento = await this.userConfigService.GetListaComplementos(data)
   this.listaComplemento = await this.userConfigService.GetListaAlertaComplemento()
   //return this.listaComplemento
+}
+
+listaComplementoUsuario:any = [] 
+async ConsultaComplementoUsuarios(){
+   let data:any ={}
+   data.NPERIODO_PROCESO = this.PeriodoComp
+  // data.NIDGRUPOSENAL = 1
+  // this.listaComplemento = await this.userConfigService.GetListaComplementos(data)
+  //this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  console.log("la lista de prueba", this.listaComplementoUsuario)
+  return this.listaComplementoUsuario
 }
 
 filtroComplemeto(item){
