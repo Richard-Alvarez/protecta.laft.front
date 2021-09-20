@@ -594,6 +594,28 @@
                                         class="col-lg-2" style="padding-left: 0px;padding-right:0px;">
                                         <div class="d-flex justify-content-between">
                                           <div class="col-lg-4">
+                                            <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}"
+                                              class="inputfile" multiple
+                                              (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,'COMPLEMENTO')" />
+                                            <div class="text-center" style="display:table-caption">
+                                              <label for="archivoComplemento{{regimen.id}}-{{index}}"
+                                                style="cursor: pointer;">
+                                                <img src="assets/icons/excel-microsoft.png" style="width: 38px;" />
+                                                <div class="parrafoAdj text-center">
+                                                  <div class="">Adjuntar Comple. </div>
+                                                </div>
+                                              </label>
+                                            </div>
+                                          </div>
+                                          <div>
+                                            <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index"
+                                              [arrFilesAdjuntos]="getFilesInformUniversal(item,'COMPLEMENTO')"
+                                              [arrFilesGuardados]="[]" [statusSTIPO_CARGA]="'COMPLEMENTO'">
+                                            </app-adjuntar-files>
+                                          </div>
+                                        </div>
+                                        <!-- <div class="d-flex justify-content-between">
+                                          <div class="col-lg-4">
                                             <input type="file" name="file" id="archivo{{regimen.id}}-{{index}}"
                                               class="inputfile" multiple
                                               (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'ADJUNTOS-FORM','RE')" />
@@ -615,11 +637,11 @@
                                               [statusSTIPO_CARGA]="'ADJUNTOS-FORM'">
                                             </app-adjuntar-files>
                                           </div>
-                                        </div>
+                                        </div> -->
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="row">
+                                  <!-- <div class="row">
                                     <div class="col-lg-10"></div>
                                     <div class="col-lg-2">
                                     <div class="col-lg-2" style="padding-left: 0px;padding-right:0px;">
@@ -647,7 +669,7 @@
                                       </div>
                                     </div>
                                 </div>
-                                  </div>
+                                  </div> -->
                                 </div>
                               </div>
                             </div>
