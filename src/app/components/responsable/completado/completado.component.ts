@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { ResponsableGlobalComponent } from '../responsableGlobal';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-completado',
@@ -538,6 +539,8 @@ export class CompletadoComponent implements OnInit {
 
   aprobarFormularios(){
 
+   
+
       
     if (this.validarUnoActivo() === false) {
      
@@ -587,9 +590,9 @@ export class CompletadoComponent implements OnInit {
             }
             indiceCheckbox++
           })
-        //console.log("Checkbox : ", respCheckboxFilter)
+        console.log("Checkbox : ", respCheckboxFilter)
         //console.log("acumuladorIndices : ", acumuladorIndices)
-        
+        debugger
         let arrServiceUpdateSenial:any =[]
         respCheckboxFilter.forEach(element => {
           
@@ -608,8 +611,10 @@ export class CompletadoComponent implements OnInit {
           data.NIDALERTA_CABECERA = element.NIDALERTA_CABECERA
           // console.log("data :  ",data)
           
-        
-          arrServiceUpdateSenial.push(this.UpdateCheckboxForm(data))
+          
+            arrServiceUpdateSenial.push(this.UpdateCheckboxForm(data))
+          
+          
          
 
         });
@@ -698,10 +703,25 @@ export class CompletadoComponent implements OnInit {
 
 
   arrNewCheck:any = []
-  setDataCheckboxApproved(item,index){
+  async setDataCheckboxApproved(item,index){
+    let listaFiltroComplemento =  this.filtroComplemeto(item)
+
+    if(listaFiltroComplemento.length > 0){
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      data.NIDALERTA = item.NIDALERTA
+      data.NIDCOMPLEMENTO = listaFiltroComplemento.NIDCOMPLEMENTO
+      data.NIDUSUARIO_RESPONSABLE = item.NIDUSUARIO_ASIGNADO
+      let resultadoValidacionComplemento = await this.userConfigService.GetValFormularioCompl(data)
+      console.log("resultadoValidacionComplemento ", resultadoValidacionComplemento)
+    }
     
+
+
     // console.log("15 Prueba arrResponsable 15 : ", this.arrResponsable)
+    console.log("15 Prueba ngModel listaFiltroComplemento: ", listaFiltroComplemento)
      console.log("15 Prueba ngModel : ", this.arrCheckbox)
+     console.log("15 Prueba ngModel item : ", item)
     let valor = this.arrCheckbox[index]
     // let respFilterAlert= this.arrNewCheck.filter(it => it.NIDALERTA === item.NIDALERTA && it.NIDALERTA_CABECERA === item.NIDALERTA_CABECERA
     //  && it.NREGIMEN===  item.NREGIMEN)
@@ -712,6 +732,7 @@ export class CompletadoComponent implements OnInit {
       objNew.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
       objNew.indiceCheckbox = index
       objNew.CheckboxValue = valor
+      objNew.NIDCOMPLEMENTO = listaFiltroComplemento.NIDCOMPLEMENTO
       
     let arrValidNewCheckLength = (this.arrNewCheck.filter(it => it.indiceCheckbox === index)).length
 
@@ -886,6 +907,7 @@ async ConsultaComplemento(){
 
 filtroComplemeto(item){
   let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
+  //console.log("resultado",item.SNOMBRE_ALERTA)
   return resultado
 }
 
@@ -970,7 +992,7 @@ async EnviarCompUsuario(alerta,complemento){
       data.NPERIODO_PROCESO = this.PeriodoComp
       data.NIDALERTA = alerta.NIDALERTA
       data.NIDCOMPLEMENTO = complemento.NIDCOMPLEMENTO
-      data.NIDUSUARIO_RESPONSABLE = this.OBJ_USUARIO.idUsuario
+      data.NIDUSUARIO_RESPONSABLE = alerta.NIDUSUARIO_ASIGNADO//this.OBJ_USUARIO.idUsuario
       data.NIDUSUARIO_ASIGNADO = element.ID_USUARIO
       data.NIDGRUPOSENAL = valorGrupo
       data.SRUTA_PDF = ''
@@ -996,7 +1018,18 @@ async EnviarCompUsuario(alerta,complemento){
    if(this.linkactual == 'clientes'){
      return 1
    }
+   
 
+ }
+ ListaUsiaroxComp:any = []
+ async GetListaUsuarioComplemento(item,complemento){
+  let data:any = {}
+  data.NPERIODO_PROCESO = this.PeriodoComp
+  data.NIDALERTA = item.NIDALERTA
+  data.NIDCOMPLEMENTO = 4//complemento.NIDCOMPLEMENTO
+  data.NIDUSUARIO_RESPONSABLE = item.NIDUSUARIO_ASIGNADO
+  this.ListaUsiaroxComp = await this.userConfigService.GetListaCompUsu(data)
+  return this.ListaUsiaroxComp
  }
 
 
