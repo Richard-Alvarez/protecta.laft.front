@@ -1017,11 +1017,11 @@ async  AgregarUsuario(item,lilistComplemento){
   let buscarrepetido:any = []
   let usuario
 
-  // console.log("this.usuario",usuario)
+   console.log("this.usuario",usuario)
   
-  // console.log("this.filtro.RESULTADO",this.filtro.RESULTADO)
-  // console.log("this.item",item)
-  // console.log("this.lilistComplemento",lilistComplemento)
+   console.log("this.filtro.RESULTADO",this.filtro.RESULTADO)
+   console.log("this.item",item)
+   console.log("this.lilistComplemento",lilistComplemento)
 
   if(this.userId == 0){
     swal.fire({
