@@ -731,7 +731,9 @@ export class CompletadoComponent implements OnInit {
                          },
            
         }).then((result) => {
-         if(!result){
+         if(!result.dismiss){
+           console.log("prueba")
+           this.arrCheckbox[index] = false
            return
          }
         })
@@ -932,16 +934,36 @@ listaComplementoUsuario:any = []
 async ConsultaComplementoUsuarios(){
    let data:any ={}
    data.NPERIODO_PROCESO = this.PeriodoComp
-  // data.NIDGRUPOSENAL = 1
-  // this.listaComplemento = await this.userConfigService.GetListaComplementos(data)
-  //this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
-  console.log("la lista de prueba", this.listaComplementoUsuario)
-  return this.listaComplementoUsuario
+ 
+  this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  //console.log("la lista de prueba", this.listaComplementoUsuario)
+  //return this.listaComplementoUsuario
+}
+
+filtro:any = []
+filtrarcomplementoxAlerta(item){
+  //console.log("la lista de item",item)
+  let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO)
+  let cantidad = this.filtro.filter(it => it.NIDUSUARIO_ASIGNADO == item.NIDUSUARIO_ASIGNADO)
+  if(cantidad.length == 0){
+    let obj:any = {}
+    obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
+    obj.NOMBRECOMPLETO = item.NOMBRECOMPLETO
+    obj.NREGIMEN = item.NREGIMEN
+    obj.RESULTADO = resultado
+    this.filtro.push(obj)
+  }
+  
+   //onsole.log("itemitemitemitemitem this.filtro",this.filtro)
+  //return resultado
+  return this.filtro
 }
 
 filtroComplemeto(item){
+  
+  
   let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
-  //console.log("resultado",item.SNOMBRE_ALERTA)
+ 
   return resultado
 }
 
@@ -950,19 +972,19 @@ userId:number = 0
 async ListaUsuarioComplemento(){
     this.ListUser = await this.userConfigService.ListaUsariosComp()
     console.log("  this.ListUser",   this.ListUser)
-
+    
     console.log("  this.ListUsuaurioAgregado 1",   this.ListUsuaurioAgregado.length)
     console.log("  this.ListUsuaurioAgregado 2",   this.ListUsuaurioAgregado)
 }
 
 ListUsuaurioAgregado:any = []
-async  AgregarUsuario(){
+async  AgregarUsuario2(){
   let usuario = this.ListUser.filter(it => it.ID_USUARIO == this.userId)
   let buscarrepetido = this.ListUsuaurioAgregado.filter(usu => usu.ID_USUARIO == usuario[0].ID_USUARIO)
   console.log("  this.usuario",   usuario[0])
   if(buscarrepetido.length == 0){
     await this.ListUsuaurioAgregado.push(usuario[0])
-    console.log("  this.ListUsuaurioAgregado",   this.ListUsuaurioAgregado)
+    console.log("  this.listaComplementoUsuario",   this.ListUsuaurioAgregado)
   }else{
     swal.fire({
       title: 'Bandeja del formularios', 
@@ -990,16 +1012,81 @@ async  AgregarUsuario(){
 
 }
 
+async  AgregarUsuario(item,lilistComplemento){
+ 
+  let buscarrepetido:any = []
+  let usuario
+
+  // console.log("this.usuario",usuario)
+  
+  // console.log("this.filtro.RESULTADO",this.filtro.RESULTADO)
+  // console.log("this.item",item)
+  // console.log("this.lilistComplemento",lilistComplemento)
+
+  if(this.userId == 0){
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'Tiene que seleccionar un usuario',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result.dismiss){
+       return
+     }
+    })
+  }else if(this.userId != 0){
+    console.log("this.filtro",this.filtro)
+    usuario = this.ListUser.filter(it => it.ID_USUARIO == this.userId)
+    console.log("this.filtro",this.filtro[0])
+    buscarrepetido = this.filtro[0].RESULTADO.filter(usu => usu.NIDUSUARIO_ASIGNADO == usuario[0].ID_USUARIO)
+    if(buscarrepetido.length == 0 ){
+    
+      await this.filtro[0].RESULTADO.push(usuario[0])
+    }
+   }else{
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'No se puede agregar al mismo usuario',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result.dismiss){
+       return
+     }
+    })
+  }
+
+
+
+
+}
+
 EliminarUsuario(indice){
-  this.ListUsuaurioAgregado.splice(indice,1)
+  this.filtro[0].RESULTADO.splice(indice,1)
   //console.log("  this.ListUsuaurioAgregado eliminando",   this.ListUsuaurioAgregado)
 }
 
 async EnviarCompUsuario(alerta,complemento){
-  //console.log("el itemmmmmmmmmm",alerta)
+  
   //console.log("el itemmmmmmmmmm 2",complemento)
   let valorGrupo = this.getLink()
-  if(this.ListUsuaurioAgregado.length == 0){
+  if(this.filtro[0].RESULTADO.length == 0){
     swal.fire({
       title: 'Bandeja del formularios', 
       icon: 'warning',
@@ -1021,7 +1108,8 @@ async EnviarCompUsuario(alerta,complemento){
       ////console.log("el error : ",err);
     })
   }else{
-    this.ListUsuaurioAgregado.forEach(async (element) => {
+    debugger
+    this.filtro[0].RESULTADO.forEach(async (element) => {
       let data:any = {}
       data.NPERIODO_PROCESO = this.PeriodoComp
       data.NIDALERTA = alerta.NIDALERTA
@@ -1038,7 +1126,10 @@ async EnviarCompUsuario(alerta,complemento){
       data.SNAME =  element.SNAME
       data.fullName = this.OBJ_USUARIO.fullName
       this.core.loader.show();
-      await this.userConfigService.GetInsCormularioComplUsu(data)
+      if(element.CONSULTA == 'C'){
+        await this.userConfigService.GetInsCormularioComplUsu(data)
+      }
+      //await this.userConfigService.GetInsCormularioComplUsu(data)
       this.core.loader.hide();
     });
   
