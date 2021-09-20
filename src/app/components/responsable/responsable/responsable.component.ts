@@ -69,6 +69,7 @@ export class ResponsableComponent implements OnInit {
   sNameTipoUsuario
 
   arrObjFilesInformeByAlert: any = []
+  arrObjFilesComplementoByAlert: any = []
 
   alertGroupForPendienteInforme: any = {}
 
@@ -710,9 +711,9 @@ export class ResponsableComponent implements OnInit {
       arrPromiseChat.push(this.getCommentHeader(item.NIDALERTA_CABECERA))
       arrPromisePregDetail.push(this.getQuestionDetail(item))
       arrPromiseAdjuntosSustento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, regimen, 'ADJUNTOS-SUSTENTO'))
-      arrPromiseAdjuntosComplemento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, 0, 'COMPLEMENTO'))
+      arrPromiseAdjuntosComplemento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, 1, 'COMPLEMENTO'))
       
-      
+      debugger;
       if(this.STIPO_USUARIO == 'RE' && item.SESTADO == "3"){
         arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,'RE'))
         arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,'OC'))
@@ -2050,6 +2051,46 @@ export class ResponsableComponent implements OnInit {
     }
   }
 
+  async addFilesComplemento (event: any, NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA){
+    try{
+      console.log("llego a esta parte?")
+      //console.log("el arrFiles 879 NIDALERTA: ",NIDALERTA)
+      //archivoSustento{{regimen.id}}-{{index}}
+      let files = event.target.files;
+
+      let arrFiles = Array.from(files)
+      console.log("el arrFiles 879 : ", arrFiles)
+      let listFileNameInform: any = []
+      arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+      //console.log("el arrFiles listFileNameInform 879 : ",listFileNameInform)
+
+      let respValidation = await this.isValidationAddFilesInforme(listFileNameInform);
+      console.log("el respValidation de AddFiles: ",respValidation)
+
+      let listFileNameCortoInform = []
+      for (let item of listFileNameInform) {
+        let nameFile = item.split(".")
+        let fileItem = item && nameFile[0].length > 14 ? nameFile[0].substr(0, 15)+ '....' + nameFile[1] : item
+        listFileNameCortoInform.push(fileItem)
+      }
+      
+      let listDataFileInform: any = []
+      arrFiles.forEach(fileData => {
+        listDataFileInform.push(this.handleFile(fileData))
+      })
+      let respPromiseFileInfoBinary = await Promise.all(listDataFileInform)
+      //console.log("el arrFiles respPromiseFileInfo 879 : ",respPromiseFileInfo)
+      let dataInfoFilesTmp = this.arrObjFilesInformeByAlert.filter(itemInfo => 
+        itemInfo.NIDALERTA == NIDALERTA && 
+        itemInfo.NREGIMEN == NREGIMEN && 
+        itemInfo.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
+        itemInfo.STIPO_CARGA == STIPO_CARGA)
+    }catch (error) {
+
+    }
+
+  }
+
   async addFilesInforme(event: any, NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
       console.log("llego a esta parte?")
@@ -2353,6 +2394,7 @@ export class ResponsableComponent implements OnInit {
 
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
+      debugger;
       this.core.loader.show()
       console.log("el INICIO")
       console.log("el INICIO NIDALERTA",NIDALERTA)
@@ -2361,13 +2403,19 @@ export class ResponsableComponent implements OnInit {
       console.log("el INICIO STIPO_CARGA",STIPO_CARGA)
 
       console.log("INICIO arrObjFilesInformeByAlert ADJUNTOS12345 : ",this.arrObjFilesInformeByAlert)
-      let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
-        alertaItem.NIDALERTA == NIDALERTA &&
-        alertaItem.NREGIMEN == NREGIMEN && 
-        alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
-        alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
-        console.log(" INICIO respListFilesAdjuntos ADJUNTOS12345 : ",respListFilesAdjuntos)
-
+      let respListFilesAdjuntos = [];
+      if(STIPO_CARGA == 'COMPLEMENTO')
+          respListFilesAdjuntos = this.arrObjFilesAdjByCabecera.filter(alertaItem =>
+          alertaItem.NIDALERTA == NIDALERTA &&
+          alertaItem.NREGIMEN == NREGIMEN && 
+          alertaItem.NIDCABECERA_USUARIO == NIDALERTA_CABECERA &&
+          alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
+      else
+          respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
+          alertaItem.NIDALERTA == NIDALERTA &&
+          alertaItem.NREGIMEN == NREGIMEN && 
+          alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
+          alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
       let listFilesAdjuntos = []//archivos
       let listFileNameAdjuntos = []//nombre de archivos
   
@@ -2683,7 +2731,7 @@ export class ResponsableComponent implements OnInit {
 
   async addFilesComplementoResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
     let respSetData = await this.setDataFile(event)
-    
+
   }
   arrObjFilesAdjByCabecera: any = []
   async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
