@@ -977,7 +977,7 @@ async EnviarCompUsuario(alerta,complemento){
       data.NIDAGRUPA = alerta.NIDAGRUPA
       //Variables para el envio de correos
       data.SEMAIL =  element.SEMAIL
-      data.NOMBRECOMPLETO =  element.NOMBRECOMPLETO
+      data.NOMBRECOMPLETO =  element.NOMBRECOMPLETO     
       data.SDESCARGO =  element.SDESCARGO
       data.SNAME =  element.SNAME
       data.fullName = this.OBJ_USUARIO.fullName

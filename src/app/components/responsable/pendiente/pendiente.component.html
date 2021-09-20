@@ -318,7 +318,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div *ngIf="STIPO_USUARIO=='RE' && item.TIPO_FORM != 'S'">
+                                                                <div *ngIf="STIPO_USUARIO=='RE' && item.TIPO_FORM != 'C'">
+                                                                    
                                                                     <div class="row">
                                                                         <div class="col-lg-9">
                                                                             <div *ngFor="let pregHeadOne of item.arrPreguntasCabecera;let incPregHeadOne = index;">
@@ -512,7 +513,7 @@
 
                                                                 </div>
 
-                                                                <div *ngIf="STIPO_USUARIO=='RE' && item.TIPO_FORM == 'C'">
+                                                                 <div *ngIf="STIPO_USUARIO=='RE' && item.TIPO_FORM == 'C'">
                                                                     
                                                                     <div class="row">
                                                                         <div class="col-lg-9">
@@ -531,7 +532,9 @@
                                                                                         </div>
 
                                                                                     </div>
-                                                                                    <div class="col-lg-6" style="padding-left: 60px;" *ngIf="STIPO_USUARIO === 'RE'">
+                                                                                    <div class="col-lg-6" style="padding-left: 60px;" *ngIf="STIPO_USUARIO== 'RE'">
+
+                                                                                        
                                                                                     </div>
 
 
@@ -539,6 +542,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-1" style="padding-left: 0px;padding-right:0px;">
+                                                                          
                                                                         </div>
                                                                         <div class="col-lg-2">
                                                                             
@@ -570,17 +574,10 @@
                                                                         </div>
                                                                     </div>
 
-                                                                  <!-- <div>
-                                                                    <button (click)="EnviarComplemento()" style="font-size: 15px;display: flex;;
-                                                                    justify-content: center;" class="btn btn-warning text-white">Solicitar Complemento</button>
-                                                                   </div>
-                                                                   
-                                                                    <div>
-                                                                        {{item | json}}
-                                                                    </div>  -->
+                                                                 
 
 
-                                                            </div>
+                                                            </div>  
                                                         </div>
                                                     </div>
                                                 </div>
