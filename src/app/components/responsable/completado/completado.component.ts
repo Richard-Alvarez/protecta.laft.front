@@ -705,12 +705,12 @@ export class CompletadoComponent implements OnInit {
   arrNewCheck:any = []
   async setDataCheckboxApproved(item,index){
     let listaFiltroComplemento =  this.filtroComplemeto(item)
-
+    console.log("15 Prueba ngModel listaFiltroComplemento: ", listaFiltroComplemento)
     if(listaFiltroComplemento.length > 0){
       let data:any = {}
       data.NPERIODO_PROCESO = this.PeriodoComp
       data.NIDALERTA = item.NIDALERTA
-      data.NIDCOMPLEMENTO = listaFiltroComplemento.NIDCOMPLEMENTO
+      data.NIDCOMPLEMENTO = listaFiltroComplemento[0].NIDCOMPLEMENTO
       data.NIDUSUARIO_RESPONSABLE = item.NIDUSUARIO_ASIGNADO
       let resultadoValidacionComplemento = await this.userConfigService.GetValFormularioCompl(data)
       console.log("resultadoValidacionComplemento ", resultadoValidacionComplemento)
@@ -719,7 +719,7 @@ export class CompletadoComponent implements OnInit {
 
 
     // console.log("15 Prueba arrResponsable 15 : ", this.arrResponsable)
-    console.log("15 Prueba ngModel listaFiltroComplemento: ", listaFiltroComplemento)
+    
      console.log("15 Prueba ngModel : ", this.arrCheckbox)
      console.log("15 Prueba ngModel item : ", item)
     let valor = this.arrCheckbox[index]
