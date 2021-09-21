@@ -24,7 +24,8 @@ export class RevisadoComponent implements OnInit {
     listFiles: Map<string, any> = new Map<string, any>()
     listFileName: Map<string, any> = new Map<string, any>()
     listFilesToShow: Map<string, any> = new Map<string, any>()
-   
+    
+    PeriodoComp
 
     @Input() regimen:any = {}
     @Input() arrResponsable:any = []
@@ -39,6 +40,15 @@ export class RevisadoComponent implements OnInit {
 
 
   async ngOnInit() {
+
+
+    await this.ListaUsuario()
+    this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
+    await this.ConsultaComplementoUsuarios()
+    await this.ListaAlertas()
+    await this.ConsultaComplemento()
+
+
     await this.getVariablesStorage();
     this.fillFileGroup()
     //console.log("el regimen IIIIIIIII: ",this.regimen)
@@ -322,6 +332,61 @@ getAlerta(alerta){
     return "Pregunta:"
 }
 }
+
+
+
+listaComplemento:any = [] 
+async ConsultaComplemento(){
+
+ this.listaComplemento = await this.userConfigService.GetListaAlertaComplemento()
+ 
+}
+
+
+filtroComplemeto(item){
+  
+  
+  let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
+ 
+  return resultado
+}
+
+listaComplementoUsuario:any = [] 
+async ConsultaComplementoUsuarios(){
+  let data:any ={}
+  data.NPERIODO_PROCESO = this.PeriodoComp
+
+ this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+
+}
+
+
+ListUser:any = []
+userId:number = 0
+async ListaUsuario(){
+    this.ListUser = await this.userConfigService.ListaUsariosComp()
+  
+}
+
+
+NewArreglo:any = []
+async ListaAlertas(){
+  this.NewArreglo = []
+   this.arrResponsable.forEach(item => {
+    let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
+    let obj:any = {}
+    obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
+    obj.NOMBRECOMPLETO = item.NOMBRECOMPLETO
+    obj.NREGIMEN = item.NREGIMEN
+    obj.RESULTADO = resultado
+    obj.NIDALERTA = item.NIDALERTA
+    this.NewArreglo.push(obj)
+    //console.log("arreglo resultado", resultado) 
+   });
+   console.log("arreglo", this.NewArreglo) 
+  
+}
+
 
 
 }
