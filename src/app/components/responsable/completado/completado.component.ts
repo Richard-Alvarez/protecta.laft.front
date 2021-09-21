@@ -952,8 +952,31 @@ async EnviarCompUsuario(alerta,complemento){
   
   var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(alerta.NIDALERTA)
   let valorGrupo = this.getLink()
-  
-  this.NewArreglo[index].RESULTADO.forEach(async (element) => {
+  let existe = this.NewArreglo[index].RESULTADO.filter(it => it.CONSULTA == 'C' )
+  if(existe.length == 0){
+
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: 'No hay usuarios nuevos',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(!result.dismiss){
+       return
+     }
+    })
+    
+  }else{
+
+    this.NewArreglo[index].RESULTADO.forEach(async (element) => {
       let data:any = {}
       data.NPERIODO_PROCESO = this.PeriodoComp
       data.NIDALERTA = alerta.NIDALERTA
@@ -972,10 +995,16 @@ async EnviarCompUsuario(alerta,complemento){
       this.core.loader.show();
       if(element.CONSULTA == 'C'){
         await this.userConfigService.GetInsCormularioComplUsu(data)
+        await this.ConsultaComplementoUsuarios()
+        await this.ListaAlertas()
       }
       //await this.userConfigService.GetInsCormularioComplUsu(data)
       this.core.loader.hide();
     });
+
+  }
+  
+  
   
 
 
@@ -983,9 +1012,10 @@ async EnviarCompUsuario(alerta,complemento){
 }
 
 
-EliminarUsuario(indice){
-  //this.filtro[0].RESULTADO.splice(indice,1)
-  //console.log("  this.ListUsuaurioAgregado eliminando",   this.ListUsuaurioAgregado)
+EliminarUsuario(indice,item){
+  var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(item.NIDALERTA)
+  this.NewArreglo[index].RESULTADO.splice(indice,1)
+  console.log("eliminando registros", this.NewArreglo)
 }
 
 
@@ -1008,7 +1038,7 @@ async ListaUsuario(){
 
 NewArreglo:any = []
 async ListaAlertas(){
-  
+  this.NewArreglo = []
    this.arrResponsable.forEach(item => {
     let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
     let obj:any = {}
@@ -1043,10 +1073,36 @@ async filtrarcomplementoxAlerta(item){
 async  AgregarUsuario(item,lilistComplemento){
   var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(item.NIDALERTA)
   let usuario = this.ListUser.filter(it => it.ID_USUARIO == this.userId)
+  let existe = this.NewArreglo[index].RESULTADO.filter(it => it.NOMBRECOMPLETO == usuario[0].NOMBRECOMPLETO)
+
+  if(existe.length > 0){
+    swal.fire({
+        title: 'Bandeja del formularios', 
+        icon: 'warning',
+        text: 'No se puede agregar al mismo usuario',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor:'#FA7000',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+       if(!result.dismiss){
+         return
+       }
+      })
+      
     
+  }else{
+      
      usuario[0].SNOMBRE_ESTADO = 'PENDIENTE'
-    await this.NewArreglo[index].RESULTADO.push(usuario[0])
-    console.log("el nuevo arreglo",this.NewArreglo)
+     await this.NewArreglo[index].RESULTADO.push(usuario[0])
+     console.log("el nuevo arreglo",this.NewArreglo)
+  }
+    
   
 }
 
