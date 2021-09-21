@@ -713,7 +713,7 @@ export class ResponsableComponent implements OnInit {
       arrPromiseAdjuntosSustento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, regimen, 'ADJUNTOS-SUSTENTO'))
       arrPromiseAdjuntosComplemento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, 1, 'COMPLEMENTO'))
       
-      debugger;
+      
       if(this.STIPO_USUARIO == 'RE' && item.SESTADO == "3"){
         arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,'RE'))
         arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,'OC'))
@@ -2394,7 +2394,7 @@ export class ResponsableComponent implements OnInit {
 
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-      debugger;
+      
       this.core.loader.show()
       console.log("el INICIO")
       console.log("el INICIO NIDALERTA",NIDALERTA)
@@ -3043,7 +3043,7 @@ export class ResponsableComponent implements OnInit {
   }
 
   async fillReport(itemAlerta, NIDUSUARIO_ASIGNADO) {
-    debugger
+   
     try {
       console.log("el param de itemAlerta : ", itemAlerta)
       let objALERTA_NEW:any = {};
