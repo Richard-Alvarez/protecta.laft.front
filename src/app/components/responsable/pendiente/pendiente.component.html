@@ -269,7 +269,8 @@
                                   <div class="col-lg-2  pt-3">
                                     <div class="text-left badge badge-danger"
                                       style="font-size: 16px;font-weight: bold;">
-                                      {{item.SNOMBRE_ALERTA}}
+                                      {{item.SNOMBRE_ALERTA}} 
+                                      
                                     </div>
                                   </div>
                                   <div class="col-lg-2  pt-3">
@@ -561,17 +562,37 @@
 
                                   <div class="row">
                                     <div class="col-lg-9">
-                                      <div
+                                       <div class="row mt-2" style="">
+                                          <div class="col-lg-6">
+                                            <div class="tooltipT">
+
+                                           
+                                              <div class="txtDetalle" style="text-align: justify">
+                                                     {{item.SDESCRIPCION_ALERTA}}</div>
+                                             
+                                            </div>
+
+                                          </div>
+                                          <div class="col-lg-6" style="padding-left: 60px;"
+                                            *ngIf="STIPO_USUARIO== 'RE'">
+
+
+                                          </div>
+
+
+                                        </div>
+                                      
+                                      <!-- <div
                                         *ngFor="let pregHeadOne of item.arrPreguntasCabecera;let incPregHeadOne = index;">
                                         <div class="row mt-2" style="">
                                           <div class="col-lg-6">
                                             <div class="tooltipT">
 
-
+                                           
                                               <div class="txtDetalle" style="text-align: justify">
 
                                                 <div style="font-weight: bold;display: inline;color: royalblue;">
-                                                  {{getAlerta(item.SNOMBRE_ALERTA)}}</div>
+                                                  {{getAlerta(item.SNOMBRE_ALERTA)}} </div>
                                                 {{pregHeadOne.SPREGUNTA}}
                                               </div>
                                             </div>
@@ -585,7 +606,7 @@
 
 
                                         </div>
-                                      </div>
+                                      </div> -->
                                     </div>
                                     <div class="col-lg-1" style="padding-left: 0px;padding-right:0px;">
                                     </div>
@@ -596,7 +617,7 @@
                                           <div class="col-lg-4">
                                             <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}"
                                               class="inputfile" multiple
-                                              (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,'COMPLEMENTO')" />
+                                              (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'COMPLEMENTO','RE')" />
                                             <div class="text-center" style="display:table-caption">
                                               <label for="archivoComplemento{{regimen.id}}-{{index}}"
                                                 style="cursor: pointer;">
