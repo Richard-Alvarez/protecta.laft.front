@@ -1327,12 +1327,8 @@ UltimoTooltip(indice, longitud){
 
 async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
   console.log("el NREGIMEN : ",NREGIMEN)
-<<<<<<< HEAD
-  //debugger;
-=======
   debugger;
   //if(STIPO_CARGA)
->>>>>>> 0165b06cebe6f3a173f1aef64835f47837a64c23
   await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
 async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
