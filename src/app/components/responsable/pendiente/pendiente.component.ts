@@ -434,6 +434,12 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           respValidacionArchivoSustento = respValidArchivoSustento
           return
         }
+        let respValidArchivoComplemento = this.isValidationComplementarioForms(senial)
+        if(respValidArchivoComplemento.code == 2){
+          boolArchivoSustent = true
+          respValidacionArchivoSustento = respValidArchivoComplemento
+          return
+        }
       })
       console.log("LA RESPUESTA DEL ARREGLO DEL ARCHIVO SUSTENTO : ",respValidacionArchivoSustento)
       if(respValidacionArchivoSustento.code == 2){
@@ -475,6 +481,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
               },
         }).then(async (result) => {
           ////console.log("hellow : ",result)
+          debugger;
           if(result.dismiss){
             return
           }
@@ -515,6 +522,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
               arrPushFilesForm.push(this.parent.sendFilesAdjuntosCabecera(senial.NIDALERTA_CABECERA,senial.NIDALERTA,this.regimen.id,'ADJUNTOS-FORM',"PENDIENTE","RE"))
               console.log("la senial 2 : ",senial)
               arrPushFilesForm.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'ADJUNTOS-SUSTENTO'))
+
+              arrPushFilesForm.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'COMPLEMENTO'))
               console.log("la senial 3: ",senial)
               arrPushResCommentsForm.push(this.enviarRespCommentForm(senial,inc))
               console.log("la senial 4: ",senial)
@@ -532,7 +541,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           //await this.sendFiles(this.STIPO_USUARIO)
           let respArrayPromisesall = await Promise.all([Promise.all(arrPushResCommentsForm),Promise.all(arrPushResCommentsFormDetail)])
           let respArrayPromiseAllAdjuntos = await Promise.all(arrPushFilesForm)
-        
+        debugger;
           let respPromiseByAlerts:any = []
           let arrPromiseGetAdjuntos:any = []
           respSetDataPendiente.array.forEach(senial => {
@@ -631,6 +640,54 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           return {code: 2, message: 'Solo se permite formato xls o xlsx'}
         }*/
       }
+      return {code: 0, message: 'Todo bien'}
+    } catch (error) {
+      console.error("el error EN OBJALERTA: ",error)
+    }
+  }
+  isValidationComplementarioForms(objAlerta){
+    try {
+      debugger;
+      objAlerta["NREGIMEN"] = 0
+      console.log("el objalerta : ",objAlerta)
+      console.log("el this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+      let respFilter = this.parent.arrObjFilesInformeByAlert.filter(it => 
+        it.NIDALERTA == objAlerta.NIDALERTA && 
+        it.NREGIMEN == objAlerta.NREGIMEN && 
+        it.NIDALERTA_CABECERA == objAlerta.NIDALERTA_CABECERA &&
+        it.STIPO_CARGA == 'COMPLEMENTO')
+
+
+        //console.log("el respFilter[0] : ",respFilter[0])
+        //console.log("el respFilter[0] length: ",respFilter[0].length)
+        // if(respFilter.length == 0){
+        //   return {code: 2, message: 'El archivo de sustento es obligatorio para la señal RG9'}
+        // }
+
+        //console.log("el respFilter[0] arrFilesName : ",respFilter[0].arrFilesName)
+        //console.log("el respFilter[0] arrFilesName length : ",(respFilter[0].arrFilesName).length)
+        let cantidad =  respFilter.length > 0 ? (respFilter[0].arrFilesName).length : 0
+        console.log("el cantidad : ",cantidad)
+        // if(cantidad == 0){
+        //   return {code: 2, message: 'El archivo de sustento es obligatorio para la señal RG9'}
+        // }
+        if(cantidad > 0){
+          if(cantidad > 1){
+            return {code: 2, message: 'No se puede adjuntar mas de un archivo de sustento'}
+          }
+          let nombreSplit = ((respFilter[0]).arrFilesName[0]).split('.')
+          if(nombreSplit.length > 2){
+            return {code: 2, message: 'El archivo de sustento debe ser adjuntado con formato correcto, sin puntos en el nombre'}
+          }
+          let extensionFile = nombreSplit[1]
+          if(!(extensionFile == 'xls' || extensionFile == 'xlsx')){
+            return {code: 2, message: 'El archivo de sustento debe ser adjuntado en formato excel'}
+          }
+        }
+        /*if(extensionFile != 'xlsx'){
+          return {code: 2, message: 'Solo se permite formato xls o xlsx'}
+        }*/
+      
       return {code: 0, message: 'Todo bien'}
     } catch (error) {
       console.error("el error EN OBJALERTA: ",error)
@@ -1270,7 +1327,12 @@ UltimoTooltip(indice, longitud){
 
 async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
   console.log("el NREGIMEN : ",NREGIMEN)
+<<<<<<< HEAD
   //debugger;
+=======
+  debugger;
+  //if(STIPO_CARGA)
+>>>>>>> 0165b06cebe6f3a173f1aef64835f47837a64c23
   await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
 async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
