@@ -522,7 +522,7 @@
                                           <div class="col-2 text-left txtDetalle">{{listUsu.SEMAIL}}</div>
                                           <div class="col-1 text-center txtDetalle">
                                             <a *ngIf="listUsu.SNOMBRE_ESTADO !== 'PENDIENTE'" style="cursor: pointer"><i
-                                                class="fas fa-file-excel" style="color:green;font-size: 20px;"></i></a>
+                                                class="fas fa-file-excel" (click)="descargarComplemento(item,listUsu)" style="color:green;font-size: 20px;"></i></a>
                                           </div>
 
 

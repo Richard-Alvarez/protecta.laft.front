@@ -1008,7 +1008,6 @@ async ListaUsuario(){
 
 NewArreglo:any = []
 async ListaAlertas(){
-  
    this.arrResponsable.forEach(item => {
     let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
     let obj:any = {}
@@ -1049,6 +1048,9 @@ async  AgregarUsuario(item,lilistComplemento){
     console.log("el nuevo arreglo",this.NewArreglo)
   
 }
-
+descargarComplemento (item,listUsu){
+  var splitRuta = listUsu.SRUTA_PDF.split('/')
+  this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
+}
   
 }

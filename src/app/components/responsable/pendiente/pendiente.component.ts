@@ -15,6 +15,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { ResponsableGlobalComponent } from '../responsableGlobal'; 
 import { Console } from 'console';
 import { SbsreportService } from 'src/app/services/sbsreport.service';
+import { ARIA_DESCRIBER_PROVIDER_FACTORY } from '@angular/cdk/a11y';
 
 
 @Component({
@@ -501,6 +502,12 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
               if(dataComplementario.length != 0){
                 console.log("la respSetDataPendiente.array 123124 2: ",dataComplementario)
                 dataComplementario.forEach(async (element) => {
+                  
+                  let array = this.parent.arrObjFilesAdjByCabecera.find(alertaItem =>
+                    alertaItem.NIDALERTA == element.NIDALERTA &&
+                    alertaItem.NREGIMEN == this.regimen.id && 
+                    alertaItem.NIDCABECERA_USUARIO == element.NIDALERTA_CABECERA &&
+                    alertaItem.STIPO_CARGA == 'COMPLEMENTO')
                   let data:any = {}
                   data.NIDCOMP_CAB_USUARIO = element.NIDALERTA_CABECERA
                   data.NIDPREGUNTA = 0
@@ -509,7 +516,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
                   data.NIDAGRUPA = element.NIDAGRUPA
                   data.NIND_RESPUESTA = 1
                   data.SCOMENTARIO = ''
-                  data.SRUTA_PDF = 'ruta pdf'
+                  if(array.SRUTA != '')
+                  array.SRUTA = 'COMPLEMENTO' +'/' + element.NIDALERTA + '/' + 'CABECERA/' + element.NIDALERTA_CABECERA + '/' + this.NPERIODO_PROCESO + '/' + this.regimen.id + '/' + array.arrFilesName[0];
+                  data.SRUTA_PDF = array.SRUTA
 
                  // debugger
                   await this.userConfigService.GetUpdComplementoCab(data)
