@@ -504,14 +504,14 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
                   data.SCOMENTARIO = ''
                   data.SRUTA_PDF = 'ruta pdf'
 
-                  debugger
+                 // debugger
                   await this.userConfigService.GetUpdComplementoCab(data)
                 });
               }
 
               console.log("la senial 1 : ",senial)
             
-              debugger
+              //debugger
               arrPushFilesForm.push(this.parent.sendFilesAdjuntosCabecera(senial.NIDALERTA_CABECERA,senial.NIDALERTA,this.regimen.id,'ADJUNTOS-FORM',"PENDIENTE","RE"))
               console.log("la senial 2 : ",senial)
               arrPushFilesForm.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'ADJUNTOS-SUSTENTO'))
@@ -589,7 +589,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   isValidationAdjuntosForms(objAlerta){
     try {
-      debugger;
+      //debugger;
       objAlerta["NREGIMEN"] = 0
       console.log("el objalerta : ",objAlerta)
       console.log("el this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
@@ -1270,12 +1270,12 @@ UltimoTooltip(indice, longitud){
 
 async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
   console.log("el NREGIMEN : ",NREGIMEN)
-  debugger;
+  //debugger;
   await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
 async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
   console.log("el NREGIMEN : ",NREGIMEN)
-  debugger;
+  //debugger;
   await this.parent.addFilesComplementoResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
  capitalizarPrimeraLetra(texto : string ) {
