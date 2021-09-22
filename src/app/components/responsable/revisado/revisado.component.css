@@ -299,3 +299,20 @@ border-bottom:2px solid #FA7000;
     color: #fff;
     background-color: #018ccd;
 }
+
+.TitleLine2{
+  padding-bottom: 1%;
+position: relative;
+z-index : 1;
+font-size: 25px;
+}
+
+.TitleLine2:before{
+  content : "";
+  position: absolute;
+  left    : 0;
+  bottom  : 0;
+  height  : 1pxs;
+  width   : 100%;  /* or 100px */
+  border-bottom:2px solid #FA7000;
+  }

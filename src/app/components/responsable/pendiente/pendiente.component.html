@@ -630,7 +630,7 @@
                                           </div>
                                           <div>
                                             <app-adjuntar-files [parent]="this" [item]="item" [indexInput]="index"
-                                              [arrFilesAdjuntos]="getFilesInformUniversal(item,'COMPLEMENTO')"
+                                              [arrFilesAdjuntos]="getFilesCabecera(item,'COMPLEMENTO',this.regimen.id)"
                                               [arrFilesGuardados]="[]" [statusSTIPO_CARGA]="'COMPLEMENTO'">
                                             </app-adjuntar-files>
                                           </div>
