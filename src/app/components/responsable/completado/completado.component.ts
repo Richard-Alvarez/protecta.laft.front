@@ -1112,6 +1112,9 @@ async  AgregarUsuario(item,lilistComplemento){
     
   
 }
-
+descargarComplemento (item,listUsu){
+  var splitRuta = listUsu.SRUTA_PDF.split('/')
+  this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
+}
   
 }
