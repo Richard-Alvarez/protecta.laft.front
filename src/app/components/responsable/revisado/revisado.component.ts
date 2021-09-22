@@ -355,7 +355,7 @@ listaComplementoUsuario:any = []
 async ConsultaComplementoUsuarios(){
   debugger
   let data:any ={}
-  data.NPERIODO_PROCESO = this.PeriodoComp
+  data.NPERIODO_PROCESO = 20210630//this.PeriodoComp
 
  this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
 

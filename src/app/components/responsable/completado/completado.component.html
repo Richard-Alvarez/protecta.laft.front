@@ -509,7 +509,7 @@
                                     <!-- <div class="row " *ngFor="let item of ListUsuaurioAgregado; let index = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">    -->
                                     <!-- <div class="row " *ngFor="let listUsu of filtrarcomplementoxAlerta(item); let index = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">  -->
                                     <div *ngFor="let array of  this.NewArreglo">
-                                      <div *ngIf="array.NIDALERTA == item.NIDALERTA">
+                                      <div *ngIf="array.NIDALERTA == item.NIDALERTA " >
                                         <div *ngFor="let listUsu of  array.RESULTADO; let indice = index">
                                             <div class="row"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
 

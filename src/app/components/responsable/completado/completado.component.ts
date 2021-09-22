@@ -388,13 +388,15 @@ export class CompletadoComponent implements OnInit {
           
           let respMetodo = this.parent.pushObjInArrayByAlert('DEVUELTO',this.regimen.id,objSenial)
           debugger
-          //await this.revisado.ConsultaComplementoUsuarios()
-          //await this.revisado.ListaAlertas()
-
+         
         
           // console.log("el respMetodo : ",respMetodo)
   
           this.core.loader.hide();
+
+          // await this.revisado.ConsultaComplementoUsuarios()
+          // await this.revisado.ListaAlertas()
+
 
           this.arrInputCommentSolCompl = []
 
@@ -550,9 +552,11 @@ export class CompletadoComponent implements OnInit {
     return data
   }
 
-  aprobarFormularios(){
-
-   
+  async aprobarFormularios(){
+    console.log("el periodo",this.revisado.PeriodoComp)
+    debugger
+    await this.revisado.ConsultaComplementoUsuarios()
+    await this.revisado.ListaAlertas()
 
       
     if (this.validarUnoActivo() === false) {
@@ -663,6 +667,8 @@ export class CompletadoComponent implements OnInit {
 
      
         this.core.loader.hide();
+        
+
        } })
     }
   }
@@ -1111,7 +1117,8 @@ async  AgregarUsuario(item,lilistComplemento){
   }
     
   
-}
+}0
+
 descargarComplemento (item,listUsu){
   var splitRuta = listUsu.SRUTA_PDF.split('/')
   this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
