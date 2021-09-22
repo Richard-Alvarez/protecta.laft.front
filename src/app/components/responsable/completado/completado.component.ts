@@ -6,6 +6,7 @@ import { CoreService } from '../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
+import { RevisadoComponent } from '../revisado/revisado.component';
 import { ResponsableGlobalComponent } from '../responsableGlobal';
 import { data } from 'jquery';
 
@@ -42,6 +43,7 @@ export class CompletadoComponent implements OnInit {
   @Input() stateCompletado:any = {}
   @Input() userGroupList:any = []
   @Input() parent:ResponsableComponent
+  @Input() revisado:RevisadoComponent
 
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
@@ -385,6 +387,11 @@ export class CompletadoComponent implements OnInit {
           //let respMetodo = this.parent.pushObjInArrayByAlert('DEVUELTO',this.regimen.id,respFilterArrRespon[0])
           
           let respMetodo = this.parent.pushObjInArrayByAlert('DEVUELTO',this.regimen.id,objSenial)
+          debugger
+          //await this.revisado.ConsultaComplementoUsuarios()
+          //await this.revisado.ListaAlertas()
+
+        
           // console.log("el respMetodo : ",respMetodo)
   
           this.core.loader.hide();

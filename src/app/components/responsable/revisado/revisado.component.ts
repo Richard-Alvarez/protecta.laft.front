@@ -24,7 +24,7 @@ export class RevisadoComponent implements OnInit {
     listFiles: Map<string, any> = new Map<string, any>()
     listFileName: Map<string, any> = new Map<string, any>()
     listFilesToShow: Map<string, any> = new Map<string, any>()
-    
+
     PeriodoComp
 
     @Input() regimen:any = {}
@@ -353,6 +353,7 @@ filtroComplemeto(item){
 
 listaComplementoUsuario:any = [] 
 async ConsultaComplementoUsuarios(){
+  debugger
   let data:any ={}
   data.NPERIODO_PROCESO = this.PeriodoComp
 
