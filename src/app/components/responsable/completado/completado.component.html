@@ -418,7 +418,7 @@
 
                         </div>
                         <div id="{{stateCompletado.sHrefHead + regimen.desCorto + index}}"
-                          class="collapse {{parent.getStyleShowByAlert(item.NIDALERTA)}}"
+                          class="collapse {{parent.getStyleShowByAlert(item.NIDALERTA)}} {{validarcomplemento(item)}}"
                           attr.data-parent="#{{stateCompletado.sCollapHead + regimen.desCorto + index}}">
 
                           <div class="row" *ngIf="STIPO_USUARIO === 'OC'">

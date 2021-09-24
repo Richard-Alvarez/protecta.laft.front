@@ -398,16 +398,19 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
      
      
      console.log("el respSetDataPendiente : ",respSetDataPendiente)
-    ////console.warn("respValidation 2: ",this.arrResponsable)
+    console.warn("respValidation 2: ",this.arrResponsable)
 
     //SE COMENTO LA VALIDACION
-    let respValidation:any =  {} //await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
-     respValidation.message = ''
+    //let respValidation:any =  {}
+  
+    let respValidation:any = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
+    debugger
+    // respValidation.message = ''
     //
     console.log("respValidation 123456: ",respValidation)
     if (respValidation.message !== '') {
       swal.fire({
-        title: 'Bandeja del 1111'+ this.sNameTipoUsuario,
+        title: 'Bandeja del '+ this.sNameTipoUsuario,
        icon: 'error',
         // html:'<i class="fas fa-exclamation-triangle"></i>',
         text: respValidation.message,
@@ -899,7 +902,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       obj.message = 'Ocurrio un error con información'
       return obj
     }
-    if(this.arrInputComment.length === 0 && valorComplemento.length != 0){
+    if(this.arrInputComment.length === 0  && valorComplemento.length == 0){
+    // if(this.arrInputComment.length === 0){
       obj.message = 'No respondió ninguna señal'
       return obj
     }
@@ -908,8 +912,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     //   obj.message = 'No selecciono ninguna señal'
     //   return obj
     // }
-    
     if(this.arrInputRespHeader.filter(t=> t != "").length !== this.arrResponsable.length){
+    // if(this.arrInputRespHeader.filter(t=> t != "").length !== this.arrResponsable.length){
       obj.message = 'Debe responder las señales'
       return obj
     }

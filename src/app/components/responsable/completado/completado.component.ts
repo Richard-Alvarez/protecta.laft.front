@@ -973,6 +973,15 @@ getLink(){
   if(this.linkactual == 'clientes'){
     return 1
   }
+  if(this.linkactual == 'contraparte'){
+    return 4
+  }
+  if(this.linkactual == 'colaborador'){
+    return 2
+  }
+  if(this.linkactual == 'proveedor'){
+    return 3
+  }
   
 
 }
@@ -1138,6 +1147,16 @@ async  AgregarUsuario(item,lilistComplemento){
 descargarComplemento (item,listUsu){
   var splitRuta = listUsu.SRUTA_PDF.split('/')
   this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
+}
+
+validarcomplemento(item){
+
+  let respuesta = this.filtroComplemeto(item)
+  if(respuesta.length != 0 && this.STIPO_USUARIO == 'OC'){
+    return 'show'
+  }else{
+    return ''
+  }
 }
   
 }

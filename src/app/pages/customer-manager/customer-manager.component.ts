@@ -2555,7 +2555,7 @@ prueba = []
           dataPoliza.NIDALERTA = 2
           dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
           dataPoliza.SCLIENT = ItemCliente.SCLIENT 
-         
+         debugger
          let respuestaConsultaPoliza = await  this.userConfigService.ValidarPolizaVigente(dataPoliza)
           if( respuestaConsultaPoliza.code == 1 ){
             Swal.fire({
@@ -2614,10 +2614,17 @@ prueba = []
                   console.log("RespuestaWC",respuestaWC)
                   
                   if(respuetaService.sStatus == 'NOT FOUND' || respuetaService.sStatus == 'ERROR'){
+                    let mensaje = ''
+                    if(respuetaService.sStatus == 'ERROR'){
+                        mensaje = 'Hubo un error en la bd'
+                    }else{
+                      mensaje = 'No se encontro registros'
+                    }
+
                     Swal.fire({
                       title: 'Gestor de Cliente',
                       icon: 'warning',
-                      text: 'No se encontro registros',
+                      text: mensaje,
                       showCancelButton: false,
                       showConfirmButton: true,
                       confirmButtonColor: "#FA7000",
