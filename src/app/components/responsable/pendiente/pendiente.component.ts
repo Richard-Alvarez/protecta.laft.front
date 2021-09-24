@@ -400,10 +400,24 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
      console.log("el respSetDataPendiente : ",respSetDataPendiente)
     console.warn("respValidation 2: ",this.arrResponsable)
 
-    //SE COMENTO LA VALIDACION
-    //let respValidation:any =  {}
-  
-    let respValidation:any = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
+    
+    let respValidation:any =  {}
+    let resultComplemento = respSetDataPendiente.array.filter(it => it.TIPO_FORM == 'C')
+    debugger
+     if(resultComplemento.length != 0){
+      respValidation = {}//await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
+      respValidation.message = ''
+
+
+      console.log("el objeto",this.parent.arrObjFilesAdjByCabecera)
+      
+
+
+
+     }else{
+       respValidation = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
+     }
+     //respValidation = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
     debugger
     // respValidation.message = ''
     //
