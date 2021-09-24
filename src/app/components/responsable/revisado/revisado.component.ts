@@ -44,7 +44,7 @@ export class RevisadoComponent implements OnInit {
 
     await this.ListaUsuario()
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
-    await this.ConsultaComplementoUsuarios()
+    await this.ConsultaComplementoUsuarios('REVISADO',this.PeriodoComp)
     await this.ListaAlertas()
     await this.ConsultaComplemento()
 
@@ -352,14 +352,23 @@ filtroComplemeto(item){
 }
 
 listaComplementoUsuario:any = [] 
-async ConsultaComplementoUsuarios(){
-  debugger
+async ConsultaComplementoUsuarios(estado,periodo) {
   let data:any ={}
-  data.NPERIODO_PROCESO = 20210630//this.PeriodoComp
-
- this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  if(estado == 'COMPLETADO'){
+    
+    data.NPERIODO_PROCESO = periodo //this.PeriodoComp
+  
+   //this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  }else{
+    
+    data.NPERIODO_PROCESO = this.PeriodoComp 
+  }
+   
+  this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  
 
 }
+
 
 
 ListUser:any = []
@@ -386,6 +395,32 @@ async ListaAlertas(){
    });
    console.log("arreglo", this.NewArreglo) 
   
+}
+
+async ListaAlertasDesdeCompletado(completado){
+  // this.NewArreglo = []
+  //  responsable.forEach(item => {
+  //   let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
+  //   let obj:any = {}
+  //   obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
+  //   obj.NOMBRECOMPLETO = item.NOMBRECOMPLETO
+  //   obj.NREGIMEN = item.NREGIMEN
+  //   obj.RESULTADO = resultado
+  //   obj.NIDALERTA = item.NIDALERTA
+  //   this.NewArreglo.push(obj)
+  //   //console.log("arreglo resultado", resultado) 
+  //  });
+  // console.log("arreglo", this.NewArreglo) 
+  debugger;
+  this.NewArreglo = await completado
+  console.log("arreglo", this.NewArreglo) 
+  console.log("completado", completado) 
+  
+}
+
+descargarComplemento (item,listUsu){
+  var splitRuta = listUsu.SRUTA_PDF.split('/')
+  this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
 }
 
 

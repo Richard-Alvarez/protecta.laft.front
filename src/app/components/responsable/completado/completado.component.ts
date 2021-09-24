@@ -43,12 +43,16 @@ export class CompletadoComponent implements OnInit {
   @Input() stateCompletado:any = {}
   @Input() userGroupList:any = []
   @Input() parent:ResponsableComponent
-  @Input() revisado:RevisadoComponent
+  //@Input() revisado:RevisadoComponent
+
+  public localRevisado: RevisadoComponent;
 
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
     private renderer: Renderer2,
-    private modalService: NgbModal,) { }
+    private modalService: NgbModal,) {
+      this.localRevisado = new RevisadoComponent(core,userConfigService,renderer,modalService)
+     }
 
   async ngOnInit() {
     await this.ListaUsuario()
@@ -552,12 +556,8 @@ export class CompletadoComponent implements OnInit {
     return data
   }
 
-  async aprobarFormularios(){
-    console.log("el periodo",this.revisado.PeriodoComp)
-    debugger
-    await this.revisado.ConsultaComplementoUsuarios()
-    await this.revisado.ListaAlertas()
-
+  async aprobarFormularios() {
+   
       
     if (this.validarUnoActivo() === false) {
      
@@ -612,7 +612,7 @@ export class CompletadoComponent implements OnInit {
         debugger
         let arrServiceUpdateSenial:any =[]
         respCheckboxFilter.forEach(element => {
-          
+          var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(element.NIDALERTA)
           let data:any = {}
           data.NIDALERTA_CAB_USUARIO = element.NIDALERTA_CABECERA
           data.NIDUSUARIO_MODIFICA = this.NIDUSUARIO_LOGUEADO
@@ -626,9 +626,10 @@ export class CompletadoComponent implements OnInit {
       
           
           data.NIDALERTA_CABECERA = element.NIDALERTA_CABECERA
+          element.COMPLEMENTO = this.NewArreglo[index].RESULTADO
           // console.log("data :  ",data)
           
-          
+          //Comentado para pruebas
             arrServiceUpdateSenial.push(this.UpdateCheckboxForm(data))
           
           
@@ -643,11 +644,14 @@ export class CompletadoComponent implements OnInit {
             //Se tiene que modificar igual
               if(item.SESTADO_REV_TOTAL == "1"){
                
-                arrPromisesGetModuleWork.push(this.getDataModuleWorkCheckBox())
+                //Comentado para pruebas
+              arrPromisesGetModuleWork.push(this.getDataModuleWorkCheckBox())
                
               }
           })
+          //Comentado para pruebas
           let respPromisesAllGetModuleWork = await Promise.all(arrPromisesGetModuleWork)
+
           //console.log("respPromisesAllGetModuleWork 123 : " ,respPromisesAllGetModuleWork)
         } catch (error) {
           console.log(error)
@@ -657,7 +661,8 @@ export class CompletadoComponent implements OnInit {
 
         //console.log("el arrResponsable : ",this.arrResponsable)
         this.core.loader.show();
-        this.setPushDataRevisado(respCheckboxFilter)
+        await this.setPushDataRevisado(respCheckboxFilter)
+        await this.localRevisado.ListaAlertasDesdeCompletado(this.NewArreglo)
         this.core.loader.hide();
         this.arrNewCheck = []
         this.arrCheckbox = []
@@ -665,7 +670,13 @@ export class CompletadoComponent implements OnInit {
         // console.log("15 Prueba arrCheckbox: ", this.arrCheckbox)
         //console.log("el revisado del régimen simplificado ",this.parent.arrResponsablesRevisadoGral)
 
-     
+        console.log("el periodo",this.localRevisado.PeriodoComp)
+        
+        //await this.localRevisado.ConsultaComplementoUsuarios('COMPLETADO',this.PeriodoComp)
+        await this.localRevisado.ngOnInit()
+        //await this.parent.ngOnInit("COMPLETADO")
+        //await this.localRevisado.ListaAlertasDesdeCompletado(this.arrResponsable)
+    
         this.core.loader.hide();
         
 
@@ -673,7 +684,8 @@ export class CompletadoComponent implements OnInit {
     }
   }
 
-  setPushDataRevisado(respCheckboxFilter){
+  async setPushDataRevisado(respCheckboxFilter){
+    debugger
     let recoveryObjResponsable: any = []
     /*acumuladorIndices.forEach(acum => {
       console.log("el acum del responsable : ",acum)
@@ -684,20 +696,24 @@ export class CompletadoComponent implements OnInit {
 
     })*/
 
-    respCheckboxFilter.forEach(itCheck => {
+    respCheckboxFilter.forEach(itCheck => { 
+    
       let indiceResponsable = this.arrResponsable.map(respo => respo.NIDALERTA_CABECERA).indexOf(itCheck.NIDALERTA_CABECERA)
       // console.log("el indice del responsable : ",indiceResponsable)
+      this.arrResponsable[indiceResponsable].RESULTADO = itCheck.RESULTADO
       recoveryObjResponsable.push(this.arrResponsable[indiceResponsable])
       let respuestaSplice = this.arrResponsable.splice(indiceResponsable,1)
       // console.log("splice :",respuestaSplice)
       
     })
      //  let from = this.parent.getWorkModuleAll
-     recoveryObjResponsable.forEach(obj => {
+     recoveryObjResponsable.forEach(async (obj) => {
       this.core.loader.show();
-       let respuestaPushObjs = this.parent.pushObjInArrayByAlert("REVISADO",this.regimen.id,obj)
+      var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(obj.NIDALERTA)
+      obj.RESULTADO =  this.NewArreglo[index].RESULTADO
+       let respuestaPushObjs = await this.parent.pushObjInArrayByAlert("REVISADO",this.regimen.id,obj)
        this.core.loader.hide();
-      //  console.log("el respuestaPushObjs ", respuestaPushObjs)
+        console.log("el respuestaPushObjs ", respuestaPushObjs)
      });
   }
 
@@ -962,7 +978,7 @@ getLink(){
 }
 
 async EnviarCompUsuario(alerta,complemento){
-  
+  debugger;
   var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(alerta.NIDALERTA)
   let valorGrupo = this.getLink()
   let existe = this.NewArreglo[index].RESULTADO.filter(it => it.CONSULTA == 'C' )

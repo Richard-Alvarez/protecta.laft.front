@@ -110,7 +110,7 @@ export class ResponsableComponent implements OnInit {
     private dataResponsable: DataResponsableService,
   ) { }
 
-  async ngOnInit() {
+  async ngOnInit()  {
 
     // // When the user scrolls the page, execute myFunction
     // window.onscroll = function() {myFunction()};
@@ -235,7 +235,7 @@ export class ResponsableComponent implements OnInit {
               
             } 
       } catch (error) {
-        console.error('el error: ',error)
+        //console.error('el error: ',error)
       }
     }
     
@@ -390,8 +390,9 @@ export class ResponsableComponent implements OnInit {
    
     console.log(this.alertFormList);
     this.alertFormList.forEach(item => {
+      item.RESULTADO = []
       item.NREGIMEN = 1
-      if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
+      if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO ) {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteGral.push(item);
         }
@@ -446,8 +447,9 @@ export class ResponsableComponent implements OnInit {
 
     console.log(this.alertFormListSimpli);
     this.alertFormListSimpli.forEach(item => {
+      console.log("item 111111111111111",item)
       item.NREGIMEN = 2
-      if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
+      if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO ) {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteSimpli.push(item);
         }
@@ -464,7 +466,7 @@ export class ResponsableComponent implements OnInit {
         //   this.arrResponsablesCerradoGral.push(item);
         // }
       }
-      if (this.STIPO_USUARIO === 'OC') {
+      if (this.STIPO_USUARIO === 'OC'  && item.TIPO_FORM !== 'C') {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteSimpli.push(item);
         }
@@ -921,12 +923,15 @@ export class ResponsableComponent implements OnInit {
       //console.error("el arrayConversacionCabecera : ",arrayConversacionCabecera)
       //console.error("el arrPreguntaDetalle 709 : ",arrPreguntaDetalle)
       objAlerta.arrPreguntasCabecera = arrayPreguntasCabecera;
+      objAlerta.arrPreguntasCabecera.RESULTADO = [];
       objAlerta.arrConversacionCabecera = arrayConversacionCabecera;
       objAlerta.arrPreguntasDetalle = arrayDetalleResult//arrPreguntaDetalle//arrayPreguntasDetail;
       objAlerta.arrPreguntasTitleDetail = arrPreguntasTitleDetail
       objAlerta.arrAdjuntos = arrAdjuntosNew
       objAlerta.arrAdjuntosSustento = arrayTmpDataAdjuntosSustento
       objAlerta.arrPromiseAdjuntosComplemento = arrayTmpDataAdjuntosComplemento
+      objAlerta.RESULTADO = []
+      
       objAlerta.SCOMENTARIO_OC = objFechaComentarioOC.SCOMENTARIO
       arrayAlertList.push(objAlerta)
       indiceArray++
@@ -1790,12 +1795,15 @@ export class ResponsableComponent implements OnInit {
         break;
       case 'REVISADO':
         if (regimen === 0) {
+          this.arrResponsablesPendienteGral.RESULTADO = []
           arrayDefault = this.arrResponsablesPendienteGral
         }
         if (regimen === 1) {
+          this.arrResponsablesPendienteGral.RESULTADO = []
           arrayDefault = this.arrResponsablesRevisadoGral
         }
         if (regimen === 2) {
+          this.arrResponsablesPendienteGral.RESULTADO = []
           arrayDefault = this.arrResponsablesRevisadoSimpli
         }
         break;
@@ -1835,6 +1843,8 @@ export class ResponsableComponent implements OnInit {
       default:
         arrayDefault = []
     }
+    console.log("el objeto", obj)
+    obj.RESULTADO = obj.RESULTADO
     arrayDefault.push(obj);
     return arrayDefault;
     //return this.arrResponsablesPendienteSimpli;

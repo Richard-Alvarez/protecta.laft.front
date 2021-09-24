@@ -25,6 +25,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   @Input() reference: any;
  
   @Input() public alert: any;
+  @Input() public lista: any;
   @Input() public data: any = {};
   constructor(
     private core: CoreService,
@@ -108,9 +109,6 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
     })
   }
 
-  GuardarCambios2(){
-    console.log("estadooooo", this.estado)
-  }
   async GuardarCambios(){
 
     let respValidacion:any = this.validator()
@@ -139,45 +137,71 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       
       if(this.data == 'null' ){
         // Acá es para registrar
-      swal.fire({
-        title: "Mantenimiento de complemento",
-         icon: "warning",
-         text: "¿Esta seguro de registrar un complemento?",
-         showCancelButton: true,
-         confirmButtonColor: "#FA7000",
-         confirmButtonText: "Aceptar",
-         showCloseButton: true,
-         customClass: { 
-           closeButton : 'OcultarBorde'
-                       },
-       }).then(async (respuesta) =>{
-               console.log("respuesta.dismiss",respuesta.dismiss)
-               if(!respuesta.dismiss){
+        let validacion = this.lista.filter(it => it.NIDALERTA == this.sennal)
+        if(validacion != 0){
 
-                
-                //Aca sera el registrar
-                let dataRegistro:any = {};
-                
-                dataRegistro.NIDCOMPLEMENTO = 0
-                dataRegistro.SNOMBRE_COMPLEMENTO = this.nombreComplemento
-                dataRegistro.SDESCRIPCION = this.descripcion
-                dataRegistro.SPREGUNTA = this.pregunta
-                dataRegistro.NIDALERTA = this.sennal
-                dataRegistro.NIDGRUPOSENAL = this.idGrupo
-                dataRegistro.SESTADO =  this.estado == true ? 1 : 2
-                dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
-                dataRegistro.TIPOOPERACION = 'I'
-                console.log("la data que envia a registrar :", dataRegistro)
+          swal.fire({
+            title: "Mantenimiento de complemento",
+             icon: "warning",
+             text: "Ya existe un complemento asignado a la alerta" ,
+             showCancelButton: true,
+             confirmButtonColor: "#FA7000",
+             confirmButtonText: "Aceptar",
+             showCloseButton: true,
+             customClass: { 
+               closeButton : 'OcultarBorde'
+                           },
+           }).then(async (respuesta) =>{
+                   console.log("respuesta.dismiss",respuesta.dismiss)
+                   if(!respuesta.dismiss){
+                      return
+                      
+             }
+            })
 
-                this.core.loader.show(); 
-                await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
-                this.core.loader.hide(); 
+        }else{
 
-                  this.closeModal('edit-modal')
-                  }else{
-                        return
-                  }
-       })
+          swal.fire({
+            title: "Mantenimiento de complemento",
+             icon: "warning",
+             text: "¿Esta seguro de registrar un complemento?",
+             showCancelButton: true,
+             confirmButtonColor: "#FA7000",
+             confirmButtonText: "Aceptar",
+             showCloseButton: true,
+             customClass: { 
+               closeButton : 'OcultarBorde'
+                           },
+           }).then(async (respuesta) =>{
+                   console.log("respuesta.dismiss",respuesta.dismiss)
+                   if(!respuesta.dismiss){
+    
+                    
+                    //Aca sera el registrar
+                    let dataRegistro:any = {};
+                    
+                    dataRegistro.NIDCOMPLEMENTO = 0
+                    dataRegistro.SNOMBRE_COMPLEMENTO = this.nombreComplemento
+                    dataRegistro.SDESCRIPCION = this.descripcion
+                    dataRegistro.SPREGUNTA = this.pregunta
+                    dataRegistro.NIDALERTA = this.sennal
+                    dataRegistro.NIDGRUPOSENAL = this.idGrupo
+                    dataRegistro.SESTADO =  this.estado == true ? 1 : 2
+                    dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
+                    dataRegistro.TIPOOPERACION = 'I'
+                    console.log("la data que envia a registrar :", dataRegistro)
+    
+                    this.core.loader.show(); 
+                    await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
+                    this.core.loader.hide(); 
+    
+                      this.closeModal('edit-modal')
+                      }else{
+                            return
+                      }
+           })
+        }
+      
 
   
        
