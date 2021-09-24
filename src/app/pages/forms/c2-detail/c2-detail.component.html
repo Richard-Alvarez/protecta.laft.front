@@ -211,7 +211,7 @@
                                                           <th scope="col">Nro. de documento</th> -->
                                                           <th scope="col" style="width:120px">Tipo y Nro. de documento</th> 
                                                           <th scope="col">Nombres</th>  
-                                                          <th *ngIf="this.boolNameMach" scope="col">Termino encontrado</th>                                     
+                                                          <th *ngIf="this.nidregimen == 1 && this.nidalerta == 2" scope="col">Termino encontrado</th>                                     
                                                           <th scope="col">Tipo de Coincidencia</th>
                                                           <th scope="col">Origen</th>
                                                           
@@ -229,24 +229,28 @@
                                                           <td>{{item.SNUM_DOCUMENTO}}</td> -->
                                                           <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                                                           <td>{{item.SNOM_COMPLETO}}</td>
-                                                          <td *ngIf="item.NIDPROVEEDOR == 4">{{item.STERMINO_COINCIDENCIA}}</td> 
+                                                          <td *ngIf="this.nidregimen == 1 && this.nidalerta == 2">{{item.STERMINO_COINCIDENCIA}}</td> 
                                                           <td>{{item.STIPO_BUSQUEDA}}</td>
                                                           <td>{{item.SORIGEN}}</td>
                                                           <!-- <td *ngIf="validatePorPorcentaje(itemCli.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ}}</td> -->
                                                           <td >{{item.NPORC_APROXIMA_BUSQ}}</td>
-                                                          <div *ngIf="item.SESTADO_REVISADO == '1'; else Respuesta">
+                                                          <!-- <div *ngIf="item.SESTADO_REVISADO == '1'"> -->
                                                               <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)"  scope="col" placement='top' ngbTooltip="{{item.SNOMCARGO}}" >
-                                                                  <div>{{cortarCararter(item.SNOMCARGO)}}</div></div>
+                                                                  <div>{{cortarCararter(item.SNOMCARGO)}}</div>
+                                                                </div>
                                                             
-                                                          </div>
-                                                          <ng-template #Respuesta>
-                                                              <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)"  scope="col" placement='top' ngbTooltip="{{item.SCARGO_PEP}}" >
-                                                                      <div>{{cortarCararter(item.SCARGO_PEP)}}</div></div> 
+                                                          <!-- </div> -->
+                                                          <!-- <ng-template #Respuesta> -->
+                                                            <!-- <div *ngIf="item.SESTADO_REVISADO == '2'"> -->
+                                                              <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,2)"  scope="col" placement='top' ngbTooltip="{{item.SCARGO_PEP}}" >
+                                                                      <div>{{cortarCararter(item.SCARGO_PEP)}}</div>
+                                                                </div> 
+                                                            <!-- </div>  -->
                                                                       <!-- <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)"  scope="col" placement='top' ngbTooltip="{{item.SNOMCARGO}}" >
                                                                           <div>{{cortarCararter(item.SNOMCARGO)}}</div></div> -->
-                                                          </ng-template>
+                                                          <!-- </ng-template> -->
                                                          
-                                                          <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,2)"  scope="col"  style="width: 250px;">
+                                                          <td *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,2)"  scope="col"  style="width: 250px;">
                                                                <ng-select placeholder="Seleccionar"  [disabled]="getDisable()" 
                                                               [items]="listCargo" bindLabel="label" [(ngModel)]="ValorCombo[incCli]" bindValue="id"
                                                               (change)="ValorCargo($event)">
@@ -255,7 +259,7 @@
                                                              </ng-select> 
                                                                  
                                                                 
-                                                          </th>
+                                                          </td>
                                                           
                                                           <td>
                                                               
