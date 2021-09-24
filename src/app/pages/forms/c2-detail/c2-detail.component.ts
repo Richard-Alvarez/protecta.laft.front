@@ -45,7 +45,8 @@ export class C2DetailComponent implements OnInit {
     selectedCargo1: any;
     selectedCargo2: any;
     selectedCargo3: any;
-
+    nidregimen;
+    nidalerta;
     boolNameMach;
     internationalList: any[] = []
     pepList: any[] = []
@@ -114,8 +115,8 @@ export class C2DetailComponent implements OnInit {
   SESTADO_BUTTON_SAVE
   NewListCheck :any = []
   async ngOnInit() {  
-        
-    
+    this.nidregimen = localStorage.getItem("NREGIMEN");
+    this.nidalerta = localStorage.getItem("NIDALERTA");
     var paramCliente =  localStorage.getItem("paramCliente");
     // console.log("El paramCliente: ", paramCliente)
     if (paramCliente != null && paramCliente != ""){
@@ -557,14 +558,6 @@ export class C2DetailComponent implements OnInit {
             
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
             //this.boolNameMach = this.arrCoincidenciasLista.;
-            console.log("el sNombreLista Marco debug : ",this.sNombreLista)
-            console.log("el arrCoincidenciasLista Marco debug : ",this.arrCoincidenciasLista)
-            if (typeof(this.arrCoincidenciasLista) == 'object'){
-                if (this.arrCoincidenciasLista[0].arrCoincidencias.length > 0)
-                    this.boolNameMach = this.arrCoincidenciasLista[0].arrCoincidencias.map(t=>t.NIDPROVEEDOR).includes(4);
-                else
-                    this.boolNameMach = false;
-            }
             this.SCLIENT_DATA = localStorage.getItem('SCLIENT')//this.formData.SCLIENT
 
             await this.getHistorialRevisiones()
@@ -1764,7 +1757,8 @@ export class C2DetailComponent implements OnInit {
                                         NTIPOCARGA: itemArreglos.NTIPOCARGA,//this.formData.NTIPOCARGA
                                         STIPO_BUSQUEDA: itemArreglos.STIPO_BUSQUEDA,
                                         NIDCARGOPEP: this.ValorCombo[incrementadorCheck],
-                                        NIDGRUPOSENAL : valorIDGrupo
+                                        NIDGRUPOSENAL : valorIDGrupo,
+                                        STIPO_DOCUMENTO : itemArreglos.STIPOIDEN
     
                                     }
                                     console.log("el param 1: ",param)
@@ -1850,7 +1844,8 @@ export class C2DetailComponent implements OnInit {
                                 NTIPOCARGA:  this.formData.NTIPOCARGA,
                                 STIPO_BUSQUEDA: item.STIPO_BUSQUEDA,
                                 NIDCARGOPEP: this.ValorCombo[i],
-                                NIDGRUPOSENAL: valorIDGrupo
+                                NIDGRUPOSENAL: valorIDGrupo,
+                                STIPO_DOCUMENTO : item.STIPOIDEN
                             }
                              console.log("entro el param 2 : ",param)
                              
@@ -2012,7 +2007,7 @@ export class C2DetailComponent implements OnInit {
     
     ValidacionCargo(Lista,estado){
         
-        if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
+                if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
             return false
         }
         else{
