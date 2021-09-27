@@ -326,11 +326,38 @@ export class PendienteComponent implements OnInit {
 
 async addFilesInforme(event: any, NIDALERTA_CABECERA, NIDALERTA, STIPO_CARGA) {
   try {
+    debugger;
     console.log("el dataMultiplex : ",this.dataMultiplex)
     // console.log("el NIDALERTA RESP INFO : ",NIDALERTA)
     //let STIPO_CARGA = "INFORMES"
     let respAddInfo = await this.parent.addFilesInforme(event, NIDALERTA, NIDALERTA_CABECERA, this.regimen.id,STIPO_CARGA)
     console.log("el arrFiles RESP INFO : ",respAddInfo)
+    if (STIPO_CARGA =="ADJUNTOS-SUSTENTO" && respAddInfo.code == 1)
+    {
+      if(this.STIPO_USUARIO === 'OC'){
+        this.sNameTipoUsuario = 'Oficial de Cumplimiento'
+      }else{
+        this.sNameTipoUsuario = 'Responsable'
+      }
+      swal.fire({
+        title: 'Bandeja del '+ this.sNameTipoUsuario,
+       icon: 'error',
+        // html:'<i class="fas fa-exclamation-triangle"></i>',
+        text: respAddInfo.message,
+        showCancelButton: false,
+        showConfirmButton: true,
+        showCloseButton: true,
+        confirmButtonText:'Aceptar',
+        confirmButtonColor: "#FA7000",
+        
+           customClass: { 
+              closeButton : 'OcultarBorde'
+              },
+        //cancelButtonColor: "#FA7000",
+
+
+      });
+    }
     //console.log("el arrFiles RESP this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
     //await this.parent.sendFilesInformes(NIDALERTA, this.listFilesInform, this.listFilesInformName)
   } catch (error) {

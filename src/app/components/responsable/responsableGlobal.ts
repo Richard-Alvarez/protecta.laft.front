@@ -2113,9 +2113,21 @@ export class ResponsableGlobalComponent {
     try {
       console.log("llego a esta parte?")
       //console.log("el arrFiles 879 NIDALERTA: ",NIDALERTA)
-      let files = event.target.files;
+      let files: any = event.target.files;
 
-      let arrFiles = Array.from(files)
+      let arrFiles: any = Array.from(files)
+      let extensiones = arrFiles.map(t => t.name.split(".")[1])
+      let extCount = extensiones.length;
+      if (extCount > 0)
+      {
+        if(extensiones.map(t => ['xlsx','xls','csv'].includes(t)).filter(t => t).length != extCount){
+          return  {
+            message : "Solo se pueden cargar archivos xlsx , xls y csv",
+            code : 1
+          }
+        };
+      }
+
       console.log("el arrFiles 879 : ", arrFiles)
       let listFileNameInform: any = []
       arrFiles.forEach(it => listFileNameInform.push(it["name"]))
@@ -2146,7 +2158,10 @@ export class ResponsableGlobalComponent {
       console.log("el this.arrObjFilesInformeByAlert tmp : ", dataInfoFilesTmp)
       let respAddFilesInArray = this.addFilesInArrayGlobalResponsable(dataInfoFilesTmp, NIDALERTA_CABECERA, NREGIMEN,NIDALERTA,STIPO_CARGA,listFileNameInform,respPromiseFileInfoBinary,listFileNameCortoInform)
       console.log("el respAddFilesInArray : ", respAddFilesInArray)
-      return true
+      return {
+        message : "",
+        code : 0
+      }
     } catch (error) {
       console.error("el arrFiles error 879 : ", error)
     }
