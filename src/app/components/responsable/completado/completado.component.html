@@ -320,7 +320,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <div class="col-lg-12" *ngIf="STIPO_USUARIO === 'RE'">
+                                    <div class="col-lg-12" *ngIf="STIPO_USUARIO === 'RE' && item.TIPO_FORM !=='C'">
                                       <div class="row mt-2" style="padding-left: 0px;padding-right: 0px;"
                                         *ngFor="let pregHeadOne of item.arrPreguntasCabecera;let incPregHeadOne = index;">
                                         <div class="col-lg-4" style="margin-right: 10px;    margin-left: -10px;">
@@ -331,6 +331,7 @@
                                                                                         </div>
                                                                                     </div> -->
                                             <div class="txtDetalle" style="text-align:justify">
+                                               
                                               <div style="font-weight: bold; display: inline;color: royalblue;">
                                                 {{getAlerta(item.SNOMBRE_ALERTA)}}</div>
                                               {{pregHeadOne.SPREGUNTA}}
@@ -360,6 +361,10 @@
 
                                       </div>
                                     </div>
+                                    <div class="col-lg-12" *ngIf="STIPO_USUARIO === 'RE' && item.TIPO_FORM =='C'" ></div>
+                                     {{item.SDESCRIPCION_ALERTA}}
+                                    
+
                                     <div class="row mt-3" *ngIf="STIPO_USUARIO === 'OC'">
                                       <div class="col-lg-3">
 
@@ -412,6 +417,8 @@
                                 </div>
                               </div>
                             </div>
+
+
 
                           </div>
 

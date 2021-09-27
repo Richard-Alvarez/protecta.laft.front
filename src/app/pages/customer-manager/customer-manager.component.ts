@@ -2545,6 +2545,8 @@ prueba = []
           ObjListaCheckSeleccionadoxNombre.SCLIENT = ItemCliente.SCLIENT     
           ObjListaCheckSeleccionadoxNombre.NTIPOCARGA = 2//ItemCliente.SESTADO_TRAT == 'NNN' ? 2 : ItemCliente.NTIPOCARGA//2
           ObjListaCheckSeleccionadoxNombre.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
+          ObjListaCheckSeleccionadoxNombre.NIDREGIMEN = 0
+          ObjListaCheckSeleccionadoxNombre.NIDTIPOLISTA = 0
           // console.log("Lista1 3",ObjListaCheckSeleccionadoxNombre)
           
           //console.log("ObjListaCheckSeleccionado",ObjListaCheckSeleccionadoxNombre)
@@ -2578,30 +2580,8 @@ prueba = []
               }
             })
           }else{
-            let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)
-            if(respuetaService.code == 1){
-              Swal.fire({
-                title: 'Gestor de Cliente',
-                icon: 'warning',
-                text: respuetaService.mensaje,
-                showCancelButton: false,
-                showConfirmButton: true,
-                //cancelButtonColor: '#dc4545',
-                confirmButtonColor: "#FA7000",
-                confirmButtonText: 'Aceptar',
-                cancelButtonText: 'Cancelar',
-                showCloseButton: true,
-                customClass: { 
-                  closeButton : 'OcultarBorde'
-                 },
-              }).then(resp => {
-                if(!resp.dismiss){
-                    return
-                  }
-              })
-
-            } else{
-
+            
+                  // Aca se ejecuta para la consulta a WC
                   let data:any = {}
                   data.name = (ItemCliente.SNOM_COMPLETO).trim()
                   data.alertId = 2
@@ -2611,17 +2591,18 @@ prueba = []
                   data.nIdUsuario = this.objUsuario.idUsuario
                   /* Se agreggo esta linea para consumir la api de WC */
                   let respuestaWC =  await this.userConfigService.ConsultaWC(data)
+                   //Aca se ejecuta para hacer la busqueda de coincidencia manual
+                   let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)
                   console.log("RespuestaWC",respuestaWC)
-                  
-                  if(respuetaService.sStatus == 'NOT FOUND' || respuetaService.sStatus == 'ERROR'){
-                    let mensaje = ''
-                    if(respuetaService.sStatus == 'ERROR'){
+                  if(respuestaWC.sStatus == 'NOT FOUND' || respuestaWC.sStatus == 'ERROR'){
+                     let mensaje = ''
+                    if(respuestaWC.sStatus == 'ERROR'){
                         mensaje = 'Hubo un error en la bd'
                     }else{
                       mensaje = 'No se encontro registros'
                     }
 
-                    Swal.fire({
+                       Swal.fire({
                       title: 'Gestor de Cliente',
                       icon: 'warning',
                       text: mensaje,
@@ -2634,54 +2615,48 @@ prueba = []
                       customClass: { 
                         closeButton : 'OcultarBorde'
                        },
-                    }).then(resp => {
-                      if(!resp.dismiss){
-                          return
-                        }
-                    })
-      
-                  } 
-            }
+                        }).then(resp => {
+                          if(!resp.dismiss){
+                              return
+                            }
+                        })
+          
+                    }
+                  else if(respuetaService.code == 1){
+                      Swal.fire({
+                        title: 'Gestor de Cliente',
+                        icon: 'warning',
+                        text: respuetaService.mensaje,
+                        showCancelButton: false,
+                        showConfirmButton: true,
+                      
+                        confirmButtonColor: "#FA7000",
+                        confirmButtonText: 'Aceptar',
+                        cancelButtonText: 'Cancelar',
+                        showCloseButton: true,
+                        customClass: { 
+                          closeButton : 'OcultarBorde'
+                         },
+                      }).then(resp => {
+                        return
+                      })
+                    } 
 
+                  if(respuetaService.code == 0){
+                    ItemCliente.NIDREGIMEN = 99
+                    ItemCliente.SESTADO_REVISADO = '2'
+                    ItemCliente.SESTADO_TRAT = null
+                   
+                    await this.goToDetailAprobar(ItemCliente,ValorArray)
+                  } 
+                  
+              
             
           }
         
 
-         let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)//this.getConfigService(ObjListaCheckSeleccionadoxDoc,ObjListaCheckSeleccionadoxNombre,objAnularCliene)
-        //  console.log("respuetaService",respuetaService)
-          if(respuetaService.code == 1){
-            Swal.fire({
-              title: 'Gestor de Cliente',
-              icon: 'warning',
-              text: respuetaService.mensaje,
-              showCancelButton: false,
-              showConfirmButton: true,
-              //cancelButtonColor: '#dc4545',
-              confirmButtonColor: "#FA7000",
-              confirmButtonText: 'Aceptar',
-              cancelButtonText: 'Cancelar',
-              showCloseButton: true,
-              customClass: { 
-                closeButton : 'OcultarBorde'
-               },
-            }).then(resp => {
-              if(!resp.dismiss){
-                  return
-                }
-            })
-          }
-          if(respuetaService.code == 0){
-            ItemCliente.NIDREGIMEN = 99
-            ItemCliente.SESTADO_REVISADO = '2'
-            ItemCliente.SESTADO_TRAT = null
-
-           
-
-            await this.goToDetailAprobar(ItemCliente,ValorArray)
-          } 
-                 // let respuestaPromiseAll = await Promise.all(idClienteSeleccionado)
-        // console.log("respuestaPromiseAll :",respuestaPromiseAll)
-        //console.log("Valor real del checkbox",arrCheckboxNew)
+       
+                
         
   }
 
