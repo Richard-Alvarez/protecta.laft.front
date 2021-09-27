@@ -429,18 +429,50 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
     
     let respValidation:any =  {}
+    let respValidacionArchivoSustento:any = {}
     let resultComplemento = respSetDataPendiente.array.filter(it => it.TIPO_FORM == 'C')
     debugger
      if(resultComplemento.length != 0){
       respValidation = {}//await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
       respValidation.message = ''
-
-
-      console.log("el objeto",this.parent.arrObjFilesAdjByCabecera)
+      respValidacionArchivoSustento.code = 1
       
+      console.log("el objeto 1",this.parent.arrObjFilesAdjByCabecera)
+      console.log("el objeto 2",this.parent.arrObjFilesAdjByCabecera.length)
+      console.log("el objeto 3",resultComplemento.length)
 
-
-      
+      debugger
+      if(this.parent.arrObjFilesAdjByCabecera.length != resultComplemento.length ){
+        debugger
+  
+        swal.fire({
+          title: 'Bandeja del '+ this.sNameTipoUsuario,
+          icon: 'warning',
+          text: 'Tiene que agregar un archivo en formato Excel',
+          //showCancelButton: true,
+          showConfirmButton: true,
+          ////cancelButtonColor: '#dc4545',
+          confirmButtonColor: "#FA7000",
+          confirmButtonText: 'Aceptar',
+          //cancelButtonText: 'Cancelar',
+          showCloseButton: true,
+          
+           customClass: { 
+              closeButton : 'OcultarBorde'
+              },
+          
+        }).then(async (result) => {
+          
+          console.log("hellow : ",result.value)
+          debugger;
+           if(result.value){
+             return
+           }
+          } )  
+          return
+      }
+     
+     
      }else{
        respValidation = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
      }
@@ -448,6 +480,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     debugger
     // respValidation.message = ''
     //
+
+    
+
     console.log("respValidation 123456: ",respValidation)
     if (respValidation.message !== '') {
       swal.fire({
@@ -469,7 +504,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
       });
     }else{
-      let respValidacionArchivoSustento:any = {}
+      
       let boolArchivoSustent = false;
       respSetDataPendiente.array.forEach(senial => {
         
@@ -525,11 +560,11 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
               closeButton : 'OcultarBorde'
               },
         }).then(async (result) => {
-          ////console.log("hellow : ",result)
+          console.log("hellow : ",result.value)
           debugger;
-          if(result.dismiss){
-            return
-          }
+           if(result.dismiss){
+             return
+           }
           if(result.value = true){
             this.core.loader.show()
             let inc = 0;
@@ -545,6 +580,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
             try {
               if(dataComplementario.length != 0){
                 console.log("la respSetDataPendiente.array 123124 2: ",dataComplementario)
+                debugger
                 dataComplementario.forEach(async (element) => {
                   
                   let array = this.parent.arrObjFilesAdjByCabecera.find(alertaItem =>
@@ -564,7 +600,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
                   array.SRUTA = 'COMPLEMENTO' +'/' + element.NIDALERTA + '/' + 'CABECERA/' + element.NIDALERTA_CABECERA + '/' + this.NPERIODO_PROCESO + '/' + this.regimen.id + '/' + array.arrFilesName[0];
                   data.SRUTA_PDF = array.SRUTA
 
-                 // debugger
+                  debugger
                   await this.userConfigService.GetUpdComplementoCab(data)
                 });
               }
@@ -943,7 +979,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       obj.message = 'Ocurrio un error con información'
       return obj
     }
-    if(this.arrInputComment.length === 0  && valorComplemento.length == 0){
+    if(this.arrInputComment.length === 0  ){
     // if(this.arrInputComment.length === 0){
       obj.message = 'No respondió ninguna señal'
       return obj
@@ -1474,6 +1510,17 @@ EnviarComplemento(){
 }
 
 
+
+ValidarCabecera(){
+  let valor = this.arrResponsable.filter(it => it.TIPO_FORM == 'C')
+  if(valor.length == 0){
+    return true
+  }else{
+    return false
+  }
+
+
+}
 
 
  

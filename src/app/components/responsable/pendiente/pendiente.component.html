@@ -57,7 +57,8 @@
             <br *ngIf="STIPO_USUARIO === 'RE'">
           </div>
           <div class="card" style="border: 0px;"
-            *ngIf="STIPO_USUARIO === 'RE' && getArray(statePendiente.sState,regimen.id).length >= 2">
+            *ngIf="STIPO_USUARIO === 'RE' && getArray(statePendiente.sState,regimen.id).length >= 2 && ValidarCabecera()" >
+            
             <div class="card-body">
               <div class="card" style="border: 0px;background-color: transparent;">
                 <div class="card-header headerSenialsV2" style="border: 0px;background-color: transparent;">
@@ -565,7 +566,7 @@
                                        <div class="row mt-2" style="">
                                           <div class="col-lg-6">
                                             <div class="tooltipT">
-
+                                             
                                            
                                               <div class="txtDetalle" style="text-align: justify">
                                                      {{item.SDESCRIPCION_ALERTA}}</div>
@@ -763,21 +764,34 @@
                 <div class="col-lg-10">
 
                 </div>
-                <div class="col-lg-2 text-right" *ngIf="GetOcultarBoton()">
+                <!-- <div class="col-lg-2 text-right" *ngIf="GetOcultarBoton()"> -->
                   <!-- <button type="button" class="btn btn-warning" *ngIf="STIPO_USUARIO==='RE'" style="font-size: 24px;"
                                  (click)="sendForm()">Enviar</button> -->
 
-                  <button (click)="sendForm()" style="font-size: 20px;"
-                    class="btn btn-warning text-white">Enviar</button>
+                  <!-- <button (click)="sendForm()" style="font-size: 20px;"
+                    class="btn btn-warning text-white">Enviar</button> -->
                   <!--<button type="button"
                                     class="btn btn-warning" *ngIf="STIPO_USUARIO==='OC' && statePendiente.sState !== 'CERRADO' && statePendiente.sState !== 'PENDIENTE' && statePendiente.sState !== 'REVISADO'">Aprobar</button>-->
-                </div>
+                <!-- </div> -->
               </div>
             </div>
 
+            <div class="row pt-2">
+              <div class="col-lg-10">
 
+              </div>
+              <div class="col-lg-2 text-right" *ngIf="GetOcultarBoton()">
+                <!-- <button type="button" class="btn btn-warning" *ngIf="STIPO_USUARIO==='RE'" style="font-size: 24px;"
+                               (click)="sendForm()">Enviar</button> -->
+
+                <button (click)="sendForm()" style="font-size: 20px;"
+                  class="btn btn-warning text-white">Enviar</button>
+                <!--<button type="button"
+                                  class="btn btn-warning" *ngIf="STIPO_USUARIO==='OC' && statePendiente.sState !== 'CERRADO' && statePendiente.sState !== 'PENDIENTE' && statePendiente.sState !== 'REVISADO'">Aprobar</button>-->
+              </div>
+            </div>
           </div>
-
+          
         </div>
 
 
@@ -792,6 +806,13 @@
             <div class="col-lg-4"></div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-lg-10">
+
+          </div>
+         
+        </div>
       </div>
     </div>
     <div class="card" *ngIf="(getArray(statePendiente.sState,regimen.id)).length == 0">
@@ -804,8 +825,15 @@
                 <div class="col-lg-4"></div>
             </div>
         </div>
-    </div>
 
+        <div class="row">
+          <div class="col-lg-10">
+
+          </div>
+          
+        </div>
+    </div>
+    
 
 </div>
 

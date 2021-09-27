@@ -1013,32 +1013,58 @@ async EnviarCompUsuario(alerta,complemento){
     })
     
   }else{
+    
 
-    this.NewArreglo[index].RESULTADO.forEach(async (element) => {
-      let data:any = {}
-      data.NPERIODO_PROCESO = this.PeriodoComp
-      data.NIDALERTA = alerta.NIDALERTA
-      data.NIDCOMPLEMENTO = complemento.NIDCOMPLEMENTO
-      data.NIDUSUARIO_RESPONSABLE = alerta.NIDUSUARIO_ASIGNADO//this.OBJ_USUARIO.idUsuario
-      data.NIDUSUARIO_ASIGNADO = element.ID_USUARIO
-      data.NIDGRUPOSENAL = valorGrupo
-      data.SRUTA_PDF = ''
-      data.NIDAGRUPA = alerta.NIDAGRUPA
-      //Variables para el envio de correos
-      data.SEMAIL =  element.SEMAIL
-      data.NOMBRECOMPLETO =  element.NOMBRECOMPLETO     
-      data.SDESCARGO =  element.SDESCARGO
-      data.SNAME =  element.SNAME
-      data.fullName = this.OBJ_USUARIO.fullName
-      this.core.loader.show();
-      if(element.CONSULTA == 'C'){
-        await this.userConfigService.GetInsCormularioComplUsu(data)
-        await this.ConsultaComplementoUsuarios()
-        await this.ListaAlertas()
-      }
-      //await this.userConfigService.GetInsCormularioComplUsu(data)
-      this.core.loader.hide();
-    });
+    swal.fire({
+      title: 'Bandeja del formularios', 
+      icon: 'warning',
+      text: '¿Está seguro de asignar los complementos?',
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonAriaLabel:'Cancelar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+       
+    }).then((result) => {
+     if(result.dismiss){
+       debugger
+       return
+     }else{
+      debugger
+      this.NewArreglo[index].RESULTADO.forEach(async (element) => {
+        let data:any = {}
+        data.NPERIODO_PROCESO = this.PeriodoComp
+        data.NIDALERTA = alerta.NIDALERTA
+        data.NIDCOMPLEMENTO = complemento.NIDCOMPLEMENTO
+        data.NIDUSUARIO_RESPONSABLE = alerta.NIDUSUARIO_ASIGNADO//this.OBJ_USUARIO.idUsuario
+        data.NIDUSUARIO_ASIGNADO = element.ID_USUARIO
+        data.NIDGRUPOSENAL = valorGrupo
+        data.SRUTA_PDF = ''
+        data.NIDAGRUPA = alerta.NIDAGRUPA
+        //Variables para el envio de correos
+        data.SEMAIL =  element.SEMAIL
+        data.NOMBRECOMPLETO =  element.NOMBRECOMPLETO     
+        data.SDESCARGO =  element.SDESCARGO
+        data.SNAME =  element.SNAME
+        data.fullName = this.OBJ_USUARIO.fullName
+        this.core.loader.show();
+        if(element.CONSULTA == 'C'){
+          await this.userConfigService.GetInsCormularioComplUsu(data)
+          await this.ConsultaComplementoUsuarios()
+          await this.ListaAlertas()
+        }
+        //await this.userConfigService.GetInsCormularioComplUsu(data)
+        this.core.loader.hide();
+      });
+     }
+    })
+
+
+   
 
   }
   
