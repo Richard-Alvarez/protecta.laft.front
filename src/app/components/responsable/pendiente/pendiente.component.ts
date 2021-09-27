@@ -413,7 +413,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       
 
 
-
+      
      }else{
        respValidation = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
      }
