@@ -964,7 +964,7 @@ async ConsultaComplemento(){
 filtroComplemeto(item){
   
   
-  let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
+  let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA)
  
   return resultado
 }
