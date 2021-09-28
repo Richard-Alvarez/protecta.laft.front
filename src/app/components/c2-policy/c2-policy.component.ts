@@ -190,7 +190,91 @@ export class C2PolicyComponent implements OnInit {
     //console.log(" c2policy data ", this.Contratante)
 
   }
+  async showdata(){
+    /* if(this.DescripcionRamo == "VIDA LEY TRABAJADORES") {
+      
+      $('#tblContactos').empty()
+      for (item = this.item1; inc < this.arregloprueba.length;) {
+        $('#tblContactos').append('<td item href="inc">'+this.item1+'</td><td >'+this.item2+'</td><td >'+this.item3+'</td><td >'+this.item4+'</td><td >'+this.item5+'</td><td >'+this.item6+'</td>')
+      }
+        
+      }
+      
+    } */
 
+    if (this.item.DES_CORTA_RAMO == 'Renta Total' && this.item.DES_PRODUCTO == 'Rt') {
+      $('#h4Asegurado').text('Datos del titular')
+      $('#DAsegDocum').css("display","block")
+      $('#DAsegCUSPP').css("display","block")
+      $('#InfoRentaTotal').css("display","block")
+      $('#InfoCanal').css("display","none")
+      $('#InfoCoberturas').css("display","block")
+      $('#InfoBeneficiarios').css("display","block")
+    }
+    //Renta vitalicia (rrvv) renta de jubilacion
+    if (this.item.DES_CORTA_RAMO == 'RRVV' || this.item.DES_PRODUCTO== 'RRVV') {
+      $('#h4Asegurado').text('Datos del Titular')
+      $('#DAsegDocum').css("display","block")
+      $('#DAsegCUSPP').css("display","block")
+      $('#DAsegIniVig').css("display","block")
+      $('#DAsegFinVig').css("display","block")
+      $('#DAsegTipPension').css("display","block")
+      $('#DAsegTipRenta').css("display","block")
+      $('#DAsegModalidad').css("display","block")
+      $('#DAsegAnDif').css("display","block")
+      $('#DAsegMesGarant').css("display","block")
+      $('#DAsegMoneda').css("display","block")
+      $('#DAsegReajTemp').css("display","block")
+      $('#DAsegPrimDef').css("display","block")
+      $('#DAsegPenDef').css("display","block")
+      $('#InfoCoberturas').css("display","block")
+      //$('#InfoBeneficiarios').css("display","block")
+      $('#InfoPensiones').css("display","block")
+      $('#titlebenef').text(this.DatosAsegurado.name+'(Titular)')
+      $('#PPensViaPago').text(/* this.pension.viaPago */'')
+      /* $('#DAsegDocum').css("display","block")
+      $('#DAsegCUSPP').css("display","block")
+      $('#DAsegIniVig').css("display","block")
+      $('#DAsegFinVig').css("display","block")
+      $('#DAsegTipPension').css("display","block")
+      $('#DAsegTipRenta').css("display","block")
+      $('#DAsegModalidad').css("display","block")
+      $('#DAsegAnDif').css("display","block")
+      $('#DAsegMesGarant').css("display","block")
+      $('#DAsegMoneda').css("display","block")
+      $('#DAsegReajTemp').css("display","block")
+      $('#DAsegPrimDef').css("display","block")
+      $('#DAsegPenDef').css("display","block")
+      $('#InfoPensiones').css("display","block") */
+    }
+    if (this.item.DES_CORTA_RAMO == 'SOAT'){
+      $('#InfoAsegurado').css("display","none")
+      $('#InfoVehiculo').css("display","block")
+      $('#InfoDirecSOAT').css("display","block")
+      $('#InfoCanal').css("display","block")
+      $('#InfoIntermediario').css("display","block")
+      $('#InfoTarifa').css("display","block")
+      $('#InfoCoberturas').css("display","block")
+    }
+    if (this.item.DES_CORTA_RAMO == "VIDA INDIVIDUAL DE LARGO PLAZO") {//desgravamen credito personal
+      $('#InfoAsegurado').css("display","block")
+      $('#InfoCanal').css("display","block")
+      $('#InfoIntermediario').css("display","block")
+      $('#InfoCoberturas').css("display","block")
+    }
+    if (this.item.DES_CORTA_RAMO == "VIDA LEY TRABAJADORES") {
+      $('#DAsegIniVig').css("display","block")
+      $('#DAsegFinVig').css("display","block")
+      $('#DAsegMonedaSal').css("display","block")
+      $('#DAsegSalario').css("display","block")
+      $('#DAsegTasa').css("display","block")
+      $('#InfoAsegurado').css("display","block")
+      $('#InfoCanal').css("display","block")
+      $('#InfoIntermediario').css("display","block")
+      $('#InfoCoberturas').css("display","block")
+      $('#InfoBeneficiarios').css("display","block")
+    }
+  }
  
 
 }

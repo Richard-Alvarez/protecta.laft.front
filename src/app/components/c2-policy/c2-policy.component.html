@@ -35,12 +35,9 @@
               id="PCardMoneda">{{this.Moneda}}</span></p>
           <p class="card-text textTitle"><span>Último Pago</span><span class="spancontent"
               id="PCardUltPago">{{this.FechaEfecto}}</span></p>
-
-
         </div>
       </div>
     </div>
-
     <div class="col-md-9" style="padding-right: 0px !important; margin-bottom: 3% !important;">
       <div id="Template" style="background: white;">
         <!-- <div class="Pestañas">
@@ -93,7 +90,6 @@
               </div>
               <div id="InfoListaCertificados" style="display:none; margin-top:5%">
                 <div class="table-responsive">
-
                   <table class="table table-hover table-striped" id="TableCertificados" style="width:100% !important"
                     data-page-length="24">
                     <thead>
@@ -119,10 +115,9 @@
                       </tr>
                     </tbody>
                   </table>
-
                 </div>
               </div>
-              <div id="InfoAsegurado" *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '80'">
+              <div id="InfoAsegurado" ><!-- *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '80'" -->
                 <h4 class="title-grid"><strong id="h4Asegurado">Datos del Asegurado</strong></h4>
                 <div class="row">
                   <div class="col-lg-3" id="DAsegNom">
@@ -222,9 +217,8 @@
                         id="PAsegTasa">{{this.DatosAsegurado.tasa}}</span></p>
                   </div>
                 </div>
-
               </div>
-              <div id="InfoTitular" *ngIf="this.item.IDRAMO == '75'">
+              <!-- <div id="InfoTitular" >*ngIf="this.item.IDRAMO == '75'"
                 <h4 class="title-grid"><strong id="h4Asegurado">Datos del Titular</strong></h4>
                 <div class="row">
                   <div class="col-lg-3" id="DAsegNom">
@@ -247,11 +241,8 @@
                     <p class="card-text textTitle"><span>CUSPP</span><span class="spancontent"
                         id="PAsegCUSPP">{{this.DatosAsegurado.cuspp}}</span></p>
                   </div>
-
                 </div>
-
-
-              </div>
+              </div> -->
               <div id="InfoCredito" style="display:none;">
                 <h4 class="title-grid"><strong>Datos del Crédito</strong></h4>
                 <div class="row">
@@ -295,7 +286,7 @@
                   </div>
                 </div>
               </div>
-              <div id="InfoRentaTotal" *ngIf="this.item.IDRAMO == '75'">
+              <div id="InfoRentaTotal" ><!-- *ngIf="this.item.IDRAMO == '75'" -->
                 <h4 class="title-grid"><strong>Datos adicionales</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
@@ -369,10 +360,8 @@
                         id="PRTGrati">{{this.DatosRentaTotal.indGratif}}</span></p>
                   </div>
                 </div>
-
-
               </div>
-              <div id="InfoVehiculo" *ngIf="this.item.IDRAMO == '66'">
+              <div id="InfoVehiculo" ><!-- *ngIf="this.item.IDRAMO == '66'" -->
                 <h4 class="title-grid"><strong>Datos del Vehículo</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
@@ -410,9 +399,8 @@
                         id="PAnio">{{this.DatosVehiculo.anio}} </span></p>
                   </div>
                 </div>
-
               </div>
-              <div id="InfoDirecSOAT" style="margin-top: 3%;" *ngIf="this.item.IDRAMO == '66'">
+              <div id="InfoDirecSOAT" style="margin-top: 3%;" ><!-- *ngIf="this.item.IDRAMO == '66'" -->
                 <h4 class="title-grid"><strong>Dirección SOAT</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
@@ -449,7 +437,6 @@
                     <p class="card-text textTitle"><span>Etapa</span><span class="spancontent"
                         id="PEtapa">{{this.DatosSoat.Etapa}}</span></p>
                   </div>
-
                 </div>
                 <div class="row">
                   <div class="col-lg-3">
@@ -477,7 +464,7 @@
                 </div>
                 <br>
               </div>
-              <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO != '75'">
+              <div id="InfoCanal" style=" margin-top:3%;" ><!-- *ngIf="this.item.IDRAMO != '75'" -->
                 <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
@@ -511,7 +498,7 @@
                   </div>
                 </div>
               </div>
-              <div id="InfoTarifa" style="margin-top: 3%;" *ngIf="this.item.IDRAMO == '66'">
+              <div id="InfoTarifa" style="margin-top: 3%;" ><!-- *ngIf="this.item.IDRAMO == '66'" -->
                 <h4 class="title-grid"><strong>Tarifa</strong></h4>
                 <div class="row">
                   <div class="col-lg-4">
@@ -534,7 +521,7 @@
                   </div>
                   <div class="col-lg-4">
                     <p class="card-text textTitle"><span>Porcentaje Comisión</span><span class="spancontent"
-                        id="PTarPorcComi">{{this.DatosTarifa.PorcentajeComision}}</span></p>
+                        id="PTarPorcComi">{{this.DatosTarifa.porcentajeComision}}</span></p>
                   </div>
                   <div class="col-lg-4">
                     <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
@@ -542,7 +529,6 @@
                   </div>
                 </div>
               </div>
-
               <div id="InfoCoberturas" style="margin-top: 3%;">
                 <h4 class="title-grid" style="font-weight:bold;">Coberturas</h4>
                 <div class="row" style="margin-bottom:1%" id="PlanPanel" *ngIf="this.item.IDRAMO != '75'">
@@ -581,7 +567,6 @@
                       </tr>
                     </tbody>
                   </ng-template>
-
                 </table>
                 <ng-container *ngIf="ListaDatosCoberturas!=null && ListaDatosCoberturas.length>0; then showPagination">
                 </ng-container>
@@ -589,11 +574,7 @@
                   <ngb-pagination [pageSize]="5" [collectionSize]="ListaDatosCoberturas.length" [(page)]="page"
                     aria-label="Default pagination"></ngb-pagination>
                 </ng-template>
-
-
-
               </div>
-
               <div id="InfoCoberRentas" style="margin-top:3%" *ngIf="this.item.IDRAMO != '75'">
                 <h4 class="title-grid"><strong>Coberturas</strong></h4>
                 <table class="table table-hover table-striped" id="tableCoberturaRentas" style="width:100%">
@@ -609,10 +590,9 @@
                     </tr>
                   </tbody>
                 </table>
-
               </div>
               <div id="InfoBeneficiarios" style="margin-top:3%;"
-                *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '75'">
+                *ngIf="this.item.IDRAMO == '73' || this.item.IDRAMO == '75' || this.IDRAMO == '76'">
                 <h4 class="title-grid"><strong>Beneficiarios</strong></h4>
                 <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
                   <thead>
@@ -622,11 +602,9 @@
                       <th class="text-center">Vínculo</th>
                       <th class="text-center">Participación</th>
                       <th class="text-center">Fecha Declaración</th>
-
                     </tr>
                   </thead>
                   <tbody id="tblContactos" *ngIf="listaDatabeneficiarios.length !=0; else listavacia2">
-
                     <tr
                       *ngFor="let ben of listaDatabeneficiarios | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index;">
                       <td class="text-center">{{ben.datosCliente.name}}</td>
@@ -634,8 +612,6 @@
                       <td class="text-center">{{ben.relacion}}</td>
                       <td class="text-center">{{ben.participacion}}</td>
                       <td class="text-center">{{ben.fechaDeclaracion}}</td>
-
-
                     </tr>
                   </tbody>
                   <ng-template #listavacia2>
@@ -645,7 +621,6 @@
                       </tr>
                     </tbody>
                   </ng-template>
-
                 </table>
                 <ng-container
                   *ngIf="listaDatabeneficiarios!=null && listaDatabeneficiarios.length>0; then showPagination2">
@@ -655,7 +630,6 @@
                     aria-label="Default pagination"></ngb-pagination>
                 </ng-template>
               </div>
-
               <div id="InfoModalidadPago" style="margin-top: 3%; margin-bottom: 3%;" *ngIf="this.item.IDRAMO == '75'">
                 <h4 class="title-grid"><strong>Modalidad de Pago</strong></h4>
                 <div style="width:45%; float:left">
@@ -674,33 +648,24 @@
                                         <div class="col text-center">Mes</div>
                                         <div class="col text-center">Fecha de Pagos</div>
                                         <div class="col text-center">Monto</div>
-                                    </div>
+                                      </div>
                                     </div>
                                     <div class="dataTables_scrollBody"
                                       style="position: relative; overflow: auto; max-height: 200px; width: 100%;">
                                       <table class="table table-hover table-striped no-footer dataTable" id="tableCronograma"
                                         style="width: 100%;" data-page-length="24" role="grid">
-                                       
-            
                                         <tbody id="tblCrono">
-            
                                           <tr role="row" class="odd"  *ngFor="let cro of listaDataCronograma">
                                             <td class=" text-center">{{cro.mes}}</td>
                                             <td class=" text-center">{{cro.fechaPago}}</td>
                                             <td class=" text-center">{{cro.pension}}</td>
                                           </tr>
-                                          
-                                          
                                         </tbody>
                                       </table>
                                     </div>
-                                  </div>
+                                </div>
                             </div>
-                          
                         </div>
-                      
-                     
-                      
                     </div>
                   </div>
                 </div>
@@ -726,56 +691,48 @@
                                       style="position: relative; overflow: auto; max-height: 200px; width: 100%;">
                                       <table class="table table-hover table-striped no-footer dataTable" id="tableRescate"
                                         style="width: 100%;" data-page-length="24" role="grid">
-                                       
-            
                                         <tbody id="tblRescate">
-            
                                           <tr role="row" class="odd"  *ngFor="let res of listaDataRestace">
                                             <td class=" text-center">{{res.mes}}</td>
                                             <td class=" text-center">{{res.monto}}</td>
                                           </tr>
-                                          
                                         </tbody>
                                       </table>
                                     </div>
-                                  </div>
+                                </div>
                             </div> 
                         </div>
-                      
-                      
-                      
                     </div>
                   </div>
                 </div>
               </div>
-
               <input type="hidden" id="titularrentavitalicia" data-asegurado="" data-vinculo=" (Titular)"
                 data-viapago="" data-sucursal="" data-banco="" data-tipocuenta="" data-numerocuenta="" data-cci=""
                 data-moneda="" data-institucion="" data-modalidad="" data-periodo="" data-receptordoc=" - "
                 data-receptornom="" data-receptorper=" - ">
               <div id="InfoPensiones" style="display:none;">
 
-                <h4 class="title-grid" style="margin-bottom:3%"><strong id="titlebenef"></strong><span id="titlevinc">
-                    (Titular)</span></h4>
-                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Modalidad de Pago</strong></h5> <br>
-                <div class="row">
-                  <div class="col-lg-3">
-                    <p class="card-text textTitle"><span>Via de Pago</span><span class="spancontent"
-                        id="PPensViaPago">-</span></p>
-                  </div>
-                  <div class="col-lg-3">
-                    <p class="card-text textTitle"><span>Sucursal</span><span class="spancontent"
-                        id="PPensSucursal">-</span></p>
-                  </div>
-                  <div class="col-lg-3">
-                    <p class="card-text textTitle"><span>Banco</span><span class="spancontent" id="PPensBanco">-</span>
-                    </p>
-                  </div>
-                  <div class="col-lg-2">
-                    <p class="card-text textTitle"><span>Tipo Cta.</span><span class="spancontent"
-                        id="PPensTipoCuenta">-</span></p>
-                  </div>
+              <h4 class="title-grid" style="margin-bottom:3%"><strong id="titlebenef"></strong><span id="titlevinc">
+                  (Titular)</span></h4>
+              <h5 class="subtitle-grid"><span class="lineorange"></span> <strong>Modalidad de Pago</strong></h5> <br>
+              <div class="row">
+                <div class="col-lg-3">
+                  <p class="card-text textTitle"><span>Via de Pago</span><span class="spancontent"
+                      id="PPensViaPago">-</span></p>
                 </div>
+                <div class="col-lg-3">
+                  <p class="card-text textTitle"><span>Sucursal</span><span class="spancontent"
+                      id="PPensSucursal">-</span></p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="card-text textTitle"><span>Banco</span><span class="spancontent" id="PPensBanco">-</span>
+                  </p>
+                </div>
+                <div class="col-lg-2">
+                  <p class="card-text textTitle"><span>Tipo Cta.</span><span class="spancontent"
+                      id="PPensTipoCuenta">-</span></p>
+                </div>
+              </div>
                 <div class="row">
                   <div class="col-lg-3">
                     <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
@@ -828,13 +785,8 @@
             </div>
             <p style="margin-bottom:5%"></p>
           </div>
-
         </div>
       </div>
-
-
     </div>
-
   </div>
-
 </div>

@@ -2534,7 +2534,7 @@ ValidarRegimenAcepta(){
     
 }
 /**/
-ResultadoPrevious: any = []
+/* ResultadoPrevious: any = []
 detResult: any =[]
 async Consultar360Previous(){
     let data = {
@@ -2562,7 +2562,7 @@ async Consultar360Previous(){
     this.detResult= this.ResultadoPrevious.certificados
     console.log("El resultado",this.detResult)
 
-  }
+  } */
   ResultadoDetail:any = {}
   async Consultar360_2(item){
 
@@ -2596,9 +2596,9 @@ async Consultar360Previous(){
    ListaPoliza:any = []
   async consultarPoliza(){
     let data:any = {}
-        data.P_TIPO_DOC = "2"
+        data.P_TIPO_DOC = this.formData.NTIPO_DOCUMENTO //"2"
         //data.P_NUMERO_DOC = "10549585" // esto es de Luis
-        data.P_NUMERO_DOC = "25623964" // esto es de celia
+        data.P_NUMERO_DOC = this.formData.SNUM_DOCUMENTO//"25623964" // esto es de celia
         
         data.P_NOMBRES = null
         data.P_POLIZA = null
@@ -2626,7 +2626,7 @@ async Consultar360Previous(){
         // }
   } 
 
-   Resultado360:any = []
+   //Resultado360:any = []
 //   async Consultar360(item){
 
 //     console.log("entro en el servicio de 360", item)
@@ -2647,8 +2647,5 @@ async Consultar360Previous(){
 //        this.core.loader.hide()
 //     console.log("entro en el servicio de 360 resultado", this.Resultado360)
 //   } 
-
-
-  
 
 }
