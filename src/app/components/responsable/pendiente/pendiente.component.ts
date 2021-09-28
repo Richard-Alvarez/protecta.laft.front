@@ -1526,6 +1526,16 @@ ValidarCabecera(){
 
 }
 
+ValidarTexto(texto){
+  let textoReemplazado:any = ''
+  textoReemplazado = texto.replace(/\n/g, '<br>');
+  //textoReemplazado = document.write(textoReemplazado)
+  //return textoReemplazado;
+
+
+ return  document.getElementById('textonuevo').innerHTML = ``+ textoReemplazado + ``
+}
+
 
  
 }
