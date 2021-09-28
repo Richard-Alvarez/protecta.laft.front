@@ -4,14 +4,6 @@
       <p> 
         <strong style="font-family: arial Narrow, serif;">Grupo de Señales de alerta - Renta Privada</strong>
       </p>
-      <!-- <p> 
-        <strong> {{USU_NOMBRE_COMPLETO}} Richard</strong>
-      </p>
-      <p>
-        <strong> {{SPERFIL_NAME_USUARIO}} Analista</strong>
-      </p>-->
-      
-
       <table border="1" cellspacing="0" cellpadding="0" align="left" width="550">
         <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
           <tbody>
@@ -67,18 +59,16 @@
       <p style="font-family: arial Narrow, serif; text-align: justify"> La compañía tiene identificado a los países 
         donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.</p>
         <p>
-            <strong style="font-family: arial Narrow, serif; text-align: justify">Consulta en Base de Datos:</strong>
+            <strong style="font-family: arial Narrow, serif; text-align: justify">Consulta de información en el sistema LAFT:</strong>
         </p>
       <dl>
         <dt style="font-family: arial Narrow, serif; text-align: justify">
-            a) Se solicita a TI la búsqueda de información.</dt>
+            a)	Se extrae la información.</dt>
         <dt style="font-family: arial Narrow, serif; text-align: justify">
-            b) El área de TI remite los resultados de la búsqueda realizada.</dt>
-        <dt style="font-family: arial Narrow, serif; text-align: justify">
-            c) Se revisa la información proporcionada.</dt>
+            b)	Se revisa la información registrada.</dt>
         </dl>
         <br>
-        <strong style="font-family: arial Narrow, serif;">Resultados:</strong>
+        <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta C3</strong>
         <ul>
         <li style="font-family: arial Narrow, serif; text-align: justify"> {{this.parent.RespuestaGlobal}} se identificaron clientes domiciliados 
             en/o que han modificado su domicilio a: países considerados paraísos fiscales o países donde existe conocida 
@@ -87,49 +77,39 @@
     </ul>   
 
         <strong style="font-family: arial Narrow, serif;">Consulta a las áreas: Comercial masivos y Operaciones</strong>
-        <br>
-        <dl>
-            <dt style="font-family: arial Narrow, serif; text-align: justify">
-            a) Se solicita al área Comercial Masivos que confirme si se han presentado/identificado las siguientes situaciones: 
-            </dt>
-            <dd style="font-family: arial Narrow, serif; text-align: justify"> ● Cliente domiciliado en/o modifica su domicilio 
+        <ol type="a">
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            Se solicita al área Comercial Masivos que confirme si se han presentado/identificado las siguientes situaciones: 
+            </li>
+            <ul>
+              <li style="font-family: arial Narrow, serif; text-align: justify">Cliente domiciliado en/o modifica su domicilio 
                 a: países considerados paraísos fiscales o países donde existe conocida actividad terrorista, considerados como 
                 no cooperantes por el GAFI o sujetos a sanciones OFAC.
-            </dd>
-            
-            <dt style="font-family: arial Narrow, serif; text-align: justify">
-            b) Se solicita al área de Operaciones los Endosos de Renta privada (Renta Total/Vida con Renta), con la finalidad 
+              </li>
+            </ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            Se solicita al área de Operaciones los Endosos de Renta privada (Renta Total/Vida con Renta), con la finalidad 
             de identificar actualizaciones respecto a la residencia de los clientes de renta privada.
-            </dt>
-            <dt style="font-family: arial Narrow, serif; text-align: justify">
-            c) Se revisa la información proporcionada.
-            </dt>
-        </dl>  
+            </li>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+            Se revisa la información proporcionada.
+            </li>
+          </ol>  
         <br>
-        <strong style="font-family: arial Narrow, serif;">Resultados:</strong>
+        <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta C3</strong>
         <ul>
         <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal"> El {{item.Cargo}} informó que {{item.Respuesta}} se 
           identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
           países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
         </li>
-        <!-- <li style="font-family: arial Narrow, serif; text-align: justify"> El área de operaciones informó que {{arrayDataSenal[1].Respuesta}} se 
-          identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
-          países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
-        </li>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> El área Comercial Rentas informó que {{arrayDataSenal[2].Respuesta}} se 
-          identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
-          países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
-        </li> -->
     </ul>   
-
-    <p>Los archivos de trabajo se ubican en:</p>
-    <p>  <a href="http://190.216.170.173/LAFT/ ">http://190.216.170.173/LAFT/ </a></p>
-    
-
-    
+    <br>
+    <br>
+    <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
+    <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://190.216.170.173/LAFT/ ">http://190.216.170.173/LAFT/ </a></p>
     </div>
   
   <div class="text-center pt-5">
-    <button class="" (click)="Export2Doc('exportContent', 'test');"></button>
+    <button class="" (click)="Export2Doc('C3', 'test');"></button>
   </div>
 

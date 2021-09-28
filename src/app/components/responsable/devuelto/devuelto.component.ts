@@ -835,14 +835,15 @@ export class DevueltoComponent implements OnInit {
           objResp.message='Debe responder obligatoriamente el comentario de la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'
           return objResp
         }else{
-          if(( preguntaCabecera.NIDALERTA == "39" || preguntaCabecera.NIDALERTA == "22") && !preguntaCabecera.isSustento)
-          {
-           objResp.code = 1
-           objResp.message='Ingrese sustento en la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'
+          // if(( preguntaCabecera.NIDALERTA == "39" || preguntaCabecera.NIDALERTA == "22") && !preguntaCabecera.isSustento)
+          // {
+          //  objResp.code = 1
+          //  objResp.message='Ingrese sustento en la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'
  
-           return objResp
-          }
-          else if(( preguntaCabecera.SNOMBRE_ALERTA == "S1" || preguntaCabecera.SNOMBRE_ALERTA == "C3") && cabecera === '1' && !preguntaCabecera.isSustento)
+          //  return objResp
+          // }
+          // else 
+          if(( preguntaCabecera.NIDALERTA == 4) && cabecera === '1' && !preguntaCabecera.isSustento)
           {
             objResp.code = 1
             objResp.message='Ingrese sustento en la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'
@@ -919,6 +920,8 @@ export class DevueltoComponent implements OnInit {
   }
 
   async removeFiles(indice,objItem,indexInput,STIPO_CARGA){
+    
+    debugger;
     return await this.parent.removeFileAdjuntosFiles(indice,objItem,indexInput,STIPO_CARGA)
   }
 

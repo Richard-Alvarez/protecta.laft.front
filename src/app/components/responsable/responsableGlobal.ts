@@ -363,7 +363,7 @@ export class ResponsableGlobalComponent {
           this.arrResponsablesCerradoGral.push(item);
         }*/
       }
-      if (this.STIPO_USUARIO === 'OC') {
+      if (this.STIPO_USUARIO === 'OC'  && item.TIPO_FORM !== 'C') {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteGral.push(item);
         }
@@ -384,7 +384,7 @@ export class ResponsableGlobalComponent {
     })
     //this.alertFormListSimpli.forEach(t => {t.SESTADO = "3",t.SNOMBRE_ESTADO = "PENDIENTE"});
 
-    console.log(this.alertFormListSimpli);
+    console.log(this.alertFormListSimpli );
     this.alertFormListSimpli.forEach(item => {
       item.NREGIMEN = 2
       if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
@@ -402,7 +402,7 @@ export class ResponsableGlobalComponent {
         }
         
       }
-      if (this.STIPO_USUARIO === 'OC') {
+      if (this.STIPO_USUARIO === 'OC'  && item.TIPO_FORM !== 'C') {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteSimpli.push(item);
         }
@@ -2116,18 +2116,19 @@ export class ResponsableGlobalComponent {
       let files: any = event.target.files;
 
       let arrFiles: any = Array.from(files)
-      let extensiones = arrFiles.map(t => t.name.split(".")[1])
-      let extCount = extensiones.length;
-      if (extCount > 0)
-      {
-        if(extensiones.map(t => ['xlsx','xls','csv'].includes(t)).filter(t => t).length != extCount){
-          return  {
-            message : "Solo se pueden cargar archivos xlsx , xls y csv",
-            code : 1
+      if(STIPO_CARGA == "ADJUNTOS-SUSTENTO"){
+        let extensiones = arrFiles.map(t => t.name.split(".")[1])
+        let extCount = extensiones.length;
+        if (extCount > 0)
+        {
+          if(extensiones.map(t => ['xlsx','xls','csv'].includes(t)).filter(t => t).length != extCount){
+            return  {
+              message : "Solo se pueden cargar archivos xlsx , xls y csv",
+              code : 1
+            }
           }
-        };
+        }
       }
-
       console.log("el arrFiles 879 : ", arrFiles)
       let listFileNameInform: any = []
       arrFiles.forEach(it => listFileNameInform.push(it["name"]))
