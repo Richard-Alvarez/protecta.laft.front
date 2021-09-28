@@ -2116,18 +2116,19 @@ export class ResponsableGlobalComponent {
       let files: any = event.target.files;
 
       let arrFiles: any = Array.from(files)
-      let extensiones = arrFiles.map(t => t.name.split(".")[1])
-      let extCount = extensiones.length;
-      if (extCount > 0)
-      {
-        if(extensiones.map(t => ['xlsx','xls','csv'].includes(t)).filter(t => t).length != extCount){
-          return  {
-            message : "Solo se pueden cargar archivos xlsx , xls y csv",
-            code : 1
+      if(STIPO_CARGA == "ADJUNTOS-SUSTENTO"){
+        let extensiones = arrFiles.map(t => t.name.split(".")[1])
+        let extCount = extensiones.length;
+        if (extCount > 0)
+        {
+          if(extensiones.map(t => ['xlsx','xls','csv'].includes(t)).filter(t => t).length != extCount){
+            return  {
+              message : "Solo se pueden cargar archivos xlsx , xls y csv",
+              code : 1
+            }
           }
-        };
+        }
       }
-
       console.log("el arrFiles 879 : ", arrFiles)
       let listFileNameInform: any = []
       arrFiles.forEach(it => listFileNameInform.push(it["name"]))

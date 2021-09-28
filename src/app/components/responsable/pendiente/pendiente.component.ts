@@ -1162,21 +1162,22 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
         //   return objResp
         // }
           else{
-          if((
-            //preguntaCabecera.NIDALERTA == "36" || 
-          //preguntaCabecera.NIDALERTA == "37" || 
-          //preguntaCabecera.NIDALERTA == "38" || 
-          // preguntaCabecera.NIDALERTA == "39" || 
-          (preguntaCabecera.NIDALERTA == "22" && this.parent.ID_USUARIO == 24)  ||
-          (preguntaCabecera.NIDALERTA == "39" && this.parent.ID_USUARIO == 35)) && 
-          !preguntaCabecera.isSustento)
-         {
-          objResp.code = 1
-          objResp.message='Ingrese sustento en la señal '+preguntaCabecera.SNOMBRE_ALERTA+''
+        //   if((
+        //     //preguntaCabecera.NIDALERTA == "36" || 
+        //   //preguntaCabecera.NIDALERTA == "37" || 
+        //   //preguntaCabecera.NIDALERTA == "38" || 
+        //   // preguntaCabecera.NIDALERTA == "39" || 
+        //   (preguntaCabecera.NIDALERTA == "22" && this.parent.ID_USUARIO == 24)  ||
+        //   (preguntaCabecera.NIDALERTA == "39" && this.parent.ID_USUARIO == 35)) && 
+        //   !preguntaCabecera.isSustento)
+        //  {
+        //   objResp.code = 1
+        //   objResp.message='Ingrese sustento en la señal '+preguntaCabecera.SNOMBRE_ALERTA+''
 
-          return objResp
-         }
-          else if(( preguntaCabecera.SNOMBRE_ALERTA == "S1" || preguntaCabecera.SNOMBRE_ALERTA == "C3") && cabecera === '1' && !preguntaCabecera.isSustento)
+        //   return objResp
+        //  }
+          //else 
+          if((preguntaCabecera.NIDALERTA == "4") && cabecera === '1' && !preguntaCabecera.isSustento)
           {
             objResp.code = 1
             objResp.message='Ingrese sustento en la señal '+preguntaCabecera.SNOMBRE_ALERTA+''
