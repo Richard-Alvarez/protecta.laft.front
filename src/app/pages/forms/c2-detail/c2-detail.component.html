@@ -2017,26 +2017,7 @@
                                 <div class="card-header headerSenials"><!---->
                                     <div class="detallePoliza {{getColorGrilla(inc)}}">
                                         <div class="row pl-2 pr-2"  (click)="Consultar360(it)">
-                                            <!-- <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
-                                                href="#{{'enlacePoliza'+inc}}">{{item.SNUM_POLIZA}}</a>
-                                            <a class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" data-toggle="collapse"
-                                                href="#{{'enlacePoliza'+inc}}">{{item.SPRODUCTO}}</a>
-                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
-                                                href="#{{'enlacePoliza'+inc}}">{{item.NCERTIF}}</a>
-                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
-                                                href="#{{'enlacePoliza'+inc}}">{{numberWithCommas(item.PRIMA_POLIZA)}}</a>
-                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse"
-                                                href="#{{'enlacePoliza'+inc}}">{{item.STIPO_CLIENTE}}</a>
-                                            <a class="col-lg-2 cabeceraPolizas" data-toggle="collapse"
-                                                href="#{{'enlacePoliza'+inc}}">{{item.DFEC_INI_POLIZA + ' - ' + item.DFEC_FIN_POLIZA}}</a>
-                                                    <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
-                                                        *ngIf="item.SPRODUCTO != 'SOAT'">-</a> 
-                                            <a class="col-lg-1 cabeceraPolizas" data-toggle="collapse" href="#{{'enlacePoliza'+inc}}"
-                                                *ngIf="getValidaCabeceraPlaca(99)">{{item.PLACA ? item.PLACA : ''}}</a>
-                                            <a class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" data-toggle="collapse"
-                                                href="#{{'enlacePoliza'+inc}}">{{item.DFEC_FIN_POLIZA}}</a>
-                                            <a class="col-lg-1 cabeceraPolizas"  data-toggle="collapse"
-                                                href="#{{'enlacePoliza'+inc}}">VIGENTE</a> -->
+                                            
                                             <div class="col-lg-2 cabeceraPolizas" >
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
                                                     <div >{{it.ramo.descripcion}}</div><!-- (click)="Consultar360(item)" -->
@@ -3475,88 +3456,88 @@
 
               <div id="poliza" class=" tab-pane fade">
                 <div>
-                  <div *ngIf="tipoClienteGC == 'C2-BANDEJA' || (tipoClienteGC == 'C2-BANDEJA' && tipoClienteCRF != 'CRF')" id="tabPanelList">
-                      
-                      <div class="row mb-2 mt-2">
-                          <div class="Header">
-                              <div class="col-lg-12">
-                                  <h4 class="TitleLine">Pólizas</h4>
-                              </div>
-                          </div>
-                      </div> 
-                      <hr>
-                      <div class="text-center tituloTwo" >{{nombreRegimen}}</div>
-                      <div class="row pl-2 pr-2">
-                          <div class="col-lg-2  text-left txtCabecera" >Ramo</div>
-                          <div class=" text-left txtCabecera" style="width: 11.904%; flex: 0 0 11.904%;">Producto</div>
-                          <div class=" text-left txtCabecera" style="width: 11.904%; flex: 0 0 11.904%;">N° Póliza</div>
-                          <div class=" text-left txtCabecera" style="width: 11.904%;">N° Certificado</div>
-                          <div class=" text-left txtCabecera" style="width: 11.904%;">Rol</div>
-                          <div class=" text-left txtCabecera" style="width: 11.904%;">Inicio</div>
-                          <div class=" text-left txtCabecera" style="width: 11.904%;">Fin</div>
-                          <div class="col-lg-1 text-left txtCabecera" >Estado</div>
-                      </div>
-                      <div id="">
-                          <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
-                              <div class="card-header headerSenials">
-                                  <div class="detallePoliza {{getColorGrilla(inc)}}">
-                                      <div class="row pl-2 pr-2" >
-                                          
-                                          <div class="col-lg-2 cabeceraPolizas" >
-                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
-                                                  <div >{{item.DES_RAMO}}</div>
-                                              </a>
-                                          </div>
-                                          <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
-                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                  <div >{{item.DES_CORTA_RAMO}}</div>
-                                              </a>
-                                          </div>
-                                          <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
-                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                  <div >{{item.POLIZA}}</div>
-                                              </a>
-                                          </div>
-                                          <div class=" cabeceraPolizas" style="width: 11.904%;">
-                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                  <div >{{item.NCERTIF}}</div>
-                                              </a>
-                                          </div>
-                                          <div class=" cabeceraPolizas" style="width: 11.904%;">
-                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                  <div >{{item.ROL}}</div>
-                                              </a>
-                                          </div>
-                                          <div class=" cabeceraPolizas" style="width: 11.904%;">
-                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                  <div >{{item.INICIO_VIG_POLIZA}}</div>
-                                              </a>
-                                          </div>
-                                          <div class=" cabeceraPolizas" style="width: 11.904%;">
-                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                  <div >{{item.FIN_VIG_POLIZA}}</div>
-                                              </a>
-                                          </div>
-                                          <div class="col-lg-1 cabeceraPolizas" >
-                                              <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                  <div >{{item.ESTADO}}</div>
-                                              </a>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="collapse" data-parent="#tabPanelList" tabindex="-1" id="{{'consulta'+inc}}" >
-                                  <div class="card-body">
-                                      <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
-                                      <app-c2-policy [item]="item" ></app-c2-policy>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <br>
-                  </div>
-                  <div *ngIf="tipoClienteGC == 'GC' || (tipoClienteGC == 'GC' && tipoClienteCRF != 'CRF')">
-                    <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
+                <div *ngIf="tipoClienteGC == 'C2-BANDEJA' || (tipoClienteGC == 'C2-BANDEJA' && tipoClienteCRF != 'CRF')" id="tabPanelList">
+                    
+                    <div class="row mb-2 mt-2">
+                        <div class="Header">
+                            <div class="col-lg-12">
+                                <h4 class="TitleLine">Pólizas</h4>
+                            </div>
+                        </div>
+                    </div> 
+                    <hr>
+                    <div class="text-center tituloTwo" >{{nombreRegimen}}</div>
+                    <div class="row pl-2 pr-2">
+                        <div class="col-lg-2  text-left txtCabecera" >Ramo</div>
+                        <div class=" text-left txtCabecera" style="width: 11.904%; flex: 0 0 11.904%;">Producto</div>
+                        <div class=" text-left txtCabecera" style="width: 11.904%; flex: 0 0 11.904%;">N° Póliza</div>
+                        <div class=" text-left txtCabecera" style="width: 11.904%;">N° Certificado</div>
+                        <div class=" text-left txtCabecera" style="width: 11.904%;">Rol</div>
+                        <div class=" text-left txtCabecera" style="width: 11.904%;">Inicio</div>
+                        <div class=" text-left txtCabecera" style="width: 11.904%;">Fin</div>
+                        <div class="col-lg-1 text-left txtCabecera" >Estado</div>
+                    </div>
+                    <div id="">
+                        <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
+                            <div class="card-header headerSenials">
+                                <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                    <div class="row pl-2 pr-2" >
+                                        
+                                        <div class="col-lg-2 cabeceraPolizas" >
+                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
+                                                <div >{{item.DES_RAMO}}</div>
+                                            </a>
+                                        </div>
+                                        <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
+                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                <div >{{item.DES_PRODUCTO}}</div>
+                                            </a>
+                                        </div>
+                                        <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
+                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                <div >{{item.POLIZA}}</div>
+                                            </a>
+                                        </div>
+                                        <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                <div >{{item.NCERTIF}}</div>
+                                            </a>
+                                        </div>
+                                        <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                <div >{{item.ROL}}</div>
+                                            </a>
+                                        </div>
+                                        <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
+                                            </a>
+                                        </div>
+                                        <div class=" cabeceraPolizas" style="width: 11.904%;">
+                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                <div >{{item.FIN_VIG_POLIZA}}</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-1 cabeceraPolizas" >
+                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                <div >{{item.ESTADO}}</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="collapse" data-parent="#tabPanelList" tabindex="-1" id="{{'consulta'+inc}}" >
+                                <div class="card-body">
+                                    <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
+                                    <app-c2-policy [item]="item" ></app-c2-policy>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div *ngIf="tipoClienteGC == 'GC' || (tipoClienteGC == 'GC' && tipoClienteCRF != 'CRF')">
+                <!-- <div class="text-left tituloOne-Poliza" >PÓLIZAS</div> -->
                     <div class="row mb-2 mt-2">
                         <div class="Header">
                             <div class="col-lg-12">
@@ -3590,7 +3571,7 @@
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
                                                     <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                        <div >{{item.DES_CORTA_RAMO}}</div>
+                                                        <div >{{item.DES_PRODUCTO}}</div>
                                                     </a>
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
@@ -3610,7 +3591,7 @@
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%;">
                                                     <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                        <div >{{item.INICIO_VIG_POLIZA}}</div>
+                                                        <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
                                                     </a>
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%;">
@@ -3726,7 +3707,7 @@
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
                                                     <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                        <div >{{item.DES_CORTA_RAMO}}</div>
+                                                        <div >{{item.DES_PRODUCTO}}</div>
                                                     </a>
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
@@ -3746,7 +3727,7 @@
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%;">
                                                     <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                        <div >{{item.INICIO_VIG_POLIZA}}</div>
+                                                        <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
                                                     </a>
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%;">
@@ -3883,7 +3864,7 @@
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
                                                     <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                        <div >{{item.DES_CORTA_RAMO}}</div>
+                                                        <div >{{item.DES_PRODUCTO}}</div>
                                                     </a>
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
@@ -3903,7 +3884,7 @@
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%;">
                                                     <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                        <div >{{item.INICIO_VIG_POLIZA}}</div>
+                                                        <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
                                                     </a>
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%;">
@@ -4020,7 +4001,7 @@
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
                                                     <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                        <div >{{item.DES_CORTA_RAMO}}</div>
+                                                        <div >{{item.DES_PRODUCTO}}</div>
                                                     </a>
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
@@ -4040,7 +4021,7 @@
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%;">
                                                     <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                        <div >{{item.INICIO_VIG_POLIZA}}</div>
+                                                        <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
                                                     </a>
                                                 </div>
                                                 <div class=" cabeceraPolizas" style="width: 11.904%;">
@@ -4173,7 +4154,7 @@
                                             </div>
                                             <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.DES_CORTA_RAMO}}</div>
+                                                    <div >{{item.DES_PRODUCTO}}</div>
                                                 </a>
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
@@ -4193,7 +4174,7 @@
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%;">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.INICIO_VIG_POLIZA}}</div>
+                                                    <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
                                                 </a>
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%;">
@@ -4311,7 +4292,7 @@
                                             </div>
                                             <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.DES_CORTA_RAMO}}</div>
+                                                    <div >{{item.DES_PRODUCTO}}</div>
                                                 </a>
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
@@ -4331,7 +4312,7 @@
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%;">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.INICIO_VIG_POLIZA}}</div>
+                                                    <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
                                                 </a>
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%;">
@@ -4460,7 +4441,7 @@
                                             </div>
                                             <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.DES_CORTA_RAMO}}</div>
+                                                    <div >{{item.DES_PRODUCTO}}</div>
                                                 </a>
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
@@ -4480,7 +4461,7 @@
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%;">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.INICIO_VIG_POLIZA}}</div>
+                                                    <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
                                                 </a>
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%;">
@@ -4598,7 +4579,7 @@
                                             </div>
                                             <div class=" cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;" style="width: 11.904%;flex: 0 0 11.904%;">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.DES_CORTA_RAMO}}</div>
+                                                    <div >{{item.DES_PRODUCTO}}</div>
                                                 </a>
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%; flex: 0 0 11.904%;">
@@ -4618,7 +4599,7 @@
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%;">
                                                 <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                    <div >{{item.INICIO_VIG_POLIZA}}</div>
+                                                    <div >{{item.INICIO_VIG_CERTIFICADO}}</div>
                                                 </a>
                                             </div>
                                             <div class=" cabeceraPolizas" style="width: 11.904%;">

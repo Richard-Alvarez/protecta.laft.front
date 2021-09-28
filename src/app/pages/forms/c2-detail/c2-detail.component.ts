@@ -2563,7 +2563,7 @@ async Consultar360Previous(){
     console.log("El resultado",this.detResult)
 
   } */
-  ResultadoDetail:any = {}
+  /* ResultadoDetail:any = {}
   async Consultar360_2(item){
 
     console.log("entro en el servicio de 360", item)
@@ -2590,7 +2590,7 @@ async Consultar360Previous(){
     // this.desCor= item.ramo.descripcionCorta;
     // this.prod= item.producto;
     // this.estado= item.status;
-  }
+  } */
 
 
    ListaPoliza:any = []
@@ -2607,7 +2607,7 @@ async Consultar360Previous(){
         data.P_FECHA_SOLICITUD = null
         data.P_ROL = null
         data.P_TIPO = null
-        data.P_ESTADO = 2
+        data.P_ESTADO = null
         data.P_NBRANCH = null
         data.P_NPAGENUM = 1
         data.P_NLIMITPERPAGE = 10000000
