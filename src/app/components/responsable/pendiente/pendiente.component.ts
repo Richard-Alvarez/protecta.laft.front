@@ -784,6 +784,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   }
 
   async removeFiles(indice,objItem,indexInput,STIPO_CARGA){
+  
+  debugger;
     return await this.parent.removeFileAdjuntosFiles(indice,objItem,indexInput,STIPO_CARGA)
   }
   getTipoUsuario(){
@@ -796,6 +798,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   }
 
   removeFileInforme(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
+    
+    debugger;
     STIPO_CARGA="ADJUNTOS-FORM"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
     // console.log("el STIPO_CARGA: ",STIPO_CARGA)
