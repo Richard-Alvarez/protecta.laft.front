@@ -31,7 +31,7 @@ export class MantenimientoComplementoComponent implements OnInit {
   }
 
   async listaComplemento(){
-    this.listcomplemento = await this.userConfig.GetListaAlertaComplemento()
+    this.listcomplemento = []//await this.userConfig.GetListaAlertaComplemento()
     console.log("la lista de los complementos", this.listcomplemento)
   }
 

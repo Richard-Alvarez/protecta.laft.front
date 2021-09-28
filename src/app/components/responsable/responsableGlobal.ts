@@ -363,7 +363,7 @@ export class ResponsableGlobalComponent {
           this.arrResponsablesCerradoGral.push(item);
         }*/
       }
-      if (this.STIPO_USUARIO === 'OC') {
+      if (this.STIPO_USUARIO === 'OC'  && item.TIPO_FORM !== 'C') {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteGral.push(item);
         }
@@ -384,7 +384,7 @@ export class ResponsableGlobalComponent {
     })
     //this.alertFormListSimpli.forEach(t => {t.SESTADO = "3",t.SNOMBRE_ESTADO = "PENDIENTE"});
 
-    console.log(this.alertFormListSimpli);
+    console.log(this.alertFormListSimpli );
     this.alertFormListSimpli.forEach(item => {
       item.NREGIMEN = 2
       if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
@@ -402,7 +402,7 @@ export class ResponsableGlobalComponent {
         }
         
       }
-      if (this.STIPO_USUARIO === 'OC') {
+      if (this.STIPO_USUARIO === 'OC'  && item.TIPO_FORM !== 'C') {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteSimpli.push(item);
         }
