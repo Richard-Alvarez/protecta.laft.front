@@ -919,6 +919,8 @@ export class DevueltoComponent implements OnInit {
   }
 
   async removeFiles(indice,objItem,indexInput,STIPO_CARGA){
+    
+    debugger;
     return await this.parent.removeFileAdjuntosFiles(indice,objItem,indexInput,STIPO_CARGA)
   }
 

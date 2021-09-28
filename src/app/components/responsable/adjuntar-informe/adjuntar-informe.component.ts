@@ -38,6 +38,7 @@ export class AdjuntarInformeComponent implements OnInit {
 
   async removeFile(indice){
     try {
+      debugger;
       let STIPO_CARGA = 'INFORMES'
       let resp = this.parent.removeFileInforme(indice,this.item,this.indexInput,STIPO_CARGA)
 

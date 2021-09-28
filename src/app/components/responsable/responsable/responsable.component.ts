@@ -1873,7 +1873,7 @@ export class ResponsableComponent implements OnInit {
   }
 
   removeFileAdjuntosFiles(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
-    STIPO_CARGA="ADJUNTOS-FORM"
+    //STIPO_CARGA="ADJUNTOS-FORM"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
     console.log("el STIPO_CARGA: ",STIPO_CARGA)
     console.log("el dataObjAlerta: ",dataObjAlerta)
@@ -1932,7 +1932,7 @@ export class ResponsableComponent implements OnInit {
   }
 
   removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
-  
+    debugger;
     console.log("el STIPO_CARGA: ",STIPO_CARGA)
     console.log("el dataObjAlerta: ",dataObjAlerta)
     console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesInformeByAlert)
