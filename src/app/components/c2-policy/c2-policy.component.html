@@ -452,7 +452,8 @@
                 </div>
                 <br>
               </div>
-              <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO != '75'|| this.item.IDRAMO != '76' && this.item.IDRAMO != '61' "><!-- *ngIf="this.item.IDRAMO != '75'|| this.item.IDRAMO != '76'|| this.item.IDRAMO != '61' " -->
+              <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO != '75' && this.item.IDRAMO != '76' && this.item.IDRAMO !== '61' "><!-- *ngIf="this.item.IDRAMO != '75'|| this.item.IDRAMO != '76'|| this.item.IDRAMO != '61' " -->
+                
                 <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
