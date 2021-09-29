@@ -29,6 +29,7 @@ export class CompletadoComponent implements OnInit {
   arrCheckbox:any = []
   linkactual = "";
   PeriodoComp
+  PeriodoComplemento
 
     files: Map<string, any> = new Map<string, any>()
     listFiles: Map<string, any> = new Map<string, any>()
@@ -57,6 +58,7 @@ export class CompletadoComponent implements OnInit {
   async ngOnInit() {
     await this.ListaUsuario()
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
+    this.PeriodoComplemento =  localStorage.getItem("fechaPeriodo")
     await this.ConsultaComplementoUsuarios()
     await this.ListaAlertas()
     
@@ -987,6 +989,8 @@ getLink(){
 }
 
 async EnviarCompUsuario(alerta,complemento){
+ 
+  
   debugger;
   var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(alerta.NIDALERTA)
   let valorGrupo = this.getLink()
@@ -1031,12 +1035,14 @@ async EnviarCompUsuario(alerta,complemento){
        
     }).then((result) => {
      if(result.dismiss){
-       debugger
+       
        return
      }else{
-      debugger
+      
       this.NewArreglo[index].RESULTADO.forEach(async (element) => {
         let data:any = {}
+        
+        
         data.NPERIODO_PROCESO = this.PeriodoComp
         data.NIDALERTA = alerta.NIDALERTA
         data.NIDCOMPLEMENTO = complemento.NIDCOMPLEMENTO
@@ -1051,8 +1057,12 @@ async EnviarCompUsuario(alerta,complemento){
         data.SDESCARGO =  element.SDESCARGO
         data.SNAME =  element.SNAME
         data.fullName = this.OBJ_USUARIO.fullName
+        data.FECHAPERIODO = this.PeriodoComplemento
+        data.NOMBREALERTA = alerta.SNOMBRE_ALERTA
         this.core.loader.show();
         if(element.CONSULTA == 'C'){
+          console.log("element11111111",data)
+          debugger
           await this.userConfigService.GetInsCormularioComplUsu(data)
           await this.ConsultaComplementoUsuarios()
           await this.ListaAlertas()

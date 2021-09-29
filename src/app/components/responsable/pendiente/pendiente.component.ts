@@ -442,13 +442,13 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       console.log("el objeto 3",resultComplemento.length)
 
       debugger
-      if(this.parent.arrObjFilesAdjByCabecera.length != resultComplemento.length ){
+      if(this.parent.arrObjFilesAdjByCabecera[0].arrFilesName.length != resultComplemento.length ){
         debugger
   
         swal.fire({
           title: 'Bandeja del '+ this.sNameTipoUsuario,
           icon: 'warning',
-          text: 'Tiene que agregar un archivo en formato Excel',
+          text: 'Debe adjuntar un archivo',
           //showCancelButton: true,
           showConfirmButton: true,
           ////cancelButtonColor: '#dc4545',

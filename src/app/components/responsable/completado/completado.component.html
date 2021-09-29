@@ -361,7 +361,7 @@
 
                                       </div>
                                     </div>
-                                    <div class="col-lg-12" *ngIf="STIPO_USUARIO === 'RE' && item.TIPO_FORM =='C'" >
+                                    <div class="col-lg-12" style='padding-left:0px' *ngIf="STIPO_USUARIO === 'RE' && item.TIPO_FORM =='C'" >
                                      {{item.SDESCRIPCION_ALERTA}}
                                     </div>
 
@@ -446,7 +446,9 @@
 
                               </div>
 
-
+                              <div class="row pt-2">
+                              <div class="col-lg-12">
+                                  <div class="borderFormat">
                               <div class="row pt-2">
                                 <div class="form-group" style="padding-left: 20px;padding-top:5px">
                                   <span class="fontText">Nombre del complemento :</span>
@@ -470,14 +472,14 @@
                               </div>
                               <div class="row container-xl">
                                 <div class="col-12">
-                                  <div class="borderFormat"
-                                    style="display: flex;justify-content: center;align-items: center;">
+                                  <div class=""
+                                    style="display: flex;justify-content: center;align-items: center;padding-top:20px">
                                     <div class="row">
                                       <div class="col-lg-4" title="Nombre del usuario"
                                         style="display: flex;justify-content: center;align-items: center;">
                                         <label class="fontText">Seleccionar usuario:</label>
                                       </div>
-                                      <div class="col-lg-5" title="Nombre del usuario"
+                                      <div class="col-lg-6" title="Nombre del usuario"
                                         style="display: flex;justify-content: center;align-items: center;">
 
                                         <select [(ngModel)]="this.userId" name="this.userId"
@@ -503,7 +505,9 @@
                                   </div>
                                 </div>
                               </div>
-
+                            </div>
+                        </div>
+                        </div>
 
                               <div class="row container-xl">
                                 <div class="col-12">
@@ -569,10 +573,9 @@
 
                               <div class="row" style="padding-top: 25px;">
                                 <div class="col-4"></div>
-                                <div class="col-lg-4 ">
-                                  <button class="btn btn-warning text-white "
-                                    (click)="EnviarCompUsuario(item,listComplemento)">Enviar complemento a los
-                                    usuarios</button>
+                                <div class="col-4">
+                                  <button class="btn btn-warning text-white " style="width: 100%;"
+                                    (click)="EnviarCompUsuario(item,listComplemento)">Solicitar complemento a los usuarios</button>
                                 </div>
                                 <div class="col-4"></div>
                               </div>
