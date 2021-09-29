@@ -27,7 +27,7 @@ export class C2PolicyComponent implements OnInit {
     //console.log("entro la data a c2policy" ,this.item)
     await this.Consultar360(this.item)
     await this.SetVariables()
-    await this.showdata()
+    /* await this.showdata() */
   }
 
   async Consultar360(item){
