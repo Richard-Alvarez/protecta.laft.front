@@ -2490,6 +2490,7 @@ prueba = []
        },
     }).then(async (result) => {
       if(!result.dismiss){
+        
         this.spinner.show()
       let DataResultadoTrat = await this.getBusquedaCoincidenciaXDocXName(item,ValorArray)
       //console.log("DataResultadoTrat", DataResultadoTrat)
@@ -2640,6 +2641,7 @@ prueba = []
                       }).then(resp => {
                         return
                       })
+                      
                     } 
 
                   if(respuetaService.code == 0){

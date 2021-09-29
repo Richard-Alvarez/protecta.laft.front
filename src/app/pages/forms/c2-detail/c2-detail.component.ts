@@ -2602,7 +2602,7 @@ async Consultar360Previous(){
         
         data.P_NOMBRES = null
         data.P_POLIZA = null
-        data.P_CODAPPLICATION ="LAFT"
+        data.P_CODAPPLICATION ="360"
         data.P_PRODUCTO =null
         data.P_FECHA_SOLICITUD = null
         data.P_ROL = null
