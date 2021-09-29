@@ -4,7 +4,7 @@
       <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
       <div class="card CardFlotante" style="background-color:white; display: inline-grid;">
         <div class="card-body" style="padding-left: 15px;padding-right: 15px;">
-          <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch">{{item.DES_CORTA_RAMO}} </strong></h4>
+          <h4 class="title-grid" style="margin-bottom:0px;"><strong id="SBranch" >{{item.DES_CORTA_RAMO}} </strong></h4>
           <p class="card-text textTitle" style=" margin-bottom: 10% !important;">
             <span class="spancontent" id="PTitleProd" style="font-size: small !important;">{{item.DES_PRODUCTO}} </span>
           </p>
@@ -714,7 +714,7 @@
               <div id="InfoPensiones" style="display:none;">
 
                 <h4 class="title-grid" style="margin-bottom:3%"><strong id="titlebenef"></strong><span id="titlevinc">
-                    (Titular)</span></h4>
+                  {{this.DatosAsegurado.name}} (Titular)</span></h4>
                 <h5 class="subtitle-grid"><span class="lineorange" style></span> <strong>Modalidad de Pago</strong></h5> <br>
                 <div class="row">
                   <div class="col-lg-3">

@@ -10,6 +10,8 @@ import { UserconfigService } from 'src/app/services/userconfig.service';
 export class C2PolicyComponent implements OnInit {
 
   @Input() item:any
+  @Input() ListaPoliza:any
+  @Input() inc:any
   pageSize = 5;
   page = 1;
   Resultado360:any = []
