@@ -289,7 +289,7 @@
                                                                     </div>
 
                                                                 </div>
-                                                                <div class="row" *ngIf="STIPO_USUARIO == 'RE' && (item.NIDALERTA == 3 || item.NIDALERTA == 4 || item.NIDALERTA == 36 || item.NIDALERTA == 37 || item.NIDALERTA == 38 || (item.NIDALERTA == 22 && item.NIDUSUARIO_ASIGNADO == 24) || (item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35))">
+                                                                <div class="row" *ngIf="STIPO_USUARIO == 'RE' && (item.NIDALERTA == 4)">
                                                                     <div class="col-lg-8"></div>
                                                                     <div class="col-lg-1"></div>
                                                                     <div class="col-lg-3">
@@ -347,98 +347,95 @@
                                         </div>
                                         <div id="{{stateDevuelto.sHrefHead + regimen.desCorto + index}}" class="collapse" attr.data-parent="#{{stateDevuelto.sCollapHead + regimen.desCorto + index}}">
                                             <app-button-download-report [item]="item" [regimen]="regimen" [STIPO_USUARIO]="STIPO_USUARIO" [parent]="this"></app-button-download-report>
-                                               
+
                                             <div class="row" *ngIf="STIPO_USUARIO === 'OC'">
-                                            <div class="col-lg-12" *ngFor="let listComplemento of filtroComplemeto(item);">
-                                                <div class="row mb-2 " style="padding-left: 30px;">
-                                                  <div class="Header">
-                                                    <div class="row">
-                                                      <div class="col-lg-19">
-                                                        <h4 class="TitleLine2">Complemento</h4>
-                                                      </div>
-                                                    </div>
-                  
-                                                  </div>
-                                                  <br>
-                  
-                                                </div>
-                  
-                  
-                                                <div class="row pt-2">
-                                                  <div class="col-lg-2 form-group">
-                                                    <span class="fontText">Nombre del complemento :</span>
-                                                  </div>
-                                                  <div class="col-lg-2 form-group">
-                                                    <input [disabled]="true" id="usName" type="text" class="form-control buttonSinBorder"
-                                                      value={{listComplemento.SNOMBRE_COMPLEMENTO}}>
-                                                  </div>
-                  
-                                                  <div class="col-lg-3 form-group">
-                                                    <span class="fontText">Descripción del complemento :</span>
-                                                  </div>
-                                                  <div class="col-lg-3 form-group">
-                                                    <input [disabled]="true" id="usName" type="text" class="form-control buttonSinBorder"
-                                                      value={{listComplemento.SDESCRIPCION}}>
-                                                  </div>
-                  
-                                                </div>
-                                                
-                  
-                  
-                                                <div class="row container-fluid">
-                                                  <div class="col-12">
-                                                    <div class="borderFormat">
-                                                      <div class="row" style="border-bottom: 2px solid #26296D;">
-                                                        <div class="col-2 txtCabecera" style="font-size: 14px;">Nombre</div>
-                                                        <div class="col-3 txtCabecera" style="font-size: 14px;">Perfil </div>
-                                                        <div class="col-3 txtCabecera" style="font-size: 14px;">Cargo</div>
-                                                        <div class="col-2 txtCabecera" style="font-size: 14px;">Estado</div>
-                                                        <div class="col-2 txtCabecera" style="font-size: 14px;">Email</div>
-                                                        
-                                                      </div>
-                  
-                                                      <!-- <div *ngIf="listaComplementoUsuario.length != 0; else ListaVacia"> -->
-                                                      <!-- <div class="row " *ngFor="let item of ListUsuaurioAgregado; let index = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">    -->
-                                                      <!-- <div class="row " *ngFor="let listUsu of filtrarcomplementoxAlerta(item); let index = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">  -->
-                                                      <div *ngFor="let array of  this.NewArreglo">
-                                                        <div *ngIf="array.NIDALERTA == item.NIDALERTA">
-                                                          <div *ngFor="let listUsu of  array.RESULTADO; let indice = index">
-                                                              <div class="row"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
-                  
-                                                             
-                                                            <!-- <div  class="row " *ngFor="let listUsuitem of  listUsu.RESULTADO ; let index = index;" id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;"> -->
-                                                            <div class="col-2 text-left txtDetalle">{{listUsu.NOMBRECOMPLETO}}</div>
-                                                            <div class="col-3 text-left txtDetalle">{{listUsu.SNAME}}</div>
-                                                            <div class="col-3 text-left txtDetalle">{{listUsu.SDESCARGO}}</div>
-                                                            <div class="col-2 text-left txtDetalle">{{listUsu.SNOMBRE_ESTADO}}</div>
-                                                            <div class="col-2 text-left txtDetalle">{{listUsu.SEMAIL}}</div>
-                                                            
-                                                            <!-- </div> -->
-                                                          </div>
-                                                          </div>
+                                                <div class="col-lg-12" *ngFor="let listComplemento of filtroComplemeto(item);">
+                                                    <div class="row mb-2 " style="padding-left: 30px;">
+                                                        <div class="Header">
+                                                            <div class="row">
+                                                                <div class="col-lg-19">
+                                                                    <h4 class="TitleLine2">Complemento</h4>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
-                                                      </div>
-                                                      <!-- </div> -->
-                                                      <ng-template #ListaVacia>
-                                                        <div class="col-12 text-center txtDetalle" style="font-weight: 700;">No hay
-                                                          usuarios agregados</div>
-                                                      </ng-template>
-                  
-                  
+                                                        <br>
+
                                                     </div>
-                                                  </div>
-                                                </div>
-                  
-                  
-                                               
-                  
-                  
-                  
-                  
-                                                <!-- Nombre del complemento :  {{listComplemento.SNOMBRE_COMPLEMENTO}}  
+
+
+                                                    <div class="row pt-2">
+                                                        <div class="col-lg-2 form-group">
+                                                            <span class="fontText">Nombre del complemento :</span>
+                                                        </div>
+                                                        <div class="col-lg-2 form-group">
+                                                            <input [disabled]="true" id="usName" type="text" class="form-control buttonSinBorder" value={{listComplemento.SNOMBRE_COMPLEMENTO}}>
+                                                        </div>
+
+                                                        <div class="col-lg-3 form-group">
+                                                            <span class="fontText">Descripción del complemento :</span>
+                                                        </div>
+                                                        <div class="col-lg-3 form-group">
+                                                            <input [disabled]="true" id="usName" type="text" class="form-control buttonSinBorder" value={{listComplemento.SDESCRIPCION}}>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                    <div class="row container-fluid">
+                                                        <div class="col-12">
+                                                            <div class="borderFormat">
+                                                                <div class="row" style="border-bottom: 2px solid #26296D;">
+                                                                    <div class="col-2 txtCabecera" style="font-size: 14px;">Nombre</div>
+                                                                    <div class="col-3 txtCabecera" style="font-size: 14px;">Perfil </div>
+                                                                    <div class="col-3 txtCabecera" style="font-size: 14px;">Cargo</div>
+                                                                    <div class="col-2 txtCabecera" style="font-size: 14px;">Estado</div>
+                                                                    <div class="col-2 txtCabecera" style="font-size: 14px;">Email</div>
+
+                                                                </div>
+
+                                                                <!-- <div *ngIf="listaComplementoUsuario.length != 0; else ListaVacia"> -->
+                                                                <!-- <div class="row " *ngFor="let item of ListUsuaurioAgregado; let index = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">    -->
+                                                                <!-- <div class="row " *ngFor="let listUsu of filtrarcomplementoxAlerta(item); let index = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">  -->
+                                                                <div *ngFor="let array of  this.NewArreglo">
+                                                                    <div *ngIf="array.NIDALERTA == item.NIDALERTA">
+                                                                        <div *ngFor="let listUsu of  array.RESULTADO; let indice = index">
+                                                                            <div class="row" id="pintaGrilla" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
+
+
+                                                                                <!-- <div  class="row " *ngFor="let listUsuitem of  listUsu.RESULTADO ; let index = index;" id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;"> -->
+                                                                                <div class="col-2 text-left txtDetalle">{{listUsu.NOMBRECOMPLETO}}</div>
+                                                                                <div class="col-3 text-left txtDetalle">{{listUsu.SNAME}}</div>
+                                                                                <div class="col-3 text-left txtDetalle">{{listUsu.SDESCARGO}}</div>
+                                                                                <div class="col-2 text-left txtDetalle">{{listUsu.SNOMBRE_ESTADO}}</div>
+                                                                                <div class="col-2 text-left txtDetalle">{{listUsu.SEMAIL}}</div>
+
+                                                                                <!-- </div> -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- </div> -->
+                                                                <ng-template #ListaVacia>
+                                                                    <div class="col-12 text-center txtDetalle" style="font-weight: 700;">No hay usuarios agregados</div>
+                                                                </ng-template>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+
+
+                                                    <!-- Nombre del complemento :  {{listComplemento.SNOMBRE_COMPLEMENTO}}  
                                                                                   Descripción del complemento :  {{listComplemento.SDESCRIPCION}} -->
-                  
-                                              </div>
+
+                                                </div>
                                             </div>
                                             <div class="card-body" style="background-color: white;">
 
