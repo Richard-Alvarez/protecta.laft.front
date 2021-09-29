@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { CoreService } from '../../../services/core.service';
@@ -13,6 +13,7 @@ import {IOption} from 'ng-select';
 import { element } from 'protractor';
 import { forEach } from 'jszip';
 import { O_NOFOLLOW } from 'constants';
+import { C2PolicyComponent } from 'src/app/components/c2-policy/c2-policy.component';
 
 
 @Component({
@@ -23,7 +24,6 @@ import { O_NOFOLLOW } from 'constants';
 
 })
 export class C2DetailComponent implements OnInit {
-
     
     cities = [
         {id: 1, name: 'Vilnius'},
@@ -195,6 +195,7 @@ export class C2DetailComponent implements OnInit {
 
     //await this.Consultar360Previous();
      await this.consultarPoliza();
+     
 
   }
   
@@ -2647,5 +2648,104 @@ async Consultar360Previous(){
 //        this.core.loader.hide()
 //     console.log("entro en el servicio de 360 resultado", this.Resultado360)
 //   } 
-
+/* async showdata(item){
+    switch (item.IDRAMO) {
+      case "61":
+        $('#InfoCanal').css("display","none")
+        $('#InfoCoberturas').css("display","block")
+        break;
+      case "64":
+        break;
+      case "66":
+        $('#CardPlaca').css("display","block")
+        $('#CardPlanilla').css("display","block")
+        $('#InfoAsegurado').css("display","none")
+        $('#InfoBeneficiarios').css("display","none")
+        $('#InfoVehiculo').css("display","block")
+        $('#InfoDirecSOAT').css("display","block")
+        $('#InfoCanal').css("display","block")
+        $('#InfoIntermediario').css("display","block")
+        $('#InfoTarifa').css("display","block")
+        $('#InfoCoberturas').css("display","block")
+        break;
+      case "71":
+        $('#InfoAsegurado').css("display","block")
+        $('#InfoCanal').css("display","block")
+        $('#InfoIntermediario').css("display","block")
+        $('#InfoCoberturas').css("display","block")
+        break;
+      case "72":
+        break;
+      case "73":
+        $('#DAsegIniVig').css("display","block")
+        $('#DAsegFinVig').css("display","block")
+        $('#DAsegMonedaSal').css("display","block")
+        $('#DAsegSalario').css("display","block")
+        $('#DAsegTasa').css("display","block")
+        $('#InfoAsegurado').css("display","block")
+        $('#InfoCanal').css("display","block")
+        $('#InfoIntermediario').css("display","block")
+        $('#InfoCoberturas').css("display","block")
+        $('#InfoBeneficiarios').css("display","block")
+        break;
+      case "74":
+        $('#InfoAsegurado').css("display","none")
+        $('#InfoCredito').css("display","block")
+        $('#InfoCoberturas').css("display","block")
+        $('#InfoBeneficiarios').css("display","block")
+        break;
+      case "75":
+        $('#h4Asegurado').text('Datos del titular')
+        $('#DAsegDocum').css("display","block")
+        $('#DAsegCUSPP').css("display","block")
+        $('#InfoRentaTotal').css("display","block")
+        $('#InfoCanal').css("display","none")
+        $('#InfoCoberturas').css("display","block")
+        $('#InfoBeneficiarios').css("display","block")
+        break;
+      case "76":
+        $('#h4Asegurado').text('Datos del Titular')
+        $('#DAsegDocum').css("display","block")
+        $('#DAsegCUSPP').css("display","block")
+        $('#DAsegIniVig').css("display","block")
+        $('#DAsegFinVig').css("display","block")
+        $('#DAsegTipPension').css("display","block")
+        $('#DAsegTipRenta').css("display","block")
+        $('#DAsegModalidad').css("display","block")
+        $('#DAsegAnDif').css("display","block")
+        $('#DAsegMesGarant').css("display","block")
+        $('#DAsegMoneda').css("display","block")
+        $('#DAsegReajTemp').css("display","block")
+        $('#DAsegPrimDef').css("display","block")
+        $('#DAsegPenDef').css("display","block") 
+        $('#DAsegIniVigSCTR').css("display","none")
+        $('#DAsegFinVigSCTR').css("display","none")
+        $('#DAsegMonedaSal').css("display","none")
+        $('#DAsegSalario').css("display","none")
+        $('#DAsegTasa').css("display","none") 
+        $('#InfoCanal').css("display","none")
+        $('#InfoCoberRentas').css("display","block")
+        $('#InfoBeneficiarios').css("display","block")
+        $('#InfoPensiones').css("display","block")
+        //$('#titlebenef').text(this.DatosAsegurado.name)
+        break;
+      case "77":
+        $('#InfoCoberturas').css("display","block")
+        $('#InfoBeneficiarios').css("display","block")
+        break;
+      case "80":
+        $('#DAsegMonedaSal').css("display","none")
+        $('#DAsegSalario').css("display","none")
+        $('#DAsegTasa').css("display","none")
+        $('#InfoCoberturas').css("display","block")
+        
+        break;
+      case "81":
+        break;
+      case "82":
+        break;
+      default:
+        break;
+    }
+  } */
 }

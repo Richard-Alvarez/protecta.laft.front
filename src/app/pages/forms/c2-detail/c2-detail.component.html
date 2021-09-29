@@ -3481,7 +3481,7 @@
                         <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
                             <div class="card-header headerSenials">
                                 <div class="detallePoliza {{getColorGrilla(inc)}}">
-                                    <div class="row pl-2 pr-2" >
+                                    <div class="row pl-2 pr-2" > <!-- (click)="showdata(item)" -->
                                         
                                         <div class="col-lg-2 cabeceraPolizas" >
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
@@ -3529,7 +3529,7 @@
                             <div class="collapse" data-parent="#tabPanelList" tabindex="-1" id="{{'consulta'+inc}}" >
                                 <div class="card-body">
                                     <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
-                                    <app-c2-policy [item]="item" ></app-c2-policy>
+                                    <app-c2-policy [item]="item" [inc]="inc" [ListaPoliza]="ListaPoliza"></app-c2-policy>
                                 </div>
                             </div>
                         </div>
@@ -3560,7 +3560,7 @@
                         </div>
                         <div id="">
                             <div *ngIf="policyGral.length > 0 || policySimpli.length > 0">
-                                <div class="card" *ngFor="let it of detResult;let inc = index;">
+                                <div class="card" *ngFor="let it of ListaPoliza;let inc = index;">
                                     <div class="card-header headerSenials"><!---->
                                         <div class="detallePoliza {{getColorGrilla(inc)}}">
                                             <div class="row pl-2 pr-2" (click)="Consultar360(it)">
@@ -3696,7 +3696,7 @@
                         </div>
                         <div id="">
                             <div *ngIf="policySimpli.length > 0">
-                                <div class="card" *ngFor="let it of detResult;let inc = index;">
+                                <div class="card" *ngFor="let it of ListaPoliza;let inc = index;">
                                     <div class="card-header headerSenials"><!---->
                                         <div class="detallePoliza {{getColorGrilla(inc)}}">
                                             <div class="row pl-2 pr-2" (click)="Consultar360(it)">
@@ -3852,7 +3852,7 @@
                         </div>
                         <div id="">
                             <div *ngIf="policyGral.length > 0">
-                                <div class="card" *ngFor="let it of detResult;let inc = index;">
+                                <div class="card" *ngFor="let it of ListaPoliza;let inc = index;">
                                     <div class="card-header headerSenials"><!---->
                                         <div class="detallePoliza {{getColorGrilla(inc)}}">
                                             <div class="row pl-2 pr-2" (click)="Consultar360(it)">
@@ -3989,7 +3989,7 @@
                         </div>
                         <div id="">
                             <div *ngIf="policySimpli.length > 0">
-                                <div class="card" *ngFor="let it of detResult;let inc = index;">
+                                <div class="card" *ngFor="let it of ListaPoliza;let inc = index;">
                                     <div class="card-header headerSenials"><!---->
                                         <div class="detallePoliza {{getColorGrilla(inc)}}">
                                             <div class="row pl-2 pr-2" (click)="Consultar360(it)">
@@ -4142,7 +4142,7 @@
                     </div>
                     <div id="">
                         <div *ngIf="policyGral.length > 0">
-                            <div class="card" *ngFor="let it of detResult;let inc = index;">
+                            <div class="card" *ngFor="let it of ListaPoliza;let inc = index;">
                                 <div class="card-header headerSenials"><!---->
                                     <div class="detallePoliza {{getColorGrilla(inc)}}">
                                         <div class="row pl-2 pr-2" (click)="Consultar360(it)">
@@ -4280,7 +4280,7 @@
                     <br>
                     <div id="">
                         <div *ngIf="policySimpli.length > 0">
-                            <div class="card" *ngFor="let it of detResult;let inc = index;">
+                            <div class="card" *ngFor="let it of ListaPoliza;let inc = index;">
                                 <div class="card-header headerSenials"><!---->
                                     <div class="detallePoliza {{getColorGrilla(inc)}}">
                                         <div class="row pl-2 pr-2" (click)="Consultar360(it)">
@@ -4429,7 +4429,7 @@
                     </div>
                     <div id="">
                         <div *ngIf="policyGral.length > 0">
-                            <div class="card" *ngFor="let it of detResult;let inc = index;">
+                            <div class="card" *ngFor="let it of ListaPoliza;let inc = index;">
                                 <div class="card-header headerSenials"><!---->
                                     <div class="detallePoliza {{getColorGrilla(inc)}}">
                                         <div class="row pl-2 pr-2" (click)="Consultar360(it)">
@@ -4567,7 +4567,7 @@
                     <br>
                     <div id="">
                         <div *ngIf="policySimpli.length > 0">
-                            <div class="card" *ngFor="let it of detResult;let inc = index;">
+                            <div class="card" *ngFor="let it of ListaPoliza;let inc = index;">
                                 <div class="card-header headerSenials"><!---->
                                     <div class="detallePoliza {{getColorGrilla(inc)}}">
                                         <div class="row pl-2 pr-2" (click)="Consultar360(it)">
