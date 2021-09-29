@@ -1,4 +1,4 @@
-<div class="containerPadre idDetallePoliza" style="">
+<div class="containerPadre idDetallePoliza"  style=""><!-- style="" -->
   <div class="row quitarMarginRow colorTemplate">
     <div class="col-md-3">
       <!-- <button class="ButtonSinFondo" id="idVolverListaPoliza" type="submit"><span style="font-size:20px; color:#707070;display: inline-grid;" class="glyphicon glyphicon-chevron-left"></span></button> -->
@@ -452,7 +452,7 @@
                 </div>
                 <br>
               </div>
-              <div id="InfoCanal" style=" margin-top:3%;" ><!-- *ngIf="this.item.IDRAMO != '75'|| this.item.IDRAMO != '76' " -->
+              <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO != '75'|| this.item.IDRAMO != '76' && this.item.IDRAMO != '61' "><!-- *ngIf="this.item.IDRAMO != '75'|| this.item.IDRAMO != '76'|| this.item.IDRAMO != '61' " -->
                 <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
