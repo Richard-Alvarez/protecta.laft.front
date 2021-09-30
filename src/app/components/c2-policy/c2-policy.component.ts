@@ -10,8 +10,7 @@ import { UserconfigService } from 'src/app/services/userconfig.service';
 export class C2PolicyComponent implements OnInit {
 
   @Input() item:any
-  @Input() ListaPoliza:any
-  @Input() inc:any
+  
   pageSize = 5;
   page = 1;
   Resultado360:any = []
@@ -27,7 +26,6 @@ export class C2PolicyComponent implements OnInit {
     
     await this.Consultar360(this.item)
     await this.SetVariables()
-    /* await this.showdata() */
   }
 
   async Consultar360(item){
@@ -83,12 +81,13 @@ export class C2PolicyComponent implements OnInit {
 
   pension:any = {}
   planSalud:any = {}
+  credito:any = {}
 
   async SetVariables(){
     this.NroPoliza = this.Resultado360.nroPolicy
     this.NroCertificado = this.Resultado360.nroCertificate == null ? 0 : this.Resultado360.nroCertificate
     this.Estado = this.Resultado360.nroPolicy == '' ? '-' : this.Resultado360.nroPolicy
-    this.planilla = this.Resultado360.planilla
+    this.planilla = this.Resultado360.planilla == '' ? '-' : this.Resultado360.planilla
 
     this.Contratante = this.Resultado360.contratante 
     this.Contratante.name = this.Resultado360.contratante.name  == '' ? '-' : this.Resultado360.contratante.name
@@ -150,6 +149,7 @@ export class C2PolicyComponent implements OnInit {
     this.DatosAsegurado.tipodoc =  this.Resultado360.asegurado.tipodoc == '' ? '-' : this.Resultado360.asegurado.tipodoc
     this.DatosAsegurado.documento =  this.Resultado360.asegurado.documento == '' ? '-' : this.Resultado360.asegurado.documento
     this.DatosAsegurado.cuspp =  this.Resultado360.asegurado.cuspp == '' ? '-' : this.Resultado360.asegurado.cuspp
+    this.DatosAsegurado.sexo =  this.Resultado360.asegurado.sexo == '' ? '-' : this.Resultado360.asegurado.sexo
 
    if(this.Resultado360.coberturas.length !== 0){
       this.DatosCoberturas.CodigoModulo = this.Resultado360.coberturas[0].codigoModulo
@@ -191,16 +191,16 @@ export class C2PolicyComponent implements OnInit {
     this.listaDataCronograma = this.Resultado360.cronogramas 
     this.listaDataRestace = this.Resultado360.rescates
 
-    this.pension.pensionDefinitiva= this.Resultado360.pension.pensionDefinitiva 
-    this.pension.primaDefinitiva= this.Resultado360.pension.primaDefinitiva
-    this.pension.reajusteTrimestral= this.Resultado360.pension.reajusteTrimestral
-    this.pension.moneda= this.Resultado360.pension.moneda
-    this.pension.mesesGarantizados= this.Resultado360.pension.mesesGarantizados
-    this.pension.aniosDiferidos= this.Resultado360.pension.aniosDiferidos
-    this.pension.modalidad= this.Resultado360.pension.modalidad
-    this.pension.tipoRenta= this.Resultado360.pension.tipoRenta
-    this.pension.tipoPension= this.Resultado360.pension.tipo.descripcion
-    this.pension.banco= this.Resultado360.pension.banco
+    this.pension.pensionDefinitiva= this.Resultado360.pension.pensionDefinitiva == '' ? '-' : this.Resultado360.pension.pensionDefinitiva
+    this.pension.primaDefinitiva= this.Resultado360.pension.primaDefinitiva == '' ? '-' : this.Resultado360.pension.primaDefinitiva
+    this.pension.reajusteTrimestral= this.Resultado360.pension.reajusteTrimestral == '' ? '-' : this.Resultado360.pension.reajusteTrimestral
+    this.pension.moneda= this.Resultado360.pension.moneda == '' ? '-' : this.Resultado360.pension.moneda
+    this.pension.mesesGarantizados= this.Resultado360.pension.mesesGarantizados == '' ? '-' : this.Resultado360.pension.mesesGarantizados
+    this.pension.aniosDiferidos= this.Resultado360.pension.aniosDiferidos == '' ? '-' : this.Resultado360.pension.aniosDiferidos
+    this.pension.modalidad= this.Resultado360.pension.modalidad == '' ? '-' : this.Resultado360.pension.modalidad
+    this.pension.tipoRenta= this.Resultado360.pension.tipoRenta == '' ? '-' :this.Resultado360.pension.tipoRenta
+    this.pension.tipoPension= this.Resultado360.pension.tipo.descripcion == '' ? '-' : this.Resultado360.pension.tipo.descripcion
+    this.pension.banco= this.Resultado360.pension.banco == '' ? '-' : this.Resultado360.pension.banco
     this.pension.sucursal= this.Resultado360.pension.sucursal == '' ? '-' : this.Resultado360.pension.sucursal
     this.pension.viaPago= this.Resultado360.pension.viaPago == '' ? '-' : this.Resultado360.pension.viaPago 
     this.pension.cuentaTipo= this.Resultado360.pension.cuenta.tipoCuenta == '' ? '-' : this.Resultado360.pension.cuenta.tipoCuenta
@@ -209,14 +209,23 @@ export class C2PolicyComponent implements OnInit {
     this.pension.cuentaCci= this.Resultado360.pension.cuenta.cci == '' ? '-' : this.Resultado360.pension.cuenta.cci
 
 
-    this.planSalud.institucion= this.Resultado360.planSalud.institucion
-    this.planSalud.modalidad= this.Resultado360.planSalud.modalidad
-    this.planSalud.monto= this.Resultado360.planSalud.monto
-    this.planSalud.periodo= this.Resultado360.planSalud.periodo
-    this.planSalud.receptorName= this.Resultado360.planSalud.receptor.name
+    this.planSalud.institucion= this.Resultado360.planSalud.institucion == '' ? '-' : this.Resultado360.planSalud.institucion
+    this.planSalud.modalidad= this.Resultado360.planSalud.modalidad == '' ? '-' : this.Resultado360.planSalud.modalidad
+    this.planSalud.monto= this.Resultado360.planSalud.monto == '' ? '-' : this.Resultado360.planSalud.monto
+    this.planSalud.periodo= this.Resultado360.planSalud.periodo == '' ? '-' : this.Resultado360.planSalud.periodo
+    this.planSalud.receptorName= this.Resultado360.planSalud.receptor.name == '' ? '-' : this.Resultado360.planSalud.receptor.name
     
-   
-
+    this.credito.nroCredito = this.Resultado360.credito.nroCredito == '' ? '-' : this.Resultado360.credito.nroCredito
+    this.credito.plazo = this.Resultado360.credito.plazo == '' ? '-' : this.Resultado360.credito.plazo
+    this.credito.inicioVigencia = this.Resultado360.credito.inicioVigencia == '' ? '-' : this.Resultado360.credito.inicioVigencia
+    this.credito.finVigencia = this.Resultado360.credito.finVigencia == '' ? '-' : this.Resultado360.credito.finVigencia
+    this.credito.moneda = this.Resultado360.credito.moneda == '' ? '-' : this.Resultado360.credito.moneda
+    this.credito.tipoPrima = this.Resultado360.credito.tipoPrima == '' ? '-' : this.Resultado360.credito.tipoPrima
+    this.credito.montoInicial = this.Resultado360.credito.montoInicial == '' ? '-' : this.Resultado360.credito.montoInicial
+    this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '-' : this.Resultado360.credito.montoInsoluto
+    this.credito.numerocuotas = this.Resultado360.credito.numerocuotas == '' ? '-' : this.Resultado360.credito.numerocuotas
+    
+    
   }
   async showdata(){
     /* if(this.DescripcionRamo == "VIDA LEY TRABAJADORES") {
@@ -231,28 +240,28 @@ export class C2PolicyComponent implements OnInit {
     } */
     switch (this.item.IDRAMO) {
       case "61":
-        $('#InfoCanal').css("display","none")
-        $('#InfoCoberturas').css("display","block")
+        //$('#InfoCanal').css("display","none")
+        //$('#InfoCoberturas').css("display","block")
         break;
       case "64":
         break;
       case "66":
-        $('#CardPlaca').css("display","block")
-        $('#CardPlanilla').css("display","block")
-        $('#InfoAsegurado').css("display","none")
-        $('#InfoBeneficiarios').css("display","none")
-        $('#InfoVehiculo').css("display","block")
-        $('#InfoDirecSOAT').css("display","block")
-        $('#InfoCanal').css("display","block")
-        $('#InfoIntermediario').css("display","block")
-        $('#InfoTarifa').css("display","block")
-        $('#InfoCoberturas').css("display","block")
+        //$('#CardPlaca').css("display","block")
+        //$('#CardPlanilla').css("display","block")
+        //$('#InfoAsegurado').css("display","none")
+        //$('#InfoBeneficiarios').css("display","none")
+        //$('#InfoVehiculo').css("display","block")
+        //$('#InfoDirecSOAT').css("display","block")
+        //$('#InfoCanal').css("display","block")
+        //$('#InfoIntermediario').css("display","block")
+        //$('#InfoTarifa').css("display","block")
+        //$('#InfoCoberturas').css("display","block")
         break;
       case "71":
-        $('#InfoAsegurado').css("display","block")
-        $('#InfoCanal').css("display","block")
-        $('#InfoIntermediario').css("display","block")
-        $('#InfoCoberturas').css("display","block")
+        //$('#InfoAsegurado').css("display","block")
+        //$('#InfoCanal').css("display","block")
+        //$('#InfoIntermediario').css("display","block")
+        //$('#InfoCoberturas').css("display","block")
         break;
       case "72":
         break;
@@ -262,31 +271,31 @@ export class C2PolicyComponent implements OnInit {
         $('#DAsegMonedaSal').css("display","block")
         $('#DAsegSalario').css("display","block")
         $('#DAsegTasa').css("display","block")
-        $('#InfoAsegurado').css("display","block")
+        //$('#InfoAsegurado').css("display","block")
         $('#InfoCanal').css("display","block")
-        $('#InfoIntermediario').css("display","block")
-        $('#InfoCoberturas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
+        //$('#InfoIntermediario').css("display","block")
+        //$('#InfoCoberturas').css("display","block")
+        //$('#InfoBeneficiarios').css("display","block")
         break;
       case "74":
-        $('#InfoAsegurado').css("display","none")
-        $('#InfoCredito').css("display","block")
-        $('#InfoCoberturas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
+        //$('#InfoAsegurado').css("display","none")
+        //$('#InfoCredito').css("display","block")
+        //$('#InfoCoberturas').css("display","block")
+        //$('#InfoBeneficiarios').css("display","block")
         break;
       case "75":
         $('#h4Asegurado').text('Datos del titular')
-        $('#DAsegDocum').css("display","block")
-        $('#DAsegCUSPP').css("display","block")
-        $('#InfoRentaTotal').css("display","block")
-        $('#InfoCanal').css("display","none")
-        $('#InfoCoberturas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
+        //$('#DAsegDocum').css("display","block")
+        //$('#DAsegCUSPP').css("display","block")
+        //$('#InfoRentaTotal').css("display","block")
+        //$('#InfoCanal').css("display","none")
+        //$('#InfoCoberturas').css("display","block")
+        //$('#InfoBeneficiarios').css("display","block")
         break;
       case "76":
         $('#h4Asegurado').text('Datos del Titular')
-        $('#DAsegDocum').css("display","block")
-        $('#DAsegCUSPP').css("display","block")
+        //$('#DAsegDocum').css("display","block")
+        //$('#DAsegCUSPP').css("display","block")
         $('#DAsegIniVig').css("display","block")
         $('#DAsegFinVig').css("display","block")
         $('#DAsegTipPension').css("display","block")
@@ -303,21 +312,21 @@ export class C2PolicyComponent implements OnInit {
         $('#DAsegMonedaSal').css("display","none")
         $('#DAsegSalario').css("display","none")
         $('#DAsegTasa').css("display","none") 
-        $('#InfoCanal').css("display","none")
-        $('#InfoCoberRentas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
-        $('#InfoPensiones').css("display","block")
-        $('#titlebenef').text(this.DatosAsegurado.name)
+        //$('#InfoCanal').css("display","none")
+        //$('#InfoCoberRentas').css("display","block")
+        //$('#InfoBeneficiarios').css("display","block")
+        //$('#InfoPensiones').css("display","block")
+        //$('#titlebenef').text(this.DatosAsegurado.name)
         break;
       case "77":
-        $('#InfoCoberturas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
+        //$('#InfoCoberturas').css("display","block")
+        //$('#InfoBeneficiarios').css("display","block")
         break;
       case "80":
-        $('#DAsegMonedaSal').css("display","none")
-        $('#DAsegSalario').css("display","none")
-        $('#DAsegTasa').css("display","none")
-        $('#InfoCoberturas').css("display","block")
+        //$('#DAsegMonedaSal').css("display","none")
+        //$('#DAsegSalario').css("display","none")
+        //$('#DAsegTasa').css("display","none")
+        //$('#InfoCoberturas').css("display","block")
         
         break;
       case "81":
