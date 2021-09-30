@@ -69,10 +69,10 @@ export class ModalEmailProfileComponent implements OnInit {
     await this.GetListAction();
     this.getAlertToEdit();
     this.ckeditorContent =  this.dataEmail.SCUERPO_CORREO
-    console.log("this.ckeditorContent",this.ckeditorContent)
+   
 
     this.objUsuario = this.core.storage.get('usuario')
-    //console.log("dentro del modal : ",this.dataEmail)
+    
 
     
     this.core.loader.hide();
@@ -81,7 +81,7 @@ export class ModalEmailProfileComponent implements OnInit {
 
 
   async getAlertToEdit() {
-    console.log("nueva data al modal;", this.dataEmail)
+    
       //ASIGNA VALORES AL MODAL
        this.profiles = this.dataEmail.NIDPROFILE;
        this.action = this.dataEmail.NIDACCION;
@@ -119,15 +119,15 @@ export class ModalEmailProfileComponent implements OnInit {
   }
 
   async GetListAction() {
-    console.log("primera linea")
+    
     let response = await this.userConfig.GetListAction()
-    console.log("primera segunda")
+    
     this.ActionList = response
-    console.log("primera tercera")
+    
 
   }
   DatackeditorContent(){
-    console.log("this.dataEmail.SCUERPO_CORREO",this.dataEmail.SCUERPO_CORREO)
+    
     return this.dataEmail.SCUERPO_CORREO;
   }
 
@@ -137,7 +137,7 @@ export class ModalEmailProfileComponent implements OnInit {
     let data:any = {};
     let dataHTML = this.DatackeditorContent()
     
-    console.log("la data para variable",dataHTML)
+    
     let NIDCORREO = this.dataEmail.NIDCORREO
 
     data.NIDCORREO = NIDCORREO
@@ -150,12 +150,12 @@ export class ModalEmailProfileComponent implements OnInit {
     data.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
     data.SCUERPO_TEXTO = this.convert(dataHTML)
     data.SCUERPO_CORREO_DEF = "" 
-    console.log("la data para actualizar",data)
+    
     //  await this.userConfig.getUpdateCorreos(data)
 
 
     let respValidacion:any = this.validator()
-    console.log("respValidacion",respValidacion)
+    
     if(respValidacion.code == 1){
       swal.fire({
         title: "Configuración de Correos",
@@ -185,7 +185,7 @@ export class ModalEmailProfileComponent implements OnInit {
                        },
          
        }).then(async (respuesta) =>{
-        // console.log("respuesta.dismiss",respuesta.dismiss)
+        
         if(!respuesta.dismiss){
            this.core.loader.show(); 
             await this.userConfig.getUpdateCorreos(data)
@@ -266,14 +266,14 @@ export class ModalEmailProfileComponent implements OnInit {
    }
 
    consoleFunc(evento){
-    console.log("entro al change", evento)
+    
     this.textoHTML = evento
     
   }
 
 
   consoleFunc2(evento){
-    console.log("entro al keyup", evento)
+  
     
     
   }
@@ -285,7 +285,7 @@ export class ModalEmailProfileComponent implements OnInit {
     }
   );
   return text
-  // console.log(text); // expected result:
+  
 }
 
 }

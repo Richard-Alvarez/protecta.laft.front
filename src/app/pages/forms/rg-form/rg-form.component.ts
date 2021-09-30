@@ -109,9 +109,9 @@ export class RgFormComponent implements OnInit {
                 this.datosCabecera = this.questionsHeaderList[0]
                 this.questionsHeaderList.forEach(it => this.answersHeaderList.push(it))
             }
-            //console.log("datos cabecera",this.datosCabecera)
+            
         } catch (error) {
-            //console.log("error", error)
+            
             this.core.loader.hide();
         }
     }
@@ -144,9 +144,9 @@ export class RgFormComponent implements OnInit {
 
     getQuestions(alertItem: any) {
         let respQuestion = this.alertGroup.get(alertItem);
-        ////console.log("respQuestion : ",respQuestion)
+        
         this.varNameStateAlertFile = respQuestion[0].SNOMBRE_ESTADO;
-        ////console.log("varNameStateAlertFile : ",this.varNameStateAlertFile)
+        
         if(respQuestion[0].SNOMBRE_ESTADO === 'COMPLETADO'){
             this.disableFormItems = true;
         }else{
@@ -170,21 +170,21 @@ export class RgFormComponent implements OnInit {
         let commentIndex = this.alertGroupList.findIndex(it => it == alertItem)
         let comment = this.comentarioAlertaList[commentIndex] 
         let data = { NIDALERTA_CAB_USUARIO: firstQuestion.NIDALERTA_CABECERA, SCOMENTARIO: comment, NIDUSUARIO_MODIFICA: this.NIDUSUARIO_ASIGNADO, STIPO_USUARIO: this.STIPO_USUARIO }
-        //console.log(data)
+        
         let response = await this.userConfigService.insertCommentHeader(data)
-        //console.log(response)
+        
 
     }
 
 
     enableAttachFiles(tipo: string,nameState: string) {
         /*if(this.STIPO_USUARIO_LOGIN != tipo){
-            //console.log("entro al if")
+            
 
             
         }*/
         if(nameState === 'COMPLETADO'){
-            ////console.log("entro al if")
+            
             this.disabledFileOC = true;
         }else{
             this.disabledFileOC = false;
@@ -261,7 +261,7 @@ export class RgFormComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
         let response = await this.userConfigService.insertAttachedFiles(data)
-        //console.log(response)
+        
     }
 
     async getAttachedFiles(tipoUsuario: string) {
@@ -326,7 +326,7 @@ export class RgFormComponent implements OnInit {
                 }
                 
                  this.userConfigService.uploadFiles(data).then(response => {
-                     //console.log("upload", response);
+                     
                  });
             }
         })
@@ -339,7 +339,7 @@ export class RgFormComponent implements OnInit {
              let comentario = this.comentarioAlertaList[index]
              it.SCOMENTARIO = comentario
              this.userConfigService.insertQuestionHeader(it).then(response => {
-                 //console.log(response)
+                 
              })
          })   
           
@@ -402,13 +402,13 @@ export class RgFormComponent implements OnInit {
         let userName = user['fullName'];
         this.ocEmailList  = await this.userConfigService.getOCEmailList()        
         for (let i = 0; i < this.ocEmailList.length; i++) {
-            //console.log(this.ocEmailList.length)
+            
             let data: any = {};
                 data.fullName = this.ocEmailList[i].NOMBRECOMPLETO
                 data.manager = userName
                 data.email = this.ocEmailList[i].SEMAIL
                 data.rol= this.ocEmailList[i].SDESCARGO  
-                //console.log(data)          
+            
             await this.userConfigService.sendEmail(data)
         }      
     }
@@ -461,7 +461,7 @@ export class RgFormComponent implements OnInit {
         return new Promise((resolve,reject) => {
             this.userConfigService.getListDirDuplicAlert(data)
             .then((response => {
-                //console.log("LA DEITA 1 : ",response);
+                
                 return resolve(response);
             }))
             .catch(err => {
@@ -477,11 +477,11 @@ export class RgFormComponent implements OnInit {
             jsonData.P_NIDALERTA = 10;//this.NIDALERTA;
             jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
     
-            //console.log("EL JSODATA : ",jsonData);
+            
             let respData:any = [];
             respData = await this.userConfigService.getListClienteRentasRAltoAlert(jsonData);
         
-                //console.log("EL DEITA : ",respData);
+                
                 if(respData.length > 0){
                     await this.excelService.exportAsExcelFile(respData,"Registros de alerta RG4");
                 }else{

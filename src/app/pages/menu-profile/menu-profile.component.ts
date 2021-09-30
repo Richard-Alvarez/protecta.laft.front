@@ -52,7 +52,7 @@ export class MenuProfileComponent implements OnInit {
           let data: any = {};
           data = (response);
           this.ProfileList = data;
-          //console.log(this.ProfileList)
+          
           this.core.loader.hide();
         }
         else {
@@ -69,7 +69,7 @@ export class MenuProfileComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        //console.log('err');
+        
         this.core.loader.hide();
         swal.fire({
           title: 'Alertas por perfil',
@@ -86,7 +86,7 @@ export class MenuProfileComponent implements OnInit {
   }
   updateOptionByProfile(data: any)
   {
-    //console.log("Actualizado carnal")
+    
   }
 
   changeProfile() {
@@ -98,7 +98,7 @@ export class MenuProfileComponent implements OnInit {
   }
 
   getOptionByProfileList(data: any) {
-    //console.log("espera que se mostrarán las opciones asignadas al perfil", data)
+    
     // this.sbsReportService.getAlertByProfileList(data)
     //   .then((response) => {
     //     let _data;

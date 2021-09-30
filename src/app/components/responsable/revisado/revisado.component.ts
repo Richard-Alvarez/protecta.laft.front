@@ -51,9 +51,7 @@ export class RevisadoComponent implements OnInit {
 
     await this.getVariablesStorage();
     this.fillFileGroup()
-    //console.log("el regimen IIIIIIIII: ",this.regimen)
-    //console.log("el stateCompletado AAAAAAAAAAAAAAAAAA: ",this.stateRevisado)
-    //console.log("el this.arrResponsable : ",this.arrResponsable)
+    
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   }
 
@@ -163,7 +161,7 @@ export class RevisadoComponent implements OnInit {
                 }
                 
                  this.userConfigService.uploadFiles(data).then(response => {
-                     //console.log("upload", response);
+                
                  });
             }
         })
@@ -172,7 +170,7 @@ export class RevisadoComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
         let response = await this.userConfigService.insertAttachedFiles(data)
-        //console.log(response)
+        
     }
 
 
@@ -197,7 +195,7 @@ export class RevisadoComponent implements OnInit {
   }
 
   getArray(state,regimen){
-    /*//console.log("la OOOOOOOOOOOO : ",state +"    -    "+regimen)
+    /*
     switch (state) {
       case 'COMPLETADO' : 
         if(regimen === 1){
@@ -230,7 +228,7 @@ export class RevisadoComponent implements OnInit {
   }
 
   getClassBagdeState(state){
-    ////console.log("state : ",state)
+  
     if(state === 'PENDIENTE'){
       return 'badge-warning'
     }
@@ -301,23 +299,19 @@ export class RevisadoComponent implements OnInit {
  capitalizarPrimeraLetra(texto : string ) {
   //  let texto = str
     
-  //  console.log("el texto de la primera letra", texto[0].toUpperCase() +  texto.slice(1).toLowerCase())
-  //  console.log("el texto que ingreso", texto[0].toUpperCase() + texto.slice(1))
-  //  console.log("el texto que ingreso 2", texto.charAt(0).toUpperCase() + texto.slice(1))
+ 
    return texto[0].toUpperCase() +  texto.slice(1).toLowerCase()
 }
 
 async getArchivoSustento(item){
-  console.log("el objAlerta sustento : ",item)
-  console.log("el objAlerta arrAdjuntosSustento : ",item.arrAdjuntosSustento[0])
+  
   try {
     let objAdjunto = item.arrAdjuntosSustento[0]
     //let NPERIODO_PROCESO =  parseInt(localStorage.getItem("periodo"))
-    // console.log("el ajunto : ",adjunto)
-    // console.log("el item : ",this.item)
+    
     //let ruta = 'ADJUNTOS/'+this.item.NIDALERTA+'/'+NPERIODO_PROCESO+'/'+this.parent.regimen.id+'/'+adjunto.name
     let ruta = item.arrAdjuntosSustento[0].SRUTA_ADJUNTO
-    // console.log("ruta : ",ruta)
+    
     let resp = await this.parent.downloadUniversalFile(ruta,objAdjunto.name)
   } catch (error) {
     console.error("error en descargar: ",error)
@@ -391,9 +385,9 @@ async ListaAlertas(){
     obj.RESULTADO = resultado
     obj.NIDALERTA = item.NIDALERTA
     this.NewArreglo.push(obj)
-    //console.log("arreglo resultado", resultado) 
+   
    });
-   console.log("arreglo", this.NewArreglo) 
+   
   
 }
 
@@ -408,13 +402,12 @@ async ListaAlertasDesdeCompletado(completado){
   //   obj.RESULTADO = resultado
   //   obj.NIDALERTA = item.NIDALERTA
   //   this.NewArreglo.push(obj)
-  //   //console.log("arreglo resultado", resultado) 
+ 
   //  });
-  // console.log("arreglo", this.NewArreglo) 
-  debugger;
+ 
+   
   this.NewArreglo = await completado
-  console.log("arreglo", this.NewArreglo) 
-  console.log("completado", completado) 
+
   
 }
 

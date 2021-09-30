@@ -95,7 +95,7 @@ export class CustomerManagerComponent implements OnInit {
   {}
 
   async ngOnInit() { 
-    console.log("ValorRegresar: ", this.ValorRegresar)
+   
     this.spinner.show()
     await this.getGrupoList()
     this.paramCliente.NTIPOIDEN_BUSQ = 2;
@@ -109,7 +109,7 @@ export class CustomerManagerComponent implements OnInit {
     this.paramCliente.MANUAL=true
     
     let paramClientels =  localStorage.getItem("paramClienteReturn");
-    // console.log("Variable",paramClientels)
+    
     let nIdGrupo = localStorage.getItem("NIDGRUPO")
     if(Number.parseInt(nIdGrupo) > 0){
       this.idGrupo = Number.parseInt(nIdGrupo);
@@ -137,7 +137,7 @@ export class CustomerManagerComponent implements OnInit {
           //this.paramCliente = JSON.parse(paramClientels);
         }
         this.newArrayResult = this.paramCliente 
-        // console.log("Variable 2",this.newArrayResult)
+       
         localStorage.setItem("paramClienteReturn", "");
         this.paramCliente.MANUAL=false
         await this.getResultsList()
@@ -151,19 +151,16 @@ export class CustomerManagerComponent implements OnInit {
     this.DataGuardada = JSON.parse(localStorage.getItem("DataGuardada"));
 
     //this.DataGuardada = this.clientList
-    //console.log("DataGuardada", this.DataGuardada);
+    
     if (this.DataGuardada) {
       this.newArrayResult = this.DataGuardada;
-      // console.log("Lista Array : ", this.newArrayResult);
+    
     }
     // this.core.loader.show()
     //Comentado para pruebas
     await this.getClientsByTratamiento()
     // this.core.loader.hide()
 
-    //console.log("Lista de reforzados que tinen no coicidencias : ",this.arrClientesRefor)
-    //console.log("Lista de reforzados que tinen coicidencias : ",this.arrClientesCoincid)
-    //console.log("arrRespClientesReforzados : ",arrRespClientesReforzados)
     
     try {
       let respSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClientReturn")
@@ -186,7 +183,7 @@ export class CustomerManagerComponent implements OnInit {
     }
 
     this.PERIODOACTUAL =  await this.userConfigService.getCurrentPeriod()
-    console.log("this.idGrupo: ",this.idGrupo)
+  
     await this.ListaDeCoincidencias(this.idGrupo)
     this.spinner.hide()
   }
@@ -199,13 +196,10 @@ export class CustomerManagerComponent implements OnInit {
     this.arrClientesRevisado = await this.setDataClientesResultados(respCRE,'CRE')
     this.arrClientesCompl = await this.setDataClientesResultados(respCCO,'CCO')
     //let respReforzado = this.setDataClientesResultados(respCRF)
-    // console.log("arrClientesRefor", this.arrClientesRefor);
-    // console.log("arrClientesRevisado", this.arrClientesRevisado);
-    // console.log("arrClientesCompl", this.arrClientesCompl);
+  
 
     //let respCRF = await this.getDataResultadoTratamiento('CRF')
-    //console.log("arrClientesRefor 123", respCRF);
-    // console.log("arrClientesCompl 111", respCCO);
+   
     await this.getserviceReforzado()
       this.spinner.hide()
   }
@@ -217,13 +211,10 @@ export class CustomerManagerComponent implements OnInit {
   this.arrClientesRevisado = await this.setDataClientesResultados(respCRE,'CRE')
   this.arrClientesCompl = await this.setDataClientesResultados(respCCO,'CCO')
   //let respReforzado = this.setDataClientesResultados(respCRF)
-  console.log("arrClientesRefor", this.arrClientesRefor);
-  console.log("arrClientesRevisado", this.arrClientesRevisado);
-  console.log("arrClientesCompl", this.arrClientesCompl);
+ 
 
   //let respCRF = await this.getDataResultadoTratamiento('CRF')
-  //console.log("arrClientesRefor 123", respCRF);
-  console.log("arrClientesCompl 111", respCCO);
+
   await this.getserviceReforzado()
     //this.spinner.hide()
 }
@@ -272,16 +263,16 @@ export class CustomerManagerComponent implements OnInit {
     let respCRF = await this.getDataResultadoTratamiento('CRF')
     let respClientesCoincidencias = await this.getDataResultadoCoincidenciasPen()
     let respClientesReforzados = await this.setDataClientesResultados(respCRF,'CRF')//
-    // console.log("EL ORIGEN DEL respClientesCoincidencias ***: ",respClientesCoincidencias)
+    
     let respClientesCoincidFormat = await this.setDataClientesResultadosPart2(respClientesCoincidencias.lista,'CRF')//
     
-    // console.log("EL ORIGEN DEL respClientesCoincidFormat ***: ",respClientesCoincidFormat)
+    
     let arrRespClientesReforzadosCoincid = respClientesCoincidFormat////*[]//*/respClientesReforzados.filter(it => it.SDESESTADO !== 'COINCIDENCIA')
     let arrRespClientesReforzadosSinCoincid = respClientesReforzados//respClientesReforzados.filter(it => it.SDESESTADO == 'NO COINCIDENCIA')
-    //debugger;
+     
     this.arrClientesRefor = arrRespClientesReforzadosSinCoincid
     this.arrClientesCoincid = arrRespClientesReforzadosCoincid
-    console.log("this.arrClientesCoincid",this.arrClientesCoincid)
+    
   }
   swalSelectReforzado(item,SESTADO_TRAT_OLD,SESTADO_TRAT){
     Swal.fire({
@@ -300,8 +291,7 @@ export class CustomerManagerComponent implements OnInit {
       showCancelButton: true,
        inputValidator: function (value){
          return new Promise(function(resolve,reject){
-          //  console.log("valor", value)
-           //console.log("ngmodel1:", this.valor1)
+         
           if (value !== '') {
             resolve('');
             
@@ -316,13 +306,13 @@ export class CustomerManagerComponent implements OnInit {
       }).then(async (msg) => {
 
         if(msg.dismiss){
-          // console.log("Aca no entra el  : ",msg)
+         
         }
         else{
-        // console.log("el valor : ",msg)
+        
         
         let respSwalTextArea = await this.swalTextAreaReforzado(item,SESTADO_TRAT_OLD,SESTADO_TRAT,msg.value)
-        // console.log("la respSwalTextArea : ",respSwalTextArea)
+       
         return respSwalTextArea
       }
       });
@@ -373,16 +363,15 @@ export class CustomerManagerComponent implements OnInit {
      }).then(async respuesta =>{
 
       if(respuesta.dismiss){
-        // console.log("Aca no entra el  : ",respuesta)
+       
       }
       else{
 
-        // console.log("La respuesta final del comentario",respuesta)
-        //console.log("La respuesta final del msg",msg)
+    
         let objSendPep:any = {}
         objSendPep.comentario = respuesta.value
         objSendPep.tipo_pep = TIPO_PEP
-        // console.log("la objSendPep : ",objSendPep)
+        
         //return objSendPep
         await this.updatePreReiforedClient(item ,SESTADO_TRAT_OLD ,SESTADO_TRAT ,objSendPep.tipo_pep ,objSendPep.comentario);
       }
@@ -402,8 +391,7 @@ export class CustomerManagerComponent implements OnInit {
  
 
   async update(item: any,SESTADO_TRAT_OLD,SESTADO_TRAT,TIPO_CLIENTE,tipoVista) {
-    // console.log("el TIPO_CLIENTE : ",TIPO_CLIENTE)
-    // console.log("el item del update TRAT Y GC vamo viendo : ",item)
+   
     let objCadenasSwal:any = {}
     objCadenasSwal.titulo = ''
     if(tipoVista == 1){
@@ -422,18 +410,18 @@ export class CustomerManagerComponent implements OnInit {
 
       const modalRef = this.modalService.open
         (ModalConfirmGcComponent, { size: 'md', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
-      // console.log("modalRef", modalRef)
+     
       modalRef.componentInstance.reference = modalRef;
       modalRef.componentInstance.dataGC = item;
-      // console.log("el item de dataGC", item)
+      
       let respModal = await modalRef.result
-      // console.log("el respModal", respModal)
+      
        this.spinner.show();
           let respReforzadoConfirm = await this.getModalReforzadoConfirm(objCadenasSwal,SESTADO_TRAT_OLD,TIPO_CLIENTE,item,SESTADO_TRAT,respModal)
-          // console.log("respReforzadoConfirm : ",respReforzadoConfirm)
+          
           //  this.spinner.hide();
 
-      // console.log("comando tres ")
+      
 
       
           //await this.updatePreReiforedClient(item,SESTADO_TRAT,objSendPep.tipo_pep,objSendPep.comentario)
@@ -461,15 +449,14 @@ export class CustomerManagerComponent implements OnInit {
              closeButton : 'OcultarBorde'
            },
           inputValidator: (result) => {
-          //  console.log("resultado", result)
+          
            if(result == ''){
               return 'Debe ingresar un comentario'
             }
           }
           
         }).then(respuesta => {
-          // console.log("respuestaadas",respuesta)
-          // console.log("Informacion de complementario",respuesta)
+         
           if(respuesta.dismiss){
               return
           }
@@ -481,7 +468,7 @@ export class CustomerManagerComponent implements OnInit {
               //input: 'textarea',
               //inputPlaceholder: 'Ingrese comentario',
               //inputValidator: (result) => {
-               // console.log("resultado", result)
+               
                // if(result == ''){
                 //  return 'Debe ingresar un comentario'
                // }
@@ -498,7 +485,7 @@ export class CustomerManagerComponent implements OnInit {
               },
             }).then(async (msg) => {
               //this.core.loader.show();
-              // console.log("el msg 123: ",msg)
+              
               if (!msg.dismiss) {
                 if(TIPO_CLIENTE == 'Reforzado'){
                   await this.swalSelectReforzado(item,SESTADO_TRAT_OLD,SESTADO_TRAT);
@@ -514,18 +501,18 @@ export class CustomerManagerComponent implements OnInit {
                 switch (SESTADO_TRAT){
                   case 'CRF' : {
                     let rspFormat = this.setDataClientesResultados(rspRevisado,'CRF')
-                    // console.log("el rspFormat $$$ : ",rspFormat)
+                    
                     this.arrClientesRefor = rspFormat
                     
                   }break;
                   case 'CRE' : {
                     let rspFormat = this.setDataClientesResultados(rspRevisado,'CRE' )
-                    // console.log("el rspFormat $$$ : ",rspFormat)
+                    
                     this.arrClientesRevisado = rspFormat
                   }break;
                   case 'CCO' : {
                     let rspFormat = this.setDataClientesResultados(rspRevisado,'CCO')
-                    // console.log("el rspFormat $$$ : ",rspFormat)
+                    
                     this.arrClientesCompl = rspFormat
                   }break;
                   default : {
@@ -570,7 +557,7 @@ export class CustomerManagerComponent implements OnInit {
            },
         }).then(async (msg) => {
           //this.core.loader.show();
-          // console.log("el msg 123: ",msg)
+          
           if (!msg.dismiss) {
             if(TIPO_CLIENTE == 'Reforzado'){
               await this.swalSelectReforzado(item,SESTADO_TRAT_OLD,SESTADO_TRAT);
@@ -586,18 +573,18 @@ export class CustomerManagerComponent implements OnInit {
             switch (SESTADO_TRAT){
               case 'CRF' : {
                 let rspFormat = this.setDataClientesResultados(rspRevisado,'CRF')
-                // console.log("el rspFormat $$$ : ",rspFormat)
+                
                 this.arrClientesRefor = rspFormat
                 
               }break;
               case 'CRE' : {
                 let rspFormat = this.setDataClientesResultados(rspRevisado,'CRE' )
-                // console.log("el rspFormat $$$ : ",rspFormat)
+                
                 this.arrClientesRevisado = rspFormat
               }break;
               case 'CCO' : {
                 let rspFormat = this.setDataClientesResultados(rspRevisado,'CCO')
-                // console.log("el rspFormat $$$ : ",rspFormat)
+                
                 this.arrClientesCompl = rspFormat
               }break;
               default : {
@@ -648,9 +635,9 @@ export class CustomerManagerComponent implements OnInit {
 
           await this.updatePreReiforedClient(item, SESTADO_TRAT_OLD,SESTADO_TRAT, resp.sTipoPep, resp.mensaje)
 
-          // console.log("comando uno ")
+          
           let rspRevisado = await this.getDataResultadoTratamiento(SESTADO_TRAT)
-          // console.log('rspRevisado 12345', rspRevisado)
+          
 
 
 
@@ -658,7 +645,7 @@ export class CustomerManagerComponent implements OnInit {
           switch (SESTADO_TRAT) {
             case 'CRF': {
               let rspFormat = this.setDataClientesResultados(rspRevisado, 'CRF')
-              // console.log("el rspFormat 7894 : ", rspFormat)
+          
               this.arrClientesRefor = rspFormat
 
             } break;
@@ -703,7 +690,7 @@ export class CustomerManagerComponent implements OnInit {
     switch (SESTADO_TRAT){
       case 'CRF' : {
         let rspFormat = this.setDataClientesResultados(rspResultados,'CRF')
-        // console.log("EL CRF rspFormat : ",rspFormat)
+        
         this.arrClientesRefor = rspFormat
       }break;
       case 'CRE' : {
@@ -756,18 +743,18 @@ export class CustomerManagerComponent implements OnInit {
     // If key pressed is V and if ctrl is true.
 
     if(key == 86 && ctrl){
-      // console.log("Ctrl+V is pressed.");
+    
       return false
      }
       
     // else if (key == 67 && ctrl) {
       
-    //   console.log("Ctrl+C is pressed.");
+  
     //     return true
     // }
    
     
-    // console.log("es real")
+    
    return true;  
    
 }
@@ -799,8 +786,7 @@ isValidDataInput3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
   let objRespuesta: any = {};
   objRespuesta.code = 0
   objRespuesta.message = ''
-  // console.log("this.NBUSCAR_POR" , this.NBUSCAR_POR)
-  // console.log("this.paramCliente.SNUM_DOCUMENTO_BUSQ" , this.paramCliente.SNUM_DOCUMENTO_BUSQ)
+
 
   if (NBUSCAR_POR == 1 && paramCliente.NTIPOIDEN_BUSQ == 1) {
     if (!(paramCliente.SNUM_DOCUMENTO_BUSQ + " ").trim() || paramCliente.SNUM_DOCUMENTO_BUSQ == null) {
@@ -895,15 +881,14 @@ isValidDataInput3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
     }
 
    
-    //console.log('La validacion :', this.core.validaciones.isValueName(this.paramCliente.SPRIMER_NOMBRE))
+    
   }
   return objRespuesta
 }
 
 async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
   try {
-    // console.log("NBUSCAR_POR", this.NBUSCAR_POR);
-    // console.log("validacion pramCliente", this.paramCliente)
+    
     
     let primerNombre = "";
     let segundoNombre = "";
@@ -913,7 +898,7 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
 
     let respValidacion:any = this.isValidDataInput3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA)
 
-    console.log("el respValidacion : ",respValidacion)
+   
     if(respValidacion.code == 1){
       Swal.fire({
         title: "Gestor de Clientes",
@@ -943,7 +928,7 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
 
        this.spinner.show();
       if (NBUSCAR_POR == 1) {
-        //console.log("prueba 1");
+      
         if(paramCliente.NTIPOIDEN_BUSQ == 2)
         {
           //this.paramCliente.NTIPOIDEN_BUSQ = 2;
@@ -975,7 +960,7 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
       }
       if (NBUSCAR_POR == 2) {
         if(NTIPO_PERSONA == 1){
-          //console.log("prueba 2");
+        
       
         
         if (paramCliente.SAPELLIDO_PATERNO || paramCliente.SAPELLIDO_PATERNO != "")
@@ -988,11 +973,7 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
           segundoNombre = " " + paramCliente.SSEGUNDO_NOMBRE;
         //let prueba=  primerNombre.concat(segundoNombre.concat(apellidoP.concat(apellidoM)));
         let prueba = (apellidoP+'').concat((apellidoM+'').concat((primerNombre+'').concat((segundoNombre+''))));
-        console.log("el apellidoP : ",apellidoP)
-        console.log("el apellidoM : ",apellidoM)
-        console.log("el primerNombre : ",primerNombre)
-        console.log("el segundoNombre : ",segundoNombre)
-          console.log("el prueba : ",prueba)
+       
         let NombreCompleto = prueba.toUpperCase().trim();
 
         data = {
@@ -1025,7 +1006,7 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
         }
         
       }
-      // console.log("pol 1 ")
+      
       let boolStatusSendResults = false;
       let CantapellidoP = ((paramCliente.SAPELLIDO_PATERNO)+'').length
       let CantapellidoM = ((paramCliente.SAPELLIDO_MATERNO)+'').length
@@ -1035,7 +1016,7 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
       let CantidadCaracteresReales = CantapellidoP + CantapellidoM + CantprimerNombre + CantsegundoNombre
      
 
-      // console.log("Cantidad de caracteres",CantidadCaracteresReales)
+   
      
 
       //if(this.NBUSCAR_POR == 2 && this.NTIPO_PERSONA == 1 && (apellidoP.length < 3 || apellidoM.length < 3 || primerNombre.length < 3 || segundoNombre.length < 3)){
@@ -1044,7 +1025,7 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
 
       }else{
         this.clientList = await this.userConfigService.getResultsList(data);
-        // console.log("la this.clientList 1241241412412-2: ", this.clientList)
+        
         this.groupClients();
         this.peopleList = this.getListOfPeople();
         //this.fake();
@@ -1052,13 +1033,13 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
          this.spinner.hide();
           
       }
-      // console.log("pol 3 ")
+      
        this.spinner.hide();
-      //console.log("data",data)
+    
       
     }
   } catch (error) {
-    console.error("error en el get result list : ",error)
+    
   }
 }
 
@@ -1080,7 +1061,7 @@ async getResultsList(){
   dataInput.SSEGUNDO_NOMBRE = this.paramCliente.SSEGUNDO_NOMBRE
   dataInput.SRAZON_SOCIAL = this.paramCliente.SRAZON_SOCIAL
   dataInput.MANUAL = this.paramCliente.MANUAL
-  console.log("el data : ",dataInput)
+  
   await this.getResultsList3(dataInput,this.NBUSCAR_POR,this.NTIPO_PERSONA);
 
 }
@@ -1091,8 +1072,7 @@ async getResultsList(){
     let objRespuesta: any = {};
     objRespuesta.code = 0
     objRespuesta.message = ''
-    // console.log("this.NBUSCAR_POR" , this.NBUSCAR_POR)
-    // console.log("this.paramCliente.SNUM_DOCUMENTO_BUSQ" , this.paramCliente.SNUM_DOCUMENTO_BUSQ)
+    
 
     if (this.NBUSCAR_POR == 1 && this.paramCliente.NTIPOIDEN_BUSQ == 1) {
       if (!(this.paramCliente.SNUM_DOCUMENTO_BUSQ + " ").trim() || this.paramCliente.SNUM_DOCUMENTO_BUSQ == null) {
@@ -1187,15 +1167,14 @@ async getResultsList(){
       }
 
      
-      //console.log('La validacion :', this.core.validaciones.isValueName(this.paramCliente.SPRIMER_NOMBRE))
+      
     }
     return objRespuesta
   }
 
   async getResultsList2() {
     try {
-      // console.log("NBUSCAR_POR", this.NBUSCAR_POR);
-      // console.log("validacion pramCliente", this.paramCliente)
+     
       
       let primerNombre = "";
       let segundoNombre = "";
@@ -1205,7 +1184,7 @@ async getResultsList(){
 
       let respValidacion:any = this.isValidDataInput2()
 
-      // console.log("el respValidacion : ",respValidacion)
+      
       if(respValidacion.code == 1){
         Swal.fire({
           title: "Gestor de Clientes",
@@ -1235,7 +1214,7 @@ async getResultsList(){
 
          this.spinner.show();
         if (this.NBUSCAR_POR == 1) {
-          //console.log("prueba 1");
+         
           if(this.paramCliente.NTIPOIDEN_BUSQ == 2)
           {
             //this.paramCliente.NTIPOIDEN_BUSQ = 2;
@@ -1265,8 +1244,7 @@ async getResultsList(){
         }
         if (this.NBUSCAR_POR == 2) {
           if(this.NTIPO_PERSONA == 1){
-            //console.log("prueba 2");
-        
+            
           
           if (this.paramCliente.SAPELLIDO_PATERNO != "")
             apellidoP = (this.paramCliente.SAPELLIDO_PATERNO + " ").trim();
@@ -1311,7 +1289,7 @@ async getResultsList(){
           }
           
         }
-        // console.log("pol 1 ")
+       
         let boolStatusSendResults = false;
         let CantapellidoP = this.paramCliente.SAPELLIDO_PATERNO.length
         let CantapellidoM = this.paramCliente.SAPELLIDO_MATERNO.length
@@ -1321,7 +1299,7 @@ async getResultsList(){
         let CantidadCaracteresReales = CantapellidoP + CantapellidoM + CantprimerNombre + CantsegundoNombre
        
 
-        // console.log("Cantidad de caracteres",CantidadCaracteresReales)
+       
        
 
         //if(this.NBUSCAR_POR == 2 && this.NTIPO_PERSONA == 1 && (apellidoP.length < 3 || apellidoM.length < 3 || primerNombre.length < 3 || segundoNombre.length < 3)){
@@ -1329,7 +1307,7 @@ async getResultsList(){
           this.getDataListResults(data)
         }else{
           this.clientList = await this.userConfigService.getResultsList(data);
-          // console.log("la this.clientList 1241241412412-2: ", this.clientList)
+          
           this.groupClients();
           this.peopleList = this.getListOfPeople();
           //this.fake();
@@ -1337,9 +1315,9 @@ async getResultsList(){
            this.spinner.hide();
             
         }
-        // console.log("pol 3 ")
+      
          this.spinner.hide();
-        //console.log("data",data)
+    
         
       }
     } catch (error) {
@@ -1364,11 +1342,11 @@ async getResultsList(){
        },
 
     }).then(async respuesta => {
-      // console.log("respuesta result list : ",respuesta)
+   
           if(respuesta.value){
              this.spinner.show();
             this.clientList = await this.userConfigService.getResultsList(data);
-            // console.log("la this.clientList 1241241412412: ", this.clientList)
+           
             this.groupClients();
             this.peopleList = this.getListOfPeople();
             this.fake();
@@ -1397,8 +1375,7 @@ async getResultsList(){
   getListNombres(map: Map<string, any>) {
     let list = [];
     map.forEach((value, key, map) => list.push(key));
-    //console.log("LAS LISTAS : ",list)
-    //console.log("clientlist : ",this.clientMap)
+   
     let tmpClienteMapFPEP = list[4];
     list[0] = "LISTAS INTERNACIONALES";
     list[1] = "LISTAS PEP";
@@ -1409,7 +1386,7 @@ async getResultsList(){
     /*list[4] = list[3]
         list[3] = list[2]
         list[2] = tmpClienteMapFPEP*/
-    //console.log("list 2: ",list)
+    
     return list;
   }
 
@@ -1429,11 +1406,10 @@ async getResultsList(){
 
   async goToDetail(item: any,TIPO_CLIENTE) {
     //item.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-    //console.log("periodo a", item.NPERIODO_PROCESO)
-    console.log("ver", item)
+    
+    
     try {
-      console.log("El TIPO_CLIENTE : ",TIPO_CLIENTE)
-      console.log("El item.STIPOIDEN : ",item.STIPOIDEN)
+     
       let tipoIden = item.STIPOIDEN + ' - ' + item.SNUM_DOCUMENTO
       item.STIPOIDEN = tipoIden
       if(TIPO_CLIENTE == 'CRE'){
@@ -1459,7 +1435,7 @@ async getResultsList(){
         localStorage.setItem("INDRESIDENCIA", item.INDRESIDENCIA);
       }else{
         let valorAlerta
-         console.log("antes del set y el item : ",item)
+         
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO);
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN);
         localStorage.setItem("SFECHA_NACIMIENTO", item.DFECHA_NACIMIENTO);
@@ -1482,7 +1458,7 @@ async getResultsList(){
         localStorage.setItem("NIDGRUPOSENAL", item.NIDGRUPOSENAL)
         // localStorage.setItem("IDGRUPO",)
         await localStorage.setItem("tipoClienteGC", "GC");
-        // console.log("paso al navigate")
+       
       }
       //this.paramCliente
       this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
@@ -1495,9 +1471,7 @@ async getResultsList(){
 
   async updatePreReiforedClient(item: any,SESTADO_TRAT_OLD ,SESTADO_TRAT ,tipo_pep,comentario) {
      this.spinner.show();
-    // console.log("periodo : ", this.NPERIODO_PROCESO);
-    // console.log("this.objUsuario : ", this.objUsuario);
-     console.log("el item de item : ",item)
+ 
 
     let objSendUpdateTratamiento:any = {}
     objSendUpdateTratamiento.SESTADO_TRAT = SESTADO_TRAT;
@@ -1519,7 +1493,7 @@ async getResultsList(){
     }else{
       objSendUpdateTratamiento.NIDREGIMEN = item.NIDREGIMEN ? item.NIDREGIMEN : 0
     }
-    // console.log("Prueba de nuevos parametros 1")
+ 
     objSendUpdateTratamiento.NIDTRATCLIEHIS = 0    
     objSendUpdateTratamiento.TIPOACCION = "I"
     
@@ -1528,19 +1502,15 @@ async getResultsList(){
     objSendUpdateTratamiento.NTIPOCLIENTE = SESTADO_TRAT_OLD == 'NNN' ? 1 : 0
     objSendUpdateTratamiento.STIPOACTRESULTADO = "MANUAL"
     objSendUpdateTratamiento.NIDGRUPOSENAL = this.idGrupo
-    // console.log("el item de UpdateTratamientoCliente : ",objSendUpdateTratamiento)
+   
      
     let response = await this.userConfigService.UpdateTratamientoCliente(objSendUpdateTratamiento);
-    // console.log('update', response)
-    
+   
   }
 
   async updateOthers(item: any,SESTADO_TRAT_OLD,SESTADO_TRAT,comentario) {
      this.spinner.show();
-    // console.log("periodo : ", this.NPERIODO_PROCESO);
-    // console.log("this.objUsuario : ", this.objUsuario);
-    // console.log("el item de item : ",item)
-    // console.log("el item de item.NTIPOCARGA : ",item.NTIPOCARGA)
+   
     let objSendUpdateTratamiento:any = {}
     objSendUpdateTratamiento.SESTADO_TRAT = SESTADO_TRAT;
     objSendUpdateTratamiento.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
@@ -1555,23 +1525,22 @@ async getResultsList(){
     objSendUpdateTratamiento.SDES_PEP = ""
     objSendUpdateTratamiento.SCOMENTARIO = comentario
     objSendUpdateTratamiento.NTIPOCARGA = (item.NTIPOCARGA == null ? 0 : item.NTIPOCARGA)
-    // console.log(objSendUpdateTratamiento.NTIPOCARGA)
+    
     if(item.SESTADO_TRAT == 'NNN'){
       objSendUpdateTratamiento.NIDREGIMEN = 1
     }else{
       objSendUpdateTratamiento.NIDREGIMEN = item.NIDREGIMEN ? item.NIDREGIMEN : 0
     }
-    // console.log("Prueba de nuevos parametros 2")
+  
     objSendUpdateTratamiento.NIDTRATCLIEHIS = 0    
     objSendUpdateTratamiento.TIPOACCION = "I"
     objSendUpdateTratamiento.NTIPOCLIENTE = SESTADO_TRAT_OLD == 'NNN' ? 1 : 0
     objSendUpdateTratamiento.STIPOACTRESULTADO = "MANUAL"
     objSendUpdateTratamiento.NIDGRUPOSENAL = this.idGrupo
     objSendUpdateTratamiento.NIDALERTA = item.NIDALERTA
-    // console.log("el item de item.NTIPOCARGA 2: ",item.NTIPOCARGA)
-    // console.log("el item de UpdateTratamientoCliente : ",objSendUpdateTratamiento)
+   
     let response = await this.userConfigService.UpdateTratamientoCliente(objSendUpdateTratamiento);
-    //console.log('update', response)
+  
      this.spinner.hide();
   }
 
@@ -1595,7 +1564,7 @@ async getResultsList(){
     this.newArrayResultNew = [];
     //let nuevosResultadosCoincid = [];
     this.resultadosCoincid = this.clientList; //this.getListOfPeople()
-    // console.log("/*****EL INICIO DEL FIN***** :", this.clientList);
+    
     
     let incClienteGC = 0
     let boolStatusClienteGC
@@ -1606,7 +1575,7 @@ async getResultsList(){
         let respDuplid = this.newArrayResult.filter(
           (it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN == cliente.NIDREGIMEN
         );
-        //console.log('respDuplid :' ,respDuplid)
+        
         if (respDuplid.length > 0) {
           bolPusheo = false;
         } else {
@@ -1618,7 +1587,7 @@ async getResultsList(){
         let arrayListasNew = [];
         
         let respClientesFilter = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN == cliente.NIDREGIMEN);
-        // console.log("el respClientesFilter ###: ",respClientesFilter)
+       
         this.tipoListas.forEach(objLista => {
           respClientesFilter.forEach(itemLista => {
             if(itemLista.NIDTIPOLISTA == objLista.id){
@@ -1630,17 +1599,17 @@ async getResultsList(){
               objCLientCoin.SDESESTADO_TRAT = itemLista.SDESESTADO_TRAT;
               objCLientCoin.NIDREGIMEN = itemLista.NIDREGIMEN
               arrayListas.push(objCLientCoin)
-              console.log("el objCLientCoin 1: ",objCLientCoin)
+              
             }
             
         })
         })
-        // console.log("el arrayListas ###: ",arrayListas)
+      
         //cambios
-      //  console.log("fake() LOS CLIENTES CON SUS LISTAS DE : "+cliente.SNOM_COMPLETO+" : ",arrayListas)
+    
 
         //let respClientesFilterCoin = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.SDESESTADO == 'COINCIDENCIA' && it.NIDREGIMEN == cliente.NIDREGIMEN);
-        //console.log("el respClientesFilterCoin :11 ",respClientesFilterCoin)
+       
 
        
 
@@ -1648,7 +1617,7 @@ async getResultsList(){
         let respSESTADOTRAT_Cliente_SIN = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN == cliente.NIDREGIMEN);
         
         let objClientesFilterCoin = respSESTADOTRAT_Cliente[0] ? respSESTADOTRAT_Cliente[0] : respSESTADOTRAT_Cliente_SIN[0]///*respClientesFilterCoin[0]*/ cliente
-        // console.log("el objClientesFilterCoin 1234 : ",objClientesFilterCoin)
+       
         let objResultadoFinalOnTheEnd: any = cliente;
         //objResultadoFinalOnTheEnd.SCLIENT = cliente.SCLIENT;
         //objResultadoFinalOnTheEnd.DFECHA_NACIMIENTO = cliente.DFECHA_NACIMIENTO;
@@ -1672,10 +1641,10 @@ async getResultsList(){
         boolStatusClienteGC = objResultadoFinalOnTheEnd.boolStatusBoton
         this.newArrayResult.push(objResultadoFinalOnTheEnd);
         incClienteGC++
-        //console.log("el objResultadoFinalOnTheEnd : ",objResultadoFinalOnTheEnd)
+        
       }
     });
-    // console.log("fake() /*****EL FIN DEL INICIO***** :", this.newArrayResult);
+    
     
     this.newArrayResult = this.newArrayResult.sort((a,b) => a.SNUM_DOCUMENTO - b.SNUM_DOCUMENTO)
     
@@ -1700,7 +1669,7 @@ async getResultsList(){
     this.newArrayResultNew = [];
     //let nuevosResultadosCoincid = [];
     this.resultadosCoincid = this.clientList; //this.getListOfPeople()
-     console.log("/*****EL INICIO DEL FIN***** :", this.clientList);
+     
     
     let incClienteGC = 0
     let boolStatusClienteGC
@@ -1711,7 +1680,7 @@ async getResultsList(){
         let respDuplid = this.newArrayResult.filter(
           (it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN_VALID == cliente.NIDREGIMEN_VALID
         );
-        //console.log('respDuplid :' ,respDuplid)
+        
         if (respDuplid.length > 0) {
           bolPusheo = false;
         } else {
@@ -1723,7 +1692,7 @@ async getResultsList(){
         let arrayListasNew = [];
         
         let respClientesFilter = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN_VALID == cliente.NIDREGIMEN_VALID);
-        // console.log("el respClientesFilter ###: ",respClientesFilter)
+        
         this.tipoListas.forEach(objLista => {
           respClientesFilter.forEach(itemLista => {
             if(itemLista.NIDTIPOLISTA == objLista.id){
@@ -1738,7 +1707,7 @@ async getResultsList(){
               objCLientCoin.STIPO_LAFT = itemLista.STIPO_LAFT
               objCLientCoin.NIDGRUPOSENAL = this.idGrupo
               arrayListas.push(objCLientCoin)
-              console.log("el objCLientCoin 2 : ",objCLientCoin)
+            
             }
             // this.tipoListas = [
             //   { id: 1, nombre: "LISTAS INTERNACIONALES",nombreSingular: "LISTA INTERNACIONAL" },
@@ -1750,12 +1719,12 @@ async getResultsList(){
             // ];
         })
         })
-        // console.log("el arrayListas ###: ",arrayListas)
+      
         //cambios
-      //  console.log("fake() LOS CLIENTES CON SUS LISTAS DE : "+cliente.SNOM_COMPLETO+" : ",arrayListas)
+     
 
         //let respClientesFilterCoin = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.SDESESTADO == 'COINCIDENCIA' && it.NIDREGIMEN == cliente.NIDREGIMEN);
-        //console.log("el respClientesFilterCoin :11 ",respClientesFilterCoin)
+      
 
        
 
@@ -1763,7 +1732,7 @@ async getResultsList(){
         let respSESTADOTRAT_Cliente_SIN = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN == cliente.NIDREGIMEN);
         
         let objClientesFilterCoin = respSESTADOTRAT_Cliente[0] ? respSESTADOTRAT_Cliente[0] : respSESTADOTRAT_Cliente_SIN[0]///*respClientesFilterCoin[0]*/ cliente
-        // console.log("el objClientesFilterCoin 1234 : ",objClientesFilterCoin)
+        
         let objResultadoFinalOnTheEnd: any = cliente;
         //objResultadoFinalOnTheEnd.SCLIENT = cliente.SCLIENT;
         //objResultadoFinalOnTheEnd.DFECHA_NACIMIENTO = cliente.DFECHA_NACIMIENTO;
@@ -1795,18 +1764,18 @@ async getResultsList(){
         boolStatusClienteGC = objResultadoFinalOnTheEnd.boolStatusBoton
         this.newArrayResult.push(objResultadoFinalOnTheEnd);
         incClienteGC++
-        //console.log("el objResultadoFinalOnTheEnd : ",objResultadoFinalOnTheEnd)
+       
       }
     });
-    // console.log("fake() /*****EL FIN DEL INICIO***** :", this.newArrayResult);
+   
     
     this.newArrayResult = this.newArrayResult.sort((a,b) => a.SNUM_DOCUMENTO - b.SNUM_DOCUMENTO)
 
     let respClientesGC:any = []
     this.newArrayResult.forEach(itemGC => {
-      // console.log("el itemGC : ",itemGC)
+      
       let respValid = respClientesGC.filter(it => it.sclient == itemGC.SCLIENT)
-      // console.log("el respValid : ",respValid)
+     
       if(respValid.length == 0){
         let objCliGC:any = {}
         objCliGC.obj = itemGC//.SCLIENT
@@ -1818,7 +1787,7 @@ async getResultsList(){
       }
       
     })
-     console.log("fake() /*****EL FIN DEL INICIO***** :", respClientesGC);
+    
     this.newArrayResult = respClientesGC
     
     this.DataGuardadas();
@@ -1861,7 +1830,7 @@ prueba = []
   DataGuardadas() {
     //this.DataGuardada =  this.newArrayResult
     localStorage.setItem("DataGuardada", JSON.stringify(this.newArrayResult));
-    //console.log("DataGuardada2", this.newArrayResult);
+    
   }
 
   ListaAccion() {
@@ -1885,7 +1854,7 @@ prueba = []
     ];
     //this.resultadosCoincid = [{id:1,nombre:"Marco",edad:24,SDESTIPOLISTA: "LISTAS INTERNACIONAL"},{id:2,nombre:"Marco",edad:24,SDESTIPOLISTA: "LISTAS PEP"}]
     this.resultadosCoincid = this.getListOfPeople();
-    //console.log("Cambios nuevos : ",this.getListOfPeople())
+    
 
     let newArrayResult = [];
 
@@ -1895,7 +1864,7 @@ prueba = []
         let respDuplid = newArrayResult.filter(
           (it) => it.nombre == cliente.SDESTIPOLISTA
         );
-        //console.log('respDuplid :' ,respDuplid)
+        
         if (respDuplid.length > 0) {
           bolPusheo = false;
         } else {
@@ -1908,12 +1877,12 @@ prueba = []
         );
         let arrListas = [];
         let respFilterLista = [];
-        // console.log("respClientesFilter : ", respClientesFilter);
+        
         //arrListas.push(respFilterLista)
         respClientesFilter.forEach((lista) => {
           this.tipoListas.forEach((itLista) => {
             // if(itLista.id == 2){
-            //     console.log("si pinta el PEP : ",itLista)
+            
             // }
             if (itLista.nombre == lista.SDESTIPOLISTA) {
               let respFilterListaNew = respFilterLista.filter(
@@ -1942,7 +1911,7 @@ prueba = []
               }
             }
           });
-          // console.log("respFilterLista : ", respFilterLista);
+       
         });
         let newObjCliente: any = {};
         //newObjCliente.id = respClientesFilter[0].id
@@ -1953,7 +1922,7 @@ prueba = []
       }
     });
 
-    // console.log("newArrayResult : ", newArrayResult);
+   
   }
 
   valor1
@@ -1979,8 +1948,7 @@ prueba = []
       
        inputValidator: function (value){
          return new Promise(function(resolve,reject){
-          //  console.log("valor", value)
-           //console.log("ngmodel1:", this.valor1)
+        
           if (value !== '') {
             resolve('');
             
@@ -2013,7 +1981,7 @@ prueba = []
             });
           }
          }).then(respuesta =>{
-          //  console.log("La respuesta final del comentario",respuesta)
+         
          })
         
         
@@ -2028,11 +1996,11 @@ prueba = []
     data.NIDALERTA = 2;
     data.NIDREGIMEN = 1;
     data.SESTADO_TRAT = SESTADO_TRAT//this.SESTADO_TRAT;
-    //console.log("param trat", data)
+    
     this.spinner.show()
     let respDataTrat = await this.userConfigService.getResultadoTratamiento(data);
     this.spinner.hide()
-    // console.log("respDataTrat",respDataTrat)
+  
     return respDataTrat
   }
 
@@ -2043,11 +2011,11 @@ prueba = []
     data.NIDALERTA = 2;
     //data.NIDREGIMEN = 1;
     //data.SESTADO_TRAT = SESTADO_TRAT//this.SESTADO_TRAT;
-    //console.log("param trat", data)
+   
     this.spinner.show()
     let respDataTrat = await this.userConfigService.GetResultadoCoincidenciasPen(data);
     this.spinner.hide()
-    // console.log("respDataTrat",respDataTrat)
+    
     return respDataTrat
   }
 
@@ -2058,7 +2026,7 @@ prueba = []
       let newArrayResult = []
     
       let incListCoincid = 0
-     // debugger;
+     //  
       arrResultadosCoincid.forEach((cliente,inc) => {
           let bolPusheo = false
           if(inc > 0){
@@ -2070,15 +2038,15 @@ prueba = []
               }
           }
           if(bolPusheo){
-            //console.log("DATA REAL DE REFORZADO :", arrResultadosCoincid)
+        
               let respClientesFilter = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && cliente.NIDREGIMEN_VALID == it.NIDREGIMEN_VALID)
               respClientesFilter.forEach(itemCli => {
                 itemCli.SDESTIPOLISTA = itemCli.SDESTIPOLISTA === 'LISTA SAC' ? 'LISTAS SAC' : itemCli.SDESTIPOLISTA
               })
-              //console.log("DATA REAL DE REFORZADO NUEVA:", arrResultadosCoincid)
+             
               let respClientesFilterCoincid = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && it.SDESESTADO == 'COINCIDENCIA')
 
-              //console.log("DATA REAL DE REFORZADO NUEVA NUEVA:", respClientesFilterCoincid)
+            
               let estadoFilter = ''
               if(respClientesFilterCoincid.length > 0){
                 estadoFilter = respClientesFilterCoincid[0].SDESESTADO
@@ -2110,7 +2078,7 @@ prueba = []
               newObjCliente.NTIPOCARGA = respClientesFilter[0].NTIPOCARGA
               newObjCliente.NIDREGIMEN_VALID = respClientesFilter[0].NIDREGIMEN_VALID
               newObjCliente.SFALTA_ACEPTAR_COINC = respClientesFilter[0].SFALTA_ACEPTAR_COINC
-              // console.log("Data filter :",respClientesFilter[0])
+            
               /*
               newObjCliente.P_NIDTRATCLIEHIS = respClientesFilter[0].P_NIDTRATCLIEHIS      
               newObjCliente.P_TIPOACCION = respClientesFilter[0].P_TIPOACCION  
@@ -2123,20 +2091,19 @@ prueba = []
               incListCoincid++
           }
       })
-     // debugger;
-      // console.log("newArrayResult : ",newArrayResult)
-      // console.log("aca entro a completado : ",newArrayResult)
+     //  
+    
 
 
       let respFormatDataGC = this.setDataFormatGC(newArrayResult)
-      // console.log("respFormatDataGC ///***///: ",respFormatDataGC)
+     
       return respFormatDataGC
 
 
 
       ///return newArrayResult
     } catch (error) {
-      console.error("El error: ",error)
+      
     }
   }
 
@@ -2158,15 +2125,15 @@ prueba = []
                   bolPusheo = true
               }
           if(bolPusheo){
-            //console.log("DATA REAL DE REFORZADO :", arrResultadosCoincid)
+          
               let respClientesFilter = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && cliente.NIDREGIMEN == it.NIDREGIMEN)
               respClientesFilter.forEach(itemCli => {
                 itemCli.SDESTIPOLISTA = itemCli.SDESTIPOLISTA === 'LISTA SAC' ? 'LISTAS SAC' : itemCli.SDESTIPOLISTA
               })
-              //console.log("DATA REAL DE REFORZADO NUEVA:", arrResultadosCoincid)
+            
               let respClientesFilterCoincid = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && it.SDESESTADO == 'COINCIDENCIA')
 
-              //console.log("DATA REAL DE REFORZADO NUEVA NUEVA:", respClientesFilterCoincid)
+           
               let estadoFilter = ''
               if(respClientesFilterCoincid.lenght > 0){
                 estadoFilter = respClientesFilterCoincid[0].SDESESTADO
@@ -2197,7 +2164,7 @@ prueba = []
               newObjCliente.INDRESIDENCIA = respClientesFilter[0].INDRESIDENCIA
               newObjCliente.NTIPOCARGA = respClientesFilter[0].NTIPOCARGA
               newObjCliente.SFALTA_ACEPTAR_COINC = respClientesFilter[0].SFALTA_ACEPTAR_COINC
-              // console.log("Data filter :",respClientesFilter[0])
+            
               /*
               newObjCliente.P_NIDTRATCLIEHIS = respClientesFilter[0].P_NIDTRATCLIEHIS      
               newObjCliente.P_TIPOACCION = respClientesFilter[0].P_TIPOACCION  
@@ -2211,24 +2178,22 @@ prueba = []
           }
       })
   
-      //console.log("newArrayResult : ",newArrayResult)
-      //console.log("aca entro a completado : ",newArrayResult)
+    
       let respFormatDataGC = this.setDataFormatGC(newArrayResult)
-      // console.log("respFormatDataGC ///***///: ",respFormatDataGC)
+      
       return respFormatDataGC
       //newArrayResult = respFormatDataGC
       //return newArrayResult
     } catch (error) {
-      console.error("El error: ",error)
-    }
+      console.error("El error: ",error) }
   }
 
   setDataFormatGC(newArrayResult){
     let respClientesGC:any = []
     newArrayResult.forEach(itemGC => {
-      // console.log("el itemGC : ",itemGC)
+    
       let respValid = respClientesGC.filter(it => it.sclient == itemGC.SCLIENT)
-      // console.log("el respValid : ",respValid)
+      
       if(respValid.length == 0){
         let objCliGC:any = {}
         objCliGC.obj = itemGC//.SCLIENT
@@ -2239,18 +2204,16 @@ prueba = []
       }
       
     })
-    // console.log("fake() /*****EL FIN DEL INICIO***** :", respClientesGC);
+   
     return respClientesGC
   }
 
   getListByResultCoincid(sclient,listaInterByClient){
     try {
-      //console.log("sclient : ",sclient)
-      //console.log("listaInterByClient : ",listaInterByClient)
-      //console.log("this.tipoListas : ",this.tipoListas)
+      
     
     //let NewLista
-    // console.log("listaInterByClient $$$ : ", listaInterByClient )
+  
     let arrLista: any = []
     listaInterByClient.forEach(itLista => {
         
@@ -2260,13 +2223,13 @@ prueba = []
         listaInter.SDESESTADO = itLista.SDESESTADO
         
         arrLista.push(listaInter)
-        //console.log("Lista prueba", arrLista )
+       
 
         //let listaCoin =  this.tipoListas.filter(it => it.nombre == itLista.SDESTIPOLISTA)
-        //console.log("listaCoin", listaCoin )
+      
 
     });
-    // console.log("arrLista $$$ : ", arrLista )
+   
     this.tipoListas.forEach(TipoLista => {
       let boolStatus = false
       arrLista.forEach(arList => {
@@ -2296,9 +2259,7 @@ prueba = []
       })
     })
   
-    // console.log("newArrLista ### ", newArrLista )
-
-    // console.log("Lista prueba 123", arrLista )
+   
     newArrLista = newArrLista.filter((item,index,list)=>{
       return list.map(t => t.SDESTIPOLISTA).indexOf(item.SDESTIPOLISTA) == index;
     })
@@ -2316,9 +2277,9 @@ prueba = []
     modalRef.componentInstance.dataGC = item;
     modalRef.result.then((resp) => {
       //aqui obtienes la data del modal c:
-      // console.log("la respuesta then del modal : ",resp)
+    
     }, (reason) => {
-      // console.log("la reason del modal : ",reason)
+    
        this.spinner.hide();
     });
   }
@@ -2332,7 +2293,7 @@ prueba = []
   }
   arrayTabs:any = [{code:1,nombre:"Gestor de Cliente"},{code:2,nombre:"Cliente Revisado"},{code:2,nombre:"Cliente Reforzado"},{code:2,nombre:"Cliente Complementario"},{code:2,nombre:"Listas de Coincidencias"}]
   setTipoSelectPestaniaClient(tipoCliente){
-    //debugger;
+     
     this.arrSetClassSelected = this.arrSetClassSelected.map(t=> {return ''})
     this.arrSetClassSelected[tipoCliente] = 'active'
     localStorage.setItem("nSelectPestaniaClient",tipoCliente)
@@ -2375,15 +2336,12 @@ prueba = []
   }
   
   goToDetailAprobar(item,arrClientesGC){
-    //debugger
-    console.log("EL ITEM 1 EL ARRAY DE COINCIDENCIAS : ",this.newArrayResult)
-    console.log("EL ITEM 1 COINCIDENCIA : ",item)
-    console.log("EL ITEM 1 COINCIDENCIA arrClientesGC: ",arrClientesGC)
+     
+   
 
-    // console.log("el item : ",item)
+   
      this.spinner.show()
-        //console.log("el ITEM 789123 : ",item)
-        //console.log("el ITEM 789123 : ",lista)
+        
         //let periodoSend = parseInt(localStorage.getItem("periodo"))
         //let numCoincidencias = (coincidenciasGC.filter(it => it.SDESESTADO == 'CONCIDENCIA')).lenght
         //let periodoCustom = numCoincidencias > 1 ? 99 : item.NIDREGIMEN
@@ -2415,8 +2373,7 @@ prueba = []
         localStorage.setItem("SCLIENT", item.SCLIENT);
         localStorage.setItem("SFALTA_ACEPTAR_COINC", item.SFALTA_ACEPTAR_COINC);
         localStorage.setItem("arrClientesGC", JSON.stringify(arrClientesGC));
-        //console.log("el item : ",item)
-        //console.log("el this.vistaOrigen 221 : ",this.vistaOrigen)
+        
         //localStorage.setItem("SOCUPACION", item.SOCUPACION)
         //localStorage.setItem("SCARGO", item.SCARGO)
         //localStorage.setItem("SZONA_GEOGRAFICA", item.SZONA_GEO)
@@ -2433,11 +2390,9 @@ prueba = []
   }
 
   goToDetailAprobarBusqCoincid(item){
-    // console.log("entro a la función")
-    // console.log("el item : ",item)
+   
      this.spinner.show()
-        //console.log("el ITEM 789123 : ",item)
-        //console.log("el ITEM 789123 : ",lista)
+        
         //let periodoSend = parseInt(localStorage.getItem("periodo"))
         
         localStorage.setItem("NIDALERTA", item.NIDALERTA)
@@ -2454,8 +2409,7 @@ prueba = []
         
         localStorage.setItem('vistaOrigen', 'BUSQ-COINCID')
         localStorage.setItem('tipoClienteGC', 'BUSQ-COINCID')
-        //console.log("el item : ",item)
-        //console.log("el this.vistaOrigen 221 : ",this.vistaOrigen)
+       
         //localStorage.setItem("SOCUPACION", item.SOCUPACION)
         //localStorage.setItem("SCARGO", item.SCARGO)
         //localStorage.setItem("SZONA_GEOGRAFICA", item.SZONA_GEO)
@@ -2473,7 +2427,7 @@ prueba = []
 
 
   async getBusquedaCoicnidencias(item,ValorArray){
-    debugger
+    
       Swal.fire({
       title: 'Gestor de Cliente',
       icon: 'warning',
@@ -2493,7 +2447,7 @@ prueba = []
         
         this.spinner.show()
       let DataResultadoTrat = await this.getBusquedaCoincidenciaXDocXName(item,ValorArray)
-      //console.log("DataResultadoTrat", DataResultadoTrat)
+      
       this.spinner.hide()
       }
       else{
@@ -2509,28 +2463,28 @@ prueba = []
 
       
     }).catch(err => {
-      //console.log("err swal : ",err)
+      
     })
     
   }
   async getBusquedaCoincidenciaXDocXName(ItemCliente,ValorArray){
       
-          console.log("EL ITEM 1 ItemCliente : ",ItemCliente)
+          
           /*let DataCliente : any = []
           //let idClienteSeleccionado = this.newArrayResult[i]
           let objAnularCliene:any = {}
           objAnularCliene.NPERIODO_PROCESO = this.NPERIODO_PROCESO
           objAnularCliene.NIDALERTA = ItemCliente.NIDALERTA
           objAnularCliene.SCLIENT = ItemCliente.SCLIENT
-          console.log("Lista1 1",objAnularCliene)
+          
           let ObjListaCheckSeleccionadoxDoc : any = {}
 
           ObjListaCheckSeleccionadoxDoc.NPERIODO_PROCESO = this.NPERIODO_PROCESO
           ObjListaCheckSeleccionadoxDoc.NIDALERTA = ItemCliente.NIDALERTA
           ObjListaCheckSeleccionadoxDoc.SNUM_DOCUMENTO = ItemCliente.SNUM_DOCUMENTO
           ObjListaCheckSeleccionadoxDoc.NTIPOCARGA = 2
-          console.log("Lista1 2",ObjListaCheckSeleccionadoxDoc)*/
-          // console.log("this.objUsuario: ",this.objUsuario)
+          */
+          
           let ObjListaCheckSeleccionadoxNombre : any = {}
 
           ObjListaCheckSeleccionadoxNombre.NPERIODO_PROCESO = this.NPERIODO_PROCESO
@@ -2548,17 +2502,14 @@ prueba = []
           ObjListaCheckSeleccionadoxNombre.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
           ObjListaCheckSeleccionadoxNombre.NIDREGIMEN = 0
           ObjListaCheckSeleccionadoxNombre.NIDTIPOLISTA = 0
-          // console.log("Lista1 3",ObjListaCheckSeleccionadoxNombre)
           
-          //console.log("ObjListaCheckSeleccionado",ObjListaCheckSeleccionadoxNombre)
-          //console.log("CheckSeleccionado",idClienteSeleccionado)
          let dataPoliza:any = {}
           dataPoliza.NPERIODO_PROCESO = this.NPERIODO_PROCESO
           dataPoliza.NIDGRUPOSENAL = this.idGrupo
           dataPoliza.NIDALERTA = 2
           dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
           dataPoliza.SCLIENT = ItemCliente.SCLIENT 
-         debugger
+         
          let respuestaConsultaPoliza = await  this.userConfigService.ValidarPolizaVigente(dataPoliza)
           if( respuestaConsultaPoliza.code == 1 ){
             Swal.fire({
@@ -2594,7 +2545,7 @@ prueba = []
                   let respuestaWC =  await this.userConfigService.ConsultaWC(data)
                    //Aca se ejecuta para hacer la busqueda de coincidencia manual
                    let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)
-                  console.log("RespuestaWC",respuestaWC)
+                  
                   if(respuestaWC.sStatus == 'NOT FOUND' || respuestaWC.sStatus == 'ERROR'){
                      let mensaje = ''
                     if(respuestaWC.sStatus == 'ERROR'){
@@ -2668,7 +2619,7 @@ prueba = []
 
     let respServiceBusqCliente = await this.userConfigService.BusquedaConcidenciaXDocXName(obj)
     /*let respServiceAnularCliente = await this.userConfigService.AnularClienteResultado(obj3)
-    console.log("el respServiceAnularCliente : ",respServiceAnularCliente)
+    
     let respuesta2 
     let respuesta1 = await this.userConfigService.GetBusquedaConcidenciaXDoc(obj)
     if(respuesta1.code == 0){
@@ -2680,7 +2631,7 @@ prueba = []
 
    validarPosicionBoton(){
     let letra = this.newArrayResult.filter(it => it.boolStatusBoton == false)
-    // console.log("a ver que data trae", letra)
+    
    }
    CambiarColor(item){
      if(item == "COINCIDENCIA"){
@@ -2705,9 +2656,9 @@ prueba = []
   //       { id: 'nickname', placeholder: 'Add a cool nickname' }
   //     ]
   //   }).then(function (context) {
-  //     console.log(context._isConfirm)
+
   //     // do whatever you want with the form data
-  //     console.log(context.swalForm) // { name: 'user name', nickname: 'what the user sends' }
+ 
   //   })
   // }
 
@@ -2784,7 +2735,7 @@ prueba = []
     this.newArrayResultNew2 = [];
    
     this.resultadosCoincid2 = this.ArrayResultCoincidencias; 
-     console.log("/*****EL INICIO DEL FIN***** :", this.ArrayResultCoincidencias);
+     
     
     let incClienteGC2 = 0
     let boolStatusClienteGC
@@ -2822,7 +2773,7 @@ prueba = []
               objCLientCoin.STIPO_LAFT = itemLista.STIPO_LAFT
               objCLientCoin.NIDGRUPOSENAL = this.idGrupo
               arrayListas.push(objCLientCoin)
-              // console.log("el objCLientCoin 2 : ",objCLientCoin)
+              
             }
          
         })
@@ -2879,11 +2830,9 @@ prueba = []
       }
       
     })
-     console.log("fake() /*****EL FIN DEL INICIO***** :", respClientesGC);
+  
     this.newArrayResult2 = respClientesGC
-    
-    console.log("ArrayResultCoincidencias",this.ArrayResultCoincidencias)
-    console.log("ArrayResultCoincidencias",this.newArrayResult2)
+   
   }
 
 
@@ -2914,7 +2863,7 @@ prueba = []
     }
     
     resultado = this.newArrayResult2
-    console.log("resultado", resultado)
+  
     let Newresultado:any = []
     let resultadoFinal:any = []
     if (resultado!= null && resultado.length > 0) {
@@ -2933,9 +2882,7 @@ prueba = []
         }
      }
 
-      
-      console.log("Newresultado", Newresultado)
-      console.log("resultadoFinal", resultadoFinal)
+   
 
       let data = []
       resultadoFinal.forEach(t => {
@@ -2950,10 +2897,10 @@ prueba = []
         t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO
         });
-        //console.log("la data1111", t.arrListas)
+        
         data.push(_data);
         });
-        console.log("la data", data)
+ 
         this.excelService.exportAsExcelFile(data, this.nombreExport());
     }
     else {

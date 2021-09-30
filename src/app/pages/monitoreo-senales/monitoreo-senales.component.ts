@@ -39,7 +39,7 @@ export class MonitoreoSenalesComponent implements OnInit {
                 this.nIdAlertaCabecera = this.questionsHeaderList[0].NIDALERTA_CABECERA
             }
         } catch (error) {
-            //console.log("error", error)
+            
         }
     }
 
@@ -62,7 +62,7 @@ export class MonitoreoSenalesComponent implements OnInit {
                 sComentario: ans.comentario
             }
             this.userConfigService.insertQuestionDetail(data).then(response => {
-                //console.log(response)
+                
             })
         })
     }

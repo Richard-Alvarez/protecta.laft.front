@@ -41,9 +41,7 @@ export class CerradoComponent implements OnInit {
   async ngOnInit() {
     await this.getVariablesStorage();
     this.fillFileGroup()
-    ////console.log("el regimen IIIIIIIII: ",this.regimen)
-    ////console.log("el stateCerrado AAAAAAAAAAAAAAAAAA: ",this.stateCerrado)
-    ////console.log("el this.arrResponsable : ",this.arrResponsable)
+   
     this.arrFilesAdjuntos = [{'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'word'},
     {'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'otros'},
     {'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'otros'},
@@ -176,7 +174,7 @@ export class CerradoComponent implements OnInit {
                 }
                 
                  this.userConfigService.uploadFiles(data).then(response => {
-                     ////console.log("upload", response);
+                    
                  });
             }
         })
@@ -185,7 +183,7 @@ export class CerradoComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
         let response = await this.userConfigService.insertAttachedFiles(data)
-        ////console.log(response)
+     
     }
    
 
@@ -209,7 +207,7 @@ export class CerradoComponent implements OnInit {
   }
 
   getArray(state,regimen){
-    /*//console.log("la OOOOOOOOOOOO : ",state +"    -    "+regimen)
+    /*
     switch (state) {
       case 'COMPLETADO' : 
         if(regimen === 1){
@@ -238,7 +236,7 @@ export class CerradoComponent implements OnInit {
   }
 
   getClassBagdeState(state){
-    ////console.log("state : ",state)
+    
     if(state === 'PENDIENTE'){
       return 'badge-warning'
     }

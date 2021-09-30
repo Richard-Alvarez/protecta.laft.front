@@ -68,7 +68,7 @@ export class C2FormComponent implements OnInit {
         await this.verifyToComplete()
         //await this.getListaInternacional();
         this.groupListTypes()
-        //console.log(this.alertData.SESTADO)
+        
         this.core.loader.hide();
     }
 
@@ -93,9 +93,9 @@ export class C2FormComponent implements OnInit {
         var user = this.core.storage.get('usuario');
         let userId = user['idUsuario'];
 
-        //console.log(status)
+        
         let param = { NPERIODO_PROCESO: this.alertData.NPERIODO_PROCESO, NIDALERTA: this.alertData.NIDALERTA, NTIPOIDEN_BUSQ: item.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: item.SNUM_DOCUMENTO, SESTADO_REVISADO: status, NIDUSUARIO_REVISADO: userId }
-        //console.log(param)
+        
         let response = await this.userConfigService.updateStatusToReviewed(param)
         item.DFECHA_REVISADO = response.dfechaRevisado.day + "/" + response.dfechaRevisado.month + "/" + response.dfechaRevisado.year
         this.core.loader.hide()
@@ -119,7 +119,7 @@ export class C2FormComponent implements OnInit {
         let coincidences = this.getListOfPeople(this.listTypeMap)
         let count = coincidences.length
         let actives = []
-        //console.log(coincidences)
+     
         for (let i = 0; i < coincidences.length; i++) {
             if (coincidences[i].estadoRevisado == true) {
                 actives.push(coincidences[i])
@@ -156,11 +156,11 @@ export class C2FormComponent implements OnInit {
                     updateAlert.periodId = this.alertData.NPERIODO_PROCESO
                     updateAlert.status = '2'
                     updateAlert.regimeId = this.alertData.NIDREGIMEN
-                    //console.log(updateAlert)
+                
                     this.userConfigService.updateStatusAlert(updateAlert)
                         .then((response) => {
                             this.core.loader.hide();
-                            //console.log(response)
+                           
                             if (response.error == 0) {
                                 swal.fire({
                                     title: 'Señal de alerta',
@@ -187,7 +187,7 @@ export class C2FormComponent implements OnInit {
                                 return
                             }
                         }).catch(() => {
-                            //console.log('err');
+                          
                             this.core.loader.hide();
                         });
                 }
@@ -200,14 +200,14 @@ export class C2FormComponent implements OnInit {
         let getCommentList: any = {};
         getCommentList.alertId = this.alertData.NIDALERTA
         getCommentList.periodId = this.alertData.NPERIODO_PROCESO
-        //console.log(getCommentList)
+        
         this.userConfigService.getCommentList(getCommentList)
             .then((response) => {
                 this.core.loader.hide();
-                //console.log(response)
+           
                 this.commentList = response
             }).catch(() => {
-                //console.log('err');
+                
                 this.core.loader.hide();
             });
         this.core.loader.hide();
@@ -215,7 +215,7 @@ export class C2FormComponent implements OnInit {
 
     saveComment() {
         this.core.loader.show();
-        //console.log(this.commentBody)
+        
         if (this.commentBody == null) {
             this.core.loader.hide();
             swal.fire({
@@ -249,11 +249,11 @@ export class C2FormComponent implements OnInit {
                     updateCommentList.periodId = this.alertData.NPERIODO_PROCESO
                     updateCommentList.comment = this.commentBody
                     updateCommentList.userId = userId
-                    //console.log(updateCommentList);
+                    
                     this.userConfigService.updateCommentList(updateCommentList)
                         .then((response) => {
                             this.core.loader.hide();
-                            //console.log(response)
+                    
                             if (response.error != 0) {
                                 swal.fire({
                                     title: 'Comentarios',
@@ -281,7 +281,7 @@ export class C2FormComponent implements OnInit {
                                 return
                             }
                         }).catch(() => {
-                            //console.log('err');
+                            
                             this.core.loader.hide();
                         });
                     this.core.loader.hide();
@@ -371,7 +371,7 @@ export class C2FormComponent implements OnInit {
             data.P_NIDALERTA = this.alertData.NIDALERTA;
             data.P_NIDREGIMEN = this.alertData.NIDREGIMEN;
             let respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
-            console.log("respResultadosCoinciden",respResultadosCoinciden)
+            
             //this.internationalList = respResultadosCoinciden
             if (respResultadosCoinciden.length > 0) {
                 //convertir a excel
@@ -379,7 +379,7 @@ export class C2FormComponent implements OnInit {
             }
             this.core.loader.hide();
         } catch (error) {
-            //console.error("el error : ", error);
+            
         }
     }
 
@@ -427,7 +427,7 @@ export class C2FormComponent implements OnInit {
             let archivos = await this.userConfigService.getAttachedFilesByAlert(data)
             archivos.forEach(it => this.arrayDocuments.push({ name: it.SRUTA_ADJUNTO }))
         } catch (error) {
-            //console.log("el error en getAttachedFiles : ", error)
+            
         }
     }
 
@@ -449,17 +449,17 @@ export class C2FormComponent implements OnInit {
                 let data = await this.handleFile(files[i])
                 listFiles.push(data)
             }
-            //console.log("los archivos : ", listFiles)
+            
             await this.sendFiles('OC');
         } catch (error) {
-            //console.log("el error: ", error)
+            
         }
 
     }
 
     async insertAttachedFiles(data: any) {//SERVICIO QUE SUBE EL NOMBRE DEL ADJUNTO
         let response = await this.userConfigService.insertAttachedFilesByAlert(data)
-        //console.log(response)
+        
     }
 
     async sendFiles(tipoUsuario: string) {
@@ -493,7 +493,7 @@ export class C2FormComponent implements OnInit {
 
             }
             this.userConfigService.uploadFilesByAlert(data).then(response => {
-                //console.log(response);
+                
             });
 
             /*listFileName.foreach(item => {
@@ -502,7 +502,7 @@ export class C2FormComponent implements OnInit {
             //this.getListFilesToShow('C2','OC');
             //this.getAttachedFiles('OC');
             let identificator = false;
-            //console.log("LIST FILE NAME : ", listFileName)
+            
             for (let i = 0; i < listFileName.length; i++) {
                 this.arrayDocuments.forEach(item => {
                     if (item === listFileName[i]) {
@@ -512,7 +512,7 @@ export class C2FormComponent implements OnInit {
                 if (identificator === false) {
                     this.arrayDocuments.push({ name: listFileName[i] })
                 }
-                //console.log("arrayDocuments : ", this.arrayDocuments)
+                
             }
 
         }

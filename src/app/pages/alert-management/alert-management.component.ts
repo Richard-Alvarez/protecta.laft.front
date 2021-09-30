@@ -24,7 +24,7 @@ export class AlertManagementComponent implements OnInit {
         this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
         this.NIDUSUARIO_ASIGNADO = this.core.storage.get('usuario')['idUsuario']
         await this.getAlertFormList()
-        //console.log("alertFormList", this.alertFormsList)
+       
         this.core.loader.hide();
     }
     async getAlertFormList() {
@@ -61,7 +61,7 @@ export class AlertManagementComponent implements OnInit {
             }
             this.first = this.alertFormsList[0]
         } catch (err) {
-            //console.log(err)
+           
         }
     }
 

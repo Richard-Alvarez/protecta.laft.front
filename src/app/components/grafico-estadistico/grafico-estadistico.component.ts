@@ -35,7 +35,7 @@ export class GraficoEstadisticoComponent implements OnInit {
   }
 
   ngOnChanges() {
-    ////console.log(this.cargas);
+    
     if (this.cargas != null) {
       if (this.cargas.length > 0) {
         this.carga = this.cargas.filter((c) => { return c.activo == true; })[0];

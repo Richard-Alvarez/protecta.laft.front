@@ -56,7 +56,7 @@ export class ReportExtractorsComponent implements OnInit {
         let data: any = {};
         data = (response);
         this.listReporTypes = data;
-        //console.log(this.listReporTypes)
+        
   
         this.core.loader.hide();
       });

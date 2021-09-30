@@ -23,7 +23,7 @@ export class ReportSbsInfoComplementaryComponent implements OnInit {
 
   async changeFile(event){
     let archivosAdd:any = Array.from(event.target.files);
-    console.log("Los files : ",archivosAdd)
+   
     this.arrAdjuntoSUNAT = []
     let arrPromises = []
     archivosAdd.forEach(item => {
@@ -31,7 +31,7 @@ export class ReportSbsInfoComplementaryComponent implements OnInit {
       arrPromises.push(this.setObjFiles(item))
     })
     this.arrAdjuntoSUNAT = await Promise.all(arrPromises)
-    console.log("arrAdjuntoSUNAT : ",this.arrAdjuntoSUNAT)
+    
     this.subirSunat = 1;
   }
 
@@ -56,7 +56,7 @@ export class ReportSbsInfoComplementaryComponent implements OnInit {
   }
 
   async subirArchivosSUNAT(){
-    console.log("el this.arrAdjuntoSUNAT : ",this.arrAdjuntoSUNAT)
+    
     let dataObj:any = {}
     dataObj.arrFiles = this.arrAdjuntoSUNAT
     await this.sbsReportService.processCargaFile(dataObj)
@@ -72,7 +72,7 @@ export class ReportSbsInfoComplementaryComponent implements OnInit {
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar'
     }).then(async (result) => {
-      console.log("el result de process archivo pagos: ",result)
+      
       if(!result.dismiss){
         this.core.loader.show()
         let dataObj:any = {}

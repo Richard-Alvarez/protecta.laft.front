@@ -123,7 +123,7 @@ export class TimePericitySettingsComponent implements OnInit {
       let data: any = {};
       data.frequencyId = this.frequencyIdActive === '' ? 0 : this.frequencyIdActive;
       data.suspensionId = this.newSuspendStatus === '' ? 0 : this.newSuspendStatus;
-      // //console.log(data);
+      
       swal.fire({
         title: 'Frecuencia de Señal',
         icon: 'warning',
@@ -186,7 +186,7 @@ export class TimePericitySettingsComponent implements OnInit {
           this.core.loader.hide();
          
         }).catch(() => {
-          // //console.log('Error en el combo de frecuencias');
+          
           this.core.loader.hide();
           swal.fire({
             title: 'Frecuencia de Señal',
@@ -218,7 +218,7 @@ export class TimePericitySettingsComponent implements OnInit {
       let data: any = {};
       data.frequencyId = this.frequencyIdActive === '' ? 0 : this.frequencyIdActive;
       data.suspensionId = this.newSuspendStatus === '' ? 0 : this.newSuspendStatus;
-      // //console.log(data);
+      
       swal.fire({
         title: 'Frecuencia de Señal',
         icon: 'warning',
@@ -279,7 +279,7 @@ export class TimePericitySettingsComponent implements OnInit {
           this.core.loader.hide();
          
         }).catch(() => {
-          // //console.log('Error en el combo de frecuencias');
+          
           this.core.loader.hide();
           swal.fire({
             title: 'Frecuencia de Señal',
@@ -314,12 +314,12 @@ export class TimePericitySettingsComponent implements OnInit {
         if (response != null) {
           let data: any = {};
           data = (response);
-          // //console.log(data)
+          
           this.Frequency = data;
           this.frequencyId = data[0].frequencyId
           this.frequencyNameList = data[0].frequencyName
 
-          // //console.log(this.Frequency);
+          
           this.core.loader.hide();
         }
         else {
@@ -340,7 +340,7 @@ export class TimePericitySettingsComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        // //console.log('Error en el combo de frecuencias');
+        
         this.core.loader.hide();
         swal.fire({
           title: 'Frecuencia de Señal',
@@ -377,7 +377,7 @@ export class TimePericitySettingsComponent implements OnInit {
           (this.currentPage - 1) * this.itemsPerPage,
           this.currentPage * this.itemsPerPage
         );    
-          // //console.log("grilla:",this.FrequencyList);
+          
           
           this.core.loader.hide();
         }
@@ -432,7 +432,7 @@ export class TimePericitySettingsComponent implements OnInit {
           this.SuspendActivated = data[0].suspendStatus
           this.getsuspendStatus(this.SuspendActivated);          
 
-          // //console.log(data);
+          
           this.core.loader.hide();
         }
         else {
@@ -453,7 +453,7 @@ export class TimePericitySettingsComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        // //console.log('Error en las cajas de textp');
+        
         this.core.loader.hide();
         swal.fire({
           title: 'Frecuencia de Señal',
@@ -519,14 +519,10 @@ export class TimePericitySettingsComponent implements OnInit {
     //this.frequencySelected = (<HTMLInputElement>document.getElementById("IdSelected")).value    
     //this.frequencyDateActive = (<HTMLInputElement>document.getElementById("frequencyDateActive")).value
     var repetido = this.FrequencyList.find(x => x.frequencyIdActive);
-    // //console.log(repetido);
-    // //console.log(this.frequencyType)   
-    // //console.log("FECHA ACTIVA  ",this.bsValueNew+'');
+
     let respRegex = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})(\s)([0-1][0-9]|2[0-3])(:)([0-5][0-9])(:)([0-5][0-9])$/;
     //frequencyDateActive
-    ////console.log("respRegex : ",respRegex.test(this.bsValueNew +''))
-    ////console.log("CADENA : ",this.bsValueNew , this.bsValueNew+'')
-    ////console.log("CADENA : ", typeof this.bsValueNew+'')
+  
     if(!this.bsValueNew){
       swal.fire('Reportes SBS', 'La fecha inicio del proceso se debe ingresar.', 'info');
       //this.core.loader.hide();
@@ -586,11 +582,7 @@ export class TimePericitySettingsComponent implements OnInit {
       data.startDate = moment(this.bsValueNew).format('DD/MM/YYYY').toString();
       data.userId = this.userId === '' ? 0 : this.userId;
 
-      // //console.log(data.frequencyIdActive)
-      // //console.log(data.frequencyType)
-      // //console.log(data.startDate)
-      // //console.log(data.userId)
-      // //console.log(data);
+    
 
       swal.fire({
         title: 'Frecuencia de Señal',

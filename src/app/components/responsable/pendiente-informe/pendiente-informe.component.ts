@@ -58,9 +58,7 @@ export class PendienteInformeComponent implements OnInit {
     
     await this.getWorkModuleList()
     // await this.getObtenerLista()
-    //console.log("el regimen IIIIIIIII: ",this.regimen)
-    //console.log("el statePendienteInforme AAAAAAAAAAAAAAAAAA: ",this.statePendienteInforme)
-    //console.log("el this.arrResponsable pendiente de informe: ",this.arrResponsable)
+   
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
     // await this.getClientsByList()
     this.arrResponsablesByPendienteInforme = [
@@ -85,11 +83,11 @@ export class PendienteInformeComponent implements OnInit {
 
     //if(respObjFocusPosition.NIDALERTA){
     //  if (respObjFocusPosition.estado.includes('PENDIENTE-INFORME')){
-    //    console.log("El respObjFocusPosition informe terminado: ",respObjFocusPosition)
+    
     //    //let cadenaContentUsers = 'collap'+'Alert'+respObjFocusPosition.NIDALERTA+'Regimen'+respObjFocusPosition.regimen.id+respObjFocusPosition.estado+'Head' + respObjFocusPosition.regimen.desCorto
     //    //'consulta'+'Alert'+respObjFocusPosition.NIDALERTA+'Lista'+respObjFocusPosition.NIDTIPOLISTA+'Regimen'+respObjFocusPosition.regimen.id
     //    let cadenaContentUsers = respObjFocusPosition.elemento
-    //    console.log("El cadenaContentUsers informe terminado: ",cadenaContentUsers)
+    
     //    this.redictM(cadenaContentUsers)
     //  }
     //}
@@ -104,7 +102,7 @@ export class PendienteInformeComponent implements OnInit {
   }
 
   getArray(state,regimen){
-    //console.log("this.arrResponsable11111111111111", this.arrResponsable)
+    
     return this.arrResponsable;
   }
 
@@ -213,11 +211,10 @@ export class PendienteInformeComponent implements OnInit {
     
     async addFilesInforme(event: any, ALERTA, STIPO_CARGA) {
       try {
-        // console.log("el NIDALERTA RESP INFO : ",NIDALERTA)
+        
         //let STIPO_CARGA = "INFORMES"
         let respAddInfo = await this.parent.addFilesInforme(event, ALERTA.NIDALERTA, null, ALERTA.NREGIMEN/*this.regimen.id*/,STIPO_CARGA)
-        //console.log("el arrFiles RESP INFO : ",respAddInfo)
-        //console.log("el arrFiles RESP this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+       
         //await this.parent.sendFilesInformes(NIDALERTA, this.listFilesInform, this.listFilesInformName)
       } catch (error) {
         console.error("el arrFiles error 879 : ",error)
@@ -231,8 +228,7 @@ export class PendienteInformeComponent implements OnInit {
         //let workModuleList = await this.parent.getWorkModuleAll(this.regimen.id)
         let validacionCantidadREvisados =  this.getObtenerLista()
         let validacionInforme = this.getValidarInforme()
-        // console.error("Nueva lista validacion ",validacionCantidadREvisados)
-        // console.error("Nueva lista validacion informe",validacionInforme)
+       
         if(ALERTA.NIDALERTA == 2){
           let dataSend = {
             NIDALERTA: ALERTA.NIDALERTA,
@@ -245,7 +241,7 @@ export class PendienteInformeComponent implements OnInit {
           let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
           //this.internationalList = respListaInternacional//.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO ==1)
           let respuestaFiltroLista =  respListaInternacional.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO =="1" )
-          console.log("Nueva lista cambios :",respuestaFiltroLista)
+    
           if(respuestaFiltroLista.length > 0 && validacionCantidadREvisados == true){
             try {
               let respSendInfo = await this.parent.sendFilesInformes(ALERTA.NIDALERTA, ALERTA.NREGIMEN/*this.regimen.id*/)
@@ -273,7 +269,7 @@ export class PendienteInformeComponent implements OnInit {
           })
           }
           else{
-            // console.log("entro al else de falta revisar las coincidencias")
+          
             swal.fire({
               title: 'Resultados de Coincidencias',
               icon: 'error',
@@ -309,31 +305,19 @@ export class PendienteInformeComponent implements OnInit {
     }
 
     getFilesInformByAlert(alerta: any) {
-      //console.log("el 45884 INICIO")
-      //console.log("el 45884 alerta : ",alerta)
-      //console.log(alerta)
-      //console.log("NIDREGIMEN: ",alerta.NIDREGIMEN)
-      //console.log("NIDREGIMEN: ",alerta.NREGIMEN)
-      //console.log("nueva lista NIDREGIMEN: ",alerta)
-      //console.log("el 45884 this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+  
       let resp = this.parent.arrObjFilesInformeByAlert.filter(inform => alerta.NIDALERTA == inform.NIDALERTA 
         && inform.NREGIMEN == alerta.NREGIMEN && inform.STIPO_CARGA == 'INFORMES')
-      //console.log("el 45884 resp : ",resp)
-       //console.log("nueva lista el 45884 resp : ",resp)
+    
       
       return resp.length === 0 ? [] : resp[0].arrFilesNameCorto//this.parent.getFilesByAlert(alerta, tipoUsuario)
     }
 
     getFilesAdjuntosUnivByAlert(alerta: any) {
-      //console.log("el 45884 INICIO")
-      //console.log("el 45884 alerta : ",alerta)
-      //console.log(alerta)
-      //console.log("NIDREGIMEN: ",alerta.NIDREGIMEN)
-      //console.log("NIDREGIMEN: ",alerta.NREGIMEN)
-      //console.log("el 45884 this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+    
       let resp = this.parent.arrObjFilesInformeByAlert.filter(inform => alerta.NIDALERTA == inform.NIDALERTA 
         && inform.NREGIMEN == alerta.NREGIMEN && inform.STIPO_CARGA == 'ADJUNTOS')
-      // console.log("el 45884 resp : ",resp)
+    
       return resp.length === 0 ? [] : resp[0].arrFilesNameCorto//this.parent.getFilesByAlert(alerta, tipoUsuario)
     }
 
@@ -368,7 +352,7 @@ export class PendienteInformeComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
         let response = await this.userConfigService.insertAttachedFiles(data)
-        //console.log(response)
+       
     }
 
     async downloadUniversalFile(ruta,nameFile){
@@ -377,33 +361,32 @@ export class PendienteInformeComponent implements OnInit {
 
     removeFileInforme(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){
       //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-      // console.log("el dataObjAlerta: ",dataObjAlerta)
+      
       let filtroFiles =  this.parent.arrObjFilesInformeByAlert.filter(it => it.NIDALERTA === dataObjAlerta.NIDALERTA && it.NREGIMEN === dataObjAlerta.NREGIMEN && it.STIPO_CARGA === STIPO_CARGA)
-      // console.log("el filtroFiles: ",filtroFiles)
+      
       let objFile:any = filtroFiles[0]
       objFile.arrFiles.splice(indice,1)
       objFile.arrFilesName.splice(indice,1)
       objFile.arrFilesNameCorto.splice(indice,1)
-      // console.log("el objFile: ",objFile)
+      
       let indiceArrObjFiles = 0
       this.parent.arrObjFilesInformeByAlert.forEach(it => {
         if(it.NIDALERTA === dataObjAlerta.NIDALERTA && it.NREGIMEN === dataObjAlerta.NREGIMEN && it.STIPO_CARGA === STIPO_CARGA){
           it = objFile
           //let respSpliceObjFiles = this.parent.arrObjFilesInformeByAlert.splice(indiceArrObjFiles,1)
-          //console.log("el splice de arrObjFilesInformeByAlert : ",respSpliceObjFiles)
+      
         }
         indiceArrObjFiles++
       })
       
-      // console.log("el this.parent.arrObjFilesInformeByAlert 2221: ",this.parent.arrObjFilesInformeByAlert)
+   
 
     }
 
     async fillReport(objAlerta){
-      debugger
+      
       try {
-        console.log("objAlerta :", objAlerta)
-        console.log("objAlerta :", objAlerta.NIDALERTA)
+       
         let validacionCantidadREvisados =  this.getObtenerLista()
         let dataSend:any = {}
         if( objAlerta.NIDALERTA == 35 ||  objAlerta.NIDALERTA == 33){
@@ -431,7 +414,7 @@ export class PendienteInformeComponent implements OnInit {
         
         //this.internationalList = respListaInternacional//.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO ==1)
         let respuestaFiltroLista =  respListaInternacional.filter(it => it.NCANTCLIENTES > 0 && it.SESTADO_REVISADO =="1" )
-        console.log("Nueva lista cambios :",respuestaFiltroLista)
+       
         /*if(!(respuestaFiltroLista.length > 0 && validacionCantidadREvisados == true) && (objAlerta.NIDALERTA == 2 || objAlerta.NIDALERTA == 35 || objAlerta.NIDALERTA == 33 )){
           swal.fire({
             title: 'Oficial de cumplimiento',
@@ -454,25 +437,25 @@ export class PendienteInformeComponent implements OnInit {
         }*/
 
         this.core.loader.show()
-        console.log("El arrUsuariosForm : ",objAlerta.arrUsuariosForm)
+       
         let arrRespUsuariosForm = []
         objAlerta.arrUsuariosForm.forEach(objResp => {
           arrRespUsuariosForm.push(this.parent.fillReport(objAlerta,objResp.NIDUSUARIO_ASIGNADO))
         })
          let respPromiseAll= await Promise.all(arrRespUsuariosForm)
-          // console.log("El respPromiseAll : ",respPromiseAll)
+      
          this.core.loader.hide()
 
 
 
         // this.core.loader.show()
-        //  console.log("El arrUsuariosForm : ",objAlerta.arrUsuariosForm)
+       
         // let arrRespUsuariosForm = []
         // objAlerta.arrUsuariosForm.forEach(objResp => {
         //   arrRespUsuariosForm.push(this.parent.fillReport(objAlerta,objResp.NIDUSUARIO_ASIGNADO))
         // })
         // let respPromiseAll= await Promise.all(arrRespUsuariosForm)
-        // // console.log("El respPromiseAll : ",respPromiseAll)
+        
         // this.core.loader.hide()
       } catch (error) {
         this.core.loader.hide()
@@ -487,7 +470,7 @@ export class PendienteInformeComponent implements OnInit {
         objAlerta.arrAdjuntosInform.forEach(objAdjunto => {
           let dateMayor = new Date(objFechaMayor.DFECHA_REGISTRO)
           let dateAdjunto = new Date(objAdjunto.DFECHA_REGISTRO)
-          // console.log("el dateAdjunto: ",dateAdjunto)
+        
           if(dateAdjunto > dateMayor){
             objFechaMayor = objAdjunto
           }
@@ -495,8 +478,7 @@ export class PendienteInformeComponent implements OnInit {
 
         // let nombreOld = objFechaMayor.name.split(".")
         // let nombreNew = nombreOld[0]+'.pdf'
-        // console.log("el objFechaMayor : ",objFechaMayor)
-        // console.log("el nombreNew : ",nombreNew)
+      
         await this.parent.downloadUniversalFile(objFechaMayor.SRUTA_ADJUNTO,objFechaMayor.name)
         this.core.loader.hide()
 
@@ -516,14 +498,13 @@ export class PendienteInformeComponent implements OnInit {
     //let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO,  NIDREGIMEN: this.regimen.id}
     this.workModuleListGral = await this.userConfigService.getWorkModuleList(data)
     //this.workModuleListSimpli = await this.userConfigService.getWorkModuleList(data2)
-    // console.log("CAmbios 1:",this.workModuleListGral )
-   // console.log("CAmbios 2:",this.workModuleListSimpli )
+  
 
 
     // let dataSend = {NIDALERTA: 2,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.NPERIODO_PROCESO ,NIDGRUPOSENAL: 1}
     // let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
       let respListaInternacional:any = []
-      console.log("this.NPERIODO_PROCESO",this.NPERIODO_PROCESO)
+      
     if(this.linkactual == "proveedor"){
       let dataSend = {
         NIDALERTA: 33,
@@ -533,7 +514,7 @@ export class PendienteInformeComponent implements OnInit {
         NIDPROVEEDOR: 14
       }
        respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-       console.log(" this.internationalList respListaInternacional",  respListaInternacional)
+    
      
   }else if(this.linkactual == "colaborador"){
     let dataSend = {
@@ -544,7 +525,7 @@ export class PendienteInformeComponent implements OnInit {
       NIDPROVEEDOR: 1
     }
        respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-       console.log(" this.internationalList respListaInternacional",  respListaInternacional)
+      
      
   }else{
     let dataSend = {
@@ -555,7 +536,7 @@ export class PendienteInformeComponent implements OnInit {
       NIDPROVEEDOR: this.regimen.id == 1 ? 4 : 1 
     }
      respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-     console.log(" this.internationalList respListaInternacional",  respListaInternacional)
+    
   }
 
 
@@ -566,9 +547,7 @@ export class PendienteInformeComponent implements OnInit {
       CANTCLIENTES = element.NCANTCLIENTES
       ESTADO_REVISADO = element.SESTADO_REVISADO
     });
-    // console.log("Listainternacinal: ",this.internationalList)
-    // console.log("validacion1: ",CANTCLIENTES)
-    // console.log("validacion2: ",ESTADO_REVISADO)
+   
 
   }
 
@@ -587,13 +566,11 @@ export class PendienteInformeComponent implements OnInit {
 
    getObtenerLista(){
     
-    // console.log("Nueva lista regimen",this.regimen.id)
+  
 
     let nuevaLista = this.internationalList
 
-     console.log("Nueva lista",nuevaLista)
-     
-     console.log("Nueva this.regimen.id",this.regimen.id)
+    
      let valorSimpli 
      let valorComp
      let valorSinRegimen  
@@ -601,7 +578,7 @@ export class PendienteInformeComponent implements OnInit {
     //  nuevaLista.forEach(element => {
 
       if(this.linkactual == "proveedor" || this.linkactual == "colaborador"){
-        console.log("Nueva this.regimen.id",0)
+      
         valorSinRegimen = nuevaLista.filter(it => it.NCANTCLIXREV > 0 && it.NIDREGIMEN == 0)
   
           if(valorSinRegimen.length > 0 ){
@@ -633,16 +610,14 @@ export class PendienteInformeComponent implements OnInit {
 
       
     //  });
-    //  console.log("Nueva lista valor de Simpli",valorSimpli)
-    //  console.log("Nueva lista valor de Comp",valorComp)
-    //  console.log("Nueva lista bolPusheo",bolPusheo)
+   
     return bolPusheo
 }
 
 getValidarInforme(){
   let resp = this.parent.arrObjFilesInformeByAlert.filter(inform => inform.NIDALERTA == 2
     && inform.NREGIMEN == this.regimen.id && inform.STIPO_CARGA == 'INFORMES')
-    // console.log("Nueva lista informes",resp)
+   
 
     // return resp.length === 0 ? [] : resp[0].arrFilesNameCorto
     return resp.length == 0 ? false  : true
@@ -659,25 +634,21 @@ redictM(cadenaFocus){
 capitalizarPrimeraLetra(texto : string ) {
   //  let texto = str
     
-  //  console.log("el texto de la primera letra", texto[0].toUpperCase() +  texto.slice(1).toLowerCase())
-  //  console.log("el texto que ingreso", texto[0].toUpperCase() + texto.slice(1))
-  //  console.log("el texto que ingreso 2", texto.charAt(0).toUpperCase() + texto.slice(1))
+  
    let caracter = texto.search('-');
 
    return texto[0].toUpperCase() +  texto.slice(1,caracter).toLowerCase() + '-' + texto[caracter + 1].toUpperCase()  + texto.slice(caracter + 2,).toLowerCase()
 }
 
 async getArchivoSustento(item){
-  console.log("el objAlerta sustento : ",item)
-  console.log("el objAlerta arrAdjuntosSustento : ",item.arrAdjuntosSustento[0])
+
   try {
     let objAdjunto = item.arrAdjuntosSustento[0]
     //let NPERIODO_PROCESO =  parseInt(localStorage.getItem("periodo"))
-    // console.log("el ajunto : ",adjunto)
-    // console.log("el item : ",this.item)
+    
     //let ruta = 'ADJUNTOS/'+this.item.NIDALERTA+'/'+NPERIODO_PROCESO+'/'+this.parent.regimen.id+'/'+adjunto.name
     let ruta = item.arrAdjuntosSustento[0].SRUTA_ADJUNTO
-    // console.log("ruta : ",ruta)
+   
     let resp = await this.parent.downloadUniversalFile(ruta,objAdjunto.name)
   } catch (error) {
     console.error("error en descargar: ",error)
@@ -686,7 +657,7 @@ async getArchivoSustento(item){
 arrCheckbox:any = []
 arrCheck:any = []
 setDataCheckboxApproved(item,index,checked: boolean){
-  console.log("checked",checked)
+  
   if(checked){
     this.arrCheck.push(item)
   }else{
@@ -695,7 +666,7 @@ setDataCheckboxApproved(item,index,checked: boolean){
   }
   
 
-  console.log("arrCheckbox",this.arrCheck)
+ 
   
 }
 
@@ -710,9 +681,7 @@ onCategoriaPressed(categoriaSelected: any, checked: boolean){
     //Removemos la categoría seleccionada del arreglo de categorías seleccionadas
     this.categoriaSelectedArray.splice(this.categoriaSelectedArray.indexOf(categoriaSelected), 1);
   }
- // console.log("this.categoriaSelectedArray",this.categoriaSelectedArray)
- // console.log("this.categoriaSelectedArray 1",this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO)
- // console.log("this.categoriaSelectedArray 2",this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO)
+
 //   this.Nombre = this.categoriaSelectedArray[0].arrUsuariosForm[0].NOMBRECOMPLETO;
 //   this.Perfil =this.categoriaSelectedArray[0].arrUsuariosForm[0].SCARGO;
 //  this.Respuesta =this.categoriaSelectedArray[0].arrUsuariosForm[0].SRESPUESTA;
@@ -736,18 +705,18 @@ DataArray(){
     });
       
   });
-  console.log("la data que enviara",this.arrayData)
+  
   
 }
 
  Export2Doc(element, filename = ''){
  
   setTimeout(function(){
-  //console.log("dsadsadsadsa", this.parent2.valor)
+ 
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
     var postHtml = "</body></html>";
     var html = preHtml+document.getElementById(element).innerHTML+postHtml;
-    // console.log("El html que descarga", html)
+    
     var blob = new Blob(['\ufeff', html],{
         type: 'application/msword'
     });
@@ -809,7 +778,7 @@ listaPepRentaParticular:any = []
 listaInternacionalRentaParticular:any = []
 
 async DescargarReporte(item){
-  debugger
+  
   this.arrayDataSenal= []
   this.Nombre = ''
   this.Perfil = ''
@@ -839,9 +808,7 @@ async DescargarReporte(item){
   this.listaEspecialRentaParticular = []
   this.listaPepRentaParticular = []
   this.listaInternacionalRentaParticular = []
-  console.log("itemm",item)
-
-  console.log("dataItem",item.arrUsuariosForm)
+ 
 
   
   this.RespuestaGlobal = item.arrUsuariosForm.filter((it,inc) => it.SRESPUESTA == "Sí")
@@ -850,7 +817,7 @@ async DescargarReporte(item){
   }else{
     this.RespuestaGlobal = 'Sí'
   }
-  //console.log("RespuestaGlobal",RespuestaGlobal.length)
+
 
   item.arrUsuariosForm.forEach((t,inc) => { 
     let data:any = {}
@@ -885,7 +852,7 @@ async DescargarReporte(item){
     data.NIDALERTA = item.NIDALERTA
     data.NIDREGIMEN = this.RegimenPendiente
     this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
-    console.log("this.arrayDataResultado",this.arrayDataResultado)
+    
     this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
     // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
     this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
@@ -902,20 +869,7 @@ async DescargarReporte(item){
     this.listaInternacionalRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75)
     //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
     //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
-    console.log("this.listaSoat",this.listaSoat)
-    console.log("this.listaMasivos",this.listaMasivos)
-    console.log("this.listaRenta",this.listaRenta)
-    console.log("this.listaAhorro",this.listaAhorro)
-    console.log("this.listaPep",this.listaPep)
-    console.log("this.listaPepMasivos",this.listaPepMasivos)
-    console.log("this.listaPepSoat",this.listaPepSoat)
-    console.log("this.listaPepRenta",this.listaPepRenta)
-    console.log("this.listaEspecialMasivos",this.listaEspecialMasivos)
-    console.log("this.listaEspecialSoat",this.listaEspecialSoat)
-    console.log("this.listaEspecialRenta",this.listaEspecialRenta)
-    console.log("this.listaEspecialRentaParticular",this.listaEspecialRentaParticular)
-    console.log("this.listaPepRentaParticular",this.listaPepRentaParticular)
-    console.log("this.listaInternacionalRentaParticular",this.listaInternacionalRentaParticular)
+    
     this.Cantidad = this.arrayDataResultado.length
   }
 
@@ -953,8 +907,7 @@ async DescargarReporte(item){
   
   this.Export2Doc(this.ValidarNombreTemplate,this.Alerta)
   
-  console.log("this.arrayDataSenal",this.arrayDataSenal)
-  console.log("las variables",this.Nombre,this.Perfil,this.Respuesta,this.Alerta ,  this.RegimenPendiente)
+ 
 } 
 
   Resultado:any = {}
@@ -972,8 +925,7 @@ async DescargarReporte(item){
       (response) => {
        this.Resultado = response
       });
-    console.log("el resultado",this.Resultado)
-
+    
     } 
    
 }

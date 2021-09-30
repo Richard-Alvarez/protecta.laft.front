@@ -118,7 +118,7 @@ export class C2DetailComponent implements OnInit {
     this.nidregimen = localStorage.getItem("NREGIMEN");
     this.nidalerta = localStorage.getItem("NIDALERTA");
     var paramCliente =  localStorage.getItem("paramCliente");
-    // console.log("El paramCliente: ", paramCliente)
+  
     if (paramCliente != null && paramCliente != ""){
         //this.parametroReturn = JSON.parse(paramCliente);
         localStorage.setItem("paramCliente", "");
@@ -186,11 +186,10 @@ export class C2DetailComponent implements OnInit {
     }
     this.nombreRegimenSimpli = 'RÉGIMEN SIMPLIFICADO:'
     this.nombreRegimenGral = 'RÉGIMEN GENERAL:'
-    //console.log("el getListById(idList) : ",this.getListById(this.IdLista))
-    console.log("La lista del unchekAllList",this.unchekAllList)
-    console.log("La lista del unchekAllList NewListCheck",this.NewListCheck)
+    
+    
     this.Arraycheckbox()
-    console.log("this.formData",this.formData)
+  
 
 
     //await this.Consultar360Previous();
@@ -202,7 +201,7 @@ export class C2DetailComponent implements OnInit {
  
   async ListarCargo(){
       this.listCargo = await this.userConfigService.GetListaCargo()
-      console.log("La lista del cargo", this.listCargo)
+     
       this.selectedCargo = this.listCargo 
       this.selectedCargo0 = this.listCargo 
       this.selectedCargo1 = this.listCargo 
@@ -219,16 +218,7 @@ export class C2DetailComponent implements OnInit {
   idCargpo3: any;
 
   ValorCargo(evento){
-        console.log("el valor del id cargo", this.idCargpo)
-        console.log("el valor del id cargo0", this.idCargpo0)
-        console.log("el valor del id cargo1", this.idCargpo1)
-        console.log("el valor del id cargo2", this.idCargpo2)
-        console.log("el valor del id cargo3", this.idCargpo3)
-        console.log("el valor dele cargo evento", evento)
-
-
-        
-        console.log("el valor del combo", this.ValorCombo)
+     
   }
 
   ValordelModel(){
@@ -260,12 +250,12 @@ export class C2DetailComponent implements OnInit {
             let respClientesFilter = this.resultadosCoincid.filter(it => it.nombre == cliente.nombre)
             let arrListas = []
             let respFilterLista = []
-            // console.log("respClientesFilter : ",respClientesFilter)
+           
                 //arrListas.push(respFilterLista)
             respClientesFilter.forEach(lista => {
                 this.tipoListas.forEach(itLista => {
                     if(itLista.id == 2){
-                        // console.log("si pinta el PEP : ",itLista)
+                        
                     }
                     if(itLista.nombre == lista.SDESTIPOLISTA){
                         let respFilterListaNew = respFilterLista.filter(it => itLista.id == it.id)
@@ -292,7 +282,7 @@ export class C2DetailComponent implements OnInit {
                         
                     }
                 })
-                // console.log("respFilterLista : ",respFilterLista)
+              
             })
             let newObjCliente:any = {}
             newObjCliente.id = respClientesFilter[0].id
@@ -303,16 +293,14 @@ export class C2DetailComponent implements OnInit {
         }
     })
 
-    // console.log("newArrayResult : ",newArrayResult)
+    
 
   }
 
   sDescriptRiesgo
 
   getOrigenVista(){
-    //this.configService.sOrigenVista$.subscribe(cadena => //console.log("el sOrigenVista$ : 1211 ",this.vistaOrigen) )
-    //console.log("el vistaOrigen en c2-dtail 885 : ",this.vistaOrigen)
-    //console.log("el this.internationalList en c2-dtail 884 : ",this.internationalList)
+    
     return this.vistaOrigen
   }
   tipoClienteGC
@@ -334,11 +322,10 @@ export class C2DetailComponent implements OnInit {
         this.SFALTA_ACEPTAR_COINC = localStorage.getItem("SFALTA_ACEPTAR_COINC")
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPO")
-        console.log("IDGRUPOSENAL", this.IDGRUPOSENAL)
-        // console.log("NIDGRUPO", this.IDGRUPOSENAL2)
+      
+       
         //this.tipoClienteGC = this.vistaOrigen
-        // console.log("El this.boolClienteReforzado : ",this.boolClienteReforzado)
-         console.log("El this.tipoClienteGC : ",this.tipoClienteGC)
+        
         this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
@@ -364,12 +351,10 @@ export class C2DetailComponent implements OnInit {
             }
             this.formData.SCLIENT = localStorage.getItem('SCLIENT')
             this.formData.arrClientesGC = JSON.parse(localStorage.getItem('arrClientesGC'))
-            console.log("this.formData.arrClientesGC ", this.formData.arrClientesGC )
+           
             // this.IDGRUPOSENALGestor = this.formData.arrClientesGC[0].NIDGRUPOSENAL
             this.IDGRUPOSENALGestor = this.IDGRUPOSENAL
-            console.log("this.formData.arrClientesGC ", this.formData.arrClientesGC )
-            console.log("this.formData.tipoClienteCRF ", this.tipoClienteCRF  )
-            console.log(" this.IDGRUPOSENALGestor ",  this.IDGRUPOSENALGestor  )
+           
             //this.formData.SOCUPACION = localStorage.getItem('SOCUPACION')
             //this.formData.SOCUPACION = this.formData.SOCUPACION === 'null' ? '' : this.formData.SOCUPACION === undefined ? '' : this.formData.SOCUPACION
             //this.formData.SCARGO = localStorage.getItem('SCARGO')
@@ -379,11 +364,10 @@ export class C2DetailComponent implements OnInit {
             this.formData.SESTADO_REVISADO = localStorage.getItem("EnviarCheckbox")
             //this.formData.SESTADO_REVISADO = this.SFALTA_ACEPTAR_COINC == 'SI' ? '2' : this.formData.SESTADO_REVISADO
             //this.formData.NIDREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
-            // console.log("El this.formData : ",this.formData)
+           
             let arrayPromisesCoincid = []
            
-            console.log("this.formData.arrClientesGCthis.formData.arrClientesGC 2",this.formData.arrClientesGC)
-            console.log("this.formData.arrClientesGCthis.formData.arrClientesGC",this.formData.arrClientesGC.NTIPO_DOCUMENTO)
+          
         
             
             this.formData.arrClientesGC.forEach(itemObjCliente => {
@@ -405,21 +389,21 @@ export class C2DetailComponent implements OnInit {
                
             })
             let arrayRespCoincid = await Promise.all(arrayPromisesCoincid);
-            console.log("EL ITEM 1 arrayRespCoincid : ",arrayRespCoincid)
+          
             let arrayClientes:any = []
             arrayRespCoincid.forEach(itemResp => {
-                //console.log('EL ITEM 1 itemResp: ',itemResp)
+                
                 itemResp.forEach(objRespListas =>{
                     
                     
                     let arregloListasCoin = objRespListas.arrCoincidencias
-                    console.log('EL ITEM 1 arregloListasCoin: ',arregloListasCoin)
+                
                     arregloListasCoin.forEach(coinDet => {
-                        //console.log('EL ITEM 1 coin: ',coin)
+                
                         let codigoLista = objRespListas.NIDTIPOLISTA
                         let desLista = objRespListas.SDESTIPOLISTA
-                        console.log('EL ITEM 1 codigoLista: ',codigoLista)
-                        console.log('EL ITEM 1 desLista: ',desLista)
+                
+                
                         let respValidCliente = arrayClientes.filter(it => 
                             it.SNUM_DOCUMENTO == coinDet.SNUM_DOCUMENTO &&
                             it.STIPO_BUSQUEDA == coinDet.STIPO_BUSQUEDA &&
@@ -450,7 +434,7 @@ export class C2DetailComponent implements OnInit {
                             objRespCliente.idLista = codigoLista//objResp.NIDTIPOLISTA
                             //objRespCliente.NIDTIPOLISTA = codigoLista//objResp.NIDTIPOLISTA
                             objRespCliente.SDESTIPOLISTA = desLista//objResp.SDESTIPOLISTA
-                            console.log('EL ITEM 1 COIN: ',objRespCliente)
+                          
                             arrayClientes.push(objRespCliente);
                         }
                         
@@ -458,12 +442,12 @@ export class C2DetailComponent implements OnInit {
                     
                 })
             })
-            console.log("EL ITEM 1 arrayClientes : ",arrayClientes)
+          
             this.ValorListaCoincidencias = arrayClientes
             arrayRespCoincid.forEach(itemResp => {
                 itemResp.forEach(itemCoin => {
                     let validLista = this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == itemCoin.NIDTIPOLISTA)
-                    console.log('EL ITEM 1 validLista.lenght: ',validLista.length)
+                   
                     if(validLista.length == 0){
                         let objResp:any = {}
                         objResp.NIDTIPOLISTA = itemCoin.NIDTIPOLISTA
@@ -483,7 +467,7 @@ export class C2DetailComponent implements OnInit {
             
 
 
-            console.log("EL ITEM 1 this.arrCoincidenciasLista: ",this.arrCoincidenciasLista)
+     
             /*
                 let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
                  this.arrCoincidenciasLista= await this.getDataClientesList(dataService)
@@ -494,22 +478,22 @@ export class C2DetailComponent implements OnInit {
             this.SCLIENT_DATA = this.formData.SCLIENT
 
             await this.getHistorialRevisiones()
-             console.log("el this.arrCoincidenciasLista ACEPTA-COINCID: ",this.arrCoincidenciasLista)
-            //  console.log("el this.arrCoincidenciasLista ACEPTA-COINCID 2: ",arrCoincidenciasLista2)
+           
+       
             /*let dataHistorialEstadoCli:any = {}
                 dataHistorialEstadoCli.NIDALERTA = 2
                 dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
                 dataHistorialEstadoCli.SCLIENT = this.formData.SCLIENT
-                // console.log("el dataHistorialEstadoCli : ",dataHistorialEstadoCli)
+             
                 let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-                // console.log("el this.arrHistoricoCli : ",this.arrHistoricoCli)
+               
                 this.arrHistoricoCli = await respCoincidCliHis.lista*/
             return
         }
         if(this.tipoClienteGC == 'GC' || this.tipoClienteGC == "C2-BANDEJA"){
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
-            console.log("NIDALERTA 222", this.formData.NIDALERTA)
+           
             this.formData.NOMBRECOMPLETO = localStorage.getItem('NOMBRECOMPLETO')
             this.formData.STIPO_NUM_DOC = localStorage.getItem('STIPO_NUM_DOC')
             this.formData.STIPO_NUM_DOC = this.formData.STIPO_NUM_DOC === 'null' ? '' : this.formData.STIPO_NUM_DOC === undefined ? '' : this.formData.STIPO_NUM_DOC
@@ -546,7 +530,7 @@ export class C2DetailComponent implements OnInit {
                 this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
             }*/
             
-            // console.log("El this.formData : ",this.formData)
+        
             let dataService:any = {}
             if(this.formData.NIDALERTA == 35){
                  dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 35,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
@@ -567,12 +551,11 @@ export class C2DetailComponent implements OnInit {
             dataHistorialEstadoCli.NIDALERTA = 2
             dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
             dataHistorialEstadoCli.SCLIENT = localStorage.getItem('SCLIENT')//this.oClienteReforzado.SCLIENT
-            // console.log("el dataHistorialEstadoCli : ",dataHistorialEstadoCli)
+         
             let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-            // console.log("el this.arrHistoricoCli : ",this.arrHistoricoCli)
+         
             this.arrHistoricoCli = await respCoincidCliHis.lista*/
 
-            // console.log("el this.arrCoincidenciasLista : ",this.arrCoincidenciasLista)
             return
         }
         
@@ -585,7 +568,7 @@ export class C2DetailComponent implements OnInit {
             this.arrListasAll = JSON.parse(localStorage.getItem('view-c2-arrListasAll'))
             
             this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
-            //console.log("this.boolClienteReforzado : ",this.boolClienteReforzado)
+            
             if(this.boolClienteReforzado == true){
                 this.sEstadoTratamientoCliente = localStorage.getItem('sEstadoTratamientoCliente')
                 if(this.sEstadoTratamientoCliente === 'CR'){
@@ -596,7 +579,7 @@ export class C2DetailComponent implements OnInit {
                 
                 
                 this.oClienteReforzado = JSON.parse(localStorage.getItem('OCLIENTE_REFORZADO'))
-                //console.log("el oClienteReforzado : ",this.oClienteReforzado);
+                
                 this.formData.NIDALERTA = this.oClienteReforzado.NIDALERTA//parseInt(localStorage.getItem("NIDALERTA"))
                 this.formData.NOMBRECOMPLETO = this.oClienteReforzado.SNOM_COMPLETO//localStorage.getItem('NOMBRECOMPLETO')
                 this.formData.STIPO_NUM_DOC = this.oClienteReforzado.STIPOIDEN//localStorage.getItem('STIPO_NUM_DOC')
@@ -625,9 +608,9 @@ export class C2DetailComponent implements OnInit {
                 data.SCLIENT = this.oClienteReforzado.SCLIENT
                 let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO}
                 /*let respServiceHistory = await this.userConfigService.getResultadoTratamientoHistory(data);
-                //console.log("el respServiceHistory : ",respServiceHistory);
+                
                 this.clientHistory = respServiceHistory*/
-                // console.log("el formData : ",this.formData);
+                
 
                 let dataSendXperian:any = {}
                 dataSendXperian.userId = 174//"1"
@@ -637,9 +620,9 @@ export class C2DetailComponent implements OnInit {
                 dataSendXperian.lastName = ''//(this.formData.NOMBRECOMPLETO).trim()
                 dataSendXperian.sclient = this.oClienteReforzado.SCLIENT
                 dataSendXperian.userCode = 174//parseInt(this.oClienteReforzado.SCLIENT)
-                // console.log("el dataSendXperian : ",dataSendXperian);
+                
                 let respExperian = await this.userConfigService.experianServiceInvoker(dataSendXperian)
-                // console.log("el respExperian : ",respExperian);
+                
                 if(respExperian.nRiskType){
                     this.sDescriptRiesgo = respExperian.sDescript//'BAJO'
                 }else{
@@ -647,9 +630,9 @@ export class C2DetailComponent implements OnInit {
                 }
 
                 this.arrCoincidenciasLista = await this.getDataClientesAllList(dataService)
-                // console.log("El arrCoincidenciasLista : ",this.arrCoincidenciasLista)
+                
                 //this.arrCoincidenciasLista = await respClientesAll.lista
-                //console.log("El arrCoincidenciasLista : ",this.arrCoincidenciasLista)
+                
             }
         }
         
@@ -660,9 +643,9 @@ export class C2DetailComponent implements OnInit {
             dataHistorialEstadoCli.NIDALERTA = 2
             dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
             dataHistorialEstadoCli.SCLIENT = this.oClienteReforzado.SCLIENT
-            // console.log("el dataHistorialEstadoCli : ",dataHistorialEstadoCli)
+            
             let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-            // console.log("el this.arrHistoricoCli : ",this.arrHistoricoCli)
+            
             this.arrHistoricoCli = await respCoincidCliHis.lista*/
             this.SCLIENT_DATA = this.oClienteReforzado.SCLIENT
 
@@ -675,7 +658,7 @@ export class C2DetailComponent implements OnInit {
     SCLIENT_DATA
     async getHistorialRevisiones() {
         let valorAlerta
-        console.log("this.formData.NIDALERTA", this.formData.NIDALERTA)
+        
         this.IDGRUPOSENAL
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             if(this.IDGRUPOSENAL == 3){
@@ -691,9 +674,9 @@ export class C2DetailComponent implements OnInit {
             dataHistorialEstadoCli.NIDALERTA = valorAlerta
             dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
             dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;//this.formData.SCLIENT
-            // console.log("el dataHistorialEstadoCli : ",dataHistorialEstadoCli)
+            
             let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-            // console.log("el this.arrHistoricoCli : ",this.arrHistoricoCli)
+            
             this.arrHistoricoCli = await respCoincidCliHis.lista
         }
         else{
@@ -710,9 +693,9 @@ export class C2DetailComponent implements OnInit {
             dataHistorialEstadoCli.NIDALERTA = this.formData.NIDALERTA
             dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
             dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;//this.formData.SCLIENT
-            // console.log("el dataHistorialEstadoCli : ",dataHistorialEstadoCli)
+            
             let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-            // console.log("el this.arrHistoricoCli : ",this.arrHistoricoCli)
+            
             this.arrHistoricoCli = await respCoincidCliHis.lista
         }
        
@@ -726,31 +709,31 @@ export class C2DetailComponent implements OnInit {
         dataHistorialEstadoCli.NIDALERTA = 2
         dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
         dataHistorialEstadoCli.SCLIENT = localStorage.getItem('SCLIENT')//this.oClienteReforzado.SCLIENT
-        console.log("el dataHistorialEstadoCli : ",dataHistorialEstadoCli)
+        
         let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-        console.log("el this.arrHistoricoCli : ",this.arrHistoricoCli)
+        
         this.arrHistoricoCli = await respCoincidCliHis.lista
     }*/
 
     getConsole(idlista,idcoincidencia,regimen){
-        console.log("lista nueva el NewListCheck : ",this.NewListCheck)
-           console.log("lista nueva el idlista : ",idlista)
-           console.log("lista nueva el idcoincidencia : ",idcoincidencia)
-           console.log("lista nueva el ngmodel : ",this.unchekAllList)
-          console.log("lista nueva el regimen : ",regimen)
+        
+        
+        
+        
+        
             let bolActiveCheck= this.unchekAllList[regimen-1][idlista][idcoincidencia]
-            console.log("lista nueva el bolActiveCheck : ",bolActiveCheck)
+        
             this.unchekAllList[regimen-1][idlista][idcoincidencia] = !bolActiveCheck ? true : false
-        //   console.log("lista nueva el check 1: ",this.unchekAllList)
-        //   console.log("lista nueva el check 2: ",this.unchekAllList[1][1])
+        
+        
         //   let Valor = this.unchekAllList[1][1].filter(it => it == true)
-        //   console.log("lista nueva el check 3: ", Valor.lenght)
+        
         //     let valor = this.unchekAllList[1][1].filter(it => it == true)
            
         //   if(valor.length > 0){
-        //     console.log("lista nueva el check 3: "," siquiera tiene 1")
+        
         //   }else{
-        //     console.log("lista nueva el check 4: "," todos falso")
+        
         //   }
 
 
@@ -761,11 +744,11 @@ export class C2DetailComponent implements OnInit {
         this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
         try {
             
-             console.log("dataService 1234  1: ",dataService)
+             
             let arrayCoincidList:any = []
             let respListasWithCoincid:any = []  //= await this.userConfigService.GetListaResultadosCoincid(dataService)
             if(this.tipoClienteGC == 'C2-BANDEJA'){
-                console.log("dataService 123456 1: ",dataService)
+             
                 
 
                 if(this.IdLista == 1){
@@ -807,7 +790,7 @@ export class C2DetailComponent implements OnInit {
                     let objListaCliente: any = {}
                     let objTipoLista: any = (this.tipoListas.filter(it => it.id == item.NIDTIPOLISTA))[0]
                     let respValid = arrayCoincidList.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA)
-                    // console.log("el objTipoLista: ", objTipoLista)
+                    
                     if(respValid.length == 0 && objTipoLista){
                         objListaCliente.NIDTIPOLISTA = objTipoLista.id
                         objListaCliente.SDESTIPOLISTA = objTipoLista.nombre
@@ -823,7 +806,7 @@ export class C2DetailComponent implements OnInit {
                                 incL++
                             }
                         })
-                        // console.log("el arrObjsListas : ",arrObjsListas)
+                        
                         /*arrObjsListas.forEach(itemList => {
                             let arrayListaCliente: any = []
                             if (item.NIDTIPOLISTA == item.NIDTIPOLISTA) {
@@ -841,7 +824,7 @@ export class C2DetailComponent implements OnInit {
                 return arrayCoincidList
             }else if(this.tipoClienteGC == 'ACEPTA-COINCID'){
 
-                console.log("dataService 123456 2: ",dataService)
+                
 
                 this.uncheckInternationalLists = []
                 this.uncheckSacList = []
@@ -916,28 +899,23 @@ export class C2DetailComponent implements OnInit {
                     //}
                     
                 })
-                // console.log("el 1 : ",this.internationalList)
-                // console.log("el 2 : ",this.sacList)
-                // console.log("el 3 : ",this.pepList)
-                // console.log("el 4 : ",this.familiesPepList)
-                // console.log("el 5 : ",this.espList)
+               
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
-                console.log("lista nueva el ngmodel 1: ",dataService.NIDREGIMEN-1)
-                console.log("lista nueva el ngmodel 2: ",[arrInternationalService,arrListPepService,this.uncheckFamiliesPepList,this.uncheckSacList,arrListEspService])
+                
                 this.unchekAllList[dataService.NIDREGIMEN-1] = [arrInternationalService,arrListPepService,arrFamiliesService,arrSacListService,arrListEspService]
                 //this.unchekAllList = arrayDefault
-                console.log("lista nueva el ngmodel unchekAllList: ",this.unchekAllList)
+                
                 //this.unchekAllList = arrayDefault[dataService.NIDREGIMEN]
                 //this.unchekAllList = [this.uncheckInternationalLists,this.uncheckPepLists,this.uncheckFamiliesPepList,this.uncheckSacList,this.uncheckListEspecial]//this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = internationalListService.concat(arrSacService.concat(pepListService.concat(familiesServiceList.concat(espListService))))
-                console.log("el sumaArrays 1244: ", sumaArrays)
-                // console.log("el unchekAllList 1244: ", this.unchekAllList)
+                
+                
                 let indiceList = 0
                 sumaArrays.forEach(item => {
                     let objListaCliente: any = {}
                     let objTipoLista: any = (this.tipoListas.filter(it => it.id == item.NIDTIPOLISTA))[0]
                     let respValid = arrayCoincidList.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA)
-                    console.log("el objTipoLista: ", objTipoLista)
+                    
                     if(respValid.length == 0 && objTipoLista){
                         objListaCliente.NIDTIPOLISTA = objTipoLista.id
                         objListaCliente.SDESTIPOLISTA = objTipoLista.nombre
@@ -953,7 +931,7 @@ export class C2DetailComponent implements OnInit {
                                 incL++
                             }
                         })
-                        // console.log("el arrObjsListas : ",arrObjsListas)
+                        
                         /*arrObjsListas.forEach(itemList => {
                             let arrayListaCliente: any = []
                             if (item.NIDTIPOLISTA == item.NIDTIPOLISTA) {
@@ -969,7 +947,7 @@ export class C2DetailComponent implements OnInit {
                     
                 })
 
-                 console.log("el arrayCoincidList 1244: ", arrayCoincidList)
+                 
                 return arrayCoincidList
             }else if(this.tipoClienteGC == 'GC' && (this.formData.NIDALERTA == 35 || this.formData.NIDALERTA ==  33)){
 
@@ -1045,28 +1023,23 @@ export class C2DetailComponent implements OnInit {
                     //}
                     
                 })
-                // console.log("el 1 : ",this.internationalList)
-                // console.log("el 2 : ",this.sacList)
-                // console.log("el 3 : ",this.pepList)
-                // console.log("el 4 : ",this.familiesPepList)
-                // console.log("el 5 : ",this.espList)
+                
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
-                console.log("lista nueva el ngmodel 1: ",dataService.NIDREGIMEN-1)
-                console.log("lista nueva el ngmodel 2: ",[arrInternationalService,arrListPepService,this.uncheckFamiliesPepList,this.uncheckSacList,arrListEspService])
+              
                 this.unchekAllList[dataService.NIDREGIMEN-1] = [arrInternationalService,arrListPepService,arrFamiliesService,arrSacListService,arrListEspService]
                 //this.unchekAllList = arrayDefault
-                console.log("lista nueva el ngmodel unchekAllList: ",this.unchekAllList)
+                
                 //this.unchekAllList = arrayDefault[dataService.NIDREGIMEN]
                 //this.unchekAllList = [this.uncheckInternationalLists,this.uncheckPepLists,this.uncheckFamiliesPepList,this.uncheckSacList,this.uncheckListEspecial]//this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = internationalListService.concat(arrSacService.concat(pepListService.concat(familiesServiceList.concat(espListService))))
-                console.log("el sumaArrays 1244: ", sumaArrays)
-                // console.log("el unchekAllList 1244: ", this.unchekAllList)
+                
+                
                 let indiceList = 0
                 sumaArrays.forEach(item => {
                     let objListaCliente: any = {}
                     let objTipoLista: any = (this.tipoListas.filter(it => it.id == item.NIDTIPOLISTA))[0]
                     let respValid = arrayCoincidList.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA)
-                    console.log("el objTipoLista: ", objTipoLista)
+                    
                     if(respValid.length == 0 && objTipoLista){
                         objListaCliente.NIDTIPOLISTA = objTipoLista.id
                         objListaCliente.SDESTIPOLISTA = objTipoLista.nombre
@@ -1082,7 +1055,7 @@ export class C2DetailComponent implements OnInit {
                                 incL++
                             }
                         })
-                        // console.log("el arrObjsListas : ",arrObjsListas)
+                        
                         /*arrObjsListas.forEach(itemList => {
                             let arrayListaCliente: any = []
                             if (item.NIDTIPOLISTA == item.NIDTIPOLISTA) {
@@ -1098,14 +1071,14 @@ export class C2DetailComponent implements OnInit {
                     
                 })
 
-                // console.log("el arrayCoincidList 1244: ", arrayCoincidList)
+                
                 return arrayCoincidList
             }
             
             
             else{
                 respListasWithCoincid = await this.userConfigService.GetListaResultadosCoincid(dataService)
-                 console.log("El respListasWithCoincid : ", respListasWithCoincid)
+                 
                 let indice = 0
                 respListasWithCoincid.forEach(lis => {
                     let objNewLista: any = {}
@@ -1144,8 +1117,8 @@ export class C2DetailComponent implements OnInit {
                     arrayCoincidList.push(objNewLista)
 
                 })
-                // console.log("el respListasWithCoincid : ", respListasWithCoincid)
-                 console.log("el arrayCoincidList 17471714771741: ", arrayCoincidList)
+                
+                 
                  return arrayCoincidList
             }
             
@@ -1156,10 +1129,10 @@ export class C2DetailComponent implements OnInit {
     }
 
     async getDataClientesAllList(dataService){
-        console.log("getDataClientesAllList: ")
+        
         let respListasWithCoincid  = await this.userConfigService.GetListaResultadosCoincid(dataService)
         let arrayCoincidList:any = []
-        // console.log("El respListasWithCoincid : ",respListasWithCoincid)
+        
         respListasWithCoincid.forEach(lis => {
             let respValidList = arrayCoincidList.filter(it => it.NIDTIPOLISTA == lis.NIDTIPOLISTA)
             if(respValidList.length == 0){
@@ -1191,7 +1164,7 @@ export class C2DetailComponent implements OnInit {
 
         /*arrayCoincidList.forEach(list => {
             let respFilterList = this.tipoListas.filter(it => list.SDESTIPOLISTA != it.nombre)
-            console.log("el respFilterList 12345: ",respFilterList)
+            
             let bolListaIgual = false
             respFilterList.forEach(itemList => {
                 if(!bolListaIgual && itemList.nombre == list.SDESTIPOLISTA){
@@ -1211,8 +1184,8 @@ export class C2DetailComponent implements OnInit {
 
         })*/
         
-        // console.log("el respListasWithCoincid : ",respListasWithCoincid)
-        // console.log("el arrayCoincidList : ",arrayCoincidList)
+      
+      
         return arrayCoincidList
     }
 
@@ -1225,10 +1198,9 @@ export class C2DetailComponent implements OnInit {
 
     getListById(idList){
         
-         console.log("el log del idList : ",idList)
-         console.log("el log del this.arrCoincidenciasLista : ",this.arrCoincidenciasLista)
+       
         let respBusq = this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == idList)
-        // console.log("el log del respBusq : ",respBusq)
+      
         let resp = []
         switch (idList) {
             case 1 : {
@@ -1275,9 +1247,9 @@ export class C2DetailComponent implements OnInit {
     async getInternationalLists() {        
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show(); 
-        //console.log("el param 789: ",param)
+      
         this.internationalList = await this.userConfigService.getInternationalLists(param)
-        //console.log("el param 789 this.internationalList: ",this.internationalList)
+        
         this.internationalList.forEach((it, i) => { 
             this.uncheckInternationalLists.push(it.NACEPTA_COINCIDENCIA == 1)
         })
@@ -1356,7 +1328,7 @@ export class C2DetailComponent implements OnInit {
         this.core.loader.show();
         let respMovement = await this.userConfigService.getMovementHistory(param)
         //let arrMovementNew = []
-        /* debugger; */
+        /*   */
         this.movementHistory = respMovement//this.sNombreLista ? respMovement.filter(duplid => duplid.SDESTIPOLISTA == this.sNombreLista) : respMovement
         this.core.loader.hide();
     }
@@ -1372,10 +1344,9 @@ export class C2DetailComponent implements OnInit {
     poliza: any */
 
     async getPolicyList(){       
-         console.log("el P_NIDALERTA : ",this.formData) 
-         console.log("el P_NIDALERTA 2: ",(this.formData.NTIPOCARGA == null ? 2 : this.formData.NTIPOCARGA)) 
+       
         let param = {P_NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, P_NIDALERTA: 2/*this.formData.NIDALERTA*/, P_NTIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, P_SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO,P_NIDREGIMEN: 99, P_NTIPOCARGA : this.formData.NTIPOCARGA == 'null' || this.formData.NTIPOCARGA == null ? '2' : this.formData.NTIPOCARGA }//this.formData.NIDREGIMEN}
-        //console.log("param de entrada poliza vigente",param)
+        
         this.core.loader.show();  
         this.policyList = await this.userConfigService.getPolicyList(param)
         
@@ -1393,8 +1364,7 @@ export class C2DetailComponent implements OnInit {
             this.bolSoatGral = this.getValidaCabeceraPlacaFunc(this.policyGral)
             this.bolSoatSimpli = this.getValidaCabeceraPlacaFunc(this.policySimpli)
         }
-        // console.log("el this.bolSoatGral : ",this.bolSoatGral)
-        // console.log("el this.bolSoatSimpli : ",this.bolSoatSimpli)
+        
         
 
         //this.policyGral = this.policyList
@@ -1420,14 +1390,11 @@ export class C2DetailComponent implements OnInit {
         this.fecpoli= this.policySimpli[0].DFEC_INI_POLIZA;
         this.poliza= this.policySimpli[0].SNUM_POLIZA; */
         
-        /* console.log('prueba kevin', this.policySimpli)
-        console.log('prueba kevin', this.policySimpli[0].NCERTIF)
-        console.log('prueba kevin', this.policySimpli[0].DFEC_INI_POLIZA)
-        console.log('prueba kevin', this.policySimpli[0].SNUM_POLIZA) */
+       
     }
 
     getListCheckedById(idList){
-        //console.log("el log del idList : ",idList)
+       
         let resp = []
         switch (idList) {
             case 1 : {
@@ -1455,7 +1422,7 @@ export class C2DetailComponent implements OnInit {
     async save() {
         
         let valor:any = this.ValidarSeleccionarListaPEP()
-        // console.log("lista nueva el check 7: ",valor)
+        
         
         if(valor == 1){
             swal.fire({
@@ -1480,39 +1447,36 @@ export class C2DetailComponent implements OnInit {
             
         }
        
-        console.log("lista nuevatipo cliente: ",this.tipoClienteGC)
-        //  console.log("lista nueva checkbox  nuevot: ",varlorcheck)
+      
+        
         let mensaje
         
         //  let varlorcheck = this.Valordelcheckbox(e)
-        //  console.log("lista nueva checkbox  nuevot: ",varlorcheck)
+     
 
         let idListaCheckbox = this.IdLista ? this.IdLista : null;
         let arreglosUncheckbox = this.getListCheckedById(idListaCheckbox)
-        console.log("el id de la lista del checkt: ",idListaCheckbox)
-         console.log("lista nueva ARRELOGS list: ",arreglosUncheckbox)
-         console.log("lista nueva ARRELOGS: ",arreglosUncheckbox.length)
-         console.log("lista nueva el ngmodel : ",this.unchekAllList[0],this.unchekAllList[1])
+        
+        
         let variabledeloscheck : any = []
        
 
 
     
           arreglosUncheckbox.filter(function(elemento){ 
-            console.log("lista nueva elemeto", elemento)
-            if(elemento == 0)
+          
+            if(elemento == 0){
 
-            console.log("lista nueva cantidad  entro en el if", elemento)
+            }
+
+           
             else{
                  variabledeloscheck  = elemento
             }
            
            return variabledeloscheck
           })
-          console.log("lista nueva el nuevo array", variabledeloscheck)
-          console.log("lista nueva el nuevo array cantidad", variabledeloscheck.length)
-          console.log("lista nueva el nuevo array cantidad 1", variabledeloscheck[0])
-          console.log("lista nueva el nuevo array cantidad 2", variabledeloscheck[1])
+          
 
         // if(this.tipoClienteGC == "ACEPTA-COINCID"){
 
@@ -1555,8 +1519,7 @@ export class C2DetailComponent implements OnInit {
             let cantidadUndefined
             let listacheckbox 
             arreglos = this.getListById(99)
-            console.log("lista de arreglos",arreglos)
-            console.log("lista de arreglos unchekAllList",this.categoriaSelectedArray)
+    
             
             
            // if(this.unchekAllList.length == 2 )  {
@@ -1565,7 +1528,7 @@ export class C2DetailComponent implements OnInit {
                 
                   for (let index2 = 0; index2 < 5; index2++) {
                         //this.unchekAllList[index][index2].splice(1,3)
-                        console.log("lista de arreglos unchekAllList1", index2, this.categoriaSelectedArray[index][index2])
+                     
                         let valor1 = this.categoriaSelectedArray[index][index2][0]
                         let valor2 = this.categoriaSelectedArray[index][index2][1]
                          
@@ -1578,7 +1541,7 @@ export class C2DetailComponent implements OnInit {
                  cantidadTrue = newValorArreglos.filter(it => it == true )
                 cantidadFalse = newValorArreglos.filter(it => it == false )
                 cantidadUndefined = newValorArreglos.filter(it => it == undefined )
-                console.log("lista de arreglos newValorArreglos", newValorArreglos)
+               
                 
            // }
             // else{
@@ -1591,7 +1554,7 @@ export class C2DetailComponent implements OnInit {
             //     }
             //     cantidadTrue = newValorArreglos.filter(it => it == true )
             //     cantidadFalse = newValorArreglos.filter(it => it == false )
-            //     console.log("lista de arreglos newValorArreglos", newValorArreglos)
+           
             // }
              
            
@@ -1664,10 +1627,7 @@ export class C2DetailComponent implements OnInit {
         //     mensaje = "¿Desea descartar la coincidencia?"
             
         // }
-        // console.log("mensaje ",mensaje)
-        // console.log("el arreglosUnchecked prueba: ",this.unchekAllList[0])
-        // console.log("el arreglosUnchecked prueba: ",this.unchekAllList)
-        //console.log("valor del checkbox 2 :", idListaCheck)
+        
         swal.fire({
             title: 'Señal de alerta',
             //text: "¿Desea actualizar la información del cliente?",
@@ -1689,7 +1649,7 @@ export class C2DetailComponent implements OnInit {
             if (result.value) {
                 this.core.loader.show();
                 let respUsuario = this.core.storage.get('usuario')
-                // console.log("el respUsuario : ",respUsuario)
+           
                 let idListaCheck = this.IdLista ? this.IdLista : null;
                 // let arreglos = [this.internationalList, this.familiesPepList, this.pepList, this.sacList, this.espList]
                 //let arreglos = this.getListById(idListaCheck)//[this.internationalList, this.familiesPepList, this.pepList, this.espList]
@@ -1701,35 +1661,26 @@ export class C2DetailComponent implements OnInit {
                 }else{
                     arreglos = this.getListById(idListaCheck)
                 }
-                // console.log("el arreglos 1551 : ",arreglos)
+       
                 //return
                 
-                //console.log("el respUsuario : ",respUsuario)
-                //console.log("el this.formData : ",this.formData)
-                // console.log("el arreglosUnchecked 1551 : ",arreglosUnchecked)
-                // console.log("el arreglosUnchecked 1551 : ",this.unchekAllList)
-                //console.log("el arreglosUnchecked.length 1551 : ",arreglosUnchecked.length)
+               
                 let arrPromises = []
                 if(this.tipoClienteGC == 'ACEPTA-COINCID'){
-                    console.log("entro en el if")
+             
                     let arrayRegimen = [1,2]
-                    console.log("EL ITEM VALUE this.unchekAllList: ",this.unchekAllList)
+              
 
-                    console.log("EL ITEM VALUE arreglos: ",arreglos)
+              
                     //arrayRegimen.forEach(regimen => {
                         //let incrementadorCheck = 0;
                         for (let incrementadorCheck = 0; incrementadorCheck < arreglos.length; incrementadorCheck++) {
                             const itemArreglos = arreglos[incrementadorCheck];
                             
                             //if(itemArreglos.NIDREGIMEN == regimen){
-                                //console.log("EL ITEM VALUE this.unchekAllList: ",this.unchekAllList)
-                                //console.log("EL ITEM VALUE regimen: ",regimen)
-                                console.log("EL ITEM VALUE itemArreglos: ",itemArreglos)
+                            
                                 const itemUncheck = (this.unchekAllList[itemArreglos.NIDREGIMEN-1][(itemArreglos.NIDTIPOLISTA-1)])[itemArreglos.NCONTADORLISTA];
-                                console.log("EL ITEM VALUE el itemUncheck incrementadorCheck: ",incrementadorCheck)
-                                //console.log("EL ITEM VALUE el itemUncheck this.unchekAllList[regimen-1]: ",this.unchekAllList[regimen-1])
-                                //console.log("EL ITEM VALUE el itemUncheck this.unchekAllList[regimen-1]: ",this.unchekAllList[regimen-1][(itemArreglos.NIDTIPOLISTA-1)])
-                                //console.log("EL ITEM VALUE el itemUncheck : ",itemUncheck)
+                              
                                 if(itemArreglos.SESTADO_REVISADO == '2'){
                                     let valorAlerta
                                     let  valorIDGrupo
@@ -1743,7 +1694,7 @@ export class C2DetailComponent implements OnInit {
                                         valorAlerta = 2
                                         valorIDGrupo = 1
                                     }
-                                    // debugger;
+                                    //  
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: valorAlerta, 
@@ -1762,7 +1713,7 @@ export class C2DetailComponent implements OnInit {
                                         STIPO_DOCUMENTO : itemArreglos.STIPOIDEN
     
                                     }
-                                    console.log("el param 1: ",param)
+                                 
                                       let response = this.userConfigService.updateUnchecked(param)
                                       arrPromises.push(response)
                                 }
@@ -1788,7 +1739,7 @@ export class C2DetailComponent implements OnInit {
                         //let item = arreglos[i]
                         for (let inc = 0; inc < this.unchekAllList.length; inc++) {
                             const itemUncheck = this.unchekAllList[inc];
-                            console.log("el itemUncheck : ",itemUncheck)
+                           
                             //if(itemUncheck == true){
                                 let param = {
                                     NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
@@ -1802,18 +1753,18 @@ export class C2DetailComponent implements OnInit {
                                     NIDUSUARIO_REVISADO: respUsuario ? respUsuario.idUsuario : null, //
                                     SESTADO_TRAT: null//itemArreglos.SESTADO_TRAT
                                 }
-                                console.log("el param : ",param)
+                              
                                 let response = this.userConfigService.updateUnchecked(param)
                                 arrPromises.push(response)
                             //}
                         }
                     })
                 }*/else{
-                    console.log("entro en el else")
+                   
                     for (let i = 0; i < arreglos.length; i++) {
                         //let arreglo = arreglos[i]
                         let item = arreglos[i]
-                        console.log("entro en el else 2",item)
+                       
                         if(item.SESTADO_REVISADO == '2'){
                             let valorAlerta
                             let valorIDGrupo
@@ -1829,8 +1780,7 @@ export class C2DetailComponent implements OnInit {
                                         valorAlerta = 2
                                         valorIDGrupo = 1
                                     }
-                            // console.log("el arreglosUnchecked[i] : "+ i +": ",this.unchekAllList[i])
-                            // console.log("item de la data",item)
+                          
                             let param = {
                                 NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                 NIDALERTA: valorAlerta, 
@@ -1848,7 +1798,7 @@ export class C2DetailComponent implements OnInit {
                                 NIDGRUPOSENAL: valorIDGrupo,
                                 STIPO_DOCUMENTO : item.STIPOIDEN
                             }
-                             console.log("entro el param 2 : ",param)
+                         
                              
                              let response = this.userConfigService.updateUnchecked(param)
                              arrPromises.push(response)
@@ -1863,9 +1813,9 @@ export class C2DetailComponent implements OnInit {
 
                 
                 let respPromiseAll = await Promise.all(arrPromises)
-                 console.log("el respPromiseAll : ",respPromiseAll)
+                 
                 this.formData.SESTADO_REVISADO = '1'
-                console.log("el this.formData.SESTADO_REVISADO : ",this.formData.SESTADO_REVISADO)
+                
                 //this.ngOnInit();//COMENTAR
 
                 //this.SCLIENT_DATA Trae el sclient para todos
@@ -1905,22 +1855,22 @@ export class C2DetailComponent implements OnInit {
     getDisable(){
       
         let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.NACEPTA_COINCIDENCIA == 2)
-        //  console.log("La cantidad de las listas 2",ValorCantidad)
+       
         if(ValorCantidad.length > 0){
             return false
         }else{
             if(this.SESTADO_REVISADO_ACEPT+'' == '1'){
-                // console.log("this.formData.SESTADO_REVISADO 1",this.SESTADO_REVISADO_ACEPT)
+             
                 //return false
                 return true
             }
             if(this.formData.SESTADO_REVISADO == '1'){
-                // console.log("this.formData.SESTADO_REVISADO 2",this.formData.SESTADO_REVISADO)
+           
                 return true
             }
             else
             {
-                // console.log("this.formData.SESTADO_REVISADO 3",this.SESTADO_REVISADO_ACEPT,this.formData.SESTADO_REVISAD)
+              
                 return false
             }
     
@@ -1933,7 +1883,7 @@ export class C2DetailComponent implements OnInit {
 
     getDisableByCheck(SESTADO_REVISADO){
         //return true
-        // console.log("Estado : ",this.formData.SESTADO_REVISADO)
+        
         if(this.formData.SESTADO_REVISADO == '1' || SESTADO_REVISADO == '1'){//(estadoTrat != 'CRE' || estadoTrat != 'CRF' || estadoTrat != 'CCO')){
             return true
         }
@@ -1950,9 +1900,7 @@ export class C2DetailComponent implements OnInit {
         let param = {P_NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, P_NIDALERTA: this.formData.NIDALERTA, P_NTIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, P_SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO,P_NIDREGIMEN: this.formData.NIDREGIMEN}
         //this.policyList = await this.userConfigService.getPolicyList(param)
         listFiltrada = policyRegimen.filter( item=> (item.RAMO+' ').trim() == "SOAT")
-        // console.log("cantidad-1:",policyRegimen)
-        //console.log("cantidad-1:",this.policyList)
-         console.log("cantidad:",listFiltrada.length)
+        
         if(listFiltrada.length>0){
             return true
         }
@@ -1967,7 +1915,7 @@ export class C2DetailComponent implements OnInit {
         this.policyList
         let listFiltrada
 
-        //   console.log("prueba 123clista",this.policyList)
+       
         
         listFiltrada = this.policyList.filter( item=> (item.RAMO+' ').trim() == "SOAT")
         if(listFiltrada.length>0){
@@ -1981,11 +1929,11 @@ export class C2DetailComponent implements OnInit {
         //     return this.bolSoatPolicy
         // }else{
         //     if(regimen == 1){
-        //         // console.log("prueba 123",this.bolSoatGral)
+        
         //         return this.bolSoatGral
         //     }
         //     if(regimen == 2){
-        //         // console.log("prueba 1234",this.bolSoatSimpli)
+        
         //         return this.bolSoatSimpli
         //     }
            
@@ -1994,7 +1942,7 @@ export class C2DetailComponent implements OnInit {
     }
 
     getOcultarEdad(){
-        //console.log("tipo de documento", this.formData.NTIPO_DOCUMENTO)
+        
         if(this.formData.NTIPO_DOCUMENTO == 2){ 
             return true
         }else{
@@ -2024,9 +1972,7 @@ export class C2DetailComponent implements OnInit {
     
     validatePorPorcentaje(items,status){
         
-        //  console.log(" El item para el validado: ",items);
-        //  console.log(" El item para el unchekAllList: ",this.unchekAllList);
-         //console.log(" El item para el validado2: ",items.SDESTIPOLISTA);
+       
         if(status == 'C'){
             var array =[] ;
             let isValidate = false;
@@ -2039,7 +1985,7 @@ export class C2DetailComponent implements OnInit {
                 }
 
             }); 
-            // console.log(" El item para el validado valor: ",status,isValidate);
+            
             return isValidate;
         }
         else{
@@ -2048,7 +1994,7 @@ export class C2DetailComponent implements OnInit {
             if(respuestafilter.length > 0 || isValidate){
                 isValidate = true;
             }
-            // console.log(" El item para el validado valor: ",status,isValidate);
+            
             return isValidate;
         }
         
@@ -2081,12 +2027,12 @@ export class C2DetailComponent implements OnInit {
         }else{*/
             let nuevaCadenaNum = ""
             
-            // console.log("el arrCadenas: ",arrCadenas)
+           
             
             let numeroLimitDos = 0
             let arrReverse = (arrCadenas[0].split("")).reverse();
             
-            // console.log("el arrReverse: ",arrReverse)
+           
             
             arrReverse.forEach(it => {
                 if(numeroLimitDos < 3){
@@ -2122,7 +2068,7 @@ export class C2DetailComponent implements OnInit {
     Valordelcheckbox(e){
         let valorretorno = false
         let valordelcheckbox = e.checked
-        console.log("prueba de chack",valordelcheckbox)
+        
         if(valordelcheckbox){
             valorretorno = true
             return valorretorno
@@ -2137,8 +2083,7 @@ export class C2DetailComponent implements OnInit {
     }
    
     validatePorPorcentaje2(IDLISTA){
-        console.log("la lista de las listas :", this.arrCoincidenciasLista)
-        console.log("la lista de las listas :",IDLISTA )
+    
         
             
 
@@ -2149,18 +2094,18 @@ export class C2DetailComponent implements OnInit {
                     let respuestafilterNom = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "NOMBRES")
                     let respuestafilterDoc = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "DOCUMENTO")
                     if(respuestafilterNom.length > 0   ){
-                        console.log("la lista de las listas true:")
+                       
                                return true
                       }
                       if(respuestafilterDoc.length > 0 && respuestafilterNom.length == 0   ){
-                        console.log("la lista de las listas false:")
+                       
                                return false
                       }
                });
                           
             }
             else{
-                console.log("la lista de las listas false 2 :")
+                
                 return false
             }
         
@@ -2219,7 +2164,7 @@ export class C2DetailComponent implements OnInit {
     }
 
     cortarCararter(texto){
-    // console.log("El valor del texto ",texto)
+  
         
     if(texto != null){
         let newTexto = texto.substring(0, 20)
@@ -2248,7 +2193,7 @@ export class C2DetailComponent implements OnInit {
         }
 
         let newArreglosListasPEP = arreglos.filter(it => it.NIDTIPOLISTA == 2)
-        console.log("lista arreglos newArreglosListasPEP", newArreglosListasPEP)
+     
         let newValorAceptador = []
         let valorAceptados = []
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
@@ -2264,11 +2209,11 @@ export class C2DetailComponent implements OnInit {
            }
         }else if (newArreglosListasPEP.length == 2 && ((newArreglosListasPEP[0].NIDREGIMEN == 1 && newArreglosListasPEP[1].NIDREGIMEN == 1) || ( newArreglosListasPEP[0].NIDREGIMEN == 2 && newArreglosListasPEP[1].NIDREGIMEN == 2 ))){
             let idRegimen = newArreglosListasPEP[0].NIDREGIMEN
-            console.log("lista nueva el check ---- idRegimen:", idRegimen)
+           
            for(let index =0; index < newArreglosListasPEP.length; index++ ){
                    valorAceptados =  this.unchekAllList[idRegimen-1][1]
                if(valorAceptados[index] && newArregloCombo[index] == undefined){
-                       console.log("entro en el if")
+                      
                        return 1
                    }
                }
@@ -2276,9 +2221,7 @@ export class C2DetailComponent implements OnInit {
             }
             else if(newArreglosListasPEP[0].NIDREGIMEN == null){
                 // for (let index = 0; index < 2; index++) { 
-                    console.log("lista arreglos newArregloCombo", this.unchekAllList)
-                    console.log("lista arreglos newArregloCombo", this.unchekAllList[-1])
-                    console.log("lista arreglos newArregloCombo", this.unchekAllList[0])
+                  
                         valorAceptados =  this.unchekAllList[-1][1]//.filter(it => it == true)
                      
                         
@@ -2313,14 +2256,13 @@ export class C2DetailComponent implements OnInit {
         }
         }else
         {
-            console.log("lista arreglos", arreglos)
-            console.log("lista arreglos newArregloCombo", newArregloCombo)
+           
 
             if(newArreglosListasPEP.length == 1 ){
-                console.log("lista nueva el check ---- idRegimen:", this.unchekAllList)
+                
                 valorAceptados =  this.unchekAllList[newArreglosListasPEP[0].NIDREGIMEN-1]
-                console.log("lista nueva el check ---- idRegimen:", valorAceptados)
-                console.log("lista nueva el check ---- idRegimen:", newArregloCombo[0])
+                
+                
                 if(valorAceptados && newArregloCombo[0] == undefined){
                 return 1 
                   
@@ -2332,13 +2274,13 @@ export class C2DetailComponent implements OnInit {
              }
              if(newArreglosListasPEP.length == 2 ){
                 let idRegimen = newArreglosListasPEP[0].NIDREGIMEN
-                console.log("lista nueva el check ---- idRegimen:", idRegimen)
+                
                  for(let index =0; index < newArreglosListasPEP.length; index++ ){
-                    console.log("lista nueva el check ---- this.unchekAllList[index]:", this.unchekAllList[index])
+                
                    valorAceptados =  this.unchekAllList[index]
-                   console.log("lista nueva el check ---- valorAceptados:", valorAceptados)
+                
                if(valorAceptados && newArregloCombo[index] == undefined){
-                       console.log("entro en el if")
+                       
                        return 1
                    
              }
@@ -2365,26 +2307,25 @@ export class C2DetailComponent implements OnInit {
         }
         
         let newArreglosListasPEP = arreglos.filter(it => it.NIDTIPOLISTA == 2)
-        console.log("lista arreglos newArreglosListasPEP", newArreglosListasPEP)
+      
         
         let newValorAceptador = []
         let valorAceptados = []
         if(this.formData.NIDALERTA == 2){
             for( let index = 0; index < newArreglosListasPEP.length; index++){
-                console.log("nueva lista 1 index",index)
-                console.log("nueva lista 1 this.categoriaSelectedArray[n 1",this.categoriaSelectedArray[newArreglosListasPEP[index].NIDREGIMEN-1][1][index])
+               
                 if( (this.categoriaSelectedArray[newArreglosListasPEP[index].NIDREGIMEN-1][1][index] ) && newArregloCombo[index] == undefined){
-                    console.log("nueva lista 1 this.categoriaSelectedArray[n 2",this.categoriaSelectedArray[newArreglosListasPEP[index].NIDREGIMEN-1][1][index] )
+                    
                     return 1 
                       
                 }
             }
         }else{
             for( let index = 0; index < newArreglosListasPEP.length; index++){
-                console.log("nueva lista 1 index",index)
-                //console.log("nueva lista 1 this.categoriaSelectedArray[n 1",this.categoriaSelectedArray[newArreglosListasPEP[index].NIDREGIMEN-1][1][index])
+                
+                
                 if( (this.categoriaSelectedArray[index][1][index] ) && newArregloCombo[index] == undefined){
-                    console.log("nueva lista 1 this.categoriaSelectedArray[n 2",this.categoriaSelectedArray[index][1][index] )
+                
                     return 1 
                       
                 }
@@ -2398,9 +2339,7 @@ export class C2DetailComponent implements OnInit {
   categoriaSelectedArray:any = [[[],[],[],[],[]],[[],[],[],[],[]]]; 
   onCategoriaPressed(categoriaSelected: any, checked: boolean,indice,idlista,idRegimen){
       
-      console.log("el nuevo array 1ndice", indice)
-      console.log("el nuevo array 1 checked", checked)
-      console.log("el nuevo array 1 idRegimen", idRegimen)
+  
       
     //if (checked) { //Si el elemento fue seleccionado
       //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
@@ -2413,7 +2352,7 @@ export class C2DetailComponent implements OnInit {
         this.categoriaSelectedArray[indice][idlista].splice(indice,1,checked);
       }
 
-      console.log("El array del combo",this.ValorCombo)
+   
     
       //this.categoriaSelectedArray[idRegimen-1][idlista-1].push(checked);
      
@@ -2427,17 +2366,14 @@ export class C2DetailComponent implements OnInit {
      
     //  this.categoriaSelectedArray.sort();
     //}
-    console.log("el nuevo array :", this.categoriaSelectedArray)
-    // console.log("el valor de la key : ",Object.keys(this.checkbox))
-    // console.log("el valor de la  entries : ",Object.entries(this.checkbox))
-    // console.log("el valor de la  values : ",Object.values(this.checkbox))
+ 
     
 }
 
 Arraycheckbox(){
     //this.ValorCombo = [13]
     
-    console.log("El array del combo",this.ValorCombo)
+   
     let arreglos:any =[]
     let idListaCheck = this.IdLista ? this.IdLista : null;
     if(this.tipoClienteGC == 'ACEPTA-COINCID'){
@@ -2449,10 +2385,7 @@ Arraycheckbox(){
         arreglos = this.getListById(idListaCheck)
     }
     
-    console.log("nueva lista 1 this.formData.NIDALERTA",this.formData.NIDALERTA)
-    console.log("nueva lista 1 tipoClienteGC",this.tipoClienteGC)
-    console.log("nueva lista 1 arregloslenght",arreglos.length)
-    console.log("nueva lista 1 arreglos",arreglos)
+  
     let estadoRevisado = arreglos.filter(it => it.SESTADO_REVISADO == "1")
    if(this.formData.NIDALERTA == 2){
         
@@ -2466,43 +2399,43 @@ Arraycheckbox(){
             this.categoriaSelectedArray[arreglos[index].NIDREGIMEN-1][arreglos[index].NIDTIPOLISTA-1].splice(index,1,true);
             
         } 
-        console.log("this.ValorCombo,",this.ValorCombo)
+        
         arreglos.forEach((element,inc) => {
-            console.log("el incementador:", inc)
+        
             if(element.SESTADO_REVISADO == 1 ){
                 if(element.NIDCARGOPEP == null){
                 this.ValorCombo.push(undefined)
-                console.log("this.ValorCombo,",this.ValorCombo)
+        
                 }else{
                    this.ValorCombo.push(undefined)
                    this.ValorCombo.splice(inc,1,element.NIDCARGOPEP)
-                   console.log("this.ValorCombo,",this.ValorCombo)
+        
                 }
                 
             }
-            console.log("this.ValorCombo,",this.ValorCombo)
+        
         });
      }
    }else{
     for( let index = 0; index < arreglos.length; index++){
-        console.log("nueva lista 1 categoriaSelectedArray 1", this.categoriaSelectedArray)
+        
         this.categoriaSelectedArray[0][arreglos[0].NIDTIPOLISTA-1].splice(index,1,false);
-        console.log("nueva lista 1 categoriaSelectedArray 2", this.categoriaSelectedArray)
+        
 
         arreglos.forEach((element,inc) => {
-            console.log("el incementador:", inc)
+        
             if(element.SESTADO_REVISADO == 1 ){
                 if(element.NIDCARGOPEP == null){
                 this.ValorCombo.push(undefined)
-                console.log("this.ValorCombo,",this.ValorCombo)
+        
                 }else{
                    this.ValorCombo.push(undefined)
                    this.ValorCombo.splice(inc,1,element.NIDCARGOPEP)
-                   console.log("this.ValorCombo,",this.ValorCombo)
+        
                 }
                 
             }
-            console.log("this.ValorCombo,",this.ValorCombo)
+        
         });
         
 } 
@@ -2511,8 +2444,6 @@ Arraycheckbox(){
     
     
     
-     console.log("nueva lista 1 arreglos", arreglos)
-     console.log("nueva lista 1 categoriaSelectedArray", this.categoriaSelectedArray)
     
 
 }
@@ -2526,7 +2457,7 @@ ValidarRegimenGC(){
     }
 }
 ValidarRegimenAcepta(){
-    console.log("this.IDGRUPOSENAL",this.IDGRUPOSENAL)
+  
     if(this.IDGRUPOSENAL == 2 || this.IDGRUPOSENAL == 3){
         return false
     }else{
@@ -2559,15 +2490,15 @@ async Consultar360Previous(){
       (response) => {
         this.ResultadoPrevious = response
     });
-    console.log("360Previous",this.ResultadoPrevious)
+    
     this.detResult= this.ResultadoPrevious.certificados
-    console.log("El resultado",this.detResult)
+    
 
   } */
   /* ResultadoDetail:any = {}
   async Consultar360_2(item){
 
-    console.log("entro en el servicio de 360", item)
+    
     let data:any = {
     Ramo : item.ramo.idRamo,
     Producto : item.idProduct,
@@ -2576,16 +2507,16 @@ async Consultar360Previous(){
     FechaConsulta : item.fechaInicioVigencia, //fecha inicio vigencia
     Endoso : item.endoso,    //Solo para rentas
     }
-    console.log("entro en el servicio de 360 la data", data)
+    
      await this.userConfigService.Consulta360(data).then(
        (response) => {
         this.ResultadoDetail = response
        });
-    console.log("entro en el servicio de 360 resultado", this.ResultadoDetail)
     
-    //console.log("El resultado", item.ramo.descripcion)//primero no envia
-    //console.log("El resultado", item.ramo.descripcionCorta)//segundo
-    //console.log("El resultado", item.producto)//tercero
+    
+    
+    
+    
 
     // this.desc= item.ramo.descripcion;
     // this.desCor= item.ramo.descripcionCorta;
@@ -2617,7 +2548,7 @@ async Consultar360Previous(){
         this.core.loader.show()
         this.ListaPoliza = await this.userConfigService.GetListaPolizas(data)
         this.core.loader.hide()
-        console.log("this.ListaPoliza", this.ListaPoliza)
+        
 
         // if(this.ListaPoliza.length != 0){
         //     this.ListaPoliza.forEach(element => {
@@ -2630,7 +2561,7 @@ async Consultar360Previous(){
    //Resultado360:any = []
 //   async Consultar360(item){
 
-//     console.log("entro en el servicio de 360", item)
+
 //     let data:any = {
 //     Ramo : item.IDRAMO,
 //     Producto : item.COD_PRODUCTO,
@@ -2639,14 +2570,14 @@ async Consultar360Previous(){
 //     FechaConsulta : item.INICIO_VIG_POLIZA,//fecha inicio vigencia
 //     Endoso : null,    //Solo para rentas
 //     }
-//     console.log("entro en el servicio de 360 la data", data)
+
 //     this.core.loader.show()
 //      await this.userConfigService.Consulta360(data).then(
 //        (response) => {
 //         this.Resultado360 = response
 //        });
 //        this.core.loader.hide()
-//     console.log("entro en el servicio de 360 resultado", this.Resultado360)
+
 //   } 
 /* async showdata(item){
     switch (item.IDRAMO) {

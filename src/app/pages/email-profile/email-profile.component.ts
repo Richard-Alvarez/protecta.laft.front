@@ -73,9 +73,9 @@ export class EmailProfileComponent implements OnInit {
       let response = await this.userConfig.GetListCorreo()
       this.ListCorreo = response
       this.core.loader.hide();
-      console.log("entro al resultado del resp : ",modalRef.componentInstance.reference)
+      
     }, (reason) => {
-      console.log("entro al resultado del reason : ",reason)
+      
       this.core.loader.hide();
     });
   }
@@ -85,13 +85,13 @@ export class EmailProfileComponent implements OnInit {
     
     
     modalRef.componentInstance.reference = modalRef;
-    console.log("entro al resultado del resp : ",modalRef.componentInstance.reference)
+   
     modalRef.result.then(async (resp) => {
       this.core.loader.show();  
       let response = await this.userConfig.GetListCorreo()
       this.ListCorreo = response
       this.core.loader.hide();
-      console.log("entro al resultado del reason : ",resp)
+     
     }, (reason) => {
       this.core.loader.hide();
     });
@@ -129,11 +129,11 @@ export class EmailProfileComponent implements OnInit {
       }
     );
     return text
-    // console.log(text); // expected result:
+    
   }
   async ListaAction(){
     // let dataList = await this.userConfig.GetListConifgCorreoDefault()
-    // console.log("la data" , dataList)
+  
   }
 
    

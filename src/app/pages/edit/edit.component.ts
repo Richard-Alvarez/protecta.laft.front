@@ -66,7 +66,7 @@ export class EditComponent implements OnInit {
       let dia = fecha.substr(8, 2);
       let mes = fecha.substr(5, 2);
       let anio = fecha.substr(0, 4);
-      //console.log(dia + '/' + mes + '/' + anio);
+      
       return dia + '/' + mes + '/' + anio;
     } else {
       return fecha;
@@ -159,7 +159,7 @@ export class EditComponent implements OnInit {
         }
       }
     }
-    //console.log(this.registro.senial);
+  
     if (this.registro.senial.id == null || this.registro.senial.id < 0 || this.registro.senial.id === undefined) {
       this.Message('La señal es obligatoria');
       error = true;
@@ -168,7 +168,7 @@ export class EditComponent implements OnInit {
 
     if (error) { this.core.loader.hide(); return; }
 
-    //console.log(error);
+ 
 
 
 
@@ -195,7 +195,7 @@ export class EditComponent implements OnInit {
     this.registro.fechaRegistro = this.FormatFecha(this.registro.fechaRegistro);
 
 
-    //console.log(this.registro);
+  
     this.cargaService.actualizarRegistro(this.registro)
       .then((Response) => {
         this.core.loader.hide();

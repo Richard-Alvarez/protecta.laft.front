@@ -54,17 +54,17 @@ export class AsignProfileRegComponent implements OnInit {
         _data = (response);
         this.listAlert = _data;
         this.listAlert.forEach(it => it.alertStatus = it.alertStatus == '1' ? true : false)
-        // //console.log(this.AlertList)
+      
         this.arrayFinalSenial = this.listAlert;
         this.core.loader.hide();
       });
   }
 
   changeProfile(){
-    //console.log("P")
+   
   }
   changeRegime(){
-    //console.log("R")
+
   }
 
 }

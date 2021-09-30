@@ -12,7 +12,7 @@ export class ValidacionesRegex{
     isLongitudByValue(valor,longitud){
         let respValor = (valor + ' ').trim()
         let longValor = respValor.length
-        // console.log("el longValor : ",longValor)
+        
         if (longValor >= longitud) {
             return true
         }

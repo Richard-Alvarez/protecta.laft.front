@@ -72,9 +72,9 @@ export class ViewC2FormComponent implements OnInit {
         // let respObjFocusPosition : any = JSON.parse(localStorage.getItem("objFocusPosition"))
 
         // if(respObjFocusPosition){
-        //     console.log("El respObjFocusPosition: ",respObjFocusPosition)
+       
         //     let cadenaContentUsers = 'consulta'+'Alert'+respObjFocusPosition.NIDALERTA+'Lista'+respObjFocusPosition.NIDTIPOLISTA+'Regimen'+respObjFocusPosition.regimen.id
-        //     console.log("El cadenaContentUsers: ",cadenaContentUsers)
+        
         //     this.redictM(cadenaContentUsers)
         // }
 
@@ -90,13 +90,13 @@ export class ViewC2FormComponent implements OnInit {
         //await this.getListaInternacional();
         this.groupListTypes()
         
-        //console.log(this.alertData.SESTADO)
+       
         // debugsger;
         let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPosition"))
 
         if(respObjFocusPosition && respObjFocusPosition.NIDALERTA){
             //if (respObjFocusPosition.estado == 'PENDIENTE-INFORME' || respObjFocusPosition.estado == 'INFORME-TERMINADO'){
-                console.log("El respObjFocusPosition: ",respObjFocusPosition)
+                
                 if(respObjFocusPosition.regimen.id == 2){
                     let tabGnral = document.getElementById("Gral"); 
                     let tabSimpl = document.getElementById("Simpli"); 
@@ -114,14 +114,13 @@ export class ViewC2FormComponent implements OnInit {
                // let cadenaContentUsers = 'consulta'+'Alert'+respObjFocusPosition.NIDALERTA+'Lista'+respObjFocusPosition.NIDTIPOLISTA+'Regimen'+respObjFocusPosition.regimen.id
                 let cadenaContentUsers = respObjFocusPosition.elementoPadre
                 let cadenaContenelement = respObjFocusPosition.elemento
-                console.log("El cadenaContentUsers: ",cadenaContentUsers)
+              
                 this.redictM(cadenaContentUsers,cadenaContenelement)
             //this.redictBodyM(cadenaContentUsers)
           //}
         }
         this.core.loader.hide();
-        //console.log("lista señales", this.signalDetailList)
-        //console.log("datos de la grilla",)
+       
     }
 
     async getClientsByList(){
@@ -151,17 +150,15 @@ export class ViewC2FormComponent implements OnInit {
         let respResultadosCoinciden:any = [] 
         respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
         this.core.loader.hide()
-        //console.log("el respResultadosCoinciden: ",respResultadosCoinciden)
+       
         
         this.arrayClientesByList = respResultadosCoinciden
     }
 
     getClientsByListArr(lista){
-        //ebugger;
-        //console.log("respuesta de los filtros: 0 ", lista)
-        //console.log("respuesta de los filtros: 1", this.arrayClientesByList)
+        
         let resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
-        //console.log("respuesta de los filtros: 2", resp)
+        
         let arrDuplid = []
         let arrRespuesta = []
         resp.forEach(itemRes => {
@@ -172,7 +169,7 @@ export class ViewC2FormComponent implements OnInit {
                 arrDuplid.push(itemRes.SNOM_COMPLETO)
             }
         })
-        // console.log("arrRespuesta lista: ", arrRespuesta)
+        
         return arrRespuesta
     }
 
@@ -197,11 +194,11 @@ export class ViewC2FormComponent implements OnInit {
         var user = this.core.storage.get('usuario');
         let userId = user['idUsuario'];
 
-        //console.log(status)
+      
         let param = { NPERIODO_PROCESO: this.alertData.NPERIODO_PROCESO, NIDALERTA: this.alertData.NIDALERTA, NTIPOIDEN_BUSQ: item.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: item.SNUM_DOCUMENTO, SESTADO_REVISADO: status, NIDUSUARIO_REVISADO: userId }
-        //console.log(param)
+      
         let response = await this.userConfigService.updateStatusToReviewed(param)
-        //console.log("respuesta de actualizado", response.dfechaRevisado)
+       
         item.DFECHA_REVISADO = response.dfechaRevisado.day + "/" + response.dfechaRevisado.month + "/" + response.dfechaRevisado.year
         this.core.loader.hide()
     }
@@ -224,7 +221,7 @@ export class ViewC2FormComponent implements OnInit {
         let coincidences = this.getListOfPeople(this.listTypeMap)
         let count = coincidences.length
         let actives = []
-        //console.log(coincidences)
+      
         for (let i = 0; i < coincidences.length; i++) {
             if (coincidences[i].estadoRevisado == true) {
                 actives.push(coincidences[i])
@@ -261,11 +258,11 @@ export class ViewC2FormComponent implements OnInit {
                     updateAlert.periodId = this.alertData.NPERIODO_PROCESO
                     updateAlert.status = '2'
                     updateAlert.regimeId = this.alertData.NIDREGIMEN
-                    //console.log(updateAlert)
+                   
                     this.userConfigService.updateStatusAlert(updateAlert)
                         .then((response) => {
                             this.core.loader.hide();
-                            //console.log(response)
+                            
                             if (response.error == 0) {
                                 swal.fire({
                                     title: 'Señal de alerta',
@@ -292,7 +289,7 @@ export class ViewC2FormComponent implements OnInit {
                                 return
                             }
                         }).catch(() => {
-                            //console.log('err');
+                            
                             this.core.loader.hide();
                         });
                 }
@@ -305,14 +302,14 @@ export class ViewC2FormComponent implements OnInit {
         let getCommentList: any = {};
         getCommentList.alertId = this.alertData.NIDALERTA
         getCommentList.periodId = this.alertData.NPERIODO_PROCESO
-        //console.log(getCommentList)
+       
         this.userConfigService.getCommentList(getCommentList)
             .then((response) => {
                 this.core.loader.hide();
-                //console.log(response)
+                
                 this.commentList = response
             }).catch(() => {
-                //console.log('err');
+               
                 this.core.loader.hide();
             });
         this.core.loader.hide();
@@ -320,7 +317,7 @@ export class ViewC2FormComponent implements OnInit {
 
     saveComment() {
         this.core.loader.show();
-        //console.log(this.commentBody)
+        
         if (this.commentBody == null) {
             this.core.loader.hide();
             swal.fire({
@@ -354,11 +351,11 @@ export class ViewC2FormComponent implements OnInit {
                     updateCommentList.periodId = this.alertData.NPERIODO_PROCESO
                     updateCommentList.comment = this.commentBody
                     updateCommentList.userId = userId
-                    //console.log(updateCommentList);
+                   
                     this.userConfigService.updateCommentList(updateCommentList)
                         .then((response) => {
                             this.core.loader.hide();
-                            //console.log(response)
+                           
                             if (response.error != 0) {
                                 swal.fire({
                                     title: 'Comentarios',
@@ -386,7 +383,7 @@ export class ViewC2FormComponent implements OnInit {
                                 return
                             }
                         }).catch(() => {
-                            //console.log('err');
+                         
                             this.core.loader.hide();
                         });
                     this.core.loader.hide();
@@ -435,7 +432,7 @@ export class ViewC2FormComponent implements OnInit {
             var URLactual = window.location + " ";
             let link = URLactual.split("/")
             this.linkactual = link[link.length-1].trim()
-            console.log(" this.internationalList link",this.linkactual)
+            
             if(this.linkactual == "proveedor"){
                 let dataSend = {
                     NIDALERTA: 33,
@@ -446,7 +443,7 @@ export class ViewC2FormComponent implements OnInit {
                 }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-                console.log(" this.internationalList",  this.internationalList)
+               
             }else if(this.linkactual == "colaborador"){
                 let dataSend = {
                     NIDALERTA: 35,
@@ -457,7 +454,7 @@ export class ViewC2FormComponent implements OnInit {
                 }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-                console.log(" this.internationalList",  this.internationalList)
+              
             }else if(this.linkactual == "contraparte"){
                 let dataSend = {
                     NIDALERTA: 39,
@@ -468,7 +465,7 @@ export class ViewC2FormComponent implements OnInit {
                 }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-                console.log(" this.internationalList",  this.internationalList)
+               
             }else{
                 let dataSend = {
                     NIDALERTA: this.alertData.NIDALERTA,
@@ -479,15 +476,15 @@ export class ViewC2FormComponent implements OnInit {
                 }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-                console.log(" this.internationalList",  this.internationalList)
+              
             }
 
 
             
-            // console.log("Listaq: ",this.internationalList)
+          
            
         } catch (error) {
-            //console.error("el error : ", error);
+          
         }
 
     }
@@ -503,23 +500,23 @@ export class ViewC2FormComponent implements OnInit {
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 
                 this.internationalList = respListaInternacional
-                 console.log(" this.internationalList",  this.internationalList)
+               
             }else if(this.linkactual == "colaborador"){
                 let dataSend = {NIDALERTA: 35,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2  }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-                console.log(" this.internationalList",  this.internationalList)
+             
             }else if(this.linkactual == "contraparte"){
                 let dataSend = {NIDALERTA: 39,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2  }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-                console.log(" this.internationalList",  this.internationalList)
+               
             }
             else{
                 let dataSend = {NIDALERTA: this.alertData.NIDALERTA,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 1  }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-                console.log(" this.internationalList",  this.internationalList)
+        
             }
             
             
@@ -551,7 +548,7 @@ export class ViewC2FormComponent implements OnInit {
             
         }
         if (respListInter.lista.length > 1) {
-            //console.log("Arreglo ", arrObjCabecera)
+           
             await this.excelService.exportAsExcelFile(respListInter.lista, "REGISTROS DE " + nombreRpt);
             
         }
@@ -572,10 +569,9 @@ export class ViewC2FormComponent implements OnInit {
         localStorage.setItem("objFocusPosition", JSON.stringify(objFocusPosition))
 
         
-        //console.log("el ITEM 789123 : ",item)
-        console.log("el ITEM 789123 : ",lista)
+      
         let periodoSend = parseInt(localStorage.getItem("periodo"))
-        //console.log("el item : ",item)
+        
         localStorage.setItem("NIDALERTA", this.alertData.NIDALERTA)
         localStorage.setItem("NPERIODO_PROCESO", this.alertData.NPERIODO_PROCESO)
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
@@ -590,7 +586,7 @@ export class ViewC2FormComponent implements OnInit {
         localStorage.setItem("NREGIMEN", this.regimen.id)
         localStorage.setItem("SCLIENT", item.SCLIENT)
         localStorage.setItem('boolClienteReforzado', 'false')
-        //console.log("el this.vistaOrigen 221 : ",this.vistaOrigen)
+        
         localStorage.setItem('vistaOrigen', this.vistaOrigen)
         localStorage.setItem('tipoClienteGC', this.vistaOrigen)
         localStorage.setItem('view-c2-sNombreLista', lista.SDESTIPOLISTA)
@@ -603,10 +599,7 @@ export class ViewC2FormComponent implements OnInit {
         localStorage.setItem("tipoClienteCRF", this.vistaOrigen);
         
         await this.configService.sOrigenVista$.emit(this.vistaOrigen)//sOrigenVista$
-        /*this.configService.sOrigenVista$.subscribe(cadena => {
-            //console.log("dentro del subscribe cadena : ",cadena)
-        } )*/
-        // console.log("antes del router.navigate : ",this.vistaOrigen)
+       
         this.core.loader.hide()
         this.router.navigate(['/c2-detail'])
     }
@@ -715,7 +708,7 @@ export class ViewC2FormComponent implements OnInit {
             let archivos = await this.userConfigService.getAttachedFilesByAlert(data)
             archivos.forEach(it => this.arrayDocuments.push({ name: it.SRUTA_ADJUNTO }))
         } catch (error) {
-            //console.log("el error en getAttachedFiles : ", error)
+         
         }
     }
 
@@ -737,17 +730,17 @@ export class ViewC2FormComponent implements OnInit {
                 let data = await this.handleFile(files[i])
                 listFiles.push(data)
             }
-            //console.log("los archivos : ", listFiles)
+           
             await this.sendFiles('OC');
         } catch (error) {
-            //console.log("el error: ", error)
+           
         }
 
     }
 
     async insertAttachedFiles(data: any) {//SERVICIO QUE SUBE EL NOMBRE DEL ADJUNTO
         let response = await this.userConfigService.insertAttachedFilesByAlert(data)
-        //console.log(response)
+      
     }
 
     async sendFiles(tipoUsuario: string) {
@@ -781,7 +774,7 @@ export class ViewC2FormComponent implements OnInit {
 
             }
             this.userConfigService.uploadFilesByAlert(data).then(response => {
-                //console.log(response);
+              
             });
 
             /*listFileName.foreach(item => {
@@ -790,7 +783,7 @@ export class ViewC2FormComponent implements OnInit {
             //this.getListFilesToShow('C2','OC');
             //this.getAttachedFiles('OC');
             let identificator = false;
-            //console.log("LIST FILE NAME : ", listFileName)
+            
             for (let i = 0; i < listFileName.length; i++) {
                 this.arrayDocuments.forEach(item => {
                     if (item === listFileName[i]) {
@@ -800,7 +793,7 @@ export class ViewC2FormComponent implements OnInit {
                 if (identificator === false) {
                     this.arrayDocuments.push({ name: listFileName[i] })
                 }
-                //console.log("arrayDocuments : ", this.arrayDocuments)
+                
             }
 
         }

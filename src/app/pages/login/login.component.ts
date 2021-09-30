@@ -103,21 +103,20 @@ export class LoginComponent implements OnInit {
             localStorage.removeItem("fromFormsDatabase")
             this.maestroService.setUser(response);
             let resp = await this.userConfigService.getCurrentPeriod()
-            console.log("periodo", resp)
+          
             localStorage.setItem("periodo", resp.periodo)
             localStorage.setItem("fechaPeriodo", resp.fechaEjecFin)
 
             let usuario = this.core.storage.get('usuario')
             let perfil = usuario['idPerfil']
-            console.log("el this.core.storage.get('usuario') : ",usuario['idPerfil'])
-             console.log("this.core.storage.get(perfil) : ",perfil)
+            
             this.STIPO_USUARIO = usuario['tipoUsuario']
-            // console.log("this.STIPO_USUARIO",this.STIPO_USUARIO)
+           
             let data = {
               NIDPROFILE : perfil
             }
             let resultadoPerfil =  await this.userConfigService.GetGrupoXPerfil(data) 
-            console.log("resultadoPerfil",resultadoPerfil)
+            
             let valor
             
             if(this.STIPO_USUARIO == 'RE'){
@@ -134,7 +133,7 @@ export class LoginComponent implements OnInit {
                   valor = 1
               }
 
-              console.log("valor",valor)
+             
               switch (valor) {
                 case 1 : {
                   this.core.rutas.goClientes();

@@ -67,10 +67,7 @@ export class PendienteComponent implements OnInit {
 
     this.NPERIODO_PROCESO = this.parent.NPERIODO_PROCESO
     await this.getVariablesStorage();
-    console.log("this.STIPO_USUARIO ",this.STIPO_USUARIO )
-    ////console.log("el regimen IIIIIIIII: ",this.regimen)
-    ////console.log("el stateCompletado AAAAAAAAAAAAAAAAAA: ",this.statePendiente)
-    ////console.log("!!!!!!!!! this.arrResponsable : ",this.arrResponsable)
+   
     this.fillFileGroup()
     this.arrFilesAdjuntos = [{'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'word'},
     {'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'otros'},
@@ -78,12 +75,11 @@ export class PendienteComponent implements OnInit {
     {'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'word'}]
     this.dataC1Serv.arrRespuestasForm$.subscribe(arreglo => {
       this.arrDetailC1 = arreglo
-      ////console.log("el ARREGLO DEL SUBSCRIBE EN C pendiente1: ",arreglo)
-      ////console.error("el ARREGLO DEL SUBSCRIBE EN C arrDetailC1 2: ",this.arrDetailC1)
+    
     })
     this.dataC1Serv.arrComentariosForm$.subscribe(arreglo => {
       this.arrDetailCommentsC1 = arreglo;
-      ////console.error("el ARREGLO DEL SUBSCRIBE EN C arrDetailCommentsC1 2: ",this.arrDetailCommentsC1)
+   
     })
     /*this.arrDetailC1 = [
       {documento:'20100904072',razonSocial:'COOPERATIVA DE AHORRO Y CREDITO AELU', producto: 'Desgravamen Aelucoop'}
@@ -149,7 +145,7 @@ export class PendienteComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
         let response = await this.userConfigService.insertAttachedFiles(data)
-        ////console.log(response)
+    
     }
 
 
@@ -165,7 +161,7 @@ export class PendienteComponent implements OnInit {
 
 
   getIsValidStateAllow(state){
-    // console.log("El valor del state", state)
+ 
     if(this.STIPO_USUARIO === 'RE' && (state === 'REVISADO' || state === 'CERRADO')){
       return false;
     }else{
@@ -174,7 +170,7 @@ export class PendienteComponent implements OnInit {
   }
 
   getArray(state,regimen){
-    /*//console.log("la OOOOOOOOOOOO : ",state +"    -    "+regimen)
+    /*
     switch (state) {
       case 'COMPLETADO' : 
         if(regimen === 1){
@@ -203,7 +199,7 @@ export class PendienteComponent implements OnInit {
   }
 
   getClassBagdeState(state){
-    ////console.log("state : ",state)
+  
     if(state === 'PENDIENTE'){
       return 'badge-warning'
     }
@@ -260,8 +256,7 @@ export class PendienteComponent implements OnInit {
       this.objRadioHeader.index = index
       this.objRadioHeader.state = state
     //}
-    ////console.log("InputRespHeaderAll : ",this.InputRespHeaderAll)
-    ////console.log("InputRespHeaderNoAll : ",this.InputRespHeaderNoAll)
+   
     /*if (state === '1' && this.InputRespHeaderSiAll !== true) {
       this.InputRespHeaderSiAll = true
       this.InputRespHeaderNoAll = false
@@ -280,15 +275,15 @@ export class PendienteComponent implements OnInit {
   }
 
   setTextInputCommentGeneral(indice,evento){
-    ////console.log("el evento.target.value : ",evento.target.value)
+  
     this.arrInputCommentGeneral[indice] = evento.target.value
     
-    ////console.log("el this.arrInputComment.length : ",this.arrInputComment.length)
+  
     for (let index = 0; index < this.arrResponsable.length; index++) {
       this.arrInputComment[index] = this.arrInputCommentGeneral[indice];
       
     }
-    ////console.log("el this.arrInputComment : ",this.arrInputComment)
+   
   }
 
   async getCommentHeader(NIDALERTA_CABECERA) {
@@ -314,11 +309,11 @@ export class PendienteComponent implements OnInit {
   sendForm2(){
    
     if (this.model.terms1 !== true || this.model.terms2 !== true) {
-      // console.log("seleccionado");
+      
     }
     
     else{
-      // console.log("no selecciono nada")
+    
     }
 
     
@@ -326,12 +321,11 @@ export class PendienteComponent implements OnInit {
 
 async addFilesInforme(event: any, NIDALERTA_CABECERA, NIDALERTA, STIPO_CARGA) {
   try {
-    debugger;
-    console.log("el dataMultiplex : ",this.dataMultiplex)
-    // console.log("el NIDALERTA RESP INFO : ",NIDALERTA)
+   
+   
     //let STIPO_CARGA = "INFORMES"
     let respAddInfo = await this.parent.addFilesInforme(event, NIDALERTA, NIDALERTA_CABECERA, this.regimen.id,STIPO_CARGA)
-    console.log("el arrFiles RESP INFO : ",respAddInfo)
+   
     if (STIPO_CARGA =="ADJUNTOS-SUSTENTO" && respAddInfo.code == 1)
     {
       if(this.STIPO_USUARIO === 'OC'){
@@ -358,7 +352,7 @@ async addFilesInforme(event: any, NIDALERTA_CABECERA, NIDALERTA, STIPO_CARGA) {
 
       });
     }
-    //console.log("el arrFiles RESP this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+  
     //await this.parent.sendFilesInformes(NIDALERTA, this.listFilesInform, this.listFilesInformName)
   } catch (error) {
     console.error("el arrFiles error 879 : ",error)
@@ -366,14 +360,9 @@ async addFilesInforme(event: any, NIDALERTA_CABECERA, NIDALERTA, STIPO_CARGA) {
 }
 
 getFilesInformUniversal(alerta: any,STIPO_CARGA) {
-  //console.log("el 45884 INICIO")
+ 
   let resp ;
-  //console.log("el 45884 alerta : ",alerta)
-  //console.log(alerta)
-  //console.log("NIDREGIMEN: ",alerta.NIDREGIMEN)
-  //console.log("NIDREGIMEN: ",alerta.NREGIMEN)
-  //console.log("nueva lista NIDREGIMEN: ",alerta)
-  //console.log("el CONSULTA this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+
   if(this.linkactual == "proveedor" || this.linkactual == "colaborador" || this.linkactual == "contraparte" ){
     resp = this.parent.arrObjFilesInformeByAlert.filter(inform => 
         inform.NIDALERTA == alerta.NIDALERTA && 
@@ -387,8 +376,7 @@ getFilesInformUniversal(alerta: any,STIPO_CARGA) {
       inform.STIPO_CARGA == STIPO_CARGA)
   }
   
-  //console.log("el CONSULTA 45884 resp : ",resp)
-   //console.log("nueva lista el 45884 resp : ",resp) 
+ 
   return resp.length === 0 ? [] : resp[0].arrFilesNameCorto//this.parent.getFilesByAlert(alerta, tipoUsuario)
 }
 
@@ -402,7 +390,7 @@ getFilesInformUniversal(alerta: any,STIPO_CARGA) {
 getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   
   let resp = this.parent.arrObjFilesAdjByCabecera.filter(it => it.NIDCABECERA_USUARIO === objAlertaItem.NIDALERTA_CABECERA && it.NREGIMEN === NREGIMEN && it.STIPO_USUARIO === this.STIPO_USUARIO && it.STIPO_CARGA == STIPO_CARGA)
-  //console.log("el resp eyy : ",resp)
+  
    return resp.length > 0 ? resp[0].arrFilesNameCorto : [] 
   //  return  []
 }
@@ -424,26 +412,23 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
      }
      
      
-     console.log("el respSetDataPendiente : ",respSetDataPendiente)
-    console.warn("respValidation 2: ",this.arrResponsable)
+   
 
     
     let respValidation:any =  {}
     let respValidacionArchivoSustento:any = {}
     let resultComplemento = respSetDataPendiente.array.filter(it => it.TIPO_FORM == 'C')
-    debugger
+    
      if(resultComplemento.length != 0){
       respValidation = {}//await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
       respValidation.message = ''
       respValidacionArchivoSustento.code = 1
       
-      console.log("el objeto 1",this.parent.arrObjFilesAdjByCabecera)
-      console.log("el objeto 2",this.parent.arrObjFilesAdjByCabecera.length)
-      console.log("el objeto 3",resultComplemento.length)
+    
 
-      debugger
+      
       if(this.parent.arrObjFilesAdjByCabecera[0].arrFilesName.length != resultComplemento.length ){
-        debugger
+        
   
         swal.fire({
           title: 'Bandeja del '+ this.sNameTipoUsuario,
@@ -463,8 +448,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           
         }).then(async (result) => {
           
-          console.log("hellow : ",result.value)
-          debugger;
+        
+           
            if(result.value){
              return
            }
@@ -477,13 +462,13 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
        respValidation = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
      }
      //respValidation = await this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
-    debugger
+    
     // respValidation.message = ''
     //
 
     
 
-    console.log("respValidation 123456: ",respValidation)
+
     if (respValidation.message !== '') {
       swal.fire({
         title: 'Bandeja del '+ this.sNameTipoUsuario,
@@ -521,7 +506,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           return
         }
       })
-      console.log("LA RESPUESTA DEL ARREGLO DEL ARCHIVO SUSTENTO : ",respValidacionArchivoSustento)
+     
       if(respValidacionArchivoSustento.code == 2){
         swal.fire({
           title: 'Bandeja del '+ this.sNameTipoUsuario,
@@ -560,8 +545,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
               closeButton : 'OcultarBorde'
               },
         }).then(async (result) => {
-          console.log("hellow : ",result.value)
-          debugger;
+     
+           
            if(result.dismiss){
              return
            }
@@ -573,14 +558,14 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           let arrPushResCommentsForm:any = []
           let arrPushFilesForm:any = []
           let arrPushResCommentsFormDetail:any = []
-          console.log("la respSetDataPendiente.array 123124 : ",respSetDataPendiente.array)
+         
           let dataComplementario = respSetDataPendiente.array.filter(it => it.TIPO_FORM == 'C')
           respSetDataPendiente.array.forEach(senial => {
             //senial.SCOMENTARIO = this.arrInputComment[inc]
             try {
               if(dataComplementario.length != 0){
-                console.log("la respSetDataPendiente.array 123124 2: ",dataComplementario)
-                debugger
+                
+                
                 dataComplementario.forEach(async (element) => {
                   
                   let array = this.parent.arrObjFilesAdjByCabecera.find(alertaItem =>
@@ -600,37 +585,37 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
                   array.SRUTA = 'COMPLEMENTO' +'/' + element.NIDALERTA + '/' + 'CABECERA/' + element.NIDALERTA_CABECERA + '/' + this.NPERIODO_PROCESO + '/' + this.regimen.id + '/' + array.arrFilesName[0];
                   data.SRUTA_PDF = array.SRUTA
 
-                  debugger
+                  
                   await this.userConfigService.GetUpdComplementoCab(data)
                 });
               }
 
-              console.log("la senial 1 : ",senial)
+             
             
-              //debugger
+               
               arrPushFilesForm.push(this.parent.sendFilesAdjuntosCabecera(senial.NIDALERTA_CABECERA,senial.NIDALERTA,this.regimen.id,'ADJUNTOS-FORM',"PENDIENTE","RE"))
-              console.log("la senial 2 : ",senial)
+             
               arrPushFilesForm.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'ADJUNTOS-SUSTENTO'))
 
               arrPushFilesForm.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'COMPLEMENTO'))
-              console.log("la senial 3: ",senial)
+             
               arrPushResCommentsForm.push(this.enviarRespCommentForm(senial,inc))
-              console.log("la senial 4: ",senial)
+            
               arrPushResCommentsFormDetail.push(this.enviarRespCommentFormDetail(senial.arrPreguntasDetalle,inc))
-              console.log("la senial 5: ",senial)
+            
               //arrNewConversacion.push(this.getCommentHeader(senial.NIDALERTA_CABECERA))
               
             } catch (error) {
-              console.error("el error en el foreach: ",Error)
+            
             }
             inc++;
              
           })
-          console.log("llego aqui jsjsjsjs")
+         
           //await this.sendFiles(this.STIPO_USUARIO)
           let respArrayPromisesall = await Promise.all([Promise.all(arrPushResCommentsForm),Promise.all(arrPushResCommentsFormDetail)])
           let respArrayPromiseAllAdjuntos = await Promise.all(arrPushFilesForm)
-        debugger;
+         
           let respPromiseByAlerts:any = []
           let arrPromiseGetAdjuntos:any = []
           respSetDataPendiente.array.forEach(senial => {
@@ -639,7 +624,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           })
          
           let resPromiseAllByAlert = await Promise.all([Promise.all(respPromiseByAlerts),Promise.all(arrPromiseGetAdjuntos)])
-          // console.log("el resPromiseAllByAlert ppp: ",resPromiseAllByAlert)
+      
           let indiceEniarCompletado = 0
           resPromiseAllByAlert[0].forEach((senial:any,inc) => {
             let arrRespuestaSet = []
@@ -648,10 +633,10 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
               ans.SRESPUESTA = ans.NRESPUESTA == '1' ? 'Sí.' : ans.NRESPUESTA == '2' ? 'No.' : ''
               //ans.SCOMENTARIO = (this.arrInputComment[inc])[indicePregCab]
               arrRespuestaSet.push(ans)
-              console.log("esto es arrRespuestaSet: ",arrRespuestaSet)
+            
             })
             senial.arrPreguntasCabecera = arrRespuestaSet
-            console.log("la senial 122334568 : ",senial)
+          
             this.enviarHaciaCompletado(senial,indiceEniarCompletado)
             indiceEniarCompletado++
           })
@@ -661,7 +646,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           this.core.loader.hide()
          
         }).catch(err => {
-          //console.error("el error : ",err);
+         
         })
       }
 
@@ -687,10 +672,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   isValidationAdjuntosForms(objAlerta){
     try {
-      //debugger;
+       
       objAlerta["NREGIMEN"] = 0
-      console.log("el objalerta : ",objAlerta)
-      console.log("el this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+  
       if(objAlerta.NIDALERTA == 4 ){
         let respFilter = this.parent.arrObjFilesInformeByAlert.filter(it => 
           it.NIDALERTA == objAlerta.NIDALERTA && 
@@ -699,16 +683,14 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           it.STIPO_CARGA == 'ADJUNTOS-SUSTENTO')
 
 
-        //console.log("el respFilter[0] : ",respFilter[0])
-        //console.log("el respFilter[0] length: ",respFilter[0].length)
+
         // if(respFilter.length == 0){
         //   return {code: 2, message: 'El archivo de sustento es obligatorio para la señal RG9'}
         // }
 
-        //console.log("el respFilter[0] arrFilesName : ",respFilter[0].arrFilesName)
-        //console.log("el respFilter[0] arrFilesName length : ",(respFilter[0].arrFilesName).length)
+       
         let cantidad =  respFilter.length > 0 ? (respFilter[0].arrFilesName).length : 0
-        console.log("el cantidad : ",cantidad)
+        
         // if(cantidad == 0){
         //   return {code: 2, message: 'El archivo de sustento es obligatorio para la señal RG9'}
         // }
@@ -736,10 +718,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   }
   isValidationComplementarioForms(objAlerta){
     try {
-      debugger;
+       
       objAlerta["NREGIMEN"] = 0
-      console.log("el objalerta : ",objAlerta)
-      console.log("el this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+  
       let respFilter = this.parent.arrObjFilesInformeByAlert.filter(it => 
         it.NIDALERTA == objAlerta.NIDALERTA && 
         it.NREGIMEN == objAlerta.NREGIMEN && 
@@ -747,16 +728,14 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
         it.STIPO_CARGA == 'COMPLEMENTO')
 
 
-        //console.log("el respFilter[0] : ",respFilter[0])
-        //console.log("el respFilter[0] length: ",respFilter[0].length)
+       
         // if(respFilter.length == 0){
         //   return {code: 2, message: 'El archivo de sustento es obligatorio para la señal RG9'}
         // }
 
-        //console.log("el respFilter[0] arrFilesName : ",respFilter[0].arrFilesName)
-        //console.log("el respFilter[0] arrFilesName length : ",(respFilter[0].arrFilesName).length)
+   
         let cantidad =  respFilter.length > 0 ? (respFilter[0].arrFilesName).length : 0
-        console.log("el cantidad : ",cantidad)
+   
         // if(cantidad == 0){
         //   return {code: 2, message: 'El archivo de sustento es obligatorio para la señal RG9'}
         // }
@@ -785,7 +764,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   async removeFiles(indice,objItem,indexInput,STIPO_CARGA){
   
-  debugger;
+   
     return await this.parent.removeFileAdjuntosFiles(indice,objItem,indexInput,STIPO_CARGA)
   }
   getTipoUsuario(){
@@ -799,19 +778,17 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   removeFileInforme(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
     
-    debugger;
+     
     STIPO_CARGA="ADJUNTOS-FORM"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-    // console.log("el STIPO_CARGA: ",STIPO_CARGA)
-    // console.log("el dataObjAlerta: ",dataObjAlerta)
-    // console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.parent.arrObjFilesAdjByCabecera)
+  
     let filtroFiles =  this.parent.arrObjFilesAdjByCabecera.filter(it => it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA)
-    // console.log("el filtroFiles: ",filtroFiles)
+    
     let objFile:any = filtroFiles[0]
     objFile.arrFiles.splice(indice,1)
     objFile.arrFilesName.splice(indice,1)
     objFile.arrFilesNameCorto.splice(indice,1)
-    // console.log("el objFile: ",objFile)
+    
     let indiceArrObjFiles = 0
     this.parent.arrObjFilesAdjByCabecera.forEach(it => {
       if(it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
@@ -820,7 +797,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       indiceArrObjFiles++
     })
     
-    // console.log("el this.parent.arrObjFilesAdjByCabecera 2221: ",this.parent.arrObjFilesAdjByCabecera)
+  
 
   }
 
@@ -844,57 +821,53 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   setDataPendiente(){
     try {
-      debugger;
+       
       let arrResponsableNew = []
       let objAlertaNew:any = {}
-      //console.log("el this.arrDetailC1 : ",this.arrDetailC1)
-      //console.log("el this.arrDetailCommentsC1 : ",this.arrDetailCommentsC1)
-      //console.log("el this.arrResponsable : ",this.arrResponsable)
+     
       for (let i = 0; i < this.arrResponsable.length; i++) {
         let newArrayDetallePendiente:any = []
         //let indiceDetalle1 = 0
       
         objAlertaNew = this.arrResponsable[i]
-        //console.log("el objAlertaNew : ",objAlertaNew)
-        //console.log("el objAlertaNew.arrPreguntasDetalle : ",objAlertaNew.arrPreguntasDetalle)
+       
         for (let indiceDetalle1 = 0; indiceDetalle1 < objAlertaNew.arrPreguntasDetalle.length; indiceDetalle1++) {
           let objPreguntaNew:any = objAlertaNew.arrPreguntasDetalle[indiceDetalle1]
           
           //objPreguntaNew.SRESPUESTA = this.arrDetailC1[indiceDetalle1] == '1' ? 'Sí.' : this.arrDetailC1[indiceDetalle1] == '2' ? 'No.' : null
           //objPreguntaNew.SCOMENTARIO = this.arrDetailCommentsC1[indiceDetalle1]
           let detalleCortoNew:any = []
-          //console.log("el objPreguntaNew : ",objPreguntaNew)
+          
           for (let indiceDetalle2 = 0; indiceDetalle2 < objPreguntaNew.length; indiceDetalle2++){
-            //console.log("el this.arrDetailC1[indiceDetalle1] : ",this.arrDetailC1[indiceDetalle1])
+          
             let NRESPUESTA =  !this.arrDetailC1[indiceDetalle1] ? null : (this.arrDetailC1[indiceDetalle1])[indiceDetalle2]
-            //console.log("el NRESPUESTA : ",NRESPUESTA)
+          
             let SCOMENTARIO = !this.arrDetailCommentsC1[indiceDetalle1] ? null : !(this.arrDetailCommentsC1[indiceDetalle1])[indiceDetalle2] ? null : (this.arrDetailCommentsC1[indiceDetalle1])[indiceDetalle2]
-            //console.log("el SCOMENTARIO : ",SCOMENTARIO)
+          
             let objPreguntasAlertaew:any = {}
             objPreguntasAlertaew = objPreguntaNew[indiceDetalle2]
-            //console.log("el objPreguntasAlertaew : ",objPreguntasAlertaew)
-            //console.log("el NRESPUESTA : ",NRESPUESTA)
-            ////console.error("********el SCOMENTARIO : ",SCOMENTARIO)
+           
             objPreguntasAlertaew.NRESPUESTA = NRESPUESTA
               objPreguntasAlertaew.SRESPUESTA = NRESPUESTA == '1' ? 'Sí.' : NRESPUESTA == '2' ? 'No.' : null
               objPreguntasAlertaew.SCOMENTARIO = typeof SCOMENTARIO === 'string' ? SCOMENTARIO : null
             detalleCortoNew.push(objPreguntasAlertaew);
           }
-          //console.log("el detalleCortoNew : ",detalleCortoNew)
+        
           newArrayDetallePendiente.push(detalleCortoNew)
         }
 
-        //console.log("el newArrayDetallePendiente : ",newArrayDetallePendiente)
+     
+
 
         objAlertaNew.arrPreguntasDetalle = newArrayDetallePendiente
         arrResponsableNew.push(objAlertaNew)
       }
-      //console.log("el arrResponsableNew : ",arrResponsableNew)
+      
       
       //this.arrResponsable = arrResponsableNew
       return {status:true,array:arrResponsableNew}
     } catch (error) {
-      //console.error("el error : ",error)
+
       return false
     }
   }
@@ -914,7 +887,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           ans["NREGIMEN"] = 0
          }
     
-        ////console.warn("!!!!!EL ANS: ",ans)
+        
         arrPromisesQuestion.push(this.userConfigService.insertQuestionHeader(ans));
         
         arrPromiseComments.push(this.parent.insertComentariosHeader(ans,senial))//ans tiene la respuesta y comentario, senial tiene todo lo referente a la señal
@@ -922,7 +895,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       let respPromises = await Promise.all(arrPromisesQuestion)
       /////this.enviarHaciaCompletado(senial)
     }catch{
-      console.log("Error en el enviarRespCommentForm")
+      
     }
    
   }
@@ -936,22 +909,22 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   if(arrDetalle.length > 0){
     let arrPromisesQuestion:any = []
     let arrRequestQuestion:any = []
-    ////console.error("el arrDetalle : ",arrDetalle)
+    
     arrDetalle.forEach(ans => {
-      ////console.warn("!!!!EL ANS DETALLE: ",ans)
+      
       ans.forEach(itemAns => {
         arrRequestQuestion.push(itemAns)
         arrPromisesQuestion.push(this.userConfigService.insertQuestionDetail(itemAns));
       })
       
     })
-    ////console.warn("el arrRequestQuestion 107: ",arrRequestQuestion)
+    
     let respPromises = await Promise.all(arrPromisesQuestion)
   }
   
   //this.enviarHaciaCompletado(arrDetalle)
     } catch (error) {
-      console.log("Error en enviarRespCommentFormDetail", error)
+      
     }
      
   }
@@ -973,12 +946,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
  async IsValidInfoDevueltoResp(arrResponsableNew){
     let obj:any = {}
     obj.message = ''
-    console.log("el arrInputComment ",this.arrInputComment)
-    console.log("el this.arrInputComment.length ",this.arrInputComment.length)
-    console.log("el arrResponsableNew.legth ",arrResponsableNew.length)
-    console.log("el arrResponsableNew ",arrResponsableNew)
+    
     let valorComplemento = arrResponsableNew.filter(it => it.TIPO_FORM == 'C')
-    console.log("valorComplemento",valorComplemento)
+   
     if(typeof this.arrInputComment !== 'object'){
       obj.message = 'Ocurrio un error con información'
       return obj
@@ -1000,7 +970,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     }
 
     // this.arrInputComment.forEach(item => {
-    //   ////console.log("el item : ",item)
+    
     //   if((item+' ').trim() === ''){
     //     obj.message = 'La respuesta esta en blanco'
     //   }
@@ -1016,7 +986,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       arrFile = this.parent.arrObjFilesInformeByAlert == undefined ? [] :this.parent.arrObjFilesInformeByAlert;
       arrFile = arrFile.filter(t=> t.NIDALERTA == senial.NIDALERTA)
       let isSustento = arrFile == undefined ? 0 : arrFile.length == 0 ? 0 :arrFile[0].arrFiles.length
-      console.log("this.arrInputRespHeader[i]", this.arrInputRespHeader[i])
+      
       let cap:any = {
         pregunta : this.arrInputRespHeader[i],
         respuesta : this.arrInputComment[i],
@@ -1025,17 +995,15 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
         isSustento : isSustento > 0 ? true : false 
       };
 
-      console.log("cap", cap)
+     
       respValDetalle = await this.IsValidInfoPendientePregDetalle(senial);
       respValCabecera = await this.IsValidInfoPendientePregCabecera(cap)//.then(data =>  
       //   respValCabecera = data
       //     );
-      console.log("respValCabecera1111", respValCabecera)
-      console.log("respValCabecera1111.code", respValCabecera.code)
-      console.log("respValCabecera1111.message", respValCabecera.message)
-      //debugger
+     
+       
       //respValidacion = this.ValidarRespuestaSenal(cap);
-      ////console.warn("el respValDetalle : ",respValDetalle)
+     
       if(respValDetalle.code === 1){
         obj=respValDetalle
         return obj
@@ -1069,11 +1037,11 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     let objResp:any = {}
     objResp.code = 0
     if( tamañoArr > 0 ){ 
-      ////console.warn("el arrPreguntasDetalle 111 : ",arrPreguntasDetalle)
+  
       for (let i = 0; i < arrPreguntasDetalle.length; i++) {
         let detalle = arrPreguntasDetalle[i]
         let respValidDet = this.IsValidInfoPenDetalle(detalle,senial)
-        ////console.warn("el respValidDet: ",respValidDet)
+      
         if(respValidDet.code === 1){
           objResp = respValidDet
           return objResp;
@@ -1088,10 +1056,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     objRes.code = 0
     for (let i = 0; i < itemDetalle.length; i++) {
       let itemDeta = itemDetalle[i]
-      ////console.log("!!!!!! itemDeta", itemDeta)
-      ////console.warn("el NRESPUESTA 222 : ",itemDeta.NRESPUESTA)
+  
       if(itemDeta.NRESPUESTA === null || (itemDeta.NRESPUESTA+' ').trim() === ''){
-        ////console.warn("el NRESPUESTA 223 : ",itemDeta.NRESPUESTA)
+       
         objRes.code = 1
         objRes.message='Debe responder obligatoriamente todas las preguntas del formulario relacionado a la señal '+senial.SNOMBRE_ALERTA+'.'
         
@@ -1130,9 +1097,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     // response = await this.sbsReportService.getQuestionsByAlert(data)
     // let _data;
     // _data = (response);
-    // console.log("Response",_data)
-    // console.log("Response11111",_data[0].validComment)
-    // debugger
+  
+
 
     if (arrPreguntasCabecera == null) {
         return {code: 0}
@@ -1140,16 +1106,14 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     if( tamañoArr > 0 ){  
       for (let i = 0; i < arrPreguntasCabecera.length; i++) {
         let cabecera = arrPreguntasCabecera[i]
-        console.log("la cabecera es 1 : ",cabecera)
-        console.log("arrComentarios[i] : ",arrComentarios[i])
+    
         let comentario = arrComentarios[i] == undefined ? "" : arrComentarios[i];
-        console.log("comentario : ",comentario)
-        console.log("comentario.length : ",comentario.length)
+  
         
        
          if (cabecera === '1' && (comentario === null || (comentario).trim() === '')){
         // if (false){
-          console.log("ENTRO EN EL IF")
+     
            objResp.code = 1
            objResp.message='Debe responder obligatoriamente el comentario de la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'
 
@@ -1198,7 +1162,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   }
 
   async ValidarRespuestaSenal(item){
-    console.log("respSetDataPendiente11111", item)
+ 
     //let respSetDataPendiente:any = this.setDataPendiente();
   
     let objResp:any = {}
@@ -1210,7 +1174,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     let data:any ={}
     data.alertId = item.NIDALERTA
     let response:any = await this.sbsReportService.getQuestionsByAlert(data)
-    console.log("response[0].validComment ", response[0].validComment )
+   
     if(response[0].validComment == 1){
         objResp.code = 1
           objResp.message='Ingrese el comentario en la señal '+ item.SNOMBRE_ALERTA+''
@@ -1244,7 +1208,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     // });
   
    
-    //console.log("respSetDataPendiente4 ArrayValidatorCabecera", ArrayValidatorCabecera)
+  
     //return objResp
   }
 
@@ -1280,7 +1244,7 @@ getValidationArrayByUser(NOMBRECOMPLETO){
 }
 
 setDataInputTextResp(indexAlerta, indexPregunta, valor){
-  console.error("el valor Del InputTEXTRESP : ",valor)
+
 
   if(this.arrInputRespHeader.length === 0){
     this.arrInputRespHeader = [[]]
@@ -1296,7 +1260,7 @@ setDataInputTextResp(indexAlerta, indexPregunta, valor){
 }
 
 setDataInputTextRespComment(indexAlerta, indexPregunta, valor){
-  console.error("el valor del InputTextRESPCommenT: ",valor)
+
   
   if(this.arrInputComment.length === 0){
     this.arrInputComment = [[]]
@@ -1314,7 +1278,7 @@ setDataInputTextRespComment(indexAlerta, indexPregunta, valor){
 valorCommentGral = ''
 
 setDataInputTextRespCommentGeneral(valor){
-  ////console.error("el valor : ",valor)
+ 
  
   this.valorCommentGral = valor
   let indSenial = 0
@@ -1337,11 +1301,11 @@ setDataInputTextRespCommentGeneral(valor){
     })
     senial.arrPreguntasCabecera = newArrayPreguntas
     newArrayResponsable.push(senial)
-    //
+    
     indSenial++;
   })
   this.arrResponsable = newArrayResponsable
-  ////console.error("el newArrayResponsable : ",newArrayResponsable)
+
 
 
   /*if(this.arrInputComment.length === 0){
@@ -1393,12 +1357,12 @@ setDataInputRestGral(valor){
     newArrayResponsable.push(senial)
     indiceSenial++
   })
-  ////console.warn("el newArrayResponsable : ",newArrayResponsable)
+
   this.arrResponsable = newArrayResponsable
 }
 
 getCheckedByQuestionHead(indexSenial,indexQuestion,valor){
-  ////console.warn("el this.arrInputRespHeader : ",this.arrInputRespHeader)
+ 
   if(!this.arrInputRespHeader[indexSenial]){
     this.arrInputRespHeader[indexSenial] = []
     return false
@@ -1421,31 +1385,29 @@ UltimoTooltip(indice, longitud){
 }
 
 async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
-  console.log("el NREGIMEN : ",NREGIMEN)
-  debugger;
+
+   
   //if(STIPO_CARGA)
   await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
 async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
-  console.log("el NREGIMEN : ",NREGIMEN)
-  //debugger;
+ 
+   
   await this.parent.addFilesComplementoResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
  capitalizarPrimeraLetra(texto : string ) {
   //  let texto = str
     
-  //  console.log("el texto de la primera letra", texto[0].toUpperCase() +  texto.slice(1).toLowerCase())
-  //  console.log("el texto que ingreso", texto[0].toUpperCase() + texto.slice(1))
-  //  console.log("el texto que ingreso 2", texto.charAt(0).toUpperCase() + texto.slice(1))
+
    return texto[0].toUpperCase() +  texto.slice(1).toLowerCase()
 }
 
 GetOcultarBoton(){
   if(this.STIPO_USUARIO == 'OC' || this.STIPO_USUARIO =='undefined'){
-    // console.log("El valor del boton false")
+   
     return false
   }else{
-    // console.log("El valor del boton true")
+  
     return true
   }
 

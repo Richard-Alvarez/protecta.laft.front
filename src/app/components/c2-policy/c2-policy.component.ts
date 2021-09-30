@@ -24,7 +24,7 @@ export class C2PolicyComponent implements OnInit {
 
   async ngOnInit() {
 
-    //console.log("entro la data a c2policy" ,this.item)
+    
     await this.Consultar360(this.item)
     await this.SetVariables()
     /* await this.showdata() */
@@ -54,7 +54,7 @@ export class C2PolicyComponent implements OnInit {
         this.Resultado360 = response
        });
        this.core.loader.hide()
-    console.log("entro en el servicio de 360 resultado c2policy", this.Resultado360)
+    
   }
   NroPoliza:string = ''
   NroCertificado:string = ''
@@ -215,14 +215,7 @@ export class C2PolicyComponent implements OnInit {
     this.planSalud.periodo= this.Resultado360.planSalud.periodo
     this.planSalud.receptorName= this.Resultado360.planSalud.receptor.name
     
-    //console.log(" viapago",this.Resultado360.pension.viaPago)
-
-
-
-    
-    //console.log(" c2policy data listaDatabeneficiarios ",this.listaDatabeneficiarios[0].datosCliente.name)
-    
-    //console.log(" c2policy data ", this.Contratante)
+   
 
   }
   async showdata(){

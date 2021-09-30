@@ -60,7 +60,7 @@ export class WorkModuleComponent implements OnInit {
         this.workModuleListSimpli = await this.userConfigService.getWorkModuleList(data2)
 
         this.workModuleList = this.workModuleListGral;
-        //console.log("this.workModuleList : ",this.workModuleList)
+        
 
         this.workModuleListGral.forEach(item => {
             if(item.SESTADO === '1'){//PENDIENTE
@@ -106,7 +106,7 @@ export class WorkModuleComponent implements OnInit {
     }
 
     setAlertData(item: any) {
-        //console.log("envio data", item)
+        
         localStorage.setItem("SNOMBRE_ALERTA", item.SNOMBRE_ALERTA)
         localStorage.setItem("SDESCRIPCION_ALERTA", item.SDESCRIPCION_ALERTA)
         localStorage.setItem("SNOMBRE_ESTADO", item.SNOMBRE_ESTADO)
@@ -175,7 +175,7 @@ export class WorkModuleComponent implements OnInit {
     }
 
     getClassBagdeState(state){
-        ////console.log("state : ",state)
+        
         if(state === 'PENDIENTE'){
           return 'badge-warning'
         }

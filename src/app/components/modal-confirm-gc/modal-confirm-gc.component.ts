@@ -31,16 +31,14 @@ export class ModalConfirmGcComponent implements OnInit {
 
 
   sendInfo(valor) {
-    console.log(" hola")
+    
    
      let valorinput = this.validarInput()
      let valorCombo = this.validarCombo()
-    //  console.log(" valor de input", valorinput)
-    //  console.log(" valor de combo", valorCombo)
+   
      if(valorinput == 'ocultar' && valorCombo=='ocultar'){
       this.reference.close({sTipoPep:this.rspTipoPEP,mensaje: this.sComentario});
-    // console.log("this.sComentario 22222", this.sComentario)
-    // console.log("this.rspTipoPEP", this.rspTipoPEP)
+    
     }
     
     
@@ -49,7 +47,7 @@ export class ModalConfirmGcComponent implements OnInit {
 
  
   validarInput(){
-    // console.log("this.sComentario",this.sComentario)
+    
     if(this.sComentario == undefined || this.sComentario == ''){
         return 'mostrar'
     }else{
@@ -60,7 +58,7 @@ export class ModalConfirmGcComponent implements OnInit {
   }
 
   validarCombo(){
-    // console.log("this.rspTipoPEP", this.rspTipoPEP)
+   
     if(this.rspTipoPEP == 1 || this.rspTipoPEP == 2 || this.rspTipoPEP == 3){
         return 'ocultar'
     }else{

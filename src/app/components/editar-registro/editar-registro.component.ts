@@ -32,7 +32,7 @@ export class EditarRegistroComponent implements OnInit {
 
   ngOnInit() {
     this.cargarRegistro();
-    ////console.log(this.registro);
+    
     this.onChangeTipoDoc(null);
   }
 
@@ -48,7 +48,7 @@ export class EditarRegistroComponent implements OnInit {
     if (this.registro.numeroDocumento === 'No registra') {
       this.registro.numeroDocumento = '';
     }
-    ////console.log(this.registro);
+    
 
   }
 
@@ -194,7 +194,7 @@ export class EditarRegistroComponent implements OnInit {
   }
 
   onChangeTipoDoc(event: any) {
-    ////console.log(this.IsEmpresa);
+    
     if (this.registro.persona.id == 2) {
       this.registro.apellidoMaterno = '';
       this.registro.apellidoPaterno = '';

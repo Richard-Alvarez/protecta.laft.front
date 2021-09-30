@@ -189,7 +189,7 @@ export class AlertsMonitoringComponent implements OnInit {
           }
           this.core.loader.hide();
         }).catch(() => {
-          ////console.log('err');
+          
           this.core.loader.hide();
           swal.fire({
             title: 'Monitoreo de alertas',
