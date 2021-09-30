@@ -63,6 +63,12 @@ export class C2PolicyComponent implements OnInit {
   FechaPrimeraVigencia:string = ''
   FechaInicioVigencia:string = ''
   FechaEfecto:string = ''
+  tipoFacturacion:string = ''
+  tipoNegocio:string = ''
+  tipoPoliza:string = ''
+  tipoReaseguro:string = ''
+  tipoRenovacion:string = ''
+  coaseguro: string = ''
   Moneda:string = 'Soles'
   Contratante:any = {}
   DatosVehiculo:any = {}
@@ -98,6 +104,12 @@ export class C2PolicyComponent implements OnInit {
     this.FechaPrimeraVigencia = this.Resultado360.fechaPrimeraVigencia  == '' ? '-' : this.Resultado360.fechaPrimeraVigencia  
     this.FechaInicioVigencia = this.Resultado360.fechaInicioVigencia  == '' ? '-' : this.Resultado360.fechaInicioVigencia  
     this.FechaEfecto = this.Resultado360.fechaEfecto  == '' ? '-' : this.Resultado360.fechaEfecto  
+    this.tipoFacturacion = this.Resultado360.tipoFacturacion  == '' ? '-' : this.Resultado360.tipoFacturacion
+    this.tipoNegocio = this.Resultado360.tipoNegocio  == '' ? '-' : this.Resultado360.tipoNegocio
+    this.tipoPoliza = this.Resultado360.tipoPoliza  == '' ? '-' : this.Resultado360.tipoPoliza
+    this.tipoReaseguro = this.Resultado360.tipoReaseguro  == '' ? '-' : this.Resultado360.tipoReaseguro
+    this.tipoRenovacion = this.Resultado360.tipoRenovacion  == '' ? '-' : this.Resultado360.tipoRenovacion
+    this.coaseguro = this.Resultado360.coaseguro  == '' ? '-' : this.Resultado360.coaseguro
 
     this.DatosVehiculo = this.Resultado360.vehiculo
     this.DatosVehiculo.placa = this.Resultado360.vehiculo.placa == '' ? '-' : this.Resultado360.vehiculo.placa
@@ -136,13 +148,13 @@ export class C2PolicyComponent implements OnInit {
     
     console.log(" this.DatosTarifa", this.DatosTarifa)
     if(this.Resultado360.tarifa !== null){
-    this.DatosTarifa = this.Resultado360.tarifa
-    this.DatosTarifa.FechaEmision = this.Resultado360.tarifa.fechaEmision == '' ? '-' : this.Resultado360.tarifa.fechaEmision
-    this.DatosTarifa.HoraEmision = this.Resultado360.tarifa.horaEmision == '' ? '-' : this.Resultado360.tarifa.horaEmision
-    this.DatosTarifa.LoteDescargo = this.Resultado360.tarifa.loteDescargo == '' ? '-' : this.Resultado360.tarifa.loteDescargo
-    this.DatosTarifa.TarifaProtecta = this.Resultado360.tarifa.tarifaProtecta == '' ? '-' : this.Resultado360.tarifa.tarifaProtecta
-    this.DatosTarifa.PorcentajeComision = this.Resultado360.tarifa.porcentajeComision == '' ? '-' : this.Resultado360.tarifa.porcentajeComision
-    this.DatosTarifa.Moneda = 'Soles'
+      this.DatosTarifa = this.Resultado360.tarifa
+      this.DatosTarifa.FechaEmision = this.Resultado360.tarifa.fechaEmision == '' ? '-' : this.Resultado360.tarifa.fechaEmision
+      this.DatosTarifa.HoraEmision = this.Resultado360.tarifa.horaEmision == '' ? '-' : this.Resultado360.tarifa.horaEmision
+      this.DatosTarifa.LoteDescargo = this.Resultado360.tarifa.loteDescargo == '' ? '-' : this.Resultado360.tarifa.loteDescargo
+      this.DatosTarifa.TarifaProtecta = this.Resultado360.tarifa.tarifaProtecta == '' ? '-' : this.Resultado360.tarifa.tarifaProtecta
+      this.DatosTarifa.PorcentajeComision = this.Resultado360.tarifa.porcentajeComision == '' ? '-' : this.Resultado360.tarifa.porcentajeComision
+      this.DatosTarifa.Moneda = 'Soles'
     }else{
       this.DatosTarifa = {}
       this.DatosTarifa.FechaEmision = ''
@@ -152,7 +164,6 @@ export class C2PolicyComponent implements OnInit {
       this.DatosTarifa.PorcentajeComision = ''
       this.DatosTarifa.Moneda = ''
     }
-    
 
     this.DatosAsegurado = this.Resultado360.asegurado
     this.DatosAsegurado.name = this.Resultado360.asegurado.name == '' ? '-' : this.Resultado360.asegurado.name
@@ -160,8 +171,8 @@ export class C2PolicyComponent implements OnInit {
     this.DatosAsegurado.salario = this.Resultado360.asegurado.salario == '' ? '-' : this.Resultado360.asegurado.salario
     this.DatosAsegurado.tasa = this.Resultado360.asegurado.tasa == '' ? '-' : this.Resultado360.asegurado.tasa
     this.DatosAsegurado.estadoCivil =  this.Resultado360.asegurado.estadoCivil  == '' ? '-' : this.Resultado360.asegurado.estadoCivil
-    this.DatosAsegurado.tipodoc =  this.Resultado360.asegurado.tipodoc == '' ? '-' : this.Resultado360.asegurado.tipodoc
-    this.DatosAsegurado.documento =  this.Resultado360.asegurado.documento == '' ? '-' : this.Resultado360.asegurado.documento
+    this.DatosAsegurado.tipodoc =  this.Resultado360.asegurado.tipodoc == '' ? '' : this.Resultado360.asegurado.tipodoc
+    this.DatosAsegurado.documento =  this.Resultado360.asegurado.documento == '' ? '' : this.Resultado360.asegurado.documento
     this.DatosAsegurado.cuspp =  this.Resultado360.asegurado.cuspp == '' ? '-' : this.Resultado360.asegurado.cuspp
     this.DatosAsegurado.sexo =  this.Resultado360.asegurado.sexo == '' ? '-' : this.Resultado360.asegurado.sexo
 
@@ -235,8 +246,8 @@ export class C2PolicyComponent implements OnInit {
     this.credito.finVigencia = this.Resultado360.credito.finVigencia == '' ? '-' : this.Resultado360.credito.finVigencia
     this.credito.moneda = this.Resultado360.credito.moneda == '' ? '-' : this.Resultado360.credito.moneda
     this.credito.tipoPrima = this.Resultado360.credito.tipoPrima == '' ? '-' : this.Resultado360.credito.tipoPrima
-    this.credito.montoInicial = this.Resultado360.credito.montoInicial == '' ? '-' : this.Resultado360.credito.montoInicial
-    this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '-' : this.Resultado360.credito.montoInsoluto
+    this.credito.montoInicial = this.Resultado360.credito.montoInicial == '' ? '0.00' : this.Resultado360.credito.montoInicial
+    this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '0.00' : this.Resultado360.credito.montoInsoluto
     this.credito.numerocuotas = this.Resultado360.credito.numerocuotas == '' ? '-' : this.Resultado360.credito.numerocuotas
         
 
@@ -269,6 +280,7 @@ export class C2PolicyComponent implements OnInit {
         //$('#InfoCoberturas').css("display","block")
         break;
       case "72":
+        //
         break;
       case "73":
         //$('#DAsegIniVig').css("display","block")
