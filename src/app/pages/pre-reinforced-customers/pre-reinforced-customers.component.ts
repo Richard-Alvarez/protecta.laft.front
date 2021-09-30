@@ -59,7 +59,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
      this.spinner.hide()
 
     this.tipoListas = this.parent.tipoListas
-    // console.log("el tipoListas &&%$: ",this.tipoListas)
+    
   }
 
   async setData(){
@@ -87,21 +87,20 @@ export class PreReinforcedCustomersComponent implements OnInit {
     data.NIDALERTA = this.NIDALERTA;
     data.NIDREGIMEN = this.NIDREGIMEN;
     data.SESTADO_TRAT = 'CRE'//this.SESTADO_TRAT;
-    // console.log("param trat", data)
-    //console.log("arrResultados", this.arrResultados)
+    
     this.respClientesRevisado = /*this.arrResultados*/ await this.userConfigService.getResultadoTratamiento(data);
 
-    // console.log("La verdadera lista sin filtro",  this.respClientesRevisado)
+    
     this.respClientesRevisado.forEach((cliente,inc) => {
     let arrayListas = [];
     let respFilterLista = [];
     let respClientesRevisadoFilter = this.respClientesRevisado.filter((it) =>/* it.SCLIENT == cliente.SCLIENT */ it.SNUM_DOCUMENTO == cliente.SNUM_DOCUMENTO );
-      // console.log("respClientesFilter", respClientesRevisadoFilter)
+    
 
       respClientesRevisadoFilter.forEach((lista) => {
         this.tipoListas.forEach((itLista) => {
           // if(itLista.id == 2){
-          //     console.log("si pinta el PEP : ",itLista)
+    
           // }
           if (itLista.nombre == lista.SDESTIPOLISTA) {
             let respFilterListaNew = respFilterLista.filter(
@@ -130,7 +129,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
             }
           }
         });
-        // console.log("respFilterLista : ", respFilterLista);
+        
       });
 
 
@@ -147,11 +146,11 @@ export class PreReinforcedCustomersComponent implements OnInit {
         //objCLientRevisadoCoin.SESTADO_TRAT = itemLista.SESTADO_TRAT;
         //objCLientRevisadoCoin.SDESESTADO_TRAT = itemLista.SDESESTADO_TRAT;
         arrayListas.push(objCLientRevisadoCoin)
-        // console.log("objCLientRevisadoCoin", objCLientRevisadoCoin)
+        
     })
 
       let respClientesRevisadoFilterCoin = this.respClientesRevisado.filter((it) => /*it.SCLIENT == cliente.SCLIENT &&*/ it.SDESESTADO == 'COINCIDENCIA');
-    //  console.log("el respClientesRevisadoFilterCoin : ",respClientesRevisadoFilterCoin)
+    
 
      let objClientesFilterCoin = respClientesRevisadoFilterCoin[0]
 
@@ -170,7 +169,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
         objResultadoRevisadoFinalOnTheEnd.arrListas = arrayListas;
         this.newArrayResult.push(objResultadoRevisadoFinalOnTheEnd);
    
-        // console.log("el objResultadoRevisadoFinalOnTheEnd : ",objResultadoRevisadoFinalOnTheEnd)
+        
 
 
     });
@@ -185,15 +184,14 @@ export class PreReinforcedCustomersComponent implements OnInit {
     data.NIDALERTA = this.NIDALERTA;
     data.NIDREGIMEN = this.NIDREGIMEN;
     data.SESTADO_TRAT = 'CRE'//this.SESTADO_TRAT;
-    // console.log("param trat", data)
-    // console.log("arrResultados", this.arrResultados)
+   
     this.respClientesRefor = this.arrResultados//await this.userConfigService.getResultadoTratamiento(data);
 
     let arregloAcumulador = [];
     let seRepite = false;
     //let incrementador = 0;
     this.respClientesRefor.forEach(item => {
-      //console.log("el item : ",item)
+      
       arregloAcumulador.forEach(acumulador => {
         if(acumulador.SNOM_COMPLETO === item.SNOM_COMPLETO && acumulador.SNUM_DOCUMENTO === item.SNUM_DOCUMENTO){
           seRepite = true;
@@ -207,7 +205,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
       }*/
       //incrementador++;
     })
-    //console.log("el arregloAcumulador : ",arregloAcumulador);
+   
     //let arrayFinal = [];
     this.arrayFinalCliRefor = []
     arregloAcumulador.forEach(acumulador => {
@@ -244,9 +242,9 @@ export class PreReinforcedCustomersComponent implements OnInit {
         
       })
       this.arrayFinalCliRefor.push(objClienteReforzadoAcum);
-      // console.log("objClienteReforzadoAcum :", objClienteReforzadoAcum)
+      
     })
-    //console.log("el arrayFinal : ",this.arrayFinalCliRefor);
+  
     /*objCliRefor.nombre = "Ronald McDonald Ruiz"
     objCliRefor.tipoDocumento = "DNI";
     objCliRefor.documento = "47878787";
@@ -259,13 +257,13 @@ export class PreReinforcedCustomersComponent implements OnInit {
     this.respClientesRefor.push(objCliRefor);*/
     this.respClientesFilters = [];
     this.respClientesFilters = this.arrayFinalCliRefor;
-    // console.log("arrayFinalCliRefor new",this.arrayFinalCliRefor)
+    
     return this.arrayFinalCliRefor;
     
   }
 
   setDataViewCustomer(item) {
-    //console.log("el item local : ",item);
+   
     localStorage.setItem('tipoClienteGC', 'CRE')
     localStorage.setItem('OCLIENTE_REFORZADO', JSON.stringify(item))
     localStorage.setItem('boolClienteReforzado', 'true')
@@ -279,7 +277,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
     data.NIDREGIMEN = 1;
     data.SESTADO_TRAT = 'CRE';
     let respuesta = await this.userConfigService.updateListClienteRefor(data);*/
-    //console.log("la respuesta : ",respuesta)
+    
   }
 
   async getListProcess(){
@@ -289,24 +287,22 @@ export class PreReinforcedCustomersComponent implements OnInit {
       this.respClientesFilters = this.arrayFinalCliRefor;
     }else{
       this.respClientesFilters = [];
-      //console.log("(this.txtBuscador+'').trim() : ",((this.txtBuscador+'').trim()).split(''))
-      //console.log("lo presiono ")
-      //console.log("lo presiono 1 : ",this.txtBuscador)
+  
       let buscadorMinuscula = this.txtBuscador.toLowerCase();
       this.arrayFinalCliRefor.forEach(item => {
         let nombre = item.SNOM_COMPLETO.toLowerCase();
-        //console.log("includes : ",nombre.includes(buscadorMinuscula));
+      
         if(nombre.includes(buscadorMinuscula)){
           this.respClientesFilters.push(item);
         }
-        //console.log("item : ",item);
+      
       })
     }
     
   }
 
   async getOptionsClient(accion,SESTADO_TRAT_OLD,dataArray,indiceQuitarRegistro){
-    // console.log("data del quitar :",dataArray)
+   
     let accionClient = '';
     let indice = indiceQuitarRegistro
     let data:any = {};
@@ -327,14 +323,14 @@ export class PreReinforcedCustomersComponent implements OnInit {
     dataService.STIPOACTRESULTADO = "MANUAL"
     dataService.NIDGRUPOSENAL = 1
 
-    // console.log("el dataService : ",dataService)
+  
     switch (accion) {
       case '1': 
         data.pregunta = '¿Está seguro de eliminar el cliente de revisado?'
         
         data.boton1 = 'Aprobar'        
         dataService.SESTADO_TRAT = 'CRE';
-        // console.log("el dataService : ",dataService)
+       
         await this.getSwalOptionClient(data,dataService,indice)
         break;
       case '2': 
@@ -343,7 +339,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
         //dataService.SESTADO_TRAT = 'AN';
         dataService.SESTADO_TRAT = 'CRE';
         
-        //console.log("el dataService : ",dataService)
+      
         await this.getSwalOptionClient(data,dataService,indice)
         break;
       case '3':
@@ -352,7 +348,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
         
         dataService.SESTADO_TRAT = 'CCO';
         
-        //console.log("el dataService : ",dataService)
+     
         await this.getSwalOptionClient(data,dataService,indice)
         break;
       default :
@@ -383,25 +379,25 @@ export class PreReinforcedCustomersComponent implements OnInit {
       
     }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
-      //console.log("result : ",result)
+    
       if (result.value) {
         
          this.spinner.show()
-        // console.log("data de reinforce",dataService)
+       
         let respServiceUpd = await this.userConfigService.UpdateTratamientoCliente(dataService);
         try {
           await this.parent.getClientsByTratamiento()
         } catch (error) {
-          console.error("El error :" ,error)
+         
         }
        
         
         
 
-        // console.log("respServiceUpd : ",respServiceUpd)
+       
 
         // this.arrResultados.splice(indice, 1)
-        // console.log("Prueba del index",indice)
+      
         // this.getResultadosCliente(1)
         // let respCRE = await this.parent.getDataResultadoTratamiento('CRE')
         // let respCCO = await this.parent.getDataResultadoTratamiento('CCO')
@@ -413,7 +409,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
         //   this.parent.getserviceReforzado()
         //   //this.parentCRF.getResultadosCliente(1)
         // }catch(error){
-        //   console.error("el error : ",error)
+       
         // }
         // ///await this.parent.ngOnInit()
         
@@ -433,7 +429,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
          })
         
         // //let valorIndice = this.eliminarFila("")
-        // //console.log("valorIndice",valorIndice)
+       
 
       } else {
         return
@@ -445,18 +441,17 @@ export class PreReinforcedCustomersComponent implements OnInit {
 
   eliminarFila(arrayQuitarRegistro){
     //this.arrResultados.splice(arrayQuitarRegistro, 1)
-    //console.log("Prueba del index",arrayQuitarRegistro)
+  
     //return arrayQuitarRegistro
   }
   newArrResultadosCliente:any = []
   getResultadosCliente(page){
-    //console.log("el this.arrResultados 1 &&& : ",this.arrResultados)
-    // console.log("el initializePage 1 &&& : ",this.initializePage)
+   
     let resp = this.arrResultados.slice(
       (page - 1) * 5,
       page * 5
     )
-    //console.log("el this.arrResultados 2 &&& : ",resp)
+    
     this.newArrResultadosCliente = resp//this.arrResultados
   }
 
@@ -483,18 +478,18 @@ export class PreReinforcedCustomersComponent implements OnInit {
 
       this.arrResultadoFilter = []
       this.arrResultadoFilter = this.arrResultados.filter(itResult => {
-        //  console.log("nuevo resultado",itResult)
+        
         let nombreClienteCompleto = ((itResult.obj.SNOM_COMPLETO+' ').trim()).toLowerCase()
-        // console.log("nuevo resultado del nombre",nombreClienteCompleto)
+        
         if(nombreClienteCompleto.includes(nombreCliente)){
-          // console.log("entro al if")
+        
           return itResult
         }
       });
 
     }
     } catch (error) {
-      console.error("error",error)
+      
     }
     // try {
     //   let nombreCliente = ((this.txtBuscador+' ').trim()).toLowerCase()
@@ -505,18 +500,18 @@ export class PreReinforcedCustomersComponent implements OnInit {
 
     //   this.arrResultadoFilter = []
     //   this.arrResultados.forEach(itResult => {
-    //     // console.log("nuevo resultado",itResult)
+    
     //     let nombreClienteCompleto = ((itResult.obj.SNOM_COMPLETO+' ').trim()).toLowerCase()
 
     //     if(nombreClienteCompleto.includes(nombreCliente)){
-    //       console.log("entro al if")
+    
     //       this.arrResultadoFilter.push(itResult)
     //     }
     //   });
 
     // }
     // } catch (error) {
-    //   console.error("error",error)
+    
     // }
     
    
@@ -533,7 +528,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
   exportListToExcel(){
     let resultado:any = []
     resultado = this.getBuscarClient()
-    console.log("resultado", resultado)
+    
     let Newresultado:any = []
     let resultadoFinal:any = []
     if (resultado!= null && resultado.length > 0) {
@@ -544,7 +539,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
        for(let index = 0 ;index < Newresultado.length; index++){
         if(Newresultado[index].length > 1){
           Newresultado[index].forEach(element => {
-            //console.log("element", element)
+    
             resultadoFinal.push(element)
           });
         }else{
@@ -553,8 +548,8 @@ export class PreReinforcedCustomersComponent implements OnInit {
      }
 
       //resultadoFinal.push(Newresultado)
-      console.log("Newresultado", Newresultado)
-      console.log("resultadoFinal", resultadoFinal)
+    
+    
 
       let data = []
       resultadoFinal.forEach(t => {
@@ -569,10 +564,10 @@ export class PreReinforcedCustomersComponent implements OnInit {
         t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO
         });
-        //console.log("la data1111", t.arrListas)
+        
         data.push(_data);
         });
-        console.log("la data", data)
+        
         this.excelService.exportAsExcelFile(data, "Cliente revizado");
     }else {
       swal.fire({
@@ -597,17 +592,16 @@ export class PreReinforcedCustomersComponent implements OnInit {
   {
     let resultado:any = []
     resultado = this.getBuscarClient()
-    console.log("resultado", resultado)
-    console.log("la data length", this.arrResultadoFilter.length)
+  
     if (resultado!= null && resultado.length > 0) {
       this.core.loader.show();
       let data = []
-      debugger
+      
       resultado.forEach(result => {
-        console.log("dsadasdsadsa",result.arrClientesGC)
+        
         let _data:any ={}
         result.arrClientesGC.forEach(element => {
-          console.log("element",element.SNOM_COMPLETO)
+          
            _data = {
             "Tipo Documento" : element.STIPOIDEN,
             "N° Documento" : element.SNUM_DOCUMENTO,
@@ -617,13 +611,13 @@ export class PreReinforcedCustomersComponent implements OnInit {
             //    let NombreLista = listas.SDESTIPOLISTA
             //    _data.NombreLista = listas.SDESESTADO
             // });
-            console.log("_data",_data)
+            
          
         });
         data.push(_data);
         
     });
-      console.log("la data", data)
+      
 
       //this.excelService.exportAsExcelFile(data, "Registro de usuarios por perfil");
     }

@@ -38,7 +38,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
     await this.getGrupoList();
     this.core.loader.hide(); 
    
-    // console.log("el this.data", this.data)
+
 
 
     if (this.data == 'null') {
@@ -82,7 +82,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
                  closeButton : 'OcultarBorde'
                              },
              }).then(async (respuesta) =>{
-                     console.log("respuesta.dismiss",respuesta.dismiss)
+                     
                      if(!respuesta.dismiss){
                       return
                       }
@@ -106,7 +106,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
            closeButton : 'OcultarBorde'
                        },
        }).then(async (respuesta) =>{
-               console.log("respuesta.dismiss",respuesta.dismiss)
+               
                if(!respuesta.dismiss){
 
                 
@@ -121,13 +121,13 @@ export class ModalProfileMaintenanceComponent implements OnInit {
                 dataRegistro.NUSERCODE = 999
                 dataRegistro.STIPO_USUARIO = 'RE'
                 
-                console.log("la data que envia a registrar :", dataRegistro)
+                
 
                 this.core.loader.show(); 
                 await this.userConfig.InsertUpdateProfile(dataRegistro).then((response) => {
                   IDRespuesta = response.id
-                  console.log("response",response )
-                  console.log("el id de la respuesta",IDRespuesta )
+                
+                
                 });
                 this.core.loader.hide(); 
 
@@ -138,7 +138,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
                     dataRegistroGrupos.NIDGRUPOSENAL = this.categoriaSelectedArray[i]
                     dataRegistroGrupos.NIDUSUARIO_MODIFICA = 999
                     dataRegistroGrupos.TIPOOPERACION = "U"
-                    //  console.log("la data que envia a registrar el combo :", dataRegistroGrupos)
+                  
                     this.core.loader.show(); 
                     await this.userConfig.InsertUpdateProfileGrupos(dataRegistroGrupos)
                     this.core.loader.hide();
@@ -169,7 +169,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
            closeButton : 'OcultarBorde'
                        },
        }).then(async (respuesta) =>{
-               console.log("respuesta.dismiss",respuesta.dismiss)
+               
                if(!respuesta.dismiss){
                 
                 let dataRegistro:any = {};
@@ -201,8 +201,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
                 this.core.loader.show(); 
                     await this.userConfig.InsertUpdateProfileGrupos(dataRegistroGrupos).then((response) => {
                       let IDCode = response.code
-                      console.log("response",response )
-                      console.log("el id de la respuesta",IDCode )
+                 
 
                       if(IDCode == 1){
                         swal.fire({
@@ -217,7 +216,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
                              closeButton : 'OcultarBorde'
                                          },
                          }).then(async (respuesta) =>{
-                                 console.log("respuesta.dismiss",respuesta.dismiss)
+                  
                                  if(!respuesta.dismiss){
                                   return
                                   }
@@ -276,32 +275,28 @@ export class ModalProfileMaintenanceComponent implements OnInit {
   }
   
   consoelAux2(){
-    console.log("el consoelAux ValorCheck : ",this.checkbox.checked)
+  
   } 
 
   consoelAux(){
 
     this.idGrupo = (<HTMLInputElement>document.getElementById("valor")).value
-        console.log("el grupo",this.idGrupo)
-
+       
 
     this.ArrTrue = Object.values(this.checkbox)
-    console.log("el consoelAux ValorCheck : ",this.checkbox)
+  
     // let Resultado =  Object.values(this.checkbox); 
-    // console.log("la cantidad de checkbox" ,Resultado) 
-    console.log("el valor de la key : ",Object.keys(this.checkbox))
-    console.log("el valor de la  entries : ",Object.entries(this.checkbox))
-    console.log("el valor de la  values : ",Object.values(this.checkbox))
+   
     let CountTrue =  this.checkbox.filter(function(it) {
       return it == true;
     });
-    console.log("la cantidad nueva ; " , CountTrue.length)
+   
     // Object.keys(this.checkbox)
     // var lucky = this.checkbox.filter(function(it) {
     //   return it == true;
     // });
     
-  //  console.log("la cantidad nueva ; " , lucky)
+ 
   }
 
   servicio
@@ -319,10 +314,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
     let Resultado =  Object.values(this.seleccionados[clave]); 
     // let NewResultado = Resultado.filter(it => it.[1] == true)
 
-     console.log("los seleccionados",this.seleccionados )
-     console.log("la cantidad los seleccionados",Resultado.length) 
-     console.log("la cantidad los seleccionados 2" ,Resultado) 
-    //  console.log("Nuevos resultados ",NewResultado) 
+     
   }
 
  
@@ -330,7 +322,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
 
   MarcarCheckbox(){
     
-    console.log("la data ",   this.data)
+  
     let newData:any = this.data.arrGrupos
     let realData:any  = newData.filter(it => it.NVACIO == 1 )
 
@@ -357,10 +349,7 @@ export class ModalProfileMaintenanceComponent implements OnInit {
       this.categoriaSelectedArray.splice(this.categoriaSelectedArray.indexOf(categoriaSelected), 1);
       //this.categoriaSelectedArray.sort();
     }
-    console.log("el nuevo array :", this.categoriaSelectedArray)
-    // console.log("el valor de la key : ",Object.keys(this.checkbox))
-    // console.log("el valor de la  entries : ",Object.entries(this.checkbox))
-    // console.log("el valor de la  values : ",Object.values(this.checkbox))
+   
     
   }
 

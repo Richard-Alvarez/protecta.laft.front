@@ -82,7 +82,7 @@ export class GafiListComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        //console.log('err');
+        
         this.core.loader.hide();
         swal.fire({
           title: 'Gestión de alertas',
@@ -159,7 +159,7 @@ export class GafiListComponent implements OnInit {
                            },
           }).then((result) => {
           })
-          //console.log(this.inCountryName)
+          
           return
         }
 
@@ -277,13 +277,7 @@ export class GafiListComponent implements OnInit {
     _data.regUser = this.userReg === '' ? 0 : this.userReg;
     _data.operType = this.operType === '' ? 0 : this.operType;
 
-    //console.log(this.countryId)
-    //console.log(this.countryName)
-    //console.log(this.countryStatus)
-    //console.log(this.userReg)
-    //console.log(this.operType)
-
-    //console.log(data)
+  
 
     swal.fire({
       title: 'Eliminar país',

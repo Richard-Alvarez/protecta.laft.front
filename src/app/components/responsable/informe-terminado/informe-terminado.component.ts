@@ -41,9 +41,7 @@ export class InformeTerminadoComponent implements OnInit {
 
   async ngOnInit() {
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO;
-    ////console.log("el regimen IIIIIIIII: ", this.regimen)
-    ////console.log("el stateInformeTerminado AAAAAAAAAAAAAAAAAA: ", this.stateInformeTerminado)
-    ////console.log("el this.arrResponsable : ", this.arrResponsable)
+    
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
     
     await this.arrResponsable
@@ -51,11 +49,11 @@ export class InformeTerminadoComponent implements OnInit {
 
     // if(respObjFocusPosition.NIDALERTA){
     //   if (respObjFocusPosition.estado.includes('INFORME-TERMINADO')){
-    //     console.log("El respObjFocusPosition informe terminado: ",respObjFocusPosition)
+    
     //     //let cadenaContentUsers = 'collap'+'Alert'+respObjFocusPosition.NIDALERTA+'Regimen'+respObjFocusPosition.regimen.id+respObjFocusPosition.estado+'Head' + respObjFocusPosition.regimen.desCorto
     //     let cadenaContentUsers = respObjFocusPosition.elemento
     //     //'consulta'+'Alert'+respObjFocusPosition.NIDALERTA+'Lista'+respObjFocusPosition.NIDTIPOLISTA+'Regimen'+respObjFocusPosition.regimen.id
-    //     console.log("El cadenaContentUsers informe terminado: ",cadenaContentUsers)
+    
     //     this.redictM(cadenaContentUsers)
     //   }
     // }
@@ -253,7 +251,7 @@ export class InformeTerminadoComponent implements OnInit {
         }
 
         this.userConfigService.uploadFiles(data).then(response => {
-          ////console.log("upload", response);
+          
         });
       }
     })
@@ -264,7 +262,7 @@ export class InformeTerminadoComponent implements OnInit {
   }
 
   async downloadInformes(itemAlerta){
-    console.log("el itemAlerta : ",itemAlerta);
+    
     try {
       let cantidadResponsables = itemAlerta.arrUsuariosForm.length
       let cantidadInformes = itemAlerta.arrAdjuntosInform.length
@@ -284,9 +282,9 @@ export class InformeTerminadoComponent implements OnInit {
                          },
            
         }).then(async (result) => {
-          //console.log("hellow : ",result)
+         
         }).catch(err => {
-          //console.log("el error : ",err);
+          
         })
       }else if(cantidadResponsables == 0 || cantidadInformes == 0){
         swal.fire({
@@ -304,15 +302,14 @@ export class InformeTerminadoComponent implements OnInit {
                          },
            
         }).then(async (result) => {
-          //console.log("hellow : ",result)
+          
         }).catch(err => {
-          //console.log("el error : ",err);
+         
         })
       }else{
         let arrPromiseDownloadInform = []
         itemAlerta.arrUsuariosForm.forEach((itemForm,inc) => {
-          // console.log("el i : ",inc)
-          // console.log("el itemAlerta.arrAdjuntosInform[inc] : ",itemAlerta.arrAdjuntosInform[inc])
+        
           let objAdjunto = itemAlerta.arrAdjuntosInform[inc]
           arrPromiseDownloadInform.push(this.parent.downloadUniversalFile(objAdjunto.SRUTA_ADJUNTO,objAdjunto.name))
         })
@@ -327,7 +324,7 @@ export class InformeTerminadoComponent implements OnInit {
 
   async insertAttachedFiles(data: any) {
     let response = await this.userConfigService.insertAttachedFiles(data)
-    ////console.log(response)
+   
   }
 
   getExcelListAlert(NIDALERTA,REGIMEN){
@@ -348,17 +345,14 @@ export class InformeTerminadoComponent implements OnInit {
 capitalizarPrimeraLetra(texto : string ) {
   //  let texto = str
     
-  //  console.log("el texto de la primera letra", texto[0].toUpperCase() +  texto.slice(1).toLowerCase())
-  //  console.log("el texto que ingreso", texto[0].toUpperCase() + texto.slice(1))
-  //  console.log("el texto que ingreso 2", texto.charAt(0).toUpperCase() + texto.slice(1))
+
    let caracter = texto.search('-');
 
    return texto[0].toUpperCase() +  texto.slice(1,caracter).toLowerCase() + '-' + texto[caracter + 1].toUpperCase()  + texto.slice(caracter + 2,).toLowerCase()
 }
 
 async revertirSenial(objAlert){
-  console.log("el objAlert : ",objAlert)
-  console.log("el NPERIODO_PROCESO : ",this.parent.NPERIODO_PROCESO)
+ 
   
   swal.fire({
     title: 'Bandeja del Oficial de Cumplimiento',
@@ -375,7 +369,7 @@ async revertirSenial(objAlert){
                    },
      
   }).then(async (result) => {
-    //console.log("hellow : ",result)
+   
     if(!result.dismiss){
       this.core.loader.show()
       let dataUpdateStatus: any = {}
@@ -388,9 +382,9 @@ async revertirSenial(objAlert){
       dataSend.NIDALERTA = objAlert.NIDALERTA
       dataSend.NREGIMEN = objAlert.NREGIMEN//this.regimen.id;
       let respDeleteAdjuntos = await this.userConfigService.DeleteAdjuntosInformAlerta(dataSend)
-      console.log("el respDeleteAdjuntos : ",respDeleteAdjuntos)
+     
       let respGetWorkModule = await this.parent.getAndSetWorkModuleAll();
-      console.log("el respGetWorkModule : ",respGetWorkModule)
+     
       /*let indicadorObj = 0
       this.arrResponsable.forEach(objAler => {
         if (objAler.NIDALERTA === objAlert.NIDALERTA && objAler.NREGIMEN === objAlert.NREGIMEN) {
@@ -403,27 +397,25 @@ async revertirSenial(objAlert){
       objAlert.SESTADO = "2"
 
       let respPushObj = this.parent.pushObjInArrayByAlert("PENDIENTE-INFORME", objAlert.NREGIMEN, objAlert)//push a informe terminado
-      console.log("el respPushObj 789 : ", respPushObj)*/
+      */
 
       this.core.loader.hide()
     }
   }).catch(err => {
-    //console.log("el error : ",err);
+    
   })
   
 }
 
 async getArchivoSustento(item){
-  console.log("el objAlerta sustento : ",item)
-  console.log("el objAlerta arrAdjuntosSustento : ",item.arrAdjuntosSustento[0])
+  
   try {
     let objAdjunto = item.arrAdjuntosSustento[0]
     //let NPERIODO_PROCESO =  parseInt(localStorage.getItem("periodo"))
-    // console.log("el ajunto : ",adjunto)
-    // console.log("el item : ",this.item)
+
     //let ruta = 'ADJUNTOS/'+this.item.NIDALERTA+'/'+NPERIODO_PROCESO+'/'+this.parent.regimen.id+'/'+adjunto.name
     let ruta = item.arrAdjuntosSustento[0].SRUTA_ADJUNTO
-    // console.log("ruta : ",ruta)
+
     let resp = await this.parent.downloadUniversalFile(ruta,objAdjunto.name)
   } catch (error) {
     console.error("error en descargar: ",error)

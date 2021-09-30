@@ -43,11 +43,11 @@ export class ViewComponent implements OnInit {
           this.historias = response;
         });
     }
-    //console.log(this.registro);
+    
   }
 
   ngOnChanges() {
-    //console.log("view:ngOnChanges");
+    
   }
 
   cargarDatos() {

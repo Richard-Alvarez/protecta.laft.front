@@ -134,10 +134,10 @@ export class ReportesSbsComponent implements OnInit {
 
   validExchangeRate() {
 
-    //console.log("un texto??", this.exchangeRate);
+    
 
     if (!this.exchangeRate) {
-      //console.log("if 2");
+      
       swal.fire({
         title: 'Reportes SBS',
         icon: 'warning',
@@ -154,7 +154,7 @@ export class ReportesSbsComponent implements OnInit {
 
 
     if (typeof this.exchangeRate != 'number') {
-      //console.log("if 1");
+      
       swal.fire({
         title: 'Reportes SBS',
         icon: 'warning',
@@ -183,7 +183,7 @@ export class ReportesSbsComponent implements OnInit {
 
     }
     if (this.exchangeRate < 0) {
-      //console.log("if 1");
+      
       swal.fire({
         title: 'Reportes SBS',
         icon: 'warning',
@@ -217,13 +217,7 @@ export class ReportesSbsComponent implements OnInit {
           this.IamountFrecMulti = this.formatNumberDecimal(_data.amountFrecMulti);
 
           
-          //console.log("amount: ", this.amount)
-          //console.log("amountUnicaMulti: ", this.amountUnicaMulti)
-          //console.log("amountFrecMulti: ", this.amountFrecMulti)
-          ////console.log("Iamount: ", this.Iamount)
-          ////console.log("IamountUnicaMulti: ", this.IamountUnicaMulti)
-          ////console.log("IamountFrecMulti: ", this.IamountFrecMulti)
-          ////console.log("PRUEBA: ", this.formatNumberDecimal(5000000000000))
+         
           this.core.loader.hide();
           return resolve(_data);
         });
@@ -259,17 +253,7 @@ export class ReportesSbsComponent implements OnInit {
     data.desUser = this.userName === '' ? 0 : this.userName;
     this.core.loader.hide();
 
-    //console.log(this.bsValueIni)
-    //console.log(this.bsValueFin)
-    //console.log(this.OperType)
-    //console.log(this.exchangeRate)
-    //console.log(this.amount)
-    //console.log(this.ReportCode)
-    //console.log(this.FileReportType)
-    //console.log(this.usuarioId)
-    //console.log(this.userName);
-    //console.log(this.ReportName)
-    //console.log(this.OperTypeName)
+  
 
 
     swal.fire({
@@ -296,9 +280,9 @@ export class ReportesSbsComponent implements OnInit {
         })
         try {
           //let respRescatesApi = await this.sbsReportService.cargarReporteRescates();
-          ////console.log("respRescatesApi : ",respRescatesApi);
+         
 
-          //console.log("hola")
+        
           let response = await this.sbsReportService.generateReportSBS(data);
           this.core.loader.hide();
           let _data;
@@ -355,9 +339,7 @@ export class ReportesSbsComponent implements OnInit {
         })
         try {
           //let respRescatesApi = await this.sbsReportService.cargarReporteRescates();
-          ////console.log("respRescatesApi : ",respRescatesApi);
-
-          //console.log("hola")
+         
           let response = await this.getReportsByProccess();
           this.core.loader.hide();
           let _data;
@@ -397,9 +379,9 @@ export class ReportesSbsComponent implements OnInit {
       data.desReport = this.ReportName === '' ? 0 : this.ReportName;
       data.desOperType = this.OperTypeName === '' ? 0 : this.OperTypeName;
       data.desUser = this.userName === '' ? 0 : this.userName;
-      console.log("el data : ",data)
+      
       let respResult = await this.sbsReportService.processInsertFile(data)
-      console.log("el respResult : ",respResult)
+      
       await this.downloadFile(respResult.archivoSunat,respResult.nomArchivoSunat)
       await this.downloadFile(respResult.archivoTxtMultiples,respResult.nomArchivoTxtMultiples)
       await this.downloadFile(respResult.archivoTxtUnicas,respResult.nomArchivoTxtUnicas)
@@ -408,7 +390,7 @@ export class ReportesSbsComponent implements OnInit {
       this.core.loader.hide()
     } catch (error) {
       this.core.loader.hide()
-      console.log("el error al generar el reporte: ",error)
+      
     }
   }
 
@@ -467,17 +449,7 @@ export class ReportesSbsComponent implements OnInit {
       data.desUser = this.userName === '' ? 0 : this.userName;
       this.core.loader.hide();
 
-      //console.log(this.bsValueIni)
-      //console.log(this.bsValueFin)
-      //console.log(this.OperType)
-      //console.log(this.exchangeRate)
-      //console.log(this.amount)
-      //console.log(this.ReportCode)
-      //console.log(this.FileReportType)
-      //console.log(this.usuarioId)
-      //console.log(this.userName);
-      //console.log(this.ReportName)
-      //console.log(this.OperTypeName)
+      
 
       swal.fire({
         title: 'Generación de Texto Plano',
@@ -504,9 +476,7 @@ export class ReportesSbsComponent implements OnInit {
 
           try {
             //let respRescatesApi = await this.sbsReportService.cargarReporteRescates();
-            ////console.log("respRescatesApi : ",respRescatesApi);
-
-            //console.log("hola")
+           
             let response = await this.sbsReportService.generateReportSBS(data);
             this.core.loader.hide();
             let _data;
@@ -533,7 +503,7 @@ export class ReportesSbsComponent implements OnInit {
   generateSbsReport() {
 
     let validER = this.validExchangeRate();
-    //console.log("validER ", validER);
+    
 
 
     if (validER != false) {
@@ -587,7 +557,7 @@ export class ReportesSbsComponent implements OnInit {
       }
 
       this.getReportsByProccess()
-      //console.log("EL nValorReporte 111111111111", this.nValorReporte);
+      
       /*if (this.nValorReporte == 0) {
         this.generateSbsReportAsCsv();
       } else if (this.nValorReporte == 1) {
@@ -611,16 +581,16 @@ export class ReportesSbsComponent implements OnInit {
   }
 
   changeComboReporte(event) {
-    //console.log("event : ", event.target.value);
+    
     let valorSelect = event.target.value;
     if (valorSelect == 0) {
       this.nValorReporte = valorSelect;
-      //console.log("el nValorReporte ", this.nValorReporte);
+      
       //return this.nValorReporte;
     }
     if (valorSelect == 1) {
       this.nValorReporte = valorSelect;
-      //console.log("el nValorReporte ", this.nValorReporte);
+      
       //return this.nValorReporte;
     }
   }
@@ -631,13 +601,11 @@ export class ReportesSbsComponent implements OnInit {
     let val = (n+'').split('');
     let ind = 0
     let cadena = '';
-    ////console.log("el val : ",val)
-    ////console.log("el ind : ",ind)
+  
     
     for (let index = (val.length)-1; index >= 0; index--) {
       const element = val[index];
-      ////console.log("index : ",index)
-      ////console.log("element : ",element)
+     
       if(ind % 3 === 0 && ind !== 0){
         cadena = ','+cadena
       }
@@ -663,19 +631,19 @@ export class ReportesSbsComponent implements OnInit {
 
   /*setTwoNumberDecimal() {
     this.amount = parseFloat(this.amount).toFixed(2);
-    //console.log("ENTRO A LA FUNCION : ",this.amount);
+    
   }*/
 
 
   /*setearValorDoc(valor){
-    //console.log("el valor ",valor);
+  
     if(valor === 0){
       this.nValorReporte = valor;
-      //console.log("el nValorReporte ",this.nValorReporte);
+    
       return this.nValorReporte;
     }else{
       this.nValorReporte = valor;
-      //console.log("el nValorReporte ",this.nValorReporte);
+      
       return this.nValorReporte;
     }
   }*/

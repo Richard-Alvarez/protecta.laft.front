@@ -16,7 +16,7 @@ export class ViewCustomerReinforcedComponent implements OnInit {
 
   async getClienteReforStorage(){
     this.objClienteRefor = JSON.parse(localStorage.getItem('OCLIENTE_REFORZADO'))
-    //console.log("objClienteRefor : "+this.objClienteRefor.nombre);
+    
   }
 
 }

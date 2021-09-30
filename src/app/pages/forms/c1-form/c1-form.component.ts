@@ -187,7 +187,7 @@ export class C1FormComponent implements OnInit {
 
     async getQuestionDetail() {
         let response = await this.userConfigService.getQuestionDetail({ NIDALERTA_CABECERA: this.NIDALERTA_CABECERA })
-        //console.log("nIdCabecera", this.NIDALERTA_CABECERA)
+        
         for (let it  in response.preguntas) {
             this.questionsList.push(it)
         }
@@ -206,7 +206,7 @@ export class C1FormComponent implements OnInit {
                 this.questionsHeaderList.forEach(it => this.answersHeaderList.push(it))
             }
         } catch (error) {
-            //console.log("error", error)
+         
         }
     }
 
@@ -223,7 +223,7 @@ export class C1FormComponent implements OnInit {
         this.answersDetailList.forEach(ans => {
             let data = ans
             this.userConfigService.insertQuestionDetail(data).then(response => {
-                //console.log("detalle cuestionario", data)
+               
             })
         })
     }
@@ -419,7 +419,7 @@ export class C1FormComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
         let response = await this.userConfigService.insertAttachedFiles(data)
-        //console.log(response)
+   
     }
 
     async getAttachedFiles(tipoUsuario: string) {
@@ -476,15 +476,15 @@ export class C1FormComponent implements OnInit {
             data.listFileName = listFileName
             data.alerta = alerta
             data.nIdCabUsuario = this.datosCabecera.NIDALERTA_CABECERA
-            //console.log("el deita in c1-form : ",data);
+           
             for (let i = 0; i < listFiles.length; i++) {
                 let ruta = `${listFileName[i]}`
                 let uploadPararms = { NIDALERTA_CABECERA: this.datosCabecera.NIDALERTA_CABECERA, SRUTA_ADJUNTO: ruta, STIPO_USUARIO: this.STIPO_USUARIO_LOGIN, NIDUSUARIO_ASIGNADO : this.NIDUSUARIO_LOGUEADO }
-                //console.log("uploadPararms", uploadPararms)
+               
                 await this.insertAttachedFiles(uploadPararms)
             }
             this.userConfigService.uploadFiles(data).then(response => {
-                //console.log(response);
+              
             });
         }
     }
@@ -542,7 +542,7 @@ export class C1FormComponent implements OnInit {
         let response = await this.userConfigService.insertCommentHeader(data)
         this.SCOMENTARIO = ''
         await this.getCommentHeader()
-        //console.log(response)
+    
     }
     
     async sendEmail() {
@@ -550,13 +550,13 @@ export class C1FormComponent implements OnInit {
         let userName = user['fullName'];
         this.ocEmailList  = await this.userConfigService.getOCEmailList()        
         for (let i = 0; i < this.ocEmailList.length; i++) {
-            //console.log(this.ocEmailList.length)
+           
             let data: any = {};
                 data.fullName = this.ocEmailList[i].NOMBRECOMPLETO
                 data.manager = userName
                 data.email = this.ocEmailList[i].SEMAIL
                 data.rol= this.ocEmailList[i].SDESCARGO  
-                //console.log(data)          
+                     
             await this.userConfigService.sendEmail(data)
         }      
     }
@@ -637,7 +637,7 @@ export class C1FormComponent implements OnInit {
                     SCARGO: this.datosCabecera.SCARGO,
                     STIPO_USUARIO: 'OC'
                 }
-                //console.log("data complemento", data)
+               
                 let response = await this.userConfigService.sendComplimentary(data)
                 await this.sendFiles(this.STIPO_USUARIO_LOGIN)
                 this.SCOMPLIMENTARY = ''
@@ -704,7 +704,7 @@ export class C1FormComponent implements OnInit {
         return new Promise((resolve, reject) => {
             this.userConfigService.getListGafiAlert(data)
                 .then((response => {
-                    //console.log("LA DEITA 1 : ", response);
+                    
                     return resolve(response);
                 }))
                 .catch(err => {
@@ -718,7 +718,7 @@ export class C1FormComponent implements OnInit {
         return new Promise((resolve, reject) => {
             this.userConfigService.getListNCAlert(data)
                 .then((response => {
-                    //console.log("LA DEITA 1 : ", response);
+                 
                     return resolve(response);
                 }))
                 .catch(err => {
@@ -732,7 +732,7 @@ export class C1FormComponent implements OnInit {
         return new Promise((resolve, reject) => {
             this.userConfigService.getListDirDuplicAlert(data)
                 .then((response => {
-                    //console.log("LA DEITA 1 : ", response);
+                    
                     return resolve(response);
                 }))
                 .catch(err => {
@@ -749,7 +749,7 @@ export class C1FormComponent implements OnInit {
         this.paylist = await this.userConfigService.getListNcCompanies(data)
         this.paylist.forEach(it => it.SESTADOPAGEFEC = it.SESTADOPAGEFEC == 1 ? true : false)
 
-        //console.log("paylist", this.paylist)
+        
     }
 
     // async updateInfoNcCompanies() {
@@ -762,7 +762,7 @@ export class C1FormComponent implements OnInit {
     //         data.P_SESTADOPAGEFEC = this.paylist[i].SESTADOPAGEFEC
     //         data.P_DESMOTIVO = this.paylist[i].DESMOTIVO
     //         this.userConfigService.updateListNcCompanies(data).then(response => {
-    //             //console.log(response)
+   
     //         })
     //     }
     // }
@@ -772,14 +772,14 @@ export class C1FormComponent implements OnInit {
         if (event.target.checked) {
             for (let i = 0; i < this.paylist.length; i++) {
                 this.paylist[i].SESTADOPAGEFEC = true
-                //console.log(this.paylist[i].SESTADOPAGEFEC)
+              
             }       
             this.core.loader.hide()    
         }
         else {
             for (let i = 0; i < this.paylist.length; i++) {
                 this.paylist[i].SESTADOPAGEFEC = false
-                //console.log(this.paylist[i].SESTADOPAGEFEC)
+         
             }       
             this.core.loader.hide()           
         }
@@ -791,13 +791,13 @@ export class C1FormComponent implements OnInit {
         jsonData.P_NIDALERTA = this.NIDALERTA;
         jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
 
-        //console.log("EL JSODATA : ", jsonData);
+    
         let respData: any = [];
         if (this.NIDALERTA == 3) {
 
             respData = await this.getListGafiAlertService(jsonData);
 
-            //console.log("EL DEITA : ", respData);
+        
             if (respData.length > 0) {
                 await this.excelService.exportAsExcelFile(respData, "Registros de alerta C3");
             }
@@ -807,7 +807,7 @@ export class C1FormComponent implements OnInit {
             jsonData.P_NIDREGIMEN = this.NIDREGIMEN;
             respData = await this.getListNCAlertService(jsonData);
 
-            //console.log("EL DEITA : ", respData);
+          
             if (respData.length > 0) {
                 await this.excelService.exportAsExcelFile(respData, "Registros de alerta S1");
             }
@@ -817,7 +817,7 @@ export class C1FormComponent implements OnInit {
             //let respData:any = [];
             respData = await this.getListDirDuplicAlertService(jsonData);
 
-            //console.log("EL DEITA : ", respData);
+       
             if (respData.length > 0) {
                 await this.excelService.exportAsExcelFile(respData, "Registros de alerta S2");
             }
@@ -827,11 +827,11 @@ export class C1FormComponent implements OnInit {
             //jsonData.P_NIDALERTA = this.NIDALERTA;//this.NIDALERTA;
             //jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
 
-            //console.log("EL JSODATA : ", jsonData);
+       
 
             respData = await this.userConfigService.getListClienteRentasRAltoAlert(jsonData);
 
-            //console.log("EL DEITA : ", respData);
+           
             if (respData.length > 0) {
                 await this.excelService.exportAsExcelFile(respData, "Registros de alerta RG4");
             }

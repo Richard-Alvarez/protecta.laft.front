@@ -34,7 +34,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    console.log("data",this.data)
+   
     //await  this.ListaAlerta()
     await  this.getGrupoList()
     await this.listData()
@@ -43,7 +43,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
        this.desactivar = false
       
 
-      console.log("SennalList",this.SennalList)
+     
     }
     else {
       this.fTitle = 'Editar complemento';
@@ -125,7 +125,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                  closeButton : 'OcultarBorde'
                              },
              }).then(async (respuesta) =>{
-                     console.log("respuesta.dismiss",respuesta.dismiss)
+                     
                      if(!respuesta.dismiss){
                       return
                       }
@@ -152,7 +152,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                closeButton : 'OcultarBorde'
                            },
            }).then(async (respuesta) =>{
-                   console.log("respuesta.dismiss",respuesta.dismiss)
+                 
                    if(!respuesta.dismiss){
                       return
                       
@@ -173,7 +173,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                closeButton : 'OcultarBorde'
                            },
            }).then(async (respuesta) =>{
-                   console.log("respuesta.dismiss",respuesta.dismiss)
+                 
                    if(!respuesta.dismiss){
     
                     
@@ -189,7 +189,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                     dataRegistro.SESTADO =  this.estado == true ? 1 : 2
                     dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
                     dataRegistro.TIPOOPERACION = 'I'
-                    console.log("la data que envia a registrar :", dataRegistro)
+                   
     
                     this.core.loader.show(); 
                     await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
@@ -220,9 +220,9 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
            closeButton : 'OcultarBorde'
                        },
        }).then(async (respuesta) =>{
-               console.log("respuesta.dismiss",respuesta.dismiss)
+             
                if(!respuesta.dismiss){
-                console.log("this.estado ", this.estado )
+            
                 let dataRegistro:any = {};
                 dataRegistro.NIDCOMPLEMENTO = this.idComplemento
                 dataRegistro.SNOMBRE_COMPLEMENTO = this.nombreComplemento

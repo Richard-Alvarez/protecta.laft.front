@@ -73,17 +73,13 @@ export class DevueltoComponent implements OnInit {
 
     this.dataC1Serv.arrRespuestasForm$.subscribe(arreglo => {
       this.arrDetailC1 = arreglo
-      ////console.log("el ARREGLO DEL SUBSCRIBE EN C pendiente1: ",arreglo)
-      ////console.error("el ARREGLO DEL SUBSCRIBE EN C arrDetailC1 2: ",this.arrDetailC1)
+     
     })
     this.dataC1Serv.arrComentariosForm$.subscribe(arreglo => {
       this.arrDetailCommentsC1 = arreglo;
-      ////console.error("el ARREGLO DEL SUBSCRIBE EN C arrDetailCommentsC1 2: ",this.arrDetailCommentsC1)
+      
     })
-    ////console.log("el regimen ajaa: ",this.regimen)
-    ////console.log("el regimen ajaa ID: ",this.regimen.id)
-    ////console.log("arrResponsablesDevueltoGral: ",this.arrResponsablesDevueltoGral)
-    ////console.log("stateDevuelto: ",this.stateDevuelto)
+ 
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
     
   }
@@ -145,7 +141,7 @@ export class DevueltoComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
         let response = await this.userConfigService.insertAttachedFiles(data)
-        ////console.log(response)
+       
     }
 
   async getVariablesStorage(){
@@ -196,7 +192,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   getClassBagdeState(state){
-    ////console.log("state : ",state)
+   
     if(state === 'PENDIENTE'){
       return 'badge-warning'
     }
@@ -273,22 +269,22 @@ export class DevueltoComponent implements OnInit {
                      },
        
     }).then(async (result) => {
-      ////console.log("hellow : ",result)
+      
     }).catch(err => {
-      ////console.log("el error : ",err);
+      console.log("el error : ",err);
     })
   }
   sendForm(){
-    ////console.log("el arrInputComment ",this.arrInputComment)
+   
     if(this.STIPO_USUARIO === 'OC'){
       this.sNameTipoUsuario = 'Oficial de Cumplimiento'
     }else{
       this.sNameTipoUsuario = 'Responsable'
     }
     let respSetDataPendiente:any = this.setDataPendiente();
-     console.log("el respSetDataPendiente : ",respSetDataPendiente)
+     
     let respValidation = this.IsValidInfoDevueltoResp(respSetDataPendiente.array);
-    ////console.log("respValidation : ",respValidation)
+    
     if (respValidation.message !== '') {
       swal.fire({
         title: 'Bandeja del '+ this.sNameTipoUsuario,
@@ -317,7 +313,7 @@ export class DevueltoComponent implements OnInit {
           return
         }
       })
-      console.log("LA RESPUESTA DEL ARREGLO DEL ARCHIVO SUSTENTO : ",respValidacionArchivoSustento)
+      
       if(respValidacionArchivoSustento.code == 2){
         swal.fire({
           title: 'Bandeja del '+ this.sNameTipoUsuario,
@@ -356,7 +352,7 @@ export class DevueltoComponent implements OnInit {
                          },
            
         }).then(async (result) => {
-          ////console.log('el result :', result)
+         
           if(result.value === true){
             this.core.loader.show();
             let inc = 0;
@@ -364,8 +360,7 @@ export class DevueltoComponent implements OnInit {
             let arrSendAdjuntos :any = []
             this.arrResponsable.forEach(senial => {
               //senial.SCOMENTARIO = this.arrInputComment[inc]
-              ////console.log("la senial : ",senial)
-              ////console.log("el arrInputComment",this.arrInputComment)
+             
               arrSendSolComplemento.push(this.enviarRespuestaComplemento(senial,inc))
               arrSendAdjuntos.push(this.parent.sendFilesAdjuntosCabecera(senial.NIDALERTA_CABECERA,senial.NIDALERTA,this.regimen.id,'ADJUNTOS-FORM',"DEVUELTO","RE"))
               arrSendAdjuntos.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'ADJUNTOS-SUSTENTO'))
@@ -386,23 +381,22 @@ export class DevueltoComponent implements OnInit {
             })
             let respPromiseAllCommetHeader = await Promise.all(arratCommentsHeader)
             let respPromiseAllAdjuntos = await Promise.all(arraAdjuntos)
-            // console.log("el respPromiseAllAdjuntos 121 : ",respPromiseAllAdjuntos)
+            
             let indiceArrAlert = 0;
             let arrResponsableNewAlert:any = []
             this.arrResponsable.forEach( objAlerta => {
-              console.log("A sto es objAlerta : ",objAlerta)
-              console.log("A sto es indiceArrAlert : ",indiceArrAlert)
+              
              objAlerta.arrConversacionCabecera = respPromiseAllCommetHeader[indiceArrAlert]
 
               objAlerta.arrAdjuntos = respPromiseAllAdjuntos[indiceArrAlert]
 
                 let arrRespuestaSet = []
                 objAlerta.arrPreguntasCabecera.forEach((ans,indicePregCab) => {
-                  console.log("A sto es indicePregCab : ",indicePregCab)
+                 
                    ans.NRESPUESTA = (this.arrInputRespHeader[indiceArrAlert])[indicePregCab]
-                   console.log("ans.NRESPUESTA : ", ans.NRESPUESTA)
+                  
                    ans.SRESPUESTA = ans.NRESPUESTA == '1' ? 'Sí.' : ans.NRESPUESTA == '2' ? 'No.' : ''
-                   console.log("ans.SRESPUESTA : ", ans.SRESPUESTA)
+                  
                   // //ans.SCOMENTARIO = (this.arrInputComment[inc])[indicePregCab]
                    arrRespuestaSet.push(ans)
 
@@ -413,11 +407,11 @@ export class DevueltoComponent implements OnInit {
               arrResponsableNewAlert.push(objAlerta)
               indiceArrAlert++;
 
-              //console.log("BEsto es : ",objAlerta)
+         
               
 
             })
-            console.log("BEsto es  el final : ",arrResponsableNewAlert)
+           
             arrResponsableNewAlert.forEach(objAlerta => {
               this.parent.pushObjInArrayByAlert('COMPLETADO',this.regimen.id,objAlerta)
             })
@@ -451,7 +445,7 @@ export class DevueltoComponent implements OnInit {
             
          
         }).catch(err => {
-          ////console.log("el error : ",err);
+          console.log("el error : ",err);
         })
       }
 
@@ -463,8 +457,7 @@ export class DevueltoComponent implements OnInit {
 
   isValidationAdjuntosForms(objAlerta){
     try {
-      console.log("el objalerta : ",objAlerta)
-      console.log("el this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+      
       if(objAlerta.NIDALERTA == 4 || objAlerta.NIDALERTA == 15){
         let respFilter = this.parent.arrObjFilesInformeByAlert.filter(it => 
           it.NIDALERTA == objAlerta.NIDALERTA && 
@@ -473,16 +466,14 @@ export class DevueltoComponent implements OnInit {
           it.STIPO_CARGA == 'ADJUNTOS-SUSTENTO')
 
 
-        //console.log("el respFilter[0] : ",respFilter[0])
-        //console.log("el respFilter[0] length: ",respFilter[0].length)
+      
         // if(respFilter.length == 0){
         //   return {code: 2, message: 'El archivo de sustento es obligatorio'}
         // }
 
-        //console.log("el respFilter[0] arrFilesName : ",respFilter[0].arrFilesName)
-        //console.log("el respFilter[0] arrFilesName length : ",(respFilter[0].arrFilesName).length)
+    
         let cantidad =  respFilter.length > 0 ? (respFilter[0].arrFilesName).length : 0
-        console.log("el cantidad : ",cantidad)
+        
         // if(cantidad == 0){
         //   return {code: 2, message: 'El archivo de sustento es obligatorio'}
         // }
@@ -513,54 +504,49 @@ export class DevueltoComponent implements OnInit {
     try {
       let arrResponsableNew = []
       let objAlertaNew:any = {}
-      //console.log("el this.arrDetailC1 : ",this.arrDetailC1)
-      //console.log("el this.arrDetailCommentsC1 : ",this.arrDetailCommentsC1)
-      //console.log("el this.arrResponsable : ",this.arrResponsable)
+      
       for (let i = 0; i < this.arrResponsable.length; i++) {
         let newArrayDetallePendiente:any = []
         //let indiceDetalle1 = 0
         objAlertaNew = this.arrResponsable[i]
-        //console.log("el objAlertaNew : ",objAlertaNew)
-        //console.log("el objAlertaNew.arrPreguntasDetalle : ",objAlertaNew.arrPreguntasDetalle)
+       
         for (let indiceDetalle1 = 0; indiceDetalle1 < objAlertaNew.arrPreguntasDetalle.length; indiceDetalle1++) {
           let objPreguntaNew:any = objAlertaNew.arrPreguntasDetalle[indiceDetalle1]
           
           //objPreguntaNew.SRESPUESTA = this.arrDetailC1[indiceDetalle1] == '1' ? 'Sí.' : this.arrDetailC1[indiceDetalle1] == '2' ? 'No.' : null
           //objPreguntaNew.SCOMENTARIO = this.arrDetailCommentsC1[indiceDetalle1]
           let detalleCortoNew:any = []
-          //console.log("el objPreguntaNew : ",objPreguntaNew)
+         
           for (let indiceDetalle2 = 0; indiceDetalle2 < objPreguntaNew.length; indiceDetalle2++){
-            //console.log("el this.arrDetailC1[indiceDetalle1] : ",this.arrDetailC1[indiceDetalle1])
+           
             let NRESPUESTA =  !this.arrDetailC1[indiceDetalle1] ? null : (this.arrDetailC1[indiceDetalle1])[indiceDetalle2]
-            //console.log("el NRESPUESTA : ",NRESPUESTA)
+            
             let SCOMENTARIO = !this.arrDetailCommentsC1[indiceDetalle1] ? null : !(this.arrDetailCommentsC1[indiceDetalle1])[indiceDetalle2] ? null : (this.arrDetailCommentsC1[indiceDetalle1])[indiceDetalle2]
-            //console.log("el SCOMENTARIO : ",SCOMENTARIO)
+           
             let objPreguntasAlertaew:any = {}
             objPreguntasAlertaew = objPreguntaNew[indiceDetalle2]
-            //console.log("el objPreguntasAlertaew : ",objPreguntasAlertaew)
-            //console.log("el NRESPUESTA : ",NRESPUESTA)
-            ////console.error("********el SCOMENTARIO : ",SCOMENTARIO)
+          
             objPreguntasAlertaew.NRESPUESTA = NRESPUESTA
             objPreguntasAlertaew.SRESPUESTA = NRESPUESTA == '1' ? 'Sí.' : NRESPUESTA == '2' ? 'No.' : null
             objPreguntasAlertaew.SCOMENTARIO = typeof SCOMENTARIO === 'string' ? SCOMENTARIO : null
             
             detalleCortoNew.push(objPreguntasAlertaew);
           }
-          //console.log("el detalleCortoNew : ",detalleCortoNew)
+    
           newArrayDetallePendiente.push(detalleCortoNew)
         }
 
-        //console.log("el newArrayDetallePendiente : ",newArrayDetallePendiente)
+    
 
         objAlertaNew.arrPreguntasDetalle = newArrayDetallePendiente
         arrResponsableNew.push(objAlertaNew)
       }
-      //console.log("el arrResponsableNew : ",arrResponsableNew)
+     
       
       //this.arrResponsable = arrResponsableNew
       return {status:true,array:arrResponsableNew}
     } catch (error) {
-      //console.error("el error : ",error)
+      console.error("el error : ",error)
       return false
     }
   }
@@ -580,8 +566,7 @@ export class DevueltoComponent implements OnInit {
     
     let respPromises = await Promise.all(arrPromisesQuestion)
     let respPromisesComments = await Promise.all(arrPromisesComment)
-    ////console.log("EL respPromises : ",respPromises)
-    ////console.error("EL arrPromisesComment : ",respPromisesComments)
+
   }
 
   enviarSolicitarComplemento(item){
@@ -596,7 +581,7 @@ export class DevueltoComponent implements OnInit {
             SCARGO: this.datosCabecera.SCARGO,
             STIPO_USUARIO: 'OC'
         }
-        //console.log("data complemento", data)
+      
         let response = await this.userConfigService.sendComplimentary(data)*/
   }
   getTextInputCommentGeneral(indice){
@@ -604,15 +589,15 @@ export class DevueltoComponent implements OnInit {
   }
 
   setTextInputCommentGeneral(indice,evento){
-    ////console.log("el evento.target.value : ",evento.target.value)
+    
     this.arrInputCommentGeneral[indice] = evento.target.value
     
-    ////console.log("el this.arrInputComment.length : ",this.arrInputComment.length)
+
     for (let index = 0; index < this.arrResponsable.length; index++) {
       this.arrInputComment[index] = this.arrInputCommentGeneral[indice];
       
     }
-    ////console.log("el this.arrInputComment : ",this.arrInputComment)
+  
   }
   
 
@@ -625,9 +610,7 @@ export class DevueltoComponent implements OnInit {
   IsValidInfoDevueltoResp(arrResponsableNew){
     let obj:any = {}
     obj.message = ''
-    ////console.log("el arrInputComment ",this.arrInputComment)
-    ////console.log("el this.arrInputComment.length ",this.arrInputComment.length)
-    ////console.log("el arrResponsableNew.legth ",arrResponsableNew.length)
+ 
     
     if(typeof this.arrInputComment !== 'object'){
       obj.message = 'Ocurrio un error con información'
@@ -649,7 +632,7 @@ export class DevueltoComponent implements OnInit {
     }
 
     this.arrInputComment.forEach(item => {
-       ////console.log("el item : ",item)
+       
        if((item+' ').trim() === ''){
          obj.message = 'La respuesta esta en blanco'
        }
@@ -673,7 +656,7 @@ export class DevueltoComponent implements OnInit {
       };
       respValDetalle = this.IsValidInfoPendientePregDetalle(senial);
       respValCabecera = this.IsValidInfoPendientePregCabecera(cap);
-      ////console.warn("el respValDetalle : ",respValDetalle)
+     
       if(respValDetalle.code === 1){
         obj=respValDetalle
         return obj
@@ -697,9 +680,7 @@ export class DevueltoComponent implements OnInit {
   IsValidInfoDevueltoResp2(){
     let obj:any = {}
     obj.message = ''
-    ////console.log("el arrInputComment ",this.arrInputComment)
-    ////console.log("el this.arrInputComment.length ",this.arrInputComment.length)
-    ////console.log("el this.arrResponsable.legth ",this.arrResponsable.length)
+   
     
     if(this.arrInputRespHeader.length === 0){
       obj.message = 'Falto responder alguna señal'
@@ -751,7 +732,7 @@ export class DevueltoComponent implements OnInit {
       return obj
     }
     this.arrInputComment.forEach(item => {
-      ////console.log("el item : ",item)
+     
       if((item+' ').trim() === ''){
         obj.message = 'La respuesta esta en blanco'
       }
@@ -773,11 +754,11 @@ export class DevueltoComponent implements OnInit {
     let objResp:any = {}
     objResp.code = 0
     if( tamañoArr > 0 ){ 
-      ////console.warn("el arrPreguntasDetalle 111 : ",arrPreguntasDetalle)
+      
       for (let i = 0; i < arrPreguntasDetalle.length; i++) {
         let detalle = arrPreguntasDetalle[i]
         let respValidDet = this.IsValidInfoPenDetalle(detalle,senial)
-        ////console.warn("el respValidDet: ",respValidDet)
+        
         if(respValidDet.code === 1){
           objResp = respValidDet
           return objResp;
@@ -792,10 +773,10 @@ export class DevueltoComponent implements OnInit {
     objRes.code = 0
     for (let i = 0; i < itemDetalle.length; i++) {
       let itemDeta = itemDetalle[i]
-      ////console.log("!!!!!! itemDeta", itemDeta)
-      ////console.warn("el NRESPUESTA 222 : ",itemDeta.NRESPUESTA)
+     
+      
       if(itemDeta.NRESPUESTA === null || (itemDeta.NRESPUESTA+' ').trim() === ''){
-        ////console.warn("el NRESPUESTA 223 : ",itemDeta.NRESPUESTA)
+        
         objRes.code = 1
         objRes.message='Debe responder obligatoriamente todas las preguntas del formulario relacionado a la señal '+senial.SNOMBRE_ALERTA+'.'
         
@@ -861,8 +842,7 @@ export class DevueltoComponent implements OnInit {
       this.objRadioHeader.index = index
       this.objRadioHeader.state = state
     //}
-    ////console.log("InputRespHeaderAll : ",this.InputRespHeaderAll)
-    ////console.log("InputRespHeaderNoAll : ",this.InputRespHeaderNoAll)
+   
     /*if (state === '1' && this.InputRespHeaderSiAll !== true) {
       this.InputRespHeaderSiAll = true
       this.InputRespHeaderNoAll = false
@@ -921,7 +901,7 @@ export class DevueltoComponent implements OnInit {
 
   async removeFiles(indice,objItem,indexInput,STIPO_CARGA){
     
-    debugger;
+     
     return await this.parent.removeFileAdjuntosFiles(indice,objItem,indexInput,STIPO_CARGA)
   }
 
@@ -946,17 +926,14 @@ export class DevueltoComponent implements OnInit {
   }
 
   async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,itemObj,STIPO_CARGA,STIPO_USUARIO){
-    console.log('el itemObj 123: ',itemObj)
+
     await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,itemObj.NREGIMEN,STIPO_CARGA,STIPO_USUARIO)
   }
 
   getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
-    //console.log("el stipo usuario : ",this.STIPO_USUARIO)
-    //console.log("el STIPO_CARGA : ",STIPO_CARGA)
-    //console.log("el objAlertaItem.NIDALERTA_CABECERA : ",objAlertaItem.NIDALERTA_CABECERA)
-    //console.log("el this.parent.arrObjFilesAdjByCabecera : ",this.parent.arrObjFilesAdjByCabecera)
+
     let resp = this.parent.arrObjFilesAdjByCabecera.filter(it => it.NIDCABECERA_USUARIO === objAlertaItem.NIDALERTA_CABECERA && it.NREGIMEN === NREGIMEN  && it.STIPO_USUARIO === this.STIPO_USUARIO && it.STIPO_CARGA == STIPO_CARGA)
-    //console.log("el resp eyy : ",resp)
+    
     return resp.length > 0 ? resp[0].arrFilesNameCorto : []
   }
 
@@ -972,18 +949,16 @@ export class DevueltoComponent implements OnInit {
  capitalizarPrimeraLetra(texto : string ) {
   //  let texto = str
     
-  //  console.log("el texto de la primera letra", texto[0].toUpperCase() +  texto.slice(1).toLowerCase())
-  //  console.log("el texto que ingreso", texto[0].toUpperCase() + texto.slice(1))
-  //  console.log("el texto que ingreso 2", texto.charAt(0).toUpperCase() + texto.slice(1))
+
    return texto[0].toUpperCase() +  texto.slice(1).toLowerCase()
 }
 
 async addFilesInforme(event: any, NIDALERTA_CABECERA, NIDALERTA, STIPO_CARGA) {
   try {
-    // console.log("el NIDALERTA RESP INFO : ",NIDALERTA)
+    
     //let STIPO_CARGA = "INFORMES"
     let respAddInfo = await this.parent.addFilesInforme(event, NIDALERTA, NIDALERTA_CABECERA, this.regimen.id,STIPO_CARGA)
-    console.log("el arrFiles RESP INFO : ",respAddInfo)
+   
     if (STIPO_CARGA =="ADJUNTOS-SUSTENTO" && respAddInfo.code == 1)
     {
       if(this.STIPO_USUARIO === 'OC'){
@@ -1010,43 +985,34 @@ async addFilesInforme(event: any, NIDALERTA_CABECERA, NIDALERTA, STIPO_CARGA) {
 
       });
     }
-    //console.log("el arrFiles RESP this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+   
     //await this.parent.sendFilesInformes(NIDALERTA, this.listFilesInform, this.listFilesInformName)
   } catch (error) {
-    console.error("el arrFiles error 879 : ",error)
+    console.error("el arrFiles error : ",error)
   }
 }
 
 getFilesInformUniversal(alerta: any,STIPO_CARGA) {
-  //console.log("el 45884 INICIO")
-  //console.log("el 45884 alerta : ",alerta)
-  //console.log(alerta)
-  //console.log("NIDREGIMEN: ",alerta.NIDREGIMEN)
-  //console.log("NIDREGIMEN: ",alerta.NREGIMEN)
-  //console.log("nueva lista NIDREGIMEN: ",alerta)
-  //console.log("el CONSULTA this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+ 
   let resp = this.parent.arrObjFilesInformeByAlert.filter(inform => 
         inform.NIDALERTA == alerta.NIDALERTA && 
         inform.NREGIMEN == alerta.NREGIMEN && 
         inform.NIDALERTA_CABECERA == alerta.NIDALERTA_CABECERA &&
         inform.STIPO_CARGA == STIPO_CARGA)
-  //console.log("el CONSULTA 45884 resp : ",resp)
-   //console.log("nueva lista el 45884 resp : ",resp)
+
   
   return resp.length === 0 ? [] : resp[0].arrFilesNameCorto//this.parent.getFilesByAlert(alerta, tipoUsuario)
 }
 
 async getArchivoSustento(item){
-  console.log("el objAlerta sustento : ",item)
-  console.log("el objAlerta arrAdjuntosSustento : ",item.arrAdjuntosSustento[0])
+
   try {
     let objAdjunto = item.arrAdjuntosSustento[0]
     //let NPERIODO_PROCESO =  parseInt(localStorage.getItem("periodo"))
-    // console.log("el ajunto : ",adjunto)
-    // console.log("el item : ",this.item)
+  
     //let ruta = 'ADJUNTOS/'+this.item.NIDALERTA+'/'+NPERIODO_PROCESO+'/'+this.parent.regimen.id+'/'+adjunto.name
     let ruta = item.arrAdjuntosSustento[0].SRUTA_ADJUNTO
-    // console.log("ruta : ",ruta)
+  
     let resp = await this.parent.downloadUniversalFile(ruta,objAdjunto.name)
   } catch (error) {
     console.error("error en descargar: ",error)
@@ -1114,9 +1080,9 @@ async ListaAlertas(){
     obj.RESULTADO = resultado
     obj.NIDALERTA = item.NIDALERTA
     this.NewArreglo.push(obj)
-    //console.log("arreglo resultado", resultado) 
+  
    });
-   console.log("arreglo", this.NewArreglo) 
+   
   
 }
 

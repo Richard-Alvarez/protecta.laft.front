@@ -43,8 +43,7 @@ export class HomeComponent implements OnInit {
 
     this.variableGlobalUser = this.core.storage.get('usuario');
     this.NombreCompleto = this.variableGlobalUser["fullName"]
-    console.log("datos",this.NombreCompleto)
-    console.log("user", this.variableGlobalUser)
+    
     this.UsuariosRE()
     moment.locale('es');
     this.core.loader.hide();

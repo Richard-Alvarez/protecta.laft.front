@@ -55,11 +55,11 @@ export class ViewC2DetailComponent implements OnInit {
 
     async getFormData() {
         this.boolClienteReforzado = JSON.parse(localStorage.getItem('boolClienteReforzado'))
-        //console.log("this.boolClienteReforzado : ",this.boolClienteReforzado)
+        
         if(this.boolClienteReforzado == true){
             this.disableFormItems = true;
             this.oClienteReforzado = JSON.parse(localStorage.getItem('OCLIENTE_REFORZADO'))
-            //console.log("el oClienteReforzado : ",this.oClienteReforzado);
+            
             this.formData.NIDALERTA = this.oClienteReforzado.NIDALERTA//parseInt(localStorage.getItem("NIDALERTA"))
             this.formData.NOMBRECOMPLETO = this.oClienteReforzado.SNOM_COMPLETO//localStorage.getItem('NOMBRECOMPLETO')
             this.formData.STIPO_NUM_DOC = this.oClienteReforzado.STIPOIDEN//localStorage.getItem('STIPO_NUM_DOC')
@@ -72,7 +72,7 @@ export class ViewC2DetailComponent implements OnInit {
             this.formData.NPERIODO_PROCESO = this.oClienteReforzado.NPERIODO_PROCESO//parseInt(localStorage.getItem('NPERIODO_PROCESO'))
             this.formData.NTIPO_DOCUMENTO = this.oClienteReforzado.NTIPO_DOCUMENTO//localStorage.getItem('NTIPO_DOCUMENTO')
             this.formData.NIDREGIMEN = 1
-            //console.log("el formData : ",this.formData);
+           
         }else{
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
             this.formData.NOMBRECOMPLETO = localStorage.getItem('NOMBRECOMPLETO')
@@ -174,7 +174,7 @@ export class ViewC2DetailComponent implements OnInit {
 
     async getPolicyList(){        
         let param = {P_NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, P_NIDALERTA: this.formData.NIDALERTA, P_NTIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, P_SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO,P_NIDREGIMEN: this.formData.NIDREGIMEN}
-        //console.log("param de entrada poliza vigente",param)
+        
         this.core.loader.show();  
         this.policyList = await this.userConfigService.getPolicyList(param)
         this.core.loader.hide();
@@ -209,7 +209,7 @@ export class ViewC2DetailComponent implements OnInit {
                             NIDTIPOLISTA: item.NIDTIPOLISTA, NIDPROVEEDOR: item.NIDPROVEEDOR, NACEPTA_COINCIDENCIA: arreglosUnchecked[i][j] ? '1' : '2'
                         }
                         let response = await this.userConfigService.updateUnchecked(param)
-                        //console.log(response)
+                    
                     }
                 }
                 this.core.loader.hide();

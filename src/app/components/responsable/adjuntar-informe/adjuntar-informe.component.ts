@@ -26,32 +26,31 @@ export class AdjuntarInformeComponent implements OnInit {
   async downloadUniversalFile(adjunto){
     try {
       let NPERIODO_PROCESO =  parseInt(localStorage.getItem("periodo"))
-      // console.log("el ajunto : ",adjunto)
-      // console.log("el item : ",this.item)
+      
       let ruta = 'INFORMES/'+this.item.NIDALERTA+'/'+NPERIODO_PROCESO+'/'+this.item.NREGIMEN+'/'+adjunto.name
-      // console.log("ruta : ",ruta)
+      
       let resp = await this.parent.downloadUniversalFile(ruta,adjunto.name)
     } catch (error) {
-      // console.error("error en descargar: ",error)
+      console.error("error en descargar: ",error)
     }
   }
 
   async removeFile(indice){
     try {
-      debugger;
+       
       let STIPO_CARGA = 'INFORMES'
       let resp = this.parent.removeFileInforme(indice,this.item,this.indexInput,STIPO_CARGA)
 
     } catch (error) {
-      // console.log("el error en removeFile: ",error)
+     console.log("el error en removeFile: ",error)
     }
   }
 
   /*async getFilesAdjuntos(){
-    //console.log("el statePendienteInforme 7896724: ",this.parent.statePendienteInforme)
+    
     if(this.parent.statePendienteInforme && this.parent.statePendienteInforme.sState == 'PENDIENTE-INFORME' ){
       let resp = await this.parent.getFilesInformByAlert(this.item,'OC','INFORMES')
-      //console.log("el statePendirespenteInforme 7896724: ",resp)
+      
       this.arrAdjuntosGenerales = resp.arrFilesNameCorto
       return this.arrAdjuntosGenerales
     }else{

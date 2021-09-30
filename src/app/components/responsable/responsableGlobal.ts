@@ -122,22 +122,22 @@ export class ResponsableGlobalComponent {
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
-    console.log("linkactual", this.linkactual)
+    
     this.core.config.rest.LimpiarDataGestor()
     
     this.core.loader.show();
     let usuario = this.core.storage.get('usuario')
-    ////console.log("el this.core.storage.get('usuario') : ",usuario)
+    
     this.STIPO_USUARIO = usuario['tipoUsuario']
     this.IDPERFIL = usuario['idPerfil']
     this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
-    //console.error("el STIPO_USUARIO : ",this.STIPO_USUARIO)
+    
     this.setStatesInit();
 
     this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
 
 
-    //console.log("arrRegimen15 : ", this.arrRegimen)
+    
     this.arrResponsablesByCerrado = [
       {
         "id": "id001",
@@ -160,17 +160,14 @@ export class ResponsableGlobalComponent {
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
     await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
-    ////console.log(this.alertFormList)
-    ////console.log(this.userGroupListGral)
+    
     if (this.STIPO_USUARIO === 'RE') {
       this.userGroupListGral = [1]
       this.userGroupListSimpli = [1]
     }
     //this.devueltoHijo.setRegimiento(1);
     //this.userGroupListSimpli.push('TI')
-    ////console.log("el arrResponsablesRevisadoSimpli : ",this.arrResponsablesRevisadoSimpli)
-    ////console.log("el arrResponsablesPendienteInformeGral 1112: ",this.arrResponsablesPendienteInformeGral)
-    ////console.log("el arrResponsablesPendienteInformeSimpli 1113: ",this.arrResponsablesPendienteInformeSimpli)
+   
     this.getTipoUsuario()
     this.fillFileGroup()
     //await this.getAllAttachedFiles()
@@ -178,7 +175,7 @@ export class ResponsableGlobalComponent {
     //await this.core.storage.set('stateRevisado',this.stateRevisado)
     //await this.core.storage.set('stateCompletado',this.stateCompletado)
     //await this.core.storage.set('stateDevuelto',this.stateDevuelto)
-    ////console.log('el this.arrResponsablesCompleGral JJJJJJJJJJ: ',this.arrResponsablesCompleGral);
+    
     //await this.core.storage.set('arrResponsablesCompleGral',this.arrResponsablesCompleGral)
     //await this.core.storage.set('arrResponsablesCompleSimpli',this.arrResponsablesCompleSimpli)
     //await this.core.storage.set('arrResponsablesDevueltoGral',this.arrResponsablesDevueltoGral)
@@ -226,7 +223,7 @@ export class ResponsableGlobalComponent {
       }
       return emptyArray
     } catch (error) {
-      //console.error("se cayo el regimenIsEmpty() :",error)
+      console.error("error :",error)
     }
   }
 
@@ -234,9 +231,9 @@ export class ResponsableGlobalComponent {
     let respComments = await this.getCommentHeader(item.NIDALERTA_CABECERA)
     item.arrConversacionCabecera = respComments
     let respComentarioActual = respComments.filter(a =>  a.STIPO_USUARIO == 'RE')
-    //console.log("el respComments : ",respComments)
+    
     item.SCOMENTARIOa_ULTIMO = respComentarioActual[0] ? respComentarioActual[0].SCOMENTARIO : ''
-    //console.log("el item : ",item)
+   
     return item
   }
 
@@ -258,7 +255,7 @@ export class ResponsableGlobalComponent {
     //let dataSendAttachedByAlert = {NIDALERTA: objAlerta.NIDALERTA, NREGIMEN: NREGIMEN, NPERIODO_PROCESO: this.NPERIODO_PROCESO, STIPO_CARGA: 'ADJUNTOS'}
     let respAdjuntos = await this.getAttachedFilesInformByAlert(objAlerta.NIDALERTA, NREGIMEN, 'ADJUNTOS')//this.userConfigService.getAttachedFilesInformByAlert(dataSendAttachedByAlert)
     //let respAdjuntosSustento = await this.getAttachedFilesInformByCacebera(objAlerta.NIDALERTA,objAlerta.NIDALERTA_CABECERA, NREGIMEN, 'ADJUNTOS-SUSTENTO')
-    console.log("los adjuntos de los informes : ", respAdjuntos)
+   
     let dataWork = { NIDALERTA: objAlerta.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: NREGIMEN }
     let respWorkDetalle = await this.getWorkModuleDetailData(dataWork)
     resp.forEach(element => {
@@ -278,7 +275,7 @@ export class ResponsableGlobalComponent {
 
     resp.sort((a, b) => new Date(a.DFECHA_REGISTRO) < new Date(b.DFECHA_REGISTRO))
     respAdjuntos.sort((a, b) => new Date(a.DFECHA_REGISTRO) < new Date(b.DFECHA_REGISTRO))
-    //console.log("el resp 9853 : ",resp)
+    
     let objFormByAlert: any = {}
     objFormByAlert.NIDALERTA = objAlerta.NIDALERTA
     objFormByAlert.SDESCRIPCION_ALERTA = objAlerta.SDESCRIPCION_ALERTA
@@ -330,8 +327,7 @@ export class ResponsableGlobalComponent {
     this.alertFormList = respBusquedaGral.array
     this.alertFormListSimpli = respBusquedaSimpli.array
     this.alertFormListContraparte = respBusquedaContraparte.array
-    console.warn("el this.alertFormList 11114-1: ", this.alertFormList)
-    console.warn("el this.alertFormList 11114-2: ", this.alertFormListSimpli)
+  
     //this.alertFormList.forEach(it => it.estado = it.SESTADO_REVISADO == '1' ? true : false)
     this.alertFormList.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
     this.alertFormListSimpli.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
@@ -342,7 +338,7 @@ export class ResponsableGlobalComponent {
     let arrInfoTerminadoSimpli = []
   
    
-    console.log(this.alertFormList);
+    
     this.alertFormList.forEach(item => {
       item.NREGIMEN = 1
       if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
@@ -384,7 +380,7 @@ export class ResponsableGlobalComponent {
     })
     //this.alertFormListSimpli.forEach(t => {t.SESTADO = "3",t.SNOMBRE_ESTADO = "PENDIENTE"});
 
-    console.log(this.alertFormListSimpli );
+   
     this.alertFormListSimpli.forEach(item => {
       item.NREGIMEN = 2
       if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
@@ -421,7 +417,7 @@ export class ResponsableGlobalComponent {
 
     })
 
-    // console.log(this.alertFormListContraparte);
+    
     // this.alertFormListContraparte.forEach(item => {
     //   item.NREGIMEN = 2
     //   if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
@@ -468,16 +464,16 @@ export class ResponsableGlobalComponent {
           let arrWorkModulePromise:any = []
        let arrRegimenNewTmp = [2,3,4]
       
-       // console.log("REgimen Arr:",this.arrRegimen)
+       
        arrRegimenNewTmp.forEach(regimenItem => {
-         console.log("REgimen item:",regimenItem)
+         
          let respWorkModulelist = this.getWorkModuleAll(regimenItem)
          arrWorkModulePromise.push(respWorkModulelist)
         
        });
 
       let respGroupPromiseAll:any = await Promise.all(arrWorkModulePromise)
-      console.log("Promise All:",respGroupPromiseAll)
+      
       this.arrResponsablesPendienteInformeGral = (respGroupPromiseAll[0]).arrPendienteInfo //respGroupPromiseAll[0]
       this.arrResponsablesInformeTerminadoGral = /*(respGroupPromiseAll[0]).arrPendienteInfo//PRUEBA/*/(respGroupPromiseAll[0]).arrInfoTerminado
       this.arrResponsablesPendienteInformeSimpli = (respGroupPromiseAll[1]).arrPendienteInfo
@@ -485,17 +481,9 @@ export class ResponsableGlobalComponent {
       
     }
 
-    console.log("arrResponsablesPendienteInformeGral : ", this.arrResponsablesPendienteInformeGral)
-    console.log("arrResponsablesInformeTerminadoGral : ", this.arrResponsablesInformeTerminadoGral)
-    console.log("arrResponsablesPendienteInformeSimpli : ", this.arrResponsablesPendienteInformeSimpli)
-    console.log("arrResponsablesInformeTerminadoSimpli : ", this.arrResponsablesInformeTerminadoSimpli)
+   
 
-    //console.log("pendiente : ",this.arrResponsablesPendienteGral)
-    //console.log("completado JJJKKK: ",this.arrResponsablesCompleGral)
-    //console.log("devuelto : ",this.arrResponsablesDevueltoGral)
-    //console.log("pendiente : ",this.arrResponsablesPendienteSimpli)
-    //console.log("completado : ",this.arrResponsablesCompleSimpli)
-    //console.log("devuelto : ",this.arrResponsablesDevueltoSimpli)
+    
     let objTiUser: any = 'TI'
 
     this.userGroupListGral = await this.groupUsers(this.alertFormList)
@@ -503,8 +491,7 @@ export class ResponsableGlobalComponent {
     ///this.addAlertsToPendienteInforme()
 
 
-    /*//console.log("userGroupListGral : ",this.userGroupListGral)
-    //console.log("userGroupListSimpli : ",this.userGroupListSimpli)*/
+  
     this.userGroupListGral.push(objTiUser)
     this.userGroupListSimpli.push(objTiUser)
   }
@@ -512,15 +499,15 @@ export class ResponsableGlobalComponent {
   async getAndSetWorkModuleAll(){
     let arrWorkModulePromise:any = []
     let arrRegimenNewTmp = [2,3,4]
-    // console.log("REgimen Arr:",this.arrRegimen)
+    
     arrRegimenNewTmp.forEach(regimenItem => {
-      console.log("REgimen item:",regimenItem)
+     
       let respWorkModulelist = this.getWorkModuleAll(regimenItem)
       arrWorkModulePromise.push(respWorkModulelist)
       
     });
     let respGroupPromiseAll:any = await Promise.all(arrWorkModulePromise)
-    console.log("Promise All:",respGroupPromiseAll)
+    
     this.arrResponsablesPendienteInformeGral = (respGroupPromiseAll[0]).arrPendienteInfo //respGroupPromiseAll[0]
     this.arrResponsablesInformeTerminadoGral = /*(respGroupPromiseAll[0]).arrPendienteInfo//PRUEBA/*/(respGroupPromiseAll[0]).arrInfoTerminado
     this.arrResponsablesPendienteInformeSimpli = (respGroupPromiseAll[1]).arrPendienteInfo
@@ -550,8 +537,7 @@ export class ResponsableGlobalComponent {
       let arrInfoTerminadoSimpli:any = []
       let respWorkListGeneral = await this.userConfigService.getWorkModuleList(data)
       //let respWorkListSimplificado = await this.userConfigService.getWorkModuleList(data)
-      //console.log("el 1234 respWorkListGeneral : ",respWorkListGeneral)
-      //console.log("el 1234 respWorkListSimplificado : ",respWorkListSimplificado)
+   
       respWorkListGeneral.forEach(idWork => {
         //idWork.arrAdjuntosInform.sort((a, b) => a.DFECHA_REGISTRO > b.DFECHA_REGISTRO)
         if (idWork.SESTADO === '1') {
@@ -564,12 +550,12 @@ export class ResponsableGlobalComponent {
       });
       
       let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral)])
-      //console.log("respGroupPromiseAll : ",respGroupPromiseAll)
+      
       
      
       return {arrPendienteInfo:respGroupPromiseAll[0],arrInfoTerminado:respGroupPromiseAll[1]}
     } catch (error) {
-        console.log(error)
+        
     }
   }
 
@@ -615,7 +601,7 @@ export class ResponsableGlobalComponent {
       if(this.linkactual == "colaborador")
         data.NREGIMEN = 1
       let respAttachFileInfo = await this.userConfigService.getAttachedFilesInformByCabecera(data)
-      console.log("el data de get info respAttachFileInfo : ",respAttachFileInfo)
+      
       return respAttachFileInfo
     } catch (error) {
       console.error("el error en get cabecera adjuntos : ",error)
@@ -673,12 +659,10 @@ export class ResponsableGlobalComponent {
     let respPromiseAdjuntosAll = await Promise.all(arrPromiseAdjuntos);
     let respPromiseAdjuntosSustentoAll = await Promise.all(arrPromiseAdjuntosSustento);
     let respPromiseAdjuntosComplementoAll = await Promise.all(arrPromiseAdjuntosComplemento);
-    console.log("respPromiseAdjuntosSustentoAll ---- 12: ",respPromiseAdjuntosSustentoAll)
+    
     //let respPromiseAdjInfoAll = await Promise.all(arrPromiseAdjuntosInfo);
-    //console.log("respPromiseAll : ",respPromiseAllPreguntas)
-    //console.error("respPromiseComentariosAll : ",respPromiseComentariosAll)
-    //console.error("---! respPromisePregDetailAll : ",respPromisePregDetailAll)
-    ////console.error("---! respPromiseAdjInfoAll : ",respPromiseAdjInfoAll)
+    
+   
     let arrayAlertList = []
     arrayBusqueda.forEach((item,indiceArray) => {
       let arrayPreguntasCabecera = []
@@ -690,7 +674,7 @@ export class ResponsableGlobalComponent {
       let arrAdjuntosNew = []
 
       let objFechaComentarioOC:any = {}
-      console.log("EL NIDALERTA : ", item.NIDALERTA)
+     
       objAlerta = item;
       respPromiseAllPreguntas.forEach(preg => {
         preg.forEach(obj => {
@@ -754,7 +738,7 @@ export class ResponsableGlobalComponent {
         })
 
       })
-      console.log("los adjuntos de los respPromiseAdjuntosSustentoAll : ", respPromiseAdjuntosSustentoAll)
+      
       let arrayTmpDataAdjuntosSustento = []
       respPromiseAdjuntosSustentoAll.forEach(it => {
         it.forEach(element => {
@@ -783,10 +767,10 @@ export class ResponsableGlobalComponent {
           
         })
       });
-      //console.error("el arrPreguntasTitleDetail 55: ",arrPreguntasTitleDetail)
+      
       //let tamanio = 0;
       //tamanio = arrPreguntasTitleDetail.length
-      //console.error("el respPromisePregDetailAll 44: ",respPromisePregDetailAll)//5 arreglos
+     
       let arrayDetalleResult: any = []
       if (item.NIDALERTA === 1) {
 
@@ -797,7 +781,7 @@ export class ResponsableGlobalComponent {
             return detalle.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA
           });
           let returnDetaDuplic: any[] = resultDetalle;
-          //console.log("eL RESULT 987 : ",resultDetalle)
+          
 
           resultDetalle.forEach(pregDet => {
             let respDetaDuplic = returnDetaDuplic.filter(detaDuplic => {
@@ -814,7 +798,7 @@ export class ResponsableGlobalComponent {
               //   }
               // })
               let RespuestaTmpArray = arrayTmpDeta.filter(itenDetTmpA => itenDetTmpA === pregDet.NIDALERTA_DETALLE)
-              //console.log( "Pregunta :", arrayTmpDeta )
+              
               if (RespuestaTmpArray.length === 0) {
                 arrayDetalleResult.push(respDetaDuplic);
                 arrayTmpDeta.push(pregDet.NIDALERTA_DETALLE)
@@ -822,8 +806,7 @@ export class ResponsableGlobalComponent {
 
             }
           })
-          //console.warn(" EL resultDetalleFilter 808: ",arrayDetalleResult)
-
+         
 
 
 
@@ -844,9 +827,6 @@ export class ResponsableGlobalComponent {
         })
       })
 
-      //console.error("el arrayPreguntasCabecera : ",arrayPreguntasCabecera)
-      //console.error("el arrayConversacionCabecera : ",arrayConversacionCabecera)
-      //console.error("el arrPreguntaDetalle 709 : ",arrPreguntaDetalle)
       objAlerta.arrPreguntasCabecera = arrayPreguntasCabecera;
       objAlerta.arrConversacionCabecera = arrayConversacionCabecera;
       objAlerta.arrPreguntasDetalle = arrayDetalleResult//arrPreguntaDetalle//arrayPreguntasDetail;
@@ -864,7 +844,7 @@ export class ResponsableGlobalComponent {
   async getFormsDetailAlgorit(item){
 
     let respQuestion = await this.getQuestionDetail(item)
-    console.log("el respQuestion : ",respQuestion)
+   
     let arrayDetalleResult: any = []
       if (item.NIDALERTA === 1) {
 
@@ -873,7 +853,7 @@ export class ResponsableGlobalComponent {
             return detalle.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA
           });
           let returnDetaDuplic: any[] = resultDetalle;
-          //console.log("eL RESULT 987 : ",resultDetalle)
+          
 
           resultDetalle.forEach(pregDet => {
             let respDetaDuplic = returnDetaDuplic.filter(detaDuplic => {
@@ -890,7 +870,7 @@ export class ResponsableGlobalComponent {
               //   }
               // })
               let RespuestaTmpArray = arrayTmpDeta.filter(itenDetTmpA => itenDetTmpA === pregDet.NIDALERTA_DETALLE)
-              //console.log( "Pregunta :", arrayTmpDeta )
+              
               if (RespuestaTmpArray.length === 0) {
                 arrayDetalleResult.push(respDetaDuplic);
                 arrayTmpDeta.push(pregDet.NIDALERTA_DETALLE)
@@ -900,7 +880,7 @@ export class ResponsableGlobalComponent {
           })
       }
 
-      console.log("el arrayDetalleResult : ",arrayDetalleResult)
+      
       return arrayDetalleResult
   }
 
@@ -930,7 +910,7 @@ export class ResponsableGlobalComponent {
 
 
 
-    //console.warn("el itemDetail: ", itemDetail)
+ 
     return itemDetail
   }
 
@@ -952,7 +932,7 @@ export class ResponsableGlobalComponent {
     try {
       let data = {NIDALERTA_CAB_USUARIO: item.NIDALERTA_CABECERA, STIPO_USUARIO: STIPO_USU}
       let resp = await this.userConfigService.getAttachedFiles(data)
-      console.log("el resp adjuntos : ",resp)
+     
       resp.forEach(respItem => {
         //respItem.SRUTA_ADJUNTO = respItem.SCOMENTARIO
         let RUTA_SPLIT = (respItem.SRUTA_ADJUNTO).split("/")
@@ -1171,7 +1151,7 @@ export class ResponsableGlobalComponent {
         }
 
         this.userConfigService.uploadFiles(data).then(response => {
-          //console.log("upload", response);
+         
         });
       }
     })
@@ -1203,7 +1183,7 @@ export class ResponsableGlobalComponent {
         }
 
         this.userConfigService.uploadFiles(data).then(response => {
-          //console.log("upload", response);
+         
         });
       }
     })
@@ -1212,12 +1192,12 @@ export class ResponsableGlobalComponent {
 
   async insertAttachedFiles(data: any) {
     let response = await this.userConfigService.insertAttachedFiles(data)
-    //console.log(response)
+    
   }
 
   async insertAttachedFilesByAlert(data: any) {
     let response = await this.userConfigService.insertAttachedFilesByAlert(data)
-    //console.log(response)
+    
   }
 
 
@@ -1231,19 +1211,19 @@ export class ResponsableGlobalComponent {
     param.NIDUSUARIO_ASIGNADO = data.NIDUSUARIO_ASIGNADO,
       param.NIDALERTA_CABECERA = data.NIDALERTA_CABECERA
     param.NIDREGIMEN = 0//data.NIDREGIMEN 
-    //console.log("param cabecera", param)
+   
     try {
       let answersHeaderList = []
       let questionsHeaderList = []
       questionsHeaderList = await this.userConfigService.getQuestionHeader(param)
-      //console.log("las preguntas : ",questionsHeaderList)
+     
       /*if (questionsHeaderList.length > 0) {
           datosCabecera = questionsHeaderList[0]
           questionsHeaderList.forEach(it => answersHeaderList.push(it))
       }*/
       return questionsHeaderList
     } catch (error) {
-      //console.log("error", error)
+      
     }
   }
 
@@ -1303,7 +1283,7 @@ export class ResponsableGlobalComponent {
   }
 
   getClassBagdeState(state) {
-    ////console.log("state : ",state)
+    
     if (state === 'PENDIENTE') {
       return 'badge-warning'
     }
@@ -1324,7 +1304,7 @@ export class ResponsableGlobalComponent {
 
 
   getValor(valor1, valor2, valor3) {
-    //console.log("el valor any : ",valor1+valor2+valor3)
+    
     return valor1 + valor2 + valor3;
   }
 
@@ -1600,7 +1580,7 @@ export class ResponsableGlobalComponent {
 
   getRegimenDinamic() {
     
-    //console.log("arrRegimen15 Usuario :", this.STIPO_USUARIO)
+    
     if (this.STIPO_USUARIO === "RE") {
       
       let RegimenTemp:any = []
@@ -1616,16 +1596,14 @@ export class ResponsableGlobalComponent {
       let estado = [this.statePendiente, this.stateCompletado, this.stateDevuelto]
       let newRegimen = []
 
-      //console.log("arrRegimen15 RegimenTemp15 : " ,RegimenTemp )
-      //console.log("arrRegimen15 Estado15 : " ,estado )
+      
       RegimenTemp.forEach(reg => {
         let estadoRegimen = []
 
         estado.forEach(est => {
-          //console.log("arrRegimen15 est :",est)
-          //console.log("arrRegimen15 reg :",reg)
+         
           let ResponsableTmp = this.getArray(est.sState, reg.id)
-          //console.log("arrRegimen15 ResponsableTmp :",ResponsableTmp)
+          
           if (ResponsableTmp.length === 0) {
             estadoRegimen.push(false)
 
@@ -1634,7 +1612,7 @@ export class ResponsableGlobalComponent {
             estadoRegimen.push(true)
           }
         })
-        //console.log("arrRegimen15 estadoRegimen :",estadoRegimen)
+        
         if (estadoRegimen.filter(it => it === true).length > 0) {
           newRegimen.push(reg)
         }
@@ -1831,14 +1809,14 @@ export class ResponsableGlobalComponent {
                      },
        
     }).then(async (result) => {
-      //console.log("hellow : ",result)
+      
     }).catch(err => {
-      //console.log("el error : ",err);
+      console.log("el error : ",err);
     })
   }
 
   async setVariableRegimen(regimen) {
-    //console.log("AL CARGAR REGIMEN : ",regimen)
+   
     await this.core.storage.set('regimenPadre', regimen)
   }
 
@@ -1929,7 +1907,7 @@ export class ResponsableGlobalComponent {
       }
       arrayDefault.push(obj);
     } catch (error) {
-      console.error('el error en pushObjInArrayByAlert: ',error)
+      console.error('error ',error)
     }
     return arrayDefault;
     //return this.arrResponsablesPendienteSimpli;
@@ -1960,19 +1938,17 @@ export class ResponsableGlobalComponent {
   removeFileAdjuntosFiles(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
     STIPO_CARGA="ADJUNTOS-FORM"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-    console.log("el STIPO_CARGA: ",STIPO_CARGA)
-    console.log("el dataObjAlerta: ",dataObjAlerta)
-    console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesAdjByCabecera)
+    
     let filtroFiles =  this.arrObjFilesAdjByCabecera.filter(it => 
       it.NIDCABECERA_USUARIO == dataObjAlerta.NIDALERTA_CABECERA &&
       it.STIPO_CARGA === STIPO_CARGA)
-    console.log("el filtroFiles: ",filtroFiles)
+    
     if(filtroFiles.length > 0){
       let objFile:any = filtroFiles[0]
       objFile.arrFiles.splice(indice,1)
       objFile.arrFilesName.splice(indice,1)
       objFile.arrFilesNameCorto.splice(indice,1)
-      console.log("el objFile: ",objFile)
+      
       let indiceArrObjFiles = 0
       this.arrObjFilesAdjByCabecera.forEach(it => {
         if(it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
@@ -1981,7 +1957,7 @@ export class ResponsableGlobalComponent {
         indiceArrObjFiles++
       })
       
-      console.log("el this.parent.arrObjFilesAdjByCabecera 2221: ",this.arrObjFilesAdjByCabecera)
+      
     }
     
 
@@ -1990,20 +1966,18 @@ export class ResponsableGlobalComponent {
   removeFileAdjuntosFilesInf(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
     STIPO_CARGA="ADJUNTOS"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-    console.log("el STIPO_CARGA: ",STIPO_CARGA)
-    console.log("el dataObjAlerta: ",dataObjAlerta)
-    console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesInformeByAlert)
+   
     let filtroFiles =  this.arrObjFilesInformeByAlert.filter(it => 
       it.NIDCABECERA_USUARIO == dataObjAlerta.NIDALERTA_CABECERA && 
       it.STIPO_CARGA === STIPO_CARGA)
 
       
-    console.log("el filtroFiles: ",filtroFiles)
+    
     let objFile:any = filtroFiles[0]
     objFile.arrFiles.splice(indice,1)
     objFile.arrFilesName.splice(indice,1)
     objFile.arrFilesNameCorto.splice(indice,1)
-    console.log("el objFile: ",objFile)
+    
     let indiceArrObjFiles = 0
     this.arrObjFilesInformeByAlert.forEach(it => {
       if(it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
@@ -2012,25 +1986,23 @@ export class ResponsableGlobalComponent {
       indiceArrObjFiles++
     })
     
-    console.log("el this.parent.arrObjFilesAdjByCabecera 2221: ",this.arrObjFilesAdjByCabecera)
+   
 
   }
 
   removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
     
-    console.log("el STIPO_CARGA: ",STIPO_CARGA)
-    console.log("el dataObjAlerta: ",dataObjAlerta)
-    console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesInformeByAlert)
+  
     let filtroFiles =  this.arrObjFilesInformeByAlert.filter(it => 
       it.NIDALERTA_CABECERA == dataObjAlerta.NIDALERTA_CABECERA && 
       it.STIPO_CARGA == STIPO_CARGA)
 
-    console.log("el filtroFiles: ",filtroFiles)
+   
     let objFile:any = filtroFiles[0]
     objFile.arrFiles.splice(indice,1)
     objFile.arrFilesName.splice(indice,1)
     objFile.arrFilesNameCorto.splice(indice,1)
-    console.log("el objFile: ",objFile)
+    
     let indiceArrObjFiles = 0
 
     //this.arrObjFilesInformeByAlert = this.arrObjFilesInformeByAlert.filter(it => it.NIDALERTA != dataObjAlerta.NIDALERTA)
@@ -2041,14 +2013,14 @@ export class ResponsableGlobalComponent {
        indiceArrObjFiles++
      })
     
-    console.log("el this.parent.arrObjFilesAdjByCabecera 2221: ",this.arrObjFilesAdjByCabecera)
+   
 
   }
 
   
 
   async insertComentariosHeader(data, senial) {
-    ////console.error("senial :",senial)
+    
     let info: any = {}
     info.NIDALERTA_CAB_USUARIO = senial.NIDALERTA_CABECERA
     info.SCOMENTARIO = data.SCOMENTARIO
@@ -2056,7 +2028,7 @@ export class ResponsableGlobalComponent {
     info.STIPO_USUARIO = this.STIPO_USUARIO
 
     let respInsertComment = await this.userConfigService.insertCommentHeader(info)
-    //console.error("respInsertComment : ",respInsertComment)
+    
     return respInsertComment;
   }
 
@@ -2069,7 +2041,7 @@ export class ResponsableGlobalComponent {
   }
 
   async getCommentHeaderWithAlert(objAlert, NIDALERTA_CABECERA) {
-    //console.warn("el objAlert: ",objAlert)
+    
     let data = { NIDALERTA_CAB_USUARIO: NIDALERTA_CABECERA, STIPO_USUARIO: this.STIPO_USUARIO }
     let comentariosCabecera = await this.userConfigService.getCommentHeader(data)
     let arrComentariosCabecera = []
@@ -2081,10 +2053,10 @@ export class ResponsableGlobalComponent {
       }
       arrComentariosCabecera.push(item)
     })
-    //console.warn("el arrComentariosCabecera: ",arrComentariosCabecera)
+    
 
     //objAlert.arrConversacionCabecera = arrComentariosCabecera
-    ////console.warn("el objAlert: ",objAlert)
+    
     return arrComentariosCabecera
     /*if (this.commentHeaderList.length > 0) {
         this.SCOMENTARIO = this.commentHeaderList[this.commentHeaderList.length - 1].SCOMENTARIO
@@ -2111,8 +2083,8 @@ export class ResponsableGlobalComponent {
 
   async addFilesInforme(event: any, NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-      console.log("llego a esta parte?")
-      //console.log("el arrFiles 879 NIDALERTA: ",NIDALERTA)
+      
+      
       let files: any = event.target.files;
 
       let arrFiles: any = Array.from(files)
@@ -2129,13 +2101,13 @@ export class ResponsableGlobalComponent {
           }
         }
       }
-      console.log("el arrFiles 879 : ", arrFiles)
+      
       let listFileNameInform: any = []
       arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-      //console.log("el arrFiles listFileNameInform 879 : ",listFileNameInform)
+      
 
       let respValidation = await this.isValidationAddFilesInforme(listFileNameInform);
-      console.log("el respValidation de AddFiles: ",respValidation)
+      
 
       let listFileNameCortoInform = []
       for (let item of listFileNameInform) {
@@ -2149,22 +2121,22 @@ export class ResponsableGlobalComponent {
         listDataFileInform.push(this.handleFile(fileData))
       })
       let respPromiseFileInfoBinary = await Promise.all(listDataFileInform)
-      //console.log("el arrFiles respPromiseFileInfo 879 : ",respPromiseFileInfo)
+     
       
       let dataInfoFilesTmp = this.arrObjFilesInformeByAlert.filter(itemInfo => 
                                                                    itemInfo.NIDALERTA == NIDALERTA && 
                                                                    itemInfo.NREGIMEN == NREGIMEN && 
                                                                    itemInfo.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
                                                                    itemInfo.STIPO_CARGA == STIPO_CARGA)
-      console.log("el this.arrObjFilesInformeByAlert tmp : ", dataInfoFilesTmp)
+      
       let respAddFilesInArray = this.addFilesInArrayGlobalResponsable(dataInfoFilesTmp, NIDALERTA_CABECERA, NREGIMEN,NIDALERTA,STIPO_CARGA,listFileNameInform,respPromiseFileInfoBinary,listFileNameCortoInform)
-      console.log("el respAddFilesInArray : ", respAddFilesInArray)
+     
       return {
         message : "",
         code : 0
       }
     } catch (error) {
-      console.error("el arrFiles error 879 : ", error)
+      console.error("error : ", error)
     }
   }
 
@@ -2173,7 +2145,7 @@ export class ResponsableGlobalComponent {
       let dataInformFile: any = {}
       let statusDuplic = false
       if (dataInfoFilesTmp.length > 0) {
-        console.log("si es mayor a 0 : ", dataInfoFilesTmp)
+        
         let indiceFile = 0
         this.arrObjFilesInformeByAlert.forEach(it => {
           if (it.NIDALERTA == NIDALERTA && it.NREGIMEN === NREGIMEN && it.STIPO_CARGA === STIPO_CARGA) {
@@ -2232,7 +2204,7 @@ export class ResponsableGlobalComponent {
               let incrementadorFileName = 0;
               listFileNameInform.forEach(itemNameCoin => {
                 let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemNameCoin)
-                console.log("SI ES DATA respFilterDuplid 1: ",respFilterDuplid)
+                
                 if(respFilterDuplid.length == 0){
                     arrayFilesNamePush.push(itemNameCoin)
                     arrayFilesPush.push(respPromiseFileInfoBinary[incrementadorFileName]);
@@ -2250,7 +2222,7 @@ export class ResponsableGlobalComponent {
         })
       }
       if (!statusDuplic) {
-        console.log("no es mayor a 0 : ", dataInfoFilesTmp)
+        
         dataInformFile.NIDALERTA = NIDALERTA
         dataInformFile.NREGIMEN = NREGIMEN
         dataInformFile.NIDALERTA_CABECERA = NIDALERTA_CABECERA
@@ -2258,11 +2230,11 @@ export class ResponsableGlobalComponent {
         dataInformFile.arrFilesName = listFileNameInform
         dataInformFile.arrFiles = respPromiseFileInfoBinary
         dataInformFile.arrFilesNameCorto = listFileNameCortoInform
-        console.log("el dataInformFile 123456789 : ", dataInformFile)
+        
         this.arrObjFilesInformeByAlert.push(dataInformFile)
       }
 
-      console.log("el arrObjFilesInformeByAlert 123456789 : ", this.arrObjFilesInformeByAlert)
+      
       return true
     } catch (error) {
       console.error("el error en el add : ",error)
@@ -2280,7 +2252,7 @@ export class ResponsableGlobalComponent {
         return
       }
     }
-    console.log("statusFormatFile : ",statusFormatFile)
+    
       if (statusFormatFile) {
         swal.fire({
           title: 'Bandeja del Oficial de Cumplimiento',
@@ -2296,7 +2268,7 @@ export class ResponsableGlobalComponent {
                          },
            
         }).then(async (result) => {
-          console.log("entro a la validacion de archivo : ",result)
+          
           this.core.loader.hide()
           return
         }).catch(err => {
@@ -2308,19 +2280,14 @@ export class ResponsableGlobalComponent {
   async sendFilesUniversalUpload(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
       this.core.loader.show()
-      console.log("el INICIO")
-      console.log("el INICIO NIDALERTA",NIDALERTA)
-      console.log("el INICIO NIDALERTA_CABECERA",NIDALERTA_CABECERA)
-      console.log("el INICIO NREGIMEN",NREGIMEN)
-      console.log("el INICIO STIPO_CARGA",STIPO_CARGA)
-
-      console.log("INICIO arrObjFilesInformeByAlert ADJUNTOS12345 : ",this.arrObjFilesInformeByAlert)
+      
+      
       let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
         alertaItem.NIDALERTA == NIDALERTA &&
         alertaItem.NREGIMEN == NREGIMEN && 
         alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
         alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
-        console.log(" INICIO respListFilesAdjuntos ADJUNTOS12345 : ",respListFilesAdjuntos)
+        
 
       let listFilesAdjuntos = []//archivos
       let listFileNameAdjuntos = []//nombre de archivos
@@ -2330,8 +2297,7 @@ export class ResponsableGlobalComponent {
         itemFile.arrFilesName.forEach(objFile => listFileNameAdjuntos.push(objFile))
       })
   
-      console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 listFilesAdjuntos: ",listFilesAdjuntos)
-      console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 listFileNameAdjuntos: ",listFileNameAdjuntos)
+      
       //this.arrObjFilesInformeByAlert = []//el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021
 
       let promiseUploadAttachedAdjuntos = []
@@ -2354,7 +2320,7 @@ export class ResponsableGlobalComponent {
         uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
         uploadPararms.listFiles = listFilesAdjuntos
         uploadPararms.listFileName = listFileNameAdjuntos
-        console.log("el data de uploadPararms informe 15: ",uploadPararms)
+        
         promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
         promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
@@ -2372,19 +2338,15 @@ export class ResponsableGlobalComponent {
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
       this.core.loader.show()
-      console.log("el INICIO")
-      console.log("el INICIO NIDALERTA",NIDALERTA)
-      console.log("el INICIO NIDALERTA_CABECERA",NIDALERTA_CABECERA)
-      console.log("el INICIO NREGIMEN",NREGIMEN)
-      console.log("el INICIO STIPO_CARGA",STIPO_CARGA)
+      
 
-      console.log("INICIO arrObjFilesInformeByAlert ADJUNTOS12345 : ",this.arrObjFilesInformeByAlert)
+      
       let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
         alertaItem.NIDALERTA == NIDALERTA &&
         alertaItem.NREGIMEN == NREGIMEN && 
         alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
         alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
-        console.log(" INICIO respListFilesAdjuntos ADJUNTOS12345 : ",respListFilesAdjuntos)
+        
 
       let listFilesAdjuntos = []//archivos
       let listFileNameAdjuntos = []//nombre de archivos
@@ -2394,8 +2356,7 @@ export class ResponsableGlobalComponent {
         itemFile.arrFilesName.forEach(objFile => listFileNameAdjuntos.push(objFile))
       })
   
-      console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 listFilesAdjuntos: ",listFilesAdjuntos)
-      console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 listFileNameAdjuntos: ",listFileNameAdjuntos)
+     
       //this.arrObjFilesInformeByAlert = []//el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021
 
       let promiseUploadAttachedAdjuntos = []
@@ -2424,7 +2385,7 @@ export class ResponsableGlobalComponent {
           uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
           uploadPararms.listFiles = listFilesAdjuntos
           uploadPararms.listFileName = listFileNameAdjuntos
-          console.log("el data de uploadPararms informe 15: ",uploadPararms)
+          
           promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
           promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
         } catch (error) {
@@ -2449,7 +2410,7 @@ export class ResponsableGlobalComponent {
       let files = this.getFiles(alerta, tipoUsuario)
       let listFiles = this.getListFiles(alerta, tipoUsuario)
       let listFileName = this.getListFileName(alerta, tipoUsuario)*/
-      console.log("el INICIO del SEND FILES INFORME")
+      
       let STIPO_CARGA = 'INFORMES'
       let STIPO_CARGA_ADJ = 'ADJUNTOS'
       let respListFiles = this.arrObjFilesInformeByAlert.filter(alertaItem =>
@@ -2459,8 +2420,7 @@ export class ResponsableGlobalComponent {
       let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
         alertaItem.NIDALERTA == NIDALERTA && alertaItem.NREGIMEN === NREGIMEN
         && alertaItem.STIPO_CARGA === STIPO_CARGA_ADJ)//archivos base64
-        console.log("respListFiles INFORMES12345 : ",respListFiles)
-        console.log("respListFilesAdjuntos ADJUNTOS12345 : ",respListFilesAdjuntos)
+        
 
       let listFiles = []//archivos
       let listFileName = []//nombre de archivos
@@ -2480,7 +2440,7 @@ export class ResponsableGlobalComponent {
 
 
 
-      console.log("el listFiles 789: ", listFiles)
+      
       
       if (listFiles.length === 0) {
         this.core.loader.hide()
@@ -2504,18 +2464,17 @@ export class ResponsableGlobalComponent {
           }
         })
       }
-      console.log("el NREGIMEN: ",NREGIMEN)
+      
       let arrPendienteInforme = this.getArray("PENDIENTE-INFORME", NREGIMEN)
-      console.log("el this.arrPendienteInforme: ",arrPendienteInforme)
-      //console.log("el this.arrResponsablesPendiente: ",this.arrResponsablesPendienteInformeSimpli)
+      
+      
       let objAlertaItem = arrPendienteInforme.filter(it => it.NIDALERTA == NIDALERTA && it.NREGIMEN == NREGIMEN)
-      console.log("el objAlertaItem 123:", objAlertaItem)
+      
       let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
-      console.log("el cantidadResponsables:", cantidadResponsables)
-      console.log("el cantidadInformes:", cantidadInformes)
+      
       if (cantidadResponsables > cantidadInformes) {
-        console.log("entro a la validacion")
+       
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',
@@ -2558,7 +2517,7 @@ export class ResponsableGlobalComponent {
         }).then(async (result: any) => {
           if (result.value) {
             this.core.loader.show()
-            console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 : ",this.arrObjFilesInformeByAlert)
+            
             this.arrObjFilesInformeByAlert = []
             
             let data: any = {};
@@ -2574,7 +2533,7 @@ export class ResponsableGlobalComponent {
             //data.alerta = alerta
             data.NIDALERTA = NIDALERTA;
             data.NPERIODO_PROCESO = NPERIODO_PROCESO
-            //console.log("el data de upload file informe 15: ",data)
+            
             //data.nIdCabUsuario = this.datosCabecera.NIDALERTA_CABECERA
 
             let respGetArrayAlert = this.getArray("PENDIENTE-INFORME", NREGIMEN);
@@ -2658,8 +2617,7 @@ export class ResponsableGlobalComponent {
             dataUpdateStatus.status = "2"
             dataUpdateStatus.regimeId = NREGIMEN
             let respServiceUpdateStatus = await this.userConfigService.updateStatusAlert(dataUpdateStatus)
-            console.log("llego hasta aqui responsableGlobalTs el respServiceUpdateStatus upd: ", respServiceUpdateStatus)
-            console.log("llego hasta aqui responsableGlobalTs el arrObjFilesInformeByAlert 1: ", this.arrObjFilesInformeByAlert)
+            
             
            
             
@@ -2691,21 +2649,20 @@ export class ResponsableGlobalComponent {
 
   async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
     try {
-      console.log("llego a esta parte?")
+     
       let respSetData = await this.setDataFile(event)
       //respPromiseFileInfo
       //listFileNameCortoInform
       //arrFiles
 
-      console.log("el respSetData : ", respSetData)
-
-      //console.log("el arrFiles respPromiseFileInfo 879 : ",respPromiseFileInfo)
+     
+      
       let dataInformFile: any = {}
       let dataInfoFilesTmp = this.arrObjFilesAdjByCabecera.filter(itemInfo => itemInfo.NIDCABECERA_USUARIO == NIDCABECERA_USUARIO && itemInfo.NIDALERTA == NIDALERTA && itemInfo.NREGIMEN === NREGIMEN && itemInfo.STIPO_CARGA === STIPO_CARGA)
-      console.log("el this.arrObjFilesAdjByCabecera tmp : ", dataInfoFilesTmp)
+      
       let statusDuplic = false
       if (dataInfoFilesTmp.length > 0) {
-        console.log("si es mayor a 0 : ", dataInfoFilesTmp)
+       
         let indiceFile = 0
         this.arrObjFilesAdjByCabecera.forEach(it => {
           if (it.NIDCABECERA_USUARIO == NIDCABECERA_USUARIO && it.NIDALERTA == NIDALERTA && it.NREGIMEN === NREGIMEN && it.STIPO_CARGA === STIPO_CARGA) {
@@ -2756,7 +2713,7 @@ export class ResponsableGlobalComponent {
               let incrementadorFileName = 0;
               respSetData.listFileNameInform.forEach(itemNameCoin => {
                 let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemNameCoin)
-                console.log("SI ES DATA respFilterDuplid 1: ",respFilterDuplid)
+                
                 if(respFilterDuplid.length == 0){
                     arrayFilesNamePush.push(itemNameCoin)
                     arrayFilesPush.push(respSetData.respPromiseFileInfo[incrementadorFileName]);
@@ -2778,7 +2735,7 @@ export class ResponsableGlobalComponent {
         })
       }
       if (!statusDuplic) {
-        console.log("no es mayor a 0 : ", dataInfoFilesTmp)
+        
         dataInformFile.SRUTA = STIPO_CARGA + '/' + NIDCABECERA_USUARIO + '/' + STIPO_USUARIO
         dataInformFile.NIDCABECERA_USUARIO = NIDCABECERA_USUARIO
         dataInformFile.NIDALERTA = NIDALERTA
@@ -2791,24 +2748,24 @@ export class ResponsableGlobalComponent {
         this.arrObjFilesAdjByCabecera.push(dataInformFile)
       }
 
-      console.log("el arrObjFilesAdjByCabecera 879-1: ", this.arrObjFilesAdjByCabecera)
+     
       return true
       //await this.sendFilesInformes(NIDALERTA, respPromiseFileInfo, listFileNameInform)
     } catch (error) {
-      console.error("el arrFiles error 879 : ", error)
+      console.error("error : ", error)
     }
   }
 
 
   async setDataFile(event) {
-    //console.log("el arrFiles 879 NIDALERTA: ",NIDALERTA)
+    
     let files = event.target.files;
 
     let arrFiles = Array.from(files)
-    console.log("el arrFiles 879 : ", arrFiles)
+   
     let listFileNameInform: any = []
     arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-    //console.log("el arrFiles listFileNameInform 879 : ",listFileNameInform)
+    
     let listFileNameCortoInform = []
     let statusFormatFile = false
     for (let item of listFileNameInform) {
@@ -2837,9 +2794,9 @@ export class ResponsableGlobalComponent {
               },
         
       }).then(async (result) => {
-        //console.log("hellow : ",result)
+        console.log("result : ",result)
       }).catch(err => {
-        //console.log("el error : ",err);
+        console.log("el error : ",err);
       })
     }
     let listDataFileInform: any = []
@@ -2853,15 +2810,13 @@ export class ResponsableGlobalComponent {
   async sendFilesAdjuntosCabecera(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, SESTADO, STIPO_USU) {
     try {
      
-      console.log("el INICIO")
+     
      
 
 
       let respValidData = await this.getValidationAndData(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA)
 
-      console.log("el respValidData 789----1: ", respValidData)
-
-      console.log("el listFiles 789: ", respValidData.listFileName)
+      
 
 
 
@@ -2890,7 +2845,7 @@ export class ResponsableGlobalComponent {
           uploadPararms.NIDUSUARIO_ASIGNADO = this.ID_USUARIO
           uploadPararms.listFiles = respValidData.listFiles
           uploadPararms.listFileName = respValidData.listFileName
-          //console.log("el data de uploadPararms informe 15: ",uploadPararms)
+          
           promiseUploadAttached.push(this.userConfigService.insertAttachedFiles(uploadPararms))
           promiseUploadFile.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
 
@@ -2901,8 +2856,7 @@ export class ResponsableGlobalComponent {
         let respPromiseAllAttached = await Promise.all(promiseUploadAttached)
         let respPromiseAllUploadFile = await Promise.all(promiseUploadFile)
 
-        console.log("el respPromiseAllAttached : ",respPromiseAllAttached)
-        console.log("el respPromiseAllUploadFile : ",respPromiseAllUploadFile)
+        
 
       
 
@@ -2920,12 +2874,12 @@ export class ResponsableGlobalComponent {
         arrAcumuladorIndiceFile.forEach(itemFile => {
           this.arrObjFilesAdjByCabecera.splice(itemFile, 1)
         })
-        console.log("El this.arrObjFilesAdjByCabecera : ",this.arrObjFilesAdjByCabecera)
+       
        
       } else {
         return false
       }
-      console.log("el FIN")
+     
       //this.core.loader.hide()
       return null
     } catch (error) {
@@ -2934,7 +2888,7 @@ export class ResponsableGlobalComponent {
   }
 
   getValidationAndData(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA) {
-    console.log("/" + NIDCABECERA_USUARIO + "/" + NIDALERTA + "/" + NREGIMEN + "/" + STIPO_CARGA + "/")
+    
     let respListFiles = this.arrObjFilesAdjByCabecera.filter(alertaItem =>
       alertaItem.NIDALERTA == NIDALERTA && alertaItem.NREGIMEN === NREGIMEN
       && alertaItem.STIPO_CARGA === STIPO_CARGA && alertaItem.NIDCABECERA_USUARIO === NIDCABECERA_USUARIO)//archivos base64
@@ -2961,7 +2915,7 @@ export class ResponsableGlobalComponent {
 
   async fillReport(itemAlerta, NIDUSUARIO_ASIGNADO) {
     try {
-      console.log("el param de itemAlerta : ", itemAlerta)
+      
       let objALERTA_NEW:any = {};
       let arrayRG = [7,8,9,10,11,12,13,14,15]
       let respFilterRG = arrayRG.filter(it => it == itemAlerta.NIDALERTA)
@@ -2977,7 +2931,7 @@ export class ResponsableGlobalComponent {
       }
       //let param = { NIDALERTA: objALERTA_NEW.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: itemAlerta.NREGIMEN, NIDUSUARIO_ASIGNADO: NIDUSUARIO_ASIGNADO, SNOMBRE_ALERTA: objALERTA_NEW.NOM_ALERTA }
       let param = { NIDALERTA: objALERTA_NEW.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: itemAlerta.NREGIMEN, NIDUSUARIO_ASIGNADO: NIDUSUARIO_ASIGNADO, SNOMBRE_ALERTA: objALERTA_NEW.NOM_ALERTA,P_NIDALERTA_ORI: itemAlerta.NIDALERTA  }
-      console.log("el param de fillREport : ", param)
+      
       let response = await this.userConfigService.fillReport(param)
       response = await fetch(`data:application/octet-stream;base64,${response.base64}`)
       const blob = await response.blob()
@@ -2996,13 +2950,13 @@ export class ResponsableGlobalComponent {
     jsonData.P_NIDALERTA = NIDALERTA;
     jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
 
-    //console.log("EL JSODATA : ", jsonData);
+   
     let respData: any = [];
     if (NIDALERTA == 3) {
 
         respData = await this.userConfigService.getListGafiAlert(jsonData);
 
-        //console.log("EL DEITA : ", respData);
+       
         if (respData.length > 0) {
             await this.excelService.exportAsExcelFile(respData, "Registros de alerta C3");
         }
@@ -3012,7 +2966,7 @@ export class ResponsableGlobalComponent {
         jsonData.P_NIDREGIMEN = NIDREGIMEN;
         respData = await this.userConfigService.getListNCAlert(jsonData);
 
-        //console.log("EL DEITA : ", respData);
+       
         if (respData.length > 0) {
             await this.excelService.exportAsExcelFile(respData, "Registros de alerta S1");
         }
@@ -3022,7 +2976,7 @@ export class ResponsableGlobalComponent {
         //let respData:any = [];
         respData = await this.userConfigService.getListDirDuplicAlert(jsonData);
 
-        //console.log("EL DEITA : ", respData);
+        
         if (respData.length > 0) {
             await this.excelService.exportAsExcelFile(respData, "Registros de alerta S2");
         }
@@ -3032,11 +2986,11 @@ export class ResponsableGlobalComponent {
         //jsonData.P_NIDALERTA = this.NIDALERTA;//this.NIDALERTA;
         //jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
 
-        //console.log("EL JSODATA : ", jsonData);
+      
 
         respData = await this.userConfigService.getListClienteRentasRAltoAlert(jsonData);
 
-        //console.log("EL DEITA : ", respData);
+       
         if (respData.length > 0) {
             await this.excelService.exportAsExcelFile(respData, "Registros de alerta RG4");
         }

@@ -23,7 +23,7 @@ export class C2PolicyComponent implements OnInit {
 
   async ngOnInit() {
 
-    //console.log("entro la data a c2policy" ,this.item)
+    
     await this.Consultar360(this.item)
     await this.SetVariables()
   }
@@ -52,7 +52,7 @@ export class C2PolicyComponent implements OnInit {
         this.Resultado360 = response
        });
        this.core.loader.hide()
-    console.log("entro en el servicio de 360 resultado c2policy", this.Resultado360)
+    
   }
   NroPoliza:string = ''
   NroCertificado:string = ''
@@ -225,10 +225,7 @@ export class C2PolicyComponent implements OnInit {
     this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '-' : this.Resultado360.credito.montoInsoluto
     this.credito.numerocuotas = this.Resultado360.credito.numerocuotas == '' ? '-' : this.Resultado360.credito.numerocuotas
     
-    console.log("this.credito.nroCredito", this.Resultado360.credito.nroCredito )
     
-    //console.log(" c2policy data ", this.Contratante)
-
   }
   async showdata(){
     /* if(this.DescripcionRamo == "VIDA LEY TRABAJADORES") {

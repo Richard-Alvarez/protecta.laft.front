@@ -54,7 +54,7 @@ export class ConfigComponent implements OnInit {
       .then((response) => {
 
         this.configSeniales = response;
-        //console.log(this.configSeniales);
+       
         // llenar señales que no existan
         this.configSeniales.forEach((config) => {
           this.aplicaciones.forEach((app) => {
@@ -100,8 +100,6 @@ export class ConfigComponent implements OnInit {
     this.configSenial = config;
 
 
-    //console.log(this.seniales);
-    //console.log(this.configSenial.senial);
   }
 
   grabar() {
@@ -112,7 +110,7 @@ export class ConfigComponent implements OnInit {
       }
     });
 
-    //console.log(this.seniales);
+    
     this.core.loader.show();
     this.configService.updateSenial(this.seniales)
       .then((response) => {
@@ -146,7 +144,7 @@ export class ConfigComponent implements OnInit {
 
   Validate(valor: any) {
     /* if (!this.configSenial.senial.indAlert && !this.configSenial.senial.indError) {
-       //console.log(valor);
+       
        if (valor === 'alert') {
          this.configSenial.senial.indAlert = false;
        } else {

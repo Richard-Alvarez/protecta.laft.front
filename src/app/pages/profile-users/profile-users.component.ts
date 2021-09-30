@@ -78,7 +78,7 @@ export class ProfileUsersComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        //console.log('err');
+        
         this.core.loader.hide();
         swal.fire({
           title: 'Usuarios por perfil',
@@ -118,7 +118,7 @@ export class ProfileUsersComponent implements OnInit {
         let _data;
         _data = (response);
         this.UserList = _data; 
-        // //console.log(this.UserList)
+        
         this.totalItems = this.UserList.length;
         this.listToShow = this.UserList.slice(
           (this.currentPage - 1) * this.itemsPerPage,

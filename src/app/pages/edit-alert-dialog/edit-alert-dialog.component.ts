@@ -79,11 +79,11 @@ constructor(
 
   async ngOnInit() { 
     //this.core.loader.show();
-    //console.log("this.alert 1 : ",this.alert)
+   
     await this.getGrupoList();
     await this.getAlertToEdit();
     //this.core.loader.hide();   
-    //console.log("this.alert : ",this.alert)
+    
     if (this.alert != null && this.alert.alertId != null) {
       this.fTitle = 'Editar Alerta';
       this.bInsertNewAlert = false;
@@ -116,9 +116,9 @@ constructor(
   }
 
   ObtenerIdGrupo(descripcion){
-    // console.log("el descripcion del grupo",descripcion)
+    
     let idGrupo = this.GrupoList.filter(it => it.SDESGRUPO_SENAL == descripcion)
-    // console.log("el array del grupo",idGrupo)
+   
      return idGrupo[0].NIDGRUPOSENAL
     // return idGrupo
   }
@@ -128,8 +128,7 @@ constructor(
    
     if (this.alert != null && this.alert.alertId != null) {
       let valor = this.ObtenerIdGrupo(this.alert.sennalDescripcion)
-      // console.log("el id del grupo",valor)
-      // console.log("la data que va al modal",this.alert)
+      
       //ASIGNA VALORES AL MODAL
       this.group = valor
       this.ValorCheckSimp = this.alert.regimenSim == 1 ? true : false
@@ -145,16 +144,13 @@ constructor(
       this.alertStatus = this.alertStatus == "1" ? true : false;
       this.reminderSender = this.reminderSender == "1" ? true : false;
 
-      console.log("el this.ValorCheckSimp : ",this.ValorCheckSimp)
-      console.log("el this.ValorCheckGene : ",this.ValorCheckGene)
+      
 
         //this.ValorCheck = this.ValorCheckSimp == 1 ? 2 : this.ValorCheckGene == 1 ? 1 : 0
-        console.log("el this.ValorCheck : ",this.ValorCheck)
-        console.log("el this.alert : ",this.alert)
-     
+        
       // this.group = this.reminderSender
       await this.getQuestionsByAlert(this.alertId);
-      // console.log("entro en el if")
+    
     }
     else {
       this.validarActivador()
@@ -167,7 +163,7 @@ constructor(
       this.bussinessDays = '';
       this.alertStatus = true;
       this.alertStatusDisabñe = true
-      // console.log("entro en el else")    
+         
     }
   }
 
@@ -184,13 +180,12 @@ constructor(
   }
 
   consoelAux(){
-    console.log("el consoelAux ValorCheckSimp : ",this.ValorCheckSimp)
-    console.log("el consoelAux ValorCheckGene : ",this.ValorCheckGene)
+    
   }
 
 
   validarActivador(){
-    // console.log("this.fTitle",this.fTitle)  
+  
      if(this.fTitle == 'Agregar Alerta'){
     //  return  this.alertStatusDisabñe 
     return false
@@ -217,9 +212,9 @@ constructor(
         this.currentPage * this.itemsPerPage
       );*/
       //this.core.loader.hide();
-        console.log("alertas", this.processlistToShow)
+     
     } catch (error) {
-      //console.log('err ',error);
+  
         swal.fire({
           title: 'Gestión de alertas',
           icon: 'error',
@@ -320,8 +315,7 @@ constructor(
       return jsonValid;
     }
      if (this.group == 1) {
-        console.log("el valor nuevo this.ValorCheckGene",this.ValorCheckGene)
-       console.log("el valor nuevo this.ValorCheckSimp",this.ValorCheckSimp)
+       
        // if(this.ValorCheckSimp ==0 || this.ValorCheckSimp == '' || this.ValorCheckGene == 0 || this.ValorCheckGene == '' ){
          if(this.ValorCheckGene ==false  && this.ValorCheckSimp ==false  ){
         
@@ -429,9 +423,8 @@ constructor(
   async updateAlert() {
     //this.core.loader.show();
     //#region Validaciones
-   debugger
-    console.log("el valor del check simpi",this.ValorCheckSimp)
-    console.log("el valor del check gene",this.ValorCheckGene)
+   
+   
     let respValidaciones = await this.validacionesModal();
     //#endregion
 
@@ -454,9 +447,7 @@ constructor(
     }else{
       //if(this.bInsertNewAlert){
         let respInsertAlert = await this.insertAlert();
-        //let Respuesta:any = await this.validarData(respInsertAlert)
-        //console.log("Respuesta :",Respuesta)
-        console.log("la data que trae ",respInsertAlert)
+        
       //}
       let cadenaConfirmar = '';
       let cadenaTitle = '';
@@ -527,7 +518,7 @@ constructor(
             
           })
           .catch( (e) => {
-            //console.log("error en catch ? ",e);
+           
             this.core.loader.hide();
             return false;
             
@@ -537,7 +528,7 @@ constructor(
         this.core.loader.hide();
         return false;
       
-      ////console.log("EL INSERT EN FALSE : ",false)
+   
 
       
       //}
@@ -549,8 +540,7 @@ constructor(
     
     //let respInsertAlert = await this.insertAlert();
 
-    ////console.log("el respInsertAlert : ",respInsertAlert);
-   
+  
     
    
   }
@@ -571,7 +561,7 @@ constructor(
     this.processlistToShow.push(questions);
     this.processlist = this.processlistToShow;
 
-    console.log(this.processlist)
+    
     //this.showGrid.
   }
 
@@ -599,8 +589,7 @@ constructor(
 
 
  validacioncheck(regimen){
-   console.log("ValorCheckSimp",this.ValorCheckSimp)
-   console.log("ValorCheckGene",this.ValorCheckGene)
+   
   if(regimen == 1){
     if (this.ValorCheckSimp == 1){
         return true
@@ -647,13 +636,12 @@ constructor(
       
       
     }else if(cantidad.length == 0){
-      console.log("entro en el else if",newQuestion.length-1)
+     
       newQuestion.splice(newQuestion.length-1)
     }
 
       else{
-     console.log("las cantidades index",newQuestion.length-1)
-     console.log("las cantidades del ultimo",cantidad.length)
+    
       newQuestion.splice(newQuestion.length-1,cantidad.length)
     }
   
@@ -663,7 +651,7 @@ constructor(
  ElimnarPregunta(indice){
   let newQuestion =   this.processlist 
   let cantidad =  this.processlistToShow.filter( it => it.transactionType == "U" )
-  console.log("el valor del indice",indice)
+ 
 
   newQuestion.splice(indice,1)
 
