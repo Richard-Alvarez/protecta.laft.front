@@ -195,7 +195,7 @@ export class C2PolicyComponent implements OnInit {
     this.pension.primaDefinitiva= this.Resultado360.pension.primaDefinitiva == '' ? '-' : this.Resultado360.pension.primaDefinitiva
     this.pension.reajusteTrimestral= this.Resultado360.pension.reajusteTrimestral == '' ? '-' : this.Resultado360.pension.reajusteTrimestral
     this.pension.moneda= this.Resultado360.pension.moneda == '' ? '-' : this.Resultado360.pension.moneda
-    this.pension.mesesGarantizados= this.Resultado360.pension.mesesGarantizados == '' ? '-' : this.Resultado360.pension.mesesGarantizados
+    this.pension.mesesGarantizados= this.Resultado360.pension.mesesGarantizados == '' ? '0' : this.Resultado360.pension.mesesGarantizados
     this.pension.aniosDiferidos= this.Resultado360.pension.aniosDiferidos == '' ? '-' : this.Resultado360.pension.aniosDiferidos
     this.pension.modalidad= this.Resultado360.pension.modalidad == '' ? '-' : this.Resultado360.pension.modalidad
     this.pension.tipoRenta= this.Resultado360.pension.tipoRenta == '' ? '-' :this.Resultado360.pension.tipoRenta
@@ -269,8 +269,8 @@ export class C2PolicyComponent implements OnInit {
       case "72":
         break;
       case "73":
-        $('#DAsegIniVig').css("display","block")
-        $('#DAsegFinVig').css("display","block")
+        //$('#DAsegIniVig').css("display","block")
+        //$('#DAsegFinVig').css("display","block")
         $('#DAsegMonedaSal').css("display","block")
         $('#DAsegSalario').css("display","block")
         $('#DAsegTasa').css("display","block")
@@ -299,22 +299,22 @@ export class C2PolicyComponent implements OnInit {
         $('#h4Asegurado').text('Datos del Titular')
         //$('#DAsegDocum').css("display","block")
         //$('#DAsegCUSPP').css("display","block")
-        $('#DAsegIniVig').css("display","block")
-        $('#DAsegFinVig').css("display","block")
-        $('#DAsegTipPension').css("display","block")
-        $('#DAsegTipRenta').css("display","block")
-        $('#DAsegModalidad').css("display","block")
-        $('#DAsegAnDif').css("display","block")
-        $('#DAsegMesGarant').css("display","block")
-        $('#DAsegMoneda').css("display","block")
-        $('#DAsegReajTemp').css("display","block")
-        $('#DAsegPrimDef').css("display","block")
-        $('#DAsegPenDef').css("display","block") 
-        $('#DAsegIniVigSCTR').css("display","none")
-        $('#DAsegFinVigSCTR').css("display","none")
-        $('#DAsegMonedaSal').css("display","none")
-        $('#DAsegSalario').css("display","none")
-        $('#DAsegTasa').css("display","none") 
+        //$('#DAsegIniVig').css("display","block")
+        //$('#DAsegFinVig').css("display","block")
+        //$('#DAsegTipPension').css("display","block")
+        //$('#DAsegTipRenta').css("display","block")
+        //$('#DAsegModalidad').css("display","block")
+        //$('#DAsegAnDif').css("display","block")
+        //$('#DAsegMesGarant').css("display","block")
+        //$('#DAsegMoneda').css("display","block")
+        //$('#DAsegReajTemp').css("display","block")
+        //$('#DAsegPrimDef').css("display","block")
+        //$('#DAsegPenDef').css("display","block") 
+        //$('#DAsegIniVigSCTR').css("display","none")
+        //$('#DAsegFinVigSCTR').css("display","none")
+        //$('#DAsegMonedaSal').css("display","none")
+        //$('#DAsegSalario').css("display","none")
+        //$('#DAsegTasa').css("display","none") 
         //$('#InfoCanal').css("display","none")
         //$('#InfoCoberRentas').css("display","block")
         //$('#InfoBeneficiarios').css("display","block")
