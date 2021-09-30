@@ -1,0 +1,59 @@
+
+<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
+    <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
+</div>
+<br>
+
+<div class="container">
+
+    <div class="row mb-2 " style="margin-top: -30px;display: flex;padding-left: 125px;">
+        <div class="Header">
+            <div class="row">
+                <div class="col-lg-19">
+                    <h4 class="TitleLine">Agregar Correo</h4>
+                </div>
+            </div>
+            
+        </div>
+        <br>
+            
+    </div>
+    
+    <div class="row" style="padding-left: 100px;">
+        <div class="col-lg-5 form-group" title="Nombre de Alerta">
+            <span class="fontText">Nombre del perfil:</span>
+            <input [(ngModel)]="pass1" id="usAlertNama" type="text" class="form-control buttonSinBorder">
+        </div>
+       
+        
+        
+    </div>
+
+    <div class="row" style="padding-left: 100px;">
+        <div class="col-lg-5 form-group" title="Nombre de Alerta">
+            <span class="fontText">Nombre del perfil:</span>
+            <input [(ngModel)]="pass2" id="usAlertNama" type="text" class="form-control buttonSinBorder">
+        </div>
+       
+        
+        
+    </div>
+    
+    
+    
+</div>
+<br>
+<div class="row" style="padding: 0px 150px;">
+    <div class="col-lg-7">
+
+    </div>
+    <div class="col-lg-3">
+       
+        <button (click)="Regresar()" class="btn btn-warning text-white " style="width: 150px;">Regresar</button>
+    </div>
+    <div class="col-lg-2">
+       
+        <button (click)="Save()" class="btn btn-warning text-white "  style="width: 150px;">Guardar</button>
+    </div>
+</div>
+<br>
