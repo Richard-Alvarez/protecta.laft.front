@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
   }
 
   Modal(){
-    const modalRef = this.modalService.open(ModalValidarContrasennaComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(ModalValidarContrasennaComponent, { size: 'lg', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false, centered : true });
     
     
     modalRef.componentInstance.reference = modalRef;
