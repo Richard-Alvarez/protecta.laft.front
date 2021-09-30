@@ -23,7 +23,7 @@ export class C2PolicyComponent implements OnInit {
 
   async ngOnInit() {
 
-    
+    //console.log("entro la data a c2policy" ,this.item)
     await this.Consultar360(this.item)
     await this.SetVariables()
   }
@@ -52,7 +52,7 @@ export class C2PolicyComponent implements OnInit {
         this.Resultado360 = response
        });
        this.core.loader.hide()
-    
+    console.log("entro en el servicio de 360 resultado c2policy", this.Resultado360)
   }
   NroPoliza:string = ''
   NroCertificado:string = ''
@@ -63,6 +63,12 @@ export class C2PolicyComponent implements OnInit {
   FechaPrimeraVigencia:string = ''
   FechaInicioVigencia:string = ''
   FechaEfecto:string = ''
+  tipoFacturacion:string = ''
+  tipoNegocio:string = ''
+  tipoPoliza:string = ''
+  tipoReaseguro:string = ''
+  tipoRenovacion:string = ''
+  coaseguro: string = ''
   Moneda:string = 'Soles'
   Contratante:any = {}
   DatosVehiculo:any = {}
@@ -98,6 +104,12 @@ export class C2PolicyComponent implements OnInit {
     this.FechaPrimeraVigencia = this.Resultado360.fechaPrimeraVigencia  == '' ? '-' : this.Resultado360.fechaPrimeraVigencia  
     this.FechaInicioVigencia = this.Resultado360.fechaInicioVigencia  == '' ? '-' : this.Resultado360.fechaInicioVigencia  
     this.FechaEfecto = this.Resultado360.fechaEfecto  == '' ? '-' : this.Resultado360.fechaEfecto  
+    this.tipoFacturacion = this.Resultado360.tipoFacturacion  == '' ? '-' : this.Resultado360.tipoFacturacion
+    this.tipoNegocio = this.Resultado360.tipoNegocio  == '' ? '-' : this.Resultado360.tipoNegocio
+    this.tipoPoliza = this.Resultado360.tipoPoliza  == '' ? '-' : this.Resultado360.tipoPoliza
+    this.tipoReaseguro = this.Resultado360.tipoReaseguro  == '' ? '-' : this.Resultado360.tipoReaseguro
+    this.tipoRenovacion = this.Resultado360.tipoRenovacion  == '' ? '-' : this.Resultado360.tipoRenovacion
+    this.coaseguro = this.Resultado360.coaseguro  == '' ? '-' : this.Resultado360.coaseguro
 
     this.DatosVehiculo = this.Resultado360.vehiculo
     this.DatosVehiculo.placa = this.Resultado360.vehiculo.placa == '' ? '-' : this.Resultado360.vehiculo.placa
@@ -132,17 +144,16 @@ export class C2PolicyComponent implements OnInit {
     this.DatosIntermediario = this.Resultado360.intermediario
     this.DatosIntermediario.CodigoIntermediario = this.Resultado360.intermediario.codigoIntermediario == '' ? '-' : this.Resultado360.intermediario.codigoIntermediario
     this.DatosIntermediario.Nombre = this.Resultado360.intermediario.nombre == '' ? '-' : this.Resultado360.intermediario.nombre
-
     
     console.log(" this.DatosTarifa", this.DatosTarifa)
     if(this.Resultado360.tarifa !== null){
-    this.DatosTarifa = this.Resultado360.tarifa
-    this.DatosTarifa.FechaEmision = this.Resultado360.tarifa.fechaEmision == '' ? '-' : this.Resultado360.tarifa.fechaEmision
-    this.DatosTarifa.HoraEmision = this.Resultado360.tarifa.horaEmision == '' ? '-' : this.Resultado360.tarifa.horaEmision
-    this.DatosTarifa.LoteDescargo = this.Resultado360.tarifa.loteDescargo == '' ? '-' : this.Resultado360.tarifa.loteDescargo
-    this.DatosTarifa.TarifaProtecta = this.Resultado360.tarifa.tarifaProtecta == '' ? '-' : this.Resultado360.tarifa.tarifaProtecta
-    this.DatosTarifa.PorcentajeComision = this.Resultado360.tarifa.porcentajeComision == '' ? '-' : this.Resultado360.tarifa.porcentajeComision
-    this.DatosTarifa.Moneda = 'Soles'
+      this.DatosTarifa = this.Resultado360.tarifa
+      this.DatosTarifa.FechaEmision = this.Resultado360.tarifa.fechaEmision == '' ? '-' : this.Resultado360.tarifa.fechaEmision
+      this.DatosTarifa.HoraEmision = this.Resultado360.tarifa.horaEmision == '' ? '-' : this.Resultado360.tarifa.horaEmision
+      this.DatosTarifa.LoteDescargo = this.Resultado360.tarifa.loteDescargo == '' ? '-' : this.Resultado360.tarifa.loteDescargo
+      this.DatosTarifa.TarifaProtecta = this.Resultado360.tarifa.tarifaProtecta == '' ? '-' : this.Resultado360.tarifa.tarifaProtecta
+      this.DatosTarifa.PorcentajeComision = this.Resultado360.tarifa.porcentajeComision == '' ? '-' : this.Resultado360.tarifa.porcentajeComision
+      this.DatosTarifa.Moneda = 'Soles'
     }else{
       this.DatosTarifa = {}
       this.DatosTarifa.FechaEmision = ''
@@ -152,7 +163,6 @@ export class C2PolicyComponent implements OnInit {
       this.DatosTarifa.PorcentajeComision = ''
       this.DatosTarifa.Moneda = ''
     }
-    
 
     this.DatosAsegurado = this.Resultado360.asegurado
     this.DatosAsegurado.name = this.Resultado360.asegurado.name == '' ? '-' : this.Resultado360.asegurado.name
@@ -160,8 +170,8 @@ export class C2PolicyComponent implements OnInit {
     this.DatosAsegurado.salario = this.Resultado360.asegurado.salario == '' ? '-' : this.Resultado360.asegurado.salario
     this.DatosAsegurado.tasa = this.Resultado360.asegurado.tasa == '' ? '-' : this.Resultado360.asegurado.tasa
     this.DatosAsegurado.estadoCivil =  this.Resultado360.asegurado.estadoCivil  == '' ? '-' : this.Resultado360.asegurado.estadoCivil
-    this.DatosAsegurado.tipodoc =  this.Resultado360.asegurado.tipodoc == '' ? '-' : this.Resultado360.asegurado.tipodoc
-    this.DatosAsegurado.documento =  this.Resultado360.asegurado.documento == '' ? '-' : this.Resultado360.asegurado.documento
+    this.DatosAsegurado.tipodoc =  this.Resultado360.asegurado.tipodoc == '' ? '' : this.Resultado360.asegurado.tipodoc
+    this.DatosAsegurado.documento =  this.Resultado360.asegurado.documento == '' ? '' : this.Resultado360.asegurado.documento
     this.DatosAsegurado.cuspp =  this.Resultado360.asegurado.cuspp == '' ? '-' : this.Resultado360.asegurado.cuspp
     this.DatosAsegurado.sexo =  this.Resultado360.asegurado.sexo == '' ? '-' : this.Resultado360.asegurado.sexo
 
@@ -175,14 +185,6 @@ export class C2PolicyComponent implements OnInit {
 
     this.ListaDatosCoberturas = this.Resultado360.coberturas
     this.listaDatabeneficiarios = this.Resultado360.beneficiarios
-
-    //this.DatosTitular = this.Resultado360.asegurado
-    // this.DatosTitular.name =  this.Resultado360.asegurado.name
-    // this.DatosTitular.EstadoCivil =  this.Resultado360.asegurado.EstadoCivil
-    // this.DatosTitular.tipodoc =  this.Resultado360.asegurado.tipodoc
-    // this.DatosTitular.documento =  this.Resultado360.asegurado.documento
-    // this.DatosTitular.fechanacimiento =  this.Resultado360.asegurado.fechanacimiento
-    // this.DatosTitular.cuspp =  this.Resultado360.asegurado.cuspp
 
     this.DatosRentaTotal = this.Resultado360.rentaTotal
     this.DatosRentaTotal.ajustAnual = this.Resultado360.rentaTotal.ajustAnual == '' ? '-' : this.Resultado360.rentaTotal.ajustAnual
@@ -235,24 +237,13 @@ export class C2PolicyComponent implements OnInit {
     this.credito.finVigencia = this.Resultado360.credito.finVigencia == '' ? '-' : this.Resultado360.credito.finVigencia
     this.credito.moneda = this.Resultado360.credito.moneda == '' ? '-' : this.Resultado360.credito.moneda
     this.credito.tipoPrima = this.Resultado360.credito.tipoPrima == '' ? '-' : this.Resultado360.credito.tipoPrima
-    this.credito.montoInicial = this.Resultado360.credito.montoInicial == '' ? '-' : this.Resultado360.credito.montoInicial
-    this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '-' : this.Resultado360.credito.montoInsoluto
+    this.credito.montoInicial = this.Resultado360.credito.montoInicial == '' ? '0.00' : this.Resultado360.credito.montoInicial
+    this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '0.00' : this.Resultado360.credito.montoInsoluto
     this.credito.numerocuotas = this.Resultado360.credito.numerocuotas == '' ? '-' : this.Resultado360.credito.numerocuotas
-    
-    
+
   }
   async showdata(){
-    /* if(this.DescripcionRamo == "VIDA LEY TRABAJADORES") {
-      
-      $('#tblContactos').empty()
-      for (item = this.item1; inc < this.arregloprueba.length;) {
-        $('#tblContactos').append('<td item href="inc">'+this.item1+'</td><td >'+this.item2+'</td><td >'+this.item3+'</td><td >'+this.item4+'</td><td >'+this.item5+'</td><td >'+this.item6+'</td>')
-      }
-        
-      }
-      
-    } */
-    switch (this.item.IDRAMO) {
+    /* switch (this.item.IDRAMO) {
       case "61":
         //$('#InfoCanal').css("display","none")
         //$('#InfoCoberturas').css("display","block")
@@ -278,15 +269,16 @@ export class C2PolicyComponent implements OnInit {
         //$('#InfoCoberturas').css("display","block")
         break;
       case "72":
+        //
         break;
       case "73":
         //$('#DAsegIniVig').css("display","block")
         //$('#DAsegFinVig').css("display","block")
-        $('#DAsegMonedaSal').css("display","block")
-        $('#DAsegSalario').css("display","block")
-        $('#DAsegTasa').css("display","block")
+        //$('#DAsegMonedaSal').css("display","block")
+        //$('#DAsegSalario').css("display","block")
+        //$('#DAsegTasa').css("display","block")
         //$('#InfoAsegurado').css("display","block")
-        $('#InfoCanal').css("display","block")
+        //$('#InfoCanal').css("display","block")
         //$('#InfoIntermediario').css("display","block")
         //$('#InfoCoberturas').css("display","block")
         //$('#InfoBeneficiarios').css("display","block")
@@ -344,100 +336,13 @@ export class C2PolicyComponent implements OnInit {
         
         break;
       case "81":
+        //
         break;
       case "82":
         break;
       default:
         break;
-    }
-    /* if(this.item.IDRAMO == "61"){
-      $('#InfoCanal').css("display","none")
-      $('#InfoCoberturas').css("display","block")
-    }
-    if (this.item.IDRAMO == '66'){
-      $('#CardPlaca').css("display","block")
-      $('#CardPlanilla').css("display","block")
-      $('#InfoAsegurado').css("display","none")
-      $('#InfoBeneficiarios').css("display","none")
-      $('#InfoVehiculo').css("display","block")
-      $('#InfoDirecSOAT').css("display","block")
-      $('#InfoCanal').css("display","block")
-      $('#InfoIntermediario').css("display","block")
-      $('#InfoTarifa').css("display","block")
-      $('#InfoCoberturas').css("display","block")
-    }
-    if (this.item.IDRAMO == "71") {//desgravamen credito personal
-      $('#InfoAsegurado').css("display","block")
-      $('#InfoCanal').css("display","block")
-      $('#InfoIntermediario').css("display","block")
-      $('#InfoCoberturas').css("display","block")
-    }
-    if (this.item.IDRAMO == "73") {
-      //$('#InfoPensiones').css("display","none")
-      //$('#h4Asegurado').text('Datos del Asegurado')
-      $('#DAsegIniVig').css("display","block")
-      $('#DAsegFinVig').css("display","block")
-      $('#DAsegMonedaSal').css("display","block")
-      $('#DAsegSalario').css("display","block")
-      $('#DAsegTasa').css("display","block")
-      $('#InfoAsegurado').css("display","block")
-      $('#InfoCanal').css("display","block")
-      $('#InfoIntermediario').css("display","block")
-      $('#InfoCoberturas').css("display","block")
-      $('#InfoBeneficiarios').css("display","block")
-    }
-    if (this.item.IDRAMO == '75') {
-      $('#h4Asegurado').text('Datos del titular')
-      $('#DAsegDocum').css("display","block")
-      $('#DAsegCUSPP').css("display","block")
-      $('#InfoRentaTotal').css("display","block")
-      $('#InfoCanal').css("display","none")
-      $('#InfoCoberturas').css("display","block")
-      $('#InfoBeneficiarios').css("display","block")
-    }
-    //Renta vitalicia (rrvv) renta de jubilacion
-    if (this.item.IDRAMO == '76') {
-      $('#h4Asegurado').text('Datos del Titular')
-      $('#DAsegDocum').css("display","block")
-      $('#DAsegCUSPP').css("display","block")
-      $('#DAsegIniVig').css("display","block")
-      $('#DAsegFinVig').css("display","block")
-      $('#DAsegTipPension').css("display","block")
-      $('#DAsegTipRenta').css("display","block")
-      $('#DAsegModalidad').css("display","block")
-      $('#DAsegAnDif').css("display","block")
-      $('#DAsegMesGarant').css("display","block")
-      $('#DAsegMoneda').css("display","block")
-      $('#DAsegReajTemp').css("display","block")
-      $('#DAsegPrimDef').css("display","block")
-      $('#DAsegPenDef').css("display","block") 
-      $('#DAsegIniVigSCTR').css("display","none")
-      $('#DAsegFinVigSCTR').css("display","none")
-      $('#DAsegMonedaSal').css("display","none")
-      $('#DAsegSalario').css("display","none")
-      $('#DAsegTasa').css("display","none") 
-      $('#InfoCanal').css("display","none")
-      $('#InfoCoberRentas').css("display","block")
-      $('#InfoBeneficiarios').css("display","block")
-      $('#InfoPensiones').css("display","block")
-      $('#titlebenef').text(this.DatosAsegurado.name) */
-      //$('#PPensViaPago').text(/* this.pension.viaPago */'')
-      /* $('#DAsegDocum').css("display","block")
-      $('#DAsegCUSPP').css("display","block")
-      $('#DAsegIniVig').css("display","block")
-      $('#DAsegFinVig').css("display","block")
-      $('#DAsegTipPension').css("display","block")
-      $('#DAsegTipRenta').css("display","block")
-      $('#DAsegModalidad').css("display","block")
-      $('#DAsegAnDif').css("display","block")
-      $('#DAsegMesGarant').css("display","block")
-      $('#DAsegMoneda').css("display","block")
-      $('#DAsegReajTemp').css("display","block")
-      $('#DAsegPrimDef').css("display","block")
-      $('#DAsegPenDef').css("display","block")
-      $('#InfoPensiones').css("display","block") */
-    //}
+    } */
   }
- 
 
 }
