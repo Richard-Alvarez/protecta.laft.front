@@ -138,7 +138,8 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       if(this.data == 'null' ){
         // Acá es para registrar
         let validacion = this.lista.filter(it => it.NIDALERTA == this.sennal)
-        if(validacion != 0){
+        //if(validacion != 0){
+        if(validacion == false){
 
           swal.fire({
             title: "Mantenimiento de complemento",
