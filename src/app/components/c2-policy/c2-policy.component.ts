@@ -23,7 +23,7 @@ export class C2PolicyComponent implements OnInit {
 
   async ngOnInit() {
 
-    
+    //console.log("entro la data a c2policy" ,this.item)
     await this.Consultar360(this.item)
     await this.SetVariables()
   }
@@ -52,7 +52,7 @@ export class C2PolicyComponent implements OnInit {
         this.Resultado360 = response
        });
        this.core.loader.hide()
-    
+    console.log("entro en el servicio de 360 resultado c2policy", this.Resultado360)
   }
   NroPoliza:string = ''
   NroCertificado:string = ''
@@ -224,20 +224,11 @@ export class C2PolicyComponent implements OnInit {
     this.credito.montoInicial = this.Resultado360.credito.montoInicial == '' ? '-' : this.Resultado360.credito.montoInicial
     this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '-' : this.Resultado360.credito.montoInsoluto
     this.credito.numerocuotas = this.Resultado360.credito.numerocuotas == '' ? '-' : this.Resultado360.credito.numerocuotas
-    
-    
+        
+
   }
   async showdata(){
-    /* if(this.DescripcionRamo == "VIDA LEY TRABAJADORES") {
-      
-      $('#tblContactos').empty()
-      for (item = this.item1; inc < this.arregloprueba.length;) {
-        $('#tblContactos').append('<td item href="inc">'+this.item1+'</td><td >'+this.item2+'</td><td >'+this.item3+'</td><td >'+this.item4+'</td><td >'+this.item5+'</td><td >'+this.item6+'</td>')
-      }
-        
-      }
-      
-    } */
+    
     switch (this.item.IDRAMO) {
       case "61":
         //$('#InfoCanal').css("display","none")
@@ -268,11 +259,11 @@ export class C2PolicyComponent implements OnInit {
       case "73":
         //$('#DAsegIniVig').css("display","block")
         //$('#DAsegFinVig').css("display","block")
-        $('#DAsegMonedaSal').css("display","block")
-        $('#DAsegSalario').css("display","block")
-        $('#DAsegTasa').css("display","block")
+        //$('#DAsegMonedaSal').css("display","block")
+        //$('#DAsegSalario').css("display","block")
+        //$('#DAsegTasa').css("display","block")
         //$('#InfoAsegurado').css("display","block")
-        $('#InfoCanal').css("display","block")
+        //$('#InfoCanal').css("display","block")
         //$('#InfoIntermediario').css("display","block")
         //$('#InfoCoberturas').css("display","block")
         //$('#InfoBeneficiarios').css("display","block")
@@ -336,93 +327,6 @@ export class C2PolicyComponent implements OnInit {
       default:
         break;
     }
-    /* if(this.item.IDRAMO == "61"){
-      $('#InfoCanal').css("display","none")
-      $('#InfoCoberturas').css("display","block")
-    }
-    if (this.item.IDRAMO == '66'){
-      $('#CardPlaca').css("display","block")
-      $('#CardPlanilla').css("display","block")
-      $('#InfoAsegurado').css("display","none")
-      $('#InfoBeneficiarios').css("display","none")
-      $('#InfoVehiculo').css("display","block")
-      $('#InfoDirecSOAT').css("display","block")
-      $('#InfoCanal').css("display","block")
-      $('#InfoIntermediario').css("display","block")
-      $('#InfoTarifa').css("display","block")
-      $('#InfoCoberturas').css("display","block")
-    }
-    if (this.item.IDRAMO == "71") {//desgravamen credito personal
-      $('#InfoAsegurado').css("display","block")
-      $('#InfoCanal').css("display","block")
-      $('#InfoIntermediario').css("display","block")
-      $('#InfoCoberturas').css("display","block")
-    }
-    if (this.item.IDRAMO == "73") {
-      //$('#InfoPensiones').css("display","none")
-      //$('#h4Asegurado').text('Datos del Asegurado')
-      $('#DAsegIniVig').css("display","block")
-      $('#DAsegFinVig').css("display","block")
-      $('#DAsegMonedaSal').css("display","block")
-      $('#DAsegSalario').css("display","block")
-      $('#DAsegTasa').css("display","block")
-      $('#InfoAsegurado').css("display","block")
-      $('#InfoCanal').css("display","block")
-      $('#InfoIntermediario').css("display","block")
-      $('#InfoCoberturas').css("display","block")
-      $('#InfoBeneficiarios').css("display","block")
-    }
-    if (this.item.IDRAMO == '75') {
-      $('#h4Asegurado').text('Datos del titular')
-      $('#DAsegDocum').css("display","block")
-      $('#DAsegCUSPP').css("display","block")
-      $('#InfoRentaTotal').css("display","block")
-      $('#InfoCanal').css("display","none")
-      $('#InfoCoberturas').css("display","block")
-      $('#InfoBeneficiarios').css("display","block")
-    }
-    //Renta vitalicia (rrvv) renta de jubilacion
-    if (this.item.IDRAMO == '76') {
-      $('#h4Asegurado').text('Datos del Titular')
-      $('#DAsegDocum').css("display","block")
-      $('#DAsegCUSPP').css("display","block")
-      $('#DAsegIniVig').css("display","block")
-      $('#DAsegFinVig').css("display","block")
-      $('#DAsegTipPension').css("display","block")
-      $('#DAsegTipRenta').css("display","block")
-      $('#DAsegModalidad').css("display","block")
-      $('#DAsegAnDif').css("display","block")
-      $('#DAsegMesGarant').css("display","block")
-      $('#DAsegMoneda').css("display","block")
-      $('#DAsegReajTemp').css("display","block")
-      $('#DAsegPrimDef').css("display","block")
-      $('#DAsegPenDef').css("display","block") 
-      $('#DAsegIniVigSCTR').css("display","none")
-      $('#DAsegFinVigSCTR').css("display","none")
-      $('#DAsegMonedaSal').css("display","none")
-      $('#DAsegSalario').css("display","none")
-      $('#DAsegTasa').css("display","none") 
-      $('#InfoCanal').css("display","none")
-      $('#InfoCoberRentas').css("display","block")
-      $('#InfoBeneficiarios').css("display","block")
-      $('#InfoPensiones').css("display","block")
-      $('#titlebenef').text(this.DatosAsegurado.name) */
-      //$('#PPensViaPago').text(/* this.pension.viaPago */'')
-      /* $('#DAsegDocum').css("display","block")
-      $('#DAsegCUSPP').css("display","block")
-      $('#DAsegIniVig').css("display","block")
-      $('#DAsegFinVig').css("display","block")
-      $('#DAsegTipPension').css("display","block")
-      $('#DAsegTipRenta').css("display","block")
-      $('#DAsegModalidad').css("display","block")
-      $('#DAsegAnDif').css("display","block")
-      $('#DAsegMesGarant').css("display","block")
-      $('#DAsegMoneda').css("display","block")
-      $('#DAsegReajTemp').css("display","block")
-      $('#DAsegPrimDef').css("display","block")
-      $('#DAsegPenDef').css("display","block")
-      $('#InfoPensiones').css("display","block") */
-    //}
   }
  
 
