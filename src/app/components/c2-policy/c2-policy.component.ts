@@ -144,7 +144,6 @@ export class C2PolicyComponent implements OnInit {
     this.DatosIntermediario = this.Resultado360.intermediario
     this.DatosIntermediario.CodigoIntermediario = this.Resultado360.intermediario.codigoIntermediario == '' ? '-' : this.Resultado360.intermediario.codigoIntermediario
     this.DatosIntermediario.Nombre = this.Resultado360.intermediario.nombre == '' ? '-' : this.Resultado360.intermediario.nombre
-
     
     console.log(" this.DatosTarifa", this.DatosTarifa)
     if(this.Resultado360.tarifa !== null){
@@ -186,14 +185,6 @@ export class C2PolicyComponent implements OnInit {
 
     this.ListaDatosCoberturas = this.Resultado360.coberturas
     this.listaDatabeneficiarios = this.Resultado360.beneficiarios
-
-    //this.DatosTitular = this.Resultado360.asegurado
-    // this.DatosTitular.name =  this.Resultado360.asegurado.name
-    // this.DatosTitular.EstadoCivil =  this.Resultado360.asegurado.EstadoCivil
-    // this.DatosTitular.tipodoc =  this.Resultado360.asegurado.tipodoc
-    // this.DatosTitular.documento =  this.Resultado360.asegurado.documento
-    // this.DatosTitular.fechanacimiento =  this.Resultado360.asegurado.fechanacimiento
-    // this.DatosTitular.cuspp =  this.Resultado360.asegurado.cuspp
 
     this.DatosRentaTotal = this.Resultado360.rentaTotal
     this.DatosRentaTotal.ajustAnual = this.Resultado360.rentaTotal.ajustAnual == '' ? '-' : this.Resultado360.rentaTotal.ajustAnual
@@ -249,12 +240,10 @@ export class C2PolicyComponent implements OnInit {
     this.credito.montoInicial = this.Resultado360.credito.montoInicial == '' ? '0.00' : this.Resultado360.credito.montoInicial
     this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '0.00' : this.Resultado360.credito.montoInsoluto
     this.credito.numerocuotas = this.Resultado360.credito.numerocuotas == '' ? '-' : this.Resultado360.credito.numerocuotas
-        
 
   }
   async showdata(){
-    
-    switch (this.item.IDRAMO) {
+    /* switch (this.item.IDRAMO) {
       case "61":
         //$('#InfoCanal').css("display","none")
         //$('#InfoCoberturas').css("display","block")
@@ -353,8 +342,7 @@ export class C2PolicyComponent implements OnInit {
         break;
       default:
         break;
-    }
+    } */
   }
- 
 
 }
