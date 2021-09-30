@@ -189,6 +189,10 @@ class Rutas {
   public urlGetValFormularioCompl: string = this.base + "monitoreoSenales/GetValFormularioCompl";
   public urlGetListaCompUsu:string = this.base + "monitoreoSenales/GetListaCompUsu";
   public urlGetListaComplementoUsuario:string = this.base + "monitoreoSenales/GetListaComplementoUsuario";
+
+  //Para Validar Contraseña por primera vez 
+  public urlGetActPassUsuario: string = this.base + "monitoreoSenales/GetActPassUsuario";
+  public urlGetUpdPssUsuario: string = this.base + "monitoreoSenales/GetUpdPssUsuario";
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

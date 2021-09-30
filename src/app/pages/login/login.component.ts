@@ -116,7 +116,16 @@ export class LoginComponent implements OnInit {
               NIDPROFILE : perfil
             }
             let resultadoPerfil =  await this.userConfigService.GetGrupoXPerfil(data) 
-            
+            let ValidadorContra = await this.ValidarUsuarioContra(usuario.idUsuario)
+            localStorage.setItem("ValidadorContraUsuario", ValidadorContra.indicador)
+            console.log("el resultado",ValidadorContra.indicador)
+
+            if(ValidadorContra.indicador == 0){
+
+              this.core.rutas.goHome();
+              return
+            }
+
             let valor
             
             if(this.STIPO_USUARIO == 'RE'){
@@ -189,6 +198,13 @@ export class LoginComponent implements OnInit {
       
      this.Ingresar()
     }
+  }
+
+  async ValidarUsuarioContra(item){
+     let data:any ={}
+    data.ID_USUARIO = item
+    let resultado = await  this.userConfigService.GetActPassUsuario(data)
+    return resultado
   }
 
 }

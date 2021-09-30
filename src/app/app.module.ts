@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -321,7 +321,7 @@ import { ModalValidarContrasennaComponent } from './pages/modal-validar-contrase
     // AngularSplitModule
     // AccordionModule,
     // MenuItem,
-  
+    ReactiveFormsModule,
     //TooltipModule
   ],
   schemas: [
@@ -331,6 +331,8 @@ import { ModalValidarContrasennaComponent } from './pages/modal-validar-contrase
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent],
   providers: [UserconfigService],
   bootstrap: [AppComponent]
+ 
+
 })
 export class AppModule {
 }

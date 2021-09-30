@@ -1,9 +1,9 @@
-
+<!-- 
 <div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
     <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
-</div>
-<br>
+</div> -->
 
+<!-- 
 <div class="container">
 
     <div class="row mb-2 " style="margin-top: -30px;display: flex;padding-left: 125px;">
@@ -59,4 +59,130 @@
         <button (click)="CerraSesion()" class="btn btn-warning text-white " style="width: 150px;">Cerrar Sesión </button>
     </div>
 </div>
-<br>
+<br> -->
+
+
+
+
+<div class="container">
+
+ 
+
+	<div style="margin: 30px">
+		<!-- <h1 class="ion-text-center">Actualizar contraseña</h1> -->
+        <div class="row mb-2 " style="margin-top: -30px;display: flex;padding-left: 30px;padding-bottom: 15px;">
+            <div class="Header">
+                <div class="row">
+                    <div class="col-lg-19">
+                        <h4 class="TitleLine">Actualizar contraseña</h4>
+                    </div>
+                </div>
+                
+            </div>
+            <br>
+            
+                
+        </div>
+		<form [formGroup]="loginForm">
+			<!-- <div class="form-group">
+				<label>First Name*</label>
+				<input class="form-control" formControlName="fname" type="text" />
+			</div>
+			<div class="error-messages">
+				<ng-container *ngFor="let error of error_messages.fname">
+					<div class="error-message" *ngIf="loginForm.get('fname').hasError(error.type) && (loginForm.get('fname').dirty || loginForm.get('fname').touched)">
+						{{ error.message }}
+					</div>
+				</ng-container>
+			</div> -->
+
+			<!-- <div class="form-group">
+				<label>Last Name*</label>
+				<input class="form-control" formControlName="lname" type="text" />
+			</div>
+			<div class="error-messages">
+				<ng-container *ngFor="let error of error_messages.lname">
+					<div class="error-message" *ngIf="loginForm.get('lname').hasError(error.type) && (loginForm.get('lname').dirty || loginForm.get('lname').touched)">
+						{{ error.message }}
+					</div>
+				</ng-container>
+			</div> -->
+
+			<!-- <div class="form-group">
+				<label>Email Id*</label>
+				<input class="form-control" formControlName="email" type="text" />
+			</div>
+			<div class="error-messages">
+				<ng-container *ngFor="let error of error_messages.email">
+					<div class="error-message" *ngIf="loginForm.get('email').hasError(error.type) && 
+    (loginForm.get('email').dirty || loginForm.get('email').touched)">
+						{{ error.message }}
+					</div>
+				</ng-container>
+			</div> -->
+
+			<div class="form-group">
+				<label>Contraseña :</label>
+                <div class="row">
+                    <div class="col-11" style="padding-right:0px">
+                        <input class="form-control" formControlName="password" [(ngModel)]="pass1" [type]="password2" />
+                    </div>
+                    <div class="col-1" style="padding-left:0px">
+                        <button (click)="onClick()" class="btn btn-primary">
+                            <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                            <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                          </button>
+                    </div>
+                </div>
+                </div>
+				
+               
+			
+            
+			<div class="error-messages">
+				<ng-container *ngFor="let error of error_messages.password">
+					<div class="error-message" *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+						{{ error.message }}
+					</div>
+				</ng-container>
+			</div>
+
+			<div class="form-group">
+				<label>Confirmar contraseña :</label>
+                <div class="row">
+                    <div class="col-11" style="padding-right:0px">
+                        <input class="form-control" formControlName="confirmpassword"  [type]="password2" />
+                    </div>
+                    <div class="col-1" style="padding-left:0px">
+                        
+                    </div>
+                </div>
+				
+			</div>
+			<div class="error-messages">
+				<ng-container *ngFor="let error of error_messages.confirmpassword">
+					<div class="error-message" *ngIf="loginForm.get('confirmpassword').hasError(error.type) && (loginForm.get('confirmpassword').dirty || loginForm.get('confirmpassword').touched)">
+						{{ error.message }}
+					</div>
+				</ng-container>
+			</div>
+      <pre>
+        <!-- Form Error - {{ loginForm.errors | json }} -->
+      </pre>
+           
+               <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-5">
+                            <button class="form-control btn btn-warning text-white" [disabled]="!loginForm.valid" (click)="Guardar()">Aceptar</button>
+                        </div>
+                        
+                        <div class="col-lg-5">
+                            <button class="form-control btn btn-warning text-white" (click)="CerraSesion()" >Cancelar</button>
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+
+          
+		</form>
+	</div>
+</div>

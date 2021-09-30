@@ -56,7 +56,12 @@ export class HomeComponent implements OnInit {
     //   .then((r) => {
     //     this.loadCargas();
     //   });
-    this.Modal()
+    let indicador:any = localStorage.getItem('ValidadorContraUsuario');
+    console.log("indicador",indicador)
+      if(indicador == 0){
+        this.Modal()
+      }
+    
   
   }
 
@@ -89,6 +94,8 @@ export class HomeComponent implements OnInit {
       //this.core.loader.hide();
     });
   }
+
+  
 
   
 
