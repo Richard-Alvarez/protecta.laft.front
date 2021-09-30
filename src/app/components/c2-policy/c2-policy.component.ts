@@ -84,6 +84,7 @@ export class C2PolicyComponent implements OnInit {
   credito:any = {}
 
   async SetVariables(){
+    console.log("this.Resultado360",this.Resultado360)
     this.NroPoliza = this.Resultado360.nroPolicy
     this.NroCertificado = this.Resultado360.nroCertificate == null ? 0 : this.Resultado360.nroCertificate
     this.Estado = this.Resultado360.nroPolicy == '' ? '-' : this.Resultado360.nroPolicy
@@ -132,6 +133,9 @@ export class C2PolicyComponent implements OnInit {
     this.DatosIntermediario.CodigoIntermediario = this.Resultado360.intermediario.codigoIntermediario == '' ? '-' : this.Resultado360.intermediario.codigoIntermediario
     this.DatosIntermediario.Nombre = this.Resultado360.intermediario.nombre == '' ? '-' : this.Resultado360.intermediario.nombre
 
+    
+    console.log(" this.DatosTarifa", this.DatosTarifa)
+    if(this.Resultado360.tarifa !== null){
     this.DatosTarifa = this.Resultado360.tarifa
     this.DatosTarifa.FechaEmision = this.Resultado360.tarifa.fechaEmision == '' ? '-' : this.Resultado360.tarifa.fechaEmision
     this.DatosTarifa.HoraEmision = this.Resultado360.tarifa.horaEmision == '' ? '-' : this.Resultado360.tarifa.horaEmision
@@ -139,6 +143,16 @@ export class C2PolicyComponent implements OnInit {
     this.DatosTarifa.TarifaProtecta = this.Resultado360.tarifa.tarifaProtecta == '' ? '-' : this.Resultado360.tarifa.tarifaProtecta
     this.DatosTarifa.PorcentajeComision = this.Resultado360.tarifa.porcentajeComision == '' ? '-' : this.Resultado360.tarifa.porcentajeComision
     this.DatosTarifa.Moneda = 'Soles'
+    }else{
+      this.DatosTarifa = {}
+      this.DatosTarifa.FechaEmision = ''
+      this.DatosTarifa.HoraEmision = ''
+      this.DatosTarifa.LoteDescargo = ''
+      this.DatosTarifa.TarifaProtecta = ''
+      this.DatosTarifa.PorcentajeComision = ''
+      this.DatosTarifa.Moneda = ''
+    }
+    
 
     this.DatosAsegurado = this.Resultado360.asegurado
     this.DatosAsegurado.name = this.Resultado360.asegurado.name == '' ? '-' : this.Resultado360.asegurado.name
