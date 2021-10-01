@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
             let resultadoPerfil =  await this.userConfigService.GetGrupoXPerfil(data) 
             let ValidadorContra = await this.ValidarUsuarioContra(usuario.idUsuario)
             localStorage.setItem("ValidadorContraUsuario", ValidadorContra.indicador)
-            console.log("el resultado",ValidadorContra.indicador)
+            //console.log("el resultado",ValidadorContra.indicador)
 
             if(ValidadorContra.indicador == 0){
 

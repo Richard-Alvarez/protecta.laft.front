@@ -92,7 +92,7 @@ export class ModalValidarContrasennaComponent implements OnInit {
   }
   async ngOnInit() {
     this.Usuario = this.core.storage.get('usuario')
-    console.log("usuario",this.Usuario)
+    //console.log("usuario",this.Usuario)
   }
 
   closeModal(id: string) {
@@ -148,6 +148,7 @@ export class ModalValidarContrasennaComponent implements OnInit {
    password(formGroup: FormGroup) {
     const { value: password } = formGroup.get('password');
     const { value: confirmPassword } = formGroup.get('confirmpassword');
+    // return password === confirmPassword ? { passwordNotMatch: false } : { passwordNotMatch: true };
     return password === confirmPassword ? null : { passwordNotMatch: true };
   }
 

@@ -165,6 +165,11 @@
 						{{ error.message }}
 					</div>
 				</ng-container>
+                <!-- <ng-container>
+					<div class="error-message" *ngIf="(loginForm.errors.passwordNotMatch == true)">
+                        Las contraseñas no son iguales
+                    </div>
+				</ng-container>  -->
 			</div>
       <pre>
         <!-- Form Error - {{ loginForm.errors | json }} -->

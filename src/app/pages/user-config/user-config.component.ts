@@ -267,7 +267,7 @@ export class UserConfigComponent implements OnInit {
   //     this.core.loader.hide();
   //   });
   // }
-
+  DataUsuario:any ={}
 
   async changeUser() {
     if (this.userId != '0') {
@@ -285,7 +285,9 @@ export class UserConfigComponent implements OnInit {
       this.userOff = true;
 
 
-      await this.getDataFromUser(this.userId);
+
+      await this.getDataFromUser(this.userId)
+      
       await this.getHistoryUser();
 
 
@@ -345,9 +347,9 @@ export class UserConfigComponent implements OnInit {
     let data: any = {};
     data.userId = userId;
 
-    let response = await this.userConfigService.getDataFromUser(data);
+    this.DataUsuario = await this.userConfigService.getDataFromUser(data);
     let _data;
-    _data = response;
+    _data = this.DataUsuario;
     this.Iduser = _data.userId;
     this.name = _data.userName;
     this.passw = _data.pass;
@@ -599,7 +601,17 @@ export class UserConfigComponent implements OnInit {
     data.systemId = this.newUsSystem === '' ? '' : this.newUsSystem;
     data.userEmail = this.newUsEmail === '' ? '' : this.newUsEmail;
     data.cargoId = this.newUsCargo === '' ? 0 : this.newUsCargo;
-    data.valor = 1
+  
+
+    if(this.DataUsuario.pass == this.newUsPass){
+      //se pone el 2 para no enviar el correo
+      data.valor = 2
+       
+    }else{
+      data.valor = 1
+       
+    }
+    //data.valor = 1
     data.state = this.state
 
     swal.fire({

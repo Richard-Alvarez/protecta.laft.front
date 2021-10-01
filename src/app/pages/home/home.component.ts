@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     //     this.loadCargas();
     //   });
     let indicador:any = localStorage.getItem('ValidadorContraUsuario');
-    console.log("indicador",indicador)
+    //console.log("indicador",indicador)
       if(indicador == 0){
         this.Modal()
       }
