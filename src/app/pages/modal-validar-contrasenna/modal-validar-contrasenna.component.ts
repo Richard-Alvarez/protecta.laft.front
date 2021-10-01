@@ -167,10 +167,24 @@ export class ModalValidarContrasennaComponent implements OnInit {
 
 
  async  Guardar(){
+
    let data:any = {}
    data.ID_USUARIO = this.Usuario.idUsuario
    data.PASSWORD = this.pass1
-   await  this.userConfigService.GetUpdPssUsuario(data)
+   let resultado:any = await this.userConfigService.GetUpdPssUsuario(data)
+   //resultado.code = 0
+   if(resultado.code == 0){
+      swal.fire({
+        
+        icon: 'success',
+        title: 'Actualizado!',
+        text:  resultado.mensaje,
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.closeModal('edit-modal')
+   }
+
   }
 
 
