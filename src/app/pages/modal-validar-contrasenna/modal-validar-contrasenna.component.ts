@@ -92,7 +92,8 @@ export class ModalValidarContrasennaComponent implements OnInit {
   }
   async ngOnInit() {
     this.Usuario = this.core.storage.get('usuario')
-    //console.log("usuario",this.Usuario)
+    console.log("usuario",this.Usuario)
+    await this.ObtenerData()
   }
 
   closeModal(id: string) {
@@ -172,6 +173,12 @@ export class ModalValidarContrasennaComponent implements OnInit {
    let data:any = {}
    data.ID_USUARIO = this.Usuario.idUsuario
    data.PASSWORD = this.pass1
+  //Esto esto para el correo
+   data.valor = 1
+   data.userEmail = this.DataUsuario.userEmail
+   data.userFullName = this.DataUsuario.userFullName
+   data.pass = this.pass1
+   data.userName =  this.DataUsuario.userName
    let resultado:any = await this.userConfigService.GetUpdPssUsuario(data)
    //resultado.code = 0
    if(resultado.code == 0){
@@ -186,6 +193,13 @@ export class ModalValidarContrasennaComponent implements OnInit {
       this.closeModal('edit-modal')
    }
 
+  }
+  DataUsuario:any = {}
+  async ObtenerData(){
+    let data:any = {}
+    data.userId = this.Usuario.idUsuario
+    this.DataUsuario = await this.userConfigService.getDataFromUser(data);
+    console.log("this.DataUsuario",this.DataUsuario)
   }
 
 
