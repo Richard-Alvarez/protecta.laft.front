@@ -1502,5 +1502,13 @@ ValidarTexto(texto){
  //return textoReemplazado
 }
 
+CountComplemento:number
+ValidarCabeceraComplemento(){
+  let valor = this.arrResponsable.filter(it => it.TIPO_FORM == 'C')
+  
+    return this.CountComplemento == valor.length
+  
+  }
+
 
 }
