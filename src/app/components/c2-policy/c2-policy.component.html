@@ -16,7 +16,7 @@
           <p class="card-text textTitle" id="CardRol" style="display:none"><span>Rol</span><span class="spancontent" id="PCardRol">{{item.ROL}}</span></p>
           <p class="card-text textTitle" id="CardPlaca"  *ngIf="this.item.IDRAMO == '66'"><span>Placa</span><span class="spancontent" id="PCardPlaca">{{this.DatosVehiculo.placa}}</span></p>
           <p class="card-text textTitle" id="CardPlanilla"  *ngIf="this.item.IDRAMO == '66'"><span>Planilla</span><span class="spancontent" id="PCardPlanilla">{{this.planilla}}</span></p>
-          <p class="card-text textTitle" id="CardNumCredito" style="display:none"><span>Número de Crédito</span><span class="spancontent" id="PCardNumCred">-</span></p>
+          <p class="card-text textTitle" id="CardNumCredito" *ngIf="this.item.IDRAMO == '74'"><span>Número de Crédito</span><span class="spancontent" id="PCardNumCred">{{this.credito.nroCredito}}</span></p>
           <p class="card-text textTitle"><span>Fecha de Emisión</span><span class="spancontent" id="PCardFecEmi">{{this.FechaEmision}}</span></p>
           <p class="card-text textTitle" id="CardPrimVig"><span>Fecha de Primera Vigencia</span><span class="spancontent" id="PCardFecPrimVig">{{this.FechaPrimeraVigencia}}</span></p>
           <p class="card-text textTitle"><span>Inicio de Vigencia</span><span class="spancontent" id="PCardFecIniVig">{{this.FechaInicioVigencia}}</span></p>
@@ -37,7 +37,7 @@
         <div class="tab-content">
           <div id="pestInfo" class="tab-pane fade in active">
             <div class="PaddingPestana">
-              <div id="InfoGenerales" *ngIf="this.item.IDRAMO == '77' && this.tipoPoliza != null">
+              <div id="InfoGenerales" *ngIf="this.item.IDRAMO == '64' || this.item.IDRAMO == '74' || (this.item.IDRAMO =='73' && this.tipoPoliza != '-') || (this.item.IDRAMO =='61' && this.tipoPoliza != '-') || (this.item.IDRAMO =='72' && this.tipoPoliza != '-') || (this.item.IDRAMO == '77' && this.tipoPoliza != '-') || (this.item.IDRAMO == '80' && this.tipoPoliza != '-') || (this.item.IDRAMO =='82' && this.tipoPoliza != '-') ">
                 <h4 class="title-grid"><strong>Información de la Póliza</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
@@ -76,17 +76,16 @@
                   </div>
                 </div>
               </div>
-              <div id="InfoListaCertificados" style="display:none; margin-top:5%">
+              <div id="InfoListaCertificados" style=" margin-top:5%" *ngIf="this.item.IDRAMO == '64' || (this.item.IDRAMO == '61' && this.ListaDatosAsegurados.length != 0)">
                 <div class="table-responsive">
-                  <table class="table table-hover table-striped" id="TableCertificados" style="width:100% !important"
-                    data-page-length="24">
+                  <div class="title-grid"><strong>Certificados / Asegurados</strong></div>
+                  <table class="table table-hover table-striped" id="TableCertificados" style="width:100% !important" data-page-length="24">
                     <thead>
-                      <tr>
-                        <th colspan="3" class="nobor">
-                        </th>
+                      <!-- <tr>
+                        <th colspan="3" class="nobor"></th>
                         <th colspan="2" class="supercabecera">Vigencia</th>
                         <th colspan="2" class="nobor"></th>
-                      </tr>
+                      </tr> -->
                       <tr class="htable headgrid" style="background:transparent;">
                         <th class="text-center"># Cert.</th>
                         <th class="text-center">Doc. Identidad</th>
@@ -97,15 +96,34 @@
                         <th class="text-center">Fecha Anulacion</th>
                       </tr>
                     </thead>
-                    <tbody id="tblCertificados">
-                      <tr>
-                        <td class="text-center" colspan="2">No tiene Certificados</td>
+                    <tbody id="tblContactos" *ngIf="ListaDatosAsegurados.length !=0; else listavacia">
+                      <tr *ngFor="let cert of ListaDatosAsegurados | slice: (page-1) * 10 : (page-1) * 10 + 10">
+                        <td class="text-center">{{cert.numero}}</td>
+                        <td class="text-center">{{cert.documento}}</td>
+                        <td class="text-center">{{cert.nombre}}</td>
+                        <td class="text-center">{{cert.fechaInicio}}</td>
+                        <td class="text-center">{{cert.fechaFin}}</td>
+                        <td class="text-center">{{cert.estado}}</td>
+                        <td class="text-center">{{cert.fechaAnulacion}}</td>
                       </tr>
                     </tbody>
+                    <ng-template #listavacia>
+                      <tbody id="tblCertificados">
+                        <tr>
+                          <td class="text-center" colspan="7">No tiene Certificados</td>
+                        </tr>
+                      </tbody>
+                    </ng-template>
                   </table>
+                  <ng-container *ngIf="ListaDatosAsegurados!=null && ListaDatosAsegurados.length>0; then showPagination">
+                  </ng-container>
+                  <ng-template #showPagination>
+                    <ngb-pagination [collectionSize]="ListaDatosAsegurados.length" [pageSize]="10" [maxSize]="5" [rotate]="true" [(page)]="page"
+                    [boundaryLinks]="true" aria-label="Default pagination" class="d-flex justify-content-end pagination-rounded-flat pagination-success"></ngb-pagination>
+                  </ng-template>
                 </div>
               </div>
-              <div id="InfoAsegurado" *ngIf="this.item.IDRAMO != '66' && this.item.IDRAMO != '74' && (this.item.IDRAMO == '77' && this.DatosAsegurado.name != '-') || this.item.IDRAMO == '81'">
+              <div id="InfoAsegurado" *ngIf="(this.item.IDRAMO == '61' && this.DatosAsegurado.name != '-') || (this.item.IDRAMO == '71' && this.DatosAsegurado.name != '-') || (this.DatosAsegurado.name != '-' && (this.item.IDRAMO == '75' || this.item.IDRAMO == '76')) || (this.item.IDRAMO == '77' && this.DatosAsegurado.name != '-') || (this.item.IDRAMO == '82' && this.DatosAsegurado.name != '-') || this.item.IDRAMO == '81'">
                 <h4 class="title-grid"><strong id="h4Asegurado" *ngIf="this.item.IDRAMO != '75' && this.item.IDRAMO != '76'">Datos del Asegurado</strong></h4>
                 <h4 class="title-grid"><strong id="h4Asegurado" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">Datos del titular</strong></h4>
                 <div class="row">
@@ -143,71 +161,71 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3" id="DAsegIniVig" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-3" id="DAsegIniVig" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Inicio Vigencia</span><span class="spancontent"
                         id="PAsegIniVig">{{this.FechaInicioVigencia}}</span></p>
                   </div>
-                  <div class="col-lg-2" id="DAsegFinVig" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-2" id="DAsegFinVig" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Fin Vigencia</span><span class="spancontent"
                         id="PAsegFinVig">{{this.FechaFinVigencia}}</span></p>
                   </div>
-                  <div class="col-lg-2" id="DAsegTipPension" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-2" id="DAsegTipPension" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Tipo de Pensión</span><span class="spancontent"
                         id="PAsegTipPension">{{this.pension.tipoPension}}</span></p>
                   </div>
-                  <div class="col-lg-4" id="DAsegTipRenta" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-4" id="DAsegTipRenta" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Tipo de Renta</span><span class="spancontent"
                         id="PAsegTipRenta">{{this.pension.tipoRenta}}</span></p>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3" id="DAsegModalidad" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-3" id="DAsegModalidad" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Modalidad</span><span class="spancontent"
                         id="PAsegModalidad">{{this.pension.modalidad}}</span></p>
                   </div>
-                  <div class="col-lg-2" id="DAsegAnDif" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-2" id="DAsegAnDif" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Años Diferidos</span><span class="spancontent"
                         id="PAsegAnDif">{{this.pension.aniosDiferidos}}</span></p>
                   </div>
-                  <div class="col-lg-2" id="DAsegMesGarant" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-2" id="DAsegMesGarant" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Meses Garantizados</span><span class="spancontent"
                         id="PAsegMesGarant">{{this.pension.mesesGarantizados}}</span></p>
                   </div>
-                  <div class="col-lg-4" id="DAsegMoneda" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-4" id="DAsegMoneda" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
                         id="PAsegMoneda">{{this.pension.moneda}}</span></p>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3" id="DAsegReajTemp" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-3" id="DAsegReajTemp" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Reajuste Trimestral</span><span class="spancontent"
                         id="PAsegReajTemp">{{this.pension.reajusteTrimestral}}</span></p>
                   </div>
-                  <div class="col-lg-2" id="DAsegPrimDef" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-2" id="DAsegPrimDef" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Prima Definitiva</span><span class="spancontent"
                         id="PAsegPrimDef">{{this.pension.primaDefinitiva}}</span></p>
                   </div>
-                  <div class="col-lg-2" id="DAsegPenDef" *ngIf="this.item.IDRAMO == '75' || this.item.IDRAMO == '76'">
+                  <div class="col-lg-2" id="DAsegPenDef" *ngIf="this.item.IDRAMO == '76'">
                     <p class="card-text textTitle"><span>Pensión Definitiva</span><span class="spancontent"
                         id="PAsegPenDef">{{this.pension.pensionDefinitiva}}</span></p>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3" id="DAsegMonedaSal" *ngIf="this.item.IDRAMO != '80' && this.item.IDRAMO != '61' && (this.item.IDRAMO != '75' && this.item.IDRAMO != '76' && this.item.IDRAMO != '72') && this.item.IDRAMO != '81'">
+                  <div class="col-lg-3" id="DAsegMonedaSal" *ngIf="this.item.IDRAMO != '80' && this.item.IDRAMO != '61' && (this.item.IDRAMO != '75' && this.item.IDRAMO != '76') && (this.item.IDRAMO != '72' && this.item.IDRAMO != '81')">
                     <p class="card-text textTitle"><span>Moneda</span><span class="spancontent"
-                        id="PAsegMonedaSal">{{this.Moneda}}</span></p>
+                        id="PAsegMonedaSal">{{this.MonedaSal}}</span></p>
                   </div>
-                  <div class="col-lg-2" id="DAsegSalario" *ngIf="this.item.IDRAMO != '80' && this.item.IDRAMO != '61' && (this.item.IDRAMO != '75' && this.item.IDRAMO != '76' && this.item.IDRAMO != '72') && this.item.IDRAMO != '81'">
+                  <div class="col-lg-2" id="DAsegSalario" *ngIf="this.item.IDRAMO != '80' && this.item.IDRAMO != '61' && (this.item.IDRAMO != '75' && this.item.IDRAMO != '76') && (this.item.IDRAMO != '72' && this.item.IDRAMO != '81')">
                     <p class="card-text textTitle"><span>Salario</span><span class="spancontent"
                         id="PAsegSalario">{{this.DatosAsegurado.salario }}</span></p>
                   </div>
-                  <div class="col-lg-2" id="DAsegTasa" *ngIf="this.item.IDRAMO != '80' && this.item.IDRAMO != '61' && (this.item.IDRAMO != '75' && this.item.IDRAMO != '76' && this.item.IDRAMO != '72') && this.item.IDRAMO != '81'">
+                  <div class="col-lg-2" id="DAsegTasa" *ngIf="this.item.IDRAMO != '80' && this.item.IDRAMO != '61' && (this.item.IDRAMO != '75' && this.item.IDRAMO != '76') && (this.item.IDRAMO != '72' && this.item.IDRAMO != '81')">
                     <p class="card-text textTitle"><span>Tasa</span><span class="spancontent"
                         id="PAsegTasa">{{this.DatosAsegurado.tasa}}</span></p>
                   </div>
                 </div>
               </div>
-              <div id="InfoCredito" *ngIf="this.item.IDRAMO == '74'">
+              <div id="InfoCredito" *ngIf="this.item.IDRAMO == '74' && this.credito.nroCredito != '-'">
                 <h4 class="title-grid"><strong>Datos del Crédito</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
@@ -428,7 +446,7 @@
                 </div>
                 <br>
               </div>
-              <div id="InfoCanal" style=" margin-top:3%;" *ngIf="(this.item.IDRAMO != '75' && this.item.IDRAMO != '76' && this.item.IDRAMO != '72') && ( this.item.IDRAMO != '61' && this.item.IDRAMO != '74' && this.item.IDRAMO != '73') && this.item.IDRAMO != '81'"><!-- *ngIf="this.item.IDRAMO != '75'|| this.item.IDRAMO != '76'|| this.item.IDRAMO != '61' " -->
+              <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO == '66' || (this.item.IDRAMO == '71' && this.DatosCanal.nombre != '-') || (this.item.IDRAMO == '73' && this.DatosCanal.nombre != '-') || this.item.IDRAMO == '77' ||  (this.item.IDRAMO == '80' && this.DatosCanal.nombre != '-') || (this.item.IDRAMO == '61' && this.DatosCanal.nombre != '-')">
                 
                 <h4 class="title-grid"><strong>Datos del Canal</strong></h4>
                 <div class="row">
@@ -450,7 +468,7 @@
                   </div>
                 </div>
               </div>
-              <div id="InfoIntermediario" style="margin-top:3%;">
+              <div id="InfoIntermediario" style="margin-top:3%;" >
                 <h4 class="title-grid"><strong>Datos del intermediario / Comercializador</strong></h4>
                 <div class="row">
                   <div class="col-lg-3">
@@ -494,7 +512,7 @@
                   </div>
                 </div>
               </div>
-              <div id="InfoCoberturas" style="margin-top: 3%; " *ngIf="this.item.IDRAMO != '75' && this.item.IDRAMO != '76'" >
+              <div id="InfoCoberturas" style="margin-top: 3%; " *ngIf="this.item.IDRAMO != '75' && this.item.IDRAMO != '76' && this.item.IDRAMO != '64' && this.item.IDRAMO != '72'" >
                 <h4 class="title-grid" style="font-weight:bold;">Coberturas</h4>
                 <div class="row" style="margin-bottom:1%" id="PlanPanel" >
                   <div class="col-lg-4">
@@ -570,7 +588,7 @@
                     aria-label="Default pagination"></ngb-pagination>
                 </ng-template>
               </div>
-              <div id="InfoBeneficiarios" style=" margin-top:3%; " *ngIf="this.item.IDRAMO != '61' && this.item.IDRAMO != '66' && (this.item.IDRAMO != '71' && this.itemIDRAMO != '80' && this.item.IDRAMO != '72') && this.item.IDRAMO != '81'">
+              <div id="InfoBeneficiarios" style=" margin-top:3%; " *ngIf="this.item.IDRAMO == '73' || (this.item.IDRAMO == '74' && this.listaDatabeneficiarios.length != 0) || this.item.IDRAMO == '75' || this.itemIDRAMO == '76' || (this.item.IDRAMO == '77' && this.listaDatabeneficiarios.length != 0) || this.item.IDRAMO == '82'">
                 <h4 class="title-grid"><strong>Beneficiarios</strong></h4>
                 <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
                   <thead>

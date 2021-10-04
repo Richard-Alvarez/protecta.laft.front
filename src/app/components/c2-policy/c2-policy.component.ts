@@ -69,7 +69,8 @@ export class C2PolicyComponent implements OnInit {
   tipoReaseguro:string = ''
   tipoRenovacion:string = ''
   coaseguro: string = ''
-  Moneda:string = 'Soles'
+  Moneda:string = ''
+  MonedaSal: string= ''
   Contratante:any = {}
   DatosVehiculo:any = {}
   DatosSoat:any = {}
@@ -78,6 +79,7 @@ export class C2PolicyComponent implements OnInit {
   DatosTarifa:any = {}
   DatosAsegurado:any = {}
   DatosCoberturas:any = {}
+  ListaDatosAsegurados:any =[]
   ListaDatosCoberturas:any = []
   listaDatabeneficiarios:any = []
   //DatosTitular:any = {}
@@ -95,6 +97,8 @@ export class C2PolicyComponent implements OnInit {
     this.NroCertificado = this.Resultado360.nroCertificate == null ? 0 : this.Resultado360.nroCertificate
     this.Estado = this.Resultado360.nroPolicy == '' ? '-' : this.Resultado360.nroPolicy
     this.planilla = this.Resultado360.planilla == '' ? '-' : this.Resultado360.planilla
+    this.Moneda = this.Resultado360.monedaPoliza == '' ? '-' : this.Resultado360.monedaPoliza
+    this.MonedaSal = this.Resultado360.monedaSalario == '' ? '-' : this.Resultado360.monedaSalario
 
     this.Contratante = this.Resultado360.contratante 
     this.Contratante.name = this.Resultado360.contratante.name  == '' ? '-' : this.Resultado360.contratante.name
@@ -104,12 +108,12 @@ export class C2PolicyComponent implements OnInit {
     this.FechaPrimeraVigencia = this.Resultado360.fechaPrimeraVigencia  == '' ? '-' : this.Resultado360.fechaPrimeraVigencia  
     this.FechaInicioVigencia = this.Resultado360.fechaInicioVigencia  == '' ? '-' : this.Resultado360.fechaInicioVigencia  
     this.FechaEfecto = this.Resultado360.fechaEfecto  == '' ? '-' : this.Resultado360.fechaEfecto  
-    this.tipoFacturacion = this.Resultado360.tipoFacturacion  == '' ? '-' : this.Resultado360.tipoFacturacion
-    this.tipoNegocio = this.Resultado360.tipoNegocio  == '' ? '-' : this.Resultado360.tipoNegocio
-    this.tipoPoliza = this.Resultado360.tipoPoliza  == '' ? '-' : this.Resultado360.tipoPoliza
-    this.tipoReaseguro = this.Resultado360.tipoReaseguro  == '' ? '-' : this.Resultado360.tipoReaseguro
-    this.tipoRenovacion = this.Resultado360.tipoRenovacion  == '' ? '-' : this.Resultado360.tipoRenovacion
-    this.coaseguro = this.Resultado360.coaseguro  == '' ? '-' : this.Resultado360.coaseguro
+    this.tipoFacturacion = this.Resultado360.tipoFacturacion  == null ? '-' : this.Resultado360.tipoFacturacion
+    this.tipoNegocio = this.Resultado360.tipoNegocio  == null ? '-' : this.Resultado360.tipoNegocio
+    this.tipoPoliza = this.Resultado360.tipoPoliza  == null ? '-' : this.Resultado360.tipoPoliza
+    this.tipoReaseguro = this.Resultado360.tipoReaseguro  == null ? '-' : this.Resultado360.tipoReaseguro
+    this.tipoRenovacion = this.Resultado360.tipoRenovacion  == null ? '-' : this.Resultado360.tipoRenovacion
+    this.coaseguro = this.Resultado360.coaseguro  == null ? '-' : this.Resultado360.coaseguro
 
     this.DatosVehiculo = this.Resultado360.vehiculo
     this.DatosVehiculo.placa = this.Resultado360.vehiculo.placa == '' ? '-' : this.Resultado360.vehiculo.placa
@@ -145,7 +149,6 @@ export class C2PolicyComponent implements OnInit {
     this.DatosIntermediario.CodigoIntermediario = this.Resultado360.intermediario.codigoIntermediario == '' ? '-' : this.Resultado360.intermediario.codigoIntermediario
     this.DatosIntermediario.Nombre = this.Resultado360.intermediario.nombre == '' ? '-' : this.Resultado360.intermediario.nombre
     
-    console.log(" this.DatosTarifa", this.DatosTarifa)
     if(this.Resultado360.tarifa !== null){
       this.DatosTarifa = this.Resultado360.tarifa
       this.DatosTarifa.FechaEmision = this.Resultado360.tarifa.fechaEmision == '' ? '-' : this.Resultado360.tarifa.fechaEmision
@@ -153,7 +156,7 @@ export class C2PolicyComponent implements OnInit {
       this.DatosTarifa.LoteDescargo = this.Resultado360.tarifa.loteDescargo == '' ? '-' : this.Resultado360.tarifa.loteDescargo
       this.DatosTarifa.TarifaProtecta = this.Resultado360.tarifa.tarifaProtecta == '' ? '-' : this.Resultado360.tarifa.tarifaProtecta
       this.DatosTarifa.PorcentajeComision = this.Resultado360.tarifa.porcentajeComision == '' ? '-' : this.Resultado360.tarifa.porcentajeComision
-      this.DatosTarifa.Moneda = 'Soles'
+      this.DatosTarifa.Moneda = this.Resultado360.tarifa.Moneda == '' ? '-' : this.Resultado360.tarifa.Moneda
     }else{
       this.DatosTarifa = {}
       this.DatosTarifa.FechaEmision = ''
@@ -183,6 +186,7 @@ export class C2PolicyComponent implements OnInit {
       this.DatosCoberturas.DescModulo = ''
     }
 
+    this.ListaDatosAsegurados = this.Resultado360.asegurados
     this.ListaDatosCoberturas = this.Resultado360.coberturas
     this.listaDatabeneficiarios = this.Resultado360.beneficiarios
 
@@ -202,7 +206,7 @@ export class C2PolicyComponent implements OnInit {
     this.DatosRentaTotal.porcAcc = this.Resultado360.rentaTotal.porcAcc == '' ? '-' : this.Resultado360.rentaTotal.porcAcc
     this.DatosRentaTotal.porcDevol = this.Resultado360.rentaTotal.porcDevol == '' ? '-' : this.Resultado360.rentaTotal.porcDevol
     this.DatosRentaTotal.porcSegVid = this.Resultado360.rentaTotal.porcSegVid == '' ? '-' : this.Resultado360.rentaTotal.porcSegVid
-    this.DatosRentaTotal.prima = this.Resultado360.rentaTotal.prima == '' ? '-' : this.Resultado360.rentaTotal.prima
+    this.DatosRentaTotal.prima = this.Resultado360.rentaTotal.prima == '0' ? '0.00' : this.Resultado360.rentaTotal.prima
 
     this.listaDataCronograma = this.Resultado360.cronogramas 
     this.listaDataRestace = this.Resultado360.rescates
@@ -231,7 +235,7 @@ export class C2PolicyComponent implements OnInit {
     this.planSalud.periodo= this.Resultado360.planSalud.periodo == '' ? '-' : this.Resultado360.planSalud.periodo
     this.planSalud.receptorName= this.Resultado360.planSalud.receptor.name == '' ? '-' : this.Resultado360.planSalud.receptor.name
     
-    this.credito.nroCredito = this.Resultado360.credito.nroCredito == '' ? '-' : this.Resultado360.credito.nroCredito
+    this.credito.nroCredito = this.Resultado360.credito.nroCredito == null ? '-' : this.Resultado360.credito.nroCredito
     this.credito.plazo = this.Resultado360.credito.plazo == '' ? '-' : this.Resultado360.credito.plazo
     this.credito.inicioVigencia = this.Resultado360.credito.inicioVigencia == '' ? '-' : this.Resultado360.credito.inicioVigencia
     this.credito.finVigencia = this.Resultado360.credito.finVigencia == '' ? '-' : this.Resultado360.credito.finVigencia
@@ -239,7 +243,7 @@ export class C2PolicyComponent implements OnInit {
     this.credito.tipoPrima = this.Resultado360.credito.tipoPrima == '' ? '-' : this.Resultado360.credito.tipoPrima
     this.credito.montoInicial = this.Resultado360.credito.montoInicial == '' ? '0.00' : this.Resultado360.credito.montoInicial
     this.credito.montoInsoluto = this.Resultado360.credito.montoInsoluto == '' ? '0.00' : this.Resultado360.credito.montoInsoluto
-    this.credito.numerocuotas = this.Resultado360.credito.numerocuotas == '' ? '-' : this.Resultado360.credito.numerocuotas
+    this.credito.numerocuotas = this.Resultado360.credito.numerocuotas == '' ? '0' : this.Resultado360.credito.numerocuotas
 
   }
   async showdata(){
