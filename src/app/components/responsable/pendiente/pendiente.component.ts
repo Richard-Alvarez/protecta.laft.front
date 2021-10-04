@@ -16,7 +16,7 @@ import { ResponsableGlobalComponent } from '../responsableGlobal';
 import { Console } from 'console';
 import { SbsreportService } from 'src/app/services/sbsreport.service';
 import { ARIA_DESCRIBER_PROVIDER_FACTORY } from '@angular/cdk/a11y';
-
+import { htmlToText } from "html-to-text";
 
 @Component({
   selector: 'app-pendiente',
@@ -1489,16 +1489,18 @@ ValidarCabecera(){
 
 }
 
+textHtml
+
 ValidarTexto(texto){
   let textoReemplazado:any = ''
   textoReemplazado = texto.replace(/\n/g, '<br>');
   //textoReemplazado = document.write(textoReemplazado)
   //return textoReemplazado;
+  this.textHtml =textoReemplazado
 
-
- return  document.getElementById('textonuevo').innerHTML = ``+ textoReemplazado + ``
+ //return  document.getElementById('textonuevo').innerHTML = ``+ textoReemplazado + ``
+ //return textoReemplazado
 }
 
 
- 
 }

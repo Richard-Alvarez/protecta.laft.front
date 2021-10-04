@@ -433,7 +433,7 @@
 
                             <div class="borderFormat">
 
-                              <div class="row mb-2 " style="padding-left: 30px;">
+                              <div class="row mb-2 " style="padding-left: 30px;margin-top: -35px;">
                                 <div class="Header">
                                   <div class="row">
                                     <div class="col-lg-19" >
@@ -446,31 +446,50 @@
 
                               </div>
 
-                              <div class="row pt-2">
+                              <div class="row pt-2" style="margin-top:-20px;">
                               <div class="col-lg-12">
                                   <div class="borderFormat">
                               <div class="row pt-2">
                                 <div class="form-group" style="padding-left: 20px;padding-top:5px">
-                                  <span class="fontText">Nombre del complemento :</span>
+                                  <span class="fontText">Nombre </span>
                                 </div>
-                                <div class="col-lg-3 form-group">
+                                <div class="col-lg-1 form-group">
                                   <input [disabled]="true" id="usName" type="text" class="form-control buttonSinBorder"
                                     value={{listComplemento.SNOMBRE_COMPLEMENTO}}>
                                 </div>
-                                <div class="col-lg-1 form-group">
-                                   
-                                  </div>
+                                
 
                                 <div class="form-group" style="padding-top:5px">
-                                  <span class="fontText">Descripción del complemento :</span>
+                                  <span class="fontText">Descripción</span>
                                 </div>
                                 <div class="col-lg-3 form-group" style="padding-left:13px">
                                   <input [disabled]="true" id="usName" type="text" class="form-control buttonSinBorder"
                                     value={{listComplemento.SDESCRIPCION}}>
                                 </div>
+                                <div class="form-group" style="padding-top:5px">
+                                  <span class="fontText">Seleccionar usuario:</span>
+                                </div>
+                                <div class="col-lg-3" title="Nombre del usuario" >
+
+                                        <select [(ngModel)]="this.userId" name="this.userId"
+                                          class="form-control buttonSinBorder">
+                                          <option value="0" selected>Seleccione</option>
+                                           <option *ngFor="let item of ListUser" value="{{item.ID_USUARIO}}"
+                                                                                            id="userIdSelected">
+                                                                                            {{item.NOMBRECOMPLETO}}</option>  
+
+
+                                        </select>
+                                      </div>
+                                      <div class="col-lg-1 " style="margin-right: 50px;">
+                                        <button title="Deshacer cambios"
+                                          style="display: flex;justify-content: center;align-items: center;width: 100px;"
+                                          class="btn btn-warning text-white "
+                                          (click)="AgregarUsuario(item,listComplemento)">Agregar</button>
+                                      </div>
 
                               </div>
-                              <div class="row container-xl">
+                              <!-- <div class="row container-xl">
                                 <div class="col-12">
                                   <div class=""
                                     style="display: flex;justify-content: center;align-items: center;padding-top:20px">
@@ -504,7 +523,7 @@
 
                                   </div>
                                 </div>
-                              </div>
+                              </div> -->
                             </div>
                         </div>
                         </div>

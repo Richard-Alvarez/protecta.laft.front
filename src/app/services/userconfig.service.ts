@@ -494,6 +494,31 @@ export class UserconfigService {
     })
   }
 
+  GetActPassUsuario(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetActPassUsuario, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  
+  GetUpdPssUsuario(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetUpdPssUsuario, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
   GetValFormularioCompl(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

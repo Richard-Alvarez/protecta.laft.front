@@ -523,22 +523,24 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-9">
                                                                             <div class="row mt-2" style="">
-                                                                                <div class="col-lg-6">
+                                                                                <div class="col-lg-12">
                                                                                     <div class="tooltipT">
 
 
 
                                                                                         <div class="txtDetalle" style="text-align: justify">
-                                                                                            {{item.SDESCRIPCION_ALERTA}}
+                                                                                            {{ValidarTexto(item.SDESCRIPCION_ALERTA)}} 
+                                                                                            <div [innerHTML]="textHtml"></div>
+                                                                                            
                                                                                         </div>
 
                                                                                     </div>
 
                                                                                 </div>
-                                                                                <div class="col-lg-6" style="padding-left: 60px;" *ngIf="STIPO_USUARIO== 'RE'">
+                                                                                <!-- <div class="col-lg-6" style="padding-left: 60px;" *ngIf="STIPO_USUARIO== 'RE'">
 
 
-                                                                                </div>
+                                                                                </div> -->
 
 
                                                                             </div>
