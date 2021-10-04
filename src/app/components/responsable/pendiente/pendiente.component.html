@@ -574,13 +574,13 @@
                                                                         <div class="col-lg-2">
                                                                             <div *ngIf=" !(item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)" class="col-lg-2" style="padding-left: 0px;padding-right:0px;">
                                                                                 <div class="d-flex justify-content-between">
-                                                                                    <div class="col-lg-4">
+                                                                                    <div class="col-lg-4" style="padding-left: 0px;">
                                                                                         <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'COMPLEMENTO','RE')" />
                                                                                         <div class="text-center" style="display:table-caption">
                                                                                             <label for="archivoComplemento{{regimen.id}}-{{index}}" style="cursor: pointer;">
                                                 <img src="assets/icons/excel-microsoft.png" style="width: 38px;" />
                                                 <div class="parrafoAdj text-center">
-                                                  <div class="">Adjuntar Comple. </div>
+                                                  <div class="">Adjuntar Complemento </div>
                                                 </div>
                                               </label>
                                                                                         </div>
