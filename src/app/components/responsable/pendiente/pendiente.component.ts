@@ -425,15 +425,22 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       respValidacionArchivoSustento.code = 1
       
     
-
+      debugger;
+      let arrCabecera =this.parent.arrObjFilesAdjByCabecera.filter(t => t.STIPO_CARGA == 'COMPLEMENTO' && t.STIPO_USUARIO == 'RE')
+      let countCabecera = 0
+      if (arrCabecera.length > 0 ){
+        countCabecera = arrCabecera
+        .map(t=> t.arrFilesName.length == 1)
+        .filter(t=> t).length
+      }
       
-      if(this.parent.arrObjFilesAdjByCabecera[0].arrFilesName.length != resultComplemento.length ){
+      if(countCabecera != resultComplemento.length ){
         
   
         swal.fire({
           title: 'Bandeja del '+ this.sNameTipoUsuario,
           icon: 'warning',
-          text: 'Debe adjuntar un archivo',
+          text: 'Debe adjuntar un archivo en cada complemento.',
           //showCancelButton: true,
           showConfirmButton: true,
           ////cancelButtonColor: '#dc4545',
