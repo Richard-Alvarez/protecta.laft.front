@@ -2595,7 +2595,7 @@ prueba = []
                       
                     } 
 
-                  if(respuetaService.code == 0){
+                  if(respuetaService.code == 0 ){
                     ItemCliente.NIDREGIMEN = 99
                     ItemCliente.SESTADO_REVISADO = '2'
                     ItemCliente.SESTADO_TRAT = null

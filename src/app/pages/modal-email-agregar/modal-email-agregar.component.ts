@@ -294,8 +294,8 @@ export class ModalEmailAgregarComponent implements OnInit {
     let usuario  = this.textoHTML.indexOf('[Usuario]')  ?  this.textoHTML.indexOf('[Usuario]') : ''
     let link  = this.textoHTML.indexOf('[Link]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
     let instruccion  = this.textoHTML.indexOf('[Instruccion]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
-    let cargo  = this.textoHTML.indexOf('[Cargo]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
-    let perfil  = this.textoHTML.indexOf('[Perfil]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
+     let cargo  = this.textoHTML.indexOf('[Cargo]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
+    // let perfil  = this.textoHTML.indexOf('[Perfil]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
     let fechafin  = this.textoHTML.indexOf('[FechaFin]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
 
     let objRespuesta: any = {};
@@ -336,16 +336,16 @@ export class ModalEmailAgregarComponent implements OnInit {
       objRespuesta.message = "Es obligatorio ingresar [Instruccion]";
       return objRespuesta
   }
-    if(cargo == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [Cargo]";
-      return objRespuesta
-    }
-    if(perfil == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [Perfil]";
-      return objRespuesta
-    }
+     if(cargo == -1){
+       objRespuesta.code = 1;
+       objRespuesta.message = "Es obligatorio ingresar [Cargo]";
+       return objRespuesta
+     }
+    // if(perfil == -1){
+    //   objRespuesta.code = 1;
+    //   objRespuesta.message = "Es obligatorio ingresar [Perfil]";
+    //   return objRespuesta
+    // }
     if(fechafin == -1){
       objRespuesta.code = 1;
       objRespuesta.message = "Es obligatorio ingresar [FechaFin]";
