@@ -1157,5 +1157,27 @@ validarcomplemento(item){
     return ''
   }
 }
+
+textHtml
+
+ValidarTexto(texto){
+  let textoReemplazado:any = ''
+  textoReemplazado = texto.replace(/\n/g, '<br>');
+  //textoReemplazado = document.write(textoReemplazado)
+  //return textoReemplazado;
+  this.textHtml =textoReemplazado
+
+ //return  document.getElementById('textonuevo').innerHTML = ``+ textoReemplazado + ``
+ //return textoReemplazado
+}
+
+CountComplemento:number
+ValidarCabeceraComplemento(){
+  let valor = this.arrResponsable.filter(it => it.TIPO_FORM == 'C')
+  
+    return this.CountComplemento == valor.length
+  
+  }
+
   
 }

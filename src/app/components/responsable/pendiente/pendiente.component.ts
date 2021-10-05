@@ -16,7 +16,7 @@ import { ResponsableGlobalComponent } from '../responsableGlobal';
 import { Console } from 'console';
 import { SbsreportService } from 'src/app/services/sbsreport.service';
 import { ARIA_DESCRIBER_PROVIDER_FACTORY } from '@angular/cdk/a11y';
-
+import { htmlToText } from "html-to-text";
 
 @Component({
   selector: 'app-pendiente',
@@ -425,15 +425,22 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       respValidacionArchivoSustento.code = 1
       
     
-
+      debugger;
+      let arrCabecera =this.parent.arrObjFilesAdjByCabecera.filter(t => t.STIPO_CARGA == 'COMPLEMENTO' && t.STIPO_USUARIO == 'RE')
+      let countCabecera = 0
+      if (arrCabecera.length > 0 ){
+        countCabecera = arrCabecera
+        .map(t=> t.arrFilesName.length == 1)
+        .filter(t=> t).length
+      }
       
-      if(this.parent.arrObjFilesAdjByCabecera[0].arrFilesName.length != resultComplemento.length ){
+      if(countCabecera != resultComplemento.length ){
         
   
         swal.fire({
           title: 'Bandeja del '+ this.sNameTipoUsuario,
           icon: 'warning',
-          text: 'Debe adjuntar un archivo',
+          text: 'Debe adjuntar un archivo en cada complemento.',
           //showCancelButton: true,
           showConfirmButton: true,
           ////cancelButtonColor: '#dc4545',
@@ -1489,16 +1496,26 @@ ValidarCabecera(){
 
 }
 
+textHtml
+
 ValidarTexto(texto){
   let textoReemplazado:any = ''
   textoReemplazado = texto.replace(/\n/g, '<br>');
   //textoReemplazado = document.write(textoReemplazado)
   //return textoReemplazado;
+  this.textHtml =textoReemplazado
 
-
- return  document.getElementById('textonuevo').innerHTML = ``+ textoReemplazado + ``
+ //return  document.getElementById('textonuevo').innerHTML = ``+ textoReemplazado + ``
+ //return textoReemplazado
 }
 
+CountComplemento:number
+ValidarCabeceraComplemento(){
+  let valor = this.arrResponsable.filter(it => it.TIPO_FORM == 'C')
+  
+    return this.CountComplemento == valor.length
+  
+  }
 
- 
+
 }

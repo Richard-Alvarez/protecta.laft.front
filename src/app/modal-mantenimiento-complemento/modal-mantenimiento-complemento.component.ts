@@ -18,7 +18,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   public pregunta = ''
   public idGrupo=0
   public GrupoList:any
-  public estado
+  public estado:boolean = true
   public desactivar: boolean
   public Usuario
   public idComplemento
@@ -110,7 +110,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   }
 
   async GuardarCambios(){
-
+debugger
     let respValidacion:any = this.validator()
     if(respValidacion.code == 1){
       swal.fire({
@@ -138,8 +138,8 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       if(this.data == 'null' ){
         // Acá es para registrar
         let validacion = this.lista.filter(it => it.NIDALERTA == this.sennal)
-        //if(validacion != 0){
-        if(validacion == false){
+        if(validacion.length != 0){
+        // if(validacion == false){
 
           swal.fire({
             title: "Mantenimiento de complemento",
@@ -175,7 +175,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                            },
            }).then(async (respuesta) =>{
                  
-                   if(!respuesta.dismiss){
+                   if(respuesta.value){
     
                     
                     //Aca sera el registrar
@@ -197,9 +197,9 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                     this.core.loader.hide(); 
     
                       this.closeModal('edit-modal')
-                      }else{
+                    }else{
                             return
-                      }
+                    }
            })
         }
       
