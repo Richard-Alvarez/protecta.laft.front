@@ -1022,6 +1022,7 @@ async EnviarCompUsuario(alerta,complemento){
         data.fullName = this.OBJ_USUARIO.fullName
         data.FECHAPERIODO = this.PeriodoComplemento
         data.NOMBREALERTA = alerta.SNOMBRE_ALERTA
+        debugger;
         this.core.loader.show();
         if(element.CONSULTA == 'C'){
          

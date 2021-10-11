@@ -1365,8 +1365,6 @@ export class C2DetailComponent implements OnInit {
             this.bolSoatSimpli = this.getValidaCabeceraPlacaFunc(this.policySimpli)
         }
         
-        
-
         //this.policyGral = this.policyList
         //this.policySimpli = this.policyList
         /*this.policyList.forEach(item=> {
@@ -2438,8 +2436,8 @@ Arraycheckbox(){
         
         });
         
-} 
-   }
+    }
+}
 
     
     

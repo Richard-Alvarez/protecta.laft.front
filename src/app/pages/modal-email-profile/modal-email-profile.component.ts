@@ -202,7 +202,7 @@ export class ModalEmailProfileComponent implements OnInit {
     let link  = this.textoHTML.indexOf('[Link]');
     let instruccion  = this.textoHTML.indexOf('[Instruccion]');
     let cargo  = this.textoHTML.indexOf('[Cargo]');
-    let perfil  = this.textoHTML.indexOf('[Perfil]');
+    // let perfil  = this.textoHTML.indexOf('[Perfil]');
     let fechafin  = this.textoHTML.indexOf('[FechaFin]');
 
     let objRespuesta: any = {};
@@ -243,11 +243,11 @@ export class ModalEmailProfileComponent implements OnInit {
       objRespuesta.message = "Es obligatorio ingresar [Cargo]";
       return objRespuesta
     }
-    if(perfil == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [Perfil]";
-      return objRespuesta
-    }
+    // if(perfil == -1){
+    //   objRespuesta.code = 1;
+    //   objRespuesta.message = "Es obligatorio ingresar [Perfil]";
+    //   return objRespuesta
+    // }
     if(fechafin == -1){
       objRespuesta.code = 1;
       objRespuesta.message = "Es obligatorio ingresar [FechaFin]";
