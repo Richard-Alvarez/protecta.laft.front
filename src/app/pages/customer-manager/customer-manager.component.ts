@@ -2544,9 +2544,9 @@ prueba = []
                   /* Se agreggo esta linea para consumir la api de WC */
                   let respuestaWC =  await this.userConfigService.ConsultaWC(data)
                    //Aca se ejecuta para hacer la busqueda de coincidencia manual
-                   let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)
-                  
-                  if(respuestaWC.sStatus == 'NOT FOUND' || respuestaWC.sStatus == 'ERROR'){
+                  let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)
+                  debugger;
+                  if((respuestaWC.sStatus == 'NOT FOUND' || respuestaWC.sStatus == 'ERROR') && respuetaService.code == 1){
                      let mensaje = ''
                     if(respuestaWC.sStatus == 'ERROR'){
                         mensaje = 'Hubo un error en la bd'
@@ -2574,32 +2574,10 @@ prueba = []
                         })
           
                     }
-                  else if(respuetaService.code == 1){
-                      Swal.fire({
-                        title: 'Gestor de Cliente',
-                        icon: 'warning',
-                        text: respuetaService.mensaje,
-                        showCancelButton: false,
-                        showConfirmButton: true,
-                      
-                        confirmButtonColor: "#FA7000",
-                        confirmButtonText: 'Aceptar',
-                        cancelButtonText: 'Cancelar',
-                        showCloseButton: true,
-                        customClass: { 
-                          closeButton : 'OcultarBorde'
-                         },
-                      }).then(resp => {
-                        return
-                      })
-                      
-                    } 
-
-                  if(respuetaService.code == 0){
+                  else {
                     ItemCliente.NIDREGIMEN = 99
                     ItemCliente.SESTADO_REVISADO = '2'
                     ItemCliente.SESTADO_TRAT = null
-                   
                     await this.goToDetailAprobar(ItemCliente,ValorArray)
                   } 
                   

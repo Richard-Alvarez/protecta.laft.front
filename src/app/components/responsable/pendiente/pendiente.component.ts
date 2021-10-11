@@ -425,7 +425,6 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
       respValidacionArchivoSustento.code = 1
       
     
-      debugger;
       let arrCabecera =this.parent.arrObjFilesAdjByCabecera.filter(t => t.STIPO_CARGA == 'COMPLEMENTO' && t.STIPO_USUARIO == 'RE')
       let countCabecera = 0
       if (arrCabecera.length > 0 ){

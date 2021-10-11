@@ -235,17 +235,49 @@ export class ReinforcedCustomersComponent implements OnInit {
           ObjListaClienteSeleccionadoDocxNombre.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
           ObjListaClienteSeleccionadoDocxNombre.NIDGRUPOSENAL = 1
        
-
-
+          //consulta worldcheck
+          let data:any = {}
+          data.name = (CheckSeleccionado.SNOM_COMPLETO).trim()
+          data.alertId = 2
+          data.periodId = this.NPERIODO_PROCESO
+          data.tipoCargaId = 2
+          data.sClient = CheckSeleccionado.SCLIENT  
+          data.nIdUsuario = this.objUsuario.idUsuario
           this.spinner.show()
+          arrCheckboxNew.push(this.userConfigService.ConsultaWC(data))
           arrCheckboxNew.push(this.userConfigService.BusquedaConcidenciaXDocXName(ObjListaClienteSeleccionadoDocxNombre))
           this.spinner.hide()
         }
     });
     this.spinner.hide()
-
-    let respuestaPromiseAll = await Promise.all(arrCheckboxNew)
-  
+    debugger;
+    let mensaje = 'No se encontro registros'
+    let respuestaPromiseAll: any = await Promise.all(arrCheckboxNew)
+    let isComfirmedXdocXname = respuestaPromiseAll.filter(t => t.code == 0).length > 0
+    let isComfirmedWC = respuestaPromiseAll.filter(t => t.sStatus == 'OK' || t.sStatus == 'UPDATE').length > 0
+    let isError = respuestaPromiseAll.filter(t => t.sStatus == 'ERROR').length > 0
+    if (!isComfirmedXdocXname && !isComfirmedWC){
+      mensaje = isError ? 'Hubo un error en la bd' : mensaje;
+      swal.fire({
+        title: 'Cliente Reforzado',
+        icon: 'warning',
+        text: 'No se encontro registros',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: "#FA7000",
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+         },
+          }).then(resp => {
+            if(!resp.dismiss){
+                return
+              }
+          })
+    }
+    debugger;
   }
 
   async getConfigService(obj,obj2){
