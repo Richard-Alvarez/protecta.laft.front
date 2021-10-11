@@ -2,73 +2,73 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
   </head>  -->
-  <app-navbar></app-navbar>
-  <main class="containerCus app-main">
-      <div class="row">
-          <button class="btn btn-link text-secondary" [(ngModel)]="ValorRegresar" value="1" (click)="back()"  title="Regresar al Pantalla Principal">
+    <app-navbar></app-navbar>
+    <main class="containerCus app-main">
+        <div class="row">
+            <button class="btn btn-link text-secondary" value="1" (click)="back()"  title="Regresar al Pantalla Principal"><!-- [(ngModel)]="ValorRegresar"  -->
               <span class="fas fa-chevron-left"></span> Volver
-          </button>
-      </div>
-      <br>
+            </button>
+        </div>
+        <br>
       
-          <!-- <div class="row mb-2 mt-2">
-              <div class="Header">
-                  <div class="row borderFormat" style="display: flex;justify-content: left;align-items: left;padding-left: 700px;">
-                      <div class="col-lg-1"></div>
-                      <div class="col-lg-1" title="Volver" style="display: flex;justify-content: center;align-items: center;">
-                          <button class="btn btn-warning text-white buttonSinBorder" routerLink="/c2-form">Salir</button>
-                      </div>
-                  </div>
-                  <br>
-              </div>
-          </div> -->
-           <div class="row pl-3 pr-3">
-                  <div class="container-fluid">
-                      <div class="card-header bordesCabecera" style="background: white;" >
-                          <ul class="nav nav-pills nav-justified" style="padding: 0px;">
-                          <li class="nav-item">
-                              <a class="nav-link active " data-toggle="tab" href="#home1"
-                                  style="text-decoration: none;">Perfil</a>
-                          </li>
-                          
-                          <li class="nav-item">
-                              <a class="nav-link " data-toggle="tab" href="#resumen1"
-                                  style="text-decoration: none;">Información Complementaria</a>
-                          </li>
-                          <!-- <li class="nav-item">
-                              <a class="nav-link " data-toggle="tab" href="#resumen2"
-                                  style="text-decoration: none;">Información de Polizas</a>
-                          </li> -->
-                          <!-- <li class="nav-item">
-                            <a class="nav-link " data-toggle="tab" href="#poliza"
+        <!-- <div class="row mb-2 mt-2">
+            <div class="Header">
+                <div class="row borderFormat" style="display: flex;justify-content: left;align-items: left;padding-left: 700px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-1" title="Volver" style="display: flex;justify-content: center;align-items: center;">
+                        <button class="btn btn-warning text-white buttonSinBorder" routerLink="/c2-form">Salir</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div> -->
+        <div class="row pl-3 pr-3">
+                <div class="container-fluid">
+                    <div class="card-header bordesCabecera" style="background: white;" >
+                        <ul class="nav nav-pills nav-justified" style="padding: 0px;">
+                        <li class="nav-item">
+                            <a class="nav-link active " data-toggle="tab" href="#home1"
+                                style="text-decoration: none;">Perfil</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#resumen1"
+                                style="text-decoration: none;">Información Complementaria</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#resumen2"
                                 style="text-decoration: none;">Información de Polizas</a>
                         </li> -->
-                          <!--<li class="nav-item">
-                              <a class="nav-link text-body" data-toggle="tab" href="#perfilPadre1"
-                                  style="text-decoration: none;">Seguimiento</a>
-                          </li>-->
-                      
-                          <!--<li class="nav-item">
-                              <a class="nav-link text-body" data-toggle="tab" href="#home2"
-                                  style="text-decoration: none;">Direcciones</a>
-                          </li>-->
-                          <!--<li class="nav-item">
-                              <a class="nav-link text-body" data-toggle="tab" href="#home3"
-                                  style="text-decoration: none;">Pólizas vigentes</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link text-body" data-toggle="tab" href="#home4"
-                                  style="text-decoration: none;">Historial de coincidencias LAFT</a>
-                          </li>
-                          <li *ngIf="getHistory()" class="nav-item">
-                              <a class="nav-link text-body" data-toggle="tab" href="#home5"
-                                  style="text-decoration: none;">Evaluaciones LAFT</a>
-                          </li>-->
-                          
-                          </ul>
-                      </div>
-                  </div>
-           </div>
+                        <!-- <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="#poliza"
+                            style="text-decoration: none;">Información de Polizas</a>
+                    </li> -->
+                        <!--<li class="nav-item">
+                            <a class="nav-link text-body" data-toggle="tab" href="#perfilPadre1"
+                                style="text-decoration: none;">Seguimiento</a>
+                        </li>-->
+                    
+                        <!--<li class="nav-item">
+                            <a class="nav-link text-body" data-toggle="tab" href="#home2"
+                                style="text-decoration: none;">Direcciones</a>
+                        </li>-->
+                        <!--<li class="nav-item">
+                            <a class="nav-link text-body" data-toggle="tab" href="#home3"
+                                style="text-decoration: none;">Pólizas vigentes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" data-toggle="tab" href="#home4"
+                                style="text-decoration: none;">Historial de coincidencias LAFT</a>
+                        </li>
+                        <li *ngIf="getHistory()" class="nav-item">
+                            <a class="nav-link text-body" data-toggle="tab" href="#home5"
+                                style="text-decoration: none;">Evaluaciones LAFT</a>
+                        </li>-->
+                        
+                        </ul>
+                    </div>
+                </div>
+        </div>
         <div class="tab-content" style="padding-bottom: 80px;">
             <div style="padding-left: 1%;padding-right: 1%;" id="home1" class=" tab-pane active">
                 <div>
@@ -1989,98 +1989,97 @@
 
             <div id="poliza" class=" tab-pane fade">
                 <div>
-                <div id="tabPanelList">
-                    
-                    <div class="row mb-2 mt-2">
-                        <div class="Header">
-                            <div class="col-lg-12">
-                                <h4 class="TitleLine">Pólizas</h4>
+                    <div id="tabPanelList">
+                        
+                        <div class="row mb-2 mt-2">
+                            <div class="Header">
+                                <div class="col-lg-12">
+                                    <h4 class="TitleLine">Pólizas</h4>
+                                </div>
                             </div>
+                        </div> 
+                        <hr>
+                        <div class="text-center tituloTwo" >{{nombreRegimen}}</div>
+                        <div class="row pl-2 pr-2">
+                            <div class="col-lg-1 text-left txtCabecera" >N° Póliza</div>
+                            <div class="col-lg-2 text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo/Producto</div>
+                            <div class="col-lg-1  text-left txtCabecera" >N° Certificado</div>
+                            <div class="col-lg-1 text-left txtCabecera" >Monto de Prima</div>
+                            <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                            <div class="col-lg-1 text-left txtCabecera" >Tipo de Cliente</div>
+                            <div class="col-lg-2 text-left txtCabecera" >Fecha Inicio y Fin de Póliza</div>
+                            <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
+                            <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}" >Fecha de Pago</div>
+                            <div class="col-lg-1 text-left txtCabecera" >Estado</div>
                         </div>
-                    </div> 
-                    <hr>
-                    <div class="text-center tituloTwo" >{{nombreRegimen}}</div>
-                    <div class="row pl-2 pr-2">
-                        <div class="col-lg-1 text-left txtCabecera" >N° Póliza</div>
-                        <div class="col-lg-2 text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo/Producto</div>
-                        <div class="col-lg-1  text-left txtCabecera" >N° Certificado</div>
-                        <div class="col-lg-1 text-left txtCabecera" >Monto de Prima</div>
-                        <div class="col-lg-1  text-left txtCabecera">Moneda</div>
-                        <div class="col-lg-1 text-left txtCabecera" >Tipo de Cliente</div>
-                        <div class="col-lg-2 text-left txtCabecera" >Fecha Inicio y Fin de Póliza</div>
-                        <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
-                        <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}" >Fecha de Pago</div>
-                        <div class="col-lg-1 text-left txtCabecera" >Estado</div>
-                    </div>
-                    <div id="">
-                        <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
-                            <div class="card-header headerSenials">
-                                <div class="detallePoliza {{getColorGrilla(inc)}}">
-                                    <div class="row pl-2 pr-2" >
-                                        <div class="col-lg-1 cabeceraPolizas" >
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
-                                                <div >{{item.POLIZA}}</div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;">
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div >{{item.DES_RAMO}}/{{item.DES_PRODUCTO}}</div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-1 cabeceraPolizas" >
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
-                                                <div >{{item.NCERTIF}}</div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-1 cabeceraPolizas" >
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div >{{item.ULTIMA_PRIMA}}</div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-1 cabeceraPolizas" >
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div ></div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-1 cabeceraPolizas" >
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div >- - - -</div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-2 cabeceraPolizas" >
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div >{{item.INICIO_VIG_CERTIFICADO}} - {{item.FIN_VIG_POLIZA}}</div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-1 cabeceraPolizas" *ngIf="getValidaCabeceraPlaca(99)">
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div >{{item.PLACA}}</div>
-                                            </a>
-                                        </div>
-                                        <div class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div >{{item.FEC_ULTIMA_PAGADA}}</div>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-1 cabeceraPolizas" >
-                                            <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div >{{item.ESTADO}}</div>
-                                            </a>
+                        <div id="">
+                            <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
+                                <div class="card-header headerSenials">
+                                    <div class="detallePoliza {{getColorGrilla(inc)}}">
+                                        <div class="row pl-2 pr-2" >
+                                            <div class="col-lg-1 cabeceraPolizas" >
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
+                                                    <div >{{item.POLIZA}}</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-2 cabeceraPolizas" style="padding-left: 0px;padding-right: 0px;">
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{item.DES_RAMO}}/{{item.DES_PRODUCTO}}</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-1 cabeceraPolizas" >
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}" >
+                                                    <div >{{item.NCERTIF}}</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-1 cabeceraPolizas" >
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{item.ULTIMA_PRIMA}}</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-1 cabeceraPolizas" >
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div ></div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-1 cabeceraPolizas" >
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >- - - -</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-2 cabeceraPolizas" >
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{item.INICIO_VIG_CERTIFICADO}} - {{item.FIN_VIG_POLIZA}}</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-1 cabeceraPolizas" *ngIf="getValidaCabeceraPlaca(99)">
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{item.PLACA}}</div>
+                                                </a>
+                                            </div>
+                                            <div class="{{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}} cabeceraPolizas" >
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{item.FEC_ULTIMA_PAGADA}}</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-1 cabeceraPolizas" >
+                                                <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
+                                                    <div >{{item.ESTADO}}</div>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="collapse" data-parent="#tabPanelList" tabindex="-1" id="{{'consulta'+inc}}" >
-                                <div class="card-body">
-                                    <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
-                                    <app-c2-policy [item]="item" ></app-c2-policy>
+                                <div class="collapse" data-parent="#tabPanelList" tabindex="-1" id="{{'consulta'+inc}}" >
+                                    <div class="card-body">
+                                        <!-- <app-c2-info-policy  [ResultadoDetail]="ResultadoDetail"></app-c2-info-policy> -->
+                                        <app-c2-policy [item]="item" ></app-c2-policy>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
-                    <br>
-                </div>
-               
                   
                 </div>
                   
