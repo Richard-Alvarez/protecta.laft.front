@@ -172,7 +172,7 @@
                                                         <td>
                                                             <!-- <input type="checkbox" (click)="checkValue($event)" [(ngModel)]="(unchekAllList[(itemCli.NIDTIPOLISTA-1)])[item.NCONTADORLISTA]" [disabled]="getDisableByCheck(item.SESTADO_REVISADO)">  -->
 
-                                                            <input type="checkbox" (change)="getConsole(itemCli.NIDTIPOLISTA-1,item.NCONTADORLISTA,item.NIDREGIMEN)"  [disabled]="getDisableByCheck(item.SESTADO_REVISADO)" [checked]="item.SESTADO_REVISADO == 1 ? true : false" (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)"  > 
+                                                            <input type="checkbox" (change)="getConsole(itemCli.NIDTIPOLISTA-1,item.NCONTADORLISTA,item.NIDREGIMEN)"  [disabled]="getDisableByCheck(item.NACEPTA_COINCIDENCIA)" [checked]="item.NACEPTA_COINCIDENCIA == 1 ? true : false" (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)"  > 
                                                         </td>
                                                     </tr>
                                                 </tbody>

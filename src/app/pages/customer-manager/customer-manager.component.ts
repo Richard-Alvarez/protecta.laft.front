@@ -31,9 +31,9 @@ export class CustomerManagerComponent implements OnInit {
   hideRazonSocial: boolean = true;
   hideDocumento: boolean = false;
   paramCliente: any = {};
-  clientList: any[] = [];
+  clientList: any = [];
   clientMap: Map<string, any> = new Map<string, any>();
-  peopleList: any[] = [];
+  peopleList: any = [];
 
   NBUSCAR_POR: number = 1;
   NTIPO_PERSONA: number = 1;
@@ -43,7 +43,7 @@ export class CustomerManagerComponent implements OnInit {
 
   PERSONA_NATURAL: number = 1;
   PERSONA_JURIDICA: number = 2;
-  listaAcciones;
+  listaAcciones : any ;
   tipoListas: any = [
     { id: 1, nombre: "Listas Internacionales",nombreSingular: "Lista Internacional" },
     { id: 2, nombre: "Listas PEP",nombreSingular: "Lista PEP" },
@@ -95,7 +95,7 @@ export class CustomerManagerComponent implements OnInit {
   {}
 
   async ngOnInit() { 
-   
+   debugger;
     this.spinner.show()
     await this.getGrupoList()
     this.paramCliente.NTIPOIDEN_BUSQ = 2;
@@ -108,7 +108,7 @@ export class CustomerManagerComponent implements OnInit {
     this.paramCliente.SRAZON_SOCIAL=""
     this.paramCliente.MANUAL=true
     
-    let paramClientels =  localStorage.getItem("paramClienteReturn");
+    let paramClientels : any =  localStorage.getItem("paramClienteReturn");
     
     let nIdGrupo = localStorage.getItem("NIDGRUPO")
     if(Number.parseInt(nIdGrupo) > 0){
@@ -131,7 +131,7 @@ export class CustomerManagerComponent implements OnInit {
         this.NBUSCAR_POR = this.paramCliente.NBUSCAR_POR;
         this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
         this.hideControls()
-        let pSNUM_DOCUMENTO_BUSQ =  localStorage.getItem("SNUM_DOCUMENTO");
+        let pSNUM_DOCUMENTO_BUSQ : any =  localStorage.getItem("SNUM_DOCUMENTO");
         if(this.paramCliente.SNUM_DOCUMENTO_BUSQ == "" || this.paramCliente.SNUM_DOCUMENTO_BUSQ == null){
           this.paramCliente.SNUM_DOCUMENTO_BUSQ = pSNUM_DOCUMENTO_BUSQ;
           //this.paramCliente = JSON.parse(paramClientels);
@@ -140,7 +140,7 @@ export class CustomerManagerComponent implements OnInit {
        
         localStorage.setItem("paramClienteReturn", "");
         this.paramCliente.MANUAL=false
-        await this.getResultsList()
+        this.getResultsList()
         this.spinner.hide()
     }
     //this.coincidenciaListas = ['COINCIDENCIA','COINCIDENCIA','COINCIDENCIA','COINCIDENCIA','COINCIDENCIA']
@@ -1410,7 +1410,7 @@ async getResultsList(){
     
     try {
      
-      let tipoIden = item.STIPOIDEN + ' - ' + item.SNUM_DOCUMENTO
+      let tipoIden = item.STIPOIDEN //+ ' - ' + item.SNUM_DOCUMENTO
       item.STIPOIDEN = tipoIden
       if(TIPO_CLIENTE == 'CRE'){
         localStorage.setItem('tipoClienteGC', 'CRE')
@@ -1461,6 +1461,14 @@ async getResultsList(){
        
       }
       //this.paramCliente
+      debugger;
+        let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
+        if(valuenSelectPestaniaClient == null){
+          localStorage.setItem("nSelectPestaniaClient",'0')
+          let valuenSelectSubPestania = localStorage.getItem("nSelectSubPestania")
+          if(valuenSelectSubPestania == null)
+            localStorage.setItem("nSelectSubPestania",'0')
+        }
       this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
       localStorage.setItem("paramCliente", JSON.stringify(this.paramCliente))
       this.router.navigate(["/c2-detail"]);
@@ -1688,7 +1696,7 @@ async getResultsList(){
         }
       }
       if (bolPusheo) {
-        let arrayListas = [];
+        let arrayListas : any = [];
         let arrayListasNew = [];
         
         let respClientesFilter = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN_VALID == cliente.NIDREGIMEN_VALID);
@@ -1728,10 +1736,10 @@ async getResultsList(){
 
        
 
-        let respSESTADOTRAT_Cliente = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN == cliente.NIDREGIMEN && it.SDESESTADO == 'COINCIDENCIA');
-        let respSESTADOTRAT_Cliente_SIN = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN == cliente.NIDREGIMEN);
+        let respSESTADOTRAT_Cliente : any = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN == cliente.NIDREGIMEN && it.SDESESTADO == 'COINCIDENCIA');
+        let respSESTADOTRAT_Cliente_SIN : any = this.resultadosCoincid.filter((it) => it.SCLIENT == cliente.SCLIENT && it.NIDREGIMEN == cliente.NIDREGIMEN);
         
-        let objClientesFilterCoin = respSESTADOTRAT_Cliente[0] ? respSESTADOTRAT_Cliente[0] : respSESTADOTRAT_Cliente_SIN[0]///*respClientesFilterCoin[0]*/ cliente
+        let objClientesFilterCoin : any = respSESTADOTRAT_Cliente[0] ? respSESTADOTRAT_Cliente[0] : respSESTADOTRAT_Cliente_SIN[0]///*respClientesFilterCoin[0]*/ cliente
         
         let objResultadoFinalOnTheEnd: any = cliente;
         //objResultadoFinalOnTheEnd.SCLIENT = cliente.SCLIENT;
@@ -1774,7 +1782,7 @@ async getResultsList(){
     let respClientesGC:any = []
     this.newArrayResult.forEach(itemGC => {
       
-      let respValid = respClientesGC.filter(it => it.sclient == itemGC.SCLIENT)
+      let respValid : any = respClientesGC.filter(it => it.sclient == itemGC.SCLIENT)
      
       if(respValid.length == 0){
         let objCliGC:any = {}
@@ -1800,7 +1808,7 @@ async getResultsList(){
       return true
     }
     let resp = false
-    let respCoindListas = objCliente.arrListas.filter(it => it.SDESESTADO == 'COINCIDENCIA')
+    let respCoindListas : any = objCliente.arrListas.filter(it => it.SDESESTADO == 'COINCIDENCIA')
     if(respCoindListas.length > 0 && (boolStatus == undefined || boolStatus == null)){
       resp = true
     }
@@ -1856,7 +1864,7 @@ prueba = []
     this.resultadosCoincid = this.getListOfPeople();
     
 
-    let newArrayResult = [];
+    let newArrayResult : any = [];
 
     this.resultadosCoincid.forEach((cliente, inc) => {
       let bolPusheo = false;
@@ -1872,11 +1880,11 @@ prueba = []
         }
       }
       if (bolPusheo || inc == 0) {
-        let respClientesFilter = this.resultadosCoincid.filter(
+        let respClientesFilter : any = this.resultadosCoincid.filter(
           (it) => it.SDESTIPOLISTA == cliente.SDESTIPOLISTA
         );
         let arrListas = [];
-        let respFilterLista = [];
+        let respFilterLista : any = [];
         
         //arrListas.push(respFilterLista)
         respClientesFilter.forEach((lista) => {
@@ -1885,7 +1893,7 @@ prueba = []
             
             // }
             if (itLista.nombre == lista.SDESTIPOLISTA) {
-              let respFilterListaNew = respFilterLista.filter(
+              let respFilterListaNew : any = respFilterLista.filter(
                 (it) => itLista.id == it.id
               );
               if (respFilterListaNew.length > 0) {
@@ -1895,7 +1903,7 @@ prueba = []
                 respFilterLista.push(itLista);
               }
             } else {
-              let respFilterListaNew = respFilterLista.filter(
+              let respFilterListaNew : any = respFilterLista.filter(
                 (it) => itLista.id == it.id
               );
               if (respFilterListaNew.length > 0) {
@@ -1998,7 +2006,7 @@ prueba = []
     data.SESTADO_TRAT = SESTADO_TRAT//this.SESTADO_TRAT;
     
     this.spinner.show()
-    let respDataTrat = await this.userConfigService.getResultadoTratamiento(data);
+    let respDataTrat : any = await this.userConfigService.getResultadoTratamiento(data);
     this.spinner.hide()
   
     return respDataTrat
@@ -2013,7 +2021,7 @@ prueba = []
     //data.SESTADO_TRAT = SESTADO_TRAT//this.SESTADO_TRAT;
    
     this.spinner.show()
-    let respDataTrat = await this.userConfigService.GetResultadoCoincidenciasPen(data);
+    let respDataTrat : any = await this.userConfigService.GetResultadoCoincidenciasPen(data);
     this.spinner.hide()
     
     return respDataTrat
@@ -2023,7 +2031,7 @@ prueba = []
   setDataClientesResultados(arrResultadosCoincid,SESTADO_TRAT){
     
     try {
-      let newArrayResult = []
+      let newArrayResult : any = []
     
       let incListCoincid = 0
      //  
@@ -2039,12 +2047,12 @@ prueba = []
           }
           if(bolPusheo){
         
-              let respClientesFilter = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && cliente.NIDREGIMEN_VALID == it.NIDREGIMEN_VALID)
+              let respClientesFilter : any = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && cliente.NIDREGIMEN_VALID == it.NIDREGIMEN_VALID)
               respClientesFilter.forEach(itemCli => {
                 itemCli.SDESTIPOLISTA = itemCli.SDESTIPOLISTA === 'LISTA SAC' ? 'LISTAS SAC' : itemCli.SDESTIPOLISTA
               })
              
-              let respClientesFilterCoincid = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && it.SDESESTADO == 'COINCIDENCIA')
+              let respClientesFilterCoincid : any = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && it.SDESESTADO == 'COINCIDENCIA')
 
             
               let estadoFilter = ''
@@ -2053,7 +2061,7 @@ prueba = []
               }else{
                 estadoFilter = respClientesFilter[0].SDESESTADO
               }
-              let respResultList = this.getListByResultCoincid(cliente.SCLIENT,respClientesFilter)
+              let respResultList : any = this.getListByResultCoincid(cliente.SCLIENT,respClientesFilter)
   
               let newObjCliente:any = {}
               //newObjCliente.id = respClientesFilter[0].id
@@ -2095,7 +2103,7 @@ prueba = []
     
 
 
-      let respFormatDataGC = this.setDataFormatGC(newArrayResult)
+      let respFormatDataGC : any = this.setDataFormatGC(newArrayResult)
      
       return respFormatDataGC
 
@@ -2110,7 +2118,7 @@ prueba = []
   setDataClientesResultadosPart2(arrResultadosCoincid,SESTADO_TRAT){
     
     try {
-      let newArrayResult = []
+      let newArrayResult : any = []
     
       let incListCoincid = 0
       arrResultadosCoincid.forEach((cliente,inc) => {
@@ -2118,7 +2126,7 @@ prueba = []
           if(inc > 0){
               
           }
-          let respDuplid = newArrayResult.filter(it => it.SCLIENT == cliente.SCLIENT && cliente.NIDREGIMEN == it.NIDREGIMEN)
+          let respDuplid : any = newArrayResult.filter(it => it.SCLIENT == cliente.SCLIENT && cliente.NIDREGIMEN == it.NIDREGIMEN)
               if(respDuplid.length > 0){
                   bolPusheo = false
               }else{
@@ -2126,12 +2134,12 @@ prueba = []
               }
           if(bolPusheo){
           
-              let respClientesFilter = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && cliente.NIDREGIMEN == it.NIDREGIMEN)
+              let respClientesFilter : any = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && cliente.NIDREGIMEN == it.NIDREGIMEN)
               respClientesFilter.forEach(itemCli => {
                 itemCli.SDESTIPOLISTA = itemCli.SDESTIPOLISTA === 'LISTA SAC' ? 'LISTAS SAC' : itemCli.SDESTIPOLISTA
               })
             
-              let respClientesFilterCoincid = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && it.SDESESTADO == 'COINCIDENCIA')
+              let respClientesFilterCoincid : any = arrResultadosCoincid.filter(it => it.SCLIENT == cliente.SCLIENT && it.SDESESTADO == 'COINCIDENCIA')
 
            
               let estadoFilter = ''
@@ -2140,7 +2148,7 @@ prueba = []
               }else{
                 estadoFilter = respClientesFilter[0].SDESESTADO
               }
-              let respResultList = this.getListByResultCoincid(cliente.SCLIENT,respClientesFilter)
+              let respResultList : any = this.getListByResultCoincid(cliente.SCLIENT,respClientesFilter)
   
               let newObjCliente:any = {}
               //newObjCliente.id = respClientesFilter[0].id
@@ -2179,7 +2187,7 @@ prueba = []
       })
   
     
-      let respFormatDataGC = this.setDataFormatGC(newArrayResult)
+      let respFormatDataGC : any = this.setDataFormatGC(newArrayResult)
       
       return respFormatDataGC
       //newArrayResult = respFormatDataGC
@@ -2192,13 +2200,13 @@ prueba = []
     let respClientesGC:any = []
     newArrayResult.forEach(itemGC => {
     
-      let respValid = respClientesGC.filter(it => it.sclient == itemGC.SCLIENT)
+      let respValid : any = respClientesGC.filter(it => it.sclient == itemGC.SCLIENT)
       
       if(respValid.length == 0){
         let objCliGC:any = {}
         objCliGC.obj = itemGC//.SCLIENT
         objCliGC.sclient = itemGC.SCLIENT
-        let respFilter = newArrayResult.filter(it => it.SCLIENT == itemGC.SCLIENT)
+        let respFilter : any = newArrayResult.filter(it => it.SCLIENT == itemGC.SCLIENT)
         objCliGC.arrClientesGC = respFilter
         respClientesGC.push(objCliGC)
       }
@@ -2384,6 +2392,14 @@ prueba = []
         localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
         //this.core.storage.set('view-c2-arrListasAll', this.internationalList)
         this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
+        debugger;
+        let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
+        if(valuenSelectPestaniaClient == null){
+          localStorage.setItem("nSelectPestaniaClient",'0')
+          let valuenSelectSubPestania = localStorage.getItem("nSelectSubPestania")
+          if(valuenSelectSubPestania == null)
+            localStorage.setItem("nSelectSubPestania",'0')
+        }
         localStorage.setItem("paramCliente", JSON.stringify(this.paramCliente))
          this.spinner.hide()
         this.router.navigate(['/c2-detail'])
@@ -2420,6 +2436,14 @@ prueba = []
         localStorage.setItem('EnviarCheckbox',sEstadoRevisado)
         //this.core.storage.set('view-c2-arrListasAll', this.internationalList)
         this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
+        debugger;
+        let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
+        if(valuenSelectPestaniaClient == null){
+          localStorage.setItem("nSelectPestaniaClient",'0')
+          let valuenSelectSubPestania = localStorage.getItem("nSelectSubPestania")
+          if(valuenSelectSubPestania == null)
+            localStorage.setItem("nSelectSubPestania",'0')
+        }
         localStorage.setItem("paramCliente", JSON.stringify(this.paramCliente))
          this.spinner.hide()
         this.router.navigate(['/c2-detail'])
@@ -2510,7 +2534,7 @@ prueba = []
           dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
           dataPoliza.SCLIENT = ItemCliente.SCLIENT 
          
-         let respuestaConsultaPoliza = await  this.userConfigService.ValidarPolizaVigente(dataPoliza)
+         let respuestaConsultaPoliza : any = await  this.userConfigService.ValidarPolizaVigente(dataPoliza)
           if( respuestaConsultaPoliza.code == 1 ){
             Swal.fire({
               title: 'Gestor de Cliente',
@@ -2542,7 +2566,7 @@ prueba = []
                   data.sClient = ItemCliente.SCLIENT  
                   data.nIdUsuario = this.objUsuario.idUsuario
                   /* Se agreggo esta linea para consumir la api de WC */
-                  let respuestaWC =  await this.userConfigService.ConsultaWC(data)
+                  let respuestaWC : any =  await this.userConfigService.ConsultaWC(data)
                    //Aca se ejecuta para hacer la busqueda de coincidencia manual
                   let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)
                   debugger;
@@ -2595,7 +2619,7 @@ prueba = []
 
 
 
-    let respServiceBusqCliente = await this.userConfigService.BusquedaConcidenciaXDocXName(obj)
+    let respServiceBusqCliente : any = await this.userConfigService.BusquedaConcidenciaXDocXName(obj)
     /*let respServiceAnularCliente = await this.userConfigService.AnularClienteResultado(obj3)
     
     let respuesta2 
@@ -2642,8 +2666,8 @@ prueba = []
 
   async getGrupoList() {
 
-    let response = await this.userConfigService.GetGrupoSenal()
-    this.GrupoList = response
+     
+    this.GrupoList = await this.userConfigService.GetGrupoSenal()
    
   } 
 
@@ -2689,9 +2713,9 @@ prueba = []
 
   ArrayResultCoincidencias: any = [];
   newArrayResultCoincidencias: any = [];
-  newArrayResult2 = [];
-  newArrayResultNew2 = [];
-  resultadosCoincid2
+  newArrayResult2 : any = [];
+  newArrayResultNew2 : any = [];
+  resultadosCoincid2 : any = [];
 
   async ListaDeCoincidencias(id){
    
