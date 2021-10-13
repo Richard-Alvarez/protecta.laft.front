@@ -109,7 +109,7 @@ export class C2DetailComponent implements OnInit {
     ) {
   }
 
-  tipoListas
+  tipoListas : any = []
   resultadosCoincid
   NPERIODO_PROCESO
   SESTADO_BUTTON_SAVE
@@ -117,7 +117,7 @@ export class C2DetailComponent implements OnInit {
   async ngOnInit() {  
     this.nidregimen = localStorage.getItem("NREGIMEN");
     this.nidalerta = localStorage.getItem("NIDALERTA");
-    var paramCliente =  localStorage.getItem("paramCliente");
+    var paramCliente : any =  localStorage.getItem("paramCliente");
   
     if (paramCliente != null && paramCliente != ""){
         //this.parametroReturn = JSON.parse(paramCliente);
@@ -130,7 +130,7 @@ export class C2DetailComponent implements OnInit {
     this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
     //this.realNoFAKE()
 
-    var paramCliente =  localStorage.getItem("nSelectPestaniaClient");
+    paramCliente =  localStorage.getItem("nSelectPestaniaClient");
     if (!paramCliente || paramCliente != ''){
         localStorage.setItem("nSelectPestaniaClientReturn",paramCliente);
         let nSelectSubPestania = localStorage.getItem("nSelectSubPestania")
@@ -513,6 +513,7 @@ export class C2DetailComponent implements OnInit {
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             //this.formData.NIDREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.STIPO_AND_NUM_DOC = ''
+            debugger
             this.formData.SESTADO_REVISADO = localStorage.getItem("EnviarCheckbox")
             this.SESTADO_REVISADO_ACEPT = this.formData.SESTADO_REVISADO
             //this.formData.SESTADO_REVISADO = this.SFALTA_ACEPTAR_COINC == 'SI' ? '1' : this.formData.SESTADO_REVISADO
@@ -593,14 +594,14 @@ export class C2DetailComponent implements OnInit {
                 this.formData.NTIPO_DOCUMENTO = this.oClienteReforzado.NTIPO_DOCUMENTO//localStorage.getItem('NTIPO_DOCUMENTO')
                 this.formData.NIDREGIMEN = 1
                 this.formData.SCLIENT = localStorage.getItem('SCLIENT')
-
+                debugger
                 this.formData.STIPO_AND_NUM_DOC = ''
-                this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
-                /*if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
+                //this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
+                if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
                     this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC +' - '+ this.formData.SNUM_DOCUMENTO
                 }else if(!this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
                     this.formData.STIPO_AND_NUM_DOC = this.formData.SNUM_DOCUMENTO
-                }*/
+                }
                 this.SCLIENT_DATA = this.oClienteReforzado.SCLIENT
 
                 let data:any = {};
@@ -782,6 +783,7 @@ export class C2DetailComponent implements OnInit {
                         this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
                     })
                 }
+                debugger;
                 this.unchekAllList = this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = this.internationalList.concat(this.sacList.concat(this.pepList.concat(this.familiesPepList.concat(this.espList))))
                 
@@ -902,6 +904,7 @@ export class C2DetailComponent implements OnInit {
                
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
                 
+                debugger;
                 this.unchekAllList[dataService.NIDREGIMEN-1] = [arrInternationalService,arrListPepService,arrFamiliesService,arrSacListService,arrListEspService]
                 //this.unchekAllList = arrayDefault
                 
@@ -1026,6 +1029,7 @@ export class C2DetailComponent implements OnInit {
                 
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
               
+                debugger;
                 this.unchekAllList[dataService.NIDREGIMEN-1] = [arrInternationalService,arrListPepService,arrFamiliesService,arrSacListService,arrListEspService]
                 //this.unchekAllList = arrayDefault
                 
@@ -1416,6 +1420,8 @@ export class C2DetailComponent implements OnInit {
         }
         return resp;
     }
+    
+    debugger;
     unchekAllList:any = []// = [[[false,false],[false,false],[false,false],[false,false],[false,false]],[[false,false],[false,false],[false,false],[false,false],[false,false]]] 
     async save() {
         
@@ -1588,6 +1594,8 @@ export class C2DetailComponent implements OnInit {
             }
         }*/
         else{
+            
+            debugger;
             if(variabledeloscheck.length == 2){
                 if(this.unchekAllList[0] == true && this.unchekAllList[1] == true ){
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando 2 coincidencia</p>" 
@@ -1677,6 +1685,7 @@ export class C2DetailComponent implements OnInit {
                             
                             //if(itemArreglos.NIDREGIMEN == regimen){
                             
+                                debugger;
                                 const itemUncheck = (this.unchekAllList[itemArreglos.NIDREGIMEN-1][(itemArreglos.NIDTIPOLISTA-1)])[itemArreglos.NCONTADORLISTA];
                               
                                 if(itemArreglos.SESTADO_REVISADO == '2'){
@@ -1881,8 +1890,8 @@ export class C2DetailComponent implements OnInit {
 
     getDisableByCheck(SESTADO_REVISADO){
         //return true
-        
-        if(this.formData.SESTADO_REVISADO == '1' || SESTADO_REVISADO == '1'){//(estadoTrat != 'CRE' || estadoTrat != 'CRF' || estadoTrat != 'CCO')){
+        debugger;//this.formData.SESTADO_REVISADO == '1' ||
+        if( SESTADO_REVISADO == '1'){//(estadoTrat != 'CRE' || estadoTrat != 'CRF' || estadoTrat != 'CCO')){
             return true
         }
         else
@@ -2194,6 +2203,8 @@ export class C2DetailComponent implements OnInit {
      
         let newValorAceptador = []
         let valorAceptados = []
+        
+        debugger;
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             
          if(newArreglosListasPEP.length == 1 ){
@@ -2338,7 +2349,7 @@ export class C2DetailComponent implements OnInit {
   onCategoriaPressed(categoriaSelected: any, checked: boolean,indice,idlista,idRegimen){
       
   
-      
+      debugger;
     //if (checked) { //Si el elemento fue seleccionado
       //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
       if(this.formData.NIDALERTA == 2){
