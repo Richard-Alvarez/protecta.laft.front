@@ -15,6 +15,14 @@ export class TemplateS2Component implements OnInit {
   @Input() item:any
   @Input() parent:PendienteInformeComponent
 
+      //VARIABLES PARA DESCARGAR REPORTES DE GRUPSO
+      @Input() AlertaGlobal:string
+      @Input() Validar:number
+      @Input() ObjListaAlertasS2:any 
+      @Input() Respuesta:number
+      
+      //@Input() RespuestaGlobalC3:string
+
   constructor() { }
 
   ngOnInit() {

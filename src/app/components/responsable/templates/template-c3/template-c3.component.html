@@ -70,10 +70,19 @@
         <br>
         <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta C3</strong>
         <ul>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> {{this.parent.RespuestaGlobal}} se identificaron clientes domiciliados 
-            en/o que han modificado su domicilio a: países considerados paraísos fiscales o países donde existe conocida 
-            actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
-        </li>
+          <div *ngIf="Validar ==1">
+                <li style="font-family: arial Narrow, serif; text-align: justify"> {{this.parent.RespuestaGlobal}} se identificaron clientes domiciliados 
+                  en/o que han modificado su domicilio a: países considerados paraísos fiscales o países donde existe conocida 
+                  actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+              </li>
+          </div>
+          <div *ngIf="Validar ==2">
+              <li style="font-family: arial Narrow, serif; text-align: justify"> {{RespuestaGlobalC3}} se identificaron clientes domiciliados 
+                en/o que han modificado su domicilio a: países considerados paraísos fiscales o países donde existe conocida 
+                actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+            </li>
+          </div>
+        
     </ul>   
 
         <strong style="font-family: arial Narrow, serif;">Consulta a las áreas: Comercial masivos y Operaciones</strong>
@@ -98,15 +107,24 @@
         <br>
         <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta C3</strong>
         <ul>
-        <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal"> El {{item.Cargo}} informó que {{item.Respuesta}} se 
-          identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
-          países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
-        </li>
+          <div *ngIf="Validar ==1">
+              <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal"> El {{item.Cargo}} informó que {{item.Respuesta}} se 
+                identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
+                países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+              </li>
+          </div>
+          <div *ngIf="Validar ==2">
+              <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of ObjListaAlertasC3"> El {{item.SPERFIL}} informó que {{item.NIDRESPUESTA == 1 ? 'si' : 'no'}} se 
+                identificaron clientes domiciliados en / o que han modificado su domicilio a: países considerados paraísos fiscales o 
+                países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+              </li>
+          </div>
+        
     </ul>   
     <br>
     <br>
     <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
-    <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://190.216.170.173/LAFT/ ">http://190.216.170.173/LAFT/ </a></p>
+    <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
     </div>
   
   <div class="text-center pt-5">

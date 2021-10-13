@@ -420,10 +420,10 @@
 
         </div>
         
-        
+        <!-- <button class="btn btn-dark" (click)="Lista()">Cerrar Señal</button> -->
 
         <div *ngIf="this.Alerta=='S2' && this.RegimenPendiente===2">
-            <app-template-s2  [parent]="this" [Nombre]="Nombre" 
+            <app-template-s2  [parent]="this" [Nombre]="Nombre" [Validar]="1" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-s2>
         </div>
 
@@ -433,7 +433,7 @@
         </div>
 
         <div *ngIf="this.Alerta=='S3' && this.RegimenPendiente===2">
-            <app-template-s3  [parent]="this" [Nombre]="Nombre" 
+            <app-template-s3  [parent]="this" [Nombre]="Nombre" [Validar]="1" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-s3>
         </div>
 
@@ -444,7 +444,7 @@
 
         <div *ngIf="this.Alerta=='C1' && this.RegimenPendiente===2">
             <app-template-c1  [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
-            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none"></app-template-c1>
+            [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" [Validar]="1"  style="display: none"></app-template-c1>
         </div>
 
         <div *ngIf="(this.NombreLink == 'proveedor' || this.NombreLink == 'contraparte') && this.RegimenPendiente==0">
@@ -464,9 +464,18 @@
         </div>
 
         <div *ngIf="this.RegimenPendiente ===1 && (this.Alerta !='C2' ||  this.Alerta !='C3' || this.Alerta !='S2') && this.ValidarRG === 'RG'">
-            <app-template-rg  [parent]="this" [Nombre]="Nombre" 
+            <app-template-rg  [parent]="this" [Nombre]="Nombre" [Validar]="1" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-rg>
         </div>
+
+        <!-- INICIO PARA DESCARGAR TODOS LOS REPORTES DE UN GRUPO -->
+        <!-- <app-template-clientes  [ObjListaAlertasRG]="ListaAlertaRG" 
+                                [ObjListaAlertasC1]="ListaAlertaC1"
+                                [RespuestaGlobalC3]="RespuestaGlobalC3" [ObjListaAlertasC3]="ListaAlertaC3"
+                                [ObjListaAlertasS2]="ListaAlertaS2"
+                                [ObjListaAlertasS3]="ListaAlertaS3"
+                                ></app-template-clientes> -->
+        <!-- FIN -->
           
           
             

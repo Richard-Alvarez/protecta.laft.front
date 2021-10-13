@@ -183,6 +183,7 @@ export class PendienteComponent implements OnInit {
       default : 
         return [];
     }*/
+    // console.log(this.arrResponsable)
     return this.arrResponsable;
     //return this.arrResponsablesPendienteSimpli;
   }

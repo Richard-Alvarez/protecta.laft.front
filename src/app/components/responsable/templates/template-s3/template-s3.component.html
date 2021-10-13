@@ -65,15 +65,24 @@
         <br>
         <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta S3</strong>
         <ul>
-            <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of parent.arrayDataSenal">
-            El {{item.Cargo}} informo que {{item.Respuesta}} se identificaron pagos de una prima superior a la establecida con posterior 
-            devolución de la diferencia por depósito errado.
-            </li>
+            <div *ngIf="Validar ==1">
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of parent.arrayDataSenal">
+                    El {{item.Cargo}} informo que {{item.Respuesta}} se identificaron pagos de una prima superior a la establecida con posterior 
+                    devolución de la diferencia por depósito errado.
+                    </li>
+            </div>
+            <div *ngIf="Validar ==2">
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of ObjListaAlertasS3">
+                    El {{item.SPERFIL}} informo que {{item.NIDRESPUESTA == 1 ? 'si' : 'no'}} se identificaron pagos de una prima superior a la establecida con posterior 
+                    devolución de la diferencia por depósito errado.
+                    </li>
+            </div>
+           
         </ul> 
         <br>
         <br>
         <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
-        <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://190.216.170.173/LAFT/ ">http://190.216.170.173/LAFT/ </a></p>
+        <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/ ">http://plataformasplaft.protectasecurity.pe/</a></p>
       </div>
     
     <div class="text-center pt-5">

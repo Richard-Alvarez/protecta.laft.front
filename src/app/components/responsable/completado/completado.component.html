@@ -546,8 +546,8 @@
                                     
                                     
                                     <div *ngFor="let array of  this.NewArreglo">
-                                      <div *ngIf="array.NIDALERTA == item.NIDALERTA " >
-                                          <div *ngIf="array.RESULTADO.length !==0;else ListaVacia">
+                                      <div *ngIf="array.NIDALERTA == item.NIDALERTA && array.NOMBRECOMPLETO == item.NOMBRECOMPLETO" >
+                                        <div *ngIf="array.RESULTADO.length !==0;else ListaVacia">
                                             <div *ngFor="let listUsu of  array.RESULTADO; let indice = index">
                                                 <div class="row"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
 

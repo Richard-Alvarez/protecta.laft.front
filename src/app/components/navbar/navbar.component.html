@@ -1,82 +1,14 @@
- <!-- <div id="cabecera" class="container-fluid {{activarStyle()}}"  
-style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:0;">
-    <div class="row" >
-        <div class="col-lg-1 mt-4 mb-4 ml-4 mr-2 col-md-1" >
-            <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" (click)="openNav()"></span>
-        </div>
-        <div class="col-lg-3 mt-1 mb-1 col-md-8"  >
-            
-            <a  (click)="Home()" style="cursor: pointer;">
-                <img src="assets/img/logo-protecta.svg" alt="Protecta Security" >
-            </a>
-            
-        </div>
-        <div class="col-lg-4 mt-4 mb-4 col-md-1">
-           
-        </div>
-    </div>   
- 
-
-</div>
-<div *ngIf="Ocultar()" id="cabecera" class="container-fluid"  
-style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:0;">
-    <div class="row" >
-        <div class="col-1 mt-4 mb-4 ml-4 mr-2" >
-            <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" ></span>
-        </div>
-        <div class="col-3 mt-1 mb-1 " (click)="Home()"  style="cursor: pointer;">
-            <img src="assets/img/logo-protecta.svg" alt="Protecta Security" >
-        </div>
-       
-    </div>   
-
-
-</div>
-
-<div class="sidenav" #mySidenav >
-
-    <a  class="closebtn mt-1" style="cursor:pointer;" (click)="closeNav()">&times;</a>
-    
-    <div  *ngFor="let option of optionList; let index = index;" (click)="activeSidenav(index)" id="{{index}}">
-       
-        <a *ngIf="option.nTieneHijo == 1" >
-            <span  class="fas fa-angle-right col-lg-1"  style="font-size:20px;cursor:pointer"></span>
-            
-            <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
-            
-        </a>
-        <a *ngIf="option.nTieneHijo == 0" [routerLink]="['/' + option.sRouterLink]">
-            <span *ngIf="option.nTieneHijo == 1" class="fas fa-angle-right col-lg-1"  style="font-size:20px;cursor:pointer"></span>
-            
-            <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
-            
-        </a>
-        
-        
-        
-        <div *ngFor="let subM of optionListSubMenu" class="sideNav2 col-lg-12">
-            
-            <a *ngIf="subM.nFatherId == option.nResourceId" [routerLink]="['/' + subM.sRouterLink]">{{ subM.sName }}</a>
-            
-        </div>
-        
-        <hr>
-
-    </div>
-    <div class="close-window col-lg-11" style="cursor: pointer;" >
-        <a  (click)="CerrarSession()" >Cerrar Sesión</a>
-    
-    
-</div> 
- -->
-
-
-
  <div id="cabecera" class="container-fluid {{activarStyle()}}"  
 style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:0;">
     <div class="row" >
         <div class="col-lg-1 mt-4 mb-4 ml-4 mr-2 col-md-1" >
-            <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" (click)="openNav()"></span>
+           <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" (click)="openNav()"></span> 
+            <!-- <input class="checkbox" type="checkbox" name="" id="" (click)="openNav()"/>
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>  -->
         </div>
         <div class="col-lg-3 mt-1 mb-1 col-md-8"  >
             
@@ -86,7 +18,7 @@ style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:
             
         </div>
         <div class="col-lg-4 mt-4 mb-4 col-md-1">
-           
+            
         </div>
     </div>   
  
@@ -142,3 +74,41 @@ style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:
     
     
 </div> 
+
+
+
+ <!-- <body>
+    <div id="wrapper">
+      
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      
+     
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              
+                    <input class="checkbox" type="checkbox" name="" id=""/>
+                    <div class="hamburger-lines">
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                    </div> 
+              <h1 class="text-center">Bootstrap Sidebar</h1>
+              <h2 class="small text-center">Second Header</h2>
+              <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium perferendis maiores velit ad id delectus nisi eligendi doloremque officia necessitatibus, repellendus alias omnis, natus nam voluptates dolor vel minus ab?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+      
+      
+  </body> -->

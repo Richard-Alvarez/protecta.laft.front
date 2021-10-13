@@ -158,6 +158,7 @@ import { TemplateS1Component } from './components/responsable/templates/template
 import { TemplateS3Component } from './components/responsable/templates/template-s3/template-s3.component';
 import { C2PolicyComponent } from './components/c2-policy/c2-policy.component';
 import { ModalValidarContrasennaComponent } from './pages/modal-validar-contrasenna/modal-validar-contrasenna.component';
+import { TemplateClientesComponent } from './components/responsable/templates/template-clientes/template-clientes.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -298,6 +299,7 @@ import { ModalValidarContrasennaComponent } from './pages/modal-validar-contrase
     TemplateS3Component,
     C2PolicyComponent,
     ModalValidarContrasennaComponent,
+    TemplateClientesComponent,
 
    
     //Validaciones

@@ -15,6 +15,9 @@ export class TemplateC1Component implements OnInit {
   @Input() item:any
   @Input() parent:PendienteInformeComponent
 
+  //VARIABLES PARA DESCARGAR REPORTES DE GRUPSO
+  @Input() Validar:number
+
   constructor() { }
 
   ngOnInit() {

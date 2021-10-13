@@ -14,6 +14,13 @@ export class TemplateS3Component implements OnInit {
   @Input() index:string
   @Input() item:any
   @Input() parent:PendienteInformeComponent
+
+  //VARIABLES PARA DESCARGAR REPORTES DE GRUPSO
+  //@Input() AlertaGlobal:string
+  @Input() Validar:number
+  @Input() ObjListaAlertasS3:any 
+  //@Input() Respuesta:number
+  
   constructor() { }
 
   ngOnInit() {
