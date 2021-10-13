@@ -89,14 +89,14 @@ export class ModalEmailAgregarComponent implements OnInit {
   }
 
   consoleFunc(evento){
-    console.log("entro al change", evento)
+    
     this.textoHTML = evento
     
   }
 
 
   consoleFunc2(evento){
-    console.log("entro al keyup", evento)
+    
     
     
   }
@@ -117,7 +117,7 @@ export class ModalEmailAgregarComponent implements OnInit {
           let data: any = {};
           data = (response);
           this.ProfileList = data;
-          // console.log("la lista", data)
+          
           this.core.loader.hide();
         }
         else {
@@ -139,7 +139,7 @@ export class ModalEmailAgregarComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        //console.log('err');
+        
         this.core.loader.hide();
         swal.fire({
           title: 'Alertas por perfil',
@@ -174,7 +174,7 @@ export class ModalEmailAgregarComponent implements OnInit {
           let data: any = {};
           data = (response);
           this.GrupoList = data;
-          // console.log("la lista", data)
+          
           this.core.loader.hide();
         }
         else {
@@ -196,7 +196,7 @@ export class ModalEmailAgregarComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        //console.log('err');
+        
         this.core.loader.hide();
         swal.fire({
           title: 'Alertas por perfil',
@@ -230,8 +230,7 @@ export class ModalEmailAgregarComponent implements OnInit {
     let data:any = {};
 
     let NIDCORREO = 0
-    console.log("El texto ckeditorContent", this.ckeditorContent)
-    console.log("El texto textoHTML", this.textoHTML)
+    
     data.NIDCORREO = NIDCORREO
     data.NIDGRUPOSENAL = this.group
     data.NIDPROFILE = this.profiles
@@ -243,13 +242,13 @@ export class ModalEmailAgregarComponent implements OnInit {
     data.SCUERPO_TEXTO = this.convert(this.textoHTML)
     data.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
     
-    console.log("la data",data)
+    
     // this.core.loader.show(); 
     //  await this.userConfig.getUpdateCorreos(data)
     // this.core.loader.hide();
 
     let respValidacion:any = this.validator()
-    console.log("respValidacion",respValidacion)
+    
     if(respValidacion.code == 1){
       swal.fire({
         title: "Configuración de Correos",
@@ -280,7 +279,7 @@ export class ModalEmailAgregarComponent implements OnInit {
                        },
          
        }).then(async (respuesta) =>{
-        console.log("respuesta.dismiss",respuesta.dismiss)
+        
         if(!respuesta.dismiss){
            this.core.loader.show(); 
             await this.userConfig.getUpdateCorreos(data)
@@ -295,8 +294,8 @@ export class ModalEmailAgregarComponent implements OnInit {
     let usuario  = this.textoHTML.indexOf('[Usuario]')  ?  this.textoHTML.indexOf('[Usuario]') : ''
     let link  = this.textoHTML.indexOf('[Link]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
     let instruccion  = this.textoHTML.indexOf('[Instruccion]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
-    let cargo  = this.textoHTML.indexOf('[Cargo]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
-    let perfil  = this.textoHTML.indexOf('[Perfil]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
+     let cargo  = this.textoHTML.indexOf('[Cargo]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
+    // let perfil  = this.textoHTML.indexOf('[Perfil]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
     let fechafin  = this.textoHTML.indexOf('[FechaFin]')  ?  this.textoHTML.indexOf('[Usuario]')  : ''
 
     let objRespuesta: any = {};
@@ -337,16 +336,16 @@ export class ModalEmailAgregarComponent implements OnInit {
       objRespuesta.message = "Es obligatorio ingresar [Instruccion]";
       return objRespuesta
   }
-    if(cargo == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [Cargo]";
-      return objRespuesta
-    }
-    if(perfil == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [Perfil]";
-      return objRespuesta
-    }
+     if(cargo == -1){
+       objRespuesta.code = 1;
+       objRespuesta.message = "Es obligatorio ingresar [Cargo]";
+       return objRespuesta
+     }
+    // if(perfil == -1){
+    //   objRespuesta.code = 1;
+    //   objRespuesta.message = "Es obligatorio ingresar [Perfil]";
+    //   return objRespuesta
+    // }
     if(fechafin == -1){
       objRespuesta.code = 1;
       objRespuesta.message = "Es obligatorio ingresar [FechaFin]";
@@ -480,12 +479,11 @@ export class ModalEmailAgregarComponent implements OnInit {
       }
     );
     return text
-    // console.log(text); // expected result:
+    
   }
 
   CambioPlantilla(){
-    console.log("Evento de plantilla",)
-    console.log("Evento de plantilla",this.action)
+  
 
     if(this.action == 0){
       this.ckeditorContent = ``; 

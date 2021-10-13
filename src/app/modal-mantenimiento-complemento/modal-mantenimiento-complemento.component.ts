@@ -18,7 +18,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   public pregunta = ''
   public idGrupo=0
   public GrupoList:any
-  public estado
+  public estado:boolean = true
   public desactivar: boolean
   public Usuario
   public idComplemento
@@ -34,7 +34,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    console.log("data",this.data)
+   
     //await  this.ListaAlerta()
     await  this.getGrupoList()
     await this.listData()
@@ -43,7 +43,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
        this.desactivar = false
       
 
-      console.log("SennalList",this.SennalList)
+     
     }
     else {
       this.fTitle = 'Editar complemento';
@@ -110,7 +110,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   }
 
   async GuardarCambios(){
-
+debugger
     let respValidacion:any = this.validator()
     if(respValidacion.code == 1){
       swal.fire({
@@ -125,7 +125,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                  closeButton : 'OcultarBorde'
                              },
              }).then(async (respuesta) =>{
-                     console.log("respuesta.dismiss",respuesta.dismiss)
+                     
                      if(!respuesta.dismiss){
                       return
                       }
@@ -138,7 +138,8 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       if(this.data == 'null' ){
         // Acá es para registrar
         let validacion = this.lista.filter(it => it.NIDALERTA == this.sennal)
-        if(validacion != 0){
+        if(validacion.length != 0){
+        // if(validacion == false){
 
           swal.fire({
             title: "Mantenimiento de complemento",
@@ -152,7 +153,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                closeButton : 'OcultarBorde'
                            },
            }).then(async (respuesta) =>{
-                   console.log("respuesta.dismiss",respuesta.dismiss)
+                 
                    if(!respuesta.dismiss){
                       return
                       
@@ -173,8 +174,8 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                closeButton : 'OcultarBorde'
                            },
            }).then(async (respuesta) =>{
-                   console.log("respuesta.dismiss",respuesta.dismiss)
-                   if(!respuesta.dismiss){
+                 
+                   if(respuesta.value){
     
                     
                     //Aca sera el registrar
@@ -189,16 +190,16 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
                     dataRegistro.SESTADO =  this.estado == true ? 1 : 2
                     dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
                     dataRegistro.TIPOOPERACION = 'I'
-                    console.log("la data que envia a registrar :", dataRegistro)
+                   
     
                     this.core.loader.show(); 
                     await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
                     this.core.loader.hide(); 
     
                       this.closeModal('edit-modal')
-                      }else{
+                    }else{
                             return
-                      }
+                    }
            })
         }
       
@@ -220,9 +221,9 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
            closeButton : 'OcultarBorde'
                        },
        }).then(async (respuesta) =>{
-               console.log("respuesta.dismiss",respuesta.dismiss)
+             
                if(!respuesta.dismiss){
-                console.log("this.estado ", this.estado )
+            
                 let dataRegistro:any = {};
                 dataRegistro.NIDCOMPLEMENTO = this.idComplemento
                 dataRegistro.SNOMBRE_COMPLEMENTO = this.nombreComplemento

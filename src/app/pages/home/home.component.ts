@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import { NgxSpinnerService } from "ngx-spinner";
 import { CoreService } from 'src/app/services/core.service';
 import { TagContentType } from '@angular/compiler';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalValidarContrasennaComponent } from '../../pages/modal-validar-contrasenna/modal-validar-contrasenna.component';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,8 @@ export class HomeComponent implements OnInit {
     private core: CoreService,
     private maestroService: MaestroService,
     private cargaService: CargaService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal,
   ) {
     if (!this.core.session.logged) {
       this.core.rutas.goLogin();
@@ -35,6 +38,8 @@ export class HomeComponent implements OnInit {
   public TipoUsuario: string;
   public variableGlobalUser
 
+  
+
   ngOnInit() {
     this.core.loader.show(); 
     if (!this.core.storage.valSession('usuario')) {
@@ -43,8 +48,7 @@ export class HomeComponent implements OnInit {
 
     this.variableGlobalUser = this.core.storage.get('usuario');
     this.NombreCompleto = this.variableGlobalUser["fullName"]
-    console.log("datos",this.NombreCompleto)
-    console.log("user", this.variableGlobalUser)
+    
     this.UsuariosRE()
     moment.locale('es');
     this.core.loader.hide();
@@ -52,7 +56,12 @@ export class HomeComponent implements OnInit {
     //   .then((r) => {
     //     this.loadCargas();
     //   });
-
+    let indicador:any = localStorage.getItem('ValidadorContraUsuario');
+    //console.log("indicador",indicador)
+      if(indicador == 0){
+        this.Modal()
+      }
+    
   
   }
 
@@ -64,6 +73,29 @@ export class HomeComponent implements OnInit {
       return false
     }
   }
+
+  ValidarPassword(){
+
+  }
+
+  Modal(){
+    const modalRef = this.modalService.open(ModalValidarContrasennaComponent, { size: 'lg', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false, centered : true });
+    
+    
+    modalRef.componentInstance.reference = modalRef;
+   
+    modalRef.result.then(async (resp) => {
+     // this.core.loader.show();  
+      
+     
+      //this.core.loader.hide();
+     
+    }, (reason) => {
+      //this.core.loader.hide();
+    });
+  }
+
+  
 
   
 

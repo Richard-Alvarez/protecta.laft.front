@@ -93,7 +93,7 @@ export class ProfileAlertsComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        //console.log('err');
+       
         this.core.loader.hide();
         swal.fire({
           title: 'Alertas por perfil',
@@ -126,17 +126,17 @@ export class ProfileAlertsComponent implements OnInit {
       //   data.grupoid = this.group;
       //   data.profiles = this.profiles;
       //   data.regimeId = 3;
-      //   console.log(data)
+      
         
-      //   console.log("ejecutas en profile",data)
+      
       //   this.getAlertByProfileList(data);
       // }
-      console.log(data)
+      
       this.regime='0';
       this.group='0';
      let listaGrupo = await this.userConfig.GetGrupoXPerfil(data)
      this.GrupoList = listaGrupo 
-     console.log("La lista del grupo",this.GrupoList)
+     
     }
     else{
       this.AlertList = '';
@@ -147,7 +147,7 @@ export class ProfileAlertsComponent implements OnInit {
 
   async changeGroup(){
     this.AlertList = []
-    // console.log("el id del grpo", this.group)
+    
     // let data: any = {};
     // // let data2: any = {};
     // data.NIDGRUPOSENAL = this.group
@@ -156,9 +156,9 @@ export class ProfileAlertsComponent implements OnInit {
     // // let text2
     // // text1 = await this.sbsReportService.GetGrupoxPerfilList(data)
     // this.ProfileList = await this.userConfig.GetPerfilXGrupo(data)
-    // // console.log("la data del grupo por perfil1", text1)
-    // // console.log("la data del grupo por perfil2", text2)
-    // console.log("la data del grupo por perfil2", this.ProfileList)
+    
+    
+    
     // if(this.group == 0){
     //   this.regime='0';
     //   this.AlertList = []
@@ -171,7 +171,7 @@ export class ProfileAlertsComponent implements OnInit {
        data.grupoid = this.group;
       data.regimeId = 3;
       
-      console.log("La data que envia en el grupo",data)
+      
        this.getAlertByProfileList(data)
       
       
@@ -213,7 +213,7 @@ export class ProfileAlertsComponent implements OnInit {
   //     }
   //     this.core.loader.hide();
   //   }).catch(() => {
-  //     //console.log('err');
+  
   //     this.core.loader.hide();
   //     swal.fire({
   //       title: 'Alertas por perfil',
@@ -238,7 +238,7 @@ export class ProfileAlertsComponent implements OnInit {
       data.grupoid = this.group;
       
       
-      console.log(data)
+      
       this.getAlertByProfileList(data);
     }
     if(this.regime == 0){
@@ -254,14 +254,14 @@ export class ProfileAlertsComponent implements OnInit {
         _data = (response);
         this.AlertList = _data;
         this.AlertList.forEach(it => it.alertStatus = it.alertStatus == '1' ? true : false)
-        // //console.log(this.AlertList)
+        
         this.arrayFinalSenial = this.AlertList;
         this.core.loader.hide();
       });
   }
 
   rollBack() {
-    // //console.log("cancelar");
+    
     this.profiles = '0';
     this.regime = '0';
     // this.getProfileList();
@@ -291,7 +291,7 @@ export class ProfileAlertsComponent implements OnInit {
         })
       }
       else if (this.regime === '0' && this.group === '1') {
-        console.log("&& this.group === 1", this.group)
+        
         swal.fire({
           title: 'Alertas por perfil',
           icon: 'warning',
@@ -369,7 +369,7 @@ export class ProfileAlertsComponent implements OnInit {
             update.regimeId = _data.regimeId  == '' ? 0 :  _data.regimeId;
             update.alertId = _data.alertId;
             update.alertStatus = _data.alertStatus == true ? '1' : '2';
-            console.log("LA lista que actualiz",update)
+            
              this.sbsReportService.updateAlertByProfile(update).then((response) => {
                if (response.error == 0) {
                  swal.fire({

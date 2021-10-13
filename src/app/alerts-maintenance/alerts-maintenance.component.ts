@@ -79,8 +79,8 @@ export class AlertsMaintenanceComponent implements OnInit {
         this.arrayFinalListToShow = this.processlist
         this.processlistToShow = this.sliceAlertsArray(this.processlist);
 
-        console.log(" eeeey : ",this.processlistToShow);
-        // //console.log(" eeeey : ",this.alert);
+        
+        
         if (this.processlist.length != 0) {
           this.core.loader.hide();
         }
@@ -103,7 +103,7 @@ export class AlertsMaintenanceComponent implements OnInit {
         }
         this.core.loader.hide();
       }).catch(() => {
-        ////console.log('err');
+       
         this.core.loader.hide();
         swal.fire({
           title: 'Gestión de alertas',
@@ -178,12 +178,12 @@ export class AlertsMaintenanceComponent implements OnInit {
         }
       })
       this.totalItems = this.arrayFinalListToShow.length
-      ////console.log("el this.arrayFinalListToShow : ",this.arrayFinalListToShow);
+      
       let resp = this.sliceAlertsArray(this.arrayFinalListToShow);
       this.processlistToShow = resp;
-      ////console.log("el this.processlistToShow.length : ",this.processlistToShow.length);
+      
 
-      ////console.log("el this.totalItems : ",this.totalItems);
+     
     }
   }
   ValidarDisable(regimen,valor){

@@ -34,15 +34,14 @@ export class TemplateRGComponent {
 
   async ngOnInit() {
     
-    //debugger;
+     
     //this.USU_NOMBRE_COMPLETO = this.parent.Nombre
     //this.Alerta = this.pendienteInforme.Alerta2()
     this.valor = true
     //this.NombreBoton = 'Export as Doc'
    // this.USU_NOMBRE_COMPLETO = this.obj.arrUsuariosForm[0].arrUsuariosForm[0].NOMBRECOMPLETO
     //this.SPERFIL_NAME_USUARIO =  this.obj.arrUsuariosForm[0].arrUsuariosForm[0].SCARGO
-   console.log("this.categoriaSelectedArray 1111111111111",this.USU_NOMBRE_COMPLETO )
-  //console.log("this.categoriaSelectedArray 222222222222",this.SPERFIL_NAME_USUARIO)
+
   }
 
 

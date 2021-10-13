@@ -77,7 +77,7 @@ export class ListaRegistroComponent implements OnInit {
   ngOnInit() {
     //this.searchCarga = 1;
     this.BoolOpciones = 0;
-    ////console.log(this.maestros);
+    
     this.Titulo = 'Todos los registros - Carga activa';
     this.localeService.use(this.locale);
     this.maestroService.cargarMaestros()
@@ -116,8 +116,7 @@ export class ListaRegistroComponent implements OnInit {
   }
   BuscarRegistro() {
 
-    ////console.log(this.checkOpcDocumento);
-    ////console.log(this.NumeroDoc);
+    
     if (this.checkOpcDocumento) {
       if (this.NumeroDoc == '' || this.NumeroDoc == undefined) {
         this.Message('Debe ingresar el número de documento');
@@ -152,14 +151,14 @@ export class ListaRegistroComponent implements OnInit {
         fechaInicio: fini, fechaFin: final, opc: opcion, tipoDoc: this.TipoDoc, numDoc: this.NumeroDoc,
         firstname: this.firstname, lastname: this.lastname, lastname2: this.lastname2
       };
-      ////console.log(data);
+      
       this.core.loader.show();
       this.registroService.getAll(data)
         .then((response) => {
 
 
 
-          ////console.log(response);
+          
 
           this.registroDate = response;
 
@@ -192,8 +191,7 @@ export class ListaRegistroComponent implements OnInit {
     }
 
     if (this.busqueda != '') {
-      ////console.log(this.searchCarga);
-      ////console.log(this.registros);
+     
       if (!this.searchCarga) {
         this.registrosVer = this.SearchTable(this.registroDate);
       } else {
@@ -203,17 +201,16 @@ export class ListaRegistroComponent implements OnInit {
       this.verPagina({ numero: 1 });
 
       /*this.registrosVer = this.SearchTable(this.registrosVer);
-      //console.log(this.registrosVer);
+      
       this.paginar();
       this.verPagina({ numero: 1 });*/
 
-      /*//console.log(this.SearchTable(this.registros));
+     
       this.paginar_2();
-      this.verPagina_2({ numero: 1 });*/
+      this.verPagina_2({ numero: 1 });
     } else {
       // this.registrosVer = this.registros;
-      ////console.log(this.searchCarga);
-      ////console.log(this.registros);
+      
       if (!this.searchCarga) {
         this.registrosVer = this.registroDate;
       } else {
@@ -275,8 +272,7 @@ export class ListaRegistroComponent implements OnInit {
     this.paginas = [];
     let paginas = Math.trunc(this.registrosVer.length / this.registrosPorPagina);
     paginas = (paginas * this.registrosPorPagina >= this.registrosVer.length ? paginas : paginas + 1);
-    ////console.log(this.registrosVer.length);
-    ////console.log(this.registrosPorPagina);
+    
     for (let i = 1; i <= paginas; i++) {
       this.paginas.push({ numero: i, clase: '' });
     }
@@ -327,7 +323,7 @@ export class ListaRegistroComponent implements OnInit {
   }
 
   descargar() {
-    ////console.log(this.registrosVer);
+    
     this.excelService.exportRegistros(this.registrosVer, 'registros');
   }
 
@@ -378,14 +374,14 @@ export class ListaRegistroComponent implements OnInit {
       const ffinal = moment(this.FiltroDateFin).format('DD/MM/YYYY').toString();
 
       let data: any = { fechaInicio: fini, fechaFin: ffinal };
-      ////console.log(data);
+      
       this.core.loader.show();
       this.registroService.getAll(data)
         .then((response) => {
 
 
 
-          ////console.log(response);
+          
 
           this.registroDate = response;
 
@@ -408,7 +404,7 @@ export class ListaRegistroComponent implements OnInit {
   }
 
   onChangeFiltro() {
-    ////console.log(this.BoolOpciones);
+    
     this.NumeroDoc = '';
     this.firstname = '';
     this.lastname = '';

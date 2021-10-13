@@ -1,5 +1,5 @@
 
-console.log('Bienvenido a mi mundo donde no le importo');
+
 
 // $(document).ready(function() {
 
@@ -22,4 +22,4 @@ console.log('Bienvenido a mi mundo donde no le importo');
 //   });
 
   
-console.log('Bienvenido a mi mundo donde no le importo x2');
+

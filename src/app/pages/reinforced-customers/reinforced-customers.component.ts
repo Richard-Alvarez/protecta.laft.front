@@ -70,10 +70,10 @@ export class ReinforcedCustomersComponent implements OnInit {
   }
 
   async getClientesReforzados(){
-    // console.log("El arrResultados : ",this.arrResultados)
+    
     
     //let respSetDataClientesResultados = await this.parent.setDataClientesResultados()
-    //console.log("el respSetDataClientesResultados : ",respSetDataClientesResultados)
+    
 
     //func
     
@@ -82,7 +82,7 @@ export class ReinforcedCustomersComponent implements OnInit {
   }
 
   setDataViewCustomer(item) {
-    //console.log("el item local : ",item);
+    
     localStorage.setItem('tipoClienteGC', 'CRF')
     localStorage.setItem('OCLIENTE_REFORZADO', JSON.stringify(item));
     localStorage.setItem('boolClienteReforzado', 'true');
@@ -91,15 +91,15 @@ export class ReinforcedCustomersComponent implements OnInit {
   }
 
   setDataViewCustomerAprobar(item) {
-    //console.log("el item local : ",item);
+    
     /*localStorage.setItem('tipoClienteGC', 'CRF')
     localStorage.setItem('OCLIENTE_REFORZADO', JSON.stringify(item));
     localStorage.setItem('boolClienteReforzado', 'true');
     localStorage.setItem('SESTADO_BUTTON_SAVE','1')
     localStorage.setItem('sEstadoTratamientoCliente','CRF');*/
     this.core.loader.show()
-    console.log("el ITEM 789123 : ",item)
-    //console.log("el ITEM 789123 : ",lista)
+    
+    
     //let periodoSend = parseInt(localStorage.getItem("periodo"))
     
     localStorage.setItem("NIDALERTA", item.NIDALERTA)
@@ -122,8 +122,8 @@ export class ReinforcedCustomersComponent implements OnInit {
     localStorage.setItem("SESTADO_BUTTON_SAVE", '2');
     localStorage.setItem("NTIPOCARGA", item.NTIPOCARGA);
     localStorage.setItem("SCLIENT", item.SCLIENT);
-    //console.log("el item : ",item)
-    //console.log("el this.vistaOrigen 221 : ",this.vistaOrigen)
+    
+    
     //localStorage.setItem("SOCUPACION", item.SOCUPACION)
     //localStorage.setItem("SCARGO", item.SCARGO)
     //localStorage.setItem("SZONA_GEOGRAFICA", item.SZONA_GEO)
@@ -142,8 +142,7 @@ export class ReinforcedCustomersComponent implements OnInit {
 
   async getProcessClientesReforzados(){
     let respuesta = this.arrCheckboxClient.filter(it => it == true)
-    // console.log("respuesta",respuesta)
-    // console.log("respuesta",respuesta.length)
+    
     if(respuesta.length == 0){
     swal.fire({
       title: 'Cliente Reforzado',
@@ -184,12 +183,12 @@ export class ReinforcedCustomersComponent implements OnInit {
       if(!result.dismiss){
         this.spinner.show()
         let DataResultadoTrat = await this.getBusquedaCoincidenciaXDocXName()
-        // console.log("DataResultadoTrat", DataResultadoTrat)
+        
         /*let respClientesCoincidencias = await this.parent.getDataResultadoCoincidenciasPen()
-        console.log("EL ORIGEN DEL respClientesCoincidencias ***: ",respClientesCoincidencias)
+        
         let respClientesCoincidFormat = await this.parent.setDataClientesResultadosPart2(respClientesCoincidencias.lista,'CRF')
         this.arrCoincidencias = respClientesCoincidFormat
-        console.log("EL ORIGEN DEL respClientesCoincidFormat ***: ",respClientesCoincidFormat)*/
+        */
         this.arrCheckboxClient = []
         await this.parent.getClientsByTratamientoSinSpinner()
         this.spinner.hide()
@@ -201,7 +200,7 @@ export class ReinforcedCustomersComponent implements OnInit {
       
       
     }).catch(err => {
-      //console.log("err swal : ",err)
+      
     })
   }
   }
@@ -213,7 +212,7 @@ export class ReinforcedCustomersComponent implements OnInit {
      
         if(idCheck){
           let CheckSeleccionado = this.arrResultados[inc].obj
-          // console.log("el chack seleccionado",CheckSeleccionado)
+          
           /*let ObjListaClienteSeleccionadoxDoc : any = {}
 
           ObjListaClienteSeleccionadoxDoc.NPERIODO_PROCESO = this.NPERIODO_PROCESO
@@ -235,21 +234,50 @@ export class ReinforcedCustomersComponent implements OnInit {
           ObjListaClienteSeleccionadoDocxNombre.NTIPOCARGA = 2//CheckSeleccionado.NTIPOCARGA     
           ObjListaClienteSeleccionadoDocxNombre.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
           ObjListaClienteSeleccionadoDocxNombre.NIDGRUPOSENAL = 1
-          //console.log("ObjListaCheckSeleccionado",ObjListaClienteSeleccionadoxDoc)
-          // console.log("ObjListaClienteSeleccionadoxNombre",ObjListaClienteSeleccionadoDocxNombre)
-
-
-          //console.log("CheckSeleccionado",CheckSeleccionado)
+       
+          //consulta worldcheck
+          let data:any = {}
+          data.name = (CheckSeleccionado.SNOM_COMPLETO).trim()
+          data.alertId = 2
+          data.periodId = this.NPERIODO_PROCESO
+          data.tipoCargaId = 2
+          data.sClient = CheckSeleccionado.SCLIENT  
+          data.nIdUsuario = this.objUsuario.idUsuario
           this.spinner.show()
+          arrCheckboxNew.push(this.userConfigService.ConsultaWC(data))
           arrCheckboxNew.push(this.userConfigService.BusquedaConcidenciaXDocXName(ObjListaClienteSeleccionadoDocxNombre))
           this.spinner.hide()
         }
     });
     this.spinner.hide()
-
-    let respuestaPromiseAll = await Promise.all(arrCheckboxNew)
-    // console.log("respuestaPromiseAll :",respuestaPromiseAll)
-    //console.log("Valor real del checkbox",arrCheckboxNew)
+    debugger;
+    let mensaje = 'No se encontro registros'
+    let respuestaPromiseAll: any = await Promise.all(arrCheckboxNew)
+    let isComfirmedXdocXname = respuestaPromiseAll.filter(t => t.code == 0).length > 0
+    let isComfirmedWC = respuestaPromiseAll.filter(t => t.sStatus == 'OK' || t.sStatus == 'UPDATE').length > 0
+    let isError = respuestaPromiseAll.filter(t => t.sStatus == 'ERROR').length > 0
+    if (!isComfirmedXdocXname && !isComfirmedWC){
+      mensaje = isError ? 'Hubo un error en la bd' : mensaje;
+      swal.fire({
+        title: 'Cliente Reforzado',
+        icon: 'warning',
+        text: 'No se encontro registros',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: "#FA7000",
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+         },
+          }).then(resp => {
+            if(!resp.dismiss){
+                return
+              }
+          })
+    }
+    debugger;
   }
 
   async getConfigService(obj,obj2){
@@ -268,20 +296,17 @@ export class ReinforcedCustomersComponent implements OnInit {
     }
     let varible = ''
     // let textoCompleto = String.fromCharCode(event.which || event.keyCode)
-    // console.log('keypress 1 ' + textoCompleto)
-    // console.log('keypress 2 ' ,  String.fromCharCode(event.which || event.keyCode))
+  
     // varible += event.target.value
     varible = event.target.value
-    // console.log('keypress 3 ' , varible)
+  
     let listaReforzado = this.getResultadosCli()
     let nuevaLista = listaReforzado.filter( it => (it.SNOM_COMPLETO+'').trim() == varible )
-    // console.log('listaReforzado real' , listaReforzado)
-    // console.log('listaReforzado 2' , varible)
-    // console.log('listaReforzado nueva' , nuevaLista)
+  
     let cantidadListaOriginal = listaReforzado.length
     let cantidadListaNueva = nuevaLista.length
     let cantidadParaEliminar = cantidadListaOriginal - cantidadListaNueva
-    // console.log('listaReforzado eliminar ' , cantidadParaEliminar)
+    
     // this.arrResultados.splice(0, )
         
   }
@@ -293,10 +318,10 @@ export class ReinforcedCustomersComponent implements OnInit {
 
   validarBorrar(event : any){
     if(event.charCode == 8){
-      // console.log("si entro")
+      
       return true;
      }
-    //  console.log("nunca entro")
+    
      return false;  
      
      
@@ -322,11 +347,11 @@ export class ReinforcedCustomersComponent implements OnInit {
 
       this.arrResultadoFilter = []
       this.arrResultadoFilter = this.arrResultados.filter(itResult => {
-        // console.log("nuevo resultado",itResult)
+        
         let nombreClienteCompleto = ((itResult.obj.SNOM_COMPLETO+' ').trim()).toLowerCase()
-        // console.log("nuevo resultado del nombre",nombreClienteCompleto)
+        
         if(nombreClienteCompleto.includes(nombreCliente)){
-          // console.log("entro al if")
+        
           return itResult
         }
       });
@@ -349,44 +374,38 @@ export class ReinforcedCustomersComponent implements OnInit {
     if(this.txtBuscador.length == 0){
      
       this.parent.getserviceReforzado()
-      // console.log("prueba :",listaReforzado)
-      // console.log("entro en el if")
+  
     }else if(key == 8){
 
-      // console.log("entro en el elseif por fin ")
-
+  
     }
     else{
-      // console.log("entro en el else :")
+    
       this.respClientesFilters = [];
-      //console.log("(this.txtBuscador+'').trim() : ",((this.txtBuscador+'').trim()).split(''))
-      //console.log("lo presiono ")
-      // console.log("lo presiono 1 : ",this.txtBuscador)
+     
       let buscadorMinuscula = this.txtBuscador.toLowerCase();
       listaReforzado.forEach((item,inc) => {
         let nombre = item.SNOM_COMPLETO.toLowerCase();
-        // console.log("includes : ",nombre.includes(buscadorMinuscula));
+        
 
         if(nombre.includes(buscadorMinuscula)){
           listaNueva = this.respClientesFilters.push(item);
-          // console.log("inc  : ", inc);
+          
           return listaNueva
         }else{
            arrIndice.push(inc)
         }
 
-        // console.log("item : ",item);
-        // console.log("item 1: ",listaNueva);
       })
 
 
       // let totalItems = listaReforzado.length
-      // console.log("arrIndice : ",arrIndice)
+      
       arrIndice.forEach(element => {
         listaReforzado.splice( element , 1)
 
       });
-      // console.log("listaReforzado : ",listaReforzado)
+      
       // this.getResultadosCliente(this.initializePage)
       
        this.newArrResultadosCliente = listaReforzado
@@ -402,7 +421,7 @@ export class ReinforcedCustomersComponent implements OnInit {
 
 
   async getOptionsClient(accion,SESTADO_TRAT_OLD,dataArray,IDListResultado){
-    // console.log("DATA QUE TRAER PARA QUITAR DE REFORZADO", dataArray)
+    
     let accionClient = '';
     let indice = IDListResultado
     let data:any = {};
@@ -416,7 +435,7 @@ export class ReinforcedCustomersComponent implements OnInit {
     dataService.SCLIENAME = dataArray.SNOM_COMPLETO;
     dataService.STIPOIDEN = dataArray.STIPOIDEN;
     dataService.NIDTRATCLIEHIS = dataArray.NIDTRATCLIEHIS;
-    // console.log("dataArray.NIDTRATCLIEHIS de reforzado" , dataArray.NIDTRATCLIEHIS)
+    
     dataService.NIDREGIMEN = dataArray.NIDREGIMEN ? dataArray.NIDREGIMEN : 0
     dataService.NIDALERTA = dataArray.NIDALERTA;
     dataService.NTIPOCARGA = dataArray.NTIPOCARGA ? dataArray.NTIPOCARGA : 0;
@@ -424,11 +443,11 @@ export class ReinforcedCustomersComponent implements OnInit {
     dataService.STIPOACTRESULTADO = "MANUAL"
     dataService.NIDGRUPOSENAL = 1
     //dataService.NIDTRATCLIEHIS = dataArray.NIDTRATCLIEHIS;
-    //console.log("nueva data 1", dataArray.NIDTRATCLIEHIS)
+    
     data.pregunta = '¿Está seguro de eliminar el cliente de reforzado?'
     data.boton1 = 'Eliminar'
     dataService.SESTADO_TRAT = 'CRF';
-    //console.log("el dataService : ",dataService)
+    
     this.getSwalOptionClient(data,dataService,indice)
     
     /*switch (accion) {
@@ -436,14 +455,14 @@ export class ReinforcedCustomersComponent implements OnInit {
         data.pregunta = '¿Está seguro de aprobar el cliente a reforzado?'
         data.boton1 = 'Aprobar'
         dataService.SESTADO_TRAT = 'CR';
-        //console.log("el dataService : ",dataService)
+    
         this.getSwalOptionClient(data,dataService)
         break;
       case '2': 
         data.pregunta = '¿Está seguro de quitar el cliente de pre reforzado?'
         data.boton1 = 'Quitar'
         dataService.SESTADO_TRAT = 'AN';
-        //console.log("el dataService : ",dataService)
+    
         this.getSwalOptionClient(data,dataService)
         break;
       case '3':
@@ -452,7 +471,7 @@ export class ReinforcedCustomersComponent implements OnInit {
         
         dataService.SESTADO_TRAT = 'MC';
         
-        //console.log("el dataService : ",dataService)
+    
         this.getSwalOptionClient(data,dataService)
         break;
       default :
@@ -480,7 +499,7 @@ async getSwalOptionClient(data,dataService,indice){
        
     }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
-      //console.log("result : ",result)
+      
       if (result.value) {
 
         this.core.loader.show()
@@ -489,12 +508,12 @@ async getSwalOptionClient(data,dataService,indice){
         try {
           await this.parent.getClientsByTratamiento()
         } catch (error) {
-          console.error("El error :" ,error)
+          
         }
-        // console.log("respServiceUpd : ",respServiceUpd)
+        
 
         // this.arrResultados.splice(indice, 1)
-        // console.log("Prueba del index",indice)
+        
 
         // let respCRE = await this.parent.getDataResultadoTratamiento('CRE')
         // let respCCO = await this.parent.getDataResultadoTratamiento('CCO')
@@ -528,13 +547,12 @@ async getSwalOptionClient(data,dataService,indice){
 
   newArrResultadosCliente:any = []
   getResultadosCliente(page){
-    //console.log("el this.arrResultados 1 &&& : ",this.arrResultados)
-    // console.log("el initializePage 1 &&& : ",this.initializePage)
+    
     let resp = this.arrResultados.slice(
       (page - 1) * 5,
       page * 5
     )
-    //console.log("el this.arrResultados 2 &&& : ",resp)
+   
     this.newArrResultadosCliente = resp//this.arrResultados
   }
 
@@ -542,7 +560,7 @@ async getSwalOptionClient(data,dataService,indice){
 
     this.getResultadosCliente(this.initializePage)
 
-    // console.log("Lista de reforzado :", this.newArrResultadosCliente)
+  
     return this.newArrResultadosCliente;
   }
 
@@ -565,7 +583,7 @@ async getSwalOptionClient(data,dataService,indice){
       NombreDescarga = "Cliente reforzado con coincidencias"
     }
     
-    console.log("resultado", resultado)
+    
     let Newresultado:any = []
     let resultadoFinal:any = []
     if (resultado!= null && resultado.length > 0) {
@@ -585,8 +603,7 @@ async getSwalOptionClient(data,dataService,indice){
      }
 
       
-      console.log("Newresultado", Newresultado)
-      console.log("resultadoFinal", resultadoFinal)
+ 
 
       let data = []
       resultadoFinal.forEach(t => {
@@ -601,10 +618,10 @@ async getSwalOptionClient(data,dataService,indice){
         t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO
         });
-        //console.log("la data1111", t.arrListas)
+        
         data.push(_data);
         });
-        console.log("la data", data)
+        
         this.excelService.exportAsExcelFile(data, NombreDescarga);
     } else {
      

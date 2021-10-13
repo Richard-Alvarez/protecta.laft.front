@@ -109,7 +109,7 @@ export class ReportComponent implements OnInit {
 
     this.action = this.ActivatedRoute.snapshot.paramMap.get('ind');
     // this.dtFechaSolicitud = moment().format('DD/MM/YYYY');
-    // //console.log(moment((moment(Date.now()).format('DD-MM-YYYY'))).toDate());
+  
     this.cargaService.getCargas()
       .then((response) => {
         const cargas = response;
@@ -117,7 +117,7 @@ export class ReportComponent implements OnInit {
         this.cargas.sort((a, b) => {
           return b.id - a.id;
         });
-        //console.log(cargas);
+       
 
         if (this.cargas != null) {
           let cargaActiva: Carga = this.cargas.filter(t => t.activo == true)[0];
@@ -145,7 +145,7 @@ export class ReportComponent implements OnInit {
 
 
   AssemblySearch(registro: Registro) {
-    //console.log(registro);
+  
     this.Search.TipoDoc = registro.documento.id.toString();
     this.Search.NumeroDoc = registro.numeroDocumento;
     this.Search.Nombre = '';
@@ -163,9 +163,9 @@ export class ReportComponent implements OnInit {
   }
 
   searchGetRegistro() {
-    //console.log(this.carga);
+    
     const clientRegister: ClientRegister = new ClientRegister();
-    //console.log(this.registro);
+    
     if (this.registro != null && this.registro !== undefined) {
       this.AssemblySearch(this.registro);
       this.cargaService.getPolicyRegister(this.Search)
@@ -278,7 +278,7 @@ export class ReportComponent implements OnInit {
     
     if (!error) {
       if (this.checkOpcDocumento) {
-        //console.log(this.Registros);
+        
         if (this.Registros.filter(x => x.numeroDocumento == this.NumeroDoc &&
           x.documento.id == this.TipoDoc).length == 0) {
           this.Message('El número de documento ingresado no existe en LAFT');
@@ -336,7 +336,7 @@ export class ReportComponent implements OnInit {
       this.Search.usercode = this.maestroService.getUser().idUsuario;
       this.cargaService.getPolicyRegister(this.Search)
         .then((response) => {
-          //console.log(response);
+          
 
           clientRegister.PolicysR = response;
 
@@ -359,17 +359,17 @@ export class ReportComponent implements OnInit {
           } else {
             this.Message('No se encontro Información');
           }
-          //console.log(this.ListClientRegister);
+          
           this.core.loader.hide();
         }).catch(() => {
-          //console.log('err');
+          
           this.core.loader.hide();
           this.Message('No se encontro Información');
         });
       // }
     });
 
-    //console.log(this.ListClientRegister);
+    
   }
 
   descargarTodos() {
@@ -380,10 +380,10 @@ export class ReportComponent implements OnInit {
     this.Search.nidcarga = this.carga.id;
     this.Search.fechaSolicitud = (this.ChkSolicitud) ? moment(this.dtFechaSolicitud).format('DD/MM/YYYY').toString() : '';
     this.Search.tipoBusqueda = (!this.checkOpcDocumento) ? 'NOMBRES' : 'DOCUMENTO';
-    //console.log(this.Search);
+    
     this.cargaService.ClientListPolicy(this.Search)
       .then((response) => {
-        //console.log(response);
+    
         policyRegister = response;
         // ListPolicysReporte.push(policyRegister);
         if (policyRegister.length == 0) {
@@ -393,9 +393,9 @@ export class ReportComponent implements OnInit {
         }
 
         this.core.loader.hide();
-        //console.log(response);
+    
       }).catch(() => {
-        //console.log('err');
+    
         this.core.loader.hide();
         this.Message('No se encontro Información');
       });
@@ -425,7 +425,7 @@ export class ReportComponent implements OnInit {
   }
 
   onChangeTipoDoc(event: any) {
-    //console.log(this.CargaActiva);
+    
   }
 
 
@@ -453,7 +453,7 @@ export class ReportComponent implements OnInit {
 
   ChangeOpciones(valor: any) {
     this.checkOpcDocumento = valor;
-    //console.log(this.checkOpcDocumento);
+    
     if (this.checkOpcDocumento) {
       document.getElementById('SeachDocumento').className = 'styleButtonActive';
       document.getElementById('SearchNombre').className = 'styleButtonDisable';

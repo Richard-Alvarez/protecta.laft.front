@@ -169,11 +169,11 @@ export class MonitoringReportesSbsComponent implements OnInit {
       data.endDate = moment(this.bsValueFin).format('DD/MM/YYYY').toString();
       data.reportId = this.IdReport === '' ? 0 : this.IdReport;
       data.searchType = this.SearchType === '' ? 0 : this.SearchType;
-      //console.log(data)
+      
       this.sbsReportService.monitoringReportSBS(data)
         .then((response) => {
           this.processlist = response;
-          console.log("el this.processlist : ",this.processlist)
+          
           this.totalItems = this.processlist.length;
           this.processlistToShow = this.processlist.slice(
             (this.currentPage - 1) * this.itemsPerPage,
@@ -195,7 +195,7 @@ export class MonitoringReportesSbsComponent implements OnInit {
           }
           this.core.loader.hide();
         }).catch(() => {
-          //console.log('err');
+          
           this.core.loader.hide();
           swal.fire({
             title: 'Reportes SBS',
@@ -215,15 +215,15 @@ export class MonitoringReportesSbsComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.sbsReportService.getFileRoute(id, tipo_archivo)
         .then(resp => {
-          //console.log("EL RESP: ", resp);
+          
           /*resp.forEach(element => {
-            //console.log("ELEMENTO 1")
+          
             //this.report = element;
             this.arrayListFiles.push(this.report);
           });
           this.report = "";*/
           this.arrayListFiles = resp;
-          //console.log("EL ARRAY : ", this.arrayListFiles)
+          
           return resolve(this.arrayListFiles);
         })
         .catch(err => {
@@ -237,9 +237,9 @@ export class MonitoringReportesSbsComponent implements OnInit {
   async saveCsvFile(id: any) {
     let tipo_archivo = 1;
     await this.sbsReportServiceFile(id.trim(), tipo_archivo);//this.sbsReportService.getFileRoute(id.trim());
-    //console.log("LLEGO A ESPERAR?");
+    
     if (this.codeErr) {
-      //console.log('err', this.mensajeErr);
+    
       this.core.loader.hide();
       swal.fire({
         title: 'Reportes SBS',
@@ -321,7 +321,7 @@ export class MonitoringReportesSbsComponent implements OnInit {
     let tipo_archivo = 2;
     await this.sbsReportServiceFile(id.trim(), tipo_archivo);//this.sbsReportService.getFileRoute(id,tipo_archivo);
     if (this.codeErr) {
-      //console.log('err', this.mensajeErr);
+      
       this.core.loader.hide();
       swal.fire({
         title: 'Reportes SBS',
@@ -335,7 +335,7 @@ export class MonitoringReportesSbsComponent implements OnInit {
 
     } else {
 
-      //console.log("UN LOG DEL this.arrayListFiles  : ", this.arrayListFiles);
+      
       if (this.arrayListFiles.length != 0) {
 
         this.arrayListFiles.forEach(element => {

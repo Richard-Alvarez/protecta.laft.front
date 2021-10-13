@@ -203,10 +203,7 @@ export class UserConfigComponent implements OnInit {
     let data: any = {};
     data = {idUser: this.name}
     let getListaHistoryUser=await this.userConfigService.getListaHistoryUser(data)
-    //console.log('Este es mi objeto',getListaHistoryUser)
-    //console.log('Este es mi array',getListaHistoryUser.data)
-    //console.log('este es use',this.name)
-    //console.log('este es use',this.name)
+    
 
     this.arrListUserLog = getListaHistoryUser.data
 
@@ -220,7 +217,7 @@ export class UserConfigComponent implements OnInit {
       this.ListUser = _data;
       this.core.loader.hide();
 
-     //console.log("Lista de usuarios",_data)
+  
     });
   }
  
@@ -228,11 +225,11 @@ export class UserConfigComponent implements OnInit {
    async getValidarUsuarioCreado(){
      let respFinal = 1;
     let nombreUsu = (<HTMLInputElement>document.getElementById("usName")).value
-    // console.log("lista de LA LISTA", this.ListUser)
+    
      let usu = this.ListUser.filter((it) => it.userName == (nombreUsu+' ').trim().toUpperCase())
-     //console.log("el usu length : ",usu.length)
+  
      if(usu.length != 0){
-      //console.log("entro al usuario swal  ")
+     
       await swal.fire({
         title: 'Registrar Usuario',
           icon: "warning",
@@ -247,7 +244,7 @@ export class UserConfigComponent implements OnInit {
            
           // cancelButtonText: "Cancelar",
       }).then( (result) => {
-        //console.log("entro al then  ")
+       
         respFinal = 2
         
       })
@@ -257,8 +254,7 @@ export class UserConfigComponent implements OnInit {
      }
      return respFinal
     // let usu = this.ListUser.filter((it) => it.userName == 'ACHANWAY')
-    // console.log("lista de name", this.newUsName)
-    // console.log("lista de usu", usu)
+  
   }
 
   // async getUserState() {
@@ -267,11 +263,11 @@ export class UserConfigComponent implements OnInit {
   //     let _data;
   //     _data = (response);
   //     this.ListUserState = _data;
-  //     console.log("this.ListUserState",this.ListUserState)
+  
   //     this.core.loader.hide();
   //   });
   // }
-
+  DataUsuario:any ={}
 
   async changeUser() {
     if (this.userId != '0') {
@@ -289,7 +285,9 @@ export class UserConfigComponent implements OnInit {
       this.userOff = true;
 
 
-      await this.getDataFromUser(this.userId);
+
+      await this.getDataFromUser(this.userId)
+      
       await this.getHistoryUser();
 
 
@@ -342,16 +340,16 @@ export class UserConfigComponent implements OnInit {
     _data = response;
     this.cargoList = _data;
     this.core.loader.hide();
-    console.log("data del cargo",response)
+    
   }
 
   async getDataFromUser(userId: any) {
     let data: any = {};
     data.userId = userId;
 
-    let response = await this.userConfigService.getDataFromUser(data);
+    this.DataUsuario = await this.userConfigService.getDataFromUser(data);
     let _data;
-    _data = response;
+    _data = this.DataUsuario;
     this.Iduser = _data.userId;
     this.name = _data.userName;
     this.passw = _data.pass;
@@ -361,7 +359,7 @@ export class UserConfigComponent implements OnInit {
     await this.getCargoList(this.rol);
     this.email = _data.userEmail;
     this.state = _data.userState;
-    //console.log("la data que envia",_data)
+    
     if (this.userId == '0') {
       this.editUserOff = true;
       this.EditUserActivated = false;
@@ -603,7 +601,17 @@ export class UserConfigComponent implements OnInit {
     data.systemId = this.newUsSystem === '' ? '' : this.newUsSystem;
     data.userEmail = this.newUsEmail === '' ? '' : this.newUsEmail;
     data.cargoId = this.newUsCargo === '' ? 0 : this.newUsCargo;
-    data.valor = 1
+  
+
+    if(this.DataUsuario.pass == this.newUsPass){
+      //se pone el 2 para no enviar el correo
+      data.valor = 2
+       
+    }else{
+      data.valor = 1
+       
+    }
+    //data.valor = 1
     data.state = this.state
 
     swal.fire({
@@ -693,7 +701,7 @@ export class UserConfigComponent implements OnInit {
   async createData() {
     
     // let nombreUsu = (<HTMLInputElement>document.getElementById("usName")).value
-    // // console.log("lista de LA LISTA", this.ListUser)
+    
     //  let usu = this.ListUser.filter((it) => it.userName == (nombreUsu+' ').trim())
     //  if(usu.length != 0){
     //   swal.fire({
@@ -712,7 +720,7 @@ export class UserConfigComponent implements OnInit {
     //  }
 
     let variable:any = await this.getValidarUsuarioCreado()
-    //console.log("la variable",variable)
+    
     if(variable == 2){
       return
     }

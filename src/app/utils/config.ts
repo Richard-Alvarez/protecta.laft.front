@@ -1,12 +1,18 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/'; 
+  private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
+<<<<<<< HEAD
   private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
  
+=======
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
+  //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
+>>>>>>> 4442b4fcd07a0211b10251333da77c4e34508f2b
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
   //private base: string = 'https://soatservicios.protectaseurity.pe/ApiLAFT/api/';
   //private basePolicy: string = 'https://localhost:5001/api/';
@@ -189,6 +195,10 @@ class Rutas {
   public urlGetValFormularioCompl: string = this.base + "monitoreoSenales/GetValFormularioCompl";
   public urlGetListaCompUsu:string = this.base + "monitoreoSenales/GetListaCompUsu";
   public urlGetListaComplementoUsuario:string = this.base + "monitoreoSenales/GetListaComplementoUsuario";
+
+  //Para Validar Contraseña por primera vez 
+  public urlGetActPassUsuario: string = this.base + "monitoreoSenales/GetActPassUsuario";
+  public urlGetUpdPssUsuario: string = this.base + "monitoreoSenales/GetUpdPssUsuario";
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

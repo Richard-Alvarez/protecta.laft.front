@@ -53,7 +53,7 @@ export class TestcompletadoComponent implements OnInit {
     await this.getTipoUsuario();
     this.fillFileGroup()
 
-    // console.log("el regimen : ",this.regimen.id)
+  
    //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   
   
@@ -115,15 +115,9 @@ export class TestcompletadoComponent implements OnInit {
     }
 
     getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
-      //console.log("el stipo usuario : ",this.STIPO_USUARIO)
-      //console.log("el STIPO_CARGA : ",STIPO_CARGA)
-      //console.log("el objAlertaItem.NIDALERTA_CABECERA : ",objAlertaItem.NIDALERTA_CABECERA)
-      // console.log("el NREGIMEN 123 : ",NREGIMEN)
-      // console.log("el this.STIPO_USUARIO 123 : ",this.STIPO_USUARIO)
-      // console.log("el this.parent.arrObjFilesAdjByCabecera 123 : ",this.parent.arrObjFilesAdjByCabecera)
-      // console.log("el objAlertaItem : ",objAlertaItem)
+      
       let resp = this.parent.arrObjFilesAdjByCabecera.filter(it => it.NIDCABECERA_USUARIO == objAlertaItem.NIDALERTA_CABECERA && it.NREGIMEN == NREGIMEN && it.STIPO_USUARIO == this.STIPO_USUARIO && it.STIPO_CARGA == STIPO_CARGA)
-      //console.log("el resp eyy : ",resp)
+    
       return resp.length > 0 ? resp[0].arrFilesNameCorto : []
     }
 
@@ -139,7 +133,7 @@ export class TestcompletadoComponent implements OnInit {
 
     async insertAttachedFiles(data: any) {
         let response = await this.userConfigService.insertAttachedFiles(data)
-        ////console.log(response)
+       
     }
 
      async getAttachedFiles(arrResponsable: any[], tipoUsuario: string) {
@@ -191,8 +185,8 @@ export class TestcompletadoComponent implements OnInit {
   }
 
   getArray(state,regimen){
-    ////console.warn("EL DATA : ",this.arrResponsable);
-    /*//console.log("la OOOOOOOOOOOO : ",state +"    -    "+regimen)
+   
+    /*
     switch (state) {
       case 'COMPLETADO' : 
         if(regimen === 1){
@@ -221,7 +215,7 @@ export class TestcompletadoComponent implements OnInit {
   }
 
   getClassBagdeState(state){
-    ////console.log("state : ",state)
+  
     if(state === 'PENDIENTE'){
       return 'badge-warning'
     }
@@ -296,9 +290,9 @@ export class TestcompletadoComponent implements OnInit {
                        },
          
       }).then(async (result) => {
-       ////console.log("hellow : ",result)
+      
       }).catch(err => {
-        ////console.log("el error : ",err);
+       
       })
     }else{
       swal.fire({
@@ -317,14 +311,14 @@ export class TestcompletadoComponent implements OnInit {
                        },
          
       }).then(async (result:any) => {
-        ////console.log("result w : ",result)
+       
         if(result.value === true){
           this.core.loader.show()
           let respFilterArrRespon:any = await this.enviarSolicitarComplemento(indice,pregHead)
           let objSenial:any = pregHead
           objSenial.SCOMENTARIO = this.arrInputCommentSolCompl[indice]
           //await this.parent.insertComentariosHeader(pregHead,objSenial) //EL STORE SOLICITAR COMPLEMENTO YA INSERTA EL COMENTARIO
-          // console.log("this.arrInputCommentSolCompl[indice]l 154 : ",this.arrInputCommentSolCompl[indice])
+         
           let respComments = await this.parent.getCommentHeaderWithAlert(objSenial,objSenial.NIDALERTA_CABECERA)
           let newArrayAdjuntos
           try {
@@ -332,18 +326,17 @@ export class TestcompletadoComponent implements OnInit {
             /*///en devuelto no se ve los adjuntos solo en la conversacion//*/let respAdjuntosRE = await this.parent.getAdjuntosCabeceraById(objSenial,'RE')
             /*///en devuelto no se ve los adjuntos solo en la conversacion//*/newArrayAdjuntos = await respAdjuntosOC.concat(respAdjuntosRE)
           } catch (error) {
-            // console.log("el error: ",error)
+            
           }
-          // console.log("newArrayAdjuntos 12345 : ",newArrayAdjuntos)
-          ////console.error("respFilterArrRespon : ",respFilterArrRespon)
+         
           objSenial.arrConversacionCabecera = respComments
           /*///en devuelto no se ve los adjuntos solo en la conversacion//*/objSenial.arrAdjuntos = newArrayAdjuntos
           objSenial.SCOMENTARIO_OC = this.arrInputCommentSolCompl[indice]
-          // console.log("objSenial : ",objSenial)
+        
           //respFilterArrRespon[0].SCOMENTARIO_OC =  this.arrInputCommentSolCompl[indice]
           //let respMetodo = this.parent.pushObjInArrayByAlert('DEVUELTO',this.regimen.id,respFilterArrRespon[0])
           let respMetodo = this.parent.pushObjInArrayByAlert('DEVUELTO',this.regimen.id,objSenial)
-          // console.log("el respMetodo : ",respMetodo)
+       
   
           this.core.loader.hide();
           // Se comento para que no aparezca la modal de success
@@ -371,7 +364,7 @@ export class TestcompletadoComponent implements OnInit {
         //   })
         // }
       }).catch(err => {
-        ////console.log("el error : ",err);
+        
       })
     }
 
@@ -398,13 +391,13 @@ export class TestcompletadoComponent implements OnInit {
   }
 
   async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
-    // console.log("el NREGIMEN : ",NREGIMEN)
+    
     await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO)
   }
 
   async enviarSolicitarComplemento(index,pregHead){
     try {
-      console.log("el pregHead : ",pregHead)
+      
       //return
       this.core.loader.show();
       let data:any = {}
@@ -420,11 +413,11 @@ export class TestcompletadoComponent implements OnInit {
       data.NIDUSUARIO = pregHead.NIDUSUARIO_ASIGNADO//this.OBJ_USUARIO.username
       data.NIDACCION = 2//DEVOLUCION DE ALERTA
       
-      console.log("data this.OBJ_USUARIO", this.OBJ_USUARIO)
+     
       let response = await this.userConfigService.sendComplimentary(data)
 
       await this.parent.sendFilesAdjuntosCabecera(pregHead.NIDALERTA_CABECERA,pregHead.NIDALERTA,this.regimen.id,'ADJUNTOS-FORM',"COMPLETADO","OC")
-      ////console.log("el response : ",response)
+     
       //this.SCOMPLIMENTARY = ''
       let respFilterArrRespon:any = []
       respFilterArrRespon = this.arrResponsable.splice(index,1)//this.arrResponsable.filter((complet) => complet.brand !== 'Seat')
@@ -432,7 +425,7 @@ export class TestcompletadoComponent implements OnInit {
 
       return respFilterArrRespon 
     } catch (error) {
-      console.error("error en enviar complemento : ",error)
+     
     }  
     
   }
@@ -442,7 +435,7 @@ export class TestcompletadoComponent implements OnInit {
     
     //let state = false;
     let texto = this.arrInputCommentSolCompl[index]
-    ////console.log("en a la funcion del keyup : ",texto)
+   
     if(( texto + '').trim() === ''){
       this.arrDisableSolCompl[index] = true
     }else if(( texto + '').trim() !== ''){
@@ -450,7 +443,7 @@ export class TestcompletadoComponent implements OnInit {
     }else{
       this.arrDisableSolCompl[index] = true
     }
-    ////console.log("state : ",this.arrDisableSolCompl[index])
+    
     //return state
   }
   getArrDisableSolCompl(index){
@@ -537,8 +530,7 @@ export class TestcompletadoComponent implements OnInit {
             }
             indiceCheckbox++
           })
-        //console.log("Checkbox : ", respCheckboxFilter)
-        //console.log("acumuladorIndices : ", acumuladorIndices)
+       
         
         let arrServiceUpdateSenial:any =[]
         respCheckboxFilter.forEach(element => {
@@ -549,7 +541,7 @@ export class TestcompletadoComponent implements OnInit {
           data.SESTADO = 4
           data.NREGIMEN = element.NREGIMEN
           data.NIDALERTA_CABECERA = element.NIDALERTA_CABECERA
-          // console.log("data :  ",data)
+      
           
         
         
@@ -558,7 +550,7 @@ export class TestcompletadoComponent implements OnInit {
         });
         try {
           let respPromiseAll:any = await Promise.all(arrServiceUpdateSenial)
-          //console.log("respPromiseAll : " ,respPromiseAll)
+         
           let arrPromisesGetModuleWork = []
           respPromiseAll.forEach(item => {
             //Se tiene que modificar igual
@@ -568,21 +560,19 @@ export class TestcompletadoComponent implements OnInit {
               }
           })
           let respPromisesAllGetModuleWork = await Promise.all(arrPromisesGetModuleWork)
-          //console.log("respPromisesAllGetModuleWork 123 : " ,respPromisesAllGetModuleWork)
+         
         } catch (error) {
-          console.log(error)
+        
         }
 
       
 
-        //console.log("el arrResponsable : ",this.arrResponsable)
+     
        
         this.setPushDataRevisado(respCheckboxFilter)
         this.arrNewCheck = []
         this.arrCheckbox = []
-        // console.log("15 Prueba arrNewCheck: ", this.arrNewCheck)
-        // console.log("15 Prueba arrCheckbox: ", this.arrCheckbox)
-        //console.log("el revisado del régimen simplificado ",this.parent.arrResponsablesRevisadoGral)
+   
 
       } })
     }
@@ -591,44 +581,42 @@ export class TestcompletadoComponent implements OnInit {
   setPushDataRevisado(respCheckboxFilter){
     let recoveryObjResponsable: any = []
     /*acumuladorIndices.forEach(acum => {
-      console.log("el acum del responsable : ",acum)
-      console.log("el this.arrResponsable[acum] del responsable : ",this.arrResponsable[acum])
+     
       let respuestaSplice = this.arrResponsable.splice(acum,1)
-      console.log("splice :",respuestaSplice)
+     
      recoveryObjResponsable.push(respuestaSplice[0])
 
     })*/
 
     respCheckboxFilter.forEach(itCheck => {
       let indiceResponsable = this.arrResponsable.map(respo => respo.NIDALERTA_CABECERA).indexOf(itCheck.NIDALERTA_CABECERA)
-      // console.log("el indice del responsable : ",indiceResponsable)
+     
       recoveryObjResponsable.push(this.arrResponsable[indiceResponsable])
       let respuestaSplice = this.arrResponsable.splice(indiceResponsable,1)
-      // console.log("splice :",respuestaSplice)
+     
       
     })
      //  let from = this.parent.getWorkModuleAll
      recoveryObjResponsable.forEach(obj => {
 
        let respuestaPushObjs = this.parent.pushObjInArrayByAlert("REVISADO",this.regimen.id,obj)
-      //  console.log("el respuestaPushObjs ", respuestaPushObjs)
+     
      });
   }
 
   async getDataModuleWorkCheckBox(){
     try {
       let respWorkList = await this.parent.getWorkModuleAll(this.regimen.id)
-      // console.log("respWorkList 123: ",respWorkList)
+     
       if(this.regimen.id == 1){
         this.parent.arrResponsablesPendienteInformeGral = respWorkList.arrPendienteInfo
       }else{
         this.parent.arrResponsablesPendienteInformeSimpli = respWorkList.arrPendienteInfo
       }
-      // console.log(" el this.parent.arrResponsablesPendienteInformeGral : ",this.parent.arrResponsablesPendienteInformeGral)
-      // console.log(" el this.parent.arrResponsablesPendienteInformeSimpli : ",this.parent.arrResponsablesPendienteInformeSimpli)
+     
       return true
     } catch (error) {
-      console.error("el error del checkbox : ",error)
+    
       return false
     }
   }
@@ -637,8 +625,7 @@ export class TestcompletadoComponent implements OnInit {
 
   arrNewCheck:any = []
   setDataCheckboxApproved(item,index){
-    // console.log("15 Prueba arrResponsable 15 : ", this.arrResponsable)
-    // console.log("15 Prueba ngModel : ", this.arrCheckbox)
+    
     let valor = this.arrCheckbox[index]
     // let respFilterAlert= this.arrNewCheck.filter(it => it.NIDALERTA === item.NIDALERTA && it.NIDALERTA_CABECERA === item.NIDALERTA_CABECERA
     //  && it.NREGIMEN===  item.NREGIMEN)
@@ -652,18 +639,18 @@ export class TestcompletadoComponent implements OnInit {
       
     let arrValidNewCheckLength = (this.arrNewCheck.filter(it => it.indiceCheckbox === index)).length
 
-    // console.log("arrValidNewCheck : ",arrValidNewCheckLength)
+  
     if(arrValidNewCheckLength > 0 ){
       //let indiceNewCheck = 0
       let arrCheckboxObjNew:any= []
       this.arrNewCheck.forEach(it => {
         if(it.indiceCheckbox === index){
             //indiceNewCheck++
-            // console.log("entro")
+           
             arrCheckboxObjNew.push(objNew)
           }
           else{
-            // console.log("no entro")
+           
             arrCheckboxObjNew.push(it)
           }
       });
@@ -672,8 +659,7 @@ export class TestcompletadoComponent implements OnInit {
     }else{
       this.arrNewCheck.push(objNew)
     }
-    // console.log("15 Prueba arrNewCheck: ", this.arrNewCheck)
-    // console.log("15 Prueba arrCheckbox: ", this.arrCheckbox)
+   
    
   }
 
@@ -691,15 +677,10 @@ export class TestcompletadoComponent implements OnInit {
   }
   
   getFilesInformByAlert(alerta: any) {
-    //console.log("el 45884 INICIO")
-    //console.log("el 45884 alerta : ",alerta)
-    //console.log(alerta)
-    //console.log("NIDREGIMEN: ",alerta.NIDREGIMEN)
-    //console.log("NIDREGIMEN: ",alerta.NREGIMEN)
-    //console.log("el 45884 this.parent.arrObjFilesInformeByAlert : ",this.parent.arrObjFilesInformeByAlert)
+ 
     let resp = this.parent.arrObjFilesInformeByAlert.filter(inform => alerta.NIDALERTA == inform.NIDALERTA 
       && inform.NREGIMEN == alerta.NREGIMEN && inform.STIPO_CARGA == 'INFORMES')
-    //console.log("el 45884 resp : ",resp)
+   
     return resp.length === 0 ? [] : resp[0].arrFilesNameCorto//this.parent.getFilesByAlert(alerta, tipoUsuario)
   }
 
@@ -707,44 +688,34 @@ export class TestcompletadoComponent implements OnInit {
     try {
       this.parent.getExcelListAlert(NIDALERTA,REGIMEN)
     } catch (error) {
-      console.log("error al descargar el archivo. ",error)
+     
     }
   }
 
 
   async getArchivoSustento(item){
-    console.log("el objAlerta sustento : ",item)
-    console.log("el objAlerta arrAdjuntosSustento : ",item.arrAdjuntosSustento[0])
+   
     try {
       let objAdjunto = item.arrAdjuntosSustento[0]
       //let NPERIODO_PROCESO =  parseInt(localStorage.getItem("periodo"))
-      // console.log("el ajunto : ",adjunto)
-      // console.log("el item : ",this.item)
+    
       //let ruta = 'ADJUNTOS/'+this.item.NIDALERTA+'/'+NPERIODO_PROCESO+'/'+this.parent.regimen.id+'/'+adjunto.name
       let ruta = item.arrAdjuntosSustento[0].SRUTA_ADJUNTO
-      // console.log("ruta : ",ruta)
+  
       let resp = await this.parent.downloadUniversalFile(ruta,objAdjunto.name)
     } catch (error) {
-      console.error("error en descargar: ",error)
+   
     }
   }
 
 
 UltimoTooltip(indice,lista){
-  // console.log("canidad de indice", this.getArray(this.stateCompletado.sState,this.regimen.id).length)
-  // console.log("canidad de indice 1", this.getArray(this.stateCompletado.sState,1).length)
-  // console.log("canidad de indice 2", this.getArray(this.stateCompletado.sState,2).length)
-  //  console.log("canidad de cantidad", indice)
-  // console.log("canidad de longitud", longitud)
-  //  console.log("canidad de grupoindexgroups", indexgroup)
+  
   
   //  let lista1 =  lista.filter(itLista1 => itLista1.NOMBRECOMPLETO== 'Diego Rosell Ramírez Gastón' )
   //  let lista2 =  lista.filter(itLista2 => itLista2.NOMBRECOMPLETO== 'Yvan Ruiz Portocarrero' )
   //  let lista3 =  lista.filter(itLista3 => itLista3.NOMBRECOMPLETO== 'Alfredo Chan Way Diaz' )
-  //  console.log("lista 1", lista1.length)
-  //  console.log("lista 2", lista2.length)
-  //  console.log("lista 3", lista3.length)
-
+ 
 
 
   if(indice == 1){
@@ -761,9 +732,7 @@ UltimoTooltip(indice,lista){
 capitalizarPrimeraLetra(texto : string ) {
   //  let texto = str
     
-  //  console.log("el texto de la primera letra", texto[0].toUpperCase() +  texto.slice(1).toLowerCase())
-  //  console.log("el texto que ingreso", texto[0].toUpperCase() + texto.slice(1))
-  //  console.log("el texto que ingreso 2", texto.charAt(0).toUpperCase() + texto.slice(1))
+ 
    return texto[0].toUpperCase() +  texto.slice(1).toLowerCase()
 }
   

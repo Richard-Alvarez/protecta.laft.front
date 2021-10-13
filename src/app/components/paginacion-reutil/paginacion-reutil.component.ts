@@ -18,7 +18,7 @@ export class PaginacionReutilComponent implements OnInit {
   }
 
   pageChanged(currentPage){
-    console.log("el currentPage : ",currentPage)
+    
     this.parent.currentPage = currentPage
     this.parent.getResultadosCliente(currentPage)
     return currentPage

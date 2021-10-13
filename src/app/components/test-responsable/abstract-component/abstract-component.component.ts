@@ -35,7 +35,7 @@ export class AbstractComponentComponent implements OnInit , ControlValueAccessor
      if(control) {
      control.valueAccessor = this;
       control.statusChanges.subscribe(status => {
-        console.log(this.modelEl);
+       
         if (status === 'INVALID' && this.modelEl) {
           this.modelEl.nativeElement.setCustomValidity(status);
         } else {

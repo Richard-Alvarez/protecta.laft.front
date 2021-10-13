@@ -28,7 +28,7 @@ export class PerfilesComponent implements OnInit {
   async GetListPerfiles() {
     let response = await this.userConfig.GetListPerfiles()
     this.PerfilList = response
-    console.log("la lista nueva",this.PerfilList)
+    
     this.ListPerfilSinRepetir()
     this.ListRepetidos()
   }
@@ -44,7 +44,7 @@ export class PerfilesComponent implements OnInit {
     });
     
   
-    console.log("nuevaLista sin repetir",nuevaLista)
+    
 
 
   }
@@ -65,7 +65,7 @@ export class PerfilesComponent implements OnInit {
       if(temporal.indexOf(value)!=-1 && repetidos.indexOf(value)==-1)      repetidos.push(value);
     });
     
-    console.log("repetidos",repetidos);
+    
   }
 
 

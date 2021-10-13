@@ -165,7 +165,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
 
 
-    //console.log("arrRegimen15 : ", this.arrRegimen)
+    
     this.arrResponsablesByCerrado = [
       {
         "id": "id001",
@@ -188,7 +188,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
    
     this.arrRegimen = this.getRegimenDinamic();
-    console.log("this.arrRegimen", this.arrRegimen)
+
     
     if (this.STIPO_USUARIO === 'RE') {
       this.userGroupListGral = [1]
@@ -203,7 +203,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
   }
 
   ValorCheck(event){
-    console.log("El valor :", this.CheckBoxValor )
+   
     
   }
   
@@ -258,9 +258,9 @@ buttons.forEach( button => button.addEventListener('click', function() {
     let respComments = await this.getCommentHeader(item.NIDALERTA_CABECERA)
     item.arrConversacionCabecera = respComments
     let respComentarioActual = respComments.filter(a =>  a.STIPO_USUARIO == 'RE')
-    console.log("el respComments : ",respComments)
+ 
     item.SCOMENTARIOa_ULTIMO = respComentarioActual[0] ? respComentarioActual[0].SCOMENTARIO : ''
-    console.log("el item : ",item)
+ 
     return item
   }
 
@@ -282,7 +282,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     //let dataSendAttachedByAlert = {NIDALERTA: objAlerta.NIDALERTA, NREGIMEN: NREGIMEN, NPERIODO_PROCESO: this.NPERIODO_PROCESO, STIPO_CARGA: 'ADJUNTOS'}
     let respAdjuntos = await this.getAttachedFilesInformByAlert(objAlerta.NIDALERTA, NREGIMEN, 'ADJUNTOS')//this.userConfigService.getAttachedFilesInformByAlert(dataSendAttachedByAlert)
     //let respAdjuntosSustento = await this.getAttachedFilesInformByCacebera(objAlerta.NIDALERTA,objAlerta.NIDALERTA_CABECERA, NREGIMEN, 'ADJUNTOS-SUSTENTO')
-    console.log("los adjuntos de los informes : ", respAdjuntos)
+  
     let dataWork = { NIDALERTA: objAlerta.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: NREGIMEN }
     let respWorkDetalle = await this.getWorkModuleDetailData(dataWork)
     resp.forEach(element => {
@@ -311,7 +311,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
     resp.sort((a, b) => new Date(a.DFECHA_REGISTRO) < new Date(b.DFECHA_REGISTRO))
     respAdjuntos.sort((a, b) => new Date(a.DFECHA_REGISTRO) < new Date(b.DFECHA_REGISTRO))
-    //console.log("el resp 9853 : ",resp)
+
     let objFormByAlert: any = {}
     objFormByAlert.NIDALERTA = objAlerta.NIDALERTA
     objFormByAlert.SDESCRIPCION_ALERTA = objAlerta.SDESCRIPCION_ALERTA
@@ -348,8 +348,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     let respBusquedaSimpli = await this.getFormsByHead(this.alertFormListSimpli, 2, numPregunta);
     this.alertFormList = respBusquedaGral.array
     this.alertFormListSimpli = respBusquedaSimpli.array
-    console.warn("el this.alertFormList 11114-1: ", this.alertFormList)
-    console.warn("el this.alertFormList 11114-2: ", this.alertFormListSimpli)
+    
     //this.alertFormList.forEach(it => it.estado = it.SESTADO_REVISADO == '1' ? true : false)
     this.alertFormList.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
     this.alertFormListSimpli.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
@@ -359,7 +358,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     let arrInfoTerminadoSimpli = []
     //this.alertFormList.forEach(t => {t.SESTADO = "1",t.SNOMBRE_ESTADO = "PENDIENTE"});
    
-    console.log(this.alertFormList);
+    
     this.alertFormList.forEach(item => {
       item.NREGIMEN = 1
       if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
@@ -415,7 +414,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     })
     //this.alertFormListSimpli.forEach(t => {t.SESTADO = "1",t.SNOMBRE_ESTADO = "PENDIENTE"});
 
-    console.log(this.alertFormListSimpli);
+    
     this.alertFormListSimpli.forEach(item => {
       item.NREGIMEN = 2
       if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
@@ -470,8 +469,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       /*
       let respWorkListGeneral = await this.userConfigService.getWorkModuleList(data)
       let respWorkListSimplificado = await this.userConfigService.getWorkModuleList(data2)
-      //console.log("el 1234 respWorkListGeneral : ",respWorkListGeneral)
-      //console.log("el 1234 respWorkListSimplificado : ",respWorkListSimplificado)
+   
       respWorkListGeneral.forEach(idWork => {
         //idWork.arrAdjuntosInform.sort((a, b) => a.DFECHA_REGISTRO > b.DFECHA_REGISTRO)
         if (idWork.SESTADO === '1') {
@@ -495,18 +493,18 @@ buttons.forEach( button => button.addEventListener('click', function() {
       let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral),
       Promise.all(arrPendienteInfoSimpli), Promise.all(arrInfoTerminadoSimpli)])
       */
-      //console.log("respGroupPromiseAll : ",respGroupPromiseAll)
+     
       let arrWorkModulePromise:any = []
       let arrRegimenNewTmp = [1,2]
-      // console.log("REgimen Arr:",this.arrRegimen)
+     
       arrRegimenNewTmp.forEach(regimenItem => {
-        console.log("REgimen item:",regimenItem)
+     
         let respWorkModulelist = this.getWorkModuleAll(regimenItem)
         arrWorkModulePromise.push(respWorkModulelist)
         
       });
       let respGroupPromiseAll:any = await Promise.all(arrWorkModulePromise)
-      console.log("Promise All:",respGroupPromiseAll)
+     
       this.arrResponsablesPendienteInformeGral = (respGroupPromiseAll[0]).arrPendienteInfo //respGroupPromiseAll[0]
       this.arrResponsablesInformeTerminadoGral = /*(respGroupPromiseAll[0]).arrPendienteInfo//PRUEBA/*/(respGroupPromiseAll[0]).arrInfoTerminado
       this.arrResponsablesPendienteInformeSimpli = (respGroupPromiseAll[1]).arrPendienteInfo
@@ -514,17 +512,9 @@ buttons.forEach( button => button.addEventListener('click', function() {
       
     }
 
-    console.log("arrResponsablesPendienteInformeGral : ", this.arrResponsablesPendienteInformeGral)
-    console.log("arrResponsablesInformeTerminadoGral : ", this.arrResponsablesInformeTerminadoGral)
-    console.log("arrResponsablesPendienteInformeSimpli : ", this.arrResponsablesPendienteInformeSimpli)
-    console.log("arrResponsablesInformeTerminadoSimpli : ", this.arrResponsablesInformeTerminadoSimpli)
+   
 
-    //console.log("pendiente : ",this.arrResponsablesPendienteGral)
-    //console.log("completado JJJKKK: ",this.arrResponsablesCompleGral)
-    //console.log("devuelto : ",this.arrResponsablesDevueltoGral)
-    //console.log("pendiente : ",this.arrResponsablesPendienteSimpli)
-    //console.log("completado : ",this.arrResponsablesCompleSimpli)
-    //console.log("devuelto : ",this.arrResponsablesDevueltoSimpli)
+  
     let objTiUser: any = 'TI'
 
     this.userGroupListGral = await this.groupUsers(this.alertFormList)
@@ -532,8 +522,6 @@ buttons.forEach( button => button.addEventListener('click', function() {
     ///this.addAlertsToPendienteInforme()
 
 
-    /*//console.log("userGroupListGral : ",this.userGroupListGral)
-    //console.log("userGroupListSimpli : ",this.userGroupListSimpli)*/
     this.userGroupListGral.push(objTiUser)
     this.userGroupListSimpli.push(objTiUser)
   }
@@ -541,15 +529,15 @@ buttons.forEach( button => button.addEventListener('click', function() {
   async getAndSetWorkModuleAll(){
     let arrWorkModulePromise:any = []
     let arrRegimenNewTmp = [1,2]
-    // console.log("REgimen Arr:",this.arrRegimen)
+    
     arrRegimenNewTmp.forEach(regimenItem => {
-      console.log("REgimen item:",regimenItem)
+    
       let respWorkModulelist = this.getWorkModuleAll(regimenItem)
       arrWorkModulePromise.push(respWorkModulelist)
       
     });
     let respGroupPromiseAll:any = await Promise.all(arrWorkModulePromise)
-    console.log("Promise All:",respGroupPromiseAll)
+  
     this.arrResponsablesPendienteInformeGral = (respGroupPromiseAll[0]).arrPendienteInfo //respGroupPromiseAll[0]
     this.arrResponsablesInformeTerminadoGral = /*(respGroupPromiseAll[0]).arrPendienteInfo//PRUEBA/*/(respGroupPromiseAll[0]).arrInfoTerminado
     this.arrResponsablesPendienteInformeSimpli = (respGroupPromiseAll[1]).arrPendienteInfo
@@ -568,8 +556,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       let arrInfoTerminadoSimpli:any = []
       let respWorkListGeneral = await this.userConfigService.getWorkModuleList(data)
       //let respWorkListSimplificado = await this.userConfigService.getWorkModuleList(data)
-      //console.log("el 1234 respWorkListGeneral : ",respWorkListGeneral)
-      //console.log("el 1234 respWorkListSimplificado : ",respWorkListSimplificado)
+     
       respWorkListGeneral.forEach(idWork => {
         //idWork.arrAdjuntosInform.sort((a, b) => a.DFECHA_REGISTRO > b.DFECHA_REGISTRO)
         if (idWork.SESTADO === '1') {
@@ -593,7 +580,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       // let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral),
       //   Promise.all(arrPendienteInfoSimpli), Promise.all(arrInfoTerminadoSimpli)])
       let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral)])
-      //console.log("respGroupPromiseAll : ",respGroupPromiseAll)
+     
       
      
       return {arrPendienteInfo:respGroupPromiseAll[0],arrInfoTerminado:respGroupPromiseAll[1]}
@@ -650,7 +637,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       data.STIPO_CARGA = STIPO_CARGA//'INFORMES'
       data.NREGIMEN = NREGIMEN
       let respAttachFileInfo = await this.userConfigService.getAttachedFilesInformByCabecera(data)
-      console.log("el data de get info respAttachFileInfo : ",respAttachFileInfo)
+      
       return respAttachFileInfo
     } catch (error) {
       console.error("el error en get cabecera adjuntos : ",error)
@@ -706,12 +693,9 @@ buttons.forEach( button => button.addEventListener('click', function() {
     let respPromisePregDetailAll = await Promise.all(arrPromisePregDetail);
     let respPromiseAdjuntosAll = await Promise.all(arrPromiseAdjuntos);
     let respPromiseAdjuntosSustentoAll = await Promise.all(arrPromiseAdjuntosSustento);
-    console.log("respPromiseAdjuntosSustentoAll ---- 12: ",respPromiseAdjuntosSustentoAll)
+   
     //let respPromiseAdjInfoAll = await Promise.all(arrPromiseAdjuntosInfo);
-    //console.log("respPromiseAll : ",respPromiseAllPreguntas)
-    //console.error("respPromiseComentariosAll : ",respPromiseComentariosAll)
-    //console.error("---! respPromisePregDetailAll : ",respPromisePregDetailAll)
-    ////console.error("---! respPromiseAdjInfoAll : ",respPromiseAdjInfoAll)
+    
     let arrayAlertList = []
     arrayBusqueda.forEach((item,indiceArray) => {
       let arrayPreguntasCabecera = []
@@ -723,7 +707,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       let arrAdjuntosNew = []
 
       let objFechaComentarioOC:any = {}
-      console.log("EL NIDALERTA : ", item.NIDALERTA)
+     
       objAlerta = item;
       respPromiseAllPreguntas.forEach(preg => {
         preg.forEach(obj => {
@@ -787,7 +771,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         })
 
       })
-      console.log("los adjuntos de los respPromiseAdjuntosSustentoAll : ", respPromiseAdjuntosSustentoAll)
+
       let arrayTmpDataAdjuntosSustento = []
       respPromiseAdjuntosSustentoAll.forEach(it => {
         it.forEach(element => {
@@ -817,7 +801,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
             return detalle.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA
           });
           let returnDetaDuplic: any[] = resultDetalle;
-          //console.log("eL RESULT 987 : ",resultDetalle)
+         
 
           resultDetalle.forEach(pregDet => {
             let respDetaDuplic = returnDetaDuplic.filter(detaDuplic => {
@@ -834,7 +818,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
               //   }
               // })
               let RespuestaTmpArray = arrayTmpDeta.filter(itenDetTmpA => itenDetTmpA === pregDet.NIDALERTA_DETALLE)
-              //console.log( "Pregunta :", arrayTmpDeta )
+              
               if (RespuestaTmpArray.length === 0) {
                 arrayDetalleResult.push(respDetaDuplic);
                 arrayTmpDeta.push(pregDet.NIDALERTA_DETALLE)
@@ -842,7 +826,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
             }
           })
-          //console.warn(" EL resultDetalleFilter 808: ",arrayDetalleResult)
+         
 
 
 
@@ -883,7 +867,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
   async getFormsDetailAlgorit(item){
 
     let respQuestion = await this.getQuestionDetail(item)
-    console.log("el respQuestion : ",respQuestion)
+  
     let arrayDetalleResult: any = []
       if (item.NIDALERTA === 1) {
 
@@ -892,8 +876,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
             return detalle.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA
           });
           let returnDetaDuplic: any[] = resultDetalle;
-          //console.log("eL RESULT 987 : ",resultDetalle)
-
+          
           resultDetalle.forEach(pregDet => {
             let respDetaDuplic = returnDetaDuplic.filter(detaDuplic => {
               let SRESPUESTA = detaDuplic.NRESPUESTA == '1' ? 'Sí.' : detaDuplic.NRESPUESTA == '2' ? 'No.' : null
@@ -909,7 +892,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
               //   }
               // })
               let RespuestaTmpArray = arrayTmpDeta.filter(itenDetTmpA => itenDetTmpA === pregDet.NIDALERTA_DETALLE)
-              //console.log( "Pregunta :", arrayTmpDeta )
+              
               if (RespuestaTmpArray.length === 0) {
                 arrayDetalleResult.push(respDetaDuplic);
                 arrayTmpDeta.push(pregDet.NIDALERTA_DETALLE)
@@ -919,7 +902,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
           })
       }
 
-      console.log("el arrayDetalleResult : ",arrayDetalleResult)
+      
       return arrayDetalleResult
   }
 
@@ -971,7 +954,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     try {
       let data = {NIDALERTA_CAB_USUARIO: item.NIDALERTA_CABECERA, STIPO_USUARIO: STIPO_USU}
       let resp = await this.userConfigService.getAttachedFiles(data)
-      console.log("el resp adjuntos : ",resp)
+   
       resp.forEach(respItem => {
         //respItem.SRUTA_ADJUNTO = respItem.SCOMENTARIO
         let RUTA_SPLIT = (respItem.SRUTA_ADJUNTO).split("/")
@@ -1190,7 +1173,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         }
 
         this.userConfigService.uploadFiles(data).then(response => {
-          //console.log("upload", response);
+          
         });
       }
     })
@@ -1222,7 +1205,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         }
 
         this.userConfigService.uploadFiles(data).then(response => {
-          //console.log("upload", response);
+          
         });
       }
     })
@@ -1231,12 +1214,12 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
   async insertAttachedFiles(data: any) {
     let response = await this.userConfigService.insertAttachedFiles(data)
-    //console.log(response)
+ 
   }
 
   async insertAttachedFilesByAlert(data: any) {
     let response = await this.userConfigService.insertAttachedFilesByAlert(data)
-    //console.log(response)
+
   }
 
 
@@ -1250,19 +1233,19 @@ buttons.forEach( button => button.addEventListener('click', function() {
     param.NIDUSUARIO_ASIGNADO = data.NIDUSUARIO_ASIGNADO,
       param.NIDALERTA_CABECERA = data.NIDALERTA_CABECERA
     param.NIDREGIMEN = regimen//data.NIDREGIMEN 
-    //console.log("param cabecera", param)
+   
     try {
       let answersHeaderList = []
       let questionsHeaderList = []
       questionsHeaderList = await this.userConfigService.getQuestionHeader(param)
-      //console.log("las preguntas : ",questionsHeaderList)
+    
       /*if (questionsHeaderList.length > 0) {
           datosCabecera = questionsHeaderList[0]
           questionsHeaderList.forEach(it => answersHeaderList.push(it))
       }*/
       return questionsHeaderList
     } catch (error) {
-      //console.log("error", error)
+     
     }
   }
 
@@ -1322,7 +1305,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
   }
 
   getClassBagdeState(state) {
-    ////console.log("state : ",state)
+   
     if (state === 'PENDIENTE') {
       return 'badge-warning'
     }
@@ -1343,7 +1326,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
 
   getValor(valor1, valor2, valor3) {
-    //console.log("el valor any : ",valor1+valor2+valor3)
+    
     return valor1 + valor2 + valor3;
   }
 
@@ -1465,22 +1448,20 @@ buttons.forEach( button => button.addEventListener('click', function() {
   // }
 
   getRegimenDinamic() {
-    //console.log("arrRegimen15 Usuario :", this.STIPO_USUARIO)
+  
     if (this.STIPO_USUARIO === "RE") {
       let RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }, { 'id': 2, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
       let estado = [this.statePendiente, this.stateCompletado, this.stateDevuelto]
       let newRegimen = []
 
-      //console.log("arrRegimen15 RegimenTemp15 : " ,RegimenTemp )
-      //console.log("arrRegimen15 Estado15 : " ,estado )
+    
       RegimenTemp.forEach(reg => {
         let estadoRegimen = []
 
         estado.forEach(est => {
-          //console.log("arrRegimen15 est :",est)
-          //console.log("arrRegimen15 reg :",reg)
+         
           let ResponsableTmp = this.getArray(est.sState, reg.id)
-          //console.log("arrRegimen15 ResponsableTmp :",ResponsableTmp)
+        
           if (ResponsableTmp.length === 0) {
             estadoRegimen.push(false)
 
@@ -1489,7 +1470,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
             estadoRegimen.push(true)
           }
         })
-        //console.log("arrRegimen15 estadoRegimen :",estadoRegimen)
+       
         if (estadoRegimen.filter(it => it === true).length > 0) {
           newRegimen.push(reg)
         }
@@ -1686,14 +1667,14 @@ buttons.forEach( button => button.addEventListener('click', function() {
                      },
        
     }).then(async (result) => {
-      //console.log("hellow : ",result)
+     
     }).catch(err => {
-      //console.log("el error : ",err);
+    
     })
   }
 
   async setVariableRegimen(regimen) {
-    //console.log("AL CARGAR REGIMEN : ",regimen)
+  
     await this.core.storage.set('regimenPadre', regimen)
   }
 
@@ -1790,19 +1771,17 @@ buttons.forEach( button => button.addEventListener('click', function() {
   removeFileAdjuntosFiles(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
     STIPO_CARGA="ADJUNTOS-FORM"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-    console.log("el STIPO_CARGA: ",STIPO_CARGA)
-    console.log("el dataObjAlerta: ",dataObjAlerta)
-    console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesAdjByCabecera)
+   
     let filtroFiles =  this.arrObjFilesAdjByCabecera.filter(it => 
       it.NIDCABECERA_USUARIO == dataObjAlerta.NIDALERTA_CABECERA &&
       it.STIPO_CARGA === STIPO_CARGA)
-    console.log("el filtroFiles: ",filtroFiles)
+   
     if(filtroFiles.length > 0){
       let objFile:any = filtroFiles[0]
       objFile.arrFiles.splice(indice,1)
       objFile.arrFilesName.splice(indice,1)
       objFile.arrFilesNameCorto.splice(indice,1)
-      console.log("el objFile: ",objFile)
+   
       let indiceArrObjFiles = 0
       this.arrObjFilesAdjByCabecera.forEach(it => {
         if(it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
@@ -1811,7 +1790,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         indiceArrObjFiles++
       })
       
-      console.log("el this.parent.arrObjFilesAdjByCabecera 2221: ",this.arrObjFilesAdjByCabecera)
+      
     }
     
 
@@ -1820,20 +1799,18 @@ buttons.forEach( button => button.addEventListener('click', function() {
   removeFileAdjuntosFilesInf(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
     STIPO_CARGA="ADJUNTOS"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-    console.log("el STIPO_CARGA: ",STIPO_CARGA)
-    console.log("el dataObjAlerta: ",dataObjAlerta)
-    console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesInformeByAlert)
+   
     let filtroFiles =  this.arrObjFilesInformeByAlert.filter(it => 
       it.NIDCABECERA_USUARIO == dataObjAlerta.NIDALERTA_CABECERA && 
       it.STIPO_CARGA === STIPO_CARGA)
 
       
-    console.log("el filtroFiles: ",filtroFiles)
+   
     let objFile:any = filtroFiles[0]
     objFile.arrFiles.splice(indice,1)
     objFile.arrFilesName.splice(indice,1)
     objFile.arrFilesNameCorto.splice(indice,1)
-    console.log("el objFile: ",objFile)
+
     let indiceArrObjFiles = 0
     this.arrObjFilesInformeByAlert.forEach(it => {
       if(it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
@@ -1842,27 +1819,25 @@ buttons.forEach( button => button.addEventListener('click', function() {
       indiceArrObjFiles++
     })
     
-    console.log("el this.parent.arrObjFilesAdjByCabecera 2221: ",this.arrObjFilesAdjByCabecera)
+   
 
   }
 
   removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
     //STIPO_CARGA="ADJUNTOS"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-    console.log("el STIPO_CARGA: ",STIPO_CARGA)
-    console.log("el dataObjAlerta: ",dataObjAlerta)
-    console.log("el this.parent.arrObjFilesAdjByCabecera: ",this.arrObjFilesInformeByAlert)
+  
     let filtroFiles =  this.arrObjFilesInformeByAlert.filter(it => 
       it.NIDALERTA_CABECERA == dataObjAlerta.NIDALERTA_CABECERA && 
       it.STIPO_CARGA == STIPO_CARGA)
 
 
-    console.log("el filtroFiles: ",filtroFiles)
+   
     let objFile:any = filtroFiles[0]
     objFile.arrFiles.splice(indice,1)
     objFile.arrFilesName.splice(indice,1)
     objFile.arrFilesNameCorto.splice(indice,1)
-    console.log("el objFile: ",objFile)
+    
     let indiceArrObjFiles = 0
     this.arrObjFilesInformeByAlert.forEach(it => {
       if(it.NIDALERTA_CABECERA === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
@@ -1871,7 +1846,6 @@ buttons.forEach( button => button.addEventListener('click', function() {
       indiceArrObjFiles++
     })
     
-    console.log("el this.parent.arrObjFilesAdjByCabecera 2221: ",this.arrObjFilesAdjByCabecera)
 
   }
 
@@ -1899,7 +1873,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     respQuestionDetail.forEach(item => {
       arrQuestionDetailList.push(item)
     })*/
-    ////console.log("questionsList : ",this.questionsList)
+    
     /*let first = this.questionsList[0]
     this.questionDetailList = response.preguntas[first]
     await this.fillAnswers(response)*/
@@ -1934,7 +1908,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       arrNewConversacion.push(this.getCommentHeaderWithAlert(senial, senial.NIDALERTA_CABECERA))
     })
     let respPromiseAllComments = await Promise.all(arrNewConversacion)
-    //console.log("respPromiseAllComments 789: ",respPromiseAllComments)
+   
     /*switch (sState) {
       case 'PENDIENTE':{
         if(regimen === 1){
@@ -1953,7 +1927,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         }
       }break;
       default: {
-        //console.log("esta en el default")
+        
       }
     }*/
   }
@@ -1969,18 +1943,18 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
   async addFilesInforme(event: any, NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-      console.log("llego a esta parte?")
-      //console.log("el arrFiles 879 NIDALERTA: ",NIDALERTA)
+      
+      
       let files = event.target.files;
 
       let arrFiles = Array.from(files)
-      console.log("el arrFiles 879 : ", arrFiles)
+      
       let listFileNameInform: any = []
       arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-      //console.log("el arrFiles listFileNameInform 879 : ",listFileNameInform)
+      
 
       let respValidation = await this.isValidationAddFilesInforme(listFileNameInform);
-      console.log("el respValidation de AddFiles: ",respValidation)
+      
 
       let listFileNameCortoInform = []
       for (let item of listFileNameInform) {
@@ -1994,19 +1968,19 @@ buttons.forEach( button => button.addEventListener('click', function() {
         listDataFileInform.push(this.handleFile(fileData))
       })
       let respPromiseFileInfoBinary = await Promise.all(listDataFileInform)
-      //console.log("el arrFiles respPromiseFileInfo 879 : ",respPromiseFileInfo)
+     
       
       let dataInfoFilesTmp = this.arrObjFilesInformeByAlert.filter(itemInfo => 
                                                                    itemInfo.NIDALERTA == NIDALERTA && 
                                                                    itemInfo.NREGIMEN == NREGIMEN && 
                                                                    itemInfo.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
                                                                    itemInfo.STIPO_CARGA == STIPO_CARGA)
-      console.log("el this.arrObjFilesInformeByAlert tmp : ", dataInfoFilesTmp)
+   
       let respAddFilesInArray = this.addFilesInArrayGlobalResponsable(dataInfoFilesTmp, NIDALERTA_CABECERA, NREGIMEN,NIDALERTA,STIPO_CARGA,listFileNameInform,respPromiseFileInfoBinary,listFileNameCortoInform)
-      console.log("el respAddFilesInArray : ", respAddFilesInArray)
+     
       return true
     } catch (error) {
-      console.error("el arrFiles error 879 : ", error)
+      console.error("el arrFiles: ", error)
     }
   }
 
@@ -2015,7 +1989,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       let dataInformFile: any = {}
       let statusDuplic = false
       if (dataInfoFilesTmp.length > 0) {
-        console.log("si es mayor a 0 : ", dataInfoFilesTmp)
+       
         let indiceFile = 0
         this.arrObjFilesInformeByAlert.forEach(it => {
           if (it.NIDALERTA == NIDALERTA && it.NREGIMEN === NREGIMEN && it.STIPO_CARGA === STIPO_CARGA) {
@@ -2033,7 +2007,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         })
       }
       if (!statusDuplic) {
-        console.log("no es mayor a 0 : ", dataInfoFilesTmp)
+       
 
         dataInformFile.NIDALERTA = NIDALERTA
         dataInformFile.NREGIMEN = NREGIMEN
@@ -2042,11 +2016,11 @@ buttons.forEach( button => button.addEventListener('click', function() {
         dataInformFile.arrFilesName = listFileNameInform
         dataInformFile.arrFiles = respPromiseFileInfoBinary
         dataInformFile.arrFilesNameCorto = listFileNameCortoInform
-        console.log("el dataInformFile 123456789 : ", dataInformFile)
+        
         this.arrObjFilesInformeByAlert.push(dataInformFile)
       }
 
-      console.log("el arrObjFilesInformeByAlert 123456789 : ", this.arrObjFilesInformeByAlert)
+    
       return true
     } catch (error) {
       console.error("el error en el add : ",error)
@@ -2063,7 +2037,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         return
       }
     }
-    console.log("statusFormatFile : ",statusFormatFile)
+   
       if (statusFormatFile) {
         swal.fire({
           title: 'Bandeja del Oficial de Cumplimiento',
@@ -2079,7 +2053,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
                          },
            
         }).then(async (result) => {
-          console.log("entro a la validacion de archivo : ",result)
+          
           this.core.loader.hide()
           return
         }).catch(err => {
@@ -2091,19 +2065,13 @@ buttons.forEach( button => button.addEventListener('click', function() {
   async sendFilesUniversalUpload(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
       this.core.loader.show()
-      console.log("el INICIO")
-      console.log("el INICIO NIDALERTA",NIDALERTA)
-      console.log("el INICIO NIDALERTA_CABECERA",NIDALERTA_CABECERA)
-      console.log("el INICIO NREGIMEN",NREGIMEN)
-      console.log("el INICIO STIPO_CARGA",STIPO_CARGA)
-
-      console.log("INICIO arrObjFilesInformeByAlert ADJUNTOS12345 : ",this.arrObjFilesInformeByAlert)
+      
       let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
         alertaItem.NIDALERTA == NIDALERTA &&
         alertaItem.NREGIMEN == NREGIMEN && 
         alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
         alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
-        console.log(" INICIO respListFilesAdjuntos ADJUNTOS12345 : ",respListFilesAdjuntos)
+       
 
       let listFilesAdjuntos = []//archivos
       let listFileNameAdjuntos = []//nombre de archivos
@@ -2113,8 +2081,6 @@ buttons.forEach( button => button.addEventListener('click', function() {
         itemFile.arrFilesName.forEach(objFile => listFileNameAdjuntos.push(objFile))
       })
   
-      console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 listFilesAdjuntos: ",listFilesAdjuntos)
-      console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 listFileNameAdjuntos: ",listFileNameAdjuntos)
       //this.arrObjFilesInformeByAlert = []//el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021
 
       let promiseUploadAttachedAdjuntos = []
@@ -2137,7 +2103,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
         uploadPararms.listFiles = listFilesAdjuntos
         uploadPararms.listFileName = listFileNameAdjuntos
-        console.log("el data de uploadPararms informe 15: ",uploadPararms)
+       
         promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
         promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
@@ -2155,19 +2121,13 @@ buttons.forEach( button => button.addEventListener('click', function() {
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
       this.core.loader.show()
-      console.log("el INICIO")
-      console.log("el INICIO NIDALERTA",NIDALERTA)
-      console.log("el INICIO NIDALERTA_CABECERA",NIDALERTA_CABECERA)
-      console.log("el INICIO NREGIMEN",NREGIMEN)
-      console.log("el INICIO STIPO_CARGA",STIPO_CARGA)
-
-      console.log("INICIO arrObjFilesInformeByAlert ADJUNTOS12345 : ",this.arrObjFilesInformeByAlert)
+     
       let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
         alertaItem.NIDALERTA == NIDALERTA &&
         alertaItem.NREGIMEN == NREGIMEN && 
         alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
         alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
-        console.log(" INICIO respListFilesAdjuntos ADJUNTOS12345 : ",respListFilesAdjuntos)
+      
 
       let listFilesAdjuntos = []//archivos
       let listFileNameAdjuntos = []//nombre de archivos
@@ -2177,8 +2137,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         itemFile.arrFilesName.forEach(objFile => listFileNameAdjuntos.push(objFile))
       })
   
-      console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 listFilesAdjuntos: ",listFilesAdjuntos)
-      console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 listFileNameAdjuntos: ",listFileNameAdjuntos)
+   
       //this.arrObjFilesInformeByAlert = []//el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021
 
       let promiseUploadAttachedAdjuntos = []
@@ -2207,7 +2166,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
           uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
           uploadPararms.listFiles = listFilesAdjuntos
           uploadPararms.listFileName = listFileNameAdjuntos
-          console.log("el data de uploadPararms informe 15: ",uploadPararms)
+          
           promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
           promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
         } catch (error) {
@@ -2232,7 +2191,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       let files = this.getFiles(alerta, tipoUsuario)
       let listFiles = this.getListFiles(alerta, tipoUsuario)
       let listFileName = this.getListFileName(alerta, tipoUsuario)*/
-      console.log("el INICIO")
+    
       let STIPO_CARGA = 'INFORMES'
       let STIPO_CARGA_ADJ = 'ADJUNTOS'
       let respListFiles = this.arrObjFilesInformeByAlert.filter(alertaItem =>
@@ -2242,8 +2201,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
       let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
         alertaItem.NIDALERTA == NIDALERTA && alertaItem.NREGIMEN === NREGIMEN
         && alertaItem.STIPO_CARGA === STIPO_CARGA_ADJ)//archivos base64
-        console.log("respListFiles INFORMES12345 : ",respListFiles)
-        console.log("respListFilesAdjuntos ADJUNTOS12345 : ",respListFilesAdjuntos)
+       
 
       let listFiles = []//archivos
       let listFileName = []//nombre de archivos
@@ -2263,7 +2221,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
 
 
-      console.log("el listFiles 789: ", listFiles)
+    
       
       if (listFiles.length === 0) {
         swal.fire({
@@ -2289,10 +2247,9 @@ buttons.forEach( button => button.addEventListener('click', function() {
       let objAlertaItem = (this.getArray("PENDIENTE-INFORME", NREGIMEN)).filter(it => it.NIDALERTA == NIDALERTA && it.NREGIMEN == NREGIMEN)
       let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
-      console.log("el cantidadResponsables:", cantidadResponsables)
-      console.log("el cantidadInformes:", cantidadInformes)
+    
       if (cantidadResponsables > cantidadInformes) {
-        console.log("entro a la validacion")
+      
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',
@@ -2335,7 +2292,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         }).then(async (result: any) => {
           if (result.value) {
             this.core.loader.show()
-            console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 : ",this.arrObjFilesInformeByAlert)
+            
             this.arrObjFilesInformeByAlert = []
             let data: any = {};
             //let user = this.core.storage.get('usuario');
@@ -2350,7 +2307,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
             //data.alerta = alerta
             data.NIDALERTA = NIDALERTA;
             data.NPERIODO_PROCESO = NPERIODO_PROCESO
-            //console.log("el data de upload file informe 15: ",data)
+            
             //data.nIdCabUsuario = this.datosCabecera.NIDALERTA_CABECERA
 
             let respGetArrayAlert = this.getArray("PENDIENTE-INFORME", NREGIMEN);
@@ -2371,7 +2328,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
               uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
               uploadPararms.listFiles = listFiles
               uploadPararms.listFileName = listFileName
-              //console.log("el data de uploadPararms informe 15: ",uploadPararms)
+            
               promiseUploadAttached.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
               promiseUploadFile.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
@@ -2390,7 +2347,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
               uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
               uploadPararms.listFiles = listFilesAdjuntos
               uploadPararms.listFileName = listFileNameAdjuntos
-              //console.log("el data de uploadPararms informe 15: ",uploadPararms)
+              
               promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
               promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
@@ -2434,7 +2391,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
             dataUpdateStatus.status = "2"
             dataUpdateStatus.regimeId = NREGIMEN
             let respServiceUpdateStatus = await this.userConfigService.updateStatusAlert(dataUpdateStatus)
-            console.log("el respServiceUpdateStatus : ", respServiceUpdateStatus)
+    
 
             arrAcumuladorIndiceFile.forEach(itemFIle => {
               this.arrObjFilesInformeByAlert.splice(itemFIle, 1)
@@ -2455,16 +2412,14 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
 
             let respPushObj = this.pushObjInArrayByAlert("INFORME-TERMINADO", NREGIMEN, respFilterAlert[0])//push a informe terminado
-            console.log("el respPushObj 789 : ", respPushObj)
-            console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 PARTE 2: ",this.arrObjFilesInformeByAlert)
+            
             this.arrObjFilesInformeByAlert = []
-            console.log("el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021 PARTE 3: ",this.arrObjFilesInformeByAlert)
+         
             this.core.loader.hide()
 
-            //console.log("el respPromiseAllAttached 789 : ",respPromiseAllAttached)
-            //console.log("el respPromiseAllAttached 789 respPromiseAllUploadFile : ",respPromiseAllUploadFile)0
+           
             /*this.userConfigService.uploadFilesByAlert(data).then(response => {
-              //console.log(response);
+             
             });*/
           } else {
             //////////
@@ -2486,21 +2441,21 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
   async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
     try {
-      console.log("llego a esta parte?")
+      
       let respSetData = await this.setDataFile(event)
       //respPromiseFileInfo
       //listFileNameCortoInform
       //arrFiles
 
-      console.log("el respSetData : ", respSetData)
+     
 
-      //console.log("el arrFiles respPromiseFileInfo 879 : ",respPromiseFileInfo)
+    
       let dataInformFile: any = {}
       let dataInfoFilesTmp = this.arrObjFilesAdjByCabecera.filter(itemInfo => itemInfo.NIDCABECERA_USUARIO == NIDCABECERA_USUARIO && itemInfo.NIDALERTA == NIDALERTA && itemInfo.NREGIMEN === NREGIMEN && itemInfo.STIPO_CARGA === STIPO_CARGA)
-      console.log("el this.arrObjFilesAdjByCabecera tmp : ", dataInfoFilesTmp)
+    
       let statusDuplic = false
       if (dataInfoFilesTmp.length > 0) {
-        console.log("si es mayor a 0 : ", dataInfoFilesTmp)
+      
         let indiceFile = 0
         this.arrObjFilesAdjByCabecera.forEach(it => {
           if (it.NIDCABECERA_USUARIO == NIDCABECERA_USUARIO && it.NIDALERTA == NIDALERTA && it.NREGIMEN === NREGIMEN && it.STIPO_CARGA === STIPO_CARGA) {
@@ -2520,7 +2475,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         })
       }
       if (!statusDuplic) {
-        console.log("no es mayor a 0 : ", dataInfoFilesTmp)
+       
         dataInformFile.SRUTA = STIPO_CARGA + '/' + NIDCABECERA_USUARIO + '/' + STIPO_USUARIO
         dataInformFile.NIDCABECERA_USUARIO = NIDCABECERA_USUARIO
         dataInformFile.NIDALERTA = NIDALERTA
@@ -2533,7 +2488,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         this.arrObjFilesAdjByCabecera.push(dataInformFile)
       }
 
-      console.log("el arrObjFilesAdjByCabecera 879 : ", this.arrObjFilesAdjByCabecera)
+      
       return true
       //await this.sendFilesInformes(NIDALERTA, respPromiseFileInfo, listFileNameInform)
     } catch (error) {
@@ -2543,14 +2498,14 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
 
   async setDataFile(event) {
-    //console.log("el arrFiles 879 NIDALERTA: ",NIDALERTA)
+    
     let files = event.target.files;
 
     let arrFiles = Array.from(files)
-    console.log("el arrFiles 879 : ", arrFiles)
+    
     let listFileNameInform: any = []
     arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-    //console.log("el arrFiles listFileNameInform 879 : ",listFileNameInform)
+    
     let listFileNameCortoInform = []
     let statusFormatFile = false
     for (let item of listFileNameInform) {
@@ -2579,9 +2534,9 @@ buttons.forEach( button => button.addEventListener('click', function() {
               },
         
       }).then(async (result) => {
-        //console.log("hellow : ",result)
+      
       }).catch(err => {
-        //console.log("el error : ",err);
+        
       })
     }
     let listDataFileInform: any = []
@@ -2599,15 +2554,13 @@ buttons.forEach( button => button.addEventListener('click', function() {
       let files = this.getFiles(alerta, tipoUsuario)
       let listFiles = this.getListFiles(alerta, tipoUsuario)
       let listFileName = this.getListFileName(alerta, tipoUsuario)*/
-      console.log("el INICIO")
+     
       //let STIPO_CARGA = 'ADJUNTOS-FORM'
 
 
       let respValidData = await this.getValidationAndData(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA)
 
-      console.log("el respValidData 789----1: ", respValidData)
-
-      console.log("el listFiles 789: ", respValidData.listFileName)
+   
 
 
 
@@ -2636,7 +2589,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
           uploadPararms.NIDUSUARIO_ASIGNADO = this.ID_USUARIO
           uploadPararms.listFiles = respValidData.listFiles
           uploadPararms.listFileName = respValidData.listFileName
-          //console.log("el data de uploadPararms informe 15: ",uploadPararms)
+         
           promiseUploadAttached.push(this.userConfigService.insertAttachedFiles(uploadPararms))
           promiseUploadFile.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
 
@@ -2647,8 +2600,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         let respPromiseAllAttached = await Promise.all(promiseUploadAttached)
         let respPromiseAllUploadFile = await Promise.all(promiseUploadFile)
 
-        console.log("el respPromiseAllAttached : ",respPromiseAllAttached)
-        console.log("el respPromiseAllUploadFile : ",respPromiseAllUploadFile)
+      
 
         //return true
 
@@ -2675,9 +2627,9 @@ buttons.forEach( button => button.addEventListener('click', function() {
         arrAcumuladorIndiceFile.forEach(itemFile => {
           this.arrObjFilesAdjByCabecera.splice(itemFile, 1)
         })
-        console.log("El this.arrObjFilesAdjByCabecera : ",this.arrObjFilesAdjByCabecera)
+      
         //let respArrayResponsable = this.getArray(SESTADO, NREGIMEN)
-        //console.log("El respArrayResponsable : ",respArrayResponsable)
+        
         //let indicadorObjSplice = 0
         /*let indicadorObj = 0
         respArrayResponsable.forEach(objAler => {
@@ -2691,22 +2643,20 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
 
         ///////let respPushObj = this.pushObjInArrayByAlert("INFORME-TERMINADO", NREGIMEN, respFilterAlert[0])//push a informe terminado
-        ///////console.log("el respPushObj 789 : ", respPushObj)
-        //console.log("el respPromiseAllAttached 789 : ",respPromiseAllAttached)
-        //console.log("el respPromiseAllAttached 789 respPromiseAllUploadFile : ",respPromiseAllUploadFile)
+      
       } else {
         return false
       }
-      console.log("el FIN")
+     
       //this.core.loader.hide()
       return null
     } catch (error) {
-      console.error("el error en send informes: ", error)
+     
     }
   }
 
   getValidationAndData(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA) {
-    console.log("/" + NIDCABECERA_USUARIO + "/" + NIDALERTA + "/" + NREGIMEN + "/" + STIPO_CARGA + "/")
+    
     let respListFiles = this.arrObjFilesAdjByCabecera.filter(alertaItem =>
       alertaItem.NIDALERTA == NIDALERTA && alertaItem.NREGIMEN === NREGIMEN
       && alertaItem.STIPO_CARGA === STIPO_CARGA && alertaItem.NIDCABECERA_USUARIO === NIDCABECERA_USUARIO)//archivos base64
@@ -2733,7 +2683,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
   async fillReport(itemAlerta, NIDUSUARIO_ASIGNADO) {
     try {
-      console.log("el param de itemAlerta : ", itemAlerta)
+    
       let objALERTA_NEW:any = {};
       let arrayRG = [7,8,9,10,11,12,13,14,15]
       let respFilterRG = arrayRG.filter(it => it == itemAlerta.NIDALERTA)
@@ -2748,7 +2698,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         NIDUSUARIO_ASIGNADO = 0 
       }
       let param = { NIDALERTA: objALERTA_NEW.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: itemAlerta.NREGIMEN, NIDUSUARIO_ASIGNADO: NIDUSUARIO_ASIGNADO, SNOMBRE_ALERTA: objALERTA_NEW.NOM_ALERTA }
-      console.log("el param de fillREport : ", param)
+      
       let response = await this.userConfigService.fillReport(param)
       response = await fetch(`data:application/octet-stream;base64,${response.base64}`)
       const blob = await response.blob()
@@ -2767,13 +2717,13 @@ buttons.forEach( button => button.addEventListener('click', function() {
     jsonData.P_NIDALERTA = NIDALERTA;
     jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
 
-    //console.log("EL JSODATA : ", jsonData);
+    
     let respData: any = [];
     if (NIDALERTA == 3) {
 
         respData = await this.userConfigService.getListGafiAlert(jsonData);
 
-        //console.log("EL DEITA : ", respData);
+        
         if (respData.length > 0) {
             await this.excelService.exportAsExcelFile(respData, "Registros de alerta C3");
         }
@@ -2783,7 +2733,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         jsonData.P_NIDREGIMEN = NIDREGIMEN;
         respData = await this.userConfigService.getListNCAlert(jsonData);
 
-        //console.log("EL DEITA : ", respData);
+        
         if (respData.length > 0) {
             await this.excelService.exportAsExcelFile(respData, "Registros de alerta S1");
         }
@@ -2793,7 +2743,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
         //let respData:any = [];
         respData = await this.userConfigService.getListDirDuplicAlert(jsonData);
 
-        //console.log("EL DEITA : ", respData);
+        
         if (respData.length > 0) {
             await this.excelService.exportAsExcelFile(respData, "Registros de alerta S2");
         }
@@ -2803,11 +2753,11 @@ buttons.forEach( button => button.addEventListener('click', function() {
         //jsonData.P_NIDALERTA = this.NIDALERTA;//this.NIDALERTA;
         //jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
 
-        //console.log("EL JSODATA : ", jsonData);
+        
 
         respData = await this.userConfigService.getListClienteRentasRAltoAlert(jsonData);
 
-        //console.log("EL DEITA : ", respData);
+        
         if (respData.length > 0) {
             await this.excelService.exportAsExcelFile(respData, "Registros de alerta RG4");
         }
@@ -2834,22 +2784,17 @@ buttons.forEach( button => button.addEventListener('click', function() {
 
   /*@HostListener("window:scroll", []) onWindowScroll() {
     // do some stuff here when the window is scrolled
-    //console.log("el scroll")
+   
     const verticalOffset = window.pageYOffset 
           || document.documentElement.scrollTop 
           || document.body.scrollTop || 0;
-    //console.log("el scroll : ",verticalOffset)
+  
     let src:any = document.getElementsByTagName('section');
     let indiceSrc = 0;
     for(let itemSrc of src){
-      //console.log("los itemSrc : ",itemSrc)
-      //console.log("los itemSrc offsetTop: ",itemSrc.offsetTop)
-      //console.log("los itemSrc document.documentElement.scrollTop: ",document.documentElement.scrollTop)
-      //console.log("los itemSrc resta: ",(itemSrc.offsetTop - document.documentElement.scrollTop)< 20)
+    
       if((itemSrc.offsetTop - document.documentElement.scrollTop) < 20){
-        console.log("estas en el elemento: ",indiceSrc)
-        console.log("estas en el elemento target: ",itemSrc.id)
-        console.log("estas en el elemento value: ",itemSrc.target.name)
+        
         localStorage.setItem('SectionPosition',this.arrListSections[indiceSrc].nombre)
       }
       indiceSrc++
@@ -2950,7 +2895,7 @@ buttons.forEach( button => button.addEventListener('click', function() {
     }else{
       this.objInstance = (this.arrInstanceDefault.filter(it => it.code != this.objInstance.code))[0]
     }
-    console.log("objInstance : ",this.objInstance)
+   
   }
 
 

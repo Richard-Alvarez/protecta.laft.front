@@ -46,8 +46,7 @@ export class NavbarComponent implements OnInit {
     this.linkactual = link[link.length-1].trim()
 
     var userSession = this.core.storage.get('usuario');
-    console.log("El id del perfil",userSession['idPerfil'])
-    // //console.log("el userSession : ",userSession)
+    
     if(userSession){
       let profile = userSession['idPerfil'];
       if (profile == 1) {
@@ -68,45 +67,26 @@ export class NavbarComponent implements OnInit {
      
     
   }
-//   isFocusInsideComponent = false;
-// isComponentClicked = false;
 
-// @HostListener('click')
-// clickInside() {
-//     this.isFocusInsideComponent = true;
-//     this.isComponentClicked = true;
-// }
-// @HostListener('document:click')
-// clickout() {
-//     if (!this.isFocusInsideComponent && this.isComponentClicked) {
-//         // do the heavy process
-
-//         this.isComponentClicked = false;
-//         this.isFocusInsideComponent = false;
-//         console.log(" this.isComponentClicked", this.isComponentClicked)
-//     }
-//     //this.isFocusInsideComponent = false;
-//     console.log(" this.isFocusInsideComponent", this.isFocusInsideComponent)
-// }
 public text: String;
 @HostListener('click', ["$event"])
   clickInside($event) {
     this.text = "clicked inside";
     $event.stopPropagation();
-    //console.log("text 1",this.text )
+    
   }
   
   @HostListener('document:click')
   clickout() {
       this.text = "clicked outside";
-      //console.log("text 2",this.text )
+      
       this.closeNav()
   }
 
   opened: boolean;
   clickOutside() {
     this.opened = !this.opened;
-    console.log("clicked outside");
+    
   }
   
 
@@ -127,7 +107,7 @@ public text: String;
 
       this.STIPO_USUARIO = usuario['tipoUsuario']
      
-      console.log("this.STIPO_USUARIO 2",this.STIPO_USUARIO)
+      
       
       //_data = (response);      
       response.forEach(item => {
@@ -143,8 +123,7 @@ public text: String;
         // }else{
           this.optionList = arrayMenusMaster;
         this.optionListSubMenu = arraySubMenus;
-        // console.log("this.optionList ",this.optionList)
-        // console.log("this.optionListSubMenu ",this.optionListSubMenu)
+       
 
         // }
         
@@ -154,16 +133,16 @@ public text: String;
     
     // let usuario = this.core.storage.get('usuario')
     // this.STIPO_USUARIO = usuario['tipoUsuario']
-    // console.log("this.STIPO_USUARIO 2",this.STIPO_USUARIO)
+    
     
   }
   
 
   showMore(data:any) { 
-    //console.log(this.optionList)
+   
     let _data: any = {};
     _data.nFatherId = data;
-    //console.log(data)
+    
     // this.userconfig.getSubOptions(_data).then((response) => {
     //   let childrens;
     //   childrens = (response);      
@@ -211,7 +190,7 @@ public text: String;
       else
         nav[i].setAttribute("style","display: block");
     }
-    console.log(nav);
+    
   }
 
   activarStyle(){

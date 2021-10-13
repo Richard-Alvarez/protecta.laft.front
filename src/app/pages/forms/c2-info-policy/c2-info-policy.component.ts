@@ -87,7 +87,7 @@ export class C2InfoPolicyComponent implements OnInit {
     /* this.showdata() */
   }
   async pruebadatos(){
-    /* console.log('resultado info',this.ResultadoDetail)
+    /* 
     this.asegurado= this.ResultadoDetail.asegurado;
     this.canal= this.ResultadoDetail.canal;
     this.canalEstado= this.ResultadoDetail.canal.estado; 
@@ -112,45 +112,43 @@ export class C2InfoPolicyComponent implements OnInit {
   ///**/
   /* idRamoPru:any;
   ValidarProducto(){
-    console.log("123asdasd", this.detResult)
+ 
     let valor = this.detResult.filter(it => it.producto ==  "Accidentes Personales Dólares" )
-    console.log("el valor ramo ", valor)
-    console.log("el valor", valor[0].idProduct)
+  
     this.idRamoPru = valor[0].idProduct
-    console.log("prueba", this.idRamoPru)
+ 
   } */
   /* listaramo(){
-    console.log("detResult",this.detResult)
+   
     this.detResult.forEach((element,index) => {
-      console.log("detResult 2",element.ramo)
-      console.log("detResult 2",element.ramo.idRamo)
+     
       this.idramo= element.ramo.idRamo
     });      
   }
   
   listaproducto(){
     this.detResult.forEach((element,index) => {
-      console.log("detResult 2",element.idProduct)
+     
       this.idproducto= element.idProduct
     });
   }
   
   listapoliza(){
     this.detResult.forEach((element,index) => {
-      console.log("detResult 2",element.nroPolicy)
+   
       this.nropolicy= element.nroPolicy
     });
   }
   listacertificado(){
     this.detResult.forEach((element,index) => {
-      console.log("detResult 2",element.nroCertificate)
+      
       this.nrocertificado= element.nroCertificate
     });
   }
   
   listafechaconsulta(){
     this.detResult.forEach((element,index) => {
-      console.log("detResult 2",element.fechaInicioVigencia)
+     
       this.fechaconsulta= element.fechaInicioVigencia
     });
   } */
@@ -169,7 +167,7 @@ export class C2InfoPolicyComponent implements OnInit {
       (response) => {
        this.Resultado = response
       }); */
-    /* console.log("el resultado info",this.ResultadoDetail)
+    /* 
     this.asegurado= this.ResultadoDetail.asegurado;
     this.canal= this.ResultadoDetail.canal;
     this.canalEstado= this.ResultadoDetail.canal.estado; 
@@ -189,16 +187,11 @@ export class C2InfoPolicyComponent implements OnInit {
     this.coberCodModul= this.ResultadoDetail.coberturas[0].codigoModulo;
     this.coberDescModul= this.ResultadoDetail.coberturas[0].descModulo;
  */
-    /* console.log('prueba kevin2',this.policyList)
-    console.log('prueba kevin2',this.policyList[0].SNUM_POLIZA)
-    console.log('prueba kevin2',this.policyList[0].NCERTIF)
-    console.log('prueba kevin2',this.policyList[0].DFEC_INI_POLIZA) */
+   
     /*valores para enviar al servicio 360*/
     //ramo
     //producto
-    //console.log("abcde",this.poliza) //numero de poliza
-    //console.log("abcde",this.certif) //certificado
-    //console.log("abcde",this.fecpoli) //fecha de inicio de vigencia
+  
     //endoso
 
   //}
@@ -224,10 +217,10 @@ export class C2InfoPolicyComponent implements OnInit {
 
 
   /* ValidarRamo(){
-    console.log("this.ramoIdRamo", this.ramoIdRamo)
+    
     let valor = this.ListadoRamo.filter(it => it.IdRamo == this.ramoIdRamo )
-    console.log("el valor ", valor)
-    console.log("el valor ", valor[0].Descripcion)
+    
+    
     this.DescripcionRamo = valor[0].Descripcion
   } */
   
@@ -244,10 +237,10 @@ export class C2InfoPolicyComponent implements OnInit {
   /* getIdRamo(){
     
     let val = this.ListadoRamo.filter(it => it.Descripcion == "RENTA PARTICULAR" ) //reemplazar "" con la variable del servicio que trae
-    console.log("el valor ", val)
-    console.log("el valor ", val[0].IdRamo)
     
-console.log("prue",this.item1)
+    
+    
+
   } */  
   /* arregloprueba: any=[
     {"zxc":"ji","":"je","hjk":"123","qsd":"jo","qwe":"ju","asd":"ja"},
@@ -391,10 +384,10 @@ console.log("prue",this.item1)
     ]
   } */
   /* ValidarProducto(){
-    console.log("this.ramoIdRamo", this.ramoIdRamo)
+    
     let valor = this.listaProducto.filter(it => it.IdRamo == this.ramoIdRamo && it.IdProducto ==  )
-    console.log("el valor ", valor)
-    console.log("el valor ", valor[0].Descripcion)
+    
+    
     this.DescripcionRamo = valor[0].Descripcion
   } */
 }

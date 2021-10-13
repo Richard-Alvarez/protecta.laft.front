@@ -55,7 +55,7 @@ export class NewComponent implements OnInit {
       let dia = fecha.substr(8, 2);
       let mes = fecha.substr(5, 2);
       let anio = fecha.substr(0, 4);
-      //console.log(dia + '/' + mes + '/' + anio);
+      
       return dia + '/' + mes + '/' + anio;
     } else {
       return fecha;
@@ -159,7 +159,7 @@ export class NewComponent implements OnInit {
         }
       }
     }
-    //console.log(this.registro.senial);
+    
     if (this.registro.senial.id == null || this.registro.senial.id < 0 || this.registro.senial.id === undefined) {
       this.Message('La señal es obligatoria');
       error = true;
@@ -196,7 +196,7 @@ export class NewComponent implements OnInit {
     this.registro.fechaRegistro = this.FormatFecha(this.registro.fechaRegistro);
     this.cargaService.agregarRegistro(this.registro)
       .then((Response) => {
-        //console.log(Response);
+        
         this.core.loader.hide();
         swal.fire(
           'Información',
@@ -214,7 +214,7 @@ export class NewComponent implements OnInit {
       })
 
       .catch((error) => {
-        //console.log(error);
+        
         this.core.loader.hide();
         this.MessageCorrect('Ocurrio un problema,Comuniquese con soporte');
       });

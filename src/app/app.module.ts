@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -157,6 +157,7 @@ import { TemplateC1Component } from './components/responsable/templates/template
 import { TemplateS1Component } from './components/responsable/templates/template-s1/template-s1.component';
 import { TemplateS3Component } from './components/responsable/templates/template-s3/template-s3.component';
 import { C2PolicyComponent } from './components/c2-policy/c2-policy.component';
+import { ModalValidarContrasennaComponent } from './pages/modal-validar-contrasenna/modal-validar-contrasenna.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -296,6 +297,7 @@ import { C2PolicyComponent } from './components/c2-policy/c2-policy.component';
     TemplateS1Component,
     TemplateS3Component,
     C2PolicyComponent,
+    ModalValidarContrasennaComponent,
 
    
     //Validaciones
@@ -319,16 +321,18 @@ import { C2PolicyComponent } from './components/c2-policy/c2-policy.component';
     // AngularSplitModule
     // AccordionModule,
     // MenuItem,
-  
+    ReactiveFormsModule,
     //TooltipModule
   ],
   schemas: [
     
     NO_ERRORS_SCHEMA
   ],
-  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent],
+  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent],
   providers: [UserconfigService],
   bootstrap: [AppComponent]
+ 
+
 })
 export class AppModule {
 }

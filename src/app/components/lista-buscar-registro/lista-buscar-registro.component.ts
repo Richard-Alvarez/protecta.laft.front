@@ -30,7 +30,7 @@ export class ListaBuscarRegistroComponent implements OnInit {
       $(".modal-backdrop").css("z-index","10");
       these.verRegistros();
     });
-    ////console.log(this.registros);
+    
   }
 
   verRegistros(){

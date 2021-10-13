@@ -94,7 +94,7 @@ export class CargaPreviewComponent implements OnInit {
     this.procesarRegistros();
   }
   conservarTodos() {
-    //console.log(this.registrosEditados);
+    
     this.registrosEditados.forEach((registroEditado) => {
 
       let registro: Registro = this.carga.registros.filter(r => r.numero == registroEditado.original.numero &&
@@ -128,7 +128,7 @@ export class CargaPreviewComponent implements OnInit {
 
   }
   procesarRegistros() {
-    //console.log(this.carga.registros);
+   
     this.cargaService.validarRegistros(this.carga.registros);
     this.segmentarRegistros();
     this.verHeader(this.headers[0]);
@@ -206,7 +206,7 @@ export class CargaPreviewComponent implements OnInit {
 
 
   editarRegistro($event) {
-    //console.log(this.registroSeleccionado);
+    
     this.registroSeleccionado = JSON.parse(JSON.stringify($event.registro));
     $(this.modalEditar).modal('show');
     this.ArreglarCampo();
@@ -264,7 +264,7 @@ export class CargaPreviewComponent implements OnInit {
 
     this.registrosOmitidos = [];
     this.refrescarHeader();
-    //console.log(this.carga);
+   
   }
   Message(mensage: string) {
     return swal.fire(
@@ -280,9 +280,9 @@ export class CargaPreviewComponent implements OnInit {
   }
 
   grabarEdicion(event: any) {
-    //console.log(this.registrosInvalidos);
+    
     let error: boolean = false;
-    //console.log(this.registroSeleccionado);
+    
 
     if (this.ValidateCampo(this.registroSeleccionado.nombre)) {
       if (this.registroSeleccionado.documento.id == 1) {
@@ -352,7 +352,7 @@ export class CargaPreviewComponent implements OnInit {
         }
       }
     }
-    //console.log(this.registroSeleccionado.senial);
+    
     if (this.registroSeleccionado.senial.id == null || this.registroSeleccionado.senial.id < 0 ||
       this.registroSeleccionado.senial.id === undefined) {
       this.Message('La señal es obligatoria');
@@ -416,7 +416,7 @@ export class CargaPreviewComponent implements OnInit {
       let dia = fecha.substr(8, 2);
       let mes = fecha.substr(5, 2);
       let anio = fecha.substr(0, 4);
-      //console.log(dia + '/' + mes + '/' + anio);
+      
       return dia + '/' + mes + '/' + anio;
     } else {
       return fecha;
@@ -430,7 +430,7 @@ export class CargaPreviewComponent implements OnInit {
     }*/
 
     this.core.loader.show();
-    //console.log(this.carga);
+    
     this.cargaService.grabarCarga(this.carga.registros)
       .then((response) => {
         this.core.rutas.goNegativeRecords();
@@ -481,7 +481,7 @@ export class CargaPreviewComponent implements OnInit {
     }
   }
   onChangeTipoDoc(event: any) {
-    //console.log(this.IsEmpresa);
+    
     if (this.registroSeleccionado.persona.id == 2) {
       this.IsEmpresa = true;
       this.registroSeleccionado.apellidoMaterno = '';
@@ -501,7 +501,7 @@ export class CargaPreviewComponent implements OnInit {
     let millisecond = dateStr.substring(20)
 
     let validDate = date + 'T' + time + '.' + millisecond;
-    //console.log(validDate)
+    
     return validDate
   }
 

@@ -71,15 +71,13 @@ export class ProveedorComponent implements OnInit {
 
   async  getListaPerfilGrupo(valor){
     this.ListaGrupos = await this.userConfigService.GetListaPerfiles() 
-    // console.log("this.IDPERFIL",this.IDPERFIL)
-    // console.log("this.IDPERFIL",this.ListaGrupos)
+  
 //Proveedores
     let NewLista = this.ListaGrupos.filter(it =>  it.NIDPROFILE ==this.IDPERFIL)
-    // console.log("this.IDPERFIL 2",NewLista)
+  
     if(valor == 1){
      let pro = NewLista.filter(lista =>  lista.SDESGRUPO_SENAL == "Proveedores")
-    //  console.log("this.IDPERFIL 3",pro)
-    //  console.log("this.IDPERFIL 4",pro.length)
+   
      if(pro.length > 0){
         return 'active' 
      }

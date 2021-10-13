@@ -52,7 +52,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
         this.alertData.SNOMBRE_ESTADO = localStorage.getItem("SNOMBRE_ESTADO")
         this.STIPOUSUARIO = this.core.storage.get('usuario')['tipoUsuario'];
         this.alertData.NIDREGIMEN = parseInt(localStorage.getItem("NIDREGIMEN"))
-        //console.log("heredado", this.alertData.NIDREGIMEN)
+        
         //await this.getAttachedFiles('OC');
         await this.getWorkModuleDetail()
         await this.getComments()
@@ -81,14 +81,14 @@ export class WarningSignWorkModuleComponent implements OnInit {
         let getCommentList: any = {};
         getCommentList.alertId = this.alertData.NIDALERTA
         getCommentList.periodId = this.NPERIODO_PROCESO
-        //console.log(getCommentList)
+        
         this.userConfigService.getCommentList(getCommentList)
             .then((response) => {
                 this.core.loader.hide();
-                //console.log(response)
+                
                 this.commentList = response
             }).catch(() => {
-                //console.log('err');
+                
                 this.core.loader.hide();
             });
         this.core.loader.hide();
@@ -107,15 +107,15 @@ export class WarningSignWorkModuleComponent implements OnInit {
         {
             this.Savependings = true;
         }
-        //console.log("estado botón",this.alertData.SESTADO)
+        
     }
 
     async saveAlert() {
         this.core.loader.show();
-        //console.log("lista ", this.workDetailList)
+        
         let pendingForms: any = {};
         pendingForms = this.workDetailList.find(x => x.SESTADO != "2")
-        //console.log("pendiente ", pendingForms)
+        
         if (pendingForms != null) {
             this.core.loader.hide();
             swal.fire({
@@ -147,11 +147,11 @@ export class WarningSignWorkModuleComponent implements OnInit {
                     updateAlert.periodId = this.NPERIODO_PROCESO
                     updateAlert.status = '2'
                     updateAlert.regimeId = this.alertData.NIDREGIMEN
-                    //console.log(updateAlert)
+                    
                     this.userConfigService.updateStatusAlert(updateAlert)
                         .then((response) => {
                             this.core.loader.hide();
-                            //console.log(response)
+                    
                             if (response.error == 0) {
                                 swal.fire({
                                     title: 'Señal de alerta',
@@ -178,7 +178,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
                                 return
                             }
                         }).catch(() => {
-                            //console.log('err');
+                            
                             this.core.loader.hide();
                         });
                 }
@@ -188,7 +188,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
 
     saveComment() {
         this.core.loader.show();
-        //console.log(this.commentBody)
+        
         if (this.commentBody == null) {
             this.core.loader.hide();
             swal.fire({
@@ -223,11 +223,11 @@ export class WarningSignWorkModuleComponent implements OnInit {
                     updateCommentList.periodId = this.NPERIODO_PROCESO
                     updateCommentList.comment = this.commentBody
                     updateCommentList.userId = userId
-                    //console.log(updateCommentList);
+                    
                     this.userConfigService.updateCommentList(updateCommentList)
                         .then((response) => {
                             this.core.loader.hide();
-                            //console.log(response)
+                            
                             if (response.error != 0) {
                                 swal.fire({
                                     title: 'Comentarios',
@@ -255,7 +255,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
                                 return
                             }
                         }).catch(() => {
-                            //console.log('err');
+                            
                             this.core.loader.hide();
                         });
                     this.core.loader.hide();
@@ -296,7 +296,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
     // }
 
     setDisableFormItems(item: any) {
-        //console.log("item : ", item);
+        
         localStorage.setItem('NIDALERTA_CABECERA', item.NIDALERTA_CABECERA)
         localStorage.setItem('NIDAGRUPA', item.NIDAGRUPA)
         localStorage.setItem('NIDALERTA', item.NIDALERTA)
@@ -342,19 +342,19 @@ export class WarningSignWorkModuleComponent implements OnInit {
 
     async getAttachedFiles(tipoUsuario: string) {
         try {
-            //console.log(" los archivos :  1")
+            
             let alerta = this.alertData.SNOMBRE_ALERTA
             let data: any = {}
             data.NIDALERTA = this.alertData.NIDALERTA;
             data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-            //console.log(" los data : ", data)
+            
             let archivos = await this.userConfigService.getAttachedFilesByAlert(data)
-            //console.log(" los archivos : ", archivos)
-            //console.log(" los arrayDocuments 1: ", this.arrayDocuments)
+            
+            
             archivos.forEach(it => this.arrayDocuments.push({ name: it.SRUTA_ADJUNTO }))
-            //console.log(" los arrayDocuments 2: ", this.arrayDocuments)
+            
         } catch (error) {
-            //console.log("el error en getAttachedFiles : ", error)
+            
         }
     }
 
@@ -374,17 +374,17 @@ export class WarningSignWorkModuleComponent implements OnInit {
                 let data = await this.handleFile(files[i])
                 listFiles.push(data)
             }
-            //console.log("los archivos : ", listFiles)
+            
             await this.sendFiles('OC');
         } catch (error) {
-            //console.log("el error: ", error)
+            
         }
 
     }
 
     async insertAttachedFiles(data: any) {//SERVICIO QUE SUBE EL NOMBRE DEL ADJUNTO
         let response = await this.userConfigService.insertAttachedFilesByAlert(data)
-        //console.log(response)
+        
     }
 
     async sendFiles(tipoUsuario: string) {
@@ -392,8 +392,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
         let files = this.getFiles(alerta, tipoUsuario)
         let listFiles = this.getListFiles(alerta, tipoUsuario)
         let listFileName = this.getListFileName(alerta, tipoUsuario)
-        //console.log("el listFileName : ", listFileName)
-        //console.log("el listFiles - X : ", listFiles)
+     
         if (files.length > 0) {
             let data: any = {};
             var user = this.core.storage.get('usuario');
@@ -408,7 +407,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
             data.alerta = alerta
             data.NIDALERTA = this.alertData.NIDALERTA;
 
-            //console.log("el data : ", data);
+            
             //data.nIdCabUsuario = this.datosCabecera.NIDALERTA_CABECERA
             for (let i = 0; i < listFiles.length; i++) {
                 let ruta = `${listFileName[i]}`
@@ -417,12 +416,12 @@ export class WarningSignWorkModuleComponent implements OnInit {
                 uploadPararms.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
                 uploadPararms.SRUTA_ADJUNTO = ruta;
                 uploadPararms.NIDUSUARIO_MODIFICA = 1
-                //console.log("uploadPararms", uploadPararms)
+              
                 await this.insertAttachedFiles(uploadPararms)
 
             }
             this.userConfigService.uploadFilesByAlert(data).then(response => {
-                //console.log(response);
+              
             });
 
             /*listFileName.foreach(item => {
@@ -431,7 +430,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
             //this.getListFilesToShow('C2','OC');
             //this.getAttachedFiles('OC');
             let identificator = false;
-            //console.log("LIST FILE NAME : ", listFileName)
+          
             for (let i = 0; i < listFileName.length; i++) {
                 this.arrayDocuments.forEach(item => {
                     if (item === listFileName[i]) {
@@ -441,7 +440,7 @@ export class WarningSignWorkModuleComponent implements OnInit {
                 if (identificator === false) {
                     this.arrayDocuments.push({ name: listFileName[i] })
                 }
-                //console.log("arrayDocuments : ", this.arrayDocuments)
+                
             }
 
         }

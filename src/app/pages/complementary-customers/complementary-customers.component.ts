@@ -54,7 +54,7 @@ export class ComplementaryCustomersComponent implements OnInit {
     await this.getClientesReforzados();
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))//20200930;
     this.NIDUSUARIO_LOGUEADO = this.core.storage.get('usuario') ? this.core.storage.get('usuario')['idUsuario'] : null//parseInt(localStorage.getItem("NIDUSUARIO_LOGUEADO"))
-    //console.log("this.NIDUSUARIO_LOGUEADO : ",this.NIDUSUARIO_LOGUEADO)
+    
     this.signalId = 0;
     await this.setData();
     this.getResultadosCliente(this.initializePage)
@@ -85,13 +85,13 @@ export class ComplementaryCustomersComponent implements OnInit {
     /*let objCliRefor:any = {};*/
     /*let respuesta*/
     this.respClientesRefor = await this.userConfigService.getResultadoTratamiento(data);
-    //console.log("el this.respClientesRefor : ",this.respClientesRefor)
+    
 
     let arregloAcumulador = [];
     let seRepite = false;
     
     this.respClientesRefor.forEach(item => {
-      //console.log("el item : ",item)
+      
       arregloAcumulador.forEach(acumulador => {
         if(acumulador.SNOM_COMPLETO === item.SNOM_COMPLETO && acumulador.SNUM_DOCUMENTO === item.SNUM_DOCUMENTO){
           seRepite = true;
@@ -105,7 +105,7 @@ export class ComplementaryCustomersComponent implements OnInit {
       }*/
       //incrementador++;
     })
-    //console.log("el arregloAcumulador : ",arregloAcumulador);
+    
     //let arrayFinal = [];
     let incrementador = 0;
     arregloAcumulador.forEach(acumulador => {
@@ -146,7 +146,7 @@ export class ComplementaryCustomersComponent implements OnInit {
       this.arrayFinalCliRefor.push(objClienteReforzadoAcum);
       
     })
-    //console.log("el arrayFinal : ",this.arrayFinalCliRefor);
+    
     /*objCliRefor.nombre = "Ronald McDonald Ruiz"
     objCliRefor.tipoDocumento = "DNI";
     objCliRefor.documento = "47878787";
@@ -211,7 +211,7 @@ export class ComplementaryCustomersComponent implements OnInit {
   }
 
   setDataViewCustomer(item) {
-    //console.log("el item local : ",item);
+   
     localStorage.setItem('tipoClienteGC', 'CCO')
     localStorage.setItem('OCLIENTE_REFORZADO', JSON.stringify(item))
     localStorage.setItem('boolClienteReforzado', 'true')
@@ -225,7 +225,7 @@ export class ComplementaryCustomersComponent implements OnInit {
     data.NIDREGIMEN = 1;
     data.SESTADO_TRAT = 'PR';
     let respuesta = await this.userConfigService.updateListClienteRefor(data);*/
-    //console.log("la respuesta : ",respuesta)
+  
   }
 
   async getListProcess(){
@@ -235,17 +235,15 @@ export class ComplementaryCustomersComponent implements OnInit {
       this.respClientesFilters = this.arrayFinalCliRefor;
     }else{
       this.respClientesFilters = [];
-      //console.log("(this.txtBuscador+'').trim() : ",((this.txtBuscador+'').trim()).split(''))
-      //console.log("lo presiono ")
-      //console.log("lo presiono 1 : ",this.txtBuscador)
+    
       let buscadorMinuscula = this.txtBuscador.toLowerCase();
       this.arrayFinalCliRefor.forEach(item => {
         let nombre = item.SNOM_COMPLETO.toLowerCase();
-        //console.log("includes : ",nombre.includes(buscadorMinuscula));
+        
         if(nombre.includes(buscadorMinuscula)){
           this.respClientesFilters.push(item);
         }
-        //console.log("item : ",item);
+        
       })
     }
     
@@ -266,7 +264,7 @@ export class ComplementaryCustomersComponent implements OnInit {
     dataService.STIPOIDEN = dataArray.STIPOIDEN;
     dataService.NIDTRATCLIEHIS = dataArray.NIDTRATCLIEHIS;
     dataService.NTIPOCARGA  = dataArray.NTIPOCARGA ;
-    // console.log("dataArray.NIDTRATCLIEHIS ", dataArray.NIDTRATCLIEHIS)
+   
     
     dataService.NIDREGIMEN = dataArray.NIDREGIMEN ? dataArray.NIDREGIMEN : 0
     dataService.NIDALERTA = dataArray.NIDALERTA;
@@ -279,21 +277,21 @@ export class ComplementaryCustomersComponent implements OnInit {
         data.pregunta = '¿Está seguro de enviar el cliente a revisado?'
         data.boton1 = 'Enviar'
         dataService.SESTADO_TRAT = 'PR';
-        //console.log("el dataService : ",dataService)
+      
         this.getSwalOptionClient(data,dataService,indice)
         break;
       case '2': 
         data.pregunta = '¿Está seguro de eliminar el cliente?'
         data.boton1 = 'Eliminar'
         dataService.SESTADO_TRAT = 'AN';
-        //console.log("el dataService : ",dataService)
+       
         this.getSwalOptionClient(data,dataService,indice)
         break;
         case '3': 
         data.pregunta = '¿Está seguro de eliminar el cliente de complementario?'
         data.boton1 = 'Eliminar'
         dataService.SESTADO_TRAT = 'CCO';
-        //console.log("el dataService : ",dataService)
+      
         this.getSwalOptionClient(data,dataService,indice)
         break;
 
@@ -303,7 +301,7 @@ export class ComplementaryCustomersComponent implements OnInit {
         
         dataService.SESTADO_TRAT = 'MC';
         
-        //console.log("el dataService : ",dataService)
+       
         this.getSwalOptionClient(data,dataService)
         break;*/
       default :
@@ -332,7 +330,7 @@ export class ComplementaryCustomersComponent implements OnInit {
        
     }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
-      //console.log("result : ",result)
+     
       if (result.value) {
 
          this.spinner.show()
@@ -343,10 +341,10 @@ export class ComplementaryCustomersComponent implements OnInit {
         } catch (error) {
           console.error("El error :" ,error)
         }
-        // console.log("respServiceUpd : ",respServiceUpd)
+       
 
         // this.arrResultados.splice(indice, 1)
-        // console.log("Prueba del index",indice)
+       
 
         // let respCRE = await this.parent.getDataResultadoTratamiento('CRE')
         // let respCCO = await this.parent.getDataResultadoTratamiento('CCO')
@@ -400,14 +398,12 @@ export class ComplementaryCustomersComponent implements OnInit {
 
   newArrResultadosCliente:any = []
   getResultadosCliente(page){
-    //console.log("el this.arrResultados 1 &&& : ",this.arrResultados)
-    // console.log("el this.arrResultados 1 &&& : ",this.arrResultados)
+   
     let resp = this.arrResultados.slice(
       (page - 1) * 5,
       page * 5
     )
-    // console.log("el this.arrResultados resp 1 &&& : ",resp)
-    //console.log("el this.arrResultados 2 &&& : ",resp)
+   
     this.newArrResultadosCliente = resp//this.arrResultados
   }
 
@@ -434,11 +430,11 @@ export class ComplementaryCustomersComponent implements OnInit {
 
       this.arrResultadoFilter = []
       this.arrResultados.forEach(itResult => {
-        // console.log("nuevo resultado",itResult)
+        
         let nombreClienteCompleto = ((itResult.obj.SNOM_COMPLETO+' ').trim()).toLowerCase()
 
         if(nombreClienteCompleto.includes(nombreCliente)){
-          // console.log("entro al if")
+        
           this.arrResultadoFilter.push(itResult)
         }
       });
@@ -462,7 +458,7 @@ export class ComplementaryCustomersComponent implements OnInit {
   exportListToExcel(){
     let resultado:any = []
     resultado = this.getBuscarClient()
-    console.log("resultado", resultado)
+    
     let Newresultado:any = []
     let resultadoFinal:any = []
     if (resultado!= null && resultado.length > 0) {
@@ -473,7 +469,7 @@ export class ComplementaryCustomersComponent implements OnInit {
        for(let index = 0 ;index < Newresultado.length; index++){
         if(Newresultado[index].length > 1){
           Newresultado[index].forEach(element => {
-            //console.log("element", element)
+           
             resultadoFinal.push(element)
           });
         }else{
@@ -482,8 +478,7 @@ export class ComplementaryCustomersComponent implements OnInit {
      }
 
       //resultadoFinal.push(Newresultado)
-      console.log("Newresultado", Newresultado)
-      console.log("resultadoFinal", resultadoFinal)
+     
 
       let data = []
       resultadoFinal.forEach(t => {
@@ -498,10 +493,10 @@ export class ComplementaryCustomersComponent implements OnInit {
         t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO
         });
-        //console.log("la data1111", t.arrListas)
+        
         data.push(_data);
         });
-        console.log("la data", data)
+       
         this.excelService.exportAsExcelFile(data, "Cliente Complementario");
     }else {
      

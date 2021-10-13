@@ -67,8 +67,7 @@ export class C1DetailCompanyComponent implements OnInit {
   }
 
   getStyle(index){
-    //console.log("prueba :" +index)
-    ////console.log("prueba2 :" +cantidad)
+  
     if(index===0){
       //padding-right:0px;padding-left:30px;
       //return 'padding-right:0px;padding-left:30px;'
@@ -85,10 +84,9 @@ export class C1DetailCompanyComponent implements OnInit {
   setDataInputs(indicePregEmpresa,indicePreg,valor){
 
     //this.arrRespuestasC1[indice]
-    ////console.log("el tvalor: ",valor);
+ 
     
-    ////console.warn("el this.arrRespuestasC1 C1: ",this.arrRespuestasC1);
-    ////console.warn("el (this.arrRespuestasC1[indicePreg]) C1: ",(this.arrRespuestasC1[indicePreg]));
+  
     //let arrDataPreguntas:any[] = this.objAlerta.arrPreguntasDetalle
     if(!this.arrRespuestasC1[indicePregEmpresa]){
       this.arrRespuestasC1[indicePregEmpresa] = [[]]
@@ -170,14 +168,13 @@ export class C1DetailCompanyComponent implements OnInit {
   }
 
   getArrayPreguntasDetalle(){
-    //console.log("el this.objAlerta.arrPreguntasDetalle 123: ",this.objAlerta.arrPreguntasDetalle)
-    //console.log("Prueba15 *****: ", this.objAlerta.arrPreguntasDetalle)
+  
     return this.objAlerta.arrPreguntasDetalle;
     
   }
 
  FuncionPadding(){
-   //console.log("Cantidad " + this.getArrayPreguntasDetalle().length)
+   
     for(let i=0; this.getArrayPreguntasDetalle().length >= 0 ; i++){
      
        if(this.getArrayPreguntasDetalle().length > 0){
@@ -201,10 +198,10 @@ export class C1DetailCompanyComponent implements OnInit {
   let respModal = await this.modalRef.result
   this.core.loader.show()
   if(respModal.SRUC){
-    // console.log("termino el modal? : ",respModal)
+  
     this.company = respModal
     let resp = await this.getArrayPreguntasDetalle()
-    // console.log("el resp /***/",resp)
+   
     let boolStatusRUC = false
     resp.forEach(element => {
       if(boolStatusRUC || element[0].SRUC == respModal.SRUC){
@@ -255,7 +252,7 @@ export class C1DetailCompanyComponent implements OnInit {
           let preg = await this.addCompany()
           let newComp = await this.insertCompanyDetailUser(preg)
           let respRefresh = await this.parent.parent.getFormsDetailAlgorit(this.objAlerta)
-          // console.log("respuesta de respRefresh : ",respRefresh)
+         
           this.objAlerta.arrPreguntasDetalle = respRefresh
           this.core.loader.hide()
         }
@@ -282,8 +279,7 @@ async addCompany() {
       NPRODUCT: this.company.SPRODUCTO,
       NIDREGIMEN: this.objAlerta.NREGIMEN
   }
-  // console.log("el this.objAlerta.arrPreguntasDetalle : ",this.objAlerta)
-  // console.log("el addCompany preg : ",preg)
+  
   /*
   this.questionDetailList.push(preg)
   this.questionsList.forEach(it => {

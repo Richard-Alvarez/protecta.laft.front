@@ -31,8 +31,8 @@ export class MantenimientoComplementoComponent implements OnInit {
   }
 
   async listaComplemento(){
-    this.listcomplemento = []//await this.userConfig.GetListaAlertaComplemento()
-    console.log("la lista de los complementos", this.listcomplemento)
+    this.listcomplemento = await this.userConfig.GetListaAlertaComplemento()
+    
   }
 
 
@@ -47,7 +47,7 @@ export class MantenimientoComplementoComponent implements OnInit {
     modalRef.componentInstance.lista =  this.listcomplemento;
     modalRef.result.then(async (resp) => {
       
-      console.log("entro al resultado del reason : ",resp)
+     
      
      
       this.core.loader.show()

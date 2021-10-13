@@ -39,7 +39,7 @@ export class FormsDatabaseComponent implements OnInit {
         let data = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: this.NIDREGIMEN }
         this.alertFormList = await this.userConfigService.getOfficialAlertFormList(data)
         this.alertFormList.forEach(it => it.estado = it.SESTADO_REVISADO == '1' ? true : false)
-        //console.log(this.alertFormList)
+        
         await this.groupUsers()
     }
 
@@ -101,7 +101,7 @@ export class FormsDatabaseComponent implements OnInit {
             item.DFECHA_REVISADO = `${fecha.day}/${fecha.month}/${fecha.year} ${fecha.hour}:${fecha.minute}:${fecha.second}`
 
         } catch (error) {
-            //console.log(error)
+            
         }
     }
 

@@ -152,7 +152,7 @@ export class RecurseProfile implements OnInit {
                     await this.getArrayResourceProfile();
                     this.arrayRequestParameters = [];
                 }
-                console.log(this.arrayRequestParameters);
+                
             });
         else 
         swal.fire({
@@ -216,10 +216,8 @@ export class RecurseProfile implements OnInit {
     }
 
     textCabecera(index){
-       console.log("texto para ver ",this.arrayCabecera[0])
-       console.log("texto para ver ",this.arrayCabecera[1])
-        console.log("texto para ver ",this.arrayCabecera.name)
-    //    console.log("texto para ver ",this.arrayCabecera.name[2])
+     
+    
 
        if(this.arrayCabecera[0]=="Menú" || this.arrayCabecera[1]=="Submenú"){
             return 'text-left'

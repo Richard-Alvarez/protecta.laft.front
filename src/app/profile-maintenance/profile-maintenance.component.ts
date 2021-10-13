@@ -48,22 +48,21 @@ export class ProfileMaintenanceComponent implements OnInit {
   async Lista(){
     let ListaGrupo:any = await this.getGrupoList()
     let bolPusheo = false;
-    // console.log("la lista de los grupos",ListaGrupo)
-    // console.log("la lista ",this.PerfilList)
+    
 
     this.PerfilList.forEach((cliente, inc) => {
     let filterPerfil:any = this.ListaNew.filter(it => it.NIDPROFILE == cliente.NIDPROFILE )
     let filterPerfil2:any = this.PerfilList.filter(it => it.NIDPROFILE == cliente.NIDPROFILE )
-    // console.log("filterPerfi2 :", filterPerfil2)
+  
    
       if(filterPerfil.length == 0){
         // let PerfilxGrupo = this.PerfilList.filter(it =>  it.NIDPROFILE == cliente.NIDPROFILE && it.NIDGRUPOSENAL == cliente.NIDGRUPOSENAL )
         let ArrGrupo:any = []
-        // console.log("PerfilxGrupo :", PerfilxGrupo)
+       
           ListaGrupo.forEach(List => {
            
             let FilterGrupo = filterPerfil2.filter(filterGrupo => filterGrupo.NIDGRUPOSENAL == List.NIDGRUPOSENAL)
-            //  console.log("FilterGrupo :", FilterGrupo)
+         
             let vacio = 0 
            
             if(FilterGrupo.length > 0){
@@ -98,8 +97,7 @@ export class ProfileMaintenanceComponent implements OnInit {
         // cliente.arrGrupos = ArrGrupo
         // this.ListaNew.push(cliente)
         this.ListaNew.push(ObjPerfil)
-        console.log("this.ListaNew",this.ListaNew)
-        console.log("ObjPerfil",ObjPerfil)
+      
       }
 
       
@@ -107,7 +105,7 @@ export class ProfileMaintenanceComponent implements OnInit {
 
      })
 
-    //  console.log("la lista nueva: ", this.ListaNew)
+    
 
   } 
 
@@ -136,7 +134,7 @@ export class ProfileMaintenanceComponent implements OnInit {
     modalRef.componentInstance.valor = this.ValorTitle;
     modalRef.result.then(async (resp) => {
       
-      console.log("entro al resultado del reason : ",resp)
+    
      
       this.ListaNew = [] 
       await this.getListaProfile()

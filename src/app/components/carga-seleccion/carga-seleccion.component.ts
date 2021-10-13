@@ -53,7 +53,7 @@ export class CargaSeleccionComponent implements OnInit {
               const tipoDocumento: Array<TipoDocumento> = resp;
               carga.registros.forEach((element) => {
                 if (element.documento.descripcion != '') {
-                  ////console.log(element);
+                  
                   element.documento = tipoDocumento.filter((r => {
                     return (r.descripcion + "").toLowerCase().trim() == (element.documento.descripcion + "").toLowerCase().trim();
                   }))[0];
@@ -124,20 +124,20 @@ export class CargaSeleccionComponent implements OnInit {
   public SetTypeDocument(carga: Carga): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
-        ////console.log(carga.registros);
+       
         const valboolean = await this.val(carga);
 
         const Documents: Array<any> =
           carga.registros.filter(x => (x.documento.id === 0 ||
             x.documento.id === undefined) && x.documento.descripcion != '').map(x => x.documento);
 
-        ////console.log(Documents);
+        
         const docs: Array<any> = Array.from(new Set(Documents.map((item) => item.descripcion)));
-        ////console.log(docs);
+        
         if (docs.length > 0) {
           for (let i = 0; i <= docs.length; i++) {
             const doc: any = { descripcion: docs[i] };
-            ////console.log(doc);
+            
             await this.maestroService.AddMaestroDocument(doc).then((re) => {
 
             });
@@ -147,7 +147,7 @@ export class CargaSeleccionComponent implements OnInit {
              if ((registro.documento.id === 0 || registro.documento.id === undefined) && registro.documento.descripcion != '') {
  
                const doc: any = { descripcion: registro.documento.descripcion };
-               //console.log(doc);
+               
                await this.maestroService.AddMaestroDocument(doc).then((re) => {
  
                });
