@@ -2562,9 +2562,9 @@ async Consultar360Previous(){
         // if(this.ListaPoliza.length != 0){
         //     this.ListaPoliza.forEach(element => {
 
-        //         this.Consultar360(element)
-        //     });
-        // }
+        //          this.Consultar360(element)
+        //      });
+        //  }
   } 
 
    //Resultado360:any = []
