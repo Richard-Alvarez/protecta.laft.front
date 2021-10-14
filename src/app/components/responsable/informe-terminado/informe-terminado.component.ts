@@ -434,38 +434,50 @@ async DescargarReportesGrupo(itemAlerta){
     arrayReporte.push(itemForm.arrAdjuntosInform[0])
   })
 
+  var dataTraeBase64:any = []
+  //this.core.loader.show();
+  arrayReporte.forEach(async  (lista,inc) => {
+    let data = { ruta: lista.SRUTA_ADJUNTO }
+    //let datatrae   
+    await  this.userConfigService.DownloadUniversalFileByAlert(data).then((response) => {
+        let data_ = response
+        dataTraeBase64.push(data_)
+     }) 
+     })
+
+     console.log("todas las base64",dataTraeBase64)
+
  
-  this.dataBase64 = await this.TraeDataBase64(arrayReporte)
-  
-
-  console.log("Resportes con base 64",this.dataBase64)
-  this.dataBase64 = this.dataBase64
-  console.log("Resportes con base 64222222",this.dataBase64)
-  console.log("Resportes con base 64222222",this.dataBase64.length)
- this.dataBase64.forEach(async(element) => {
-    this.core.loader.show();
-    debugger
-      this.dataBase64aHTML.push(this.b64_to_utf8(element.base64))
-      this.core.loader.hide();
-      console.log("todas html 1x1",this.dataBase64aHTML)
-   });
+  this.dataBase64 = Promise.all(this.dataBase64)
+  console.log("todas html 111",this.dataBase64)
+//  this.dataBase64.forEach(async(element) => {
+//     this.core.loader.show();
+//     debugger
+//       this.dataBase64aHTML.push(this.b64_to_utf8(element.base64))
+//       this.core.loader.hide();
+//       console.log("todas html 1x1",this.dataBase64aHTML)
+//    });
 
 
-   console.log("todas html",this.dataBase64aHTML)
+ //  console.log("todas html",this.dataBase64aHTML)
 
    //this.Export2Doc("Reportes","Reportes")
 }
 async TraeDataBase64(array){
   var dataTraeBase64:any = []
   this.core.loader.show();
-  array.forEach(async (lista,inc) => {
+  array.forEach(async  (lista,inc) => {
     let data = { ruta: lista.SRUTA_ADJUNTO }
-    let datatrae =  await this.userConfigService.DownloadUniversalFileByAlert(data)
-    dataTraeBase64.push(datatrae)
+    //let datatrae   
+    await  this.userConfigService.DownloadUniversalFileByAlert(data).then((response) => {
+       debugger
+      dataTraeBase64.push(response)
+     })
+    
      })
    this.core.loader.hide();
    
-   return dataTraeBase64
+    return await dataTraeBase64
 }
 
 b64_to_utf8(str) {
