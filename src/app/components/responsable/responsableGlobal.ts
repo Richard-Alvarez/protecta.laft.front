@@ -2340,16 +2340,31 @@ export class ResponsableGlobalComponent {
       this.core.loader.show()
       
 
-      
-      let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
-        alertaItem.NIDALERTA == NIDALERTA &&
-        alertaItem.NREGIMEN == NREGIMEN && 
-        alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
-        alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
-        
-
+      let respListFilesAdjuntos = [];
+      if(STIPO_CARGA == 'COMPLEMENTO')
+          respListFilesAdjuntos = this.arrObjFilesAdjByCabecera.filter(alertaItem =>
+          alertaItem.NIDALERTA == NIDALERTA &&
+          alertaItem.NREGIMEN == NREGIMEN && 
+          alertaItem.NIDCABECERA_USUARIO == NIDALERTA_CABECERA &&
+          alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
+      else
+          respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
+          alertaItem.NIDALERTA == NIDALERTA &&
+          alertaItem.NREGIMEN == NREGIMEN && 
+          alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
+          alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
       let listFilesAdjuntos = []//archivos
       let listFileNameAdjuntos = []//nombre de archivos
+
+      // let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
+      //   alertaItem.NIDALERTA == NIDALERTA &&
+      //   alertaItem.NREGIMEN == NREGIMEN && 
+      //   alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
+      //   alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
+        
+
+      // let listFilesAdjuntos = []//archivos
+      // let listFileNameAdjuntos = []//nombre de archivos
   
       respListFilesAdjuntos.forEach(itemFile => {
         itemFile.arrFiles.forEach(objFile => listFilesAdjuntos.push(objFile))

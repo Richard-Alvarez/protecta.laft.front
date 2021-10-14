@@ -361,10 +361,21 @@
 
                                       </div>
                                     </div>
-                                    <div class="col-lg-8" style='padding-left:0px' *ngIf="STIPO_USUARIO === 'RE' && item.TIPO_FORM =='C'" >
-                                      {{ValidarTexto(item.SDESCRIPCION_ALERTA)}} 
-                                       <div [innerHTML]="textHtml"></div>
-                                     
+                                    <div class="row" style='padding-left:0px' *ngIf="STIPO_USUARIO === 'RE' && item.TIPO_FORM =='C'" >
+                                      <div class="col-lg-7">
+                                         {{ValidarTexto(item.SDESCRIPCION_ALERTA)}}
+                                        <div [innerHTML]="textHtml"></div>
+                                      </div>
+                                      <div class="col-lg-1" style="
+                                      padding: 0px;
+                                      text-align: center;
+                                  " >
+                                        <a  style="cursor: pointer;padding: 0px 1px;"  >
+                                          <img src="assets/icons/excel-microsoft.png" (click)="descargarComplemento2(item)" style="width: 38px;"/>
+                                         Descargar Complemento
+                                        </a>
+                                      </div>
+                                      <div class="col-lg-4"></div>
                                     </div>
 
                                     <div class="row mt-3" *ngIf="STIPO_USUARIO === 'OC'">
