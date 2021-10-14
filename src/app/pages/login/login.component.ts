@@ -115,6 +115,7 @@ export class LoginComponent implements OnInit {
             let data = {
               NIDPROFILE : perfil
             }
+            
             let resultadoPerfil =  await this.userConfigService.GetGrupoXPerfil(data) 
             let ValidadorContra = await this.ValidarUsuarioContra(usuario.idUsuario)
             localStorage.setItem("ValidadorContraUsuario", ValidadorContra.indicador)
@@ -152,10 +153,10 @@ export class LoginComponent implements OnInit {
                 }break;
                 case 4 : {
                   this.core.rutas.goContraparte();
-                }
+                }break;
                 default: {
                   this.core.rutas.goProveedor();
-              }
+              }break;
             }   
 
             }else{
