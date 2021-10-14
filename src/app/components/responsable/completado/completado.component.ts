@@ -1142,11 +1142,20 @@ async  AgregarUsuario(item,lilistComplemento){
   }
     
   
-}0
+}
 
 descargarComplemento (item,listUsu){
+  debugger;
   var splitRuta = listUsu.SRUTA_PDF.split('/')
   this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
+}
+descargarComplemento2 (item){
+  debugger;
+  let obj =  this.NewArreglo.filter(t => t.NIDALERTA == item.NIDALERTA && t.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
+  if(obj.length == 0)
+    return
+  var splitRuta = obj[0].RESULTADO[0].SRUTA_PDF.split('/')
+  this.parent.downloadUniversalFile(obj[0].RESULTADO[0].SRUTA_PDF, splitRuta[splitRuta.length - 1])
 }
 
 validarcomplemento(item){

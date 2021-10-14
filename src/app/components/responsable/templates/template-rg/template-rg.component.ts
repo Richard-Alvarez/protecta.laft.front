@@ -3,6 +3,7 @@ import { UserconfigService } from 'src/app/services/userconfig.service';
 import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-informe.component';
 import { CoreService } from '../../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NumberFormat } from 'xlsx/types';
 
 @Component({
   selector: 'app-template-rg',
@@ -11,18 +12,23 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TemplateRGComponent {
 
-  //public pendienteInforme: PendienteInformeComponent;
- 
-  //@Input() obj:any = {}
+  
   @Input() Nombre:string
   @Input() Perfil:string
-  //@Input() Respuesta:string
+  
+  
+  @Input() Respuesta:number
   //@Input() Alerta:string
   @Input() index:string
   @Input() item:any
   @Input() parent:PendienteInformeComponent
+
+  //VARIABLES PARA DESCARGAR REPORTES DE GRUPSO
+  @Input() AlertaGlobal:string
+  @Input() Validar:number
+
  Alerta
- Respuesta
+ 
   USU_NOMBRE_COMPLETO:string =  ''
   NombreBoton:string = 'Export as Doc'
   rpta711:string = ''
@@ -34,15 +40,8 @@ export class TemplateRGComponent {
 
   async ngOnInit() {
     
-     
-    //this.USU_NOMBRE_COMPLETO = this.parent.Nombre
-    //this.Alerta = this.pendienteInforme.Alerta2()
-    this.valor = true
-    //this.NombreBoton = 'Export as Doc'
-   // this.USU_NOMBRE_COMPLETO = this.obj.arrUsuariosForm[0].arrUsuariosForm[0].NOMBRECOMPLETO
-    //this.SPERFIL_NAME_USUARIO =  this.obj.arrUsuariosForm[0].arrUsuariosForm[0].SCARGO
-
-  }
+      this.valor = true
+ }
 
 
   Export2Doc(element, filename = ''){

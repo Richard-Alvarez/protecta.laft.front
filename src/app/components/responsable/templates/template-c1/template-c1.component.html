@@ -76,30 +76,58 @@
     </ol>
       <br>
       <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta C1</strong>
-      <ul>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> 
-        El Área de Comercial Masivos señaló {{arrayDataSenal[0].Respuesta}}  haber identificado ninguna situación atípica respecto a la señal 
-        de alerta “C1”. Se tiene como sustento el correo como sustento.
-        </li>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> 
-        En el sistema LAFT se reportaron XX entidades, de las cuales se tomó una muestra de XX entidades y el área de Cumplimiento, con el 
-        apoyo de Comercial Masivo, constató que su actividad económica guarda un propósito lógico con los productos contratados. Por ende, 
-        no se identificó señal de alerta.
-        </li>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> 
-        El Área de Comercial Masivos indicó que las operaciones con los contratantes de la muestra {{arrayDataSenal[0].Respuesta}}   guardan 
-        relación con la actividad económica del cliente y los precios con los cuales se están comercializando a los 
-        contratantes se alinean a las políticas de la Compañía y están dentro de los parámetros de normalidad vigente 
-        en el mercado. 
-        </li>
-        <li style="font-family: arial Narrow, serif; text-align: justify"> 
-        Por lo tanto, se concluye que por la señal de alerta “C1” {{arrayDataSenal[0].Respuesta}}  se identificaron casos. 
-        </li>
-      </ul>   
+
+      <div *ngIf="Validar ==1">
+        <ul>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+          El Área de Comercial Masivos señaló {{arrayDataSenal[0].Respuesta}}  haber identificado ninguna situación atípica respecto a la señal 
+          de alerta “C1”. Se tiene como sustento el correo como sustento.
+          </li>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+          En el sistema LAFT se reportaron XX entidades, de las cuales se tomó una muestra de XX entidades y el área de Cumplimiento, con el 
+          apoyo de Comercial Masivo, constató que su actividad económica guarda un propósito lógico con los productos contratados. Por ende, 
+          no se identificó señal de alerta.
+          </li>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+          El Área de Comercial Masivos indicó que las operaciones con los contratantes de la muestra {{arrayDataSenal[0].Respuesta}}   guardan 
+          relación con la actividad económica del cliente y los precios con los cuales se están comercializando a los 
+          contratantes se alinean a las políticas de la Compañía y están dentro de los parámetros de normalidad vigente 
+          en el mercado. 
+          </li>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+          Por lo tanto, se concluye que por la señal de alerta “C1” {{arrayDataSenal[0].Respuesta}}  se identificaron casos. 
+          </li>
+        </ul>   
+
+      </div>
+      <div *ngIf="Validar ==2">
+
+        <ul>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+          El Área de Comercial Masivos señaló {{item.NIDRESPUESTA == 1 ? 'si' : 'no' }}  haber identificado ninguna situación atípica respecto a la señal 
+          de alerta “C1”. Se tiene como sustento el correo como sustento.
+          </li>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+          En el sistema LAFT se reportaron XX entidades, de las cuales se tomó una muestra de XX entidades y el área de Cumplimiento, con el 
+          apoyo de Comercial Masivo, constató que su actividad económica guarda un propósito lógico con los productos contratados. Por ende, 
+          no se identificó señal de alerta.
+          </li>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+          El Área de Comercial Masivos indicó que las operaciones con los contratantes de la muestra {{item.NIDRESPUESTA == 1 ? 'si' : 'no' }}   guardan 
+          relación con la actividad económica del cliente y los precios con los cuales se están comercializando a los 
+          contratantes se alinean a las políticas de la Compañía y están dentro de los parámetros de normalidad vigente 
+          en el mercado. 
+          </li>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+          Por lo tanto, se concluye que por la señal de alerta “C1” {{item.NIDRESPUESTA == 1 ? 'si' : 'no' }}  se identificaron casos. 
+          </li>
+        </ul>   
+      </div>
+      
       <br>
       <br>
       <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
-      <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://190.216.170.173/LAFT/ ">http://190.216.170.173/LAFT/ </a></p>
+      <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
   </div>
     
     <div class="text-center pt-5">

@@ -15,6 +15,13 @@ export class TemplateC3Component implements OnInit {
   @Input() item:any
   @Input() parent:PendienteInformeComponent
 
+    //VARIABLES PARA DESCARGAR REPORTES DE GRUPSO
+    @Input() AlertaGlobal:string
+    @Input() Validar:number
+    @Input() ObjListaAlertasC3:any 
+    @Input() RespuestaGlobalC3:string
+    
+
   constructor() { }
 
   ngOnInit() {

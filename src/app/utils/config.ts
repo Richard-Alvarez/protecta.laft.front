@@ -193,6 +193,9 @@ class Rutas {
   //Para Validar Contraseña por primera vez 
   public urlGetActPassUsuario: string = this.base + "monitoreoSenales/GetActPassUsuario";
   public urlGetUpdPssUsuario: string = this.base + "monitoreoSenales/GetUpdPssUsuario";
+
+  //Para generar reportes por grupo
+  public urlGetAlertaResupuesta:string = this.base + "monitoreoSenales/GetAlertaResupuesta";
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

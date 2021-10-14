@@ -195,7 +195,18 @@ export class UserconfigService {
     })
   }
 
-  
+  GetAlertaResupuesta(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetAlertaResupuesta,data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        //console.log(error)
+        return reject(error)
+      }
+    })
+  }
 
   GetListaResultado(data: any): Promise<any> {
     return new Promise((resolve, reject) => {

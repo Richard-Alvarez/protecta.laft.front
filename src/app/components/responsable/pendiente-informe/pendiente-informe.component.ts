@@ -91,6 +91,7 @@ export class PendienteInformeComponent implements OnInit {
     //    this.redictM(cadenaContentUsers)
     //  }
     //}
+   
   }
 
   getIsValidStateAllow(state){
@@ -927,6 +928,68 @@ async DescargarReporte(item){
       });
     
     } 
+
+   
+  
+  ListaAlerta:any = []
+  ListaAlertaRG:any = []
+  ListaAlertaC1:any = []
+  ListaAlertaC3:any = []
+  RespuestaGlobalC3:string = ''
+  ListaAlertaS1:any = []
+  ListaAlertaS2:any = []
+  ListaAlertaS3:any = []
+  //prueba:string = "RG1"
+  async Lista(){
+    let idGrupo = await this.ValidarGrupo()
+    let data :any = {}
+    data.NIDGRUPOSENAL = idGrupo
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    this.core.loader.show()
+    this.ListaAlerta = await this.userConfigService.GetAlertaResupuesta(data)
+    this.core.loader.hide()
+
+    this.ListaAlertaRG = this.ListaAlerta.filter(it => (it.SNOMBRE_ALERTA).substr(0,2) == 'RG' )
+    this.ListaAlertaRG.sort((a, b) => a.NIDALERTA - b.NIDALERTA)
+    this.ListaAlertaC1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C1' )
+    this.ListaAlertaC3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C3' )
+    this.RespuestaGlobalC3 = this.ListaAlertaC3.filter((it,inc) => it.NIDRESPUESTA == 1)
+    if(this.RespuestaGlobalC3.length == 0){
+      this.RespuestaGlobalC3 = 'no'
+    }else{
+      this.RespuestaGlobalC3 = 'Sí'
+    }
+    this.ListaAlertaS1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S1' )
+    this.ListaAlertaS2  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S2' )
+    this.ListaAlertaS3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S3' )
+
+
+    //this.ListaAlertaRG = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'RG1' )
+    
+    console.log("La nueva lista",this.ListaAlerta)
+    console.log("La nueva lista ListaAlertaRG",this.ListaAlertaRG)
+
+    this.Export2Doc('Reporte','Reporte de Clientes')
+
+
+  }
+
+  async ValidarGrupo(){
+    var URLactual = window.location + " ";
+    let link = URLactual.split("/")
+    this.linkactual = link[link.length-1].trim()
+    if(this.linkactual == "clientes"){
+      return 1
+    }else if(this.linkactual == "colaborador"){
+      return 2
+    }
+    else if(this.linkactual == "contraparte"){
+      return 4
+    }
+    else if(this.linkactual == "proveedor"){
+      return 3
+    }
+  }
    
 }
 

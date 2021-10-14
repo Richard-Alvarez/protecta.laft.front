@@ -63,7 +63,7 @@ export class NavbarComponent implements OnInit {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
-    
+
      
     
   }
@@ -88,6 +88,7 @@ public text: String;
     this.opened = !this.opened;
     
   }
+
   
 
   //Obtiene la lista de opciones

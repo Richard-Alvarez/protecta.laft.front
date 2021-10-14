@@ -1038,6 +1038,7 @@ export class ResponsableComponent implements OnInit {
   }
 
   async downloadUniversalFile(ruta, nameFile) {
+    debugger
     try {
       this.core.loader.show()
       let data = { ruta: ruta }
@@ -2384,7 +2385,7 @@ export class ResponsableComponent implements OnInit {
 
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-      
+      debugger;
       this.core.loader.show()
       
   

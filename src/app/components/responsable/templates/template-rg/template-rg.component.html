@@ -1,23 +1,16 @@
 <div id="RG">
-
+    
     <!--    
         <p>
             <img src="http://190.216.170.173/LAFT/assets/img/logo.png" alt="" >
         </p> -->
           
             
-    
-       <!-- <div *ngFor="let item of parent.arrayData"> -->
-           
+     
            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
-          <!-- <p> 
-               <strong>Usuario:  {{parent.Nombre}}  </strong>
-           </p>
-           <p>
-               <strong>Perfil:  {{parent.Perfil}}  </strong>
-           </p> -->
+          
                  
-           <div *ngIf="parent.Alerta == 'RG1'">
+           <div *ngIf="parent.Alerta == 'RG1' || this.AlertaGlobal== 'RG1'">
            <!-- ESTO ES PARA LA RG1 -->
            <table border="1" cellspacing="0" cellpadding="0" align="left" width="100&">
                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -65,7 +58,7 @@
            </table>
            </div>
     
-            <div *ngIf="parent.Alerta == 'RG2'">
+            <div *ngIf="parent.Alerta == 'RG2' || this.AlertaGlobal== 'RG2'">
             <!-- ESTO ES PARA LA RG2 -->
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -112,7 +105,7 @@
             </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'RG3'">
+            <div *ngIf="parent.Alerta == 'RG3' || this.AlertaGlobal== 'RG3'">
             <!-- ESTO ES PARA LA RG3 -->
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -157,7 +150,7 @@
             </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'RG4'">
+            <div *ngIf="parent.Alerta == 'RG4' || this.AlertaGlobal== 'RG4'">
             <!-- ESTO ES PARA LA RG4 -->
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -202,7 +195,7 @@
             </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'RG5'">
+            <div *ngIf="parent.Alerta == 'RG5' || this.AlertaGlobal== 'RG5'">
             <!-- ESTO ES PARA LA RG5 -->
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -247,7 +240,7 @@
             </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'RG6'">
+            <div *ngIf="parent.Alerta == 'RG6' || this.AlertaGlobal== 'RG6'">
             <!-- ESTO ES PARA LA RG6 -->
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -293,7 +286,7 @@
             </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'RG7'">
+            <div *ngIf="parent.Alerta == 'RG7' || this.AlertaGlobal== 'RG7'">
             <!-- ESTO ES PARA LA RG7 -->
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -340,7 +333,7 @@
             </table>
             </div>  
     
-            <div *ngIf="parent.Alerta == 'RG8'">
+            <div *ngIf="parent.Alerta == 'RG8' || this.AlertaGlobal== 'RG8'">
             <!-- ESTO ES PARA LA RG8 -->
             <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -386,7 +379,7 @@
             </table>
             </div>
     
-            <div *ngIf="parent.Alerta == 'RG9'">
+            <div *ngIf="parent.Alerta == 'RG9' || this.AlertaGlobal== 'RG9'">
                  <!-- ESTO ES PARA LA RG9 -->
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -487,13 +480,26 @@
         <p>
             <strong></strong>
         </p>
-        
-                <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>
-                <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
-                <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify"
-                >El {{parent.Perfil}} informó que  {{parent.Respuesta}} tiene casos a reportar con respecto 
-                a los clientes de renta privada y ahorro total.</li></ul>   
+                <div *ngIf="Validar ==1">
+                    <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>
+                    <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                    <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify"
+                    >El {{parent.Perfil}} informó que  {{parent.Respuesta}} tiene casos a reportar con respecto 
+                    a los clientes de renta privada y ahorro total.</li></ul>
+                </div>
+
+                <div *ngIf="Validar ==2">
+                    <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>
+                    <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                    <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify"
+                    >El {{this.Perfil}} informó que  {{this.Respuesta == 1 ? 'si' : 'no'}} tiene casos a reportar con respecto 
+                    a los clientes de renta privada y ahorro total.</li></ul>
+                </div>
+                
+                
+                
             </div>
     
         
