@@ -599,7 +599,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
              
             
-               
+               debugger;
               arrPushFilesForm.push(this.parent.sendFilesAdjuntosCabecera(senial.NIDALERTA_CABECERA,senial.NIDALERTA,this.regimen.id,'ADJUNTOS-FORM',"PENDIENTE","RE"))
              
               arrPushFilesForm.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'ADJUNTOS-SUSTENTO'))

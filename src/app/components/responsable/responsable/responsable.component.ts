@@ -2385,7 +2385,7 @@ export class ResponsableComponent implements OnInit {
 
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-      
+      debugger;
       this.core.loader.show()
       
   
