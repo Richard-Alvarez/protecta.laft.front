@@ -2555,7 +2555,7 @@ async Consultar360Previous(){
         data.P_NUSER = 0
 
         this.core.loader.show()
-        //this.ListaPoliza = await this.userConfigService.GetListaPolizas(data)
+        this.ListaPoliza = await this.userConfigService.GetListaPolizas(data)
         this.core.loader.hide()
         
 

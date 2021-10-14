@@ -6,6 +6,7 @@ import { CoreService } from '../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-informe-terminado',
@@ -421,5 +422,103 @@ async getArchivoSustento(item){
     console.error("error en descargar: ",error)
   }
 }
+
+dataBase64:any =[]
+dataBase64aHTML:any =[]
+
+async DescargarReportesGrupo(itemAlerta){
+ 
+  let arrayReporte = []
+  this.dataBase64 = []
+  itemAlerta.forEach((itemForm) => {
+    arrayReporte.push(itemForm.arrAdjuntosInform[0])
+  })
+
+ 
+  this.dataBase64 = await this.TraeDataBase64(arrayReporte)
+  
+
+  console.log("Resportes con base 64",this.dataBase64)
+  this.dataBase64 = this.dataBase64
+  console.log("Resportes con base 64222222",this.dataBase64)
+  console.log("Resportes con base 64222222",this.dataBase64.length)
+ this.dataBase64.forEach(async(element) => {
+    this.core.loader.show();
+    debugger
+      this.dataBase64aHTML.push(this.b64_to_utf8(element.base64))
+      this.core.loader.hide();
+      console.log("todas html 1x1",this.dataBase64aHTML)
+   });
+
+
+   console.log("todas html",this.dataBase64aHTML)
+
+   //this.Export2Doc("Reportes","Reportes")
+}
+async TraeDataBase64(array){
+  var dataTraeBase64:any = []
+  this.core.loader.show();
+  array.forEach(async (lista,inc) => {
+    let data = { ruta: lista.SRUTA_ADJUNTO }
+    let datatrae =  await this.userConfigService.DownloadUniversalFileByAlert(data)
+    dataTraeBase64.push(datatrae)
+     })
+   this.core.loader.hide();
+   
+   return dataTraeBase64
+}
+
+b64_to_utf8(str) {
+  return decodeURIComponent(escape(window.atob(str)));
+}
+
+Conversion(){
+   console.log("todas111",this.dataBase64)
+ console.log("todas html1111",this.dataBase64aHTML)
+  // this.dataBase64.forEach(async(element) => {
+  //   this.core.loader.show();
+  //   debugger
+  //     this.dataBase64aHTML.push(this.b64_to_utf8(element.base64))
+  //     this.core.loader.hide();
+  //     console.log("todas html 1x1",this.dataBase64aHTML)
+  //  });
+}
+ 
+
+
+Export2Doc(element, filename = ''){
+ 
+  setTimeout(function(){
+ 
+    var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'></head><body>";
+    var postHtml = "</body></html>";
+    var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+    
+    var blob = new Blob(['\ufeff', html],{
+        type: 'application/msword'
+    });
+  
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
+  
+    filename = filename?filename+'.doc': 'document.doc';
+  
+    var downloadLink = document.createElement("a");
+  
+     document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        navigator.msSaveOrOpenBlob(blob, filename);
+    }else{
+        downloadLink.href = url;
+  
+          downloadLink.download = filename;
+  
+          downloadLink.click();
+    }
+  
+     document.body.removeChild(downloadLink);
+    },1);
+
+ }
 
 }
