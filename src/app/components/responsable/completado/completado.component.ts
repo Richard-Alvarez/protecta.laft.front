@@ -27,6 +27,8 @@ export class CompletadoComponent implements OnInit {
   arrDisableSolCompl:any = []
   arrFilesAdjuntos:any = []
   arrCheckbox:any = []
+  valueUserSelect: any = []
+  indexSave
   linkactual = "";
   PeriodoComp
   PeriodoComplemento
@@ -60,12 +62,12 @@ export class CompletadoComponent implements OnInit {
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
     this.PeriodoComplemento =  localStorage.getItem("fechaPeriodo")
     await this.ConsultaComplementoUsuarios()
+    await this.ConsultaComplemento()
     await this.ListaAlertas()
-    
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
-    await this.ConsultaComplemento()
+    
     //await this.obtenerAlertas()
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO
     this.OBJ_USUARIO = this.core.storage.get('usuario');
@@ -216,20 +218,7 @@ export class CompletadoComponent implements OnInit {
   }
 
   getArray(state,regimen){
-    
-    /*
-    switch (state) {
-      case 'COMPLETADO' : 
-        if(regimen === 1){
-          return this.arrResponsablesCompleGral
-        }
-        if(regimen === 2){
-          return this.arrResponsablesCompleSimpli
-        }
-      break;
-      default : 
-        return [];
-    }*/
+
     return this.arrResponsable;
     //return this.arrResponsablesPendienteSimpli;
   }
@@ -927,13 +916,13 @@ async ConsultaComplemento(){
 
 
 filtroComplemeto(item){
-  
-  
   let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA)
- 
+  
   return resultado
 }
-
+filtroComplemeto2(item){
+  return this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA)
+}
 getLink(){
   if(this.linkactual == 'clientes'){
     return 1
@@ -955,7 +944,7 @@ async EnviarCompUsuario(alerta,complemento){
  
   
    
-  var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(alerta.NIDALERTA)
+  var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == alerta.NIDALERTA && fil.NOMBRECOMPLETO == alerta.NOMBRECOMPLETO)
   let valorGrupo = this.getLink()
   let existe = this.NewArreglo[index].RESULTADO.filter(it => it.CONSULTA == 'C' )
   if(existe.length == 0){
@@ -1022,7 +1011,6 @@ async EnviarCompUsuario(alerta,complemento){
         data.fullName = this.OBJ_USUARIO.fullName
         data.FECHAPERIODO = this.PeriodoComplemento
         data.NOMBREALERTA = alerta.SNOMBRE_ALERTA
-        debugger;
         this.core.loader.show();
         if(element.CONSULTA == 'C'){
          
@@ -1051,7 +1039,8 @@ async EnviarCompUsuario(alerta,complemento){
 
 
 EliminarUsuario(indice,item){
-  var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(item.NIDALERTA)
+  debugger;
+  var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
   this.NewArreglo[index].RESULTADO.splice(indice,1)
   
 }
@@ -1071,22 +1060,25 @@ ListUser:any = []
 userId:number = 0
 async ListaUsuario(){
     this.ListUser = await this.userConfigService.ListaUsariosComp()
-  
 }
 
 NewArreglo:any = []
 async ListaAlertas(){
   this.NewArreglo = []
-   this.arrResponsable.forEach(item => {
+
+  this.arrResponsable.forEach(item => {
+    let objComplemento = this.listaComplemento.filter( t=> t.NIDALERTA == item.NIDALERTA )
     let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
-    let obj:any = {}
-    obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
-    obj.NOMBRECOMPLETO = item.NOMBRECOMPLETO
-    obj.NREGIMEN = item.NREGIMEN
-    obj.RESULTADO = resultado
-    obj.NIDALERTA = item.NIDALERTA
-    this.NewArreglo.push(obj)
-    
+    if(objComplemento.length > 0){
+      let obj:any = {}
+      obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
+      obj.NOMBRECOMPLETO = item.NOMBRECOMPLETO
+      obj.NREGIMEN = item.NREGIMEN
+      obj.RESULTADO = resultado
+      obj.NIDALERTA = item.NIDALERTA
+      this.NewArreglo.push(obj)
+      //item.RESULTADO = resultado
+    }
    });
   
   
@@ -1107,10 +1099,13 @@ async filtrarcomplementoxAlerta(item){
 
 }
 
-
-async  AgregarUsuario(item,lilistComplemento){
-  var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(item.NIDALERTA)
-  let usuario = this.ListUser.filter(it => it.ID_USUARIO == this.userId)
+cambioCombo (index , val){
+  this.valueUserSelect[index] = val.currentTarget.value
+  
+}
+async  AgregarUsuario(item,lilistComplemento,iUSelect){
+  var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
+  let usuario = this.ListUser.filter(it => it.ID_USUARIO == this.valueUserSelect[iUSelect])
   let existe = this.NewArreglo[index].RESULTADO.filter(it => it.NOMBRECOMPLETO == usuario[0].NOMBRECOMPLETO)
 
   if(existe.length > 0){
@@ -1135,9 +1130,9 @@ async  AgregarUsuario(item,lilistComplemento){
       
     
   }else{
-      
+    this.indexSave = iUSelect
      usuario[0].SNOMBRE_ESTADO = 'PENDIENTE'
-     await this.NewArreglo[index].RESULTADO.push(usuario[0])
+     await this.NewArreglo[index].RESULTADO.push(usuario[0]);
      
   }
     

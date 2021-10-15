@@ -6,6 +6,7 @@ import { CoreService } from '../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-informe-terminado',
@@ -421,5 +422,79 @@ async getArchivoSustento(item){
     console.error("error en descargar: ",error)
   }
 }
+
+dataBase64:any =[]
+dataBase64aHTML:any =[]
+
+async DescargarReportesGrupo(itemAlerta){
+  this.dataBase64 = []
+  this.dataBase64aHTML =[]
+  
+  let arrayReporte = []
+  itemAlerta.forEach((itemForm) => {
+    arrayReporte.push(itemForm.arrAdjuntosInform[0])
+  })
+
+  for(let i=0; i < arrayReporte.length ;i++ ){
+    let data = { ruta : arrayReporte[i].SRUTA_ADJUNTO}
+    let respuesta = await this.userConfigService.DownloadUniversalFileByAlert(data)
+    this.dataBase64.push(respuesta)
+  }
+
+  this.dataBase64.forEach(element => {
+    let resultado = this.b64_to_utf8(element.base64)
+    this.dataBase64aHTML.push(resultado)
+  });
+
+     console.log("todas las base64",this.dataBase64)
+     console.log("todas las dataBase64aHTML",this.dataBase64aHTML)
+
+     this.Export2Doc("Reportes","Reportes")
+     //this.dataBase64 = []
+     //this.dataBase64aHTML =[]
+}
+
+
+b64_to_utf8(str) {
+  return decodeURIComponent(escape(window.atob(str)));
+}
+
+
+
+Export2Doc(element, filename = ''){
+ 
+  setTimeout(function(){
+ 
+    var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'></head><body>";
+    var postHtml = "</body></html>";
+    var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+    
+    var blob = new Blob(['\ufeff', html],{
+        type: 'application/msword'
+    });
+  
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
+  
+    filename = filename?filename+'.doc': 'document.doc';
+  
+    var downloadLink = document.createElement("a");
+  
+     document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        navigator.msSaveOrOpenBlob(blob, filename);
+    }else{
+        downloadLink.href = url;
+  
+          downloadLink.download = filename;
+  
+          downloadLink.click();
+    }
+  
+     document.body.removeChild(downloadLink);
+    },1000);
+     // this.dataBase64 = []
+     //this.dataBase64aHTML =[]
+ }
 
 }

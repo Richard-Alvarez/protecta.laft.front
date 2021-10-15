@@ -153,6 +153,7 @@
                                                                     
                                                                     <div class="col-lg-4 pt-2" style="padding-left: 40px">
                                                                         <button class="btn btn-dark" (click)="revertirSenial(item)">Revertir Señal</button>
+                                                                       
                                                                     </div>
                                                                 </div>
                                                                 
@@ -320,7 +321,20 @@
                 </div>
 
             </div>
+            
+         <!-- <button class="btn btn-primary" (click)="DescargarReportesGrupo(arrResponsable)">Descargar</button>  -->
+        
 
+            <div id="Reportes" >
+                <div  *ngFor="let item of this.dataBase64aHTML"   style="display: none">
+                    <font face="Arial Narrow, serif" style="font-size: 16px"> 
+                        <div [innerHTML]="item"></div> 
+                    </font>
+                    
+                </div>
+            </div>  
+           
+       
 
         </div>
         <div class="card" *ngIf="arrResponsable.length == 0">
