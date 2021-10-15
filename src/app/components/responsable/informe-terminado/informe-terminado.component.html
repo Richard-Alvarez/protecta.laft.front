@@ -324,7 +324,7 @@
             
          <!-- <button class="btn btn-primary" (click)="DescargarReportesGrupo(arrResponsable)">Descargar</button>  -->
         
-
+<!-- 
             <div id="Reportes" >
                 <div  *ngFor="let item of this.dataBase64aHTML"   style="display: none">
                     <font face="Arial Narrow, serif" style="font-size: 16px"> 
@@ -333,10 +333,15 @@
                     
                 </div>
             </div>  
-           
-       
+            -->
+            
+            
+              
+                
+             
 
         </div>
+       
         <div class="card" *ngIf="arrResponsable.length == 0">
             <div class="card-body">
                 <div class="row">
@@ -348,6 +353,13 @@
                 </div>
             </div>
         </div>
+        <button class="btn btn-primary" (click)="DescargarReportesXGrupo(arrResponsable)">Descargar Reportes</button>
+        <div *ngIf="this.idGrupo == 1 "> 
+            <div id="Reportes" >
+                <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG" ></app-template-clientes-general>
+            </div>
+            
+        </div> 
     </div>
 
 

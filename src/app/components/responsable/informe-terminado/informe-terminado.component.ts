@@ -28,6 +28,7 @@ export class InformeTerminadoComponent implements OnInit {
   listFileName: Map<string, any> = new Map<string, any>()
   listFilesToShow: Map<string, any> = new Map<string, any>()
 
+  NPERIODO_PROCESO:number
 
   @Input() regimen: any = {}
   @Input() arrResponsable: any = []
@@ -42,7 +43,7 @@ export class InformeTerminadoComponent implements OnInit {
 
   async ngOnInit() {
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO;
-    
+    this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
     
     await this.arrResponsable
@@ -77,6 +78,7 @@ export class InformeTerminadoComponent implements OnInit {
         "comentario": "Un comentario uno"
       }
     ]
+   // this.ValidarGrupo()
   }
 
   getIsValidStateAllow(state) {
@@ -496,5 +498,45 @@ Export2Doc(element, filename = ''){
      // this.dataBase64 = []
      //this.dataBase64aHTML =[]
  }
+ ListaAlerta
+ ListaAlertaRG
+ RespuetasAlertaRG
+ idGrupo
+  async DescargarReportesXGrupo(){
+    this.idGrupo = await this.ValidarGrupo()
+    let data :any = {}
+    data.NIDGRUPOSENAL = this.idGrupo
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    this.core.loader.show()
+    this.ListaAlerta = await this.userConfigService.GetAlertaResupuesta(data)
+    this.core.loader.hide()
+  
+  this.ListaAlertaRG = this.ListaAlerta.filter(it => (it.SNOMBRE_ALERTA).substr(0,2) == 'RG' )
+  let respuestaRG = this.ListaAlertaRG.filter((it,inc) => it.NIDRESPUESTA == 1)
+    if(respuestaRG.length == 0){
+      this.RespuetasAlertaRG = 'no'
+    }else{
+      this.RespuetasAlertaRG = 'sí'
+    }
+    this.Export2Doc("Reportes","Reportes") 
+  }
+
+ linkactual
+ async ValidarGrupo(){
+  var URLactual = window.location + " ";
+  let link = URLactual.split("/")
+  this.linkactual = link[link.length-1].trim()
+  if(this.linkactual == "clientes"){
+    return  1
+  }else if(this.linkactual == "colaborador"){
+    return  2
+  }
+  else if(this.linkactual == "contraparte"){
+    return  4
+  }
+  else if(this.linkactual == "proveedor"){
+    return  3
+  }
+}
 
 }
