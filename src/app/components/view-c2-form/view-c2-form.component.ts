@@ -486,7 +486,7 @@ export class ViewC2FormComponent implements OnInit {
         } catch (error) {
           
         }
-
+console.log('asds',this.internationalList);
     }
 
     async getValidar() {
