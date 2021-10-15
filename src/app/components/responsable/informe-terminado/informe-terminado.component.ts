@@ -427,63 +427,38 @@ dataBase64:any =[]
 dataBase64aHTML:any =[]
 
 async DescargarReportesGrupo(itemAlerta){
- 
-  let arrayReporte = []
   this.dataBase64 = []
+  this.dataBase64aHTML =[]
+  
+  let arrayReporte = []
   itemAlerta.forEach((itemForm) => {
     arrayReporte.push(itemForm.arrAdjuntosInform[0])
   })
 
- 
-  this.dataBase64 = await this.TraeDataBase64(arrayReporte)
-  
+  for(let i=0; i < arrayReporte.length ;i++ ){
+    let data = { ruta : arrayReporte[i].SRUTA_ADJUNTO}
+    let respuesta = await this.userConfigService.DownloadUniversalFileByAlert(data)
+    this.dataBase64.push(respuesta)
+  }
 
-  console.log("Resportes con base 64",this.dataBase64)
-  this.dataBase64 = this.dataBase64
-  console.log("Resportes con base 64222222",this.dataBase64)
-  console.log("Resportes con base 64222222",this.dataBase64.length)
- this.dataBase64.forEach(async(element) => {
-    this.core.loader.show();
-    debugger
-      this.dataBase64aHTML.push(this.b64_to_utf8(element.base64))
-      this.core.loader.hide();
-      console.log("todas html 1x1",this.dataBase64aHTML)
-   });
+  this.dataBase64.forEach(element => {
+    let resultado = this.b64_to_utf8(element.base64)
+    this.dataBase64aHTML.push(resultado)
+  });
 
+     console.log("todas las base64",this.dataBase64)
+     console.log("todas las dataBase64aHTML",this.dataBase64aHTML)
 
-   console.log("todas html",this.dataBase64aHTML)
-
-   //this.Export2Doc("Reportes","Reportes")
+     this.Export2Doc("Reportes","Reportes")
+     //this.dataBase64 = []
+     //this.dataBase64aHTML =[]
 }
-async TraeDataBase64(array){
-  var dataTraeBase64:any = []
-  this.core.loader.show();
-  array.forEach(async (lista,inc) => {
-    let data = { ruta: lista.SRUTA_ADJUNTO }
-    let datatrae =  await this.userConfigService.DownloadUniversalFileByAlert(data)
-    dataTraeBase64.push(datatrae)
-     })
-   this.core.loader.hide();
-   
-   return dataTraeBase64
-}
+
 
 b64_to_utf8(str) {
   return decodeURIComponent(escape(window.atob(str)));
 }
 
-Conversion(){
-   console.log("todas111",this.dataBase64)
- console.log("todas html1111",this.dataBase64aHTML)
-  // this.dataBase64.forEach(async(element) => {
-  //   this.core.loader.show();
-  //   debugger
-  //     this.dataBase64aHTML.push(this.b64_to_utf8(element.base64))
-  //     this.core.loader.hide();
-  //     console.log("todas html 1x1",this.dataBase64aHTML)
-  //  });
-}
- 
 
 
 Export2Doc(element, filename = ''){
@@ -517,8 +492,9 @@ Export2Doc(element, filename = ''){
     }
   
      document.body.removeChild(downloadLink);
-    },1);
-
+    },1000);
+     // this.dataBase64 = []
+     //this.dataBase64aHTML =[]
  }
 
 }
