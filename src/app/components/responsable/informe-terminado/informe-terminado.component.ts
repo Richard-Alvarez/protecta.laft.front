@@ -429,7 +429,7 @@ dataBase64aHTML:any =[]
 async DescargarReportesGrupo(itemAlerta){
   this.dataBase64 = []
   this.dataBase64aHTML =[]
-  
+
   let arrayReporte = []
   itemAlerta.forEach((itemForm) => {
     arrayReporte.push(itemForm.arrAdjuntosInform[0])
@@ -449,7 +449,7 @@ async DescargarReportesGrupo(itemAlerta){
      console.log("todas las base64",this.dataBase64)
      console.log("todas las dataBase64aHTML",this.dataBase64aHTML)
 
-     this.Export2Doc("Reportes","Reportes")
+     this.Export2Doc("Reportes","Reportes") 
      //this.dataBase64 = []
      //this.dataBase64aHTML =[]
 }
