@@ -322,14 +322,17 @@
 
             </div>
             
-        <!-- <button class="btn btn-primary" (click)="DescargarReportesGrupo(arrResponsable)">Descargar</button> 
-        <button class="btn btn-dark" (click)="Conversion()">Revertir 1</button>
+         <!-- <button class="btn btn-primary" (click)="DescargarReportesGrupo(arrResponsable)">Descargar</button>  -->
+        
 
-            <div id="Reportes">
-                <div  *ngFor="let item of this.dataBase64aHTML" style="display: none" >
-                    <div [innerHTML]="item"></div> 
+            <div id="Reportes" >
+                <div  *ngFor="let item of this.dataBase64aHTML"   style="display: none">
+                    <font face="Arial Narrow, serif" style="font-size: 16px"> 
+                        <div [innerHTML]="item"></div> 
+                    </font>
+                    
                 </div>
-            </div>  -->
+            </div>  
            
        
 
