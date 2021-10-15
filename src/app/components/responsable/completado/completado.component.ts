@@ -1145,15 +1145,31 @@ async  AgregarUsuario(item,lilistComplemento){
 }
 
 descargarComplemento (item,listUsu){
-  debugger;
   var splitRuta = listUsu.SRUTA_PDF.split('/')
   this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
 }
 descargarComplemento2 (item){
-  debugger;
   let obj =  this.NewArreglo.filter(t => t.NIDALERTA == item.NIDALERTA && t.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
-  if(obj.length == 0)
-    return
+  if(obj.length == 0 ||obj[0].RESULTADO.length == 0){
+    swal.fire({
+      title: 'Bandeja del formularios', //+ this.sNameTipoUsuario,
+      icon: 'warning',
+      text: 'No se ha encontrado complemento asociado',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor:'#FA7000',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                    },
+      
+    }).then((result) => {
+    
+    }).catch(err => {
+    console.log("el error : ",err);
+    })
+  }
   var splitRuta = obj[0].RESULTADO[0].SRUTA_PDF.split('/')
   this.parent.downloadUniversalFile(obj[0].RESULTADO[0].SRUTA_PDF, splitRuta[splitRuta.length - 1])
 }
