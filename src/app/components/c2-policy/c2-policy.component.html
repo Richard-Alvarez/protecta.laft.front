@@ -444,7 +444,6 @@
                         id="PDirAct">{{this.DatosSoat.DireccionActual}}</span></p>
                   </div>
                 </div>
-                <br>
               </div>
               <div id="InfoCanal" style=" margin-top:3%;" *ngIf="this.item.IDRAMO == '66' || (this.item.IDRAMO == '71' && this.DatosCanal.nombre != '-') || (this.item.IDRAMO == '73' && this.DatosCanal.nombre != '-') || this.item.IDRAMO == '77' ||  (this.item.IDRAMO == '80' && this.DatosCanal.nombre != '-') || (this.item.IDRAMO == '61' && this.DatosCanal.nombre != '-')">
                 
@@ -588,7 +587,7 @@
                     aria-label="Default pagination"></ngb-pagination>
                 </ng-template>
               </div>
-              <div id="InfoBeneficiarios" style=" margin-top:3%; " *ngIf="this.item.IDRAMO == '73' || (this.item.IDRAMO == '74' && this.listaDatabeneficiarios.length != 0) || this.item.IDRAMO == '75' || this.itemIDRAMO == '76' || (this.item.IDRAMO == '77' && this.listaDatabeneficiarios.length != 0) || this.item.IDRAMO == '82'">
+              <div id="InfoBeneficiarios" style=" margin-top:3%; " *ngIf="this.listaDatabeneficiarios.length != 0 || this.item.IDRAMO == '73' || (this.item.IDRAMO == '74' && this.listaDatabeneficiarios.length != 0) || (this.item.IDRAMO == '75' || this.itemIDRAMO == '76') || (this.item.IDRAMO == '77' && this.listaDatabeneficiarios.length != 0) || this.item.IDRAMO == '82'">
                 <h4 class="title-grid"><strong>Beneficiarios</strong></h4>
                 <table class="table table-hover table-striped" id="tableCobertura" style="width:100%">
                   <thead>
@@ -710,7 +709,7 @@
 
                 <h4 class="title-grid" style="margin-bottom:3%"><strong id="titlebenef"></strong><span id="titlevinc">
                   {{this.DatosAsegurado.name}} (Titular)</span></h4>
-                <h5 class="subtitle-grid"><span class="lineorange" style></span> <strong> Modalidad de Pago</strong></h5> <br>
+                <h5 class="subtitle-grid"><span class="lineorange" style></span> <strong> Modalidad de Pago</strong></h5> 
                 <div class="row">
                   <div class="col-lg-3">
                     <p class="card-text textTitle"><span>Via de Pago</span><span class="spancontent"
@@ -743,7 +742,6 @@
                   </div>
                 </div>
                 <h5 class="subtitle-grid"><span class="lineorange"></span> <strong> Receptor de Pensión</strong></h5>
-                <br>
                 <div class="row">
                   <div class="col-lg-3">
                     <p class="card-text textTitle"><span>Identificación</span>
@@ -758,7 +756,7 @@
                         id="PRecepNombre">{{this.planSalud.receptorName}}</span></p>
                   </div>
                 </div>
-                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong> Plan de Salud</strong></h5> <br>
+                <h5 class="subtitle-grid"><span class="lineorange"></span> <strong> Plan de Salud</strong></h5> 
                 <div class="row">
                   <div class="col-lg-3">
                     <p class="card-text textTitle"><span>Institución</span><span class="spancontent"
