@@ -1,4 +1,4 @@
-<div id="RG">
+<div id="Reportes">
     <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
            <table border="1" cellspacing="0" cellpadding="0" align="left" width="100&">
                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
@@ -21,33 +21,33 @@
                    </td>
                    </tr>
                    <tr>
-                   <td width="20%">
-                       <p align="center">
-                       RG1
-                       </p>
-                   </td>
-                   <td width="60%" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                       <p>
-                       La información proporcionada por el cliente es
-                       inconsistente o de difícil verificación por parte de
-                       PROTECTA.
-                       </p>
-                   </td>
-                   <td width="20%">
-                       <dl>
-                           <dt style="padding-left: 20px;"> ● Vida con Renta Temporal</dt>
-                           <dt style="padding-left: 20px;"> ● Renta Total</dt>
-                           <dt style="padding-left: 20px;"> ● Ahorro Total</dt>
-                           </dl> 
-                   </td>
+                    <td width="20%">
+                        <p align="center">
+                        RG1
+                        </p>
+                    </td>
+                    <td width="60%" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                        La información proporcionada por el cliente es
+                        inconsistente o de difícil verificación por parte de
+                        PROTECTA.
+                        </p>
+                    </td>
+                    <td width="20%">
+                        <dl>
+                            <dt style="padding-left: 20px;"> ● Vida con Renta Temporal</dt>
+                            <dt style="padding-left: 20px;"> ● Renta Total</dt>
+                            <dt style="padding-left: 20px;"> ● Ahorro Total</dt>
+                            </dl> 
+                    </td>
                    </tr>
                     <tr>
-                        <td width="20%" rowspan="2" >
+                        <td width="20%" r>
                         <p align="center">
                             RG2
                         </p>
                         </td>
-                        <td width="60%" style="padding-left: 10px; padding-right: 10px; text-align: justify" rowspan="2">
+                        <td width="60%" style="padding-left: 10px; padding-right: 10px; text-align: justify" >
                         <p>
                             El cliente se rehúsa a llenar los formularios requeridos
                             por PROTECTA o a proporcionar la información necesaria para
@@ -58,9 +58,27 @@
                             le solicita formularios adicionales a los inicialmente requeridos.
                         </p>
                         </td>
-                        <td width="20%" rowspan="2">
+                        <td width="20%" >
                         <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
                         <p style="padding-left: 20px;"> ● Renta Total</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                        <p align="center">
+                            RG3
+                        </p>
+                        </td>
+                        <td width="60%" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                        <p>
+                            El cliente trata de presionar a un trabajador para no
+                            llenar los formularios requeridos por la empresa.
+                        </p>
+                        </td>
+                        <td width="20%">
+                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                        <p style="padding-left: 20px;"> ● Renta Total</p>
+                        <p style="padding-left: 20px;">● Ahorro Total</p>
                         </td>
                     </tr>
                     <tr>
@@ -234,21 +252,14 @@
         <p>
             <strong></strong>
         </p>
-                <div *>
-                    <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>
-                    <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
-                    <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify"
-                    >El CARGO informó que RESPUESTA tiene casos a reportar con respecto 
-                    a los clientes de renta privada y ahorro total.</li></ul>
-                </div>
+               
 
                 <div>
                     <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>
                     <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
                     <ul>
                     <li style="font-family: arial Narrow, serif; text-align: justify"
-                    >El CARGO informó que RESPUESTA tiene casos a reportar con respecto 
+                    >El {{objListaAlertaRG[0].SCARGO}} informó que  {{respuestaRG}} tiene casos a reportar con respecto 
                     a los clientes de renta privada y ahorro total.</li></ul>
                 </div>
                 
