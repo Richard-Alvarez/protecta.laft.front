@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { async } from '@angular/core/testing';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-informe-terminado',
@@ -498,6 +499,7 @@ Export2Doc(element, filename = ''){
      // this.dataBase64 = []
      //this.dataBase64aHTML =[]
  }
+
  ListaAlerta
  ListaAlertaRG
  RespuetasAlertaRG
@@ -510,18 +512,22 @@ Export2Doc(element, filename = ''){
  ListaAlertaS3
  ListaColaborador
  RespuestaGlobalColaborador
+ ListaContraparte
+ CargosConcatenadosContraparte
+ RespuestaGlobalContraparte:any = []
+ RespuestaGlobalContraparteP5
   async DescargarReportesXGrupo(array){
-    
+    //console.log("arrResponsable",this.arrResponsable)
      
     this.idGrupo = await this.ValidarGrupo()
-    let data :any = {}
+    let data :any = {} 
     data.NIDGRUPOSENAL = this.idGrupo
     data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     this.core.loader.show()
     this.ListaAlerta = await this.userConfigService.GetAlertaResupuesta(data)
     this.core.loader.hide()
     //PARA REGIMEN GENERAL
-    if(this.regimen.id == 1 && this.idGrupo == 1){
+    if(this.regimen.id == 1 && this.idGrupo == 1){ // REGIMEN GENERAL
       this.ListaAlertaRG = this.ListaAlerta.filter(it => (it.SNOMBRE_ALERTA).substr(0,2) == 'RG' )
       let respuestaRG = this.ListaAlertaRG.filter((it,inc) => it.NIDRESPUESTA == 1)
       if(respuestaRG.length == 0){
@@ -529,7 +535,7 @@ Export2Doc(element, filename = ''){
       }else{
         this.RespuetasAlertaRG = 'Sí'
       }
-    }else if(this.regimen.id == 2 && this.idGrupo == 1){
+    }else if(this.regimen.id == 2 && this.idGrupo == 1){ //REGIMEN SIMPLIFICADO
       this.ListaAlertaC1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C1' )
       this.ListaAlertaC3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C3' )
       let respuestaC3 = this.ListaAlertaC3.filter((it,inc) => it.NIDRESPUESTA == 1)
@@ -542,7 +548,7 @@ Export2Doc(element, filename = ''){
         this.RespuestaGlobalC3 = 'sí'
       }
      
-    }else if (this.idGrupo == 2){
+    }else if (this.idGrupo == 2){ // COLABORADOR
       this.ListaColaborador = this.ListaAlerta
       let respuestaColaborador = this.ListaAlerta.filter((it,inc) => it.NIDRESPUESTA == 1)
       if(respuestaColaborador.length == 0){
@@ -550,6 +556,57 @@ Export2Doc(element, filename = ''){
       }else{
         this.RespuestaGlobalColaborador = 'sí'
       }
+    }else if (this.idGrupo == 3){ // PROVEEDOR
+
+    }
+    else if (this.idGrupo == 4){ //CONTRAPARTE
+      console.log("array",array)
+      this.ListaContraparte = this.ListaAlerta
+      let Concatenar =  this.ListaContraparte.filter(it => it.SNOMBRE_ALERTA == "P2" || it.SNOMBRE_ALERTA == "P3" || it.SNOMBRE_ALERTA == "P1")
+      
+      let sinRepetidos = Concatenar.filter((valorActual, indiceActual, arreglo) => {
+        return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.SNOMBRE_ALERTA) === JSON.stringify(valorActual.SNOMBRE_ALERTA)) === indiceActual
+        });
+
+        let cargosConcatenados = ''
+        sinRepetidos.forEach(t => {
+          cargosConcatenados = cargosConcatenados.concat(t.SCARGO,', ') 
+        });
+
+        this.CargosConcatenadosContraparte = cargosConcatenados
+
+        let respuestaP5 = this.ListaAlerta.filter((it,inc) => it.NIDRESPUESTA == 1 && it.SNOMBRE_ALERTA == "P5" )
+        if(respuestaP5.length == 0){
+          this.RespuestaGlobalContraparteP5 = 'No'
+        }else{
+          this.RespuestaGlobalContraparteP5 = 'Sí'
+        }
+
+        let sinRepetidosCargos = this.ListaContraparte.filter((valorActual, indiceActual, arreglo) => {
+          return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.SCARGO) === JSON.stringify(valorActual.SCARGO)) === indiceActual
+          });
+
+          //console.log("sinRepetidosCargos",sinRepetidosCargos)
+          
+          sinRepetidosCargos.forEach(element => {
+              let respuesta = ''
+              let listarespuestas = this.ListaContraparte.filter(it=> it.SCARGO == element.SCARGO)
+              
+              let validarRespuesta = listarespuestas.filter(it=> it.NIDRESPUESTA == 1)
+              //console.log("listarespuestas",validarRespuesta.length)
+              if(validarRespuesta.length == 0){
+                respuesta = 'no'
+              }else{
+               respuesta = 'sí'
+              }
+              let data:any ={}
+              data.SCARGO = element.SCARGO
+              data.RespuestaGlobal = respuesta
+              this.RespuestaGlobalContraparte.push(data)
+
+          });
+
+          //console.log("RespuestaGlobalContraparte",this.RespuestaGlobalContraparte)
     }
    
 

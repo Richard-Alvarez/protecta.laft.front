@@ -353,7 +353,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary" (click)="DescargarReportesXGrupo(arrResponsable,regimen)">Descargar Reportes</button>
+        <button class="btn btn-primary" (click)="DescargarReportesXGrupo(arrResponsable)">Descargar Reportes</button>
         <div *ngIf="(this.idGrupo == 1 && this.regimen.id == 1)"> 
             <div id="Reportes" >
                 <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG"  style="display: none" ></app-template-clientes-general>
@@ -373,6 +373,12 @@
         <div *ngIf="(this.idGrupo == 2)"> 
             <div id="Reportes" >
                 <app-template-colaborador [RespuestaGlobalColaborador]="RespuestaGlobalColaborador" style="display: none" ></app-template-colaborador>
+            </div>
+            
+        </div> 
+        <div *ngIf="(this.idGrupo == 4)"> 
+            <div id="Reportes" >
+                <app-template-contraparte [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalContraparteP5" [RespuestaGlobalContraparte]="RespuestaGlobalContraparte" style="display: none" ></app-template-contraparte>
             </div>
             
         </div> 
