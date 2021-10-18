@@ -508,6 +508,8 @@ Export2Doc(element, filename = ''){
  ListaAlertaS1
  ListaAlertaS2
  ListaAlertaS3
+ ListaColaborador
+ RespuestaGlobalColaborador
   async DescargarReportesXGrupo(array){
     
      
@@ -540,6 +542,14 @@ Export2Doc(element, filename = ''){
         this.RespuestaGlobalC3 = 'sí'
       }
      
+    }else if (this.idGrupo == 2){
+      this.ListaColaborador = this.ListaAlerta
+      let respuestaColaborador = this.ListaAlerta.filter((it,inc) => it.NIDRESPUESTA == 1)
+      if(respuestaColaborador.length == 0){
+        this.RespuestaGlobalColaborador = 'no'
+      }else{
+        this.RespuestaGlobalColaborador = 'sí'
+      }
     }
    
 

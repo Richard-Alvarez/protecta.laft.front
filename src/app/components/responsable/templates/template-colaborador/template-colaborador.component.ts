@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit , Input} from '@angular/core';
+import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-informe.component';
 @Component({
   selector: 'app-template-colaborador',
   templateUrl: './template-colaborador.component.html',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplateColaboradorComponent implements OnInit {
 
+  @Input() RespuestaGlobalColaborador
+  @Input() parent:PendienteInformeComponent
   constructor() { }
 
   ngOnInit() {
