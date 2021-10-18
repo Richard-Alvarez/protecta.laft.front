@@ -359,7 +359,11 @@
         </div>
         <div *ngIf="(this.idGrupo == 1 && this.regimen.id == 1)"> 
             <div id="Reportes" >
-                <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG" [Periodo]="this.NPERIODO_PROCESO" style="display: none" ></app-template-clientes-general>
+                <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG" [Periodo]="PeriodoFecha" 
+                [RegimenPendiente]="RegimenPendiente"
+                [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
+                 [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial"  [listaPepMasivos]="listaPepMasivos"
+                style="display: none" ></app-template-clientes-general>
             </div>
             
         </div> 

@@ -254,13 +254,20 @@
              <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
                     <ul>
                     <li style="font-family: arial Narrow, serif; text-align: justify"
-                    >El {{objListaAlertaRG[0].SCARGO}} informó que  {{respuestaRG}} tiene casos a reportar con respecto 
+                    >El {{objListaAlertaRG[0].SCARGO}} informó que  {{respuestaRG}} tiene casos a reportar con respecto  
                     a los clientes de renta privada y ahorro total.</li></ul>
                 </div>
 </div>
 <br>
-    <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
-    <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
+    <!-- <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
+    <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p> -->
+
+    <app-template-c2 [parent2]="this"  [arrayDataSenal]="arrayDataSenal" 
+    [Perfil]="Perfil"   [arrayDataResultado]="arrayDataResultado"  [Periodo]="Periodo"
+    [Cantidad]="Cantidad"  [Validar]="2"  style="display: none" [RegimenPendiente]="RegimenPendiente"
+    [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
+    [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial" [listaPepMasivos]="listaPepMasivos" 
+    ></app-template-c2>
         
     </div>
       

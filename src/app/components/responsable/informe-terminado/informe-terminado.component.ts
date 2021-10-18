@@ -518,6 +518,7 @@ Export2Doc(element, filename = ''){
  RespuestaGlobalContraparteP5
  RegimenPendiente = 0
  PeriodoFecha
+ 
   async DescargarReportesXGrupo(array){
     
     this.ListaAlerta = []

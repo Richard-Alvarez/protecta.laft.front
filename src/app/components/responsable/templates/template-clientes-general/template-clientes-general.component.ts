@@ -10,6 +10,32 @@ export class TemplateClientesGeneralComponent implements OnInit {
   @Input() objListaAlertaRG:any
   @Input() respuestaRG:any
    
+  @Input() Nombre:string
+  @Input() Perfil:string
+  @Input() arrayDataSenal:any 
+  @Input() arrayDataResultado:any 
+  @Input() index:string
+  @Input() item:any
+  @Input() Periodo:number
+  @Input() Cantidad:number
+
+  //las variables para el reporte global
+  @Input() RegimenPendiente:number
+  @Input() listaMasivos
+  @Input() listaSoat
+  @Input() listaRenta
+  @Input() listaEspecialRentaParticular
+  @Input() listaPep
+  @Input() listaPepSoat
+  @Input() listaPepRenta
+  @Input() listaPepRentaParticular
+  @Input() listaEspecialMasivos
+  @Input() listaEspecialSoat
+  @Input() listaEspecialRenta
+  @Input() listaInternacionalRentaParticular
+  @Input() listaEspecial
+  @Input() listaPepMasivos
+
   @Input() parent:PendienteInformeComponent
   constructor() { }
 
