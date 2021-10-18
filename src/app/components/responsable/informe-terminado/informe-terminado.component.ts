@@ -503,6 +503,8 @@ Export2Doc(element, filename = ''){
  RespuetasAlertaRG
  idGrupo
   async DescargarReportesXGrupo(){
+    console.log("regimen",this.regimen)
+    return 
     this.idGrupo = await this.ValidarGrupo()
     let data :any = {}
     data.NIDGRUPOSENAL = this.idGrupo
