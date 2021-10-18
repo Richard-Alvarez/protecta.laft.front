@@ -12,13 +12,13 @@ export class TemplateC1Component implements OnInit {
   @Input() Perfil:string
   @Input() arrayDataSenal:any 
   @Input() index:string
-  @Input() item:any
+  //@Input() item:any
   @Input() parent:PendienteInformeComponent
 
   //VARIABLES PARA DESCARGAR REPORTES DE GRUPSO
   @Input() Validar:number
   @Input() objListaAlertaC1:number
-  
+  @Input() item:any
 
   constructor() { }
 

@@ -502,9 +502,15 @@ Export2Doc(element, filename = ''){
  ListaAlertaRG
  RespuetasAlertaRG
  idGrupo
-  async DescargarReportesXGrupo(){
-    console.log("regimen",this.regimen)
-    return 
+ ListaAlertaC1
+ ListaAlertaC3
+ RespuestaGlobalC3
+ ListaAlertaS1
+ ListaAlertaS2
+ ListaAlertaS3
+  async DescargarReportesXGrupo(array){
+    
+     
     this.idGrupo = await this.ValidarGrupo()
     let data :any = {}
     data.NIDGRUPOSENAL = this.idGrupo
@@ -512,14 +518,32 @@ Export2Doc(element, filename = ''){
     this.core.loader.show()
     this.ListaAlerta = await this.userConfigService.GetAlertaResupuesta(data)
     this.core.loader.hide()
-  
-  this.ListaAlertaRG = this.ListaAlerta.filter(it => (it.SNOMBRE_ALERTA).substr(0,2) == 'RG' )
-  let respuestaRG = this.ListaAlertaRG.filter((it,inc) => it.NIDRESPUESTA == 1)
-    if(respuestaRG.length == 0){
-      this.RespuetasAlertaRG = 'no'
-    }else{
-      this.RespuetasAlertaRG = 'sí'
+    //PARA REGIMEN GENERAL
+    if(this.regimen.id == 1 && this.idGrupo == 1){
+      this.ListaAlertaRG = this.ListaAlerta.filter(it => (it.SNOMBRE_ALERTA).substr(0,2) == 'RG' )
+      let respuestaRG = this.ListaAlertaRG.filter((it,inc) => it.NIDRESPUESTA == 1)
+      if(respuestaRG.length == 0){
+        this.RespuetasAlertaRG = 'No'
+      }else{
+        this.RespuetasAlertaRG = 'Sí'
+      }
+    }else if(this.regimen.id == 2 && this.idGrupo == 1){
+      this.ListaAlertaC1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C1' )
+      this.ListaAlertaC3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C3' )
+      let respuestaC3 = this.ListaAlertaC3.filter((it,inc) => it.NIDRESPUESTA == 1)
+      this.ListaAlertaS1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S1' )
+      this.ListaAlertaS2  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S2' )
+      this.ListaAlertaS3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S3' )
+      if(respuestaC3.length == 0){
+        this.RespuestaGlobalC3 = 'no'
+      }else{
+        this.RespuestaGlobalC3 = 'sí'
+      }
+     
     }
+   
+
+
     this.Export2Doc("Reportes","Reportes") 
   }
 

@@ -7,6 +7,11 @@ import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-inf
 })
 export class TemplateClientesSimplificadoComponent implements OnInit {
   @Input() objListaAlertaC1
+  @Input() ObjListaAlertasC3
+  @Input() RespuestaGlobalC3:string
+  @Input() ObjListaAlertasS2
+  @Input() ObjListaAlertasS3
+  
   @Input() parent:PendienteInformeComponent
   constructor() { }
 

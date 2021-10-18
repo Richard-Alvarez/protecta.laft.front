@@ -354,15 +354,19 @@
             </div>
         </div>
         <button class="btn btn-primary" (click)="DescargarReportesXGrupo(arrResponsable,regimen)">Descargar Reportes</button>
-        <div *ngIf="this.idGrupo == 1 && this.regimen.id == 1"> 
+        <div *ngIf="(this.idGrupo == 1 && this.regimen.id == 1)"> 
             <div id="Reportes" >
                 <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG"  style="display: none" ></app-template-clientes-general>
             </div>
             
         </div> 
-        <div *ngIf="this.idGrupo == 1 && this.regimen.id == 2"> 
+        <div *ngIf="(this.idGrupo == 1 && this.regimen.id == 2)"> 
             <div id="Reportes" >
-                <app-template-clientes-simplificado [objListaAlertaC1]="ListaAlertaC1"   style="display: none" ></app-template-clientes-simplificado>
+                <app-template-clientes-simplificado [objListaAlertaC1]="ListaAlertaC1" 
+                [ObjListaAlertasC3]="ListaAlertaC3" [RespuestaGlobalC3]="RespuestaGlobalC3" 
+                [ObjListaAlertasS2]="ListaAlertaS2"
+                [ObjListaAlertasS3]="ListaAlertaS3"
+                style="display: none" ></app-template-clientes-simplificado>
             </div>
             
         </div> 
