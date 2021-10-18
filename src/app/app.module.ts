@@ -159,6 +159,11 @@ import { TemplateS3Component } from './components/responsable/templates/template
 import { C2PolicyComponent } from './components/c2-policy/c2-policy.component';
 import { ModalValidarContrasennaComponent } from './pages/modal-validar-contrasenna/modal-validar-contrasenna.component';
 import { TemplateClientesComponent } from './components/responsable/templates/template-clientes/template-clientes.component';
+import { TemplateClientesGeneralComponent } from './components/responsable/templates/template-clientes-general/template-clientes-general.component';
+import { TemplateClientesSimplificadoComponent } from './components/responsable/templates/template-clientes-simplificado/template-clientes-simplificado.component';
+import { TemplateProveedorComponent } from './components/responsable/templates/template-proveedor/template-proveedor.component';
+import { TemplateContraparteComponent } from './components/responsable/templates/template-contraparte/template-contraparte.component';
+import { TemplateColaboradorComponent } from './components/responsable/templates/template-colaborador/template-colaborador.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -300,6 +305,11 @@ import { TemplateClientesComponent } from './components/responsable/templates/te
     C2PolicyComponent,
     ModalValidarContrasennaComponent,
     TemplateClientesComponent,
+    TemplateClientesGeneralComponent,
+    TemplateClientesSimplificadoComponent,
+    TemplateProveedorComponent,
+    TemplateContraparteComponent,
+    TemplateColaboradorComponent,
 
    
     //Validaciones
