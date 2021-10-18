@@ -778,6 +778,7 @@ listaEspecialRentaParticular:any = []
 listaPepRentaParticular:any = []
 listaInternacionalRentaParticular:any = []
 
+
 async DescargarReporte(item){
   
   this.arrayDataSenal= []

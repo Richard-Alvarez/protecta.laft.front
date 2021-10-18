@@ -356,16 +356,22 @@
         <button class="btn btn-primary" (click)="DescargarReportesXGrupo(arrResponsable)">Descargar Reportes</button>
         <div *ngIf="(this.idGrupo == 1 && this.regimen.id == 1)"> 
             <div id="Reportes" >
-                <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG"  style="display: none" ></app-template-clientes-general>
+                <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG" [Periodo]="this.NPERIODO_PROCESO" style="display: none" ></app-template-clientes-general>
             </div>
             
         </div> 
         <div *ngIf="(this.idGrupo == 1 && this.regimen.id == 2)"> 
             <div id="Reportes" >
-                <app-template-clientes-simplificado [objListaAlertaC1]="ListaAlertaC1" 
+                <app-template-clientes-simplificado 
+                [parent]="this"
+                [objListaAlertaC1]="ListaAlertaC1" 
                 [ObjListaAlertasC3]="ListaAlertaC3" [RespuestaGlobalC3]="RespuestaGlobalC3" 
                 [ObjListaAlertasS2]="ListaAlertaS2"
                 [ObjListaAlertasS3]="ListaAlertaS3"
+                [Periodo]="PeriodoFecha"
+                [RegimenPendiente]="RegimenPendiente"
+                [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
+                 [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial"  [listaPepMasivos]="listaPepMasivos"
                 style="display: none" ></app-template-clientes-simplificado>
             </div> 
             
