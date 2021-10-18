@@ -353,7 +353,10 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary" (click)="DescargarReportesXGrupo(arrResponsable)">Descargar Reportes</button>
+        <br>
+        <div class="col-md-6 d-flex justify-content-between " style="padding: 0px 200px 0px 0px; color:#7c7ea6 !important; ">
+        <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton" (click)="DescargarReportesXGrupo(arrResponsable)"><i class="fas fa-download"></i> Descargar Reporte Grupal</button>
+        </div>
         <div *ngIf="(this.idGrupo == 1 && this.regimen.id == 1)"> 
             <div id="Reportes" >
                 <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG" [Periodo]="this.NPERIODO_PROCESO" style="display: none" ></app-template-clientes-general>
