@@ -2712,7 +2712,7 @@ export class ResponsableComponent implements OnInit {
 
   }
   arrObjFilesAdjByCabecera: any = []
-  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
+  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO,NOMBRECOMPLETO) {
     try {
       
       let respSetData = await this.setDataFile(event)
@@ -2738,6 +2738,7 @@ export class ResponsableComponent implements OnInit {
             dataInformFile.NREGIMEN = NREGIMEN
             dataInformFile.STIPO_USUARIO = STIPO_USUARIO
             dataInformFile.STIPO_CARGA = STIPO_CARGA
+            dataInformFile.NOMBRECOMPLETO = NOMBRECOMPLETO
 
             let arrayFilesNamePush:any = []
             let arrayFilesPush:any = []
@@ -2812,6 +2813,7 @@ export class ResponsableComponent implements OnInit {
         dataInformFile.NREGIMEN = NREGIMEN
         dataInformFile.STIPO_USUARIO = STIPO_USUARIO
         dataInformFile.STIPO_CARGA = STIPO_CARGA
+        dataInformFile.NOMBRECOMPLETO = NOMBRECOMPLETO
         dataInformFile.arrFilesName = respSetData.listFileNameInform
         dataInformFile.arrFiles = respSetData.respPromiseFileInfo
         dataInformFile.arrFilesNameCorto = respSetData.listFileNameCortoInform

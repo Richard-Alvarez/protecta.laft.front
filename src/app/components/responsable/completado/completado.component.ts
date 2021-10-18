@@ -441,7 +441,7 @@ export class CompletadoComponent implements OnInit {
 
   async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
     
-    await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO)
+    await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,'')
   }
 
   async enviarSolicitarComplemento(index,pregHead){
@@ -1144,11 +1144,23 @@ descargarComplemento (item,listUsu){
   this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
 }
 descargarComplemento2 (item){
+  debugger;
+  let SRUTA_PDF = '';
+  if(this.NewArreglo == undefined){
+    this.NewArreglo = []
+    
+  }
+  if(this.parent.arrObjFilesAdjByCabecera.length > 0){
+      let objDocumento = this.parent.arrObjFilesAdjByCabecera.filter(t=> t.NIDALERTA == item.NIDALERTA && t.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
+      if(objDocumento.length > 0)
+        SRUTA_PDF = objDocumento[0].SRUTA
+  }
   let obj =  this.NewArreglo.filter(t => t.NIDALERTA == item.NIDALERTA && t.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
-  if(obj.length == 0)
-    return
-  var splitRuta = obj[0].RESULTADO[0].SRUTA_PDF.split('/')
-  this.parent.downloadUniversalFile(obj[0].RESULTADO[0].SRUTA_PDF, splitRuta[splitRuta.length - 1])
+  
+  SRUTA_PDF = obj[0].RESULTADO[0].SRUTA_PDF == null ? SRUTA_PDF : obj[0].RESULTADO[0].SRUTA_PDF
+  var splitRuta = SRUTA_PDF.split('/')
+  this.parent.downloadUniversalFile(SRUTA_PDF, splitRuta[splitRuta.length - 1])
+ 
 }
 
 validarcomplemento(item){
