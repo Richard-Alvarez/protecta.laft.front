@@ -441,7 +441,7 @@ export class CompletadoComponent implements OnInit {
 
   async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
     
-    await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO)
+    await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,'')
   }
 
   async enviarSolicitarComplemento(index,pregHead){
@@ -593,7 +593,10 @@ export class CompletadoComponent implements OnInit {
         
         let arrServiceUpdateSenial:any =[]
         respCheckboxFilter.forEach(element => {
-          var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(element.NIDALERTA)
+         // console.log( this.NewArreglo)
+          //var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(element.NIDALERTA)
+          var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == element.NIDALERTA && fil.NIDUSUARIO_ASIGNADO == element.NIDUSUARIO_ASIGNADO)
+         
           let data:any = {}
           data.NIDALERTA_CAB_USUARIO = element.NIDALERTA_CABECERA
           data.NIDUSUARIO_MODIFICA = this.NIDUSUARIO_LOGUEADO
@@ -607,7 +610,12 @@ export class CompletadoComponent implements OnInit {
       
           
           data.NIDALERTA_CABECERA = element.NIDALERTA_CABECERA
-          element.COMPLEMENTO = this.NewArreglo[index].RESULTADO
+          if(index == -1){
+            element.COMPLEMENTO = []
+          }else{
+            element.COMPLEMENTO = this.NewArreglo[index].RESULTADO
+          }
+          
          
           
           //Comentado para pruebas
@@ -687,8 +695,14 @@ export class CompletadoComponent implements OnInit {
      //  let from = this.parent.getWorkModuleAll
      recoveryObjResponsable.forEach(async (obj) => {
       this.core.loader.show();
-      var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(obj.NIDALERTA)
-      obj.RESULTADO =  this.NewArreglo[index].RESULTADO
+     // var index = this.NewArreglo.map(fil => fil.NIDALERTA).indexOf(obj.NIDALERTA)
+       var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == obj.NIDALERTA && fil.NIDUSUARIO_ASIGNADO == obj.NIDUSUARIO_ASIGNADO)
+       if(index ==-1){
+        obj.RESULTADO =  []
+       }else{
+        obj.RESULTADO =  this.NewArreglo[index].RESULTADO
+       }
+      
        let respuestaPushObjs = await this.parent.pushObjInArrayByAlert("REVISADO",this.regimen.id,obj)
        this.core.loader.hide();
         
@@ -1039,7 +1053,7 @@ async EnviarCompUsuario(alerta,complemento){
 
 
 EliminarUsuario(indice,item){
-  debugger;
+  
   var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
   this.NewArreglo[index].RESULTADO.splice(indice,1)
   
@@ -1065,7 +1079,7 @@ async ListaUsuario(){
 NewArreglo:any = []
 async ListaAlertas(){
   this.NewArreglo = []
-
+  
   this.arrResponsable.forEach(item => {
     let objComplemento = this.listaComplemento.filter( t=> t.NIDALERTA == item.NIDALERTA )
     let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
@@ -1081,7 +1095,7 @@ async ListaAlertas(){
     }
    });
   
-  
+  console.log("NewArreglo",this.NewArreglo)
 }
 
 
@@ -1144,29 +1158,23 @@ descargarComplemento (item,listUsu){
   this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
 }
 descargarComplemento2 (item){
-  let obj =  this.NewArreglo.filter(t => t.NIDALERTA == item.NIDALERTA && t.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
-  if(obj.length == 0 ||obj[0].RESULTADO.length == 0){
-    swal.fire({
-      title: 'Bandeja del formularios', //+ this.sNameTipoUsuario,
-      icon: 'warning',
-      text: 'No se ha encontrado complemento asociado',
-      showCancelButton: false,
-      showConfirmButton: true,
-      confirmButtonText: 'Aceptar',
-      confirmButtonColor:'#FA7000',
-      showCloseButton: true,
-      customClass: { 
-        closeButton : 'OcultarBorde'
-                    },
-      
-    }).then((result) => {
+  debugger;
+  let SRUTA_PDF = '';
+  if(this.NewArreglo == undefined){
+    this.NewArreglo = []
     
-    }).catch(err => {
-    console.log("el error : ",err);
-    })
   }
-  var splitRuta = obj[0].RESULTADO[0].SRUTA_PDF.split('/')
-  this.parent.downloadUniversalFile(obj[0].RESULTADO[0].SRUTA_PDF, splitRuta[splitRuta.length - 1])
+  if(this.parent.arrObjFilesAdjByCabecera.length > 0){
+      let objDocumento = this.parent.arrObjFilesAdjByCabecera.filter(t=> t.NIDALERTA == item.NIDALERTA && t.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
+      if(objDocumento.length > 0)
+        SRUTA_PDF = objDocumento[0].SRUTA
+  }
+  let obj =  this.NewArreglo.filter(t => t.NIDALERTA == item.NIDALERTA && t.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
+  
+  SRUTA_PDF = obj[0].RESULTADO[0].SRUTA_PDF == null ? SRUTA_PDF : obj[0].RESULTADO[0].SRUTA_PDF
+  var splitRuta = SRUTA_PDF.split('/')
+  this.parent.downloadUniversalFile(SRUTA_PDF, splitRuta[splitRuta.length - 1])
+ 
 }
 
 validarcomplemento(item){

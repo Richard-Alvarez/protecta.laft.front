@@ -3,36 +3,39 @@
 <div id="C1">
   <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
     <p> 
+      <strong style="font-family: arial Narrow, serif;">1.1 Señales de alerta - relativas a los productos</strong>
+    </p>  
+    <p> 
       <strong style="font-family: arial Narrow, serif;">1.1.1	Entidades sin fines de lucro (SFL), Cajas Rurales de Ahorro 
       y Crédito (CRACs), Cooperativas de Ahorro (COOPs), entre otros.   </strong>
     </p>  
-    <table border="1" cellspacing="0" cellpadding="0" align="left" width="550">
+    <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
       <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
         <tbody>
           <tr>
-            <td width="50" style="padding-left: 10px;">
+            <td width="50px" style="padding-left: 10px;">
               <p>
                 <strong>CÓDIGO</strong>
               </p>
             </td>
-            <td width="380" style="padding-left: 10px;">
+            <td width="400px" style="padding-left: 10px; text-align: center">
               <p>
                 <strong>SEÑAL DE ALERTA</strong>
               </p>
             </td>
-            <td width="80">
+            <td width="250px">
               <p align="center">
                 <strong>PRODUCTO</strong>
               </p>
             </td>
           </tr>
           <tr>
-            <td width="50">
+            <td width="50px">
               <p align="center">
                 C1
               </p>
             </td>
-            <td width="380" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+            <td width="400px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
               <p>
                 Con relación a las organizaciones sin fines de lucro, tales como las asociaciones, fundaciones, 
                 comités, ONG, entre otras, las operaciones no parecen tener un propósito económico lógico o no 
@@ -40,14 +43,13 @@
                 participan en la transacción.
               </p>
             </td>
-            <td width="80">
+            <td width="250px">
               <p style="padding-left: 20px; text-align: center;">Todos los productos
               </p>
             </td>
           </tr>
         </tbody>
       </FONT>
-      <br>
     </table>
   </div>
   <br>
@@ -77,7 +79,7 @@
       <br>
       <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta C1</strong>
 
-      <div *ngIf="Validar ==1">
+      <div *ngIf="Validar ==1"> 
         <ul>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
           El Área de Comercial Masivos señaló {{arrayDataSenal[0].Respuesta}}  haber identificado ninguna situación atípica respecto a la señal 
@@ -104,7 +106,7 @@
 
         <ul>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
-          El Área de Comercial Masivos señaló {{item.NIDRESPUESTA == 1 ? 'si' : 'no' }}  haber identificado ninguna situación atípica respecto a la señal 
+          El Área de Comercial Masivos señaló {{item[0].NIDRESPUESTA == 1 ? 'si' : 'no' }}  haber identificado ninguna situación atípica respecto a la señal 
           de alerta “C1”. Se tiene como sustento el correo como sustento.
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
@@ -113,21 +115,19 @@
           no se identificó señal de alerta.
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
-          El Área de Comercial Masivos indicó que las operaciones con los contratantes de la muestra {{item.NIDRESPUESTA == 1 ? 'si' : 'no' }}   guardan 
+          El Área de Comercial Masivos indicó que las operaciones con los contratantes de la muestra {{item[0].NIDRESPUESTA == 1 ? 'si' : 'no' }}   guardan 
           relación con la actividad económica del cliente y los precios con los cuales se están comercializando a los 
           contratantes se alinean a las políticas de la Compañía y están dentro de los parámetros de normalidad vigente 
           en el mercado. 
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
-          Por lo tanto, se concluye que por la señal de alerta “C1” {{item.NIDRESPUESTA == 1 ? 'si' : 'no' }}  se identificaron casos. 
+          Por lo tanto, se concluye que por la señal de alerta “C1” {{item[0].NIDRESPUESTA == 1 ? 'si' : 'no' }}  se identificaron casos. 
           </li>
         </ul>   
       </div>
-      
       <br>
-      <br>
-      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
-      <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
+      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:<a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
+
   </div>
     
     <div class="text-center pt-5">

@@ -571,7 +571,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
             //senial.SCOMENTARIO = this.arrInputComment[inc]
             try {
               if(dataComplementario.length != 0){
-                
+                debugger;
                 
                 dataComplementario.forEach(async (element) => {
                   
@@ -591,7 +591,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
                   if(array.SRUTA != '')
                   array.SRUTA = 'COMPLEMENTO' +'/' + element.NIDALERTA + '/' + 'CABECERA/' + element.NIDALERTA_CABECERA + '/' + this.NPERIODO_PROCESO + '/' + this.regimen.id + '/' + array.arrFilesName[0];
                   data.SRUTA_PDF = array.SRUTA
-
+                  //this.NewArreglo.findIndex(t=> t.NIDALERTA == element.NIDALERTA && t.NOMBRECOMPLETO ==)
                   
                   await this.userConfigService.GetUpdComplementoCab(data)
                 });
@@ -633,6 +633,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           let resPromiseAllByAlert = await Promise.all([Promise.all(respPromiseByAlerts),Promise.all(arrPromiseGetAdjuntos)])
       
           let indiceEniarCompletado = 0
+          debugger;
           resPromiseAllByAlert[0].forEach((senial:any,inc) => {
             let arrRespuestaSet = []
             senial.arrPreguntasCabecera.forEach((ans,indicePregCab) => {
@@ -771,7 +772,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   async removeFiles(indice,objItem,indexInput,STIPO_CARGA){
   
-   
+   debugger;
     return await this.parent.removeFileAdjuntosFiles(indice,objItem,indexInput,STIPO_CARGA)
   }
   getTipoUsuario(){
@@ -785,7 +786,6 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   removeFileInforme(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
     
-     
     STIPO_CARGA="ADJUNTOS-FORM"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
   
@@ -1391,15 +1391,13 @@ UltimoTooltip(indice, longitud){
 
 }
 
-async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
-
-   
-  //if(STIPO_CARGA)
-  await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
+//async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
+addFilesUniversal(event,item,STIPO_CARGA,STIPO_USUARIO){
+   debugger
+  this.parent.addFilesAdjuntosResponsable(event, item.NIDALERTA_CABECERA, item.NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO,item.NOMBRECOMPLETO)
 }
-async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
- 
-   
+async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,NOMBRECOMPLETO){
+  debugger;
   await this.parent.addFilesComplementoResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
  capitalizarPrimeraLetra(texto : string ) {

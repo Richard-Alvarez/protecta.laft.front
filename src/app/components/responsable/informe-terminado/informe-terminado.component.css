@@ -305,3 +305,6 @@ border-bottom:2px solid #FA7000;
     background-color: #2b245b;
     border-color: #2b245b;
 }
+.colorButton{
+  color: #7c7ea6 !important;
+}

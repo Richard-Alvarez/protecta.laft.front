@@ -1936,7 +1936,7 @@ export class ResponsableGlobalComponent {
   }
 
   removeFileAdjuntosFiles(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
-    STIPO_CARGA="ADJUNTOS-FORM"
+    //STIPO_CARGA="ADJUNTOS-FORM"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
     
     let filtroFiles =  this.arrObjFilesAdjByCabecera.filter(it => 
@@ -2347,6 +2347,8 @@ export class ResponsableGlobalComponent {
           alertaItem.NREGIMEN == NREGIMEN && 
           alertaItem.NIDCABECERA_USUARIO == NIDALERTA_CABECERA &&
           alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
+
+        
       else
           respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
           alertaItem.NIDALERTA == NIDALERTA &&
@@ -2662,7 +2664,7 @@ export class ResponsableGlobalComponent {
   }
   arrObjFilesAdjByCabecera: any = []
 
-  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO) {
+  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO,NOMBRECOMPLETO) {
     try {
      
       let respSetData = await this.setDataFile(event)
@@ -2674,6 +2676,7 @@ export class ResponsableGlobalComponent {
       
       let dataInformFile: any = {}
       let dataInfoFilesTmp = this.arrObjFilesAdjByCabecera.filter(itemInfo => itemInfo.NIDCABECERA_USUARIO == NIDCABECERA_USUARIO && itemInfo.NIDALERTA == NIDALERTA && itemInfo.NREGIMEN === NREGIMEN && itemInfo.STIPO_CARGA === STIPO_CARGA)
+      
       
       let statusDuplic = false
       if (dataInfoFilesTmp.length > 0) {
@@ -2687,6 +2690,7 @@ export class ResponsableGlobalComponent {
             dataInformFile.NREGIMEN = NREGIMEN
             dataInformFile.STIPO_USUARIO = STIPO_USUARIO
             dataInformFile.STIPO_CARGA = STIPO_CARGA
+            dataInformFile.NOMBRECOMPLETO = NOMBRECOMPLETO
 
             let arrayFilesNamePush:any = []
             let arrayFilesPush:any = []
@@ -2750,13 +2754,14 @@ export class ResponsableGlobalComponent {
         })
       }
       if (!statusDuplic) {
-        
+        debugger;
         dataInformFile.SRUTA = STIPO_CARGA + '/' + NIDCABECERA_USUARIO + '/' + STIPO_USUARIO
         dataInformFile.NIDCABECERA_USUARIO = NIDCABECERA_USUARIO
         dataInformFile.NIDALERTA = NIDALERTA
         dataInformFile.NREGIMEN = NREGIMEN
         dataInformFile.STIPO_USUARIO = STIPO_USUARIO
         dataInformFile.STIPO_CARGA = STIPO_CARGA
+        dataInformFile.NOMBRECOMPLETO = NOMBRECOMPLETO
         dataInformFile.arrFilesName = respSetData.listFileNameInform
         dataInformFile.arrFiles = respSetData.respPromiseFileInfo
         dataInformFile.arrFilesNameCorto = respSetData.listFileNameCortoInform
@@ -2784,15 +2789,17 @@ export class ResponsableGlobalComponent {
     let listFileNameCortoInform = []
     let statusFormatFile = false
     for (let item of listFileNameInform) {
-      //let item = listFileNameInform[0]
-      let nameFile = item.split(".")
-      if (nameFile.length > 2 || nameFile.length < 2) {
-        statusFormatFile = true
-        return
+      if(item.lastIndexOf('.') >= 0){
+        let nameFile = []
+        nameFile[0] = item.substring(0, item.lastIndexOf('.'));
+        nameFile[1] = item.substring(item.lastIndexOf('.') + 1);
+        if (nameFile.length > 2 || nameFile.length < 2) {
+          statusFormatFile = true
+          return
+        }
+        let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+        listFileNameCortoInform.push(fileItem)
       }
-      let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
-      //listFileNameCortoInform.push(fileItem)
-      listFileNameCortoInform.push(fileItem)
     }
     if (statusFormatFile) {
       swal.fire({
