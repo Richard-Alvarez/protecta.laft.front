@@ -556,11 +556,11 @@ Export2Doc(element, filename = ''){
       }else{
         this.RespuestaGlobalColaborador = 'sí'
       }
-    }else if (this.idGrupo == 3){ // PROVEEDOR
+    // }else if (this.idGrupo == 3){ // PROVEEDOR
 
-    }
-    else if (this.idGrupo == 4){ //CONTRAPARTE
-      console.log("array",array)
+     }
+    else if (this.idGrupo == 4 || this.idGrupo == 3){ //CONTRAPARTE
+      
       this.ListaContraparte = this.ListaAlerta
       let Concatenar =  this.ListaContraparte.filter(it => it.SNOMBRE_ALERTA == "P2" || it.SNOMBRE_ALERTA == "P3" || it.SNOMBRE_ALERTA == "P1")
       

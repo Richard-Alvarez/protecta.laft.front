@@ -106,7 +106,7 @@
                 </p>
                 <ol type="a">
                     <li style="font-family: arial Narrow, serif; text-align: justify">
-                        Se solicita (Todos los cargos que respondieron en P1, P2,P3), que confirme 
+                        Se solicita {{CargosConcatenadosContraparte}} que confirme 
                         si se han presentado/identificado las señales de alerta respectivas.
                     </li>
                     <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -117,8 +117,8 @@
                     <p><strong></strong></p>
                     <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
                     <ul>
-                        <li style="font-family: arial Narrow, serif; text-align: justify">
-                            La (Cargos) reportó que (Respuesta) hubo situaciones que configuraron como 
+                        <li *ngFor="let item of RespuestaGlobalContraparte" style="font-family: arial Narrow, serif; text-align: justify">
+                            La {{item.SCARGO}} reportó que {{item.RespuestaGlobal}} hubo situaciones que configuraron como 
                             señales de alerta con relación al comportamiento de los proveedores.
                         </li>
                     </ul>
@@ -154,7 +154,7 @@
                     <br>
                     <ul>
                         <li style="font-family: arial Narrow, serif; text-align: justify">
-                            Con relación a la señal de alerta P5: (Respuesta) se identificaron proveedores domiciliados 
+                            Con relación a la señal de alerta P5: {{RespuestaGlobalContraparteP5}} se identificaron proveedores domiciliados 
                             en / o que modificaron su domicilio a: países considerados paraísos fiscales o países donde existe conocida 
                             actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
                         </li>
@@ -164,6 +164,7 @@
 
     </div>
       <div class="text-center pt-5">
-        <button>LINK DE PRODUCCION</button> 
+        <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
+        <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
       </div>
     

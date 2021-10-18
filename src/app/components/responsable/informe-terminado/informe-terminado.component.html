@@ -376,6 +376,12 @@
             </div>
             
         </div> 
+        <div *ngIf="(this.idGrupo == 3)"> 
+            <div id="Reportes" >
+                <app-template-proveedor [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalContraparteP5" [RespuestaGlobalContraparte]="RespuestaGlobalContraparte"  style="display: none" ></app-template-proveedor>
+            </div>
+            
+        </div> 
         <div *ngIf="(this.idGrupo == 4)"> 
             <div id="Reportes" >
                 <app-template-contraparte [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalContraparteP5" [RespuestaGlobalContraparte]="RespuestaGlobalContraparte" style="display: none" ></app-template-contraparte>
