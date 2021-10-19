@@ -578,41 +578,41 @@ Export2Doc(element, filename = ''){
     let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO != 4 && it.NIDREGIMEN == validadador && it.SNOMBRE_ALERTA !== 'C2')
     console.log("Validador",ValidadorGlobal.length)
     console.log("Validador 11",ValidadorGlobal)
-      if(ValidadorGlobal.length > 0 || validadador == -1 ){
-        swal.fire({
-          title: 'Bandeja de Cumplimiento',
-          icon: 'error',
-          text: 'Falta responder alguna señal',
-          showCancelButton: false,
-          showConfirmButton: true,
-          //cancelButtonColor: '#dc4545',
-          confirmButtonColor: "#FA7000",
-          confirmButtonText: 'Aceptar',
-          showCloseButton: true,
-          customClass: { 
-            closeButton : 'OcultarBorde'
-                        },
+      // if(ValidadorGlobal.length > 0 || validadador == -1 ){
+      //   swal.fire({
+      //     title: 'Bandeja de Cumplimiento',
+      //     icon: 'error',
+      //     text: 'Falta responder alguna señal',
+      //     showCancelButton: false,
+      //     showConfirmButton: true,
+      //     //cancelButtonColor: '#dc4545',
+      //     confirmButtonColor: "#FA7000",
+      //     confirmButtonText: 'Aceptar',
+      //     showCloseButton: true,
+      //     customClass: { 
+      //       closeButton : 'OcultarBorde'
+      //                   },
             
-        }).then((result) => {
-            if(result.value){
-              console.log("entro en el if")
-              return
-            }else{
-              console.log("entro en el else")
-            } 
+      //   }).then((result) => {
+      //       if(result.value){
+      //         console.log("entro en el if")
+      //         return
+      //       }else{
+      //         console.log("entro en el else")
+      //       } 
 
-        })
-        return
-      }
+      //   })
+      //   return
+      // }
     
     
     if(this.regimen.id == 1 && this.idGrupo == 1){ // REGIMEN GENERAL
     
-      //this.ValidadorReportes =  this.ValidacionReporte()
+     
       await this.DataReporteC2()
       this.ListaAlertaRG = this.ListaAlerta.filter(it => (it.SNOMBRE_ALERTA).substr(0,2) == 'RG' )
       this.CargoRG = this.ListaAlertaRG[0].SCARGO
-      //this.Alerta = (this.ListaAlertaRG[0].SNOMBRE_ALERTA).substr(0,2)
+     
 
       console.log("ListaAlertaRG",this.ListaAlertaRG)
 
@@ -694,14 +694,14 @@ Export2Doc(element, filename = ''){
           return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.SCARGO) === JSON.stringify(valorActual.SCARGO)) === indiceActual
           });
 
-          //console.log("sinRepetidosCargos",sinRepetidosCargos)
+        
           
           sinRepetidosCargos.forEach(element => {
               let respuesta = ''
               let listarespuestas = this.ListaContraparte.filter(it=> it.SCARGO == element.SCARGO)
               
               let validarRespuesta = listarespuestas.filter(it=> it.NIDRESPUESTA == 1)
-              //console.log("listarespuestas",validarRespuesta.length)
+             
               if(validarRespuesta.length == 0){
                 respuesta = 'no'
               }else{
@@ -714,7 +714,7 @@ Export2Doc(element, filename = ''){
 
           });
 
-          //console.log("RespuestaGlobalContraparte",this.RespuestaGlobalContraparte)
+         
     }
    
 
