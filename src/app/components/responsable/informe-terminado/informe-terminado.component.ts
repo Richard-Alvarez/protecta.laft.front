@@ -495,13 +495,12 @@ Export2Doc(element, filename = ''){
     }
   
      document.body.removeChild(downloadLink);
-     this.NombreReporte = ''
-     this.RegimenPendiente = 0
+  
      
     },1);
      // this.dataBase64 = []
      //this.dataBase64aHTML =[]
-     this.ValidadorReportes =  this.ValidacionReporte()
+    // this.ValidadorReportes =  this.ValidacionReporte()
     
  }
 
@@ -511,10 +510,12 @@ Export2Doc(element, filename = ''){
  RespuetasAlertaRG
  idGrupo
  ListaAlertaC1
+ RespuestaAlertaC1
  ListaAlertaC3
  RespuestaGlobalC3
  ListaAlertaS1
  ListaAlertaS2
+ RespuestaAlertaS2
  ListaAlertaS3 
  ListaColaborador
  RespuestaGlobalColaborador
@@ -526,20 +527,25 @@ Export2Doc(element, filename = ''){
  PeriodoFecha
  Alerta 
  NombreReporte
- ValidadorReportes
+ ValidadorReportes = 0
+ 
+
   async DescargarReportesXGrupo(array){
     
     console.log("ReportesSimplificado",array)
+    let  validadador = array[0].NREGIMEN
     this.ListaAlerta = []
     this.ListaAlertaRG = []
     this.CargoRG = ""
     this.RespuetasAlertaRG = ''
     this.idGrupo = 0
     this.ListaAlertaC1  = []
+    this.RespuestaAlertaC1 = ''
     this.ListaAlertaC3 = []
     this.RespuestaGlobalC3  = ''
     this.ListaAlertaS1= []
     this.ListaAlertaS2= []
+    this.RespuestaAlertaS2 = ''
     this.ListaAlertaS3= []
     this.ListaColaborador= []
     this.RespuestaGlobalColaborador = ''
@@ -551,22 +557,54 @@ Export2Doc(element, filename = ''){
     this.Alerta = ""
     this.NombreReporte = ""
     this.idGrupo = await this.ValidarGrupo()
-    this.ValidadorReportes= 0
+    
+    this.ValidadorReportes = validadador
+    console.log("ValidadorReportes",this.ValidadorReportes)
     let data :any = {} 
     data.NIDGRUPOSENAL = this.idGrupo
     data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     this.core.loader.show()
     this.ListaAlerta = await this.userConfigService.GetAlertaResupuesta(data)
+
     this.core.loader.hide()
+
+    let Validador = this.ListaAlerta.filter(it => it.SETADO !== 4 && it.NIDREGIMEN == validadador)
+    console.log("Validador",Validador.length)
+      if(Validador.length > 0 ){
+        swal.fire({
+          title: 'Bandeja de Cumplimiento',
+          icon: 'error',
+          text: 'Falta responder alguna señal',
+          showCancelButton: false,
+          showConfirmButton: true,
+          //cancelButtonColor: '#dc4545',
+          confirmButtonColor: "#FA7000",
+          confirmButtonText: 'Aceptar',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+                        },
+            
+        }).then((result) => {
+            if(result.value){
+              console.log("entro en el if")
+              return
+            }else{
+              console.log("entro en el else")
+            } 
+
+        })
+        return
+      }
     
     
     if(this.regimen.id == 1 && this.idGrupo == 1){ // REGIMEN GENERAL
-      this.NombreReporte = "Gene"
+    
       //this.ValidadorReportes =  this.ValidacionReporte()
       await this.DataReporteC2()
       this.ListaAlertaRG = this.ListaAlerta.filter(it => (it.SNOMBRE_ALERTA).substr(0,2) == 'RG' )
       this.CargoRG = this.ListaAlertaRG[0].SCARGO
-      this.Alerta = (this.ListaAlertaRG[0].SNOMBRE_ALERTA).substr(0,2)
+      //this.Alerta = (this.ListaAlertaRG[0].SNOMBRE_ALERTA).substr(0,2)
 
       console.log("ListaAlertaRG",this.ListaAlertaRG)
 
@@ -585,18 +623,20 @@ Export2Doc(element, filename = ''){
 
     }else if(this.regimen.id == 2 && this.idGrupo == 1){ //REGIMEN SIMPLIFICADO
       
-      //this.ValidadorReportes =  this.ValidacionReporte()
-      this.NombreReporte = "Simpli"
+     
+     
       await this.DataReporteC2()
       this.ListaAlertaC1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C1' )
+      this.RespuestaAlertaC1 = this.ListaAlertaC1[0].NIDRESPUESTA
       this.ListaAlertaC3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C3' )
       let respuestaC3 = this.ListaAlertaC3.filter((it,inc) => it.NIDRESPUESTA == 1)
       this.ListaAlertaS1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S1' )
       this.ListaAlertaS2  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S2' )
+      this.RespuestaAlertaS2 = this.ListaAlertaS2[0].NIDRESPUESTA
       this.ListaAlertaS3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S3' )
 
-       console.log("ListaAlertaC1",this.ListaAlertaC1)
-      this.Alerta = this.ListaAlertaC1[0].SNOMBRE_ALERTA
+     
+     
       if(respuestaC3.length == 0){
         this.RespuestaGlobalC3 = 'no'
       }else{
@@ -672,13 +712,21 @@ Export2Doc(element, filename = ''){
 
     this.RegimenPendiente = this.regimen.id
     debugger
-    if(this.regimen.id === 1){
-      this.Export2Doc("ReportesGeneral","Reportes") 
-    }else if (this.regimen.id === 2){
-      this.Export2Doc("ReportesSimplificado","Reportes") 
+    if(this.idGrupo == 1 && this.ValidadorReportes  == 1){
+      this.Export2Doc("ReportesGeneral","Reportes Regimen General") 
+    }else if (this.idGrupo == 1 && this.ValidadorReportes  == 2){
+      this.Export2Doc("ReportesSimplificado","Reportes Regimen Simplidicado") 
+    }else if(this.idGrupo == 2){
+      this.Export2Doc("Reportes","Reportes de Colaboradores") 
+    }else if(this.idGrupo == 3){
+      this.Export2Doc("Reportes","Reportes de Proveedores") 
     }
+    else if(this.idGrupo == 4){
+      this.Export2Doc("Reportes","Reportes de Contraparte") 
+    }
+
    
-    //this.Alerta = ''
+    
   }
 
  linkactual
@@ -773,6 +821,35 @@ Export2Doc(element, filename = ''){
     return  10
   }else if(this.linkactual == "clientes" &&  this.regimen.id == 2){
     return  20
+  }
+ }
+
+ ValidarRevisados(){
+  let Validador = this.ListaAlerta.filter(it => it.SETADO !== 4)
+  if(Validador.length > 0 ){
+    swal.fire({
+      title: 'Bandeja de Cumplimiento',
+      icon: 'error',
+      text: 'Falta responder alguna señal',
+      showCancelButton: false,
+      showConfirmButton: true,
+      //cancelButtonColor: '#dc4545',
+      confirmButtonColor: "#FA7000",
+      confirmButtonText: 'Aceptar',
+      showCloseButton: true,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+                     },
+        
+    }).then((result) => {
+        if(result.value){
+          console.log("entro en el if")
+          return
+        }else{
+          console.log("entro en el else")
+        } 
+
+    })
   }
  }
 

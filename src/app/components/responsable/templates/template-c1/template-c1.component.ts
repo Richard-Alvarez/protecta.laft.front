@@ -18,6 +18,7 @@ export class TemplateC1Component implements OnInit {
   //VARIABLES PARA DESCARGAR REPORTES DE GRUPSO
   @Input() Validar:number
   @Input() objListaAlertaC1:number
+  @Input() RespuestaAlertaC1:any
   @Input() item:any
 
   constructor() { }

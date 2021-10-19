@@ -357,35 +357,37 @@
         <div class="col-md-6 d-flex justify-content-between " style="padding: 0px 200px 0px 0px; color:#7c7ea6 !important; ">
         <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton" (click)="DescargarReportesXGrupo(arrResponsable)"><i class="fas fa-download"></i> Descargar Reporte Grupal</button>
         </div>
-        {{this.regimen.id}} --   {{this.RegimenPendiente}} --   {{this.Alerta}} -- {{this.ValidadorReportes}} - {{this.NombreReporte}}
+       
 
-         <div *ngIf=" RegimenPendiente == 2 && this.ValidadorReportes == 20"> 
+        
+        <div *ngIf=" ValidadorReportes == 1 && this.idGrupo == 1"> 
+            <div id="ReportesGeneral" >
+               <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG" [CargoRG]="CargoRG" [Periodo]="PeriodoFecha" 
+               [RegimenPendiente]="RegimenPendiente"
+               [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
+                [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial"  [listaPepMasivos]="listaPepMasivos"
+                style="display: none" ></app-template-clientes-general>
+           </div> 
+           
+       </div> 
+
+         <div *ngIf=" ValidadorReportes == 2 && this.idGrupo == 1"> 
              <div id="ReportesSimplificado" >  
                 <app-template-clientes-simplificado 
                 [parent]="this"
-                [objListaAlertaC1]="ListaAlertaC1" 
+                [objListaAlertaC1]="ListaAlertaC1" [RespuestaAlertaC1]="RespuestaAlertaC1"
                 [ObjListaAlertasC3]="ListaAlertaC3" [RespuestaGlobalC3]="RespuestaGlobalC3" 
-                [ObjListaAlertasS2]="ListaAlertaS2"
+                [ObjListaAlertasS2]="ListaAlertaS2" [RespuestaAlertaS2]="RespuestaAlertaS2"
                 [ObjListaAlertasS3]="ListaAlertaS3"
                 [Periodo]="PeriodoFecha"
                 [RegimenPendiente]="RegimenPendiente"
                 [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
                  [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial"  [listaPepMasivos]="listaPepMasivos"
-                 ></app-template-clientes-simplificado>
+                 style="display: none" ></app-template-clientes-simplificado>
             </div>  
             
          </div>  
 
-        <div *ngIf="RegimenPendiente == 1 && this.ValidadorReportes == 10 ">  
-             <div id="ReportesGeneral" >
-                <app-template-clientes-general [objListaAlertaRG]="ListaAlertaRG" [respuestaRG]="RespuetasAlertaRG" [CargoRG]="CargoRG" [Periodo]="PeriodoFecha" 
-                [RegimenPendiente]="RegimenPendiente"
-                [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
-                 [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial"  [listaPepMasivos]="listaPepMasivos"
-                 ></app-template-clientes-general>
-            </div> 
-            
-        </div> 
         
         <div *ngIf="(this.idGrupo == 2)"> 
             <div id="Reportes" >

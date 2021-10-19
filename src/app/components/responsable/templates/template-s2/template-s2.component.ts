@@ -20,7 +20,7 @@ export class TemplateS2Component implements OnInit {
       @Input() Validar:number
       @Input() ObjListaAlertasS2:any 
       @Input() Respuesta:number
-      
+      @Input() RespuestaAlertaS2
       //@Input() RespuestaGlobalC3:string
 
   constructor() { }
