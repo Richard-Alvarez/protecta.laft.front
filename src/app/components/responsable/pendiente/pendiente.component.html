@@ -330,7 +330,7 @@
                                                                                         <div class="txtDetalle" style="text-align: justify; ">
                                                                                             <div style="font-weight: bold;display: inline;color: royalblue;">
                                                                                                 {{getAlerta(item.SNOMBRE_ALERTA)}}</div>
-                                                                                            {{pregHeadOne.SPREGUNTA}} 
+                                                                                            {{pregHeadOne.SPREGUNTA}}
                                                                                         </div>
                                                                                     </div>
 
@@ -360,7 +360,7 @@
 
                                                                                                 <div style="font-weight: bold;display: inline;color: royalblue;">
                                                                                                     {{getAlerta(item.SNOMBRE_ALERTA)}}</div>
-                                                                                                {{pregHeadOne.SPREGUNTA}}  
+                                                                                                {{pregHeadOne.SPREGUNTA}}
                                                                                             </div>
                                                                                         </div>
 
@@ -426,7 +426,7 @@
                                                                             <div *ngIf=" !(item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)" class="col-lg-2" style="padding-left: 0px;padding-right:0px;">
                                                                                 <div class="d-flex justify-content-between">
                                                                                     <div class="col-lg-4">
-                                                                                        <input type="file" name="file" id="archivo{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'ADJUNTOS-FORM','RE')" />
+                                                                                        <input type="file" name="file" id="archivo{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,item.NOMBRECOMPLETO,'ADJUNTOS-FORM','RE',item.NOMBRECOMPLETO)" />
                                                                                         <div class="text-center">
                                                                                             <label for="archivo{{regimen.id}}-{{index}}">
                                                 <i class="fas fa-paperclip fa-2x fa-lg"
@@ -550,9 +550,9 @@
 
 
                                                                                         <div class="txtDetalle" style="text-align: justify">
-                                                                                            {{ValidarTexto(item.SDESCRIPCION_ALERTA)}} 
+                                                                                            {{ValidarTexto(item.SDESCRIPCION_ALERTA)}}
                                                                                             <div [innerHTML]="textHtml"></div>
-                                                                                            
+
                                                                                         </div>
 
                                                                                     </div>
@@ -598,7 +598,7 @@
                                                                             <div *ngIf=" !(item.NIDALERTA == 39 && item.NIDUSUARIO_ASIGNADO == 35)" class="col-lg-2" style="padding-left: 0px;padding-right:0px;">
                                                                                 <div class="d-flex justify-content-between">
                                                                                     <div class="col-lg-4" style="padding-left: 0px;">
-                                                                                        <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'COMPLEMENTO','RE')" />
+                                                                                        <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item,'COMPLEMENTO','RE')" />
                                                                                         <div class="text-center" style="display:table-caption">
                                                                                             <label for="archivoComplemento{{regimen.id}}-{{index}}" style="cursor: pointer;">
                                                 <img src="assets/icons/excel-microsoft.png" style="width: 38px;" />
