@@ -533,7 +533,14 @@ Export2Doc(element, filename = ''){
   async DescargarReportesXGrupo(array){
     
     console.log("ReportesSimplificado",array)
-    let  validadador = array[0].NREGIMEN
+    let  validadador
+    if(array.length === 0){
+      validadador = -1
+    }else{
+       validadador = array[0].NREGIMEN  
+      }
+
+    
     this.ListaAlerta = []
     this.ListaAlertaRG = []
     this.CargoRG = ""
@@ -568,9 +575,10 @@ Export2Doc(element, filename = ''){
 
     this.core.loader.hide()
 
-    let Validador = this.ListaAlerta.filter(it => it.SETADO !== 4 && it.NIDREGIMEN == validadador)
-    console.log("Validador",Validador.length)
-      if(Validador.length > 0 ){
+    let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO != 4 && it.NIDREGIMEN == validadador && it.SNOMBRE_ALERTA !== 'C2')
+    console.log("Validador",ValidadorGlobal.length)
+    console.log("Validador 11",ValidadorGlobal)
+      if(ValidadorGlobal.length > 0 || validadador == -1 ){
         swal.fire({
           title: 'Bandeja de Cumplimiento',
           icon: 'error',
