@@ -2,17 +2,10 @@
 
     
         
-    <!--<img src="http://190.216.170.173/LAFT/assets/img/logo.png" alt="" style="width: 100px;" >
-                
-        <div *ngFor="let item of parent.arrayData"> -->
+    
            
            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
-          <!-- <p> 
-               <strong>Usuario:  {{parent.Nombre}}  </strong>
-           </p>
-           <p>
-               <strong>Perfil:  {{parent.Perfil}}  </strong>
-           </p> -->
+         
 
            <div *ngIf="parent.NombreLink == 'proveedor'">
                  
@@ -379,7 +372,7 @@
 
             </div>
     
-            <div *ngIf="parent.NombreLink == 'proveedor'">
+            <div *ngIf="parent.NombreLink == 'proveedor' && parent.Alerta != 'P4'">
             <!-- <div *ngIf="parent.Alerta !== 'P5$'"> -->
             <div class="container" style="padding: 0px 200px;">
             <br> 
@@ -403,16 +396,65 @@
             <p>
             <p><strong></strong></p>
             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+            <div *ngIf=" parent.Alerta == 'P5'">
+                <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+                    {{item.Cargo}} reportó que {{item.Respuesta}}  se identificaron proveedores o contrapartes domiciliados en / o que modificaron su domicilio a: países 
+                    considerados paraísos fiscales o países donde existe conocida actividad terrorista, considerados como no cooperantes por el
+                     GAFI o sujetos a sanciones OFAC. 
+                   </li>
+                </ul>
+            </div>
+            <div *ngIf=" parent.Alerta !== 'P5'">
                 <ul>
                     <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
                     La {{item.Cargo}} reportó que {{item.Respuesta}} hubo situaciones que 
                     configuraron como señales de alerta con relación al comportamiento de los proveedores.
                    </li>
                 </ul>
+            </div>
+               
                 
             </div>
     
             <!-- </div> -->
+            </div>
+
+            <div *ngIf="parent.Alerta == 'P4'">
+                <div class="container" style="padding: 0px 200px;">
+                     <div style="padding-top: 20px;"></div>
+                    <p>
+                        <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta </strong>
+                    </p>
+                    <div *ngIf="parent.NombreLink == 'contraparte'">
+                        <ol type="a" style="font-family: arial Narrow, serif; text-align: justify">
+                            <li>Se realiza la búsqueda contra las listas internacionales y Registro Negativo, esto es ejecutada mediante solicitud al área de Tecnología.
+                                Estas consultas también se realizan de manera individual a través de la plataforma WorldCheck e información de las contrapartes.</li>
+                                <li>
+                                    Se revisa la información proporcionada.
+                                </li>
+                        </ol>
+                    </div>
+                    <div *ngIf="parent.NombreLink == 'proveedor'">
+                        <ol type="a" style="font-family: arial Narrow, serif; text-align: justify">
+                            <li>Se realiza la búsqueda contra las listas internacionales y Registro Negativo, esto es ejecutada mediante solicitud al área de Tecnología.
+                                Estas consultas también se realizan de manera individual a través de la plataforma WorldCheck e información de los proveedores.</li>
+                                <li>
+                                    Se revisa la información proporcionada.
+                                </li>
+                        </ol>
+                    </div>
+                    
+                    <p><strong></strong></p>
+                    <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                    <ul>
+                        <li style="font-family: arial Narrow, serif; text-align: justify">
+                            Con relación a la señal de alerta P4: Se revisó a las contrapartes correspondientes a la base de usufructuarios, contra el Registro Negativo LA/FT
+                             para poder identificar la señal de alerta en cuestión. Los resultados indicaron que se identificó (TOTAL DE COINCIDENCIAS APROBADAS) 
+                             señales de alerta por el usufructuario (NOMBRE DE LOS PROVEEDORES O CONTRAPARTE).
+                       </li>
+                    </ul>
+                </div>
             </div>
 
             <div *ngIf="parent.NombreLink == 'contraparte'">
@@ -432,12 +474,12 @@
                     Se revisa la información proporcionada.
                     </li>
                 </ul>
-                <p><strong></strong></p>
+                <p><strong></strong></p>s
                 <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
                 <ul>
                         <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
-                        La {{item.Cargo}} reportó que {{item.Respuesta}} hubo situaciones que 
-                        configuraron como señales de alerta con relación al comportamiento de los proveedores.
+                        La {{item.Cargo}} reportó que {{item.Respuesta}} hubo situaciones que configuraron como señales de alerta
+                         con relación al comportamiento de usufructuarios.
                        </li>
                     </ul>
                     
