@@ -95,7 +95,6 @@ export class CustomerManagerComponent implements OnInit {
   {}
 
   async ngOnInit() { 
-   debugger;
     this.spinner.show()
     await this.getGrupoList()
     this.paramCliente.NTIPOIDEN_BUSQ = 2;
@@ -1461,7 +1460,6 @@ async getResultsList(){
        
       }
       //this.paramCliente
-      debugger;
         let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
         if(valuenSelectPestaniaClient == null){
           localStorage.setItem("nSelectPestaniaClient",'0')
@@ -2392,7 +2390,6 @@ prueba = []
         localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
         //this.core.storage.set('view-c2-arrListasAll', this.internationalList)
         this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
-        debugger;
         let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
         if(valuenSelectPestaniaClient == null){
           localStorage.setItem("nSelectPestaniaClient",'0')
@@ -2436,7 +2433,6 @@ prueba = []
         localStorage.setItem('EnviarCheckbox',sEstadoRevisado)
         //this.core.storage.set('view-c2-arrListasAll', this.internationalList)
         this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
-        debugger;
         let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
         if(valuenSelectPestaniaClient == null){
           localStorage.setItem("nSelectPestaniaClient",'0')
@@ -2569,7 +2565,6 @@ prueba = []
                   let respuestaWC : any =  await this.userConfigService.ConsultaWC(data)
                    //Aca se ejecuta para hacer la busqueda de coincidencia manual
                   let respuetaService:any = await this.getConfigService(ObjListaCheckSeleccionadoxNombre)
-                  debugger;
                   if((respuestaWC.sStatus == 'NOT FOUND' || respuestaWC.sStatus == 'ERROR') && respuetaService.code == 1){
                      let mensaje = ''
                     if(respuestaWC.sStatus == 'ERROR'){
