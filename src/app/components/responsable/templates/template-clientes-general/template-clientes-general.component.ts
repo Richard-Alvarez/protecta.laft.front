@@ -36,6 +36,13 @@ export class TemplateClientesGeneralComponent implements OnInit {
   @Input() listaEspecial
   @Input() listaPepMasivos
 
+  @Input() listaInternacionalMaisvos
+  @Input() listaInternacionalSoat
+  @Input() listaInternacionalRenta
+  @Input() listaEspecialSimpli
+  @Input() listaEspecialGene
+ 
+
   @Input() parent:PendienteInformeComponent
   constructor() { }
 

@@ -575,7 +575,7 @@ Export2Doc(element, filename = ''){
 
     this.core.loader.hide()
 
-    let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO != 4 && it.NIDREGIMEN == validadador && it.SNOMBRE_ALERTA !== 'C2')
+    let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO == 1 && it.NIDREGIMEN == validadador && it.SNOMBRE_ALERTA !== 'C2')
     console.log("Validador",ValidadorGlobal.length)
     console.log("Validador 11",ValidadorGlobal)
       // if(ValidadorGlobal.length > 0 || validadador == -1 ){
@@ -719,7 +719,7 @@ Export2Doc(element, filename = ''){
    
 
     this.RegimenPendiente = this.regimen.id
-    debugger
+    
     if(this.idGrupo == 1 && this.ValidadorReportes  == 1){
       this.Export2Doc("ReportesGeneral","Reportes Regimen General") 
     }else if (this.idGrupo == 1 && this.ValidadorReportes  == 2){
@@ -775,6 +775,12 @@ Export2Doc(element, filename = ''){
   listaEspecialRentaParticular:any = []
   listaPepRentaParticular:any = []
   listaInternacionalRentaParticular:any = []
+ 
+  listaInternacionalMaisvos:any = []
+  listaInternacionalSoat:any = []
+  listaInternacionalRenta:any = []
+  listaEspecialSimpli:any = []
+  listaEspecialGene:any = []
 
  async DataReporteC2(){
   this.arrayDataSenal= []
@@ -796,6 +802,11 @@ Export2Doc(element, filename = ''){
   this.listaEspecialRentaParticular = []
   this.listaPepRentaParticular = []
   this.listaInternacionalRentaParticular = []
+  this.listaInternacionalMaisvos = []
+  this.listaInternacionalSoat = []
+  this.listaInternacionalRenta = []
+  this.listaEspecialSimpli = []
+  this.listaEspecialGene = []
 
     let data:any = {}
     data.NPERIODO_PROCESO = this.NPERIODO_PROCESO 
@@ -805,7 +816,8 @@ Export2Doc(element, filename = ''){
     
     this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
     // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
-    this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
+    //this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
+    this.listaMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66)
     this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76 && it.NIDTIPOLISTA == 5)
     this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
     this.listaPepMasivos =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 99)
@@ -817,9 +829,13 @@ Export2Doc(element, filename = ''){
     this.listaEspecialRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
     this.listaPepRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 75)
     this.listaInternacionalRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75)
-    //this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.NIDREGIMEN == 1)
-    //this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == this.RegimenPendiente)
-    
+    this.listaInternacionalMaisvos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
+    this.listaInternacionalSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1  && it.RAMO !== 75  && it.RAMO !== 76 )
+    this.listaInternacionalRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1   && it.RAMO == 76 )
+    this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
+    this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 )
+    this.listaEspecialSimpli =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == 2)
+    this.listaEspecialGene =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5   && it.NIDREGIMEN == 1)
     this.Cantidad = this.arrayDataResultado.length
   
  }

@@ -43,6 +43,12 @@ export class TemplateClientesSimplificadoComponent implements OnInit {
   @Input() listaInternacionalRentaParticular
   @Input() listaEspecial
   @Input() listaPepMasivos
+
+  @Input() listaInternacionalMaisvos
+  @Input() listaInternacionalSoat
+  @Input() listaInternacionalRenta
+  @Input() listaEspecialSimpli
+  @Input() listaEspecialGene
  
   
   //@Input() parent:PendienteInformeComponent
