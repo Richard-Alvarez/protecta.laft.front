@@ -860,8 +860,9 @@ async DescargarReporte(item){
     data.NPERIODO_PROCESO = this.NPERIODO_PROCESO 
     data.NIDALERTA = item.NIDALERTA
     data.NIDREGIMEN = this.RegimenPendiente
+    this.core.loader.show()
     this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
-    
+    this.core.loader.hide()
     this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
     // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
     //this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
