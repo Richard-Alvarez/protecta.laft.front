@@ -723,7 +723,7 @@ Export2Doc(element, filename = ''){
     if(this.idGrupo == 1 && this.ValidadorReportes  == 1){
       this.Export2Doc("ReportesGeneral","Reportes Regimen General") 
     }else if (this.idGrupo == 1 && this.ValidadorReportes  == 2){
-      this.Export2Doc("ReportesSimplificado","Reportes Regimen Simplidicado") 
+      this.Export2Doc("ReportesSimplificado","Reportes Regimen Simplificado") 
     }else if(this.idGrupo == 2){
       this.Export2Doc("Reportes","Reportes de Colaboradores") 
     }else if(this.idGrupo == 3){
