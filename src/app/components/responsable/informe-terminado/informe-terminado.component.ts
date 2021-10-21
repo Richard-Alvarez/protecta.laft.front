@@ -532,7 +532,7 @@ Export2Doc(element, filename = ''){
 
   async DescargarReportesXGrupo(array){
     
-    console.log("ReportesSimplificado",array)
+    console.log("Lista del array",array)
     let  validadador
     if(array.length === 0){
       validadador = -1
@@ -560,7 +560,7 @@ Export2Doc(element, filename = ''){
     this.CargosConcatenadosContraparte = ''
     this.RespuestaGlobalContraparte = []
     this.RespuestaGlobalContraparteP5  = ''
-    this.RegimenPendiente = 0//this.regimen.id
+    this.RegimenPendiente = 0 //this.regimen.id
     this.Alerta = ""
     this.NombreReporte = ""
     this.idGrupo = await this.ValidarGrupo()
@@ -574,7 +574,7 @@ Export2Doc(element, filename = ''){
     this.ListaAlerta = await this.userConfigService.GetAlertaResupuesta(data)
 
     this.core.loader.hide()
-
+    console.log("lista alerta",this.ListaAlerta)
     let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO == 1 && it.NIDREGIMEN == validadador && it.SNOMBRE_ALERTA !== 'C2')
     console.log("Validador",ValidadorGlobal.length)
     console.log("Validador 11",ValidadorGlobal)
@@ -812,7 +812,11 @@ Export2Doc(element, filename = ''){
     data.NPERIODO_PROCESO = this.NPERIODO_PROCESO 
     data.NIDALERTA = 2
     data.NIDREGIMEN = this.regimen.id
-    this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
+
+      this.core.loader.show()
+      this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
+      this.core.loader.hide()
+   
     
     this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
     // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)

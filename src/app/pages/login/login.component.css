@@ -55,7 +55,7 @@ label{
     padding: 20px;
     top: 30px;
     color :#f3d9d9;
-    width: 400px;
+    width: 400px; 
     height: 90px;
     text-align: center;
     opacity: 1;
@@ -90,3 +90,6 @@ label{
             background-color: #da6004;
             border-color: #da6004;
         }
+
+
+    
