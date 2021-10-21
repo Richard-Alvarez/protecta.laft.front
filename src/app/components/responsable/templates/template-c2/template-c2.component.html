@@ -1,4 +1,7 @@
 <div id="C2">
+
+    <img src="http://190.216.170.173/LAFT/assets/img/protecta.png" width="200" height="50">
+
     <div *ngIf="Validar == 1">
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
             <p> 
@@ -9,17 +12,17 @@
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
                         <tr>
-                            <td width="50px" style="padding-left: 10px; padding-right: 10px;">
+                            <td width="50px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
                                 <p>
                                     <strong>CÓDIGO</strong>
                                 </p>
                             </td>
-                            <td width="450px" style="padding-left: 10px;">
+                            <td width="400px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
                                 <p>
                                     <strong>SEÑAL DE ALERTA</strong>
                                 </p>
                             </td>
-                            <td width="200px">
+                            <td width="250px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
                                 <p align="center">
                                     <strong>PRODUCTO</strong>
                                 </p>
@@ -31,14 +34,14 @@
                                     C2
                                 </p>
                             </td>
-                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <td width="400px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
                                 <p>
                                     Que se tome conocimiento por los medios de difusión pública u otro, según sea el caso,
                                     que un cliente está siendo investigado o procesado por el delito de lavado de activos,
                                     delitos precedentes, el delito de financiamiento del terrorismo y/o delitos conexos.
                                 </p>
                             </td>
-                            <td width="200px" style="padding-left: 10px; padding-right: 10px; text-align: center">
+                            <td width="250px" style="padding-left: 10px; padding-right: 10px; text-align: center">
                                 <p>
                                     Todos los productos
                                 </p>
@@ -69,7 +72,6 @@
                         descartado como falso positivo, se procederá a analizar la inusual operación.
                     </li>
                 </ol>
-            <br>
             <strong style="font-family: arial Narrow, serif;"> Resultados Señales de alerta C2</strong>
         </div>
 
@@ -426,7 +428,6 @@
             <dd><strong style="font-family: arial Narrow, serif;"> -------------------------------</strong></dd>
     </div> -->
 
-    <br>
     <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
 
     <div *ngIf="parent.RegimenPendiente == 2"  >
@@ -500,7 +501,6 @@
             </table>
             <br>
         </div>
-        <br>
     </div>
 
     <div *ngIf="parent.RegimenPendiente == 2"  >
@@ -565,20 +565,17 @@
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    -----------
                                 </p>
                             </td>
                         </tr>
                     </tbody>
                 </FONT>
             </table>
-            <br>
         </div>
         <br>
     </div>
 
     <div *ngIf="parent.RegimenPendiente == 2"  >
-        <br>
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepRenta.length}} coincidencias
@@ -640,7 +637,6 @@
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    -----------
                                 </p>
                             </td>
                             </tr>
@@ -713,7 +709,6 @@
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    -----------
                                 </p>
                             </td>
                         </tr>
@@ -865,7 +860,6 @@
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    -----------
                                 </p>
                             </td>
                         </tr>
@@ -937,7 +931,6 @@
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    -----------
                                 </p>
                             </td>
                         </tr>
@@ -1009,7 +1002,6 @@
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    -----------
                                 </p>
                             </td>
                         </tr>
@@ -1081,7 +1073,6 @@
                             </td>
                             <td width="30%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                 <p>
-                                    -----------
                                 </p>
                             </td>
                         </tr>
@@ -1173,6 +1164,7 @@
             </li>
         </ul>
     </div>
+
     <div *ngIf="parent.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -1183,21 +1175,17 @@
             </li>
         </ul>
     </div>
-   
 
     <ng-template #SinData>
 
       </ng-template>
       <br>
-      <br>
-      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
-      <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
+      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: <a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
 
     </div>
 
 
     <!-- ESTO ES PARA DESCARGA GLOBAL -->
-    
 
     <div *ngIf="Validar == 2">
         <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
@@ -1209,17 +1197,17 @@
                 <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                     <tbody>
                         <tr>
-                            <td width="50px" style="padding-left: 10px; padding-right: 10px;">
+                            <td width="50px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
                                 <p>
                                     <strong>CÓDIGO</strong>
                                 </p>
                             </td>
-                            <td width="450px" style="padding-left: 10px;">
+                            <td width="400px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
                                 <p>
                                     <strong>SEÑAL DE ALERTA</strong>
                                 </p>
                             </td>
-                            <td width="200px">
+                            <td width="250px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
                                 <p align="center">
                                     <strong>PRODUCTO</strong>
                                 </p>
@@ -1231,14 +1219,14 @@
                                     C2
                                 </p>
                             </td>
-                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <td width="400px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
                                 <p>
                                     Que se tome conocimiento por los medios de difusión pública u otro, según sea el caso,
                                     que un cliente está siendo investigado o procesado por el delito de lavado de activos,
                                     delitos precedentes, el delito de financiamiento del terrorismo y/o delitos conexos.
                                 </p>
                             </td>
-                            <td width="200px" style="padding-left: 10px; padding-right: 10px; text-align: center">
+                            <td width="250px" style="padding-left: 10px; padding-right: 10px; text-align: center">
                                 <p>
                                     Todos los productos
                                 </p>
@@ -1246,7 +1234,7 @@
                         </tr>
                     </tbody>
                 </FONT>
-            </table>
+           </table>
         </div>
 
         <div class="container" style="padding: 0px 200px;">
@@ -1546,7 +1534,6 @@
             </table>
             <br>
         </div>
-        <br>
     </div>
 
     <!-- <div *ngIf="RegimenPendiente == 1"  >
