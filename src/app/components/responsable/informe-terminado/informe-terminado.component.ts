@@ -575,36 +575,36 @@ Export2Doc(element, filename = ''){
 
     this.core.loader.hide()
     console.log("lista alerta",this.ListaAlerta)
-    let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO == 1 && it.NIDREGIMEN == validadador && it.SNOMBRE_ALERTA !== 'C2')
+    let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO == 1 && it.NIDREGIMEN == validadador )//&& it.SNOMBRE_ALERTA !== 'C2')
     console.log("Validador",ValidadorGlobal.length)
     console.log("Validador 11",ValidadorGlobal)
-      // if(ValidadorGlobal.length > 0 || validadador == -1 ){
-      //   swal.fire({
-      //     title: 'Bandeja de Cumplimiento',
-      //     icon: 'error',
-      //     text: 'Falta responder alguna señal',
-      //     showCancelButton: false,
-      //     showConfirmButton: true,
-      //     //cancelButtonColor: '#dc4545',
-      //     confirmButtonColor: "#FA7000",
-      //     confirmButtonText: 'Aceptar',
-      //     showCloseButton: true,
-      //     customClass: { 
-      //       closeButton : 'OcultarBorde'
-      //                   },
+       if(ValidadorGlobal.length > 0 || validadador == -1 ){
+        swal.fire({
+          title: 'Bandeja de Cumplimiento',
+          icon: 'error',
+          text: 'Debe cerrar todas las señales para la descarga del informe',
+          showCancelButton: false,
+          showConfirmButton: true,
+          //cancelButtonColor: '#dc4545',
+          confirmButtonColor: "#FA7000",
+          confirmButtonText: 'Aceptar',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+                        },
             
-      //   }).then((result) => {
-      //       if(result.value){
-      //         console.log("entro en el if")
-      //         return
-      //       }else{
-      //         console.log("entro en el else")
-      //       } 
+        }).then((result) => {
+            if(result.value){
+              console.log("entro en el if")
+              return
+            }else{
+              console.log("entro en el else")
+            } 
 
-      //   })
-      //   return
-      // }
-    debugger
+        })
+        return
+      }
+    
     
     if(this.regimen.id == 1 && this.idGrupo == 1){ // REGIMEN GENERAL
     
