@@ -428,7 +428,7 @@
         </div>
 
         <div *ngIf="this.Alerta=='S1' && this.RegimenPendiente===2">
-            <app-template-s1  [parent]="this" [Nombre]="Nombre" 
+            <app-template-s1  [parent]="this" [Nombre]="Nombre"  [Validar]="1" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta"  style="display: none"></app-template-s1>
         </div>
 
@@ -448,11 +448,11 @@
         </div>
 
         <div *ngIf="(this.NombreLink == 'proveedor' || this.NombreLink == 'contraparte') && this.RegimenPendiente==0">
-            <app-template-p [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
+            <app-template-p [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal"  [Validar]="1" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-p>
         </div>
         <div *ngIf="this.NombreLink == 'colaborador' && this.RegimenPendiente==0">
-            <app-template-t [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
+            <app-template-t [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal"  [Validar]="1" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-t>
         </div>
 
