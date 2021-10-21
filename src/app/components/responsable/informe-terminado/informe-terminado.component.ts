@@ -604,7 +604,7 @@ Export2Doc(element, filename = ''){
       //   })
       //   return
       // }
-    
+    debugger
     
     if(this.regimen.id == 1 && this.idGrupo == 1){ // REGIMEN GENERAL
     
