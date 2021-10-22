@@ -741,8 +741,9 @@ DataArray(){
     }
   
      document.body.removeChild(downloadLink);
+    
     },1);
-
+    this.RegimenPendiente = 0
  }
 
 
@@ -784,7 +785,7 @@ listaEspecialSimpli:any = []
 listaEspecialGene:any = []
 
 async DescargarReporte(item){
-  
+  console.log("el item",item)
   this.arrayDataSenal= []
   this.Nombre = ''
   this.Perfil = ''
@@ -919,10 +920,14 @@ async DescargarReporte(item){
     this.ValidarNombreTemplate = this.Alerta
   }
 
-  
+  this.RegimenPendiente =  item.NREGIMEN
+  console.log("this.RegimenPendiente",this.RegimenPendiente)
   this.Export2Doc(this.ValidarNombreTemplate,this.Alerta)
   
- 
+  setTimeout(function(){
+    this.RegimenPendiente =  item.NREGIMEN
+    console.log("this.RegimenPendiente",this.RegimenPendiente)
+  },1)
 } 
 
   Resultado:any = {}
