@@ -1,12 +1,19 @@
 
+<div id="Reportes">
 
-    <app-template-c1  [parent]="this" [item]="objListaAlertaC1" [Validar]="2"  style="display: none"></app-template-c1>
+     <img src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"> 
+     <div>
+        <br/>
+    </div>
+
+     <app-template-c1  [parent]="this" [item]="" [RespuestaAlertaC1]="RespuestaAlertaC1" [Validar]="2" style="display: none" ></app-template-c1> 
 
     <app-template-c2 [parent2]="this"  [arrayDataSenal]="arrayDataSenal" 
     [Perfil]="Perfil"   [arrayDataResultado]="arrayDataResultado"  [Periodo]="Periodo"
     [Cantidad]="Cantidad"  [Validar]="2"  style="display: none" [RegimenPendiente]="RegimenPendiente"
     [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
     [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial" [listaPepMasivos]="listaPepMasivos" 
+    [listaInternacionalMaisvos]="listaInternacionalMaisvos" [listaInternacionalSoat]="listaInternacionalSoat" [listaInternacionalRenta]="listaInternacionalRenta" [listaEspecialSimpli]="listaEspecialSimpli" [listaEspecialGene]="listaEspecialGene"
     ></app-template-c2>
     
     
@@ -17,6 +24,8 @@
    
     <app-template-s1   style="display: none"></app-template-s1>
 
-    <app-template-s2  [parent]="this" [ObjListaAlertasS2]="ObjListaAlertasS2" [Validar]="2"   style="display: none" ></app-template-s2>
+     <app-template-s2  [parent]="this" [ObjListaAlertasS2]="" [RespuestaAlertaS2]="RespuestaAlertaS2" [Validar]="2"   style="display: none" ></app-template-s2>
 
     <app-template-s3  [parent]="this"[ObjListaAlertasS3]="ObjListaAlertasS3" [Validar]="2"  style="display: none" ></app-template-s3> 
+
+</div>

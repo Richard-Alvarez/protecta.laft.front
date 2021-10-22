@@ -8,9 +8,13 @@ import { InformeTerminadoComponent } from '../../informe-terminado/informe-termi
 })
 export class TemplateClientesSimplificadoComponent implements OnInit {
   @Input() objListaAlertaC1
+  @Input() RespuestaAlertaC1
+  
   @Input() ObjListaAlertasC3
   @Input() RespuestaGlobalC3:string
   @Input() ObjListaAlertasS2
+  @Input() RespuestaAlertaS2
+  
   @Input() ObjListaAlertasS3
  
   @Input() Nombre:string
@@ -21,8 +25,9 @@ export class TemplateClientesSimplificadoComponent implements OnInit {
   @Input() item:any
   @Input() Periodo:number
   @Input() Cantidad:number
-
+  @Input() Validar:number
   //las variables para el reporte global
+
   @Input() RegimenPendiente:number
   @Input() listaMasivos
   @Input() listaSoat
@@ -38,6 +43,12 @@ export class TemplateClientesSimplificadoComponent implements OnInit {
   @Input() listaInternacionalRentaParticular
   @Input() listaEspecial
   @Input() listaPepMasivos
+
+  @Input() listaInternacionalMaisvos
+  @Input() listaInternacionalSoat
+  @Input() listaInternacionalRenta
+  @Input() listaEspecialSimpli
+  @Input() listaEspecialGene
  
   
   //@Input() parent:PendienteInformeComponent

@@ -10,7 +10,7 @@ export class TemplateContraparteComponent implements OnInit {
   @Input() CargosConcatenadosContraparte
   @Input() RespuestaGlobalContraparteP5
   @Input() RespuestaGlobalContraparte
-  
+  @Input() Validar:number
   
   @Input() parent:PendienteInformeComponent
   constructor() { }

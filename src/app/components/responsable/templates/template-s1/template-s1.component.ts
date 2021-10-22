@@ -12,6 +12,7 @@ export class TemplateS1Component implements OnInit {
   @Input() Perfil:string
   //@Input() Respuesta:string
   //@Input() Alerta:string
+  @Input() Validar:number
   @Input() index:string
   @Input() item:any
   @Input() parent:PendienteInformeComponent

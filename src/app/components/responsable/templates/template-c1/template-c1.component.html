@@ -1,6 +1,12 @@
 
-
 <div id="C1">
+
+  <div *ngIf="Validar ==1"> 
+  <img src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"> 
+  <div>
+    <br/>
+</div>
+  </div>
   <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
     <p> 
       <strong style="font-family: arial Narrow, serif;">1.1 Señales de alerta - relativas a los productos</strong>
@@ -9,7 +15,7 @@
       <strong style="font-family: arial Narrow, serif;">1.1.1	Entidades sin fines de lucro (SFL), Cajas Rurales de Ahorro 
       y Crédito (CRACs), Cooperativas de Ahorro (COOPs), entre otros.   </strong>
     </p>  
-    <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+    <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px" left="20px">
       <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
         <tbody>
           <tr>
@@ -106,7 +112,7 @@
 
         <ul>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
-          El Área de Comercial Masivos señaló {{item[0].NIDRESPUESTA == 1 ? 'si' : 'no' }}  haber identificado ninguna situación atípica respecto a la señal 
+          El Área de Comercial Masivos señaló {{RespuestaAlertaC1 == 1 ? 'si' : 'no' }}  haber identificado ninguna situación atípica respecto a la señal 
           de alerta “C1”. Se tiene como sustento el correo como sustento.
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
@@ -115,18 +121,18 @@
           no se identificó señal de alerta.
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
-          El Área de Comercial Masivos indicó que las operaciones con los contratantes de la muestra {{item[0].NIDRESPUESTA == 1 ? 'si' : 'no' }}   guardan 
+          El Área de Comercial Masivos indicó que las operaciones con los contratantes de la muestra {{RespuestaAlertaC1 == 1 ? 'si' : 'no' }}   guardan 
           relación con la actividad económica del cliente y los precios con los cuales se están comercializando a los 
           contratantes se alinean a las políticas de la Compañía y están dentro de los parámetros de normalidad vigente 
           en el mercado. 
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
-          Por lo tanto, se concluye que por la señal de alerta “C1” {{item[0].NIDRESPUESTA == 1 ? 'si' : 'no' }}  se identificaron casos. 
+          Por lo tanto, se concluye que por la señal de alerta “C1” {{RespuestaAlertaC1 == 1 ? 'si' : 'no' }}  se identificaron casos. 
           </li>
         </ul>   
       </div>
       <br>
-      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:<a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
+      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a></p>
 
   </div>
     

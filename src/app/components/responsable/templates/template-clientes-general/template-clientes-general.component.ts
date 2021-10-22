@@ -7,9 +7,9 @@ import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-inf
 })
 export class TemplateClientesGeneralComponent implements OnInit {
 
-  @Input() objListaAlertaRG:any
+  @Input() objListaAlertaRG:any 
   @Input() respuestaRG:any
-   
+  @Input()  CargoRG:any
   @Input() Nombre:string
   @Input() Perfil:string
   @Input() arrayDataSenal:any 
@@ -35,6 +35,13 @@ export class TemplateClientesGeneralComponent implements OnInit {
   @Input() listaInternacionalRentaParticular
   @Input() listaEspecial
   @Input() listaPepMasivos
+
+  @Input() listaInternacionalMaisvos
+  @Input() listaInternacionalSoat
+  @Input() listaInternacionalRenta
+  @Input() listaEspecialSimpli
+  @Input() listaEspecialGene
+ 
 
   @Input() parent:PendienteInformeComponent
   constructor() { }

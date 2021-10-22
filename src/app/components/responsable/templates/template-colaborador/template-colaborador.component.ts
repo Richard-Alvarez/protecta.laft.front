@@ -8,6 +8,7 @@ import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-inf
 export class TemplateColaboradorComponent implements OnInit {
 
   @Input() RespuestaGlobalColaborador
+  @Input() Validar:number
   @Input() parent:PendienteInformeComponent
   constructor() { }
 
