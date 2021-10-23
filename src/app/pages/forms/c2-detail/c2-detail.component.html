@@ -144,17 +144,17 @@
                                                     <!-- <td *ngIf="validatePorPorcentaje2(itemCli.NIDTIPOLISTA)">{{item.NPORC_APROXIMA_BUSQ}}</td> -->
                                                     <!-- <td *ngIf="validatePorPorcentaje(itemCli.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ }}</td>  -->
                                                     <td>{{item.NPORC_APROXIMA_BUSQ }}</td>
-                                                    <div *ngIf="item.SESTADO_REVISADO== '1'; else Respuesta">
-                                                        <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col" placement='top' ngbTooltip="{{item.SNOMCARGO}}">
-                                                            <div>{{cortarCararter(item.SNOMCARGO)}}</div>
-                                                        </div>
+                                                    <!-- <div *ngIf="item.SESTADO_REVISADO== '1'; else Respuesta"> -->
+                                                    <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col" placement='top' ngbTooltip="{{item.SNOMCARGO}}">
+                                                        <div>{{cortarCararter(item.SNOMCARGO)}}</div>
                                                     </div>
-                                                    <ng-template #Respuesta>
+                                                    <!-- </div> -->
+                                                    <!-- <ng-template #Respuesta> -->
 
-                                                        <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col" placement='top' ngbTooltip="{{item.SCARGO_PEP}}">
-                                                            <div>{{cortarCararter(item.SCARGO_PEP)}}</div>
-                                                        </div>
-                                                    </ng-template>
+                                                    <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col" placement='top' ngbTooltip="{{item.SCARGO_PEP}}">
+                                                        <div>{{cortarCararter(item.SCARGO_PEP)}}</div>
+                                                    </div>
+                                                    <!-- </ng-template> -->
 
 
                                                     <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA)" scope="col" style="width: 250px;">
