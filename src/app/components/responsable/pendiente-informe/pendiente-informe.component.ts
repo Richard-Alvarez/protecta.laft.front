@@ -711,9 +711,9 @@ DataArray(){
 }
 
  Export2Doc(element, filename = ''){
- 
+  
   setTimeout(function(){
- 
+    debugger
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'></head><body>";
     var postHtml = "</body></html>";
     var html = preHtml+document.getElementById(element).innerHTML+postHtml;
@@ -741,9 +741,9 @@ DataArray(){
     }
   
      document.body.removeChild(downloadLink);
-    
+     
     },1);
-    this.RegimenPendiente = 0
+   
  }
 
 
@@ -783,8 +783,10 @@ listaInternacionalSoat:any = []
 listaInternacionalRenta:any = []
 listaEspecialSimpli:any = []
 listaEspecialGene:any = []
+validadorC2:string = ''
 
 async DescargarReporte(item){
+  this.ElimanrDiv()
   console.log("el item",item)
   this.arrayDataSenal= []
   this.Nombre = ''
@@ -820,6 +822,7 @@ async DescargarReporte(item){
   this.listaInternacionalRenta = []
   this.listaEspecialSimpli = []
   this.listaEspecialGene = []
+  this.validadorC2 = ''
   
   this.RespuestaGlobal = item.arrUsuariosForm.filter((it,inc) => it.SRESPUESTA == "Sí")
   if(this.RespuestaGlobal.length == 0){
@@ -847,7 +850,13 @@ async DescargarReporte(item){
   this.Perfil =this.arrayDataSenal[0].Cargo;
   this.Respuesta = (this.arrayDataSenal[0].Respuesta).toLowerCase()
   this.Alerta = this.arrayDataSenal[0].Alerta
+  
   this.RegimenPendiente = item.NREGIMEN
+  if(this.Alerta == "C2" && this.RegimenPendiente == 1){
+    this.validadorC2 = "C2-1"
+  }else if (this.Alerta == "C2" && this.RegimenPendiente == 2){
+    this.validadorC2 = "C2-2"
+  }
   let dia =  this.NPERIODO_PROCESO.toString().substr(6,2)
   let mes =  this.NPERIODO_PROCESO.toString().substr(4,2)
   let anno = this.NPERIODO_PROCESO.toString().substr(0,4) 
@@ -857,36 +866,9 @@ async DescargarReporte(item){
   this.ValidarP = this.Alerta.substr(0,1)
 
   if(item.SNOMBRE_ALERTA == "C2" && item.NIDALERTA == 2){
-    let data:any = {}
-    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO 
-    data.NIDALERTA = item.NIDALERTA
-    data.NIDREGIMEN = this.RegimenPendiente
-    this.core.loader.show()
-    this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
-    this.core.loader.hide()
-    this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
-    // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
-    //this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
-    this.listaMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66)
-    this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76 && it.NIDTIPOLISTA == 5)
-    this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
-    this.listaPepMasivos =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 99)
-    this.listaPepSoat =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
-    this.listaPepRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
-    this.listaEspecialMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 99)
-    this.listaEspecialSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
-    this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
-    this.listaEspecialRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
-    this.listaPepRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 75)
-    this.listaInternacionalRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75)
-    this.listaInternacionalMaisvos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
-    this.listaInternacionalSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1  && it.RAMO !== 75  && it.RAMO !== 76 )
-    this.listaInternacionalRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1   && it.RAMO == 76 )
-    this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
-    this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 )
-    this.listaEspecialSimpli =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == 2)
-    this.listaEspecialGene =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5   && it.NIDREGIMEN == 1)
-    this.Cantidad = this.arrayDataResultado.length
+   
+    await  this.ReporteC2(item)
+    
   }
 
   
@@ -920,16 +902,58 @@ async DescargarReporte(item){
     this.ValidarNombreTemplate = this.Alerta
   }
 
-  this.RegimenPendiente =  item.NREGIMEN
   console.log("this.RegimenPendiente",this.RegimenPendiente)
-  this.Export2Doc(this.ValidarNombreTemplate,this.Alerta)
-  
-  setTimeout(function(){
-    this.RegimenPendiente =  item.NREGIMEN
-    console.log("this.RegimenPendiente",this.RegimenPendiente)
-  },1)
-} 
 
+  //this.RegimenPendiente =  item.NREGIMEN
+  this.core.loader.show
+  this.Export2Doc(this.ValidarNombreTemplate,this.Alerta)
+  this.core.loader.hide 
+
+
+} 
+ElimanrDiv(){
+  let imagen = document.getElementById("C2");	
+	if (!imagen){
+		console.log("El elemento selecionado no existe");
+	} else {
+		let padre = imagen.parentNode;
+		padre.removeChild(imagen);
+	}
+}
+
+
+  async ReporteC2(item){
+    let data:any = {}
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO 
+    data.NIDALERTA = item.NIDALERTA
+    data.NIDREGIMEN = this.RegimenPendiente
+    this.core.loader.show()
+    this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
+    this.core.loader.hide()
+    this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
+    // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
+    //this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
+    this.listaMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66)
+    this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76 && it.NIDTIPOLISTA == 5)
+    this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
+    this.listaPepMasivos =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 99)
+    this.listaPepSoat =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
+    this.listaPepRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
+    this.listaEspecialMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 99)
+    this.listaEspecialSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
+    this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+    this.listaEspecialRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
+    this.listaPepRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 75)
+    this.listaInternacionalRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75)
+    this.listaInternacionalMaisvos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
+    this.listaInternacionalSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1  && it.RAMO !== 75  && it.RAMO !== 76 )
+    this.listaInternacionalRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1   && it.RAMO == 76 )
+    this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
+    this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 )
+    this.listaEspecialSimpli =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == 2)
+    this.listaEspecialGene =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5   && it.NIDREGIMEN == 1)
+    this.Cantidad = this.arrayDataResultado.length
+  }
   Resultado:any = {}
   async Consultar360(){
     let data:any = {}

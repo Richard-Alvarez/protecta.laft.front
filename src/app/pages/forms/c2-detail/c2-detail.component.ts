@@ -904,7 +904,11 @@ export class C2DetailComponent implements OnInit {
                
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
                 
+<<<<<<< HEAD
                 /* debugger; */
+=======
+               
+>>>>>>> 63f62703b8339016d8442b184d4ebba4c0795bf1
                 this.unchekAllList[dataService.NIDREGIMEN-1] = [arrInternationalService,arrListPepService,arrFamiliesService,arrSacListService,arrListEspService]
                 //this.unchekAllList = arrayDefault
                 
@@ -1424,7 +1428,7 @@ export class C2DetailComponent implements OnInit {
     /* debugger; */
     unchekAllList:any = []// = [[[false,false],[false,false],[false,false],[false,false],[false,false]],[[false,false],[false,false],[false,false],[false,false],[false,false]]] 
     async save() {
-        
+       
         let valor:any = this.ValidarSeleccionarListaPEP()
         
         
@@ -1513,7 +1517,7 @@ export class C2DetailComponent implements OnInit {
         // }
 
         //() }
-        
+        debugger
         if(this.tipoClienteGC == "ACEPTA-COINCID"){
             let arreglos:any = []
             let newValorArreglos:any = []
@@ -1524,7 +1528,7 @@ export class C2DetailComponent implements OnInit {
             let listacheckbox 
             arreglos = this.getListById(99)
     
-            
+            debugger
             
            // if(this.unchekAllList.length == 2 )  {
                
@@ -1890,7 +1894,11 @@ export class C2DetailComponent implements OnInit {
 
     getDisableByCheck(SESTADO_REVISADO){
         //return true
+<<<<<<< HEAD
         /* debugger; *///this.formData.SESTADO_REVISADO == '1' ||
+=======
+        //debugger;//this.formData.SESTADO_REVISADO == '1' ||
+>>>>>>> 63f62703b8339016d8442b184d4ebba4c0795bf1
         if( SESTADO_REVISADO == '1'){//(estadoTrat != 'CRE' || estadoTrat != 'CRF' || estadoTrat != 'CCO')){
             return true
         }
@@ -2383,7 +2391,7 @@ export class C2DetailComponent implements OnInit {
 Arraycheckbox(){
     //this.ValorCombo = [13]
     
-   
+ debugger
     let arreglos:any =[]
     let idListaCheck = this.IdLista ? this.IdLista : null;
     if(this.tipoClienteGC == 'ACEPTA-COINCID'){
@@ -2396,7 +2404,8 @@ Arraycheckbox(){
     }
     
   
-    let estadoRevisado = arreglos.filter(it => it.SESTADO_REVISADO == "1")
+    // let estadoRevisado = arreglos.filter(it => it.SESTADO_REVISADO == "1")
+    let estadoRevisado = arreglos.filter(it => it.NACEPTA_COINCIDENCIA == "1")
    if(this.formData.NIDALERTA == 2){
         
     for( let index = 0; index < arreglos.length; index++){
@@ -2405,10 +2414,13 @@ Arraycheckbox(){
     } 
 
     if(estadoRevisado.length != 0){
-        for( let index = 0; index < estadoRevisado.length; index++){
-            this.categoriaSelectedArray[arreglos[index].NIDREGIMEN-1][arreglos[index].NIDTIPOLISTA-1].splice(index,1,true);
-            
-        } 
+        //if(this.tipoClienteGC != 'ACEPTA-COINCID'){
+            for( let index = 0; index < estadoRevisado.length; index++){
+                this.categoriaSelectedArray[arreglos[index].NIDREGIMEN-1][arreglos[index].NIDTIPOLISTA-1].splice(index,1,true);
+                
+            } 
+       // }
+       
         
         arreglos.forEach((element,inc) => {
         

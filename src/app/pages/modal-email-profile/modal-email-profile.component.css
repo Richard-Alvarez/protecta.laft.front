@@ -21,3 +21,20 @@
       .fontText{
         font-size: 0.9rem;
       }
+
+    .borderFormat{
+    padding-right: 15px;padding-left: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border: 1px solid #d4d2d2;
+    margin-top: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    }
+
+      /**/
+
+
+ 
