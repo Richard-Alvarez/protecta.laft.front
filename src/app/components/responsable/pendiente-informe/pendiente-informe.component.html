@@ -455,13 +455,18 @@
             <app-template-t [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal"  [Validar]="1" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" style="display: none" ></app-template-t>
         </div>
-       
+     
         <div *ngIf="this.Alerta=='C2' && (this.RegimenPendiente==2  || this.RegimenPendiente==1)" >
+
             <app-template-c2 [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" 
             [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" [arrayDataResultado]="arrayDataResultado"  [Periodo]="Periodo"
-            [Cantidad]="Cantidad" [Validar]="1"  [RegimenPendiente]="RegimenPendiente"
+            [Cantidad]="Cantidad" [Validar]="1"  [RegimenPendiente]="regimen.id" style="display: none"
             ></app-template-c2>
-        </div>
+        </div>  
+         
+           
+           
+       
 
         <div *ngIf="this.RegimenPendiente ===1 && (this.Alerta !='C2' ||  this.Alerta !='C3' || this.Alerta !='S2') && this.ValidarRG === 'RG'">
             <app-template-rg  [parent]="this" [Nombre]="Nombre" [Validar]="1" 
