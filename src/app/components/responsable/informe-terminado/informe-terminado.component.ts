@@ -270,7 +270,8 @@ export class InformeTerminadoComponent implements OnInit {
     try {
       let cantidadResponsables = itemAlerta.arrUsuariosForm.length
       let cantidadInformes = itemAlerta.arrAdjuntosInform.length
-      if(cantidadResponsables > cantidadInformes){
+      if(false){
+      // if(cantidadResponsables > cantidadInformes){
         swal.fire({
           title: 'Bandeja del Oficial de Cumplimiento',
           icon: 'error',

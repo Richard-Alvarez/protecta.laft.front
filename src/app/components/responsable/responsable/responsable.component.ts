@@ -2517,8 +2517,9 @@ export class ResponsableComponent implements OnInit {
       let objAlertaItem = (this.getArray("PENDIENTE-INFORME", NREGIMEN)).filter(it => it.NIDALERTA == NIDALERTA && it.NREGIMEN == NREGIMEN)
       let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
-     
-      if (cantidadResponsables > cantidadInformes) {
+
+      if (false) {
+      // if (cantidadResponsables > cantidadInformes) {
         
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
