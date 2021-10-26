@@ -652,7 +652,7 @@
                 <br />
                 <div class="row">
                     <div class="table-responsive" style="padding-left: 15px; padding-right: 15px;">
-                        <table class="table table-striped table-sm" style="font-size: 14px;">
+                        <table class="table table-striped table-sm " style="font-size: 14px;">
                             <thead>
                                 <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
                                     <th scope="col">Nombres Completos</th>
@@ -666,8 +666,8 @@
                                         <th scope="col">Zona Geográfica</th> -->
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody >
+                                <tr >
                                     <td class="fuenteTd">{{formData.NOMBRECOMPLETO}}</td>
                                     <td class="fuenteTd">{{formData.STIPO_AND_NUM_DOC}}</td>
                                     <td class="fuenteTd">{{formData.SFECHA_NACIMIENTO}}</td>
@@ -1795,23 +1795,22 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="text-center tituloTwo">{{nombreRegimen}}</div>
-                    <div class="row pl-2 pr-2">
+                    <div class="row pl-2 pr-2 ">
                         <div class="col-lg-1 text-left txtCabecera">N° Póliza</div>
                         <div class="col-lg-2 text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo/Producto</div>
-                        <div class="col-lg-1  text-left txtCabecera">N° Certificado</div>
-                        <div class="col-lg-1 text-left txtCabecera">Monto de Prima</div>
-                        <div class="col-lg-1  text-left txtCabecera">Moneda</div>
-                        <div class="col-lg-1 text-left txtCabecera">Tipo de Cliente</div>
+                        <div class="col-lg-2  text-left txtCabecera">N° Certificado</div>
+                        <div class="col-lg-2 text-left txtCabecera">Monto de Prima</div>
+                        <!-- <div class="col-lg-1  text-left txtCabecera">Moneda</div> -->
+                        <!-- <div class="col-lg-1 text-left txtCabecera">Tipo de Cliente</div> -->
                         <div class="col-lg-2 text-left txtCabecera">Fecha Inicio y Fin de Póliza</div>
                         <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
                         <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
                         <div class="col-lg-1 text-left txtCabecera">Estado</div>
                     </div>
-                    <div id="">
+                    <div id="" >
                         <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
-                            <div class="card-header headerSenials">
-                                <div class="detallePoliza {{getColorGrilla(inc)}}">
+                            <div class="headerSenials">
+                                <div class="{{getColorGrilla(inc)}}">
                                     <div class="row pl-2 pr-2">
                                         <div class="col-lg-1 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
@@ -1823,26 +1822,26 @@
                                                 <div>{{item.DES_RAMO}}/{{item.DES_PRODUCTO}}</div>
                                             </a>
                                         </div>
-                                        <div class="col-lg-1 cabeceraPolizas">
+                                        <div class="col-lg-2 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div>{{item.NCERTIF}}</div>
                                             </a>
                                         </div>
-                                        <div class="col-lg-1 cabeceraPolizas">
+                                        <div class="col-lg-2 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div>{{item.ULTIMA_PRIMA}}</div>
                                             </a>
                                         </div>
-                                        <div class="col-lg-1 cabeceraPolizas">
+                                        <!-- <div class="col-lg-1 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div></div>
                                             </a>
-                                        </div>
-                                        <div class="col-lg-1 cabeceraPolizas">
+                                        </div> -->
+                                        <!-- <div class="col-lg-1 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div>- - - -</div>
                                             </a>
-                                        </div>
+                                        </div> -->
                                         <div class="col-lg-2 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div>{{item.INICIO_VIG_CERTIFICADO}} - {{item.FIN_VIG_POLIZA}}</div>
