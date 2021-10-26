@@ -904,11 +904,7 @@ export class C2DetailComponent implements OnInit {
                
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
                 
-<<<<<<< HEAD
-                /* debugger; */
-=======
                
->>>>>>> 63f62703b8339016d8442b184d4ebba4c0795bf1
                 this.unchekAllList[dataService.NIDREGIMEN-1] = [arrInternationalService,arrListPepService,arrFamiliesService,arrSacListService,arrListEspService]
                 //this.unchekAllList = arrayDefault
                 
@@ -1517,7 +1513,6 @@ export class C2DetailComponent implements OnInit {
         // }
 
         //() }
-        debugger
         if(this.tipoClienteGC == "ACEPTA-COINCID"){
             let arreglos:any = []
             let newValorArreglos:any = []
@@ -1528,7 +1523,7 @@ export class C2DetailComponent implements OnInit {
             let listacheckbox 
             arreglos = this.getListById(99)
     
-            debugger
+            
             
            // if(this.unchekAllList.length == 2 )  {
                
@@ -1894,11 +1889,7 @@ export class C2DetailComponent implements OnInit {
 
     getDisableByCheck(SESTADO_REVISADO){
         //return true
-<<<<<<< HEAD
-        /* debugger; *///this.formData.SESTADO_REVISADO == '1' ||
-=======
         //debugger;//this.formData.SESTADO_REVISADO == '1' ||
->>>>>>> 63f62703b8339016d8442b184d4ebba4c0795bf1
         if( SESTADO_REVISADO == '1'){//(estadoTrat != 'CRE' || estadoTrat != 'CRF' || estadoTrat != 'CCO')){
             return true
         }
@@ -2391,7 +2382,7 @@ export class C2DetailComponent implements OnInit {
 Arraycheckbox(){
     //this.ValorCombo = [13]
     
- debugger
+
     let arreglos:any =[]
     let idListaCheck = this.IdLista ? this.IdLista : null;
     if(this.tipoClienteGC == 'ACEPTA-COINCID'){
