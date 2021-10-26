@@ -1963,6 +1963,7 @@ export class C2DetailComponent implements OnInit {
     
     ValidacionCargo(Lista,estado){
         
+        debugger;
                 if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
             return false
         }
