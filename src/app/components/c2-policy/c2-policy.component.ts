@@ -1,6 +1,7 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, Output} from '@angular/core';
 import { CoreService } from '../../services/core.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-c2-policy',
@@ -8,7 +9,7 @@ import { UserconfigService } from 'src/app/services/userconfig.service';
   styleUrls: ['./c2-policy.component.css']
 })
 export class C2PolicyComponent implements OnInit {
-
+  @Output() monedaPoliza= new EventEmitter;
   @Input() item:any
   
   pageSize = 5;

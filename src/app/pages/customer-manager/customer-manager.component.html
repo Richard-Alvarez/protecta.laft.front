@@ -400,6 +400,18 @@
     
     
                                                     </div>
+                                                    <div *ngIf="(item.obj.SESTADO_TRAT == 'BAW' || item.obj.SESTADO_TRAT == 'BMW' || item.obj.SESTADO_TRAT == 'BAI' || item.obj.SESTADO_TRAT == 'BMI') && item.obj.SFALTA_ACEPTAR_COINC == 'NO'"
+                                                    class="dropdown-menu dropdown-menu-right colorTextoDropDown">
+                                                        <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item.obj,'NNN')">Ver</a>
+                                                        <a class="dropdown-item colorTextoDropDown"
+                                                            (click)="update(item.obj,item.obj.SESTADO_TRAT,'CRF','Reforzado',1)">Enviar a
+                                                            Reforzado</a>
+                                                        <a class="dropdown-item colorTextoDropDown"
+                                                            (click)="getBusquedaCoicnidencias(item.obj,item.arrClientesGC)">Realizar búsqueda de
+                                                            coincidencias</a>
+    
+    
+                                                    </div>
                                                     <div *ngIf="item.obj.SFALTA_ACEPTAR_COINC == 'SI'"
                                                     class="dropdown-menu dropdown-menu-right colorTextoDropDown">
                                                         

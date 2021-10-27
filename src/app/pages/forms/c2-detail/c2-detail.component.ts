@@ -513,7 +513,7 @@ export class C2DetailComponent implements OnInit {
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             //this.formData.NIDREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.STIPO_AND_NUM_DOC = ''
-            debugger
+            /* debugger */
             this.formData.SESTADO_REVISADO = localStorage.getItem("EnviarCheckbox")
             this.SESTADO_REVISADO_ACEPT = this.formData.SESTADO_REVISADO
             //this.formData.SESTADO_REVISADO = this.SFALTA_ACEPTAR_COINC == 'SI' ? '1' : this.formData.SESTADO_REVISADO
@@ -594,7 +594,7 @@ export class C2DetailComponent implements OnInit {
                 this.formData.NTIPO_DOCUMENTO = this.oClienteReforzado.NTIPO_DOCUMENTO//localStorage.getItem('NTIPO_DOCUMENTO')
                 this.formData.NIDREGIMEN = 1
                 this.formData.SCLIENT = localStorage.getItem('SCLIENT')
-                debugger
+                /* debugger */
                 this.formData.STIPO_AND_NUM_DOC = ''
                 //this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
                 if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
@@ -783,7 +783,7 @@ export class C2DetailComponent implements OnInit {
                         this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
                     })
                 }
-                debugger;
+                /* debugger; */
                 this.unchekAllList = this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = this.internationalList.concat(this.sacList.concat(this.pepList.concat(this.familiesPepList.concat(this.espList))))
                 
@@ -1029,7 +1029,7 @@ export class C2DetailComponent implements OnInit {
                 
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
               
-                debugger;
+                /* debugger; */
                 this.unchekAllList[dataService.NIDREGIMEN-1] = [arrInternationalService,arrListPepService,arrFamiliesService,arrSacListService,arrListEspService]
                 //this.unchekAllList = arrayDefault
                 
@@ -1421,7 +1421,7 @@ export class C2DetailComponent implements OnInit {
         return resp;
     }
     
-    debugger;
+    /* debugger; */
     unchekAllList:any = []// = [[[false,false],[false,false],[false,false],[false,false],[false,false]],[[false,false],[false,false],[false,false],[false,false],[false,false]]] 
     async save() {
        
@@ -1513,7 +1513,6 @@ export class C2DetailComponent implements OnInit {
         // }
 
         //() }
-        debugger
         if(this.tipoClienteGC == "ACEPTA-COINCID"){
             let arreglos:any = []
             let newValorArreglos:any = []
@@ -1524,7 +1523,7 @@ export class C2DetailComponent implements OnInit {
             let listacheckbox 
             arreglos = this.getListById(99)
     
-            debugger
+            
             
            // if(this.unchekAllList.length == 2 )  {
                
@@ -1595,7 +1594,7 @@ export class C2DetailComponent implements OnInit {
         }*/
         else{
             
-            debugger;
+            /* debugger; */
             if(variabledeloscheck.length == 2){
                 if(this.unchekAllList[0] == true && this.unchekAllList[1] == true ){
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando 2 coincidencia</p>" 
@@ -1685,7 +1684,7 @@ export class C2DetailComponent implements OnInit {
                             
                             //if(itemArreglos.NIDREGIMEN == regimen){
                             
-                                debugger;
+                                /* debugger; */
                                 const itemUncheck = (this.unchekAllList[itemArreglos.NIDREGIMEN-1][(itemArreglos.NIDTIPOLISTA-1)])[itemArreglos.NCONTADORLISTA];
                               
                                 if(itemArreglos.SESTADO_REVISADO == '2'){
@@ -1963,7 +1962,7 @@ export class C2DetailComponent implements OnInit {
     
     ValidacionCargo(Lista,estado){
         
-        debugger;
+        /* debugger; */
                 if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
             return false
         }
@@ -2205,7 +2204,7 @@ export class C2DetailComponent implements OnInit {
         let newValorAceptador = []
         let valorAceptados = []
         
-        debugger;
+        /* debugger; */
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             
          if(newArreglosListasPEP.length == 1 ){
@@ -2350,7 +2349,7 @@ export class C2DetailComponent implements OnInit {
   onCategoriaPressed(categoriaSelected: any, checked: boolean,indice,idlista,idRegimen){
       
   
-      debugger;
+      /* debugger; */
     //if (checked) { //Si el elemento fue seleccionado
       //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
       if(this.formData.NIDALERTA == 2){
@@ -2383,7 +2382,7 @@ export class C2DetailComponent implements OnInit {
 Arraycheckbox(){
     //this.ValorCombo = [13]
     
- debugger
+
     let arreglos:any =[]
     let idListaCheck = this.IdLista ? this.IdLista : null;
     if(this.tipoClienteGC == 'ACEPTA-COINCID'){
@@ -2538,7 +2537,6 @@ async Consultar360Previous(){
     // this.estado= item.status;
   } */
 
-
    ListaPoliza:any = []
   async consultarPoliza(){
     let data:any = {}
@@ -2563,13 +2561,20 @@ async Consultar360Previous(){
         this.ListaPoliza = await this.userConfigService.GetListaPolizas(data)
         this.core.loader.hide()
         
+        
+        this.ListaPoliza.reverse((a,b)=>{
+            a.ESTADO > b.ESTADO ? 1 :
+            a.ESTADO < b.ESTADO ? -1 :
+            0
+        })
+        
 
-        // if(this.ListaPoliza.length != 0){
-        //     this.ListaPoliza.forEach(element => {
+         /* if(this.ListaPoliza.length != 0){
+             this.ListaPoliza.forEach(element => {
 
-        //          this.Consultar360(element)
-        //      });
-        //  }
+                  this.Consultar360(element)
+              });
+          } */
   } 
 
    //Resultado360:any = []
