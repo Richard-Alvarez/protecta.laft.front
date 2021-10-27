@@ -28,16 +28,20 @@ export class ModalEmailProfileComponent implements OnInit {
 
   @Input() dataEmail: any;
   @Input() reference: any;
+  @Input() ListaEmail: any;
+  
   contador = 0
   message
   asunto
   userId = 0
   perfil
-  action = '0'
+  action = 0
   objUsuario:any = {}
 
   validarActualizar:boolean = false
   ActivarCombo:boolean = false
+  ActivarUser:boolean = false
+  ActivarListUser:boolean = false
 
   constructor(
     private core: CoreService,
@@ -96,7 +100,7 @@ export class ModalEmailProfileComponent implements OnInit {
 
   async getAlertToEdit() {
       if(this.dataEmail == null){
-        this.action = '0'
+        this.action = 0
         this.group = 0
         this.profiles = 0
         this.ckeditorContent =  ''
@@ -179,7 +183,7 @@ export class ModalEmailProfileComponent implements OnInit {
         data.SASUNTO_CORREO  = this.asunto
         // data.SCUERPO_CORREO  = this.message
         data.SCUERPO_CORREO  =  this.ckeditorContent
-        data.NIDACCION  = parseInt(this.action)
+        data.NIDACCION  = this.action //parseInt(this.action)
         data.SCUERPO_CORREO_DEF =  this.textoHTML
         data.SCUERPO_TEXTO = this.convert(this.textoHTML)
         data.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
@@ -195,13 +199,13 @@ export class ModalEmailProfileComponent implements OnInit {
       data.SASUNTO_CORREO  = this.asunto
       // data.SCUERPO_CORREO  = this.message
       data.SCUERPO_CORREO  =  this.ckeditorContent//dataHTML
-      data.NIDACCION  = parseInt(this.action)
+      data.NIDACCION  = this.action//parseInt(this.action)
       data.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
-      data.SCUERPO_TEXTO = this.convert(dataHTML)
-      data.SCUERPO_CORREO_DEF = "" 
+      data.SCUERPO_TEXTO = this.convert(this.ckeditorContent)//this.convert(dataHTML)
+      data.SCUERPO_CORREO_DEF =  this.ckeditorContent//"" 
     }
     let respValidacion:any = {}
-      if(this.action == '1' || this.action == '2'){
+      if(this.action == 1 || this.action == 2){
         respValidacion = this.validator()
       }  else{
         respValidacion.code = 0
@@ -341,30 +345,61 @@ export class ModalEmailProfileComponent implements OnInit {
   
 }
   titulo:string = ''
+  validadorEstado:number = 0
   getTitulo(){
+
     if(this.dataEmail == null){
       this.titulo = 'Agregar Correo'
+      this.validadorEstado = 1
     }else{
       this.titulo = 'Actualizar Correo'
+      this.validadorEstado = 2
     }
   }
 
   async CambioCombo(){
+    this.action = 0
+    console.log("this.action",this.action)
     console.log("entro en la funcion")
-    if(this.action == '0'){
-      
+    if(this.action == 0){
+      this.ActivarUser = true
+      this.ActivarListUser = true
      this.ActivarCombo = true
-    }else if(this.action == '1' || this.action == '2'){
+    }else if(this.action == 1 || this.action == 2){
       this.ActivarCombo = false
-     
-    }else{
-      let data:any ={}
-      data.NIDACCION = this.action
-      this.core.loader.show()
-      let response = await this.userConfig.getListaUsuarioCorreos(data)
-      this.core.loader.hide()
-      this.UsuarioAgregado = response
-      this.ActivarCombo = true
+      this.ActivarUser = true
+      this.ActivarListUser = true
+    }else if(this.action == 6 ){
+
+        if(this.validadorEstado == 2){
+
+          let data:any ={}
+          data.NIDACCION = this.action
+          this.core.loader.show()
+          let response = await this.userConfig.getListaUsuarioCorreos(data)
+          this.core.loader.hide()
+          this.UsuarioAgregado = response
+
+        }else{
+          this.action = 0
+          let resultado = this.ListaEmail.filter(it => it.NIDACCION == 6)
+          console.log("resultado",resultado)
+          console.log("ListaEmail",this.ListaEmail)
+          if(resultado.length > 0){
+            
+            let mensaje = "No se puede agregar otra acción de " + resultado[0].SDESACCION
+
+            this.MensajeSwal(mensaje)
+            
+            return
+          }
+        }
+          
+    }
+    else{
+       this.ActivarCombo = true
+       this.ActivarUser = false
+       this.ActivarListUser = false
     }
 
   }
@@ -433,4 +468,19 @@ export class ModalEmailProfileComponent implements OnInit {
       console.log("UsuarioAgregado",this.UsuarioAgregado)
     }
 
+    MensajeSwal(mensaje){
+      swal.fire({
+        title: "Configuración de Correos",
+        icon: "warning",
+        text: mensaje,
+        showCancelButton: false,
+        confirmButtonColor: "#FA7000",
+        confirmButtonText: "Aceptar",
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+    })
+  }
 }

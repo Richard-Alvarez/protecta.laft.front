@@ -398,6 +398,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   
 
    async sendForm(){
+    // await this.EnviarCorreo()
+    // return
+    
     if(this.STIPO_USUARIO === 'OC'){
       this.sNameTipoUsuario = 'Oficial de Cumplimiento'
     }else{
@@ -651,6 +654,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           this.arrResponsable = []
           
           }
+          await this.EnviarCorreo()
           this.core.loader.hide()
          
         }).catch(err => {
@@ -1513,6 +1517,36 @@ ValidarCabeceraComplemento(){
   
     return this.CountComplemento == valor.length
   
+  }
+
+  async EnviarCorreo(){
+
+ 
+    this.linkactual 
+
+    let data:any = {}
+    data.NIDACCION = 6
+    let ListaUsuario = await this.userConfigService.getListaUsuarioCorreos(data)
+    console.log("ListaUsuario",ListaUsuario)
+    let usuario = this.core.storage.get('usuario')
+    console.log("usuario",usuario)
+    let dataCorreo:any = {}
+    dataCorreo.NOMBRECOMPLETO = usuario.fullName
+    dataCorreo.ASUNTO = ListaUsuario[0].SASUNTO_CORREO
+    dataCorreo.GRUPO =   this.linkactual 
+    dataCorreo.USUARIO = usuario.username
+    dataCorreo.mensaje = ListaUsuario[0].SCUERPO_CORREO
+    dataCorreo.SEMAIL = []
+    for(let i=0; i < ListaUsuario.length ; i++ ){
+      
+     
+       dataCorreo.SEMAIL.push(ListaUsuario[i].userEmail)
+       
+    }
+    console.log("dataCorreo",dataCorreo)
+    this.core.loader.show()
+    await this.userConfigService.EnvioCorreoConfirmacion(dataCorreo)
+    this.core.loader.hide()
   }
 
 
