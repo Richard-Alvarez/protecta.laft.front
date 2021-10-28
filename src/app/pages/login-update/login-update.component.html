@@ -10,7 +10,8 @@
     <img class="wave" src="http://github.com/sefyudem/Responsive-Login-Form/blob/master/img/wave.png?raw=true">
     <div class="container2">
       <div class="img">
-        <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iYWU3YWQ0OTUtNTQzZC00YzRiLTk0ODMtODA1OWM1NTY2ZmU2IiBkYXRhLW5hbWU9
+         
+     <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iYWU3YWQ0OTUtNTQzZC00YzRiLTk0ODMtODA1OWM1NTY2ZmU2IiBkYXRhLW5hbWU9
   IkxheWVyIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9
   Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxMDA5LjU0IiBoZWlnaHQ9Ijgz
   OS42NCIgdmlld0JveD0iMCAwIDEwMDkuNTQgODM5LjY0Ij48ZGVmcz48bGluZWFyR3JhZGllbnQg
@@ -456,11 +457,12 @@
   LTIuMTUtNC45Mi05Ljg0LTUuMzktMTMuMzhsLS41MSwwczEsMTIuMzgsNS41OSwxNS4yLDI3LjU4
   LDUuNjUsNDQuOTIsNS41MWM1LDAsNi43My0xLjgyLDYuNjQtNC40NkMzMTAuODUsODE1LjE2LDMw
   OC45NCw4MTYuMTUsMzA1LjIyLDgxNi4xOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05NS4yMyAt
-  MzAuMTgpIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=">
+  MzAuMTgpIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4="> 
       </div>
       <div class="login-content">
-        <form action="index.html">
-          <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iNDU3YmYyNzMtMjRhMy00ZmQ4LWE4NTctZTliOTE4MjY3ZDZhIiBkYXRhLW5hbWU9
+        <form >
+            <img src="assets/icons/Login_user.png">
+          <!-- <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iNDU3YmYyNzMtMjRhMy00ZmQ4LWE4NTctZTliOTE4MjY3ZDZhIiBkYXRhLW5hbWU9
   IkxheWVyIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9
   Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI2OTgiIGhlaWdodD0iNjk4IiB2
   aWV3Qm94PSIwIDAgNjk4IDY5OCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiMjQ3OTQ2Yy1j
@@ -497,7 +499,7 @@
   LDM2OS43LDQ2Mi41NCw0MDcuMDcsNDg4LjkzLDMyNVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0y
   NTEgLTEwMSkiIGZpbGw9IiMzMzMiLz48ZWxsaXBzZSBjeD0iMTk0Ljg2IiBjeT0iMzcyLjMiIHJ4
   PSIxNC4wOSIgcnk9IjI2LjQyIiBmaWxsPSIjZmRiNzk3Ii8+PGVsbGlwc2UgY3g9IjQ5Ny44IiBj
-  eT0iMzcyLjMiIHJ4PSIxNC4wOSIgcnk9IjI2LjQyIiBmaWxsPSIjZmRiNzk3Ii8+PC9zdmc+">
+  eT0iMzcyLjMiIHJ4PSIxNC4wOSIgcnk9IjI2LjQyIiBmaWxsPSIjZmRiNzk3Ii8+PC9zdmc+"> -->
           <h2 class="title">Welcome</h2>
                 <div class="input-div one">
                    <div class="i">
@@ -516,12 +518,39 @@
                       <h5>Password</h5>
                       <input type="password" class="input">
                    </div>
+                </div> 
+             
+                <div class="div-captcha">
+                    <div class="row">
+                        <div class="col-9 textCaptcha">
+                            <span>{{scaptcha}}</span>
+                        </div>
+                        <div class="col-3 " >
+                            <button (click)="getCaptcha()" class="btnCaptcha"><i class="fas fa-refresh"></i></button>  
+                        </div>
+                    </div>
+                      
                 </div>
+                
+                <div class="input-div captcha">
+                    <div class="i"> 
+                       <i class="fas fa-random"></i>
+                    </div>
+                    <div class="div">
+                       <h5>Captcha</h5>
+                       <input type="text" class="input">
+                    </div>
+                 </div>
                 <a href="#">Forgot Password?</a>
-                <input type="submit" class="btn" value="Login">
+                <button class="btnLogin">Login</button>  
+                
               </form>
           </div>
       </div>
       <script type="text/javascript" src="js/main.js"></script>
   </body>
   <!-- </html> -->
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:600&display=swap');
+    </style>
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
