@@ -8,14 +8,14 @@
     <br>
 
     
-        <!-- <div class="col-lg-3 pl-5">Seleccionar un grupo</div> -->
+       
         <div class="col-lg-3 form-group pl-5" style="margin-right: 40px;">
             <label class="fontText">Grupo:</label>
             <select  [(ngModel)]="idGrupo" name="profile" (change)="valorGrupo($event)"
                
                 style="display: flex;justify-content: center;align-items: center;"
                 class="form-control buttonSinBorder">
-                <!-- <option value="0" selected>Seleccione</option> -->
+                
                 <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="profileIdSelected" >
                     {{item.SDESGRUPO_SENAL}}</option>
                
@@ -63,13 +63,7 @@
 
         <div class="tab-content" style=""  >
             <div id="cus-manag"  class=" tab-pane {{arrSetClassSelected[0]}}">
-                <!-- <div class="row mb-2 mt-2">
-                    <div class="Header">
-                        <div class="col-lg-12">
-                            <h4 class="TitleLine">Gestor de clientes</h4>
-                        </div>
-                    </div>
-                </div> -->
+                
                 <div class="borderFormat">
                     <div class="row form-group">
                         <div class="col-lg-1">
@@ -97,15 +91,13 @@
                             <span class="fontText">Número:</span>
                         </div>
                         <div class="col-lg-2" [hidden]="hideDocumento" style="margin-left: -35px;">
-                            <!-- <input class="form-control" type="text" (keydown)="negarCopiar($event)" maxlength="{{validationCantidadCaracteres()}}" (keypress)="validaNumericos($event)" [(ngModel)]="paramCliente.SNUM_DOCUMENTO_BUSQ"> -->
+                            
                             <input class="form-control" type="text" maxlength="{{validationCantidadCaracteres()}}"
                                 (keypress)="validaNumericos($event)" [(ngModel)]="paramCliente.SNUM_DOCUMENTO_BUSQ">
                         </div>
 
                         <div class="col-lg-1" *ngIf="mostrarBotonBuscarDocumento()">
-                            <!-- <button class="btn btn-warning" (click)="getResultsList()"
-                                style="font-size: 20px;font-family: 'Roboto';">Buscar</button> -->
-                                <!--<button _ngcontent-qgx-c1="" (click)="getResultsList()"  class="btn btn-warning text-white buttonSinBorder">Buscar</button>-->
+                            
                                 <button _ngcontent-qgx-c1="" (click)="getResultsList()"  class="btn btn-warning btnBuscarStyle">Buscar</button>
 
                         </div>
@@ -123,13 +115,6 @@
                         </div>
 
                     </div>
-
-
-
-
-
-
-
 
                     <div class="row form-group" [hidden]="hideNombresPersona">
                         <div class="col-lg-1">
@@ -174,121 +159,11 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-1" *ngIf="mostrarBotonBuscarNombre()">
-                            <!-- <button class="btn btn-warning" (click)="getResultsList()"
-                                style="font-size: 20px;font-family: 'Roboto';">Buscar</button> -->
+                           
                                 <button _ngcontent-qgx-c1="" (click)="getResultsList()"  class="btn btn-warning text-white ">Buscar</button>
                         </div>
                     </div>
-                    <!-- <div class="row form-group">
-                        <div class="table-responsive" *ngIf="newArrayResult.length > 0">
-                            <div class="table table-sm">
-
-                                <table class="table table-sm" style="font-size: 12px;overflow-y: auto; ">
-                                    <thead
-                                        style="text-transform: uppercase;color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
-                                        <th scope="col" class="text-left">Último periodo de búsqueda</th>
-                                        <th scope="col" class="text-left">Nombre / Razón Social</th>
-                                        <th scope="col" class="text-left">Tipo de Documento</th>
-                                        <th scope="col" class="text-left">NÚMERO DE DOCUMENTO</th>
-                                        <th *ngFor="let type of tipoListas" scope="col" class="text-left">
-                                            {{type.nombre}}
-                                        </th>
-                                        <th>Producto</th>
-                                        <th>Estado</th>
-                                        <th>Régimen</th>
-                                        <th>Acciones</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of newArrayResult; let i = index ">
-                                            <td class="text-left">30/09/2020</td>
-                                            <td class="text-left">{{item.SNOM_COMPLETO}}</td>
-                                            <td class="text-left">{{item.STIPOIDEN}}</td>
-                                            <td class="text-left">{{item.SNUM_DOCUMENTO}}</td>
-                                            <td class="text-left" *ngFor="let type of item.arrListas">
-                                                {{type.SDESESTADO}}
-                                            </td>
-                                            <td class="text-left">Varios</td>
-                                            <td class="text-left">{{item.SDESESTADO_TRAT}}</td>
-                                            <td class="text-left">{{item.SDESREGIMEN}}</td>
-                                            <td class="text-left">
-                                                
-                                                <button
-                                                    class="btn {{item.boolStatusBoton == true ?  'sinespacioboton' : 'espacioboton'}}"
-                                                    data-toggle="dropdown" *ngIf="item.boolStatusBoton">
-                                                    <span class="fas fa-bars" style="font-size: 20px;"></span>
-                                                </button>
-                                                
-                                                <div *ngIf="item.SESTADO_TRAT == 'CRE' "
-                                                    class="dropdown-menu arrow pull-right dropdown">
-                                                    <a class="dropdown-item" (click)="goToDetail(item,'CRE')">Ver</a>
-
-                                                    <a class="dropdown-item"
-                                                        (click)="update(item,'CRF','Reforzado',1)">Enviar a
-                                                        Reforzado</a>
-                                                    <a class="dropdown-item"
-                                                        (click)="update(item,'CCO','Complementario',1)">Enviar a
-                                                        Complementario</a>
-                                                    <a class="dropdown-item"
-                                                        (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
-                                                        coincidencias</a>
-                                                </div>
-                                                <div *ngIf="item.SESTADO_TRAT == 'CCO' "
-                                                    class="dropdown-menu arrow pull-right dropdown">
-                                                    <a class="dropdown-item" (click)="goToDetail(item,'CCO')">Ver</a>
-                                                    <a class="dropdown-item"
-                                                        (click)="update(item,'CRE','Revisado',1)">Enviar a Revisado</a>
-                                                    <a class="dropdown-item"
-                                                        (click)="update(item,'CRF','Reforzado',1)">Enviar a
-                                                        Reforzado</a>
-
-                                                    <a class="dropdown-item"
-                                                        (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
-                                                        coincidencias</a>
-                                                </div>
-                                                <div *ngIf="item.SESTADO_TRAT == 'CRF'"
-                                                    class="dropdown-menu arrow pull-right dropdown">
-                                                    <a class="dropdown-item" (click)="goToDetail(item,'CRF')">Ver</a>
-                                                    <a class="dropdown-item"
-                                                        (click)="update(item,'CRE','Revisado',1)">Enviar a Revisado</a>
-
-                                                    <a class="dropdown-item"
-                                                        (click)="update(item,'CCO','Complementario',1)">Enviar a
-                                                        Complementario</a>
-                                                    <a class="dropdown-item"
-                                                        (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
-                                                        coincidencias</a>
-                                                </div>
-                                                <div *ngIf="item.SESTADO_TRAT == 'NNN' "
-                                                    class="dropdown-menu arrow pull-right dropdown">
-                                                    <a class="dropdown-item" (click)="goToDetail(item,'NNN')">Ver</a>
-                                                    <a class="dropdown-item"
-                                                        (click)="update(item,'CRF','Reforzado',1)">Enviar a
-                                                        Reforzado</a>
-                                                    <a class="dropdown-item"
-                                                        (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
-                                                        coincidencias</a>
-
-
-                                                </div>
-                                                <div *ngIf="item.SESTADO_TRAT == null "
-                                                    class="dropdown-menu arrow pull-right dropdown">
-                                                    <a class="dropdown-item" (click)="goToDetailAprobar(item)">Aprobar
-                                                        coincidencias</a>
-                                                    
-
-
-                                                </div>
-                                               
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div> -->
-
-
-
+                   
 
 
                     <div class="">
@@ -389,18 +264,6 @@
                                                             coincidencias</a>
                                                     </div>
                                                     <div *ngIf="item.obj.SESTADO_TRAT == 'NNN' && item.obj.SFALTA_ACEPTAR_COINC == 'NO'"
-                                                    class="dropdown-menu dropdown-menu-right colorTextoDropDown">
-                                                        <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item.obj,'NNN')">Ver</a>
-                                                        <a class="dropdown-item colorTextoDropDown"
-                                                            (click)="update(item.obj,item.obj.SESTADO_TRAT,'CRF','Reforzado',1)">Enviar a
-                                                            Reforzado</a>
-                                                        <a class="dropdown-item colorTextoDropDown"
-                                                            (click)="getBusquedaCoicnidencias(item.obj,item.arrClientesGC)">Realizar búsqueda de
-                                                            coincidencias</a>
-    
-    
-                                                    </div>
-                                                    <div *ngIf="(item.obj.SESTADO_TRAT == 'BAW' || item.obj.SESTADO_TRAT == 'BMW' || item.obj.SESTADO_TRAT == 'BAI' || item.obj.SESTADO_TRAT == 'BMI') && item.obj.SFALTA_ACEPTAR_COINC == 'NO'"
                                                     class="dropdown-menu dropdown-menu-right colorTextoDropDown">
                                                         <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item.obj,'NNN')">Ver</a>
                                                         <a class="dropdown-item colorTextoDropDown"

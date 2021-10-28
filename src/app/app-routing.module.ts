@@ -10,6 +10,7 @@ import { NewComponent } from './pages/new/new.component';
 import { ConfigComponent } from './pages/config/config.component';
 import { ReportComponent } from './pages/report/report.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LoginUpdateComponent } from './pages/login-update/login-update.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ReportesSbsComponent } from './pages/reportes-sbs/reportes-sbs.component';
 import { MonitoringReportesSbsComponent } from './pages/monitoring-reportes-sbs/monitoring-reportes-sbs.component';
@@ -36,6 +37,7 @@ import { ProfileMaintenanceComponent } from './profile-maintenance/profile-maint
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { ViewCustomerReinforcedComponent } from './view-customer-reinforced/view-customer-reinforced.component';
 import { CustomerManagerComponent } from './pages/customer-manager/customer-manager.component';
+import { CustomerManagerUpdateComponent } from './pages/customer-manager-update/customer-manager-update.component';
 import { ReinforcedCustomersComponent } from './pages/reinforced-customers/reinforced-customers.component';
 import { ReportExtractorsComponent } from './pages/report-extractors/report-extractors.component';
 import { GeneralMaintenanceComponent } from './pages/general-maintenance/general-maintenance.component';
@@ -82,6 +84,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, },
   { path: 'ver', component: ViewComponent },
   { path: '', component: LoginComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginUpdateComponent, pathMatch: 'full' },
   { path: 'editar', component: EditComponent },
   { path: 'carga', component: CargaPreviewComponent },
   { path: 'nuevo', component: NewComponent },
@@ -95,6 +98,7 @@ const routes: Routes = [
   { path: 'forms-database', component: FormsDatabaseComponent },
   { path: 'work-module', component: WorkModuleComponent },
   { path: 'customer-manager', component: CustomerManagerComponent },
+  { path: 'customer-manager-2', component: CustomerManagerUpdateComponent },
   { path: 'reinforced-customers', component: ReinforcedCustomersComponent }, 
   { path: 'report-extractors', component: ReportExtractorsComponent },
   { path: 'general-maintenance', component: GeneralMaintenanceComponent },

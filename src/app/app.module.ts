@@ -164,6 +164,8 @@ import { TemplateClientesSimplificadoComponent } from './components/responsable/
 import { TemplateProveedorComponent } from './components/responsable/templates/template-proveedor/template-proveedor.component';
 import { TemplateContraparteComponent } from './components/responsable/templates/template-contraparte/template-contraparte.component';
 import { TemplateColaboradorComponent } from './components/responsable/templates/template-colaborador/template-colaborador.component';
+import { CustomerManagerUpdateComponent } from './pages/customer-manager-update/customer-manager-update.component';
+import { LoginUpdateComponent } from './pages/login-update/login-update.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -310,6 +312,8 @@ import { TemplateColaboradorComponent } from './components/responsable/templates
     TemplateProveedorComponent,
     TemplateContraparteComponent,
     TemplateColaboradorComponent,
+    CustomerManagerUpdateComponent,
+    LoginUpdateComponent,
 
    
     //Validaciones
