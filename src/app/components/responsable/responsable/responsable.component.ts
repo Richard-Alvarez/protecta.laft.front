@@ -235,7 +235,7 @@ export class ResponsableComponent implements OnInit {
         //console.error('el error: ',error)
       }
     }
-    
+   
     this.core.loader.hide();
 
   }
@@ -3206,7 +3206,7 @@ export class ResponsableComponent implements OnInit {
   redictBodyM(){
     document.getElementById('consulta0').focus({ preventScroll : false})
   }
-
+ 
   
 }
 

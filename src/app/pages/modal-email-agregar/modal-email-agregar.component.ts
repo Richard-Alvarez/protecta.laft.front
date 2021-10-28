@@ -37,6 +37,8 @@ export class ModalEmailAgregarComponent implements OnInit {
   mycontent: string;
   textoHTML: string = ''
   
+  activarGrupo:boolean = true
+  activarPerfil:boolean = true
 
   constructor(
     private core: CoreService,
@@ -47,15 +49,10 @@ export class ModalEmailAgregarComponent implements OnInit {
    }
 
   async ngOnInit() {
+    
     this.core.loader.show(); 
     this.CambioPlantilla()
-    // this.ckeditorContent = `<p><br />
-    // <span style="font-size:16px">Estimado&nbsp;<strong>[Usuario]</strong><br />
-    // Le informamos que se ha solicitado un complemento asignado a su cargo<strong> [Cargo],</strong>&nbsp;agradeceremos que responda a la solicitud en el m&aacute;s breve plazo. <strong>[Instruccion] [Link]</strong>. Muchas gracias</span></p>
     
-    // <p><br />
-    // <span style="font-size:16px">Atentamente,<br />
-    // <strong>Protecta security&nbsp;&nbsp;</strong></span></p>`; 
     this.ckeConfig = {
       allowedContent: false,
       
@@ -419,7 +416,7 @@ export class ModalEmailAgregarComponent implements OnInit {
     let respValidacion:any = this.getBuscarTexto()
 
     swal.fire({
-      title: "Registrar Usuario",
+      title: "Configuración de Correos",
       icon: "warning",
       text: respValidacion.message,
       showCancelButton: false,
@@ -449,7 +446,7 @@ export class ModalEmailAgregarComponent implements OnInit {
     //  <strong>Protecta security&nbsp;&nbsp;</strong></span></p>`; 
     
      swal.fire({
-      title: "Registrar Usuario",
+      title: "Configuración de Correos",
       icon: "warning",
       text: "¿ Está seguro de regresar al correo principal ?",
       showCancelButton: true,
@@ -483,11 +480,19 @@ export class ModalEmailAgregarComponent implements OnInit {
   }
 
   CambioPlantilla(){
+
+    //Mostrar los comobobox
+
   
 
     if(this.action == 0){
-      this.ckeditorContent = ``; 
+      this.ckeditorContent = ``;
+      this.activarGrupo = true
+      this.activarPerfil = true 
     }else if(this.action == 1){
+      
+      this.activarGrupo = false
+      this.activarPerfil = false
       this.ckeditorContent = `<p><br />
       <span style="font-size:16px">Estimado&nbsp;<strong>[Usuario]</strong></span></p>
       
@@ -498,7 +503,9 @@ export class ModalEmailAgregarComponent implements OnInit {
       <span style="font-size:16px">Atentamente,<br />
       <strong>Protecta security&nbsp;</strong></span></p>`; 
       
-    }else{
+    }else if(this.action == 2){
+      this.activarGrupo = false
+      this.activarPerfil = false
       this.ckeditorContent = `<p><br />
       <span style="font-size:16px">Estimado&nbsp;<strong>[Usuario]</strong><br />
       Le informamos que se ha solicitado un complemento asignado a su cargo<strong> [Cargo],</strong>&nbsp;agradeceremos que responda a la solicitud en el m&aacute;s breve plazo. <strong>[Instruccion] [Link]</strong>. Muchas gracias</span></p>
@@ -507,6 +514,10 @@ export class ModalEmailAgregarComponent implements OnInit {
       <span style="font-size:16px">Atentamente,<br />
       <strong>Protecta security&nbsp;&nbsp;</strong></span></p>`; 
 
+    }else{
+      this.activarGrupo = true
+      this.activarPerfil = true 
+      this.ckeditorContent = ''
     }
 
 

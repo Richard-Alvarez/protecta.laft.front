@@ -83,8 +83,8 @@
 
         <br>
         <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+      
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaMasivos.length}}
@@ -156,8 +156,8 @@
             <br>
         </div>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+      
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialSoat.length}}
@@ -219,8 +219,8 @@
             <br>
         </div>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+     
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}}
@@ -282,8 +282,8 @@
             <br>
         </div>
     </div>
-    
-    <div *ngIf="parent.RegimenPendiente == 1"  >
+     
+    <div *ngIf="this.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialRentaParticular.length}} coincidencias
@@ -435,8 +435,8 @@
     </div> -->
 
     <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+      
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias
@@ -508,12 +508,12 @@
             <br>
         </div>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+     
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepSoat.length}} coincidencias
-                exactas de clientes PEP y la base de clientes vigentes - SOAT al cierre del{{this.Periodo}}, por ende, se consideran
+                exactas de clientes PEP y la base de clientes vigentes - SOAT al cierre del {{this.Periodo}}, por ende, se consideran
                 como señales de alerta “C2”.
             </li>
         </ul>
@@ -580,12 +580,12 @@
         </div>
         <br>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+      
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepRenta.length}} coincidencias
-                exactas de clientes PEP y la base de clientes vigentes - RENTAS VITALICIAS al cierre del{{this.Periodo}}, por ende, se consideran
+                exactas de clientes PEP y la base de clientes vigentes - RENTAS VITALICIAS al cierre del {{this.Periodo}}, por ende, se consideran
                  como señales de alerta “C2”.
             </li>
         </ul>
@@ -652,12 +652,12 @@
                 <br>
         </div>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 1"  >
+      
+    <div *ngIf="this.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepRentaParticular.length}} coincidencias
-                exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del{{this.Periodo}}, por ende, se consideran
+                exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del {{this.Periodo}}, por ende, se consideran
                 como señales de alerta “C2”.
             </li>
         </ul>
@@ -724,12 +724,12 @@
             <br>
         </div>
     </div>
-
+      
     <!-- <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="parent.listaPep.length !=0;else SinData">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPep.length}} coincidencias
-            exactas de clientes PEP y la base de clientes vigentes - AHORRO TOTAL  al cierre del{{this.Periodo}}, por ende,
+            exactas de clientes PEP y la base de clientes vigentes - AHORRO TOTAL  al cierre del {{this.Periodo}}, por ende,
             se consideran como señales de alerta “C2”.
             </li>
         </ul>
@@ -804,8 +804,8 @@
 
     <br>
     <strong style="font-family: arial Narrow, serif;"> LISTAS INTERNACIONALES</strong>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+      
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalMaisvos.length}} coincidencias
@@ -875,8 +875,8 @@
             <br>
         </div>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+      
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalSoat.length}} coincidencias
@@ -946,8 +946,8 @@
             <br>
         </div>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 2"  >
+      
+    <div *ngIf="this.RegimenPendiente == 2"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalRenta.length}} coincidencias
@@ -1017,8 +1017,8 @@
             <br>
         </div>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 1"  >
+      
+    <div *ngIf="this.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalRentaParticular.length}} coincidencias
@@ -1088,7 +1088,7 @@
             <br>
         </div>
     </div>
-
+      
     <!-- <div *ngIf="parent.RegimenPendiente == 1"  >
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -1160,7 +1160,7 @@
             <br>
         </div>
     </div>  -->
-    <div *ngIf="parent.RegimenPendiente == 1">
+    <div *ngIf="this.RegimenPendiente == 1">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
              {{parent.listaEspecialGene.length > 0 ? 'Si' : 'No'}} se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del {{parent.Periodo}}”.
@@ -1170,8 +1170,8 @@
             </li>
         </ul>
     </div>
-
-    <div *ngIf="parent.RegimenPendiente == 2">
+      
+    <div *ngIf="this.RegimenPendiente == 2">
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
              {{parent.listaEspecialSimpli.length > 0 ? 'Si' : 'No'}} se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del {{parent.Periodo}}”.
@@ -1181,7 +1181,7 @@
             </li>
         </ul>
     </div>
-
+      
     <ng-template #SinData>
 
       </ng-template>
@@ -1700,7 +1700,7 @@
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{listaPepSoat.length}} coincidencias
-                exactas de clientes PEP y la base de clientes vigentes - SOAT al cierre del{{this.Periodo}}, por ende, se consideran
+                exactas de clientes PEP y la base de clientes vigentes - SOAT al cierre del {{this.Periodo}}, por ende, se consideran
                 como señales de alerta “C2”.
             </li>
         </ul>
@@ -1775,7 +1775,7 @@
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{listaPepRenta.length}} coincidencias
-                exactas de clientes PEP y la base de clientes vigentes - RENTAS VITALICIAS al cierre del{{this.Periodo}}, por ende, se consideran
+                exactas de clientes PEP y la base de clientes vigentes - RENTAS VITALICIAS al cierre del {{this.Periodo}}, por ende, se consideran
                  como señales de alerta “C2”.
             </li>
         </ul>
@@ -1848,7 +1848,7 @@
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify">
                 De acuerdo a los resultados reportados por el área de TI, se identificaron {{listaPepRentaParticular.length}} coincidencias
-                exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del{{this.Periodo}}, por ende, se consideran
+                exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del {{this.Periodo}}, por ende, se consideran
                 como señales de alerta “C2”.
             </li>
         </ul>
@@ -1921,7 +1921,7 @@
         <ul>
             <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="listaPep.length !=0;else SinData">
             De acuerdo a los resultados reportados por el área de TI, se identificaron {{listaPep.length}} coincidencias
-            exactas de clientes PEP y la base de clientes vigentes - AHORRO TOTAL  al cierre del{{this.Periodo}}, por ende,
+            exactas de clientes PEP y la base de clientes vigentes - AHORRO TOTAL  al cierre del {{this.Periodo}}, por ende,
             se consideran como señales de alerta “C2”.
             </li>
         </ul>

@@ -80,22 +80,22 @@ export class EmailProfileComponent implements OnInit {
     });
   }
 
-  async getModalAgregar(data: any){
-    const modalRef = this.modalService.open(ModalEmailAgregarComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
+  // async getModalAgregar(data: any){
+  //   const modalRef = this.modalService.open(ModalEmailAgregarComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
     
     
-    modalRef.componentInstance.reference = modalRef;
+  //   modalRef.componentInstance.reference = modalRef;
    
-    modalRef.result.then(async (resp) => {
-      this.core.loader.show();  
-      let response = await this.userConfig.GetListCorreo()
-      this.ListCorreo = response
-      this.core.loader.hide();
+  //   modalRef.result.then(async (resp) => {
+  //     this.core.loader.show();  
+  //     let response = await this.userConfig.GetListCorreo()
+  //     this.ListCorreo = response
+  //     this.core.loader.hide();
      
-    }, (reason) => {
-      this.core.loader.hide();
-    });
-  }
+  //   }, (reason) => {
+  //     this.core.loader.hide();
+  //   });
+  // }
 
 
    async getListCorreo(){
@@ -116,18 +116,20 @@ export class EmailProfileComponent implements OnInit {
   }
  
   convert(texto) {
-    const text = htmlToText(
-      `<p><br />
-    <span style="font-size:16px">Estimado&nbsp;<strong>[Usuario] - Richard</strong><br />
-    Le informamos que se ha solicitado un complemento asignado a su cargo<strong> [Cargo],</strong>&nbsp;agradeceremos que responda a la solicitud en el m&aacute;s breve plazo. <strong>[Instruccion] [Link]</strong>. Muchas gracias</span></p>
+    // const text = htmlToText(
+    //   `<p><br />
+    // <span style="font-size:16px">Estimado&nbsp;<strong>[Usuario] - Richard</strong><br />
+    // Le informamos que se ha solicitado un complemento asignado a su cargo<strong> [Cargo],</strong>&nbsp;agradeceremos que responda a la solicitud en el m&aacute;s breve plazo. <strong>[Instruccion] [Link]</strong>. Muchas gracias</span></p>
     
-    <p><br />
-    <span style="font-size:16px">Atentamente,<br />
-    <strong>Protecta security&nbsp;&nbsp;</strong></span></p>`,
-      {
-        wordwrap: 130
-      }
-    );
+    // <p><br />
+    // <span style="font-size:16px">Atentamente,<br />
+    // <strong>Protecta security&nbsp;&nbsp;</strong></span></p>`,
+    //   {
+    //     wordwrap: 130
+    //   }
+    // );
+
+    let text = htmlToText(texto,{wordwrap: 130})
     return text
     
   }
