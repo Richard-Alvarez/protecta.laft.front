@@ -2438,7 +2438,7 @@ export class ResponsableComponent implements OnInit {
           uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
           uploadPararms.listFiles = listFilesAdjuntos
           uploadPararms.listFileName = listFileNameAdjuntos
-          
+          debugger
           promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
           promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
         } catch (error) {
@@ -2712,7 +2712,8 @@ export class ResponsableComponent implements OnInit {
 
   }
   arrObjFilesAdjByCabecera: any = []
-  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO,NOMBRECOMPLETO) {
+  arrObjFilesComplemento: any = []
+  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO,NOMBRECOMPLETO,ValidadorComplementos) {
     try {
       
       let respSetData = await this.setDataFile(event)
@@ -2720,6 +2721,10 @@ export class ResponsableComponent implements OnInit {
       //listFileNameCortoInform
       //arrFiles
 
+      if(ValidadorComplementos == 'OC-COMPLEMENTOS'){
+        this.arrObjFilesComplemento = respSetData
+      }
+      
      
 
      
@@ -2820,7 +2825,7 @@ export class ResponsableComponent implements OnInit {
         this.arrObjFilesAdjByCabecera.push(dataInformFile)
       }
 
-  
+      console.log("arrObjFilesAdjByCabecera",this.arrObjFilesAdjByCabecera)
       return true
       //await this.sendFilesInformes(NIDALERTA, respPromiseFileInfo, listFileNameInform)
     } catch (error) {
@@ -2830,7 +2835,7 @@ export class ResponsableComponent implements OnInit {
 
 
   async setDataFile(event) {
- 
+ debugger
     let files = event.target.files;
 
     let arrFiles = Array.from(files)
