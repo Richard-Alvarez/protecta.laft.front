@@ -225,6 +225,7 @@ export class PendienteInformeComponent implements OnInit {
     
     
     async sendFilesInformes(ALERTA) {
+      
       try {
         //let workModuleList = await this.parent.getWorkModuleAll(this.regimen.id)
         let validacionCantidadREvisados =  this.getObtenerLista()

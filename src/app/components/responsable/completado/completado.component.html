@@ -512,8 +512,8 @@
                                                                                 <!-- <div class="col-2 txtCabecera" style="font-size: 14px;">Perfil </div> -->
                                                                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Cargo</div>
                                                                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Estado</div>
-                                                                                <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Email</div>
-                                                                                <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Adjuntar </div>
+                                                                                <div class="col-2 txtCabecera text-left" style="font-size: 14px;">Email</div>
+                                                                                <div class="col-2 txtCabecera text-left" style="font-size: 14px;">Adjuntar </div>
                                                                                 <div class="col-1 txtCabecera" style="font-size: 14px;">Documento</div>
                                                                                 <div class="col-1 txtCabecera text-center" style="font-size: 14px;">Eliminar</div>
                                                                             </div>
@@ -535,8 +535,8 @@
                                                                                                  
                                                                                                 <div class="col-2 text-left txtDetalle">{{listUsu.SDESCARGO}}</div>
                                                                                                 <div class="col-2 text-left txtDetalle">{{listUsu.SNOMBRE_ESTADO}}</div>
-                                                                                                <div class="col-2 text-center txtDetalle">{{listUsu.SEMAIL}}</div>
-                                                                                                <div class="col-2 text-center">
+                                                                                                <div class="col-2 text-left txtDetalle">{{listUsu.SEMAIL}}</div>
+                                                                                                <div class="col-2 text-left">
                                                                                                     <div *ngIf="(listUsu.CONSULTA == 'C')">
                                                                                                         <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}-{{indice}}" class="inputfile" multiple (change)="addFilesUniversal2($event,item,'COMPLEMENTO','RE', listUsu,indice)" />
                                                                                                              <div class="text-center" style="display:table-caption;float:left;">
@@ -559,7 +559,7 @@
                                                                                                             </div>
                                                                                                         </div> -->
                                                                                                     
-                                                                                                    <div  class="txtDetalle"  placement="top" ngbTooltip="{{listUsu.SFILE_NAME_LARGO}}">
+                                                                                                    <div  class="txtDetalle text-center"  placement="top" ngbTooltip="{{listUsu.SFILE_NAME_LARGO}}">
                                                                                                         <a (click)="descargarArchivoSubido(item,listUsu)" style="color: blue;cursor: pointer;"><u>{{listUsu.SFILE_NAME}}</u></a> 
                                                                                                     </div>
                                                                                                    

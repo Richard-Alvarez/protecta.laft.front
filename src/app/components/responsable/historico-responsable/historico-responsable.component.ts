@@ -11,6 +11,7 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import {  DataResponsableService } from '../../../services/data-responsable.service';
+import { SbsreportService } from '../../../services/sbsreport.service';
 import * as $ from 'jquery';
 
 
@@ -108,49 +109,12 @@ export class HistoricoResponsableComponent implements OnInit {
     private modalService: NgbModal,
     private excelService: ExcelService,
     private dataResponsable: DataResponsableService,
+    private sbsReportService: SbsreportService,
   ) { }
 
   async ngOnInit()  {
 
-    // // When the user scrolls the page, execute myFunction
-    // window.onscroll = function() {myFunction()};
-
-    // // Get the header
-    // var header = document.getElementById("myHeader");
-
-    // // Get the offset position of the navbar
-    // var sticky = header.offsetTop;
-
-    // // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-    // function myFunction() {
-    //   if (window.pageYOffset > sticky) {
-    //     header.classList.add("sticky");
-    //   } else {
-    //     header.classList.remove("sticky");
-    //   }
-    // }
-    // window.onscroll = function() {myFunction()};
-    // // document.addEventListener("DOMContentLoaded" , function(){
-    //   // window.addEventListener('scroll', function() {
-    //     function myFunction() {
-    //       if (window.scrollY > 80) {
-    //         document.getElementById('navbar_top').classList.add('fixed-top');
-    //         // add padding top to show content behind navbar
-    //         // var prueba = document.querySelector('.navbar')
-            
-    //         // var prueba = document.getElementById(".navbar").offsetHeight 
-    //         // var navbar_height = prueba ;
-    //         // document.body.style.paddingTop = navbar_height + 'px';
-    //       } else {
-    //         document.getElementById('navbar_top').classList.remove('fixed-top');
-    //          // remove padding top from body
-    //         document.body.style.paddingTop = '0';
-    //       } 
-            
-    //       } 
-      // });
-    // }); 
-
+    await this.obtenerPeriodos()
 
     this.core.config.rest.LimpiarDataGestor()
     this.core.loader.show();
@@ -184,34 +148,18 @@ export class HistoricoResponsableComponent implements OnInit {
       }
     ]
 
-    this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
-    await this.getOfficialAlertFormList()
+    this.NPERIODO_PROCESO = 20210630//parseInt(localStorage.getItem("periodo"))
+    //await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
    
     if (this.STIPO_USUARIO === 'RE') {
       this.userGroupListGral = [1]
       this.userGroupListSimpli = [1]
     }
-    //this.devueltoHijo.setRegimiento(1);
-    //this.userGroupListSimpli.push('TI')
+    
+    //this.getTipoUsuario()
+    //this.fillFileGroup()
    
-    this.getTipoUsuario()
-    this.fillFileGroup()
-    //await this.getAllAttachedFiles()
-
-    //await this.core.storage.set('stateRevisado',this.stateRevisado)
-    //await this.core.storage.set('stateCompletado',this.stateCompletado)
-    //await this.core.storage.set('stateDevuelto',this.stateDevuelto)
-   
-    //await this.core.storage.set('arrResponsablesCompleGral',this.arrResponsablesCompleGral)
-    //await this.core.storage.set('arrResponsablesCompleSimpli',this.arrResponsablesCompleSimpli)
-    //await this.core.storage.set('arrResponsablesDevueltoGral',this.arrResponsablesDevueltoGral)
-    //await this.core.storage.set('arrResponsablesDevueltoSimpli',this.arrResponsablesDevueltoSimpli)
-
-    /*this.dataResponsable.Responsable$.subscribe(arreglo => {
-      this.arrDetailC1 = arreglo
-     
-    })*/
 
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
@@ -232,7 +180,7 @@ export class HistoricoResponsableComponent implements OnInit {
               
             } 
       } catch (error) {
-        //console.error('el error: ',error)
+      
       }
     }
    
@@ -3122,81 +3070,6 @@ export class HistoricoResponsableComponent implements OnInit {
     }
   }
 
-
-  /*@HostListener("window:scroll", []) onWindowScroll() {
-    // do some stuff here when the window is scrolled
-   
-    const verticalOffset = window.pageYOffset 
-          || document.documentElement.scrollTop 
-          || document.body.scrollTop || 0;
-   
-    let src:any = document.getElementsByTagName('section');
-    let indiceSrc = 0;
-    for(let itemSrc of src){
-      
-      if((itemSrc.offsetTop - document.documentElement.scrollTop) < 20){
-      
-        localStorage.setItem('SectionPosition',this.arrListSections[indiceSrc].nombre)
-      }
-      indiceSrc++
-    }*/
-    /*if(){
-
-    }*/
-    
-  //}
-
-  /*getEtiquetaDinamic(indice,icono){
-    if(this.boolPalomitaHeaderPlus === true && this.indiceIconDinamic === indice && icono === 1){
-      return 'showEtiqueta'
-    }
-    if(this.boolPalomitaHeaderMinus === true && this.indiceIconDinamic === indice && icono === 2){
-      return 'showEtiqueta'
-    }
-    if(this.boolPalomitaHeaderPlus === false && this.indiceIconDinamic === indice && icono === 1){
-      return 'hiddenEtiqueta'
-    }
-    if(this.boolPalomitaHeaderMinus === false && this.indiceIconDinamic === indice && icono === 2){
-      return 'hiddenEtiqueta'
-    }
-  }
-
-  setEtiquetaDinamic(indice,icono){
-    if(this.boolPalomitaHeaderPlus === true && this.indiceIconDinamic === indice && icono === 1){
-      this.boolPalomitaHeaderPlus = false;
-    }
-    if(this.boolPalomitaHeaderPlus === false && this.indiceIconDinamic === indice && icono === 1){
-      this.boolPalomitaHeaderPlus = true;
-    }
-    if(this.boolPalomitaHeaderMinus === true && this.indiceIconDinamic === indice && icono === 2){
-      this.boolPalomitaHeaderPlus = false;
-    }
-    if(this.boolPalomitaHeaderMinus === false && this.indiceIconDinamic === indice && icono === 2){
-      this.boolPalomitaHeaderPlus = true;
-    }
-  }*/
-
-  /*setPalomitaMinus(id){
-    //this.renderer.addClass(this.contenido.nativeElement, "cerrarNav");remove
-    this.renderer.addClass(this.contentIconPlus.nativeElement, "showPlus");
-    this.renderer.removeClass(this.contentIconMinus.nativeElement, "showMinus");
-    this.renderer.addClass(this.contentIconMinus.nativeElement, "hiddenMinus");
-  }
-
-  setPalomitaPlus(){
-    this.renderer.addClass(this.contentIconMinus.nativeElement, "showPlus");
-    this.renderer.removeClass(this.contentIconPlus.nativeElement, "showPlus");
-    this.renderer.addClass(this.contentIconPlus.nativeElement, "hiddenPlus");
-  }*/
-
-  /*getIdRegimem(regimen){
-    if(regimen === 1){
-      return 'regGeneral'
-    }
-    if(regimen === 2){
-      return 'regSimpli'
-    }
-  }*/
   redict(){
     document.getElementById('acordionPENDIENTE-INFORMEGral0').focus({ preventScroll : false})
   }
@@ -3210,7 +3083,21 @@ export class HistoricoResponsableComponent implements OnInit {
   redictBodyM(){
     document.getElementById('consulta0').focus({ preventScroll : false})
   }
+
+  ListPeriodos:any = []
+  IDListPeriodo = 0
+  ListAnnos:any =[]
+  async obtenerPeriodos(){
+    this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
+    console.log("Periodos",this.ListPeriodos)
+      this.ListPeriodos.forEach((element,inc) => {
+         let data:any = {}
+         data.ID = inc
+         data.ANNO =  element.endDate.toString().substr(6,4) 
+         this.ListAnnos.push(data)
+      });
+  console.log("ListAnnos",this.ListAnnos)
+  }
  
-  
 }
 
