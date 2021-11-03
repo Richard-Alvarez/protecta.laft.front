@@ -16,7 +16,8 @@ import { RecaptchaComponent, RecaptchaModule, RecaptchaFormsModule } from 'ng-re
 export class LoginUpdateComponent implements OnInit {
 
   public scaptcha: string;
-
+  public show:boolean = false;
+  public pass:string = 'password'
   constructor(public login: LoginService, public core: CoreService, public maestroService: MaestroService, public userConfigService: UserconfigService) { }
 
   ngOnInit() {
@@ -53,6 +54,17 @@ export class LoginUpdateComponent implements OnInit {
         this.scaptcha = data.captcha;
         //this.validateCaptcha();
       });
+  }
+
+  
+  MostrarPass() {
+    if (this.pass === 'password') {
+      this.pass = 'text';
+      this.show = true;
+    } else {
+      this.pass = 'password';
+      this.show = false;
+    }
   }
   
 }

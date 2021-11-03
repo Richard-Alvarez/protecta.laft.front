@@ -1398,7 +1398,7 @@ UltimoTooltip(indice, longitud){
 //async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
 addFilesUniversal(event,item,STIPO_CARGA,STIPO_USUARIO){
    debugger
-  this.parent.addFilesAdjuntosResponsable(event, item.NIDALERTA_CABECERA, item.NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO,item.NOMBRECOMPLETO)
+  this.parent.addFilesAdjuntosResponsable(event, item.NIDALERTA_CABECERA, item.NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO,item.NOMBRECOMPLETO,'')
 }
 async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,NOMBRECOMPLETO){
   debugger;
@@ -1549,5 +1549,24 @@ ValidarCabeceraComplemento(){
     this.core.loader.hide()
   }
 
+  listaComplementoUsuario:any = [] 
+async ConsultaComplementoUsuarios(){
+  let data:any ={}
+  data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
 
+  this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+
+}
+
+  async descargarComplementoSubido (item){
+    await this.ConsultaComplementoUsuarios()
+    let DATA =  this.listaComplementoUsuario.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDUSUARIO_ASIGNADO == item.NIDUSUARIO_ASIGNADO )
+    debugger;
+    let SRUTA = DATA[0].SRUTA_FILE_NAME;
+    let SRUTA_LARGA = DATA[0].SFILE_NAME_LARGO;
+    
+   
+    this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+   
+  }
 }

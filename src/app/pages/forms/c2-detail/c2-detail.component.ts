@@ -1523,7 +1523,7 @@ export class C2DetailComponent implements OnInit {
             let listacheckbox 
             arreglos = this.getListById(99)
     
-            
+
             
            // if(this.unchekAllList.length == 2 )  {
                
@@ -2568,6 +2568,7 @@ async Consultar360Previous(){
             0
         })
         
+        console.log('asd',this.formData.NTIPO_DOCUMENTO)
 
          /* if(this.ListaPoliza.length != 0){
              this.ListaPoliza.forEach(element => {

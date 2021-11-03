@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Console } from 'console';
 import swal from 'sweetalert2';
 import { CoreService } from '../services/core.service';
 import { SbsreportService } from '../services/sbsreport.service';
@@ -38,7 +39,8 @@ export class GafiListComponent implements OnInit {
 
   ngOnInit() {
     this.core.config.rest.LimpiarDataGestor()
-    this.getGafiList();
+    this.getGafiList()
+
     this.namesOff = true;
     this.activeCancel = true;
     this.activeSave = true;
@@ -60,8 +62,10 @@ export class GafiListComponent implements OnInit {
         //   (this.currentPage - 1) * this.itemsPerPage,
         //   this.currentPage * this.itemsPerPage
         // );
+        
         if (this.processlist.length != 0) {
           this.core.loader.hide();
+          
         }
         else {
           this.core.loader.hide();
@@ -81,6 +85,7 @@ export class GafiListComponent implements OnInit {
           })
         }
         this.core.loader.hide();
+        
       }).catch(() => {
         
         this.core.loader.hide();
@@ -98,6 +103,7 @@ export class GafiListComponent implements OnInit {
         }).then((result) => {
         })
       });
+      
   }
 
   // pageChanged(currentPage) {
