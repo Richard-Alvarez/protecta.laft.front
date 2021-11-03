@@ -1019,6 +1019,7 @@ ElimanrDiv(){
 
   async ValidarGrupo(){
     var URLactual = window.location + " ";
+
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
     if(this.linkactual == "clientes"){

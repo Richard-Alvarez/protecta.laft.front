@@ -200,6 +200,7 @@ private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //Para envio de correos
   public urlInsCorreoUsuario:string = this.base + "monitoreoSenales/InsCorreoUsuario";
   public urlgetListaUsuarioCorreos:string = this.base + "monitoreoSenales/getListaUsuarioCorreos";
+  public urlEnvioCorreoConfirmacion:string = this.base + "monitoreoSenales/EnvioCorreoConfirmacion";
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

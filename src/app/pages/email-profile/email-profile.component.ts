@@ -68,6 +68,7 @@ export class EmailProfileComponent implements OnInit {
     
     modalRef.componentInstance.reference = modalRef;
     modalRef.componentInstance.dataEmail = data;
+    modalRef.componentInstance.ListaEmail = this.ListCorreo;
     modalRef.result.then(async (resp) => {
       this.core.loader.show();  
       let response = await this.userConfig.GetListCorreo()
