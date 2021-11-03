@@ -149,7 +149,7 @@ export class CompletadoComponent implements OnInit {
     }
 
     getFilesCabecera2(objAlertaItem,STIPO_CARGA,NREGIMEN){
-      //debugger
+   
       let resp = this.parent.arrObjFilesAdjByCabecera.filter(it => it.NIDCABECERA_USUARIO === objAlertaItem.NIDALERTA_CABECERA && it.NREGIMEN === NREGIMEN && it.STIPO_USUARIO === this.STIPO_USUARIO && it.STIPO_CARGA == STIPO_CARGA)
       
        return resp.length > 0 ? resp[0].arrFilesNameCorto : [] 
@@ -446,7 +446,7 @@ export class CompletadoComponent implements OnInit {
   }
 
   async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
-      debugger
+      
     await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,'','')
   }
 
@@ -976,7 +976,7 @@ getLink(){
 }
 
 async EnviarCompUsuario(alerta,complemento){
-  debugger
+  
   
    
   var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == alerta.NIDALERTA && fil.NOMBRECOMPLETO == alerta.NOMBRECOMPLETO)
@@ -1029,7 +1029,7 @@ async EnviarCompUsuario(alerta,complemento){
       this.NewArreglo[index].RESULTADO.forEach(async (element) => {
         console.log("element",element)
         let data:any = {}
-        
+        let validador = element.FILE.length
         
         data.NPERIODO_PROCESO = this.PeriodoComp
         data.NIDALERTA = alerta.NIDALERTA
@@ -1047,9 +1047,16 @@ async EnviarCompUsuario(alerta,complemento){
         data.fullName = this.OBJ_USUARIO.fullName
         data.FECHAPERIODO = this.PeriodoComplemento
         data.NOMBREALERTA = alerta.SNOMBRE_ALERTA
-        data.SRUTA_FILE_NAME = 'COMPLEMENTO-OC' +'/' + alerta.NIDALERTA + '/' + 'CABECERA/' + alerta.NIDALERTA_CABECERA + '/' +  this.PeriodoComp + '/' + this.regimen.id + '/' + element.FILE[0].listFileNameInform[0];
-        data.SFILE_NAME=  element.FILE[0].listFileNameCortoInform[0]
-        data.SFILE_NAME_LARGO =  element.SFILE_NAME_LARGO
+        if(validador == 1){
+          data.SRUTA_FILE_NAME = 'COMPLEMENTO-OC' +'/' + alerta.NIDALERTA + '/' + 'CABECERA/' + alerta.NIDALERTA_CABECERA + '/' +  this.PeriodoComp + '/' + this.regimen.id + '/' + element.FILE[0].listFileNameInform[0];
+          data.SFILE_NAME=  element.FILE[0].listFileNameCortoInform[0]
+          data.SFILE_NAME_LARGO =  element.SFILE_NAME_LARGO
+        }else{
+          data.SRUTA_FILE_NAME = ""
+          data.SFILE_NAME=  ""
+          data.SFILE_NAME_LARGO =  ""
+        }
+      
         this.core.loader.show();
         debugger
         console.log("la data",data)
@@ -1061,19 +1068,29 @@ async EnviarCompUsuario(alerta,complemento){
           uploadPararms.STIPO_CARGA = "COMPLEMENTO-OC";
           uploadPararms.NIDALERTA_CABECERA =  alerta.NIDALERTA_CABECERA;
           uploadPararms.NPERIODO_PROCESO = this.PeriodoComp;
-          uploadPararms.SRUTA_ADJUNTO = 'COMPLEMENTO-OC' +'/' + alerta.NIDALERTA + '/' + 'CABECERA/' + alerta.NIDALERTA_CABECERA + '/' +  this.PeriodoComp + '/' + this.regimen.id + '/' + element.FILE[0].listFileNameInform[0];;
-          uploadPararms.SRUTA = 'COMPLEMENTO-OC' + '/' + alerta.NIDALERTA + '/CABECERA/' + alerta.NIDALERTA_CABECERA + '/' + this.PeriodoComp + '/' + this.regimen.id ;
           uploadPararms.NIDUSUARIO_MODIFICA =  element.ID_USUARIO
-          uploadPararms.listFiles = element.FILE[0].respPromiseFileInfo
-          uploadPararms.listFileName =  element.FILE[0].listFileNameInform
+          if(validador == 1){
+            uploadPararms.SRUTA_ADJUNTO = 'COMPLEMENTO-OC' +'/' + alerta.NIDALERTA + '/' + 'CABECERA/' + alerta.NIDALERTA_CABECERA + '/' +  this.PeriodoComp + '/' + this.regimen.id + '/' + element.FILE[0].listFileNameInform[0];
+            uploadPararms.SRUTA = 'COMPLEMENTO-OC' + '/' + alerta.NIDALERTA + '/CABECERA/' + alerta.NIDALERTA_CABECERA + '/' + this.PeriodoComp + '/' + this.regimen.id ;
+            uploadPararms.listFiles = element.FILE[0].respPromiseFileInfo
+            uploadPararms.listFileName =  element.FILE[0].listFileNameInform
+          }else{
+            uploadPararms.SRUTA_ADJUNTO = ""
+            uploadPararms.SRUTA = ""
+            uploadPararms.listFiles = ""
+            uploadPararms.listFileName =  ""
+          }
+         
           
           
-          
+          if(validador == 1){
+            await this.userConfigService.GetInsCormularioComplUsu(data)
+            await this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms)
+            await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
+          }else{
+            await this.userConfigService.GetInsCormularioComplUsu(data)
+          }
 
-          await this.userConfigService.GetInsCormularioComplUsu(data)
-          await this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms)
-          await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-          
           await this.ConsultaComplementoUsuarios()
           await this.ListaAlertas()
         }
@@ -1212,7 +1229,7 @@ descargarComplemento (item,listUsu){
   this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
 }
 descargarComplemento2 (item){
-  debugger;
+  
   let SRUTA_PDF = '';
   if(this.NewArreglo == undefined){
     this.NewArreglo = []
@@ -1263,7 +1280,7 @@ ValidarCabeceraComplemento(){
   }
 
   async insertAdjunto(item,arrObj,listUsu){
-    debugger
+    
     var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
     var indexResultado = this.NewArreglo[index].RESULTADO.findIndex(fil => fil.ID_USUARIO == listUsu.ID_USUARIO && fil.NOMBRECOMPLETO == listUsu.NOMBRECOMPLETO)
     var validador = this.NewArreglo[index].RESULTADO[indexResultado].FILE
@@ -1303,7 +1320,7 @@ ValidarCabeceraComplemento(){
   async descargarComplementoSubido(item){
     await this.ConsultaComplementoUsuarios()
     let DATA =  this.listaComplementoUsuario.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDUSUARIO_ASIGNADO == item.NIDUSUARIO_ASIGNADO )
-    debugger;
+    
     let SRUTA = DATA[0].SRUTA_FILE_NAME;
     let SRUTA_LARGA = DATA[0].SFILE_NAME_LARGO;
     
@@ -1312,7 +1329,7 @@ ValidarCabeceraComplemento(){
   }
 
   removeFile(item,listUsu){
-    debugger
+   
     console.log("NewArreglo",this.NewArreglo)
     var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
     var indexResultado = this.NewArreglo[index].RESULTADO.findIndex(fil => fil.ID_USUARIO == listUsu.ID_USUARIO && fil.NOMBRECOMPLETO == listUsu.NOMBRECOMPLETO)

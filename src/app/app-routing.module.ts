@@ -77,7 +77,8 @@ import { ConfigDemandaComponent } from './../app/config-demanda/config-demanda.c
 import { TemplateRGComponent } from './../app/components/responsable/templates/template-rg/template-rg.component';
 import { TemplateC3Component } from './../app/components/responsable/templates/template-c3/template-c3.component';
 import { MantenimientoComplementoComponent } from './../app/mantenimiento-complemento/mantenimiento-complemento.component';
-
+import { HistoricoResponsableComponent } from './components/responsable/historico-responsable/historico-responsable.component'
+import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component'
 import { NavbarUpdateComponent } from './../app/components/navbar-update/navbar-update.component';
 //fin formularios antiguos
 
@@ -106,6 +107,9 @@ const routes: Routes = [
     // { path: 'responsable', component: ResponsableComponent },
     { path: 'clientes', component: ResponsableComponent },
     { path: 'testResponsable2', component: TestResponsableComponent },
+    { path: 'historico', component: HistoricoResponsableComponent },
+    { path: 'busqueda-demanda', component: BusquedaDemandaComponent },
+   
   //SUB MENÚS
   { path: 'c1-form', component: C1FormComponent },
   { path: 'c2-form', component: C2FormComponent },

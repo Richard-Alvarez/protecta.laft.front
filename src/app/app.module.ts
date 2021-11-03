@@ -167,6 +167,8 @@ import { TemplateColaboradorComponent } from './components/responsable/templates
 import { CustomerManagerUpdateComponent } from './pages/customer-manager-update/customer-manager-update.component';
 import { LoginUpdateComponent } from './pages/login-update/login-update.component';
 import { NavbarUpdateComponent } from './components/navbar-update/navbar-update.component';
+import { HistoricoResponsableComponent } from './components/responsable/historico-responsable/historico-responsable.component';
+import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -316,6 +318,8 @@ import { NavbarUpdateComponent } from './components/navbar-update/navbar-update.
     CustomerManagerUpdateComponent,
     LoginUpdateComponent,
     NavbarUpdateComponent,
+    HistoricoResponsableComponent,
+    BusquedaDemandaComponent,
 
    
     //Validaciones
