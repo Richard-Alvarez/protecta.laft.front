@@ -148,7 +148,13 @@ export class CompletadoComponent implements OnInit {
       return resp.length > 0 ? resp[0].arrFilesNameCorto : []
     }
 
-    
+    getFilesCabecera2(objAlertaItem,STIPO_CARGA,NREGIMEN){
+   
+      let resp = this.parent.arrObjFilesAdjByCabecera.filter(it => it.NIDCABECERA_USUARIO === objAlertaItem.NIDALERTA_CABECERA && it.NREGIMEN === NREGIMEN && it.STIPO_USUARIO === this.STIPO_USUARIO && it.STIPO_CARGA == STIPO_CARGA)
+      
+       return resp.length > 0 ? resp[0].arrFilesNameCorto : [] 
+      //  return  []
+    }
 
     async downloadUniversalFile(ruta,nameFile){
       await this.parent.downloadUniversalFile(ruta,nameFile)
@@ -440,9 +446,24 @@ export class CompletadoComponent implements OnInit {
   }
 
   async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
-    
-    await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,'')
+      
+    await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,'','')
   }
+
+  async addFilesUniversal2(event,item,STIPO_CARGA,STIPO_USUARIO,listUsu,indice){
+    console.log("event",event)
+    console.log("list",listUsu)
+    console.log("indice",indice)
+    
+   //await this.parent.addFilesAdjuntosResponsable(event, item.NIDALERTA_CABECERA, item.NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO,item.NOMBRECOMPLETO,'OC-COMPLEMENTOS')
+    let data = await this.parent.setDataFile(event)
+  
+    if(data.arrFiles.length !== 0 ){
+     
+      await this.insertAdjunto(item,data,listUsu)
+    }
+  
+ }
 
   async enviarSolicitarComplemento(index,pregHead){
     try {
@@ -955,7 +976,7 @@ getLink(){
 }
 
 async EnviarCompUsuario(alerta,complemento){
- 
+  
   
    
   var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == alerta.NIDALERTA && fil.NOMBRECOMPLETO == alerta.NOMBRECOMPLETO)
@@ -1006,8 +1027,9 @@ async EnviarCompUsuario(alerta,complemento){
      }else{
       
       this.NewArreglo[index].RESULTADO.forEach(async (element) => {
+        console.log("element",element)
         let data:any = {}
-        
+        let validador = element.FILE.length
         
         data.NPERIODO_PROCESO = this.PeriodoComp
         data.NIDALERTA = alerta.NIDALERTA
@@ -1025,11 +1047,50 @@ async EnviarCompUsuario(alerta,complemento){
         data.fullName = this.OBJ_USUARIO.fullName
         data.FECHAPERIODO = this.PeriodoComplemento
         data.NOMBREALERTA = alerta.SNOMBRE_ALERTA
+        if(validador == 1){
+          data.SRUTA_FILE_NAME = 'COMPLEMENTO-OC' +'/' + alerta.NIDALERTA + '/' + 'CABECERA/' + alerta.NIDALERTA_CABECERA + '/' +  this.PeriodoComp + '/' + this.regimen.id + '/' + element.FILE[0].listFileNameInform[0];
+          data.SFILE_NAME=  element.FILE[0].listFileNameCortoInform[0]
+          data.SFILE_NAME_LARGO =  element.SFILE_NAME_LARGO
+        }else{
+          data.SRUTA_FILE_NAME = ""
+          data.SFILE_NAME=  ""
+          data.SFILE_NAME_LARGO =  ""
+        }
+      
         this.core.loader.show();
+        debugger
+        console.log("la data",data)
         if(element.CONSULTA == 'C'){
          
+          let uploadPararms: any = {}
+          uploadPararms.NIDALERTA = alerta.NIDALERTA;
+          uploadPararms.NREGIMEN = this.regimen.id;
+          uploadPararms.STIPO_CARGA = "COMPLEMENTO-OC";
+          uploadPararms.NIDALERTA_CABECERA =  alerta.NIDALERTA_CABECERA;
+          uploadPararms.NPERIODO_PROCESO = this.PeriodoComp;
+          uploadPararms.NIDUSUARIO_MODIFICA =  element.ID_USUARIO
+          if(validador == 1){
+            uploadPararms.SRUTA_ADJUNTO = 'COMPLEMENTO-OC' +'/' + alerta.NIDALERTA + '/' + 'CABECERA/' + alerta.NIDALERTA_CABECERA + '/' +  this.PeriodoComp + '/' + this.regimen.id + '/' + element.FILE[0].listFileNameInform[0];
+            uploadPararms.SRUTA = 'COMPLEMENTO-OC' + '/' + alerta.NIDALERTA + '/CABECERA/' + alerta.NIDALERTA_CABECERA + '/' + this.PeriodoComp + '/' + this.regimen.id ;
+            uploadPararms.listFiles = element.FILE[0].respPromiseFileInfo
+            uploadPararms.listFileName =  element.FILE[0].listFileNameInform
+          }else{
+            uploadPararms.SRUTA_ADJUNTO = ""
+            uploadPararms.SRUTA = ""
+            uploadPararms.listFiles = ""
+            uploadPararms.listFileName =  ""
+          }
+         
           
-          await this.userConfigService.GetInsCormularioComplUsu(data)
+          
+          if(validador == 1){
+            await this.userConfigService.GetInsCormularioComplUsu(data)
+            await this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms)
+            await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
+          }else{
+            await this.userConfigService.GetInsCormularioComplUsu(data)
+          }
+
           await this.ConsultaComplementoUsuarios()
           await this.ListaAlertas()
         }
@@ -1079,16 +1140,19 @@ async ListaUsuario(){
 NewArreglo:any = []
 async ListaAlertas(){
   this.NewArreglo = []
-  
+   let FILE:any = []
   this.arrResponsable.forEach(item => {
     let objComplemento = this.listaComplemento.filter( t=> t.NIDALERTA == item.NIDALERTA )
     let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
+     //resultado.FILE = []
+    
     if(objComplemento.length > 0){
       let obj:any = {}
       obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
       obj.NOMBRECOMPLETO = item.NOMBRECOMPLETO
       obj.NREGIMEN = item.NREGIMEN
       obj.RESULTADO = resultado
+      // obj.RESULTADO = FILE
       obj.NIDALERTA = item.NIDALERTA
       this.NewArreglo.push(obj)
       //item.RESULTADO = resultado
@@ -1118,6 +1182,7 @@ cambioCombo (index , val){
   
 }
 async  AgregarUsuario(item,lilistComplemento,iUSelect){
+  
   var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
   let usuario = this.ListUser.filter(it => it.ID_USUARIO == this.valueUserSelect[iUSelect])
   let existe = this.NewArreglo[index].RESULTADO.filter(it => it.NOMBRECOMPLETO == usuario[0].NOMBRECOMPLETO)
@@ -1146,9 +1211,15 @@ async  AgregarUsuario(item,lilistComplemento,iUSelect){
   }else{
     this.indexSave = iUSelect
      usuario[0].SNOMBRE_ESTADO = 'PENDIENTE'
+     usuario[0].FILE = []
+     usuario[0].SFILE_NAME = ''
+     usuario[0].SFILE_NAME_LARGO = ''
+     
      await this.NewArreglo[index].RESULTADO.push(usuario[0]);
      
   }
+
+  console.log(" this.NewArreglo 111111", this.NewArreglo)
     
   
 }
@@ -1158,7 +1229,7 @@ descargarComplemento (item,listUsu){
   this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
 }
 descargarComplemento2 (item){
-  debugger;
+  
   let SRUTA_PDF = '';
   if(this.NewArreglo == undefined){
     this.NewArreglo = []
@@ -1208,5 +1279,75 @@ ValidarCabeceraComplemento(){
   
   }
 
+  async insertAdjunto(item,arrObj,listUsu){
+    
+    var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
+    var indexResultado = this.NewArreglo[index].RESULTADO.findIndex(fil => fil.ID_USUARIO == listUsu.ID_USUARIO && fil.NOMBRECOMPLETO == listUsu.NOMBRECOMPLETO)
+    var validador = this.NewArreglo[index].RESULTADO[indexResultado].FILE
+   
+  
+    console.log("validador",validador)
+    if(validador.length > 0  ){
+      swal.fire({
+        title: 'Bandeja del formularios', //+ this.sNameTipoUsuario,
+        icon: 'warning',
+        text: 'Solo se puede adjuntar un archivo',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor:'#FA7000',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+       return
+      }).catch(err => {
+      
+      })
+     return
+    }else{
+      this.NewArreglo[index].RESULTADO[indexResultado].SFILE_NAME = arrObj.listFileNameCortoInform[0];
+      this.NewArreglo[index].RESULTADO[indexResultado].SFILE_NAME_LARGO = arrObj.listFileNameInform[0];
+      await this.NewArreglo[index].RESULTADO[indexResultado].FILE.push(arrObj);
+      console.log(" this.NewArreglo 22222", this.NewArreglo)
+  
+    }
+   
+  }
+
+  async descargarComplementoSubido(item){
+    await this.ConsultaComplementoUsuarios()
+    let DATA =  this.listaComplementoUsuario.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDUSUARIO_ASIGNADO == item.NIDUSUARIO_ASIGNADO )
+    
+    let SRUTA = DATA[0].SRUTA_FILE_NAME;
+    let SRUTA_LARGA = DATA[0].SFILE_NAME_LARGO;
+    
+   
+    this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+  }
+
+  removeFile(item,listUsu){
+   
+    console.log("NewArreglo",this.NewArreglo)
+    var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
+    var indexResultado = this.NewArreglo[index].RESULTADO.findIndex(fil => fil.ID_USUARIO == listUsu.ID_USUARIO && fil.NOMBRECOMPLETO == listUsu.NOMBRECOMPLETO)
+    this.NewArreglo[index].RESULTADO[indexResultado].FILE = []
+    this.NewArreglo[index].RESULTADO[indexResultado].SFILE_NAME = ''
+    this.NewArreglo[index].RESULTADO[indexResultado].SFILE_NAME_LARGO = ''
+    
+    console.log("NewArreglo",this.NewArreglo)
+    console.log("item",item)
+  }
+
+  descargarArchivoSubido(item,listUsu){
+   
+    let SRUTA = listUsu.SRUTA_FILE_NAME;
+    let SRUTA_LARGA = listUsu.SFILE_NAME_LARGO;
+    
+   
+    this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+  }
   
 }

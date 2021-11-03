@@ -166,6 +166,7 @@ import { TemplateContraparteComponent } from './components/responsable/templates
 import { TemplateColaboradorComponent } from './components/responsable/templates/template-colaborador/template-colaborador.component';
 import { CustomerManagerUpdateComponent } from './pages/customer-manager-update/customer-manager-update.component';
 import { LoginUpdateComponent } from './pages/login-update/login-update.component';
+import { NavbarUpdateComponent } from './components/navbar-update/navbar-update.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -314,6 +315,7 @@ import { LoginUpdateComponent } from './pages/login-update/login-update.componen
     TemplateColaboradorComponent,
     CustomerManagerUpdateComponent,
     LoginUpdateComponent,
+    NavbarUpdateComponent,
 
    
     //Validaciones

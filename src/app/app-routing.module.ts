@@ -78,6 +78,7 @@ import { TemplateRGComponent } from './../app/components/responsable/templates/t
 import { TemplateC3Component } from './../app/components/responsable/templates/template-c3/template-c3.component';
 import { MantenimientoComplementoComponent } from './../app/mantenimiento-complemento/mantenimiento-complemento.component';
 
+import { NavbarUpdateComponent } from './../app/components/navbar-update/navbar-update.component';
 //fin formularios antiguos
 
 const routes: Routes = [
@@ -153,9 +154,10 @@ const routes: Routes = [
   { path: 'config-demanda', component: ConfigDemandaComponent},
   { path: 'rg', component: TemplateRGComponent},
   { path: 'C3', component: TemplateC3Component},
-  { path: 'complement-maintenance', component: MantenimientoComplementoComponent}
+  { path: 'complement-maintenance', component: MantenimientoComplementoComponent},
   
-
+  //
+  { path: 'navbar', component: NavbarUpdateComponent},
 
 ];
 @NgModule({
