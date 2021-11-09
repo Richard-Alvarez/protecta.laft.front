@@ -355,7 +355,7 @@ border-bottom:2px solid #FA7000;
     padding: 16px;
   }
   
-  .sticky {
+  /* .sticky {
     position: sticky;
     top: 0;
     width: 100%;
@@ -367,11 +367,13 @@ border-bottom:2px solid #FA7000;
 
   .sticky  {
     padding-top: 10px;
+  } */
+
+
+
+  .tabs-top{
+    padding-top: 100px !important;
   }
-
-
-
-
 
 
 

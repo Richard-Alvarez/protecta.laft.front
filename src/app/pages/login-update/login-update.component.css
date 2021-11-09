@@ -175,6 +175,8 @@
   }
   
   a{
+    padding: 10px;
+    float: right;
     display: block;
     text-align: right;
     text-decoration: none;

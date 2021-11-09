@@ -1,26 +1,21 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import swal from 'sweetalert2';
-import { environment } from 'src/environments/environment'
 import { CoreService } from '../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { ModalBandejaComponent } from '../../modal-bandeja/modal-bandeja.component';
-import { DevueltoComponent } from '../devuelto/devuelto.component'
-import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { ExcelService } from 'src/app/services/excel.service';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import {  DataResponsableService } from '../../../services/data-responsable.service';
 import { SbsreportService } from '../../../services/sbsreport.service';
 import * as $ from 'jquery';
 
 
 @Component({
-  selector: 'app-historico-responsable',
-  templateUrl: './historico-responsable.component.html',
-  styleUrls: ['./historico-responsable.component.css']
+  selector: 'app-historico-clientes',
+  templateUrl: './historico-clientes.component.html',
+  styleUrls: ['./historico-clientes.component.css']
 })
-export class HistoricoResponsableComponent implements OnInit {
+export class HistoricoClientesComponent implements OnInit {
 
   /*indiceIconDinamic;
   boolPalomitaHeaderPlus:boolean = true;
@@ -115,72 +110,71 @@ export class HistoricoResponsableComponent implements OnInit {
   async ngOnInit()  {
 
     await this.obtenerPeriodos()
-
-    this.core.config.rest.LimpiarDataGestor()
-    this.core.loader.show();
-    let usuario = this.core.storage.get('usuario')
+   
+      //  this.core.config.rest.LimpiarDataGestor()
+      this.core.loader.show();
+      let usuario = this.core.storage.get('usuario')
+      
+      this.STIPO_USUARIO = usuario['tipoUsuario']
+      this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
+      this.arrRegimen = this.getRegimenDinamic();
     
-    this.STIPO_USUARIO = usuario['tipoUsuario']
-    this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
-    
-    this.setStatesInit();
+      if(this.IDListPeriodo === "0"){
 
-    this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
+        this.setStatesInit();
 
-
+        this.NPERIODO_PROCESO = 0//this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
+        //await this.getOfficialAlertFormList()
+        if (this.STIPO_USUARIO === 'RE') {
+          this.userGroupListGral = [1]
+          this.userGroupListSimpli = [1]
+        }
+        //this.getTipoUsuario()
+        //this.fillFileGroup()
+        this.arrResponsablesRevisadoGral = []
   
-    this.arrResponsablesByCerrado = [
-      {
-        "id": "id001",
-        "usuario": "Alfredo Chan Way Diaz",
-        "fecha_movimiento": "18/12/2020 16:07:22",
-        "periodo": "01/07/20 al 30/09/20",
-        "respuesta": "Sí",
-        "comentario": "Un comentario uno"
-      },
-      {
-        "id": "id002",
-        "usuario": "Usuario de prueba",
-        "fecha_movimiento": "18/12/2020 16:07:22",
-        "periodo": "01/07/20 al 30/09/20",
-        "respuesta": "Sí",
-        "comentario": "Un comentario uno"
-      }
-    ]
-
-    this.NPERIODO_PROCESO = 20210630//parseInt(localStorage.getItem("periodo"))
-    //await this.getOfficialAlertFormList()
-    this.arrRegimen = this.getRegimenDinamic();
+        this.arrResponsablesRevisadoSimpli = []
    
-    if (this.STIPO_USUARIO === 'RE') {
-      this.userGroupListGral = [1]
-      this.userGroupListSimpli = [1]
-    }
+        this.arrResponsablesInformeTerminadoGral = []
     
-    //this.getTipoUsuario()
-    //this.fillFileGroup()
-   
+        this.arrResponsablesInformeTerminadoSimpli = []
+     
+      
+      }else{
+        this.setStatesInit();
+        this.NPERIODO_PROCESO = this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
+        await this.getOfficialAlertFormList()
+        if (this.STIPO_USUARIO === 'RE') {
+          this.userGroupListGral = [1]
+          this.userGroupListSimpli = [1]
+        }
+        this.getTipoUsuario()
+        this.fillFileGroup()
+     
+     
+      } 
+    
 
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
     let linkactual = link[link.length-1].trim()
-    if(linkactual == 'clientes'){
+    if(linkactual == 'historico-clientes'){ 
       try {
         window.onscroll = function() {myFunction()};
       
           function myFunction() {
             if (window.scrollY > 80) {
               document.getElementById('navbar_top').classList.add('fixed-top');
-             
+              document.getElementById('navbar_top').classList.add('tabs-top');
             } else {
               document.getElementById('navbar_top').classList.remove('fixed-top');
-            
+              document.getElementById('navbar_top').classList.remove('tabs-top');
               document.body.style.paddingTop = '0';
             } 
               
             } 
       } catch (error) {
-      
+        //console.error('el error: ',error)
       }
     }
    
@@ -2466,7 +2460,7 @@ export class HistoricoResponsableComponent implements OnInit {
       let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
      
-      if (cantidadResponsables > cantidadInformes) {
+      if (false) {
         
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
@@ -3070,6 +3064,81 @@ export class HistoricoResponsableComponent implements OnInit {
     }
   }
 
+
+  /*@HostListener("window:scroll", []) onWindowScroll() {
+    // do some stuff here when the window is scrolled
+   
+    const verticalOffset = window.pageYOffset 
+          || document.documentElement.scrollTop 
+          || document.body.scrollTop || 0;
+   
+    let src:any = document.getElementsByTagName('section');
+    let indiceSrc = 0;
+    for(let itemSrc of src){
+      
+      if((itemSrc.offsetTop - document.documentElement.scrollTop) < 20){
+      
+        localStorage.setItem('SectionPosition',this.arrListSections[indiceSrc].nombre)
+      }
+      indiceSrc++
+    }*/
+    /*if(){
+
+    }*/
+    
+  //}
+
+  /*getEtiquetaDinamic(indice,icono){
+    if(this.boolPalomitaHeaderPlus === true && this.indiceIconDinamic === indice && icono === 1){
+      return 'showEtiqueta'
+    }
+    if(this.boolPalomitaHeaderMinus === true && this.indiceIconDinamic === indice && icono === 2){
+      return 'showEtiqueta'
+    }
+    if(this.boolPalomitaHeaderPlus === false && this.indiceIconDinamic === indice && icono === 1){
+      return 'hiddenEtiqueta'
+    }
+    if(this.boolPalomitaHeaderMinus === false && this.indiceIconDinamic === indice && icono === 2){
+      return 'hiddenEtiqueta'
+    }
+  }
+
+  setEtiquetaDinamic(indice,icono){
+    if(this.boolPalomitaHeaderPlus === true && this.indiceIconDinamic === indice && icono === 1){
+      this.boolPalomitaHeaderPlus = false;
+    }
+    if(this.boolPalomitaHeaderPlus === false && this.indiceIconDinamic === indice && icono === 1){
+      this.boolPalomitaHeaderPlus = true;
+    }
+    if(this.boolPalomitaHeaderMinus === true && this.indiceIconDinamic === indice && icono === 2){
+      this.boolPalomitaHeaderPlus = false;
+    }
+    if(this.boolPalomitaHeaderMinus === false && this.indiceIconDinamic === indice && icono === 2){
+      this.boolPalomitaHeaderPlus = true;
+    }
+  }*/
+
+  /*setPalomitaMinus(id){
+    //this.renderer.addClass(this.contenido.nativeElement, "cerrarNav");remove
+    this.renderer.addClass(this.contentIconPlus.nativeElement, "showPlus");
+    this.renderer.removeClass(this.contentIconMinus.nativeElement, "showMinus");
+    this.renderer.addClass(this.contentIconMinus.nativeElement, "hiddenMinus");
+  }
+
+  setPalomitaPlus(){
+    this.renderer.addClass(this.contentIconMinus.nativeElement, "showPlus");
+    this.renderer.removeClass(this.contentIconPlus.nativeElement, "showPlus");
+    this.renderer.addClass(this.contentIconPlus.nativeElement, "hiddenPlus");
+  }*/
+
+  /*getIdRegimem(regimen){
+    if(regimen === 1){
+      return 'regGeneral'
+    }
+    if(regimen === 2){
+      return 'regSimpli'
+    }
+  }*/
   redict(){
     document.getElementById('acordionPENDIENTE-INFORMEGral0').focus({ preventScroll : false})
   }
@@ -3084,20 +3153,73 @@ export class HistoricoResponsableComponent implements OnInit {
     document.getElementById('consulta0').focus({ preventScroll : false})
   }
 
+
   ListPeriodos:any = []
-  IDListPeriodo = 0
   ListAnnos:any =[]
+  IDListAnno:number = 0
+  IDListPeriodo:string = "0"
+  NewListAnnos
+  NewListPeriodos 
   async obtenerPeriodos(){
+   
     this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
+    
+    this.ListPeriodos.forEach((element,inc) => {
+        let anno =  element.endDate.toString().substr(6,4)
+        let mes = element.endDate.toString().substr(3,2)
+        let dia = element.endDate.toString().substr(0,2) 
+        this.ListPeriodos[inc].periodo =  anno + mes + dia
+        
+    });
     console.log("Periodos",this.ListPeriodos)
-      this.ListPeriodos.forEach((element,inc) => {
-         let data:any = {}
-         data.ID = inc
-         data.ANNO =  element.endDate.toString().substr(6,4) 
-         this.ListAnnos.push(data)
+    
+      for( let i = 0; i < this.ListPeriodos.length ; i++){
+        let exists = true
+        let data:any = {}
+        data.ID = i
+        data.ANNO =  this.ListPeriodos[i].endDate.toString().substr(6,4) 
+        data.FECHAEND =  this.ListPeriodos[i].endDate
+        this.ListAnnos.push(data)
+       
+      }
+     
+     let sinRepetidos = this.ListAnnos.filter((valorActual, indiceActual, arreglo) => {
+          return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.ANNO) === JSON.stringify(valorActual.ANNO)) === indiceActual
       });
-  console.log("ListAnnos",this.ListAnnos)
+       this.NewListAnnos = sinRepetidos
+      console.log("Sin repetidos es:", sinRepetidos);
   }
+  
+  BuscarPeriodo(event){
+     
+      console.log("IDListAnno:", this.IDListAnno);
+     
+        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
+   
+        this.IDListPeriodo = "0"
+   
+      
+      console.log("NewListPeriodos:", this.NewListPeriodos);
+     
+  }
+
+  async SeleccionarPeriodo(){
+    console.log("IDListPeriodo",this.IDListPeriodo)
+   
+     this.arrResponsablesRevisadoGral = []
+  
+     this.arrResponsablesRevisadoSimpli = []
+
+     this.arrResponsablesInformeTerminadoGral = []
  
+     this.arrResponsablesInformeTerminadoSimpli = []
+  
+
+    await this.ngOnInit()
+    
+  } 
+
+
+  
 }
 

@@ -2518,8 +2518,9 @@ export class ResponsableComponent implements OnInit {
       let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
      
-      if (cantidadResponsables > cantidadInformes) {
-        
+      // if (cantidadResponsables > cantidadInformes) {
+        if (false) {
+        debugger
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',

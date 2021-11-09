@@ -1,0 +1,154 @@
+<app-navbar></app-navbar>
+
+
+
+<main class="container-fluid app-main">
+
+    <div class="row pl-5 pr-5">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <!-- <br> -->
+    
+    <div class="container-fluid pt-3 pb-3"> 
+        
+        <div class="row pl-5 pr5">
+                    <div class="col-4" style="padding-left:0px">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="pt-1" style="float:left">
+                                    Seleccione un Año:
+                                 </div>
+                                 <div class="col-7" style="float:left">
+                                     <div class=" form-group">
+                                         <select  [(ngModel)]="localResponsable.IDListAnno" name="profile" 
+                                            (change)="localResponsable.BuscarPeriodo($event)"
+                                             style="display: flex;justify-content: center;align-items: center;"
+                                             class="form-control buttonSinBorder">
+                                             <option value="0" selected>Seleccione</option>
+                                             <option *ngFor="let item of localResponsable.NewListAnnos" value="{{item.ANNO}}" id="profileIdSelected" >
+                                                 {{item.ANNO}}</option>
+                                         </select>
+                                     </div>  
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+    
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="pt-1" style="float:left">
+                                    Seleccione un Periodo:
+                                 </div>
+                                 <div class="col-7" style="float:left">
+                                    <div class=" form-group">
+                                        <select  [(ngModel)]="localResponsable.IDListPeriodo" name="profile" 
+                                        (change)="localResponsable.SeleccionarPeriodo($event)"
+                                            style="display: flex;justify-content: center;align-items: center;"
+                                            class="form-control buttonSinBorder">
+                                            <option value="0" selected>Seleccione</option>
+                                            <option *ngFor="let item of localResponsable.NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
+                                                {{item.periodo}}</option>
+                                        </select>
+                                    </div>  
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+        </div>
+    </div>
+
+    <div class="container-fluid pl-5 pr-5">
+        <!-- <div class="card-header bordesCabecera" style="background: white;" >
+        <ul class="nav nav-pills nav-justified">
+            <li class="nav-item"   style="" *ngFor="let tabs of localResponsable.arrRegimen;let variabletabs = index;">
+               
+                <a id="{{tabs.desCorto}}" class="nav-link colortab {{localResponsable.getActiveRegimiento(variabletabs)}} " data-toggle="tab" href="#reg{{tabs.desCorto}}" 
+                style="font-size: 17px;"
+                > {{"Régimen " + tabs.descripcion }}</a>
+            </li>
+            
+        </ul> 
+        </div>  -->
+        <div class="tab-content" style="" >
+              <div   id="reg{{regimen.desCorto}}" *ngFor="let regimen of localResponsable.arrRegimen;let variabletabs = index;" class=" tab-pane {{localResponsable.getShowRegimientoContraparte(variabletabs,regimen)}}">  
+                <!-- <div   id="reg{{regimen.desCorto}}" *ngFor="let regimen of localResponsable.arrRegimen;let variabletabs = index;" class=" tab-pane active">  -->
+               
+                <!-- <div id="reg{{regimen.desCorto}}" *ngFor="let regimen of localResponsable.arrRegimen;let variabletabs = index;" class=" tab-pane {{localResponsable.getListaPerfilGrupo(1)}}">  -->
+                <div class="" style="background-color:transparent !important;">
+                    <div class="row">
+                        <div class="col-lg-8">
+
+                        </div>
+                       
+
+                    </div>
+                    <div class="">
+
+
+                        <!-- <app-completado [parent]="localResponsable" [regimen]="regimen"
+                        [stateCompletado]="stateCompletado"
+                        [arrResponsable]="localResponsable.getArray(stateCompletado.sState,regimen.id)"
+                        [userGroupList]="localResponsable.getArrayUserGroup(regimen.id)"></app-completado>
+
+                        <app-pendiente-informe [parent]="localResponsable" [regimen]="regimen"
+                                    [statePendienteInforme]="statePendienteInforme"
+                                    [arrResponsable]="localResponsable.getArray(statePendienteInforme.sState,regimen.id)"
+                                    [userGroupList]="localResponsable.getArrayUserGroup(regimen.id)"></app-pendiente-informe> -->
+
+                        <!--REVISADO-->
+                        <div *ngIf="STIPO_USUARIO != 'RE' "> 
+                            <div>
+                                <app-revisado [parent]="localResponsable" [regimen]="regimen"
+                                    [stateRevisado]="stateRevisado"
+                                    [arrResponsable]="localResponsable.getArray(stateRevisado.sState,regimen.id)"
+                                    [userGroupList]="localResponsable.getArrayUserGroup(regimen.id)"></app-revisado>
+                            </div>
+                        </div>
+                        <br>
+                       
+                        
+                        <!--INFORME TERMINADO-->
+                        <div *ngIf="STIPO_USUARIO != 'RE' "> 
+                            <div>
+                                <app-informe-terminado [parent]="localResponsable" [regimen]="regimen"
+                                    [stateInformeTerminado]="stateInformeTerminado"
+                                    [arrResponsable]="localResponsable.getArray(stateInformeTerminado.sState,regimen.id)"
+                                    [userGroupList]="localResponsable.getArrayUserGroup(regimen.id)" [ValidadorHistorico]="0" [HistoricoPeriodo]="localResponsable.IDListPeriodo"></app-informe-terminado>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                 
+             </div>
+            
+            
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+  
+
+
+</main>
+
+<br>
+<app-footer></app-footer>
