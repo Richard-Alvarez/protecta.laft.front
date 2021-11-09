@@ -480,6 +480,17 @@ export class UserconfigService {
       }
     })
   }
+  BusquedaManual(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlBusquedaManual, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
   GetUpdComplementoCab(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -1374,7 +1385,18 @@ export class UserconfigService {
         }
       })
   }
-    
+  getListaTipo(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetListTipo).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        //console.log(error)
+        return reject(error)
+      }
+    })
+}
 
   updateListClienteRefor(data): Promise<any> {
     return new Promise((resolve, reject) => {

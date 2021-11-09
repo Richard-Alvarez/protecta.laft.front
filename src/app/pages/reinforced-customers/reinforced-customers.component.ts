@@ -88,6 +88,14 @@ export class ReinforcedCustomersComponent implements OnInit {
     localStorage.setItem('boolClienteReforzado', 'true');
     localStorage.setItem('SESTADO_BUTTON_SAVE','1')
     localStorage.setItem('sEstadoTratamientoCliente','CRF');
+    // debugger
+    //  let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
+    //  if (valuenSelectPestaniaClient == null) {
+    //    localStorage.setItem("nSelectPestaniaClient", '0')
+    //    let valuenSelectSubPestania = localStorage.getItem("nSelectSubPestania")
+    //    if (valuenSelectSubPestania == null)
+    //      localStorage.setItem("nSelectSubPestania", '0')
+    //  }
   }
 
   setDataViewCustomerAprobar(item) {
@@ -135,7 +143,14 @@ export class ReinforcedCustomersComponent implements OnInit {
     localStorage.setItem("NIDGRUPOSENAL", "1")
     //this.core.storage.set('view-c2-arrListasAll', this.internationalList)
      this.spinner.hide()
-
+    //  debugger
+    //  let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
+    //  if (valuenSelectPestaniaClient == null) {
+    //    localStorage.setItem("nSelectPestaniaClient", '0')
+    //    let valuenSelectSubPestania = localStorage.getItem("nSelectSubPestania")
+    //    if (valuenSelectSubPestania == null)
+    //      localStorage.setItem("nSelectSubPestania", '0')
+    //  }
     this.router.navigate(['/c2-detail'])
 
   }
@@ -190,7 +205,7 @@ export class ReinforcedCustomersComponent implements OnInit {
         this.arrCoincidencias = respClientesCoincidFormat
         */
         this.arrCheckboxClient = []
-        await this.parent.getClientsByTratamientoSinSpinner()
+        //await this.parent.getClientsByTratamientoSinSpinner()
         this.spinner.hide()
       }
       else{
@@ -334,7 +349,7 @@ export class ReinforcedCustomersComponent implements OnInit {
 
   arrResultadoFilter: any = []
    getBuscarClient(){
-       return this.arrResultadoFilter.length > 0 ? this.arrResultadoFilter : this.arrResultados
+       return this.arrResultados
   }
 
   setFilterResultadosClient(){
@@ -541,7 +556,7 @@ async getSwalOptionClient(data,dataService,indice){
         return
         //swal.fire('Changes are not saved', '', 'info')
       }
-      await this.parent.getResultsList()
+      await this.parent.getResultsList(false)
     })
   }
 

@@ -33,6 +33,8 @@ class Rutas {
   public urlUpdateRevisedState: string = this.base + "monitoreoSenales/UpdateRevisedState";
   public urlGetCommentHeader: string = this.base + "monitoreoSenales/GetCommentsHeader";
   public urlInsertCommentHeader: string = this.base + "monitoreoSenales/InsertCommentHeader";
+  public urlBusquedaManual: string = this.base + "monitoreoSenales/BusquedaManual";
+  public urlGetListTipo: string = this.base + "monitoreoSenales/GetListaTipo";
   public urlGetWorkModuleList: string = this.base + "monitoreoSenales/GetWorkModuleList";
   public urlGetWorkModuleDetail: string = this.base + "monitoreoSenales/GetWorkModuleDetail";
   public urlInsertCompanyDetailUser: string = this.base + "monitoreoSenales/InsertCompanyDetailUser";
