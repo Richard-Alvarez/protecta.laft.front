@@ -226,4 +226,127 @@ width: 100%;
   .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
     box-shadow: none !important; 
   }
-  
+  .icon-descarga{
+    font-size: 30px;
+    float: left;
+    padding: 10px;
+    color: #fd7e14;
+  }
+
+  .icon-descarga2{
+    font-size: 30px;
+    float: right;
+    padding: 10px;
+    color: #fd7e14;
+  }
+  /*********************************** PARA ADJUNTAR ARCHIVO *********************/
+  /**********File Inputs**********/
+.container-input {
+  text-align: center;
+  /* background: #282828; */
+  /* border-top: 5px solid #c39f77; */
+  padding: 50px 0;
+  border-radius: 6px;
+  width: 50%;
+   margin: 0 auto;  
+  margin-bottom: 20px;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  max-width: 80%;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* cursor: pointer; */
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+}
+
+.Puntero{
+  cursor: pointer;
+}
+
+.inputfile + label svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  margin-top: -0.25em;
+  margin-right: 0.25em;
+}
+
+.iborrainputfile {
+font-size:16px; 
+font-weight:normal;
+font-family: 'Lato';
+}
+
+
+
+/* style 7 */
+
+.inputfile-7 + label {
+  /* color: #c39f77;*/
+  color: blue
+} 
+
+.inputfile-7 + label {
+  /* border: 1px solid #c39f77; */
+  border: 1px solid #fd7e14;
+  font-size: 1rem;
+  background-color: #fff;
+  padding: 0;
+}
+
+.inputfile-7:focus + label,
+.inputfile-7.has-focus + label,
+.inputfile-7 + label:hover {
+  border-color: #f79544;
+}
+
+.inputfile-7 + label span,
+.inputfile-7 + label strong {
+  padding: 0.625rem 1.25rem;
+}
+
+.inputfile-7 + label span {
+  width: 200px;
+  min-height: 1em;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.inputfile-7 + label strong {
+  height: 100%;
+  color: #fff;
+  /* background-color: #c39f77; */
+  background-color: #fd7e14;
+  display: inline-block;
+}
+
+.inputfile-7:focus + label strong,
+.inputfile-7.has-focus + label strong,
+.inputfile-7 + label:hover strong {
+  background-color: #f79544;
+}
+
+@media screen and (max-width: 50em) {
+.inputfile-7 + label strong {
+  display: block;
+}
+}
+/**********End File Inputs**********/

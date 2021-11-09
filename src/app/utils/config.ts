@@ -1,10 +1,10 @@
 class Rutas {
 
- private base: string = 'http://localhost:5001/api/'; 
+   private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-//private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
  // private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -202,7 +202,11 @@ class Rutas {
   public urlInsCorreoUsuario:string = this.base + "monitoreoSenales/InsCorreoUsuario";
   public urlgetListaUsuarioCorreos:string = this.base + "monitoreoSenales/getListaUsuarioCorreos";
   public urlEnvioCorreoConfirmacion:string = this.base + "monitoreoSenales/EnvioCorreoConfirmacion";
-  
+
+  //LISTAR LOS ADJUNTOS
+  public urlgetListaAdjuntos:string = this.base + "monitoreoSenales/getListaAdjuntos";
+  //ELIMINAR ADJUNTOS
+  public urlgetDeleteAdjuntos:string = this.base + "monitoreoSenales/getDeleteAdjuntos";
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }

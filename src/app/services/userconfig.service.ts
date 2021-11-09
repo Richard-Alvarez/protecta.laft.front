@@ -541,6 +541,19 @@ export class UserconfigService {
     })
   }
 
+  getListaAdjuntos(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlgetListaAdjuntos, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+  
+
   EnvioCorreoConfirmacion(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
@@ -1599,6 +1612,18 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlDeleteAdjuntosInformAlerta, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  getDeleteAdjuntos(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlgetDeleteAdjuntos, data).subscribe((response) => {
           return resolve(response);
         });
       } catch (error) {

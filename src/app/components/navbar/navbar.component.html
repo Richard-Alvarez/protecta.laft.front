@@ -61,8 +61,10 @@ style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:
         
         
         <div *ngFor="let subM of optionListSubMenu" class="sideNav2 col-lg-12">
-            
-            <a *ngIf="subM.nFatherId == option.nResourceId" [routerLink]="['/' + subM.sRouterLink]">{{ subM.sName }}</a>
+            <div  (click)="changeClient($event)" id="{{ subM.sName }}">
+                <a *ngIf="subM.nFatherId == option.nResourceId" [routerLink]="['/' + subM.sRouterLink]" >{{ subM.sName }}</a>
+            </div>
+           
             
         </div>
         

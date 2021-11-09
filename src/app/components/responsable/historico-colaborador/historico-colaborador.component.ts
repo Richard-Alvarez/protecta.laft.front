@@ -13,12 +13,15 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { ResponsableGlobalComponent } from '../responsableGlobal';  
 import { SbsreportService } from '../../../services/sbsreport.service';
+
+
 @Component({
-  selector: 'app-contraparte',
-  templateUrl: './contraparte.component.html',
-  styleUrls: ['./contraparte.component.css']
+  selector: 'app-historico-colaborador',
+  templateUrl: './historico-colaborador.component.html',
+  styleUrls: ['./historico-colaborador.component.css']
 })
-export class ContraparteComponent implements OnInit {
+export class HistoricoColaboradorComponent implements OnInit {
+
   statePendiente: any = { sState: 'PENDIENTE', sCollapHead: 'acordionPENDIENTE', sHrefHead: 'collapPENDIENTEHead', arrayForms: 'arrResponsablesPendiente' }
   stateRevisado: any = { sState: 'REVISADO', sCollapHead: 'acordionREVISADO', sHrefHead: 'collapREVISADOHead', arrayForms: 'arrResponsablesRevisado' };
   stateCompletado: any = { sState: 'COMPLETADO', sCollapHead: 'acordionCOMPLETADO', sHrefHead: 'collapCOMPLETADOHead', arrayForms: 'arrResponsablesPendiente' };
@@ -39,21 +42,27 @@ export class ContraparteComponent implements OnInit {
     private modalService: NgbModal,
     private excelService: ExcelService,
     private sbsReportService: SbsreportService,
-  ) {this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService) }
+   )
+  { this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService)}
 
   async ngOnInit() {
+     //   var pathname = window.location.pathname;
+  //  alert(pathname);
+    // var URLactual = window.location + " ";
+    // let link = URLactual.split("/")
+    // this.linkactual = link[link.length-1].trim()
+    //   // alert(link[link.length-1].trim());
 
     let usuario = this.core.storage.get('usuario')
     this.STIPO_USUARIO = usuario['tipoUsuario']
     
     this.IDPERFIL = usuario['idPerfil']
-
     await this.localResponsable.ngOnInit();
     // this.arrRegimen = this.localResponsable.arrRegimen
 
    
-    await this.getListaPerfilGrupo(1)
-    
+      
+  
   }
 
   private ListaGrupos:any = []
@@ -61,10 +70,10 @@ export class ContraparteComponent implements OnInit {
 
   async  getListaPerfilGrupo(valor){
     this.ListaGrupos = await this.userConfigService.GetListaPerfiles() 
-    
+   
 //Proveedores
     let NewLista = this.ListaGrupos.filter(it =>  it.NIDPROFILE ==this.IDPERFIL)
-  
+    
     if(valor == 1){
      let pro = NewLista.filter(lista =>  lista.SDESGRUPO_SENAL == "Proveedores")
     
@@ -85,6 +94,20 @@ export class ContraparteComponent implements OnInit {
      }
     }
 
+    
+  }
 
-}
+
+  async downloadUniversalFile(ruta, nameFile) {
+    await this.localResponsable.downloadUniversalFile(ruta, nameFile)
+
+  }
+
+  removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
+    this.localResponsable.removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA)
+  }
+
+  async addFilesInforme(event, NIDALERTA, data_null1, regimen,STIPO_CARGA){
+    await this.localResponsable.addFilesInforme(event, NIDALERTA, null, regimen.id,STIPO_CARGA)
+  }
 }

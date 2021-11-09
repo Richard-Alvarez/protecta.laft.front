@@ -22,6 +22,8 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   public desactivar: boolean
   public Usuario
   public idComplemento
+  public PeriodoComp:any
+  public OcultarDescarga:boolean = false
   @Input() reference: any;
  
   @Input() public alert: any;
@@ -34,7 +36,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-   
+    this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
     //await  this.ListaAlerta()
     await  this.getGrupoList()
     await this.listData()
@@ -77,7 +79,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   
   listData(){
     if (this.data == 'null') {
-
+      this.OcultarDescarga = true
     }
     else{
       this.idGrupo = this.data.NIDGRUPOSENAL
@@ -88,6 +90,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
       this.descripcion = this.data.SDESCRIPCION
       this.pregunta = this.data.SPREGUNTA
       this.idComplemento = this.data.NIDCOMPLEMENTO
+      this.NombreArchivo = this.data.SFILE_NAME_LARGO
     }
     
   }
@@ -177,8 +180,8 @@ debugger
                  
                    if(respuesta.value){
     
-                    
-                    //Aca sera el registrar
+                    let validador = (this.NombreArchivo  == '' || this.NombreArchivo  == null ) ? 0 : 1
+                   
                     let dataRegistro:any = {};
                     
                     dataRegistro.NIDCOMPLEMENTO = 0
@@ -190,11 +193,51 @@ debugger
                     dataRegistro.SESTADO =  this.estado == true ? 1 : 2
                     dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
                     dataRegistro.TIPOOPERACION = 'I'
-                   
+                    if(validador == 0){
+                      dataRegistro.SRUTA_FILE_NAME = ''
+                      dataRegistro.SFILE_NAME =  ''
+                      dataRegistro.SFILE_NAME_LARGO = ''
+                    }else{
+                      dataRegistro.SRUTA_FILE_NAME = 'COMPLEMENTO-PLANTILLA' +'/' + this.sennal + '/'  +  this.PeriodoComp + '/' +0+ '/' + this.ArchivoAdjunto.listFileNameInform[0];
+                      dataRegistro.SFILE_NAME =  this.ArchivoAdjunto.listFileNameCortoInform[0]
+                      dataRegistro.SFILE_NAME_LARGO = this.ArchivoAdjunto.listFileNameInform[0]
+                    }
     
-                    this.core.loader.show(); 
-                    await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
-                    this.core.loader.hide(); 
+                    if(validador == 0 ){
+                
+                      this.core.loader.show(); 
+                      await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
+                      //data para eliminar el registro del archivo
+                      // let dataDel:any = {}
+                      // dataDel.NIDALERTA = this.sennal
+                      // dataDel.NPERIODO_PROCESO = this.PeriodoComp
+                      // dataDel.NREGIMEN =  0
+                      // dataDel.STIPO_CARGA = 'COMPLEMENTO-PLANTILLA'
+                      // await this.UserconfigService.getDeleteAdjuntos(dataDel)
+                      // this.core.loader.hide();
+    
+                   }else{
+                    
+                      let uploadPararms: any = {}
+                      uploadPararms.NIDALERTA = this.sennal;
+                      uploadPararms.NREGIMEN = 0;
+                      uploadPararms.STIPO_CARGA = "COMPLEMENTO-PLANTILLA";
+                      uploadPararms.NIDALERTA_CABECERA =  0;
+                      uploadPararms.NPERIODO_PROCESO = this.PeriodoComp;
+                      uploadPararms.NIDUSUARIO_MODIFICA =  this.Usuario.idUsuario
+                      uploadPararms.SRUTA_ADJUNTO = 'COMPLEMENTO-PLANTILLA' +'/' + this.sennal + '/'  +  this.PeriodoComp + '/' + 0+ '/' + this.ArchivoAdjunto.listFileNameInform[0];
+                      uploadPararms.SRUTA = 'COMPLEMENTO-PLANTILLA' + '/' + this.sennal + '/' + this.PeriodoComp + '/' +  0 ;
+                      uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+                      uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
+                
+    
+                      this.core.loader.show(); 
+                      
+                      await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
+                      await this.UserconfigService.insertAttachedFilesInformByAlert(uploadPararms)
+                      await this.UserconfigService.UploadFilesUniversalByRuta(uploadPararms)
+                      this.core.loader.hide();
+                   }
     
                       this.closeModal('edit-modal')
                     }else{
@@ -221,9 +264,9 @@ debugger
            closeButton : 'OcultarBorde'
                        },
        }).then(async (respuesta) =>{
-             
+             debugger
                if(!respuesta.dismiss){
-            
+                let validador = (this.NombreArchivo  == '' || this.NombreArchivo  == null ) ? 0 : 1
                 let dataRegistro:any = {};
                 dataRegistro.NIDCOMPLEMENTO = this.idComplemento
                 dataRegistro.SNOMBRE_COMPLEMENTO = this.nombreComplemento
@@ -234,11 +277,56 @@ debugger
                 dataRegistro.SESTADO =  this.estado == true ? 1 : 2
                 dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
                 dataRegistro.TIPOOPERACION = 'M'
+                debugger
+                if(validador == 0){
+                  dataRegistro.SRUTA_FILE_NAME = ''
+                  dataRegistro.SFILE_NAME =  ''
+                  dataRegistro.SFILE_NAME_LARGO = ''
+                }else{
+                  dataRegistro.SRUTA_FILE_NAME = 'COMPLEMENTO-PLANTILLA' +'/' + this.sennal + '/'  +  this.PeriodoComp + '/' +0+ '/' + this.ArchivoAdjunto.listFileNameInform[0];
+                  dataRegistro.SFILE_NAME =  this.ArchivoAdjunto.listFileNameCortoInform[0]
+                  dataRegistro.SFILE_NAME_LARGO = this.ArchivoAdjunto.listFileNameInform[0]
+                }
+               
 
-                this.core.loader.show(); 
+               if(validador == 0 ){
                 
-                await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
-                this.core.loader.hide();
+                  this.core.loader.show(); 
+                  await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
+
+                  //data para eliminar el registro del archivo
+                  let dataDel:any = {}
+                  dataDel.NIDALERTA = this.sennal
+                  dataDel.NPERIODO_PROCESO = this.PeriodoComp
+                  dataDel.NREGIMEN =  0
+                  dataDel.STIPO_CARGA = 'COMPLEMENTO-PLANTILLA'
+                  await this.UserconfigService.getDeleteAdjuntos(dataDel)
+                  
+                  this.core.loader.hide();
+
+               }else{
+                
+                  let uploadPararms: any = {}
+                  uploadPararms.NIDALERTA = this.sennal;
+                  uploadPararms.NREGIMEN = 0;
+                  uploadPararms.STIPO_CARGA = "COMPLEMENTO-PLANTILLA";
+                  uploadPararms.NIDALERTA_CABECERA =  0;
+                  uploadPararms.NPERIODO_PROCESO = this.PeriodoComp;
+                  uploadPararms.NIDUSUARIO_MODIFICA =  this.Usuario.idUsuario
+                  uploadPararms.SRUTA_ADJUNTO = 'COMPLEMENTO-PLANTILLA' +'/' + this.sennal + '/'  +  this.PeriodoComp + '/' + 0+ '/' + this.ArchivoAdjunto.listFileNameInform[0];
+                  uploadPararms.SRUTA = 'COMPLEMENTO-PLANTILLA' + '/' + this.sennal + '/' + this.PeriodoComp + '/' +  0 ;
+                  uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+                  uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
+            
+
+                  this.core.loader.show(); 
+                  
+                  await this.UserconfigService.InsertUpdateComplemento(dataRegistro)
+                  await this.UserconfigService.insertAttachedFilesInformByAlert(uploadPararms)
+                  await this.UserconfigService.UploadFilesUniversalByRuta(uploadPararms)
+                  this.core.loader.hide();
+               }
+
 
                 
                 }else{
@@ -291,5 +379,134 @@ debugger
   }
 
 
+  async setDataFile(event) {
+      debugger
+       let files = event.target.files;
+   
+       let arrFiles = Array.from(files)
+       
+       let listFileNameInform: any = []
+       arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+      
+       let listFileNameCortoInform = []
+       let statusFormatFile = false
+       for (let item of listFileNameInform) {
+         //let item = listFileNameInform[0]
+         let nameFile = item.split(".")
+         if (nameFile.length > 2 || nameFile.length < 2) {
+           statusFormatFile = true
+           return
+         }
+         let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+         //listFileNameCortoInform.push(fileItem)
+         listFileNameCortoInform.push(fileItem)
+       }
+       if (statusFormatFile) {
+         swal.fire({
+           title: 'Mantenimiento de complemento',
+           icon: 'warning',
+           text: 'El archivo no tiene el formato necesario',
+           showCancelButton: false,
+           showConfirmButton: true,
+           confirmButtonColor:'#FA7000',
+           confirmButtonText: 'Aceptar',
+           showCloseButton:true,
+              customClass: { 
+                 closeButton : 'OcultarBorde'
+                 },
+           
+         }).then(async (result) => {
+         
+         }).catch(err => {
+         
+         })
+       }
+       let listDataFileInform: any = []
+       arrFiles.forEach(fileData => {
+         listDataFileInform.push(this.handleFile(fileData))
+       })
+       let respPromiseFileInfo = await Promise.all(listDataFileInform)
+       return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+     }
+   
 
+     handleFile(blob: any): Promise<any> {
+      return new Promise(resolve => {
+        const reader = new FileReader()
+        reader.onloadend = () => resolve(reader.result)
+        reader.readAsDataURL(blob)
+      })
+    }
+    ArchivoAdjunto:any
+    NombreArchivo:string = ''
+    async AgregarAdjunto(evento){
+     this.ArchivoAdjunto =  await this.setDataFile(evento)
+     console.log( this.ArchivoAdjunto)
+   
+      this.NombreArchivo = this.ArchivoAdjunto.listFileNameInform[0]
+      console.log("this.NombreArchivo", this.NombreArchivo)
+    }
+
+
+    async DescargarArhivo(){
+      let SRUTA = this.data.SRUTA_FILE_NAME;
+      let SRUTA_LARGA = this.data.SFILE_NAME_LARGO;
+      
+      if(SRUTA == '' || SRUTA == null){
+        let mensaje = "No hay archivos para descargar"
+        await this.MensajesAlertas(mensaje)
+        
+      }else{
+        await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+        }
+
+      }
+     
+    
+  
+    async downloadUniversalFile(ruta, nameFile) {
+      debugger
+      try {
+        this.core.loader.show()
+        let data = { ruta: ruta }
+        let response = await this.UserconfigService.DownloadUniversalFileByAlert(data)
+        response = await fetch(`data:application/octet-stream;base64,${response.base64}`)
+        const blob = await response.blob()
+        let url = URL.createObjectURL(blob)
+        let link = document.createElement('a')
+        link.href = url
+        link.download = nameFile
+        link.click()
+        this.core.loader.hide()
+      } catch (error) {
+        console.error("el error en descargar archivo: ", error)
+      }
+  
+    }
+
+    MensajesAlertas(mensaje){
+      swal.fire({
+        title: 'Mantenimiento de complemento',
+        icon: 'warning',
+        text: mensaje,
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor:'#FA7000',
+        confirmButtonText: 'Aceptar',
+        showCloseButton:true,
+           customClass: { 
+              closeButton : 'OcultarBorde'
+              },
+        
+      }).then(async (result) => {
+      
+      }).catch(err => {
+      
+      })
+      return
+    }
+    EliminarArchivo(){
+      debugger
+      this.NombreArchivo = ""
+    }
 }

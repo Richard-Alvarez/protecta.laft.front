@@ -77,7 +77,10 @@ import { ConfigDemandaComponent } from './../app/config-demanda/config-demanda.c
 import { TemplateRGComponent } from './../app/components/responsable/templates/template-rg/template-rg.component';
 import { TemplateC3Component } from './../app/components/responsable/templates/template-c3/template-c3.component';
 import { MantenimientoComplementoComponent } from './../app/mantenimiento-complemento/mantenimiento-complemento.component';
-import { HistoricoResponsableComponent } from './components/responsable/historico-responsable/historico-responsable.component'
+import { HistoricoClientesComponent } from './components/responsable/historico-clientes/historico-clientes.component'
+import { HistoricoProveedorComponent } from './components/responsable/historico-proveedor/historico-proveedor.component'
+import { HistoricoColaboradorComponent } from './components/responsable/historico-colaborador/historico-colaborador.component';
+import { HistoricoContraparteComponent } from './components/responsable/historico-contraparte/historico-contraparte.component';
 import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component'
 import { NavbarUpdateComponent } from './../app/components/navbar-update/navbar-update.component';
 //fin formularios antiguos
@@ -107,7 +110,10 @@ const routes: Routes = [
     // { path: 'responsable', component: ResponsableComponent },
     { path: 'clientes', component: ResponsableComponent },
     { path: 'testResponsable2', component: TestResponsableComponent },
-    { path: 'historico', component: HistoricoResponsableComponent },
+    { path: 'historico-clientes', component: HistoricoClientesComponent },
+    { path: 'historico-colaborador', component: HistoricoColaboradorComponent },
+    { path: 'historico-proveedor', component: HistoricoProveedorComponent },
+    { path: 'historico-contraparte', component: HistoricoContraparteComponent },
     { path: 'busqueda-demanda', component: BusquedaDemandaComponent },
    
   //SUB MENÚS

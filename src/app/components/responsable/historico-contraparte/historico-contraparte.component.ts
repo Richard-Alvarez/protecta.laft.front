@@ -13,12 +13,13 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { ResponsableGlobalComponent } from '../responsableGlobal';  
 import { SbsreportService } from '../../../services/sbsreport.service';
+
 @Component({
-  selector: 'app-contraparte',
-  templateUrl: './contraparte.component.html',
-  styleUrls: ['./contraparte.component.css']
+  selector: 'app-historico-contraparte',
+  templateUrl: './historico-contraparte.component.html',
+  styleUrls: ['./historico-contraparte.component.css']
 })
-export class ContraparteComponent implements OnInit {
+export class HistoricoContraparteComponent implements OnInit {
   statePendiente: any = { sState: 'PENDIENTE', sCollapHead: 'acordionPENDIENTE', sHrefHead: 'collapPENDIENTEHead', arrayForms: 'arrResponsablesPendiente' }
   stateRevisado: any = { sState: 'REVISADO', sCollapHead: 'acordionREVISADO', sHrefHead: 'collapREVISADOHead', arrayForms: 'arrResponsablesRevisado' };
   stateCompletado: any = { sState: 'COMPLETADO', sCollapHead: 'acordionCOMPLETADO', sHrefHead: 'collapCOMPLETADOHead', arrayForms: 'arrResponsablesPendiente' };
@@ -42,18 +43,15 @@ export class ContraparteComponent implements OnInit {
   ) {this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService) }
 
   async ngOnInit() {
-
+    await this.localResponsable.obtenerPeriodos()
     let usuario = this.core.storage.get('usuario')
     this.STIPO_USUARIO = usuario['tipoUsuario']
     
     this.IDPERFIL = usuario['idPerfil']
-
-    await this.localResponsable.ngOnInit();
-    // this.arrRegimen = this.localResponsable.arrRegimen
-
-   
-    await this.getListaPerfilGrupo(1)
     
+    await this.localResponsable.ngOnInit();
+    
+     await this.getListaPerfilGrupo(1)
   }
 
   private ListaGrupos:any = []
@@ -86,5 +84,8 @@ export class ContraparteComponent implements OnInit {
     }
 
 
-}
+  }
+
+  
+
 }
