@@ -371,7 +371,7 @@ export class ComplementaryCustomersComponent implements OnInit {
         //swal.fire('Changes are not saved', '', 'info')
       }
       
-      await this.parent.getResultsList()
+      await this.parent.getResultsList(false)
     })
   }
 
@@ -416,7 +416,7 @@ export class ComplementaryCustomersComponent implements OnInit {
    getBuscarClient(){
       
       // this.arrResultadoFilter = this.arrResultados
-       return this.arrResultadoFilter.length > 0 ? this.arrResultadoFilter : this.arrResultados
+       return this.arrResultados
   }
 
   setFilterResultadosClient(){
