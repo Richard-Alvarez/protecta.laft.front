@@ -169,6 +169,8 @@ import { LoginUpdateComponent } from './pages/login-update/login-update.componen
 import { NavbarUpdateComponent } from './components/navbar-update/navbar-update.component';
 import { HistoricoResponsableComponent } from './components/responsable/historico-responsable/historico-responsable.component';
 import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component';
+
+import { FileUploadModule } from 'ng2-file-upload';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -345,6 +347,7 @@ import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda
     // MenuItem,
     ReactiveFormsModule,
     //TooltipModule
+    FileUploadModule,
   ],
   schemas: [
     
@@ -352,8 +355,8 @@ import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda
   ],
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent],
   providers: [UserconfigService],
-  bootstrap: [AppComponent]
- 
+  bootstrap: [AppComponent],
+  exports: [BusquedaDemandaComponent]
 
 })
 export class AppModule {

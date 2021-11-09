@@ -1,0 +1,98 @@
+.mat-sort-header-container{
+    align-items: center;
+}
+
+.container{
+    font-family: 'Roboto', sans-serif;
+}
+.TitleLine{
+  padding-bottom: 1%;
+  position: relative;
+z-index : 1;
+
+}
+
+.TitleLine:before{
+  content : "";
+  position: absolute;
+  left    : 0;
+  bottom  : 0;
+  height  : 1pxs;
+  width   : 100%;  /* or 100px */
+  border-bottom:2px solid #FA7000;
+}
+
+.borderFormat{
+  padding-right: 15px;padding-left: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+  border: 1px solid #d4d2d2;
+  margin-top: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.btnBuscarStyle{
+  border: 0;
+border-radius: .25em;
+background: initial;
+color: #fff;
+font-size: 1.0625em;
+/*background-color: rgb(250, 112, 0);*/
+/*border-bottom: #3085d6;*/
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+  font-size: 1.20em;
+  font-weight: 400;
+  color: balck;
+  background-color: white;
+  display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: #FA7000;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+/* .parrafoAdj{
+  font-family: Roboto;
+  font-size: 12px;
+  color: black;
+  font-weight: normal;
+} */
+
+.fontText{
+  color: #555555;
+  font-size: 0.9rem;
+  margin-bottom: 0rem;
+}
+
+.btnBuscarStyle{
+  border: 0;
+border-radius: .25em;
+background: initial;
+color: #fff;
+font-size: 1.0625em;
+/*background-color: rgb(250, 112, 0);*/
+/*border-bottom: #3085d6;*/
+}
+
+.BordeHr{
+  border-bottom:  0.5px solid #26296D;
+ }
