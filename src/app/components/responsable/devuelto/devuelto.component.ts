@@ -927,7 +927,7 @@ export class DevueltoComponent implements OnInit {
 
   async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,itemObj,STIPO_CARGA,STIPO_USUARIO){
 
-    await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,itemObj.NREGIMEN,STIPO_CARGA,STIPO_USUARIO,'')
+    await this.parent.addFilesAdjuntosResponsable(event, NIDALERTA_USUARIO, NIDALERTA,itemObj.NREGIMEN,STIPO_CARGA,STIPO_USUARIO,'','')
   }
 
   getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){

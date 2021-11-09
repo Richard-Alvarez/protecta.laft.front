@@ -437,35 +437,35 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
         .filter(t=> t).length
       }
       
-      if(countCabecera != resultComplemento.length ){
+      // if(countCabecera != resultComplemento.length ){
         
   
-        swal.fire({
-          title: 'Bandeja del '+ this.sNameTipoUsuario,
-          icon: 'warning',
-          text: 'Debe adjuntar un archivo en cada complemento.',
-          //showCancelButton: true,
-          showConfirmButton: true,
-          ////cancelButtonColor: '#dc4545',
-          confirmButtonColor: "#FA7000",
-          confirmButtonText: 'Aceptar',
-          //cancelButtonText: 'Cancelar',
-          showCloseButton: true,
+      //   swal.fire({
+      //     title: 'Bandeja del '+ this.sNameTipoUsuario,
+      //     icon: 'warning',
+      //     text: 'Debe adjuntar un archivo en cada complemento.',
+      //     //showCancelButton: true,
+      //     showConfirmButton: true,
+      //     ////cancelButtonColor: '#dc4545',
+      //     confirmButtonColor: "#FA7000",
+      //     confirmButtonText: 'Aceptar',
+      //     //cancelButtonText: 'Cancelar',
+      //     showCloseButton: true,
           
-           customClass: { 
-              closeButton : 'OcultarBorde'
-              },
+      //      customClass: { 
+      //         closeButton : 'OcultarBorde'
+      //         },
           
-        }).then(async (result) => {
+      //   }).then(async (result) => {
           
         
            
-           if(result.value){
-             return
-           }
-          } )  
-          return
-      }
+      //      if(result.value){
+      //        return
+      //      }
+      //     } )  
+      //     return
+      // }
      
      
      }else{
@@ -1398,7 +1398,7 @@ UltimoTooltip(indice, longitud){
 //async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
 addFilesUniversal(event,item,STIPO_CARGA,STIPO_USUARIO){
    debugger
-  this.parent.addFilesAdjuntosResponsable(event, item.NIDALERTA_CABECERA, item.NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO,item.NOMBRECOMPLETO)
+  this.parent.addFilesAdjuntosResponsable(event, item.NIDALERTA_CABECERA, item.NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO,item.NOMBRECOMPLETO,'')
 }
 async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,NOMBRECOMPLETO){
   debugger;
@@ -1549,5 +1549,80 @@ ValidarCabeceraComplemento(){
     this.core.loader.hide()
   }
 
+  listaComplementoUsuario:any = [] 
+async ConsultaComplementoUsuarios(){
+  let data:any ={}
+  data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+ 
+  this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
 
+}
+
+  async descargarComplementoSubido (item){
+    //await this.ConsultaComplementoUsuarios()
+    let data:any = {}
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    let listaAdjuntos = await this.userConfigService.getListaAdjuntos(data)
+    console.log("listaAdjuntos",listaAdjuntos)
+    let newlistaAdjuntos = listaAdjuntos.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.NIDUSUARIO_MODIFICA == item.NIDUSUARIO_ASIGNADO )
+    console.log("listaAdjuntos",newlistaAdjuntos)
+   
+    if(newlistaAdjuntos.length !== 0){
+      newlistaAdjuntos.forEach(objAdj => {
+        let valor = objAdj.SRUTA_ADJUNTO
+        let link = valor.split("/")
+        let nombre = link[link.length-1].trim()
+  
+        console.log(data)
+        let SRUTA = objAdj.SRUTA_ADJUNTO;
+        let SRUTA_LARGA = nombre;
+        this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+      });
+    }else{
+      let mensaje = "No hay muestras para descargar"
+        this.AlertaMensaje(mensaje)
+    }
+    
+   
+   
+  }
+
+  async DescargarPlantilla(item){
+   
+      let listaAlertaComp = await this.userConfigService.GetListaAlertaComplemento()
+      let DATA = listaAlertaComp.filter(it => it.NIDALERTA == item.NIDALERTA)
+
+      if(DATA.length == 0){
+        let mensaje = "No hay plantilla en el complemento"
+        this.AlertaMensaje(mensaje)
+      }else{
+        let SRUTA = DATA[0].SRUTA_FILE_NAME;
+        let SRUTA_LARGA = DATA[0].SFILE_NAME_LARGO;
+        this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+      }
+      
+  }
+
+  AlertaMensaje(mensaje){
+
+    swal.fire({
+      title: 'Bandeja del '+ this.sNameTipoUsuario,
+      icon: 'warning',
+      text: mensaje,
+      showConfirmButton: true,
+      confirmButtonColor: "#FA7000",
+      confirmButtonText: 'Aceptar',
+      showCloseButton: true,
+      customClass: { 
+          closeButton : 'OcultarBorde'
+          },
+      
+    }).then(async (result) => {
+       if(result.value){
+         return
+       }
+      } )  
+      return
+
+  }
 }

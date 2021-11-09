@@ -77,7 +77,12 @@ import { ConfigDemandaComponent } from './../app/config-demanda/config-demanda.c
 import { TemplateRGComponent } from './../app/components/responsable/templates/template-rg/template-rg.component';
 import { TemplateC3Component } from './../app/components/responsable/templates/template-c3/template-c3.component';
 import { MantenimientoComplementoComponent } from './../app/mantenimiento-complemento/mantenimiento-complemento.component';
-
+import { HistoricoClientesComponent } from './components/responsable/historico-clientes/historico-clientes.component'
+import { HistoricoProveedorComponent } from './components/responsable/historico-proveedor/historico-proveedor.component'
+import { HistoricoColaboradorComponent } from './components/responsable/historico-colaborador/historico-colaborador.component';
+import { HistoricoContraparteComponent } from './components/responsable/historico-contraparte/historico-contraparte.component';
+import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component'
+import { NavbarUpdateComponent } from './../app/components/navbar-update/navbar-update.component';
 //fin formularios antiguos
 
 const routes: Routes = [
@@ -105,6 +110,12 @@ const routes: Routes = [
     // { path: 'responsable', component: ResponsableComponent },
     { path: 'clientes', component: ResponsableComponent },
     { path: 'testResponsable2', component: TestResponsableComponent },
+    { path: 'historico-clientes', component: HistoricoClientesComponent },
+    { path: 'historico-colaborador', component: HistoricoColaboradorComponent },
+    { path: 'historico-proveedor', component: HistoricoProveedorComponent },
+    { path: 'historico-contraparte', component: HistoricoContraparteComponent },
+    { path: 'busqueda-demanda', component: BusquedaDemandaComponent },
+   
   //SUB MENÚS
   { path: 'c1-form', component: C1FormComponent },
   { path: 'c2-form', component: C2FormComponent },
@@ -153,9 +164,10 @@ const routes: Routes = [
   { path: 'config-demanda', component: ConfigDemandaComponent},
   { path: 'rg', component: TemplateRGComponent},
   { path: 'C3', component: TemplateC3Component},
-  { path: 'complement-maintenance', component: MantenimientoComplementoComponent}
+  { path: 'complement-maintenance', component: MantenimientoComplementoComponent},
   
-
+  //
+  { path: 'navbar', component: NavbarUpdateComponent},
 
 ];
 @NgModule({

@@ -166,6 +166,12 @@ import { TemplateContraparteComponent } from './components/responsable/templates
 import { TemplateColaboradorComponent } from './components/responsable/templates/template-colaborador/template-colaborador.component';
 import { CustomerManagerUpdateComponent } from './pages/customer-manager-update/customer-manager-update.component';
 import { LoginUpdateComponent } from './pages/login-update/login-update.component';
+import { NavbarUpdateComponent } from './components/navbar-update/navbar-update.component';
+import { HistoricoClientesComponent } from './components/responsable/historico-clientes/historico-clientes.component';
+import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component';
+import { HistoricoProveedorComponent } from './components/responsable/historico-proveedor/historico-proveedor.component';
+import { HistoricoContraparteComponent } from './components/responsable/historico-contraparte/historico-contraparte.component';
+import { HistoricoColaboradorComponent } from './components/responsable/historico-colaborador/historico-colaborador.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -314,6 +320,12 @@ import { LoginUpdateComponent } from './pages/login-update/login-update.componen
     TemplateColaboradorComponent,
     CustomerManagerUpdateComponent,
     LoginUpdateComponent,
+    NavbarUpdateComponent,
+    HistoricoClientesComponent,
+    BusquedaDemandaComponent,
+    HistoricoProveedorComponent,
+    HistoricoContraparteComponent,
+    HistoricoColaboradorComponent,
 
    
     //Validaciones

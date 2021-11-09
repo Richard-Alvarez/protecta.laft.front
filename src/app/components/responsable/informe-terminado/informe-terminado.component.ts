@@ -36,6 +36,8 @@ export class InformeTerminadoComponent implements OnInit {
   @Input() stateInformeTerminado: any = {}
   @Input() userGroupList: any = []
   @Input() parent/*: ResponsableComponent*/
+  @Input() ValidadorHistorico: any
+  @Input() HistoricoPeriodo: any
 
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
@@ -567,9 +569,18 @@ Export2Doc(element, filename = ''){
     
     this.ValidadorReportes = validadador
     console.log("ValidadorReportes",this.ValidadorReportes)
+    let mensaje = ''
     let data :any = {} 
     data.NIDGRUPOSENAL = this.idGrupo
-    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    debugger
+    if(this.ValidadorHistorico == 0){
+      data.NPERIODO_PROCESO = this.HistoricoPeriodo
+      mensaje ='No hay señales en este periodo para poder descargar'
+    }else{
+      data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+      mensaje = 'Debe cerrar todas las señales para la descarga del informe'
+    }
+    //data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     this.core.loader.show()
     this.ListaAlerta = await this.userConfigService.GetAlertaResupuesta(data)
 
@@ -582,7 +593,7 @@ Export2Doc(element, filename = ''){
         swal.fire({
           title: 'Bandeja de Cumplimiento',
           icon: 'error',
-          text: 'Debe cerrar todas las señales para la descarga del informe',
+          text: mensaje,//'Debe cerrar todas las señales para la descarga del informe',
           showCancelButton: false,
           showConfirmButton: true,
           //cancelButtonColor: '#dc4545',
@@ -602,7 +613,7 @@ Export2Doc(element, filename = ''){
             } 
 
         })
-       // return 
+        return 
       }
     
     
@@ -742,15 +753,15 @@ Export2Doc(element, filename = ''){
   var URLactual = window.location + " ";
   let link = URLactual.split("/")
   this.linkactual = link[link.length-1].trim()
-  if(this.linkactual == "clientes"){
+  if(this.linkactual == "clientes" || this.linkactual == "historico-clientes" ){
     return  1
-  }else if(this.linkactual == "colaborador"){
+  }else if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
     return  2
   }
-  else if(this.linkactual == "contraparte"){
+  else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte" ){
     return  4
   }
-  else if(this.linkactual == "proveedor"){
+  else if(this.linkactual == "proveedor" || this.linkactual == "historico-proveedor" ){
     return  3
   }
 }

@@ -12,6 +12,8 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { NgxSpinnerService } from "ngx-spinner";
+import { SbsreportService } from '../../services/sbsreport.service';
+
 
 
 // @Component({
@@ -106,18 +108,21 @@ export class ResponsableGlobalComponent {
   cadenaEstadosSinSenial = 'No se encontraron señales por revisar.'
 
   linkactual = "";
-
+  VALIDADOR = 0
   constructor(
     private core: CoreService,
     private userConfigService: UserconfigService,
     private renderer: Renderer2,
     private modalService: NgbModal,
     private excelService: ExcelService,
+    private sbsReportService: SbsreportService,
     // private spinner: NgxSpinnerService,
     
   ) { }
 
   async ngOnInit() {
+
+    await this.obtenerPeriodos()
 
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
@@ -131,32 +136,49 @@ export class ResponsableGlobalComponent {
     this.STIPO_USUARIO = usuario['tipoUsuario']
     this.IDPERFIL = usuario['idPerfil']
     this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
-    
-    this.setStatesInit();
-
-    this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
-
-
-    
-    this.arrResponsablesByCerrado = [
-      {
-        "id": "id001",
-        "usuario": "Alfredo Chan Way Diaz",
-        "fecha_movimiento": "18/12/2020 16:07:22",
-        "periodo": "01/07/20 al 30/09/20",
-        "respuesta": "Sí",
-        "comentario": "Un comentario uno"
-      },
-      {
-        "id": "id002",
-        "usuario": "Usuario de prueba",
-        "fecha_movimiento": "18/12/2020 16:07:22",
-        "periodo": "01/07/20 al 30/09/20",
-        "respuesta": "Sí",
-        "comentario": "Un comentario uno"
+  if(this.linkactual == "historico-colaborador" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte"){
+    if(this.IDListPeriodo === "0"){
+      this.setStatesInit();
+      //this.NPERIODO_PROCESO = 0
+      //await this.getOfficialAlertFormList()
+      this.arrRegimen = this.getRegimenDinamic();
+      
+      if (this.STIPO_USUARIO === 'RE') {
+        this.userGroupListGral = [1]
+        this.userGroupListSimpli = [1]
       }
-    ] 
+      //this.devueltoHijo.setRegimiento(1);
+      //this.userGroupListSimpli.push('TI')
+     
+      //this.getTipoUsuario()
+      //this.fillFileGroup()
+      this.arrResponsablesRevisadoGral = []
+  
+      this.arrResponsablesRevisadoSimpli = []
+ 
+      this.arrResponsablesInformeTerminadoGral = []
+  
+      this.arrResponsablesInformeTerminadoSimpli = []
 
+    }else{
+      this.setStatesInit();
+      this.NPERIODO_PROCESO = this.IDListPeriodo
+      await this.getOfficialAlertFormList()
+      this.arrRegimen = this.getRegimenDinamic();
+      
+      if (this.STIPO_USUARIO === 'RE') {
+        this.userGroupListGral = [1]
+        this.userGroupListSimpli = [1]
+      }
+      //this.devueltoHijo.setRegimiento(1);
+      //this.userGroupListSimpli.push('TI')
+     
+      this.getTipoUsuario()
+      this.fillFileGroup()
+      
+    }
+  }else{
+    this.setStatesInit();
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
     await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
@@ -170,22 +192,8 @@ export class ResponsableGlobalComponent {
    
     this.getTipoUsuario()
     this.fillFileGroup()
-    //await this.getAllAttachedFiles()
-
-    //await this.core.storage.set('stateRevisado',this.stateRevisado)
-    //await this.core.storage.set('stateCompletado',this.stateCompletado)
-    //await this.core.storage.set('stateDevuelto',this.stateDevuelto)
+  }
     
-    //await this.core.storage.set('arrResponsablesCompleGral',this.arrResponsablesCompleGral)
-    //await this.core.storage.set('arrResponsablesCompleSimpli',this.arrResponsablesCompleSimpli)
-    //await this.core.storage.set('arrResponsablesDevueltoGral',this.arrResponsablesDevueltoGral)
-    //await this.core.storage.set('arrResponsablesDevueltoSimpli',this.arrResponsablesDevueltoSimpli)
-
-    /*this.dataResponsable.Responsable$.subscribe(arreglo => {
-      this.arrDetailC1 = arreglo
-     
-    })*/
-    // await this.getListaPerfilGrupo()
     this.core.loader.hide();
 
   }
@@ -304,9 +312,9 @@ export class ResponsableGlobalComponent {
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
     let valor
-    if(this.linkactual == "colaborador"){
+    if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
       valor = 2
-    }else if(this.linkactual == "contraparte"){
+    }else if(this.linkactual == "contraparte"  || this.linkactual == "historico-contraparte" ){
       valor = 4
     }else{
       valor = 3
@@ -1523,7 +1531,7 @@ export class ResponsableGlobalComponent {
     // } else {
     //   return ''
     // }
-    if(this.linkactual=='colaborador'){
+    if(this.linkactual=='colaborador' || this.linkactual=='historico-colaborador'){
       return 'active'
     }else{
       return ''
@@ -1537,7 +1545,7 @@ export class ResponsableGlobalComponent {
     // } else {
     //   return ''
     // }
-    if(this.linkactual=='proveedor' ||this.linkactual =="contraparte"){
+    if(this.linkactual=='proveedor' ||this.linkactual =="contraparte" || this.linkactual =="historico-contraparte" || this.linkactual =="historico-proveedor"){
       return 'active'
     }else{
       return ''
@@ -1551,7 +1559,7 @@ export class ResponsableGlobalComponent {
     // } else {
     //   return ''
     // }
-    if(this.linkactual =="contraparte"){
+    if(this.linkactual =="contraparte" || this.linkactual =="historico-contraparte"){
       return 'active'
     }else{
       return ''
@@ -2487,11 +2495,11 @@ export class ResponsableGlobalComponent {
       
       let objAlertaItem = arrPendienteInforme.filter(it => it.NIDALERTA == NIDALERTA && it.NREGIMEN == NREGIMEN)
       
-      let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
+      //let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
       
-      if (cantidadResponsables > cantidadInformes) {
-       
+      // if (cantidadResponsables > cantidadInformes) {
+        if (false) {
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',
@@ -2663,8 +2671,8 @@ export class ResponsableGlobalComponent {
   
   }
   arrObjFilesAdjByCabecera: any = []
-
-  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO,NOMBRECOMPLETO) {
+  arrObjFilesComplemento: any = []
+  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO,NOMBRECOMPLETO,ValidadorComplementos) {
     try {
      
       let respSetData = await this.setDataFile(event)
@@ -2672,7 +2680,10 @@ export class ResponsableGlobalComponent {
       //listFileNameCortoInform
       //arrFiles
 
-     
+      if(ValidadorComplementos == 'OC-COMPLEMENTOS'){
+        this.arrObjFilesComplemento = respSetData
+      }
+      
       
       let dataInformFile: any = {}
       let dataInfoFilesTmp = this.arrObjFilesAdjByCabecera.filter(itemInfo => itemInfo.NIDCABECERA_USUARIO == NIDCABECERA_USUARIO && itemInfo.NIDALERTA == NIDALERTA && itemInfo.NREGIMEN === NREGIMEN && itemInfo.STIPO_CARGA === STIPO_CARGA)
@@ -3057,7 +3068,61 @@ export class ResponsableGlobalComponent {
   }
 
   
+  ListPeriodos:any = []
+  ListAnnos:any =[]
+  IDListAnno:number = 0
+  IDListPeriodo:string = "0"
+  NewListAnnos
+  NewListPeriodos 
+  async obtenerPeriodos(){
+   
+    this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
+    
+    this.ListPeriodos.forEach((element,inc) => {
+        let anno =  element.endDate.toString().substr(6,4)
+        let mes = element.endDate.toString().substr(3,2)
+        let dia = element.endDate.toString().substr(0,2) 
+        this.ListPeriodos[inc].periodo =  anno + mes + dia
+        
+    });
+    console.log("Periodos",this.ListPeriodos)
+    
+      for( let i = 0; i < this.ListPeriodos.length ; i++){
+        let exists = true
+        let data:any = {}
+        data.ID = i
+        data.ANNO =  this.ListPeriodos[i].endDate.toString().substr(6,4) 
+        data.FECHAEND =  this.ListPeriodos[i].endDate
+        this.ListAnnos.push(data)
+       
+      }
+     
+     let sinRepetidos = this.ListAnnos.filter((valorActual, indiceActual, arreglo) => {
+          return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.ANNO) === JSON.stringify(valorActual.ANNO)) === indiceActual
+      });
+       this.NewListAnnos = sinRepetidos
+      console.log("Sin repetidos es:", sinRepetidos);
+  }
+  
+  BuscarPeriodo(event){
+     
+      console.log("IDListAnno:", this.IDListAnno);
+     
+        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
+   
+        this.IDListPeriodo = "0"
+   
+      
+      console.log("NewListPeriodos:", this.NewListPeriodos);
+     
+  }
 
+  async SeleccionarPeriodo(){
+    console.log("IDListPeriodo",this.IDListPeriodo)
+    this.VALIDADOR = 1
+    await this.ngOnInit()
+    
+  } 
 
 
 }
