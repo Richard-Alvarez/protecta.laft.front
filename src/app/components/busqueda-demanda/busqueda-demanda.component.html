@@ -82,7 +82,7 @@
                                 <td ><div placement='top' ngbTooltip="{{item.cargo}}">{{cortarCararter(item.SCARGO)}}</div></td>
                                 <td>IDECON</td>
                                 <td class="text-center">
-                                    <img  src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
+                                    <img  (click)="exportListToExcel()" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
                                             <!-- *ngIf="item.tipoDeArchivo == 'xls'" (click)="getCsvFile(item.id)"-->
                                 
                                     <!-- <img *ngIf="item.tipoDeArchivo == 'txt'" src="assets/icons/edit.png" title="Descargar Texto Plano" alt="" style="cursor: pointer;height:40px;width: 35px;"

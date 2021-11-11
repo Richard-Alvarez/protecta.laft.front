@@ -4,6 +4,7 @@ import { UserconfigService } from 'src/app/services/userconfig.service';
 import { DatePipe } from '@angular/common';
 import { FileUploader } from 'ng2-file-upload';
 import { ExcelService } from 'src/app/services/excel.service';
+import swal from 'sweetalert2';
 /* import * as XLSX from 'xlsx'; */
 
 @Component({
@@ -33,7 +34,8 @@ export class BusquedaDemandaComponent implements OnInit {
   constructor(
     public datepipe: DatePipe,
     private core: CoreService,
-    private userConfigService: UserconfigService
+    private userConfigService: UserconfigService,
+    private excelService: ExcelService,
     ) { } 
 
   ngOnInit() {
@@ -48,7 +50,7 @@ export class BusquedaDemandaComponent implements OnInit {
     
     //console.log('',this.timestamp.getDate()|this.timestamp.getMonth()|this.timestamp.getFullYear());
     /*codigodebusqueda*/console.log("codigo busqueda",this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
-    this.GenerarCodigo();
+    //this.GenerarCodigo();
     
   }
   
@@ -122,17 +124,6 @@ export class BusquedaDemandaComponent implements OnInit {
     var codigo = Math.floor(Math.random()*999999)
     console.log("codigo unico",codigo);
     return codigo.toString();
-      /*var longitud = 8;
-      const alfabeto :string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-       StringBuilder token = new StringBuilder();
-      Random rnd = new Random();
-
-      for (int i = 0; i < longitud; i++)
-      {
-          int indice = rnd.Next(alfabeto.Length);
-          token.Append(alfabeto[indice]);
-      }
-      return token.ToString(); */
   }
 
 /*  arrayBuffer:any;
@@ -214,5 +205,65 @@ file:File;
       }
     }
     return ''
+  }
+  exportListToExcel(){debugger;
+    let resultado:any = []
+    resultado = this.resultadoFinal
+    
+    let Newresultado:any = []
+    let resulFinal:any = []
+    if (resultado!= null && resultado.length > 0) {
+      for(let i =0; i< resultado.length;i++){
+        //Newresultado = resultado[i].arrClientesGC
+        Newresultado.push(resultado[i])
+       }
+      /* for(let index = 0 ;index < Newresultado.length; index++){
+        //if(Newresultado[index].length > 1){
+          Newresultado[index].forEach(element => {
+            resulFinal.push(element)
+          });
+        //}else{
+          resulFinal.push(Newresultado[index])
+        //}
+      } */
+
+      //resultadoFinal.push(Newresultado)
+      let data = []
+      /* resulFinal */Newresultado.forEach(t => {
+       
+        let _data = {
+          "Fecha y Hora de Búsqueda" : t.DFECHA_BUSQUEDA,
+          "Usuario que Realizó la Busqueda" : t.SUSUARIO_BUSQUEDA,
+          "Tipo de Documento" : t.STIPO_DOCUMENTO,
+          "Número de Documento" : t.SNUM_DOCUMENTO,
+          "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
+          "Tipo de Persona	" : t.STIPO_PERSONA,
+          "Cargo" : t.SCARGO
+        }
+        /* t.arrListas.forEach(element => {
+          _data[element.SDESTIPOLISTA] = element.SDESESTADO
+        }); */
+        
+        data.push(_data);
+        });
+        
+        this.excelService.exportAsExcelFile(data, "Resultados Busqueda a Demanda");
+    }else {
+      swal.fire({
+        title: 'Gestor de clientes',
+        icon: 'warning',
+        text: 'No hay registros',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
+    }
   }
 }
