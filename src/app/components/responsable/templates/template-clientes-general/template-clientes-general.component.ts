@@ -18,7 +18,7 @@ export class TemplateClientesGeneralComponent implements OnInit {
   @Input() item:any
   @Input() Periodo:number
   @Input() Cantidad:number
-
+  @Input() Validar:number
   //las variables para el reporte global
   @Input() RegimenPendiente:number
   @Input() listaMasivos
