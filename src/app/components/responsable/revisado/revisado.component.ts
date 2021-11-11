@@ -31,6 +31,7 @@ export class RevisadoComponent implements OnInit {
     @Input() arrResponsable:any = []
     @Input() stateRevisado:any = {}
     @Input() userGroupList:any = []
+    @Input() ValidadorHistorico: any
     @Input() parent:ResponsableComponent
 
   constructor(private core: CoreService,
@@ -411,11 +412,58 @@ async ListaAlertasDesdeCompletado(completado){
   
 }
 
-descargarComplemento (item,listUsu){
-  var splitRuta = listUsu.SRUTA_PDF.split('/')
-  this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
+async descargarComplemento (item,listUsu){
+  // var splitRuta = listUsu.SRUTA_PDF.split('/')
+  // this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
+
+  await this.ListaDeAdjunto()
+  console.log("listUsu",listUsu)
+  let listaArchivos = this.listaArchivosComplementos.filter(it => it.STIPO_CARGA == "COMPLEMENTO" && it.NIDALERTA == listUsu.NIDALERTA && it.NIDUSUARIO_MODIFICA == listUsu.NIDUSUARIO_ASIGNADO)
+  if(listaArchivos.length ==0){
+    let mensaje = "El responsable no adjunto ningun archivo"
+    this.AlertaMensaje(mensaje)
+  }else{
+    listaArchivos.forEach(lista => {
+      console.log("listaArchivos",lista)
+      var splitRuta = lista.SRUTA_ADJUNTO.split('/')
+      this.parent.downloadUniversalFile(lista.SRUTA_ADJUNTO, splitRuta[splitRuta.length - 1])
+    });
+   
+  }
+
+  
+
 }
 
+listaArchivosComplementos:any =[]
+async ListaDeAdjunto(){
+  let data:any ={}
+  data.NPERIODO_PROCESO = this.PeriodoComp
+  this.listaArchivosComplementos = await this.userConfigService.getListaAdjuntos(data)
+}
+
+AlertaMensaje(mensaje){
+
+  swal.fire({
+    title: 'Bandeja del Oficial de Cumplimiento',
+    icon: 'warning',
+    text: mensaje,
+    showConfirmButton: true,
+    confirmButtonColor: "#FA7000",
+    confirmButtonText: 'Aceptar',
+    showCloseButton: true,
+    customClass: { 
+        closeButton : 'OcultarBorde'
+        },
+    
+  }).then(async (result) => {
+     if(result.value){
+       return
+     }
+    } )  
+    return
+
+}
 
 
 }

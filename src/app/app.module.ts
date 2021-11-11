@@ -173,6 +173,7 @@ import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda
 import { HistoricoProveedorComponent } from './components/responsable/historico-proveedor/historico-proveedor.component';
 import { HistoricoContraparteComponent } from './components/responsable/historico-contraparte/historico-contraparte.component';
 import { HistoricoColaboradorComponent } from './components/responsable/historico-colaborador/historico-colaborador.component';
+import { InformesComponent } from './components/informes/informes.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
@@ -327,6 +328,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     HistoricoProveedorComponent,
     HistoricoContraparteComponent,
     HistoricoColaboradorComponent,
+    InformesComponent,
 
    
     //Validaciones
