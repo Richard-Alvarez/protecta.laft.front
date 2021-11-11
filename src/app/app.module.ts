@@ -26,6 +26,7 @@ import { TablaRegistrosComponent } from './components/tabla-registros/tabla-regi
 import { ReportComponent } from './pages/report/report.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StrDatePipe } from './pipes/str-date.pipe';
+import { DatePipe } from '@angular/common';
 
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -179,7 +180,7 @@ import { TemplateC2GeneralComponent } from './components/responsable/templates/t
 
 // import { AngularSplitModule } from 'angular-split'; 
 
-
+import { FileUploadModule } from 'ng2-file-upload';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -355,15 +356,16 @@ import { TemplateC2GeneralComponent } from './components/responsable/templates/t
     // MenuItem,
     ReactiveFormsModule,
     //TooltipModule
+    FileUploadModule,
   ],
   schemas: [
     
     NO_ERRORS_SCHEMA
   ],
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent],
-  providers: [UserconfigService],
-  bootstrap: [AppComponent]
- 
+  providers: [UserconfigService, DatePipe],
+  bootstrap: [AppComponent],
+  exports: [BusquedaDemandaComponent]
 
 })
 export class AppModule {

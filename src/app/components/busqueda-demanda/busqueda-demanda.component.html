@@ -1,1 +1,108 @@
-<p>busqueda-demanda works!</p>
+<header>
+    <div > 
+        <app-navbar></app-navbar> 
+    </div>
+    
+</header>
+<main class="container app-main">
+    <section class="container">
+        <section class="header">
+            <article class="row">
+                <button class="btn btn-link text-secondary" style="padding-left: 0px;" routerLink="/home" title="Regresar a la Pantalla Principal">
+                    <span class="fas fa-chevron-left"></span> Pantalla Principal
+                </button>
+            </article>
+            <article>
+                <div class="row" style="display: flex;justify-content: center;align-items: center;padding-right: 505px;">
+                    <div class="col-lg-30">
+                        <h4 class="TitleLine">Búsqueda de coincidencias a demanda</h4>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section class="row borderFormat" style="display: flex;justify-content: center;align-items: center;">
+            <article class="tab-content">
+                <div class="row form-group">
+                    <div class="col-lg-2" >
+                        <span class="fontText" style="position: relative;">Busqueda:</span>
+                    </div>
+                    <div class="col-lg-3" style="margin-left: -20px;">
+                        <select class="form-control" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" style="width: fit-content;">
+                            <option value="1">Individual</option>
+                            <option value="2">Masiva</option>
+                        </select>
+                    </div>
+                    <div  [hidden]="hideIndividual"  class="col-lg-7" style="margin-left: -20px;"><!-- class="col-lg-2" -->
+                        <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="adjunte datos de búsqueda" maxlength="100" size="30" [(ngModel)]="nombreCompleto"><!-- .nombreBusqueda -->
+                    </div>
+                    <div class="col-lg-1" [hidden]="hideIndividual" *ngIf="mostrarBotonBuscarIndividual()" style="margin-left: -20px;">
+                        <button class="btn btn-warning btnBuscarStyle" (click)="obtenerBusquedaCoincidenciaXNombreDemanda()">Buscar</button>
+                    </div>
+                    <!-- <div class="col-lg-7" [hidden]="hideMasiva" style="margin-left: -40px;">
+                        <input ng2FileSelect type="file" accept=".xlsx" [uploader]="uploader">
+                    </div> --><!-- 1 -->
+                    <div class="col-lg-7" [hidden]="hideMasiva" style="margin-left: -20px;"><!-- VIDA LEY -->
+                        <input type="file" accept=".xlsx" onclick="this.value=null;"
+                                (change)="seleccionExcel($event).target.files[0]" [(ngModel)]="archivoExcel"
+                                style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()">
+                    </div><!-- 2 -->
+                    <!-- <div>
+                        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="carga de archivos" accept=".xlsx">
+                    </div> --><!-- 3 -->
+                    <div class="col-lg-1" [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()" style="margin-left: -20px;">
+                        <button class="btn btn-warning btnBuscarStyle" (click)="obtenerBusquedaCoincidenciaXNombreDemanda()">Buscar</button>
+                    </div>
+                </div>
+            </article>
+            <article class="row"> <!-- container-fluid app-main -->
+                <div class="table-responsive2">
+                    <table class="table table-striped table-sm" style="font-size: 12px;"><!-- matSort (matSortChange)="sortData($event)" -->
+                        <thead >
+                            <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                <th scope="col" style="vertical-align: middle;">Fecha y Hora de Búsqueda</th><!-- mat-sort-header="fecBusqueda" -->
+                                <th scope="col" style="vertical-align: middle;">Usuario que Realizó la Busqueda</th><!-- mat-sort-header="usuBusqueda" -->
+                                <th scope="col" style="vertical-align: middle;">Tipo de Documento</th><!-- mat-sort-header="tipDocumento" -->
+                                <th scope="col" style="vertical-align: middle;">Número de Documento</th><!-- mat-sort-header="numDocumento" -->
+                                <th scope="col" style="vertical-align: middle;">Nombre/Razón Social</th><!-- mat-sort-header="tipBusqueda" -->
+                                <th scope="col" style="vertical-align: middle;">Tipo de Persona</th><!-- mat-sort-header="tipPersona" -->
+                                <th scope="col" style="vertical-align: middle;">Cargo</th><!-- mat-sort-header="cargo" -->
+                                <th scope="col" style="vertical-align: middle;">Lista</th><!-- mat-sort-header="lista" -->
+                                <th scope="col" style="vertical-align: middle;">Descargar</th><!-- mat-sort-header="lista" -->
+                            </tr>
+                        </thead>
+                        <!-- <hr class="BordeHr" style="size:100%;"> -->
+                        <tbody ><!-- *ngIf="resultadoFinal.length != 0; else listavacia" -->
+                            <tr *ngFor="let item of resultadoFinal">
+                                <td scope="col">{{item.DFECHA_BUSQUEDA}}</td>
+                                <td>{{item.SUSUARIO_BUSQUEDA}}</td>
+                                <td>{{item.STIPO_DOCUMENTO}}</td>
+                                <td>{{item.SNUM_DOCUMENTO}}</td>
+                                <td><div placement='top' ngbTooltip="{{item.tipBusqueda}}">{{cortarCararterNombre(item.SNOMBRE_COMPLETO)}}</div></td>
+                                <td>{{item.STIPO_PERSONA}}</td>
+                                <td ><div placement='top' ngbTooltip="{{item.cargo}}">{{cortarCararter(item.SCARGO)}}</div></td>
+                                <td>IDECON</td>
+                                <td class="text-center">
+                                    <img  (click)="exportListToExcel()" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
+                                            <!-- *ngIf="item.tipoDeArchivo == 'xls'" (click)="getCsvFile(item.id)"-->
+                                
+                                    <!-- <img *ngIf="item.tipoDeArchivo == 'txt'" src="assets/icons/edit.png" title="Descargar Texto Plano" alt="" style="cursor: pointer;height:40px;width: 35px;"
+                                            (click)="getTextPlainFile(item.id)" /> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                        <ng-template #listavacia>
+                            <tbody ><!-- id="tblBeneficiarios" -->
+                                <tr>
+                                    <td class="text-center" colspan="9">No se encontró coincidencias</td>
+                                </tr>
+                            </tbody>
+                          </ng-template>
+                    </table>
+                    
+                </div>
+            </article>
+        </section>
+    </section>
+</main>
+
+<app-footer></app-footer>
