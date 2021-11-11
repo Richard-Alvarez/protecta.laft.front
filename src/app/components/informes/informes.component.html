@@ -1,1 +1,203 @@
-<ckeditor  [config]="ckeConfig" [(ngModel)]="ckeditorContent"> </ckeditor>
+<app-navbar></app-navbar>
+<main class="container-fluid app-main">
+    <div class="row pl-5 pr-5">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span> Pantalla Principal
+        </button>
+    </div>
+    <br>
+    <div class="">
+        <div class="container-fluid pl-5 pr-5">
+            <div class="card-header bordesCabecera" style="background: white;">
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item">
+                        <a class="colorLetra nav-link active" data-toggle="tab" href="#grupal"
+                            style="font-size:17px;">Informes
+                            Grupales</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="colorLetra nav-link" data-toggle="tab" href="#general" style="font-size:17px;">Informe
+                            General</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" style="padding-bottom: 80px;">
+                    <div id="grupal" class="tab-pane fade  active show">
+                        <div class=""
+                            style="display: flex;justify-content: left;align-items: left;padding-right: 700px;">
+                            <div class="col-lg-17">
+                                <h4 class="TitleLine">Informes Grupales</h4>
+                            </div>
+                        </div>
+
+                        <div class="borderFormat">
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="col-lg-2"
+                                        style="display: flex;justify-content: center;align-items: center;">
+                                        <label class="fontText">Seleccionar Grupo:</label>
+                                    </div>
+                                    <div class="col-lg-3"
+                                        style="display: flex;justify-content: center;align-items: center;">
+
+                                        <select [(ngModel)]="idGrupo" name="userId" (change)="changeGrupo()"
+                                            class="form-control buttonSinBorder">
+                                            <option value="0" selected>Seleccione</option>
+                                            <option *ngFor="let item of ListGrupo" value="{{item.NIDGRUPOSENAL}}">
+                                                {{item.SDESGRUPO_SENAL}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row justify-content-md-center pt-4">
+                                    <div class="col-lg-2"
+                                        style="display: flex;justify-content: center;align-items: center;">
+                                        <label class="fontText">Seleccionar el año:</label>
+                                    </div>
+                                    <div class="col-lg-3"
+                                        style="display: flex;justify-content: center;align-items: center;">
+
+                                        <select [(ngModel)]="IDListAnnoxGrupo" name="userId" (change)="changeAnnoxGrupo()"
+                                            class="form-control buttonSinBorder">
+                                            <option value="0" selected>Seleccione</option>
+                                            <option *ngFor="let item of NewListAnnos" value="{{item.ANNO}}"
+                                                id="profileIdSelected">
+                                                {{item.ANNO}}</option>
+                                        </select>
+                                    </div>
+ 
+                                </div>
+
+                                <div class="row justify-content-md-center pt-4">
+                                    <div class="col-lg-2"
+                                        style="display: flex;justify-content: center;align-items: center;">
+                                        <label class="fontText">Seleccionar el periodo:</label> 
+                                    </div>
+                                    <div class="col-lg-3"
+                                        style="display: flex;justify-content: center;align-items: center;">
+
+                                        <select [(ngModel)]="IDListPeriodoxGrupo" name="userId"
+                                            class="form-control buttonSinBorder"> 
+                                            <option value="0" selected>Seleccione</option>
+                                            <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
+                                                {{item.periodo}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+
+                        <div class="row justify-content-md-center pt-3">
+                            <button class="btn btn-warning text-white" (click)="DescargarReporte()">Descargar Reporte </button>
+                        </div>
+
+
+
+                    </div>
+                    <div id="general" class="tab-pane fade">
+                        <div class=""
+                            style="display: flex;justify-content: left;align-items: left;padding-right: 700px;">
+                            <div class="col-lg-17">
+                                <h4 class="TitleLine">Informe General</h4>
+                            </div>
+
+                        </div>
+
+
+                        <div class="borderFormat">
+                            <div class="container">
+                                
+
+                                <div class="row justify-content-md-center pt-4">
+                                    <div class="col-lg-2"
+                                        style="display: flex;justify-content: center;align-items: center;">
+                                        <label class="fontText">Seleccionar el año:</label>
+                                    </div>
+                                    <div class="col-lg-3"
+                                        style="display: flex;justify-content: center;align-items: center;">
+
+                                        <select [(ngModel)]="IDListAnnoGlobal" name="userId" (change)="changeAnnoGlobal()"
+                                            class="form-control buttonSinBorder">
+                                            <option value="0" selected>Seleccione</option>
+                                            <option *ngFor="let item of NewListAnnos" value="{{item.ANNO}}"
+                                                id="profileIdSelected">
+                                                {{item.ANNO}}</option>
+                                        </select>
+                                    </div>
+ 
+                                </div>
+
+                                <div class="row justify-content-md-center pt-4">
+                                    <div class="col-lg-2"
+                                        style="display: flex;justify-content: center;align-items: center;">
+                                        <label class="fontText">Seleccionar el periodo:</label> 
+                                    </div>
+                                    <div class="col-lg-3"
+                                        style="display: flex;justify-content: center;align-items: center;">
+
+                                        <select [(ngModel)]="IDListPeriodoGlobal" name="userId" 
+                                            class="form-control buttonSinBorder"> 
+                                            <option value="0" selected>Seleccione</option>
+                                            <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
+                                                {{item.periodo}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row justify-content-md-center pt-3">
+                            <button class="btn btn-warning text-white" (click)="DescargarReporteGeneral()">Descargar Reporte General </button>
+                        </div>
+
+                        <div id="ReportesGlobal">
+                            <div align="left" dir="ltr" style="margin-left:-3.5pt;display: none">
+                                <table style="border: none; border-collapse: collapse; margin-right: calc(0%); width: 100%;">
+                                    <tbody>
+                                        <tr style="height:700.0pt;">
+                                            <td style="border-left:solid #000000 3pt;border-right:solid #000000 3pt;border-bottom:solid #000000 3pt;border-top:solid #000000 3pt;vertical-align:middle;padding:0pt 3.5pt 0pt 3.5pt;overflow:hidden;overflow-wrap:break-word;"><br><br><br><br><br><br>
+                                                <p dir="ltr" style="line-height:1.3800000000000001;margin-right: 10.65pt;text-align: center;margin-top:0pt;margin-bottom:6pt;"><span style="font-size:48pt;font-family:'Arial Narrow',sans-serif;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Se&ntilde;ales de alerta&nbsp;</span></p>
+                                                <p dir="ltr" style="line-height:1.3800000000000001;margin-right: 10.65pt;text-align: center;margin-top:0pt;margin-bottom:6pt;"><span style="font-size:48pt;font-family:'Arial Narrow',sans-serif;color:#000000;background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">{{IDListAnnoGlobal}}</span></p><br><br><br><br><br><br><br>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                              </div>
+                              
+                            <app-template-c1  [parent]="this" [item]="" [RespuestaAlertaC1]="RespuestaAlertaC1" [Validar]="2" style="display: none" ></app-template-c1> 
+                            <app-template-c3  [parent]="this" [ObjListaAlertasC3]="ListaAlertaClientesC3" [RespuestaGlobalC3]="RespuestaGlobalC3"  [Validar]="2"  style="display: none"></app-template-c3>
+                            <app-template-s1   style="display: none"></app-template-s1>
+                            <app-template-s2  [parent]="this" [ObjListaAlertasS2]="" [RespuestaAlertaS2]="RespuestaAlertaS2" [Validar]="2"   style="display: none" ></app-template-s2>
+                            <app-template-s3  [parent]="this"[ObjListaAlertasS3]="ListaAlertaClientesS3" [Validar]="2"  style="display: none" ></app-template-s3> 
+
+                            <app-template-clientes-general [objListaAlertaRG]="ListaAlertaClienteRG" [respuestaRG]="RespuetasAlertaRG" [CargoRG]="CargoRG" [Validar]="2" style="display: none" ></app-template-clientes-general>
+                            <app-template-colaborador [RespuestaGlobalColaborador]="RespuestaGlobalColaborador" style="display: none" ></app-template-colaborador>
+                            <app-template-proveedor [CargosConcatenadosContraparte]="CargosConcatenadosProveedor" [RespuestaGlobalContraparteP5]="RespuestaGlobalProveedorP5" [RespuestaGlobalContraparte]="RespuestaGlobalProveedor"  style="display: none" ></app-template-proveedor>
+                            <app-template-contraparte [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalContraparteP5" [RespuestaGlobalContraparte]="RespuestaGlobalContraparte" style="display: none" ></app-template-contraparte>
+                        </div>
+                    
+
+
+                    </div> 
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>
