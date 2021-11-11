@@ -1,7 +1,9 @@
 import { Component, OnInit, NgModule, Input, Output } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
+import { DatePipe } from '@angular/common';
 import { FileUploader } from 'ng2-file-upload';
+import { ExcelService } from 'src/app/services/excel.service';
 /* import * as XLSX from 'xlsx'; */
 
 @Component({
@@ -10,8 +12,9 @@ import { FileUploader } from 'ng2-file-upload';
   styleUrls: ['./busqueda-demanda.component.css']
 })
 export class BusquedaDemandaComponent implements OnInit {
-  /* fileToUpload: File = null; *///
-  
+  fileToUpload: File = null;//
+  timestamp = Date();
+    
   hideMasiva: boolean = true;
   hideIndividual: boolean = false;
 
@@ -28,6 +31,7 @@ export class BusquedaDemandaComponent implements OnInit {
   resultadoFinal : any []
 
   constructor(
+    public datepipe: DatePipe,
     private core: CoreService,
     private userConfigService: UserconfigService
     ) { } 
@@ -41,16 +45,119 @@ export class BusquedaDemandaComponent implements OnInit {
     //console.log("change masiva",this.NBUSCAR_POR);
     //console.log("change masiva",this.hideMasiva);
     //console.log("change individual",this.hideIndividual);
+    
+    //console.log('',this.timestamp.getDate()|this.timestamp.getMonth()|this.timestamp.getFullYear());
+    /*codigodebusqueda*/console.log("codigo busqueda",this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+    this.GenerarCodigo();
+    
+  }
+  
+
+
+  /* uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true }); *//* 1 */
+  
+  archivoExcel:File;
+  clearInsert(){this.archivoExcel = null;}
+  lastFileAt: Date;
+  getDate() {
+    return new Date();
+  }
+  excelSubir: File;
+  seleccionExcel(archivo: File) {
+    this.excelSubir = null;
+    if (!archivo) {
+      this.excelSubir = null;
+      return;
+    }
+    this.excelSubir = archivo;
+  }
+  /* errorExcel = false;
+  validarexce(){
+    this.errorExcel = false;
+    const myFormData: FormData = new FormData();
+
+    myFormData.append('dataFile',this.excelSubir);
+
+    const data : any = {};
+    data.ñl
+  } */  /* 2 */
+
+  async obtenerBusquedaCoincidenciaXNombreDemanda(){
+    //var currentTime = Date.now();
+
+    let ObjLista : any = {};
+      //P_ID : currentTime
+      ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+      ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+      if(this.NBUSCAR_POR == 1){
+        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
+      }else
+      {
+        ObjLista.P_SNOMCOMPLETO = null;
+      }
+      ObjLista.P_NIDUSUARIO = this.idUsuario;
+    
+
+    this.core.loader.show()
+
+    await this.userConfigService.GetBusquedaConcidenciaXNombreDemanda(ObjLista).then(
+      (response) => {
+       this.resulBusqueda = response
+      });
+    this.core.loader.hide()
+      this.resultadoFinal = this.resulBusqueda.lista
+      console.log('resultado de la busqueda', this.resulBusqueda);
+      console.log('resultado de la busqueda 1', this.resulBusqueda.lista);
+      console.log('resultado de la busqueda', this.NPERIODO_PROCESO);
+      console.log('resultado de la busqueda', this.nombreCompleto);
+      console.log('resultado de la busqueda', this.idUsuario);
+      console.log('resultado de la busqueda', ObjLista);
+      console.log('',ObjLista.P_SCODBUSQUEDA);
+
+      
+  }
+  
+  GenerarCodigo()
+  {
+    var codigo = Math.floor(Math.random()*999999)
+    console.log("codigo unico",codigo);
+    return codigo.toString();
+      /*var longitud = 8;
+      const alfabeto :string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+       StringBuilder token = new StringBuilder();
+      Random rnd = new Random();
+
+      for (int i = 0; i < longitud; i++)
+      {
+          int indice = rnd.Next(alfabeto.Length);
+          token.Append(alfabeto[indice]);
+      }
+      return token.ToString(); */
   }
 
-  uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true });
-  
-/* 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    console.log('',this.fileToUpload)
-  } *///
+/*  arrayBuffer:any;
+file:File;
+ incomingfile(event) 
+  {
+  this.file= event.target.files[0]; 
+  }
 
+ Upload() {
+      let fileReader = new FileReader();
+        fileReader.onload = (e) => {
+            this.arrayBuffer = fileReader.result;
+            var data = new Uint8Array(this.arrayBuffer);
+            var arr = new Array();
+            for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+            var bstr = arr.join("");
+            var workbook = XLSX.read(bstr, {type:"binary"});
+            var first_sheet_name = workbook.SheetNames[0];
+            var worksheet = workbook.Sheets[first_sheet_name];
+            console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
+        }
+        fileReader.readAsArrayBuffer(this.file);
+} *//* 3 */
+  
   hideControls() {
     if (this.NBUSCAR_POR == this.POR_INDIVIDUAL) {
       this.hideMasiva = true;
@@ -84,29 +191,7 @@ export class BusquedaDemandaComponent implements OnInit {
     return false
   }
 
-  async obtenerBusquedaCoincidenciaXNombreDemanda(){
-    let ObjLista : any = {
-    P_NPERIODO_PROCESO : this.NPERIODO_PROCESO,
-    P_SNOMCOMPLETO : this.nombreCompleto,//'RAMON MORENO MADELEINE JUANA',
-    //ObjLista.P_SCLIENT = '02000010286766'
-    P_NIDUSUARIO : this.idUsuario,
-    }
-
-    this.core.loader.show()
-
-    await this.userConfigService.GetBusquedaConcidenciaXNombreDemanda(ObjLista).then(
-      (response) => {
-       this.resulBusqueda = response
-      });
-    this.core.loader.hide()
-      this.resultadoFinal = this.resulBusqueda.lista
-      console.log('resultado de la busqueda', this.resulBusqueda);
-      console.log('resultado de la busqueda 1', this.resulBusqueda.lista);
-      console.log('resultado de la busqueda', this.NPERIODO_PROCESO);
-      console.log('resultado de la busqueda', this.nombreCompleto);
-      console.log('resultado de la busqueda', this.idUsuario);
-      console.log('resultado de la busqueda', ObjLista);
-  }
+  
 
   cortarCararterNombre(text){        
     if(text != null){

@@ -26,6 +26,7 @@ import { TablaRegistrosComponent } from './components/tabla-registros/tabla-regi
 import { ReportComponent } from './pages/report/report.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StrDatePipe } from './pipes/str-date.pipe';
+import { DatePipe } from '@angular/common';
 
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -358,7 +359,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     NO_ERRORS_SCHEMA
   ],
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent],
-  providers: [UserconfigService],
+  providers: [UserconfigService, DatePipe],
   bootstrap: [AppComponent],
   exports: [BusquedaDemandaComponent]
 
