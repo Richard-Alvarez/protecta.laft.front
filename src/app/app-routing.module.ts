@@ -83,6 +83,7 @@ import { HistoricoColaboradorComponent } from './components/responsable/historic
 import { HistoricoContraparteComponent } from './components/responsable/historico-contraparte/historico-contraparte.component';
 import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component'
 import { NavbarUpdateComponent } from './../app/components/navbar-update/navbar-update.component';
+import { InformesComponent } from './../app/components/informes/informes.component';
 //fin formularios antiguos
 
 const routes: Routes = [
@@ -165,10 +166,11 @@ const routes: Routes = [
   { path: 'rg', component: TemplateRGComponent},
   { path: 'C3', component: TemplateC3Component},
   { path: 'complement-maintenance', component: MantenimientoComplementoComponent},
+  { path: 'informes', component: InformesComponent},
   
   //
   { path: 'navbar', component: NavbarUpdateComponent},
-
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes), RecaptchaModule.forRoot()],

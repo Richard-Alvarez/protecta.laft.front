@@ -1026,7 +1026,7 @@ async EnviarCompUsuario(alerta,complemento){
        
        return
      }else{
-      
+      this.core.loader.show();
       this.NewArreglo[index].RESULTADO.forEach(async (element) => {
         console.log("element",element)
         let data:any = {}
@@ -1061,7 +1061,7 @@ async EnviarCompUsuario(alerta,complemento){
           data.SFILE_NAME_LARGO =  ""
         }
         await this.userConfigService.GetInsCormularioComplUsu(data)
-        this.core.loader.show();
+      
         debugger
         console.log("la data",data)
         if(element.CONSULTA == 'C'){
@@ -1281,7 +1281,7 @@ async  AgregarUsuario(item,lilistComplemento,iUSelect){
 }
 
 async  descargarComplemento (item,listUsu){
-  
+  debugger
     await this.ListaDeAdjunto()
     console.log("listUsu",listUsu)
     let listaArchivos = this.listaArchivosComplementos.filter(it => it.STIPO_CARGA == "COMPLEMENTO" && it.NIDALERTA == listUsu.NIDALERTA && it.NIDUSUARIO_MODIFICA == listUsu.NIDUSUARIO_ASIGNADO)
