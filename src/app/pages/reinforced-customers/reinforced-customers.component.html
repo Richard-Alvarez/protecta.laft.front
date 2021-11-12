@@ -20,8 +20,8 @@
         <div id="detalleReforzado1" class="tab-pane {{this.parent.arrSetClassSelectedSubModule[0]}}">
 
             <div class="col-md-5 d-flex justify-content-between " style="padding: 30px 0px 0px 0px; color: #a0a1cc !important;">
-                  <button (click)="exportListToExcel(1)" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar cliente reforzado </button>
-             </div>
+                <button (click)="exportListToExcel(1)" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar cliente reforzado </button>
+            </div>
             <div class="row mb-2 mt-2" style="padding-left: 15px;
             padding-right: 15px;">
 
@@ -51,7 +51,8 @@
                                         <div class="col-lg-2 txtCabecera text-left">Nombre / Razón Social</div>
                                         <div class="col-lg-7" style="padding-left: 0px;padding-right: 0px;">
                                             <div class="row">
-                                                <div *ngFor="let type of parent.tipoListas" class="text-left col txtCabecera text-left">{{type.nombre}}</div>
+                                                <div *ngFor="let tipo of parent.tipoListas" class="col-lg-2 txtCabecera ">{{tipo.SDESTIPOLISTA}}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -74,27 +75,28 @@
                             </div>
                             <hr class="BordeHr" style="size:10px;">
 
-                            <div class="row " *ngFor="let item of getBuscarClient(); let i = index;" style="padding-bottom:15px">
+                            <div class="row " *ngFor="let item of getBuscarClient(); let ind = index;">
                                 <div class="col-lg-10">
-                                    <div class="row" *ngFor="let itemCli of item.arrClientesGC;" style="padding-bottom:15px">
+                                    <div class="row">
 
-                                        <div class="col-lg-1 txtDetalle text">{{itemCli.STIPOIDEN}} - {{itemCli.SNUM_DOCUMENTO}}</div>
+
+                                        <div class="col-lg-1 txtDetalle">{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}} </div>
                                         <div class="col-lg-2 txtDetalle text-left">
-                                            {{itemCli.SNOM_COMPLETO}}
+                                            {{item.SNOM_COMPLETO}}
                                         </div>
 
-                                        <div class="col-lg-7" style="padding-left: 0px;padding-right: 0px;">
+                                        <div class="col-lg-7 txtDetalle" style="padding-left: 0px;padding-right: 0px;">
                                             <div class="row">
-                                                <div class="col txtDetalle text-left {{CambiarColor(type.SDESESTADO.trim())}}" *ngFor="let type of itemCli.arrListas;">
-                                                    {{type.SDESESTADO}}
+                                                <div class="col-lg-2 text-left" *ngFor="let tipo of parent.tipoListas">
+                                                    <span class="cambiarColor" *ngIf="parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Coincidencia</span>
+                                                    <span *ngIf="!parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Sin Coincidencia</span>
                                                 </div>
                                             </div>
                                         </div>
 
 
-
-                                        <div class="col-lg-2 txtDetalle ">
-                                            {{itemCli.SDESREGIMEN}}
+                                        <div class="col-lg-2 txtDetalle">
+                                            {{item.SDESREGIMEN}}
                                         </div>
                                     </div>
                                 </div>
@@ -105,8 +107,8 @@
                                                 <span class="fas fa-bars" style="font-size: 20px;"></span>
                                             </button>
                                             <div class="dropdown-menu arrow pull-right dropdown" style="">
-                                                <a class="dropdown-item" (click)="setDataViewCustomer(item.obj)" routerLink="/c2-detail">Ver</a>
-                                                <a class="dropdown-item" (click)="getOptionsClient('1',item.obj.SESTADO_TRAT,item.obj,item.obj.NINCREMENTADOR)">Eliminar de Reforzado</a>
+                                                <a class="dropdown-item" (click)="setDataViewCustomer(item)" routerLink="/c2-detail">Ver</a>
+                                                <a class="dropdown-item" (click)="parent.getOptionsClient('2',item.SESTADO_TRAT,item,ind)">Eliminar de Reforzado</a>
 
                                             </div>
                                         </div>
@@ -159,7 +161,7 @@
         <div id="detalleReforzado2" class="tab-pane {{this.parent.arrSetClassSelectedSubModule[1]}}">
             <div class="col-md-5 d-flex justify-content-between " style="padding: 30px 0px 0px 0px; color: #a0a1cc !important;">
                 <button (click)="exportListToExcel(2)" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar cliente reforzado con coincidencia </button>
-           </div>
+            </div>
             <div class="row mb-2 mt-2" style="padding-left: 15px;
             padding-right: 15px;">
 
@@ -175,7 +177,8 @@
                                         <div class="col-lg-2 txtCabecera text-left">Nombre / Razón Social</div>
                                         <div class="col-lg-7" style="padding-left: 0px;padding-right: 0px;">
                                             <div class="row">
-                                                <div *ngFor="let type of parent.tipoListas" class="text-left col txtCabecera text-left">{{type.nombre}}</div>
+                                                <div *ngFor="let tipo of parent.tipoListas" class="col-lg-2 txtCabecera">{{tipo.SDESTIPOLISTA}}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -199,26 +202,25 @@
 
                             <div class="row " *ngFor="let item of arrCoincidencias; let i = index;">
                                 <div class="col-lg-11">
-                                    <div class="row" *ngFor="let itemCli of item.arrClientesGC;" style="padding-bottom:15px">
+                                    <!-- <div class="row" *ngFor="let itemCli of item.arrClientesGC;" style="padding-bottom:15px">  -->
+                                    <div class="row ">
 
-
-                                        <div class="col-lg-1 txtDetalle">{{itemCli.STIPOIDEN}}</div>
+                                        <div class="col-lg-1 txtDetalle">{{item.STIPOIDEN}}</div>
                                         <div class="col-lg-2 txtDetalle text-left">
-                                            {{itemCli.SNOM_COMPLETO}}
+                                            {{item.SNOM_COMPLETO}}
                                         </div>
 
-                                        <div class="col-lg-7" style="padding-left: 0px;padding-right: 0px;">
+
+                                        <div class="col-lg-7 txtDetalle" style="padding-left: 0px;padding-right: 0px;">
                                             <div class="row">
-                                                <div class="col txtDetalle text-left {{CambiarColor(type.SDESESTADO.trim())}}" *ngFor="let type of itemCli.arrListas;">
-                                                    {{type.SDESESTADO}}
+                                                <div class="col-lg-2 text-left" *ngFor="let tipo of parent.tipoListas">
+                                                    <span class="cambiarColor" *ngIf="parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Coincidencia</span>
+                                                    <span *ngIf="!parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Sin Coincidencia</span>
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-                                        <div class="col-lg-2 txtDetalle">
-                                            {{itemCli.SDESREGIMEN}}
+                                        <div class="col-lg-1 txtDetalle">
+                                            {{item.SDESREGIMEN}}
                                         </div>
                                     </div>
                                 </div>
@@ -229,7 +231,7 @@
                                                 <span class="fas fa-bars" style="font-size: 20px;"></span>
                                             </button>
                                             <div class="dropdown-menu arrow pull-right" style="">
-                                                <a class="dropdown-item" (click)="setDataViewCustomerAprobar(item.obj)" routerLink="/c2-detail">Ver</a>
+                                                <a class="dropdown-item" (click)="setDataViewCustomerAprobar(item)" routerLink="/c2-detail">Ver</a>
                                             </div>
                                         </div>
                                     </div>

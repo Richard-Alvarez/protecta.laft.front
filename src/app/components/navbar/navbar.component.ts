@@ -215,5 +215,14 @@ public text: String;
     this.core.rutas.goHome();
   }
 
+  changeClient(event:any){
+    // console.log("evento",event)
+    // console.log("evento",event.target)
+    // console.log("evento",event.target.innerHTML)
+    // console.log("evento",event.target.id)
+    localStorage.setItem('ValorHistorial', event.target.innerHTML);
+
+  }
+
   
 } 

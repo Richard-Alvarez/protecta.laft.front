@@ -12,7 +12,7 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { ResponsableGlobalComponent } from '../responsableGlobal';  
-
+import { SbsreportService } from '../../../services/sbsreport.service';
 @Component({
   selector: 'app-contraparte',
   templateUrl: './contraparte.component.html',
@@ -38,7 +38,8 @@ export class ContraparteComponent implements OnInit {
     private renderer: Renderer2,
     private modalService: NgbModal,
     private excelService: ExcelService,
-  ) {this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService) }
+    private sbsReportService: SbsreportService,
+  ) {this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService) }
 
   async ngOnInit() {
 

@@ -1,7 +1,7 @@
 <div class="row">
     <div *ngFor="let adj of arrFilesAdjuntos;let incAdj = index;" class="">
         <div>
-            <div class="parrafoAdj">{{adj.name ? adj.name : adj}} <i class="far fa-times-circle" (click)="removeFile(incAdj)"></i></div>
+            <div class="parrafoAdj" style="width: 100%;">{{adj.name ? adj.name : adj}} <i class="far fa-times-circle" (click)="removeFile(incAdj)"></i></div>
         </div>
     </div>
     <div *ngFor="let adj of arrFilesGuardados;let indexFile=index">

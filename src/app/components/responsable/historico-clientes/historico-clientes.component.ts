@@ -1,25 +1,21 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import swal from 'sweetalert2';
-import { environment } from 'src/environments/environment'
 import { CoreService } from '../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { ModalBandejaComponent } from '../../modal-bandeja/modal-bandeja.component';
-import { DevueltoComponent } from '../devuelto/devuelto.component'
-import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { ExcelService } from 'src/app/services/excel.service';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import {  DataResponsableService } from '../../../services/data-responsable.service';
+import { SbsreportService } from '../../../services/sbsreport.service';
 import * as $ from 'jquery';
 
 
 @Component({
-  selector: 'app-historico-responsable',
-  templateUrl: './historico-responsable.component.html',
-  styleUrls: ['./historico-responsable.component.css']
+  selector: 'app-historico-clientes',
+  templateUrl: './historico-clientes.component.html',
+  styleUrls: ['./historico-clientes.component.css']
 })
-export class HistoricoResponsableComponent implements OnInit {
+export class HistoricoClientesComponent implements OnInit {
 
   /*indiceIconDinamic;
   boolPalomitaHeaderPlus:boolean = true;
@@ -108,125 +104,71 @@ export class HistoricoResponsableComponent implements OnInit {
     private modalService: NgbModal,
     private excelService: ExcelService,
     private dataResponsable: DataResponsableService,
+    private sbsReportService: SbsreportService,
   ) { }
 
   async ngOnInit()  {
 
-    // // When the user scrolls the page, execute myFunction
-    // window.onscroll = function() {myFunction()};
-
-    // // Get the header
-    // var header = document.getElementById("myHeader");
-
-    // // Get the offset position of the navbar
-    // var sticky = header.offsetTop;
-
-    // // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-    // function myFunction() {
-    //   if (window.pageYOffset > sticky) {
-    //     header.classList.add("sticky");
-    //   } else {
-    //     header.classList.remove("sticky");
-    //   }
-    // }
-    // window.onscroll = function() {myFunction()};
-    // // document.addEventListener("DOMContentLoaded" , function(){
-    //   // window.addEventListener('scroll', function() {
-    //     function myFunction() {
-    //       if (window.scrollY > 80) {
-    //         document.getElementById('navbar_top').classList.add('fixed-top');
-    //         // add padding top to show content behind navbar
-    //         // var prueba = document.querySelector('.navbar')
-            
-    //         // var prueba = document.getElementById(".navbar").offsetHeight 
-    //         // var navbar_height = prueba ;
-    //         // document.body.style.paddingTop = navbar_height + 'px';
-    //       } else {
-    //         document.getElementById('navbar_top').classList.remove('fixed-top');
-    //          // remove padding top from body
-    //         document.body.style.paddingTop = '0';
-    //       } 
-            
-    //       } 
-      // });
-    // }); 
-
-
-    this.core.config.rest.LimpiarDataGestor()
-    this.core.loader.show();
-    let usuario = this.core.storage.get('usuario')
+    await this.obtenerPeriodos()
+   
+      //  this.core.config.rest.LimpiarDataGestor()
+      this.core.loader.show();
+      let usuario = this.core.storage.get('usuario')
+      
+      this.STIPO_USUARIO = usuario['tipoUsuario']
+      this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
+      this.arrRegimen = this.getRegimenDinamic();
     
-    this.STIPO_USUARIO = usuario['tipoUsuario']
-    this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
-    
-    this.setStatesInit();
+      if(this.IDListPeriodo === "0"){
 
-    this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
+        this.setStatesInit();
 
-
+        this.NPERIODO_PROCESO = 0//this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
+        //await this.getOfficialAlertFormList()
+        if (this.STIPO_USUARIO === 'RE') {
+          this.userGroupListGral = [1]
+          this.userGroupListSimpli = [1]
+        }
+        //this.getTipoUsuario()
+        //this.fillFileGroup()
+        this.arrResponsablesRevisadoGral = []
   
-    this.arrResponsablesByCerrado = [
-      {
-        "id": "id001",
-        "usuario": "Alfredo Chan Way Diaz",
-        "fecha_movimiento": "18/12/2020 16:07:22",
-        "periodo": "01/07/20 al 30/09/20",
-        "respuesta": "Sí",
-        "comentario": "Un comentario uno"
-      },
-      {
-        "id": "id002",
-        "usuario": "Usuario de prueba",
-        "fecha_movimiento": "18/12/2020 16:07:22",
-        "periodo": "01/07/20 al 30/09/20",
-        "respuesta": "Sí",
-        "comentario": "Un comentario uno"
-      }
-    ]
-
-    this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
-    await this.getOfficialAlertFormList()
-    this.arrRegimen = this.getRegimenDinamic();
+        this.arrResponsablesRevisadoSimpli = []
    
-    if (this.STIPO_USUARIO === 'RE') {
-      this.userGroupListGral = [1]
-      this.userGroupListSimpli = [1]
-    }
-    //this.devueltoHijo.setRegimiento(1);
-    //this.userGroupListSimpli.push('TI')
-   
-    this.getTipoUsuario()
-    this.fillFileGroup()
-    //await this.getAllAttachedFiles()
-
-    //await this.core.storage.set('stateRevisado',this.stateRevisado)
-    //await this.core.storage.set('stateCompletado',this.stateCompletado)
-    //await this.core.storage.set('stateDevuelto',this.stateDevuelto)
-   
-    //await this.core.storage.set('arrResponsablesCompleGral',this.arrResponsablesCompleGral)
-    //await this.core.storage.set('arrResponsablesCompleSimpli',this.arrResponsablesCompleSimpli)
-    //await this.core.storage.set('arrResponsablesDevueltoGral',this.arrResponsablesDevueltoGral)
-    //await this.core.storage.set('arrResponsablesDevueltoSimpli',this.arrResponsablesDevueltoSimpli)
-
-    /*this.dataResponsable.Responsable$.subscribe(arreglo => {
-      this.arrDetailC1 = arreglo
+        this.arrResponsablesInformeTerminadoGral = []
+    
+        this.arrResponsablesInformeTerminadoSimpli = []
      
-    })*/
+      
+      }else{
+        this.setStatesInit();
+        this.NPERIODO_PROCESO = this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
+        await this.getOfficialAlertFormList()
+        if (this.STIPO_USUARIO === 'RE') {
+          this.userGroupListGral = [1]
+          this.userGroupListSimpli = [1]
+        }
+        this.getTipoUsuario()
+        this.fillFileGroup()
+     
+     
+      } 
+    
 
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
     let linkactual = link[link.length-1].trim()
-    if(linkactual == 'clientes'){
+    if(linkactual == 'historico-clientes'){ 
       try {
         window.onscroll = function() {myFunction()};
       
           function myFunction() {
             if (window.scrollY > 80) {
               document.getElementById('navbar_top').classList.add('fixed-top');
-             
+              document.getElementById('navbar_top').classList.add('tabs-top');
             } else {
               document.getElementById('navbar_top').classList.remove('fixed-top');
-            
+              document.getElementById('navbar_top').classList.remove('tabs-top');
               document.body.style.paddingTop = '0';
             } 
               
@@ -2518,7 +2460,7 @@ export class HistoricoResponsableComponent implements OnInit {
       let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
      
-      if (cantidadResponsables > cantidadInformes) {
+      if (false) {
         
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
@@ -3210,7 +3152,74 @@ export class HistoricoResponsableComponent implements OnInit {
   redictBodyM(){
     document.getElementById('consulta0').focus({ preventScroll : false})
   }
+
+
+  ListPeriodos:any = []
+  ListAnnos:any =[]
+  IDListAnno:number = 0
+  IDListPeriodo:string = "0"
+  NewListAnnos
+  NewListPeriodos 
+  async obtenerPeriodos(){
+   
+    this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
+    
+    this.ListPeriodos.forEach((element,inc) => {
+        let anno =  element.endDate.toString().substr(6,4)
+        let mes = element.endDate.toString().substr(3,2)
+        let dia = element.endDate.toString().substr(0,2) 
+        this.ListPeriodos[inc].periodo =  anno + mes + dia
+        
+    });
+    console.log("Periodos",this.ListPeriodos)
+    
+      for( let i = 0; i < this.ListPeriodos.length ; i++){
+        let exists = true
+        let data:any = {}
+        data.ID = i
+        data.ANNO =  this.ListPeriodos[i].endDate.toString().substr(6,4) 
+        data.FECHAEND =  this.ListPeriodos[i].endDate
+        this.ListAnnos.push(data)
+       
+      }
+     
+     let sinRepetidos = this.ListAnnos.filter((valorActual, indiceActual, arreglo) => {
+          return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.ANNO) === JSON.stringify(valorActual.ANNO)) === indiceActual
+      });
+       this.NewListAnnos = sinRepetidos
+      console.log("Sin repetidos es:", sinRepetidos);
+  }
+  
+  BuscarPeriodo(event){
+     
+      console.log("IDListAnno:", this.IDListAnno);
+     
+        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
+   
+        this.IDListPeriodo = "0"
+   
+      
+      console.log("NewListPeriodos:", this.NewListPeriodos);
+     
+  }
+
+  async SeleccionarPeriodo(){
+    console.log("IDListPeriodo",this.IDListPeriodo)
+   
+     this.arrResponsablesRevisadoGral = []
+  
+     this.arrResponsablesRevisadoSimpli = []
+
+     this.arrResponsablesInformeTerminadoGral = []
  
+     this.arrResponsablesInformeTerminadoSimpli = []
+  
+
+    await this.ngOnInit()
+    
+  } 
+
+
   
 }
 

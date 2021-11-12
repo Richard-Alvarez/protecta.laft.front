@@ -1,282 +1,557 @@
-<div id="Reportes">
+<div *ngIf="Validar == 1">
 
-    <img src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"> 
-    <div>
-        <br/>
-    </div>
-    
-    <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
-        <p>
-            <strong style="font-family: arial Narrow, serif;">1.1.7.	Grupo de Señales de alerta - Renta Privada</strong>
-            </p>
-        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-               <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
-               <tbody>
-                   <tr>
-                   <td width="50px" style="padding-left: 5px; padding-right: 5px; text-align: center;">
-                       <p>
-                       <strong>CÓDIGO</strong>
-                       </p>
-                   </td>
-                   <td width="400px" style="padding-left: 10px; padding-right: 5px; text-align: center;">
-                       <p>
-                       <strong>SEÑAL DE ALERTA</strong>
-                       </p>
-                   </td>
-                   <td width="250px" style="padding-left: 10px; padding-right: 5px; text-align: center;">
-                       <p>
-                       <strong>PRODUCTO</strong>
-                       </p>
-                   </td>
-                   </tr>
-                   <tr>
-                    <td width="50px">
-                        <p align="center">
-                        RG1
-                        </p>
-                    </td>
-                    <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                        <p>
-                        La información proporcionada por el cliente es
-                        inconsistente o de difícil verificación por parte de
-                        PROTECTA.
-                        </p>
-                    </td>
-                    <td width="200px">
-                        <dl>
-                            <dt style="padding-left: 20px;"> ● Vida con Renta Temporal</dt>
-                            <dt style="padding-left: 20px;"> ● Renta Total</dt>
-                        </dl> 
-                    </td>
-                   </tr>
-                    <tr>
+    <div id="Reportes">
+
+        <img src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"> 
+        <div>
+            <br/>
+        </div>
+        
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <p>
+                <strong style="font-family: arial Narrow, serif;">1.1.7.	Grupo de Señales de alerta - Renta Privada</strong>
+                </p>
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                   <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                   <tbody>
+                       <tr>
+                       <td width="50px" style="padding-left: 5px; padding-right: 5px; text-align: center;">
+                           <p>
+                           <strong>CÓDIGO</strong>
+                           </p>
+                       </td>
+                       <td width="400px" style="padding-left: 10px; padding-right: 5px; text-align: center;">
+                           <p>
+                           <strong>SEÑAL DE ALERTA</strong>
+                           </p>
+                       </td>
+                       <td width="250px" style="padding-left: 10px; padding-right: 5px; text-align: center;">
+                           <p>
+                           <strong>PRODUCTO</strong>
+                           </p>
+                       </td>
+                       </tr>
+                       <tr>
                         <td width="50px">
-                        <p align="center">
-                            RG2
-                        </p>
-                        </td>
-                        <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify" >
-                        <p>
-                            El cliente se rehúsa a llenar los formularios requeridos
-                            por PROTECTA o a proporcionar la información necesaria para
-                            completarlos.
-                        </p>
-                        <p>
-                            El cliente se rehúsa a realizar la operación una vez que se 
-                            le solicita formularios adicionales a los inicialmente requeridos.
-                        </p>
-                        </td>
-                        <td width="200px" >
-                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
-                        <p style="padding-left: 20px;"> ● Renta Total</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="50px">
-                        <p align="center">
-                            RG3
-                        </p>
+                            <p align="center">
+                            RG1
+                            </p>
                         </td>
                         <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                        <p>
-                            El cliente trata de presionar a un trabajador para no
-                            llenar los formularios requeridos por la empresa.
-                        </p>
+                            <p>
+                            La información proporcionada por el cliente es
+                            inconsistente o de difícil verificación por parte de
+                            PROTECTA.
+                            </p>
                         </td>
                         <td width="200px">
-                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
-                        <p style="padding-left: 20px;"> ● Renta Total</p>
+                            <dl>
+                                <dt style="padding-left: 20px;"> ● Vida con Renta Temporal</dt>
+                                <dt style="padding-left: 20px;"> ● Renta Total</dt>
+                            </dl> 
                         </td>
-                    </tr>
-                    <tr>
-                        <td width="50px">
-                        <p align="center">
-                            RG4
-                        </p>
-                        </td>
-                        <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                        <p>
-                            Las operaciones no corresponden al perfil del cliente. El
-                            cliente solicita una póliza cuya suma asegurada no
-                            concuerda con su nivel de vida o perfil.
-                        </p>
-                        </td>
-                        <td width="200px">
-                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
-                        <p style="padding-left: 20px;"> ● Renta Total</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="50px">
-                        <p align="center">
-                            RG5
-                        </p>
-                        </td>
-                        <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                        <p>
-                            El cliente solicita ser excluido del registro de
-                            operaciones sin causa aparente o justificada.
-                        </p>
-                        </td>
-                        <td width="200px">
-                        <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
-                        <p style="padding-left: 20px;"> ● Renta Total</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="50px">
-                        <p align="center">
-                            RG6
-                        </p>
-                        </td>
-                        <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                        <p>
-                            El cliente solicita que los abonos se realicen en una
-                            cuenta mancomunada con una persona con la que no tiene
-                            vínculo familiar aparentemente.
-                        </p>
-                        </td>
-                        <td width="200px">
-                        <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
-                        <p style="padding-left: 20px;">● Renta Total</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="50px">
-                        <p align="center">
-                            RG7
-                        </p>
-                        </td>
-                        <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                        <p>
-                            El cliente se niega o evita dar información que permita
-                            determinar y sustentar el origen de fondos destinados para
-                            la contratación del seguro y/o estas operaciones no guardan
-                            relación con su actividad económica.
-                        </p>
-                        </td>
-                        <td width="200px">
-                        <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
-                        <p style="padding-left: 20px;">● Renta Total</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="50px">
-                        <p align="center">
-                            RG8
-                        </p>
-                        </td>
-                        <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
-                        <p>
-                            Un mismo beneficiario de pólizas de seguros de vida por
-                            importes significativos, contratadas por distintas personas
-                            con las cuales no tenga relación, vínculo o parentesco
-                            aparente.
-                        </p>
-                        </td>
-                        <td width="200px">
-                        <p style="padding-left: 20px;">● Renta Total</p>
-                        </td>
-                    </tr>
+                       </tr>
                         <tr>
                             <td width="50px">
                             <p align="center">
-                                RG9
+                                RG2
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify" >
+                            <p>
+                                El cliente se rehúsa a llenar los formularios requeridos
+                                por PROTECTA o a proporcionar la información necesaria para
+                                completarlos.
+                            </p>
+                            <p>
+                                El cliente se rehúsa a realizar la operación una vez que se 
+                                le solicita formularios adicionales a los inicialmente requeridos.
+                            </p>
+                            </td>
+                            <td width="200px" >
+                            <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;"> ● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG3
                             </p>
                             </td>
                             <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
                             <p>
-                                El cliente solicita el rescate de la póliza en condiciones financieras que le son significativamente 
-                                desfavorables.
+                                El cliente trata de presionar a un trabajador para no
+                                llenar los formularios requeridos por la empresa.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;"> ● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG4
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                Las operaciones no corresponden al perfil del cliente. El
+                                cliente solicita una póliza cuya suma asegurada no
+                                concuerda con su nivel de vida o perfil.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;"> ● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG5
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                El cliente solicita ser excluido del registro de
+                                operaciones sin causa aparente o justificada.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;"> ● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG6
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                El cliente solicita que los abonos se realicen en una
+                                cuenta mancomunada con una persona con la que no tiene
+                                vínculo familiar aparentemente.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;">● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG7
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                El cliente se niega o evita dar información que permita
+                                determinar y sustentar el origen de fondos destinados para
+                                la contratación del seguro y/o estas operaciones no guardan
+                                relación con su actividad económica.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;">● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG8
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                Un mismo beneficiario de pólizas de seguros de vida por
+                                importes significativos, contratadas por distintas personas
+                                con las cuales no tenga relación, vínculo o parentesco
+                                aparente.
                             </p>
                             </td>
                             <td width="200px">
                             <p style="padding-left: 20px;">● Renta Total</p>
                             </td>
                         </tr>
-                    </tbody>
-                </FONT>
-                </table>
-            </div>
-
-        <div class="container" style="padding: 0px 200px;">
-            <p style='margin-right:0cm;margin-left:0cm;font-size:16px;font-family:"Times New Roman",serif;margin:0cm;'><strong><span style='font-family:"Arial Narrow",sans-serif;'>&nbsp;</span></strong></p>
-        <p>
-            <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta:</strong>
-        </p>
-        <p style="font-family: arial Narrow, serif; text-align: justify"> a) Se solicita a la Gerencia de Comercial Rentas información sobre las
-            siguientes situaciones:</p>
-        <ul>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            La información proporcionada por el cliente es inconsistente o de difícil
-            verificación por parte de PROTECTA.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            El cliente se rehúsa a llenar los formularios requeridos por PROTECTA o a
-            proporcionar la información necesaria para completarlos.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            El cliente se rehúsa a realizar la operación una vez que se le solicita
-            formularios adicionales a los inicialmente requeridos.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            El cliente trata de presionar a un trabajador para no llenar los
-            formularios requeridos por la empresa.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            Las operaciones no corresponden al perfil del cliente. El cliente
-            solicita una póliza cuya suma asegurada no concuerda con su nivel de vida o
-            perfil.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            El cliente solicita ser excluido del registro de operaciones sin causa
-            aparente o justificada.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            El cliente solicita que los abonos se realicen en una cuenta mancomunada
-            con una persona con la que no tiene vínculo familiar aparentemente.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            El cliente se niega o evita dar información que permita determinar y
-            sustentar el origen de fondos destinados para la contratación del seguro
-            y/o estas operaciones no guardan relación con su actividad económica.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            Un mismo beneficiario de pólizas de seguros de vida por importes
-            significativos, contratadas por distintas personas con las cuales no tenga
-            relación, vínculo o parentesco aparente.
-            </li>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-            El cliente solicita el rescate de la póliza en condiciones financieras
-            que le son significativamente desfavorables.
-            </li>
-        </ul>
-        <p>
-            <strong></strong>
-        </p>
-         <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>       
-
-        <div>
-             <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
-                    <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify"
-                    >El {{CargoRG}} informó que  {{respuestaRG}} tiene casos a reportar con respecto  
-                    a los clientes de renta privada y ahorro total.</li></ul>
+                            <tr>
+                                <td width="50px">
+                                <p align="center">
+                                    RG9
+                                </p>
+                                </td>
+                                <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    El cliente solicita el rescate de la póliza en condiciones financieras que le son significativamente 
+                                    desfavorables.
+                                </p>
+                                </td>
+                                <td width="200px">
+                                <p style="padding-left: 20px;">● Renta Total</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                    </table>
                 </div>
-</div>
-<br>
-    <!-- <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
-    <p style="font-family: arial Narrow, serif; text-align: justify"><a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p> -->
-
-    <app-template-c2 [parent2]="this"  [arrayDataSenal]="arrayDataSenal" 
-    [Perfil]="Perfil"   [arrayDataResultado]="arrayDataResultado"  [Periodo]="Periodo"
-    [Cantidad]="Cantidad"  [Validar]="2"  style="display: none" [RegimenPendiente]="RegimenPendiente"
-    [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
-    [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial" [listaPepMasivos]="listaPepMasivos" 
-    [listaInternacionalMaisvos]="listaInternacionalMaisvos" [listaInternacionalSoat]="listaInternacionalSoat" [listaInternacionalRenta]="listaInternacionalRenta" [listaEspecialSimpli]="listaEspecialSimpli" [listaEspecialGene]="listaEspecialGene"
-    ></app-template-c2>
+    
+            <div class="container" style="padding: 0px 200px;">
+                <p style='margin-right:0cm;margin-left:0cm;font-size:16px;font-family:"Times New Roman",serif;margin:0cm;'><strong><span style='font-family:"Arial Narrow",sans-serif;'>&nbsp;</span></strong></p>
+            <p>
+                <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta:</strong>
+            </p>
+            <p style="font-family: arial Narrow, serif; text-align: justify"> a) Se solicita a la Gerencia de Comercial Rentas información sobre las
+                siguientes situaciones:</p>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                La información proporcionada por el cliente es inconsistente o de difícil
+                verificación por parte de PROTECTA.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente se rehúsa a llenar los formularios requeridos por PROTECTA o a
+                proporcionar la información necesaria para completarlos.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente se rehúsa a realizar la operación una vez que se le solicita
+                formularios adicionales a los inicialmente requeridos.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente trata de presionar a un trabajador para no llenar los
+                formularios requeridos por la empresa.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                Las operaciones no corresponden al perfil del cliente. El cliente
+                solicita una póliza cuya suma asegurada no concuerda con su nivel de vida o
+                perfil.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente solicita ser excluido del registro de operaciones sin causa
+                aparente o justificada.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente solicita que los abonos se realicen en una cuenta mancomunada
+                con una persona con la que no tiene vínculo familiar aparentemente.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente se niega o evita dar información que permita determinar y
+                sustentar el origen de fondos destinados para la contratación del seguro
+                y/o estas operaciones no guardan relación con su actividad económica.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                Un mismo beneficiario de pólizas de seguros de vida por importes
+                significativos, contratadas por distintas personas con las cuales no tenga
+                relación, vínculo o parentesco aparente.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente solicita el rescate de la póliza en condiciones financieras
+                que le son significativamente desfavorables.
+                </li>
+            </ul>
+            <p>
+                <strong></strong>
+            </p>
+             <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>       
+    
+            <div>
+                 <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                        <ul>
+                        <li style="font-family: arial Narrow, serif; text-align: justify"
+                        >El {{CargoRG}} informó que  {{respuestaRG}} tiene casos a reportar con respecto  
+                        a los clientes de renta privada y ahorro total.</li></ul>
+                    </div>
+        </div>
+    
+    <br>
+       
         
+    
+        <app-template-c2 [parent2]="this"  [arrayDataSenal]="arrayDataSenal" 
+        [Perfil]="Perfil"   [arrayDataResultado]="arrayDataResultado"  [Periodo]="Periodo"
+        [Cantidad]="Cantidad"  [Validar]="2"  style="display: none" [RegimenPendiente]="RegimenPendiente"
+        [listaMasivos]="listaMasivos" [listaSoat]="listaSoat" [listaRenta]="listaRenta" [listaEspecialRentaParticular]="listaEspecialRentaParticular" [listaPep]="listaPep" [listaPepSoat]="listaPepSoat"  [listaPepRenta]="listaPepRenta" [listaPepRentaParticular]="listaPepRentaParticular"
+        [listaEspecialMasivos]="listaEspecialMasivos" [listaEspecialSoat]="listaEspecialSoat" [listaEspecialRenta]="listaEspecialRenta"  [listaInternacionalRentaParticular]="listaInternacionalRentaParticular" [listaEspecial]="listaEspecial" [listaPepMasivos]="listaPepMasivos" 
+        [listaInternacionalMaisvos]="listaInternacionalMaisvos" [listaInternacionalSoat]="listaInternacionalSoat" [listaInternacionalRenta]="listaInternacionalRenta" [listaEspecialSimpli]="listaEspecialSimpli" [listaEspecialGene]="listaEspecialGene"
+        ></app-template-c2>
+            
     </div>
-      
+          
+
+</div>
+
+
+
+
+
+
+    <div *ngIf="Validar == 2">
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <p>
+                <strong style="font-family: arial Narrow, serif;">1.1.7.	Grupo de Señales de alerta - Renta Privada</strong>
+                </p>
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                   <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                   <tbody>
+                       <tr>
+                       <td width="50px" style="padding-left: 5px; padding-right: 5px; text-align: center;">
+                           <p>
+                           <strong>CÓDIGO</strong>
+                           </p>
+                       </td>
+                       <td width="400px" style="padding-left: 10px; padding-right: 5px; text-align: center;">
+                           <p>
+                           <strong>SEÑAL DE ALERTA</strong>
+                           </p>
+                       </td>
+                       <td width="250px" style="padding-left: 10px; padding-right: 5px; text-align: center;">
+                           <p>
+                           <strong>PRODUCTO</strong>
+                           </p>
+                       </td>
+                       </tr>
+                       <tr>
+                        <td width="50px">
+                            <p align="center">
+                            RG1
+                            </p>
+                        </td>
+                        <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                            La información proporcionada por el cliente es
+                            inconsistente o de difícil verificación por parte de
+                            PROTECTA.
+                            </p>
+                        </td>
+                        <td width="200px">
+                            <dl>
+                                <dt style="padding-left: 20px;"> ● Vida con Renta Temporal</dt>
+                                <dt style="padding-left: 20px;"> ● Renta Total</dt>
+                            </dl> 
+                        </td>
+                       </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG2
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify" >
+                            <p>
+                                El cliente se rehúsa a llenar los formularios requeridos
+                                por PROTECTA o a proporcionar la información necesaria para
+                                completarlos.
+                            </p>
+                            <p>
+                                El cliente se rehúsa a realizar la operación una vez que se 
+                                le solicita formularios adicionales a los inicialmente requeridos.
+                            </p>
+                            </td>
+                            <td width="200px" >
+                            <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;"> ● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG3
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                El cliente trata de presionar a un trabajador para no
+                                llenar los formularios requeridos por la empresa.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;"> ● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG4
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                Las operaciones no corresponden al perfil del cliente. El
+                                cliente solicita una póliza cuya suma asegurada no
+                                concuerda con su nivel de vida o perfil.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;"> ● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG5
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                El cliente solicita ser excluido del registro de
+                                operaciones sin causa aparente o justificada.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;"> ● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;"> ● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG6
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                El cliente solicita que los abonos se realicen en una
+                                cuenta mancomunada con una persona con la que no tiene
+                                vínculo familiar aparentemente.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;">● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG7
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                El cliente se niega o evita dar información que permita
+                                determinar y sustentar el origen de fondos destinados para
+                                la contratación del seguro y/o estas operaciones no guardan
+                                relación con su actividad económica.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;">● Vida con Renta Temporal</p>
+                            <p style="padding-left: 20px;">● Renta Total</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                            <p align="center">
+                                RG8
+                            </p>
+                            </td>
+                            <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                            <p>
+                                Un mismo beneficiario de pólizas de seguros de vida por
+                                importes significativos, contratadas por distintas personas
+                                con las cuales no tenga relación, vínculo o parentesco
+                                aparente.
+                            </p>
+                            </td>
+                            <td width="200px">
+                            <p style="padding-left: 20px;">● Renta Total</p>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td width="50px">
+                                <p align="center">
+                                    RG9
+                                </p>
+                                </td>
+                                <td width="450px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    El cliente solicita el rescate de la póliza en condiciones financieras que le son significativamente 
+                                    desfavorables.
+                                </p>
+                                </td>
+                                <td width="200px">
+                                <p style="padding-left: 20px;">● Renta Total</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                    </table>
+                </div>
+    
+            <div class="container" style="padding: 0px 200px;">
+                <p style='margin-right:0cm;margin-left:0cm;font-size:16px;font-family:"Times New Roman",serif;margin:0cm;'><strong><span style='font-family:"Arial Narrow",sans-serif;'>&nbsp;</span></strong></p>
+            <p>
+                <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta:</strong>
+            </p>
+            <p style="font-family: arial Narrow, serif; text-align: justify"> a) Se solicita a la Gerencia de Comercial Rentas información sobre las
+                siguientes situaciones:</p>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                La información proporcionada por el cliente es inconsistente o de difícil
+                verificación por parte de PROTECTA.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente se rehúsa a llenar los formularios requeridos por PROTECTA o a
+                proporcionar la información necesaria para completarlos.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente se rehúsa a realizar la operación una vez que se le solicita
+                formularios adicionales a los inicialmente requeridos.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente trata de presionar a un trabajador para no llenar los
+                formularios requeridos por la empresa.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                Las operaciones no corresponden al perfil del cliente. El cliente
+                solicita una póliza cuya suma asegurada no concuerda con su nivel de vida o
+                perfil.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente solicita ser excluido del registro de operaciones sin causa
+                aparente o justificada.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente solicita que los abonos se realicen en una cuenta mancomunada
+                con una persona con la que no tiene vínculo familiar aparentemente.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente se niega o evita dar información que permita determinar y
+                sustentar el origen de fondos destinados para la contratación del seguro
+                y/o estas operaciones no guardan relación con su actividad económica.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                Un mismo beneficiario de pólizas de seguros de vida por importes
+                significativos, contratadas por distintas personas con las cuales no tenga
+                relación, vínculo o parentesco aparente.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                El cliente solicita el rescate de la póliza en condiciones financieras
+                que le son significativamente desfavorables.
+                </li>
+            </ul>
+            <p>
+                <strong></strong>
+            </p>
+             <p style="font-family: arial Narrow, serif;"> b) Se revisa la información proporcionada:</p>       
+    
+            <div>
+                 <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                        <ul>
+                        <li style="font-family: arial Narrow, serif; text-align: justify"
+                        >El {{CargoRG}} informó que  {{respuestaRG}} tiene casos a reportar con respecto  
+                        a los clientes de renta privada y ahorro total.</li></ul>
+                    </div>
+        </div>
+        <br>
+      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a></p>
+
+    </div>
     
     

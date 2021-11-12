@@ -44,6 +44,8 @@ export class ViewC2FormComponent implements OnInit {
     @Input() regimen
     @Input() valueIdCollap
     @Input() state:any = {}
+    @Input() ValidadorHistorico
+    @Input() HistoricoPeriodo
     constructor(
         private userConfigService: UserconfigService,
         private configService: ConfigService,
@@ -62,7 +64,12 @@ export class ViewC2FormComponent implements OnInit {
         this.alertData.SDESCRIPCION_ALERTA = this.objAlertaC2.SDESCRIPCION_ALERTA//localStorage.getItem("SDESCRIPCION_ALERTA")
         this.alertData.SNOMBRE_ESTADO = this.objAlertaC2.SNOMBRE_ESTADO//localStorage.getItem("SNOMBRE_ESTADO")
         this.alertData.NIDALERTA = this.objAlertaC2.NIDALERTA//parseInt(localStorage.getItem("NIDALERTA"))
-        this.alertData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))//parseInt(localStorage.getItem("NPERIODO_PROCESO"))
+        if(this.ValidadorHistorico != 0){
+            this.alertData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
+        }else{
+            this.alertData.NPERIODO_PROCESO = parseInt(this.HistoricoPeriodo)
+        }
+        //parseInt(localStorage.getItem("NPERIODO_PROCESO"))
         this.alertData.SPERIODO_FECHA = this.objAlertaC2.NPERIODO_PROCESO//localStorage.getItem("fechaPeriodo")
         this.alertData.NIDREGIMEN = this.regimen.id//parseInt(localStorage.getItem("NIDREGIMEN"))
         this.alertData.SESTADO = this.objAlertaC2.SESTADO//localStorage.getItem("SESTADO")
@@ -486,7 +493,7 @@ export class ViewC2FormComponent implements OnInit {
         } catch (error) {
           
         }
-console.log('asds',this.internationalList);
+// console.log('asds',this.internationalList);
     }
 
     async getValidar() {

@@ -278,3 +278,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
   display: flex !important;
   justify-content: center  !important;
 }
+
+.fixed-top{
+  
+}

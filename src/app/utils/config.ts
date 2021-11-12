@@ -33,6 +33,8 @@ private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   public urlUpdateRevisedState: string = this.base + "monitoreoSenales/UpdateRevisedState";
   public urlGetCommentHeader: string = this.base + "monitoreoSenales/GetCommentsHeader";
   public urlInsertCommentHeader: string = this.base + "monitoreoSenales/InsertCommentHeader";
+  public urlBusquedaManual: string = this.base + "monitoreoSenales/BusquedaManual";
+  public urlGetListTipo: string = this.base + "monitoreoSenales/GetListaTipo";
   public urlGetWorkModuleList: string = this.base + "monitoreoSenales/GetWorkModuleList";
   public urlGetWorkModuleDetail: string = this.base + "monitoreoSenales/GetWorkModuleDetail";
   public urlInsertCompanyDetailUser: string = this.base + "monitoreoSenales/InsertCompanyDetailUser";
@@ -152,6 +154,7 @@ private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   public urlUpdateStateSenialCabUsuarioRealByForm: string = this.base + "monitoreoSenales/UpdateStateSenialCabUsuarioRealByForm";
   public urlGetListaResultadosCoincid: string = this.base + "monitoreoSenales/getListaResultadosCoincid";
   public urlGetBusquedaConcidenciaXNombre: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNombre";
+  public urlGetBusquedaConcidenciaXNombreDemanda: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNombreDemanda";/*kdtr*/
   public urlGetBusquedaConcidenciaXDoc: string = this.base + "monitoreoSenales/BusquedaConcidenciaXDoc";
   public urlAnularClienteResultado: string = this.base + "monitoreoSenales/AnularResultadosCliente";
   public urlBusquedaConcidenciaXDocXName: string = this.base + "monitoreoSenales/BusquedaConcidenciaXDocXName";
@@ -201,7 +204,11 @@ private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   public urlInsCorreoUsuario:string = this.base + "monitoreoSenales/InsCorreoUsuario";
   public urlgetListaUsuarioCorreos:string = this.base + "monitoreoSenales/getListaUsuarioCorreos";
   public urlEnvioCorreoConfirmacion:string = this.base + "monitoreoSenales/EnvioCorreoConfirmacion";
-  
+
+  //LISTAR LOS ADJUNTOS
+  public urlgetListaAdjuntos:string = this.base + "monitoreoSenales/getListaAdjuntos";
+  //ELIMINAR ADJUNTOS
+  public urlgetDeleteAdjuntos:string = this.base + "monitoreoSenales/getDeleteAdjuntos";
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }

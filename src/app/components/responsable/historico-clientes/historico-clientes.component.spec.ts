@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistoricoResponsableComponent } from './historico-responsable.component';
+import { HistoricoClientesComponent } from './historico-clientes.component';
 
 describe('HistoricoResponsableComponent', () => {
-  let component: HistoricoResponsableComponent;
-  let fixture: ComponentFixture<HistoricoResponsableComponent>;
+  let component: HistoricoClientesComponent;
+  let fixture: ComponentFixture<HistoricoClientesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistoricoResponsableComponent ]
+      declarations: [ HistoricoClientesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HistoricoResponsableComponent);
+    fixture = TestBed.createComponent(HistoricoClientesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

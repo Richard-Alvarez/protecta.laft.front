@@ -33,7 +33,6 @@ export class PreReinforcedCustomersComponent implements OnInit {
   arrayQuitar: any = []
   @Input() arrResultados;
   @Input() parent: CustomerManagerComponent
-  @Input() parentCCO
   @Input() parentCRF
   initializePage = 1
 
@@ -301,63 +300,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
     
   }
 
-  async getOptionsClient(accion,SESTADO_TRAT_OLD,dataArray,indiceQuitarRegistro){
-   
-    let accionClient = '';
-    let indice = indiceQuitarRegistro
-    let data:any = {};
-    let dataService:any = {};
-    dataService.NIDUSUARIO_MODIFICA = this.NIDUSUARIO_LOGUEADO;
-    dataService.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-    dataService.SCLIENT = dataArray.SCLIENT;
-    dataService.NIDDOC_TYPE = dataArray.NTIPO_DOCUMENTO;
-    dataService.SIDDOC = dataArray.SNUM_DOCUMENTO;
-    dataService.DBIRTHDAT = dataArray.DFECHA_NACIMIENTO;
-    dataService.SCLIENAME = dataArray.SNOM_COMPLETO;
-    dataService.STIPOIDEN = dataArray.STIPOIDEN;
-    dataService.NIDTRATCLIEHIS = dataArray.NIDTRATCLIEHIS;
-    
-    dataService.NIDREGIMEN = dataArray.NIDREGIMEN ? dataArray.NIDREGIMEN : 0
-    dataService.NIDALERTA = dataArray.NIDALERTA;
-    dataService.NTIPOCLIENTE = SESTADO_TRAT_OLD == 'NNN' ? 1 : 0
-    dataService.STIPOACTRESULTADO = "MANUAL"
-    dataService.NIDGRUPOSENAL = 1
-
   
-    switch (accion) {
-      case '1': 
-        data.pregunta = '¿Está seguro de eliminar el cliente de revisado?'
-        
-        data.boton1 = 'Aprobar'        
-        dataService.SESTADO_TRAT = 'CRE';
-       
-        await this.getSwalOptionClient(data,dataService,indice)
-        break;
-      case '2': 
-        data.pregunta = '¿Está seguro de eliminar el cliente de revisado?'
-        data.boton1 = 'Eliminar'
-        //dataService.SESTADO_TRAT = 'AN';
-        dataService.SESTADO_TRAT = 'CRE';
-        
-      
-        await this.getSwalOptionClient(data,dataService,indice)
-        break;
-      case '3':
-        data.pregunta = '¿Está seguro de enviar el cliente a complementario?';
-        data.boton1 = 'Enviar a monitoreo complementario';
-        
-        dataService.SESTADO_TRAT = 'CCO';
-        
-     
-        await this.getSwalOptionClient(data,dataService,indice)
-        break;
-      default :
-        alert('No escogió una opción correcta')
-        break;
-    }
-      
-    await this.getClientesReforzados();
-  }
 
   async getSwalOptionClient(data,dataService,indice){
 
@@ -374,9 +317,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
       showCloseButton: true,
       customClass: { 
         closeButton : 'OcultarBorde'
-                     },
-       
-      
+                     }
     }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
     
@@ -390,31 +331,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
         } catch (error) {
          
         }
-       
-        
-        
-
-       
-
-        // this.arrResultados.splice(indice, 1)
-      
-        // this.getResultadosCliente(1)
-        // let respCRE = await this.parent.getDataResultadoTratamiento('CRE')
-        // let respCCO = await this.parent.getDataResultadoTratamiento('CCO')
-       
-        // try{
-        //   this.parent.arrClientesRevisado = await this.parent.setDataClientesResultados(respCRE,'CRE')
-        //   //this.parentCCO.getResultadosCliente(1)
-        //   this.parent.arrClientesCompl = await this.parent.setDataClientesResultados(respCCO,'CCO')
-        //   this.parent.getserviceReforzado()
-        //   //this.parentCRF.getResultadosCliente(1)
-        // }catch(error){
-       
-        // }
-        // ///await this.parent.ngOnInit()
-        
           this.spinner.hide()
-        
          swal.fire({
           title:'Eliminado  con éxito',
             text:'',
@@ -424,8 +341,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
            showCloseButton: true,
            customClass: { 
             closeButton : 'OcultarBorde'
-                         },
-           
+                         }
          })
         
         // //let valorIndice = this.eliminarFila("")
@@ -435,7 +351,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
         return
         //swal.fire('Changes are not saved', '', 'info')
       }
-      await this.parent.getResultsList()
+      //await this.parent.getResultsList()
     })
   }
 
@@ -446,7 +362,6 @@ export class PreReinforcedCustomersComponent implements OnInit {
   }
   newArrResultadosCliente:any = []
   getResultadosCliente(page){
-   
     let resp = this.arrResultados.slice(
       (page - 1) * 5,
       page * 5
@@ -461,10 +376,9 @@ export class PreReinforcedCustomersComponent implements OnInit {
   }
 
   arrResultadoFilter: any = []
-   getBuscarClient(){
-      
+  getBuscarClient(){
       // this.arrResultadoFilter = this.arrResultados
-       return this.arrResultadoFilter.length > 0 ? this.arrResultadoFilter : this.arrResultados
+       return this.arrResultados //this.arrResultadoFilter.length > 0 ? this.arrResultadoFilter : this.arrResultados
   }
 
   setFilterResultadosClient(){

@@ -210,6 +210,7 @@
                                                 <div class="card-header headerSenials " style="margin-top: 0px;padding-top: 0px;background-color: rgb(43 36 91 / 8%);">
 
                                                     <div class="row">
+                                                       
                                                         <div class="col-lg-1" style="padding-right: 0px;padding-left: 0px;">
                                                             <div class="pt-4 pl-4" *ngIf="item.TIPO_FORM !== 'C'">
                                                                 <i class="fas fa-2x fa-ellipsis-h" style="cursor: pointer;" data-toggle="collapse" attr.href="#{{stateCompletado.sHrefHead + regimen.desCorto + index}}"></i>
@@ -336,11 +337,12 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="row" style='padding-left:0px' *ngIf="STIPO_USUARIO === 'RE' && item.TIPO_FORM =='C'">
+                                                                            
                                                                             <div class="col-lg-7">
                                                                                 {{ValidarTexto(item.SDESCRIPCION_ALERTA)}}
                                                                                 <div [innerHTML]="textHtml"></div>
                                                                             </div>
-                                                                            <div class="col-lg-1 parrafoAdj text-center" style="padding-left: 0px;padding-right:0px;cursor: pointer;" (click)="descargarComplementoSubido(item)">
+                                                                            <div class="col-lg-1 parrafoAdj text-center" style="padding-left: 0px;padding-right:0px;cursor: pointer;width: 100%;" (click)="descargarComplementoSubido(item)">
                                                                                 <div>
                                                                                     <i class="fas fa-file-download"  style="font-size: 25px;text-align: center;padding-top: 10px;color: #2e7d32;"></i>
                                                                                 </div>
@@ -350,10 +352,21 @@
                                                                                   
                                                                                 
                                                                             </div>
-                                                                            <div class="col-lg-1" style=" padding: 0px;  text-align: center;  ">
+                                                                            <!-- <div class="col-lg-1" style=" padding: 0px;  text-align: center;  ">
                                                                                 <a style="cursor: pointer;padding: 0px 1px;">
                                                                                     <img src="assets/icons/excel-microsoft.png" (click)="descargarComplemento2(item)" style="width: 38px;" /> Descargar Complemento
                                                                                 </a>
+                                                                            </div> -->
+                                                                            <div class="col-lg-1 parrafoAdj text-center" style="padding-left: 0px;padding-right:0px;cursor: pointer;" (click)="descargarComplemento2(item)">
+                                                                                <div>
+                                                                                    <!-- <i class="fas fa-file-download"  style="font-size: 25px;text-align: center;padding-top: 6px;color: #2e7d32;"></i> -->
+                                                                                    <img src="assets/icons/excel-microsoft.png" style="width: 41px;" />
+                                                                                </div>
+                                                                                <div>
+                                                                                    Descargar archivos
+                                                                                </div>
+                                                                                  
+                                                                                
                                                                             </div>
                                                                             <div class="col-lg-3"></div>
                                                                         </div>
@@ -369,15 +382,15 @@
                                                                             <div class="col-lg-6">
                                                                                 <div class="">
                                                                                     <div class="col-lg-2">
-                                                                                        <input type="file" name="file" id="archivoFilesComplementary{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item.NIDALERTA_CABECERA,item.NIDALERTA,regimen.id,'ADJUNTOS-FORM','OC')" />
+                                                                                        <input type="file" name="file" id="archivoFilesComplementary{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item,'ADJUNTOS-FORM','OC')" />
                                                                                         <div class="text-center">
                                                                                             <label for="archivoFilesComplementary{{regimen.id}}-{{index}}">
-                                                <i class="fas fa-paperclip fa-2x fa-lg"
-                                                  style="color: #706d6d;cursor:pointer">
-                                                  <div class="parrafoAdj text-center">
-                                                    Adjuntar archivo</div>
-                                                </i>
-                                              </label>
+                                                                                                <i class="fas fa-paperclip fa-2x fa-lg"
+                                                                                                style="color: #706d6d;cursor:pointer">
+                                                                                                <div class="parrafoAdj text-center">
+                                                                                                    Adjuntar archivo</div>
+                                                                                                </i>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-10">
@@ -465,41 +478,7 @@
                                                                                 </div>
 
                                                                             </div>
-                                                                            <!-- <div class="row container-xl">
-                                <div class="col-12">
-                                  <div class=""
-                                    style="display: flex;justify-content: center;align-items: center;padding-top:20px">
-                                    <div class="row">
-                                      <div class="col-lg-4" title="Nombre del usuario"
-                                        style="display: flex;justify-content: center;align-items: center;">
-                                        <label class="fontText">Seleccionar usuario:</label>
-                                      </div>
-                                      <div class="col-lg-6" title="Nombre del usuario"
-                                        style="display: flex;justify-content: center;align-items: center;">
-
-                                        <select [(ngModel)]="this.userId" name="this.userId"
-                                          class="form-control buttonSinBorder">
-                                          <option value="0" selected>Seleccione</option>
-                                           <option *ngFor="let item of ListUser" value="{{item.ID_USUARIO}}"
-                                                                                            id="userIdSelected">
-                                                                                            {{item.NOMBRECOMPLETO}}</option>  
-
-
-                                        </select>
-                                      </div>
-                                      <div class="col-lg-1 " style="margin-right: 50px;">
-                                        <button title="Deshacer cambios"
-                                          style="display: flex;justify-content: center;align-items: center;width: 100px;"
-                                          class="btn btn-warning text-white "
-                                          (click)="AgregarUsuario(item,listComplemento)">Agregar</button>
-                                      </div>
-                                    </div>
-
-
-
-                                  </div>
-                                </div>
-                              </div> -->
+                                                                        
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -508,13 +487,14 @@
                                                                     <div class="col-12">
                                                                         <div class="borderFormat">
                                                                             <div class="row" style="border-bottom: 2px solid #26296D;">
-                                                                                <div class="col-2 txtCabecera" style="font-size: 14px;">Nombre</div>
+                                                                                <!-- <div class="col-2 txtCabecera" style="font-size: 14px;">Usuario</div> -->
+                                                                                <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Nombre</div>
                                                                                 <!-- <div class="col-2 txtCabecera" style="font-size: 14px;">Perfil </div> -->
-                                                                                <div class="col-2 txtCabecera" style="font-size: 14px;">Cargo</div>
-                                                                                <div class="col-2 txtCabecera" style="font-size: 14px;">Estado</div>
+                                                                                <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Cargo</div>
+                                                                                <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Estado</div>
                                                                                 <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Email</div>
                                                                                 <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Adjuntar </div>
-                                                                                <div class="col-1 txtCabecera" style="font-size: 14px;">Documento</div>
+                                                                                <div class="col-1 txtCabecera text-center" style="font-size: 14px;">Documento</div>
                                                                                 <div class="col-1 txtCabecera text-center" style="font-size: 14px;">Eliminar</div>
                                                                             </div>
 
@@ -525,20 +505,23 @@
                                                                                     <div *ngIf="array.RESULTADO.length !==0;else ListaVacia">
                                                                                       
                                                                                         <div *ngFor="let listUsu of  array.RESULTADO; let indice = index">
-                                                                                            
+                                                                                            <!-- <div class="row">
+                                                                                                <div class="col-12">{{listUsu | json}}</div>
+                                                                                                
+                                                                                            </div> -->
                                                                                             <div class="row" id="pintaGrilla" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
 
-                                                                                              
-
-                                                                                                <div class="col-2 text-left txtDetalle">{{listUsu.NOMBRECOMPLETO}}</div>
+                                                                                               
+                                                                                                <!-- <div class="col-2 text-left txtDetalle">{{listUsu.SNOMBRE_RESPONSABLE}}</div> -->
+                                                                                                <div class="col-2 text-center txtDetalle">{{listUsu.NOMBRECOMPLETO}}</div>
                                                                                                 <!-- <div class="col-2 text-left txtDetalle">{{listUsu.SNAME}}</div> -->
                                                                                                  
-                                                                                                <div class="col-2 text-left txtDetalle">{{listUsu.SDESCARGO}}</div>
-                                                                                                <div class="col-2 text-left txtDetalle">{{listUsu.SNOMBRE_ESTADO}}</div>
+                                                                                                <div class="col-2 text-center txtDetalle">{{listUsu.SDESCARGO}}</div>
+                                                                                                <div class="col-2 text-center txtDetalle">{{listUsu.SNOMBRE_ESTADO}}</div>
                                                                                                 <div class="col-2 text-center txtDetalle">{{listUsu.SEMAIL}}</div>
                                                                                                 <div class="col-2 text-center">
                                                                                                     <div *ngIf="(listUsu.CONSULTA == 'C')">
-                                                                                                        <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}-{{indice}}" class="inputfile" multiple (change)="addFilesUniversal2($event,item,'COMPLEMENTO','RE', listUsu,indice)" />
+                                                                                                        <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}-{{indice}}" class="inputfile"  (change)="addFilesUniversal2($event,item,'COMPLEMENTO','RE', listUsu,indice)" />
                                                                                                              <div class="text-center" style="display:table-caption;float:left;">
                                                                                                         <label for="archivoComplemento{{regimen.id}}-{{index}}-{{indice}}" style="cursor: pointer;" placement="top" ngbTooltip="Adjuntar">
                                                                                                             <i class="fas fa-paperclip"  style="cursor: pointer;"></i>
@@ -547,27 +530,34 @@
                                                                                                             </div>
                                                                                                     </div>
                                                                                                     
-                                                                                                    <!-- <div *ngIf="(listUsu.SFILE_NAME !== '' && listUsu.SNOMBRE_ESTADO == 'PENDIENTE') || (listUsu.SFILE_NAME == '' && listUsu.SFILE_NAME_LARGO !== '' && listUsu.SNOMBRE_ESTADO == 'PENDIENTE')"> -->
-                                                                                                        <div *ngIf="(listUsu.SFILE_NAME !== '' && listUsu.CONSULTA !== 'STORE')">
-                                                                                                            <div   style="float: right;cursor: pointer;" placement="top" ngbTooltip="Eliminar">
+                                                                                                   
+                                                                                                        <div *ngIf="(listUsu.CONSULTA !== 'STORE')">
+                                                                                                            
+                                                                                                            <div  *ngIf="(listUsu.CONSULTA == 'C' && listUsu.SFILE_NAME.length !== 0)" style="float: right;cursor: pointer;" placement="top" ngbTooltip="Eliminar archivo">
                                                                                                                 <i class="far fa-times-circle" (click)="removeFile(item,listUsu)"></i>
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                        <!-- <div *ngIf="(listUsu.SFILE_NAME == '' && listUsu.CONSULTA == 'STORE')">
-                                                                                                            <div   style="float: right;cursor: pointer;">
-                                                                                                                <i class="fas fa-file-download" (click)="descargarArchivoSubido(item)"></i>
-                                                                                                            </div>
-                                                                                                        </div> -->
+                                                                                                       
                                                                                                     
-                                                                                                    <div  class="txtDetalle"  placement="top" ngbTooltip="{{listUsu.SFILE_NAME_LARGO}}">
-                                                                                                        <a (click)="descargarArchivoSubido(item,listUsu)" style="color: blue;cursor: pointer;"><u>{{listUsu.SFILE_NAME}}</u></a> 
+                                                                                                    <div *ngIf="(listUsu.CONSULTA !== 'C')" class="txtDetalle text-center">
+                                                                                                        <label *ngFor=" let listArchivo of listUsu.ARCHIVO">
+                                                                                                            
+                                                                                                            <a (click)="descargarArchivoSubido(item,listArchivo)" style="color: blue;cursor: pointer;" placement="top" ngbTooltip="{{listArchivo.NombreArchivo}}"><u>{{listArchivo.NombreArchivoCorto}}</u></a>
+                                                                                                        </label>
+                                                                                                        
+                                                                                                    </div>
+                                                                                                    <div  *ngIf="(listUsu.CONSULTA == 'C')" class="txtDetalle text-center"  placement="top" ngbTooltip="{{listUsu.SFILE_NAME_LARGO}}">
+                                                                                                        <label *ngFor=" let itemUsu of listUsu.SFILE_NAME">
+                                                                                                            <a  style="color: blue;"><u>{{itemUsu}}</u></a> 
+                                                                                                         </label> 
+                                                                                                       
                                                                                                     </div>
                                                                                                    
                                                                                                     
                                                                                            
                                                                                                  </div>     
                                                                                                 <div class="col-1 text-center txtDetalle">
-                                                                                                    <a *ngIf="listUsu.SNOMBRE_ESTADO !== 'PENDIENTE'" style="cursor: pointer"><i
+                                                                                                    <a *ngIf="listUsu.SNOMBRE_ESTADO !== 'PENDIENTE'" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos"><i
                                                                                                              class="fas fa-file-excel" (click)="descargarComplemento(item,listUsu)" style="color:green;font-size: 20px;"></i></a>
                                                                                                 </div>
 
@@ -601,7 +591,7 @@
 
                                                                 <div class="row" style="padding-top: 25px;">
                                                                     <div class="col-4"></div>
-                                                                    <div class="col-4">
+                                                                    <div class="col-4" style="padding: 0% 6%;">
                                                                         <button class="btn btn-warning text-white " style="width: 100%;" (click)="EnviarCompUsuario(item,listComplemento)">Solicitar complemento a los usuarios</button>
                                                                     </div>
                                                                     <div class="col-4"></div>

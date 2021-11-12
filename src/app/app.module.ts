@@ -26,6 +26,7 @@ import { TablaRegistrosComponent } from './components/tabla-registros/tabla-regi
 import { ReportComponent } from './pages/report/report.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StrDatePipe } from './pipes/str-date.pipe';
+import { DatePipe } from '@angular/common';
 
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -167,14 +168,19 @@ import { TemplateColaboradorComponent } from './components/responsable/templates
 import { CustomerManagerUpdateComponent } from './pages/customer-manager-update/customer-manager-update.component';
 import { LoginUpdateComponent } from './pages/login-update/login-update.component';
 import { NavbarUpdateComponent } from './components/navbar-update/navbar-update.component';
-import { HistoricoResponsableComponent } from './components/responsable/historico-responsable/historico-responsable.component';
+import { HistoricoClientesComponent } from './components/responsable/historico-clientes/historico-clientes.component';
 import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component';
+import { HistoricoProveedorComponent } from './components/responsable/historico-proveedor/historico-proveedor.component';
+import { HistoricoContraparteComponent } from './components/responsable/historico-contraparte/historico-contraparte.component';
+import { HistoricoColaboradorComponent } from './components/responsable/historico-colaborador/historico-colaborador.component';
+import { InformesComponent } from './components/informes/informes.component';
+import { TemplateC2GeneralComponent } from './components/responsable/templates/template-c2-general/template-c2-general.component';
 // import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 // import {MenuItem} from 'primeng/api';                  //api
 
 // import { AngularSplitModule } from 'angular-split'; 
 
-
+import { FileUploadModule } from 'ng2-file-upload';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -318,8 +324,13 @@ import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda
     CustomerManagerUpdateComponent,
     LoginUpdateComponent,
     NavbarUpdateComponent,
-    HistoricoResponsableComponent,
+    HistoricoClientesComponent,
     BusquedaDemandaComponent,
+    HistoricoProveedorComponent,
+    HistoricoContraparteComponent,
+    HistoricoColaboradorComponent,
+    InformesComponent,
+    TemplateC2GeneralComponent,
 
    
     //Validaciones
@@ -345,15 +356,16 @@ import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda
     // MenuItem,
     ReactiveFormsModule,
     //TooltipModule
+    FileUploadModule,
   ],
   schemas: [
     
     NO_ERRORS_SCHEMA
   ],
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent],
-  providers: [UserconfigService],
-  bootstrap: [AppComponent]
- 
+  providers: [UserconfigService, DatePipe],
+  bootstrap: [AppComponent],
+  exports: [BusquedaDemandaComponent]
 
 })
 export class AppModule {
