@@ -4,11 +4,7 @@ class Rutas {
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-<<<<<<< HEAD
-private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
-=======
   private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
->>>>>>> 769ad57cb12d159942535e62c9a3431930ba87c0
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
  // private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
