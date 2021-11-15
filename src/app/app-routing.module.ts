@@ -89,8 +89,9 @@ import { InformesComponent } from './../app/components/informes/informes.compone
 const routes: Routes = [
   { path: 'home', component: HomeComponent, },
   { path: 'ver', component: ViewComponent },
-  { path: '', component: LoginComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginUpdateComponent, pathMatch: 'full' },
+  // { path: '', component: LoginComponent, pathMatch: 'full' },
+  // { path: 'login', component: LoginUpdateComponent, pathMatch: 'full' },
+  { path: '', component: LoginUpdateComponent, pathMatch: 'full' },
   { path: 'editar', component: EditComponent },
   { path: 'carga', component: CargaPreviewComponent },
   { path: 'nuevo', component: NewComponent },
