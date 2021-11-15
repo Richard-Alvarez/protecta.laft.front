@@ -1,11 +1,4 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-  <title>Animated Login Form</title>
-  <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head> -->
+
 <body>
     <!-- <img class="wave" src="http://github.com/sefyudem/Responsive-Login-Form/blob/master/img/wave.png?raw=true"> -->
     <img  class="wave" src="assets/icons/wave-2.png">
@@ -26,7 +19,7 @@
                    </div>
                    <div class="div">
                       <h5>Username</h5>
-                      <input type="text" class="input">
+                      <input type="text" class="input" id="InputUsername"  name="username" [(ngModel)]="user.susername">
                    </div>
                 </div>
                 <div class="input-div pass">
@@ -39,11 +32,11 @@
                           <div class="col-9"></div>
                           <div class="col-3"></div>
                       </div>
-                      <input [type]="pass" class="input inputPass">
-                      <div class="prueba">
-                        <button class="i btnVer" (click)="MostrarPass()"> 
-                            <i class="fa fa-eye"  *ngIf="!show"></i>
-                            <i class="fa fa-eye-slash"  *ngIf="show"></i>
+                      <input [type]="pass" class="input inputPass" id="InputPassword" name="spassword" [(ngModel)]="user.spassword">
+                      <div class="prueba"> 
+                        <button class="i btnVer" > 
+                            <i class="fa fa-eye"  (click)="MostrarPass()" name="show" *ngIf="!eye.show"></i>
+                            <i class="fa fa-eye-slash" (click)="MostrarPass()" name="show" *ngIf="eye.show"></i>
                          </button>
                       </div>
                       
@@ -70,15 +63,15 @@
                     </div>
                     <div class="div">
                        <h5>Captcha</h5>
-                       <input type="text" class="input">
+                       <input type="text" class="input"  id="InputCaptcha" name="txtcaptcha" [(ngModel)]="captcha.txtcaptcha" maxlength="5" (keyup)="onEnter($event)" >
                     </div>
                  </div>
-                 
+                  
                      <a href="#">Forgot Password?</a>
                   
                
 
-                <button class="btnLogin">Login</button>  
+                <button class="btnLogin" (click)="Ingresar()">Login</button>  
                 
               </form>
           </div>
