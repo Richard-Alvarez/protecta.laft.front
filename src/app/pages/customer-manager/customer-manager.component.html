@@ -4,7 +4,7 @@
         <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
             <span class="fas fa-chevron-left"></span> Pantalla Principal
         </button>
-    </div>
+    </div> 
     <br>
     <div class="d-flex">
         <div class="col-lg-3 form-group pl-5" style="margin-right: 40px;">
@@ -20,6 +20,15 @@
                 <option *ngFor="let item of this.SubGrupoList" value="{{item.NIDSUBGRUPOSEN}}" >
                     {{item.SDESSUBGRUPO_SENAL}}</option>
             </select>
+        </div>
+        <div class="col-3">
+            <div class="box">
+                <input type="file" name="file-2" id="file-2" class="inputfile inputfile-2"  (change)="setDataFile($event)">
+                <label for="file-2"><span>Seleccione un Archivo</span></label>
+            </div> 
+        </div>
+        <div class="col-2">
+            <button class="btn btn-danger" (click)="RegistrarArchivo($event)">Registrar Lista</button>
         </div>
     </div>
     <div class="container-fluid pl-5 pr-5">

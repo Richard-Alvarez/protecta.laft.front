@@ -1665,4 +1665,18 @@ export class UserconfigService {
       }
     });
   }
+  
+  LeerDataExcel(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlLeerDataExcel, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
 }

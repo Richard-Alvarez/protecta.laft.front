@@ -98,6 +98,7 @@ export class CustomerManagerComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.AdjuntarArchivo()
     this.spinner.show()
     await this.getGrupoList()
     await this.getListTipo();
@@ -1222,6 +1223,112 @@ export class CustomerManagerComponent implements OnInit {
 
   async getBusquedaManual(obj) {
     return await this.userConfigService.BusquedaManual(obj)
+  }
+
+
+  AdjuntarArchivo(){
+    var inputs = document.querySelectorAll( '.inputfile' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+	var label	 = input.nextElementSibling,
+		labelVal = label.innerHTML;
+
+	input.addEventListener( 'change', function( e )
+	{
+		var fileName = '';
+		if( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
+
+		if( fileName )
+			label.querySelector( 'span' ).innerHTML = fileName;
+		else
+			label.innerHTML = labelVal;
+	});
+});
+  }
+
+  ArchivoAdjunto:any
+  async RegistrarArchivo(){
+    
+    let dataGrupo:any  = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
+    
+
+    let uploadPararms:any = {}
+    uploadPararms.SRUTA = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' ;
+    uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+    uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
+    await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
+
+
+    let datosExcel:any = {}
+    datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + 'ListaColaborador.xlsx' ;
+    let ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+    console.log("Resultado Excel", ResultadoExcel)
+
+
+
+  }
+
+
+  async setDataFile(event) {
+    
+     let files = event.target.files;
+ 
+     let arrFiles = Array.from(files)
+     
+     let listFileNameInform: any = []
+     arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+    
+     let listFileNameCortoInform = []
+     let statusFormatFile = false
+     for (let item of listFileNameInform) {
+       //let item = listFileNameInform[0]
+       let nameFile = item.split(".")
+       if (nameFile.length > 2 || nameFile.length < 2) {
+         statusFormatFile = true
+         return
+       }
+       let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+       //listFileNameCortoInform.push(fileItem)
+       listFileNameCortoInform.push(fileItem)
+     }
+     if (statusFormatFile) {
+       swal.fire({
+         title: 'Mantenimiento de complemento',
+         icon: 'warning',
+         text: 'El archivo no tiene el formato necesario',
+         showCancelButton: false,
+         showConfirmButton: true,
+         confirmButtonColor:'#FA7000',
+         confirmButtonText: 'Aceptar',
+         showCloseButton:true,
+            customClass: { 
+               closeButton : 'OcultarBorde'
+               },
+         
+       }).then(async (result) => {
+       
+       }).catch(err => {
+       
+       })
+     }
+     let listDataFileInform: any = []
+     arrFiles.forEach(fileData => {
+       listDataFileInform.push(this.handleFile(fileData))
+     })
+     let respPromiseFileInfo = await Promise.all(listDataFileInform)
+     
+     return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+   }
+
+   handleFile(blob: any): Promise<any> {
+    return new Promise(resolve => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.readAsDataURL(blob)
+    })
   }
 
 }
