@@ -6,12 +6,21 @@
         </button>
     </div>
     <br>
-    <div class="col-lg-3 form-group pl-5" style="margin-right: 40px;">
-        <label class="fontText">Grupo:</label>
-        <select [(ngModel)]="idGrupo" name="profile" (change)="valorGrupo()" style="display: flex;justify-content: center;align-items: center;" class="form-control buttonSinBorder">
+    <div class="d-flex">
+        <div class="col-lg-3 form-group pl-5" style="margin-right: 40px;">
+            <label class="fontText">Grupo:</label>
+            <select [(ngModel)]="idGrupo" name="profile" (change)="valorGrupo()" style="display: flex;justify-content: center;align-items: center;" class="form-control buttonSinBorder">
                 <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" >
                     {{item.SDESGRUPO_SENAL}}</option>
             </select>
+        </div>
+        <div *ngIf="idGrupo == 3 || idGrupo == 4" class="col-lg-3 form-group pl-5" style="margin-right: 40px;">
+            <label class="fontText">Sub Grupo:</label>
+            <select [(ngModel)]="idSubGrupo" name="profile" (change)="valorSubGrupo()" style="display: flex;justify-content: center;align-items: center;" class="form-control buttonSinBorder">
+                <option *ngFor="let item of this.SubGrupoList" value="{{item.NIDSUBGRUPOSEN}}" >
+                    {{item.SDESSUBGRUPO_SENAL}}</option>
+            </select>
+        </div>
     </div>
     <div class="container-fluid pl-5 pr-5">
         <div class="card-header bordesCabecera" style="background: white;">

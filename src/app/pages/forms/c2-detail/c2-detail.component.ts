@@ -167,18 +167,18 @@ export class C2DetailComponent implements OnInit {
       await this.getPolicyList()
      
       this.core.loader.hide()
-      this.arrRevisionesHis = [
-          {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'},
-          {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'},
-          {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'}
-      ]
-      this.arrCaracteristicasHis = [
-        {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'PEP'},
-        {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'Otras Fuentes',tipoPep:'PEP'},
-        {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'FPEP'},
-        {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'Otras Razones',tipoPep:'PEP'},
-        {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'FPEP'}
-    ]
+    //   this.arrRevisionesHis = [
+    //       {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'},
+    //       {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'},
+    //       {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'}
+    //   ]
+    //   this.arrCaracteristicasHis = [
+    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'PEP'},
+    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'Otras Fuentes',tipoPep:'PEP'},
+    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'FPEP'},
+    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'Otras Razones',tipoPep:'PEP'},
+    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'FPEP'}
+    // ]
     if(this.formData.NIDREGIMEN == '2'){
         this.nombreRegimen = 'RÉGIMEN SIMPLIFICADO:'
     }else if(this.formData.NIDREGIMEN == '1'){
@@ -328,6 +328,7 @@ export class C2DetailComponent implements OnInit {
         
         this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
+            debugger;
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
             this.formData.NOMBRECOMPLETO = localStorage.getItem('NOMBRECOMPLETO')
@@ -369,7 +370,7 @@ export class C2DetailComponent implements OnInit {
            
           
         
-            
+            debugger;
             this.formData.arrClientesGC.forEach(itemObjCliente => {
                if( this.IDGRUPOSENALGestor == 2){
                 let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 35,"STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
@@ -457,24 +458,8 @@ export class C2DetailComponent implements OnInit {
                         objResp.arrCoincidencias = arrClientes
                         this.arrCoincidenciasLista.push(objResp)
                     }
-                })
-            
-                
-                
-                
-                
-            })
-            
-
-
-     
-            /*
-                let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
-                 this.arrCoincidenciasLista= await this.getDataClientesList(dataService)
-                 
-              */
-            
-                    
+                }) 
+            })      
             this.SCLIENT_DATA = this.formData.SCLIENT
 
             await this.getHistorialRevisiones()
@@ -491,6 +476,7 @@ export class C2DetailComponent implements OnInit {
             return
         }
         if(this.tipoClienteGC == 'GC' || this.tipoClienteGC == "C2-BANDEJA"){
+            debugger;
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
            
@@ -745,7 +731,7 @@ export class C2DetailComponent implements OnInit {
         this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
         try {
             
-             
+             debugger;
             let arrayCoincidList:any = []
             let respListasWithCoincid:any = []  //= await this.userConfigService.GetListaResultadosCoincid(dataService)
             if(this.tipoClienteGC == 'C2-BANDEJA'){
@@ -872,10 +858,9 @@ export class C2DetailComponent implements OnInit {
                     let boolAcepta = it.NACEPTA_COINCIDENCIA == 1
                     //boolAcepta = this.SFALTA_ACEPTAR_COINC != 'SI'
                     arrListPepService.push(boolAcepta)
-                    //if(dataService.NIDREGIMEN == it.NIDREGIMEN){
-                        //this.uncheckPepLists.push(boolAcepta)
-                        
-                    //}
+                    if(dataService.NIDREGIMEN == it.NIDREGIMEN){
+                        this.uncheckPepLists.push(boolAcepta)
+                    }
                     
                 })
 
@@ -1652,6 +1637,7 @@ export class C2DetailComponent implements OnInit {
                
         }).then(async (result) => {
             if (result.value) {
+                debugger;
                 this.core.loader.show();
                 let respUsuario = this.core.storage.get('usuario')
            
