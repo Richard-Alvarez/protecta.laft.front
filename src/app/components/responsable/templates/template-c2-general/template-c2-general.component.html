@@ -1,1 +1,761 @@
-<p>template-c2-general works!</p>
+<div id="C2-general">
+    <div>
+        <img src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"> 
+        <div>
+            <u> 
+                <strong style="font-family: arial Narrow, serif; text-align: center;">SEÑALES DE ALERTA - MONITORITOREO DE SEÑALES DE ALERTA</strong>
+            </u>
+            <br/>
+        </div>
+    </div>
+
+    <div>
+       <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+            <p> 
+                <strong style="font-family: arial Narrow, serif;">1.1.2.	Investigados</strong>
+            </p>  
+              <!-- ESTO ES PARA LA C2 -->
+              <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <tbody>
+                        <tr>
+                            <td width="50px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
+                                <p>
+                                    <strong>CÓDIGO</strong>
+                                </p>
+                            </td>
+                            <td width="400px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
+                                <p>
+                                    <strong>SEÑAL DE ALERTA</strong>
+                                </p>
+                            </td>
+                            <td width="250px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
+                                <p align="center">
+                                    <strong>PRODUCTO</strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                                <p align="center">
+                                    C2
+                                </p>
+                            </td>
+                            <td width="400px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    Que se tome conocimiento por los medios de difusión pública u otro, según sea el caso,
+                                    que un cliente está siendo investigado o procesado por el delito de lavado de activos,
+                                    delitos precedentes, el delito de financiamiento del terrorismo y/o delitos conexos.
+                                </p>
+                            </td>
+                            <td width="250px" style="padding-left: 10px; padding-right: 10px; text-align: center">
+                                <p>
+                                    Todos los productos
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </FONT>
+            </table>
+        </div>
+
+        <div class="container" style="padding: 0px 200px;">
+            <br>
+            <strong style="font-family: arial Narrow, serif;">Monitoreo Señales de alerta C2</strong>
+            <ol type="a">
+                <li style="font-family: arial Narrow, serif; text-align: justify">Solicita al área de Operaciones & TI que realice
+                    la búsqueda del Registro Negativo y base de PEP y Familiares de PEP contra la base de clientes con la finalidad
+                    de identificar la señal de alerta en cuestión. Para esto, la Oficialía de Cumplimiento es responsable de enviar
+                    la lista de nombres contenidos en dicho registro.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">Complementariamente, esta señal de alerta se revisa
+                    mediante el “Procedimiento para el monitoreo de Listas Especiales de Seguridad” según lo indicado en el documento
+                    Sistema de Monitoreo de Operaciones – SPLAFT.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">Complementariamente, esta señal de alerta se revisa
+                    mediante la búsqueda de clientes con información negativa en fuentes públicas.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">En caso se identifique señal de alerta y no sea
+                    descartado como falso positivo, se procederá a analizar la inusual operación.
+                </li>
+            </ol>
+            <strong style="font-family: arial Narrow, serif;"> Resultados Señales de alerta C2</strong>
+        </div>
+        <br>
+
+       <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
+
+       <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. DE COINCIDENCIAS) coincidencias
+                    exactas entre el Registro Negativo y la base de clientes - RENTA PARTICULAR vigente al cierre del (PERIODO),
+                    por ende, se consideran como señales de alerta “C2”.
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="14%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO</strong>
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                                <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>DOCUMENTO DE REFERENCIA</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="180px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (INFORMACION DE REGISTROS NEGATIVOS)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
+
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIAS)
+                    coincidencias exactas entre el Registro Negativo y la base de clientes – MASIVOS vigente al cierre (PERIODO),
+                    por ende, se consideran como señales de alerta “C2”.
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                                <td width="28%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>DOCUMENTO DE REFERENCIA</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="280px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
+     
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIAS)
+                    coincidencias exactas entre el Registro Negativo y la base de clientes – SOAT vigente al cierre del (PERIODO),
+                    por ende, se consideran como señales de alerta “C2”.
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="15%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="44" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO</strong>
+                                    </p>
+                                </td>
+                                <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                       (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
+    
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIAS)
+                    coincidencias exactas entre el Registro Negativo y la base de clientes – RENTAS VITALICIAS vigente al
+                    cierre del (PERIODO), por ende, se consideran como señales de alerta “C2”.
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="15%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="44" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO</strong>
+                                    </p>
+                                </td>
+                                <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
+                                    <p>
+                                        <strong>DOCUMENTO DE REFERENCIA</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
+
+   <strong style="font-family: arial Narrow, serif;"> PERSONAS POLÍTICAMENTE EXPUESTAS</strong>
+
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIA) coincidencias
+                    exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del (PERIODO), por ende, se consideran
+                    como señales de alerta “C2”.
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>   
+
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIAS) coincidencias
+                    exactas de clientes PEP y la base de clientes vigentes - MASIVOS al cierre del (PERIODO), por ende, se consideran
+                    como señales de alerta “C2”.
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
+    
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIA) coincidencias
+                    exactas de clientes PEP y la base de clientes vigentes - SOAT al cierre del (PERIODO), por ende, se consideran
+                    como señales de alerta “C2”.
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+            </div>
+        </div>
+     
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIA) coincidencias
+                    exactas de Listas PEP y la base de clientes vigentes - RENTAS VITALICIAS al cierre del (PERIODO), por ende, se consideran
+                    como señales de alerta “C2”.
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                            </tr> 
+                            <tr >
+                                <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
+
+        <strong style="font-family: arial Narrow, serif;">LISTAS COMPLEMENTARIAS WORLDCHECK</strong>
+
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIAS) coincidencias
+                    exactas de listas complementarias de WORLDCHECK y la base de clientes vigentes - RENTA PARTICULAR al cierre del (PERIODO).
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                    </p>
+                                </td>
+                                <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
+
+        <strong style="font-family: arial Narrow, serif;">LISTAS INTERNACIONALES</strong>
+     
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. COINCIDENCIAS) coincidencias
+                    exactas de listas internacionales y la base de clientes vigentes - RENTA PARTICULAR al cierre del (PERIODO).
+                </li>
+            </ul>
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                        <tbody>
+                            <tr>
+                                <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                     <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                    </p>
+                                </td>
+                                <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                                <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                    <p>
+                                        <strong>INFORMACIÓN ADICIONAL</strong>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (TIPO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="11%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NUMERO DE DOCUMENTO)
+                                    </p>
+                                </td>
+                                <td width="25%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (NOMBRE COMPLETO)
+                                    </p>
+                                </td>
+                                <td width="20%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        (PRODUCTO)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
+     
+        <div>
+            <ul>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                   (SI/NO) se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del (PERIODO)”.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Por lo tanto, se concluye que por la señal de alerta “C2” (SI/NO) se identificaron casos.
+                </li>
+            </ul>
+        </div>
+     
+   <ng-template #SinData>
+
+     </ng-template>
+     <br>
+     <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: <a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
+
+   </div>
+
+</div>
+
