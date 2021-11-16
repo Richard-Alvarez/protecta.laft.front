@@ -1251,7 +1251,7 @@ Array.prototype.forEach.call( inputs, function( input )
 
   ArchivoAdjunto:any
   async RegistrarArchivo(){
-    
+    console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
     let dataGrupo:any  = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
     
 
@@ -1267,8 +1267,20 @@ Array.prototype.forEach.call( inputs, function( input )
     let ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", ResultadoExcel)
 
+    let datosRegistro:any = {}
+    datosRegistro.NPERIODO_PROCESO
+    datosRegistro.NTIPO_DOCUMENTO
+    datosRegistro.SNUM_DOCUMENTO
+    datosRegistro.SNOM_COMPLETO
+    datosRegistro.DFECHA_NACIMIENTO
+    datosRegistro.NIDUSUARIO
+    datosRegistro.NIDGRUPOSENAL
+    datosRegistro.NIDSUBGRUPOSEN
+    datosRegistro.SNUM_DOCUMENTO_EMPRESA
+    datosRegistro.SNOM_COMPLETO_EMPRESA
+    datosRegistro.SACTUALIZA
 
-
+    let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistro)
   }
 
 

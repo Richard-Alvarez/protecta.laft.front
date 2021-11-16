@@ -1679,4 +1679,16 @@ export class UserconfigService {
     });
   }
 
+  GetRegistrarDatosExcelGC(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetRegistrarDatosExcelGC, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
 }
