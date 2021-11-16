@@ -1250,6 +1250,7 @@ Array.prototype.forEach.call( inputs, function( input )
   }
 
   ArchivoAdjunto:any
+  ResultadoExcel:any
   async RegistrarArchivo(){
     console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
     let dataGrupo:any  = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
@@ -1264,23 +1265,42 @@ Array.prototype.forEach.call( inputs, function( input )
 
     let datosExcel:any = {}
     datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + 'ListaColaborador.xlsx' ;
-    let ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
-    console.log("Resultado Excel", ResultadoExcel)
+     this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+    console.log("Resultado Excel", this.ResultadoExcel)
 
-    let datosRegistro:any = {}
-    datosRegistro.NPERIODO_PROCESO
-    datosRegistro.NTIPO_DOCUMENTO
-    datosRegistro.SNUM_DOCUMENTO
-    datosRegistro.SNOM_COMPLETO
-    datosRegistro.DFECHA_NACIMIENTO
-    datosRegistro.NIDUSUARIO
-    datosRegistro.NIDGRUPOSENAL
-    datosRegistro.NIDSUBGRUPOSEN
-    datosRegistro.SNUM_DOCUMENTO_EMPRESA
-    datosRegistro.SNOM_COMPLETO_EMPRESA
-    datosRegistro.SACTUALIZA
+    let datosEliminar:any = {}
+    datosEliminar.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    datosEliminar.NTIPO_DOCUMENTO = 0
+    datosEliminar.SNUM_DOCUMENTO = ''
+    datosEliminar.SNOM_COMPLETO = ''
+    datosEliminar.DFECHA_NACIMIENTO = ''
+    datosEliminar.NIDUSUARIO = 0
+    datosEliminar.NIDGRUPOSENAL = 2
+    datosEliminar.NIDSUBGRUPOSEN = 0
+    datosEliminar.SNUM_DOCUMENTO_EMPRESA =''
+    datosEliminar.SNOM_COMPLETO_EMPRESA = ''
+    datosEliminar.SACTUALIZA = 'DEL'
+    let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
 
-    let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistro)
+    debugger
+    for( let i = 0; i < this.ResultadoExcel.length ; i++){
+      let datosRegistroColaborador:any = {}
+    datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].ID_DOCUMENTO)
+    datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].NUMERO_DOCUMENTO
+    datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].NOMBRES_APELLIDOS
+    datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].FECHA_NACIMIENTO
+    datosRegistroColaborador.NIDUSUARIO = this.NIDUSUARIO_LOGUEADO
+    datosRegistroColaborador.NIDGRUPOSENAL = 2
+    datosRegistroColaborador.NIDSUBGRUPOSEN = 0
+    datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = ''
+    datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = ''
+    datosRegistroColaborador.SACTUALIZA = 'INS'
+
+    let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
+    }
+
+    
   }
 
 
