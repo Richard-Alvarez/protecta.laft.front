@@ -400,7 +400,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
    async sendForm(){
     // await this.EnviarCorreo()
     // return
-    
+    debugger
     if(this.STIPO_USUARIO === 'OC'){
       this.sNameTipoUsuario = 'Oficial de Cumplimiento'
     }else{
@@ -431,41 +431,45 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     
       let arrCabecera =this.parent.arrObjFilesAdjByCabecera.filter(t => t.STIPO_CARGA == 'COMPLEMENTO' && t.STIPO_USUARIO == 'RE')
       let countCabecera = 0
-      if (arrCabecera.length > 0 ){
-        countCabecera = arrCabecera
-        .map(t=> t.arrFilesName.length == 1)
-        .filter(t=> t).length
+      let validadorLista = 0
+      if(arrCabecera.length !== 0 ){
+        validadorLista = arrCabecera[0].arrFilesName.length
       }
+       
+      // if (arrCabecera.length > 0 ){
+      //   countCabecera = arrCabecera
+      //   .map(t=> t.arrFilesName.length == 1)
+      //   .filter(t=> t).length
+      // }
       
       // if(countCabecera != resultComplemento.length ){
+        if(validadorLista == 0 ){
         
   
-      //   swal.fire({
-      //     title: 'Bandeja del '+ this.sNameTipoUsuario,
-      //     icon: 'warning',
-      //     text: 'Debe adjuntar un archivo en cada complemento.',
-      //     //showCancelButton: true,
-      //     showConfirmButton: true,
-      //     ////cancelButtonColor: '#dc4545',
-      //     confirmButtonColor: "#FA7000",
-      //     confirmButtonText: 'Aceptar',
-      //     //cancelButtonText: 'Cancelar',
-      //     showCloseButton: true,
+        swal.fire({
+          title: 'Bandeja del '+ this.sNameTipoUsuario,
+          icon: 'warning',
+          text: 'Debe adjuntar un archivo.',
+          showConfirmButton: true,
+          confirmButtonColor: "#FA7000",
+          confirmButtonText: 'Aceptar',
           
-      //      customClass: { 
-      //         closeButton : 'OcultarBorde'
-      //         },
+          showCloseButton: true,
           
-      //   }).then(async (result) => {
+           customClass: { 
+              closeButton : 'OcultarBorde'
+              },
+          
+        }).then(async (result) => {
           
         
            
-      //      if(result.value){
-      //        return
-      //      }
-      //     } )  
-      //     return
-      // }
+           if(result.value){
+             return
+           }
+          } )  
+          return
+      }
      
      
      }else{
@@ -568,7 +572,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           let arrPushResCommentsForm:any = []
           let arrPushFilesForm:any = []
           let arrPushResCommentsFormDetail:any = []
-         
+         debugger
           let dataComplementario = respSetDataPendiente.array.filter(it => it.TIPO_FORM == 'C')
           respSetDataPendiente.array.forEach(senial => {
             //senial.SCOMENTARIO = this.arrInputComment[inc]
@@ -1588,18 +1592,43 @@ async ConsultaComplementoUsuarios(){
   }
 
   async DescargarPlantilla(item){
-   
-      let listaAlertaComp = await this.userConfigService.GetListaAlertaComplemento()
-      let DATA = listaAlertaComp.filter(it => it.NIDALERTA == item.NIDALERTA)
+    debugger
+      // let listaAlertaComp = await this.userConfigService.GetListaAlertaComplemento()
+      // let DATA = listaAlertaComp.filter(it => it.NIDALERTA == item.NIDALERTA)
 
-      if(DATA.length == 0){
-        let mensaje = "No hay plantilla en el complemento"
-        this.AlertaMensaje(mensaje)
+      // if(DATA.length == 0){
+      //   let mensaje = "No hay plantilla en el complemento"
+      //   this.AlertaMensaje(mensaje)
+      // }else{
+      //   let SRUTA = DATA[0].SRUTA_FILE_NAME;
+      //   let SRUTA_LARGA = DATA[0].SFILE_NAME_LARGO;
+      //   this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+      // }
+
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+      let listaAdjuntos = await this.userConfigService.getListaAdjuntos(data)
+      console.log("listaAdjuntos",listaAdjuntos)
+      let newlistaAdjuntos = listaAdjuntos.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-PLANTILLA" )
+      console.log("listaAdjuntos",newlistaAdjuntos)
+     
+      if(newlistaAdjuntos.length !== 0){
+        newlistaAdjuntos.forEach(objAdj => {
+          let valor = objAdj.SRUTA_ADJUNTO
+          let link = valor.split("/")
+          let nombre = link[link.length-1].trim()
+    
+          console.log(data)
+          let SRUTA = objAdj.SRUTA_ADJUNTO;
+          let SRUTA_LARGA = nombre;
+          this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+        });
       }else{
-        let SRUTA = DATA[0].SRUTA_FILE_NAME;
-        let SRUTA_LARGA = DATA[0].SFILE_NAME_LARGO;
-        this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+        let mensaje = "No hay plantilla para descargar"
+          this.AlertaMensaje(mensaje)
       }
+      
+     
       
   }
 

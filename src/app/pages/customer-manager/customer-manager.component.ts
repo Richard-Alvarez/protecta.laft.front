@@ -28,7 +28,9 @@ import swal from 'sweetalert2';
 })
 export class CustomerManagerComponent implements OnInit {
   GrupoList: any = []
+  SubGrupoList: any = []
   idGrupo = 1
+  idSubGrupo
   arrSetClassSelected: any = []
   arrSetClassSelectedSubModule: any = []
   NBUSCAR_POR: number = 1;
@@ -96,6 +98,7 @@ export class CustomerManagerComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.AdjuntarArchivo()
     this.spinner.show()
     await this.getGrupoList()
     await this.getListTipo();
@@ -147,7 +150,6 @@ export class CustomerManagerComponent implements OnInit {
     //  }
     await this.getClientsByTratamiento()
 
-    debugger;
     try {
       let respSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClientReturn")
       if (!respSelectPestaniaClient || (respSelectPestaniaClient + ' ').trim() == '') {
@@ -177,10 +179,25 @@ export class CustomerManagerComponent implements OnInit {
   async valorGrupo() {
     this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
     this.arrSetClassSelected[0] = 'active'
-    if (this.idGrupo != 1) {
+    if (this.idGrupo == 3 || this.idGrupo == 4) {
+      debugger;
+      let data = {
+      NIDGRUPOSENAL : this.idGrupo
+      }
+      this.SubGrupoList = await this.userConfigService.getSubGrupoSenal(data);
+      if(this.SubGrupoList.length > 0)
+        this.idSubGrupo = this.SubGrupoList.map(t=> t.NIDSUBGRUPOSEN)[0] 
       //this.ListaDeCoincidencias(this.idGrupo)
     }
   }
+  async valorSubGrupo() {
+    // this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
+    // this.arrSetClassSelected[0] = 'active'
+    // if (this.idGrupo != 1) {
+    //   //this.ListaDeCoincidencias(this.idGrupo)
+    // }
+  }
+
 
   setTipoSelectPestaniaClient(tipoCliente) {
     this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
@@ -550,7 +567,7 @@ export class CustomerManagerComponent implements OnInit {
 
   groupClients(listaCoincidencia) {
     let _items = listaCoincidencia;
-    _items = _items.filter((value, index, array) => {
+    listaCoincidencia = listaCoincidencia.filter((value, index, array) => {
       return array.map((t) => t.SNOM_COMPLETO).indexOf(value.SNOM_COMPLETO) == index;
     });
     listaCoincidencia.forEach((t) => {
@@ -1037,7 +1054,6 @@ export class CustomerManagerComponent implements OnInit {
     }
   }
   async delObjCliente(item, indice) {
-    debugger;
     switch (item.SESTADO_TRAT) {
       case 'CRF': {
         this.arrClientesRefor = this.arrClientesRefor.filter(t => t.SNUM_DOCUMENTO != item.SNUM_DOCUMENTO)
@@ -1101,7 +1117,6 @@ export class CustomerManagerComponent implements OnInit {
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
     let respuestaConsultaPoliza: any = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
-    debugger;
     if (respuestaConsultaPoliza.code == 1) {
       Swal.fire({
         title: 'Gestor de Cliente',
@@ -1162,13 +1177,14 @@ export class CustomerManagerComponent implements OnInit {
   }
 
   goToDetailAprobar(item) {
+    debugger;
     this.spinner.show()
-    if (item.NIDGRUPOSENAL == 2) {
+    if (this.idGrupo == 2) {
       localStorage.setItem("NIDALERTA", '35')
-    } else if (item.NIDGRUPOSENAL == 3) {
+    } else if (this.idGrupo == 3) {
       localStorage.setItem("NIDALERTA", '33')
     } else {
-      localStorage.setItem("NIDALERTA", item.NIDALERTA)
+      localStorage.setItem("NIDALERTA", '2')
     }
     localStorage.setItem("NPERIODO_PROCESO", this.NPERIODO_PROCESO + '')
     localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
@@ -1187,7 +1203,7 @@ export class CustomerManagerComponent implements OnInit {
     localStorage.setItem("NTIPOCARGA", item.NTIPOCARGA);
     localStorage.setItem("SCLIENT", item.SCLIENT);
     localStorage.setItem("SFALTA_ACEPTAR_COINC", item.SFALTA_ACEPTAR_COINC);
-    localStorage.setItem("arrClientesGC", JSON.stringify(this.arrClientesCoincid));
+    localStorage.setItem("arrClientesGC", JSON.stringify(this.clientList));
     localStorage.setItem('view-c2-idLista', item.NIDTIPOLISTA)
     let sEstadoRevisado = item.SESTADO_REVISADO// == '1' ? '1' : '0'
     localStorage.setItem('EnviarCheckbox', sEstadoRevisado)
@@ -1207,6 +1223,124 @@ export class CustomerManagerComponent implements OnInit {
 
   async getBusquedaManual(obj) {
     return await this.userConfigService.BusquedaManual(obj)
+  }
+
+
+  AdjuntarArchivo(){
+    var inputs = document.querySelectorAll( '.inputfile' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+	var label	 = input.nextElementSibling,
+		labelVal = label.innerHTML;
+
+	input.addEventListener( 'change', function( e )
+	{
+		var fileName = '';
+		if( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
+
+		if( fileName )
+			label.querySelector( 'span' ).innerHTML = fileName;
+		else
+			label.innerHTML = labelVal;
+	});
+});
+  }
+
+  ArchivoAdjunto:any
+  async RegistrarArchivo(){
+    console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
+    let dataGrupo:any  = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
+    
+
+    let uploadPararms:any = {}
+    uploadPararms.SRUTA = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' ;
+    uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+    uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
+    await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
+
+
+    let datosExcel:any = {}
+    datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + 'ListaColaborador.xlsx' ;
+    let ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+    console.log("Resultado Excel", ResultadoExcel)
+
+    let datosRegistro:any = {}
+    datosRegistro.NPERIODO_PROCESO
+    datosRegistro.NTIPO_DOCUMENTO
+    datosRegistro.SNUM_DOCUMENTO
+    datosRegistro.SNOM_COMPLETO
+    datosRegistro.DFECHA_NACIMIENTO
+    datosRegistro.NIDUSUARIO
+    datosRegistro.NIDGRUPOSENAL
+    datosRegistro.NIDSUBGRUPOSEN
+    datosRegistro.SNUM_DOCUMENTO_EMPRESA
+    datosRegistro.SNOM_COMPLETO_EMPRESA
+    datosRegistro.SACTUALIZA
+
+    let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistro)
+  }
+
+
+  async setDataFile(event) {
+    
+     let files = event.target.files;
+ 
+     let arrFiles = Array.from(files)
+     
+     let listFileNameInform: any = []
+     arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+    
+     let listFileNameCortoInform = []
+     let statusFormatFile = false
+     for (let item of listFileNameInform) {
+       //let item = listFileNameInform[0]
+       let nameFile = item.split(".")
+       if (nameFile.length > 2 || nameFile.length < 2) {
+         statusFormatFile = true
+         return
+       }
+       let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+       //listFileNameCortoInform.push(fileItem)
+       listFileNameCortoInform.push(fileItem)
+     }
+     if (statusFormatFile) {
+       swal.fire({
+         title: 'Mantenimiento de complemento',
+         icon: 'warning',
+         text: 'El archivo no tiene el formato necesario',
+         showCancelButton: false,
+         showConfirmButton: true,
+         confirmButtonColor:'#FA7000',
+         confirmButtonText: 'Aceptar',
+         showCloseButton:true,
+            customClass: { 
+               closeButton : 'OcultarBorde'
+               },
+         
+       }).then(async (result) => {
+       
+       }).catch(err => {
+       
+       })
+     }
+     let listDataFileInform: any = []
+     arrFiles.forEach(fileData => {
+       listDataFileInform.push(this.handleFile(fileData))
+     })
+     let respPromiseFileInfo = await Promise.all(listDataFileInform)
+     
+     return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+   }
+
+   handleFile(blob: any): Promise<any> {
+    return new Promise(resolve => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.readAsDataURL(blob)
+    })
   }
 
 }

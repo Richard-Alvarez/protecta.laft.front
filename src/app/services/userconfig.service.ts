@@ -316,7 +316,19 @@ export class UserconfigService {
       }
     });
   }
+  getSubGrupoSenal(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetSubGrupoSenal, data).subscribe((response) => {
+          return resolve(response);
 
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  
   //Obtener la lista de estados de los usuarios
   getUserState(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -1653,4 +1665,30 @@ export class UserconfigService {
       }
     });
   }
+  
+  LeerDataExcel(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlLeerDataExcel, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  GetRegistrarDatosExcelGC(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetRegistrarDatosExcelGC, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
 }

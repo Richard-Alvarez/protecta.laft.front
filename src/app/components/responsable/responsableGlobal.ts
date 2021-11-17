@@ -2498,8 +2498,9 @@ export class ResponsableGlobalComponent {
       //let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
       
+      if (false) {
       // if (cantidadResponsables > cantidadInformes) {
-        if (false) {
+       
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',
