@@ -19,6 +19,9 @@ export class BusquedaDemandaComponent implements OnInit {
   hideMasiva: boolean = true;
   hideIndividual: boolean = false;
 
+  encontroRespuesta: boolean = true;
+  noEncontroRespuesta: boolean = true;
+
   NBUSCAR_POR: number = 1;
   
   POR_INDIVIDUAL: number = 1;
@@ -41,22 +44,15 @@ export class BusquedaDemandaComponent implements OnInit {
   ngOnInit() {
 
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
-    this.nombreCompleto = null; /* this.nombreCompleto.nombreBusqueda = null; */
+    this.nombreCompleto = null;
     this.variableGlobalUser = this.core.storage.get('usuario');
     this.idUsuario = this.variableGlobalUser["idUsuario"]
-    //console.log("change masiva",this.NBUSCAR_POR);
-    //console.log("change masiva",this.hideMasiva);
-    //console.log("change individual",this.hideIndividual);
     
     //console.log('',this.timestamp.getDate()|this.timestamp.getMonth()|this.timestamp.getFullYear());
     /*codigodebusqueda*/console.log("codigo busqueda",this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
     //this.GenerarCodigo();
     
   }
-  
-
-
-  /* uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true }); *//* 1 */
   
   archivoExcel:File;
   clearInsert(){this.archivoExcel = null;}
@@ -73,20 +69,31 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     this.excelSubir = archivo;
   }
-  /* errorExcel = false;
-  validarexce(){
-    this.errorExcel = false;
-    const myFormData: FormData = new FormData();
+  async getServicioBusquedaDemanda(){
+    
+    let ObjLista : any = {};
+      //P_ID : currentTime
+      ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+      ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+      if(this.NBUSCAR_POR == 1){
+        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//fpep'RAMON MORENO MADELEINE JUANA', pep'GONZALEZ GONZALEZ MARIO'
+      }else
+      {
+        ObjLista.P_SNOMCOMPLETO = null;
+      }
+      ObjLista.P_NIDUSUARIO = this.idUsuario;
+    
 
-    myFormData.append('dataFile',this.excelSubir);
+    this.core.loader.show()
 
-    const data : any = {};
-    data.ñl
-  } */  /* 2 */
-
+    await this.userConfigService.GetBusquedaConcidenciaXNombreDemanda(ObjLista).then(
+      (response) => {
+       this.resulBusqueda = response
+      });
+    this.core.loader.hide()
+  }
+  /*busquedaidecon*/
   async obtenerBusquedaCoincidenciaXNombreDemanda(){
-    //var currentTime = Date.now();
-
     let ObjLista : any = {};
       //P_ID : currentTime
       ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
@@ -107,7 +114,16 @@ export class BusquedaDemandaComponent implements OnInit {
        this.resulBusqueda = response
       });
     this.core.loader.hide()
-      this.resultadoFinal = this.resulBusqueda.lista
+    
+    this.resultadoFinal = this.resulBusqueda.lista
+  
+    if(this.resultadoFinal.length != 0){
+      this.encontroRespuesta = false;
+      this.noEncontroRespuesta = true;
+    }else{
+      this.encontroRespuesta = true;
+      this.noEncontroRespuesta = false
+    }
       console.log('resultado de la busqueda', this.resulBusqueda);
       console.log('resultado de la busqueda 1', this.resulBusqueda.lista);
       console.log('resultado de la busqueda', this.NPERIODO_PROCESO);
@@ -115,9 +131,8 @@ export class BusquedaDemandaComponent implements OnInit {
       console.log('resultado de la busqueda', this.idUsuario);
       console.log('resultado de la busqueda', ObjLista);
       console.log('',ObjLista.P_SCODBUSQUEDA);
-
-      
   }
+  /*fin busqueda idecon*/
   
   GenerarCodigo()
   {
@@ -125,29 +140,6 @@ export class BusquedaDemandaComponent implements OnInit {
     console.log("codigo unico",codigo);
     return codigo.toString();
   }
-
-/*  arrayBuffer:any;
-file:File;
- incomingfile(event) 
-  {
-  this.file= event.target.files[0]; 
-  }
-
- Upload() {
-      let fileReader = new FileReader();
-        fileReader.onload = (e) => {
-            this.arrayBuffer = fileReader.result;
-            var data = new Uint8Array(this.arrayBuffer);
-            var arr = new Array();
-            for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-            var bstr = arr.join("");
-            var workbook = XLSX.read(bstr, {type:"binary"});
-            var first_sheet_name = workbook.SheetNames[0];
-            var worksheet = workbook.Sheets[first_sheet_name];
-            console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
-        }
-        fileReader.readAsArrayBuffer(this.file);
-} *//* 3 */
   
   hideControls() {
     if (this.NBUSCAR_POR == this.POR_INDIVIDUAL) {
@@ -206,7 +198,7 @@ file:File;
     }
     return ''
   }
-  exportListToExcel(){debugger;
+  exportListToExcel(){
     let resultado:any = []
     resultado = this.resultadoFinal
     
@@ -238,7 +230,8 @@ file:File;
           "Número de Documento" : t.SNUM_DOCUMENTO,
           "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
           "Tipo de Persona	" : t.STIPO_PERSONA,
-          "Cargo" : t.SCARGO
+          "Cargo" : t.SCARGO,
+          "Lista" : t.SLISTA
         }
         /* t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO
@@ -252,7 +245,7 @@ file:File;
       swal.fire({
         title: 'Gestor de clientes',
         icon: 'warning',
-        text: 'No hay registros',
+        text: 'error',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar',
@@ -266,4 +259,10 @@ file:File;
       return
     }
   }
+  Buscar(event:any){
+    if(event.keyCode == 13){
+       document.getElementById("enter").click();
+    }else{
+    }
+ }
 }
