@@ -42,8 +42,11 @@
                         <input ng2FileSelect type="file" accept=".xlsx" [uploader]="uploader">
                     </div> --><!-- 1 -->
                     <div class="col-lg-7" [hidden]="hideMasiva" style="margin-left: -20px;"><!-- VIDA LEY -->
-                        <input type="file" accept=".xlsx" onclick="this.value=null;"
+                        <!-- <input type="file" accept=".xlsx" onclick="this.value=null;"
                                 (change)="seleccionExcel($event).target.files[0]" [(ngModel)]="archivoExcel"
+                                style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()"> -->
+                            <input type="file" accept=".xlsx" onclick="this.value=null;"
+                                (change)="setDataFile($event)" [(ngModel)]="archivoExcel"
                                 style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()">
                     </div><!-- 2 -->
                     <!-- <div>

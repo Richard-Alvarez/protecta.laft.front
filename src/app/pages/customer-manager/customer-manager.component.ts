@@ -571,7 +571,7 @@ export class CustomerManagerComponent implements OnInit {
       return array.map((t) => t.SNOM_COMPLETO).indexOf(value.SNOM_COMPLETO) == index;
     });
     listaCoincidencia.forEach((t) => {
-      console.log(t);
+      // console.log(t);
       t.ARRAY_IDTIPOLISTA = _items
         .filter((i) => i.SNOM_COMPLETO == t.SNOM_COMPLETO)
         .map((f) => f.NIDTIPOLISTA);
@@ -1251,8 +1251,14 @@ Array.prototype.forEach.call( inputs, function( input )
 
   ArchivoAdjunto:any
   ResultadoExcel:any
+  NombreArchivo:string = ''
   async RegistrarArchivo(){
     console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
+    if(this.NombreArchivo == ''){
+      let mensaje = 'No hay archivo registrado'
+      this.SwalGlobal(mensaje)
+      return
+    }
     let dataGrupo:any  = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
     
 
@@ -1265,6 +1271,7 @@ Array.prototype.forEach.call( inputs, function( input )
 
     let datosExcel:any = {}
     datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + 'ListaColaborador.xlsx' ;
+    datosExcel.VALIDADOR = 'GESTOR-CLIENTE'
      this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
 
@@ -1351,6 +1358,11 @@ Array.prototype.forEach.call( inputs, function( input )
        listDataFileInform.push(this.handleFile(fileData))
      })
      let respPromiseFileInfo = await Promise.all(listDataFileInform)
+     if(listFileNameCortoInform.length == 0){
+      this.NombreArchivo = ''
+     }else{ 
+      this.NombreArchivo = listFileNameCortoInform[0]
+     }
      
      return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
    }
@@ -1362,5 +1374,26 @@ Array.prototype.forEach.call( inputs, function( input )
       reader.readAsDataURL(blob)
     })
   }
+
+  SwalGlobal(mensaje){
+    Swal.fire({
+      title: "Gestor de Clientes",
+      icon: "warning",
+      text: mensaje,
+      showCancelButton: false,
+      confirmButtonColor: "#FA7000",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCloseButton: true,
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+    }).then(async (msg) => {
+      return
+    });
+  }
+
+
+
 
 }

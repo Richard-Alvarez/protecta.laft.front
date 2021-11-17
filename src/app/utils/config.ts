@@ -214,6 +214,7 @@ private base: string = 'http://localhost:5001/api/';
   //LEER DATOS DE UN EXCEL
   public urlLeerDataExcel:string = this.base + "monitoreoSenales/LeerDataExcel";
   public urlGetRegistrarDatosExcelGC:string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
+  public urlGetRegistrarDatosExcelDemanda:string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
   
   
   LimpiarDataGestor() {

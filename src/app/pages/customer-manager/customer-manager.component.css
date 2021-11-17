@@ -151,7 +151,7 @@ width: 100%;
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-  background-color: #FA7000;
+  /* background-color: #FA7000; */
 }
 
 .inputfile + label {
@@ -316,7 +316,13 @@ font-size: 1.0625em;
  border:  0.5px solid #26296D;
 }
 
+.btnRegistrar{
+  background-image: linear-gradient(to right, #f1974c, #fd7e14, #f97b11);
+  color: white;
+}
 
+
+  
 
 /*********************************** PARA ADJUNTAR ARCHIVO *********************/
   /**********File Inputs**********/
@@ -324,11 +330,11 @@ font-size: 1.0625em;
     text-align: center;
     /* background: #282828; */
     /* border-top: 5px solid #c39f77; */
-    padding: 50px 0;
+    /* padding: 50px 0; */
     border-radius: 6px;
     width: 50%;
      margin: 0 auto;  
-    margin-bottom: 20px;
+    padding-top: 20px;
   }
   
   .inputfile {
@@ -387,12 +393,13 @@ font-size: 1.0625em;
     font-size: 1rem;
     background-color: #fff;
     padding: 0;
+    float: right;
   }
   
   .inputfile-7:focus + label,
   .inputfile-7.has-focus + label,
   .inputfile-7 + label:hover {
-    border-color: #f79544;
+    /* border-color: #f79544; */
   }
   
   .inputfile-7 + label span,
@@ -421,7 +428,7 @@ font-size: 1.0625em;
   .inputfile-7:focus + label strong,
   .inputfile-7.has-focus + label strong,
   .inputfile-7 + label:hover strong {
-    background-color: #f79544;
+    /* background-color: #f79544; */
   }
   
   @media screen and (max-width: 50em) {
