@@ -151,7 +151,7 @@ width: 100%;
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-  background-color: #FA7000;
+  /* background-color: #FA7000; */
 }
 
 .inputfile + label {
@@ -316,40 +316,124 @@ font-size: 1.0625em;
  border:  0.5px solid #26296D;
 }
 
-
-
-
-/*Adjuntar archivos*/
-
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+.btnRegistrar{
+  background-image: linear-gradient(to right, #f1974c, #fd7e14, #f97b11);
+  color: white;
 }
 
-.inputfile + label { 
-    font-size: 1.25em;
+
+  
+
+/*********************************** PARA ADJUNTAR ARCHIVO *********************/
+  /**********File Inputs**********/
+  .container-input {
+    text-align: center;
+    /* background: #282828; */
+    /* border-top: 5px solid #c39f77; */
+    /* padding: 50px 0; */
+    border-radius: 6px;
+    width: 50%;
+     margin: 0 auto;  
+    padding-top: 20px;
+  }
+  
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: white;
-    background-color: black;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* cursor: pointer; */
     display: inline-block;
-}
- 
-.inputfile:focus + label,
-.inputfile + label:hover {
-    background-color: red;
-}
- 
-.inputfile + label {
-	cursor: pointer; 
-}
-
-.inputfile:focus + label {
-	outline: 1px dotted #000;
-	outline: -webkit-focus-ring-color auto 5px;
-} 
-
-/**/
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .Puntero{
+    cursor: pointer;
+    font-weight: 400 ;
+  }
+  
+  .inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+  }
+  
+  .iborrainputfile {
+  font-size:16px; 
+  font-weight:normal;
+  font-family: 'Lato';
+  }
+  
+  
+  
+  /* style 7 */
+  
+  .inputfile-7 + label {
+    /* color: #c39f77;*/
+    color: blue
+  } 
+  
+  .inputfile-7 + label {
+    /* border: 1px solid #c39f77; */
+    border: 1px solid #fd7e14;
+    font-size: 1rem;
+    background-color: #fff;
+    padding: 0;
+    float: right;
+  }
+  
+  .inputfile-7:focus + label,
+  .inputfile-7.has-focus + label,
+  .inputfile-7 + label:hover {
+    /* border-color: #f79544; */
+  }
+  
+  .inputfile-7 + label span,
+  .inputfile-7 + label strong {
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .inputfile-7 + label span {
+    width: 200px;
+    min-height: 1em;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  
+  .inputfile-7 + label strong {
+    height: 100%;
+    color: #fff;
+    /* background-color: #c39f77; */
+    background-color: #fd7e14;
+    display: inline-block;
+  }
+  
+  .inputfile-7:focus + label strong,
+  .inputfile-7.has-focus + label strong,
+  .inputfile-7 + label:hover strong {
+    /* background-color: #f79544; */
+  }
+  
+  @media screen and (max-width: 50em) {
+  .inputfile-7 + label strong {
+    display: block;
+  }
+  }
+  /**********End File Inputs**********/

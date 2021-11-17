@@ -5,6 +5,8 @@ import { DatePipe } from '@angular/common';
 import { FileUploader } from 'ng2-file-upload';
 import { ExcelService } from 'src/app/services/excel.service';
 import swal from 'sweetalert2';
+
+import { ConsoleReporter } from 'jasmine';
 /* import * as XLSX from 'xlsx'; */
 
 @Component({
@@ -33,6 +35,10 @@ export class BusquedaDemandaComponent implements OnInit {
   variableGlobalUser;
   resulBusqueda : any = []
   resultadoFinal : any []
+
+  ArchivoAdjunto:any
+  ResultadoExcel:any
+  NombreArchivo:string = ''
 
   constructor(
     public datepipe: DatePipe,
@@ -94,6 +100,11 @@ export class BusquedaDemandaComponent implements OnInit {
   }
   /*busquedaidecon*/
   async obtenerBusquedaCoincidenciaXNombreDemanda(){
+<<<<<<< HEAD
+=======
+    //var currentTime = Date.now();
+    console.log("NBUSCAR_POR",this.NBUSCAR_POR)
+>>>>>>> 635c8bcca24da88e1f48c90b97c643cce7e08a16
     let ObjLista : any = {};
       //P_ID : currentTime
       ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
@@ -102,6 +113,9 @@ export class BusquedaDemandaComponent implements OnInit {
         ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
       }else
       {
+
+        this.SubirExcel(ObjLista)
+        
         ObjLista.P_SNOMCOMPLETO = null;
       }
       ObjLista.P_NIDUSUARIO = this.idUsuario;
@@ -259,6 +273,7 @@ export class BusquedaDemandaComponent implements OnInit {
       return
     }
   }
+<<<<<<< HEAD
   Buscar(event:any){
     if(event.keyCode == 13){
        document.getElementById("enter").click();
@@ -266,3 +281,137 @@ export class BusquedaDemandaComponent implements OnInit {
     }
  }
 }
+=======
+
+
+  async setDataFile(event) {
+    
+    let files = event.target.files;
+
+    let arrFiles = Array.from(files)
+    
+    let listFileNameInform: any = []
+    arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+   
+    let listFileNameCortoInform = []
+    let statusFormatFile = false
+    for (let item of listFileNameInform) {
+      //let item = listFileNameInform[0]
+      let nameFile = item.split(".")
+      if (nameFile.length > 2 || nameFile.length < 2) {
+        statusFormatFile = true
+        return
+      }
+      let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+      //listFileNameCortoInform.push(fileItem)
+      listFileNameCortoInform.push(fileItem)
+    }
+    if (statusFormatFile) {
+      swal.fire({
+        title: 'Mantenimiento de complemento',
+        icon: 'warning',
+        text: 'El archivo no tiene el formato necesario',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor:'#FA7000',
+        confirmButtonText: 'Aceptar',
+        showCloseButton:true,
+           customClass: { 
+              closeButton : 'OcultarBorde'
+              },
+        
+      }).then(async (result) => {
+      
+      }).catch(err => {
+      
+      })
+    }
+    let listDataFileInform: any = []
+    arrFiles.forEach(fileData => {
+      listDataFileInform.push(this.handleFile(fileData))
+    })
+    let respPromiseFileInfo = await Promise.all(listDataFileInform)
+    if(listFileNameCortoInform.length == 0){
+     this.NombreArchivo = ''
+    }else{ 
+     this.NombreArchivo = listFileNameCortoInform[0]
+    }
+    
+    return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+   // return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+  }
+
+  handleFile(blob: any): Promise<any> {
+   return new Promise(resolve => {
+     const reader = new FileReader()
+     reader.onloadend = () => resolve(reader.result)
+     reader.readAsDataURL(blob)
+   })
+ }
+
+ async SubirExcel(obj){
+ 
+
+  if(this.NombreArchivo == ''){
+    let mensaje = 'No hay archivo registrado'
+    this.SwalGlobal(mensaje)
+    return
+  }
+
+  let uploadPararms:any = {}
+  uploadPararms.SRUTA = 'ARCHIVOS-DEMANDA' + '/'+ this.NPERIODO_PROCESO + '/' ;
+  uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+  uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
+  await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
+
+  let datosExcel:any = {}
+  datosExcel.RutaExcel = 'ARCHIVOS-DEMANDA' +'/'+ this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0] ;
+  datosExcel.VALIDADOR = 'DEMANDA'
+   this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+  console.log("Resultado Excel", this.ResultadoExcel)
+  
+  let datosEliminar:any = {}
+    datosEliminar.SCODBUSQUEDA = ''
+    datosEliminar.SCOD_USUARIO = ''
+    datosEliminar.SNOMBRE_COMPLETO = ''
+    datosEliminar.STIPO_DOCUMENTO = ''
+    datosEliminar.SNUM_DOCUMENTO = ''
+    datosEliminar.VALIDAR = 'DEL'
+   let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
+
+   for( let i = 0; i < this.ResultadoExcel.length ; i++){
+    let datosRegistroColaborador:any = {}
+  datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
+  datosRegistroColaborador.SCOD_USUARIO = this.idUsuario
+  datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
+  datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
+  datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
+  datosRegistroColaborador.VALIDAR = 'INS'
+
+  let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
+  }
+
+
+ }
+
+
+ SwalGlobal(mensaje){
+  swal.fire({
+    title: "Busqueda a Demanda",
+    icon: "warning",
+    text: mensaje,
+    showCancelButton: false,
+    confirmButtonColor: "#FA7000",
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar",
+    showCloseButton: true,
+    customClass: {
+      closeButton: 'OcultarBorde'
+    },
+  }).then(async (msg) => {
+    return
+  });
+}
+
+}
+>>>>>>> 635c8bcca24da88e1f48c90b97c643cce7e08a16

@@ -20,6 +20,7 @@
                 </div>
             </article>
         </section>
+<<<<<<< HEAD
         <section class="row borderFormat" >
             <article class="tab-content" style="margin: 0 auto;width: 100%;">
                 <div class="table-responsive" >
@@ -59,6 +60,43 @@
                             </tr>
                         </thead>
                     </table>
+=======
+        <section class="row borderFormat" style="display: flex;justify-content: center;align-items: center;">
+            <article class="tab-content">
+                <div class="row form-group">
+                    <div class="col-lg-2" >
+                        <span class="fontText" style="position: relative;">Busqueda:</span>
+                    </div>
+                    <div class="col-lg-3" style="margin-left: -20px;">
+                        <select class="form-control" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" style="width: fit-content;">
+                            <option value="1">Individual</option>
+                            <option value="2">Masiva</option>
+                        </select>
+                    </div>
+                    <div  [hidden]="hideIndividual"  class="col-lg-7" style="margin-left: -20px;"><!-- class="col-lg-2" -->
+                        <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="adjunte datos de búsqueda" maxlength="100" size="30" [(ngModel)]="nombreCompleto"><!-- .nombreBusqueda -->
+                    </div>
+                    <div class="col-lg-1" [hidden]="hideIndividual" *ngIf="mostrarBotonBuscarIndividual()" style="margin-left: -20px;">
+                        <button class="btn btn-warning btnBuscarStyle" (click)="obtenerBusquedaCoincidenciaXNombreDemanda()">Buscar</button>
+                    </div>
+                    <!-- <div class="col-lg-7" [hidden]="hideMasiva" style="margin-left: -40px;">
+                        <input ng2FileSelect type="file" accept=".xlsx" [uploader]="uploader">
+                    </div> --><!-- 1 -->
+                    <div class="col-lg-7" [hidden]="hideMasiva" style="margin-left: -20px;"><!-- VIDA LEY -->
+                        <!-- <input type="file" accept=".xlsx" onclick="this.value=null;"
+                                (change)="seleccionExcel($event).target.files[0]" [(ngModel)]="archivoExcel"
+                                style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()"> -->
+                            <input type="file" accept=".xlsx" onclick="this.value=null;"
+                                (change)="setDataFile($event)" [(ngModel)]="archivoExcel"
+                                style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()">
+                    </div><!-- 2 -->
+                    <!-- <div>
+                        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="carga de archivos" accept=".xlsx">
+                    </div> --><!-- 3 -->
+                    <div class="col-lg-1" [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()" style="margin-left: -20px;">
+                        <button class="btn btn-warning btnBuscarStyle" (click)="obtenerBusquedaCoincidenciaXNombreDemanda()">Buscar</button>
+                    </div>
+>>>>>>> 635c8bcca24da88e1f48c90b97c643cce7e08a16
                 </div>
             </article>
             <article class="row" style="margin: 0 auto; width: 100%;">
