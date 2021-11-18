@@ -155,6 +155,7 @@ private base: string = 'http://localhost:5001/api/';
   public urlUpdateStateSenialCabUsuarioRealByForm: string = this.base + "monitoreoSenales/UpdateStateSenialCabUsuarioRealByForm";
   public urlGetListaResultadosCoincid: string = this.base + "monitoreoSenales/getListaResultadosCoincid";
   public urlGetBusquedaConcidenciaXNombre: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNombre";
+  public urlBusquedaADemandal: string = this.base + "monitoreoSenales/BusquedaADemandal"
   public urlGetBusquedaConcidenciaXNombreDemanda: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNombreDemanda";/*kdtr*/
   public urlGetBusquedaConcidenciaXDoc: string = this.base + "monitoreoSenales/BusquedaConcidenciaXDoc";
   public urlAnularClienteResultado: string = this.base + "monitoreoSenales/AnularResultadosCliente";

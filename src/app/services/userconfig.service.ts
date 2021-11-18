@@ -1499,6 +1499,18 @@ export class UserconfigService {
       }
     })
   }
+  /*busqueda a demanda*/
+  BusquedaADemanda(data: any): Promise<any>{
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlBusquedaADemandal, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
   GetBusquedaConcidenciaXNombreDemanda(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
