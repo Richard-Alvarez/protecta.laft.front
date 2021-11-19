@@ -30,6 +30,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
   NPERIODO_PROCESO: number;
   nombreCompleto : string;
+  numeroDoc : string;
   idUsuario : number;
   nombreUsuario: string;
   variableGlobalUser;
@@ -51,6 +52,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
     this.nombreCompleto = null;
+    this.numeroDoc = null;
     this.variableGlobalUser = this.core.storage.get('usuario');//
     this.idUsuario = this.variableGlobalUser["idUsuario"] //sessionStorage.usuario["fullName"]//
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
@@ -106,7 +108,7 @@ export class BusquedaDemandaComponent implements OnInit {
         ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
       }else
       {
-        //this.SubirExcel(ObjLista)
+        this.SubirExcel(ObjLista)
         ObjLista.P_SNOMCOMPLETO = null;
       }
       ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
@@ -140,8 +142,8 @@ export class BusquedaDemandaComponent implements OnInit {
       }
 
       this.core.loader.hide()
-      console.log("index",this.resultadoFinal)
-      console.log("index",this.resultadoFinal[1])
+      //console.log("index",this.resultadoFinal)
+      //console.log("index",this.resultadoFinal[1])
     
     }
   }
@@ -150,10 +152,10 @@ export class BusquedaDemandaComponent implements OnInit {
   }
 
   /*busquedaidecon*/
-  /* async obtenerBusquedaCoincidenciaXNombreDemanda(){
+  async obtenerBusquedaCoincidenciaXNombreDemanda(){
 
     //var currentTime = Date.now();
-    console.log("NBUSCAR_POR",this.NBUSCAR_POR)
+    //console.log("NBUSCAR_POR",this.NBUSCAR_POR)
 
     let ObjLista : any = {};
       //P_ID : currentTime
@@ -164,11 +166,11 @@ export class BusquedaDemandaComponent implements OnInit {
       }else
       {
 
-        this.SubirExcel(ObjLista)
+        await this.SubirExcel(ObjLista)
 
         ObjLista.P_SNOMCOMPLETO = null;
       }
-      ObjLista.P_NIDUSUARIO = this.idUsuario;
+      ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario;
     
 
     this.core.loader.show()
@@ -179,7 +181,7 @@ export class BusquedaDemandaComponent implements OnInit {
       });
     this.core.loader.hide()
     
-    //this.resultadoFinal = this.resulBusqueda.lista
+    this.resultadoFinal = this.resulBusqueda.items;
   console.log("resultado",this.resulBusqueda);
   console.log("resultado",this.resultadoFinal);
     if(this.resultadoFinal.length != 0){
@@ -189,7 +191,7 @@ export class BusquedaDemandaComponent implements OnInit {
       this.encontroRespuesta = true;
       this.noEncontroRespuesta = false
     }
-  } */
+  }
   /*fin busqueda idecon*/
   
   GenerarCodigo()
@@ -255,7 +257,6 @@ export class BusquedaDemandaComponent implements OnInit {
     return ''
   }
   exportListToExcelIndividual(i){
-    debugger;
     let resultado:any = []
     resultado = this.resultadoFinal[i]
     
@@ -323,25 +324,15 @@ export class BusquedaDemandaComponent implements OnInit {
     resultado = this.resultadoFinal
     
     let Newresultado:any = []
-    let resulFinal:any = []
     if (resultado!= null && resultado.length > 0) {
       for(let i =0; i< resultado.length;i++){
-        //Newresultado = resultado[i].arrClientesGC
+        
         Newresultado.push(resultado[i])
        }
-      /* for(let index = 0 ;index < Newresultado.length; index++){
-        //if(Newresultado[index].length > 1){
-          Newresultado[index].forEach(element => {
-            resulFinal.push(element)
-          });
-        //}else{
-          resulFinal.push(Newresultado[index])
-        //}
-      } */
 
       //resultadoFinal.push(Newresultado)
       let data = []
-      /* resulFinal */Newresultado.forEach(t => {
+      Newresultado.forEach(t => {
        
         let _data = {
           "Fecha y Hora de Búsqueda" : t.DFECHA_BUSQUEDA,
@@ -355,9 +346,6 @@ export class BusquedaDemandaComponent implements OnInit {
           "Lista" : t.SLISTA,
           "Proveedor" : t.SPROVEEDOR
         }
-        /* t.arrListas.forEach(element => {
-          _data[element.SDESTIPOLISTA] = element.SDESESTADO
-        }); */
         
         data.push(_data);
         });
@@ -386,16 +374,19 @@ export class BusquedaDemandaComponent implements OnInit {
        document.getElementById("enter").click();
     }else{
     }
- }
+  }
 
  async setDataFile(event) {
     
   let files = event.target.files;
 
   let arrFiles = Array.from(files)
+
+  console.log("arreglo excel",arrFiles);//
   
   let listFileNameInform: any = []
   arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+  console.log("array push",listFileNameInform);//
  
   let listFileNameCortoInform = []
   let statusFormatFile = false
@@ -408,6 +399,7 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
     //listFileNameCortoInform.push(fileItem)
+    console.log("items",fileItem);//
     listFileNameCortoInform.push(fileItem)
   }
   if (statusFormatFile) {
@@ -443,6 +435,7 @@ export class BusquedaDemandaComponent implements OnInit {
   
   return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
  // return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+ console.log("this archivo", this.ArchivoAdjunto);
 }
 
 handleFile(blob: any): Promise<any> {
@@ -454,7 +447,6 @@ handleFile(blob: any): Promise<any> {
 }
 
 async SubirExcel(obj){
-  debugger
   if(this.NombreArchivo == ''){
    let mensaje = 'No hay archivo registrado'
    this.SwalGlobal(mensaje)
@@ -466,13 +458,11 @@ async SubirExcel(obj){
   uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
   uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
   await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-
   let datosExcel:any = {}
   datosExcel.RutaExcel = 'ARCHIVOS-DEMANDA' +'/'+ this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0] ;
   datosExcel.VALIDADOR = 'DEMANDA'
   this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
   console.log("Resultado Excel", this.ResultadoExcel)
-
   let datosEliminar:any = {}
   datosEliminar.SCODBUSQUEDA = ''
   datosEliminar.SNOMBREUSUARIO = ''
@@ -481,17 +471,18 @@ async SubirExcel(obj){
   datosEliminar.SNUM_DOCUMENTO = ''
   datosEliminar.VALIDAR = 'DEL'
   let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
-
+  console.log("respuesta de eliminar", responseEliminar);
   for( let i = 0; i < this.ResultadoExcel.length ; i++){
     let datosRegistroColaborador:any = {}
     datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
-    datosRegistroColaborador.SNOMBREUSUARIO = this.idUsuario
+    datosRegistroColaborador.SNOMBREUSUARIO = this.nombreUsuario
     datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
     datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
     datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
     datosRegistroColaborador.VALIDAR = 'INS'
 
     let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
+    console.log("respuesta de inserccion a tabla carga",response);
   }
 
 

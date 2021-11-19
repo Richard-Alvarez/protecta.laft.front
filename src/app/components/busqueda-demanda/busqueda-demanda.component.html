@@ -36,10 +36,22 @@
                                     </select>
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
+                                    <span class="fontText" >Tipo Doc:</span>
+                                </th>
+                                <th [hidden]="hideIndividual" scope="col" >
                                     <select class="form-control" [(ngModel)]="NOMBRE_RAZON">
-                                        <option value="2" title="dni">Individuo</option>
-                                        <option value="1" title="ruc">Razón social</option>
+                                        <option value="2" title="dni">DNI</option>
+                                        <option value="1" title="ruc">RUC</option>
+                                        <option value="2" title="ruc">CE</option>
+                                        <option value="2" title="ruc">PASS</option>
                                     </select>
+                                </th>
+                                <th [hidden]="hideIndividual" scope="col" >
+                                    <span class="fontText" >Número Doc:</span>
+                                </th>
+                                <th [hidden]="hideIndividual"  scope="col">
+                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="Número de Documento" maxlength="100" size="34"
+                                            [(ngModel)]="numeroDoc" >
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
                                     <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="adjunte datos de búsqueda" maxlength="100" size="34"
