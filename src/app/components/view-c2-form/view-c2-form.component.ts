@@ -39,6 +39,8 @@ export class ViewC2FormComponent implements OnInit {
     public uploadDate: any = '';
     public message: any = '';
     public reviewed: any[] = []
+    NIDGRUPOSENAL:any
+
     @Input() vistaOrigen
     @Input() objAlertaC2
     @Input() regimen
@@ -67,7 +69,7 @@ export class ViewC2FormComponent implements OnInit {
         if(this.ValidadorHistorico != 0){
             this.alertData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
         }else{
-            this.alertData.NPERIODO_PROCESO = parseInt(this.HistoricoPeriodo)
+            this.alertData.NPERIODO_PROCESO = 20210930//parseInt(this.HistoricoPeriodo)
         }
         //parseInt(localStorage.getItem("NPERIODO_PROCESO"))
         this.alertData.SPERIODO_FECHA = this.objAlertaC2.NPERIODO_PROCESO//localStorage.getItem("fechaPeriodo")
@@ -153,6 +155,8 @@ export class ViewC2FormComponent implements OnInit {
         // data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
         // data.P_NIDALERTA = this.alertData.NIDALERTA;
         // data.P_NIDREGIMEN = this.regimen.id;
+        let respuestaID = await this.ValidarGrupo()
+            data.NIDGRUPOSENAL =  respuestaID
         this.core.loader.show()
         let respResultadosCoinciden:any = [] 
         respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
@@ -181,7 +185,8 @@ export class ViewC2FormComponent implements OnInit {
     }
 
     async getSignalDetailList() {
-        let data = { NPERIODO_PROCESO: this.alertData.NPERIODO_PROCESO, NIDALERTA: this.alertData.NIDALERTA, NIDREGIMEN: this.alertData.NIDREGIMEN }
+        let respuestaID = await this.ValidarGrupo()
+        let data = { NPERIODO_PROCESO: this.alertData.NPERIODO_PROCESO, NIDALERTA: this.alertData.NIDALERTA, NIDREGIMEN: this.alertData.NIDREGIMEN , NIDGRUPOSENAL: respuestaID }
         this.signalDetailList = await this.userConfigService.getSignalList(data)
         this.signalDetailList.forEach(it => it.estadoRevisado = it.SESTADO_REVISADO == '1' ? true : false)
     }
@@ -847,6 +852,23 @@ console.log('prueba',this.internationalList);
         //.focus({ preventScroll : false})
         //document.getElementById('consulta0').focus({ preventScroll : false})
     }
+
+    async ValidarGrupo(){
+        var URLactual = window.location + " ";
+        let link = URLactual.split("/")
+        this.linkactual = link[link.length-1].trim()
+        if(this.linkactual == "clientes" || this.linkactual == "historico-clientes" ){
+          return  1
+        }else if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
+          return  2
+        }
+        else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte" ){
+          return  4
+        }
+        else if(this.linkactual == "proveedor" || this.linkactual == "historico-proveedor" ){
+          return  3
+        }
+      }
 
    
 }

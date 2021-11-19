@@ -283,4 +283,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
   
 }
 
+.custom-file-input ~ .custom-file-label::after {
+  content: "Adjuntar" !important;
 
+}
