@@ -181,9 +181,9 @@
                                     <div class="col-lg-1 txtCabecera">Número de Documento</div>
                                     <div *ngFor="let tipo of tipoListas" class="text-left col-lg-1 txtCabecera text-left">{{tipo.SDESTIPOLISTA}}
                                     </div>
-                                    <div class="col-lg-1 txtCabecera">Producto</div>
+                                    <div *ngIf="idGrupo == 1" class="col-lg-1 txtCabecera">Producto</div>
                                     <div class="col-lg-1 txtCabecera">Estado</div>
-                                    <div class="col-lg-1 txtCabecera" style="padding-left:0px;padding-right: 0px;">Régimen</div>
+                                    <div *ngIf="idGrupo == 1" class="col-lg-1 txtCabecera" style="padding-left:0px;padding-right: 0px;">Régimen</div>
                                 </div>
                             </div>
                             <div class="col-lg-1">
@@ -206,10 +206,10 @@
                                         <span class="cambiarColor" *ngIf="validate(itemCli.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Coincidencia</span>
                                         <span *ngIf="!validate(itemCli.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Sin Coincidencia</span>
                                     </div>
-                                    <div class="col-lg-1 txtDetalle" style="padding-left:15px;padding-right: 0px;">{{itemCli.SDESPRODUCTO}}</div>
+                                    <div *ngIf="idGrupo == 1" class="col-lg-1 txtDetalle" style="padding-left:15px;padding-right: 0px;">{{itemCli.SDESPRODUCTO}}</div>
                                     <div class="col-lg-1 txtDetalle" style="padding-left:15px;padding-right: 0px;">{{itemCli.SDESESTADO_TRAT}}
                                     </div>
-                                    <div class="col-lg-1 txtDetalle" style="padding-left:15px;padding-right: 0px;">{{itemCli.SDESREGIMEN}}</div>
+                                    <div *ngIf="idGrupo == 1" class="col-lg-1 txtDetalle" style="padding-left:15px;padding-right: 0px;">{{itemCli.SDESREGIMEN}}</div>
                                 </div>
                             </div>
                             <div class="col-lg-1" style="text-align: center; margin: auto;">
@@ -303,7 +303,7 @@
                                 <div class="col-lg-2 txtCabecera">Nombre / Razón Social</div>
                                 <div class="col-lg-1 txtCabecera">Tipo de Documento</div>
                                 <div class="col-lg-1 txtCabecera">Número de Documento</div>
-                                <div *ngFor="let type2 of tipoListas" class="text-left col-lg-1 txtCabecera text-left">{{type2.nombre}}
+                                <div *ngFor="let tipo of tipoListas" class="text-left col-lg-1 txtCabecera text-left">{{tipo.SDESTIPOLISTA}}
                                 </div>
                                 <div class="col-lg-1 txtCabecera">Producto</div>
                                 <div class="col-lg-1 txtCabecera">Estado</div>

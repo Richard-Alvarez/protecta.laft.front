@@ -5,8 +5,6 @@ import { DatePipe } from '@angular/common';
 import { FileUploader } from 'ng2-file-upload';
 import { ExcelService } from 'src/app/services/excel.service';
 import swal from 'sweetalert2';
-
-// import { ConsoleReporter } from 'jasmine';
 /* import * as XLSX from 'xlsx'; */
 
 @Component({
@@ -25,13 +23,16 @@ export class BusquedaDemandaComponent implements OnInit {
   noEncontroRespuesta: boolean = true;
 
   NBUSCAR_POR: number = 1;
+  NOMBRE_RAZON: number = 2;
   
   POR_INDIVIDUAL: number = 1;
   POR_MASIVA: number = 2;
 
   NPERIODO_PROCESO: number;
   nombreCompleto : string;
-  idUsuario : number; 
+  numeroDoc : string;
+  idUsuario : number;
+  nombreUsuario: string;
   variableGlobalUser;
   resulBusqueda : any = []
   resultadoFinal : any []
@@ -51,8 +52,12 @@ export class BusquedaDemandaComponent implements OnInit {
 
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
     this.nombreCompleto = null;
-    this.variableGlobalUser = this.core.storage.get('usuario');
-    this.idUsuario = this.variableGlobalUser["idUsuario"]
+    this.numeroDoc = null;
+    this.variableGlobalUser = this.core.storage.get('usuario');//
+    this.idUsuario = this.variableGlobalUser["idUsuario"] //sessionStorage.usuario["fullName"]//
+    this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
+    console.log("nombre usuario",this.nombreUsuario); //nombreusuario
+
     
     //console.log('',this.timestamp.getDate()|this.timestamp.getMonth()|this.timestamp.getFullYear());
     /*codigodebusqueda*/console.log("codigo busqueda",this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
@@ -66,7 +71,7 @@ export class BusquedaDemandaComponent implements OnInit {
   getDate() {
     return new Date();
   }
-  excelSubir: File;
+  /*excelSubir: File;
   seleccionExcel(archivo: File) {
     this.excelSubir = null;
     if (!archivo) {
@@ -74,48 +79,100 @@ export class BusquedaDemandaComponent implements OnInit {
       return;
     }
     this.excelSubir = archivo;
-  }
-  async getServicioBusquedaDemanda(){
-    
-    let ObjLista : any = {};
-      //P_ID : currentTime
-      ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
-      ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-      if(this.NBUSCAR_POR == 1){
-        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//fpep'RAMON MORENO MADELEINE JUANA', pep'GONZALEZ GONZALEZ MARIO'
-      }else
-      {
-        ObjLista.P_SNOMCOMPLETO = null;
-      }
-      ObjLista.P_NIDUSUARIO = this.idUsuario;
-    
+  }*/
+  async BusquedaADemandaMixta(){
 
-    this.core.loader.show()
-
-    await this.userConfigService.GetBusquedaConcidenciaXNombreDemanda(ObjLista).then(
-      (response) => {
-       this.resulBusqueda = response
-      });
-    this.core.loader.hide()
-  }
-  /*busquedaidecon*/
-  async obtenerBusquedaCoincidenciaXNombreDemanda(){
-    //var currentTime = Date.now();
-    console.log("NBUSCAR_POR",this.NBUSCAR_POR)
-    let ObjLista : any = {};
-      //P_ID : currentTime
+    if (this.NBUSCAR_POR == 1 && this.nombreCompleto == null) {
+      swal.fire({
+        title: 'Busqueda a Demanda',
+        icon: 'warning',
+        text: 'Ingrese nombre para busqueda',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
+    }
+    else {
+      
+      let ObjLista : any = {};
       ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
       ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
       if(this.NBUSCAR_POR == 1){
         ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
       }else
       {
-
         this.SubirExcel(ObjLista)
-        
         ObjLista.P_SNOMCOMPLETO = null;
       }
-      ObjLista.P_NIDUSUARIO = this.idUsuario;
+      ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
+      ObjLista.P_NOMBRE_RAZON = this.NOMBRE_RAZON;
+    
+
+      this.core.loader.show()
+    
+      let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
+
+      if (respuetaService.length != 0) {
+        respuetaService.itemsWC.forEach(t => {
+          t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
+          t.SPROVEEDOR = "WC"
+        });
+  
+        respuetaService.itemsIDE.forEach(t => {
+          t.SPROVEEDOR = "IDECON"
+        }); 
+      }
+        
+      this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC);
+
+
+      if(this.resultadoFinal.length != 0){
+        this.encontroRespuesta = false;
+        this.noEncontroRespuesta = true;
+      }else{
+        this.encontroRespuesta = true;
+        this.noEncontroRespuesta = false
+      }
+
+      this.core.loader.hide()
+      //console.log("index",this.resultadoFinal)
+      //console.log("index",this.resultadoFinal[1])
+    
+    }
+  }
+  async getBusquedaADemanda(obj) {
+    return await this.userConfigService.BusquedaADemanda(obj)
+  }
+
+  /*busquedaidecon*/
+  async obtenerBusquedaCoincidenciaXNombreDemanda(){
+    //var currentTime = Date.now();
+    console.log("NBUSCAR_POR",this.NBUSCAR_POR)
+
+    //var currentTime = Date.now();
+    //console.log("NBUSCAR_POR",this.NBUSCAR_POR)
+
+    let ObjLista : any = {};
+      //P_ID : currentTime
+      ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+      ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+      if(this.NBUSCAR_POR == 1){
+        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',//CANDIOTTI BALLON LELIA GLORIA
+      }else
+      {
+
+        await this.SubirExcel(ObjLista)
+
+        ObjLista.P_SNOMCOMPLETO = null;
+      }
+      ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario;
     
 
     this.core.loader.show()
@@ -126,8 +183,9 @@ export class BusquedaDemandaComponent implements OnInit {
       });
     this.core.loader.hide()
     
-    this.resultadoFinal = this.resulBusqueda.lista
-  
+    this.resultadoFinal = this.resulBusqueda.items;
+  console.log("resultado",this.resulBusqueda);
+  console.log("resultado",this.resultadoFinal);
     if(this.resultadoFinal.length != 0){
       this.encontroRespuesta = false;
       this.noEncontroRespuesta = true;
@@ -135,13 +193,6 @@ export class BusquedaDemandaComponent implements OnInit {
       this.encontroRespuesta = true;
       this.noEncontroRespuesta = false
     }
-      console.log('resultado de la busqueda', this.resulBusqueda);
-      console.log('resultado de la busqueda 1', this.resulBusqueda.lista);
-      console.log('resultado de la busqueda', this.NPERIODO_PROCESO);
-      console.log('resultado de la busqueda', this.nombreCompleto);
-      console.log('resultado de la busqueda', this.idUsuario);
-      console.log('resultado de la busqueda', ObjLista);
-      console.log('',ObjLista.P_SCODBUSQUEDA);
   }
   /*fin busqueda idecon*/
   
@@ -185,8 +236,6 @@ export class BusquedaDemandaComponent implements OnInit {
     return false
   }
 
-  
-
   cortarCararterNombre(text){        
     if(text != null){
       let newTexto = text.substring(0, 22)
@@ -209,17 +258,17 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     return ''
   }
-  exportListToExcel(){
+  exportListToExcelIndividual(i){
     let resultado:any = []
-    resultado = this.resultadoFinal
+    resultado = this.resultadoFinal[i]
     
     let Newresultado:any = []
     let resulFinal:any = []
-    if (resultado!= null && resultado.length > 0) {
-      for(let i =0; i< resultado.length;i++){
-        //Newresultado = resultado[i].arrClientesGC
-        Newresultado.push(resultado[i])
-       }
+    if (resultado!= null) {/*  && resultado.length > 0 */
+      //for(let i =0; i< resultado.length;i++){
+        
+        Newresultado.push(resultado)//[i]
+      //}
       /* for(let index = 0 ;index < Newresultado.length; index++){
         //if(Newresultado[index].length > 1){
           Newresultado[index].forEach(element => {
@@ -240,13 +289,65 @@ export class BusquedaDemandaComponent implements OnInit {
           "Tipo de Documento" : t.STIPO_DOCUMENTO,
           "Número de Documento" : t.SNUM_DOCUMENTO,
           "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
+          "Porcentaje de coincidencia" : t.SPORCEN_COINCIDENCIA, 
           "Tipo de Persona	" : t.STIPO_PERSONA,
-          "Cargo" : t.SCARGO,
-          "Lista" : t.SLISTA
+          "Cargo" : t.SCARGO == null ? '-' : t.SCARGO,
+          "Lista" : t.SLISTA,
+          "Proveedor" : t.SPROVEEDOR
         }
         /* t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO
         }); */
+        
+        data.push(_data);
+        });
+        
+        this.excelService.exportAsExcelFile(data, "Resultados Busqueda a Demanda");
+    }else {
+      swal.fire({
+        title: 'Gestor de clientes',
+        icon: 'warning',
+        text: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
+    }
+  }
+  exportListToExcel(){
+    let resultado:any = []
+    resultado = this.resultadoFinal
+    
+    let Newresultado:any = []
+    if (resultado!= null && resultado.length > 0) {
+      for(let i =0; i< resultado.length;i++){
+        
+        Newresultado.push(resultado[i])
+       }
+
+      //resultadoFinal.push(Newresultado)
+      let data = []
+      Newresultado.forEach(t => {
+       
+        let _data = {
+          "Fecha y Hora de Búsqueda" : t.DFECHA_BUSQUEDA,
+          "Usuario que Realizó la Busqueda" : t.SUSUARIO_BUSQUEDA,
+          "Tipo de Documento" : t.STIPO_DOCUMENTO,
+          "Número de Documento" : t.SNUM_DOCUMENTO,
+          "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
+          "Porcentaje de coincidencia" : t.SPORCEN_COINCIDENCIA, 
+          "Tipo de Persona	" : t.STIPO_PERSONA,
+          "Cargo" : t.SCARGO == null ? '-' : t.SCARGO,
+          "Lista" : t.SLISTA,
+          "Proveedor" : t.SPROVEEDOR
+        }
         
         data.push(_data);
         });
@@ -278,79 +379,83 @@ export class BusquedaDemandaComponent implements OnInit {
  }
 
 
+  
 
-  async setDataFile(event) {
+ async setDataFile(event) {
     
-    let files = event.target.files;
+  let files = event.target.files;
 
-    let arrFiles = Array.from(files)
-    
-    let listFileNameInform: any = []
-    arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-   
-    let listFileNameCortoInform = []
-    let statusFormatFile = false
-    for (let item of listFileNameInform) {
-      //let item = listFileNameInform[0]
-      let nameFile = item.split(".")
-      if (nameFile.length > 2 || nameFile.length < 2) {
-        statusFormatFile = true
-        return
-      }
-      let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
-      //listFileNameCortoInform.push(fileItem)
-      listFileNameCortoInform.push(fileItem)
-    }
-    if (statusFormatFile) {
-      swal.fire({
-        title: 'Mantenimiento de complemento',
-        icon: 'warning',
-        text: 'El archivo no tiene el formato necesario',
-        showCancelButton: false,
-        showConfirmButton: true,
-        confirmButtonColor:'#FA7000',
-        confirmButtonText: 'Aceptar',
-        showCloseButton:true,
-           customClass: { 
-              closeButton : 'OcultarBorde'
-              },
-        
-      }).then(async (result) => {
-      
-      }).catch(err => {
-      
-      })
-    }
-    let listDataFileInform: any = []
-    arrFiles.forEach(fileData => {
-      listDataFileInform.push(this.handleFile(fileData))
-    })
-    let respPromiseFileInfo = await Promise.all(listDataFileInform)
-    if(listFileNameCortoInform.length == 0){
-     this.NombreArchivo = ''
-    }else{ 
-     this.NombreArchivo = listFileNameCortoInform[0]
-    }
-    
-    return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
-   // return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
-  }
+  let arrFiles = Array.from(files)
 
-  handleFile(blob: any): Promise<any> {
-   return new Promise(resolve => {
-     const reader = new FileReader()
-     reader.onloadend = () => resolve(reader.result)
-     reader.readAsDataURL(blob)
-   })
- }
-
- async SubirExcel(obj){
+  console.log("arreglo excel",arrFiles);//
+  
+  let listFileNameInform: any = []
+  arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+  console.log("array push",listFileNameInform);//
  
+  let listFileNameCortoInform = []
+  let statusFormatFile = false
+  for (let item of listFileNameInform) {
+    //let item = listFileNameInform[0]
+    let nameFile = item.split(".")
+    if (nameFile.length > 2 || nameFile.length < 2) {
+      statusFormatFile = true
+      return
+    }
+    let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+    //listFileNameCortoInform.push(fileItem)
+    console.log("items",fileItem);//
+    listFileNameCortoInform.push(fileItem)
+  }
+  if (statusFormatFile) {
+    swal.fire({
+      title: 'Mantenimiento de complemento',
+      icon: 'warning',
+      text: 'El archivo no tiene el formato necesario',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonColor:'#FA7000',
+      confirmButtonText: 'Aceptar',
+      showCloseButton:true,
+         customClass: { 
+            closeButton : 'OcultarBorde'
+            },
+      
+    }).then(async (result) => {
+    
+    }).catch(err => {
+    
+    })
+  }
+  let listDataFileInform: any = []
+  arrFiles.forEach(fileData => {
+    listDataFileInform.push(this.handleFile(fileData))
+  })
+  let respPromiseFileInfo = await Promise.all(listDataFileInform)
+  if(listFileNameCortoInform.length == 0){
+   this.NombreArchivo = ''
+  }else{ 
+   this.NombreArchivo = listFileNameCortoInform[0]
+  }
+  
+  return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+ // return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+ console.log("this archivo", this.ArchivoAdjunto);
+}
 
+handleFile(blob: any): Promise<any> {
+ return new Promise(resolve => {
+   const reader = new FileReader()
+   reader.onloadend = () => resolve(reader.result)
+   reader.readAsDataURL(blob)
+ })
+}
+
+async SubirExcel(obj){
   if(this.NombreArchivo == ''){
-    let mensaje = 'No hay archivo registrado'
-    this.SwalGlobal(mensaje)
-    return
+   let mensaje = 'No hay archivo registrado'
+   this.SwalGlobal(mensaje)
+   return
   }
 
   let uploadPararms:any = {}
@@ -358,54 +463,53 @@ export class BusquedaDemandaComponent implements OnInit {
   uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
   uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
   await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-
   let datosExcel:any = {}
   datosExcel.RutaExcel = 'ARCHIVOS-DEMANDA' +'/'+ this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0] ;
   datosExcel.VALIDADOR = 'DEMANDA'
-   this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+  this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
   console.log("Resultado Excel", this.ResultadoExcel)
-  
   let datosEliminar:any = {}
-    datosEliminar.SCODBUSQUEDA = ''
-    datosEliminar.SCOD_USUARIO = ''
-    datosEliminar.SNOMBRE_COMPLETO = ''
-    datosEliminar.STIPO_DOCUMENTO = ''
-    datosEliminar.SNUM_DOCUMENTO = ''
-    datosEliminar.VALIDAR = 'DEL'
-   let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
-
-   for( let i = 0; i < this.ResultadoExcel.length ; i++){
+  datosEliminar.SCODBUSQUEDA = ''
+  datosEliminar.SNOMBREUSUARIO = ''
+  datosEliminar.SNOMBRE_COMPLETO = ''
+  datosEliminar.STIPO_DOCUMENTO = ''
+  datosEliminar.SNUM_DOCUMENTO = ''
+  datosEliminar.VALIDAR = 'DEL'
+  let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
+  console.log("respuesta de eliminar", responseEliminar);
+  for( let i = 0; i < this.ResultadoExcel.length ; i++){
     let datosRegistroColaborador:any = {}
-  datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
-  datosRegistroColaborador.SCOD_USUARIO = this.idUsuario
-  datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
-  datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
-  datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
-  datosRegistroColaborador.VALIDAR = 'INS'
+    datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
+    datosRegistroColaborador.SNOMBREUSUARIO = this.nombreUsuario
+    datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
+    datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
+    datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
+    datosRegistroColaborador.VALIDAR = 'INS'
 
-  let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
+    let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
+    console.log("respuesta de inserccion a tabla carga",response);
   }
 
 
- }
+}
 
 
- SwalGlobal(mensaje){
-  swal.fire({
-    title: "Busqueda a Demanda",
-    icon: "warning",
-    text: mensaje,
-    showCancelButton: false,
-    confirmButtonColor: "#FA7000",
-    confirmButtonText: "Aceptar",
-    cancelButtonText: "Cancelar",
-    showCloseButton: true,
-    customClass: {
-      closeButton: 'OcultarBorde'
-    },
-  }).then(async (msg) => {
-    return
-  });
+SwalGlobal(mensaje){
+swal.fire({
+  title: "Busqueda a Demanda",
+  icon: "warning",
+  text: mensaje,
+  showCancelButton: false,
+  confirmButtonColor: "#FA7000",
+  confirmButtonText: "Aceptar",
+  cancelButtonText: "Cancelar",
+  showCloseButton: true,
+  customClass: {
+    closeButton: 'OcultarBorde'
+  },
+}).then(async (msg) => {
+  return
+});
 }
 
 }

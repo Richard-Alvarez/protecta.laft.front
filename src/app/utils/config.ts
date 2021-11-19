@@ -1,10 +1,10 @@
 class Rutas {
 
-//private base: string = 'http://localhost:5001/api/'; 
+private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
  //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -155,6 +155,7 @@ class Rutas {
   public urlUpdateStateSenialCabUsuarioRealByForm: string = this.base + "monitoreoSenales/UpdateStateSenialCabUsuarioRealByForm";
   public urlGetListaResultadosCoincid: string = this.base + "monitoreoSenales/getListaResultadosCoincid";
   public urlGetBusquedaConcidenciaXNombre: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNombre";
+  public urlBusquedaADemandal: string = this.base + "monitoreoSenales/BusquedaADemandal"
   public urlGetBusquedaConcidenciaXNombreDemanda: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNombreDemanda";/*kdtr*/
   public urlGetBusquedaConcidenciaXDoc: string = this.base + "monitoreoSenales/BusquedaConcidenciaXDoc";
   public urlAnularClienteResultado: string = this.base + "monitoreoSenales/AnularResultadosCliente";

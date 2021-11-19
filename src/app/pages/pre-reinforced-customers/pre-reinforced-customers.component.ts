@@ -439,67 +439,10 @@ export class PreReinforcedCustomersComponent implements OnInit {
     }
   }
 
-  exportListToExcel(){
+  exportListToExcel(_title){
     let resultado:any = []
     resultado = this.getBuscarClient()
-    
-    let Newresultado:any = []
-    let resultadoFinal:any = []
-    if (resultado!= null && resultado.length > 0) {
-      for(let i =0; i< resultado.length;i++){
-        //Newresultado = resultado[i].arrClientesGC
-        Newresultado.push(resultado[i].arrClientesGC)
-       }
-       for(let index = 0 ;index < Newresultado.length; index++){
-        if(Newresultado[index].length > 1){
-          Newresultado[index].forEach(element => {
-    
-            resultadoFinal.push(element)
-          });
-        }else{
-          resultadoFinal.push(Newresultado[index][0])
-        }
-     }
-
-      //resultadoFinal.push(Newresultado)
-    
-    
-
-      let data = []
-      resultadoFinal.forEach(t => {
-       
-        let _data = {
-          "Tipo Documento" : t.STIPOIDEN,
-          "N° Documento" : t.SNUM_DOCUMENTO,
-          "Nombre / Razón Social" : t.SNOM_COMPLETO,
-          "Regimen" : t.SDESREGIMEN
-           
-        }
-        t.arrListas.forEach(element => {
-          _data[element.SDESTIPOLISTA] = element.SDESESTADO
-        });
-        
-        data.push(_data);
-        });
-        
-        this.excelService.exportAsExcelFile(data, "Cliente revizado");
-    }else {
-      swal.fire({
-        title: 'Gestor de clientes',
-        icon: 'warning',
-        text: 'No hay registros',
-        showCancelButton: false,
-        confirmButtonColor: '#FA7000',
-        confirmButtonText: 'Continuar',
-        showCloseButton: true,
-        customClass: { 
-          closeButton : 'OcultarBorde'
-                       },
-         
-      }).then((result) => {
-      })
-      return
-    }
+    this.parent.exportListToExcel(_title,resultado);
   }
 
   exportListToExcel2()
