@@ -455,7 +455,7 @@ export class ViewC2FormComponent implements OnInit {
                 }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-               
+                console.log('prueba1',dataSend);
             }else if(this.linkactual == "colaborador"){
                 let dataSend = {
                     NIDALERTA: 35,
@@ -466,7 +466,7 @@ export class ViewC2FormComponent implements OnInit {
                 }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-              
+                console.log('prueba1',dataSend);
             }else if(this.linkactual == "contraparte"){
                 let dataSend = {
                     NIDALERTA: 39,
@@ -477,7 +477,7 @@ export class ViewC2FormComponent implements OnInit {
                 }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-               
+                console.log('prueba1',dataSend);
             }else{
                 let dataSend = {
                     NIDALERTA: this.alertData.NIDALERTA,
@@ -488,10 +488,11 @@ export class ViewC2FormComponent implements OnInit {
                 }
                 let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 this.internationalList = respListaInternacional
-              
+                console.log('prueba1',dataSend);
             }
 
 
+console.log('prueba',this.internationalList);
             
           
            
