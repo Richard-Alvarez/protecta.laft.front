@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import { PendienteInformeComponent } from '../../pendiente-informe/pendiente-informe.component';
 
 @Component({
   selector: 'app-template-c2-general',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplateC2GeneralComponent implements OnInit {
 
+  @Input() parent:PendienteInformeComponent
+  
   constructor() { }
 
   ngOnInit() {

@@ -6,7 +6,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { ExcelService } from 'src/app/services/excel.service';
 import swal from 'sweetalert2';
 
-import { ConsoleReporter } from 'jasmine';
+// import { ConsoleReporter } from 'jasmine';
 /* import * as XLSX from 'xlsx'; */
 
 @Component({
