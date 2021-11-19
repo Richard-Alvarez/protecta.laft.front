@@ -285,6 +285,57 @@ async DataAlertas(idgrupo,perido){
 
 
 
+  
+  arrayDataResultadoGeneral:any = []
+  arrayDataResultadoSimplificado:any = []
+  Periodo:string = ''
+  listaMasivos:any = []
+  listaRenta:any = []
+  listaPepMasivos:any = []
+  listaPepSoat:any = []
+  listaPepRenta:any = []
+  listaEspecialSoat:any = []
+  listaEspecialRenta:any = []
+  listaPepRentaParticular:any = []
+  listaInternacionalRentaParticularWC:any = []
+  listaInternacionalRentaParticularIDECON:any = []
+  
+async DataReporteC2(){
+
+
+    let dataRG:any = {}
+    dataRG.NPERIODO_PROCESO = this.IDListPeriodoGlobal
+    dataRG.NIDALERTA = 2
+    dataRG.NIDREGIMEN = 1
+
+    let dataRS:any = {}
+    dataRG.NPERIODO_PROCESO = this.IDListPeriodoGlobal
+    dataRG.NIDALERTA = 2
+    dataRG.NIDREGIMEN = 2
+
+      this.core.loader.show()
+      this.arrayDataResultadoGeneral =  await this.userConfigService.GetListaResultado(dataRG)
+      this.arrayDataResultadoSimplificado =  await this.userConfigService.GetListaResultado(dataRS)
+      this.core.loader.hide()
+
+      this.listaRenta = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+      this.listaMasivos = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76)
+      this.listaEspecialSoat =  this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
+      this.listaEspecialRenta = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+      this.listaPepRentaParticular = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 75)
+      this.listaPepMasivos =  this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
+      this.listaPepSoat =  this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
+      this.listaPepRenta = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
+      this.listaInternacionalRentaParticularWC = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4)
+      this.listaInternacionalRentaParticularIDECON = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1)
+
+    
+    
+  
+ }
+
+
+
 
 
 

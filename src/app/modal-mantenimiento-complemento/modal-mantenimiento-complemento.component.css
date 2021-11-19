@@ -275,6 +275,7 @@ width: 100%;
 
 .Puntero{
   cursor: pointer;
+  font-weight: 400 ;
 }
 
 .inputfile + label svg {

@@ -358,7 +358,7 @@ export class ModalEmailProfileComponent implements OnInit {
   }
 
   async CambioCombo(){
-    this.action = 0
+    //this.action = 0
     console.log("this.action",this.action)
     console.log("entro en la funcion")
     if(this.action == 0){

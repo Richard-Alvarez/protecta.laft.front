@@ -88,7 +88,7 @@
        <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron (CANT. DE COINCIDENCIAS) coincidencias
+                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias
                     exactas entre el Registro Negativo y la base de clientes - RENTA PARTICULAR vigente al cierre del (PERIODO),
                     por ende, se consideran como señales de alerta “C2”.
                 </li>
@@ -124,30 +124,30 @@
                                     </p>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr *ngFor="let item of parent.listaRenta">
                                 <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        (TIPO DE DOCUMENTO)
+                                        {{item.STIPO_DOCUMENTO}}
                                     </p>
                                 </td>
                                 <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        (NUMERO DE DOCUMENTO)
+                                        {{item.SNUM_DOCUMENTO_BUSQ}}
                                     </p>
                                 </td>
                                 <td width="180px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        (NOMBRE COMPLETO)
+                                        {{item.SNOM_COMPLETO_BUSQ}}
                                     </p>
                                 </td>
                                 <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        (PRODUCTO)
+                                        {{item.DESRAMO}}
                                     </p>
                                 </td>
                                 <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        (INFORMACION DE REGISTROS NEGATIVOS)
+                                        {{item.STIPO_LISTA_REFERENCIA}}
                                     </p>
                                 </td>
                             </tr>

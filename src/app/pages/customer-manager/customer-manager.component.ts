@@ -589,7 +589,7 @@ export class CustomerManagerComponent implements OnInit {
       return array.map((t) => t.SNOM_COMPLETO).indexOf(value.SNOM_COMPLETO) == index;
     });
     listaCoincidencia.forEach((t) => {
-      console.log(t);
+      // console.log(t);
       t.ARRAY_IDTIPOLISTA = _items
         .filter((i) => i.SNOM_COMPLETO == t.SNOM_COMPLETO)
         .map((f) => f.NIDTIPOLISTA);
@@ -1268,8 +1268,15 @@ Array.prototype.forEach.call( inputs, function( input )
   }
 
   ArchivoAdjunto:any
+  ResultadoExcel:any
+  NombreArchivo:string = ''
   async RegistrarArchivo(){
     console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
+    if(this.NombreArchivo == ''){
+      let mensaje = 'No hay archivo registrado'
+      this.SwalGlobal(mensaje)
+      return
+    }
     let dataGrupo:any  = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
     
 
@@ -1282,23 +1289,43 @@ Array.prototype.forEach.call( inputs, function( input )
 
     let datosExcel:any = {}
     datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + 'ListaColaborador.xlsx' ;
-    let ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
-    console.log("Resultado Excel", ResultadoExcel)
+    datosExcel.VALIDADOR = 'GESTOR-CLIENTE'
+     this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+    console.log("Resultado Excel", this.ResultadoExcel)
 
-    let datosRegistro:any = {}
-    datosRegistro.NPERIODO_PROCESO
-    datosRegistro.NTIPO_DOCUMENTO
-    datosRegistro.SNUM_DOCUMENTO
-    datosRegistro.SNOM_COMPLETO
-    datosRegistro.DFECHA_NACIMIENTO
-    datosRegistro.NIDUSUARIO
-    datosRegistro.NIDGRUPOSENAL
-    datosRegistro.NIDSUBGRUPOSEN
-    datosRegistro.SNUM_DOCUMENTO_EMPRESA
-    datosRegistro.SNOM_COMPLETO_EMPRESA
-    datosRegistro.SACTUALIZA
+    let datosEliminar:any = {}
+    datosEliminar.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    datosEliminar.NTIPO_DOCUMENTO = 0
+    datosEliminar.SNUM_DOCUMENTO = ''
+    datosEliminar.SNOM_COMPLETO = ''
+    datosEliminar.DFECHA_NACIMIENTO = ''
+    datosEliminar.NIDUSUARIO = 0
+    datosEliminar.NIDGRUPOSENAL = 2
+    datosEliminar.NIDSUBGRUPOSEN = 0
+    datosEliminar.SNUM_DOCUMENTO_EMPRESA =''
+    datosEliminar.SNOM_COMPLETO_EMPRESA = ''
+    datosEliminar.SACTUALIZA = 'DEL'
+    let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
 
-    let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistro)
+    debugger
+    for( let i = 0; i < this.ResultadoExcel.length ; i++){
+      let datosRegistroColaborador:any = {}
+    datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].ID_DOCUMENTO)
+    datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].NUMERO_DOCUMENTO
+    datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].NOMBRES_APELLIDOS
+    datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].FECHA_NACIMIENTO
+    datosRegistroColaborador.NIDUSUARIO = this.NIDUSUARIO_LOGUEADO
+    datosRegistroColaborador.NIDGRUPOSENAL = 2
+    datosRegistroColaborador.NIDSUBGRUPOSEN = 0
+    datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = ''
+    datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = ''
+    datosRegistroColaborador.SACTUALIZA = 'INS'
+
+    let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
+    }
+
+    
   }
 
 
@@ -1349,6 +1376,11 @@ Array.prototype.forEach.call( inputs, function( input )
        listDataFileInform.push(this.handleFile(fileData))
      })
      let respPromiseFileInfo = await Promise.all(listDataFileInform)
+     if(listFileNameCortoInform.length == 0){
+      this.NombreArchivo = ''
+     }else{ 
+      this.NombreArchivo = listFileNameCortoInform[0]
+     }
      
      return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
    }
@@ -1361,7 +1393,6 @@ Array.prototype.forEach.call( inputs, function( input )
     })
   }
   exportListToExcel(_title,resultados){
-    debugger;
     let dataReport : any =[]
     resultados.forEach(element => {
       let data = {} ;
@@ -1394,4 +1425,26 @@ Array.prototype.forEach.call( inputs, function( input )
       return
     }
   }
+
+  SwalGlobal(mensaje){
+    Swal.fire({
+      title: "Gestor de Clientes",
+      icon: "warning",
+      text: mensaje,
+      showCancelButton: false,
+      confirmButtonColor: "#FA7000",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCloseButton: true,
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+    }).then(async (msg) => {
+      return
+    });
+  }
+
+
+
+
 }

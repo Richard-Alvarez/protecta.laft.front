@@ -1798,14 +1798,14 @@
                     <div class="row pl-2 pr-2 ">
                         <div class="col-lg-1 text-left txtCabecera">N° Póliza</div>
                         <div class="col-lg-2 text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo/Producto</div>
-                        <div class="col-lg-1  text-left txtCabecera">N° Certificado</div>
-                        <div class="col-lg-1 text-left txtCabecera">Monto de Prima</div>
-                        <div class="col-lg-1  text-left txtCabecera">Moneda</div>
-                        <div class="col-lg-1 text-left txtCabecera">Tipo de Cliente</div>
+                        <div class="col-lg-2  text-left txtCabecera">N° Certificado</div>
+                        <div class="col-lg-2 text-left txtCabecera">Monto de Prima</div>
+                        <!-- <div class="col-lg-1  text-left txtCabecera">Moneda</div>
+                        <div class="col-lg-1 text-left txtCabecera">Tipo de Cliente</div> -->
                         <div class="col-lg-2 text-left txtCabecera">Fecha Inicio y Fin de Póliza</div>
                         <div *ngIf="getValidaCabeceraPlaca(1)" class="col-lg-1  text-left txtCabecera">Placa</div>
                         <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
-                        <div class="col-lg-1 text-left txtCabecera">Estado</div>
+                        <div class="col-lg-1 text-left txtCabecera">Estado de Póliza</div>
                     </div>
                     <div id="" >
                         <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
@@ -1822,26 +1822,26 @@
                                                 <div>{{item.DES_RAMO}}/{{item.DES_PRODUCTO}}</div>
                                             </a>
                                         </div>
-                                        <div class="col-lg-1 cabeceraPolizas">
+                                        <div class="col-lg-2 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div>{{item.NCERTIF}}</div>
                                             </a>
                                         </div>
-                                        <div class="col-lg-1 cabeceraPolizas">
+                                        <div class="col-lg-2 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div>{{item.ULTIMA_PRIMA}}</div>
                                             </a>
                                         </div>
-                                        <div class="col-lg-1 cabeceraPolizas">
+                                        <!-- <div class="col-lg-1 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div>-</div>
                                             </a>
-                                        </div>
-                                        <div class="col-lg-1 cabeceraPolizas">
+                                        </div> -->
+                                        <!-- <div class="col-lg-1 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
-                                                <div><!-- {{item.STIPO_CLIENTE}} --></div>
+                                                <div>-</div>
                                             </a>
-                                        </div>
+                                        </div> -->
                                         <div class="col-lg-2 cabeceraPolizas">
                                             <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+inc}}">
                                                 <div>{{item.INICIO_VIG_CERTIFICADO}} - {{item.FIN_VIG_POLIZA}}</div>

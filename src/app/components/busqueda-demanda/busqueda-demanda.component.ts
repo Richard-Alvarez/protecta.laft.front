@@ -5,6 +5,8 @@ import { DatePipe } from '@angular/common';
 import { FileUploader } from 'ng2-file-upload';
 import { ExcelService } from 'src/app/services/excel.service';
 import swal from 'sweetalert2';
+
+// import { ConsoleReporter } from 'jasmine';
 /* import * as XLSX from 'xlsx'; */
 
 @Component({
@@ -19,6 +21,9 @@ export class BusquedaDemandaComponent implements OnInit {
   hideMasiva: boolean = true;
   hideIndividual: boolean = false;
 
+  encontroRespuesta: boolean = true;
+  noEncontroRespuesta: boolean = true;
+
   NBUSCAR_POR: number = 1;
   
   POR_INDIVIDUAL: number = 1;
@@ -31,6 +36,10 @@ export class BusquedaDemandaComponent implements OnInit {
   resulBusqueda : any = []
   resultadoFinal : any []
 
+  ArchivoAdjunto:any
+  ResultadoExcel:any
+  NombreArchivo:string = ''
+
   constructor(
     public datepipe: DatePipe,
     private core: CoreService,
@@ -41,22 +50,15 @@ export class BusquedaDemandaComponent implements OnInit {
   ngOnInit() {
 
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
-    this.nombreCompleto = null; /* this.nombreCompleto.nombreBusqueda = null; */
+    this.nombreCompleto = null;
     this.variableGlobalUser = this.core.storage.get('usuario');
     this.idUsuario = this.variableGlobalUser["idUsuario"]
-    //console.log("change masiva",this.NBUSCAR_POR);
-    //console.log("change masiva",this.hideMasiva);
-    //console.log("change individual",this.hideIndividual);
     
     //console.log('',this.timestamp.getDate()|this.timestamp.getMonth()|this.timestamp.getFullYear());
     /*codigodebusqueda*/console.log("codigo busqueda",this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
     //this.GenerarCodigo();
     
   }
-  
-
-
-  /* uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true }); *//* 1 */
   
   archivoExcel:File;
   clearInsert(){this.archivoExcel = null;}
@@ -73,26 +75,14 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     this.excelSubir = archivo;
   }
-  /* errorExcel = false;
-  validarexce(){
-    this.errorExcel = false;
-    const myFormData: FormData = new FormData();
-
-    myFormData.append('dataFile',this.excelSubir);
-
-    const data : any = {};
-    data.ñl
-  } */  /* 2 */
-
-  async obtenerBusquedaCoincidenciaXNombreDemanda(){
-    //var currentTime = Date.now();
-
+  async getServicioBusquedaDemanda(){
+    
     let ObjLista : any = {};
       //P_ID : currentTime
       ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
       ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
       if(this.NBUSCAR_POR == 1){
-        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
+        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//fpep'RAMON MORENO MADELEINE JUANA', pep'GONZALEZ GONZALEZ MARIO'
       }else
       {
         ObjLista.P_SNOMCOMPLETO = null;
@@ -107,7 +97,47 @@ export class BusquedaDemandaComponent implements OnInit {
        this.resulBusqueda = response
       });
     this.core.loader.hide()
-      this.resultadoFinal = this.resulBusqueda.lista
+  }
+  /*busquedaidecon*/
+  async obtenerBusquedaCoincidenciaXNombreDemanda(){
+<<<<<<< HEAD
+=======
+    //var currentTime = Date.now();
+    console.log("NBUSCAR_POR",this.NBUSCAR_POR)
+>>>>>>> 635c8bcca24da88e1f48c90b97c643cce7e08a16
+    let ObjLista : any = {};
+      //P_ID : currentTime
+      ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+      ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+      if(this.NBUSCAR_POR == 1){
+        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
+      }else
+      {
+
+        this.SubirExcel(ObjLista)
+        
+        ObjLista.P_SNOMCOMPLETO = null;
+      }
+      ObjLista.P_NIDUSUARIO = this.idUsuario;
+    
+
+    this.core.loader.show()
+
+    await this.userConfigService.GetBusquedaConcidenciaXNombreDemanda(ObjLista).then(
+      (response) => {
+       this.resulBusqueda = response
+      });
+    this.core.loader.hide()
+    
+    this.resultadoFinal = this.resulBusqueda.lista
+  
+    if(this.resultadoFinal.length != 0){
+      this.encontroRespuesta = false;
+      this.noEncontroRespuesta = true;
+    }else{
+      this.encontroRespuesta = true;
+      this.noEncontroRespuesta = false
+    }
       console.log('resultado de la busqueda', this.resulBusqueda);
       console.log('resultado de la busqueda 1', this.resulBusqueda.lista);
       console.log('resultado de la busqueda', this.NPERIODO_PROCESO);
@@ -115,9 +145,8 @@ export class BusquedaDemandaComponent implements OnInit {
       console.log('resultado de la busqueda', this.idUsuario);
       console.log('resultado de la busqueda', ObjLista);
       console.log('',ObjLista.P_SCODBUSQUEDA);
-
-      
   }
+  /*fin busqueda idecon*/
   
   GenerarCodigo()
   {
@@ -125,29 +154,6 @@ export class BusquedaDemandaComponent implements OnInit {
     console.log("codigo unico",codigo);
     return codigo.toString();
   }
-
-/*  arrayBuffer:any;
-file:File;
- incomingfile(event) 
-  {
-  this.file= event.target.files[0]; 
-  }
-
- Upload() {
-      let fileReader = new FileReader();
-        fileReader.onload = (e) => {
-            this.arrayBuffer = fileReader.result;
-            var data = new Uint8Array(this.arrayBuffer);
-            var arr = new Array();
-            for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-            var bstr = arr.join("");
-            var workbook = XLSX.read(bstr, {type:"binary"});
-            var first_sheet_name = workbook.SheetNames[0];
-            var worksheet = workbook.Sheets[first_sheet_name];
-            console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
-        }
-        fileReader.readAsArrayBuffer(this.file);
-} *//* 3 */
   
   hideControls() {
     if (this.NBUSCAR_POR == this.POR_INDIVIDUAL) {
@@ -206,7 +212,7 @@ file:File;
     }
     return ''
   }
-  exportListToExcel(){debugger;
+  exportListToExcel(){
     let resultado:any = []
     resultado = this.resultadoFinal
     
@@ -238,7 +244,8 @@ file:File;
           "Número de Documento" : t.SNUM_DOCUMENTO,
           "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
           "Tipo de Persona	" : t.STIPO_PERSONA,
-          "Cargo" : t.SCARGO
+          "Cargo" : t.SCARGO,
+          "Lista" : t.SLISTA
         }
         /* t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO
@@ -252,7 +259,7 @@ file:File;
       swal.fire({
         title: 'Gestor de clientes',
         icon: 'warning',
-        text: 'No hay registros',
+        text: 'error',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar',
@@ -266,4 +273,145 @@ file:File;
       return
     }
   }
+<<<<<<< HEAD
+  Buscar(event:any){
+    if(event.keyCode == 13){
+       document.getElementById("enter").click();
+    }else{
+    }
+ }
 }
+=======
+
+
+  async setDataFile(event) {
+    
+    let files = event.target.files;
+
+    let arrFiles = Array.from(files)
+    
+    let listFileNameInform: any = []
+    arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+   
+    let listFileNameCortoInform = []
+    let statusFormatFile = false
+    for (let item of listFileNameInform) {
+      //let item = listFileNameInform[0]
+      let nameFile = item.split(".")
+      if (nameFile.length > 2 || nameFile.length < 2) {
+        statusFormatFile = true
+        return
+      }
+      let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+      //listFileNameCortoInform.push(fileItem)
+      listFileNameCortoInform.push(fileItem)
+    }
+    if (statusFormatFile) {
+      swal.fire({
+        title: 'Mantenimiento de complemento',
+        icon: 'warning',
+        text: 'El archivo no tiene el formato necesario',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor:'#FA7000',
+        confirmButtonText: 'Aceptar',
+        showCloseButton:true,
+           customClass: { 
+              closeButton : 'OcultarBorde'
+              },
+        
+      }).then(async (result) => {
+      
+      }).catch(err => {
+      
+      })
+    }
+    let listDataFileInform: any = []
+    arrFiles.forEach(fileData => {
+      listDataFileInform.push(this.handleFile(fileData))
+    })
+    let respPromiseFileInfo = await Promise.all(listDataFileInform)
+    if(listFileNameCortoInform.length == 0){
+     this.NombreArchivo = ''
+    }else{ 
+     this.NombreArchivo = listFileNameCortoInform[0]
+    }
+    
+    return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+   // return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+  }
+
+  handleFile(blob: any): Promise<any> {
+   return new Promise(resolve => {
+     const reader = new FileReader()
+     reader.onloadend = () => resolve(reader.result)
+     reader.readAsDataURL(blob)
+   })
+ }
+
+ async SubirExcel(obj){
+ 
+
+  if(this.NombreArchivo == ''){
+    let mensaje = 'No hay archivo registrado'
+    this.SwalGlobal(mensaje)
+    return
+  }
+
+  let uploadPararms:any = {}
+  uploadPararms.SRUTA = 'ARCHIVOS-DEMANDA' + '/'+ this.NPERIODO_PROCESO + '/' ;
+  uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+  uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
+  await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
+
+  let datosExcel:any = {}
+  datosExcel.RutaExcel = 'ARCHIVOS-DEMANDA' +'/'+ this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0] ;
+  datosExcel.VALIDADOR = 'DEMANDA'
+   this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+  console.log("Resultado Excel", this.ResultadoExcel)
+  
+  let datosEliminar:any = {}
+    datosEliminar.SCODBUSQUEDA = ''
+    datosEliminar.SCOD_USUARIO = ''
+    datosEliminar.SNOMBRE_COMPLETO = ''
+    datosEliminar.STIPO_DOCUMENTO = ''
+    datosEliminar.SNUM_DOCUMENTO = ''
+    datosEliminar.VALIDAR = 'DEL'
+   let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
+
+   for( let i = 0; i < this.ResultadoExcel.length ; i++){
+    let datosRegistroColaborador:any = {}
+  datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
+  datosRegistroColaborador.SCOD_USUARIO = this.idUsuario
+  datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
+  datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
+  datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
+  datosRegistroColaborador.VALIDAR = 'INS'
+
+  let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
+  }
+
+
+ }
+
+
+ SwalGlobal(mensaje){
+  swal.fire({
+    title: "Busqueda a Demanda",
+    icon: "warning",
+    text: mensaje,
+    showCancelButton: false,
+    confirmButtonColor: "#FA7000",
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar",
+    showCloseButton: true,
+    customClass: {
+      closeButton: 'OcultarBorde'
+    },
+  }).then(async (msg) => {
+    return
+  });
+}
+
+}
+>>>>>>> 635c8bcca24da88e1f48c90b97c643cce7e08a16

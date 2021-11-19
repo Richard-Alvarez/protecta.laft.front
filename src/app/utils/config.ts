@@ -1,12 +1,12 @@
 class Rutas {
 
-private base: string = 'http://localhost:5001/api/'; 
+//private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-//private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
- // private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
+ //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
   //private base: string = 'https://soatservicios.protectaseurity.pe/ApiLAFT/api/';
   //private basePolicy: string = 'https://localhost:5001/api/';
@@ -214,6 +214,7 @@ private base: string = 'http://localhost:5001/api/';
   //LEER DATOS DE UN EXCEL
   public urlLeerDataExcel:string = this.base + "monitoreoSenales/LeerDataExcel";
   public urlGetRegistrarDatosExcelGC:string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
+  public urlGetRegistrarDatosExcelDemanda:string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
   
   
   LimpiarDataGestor() {
