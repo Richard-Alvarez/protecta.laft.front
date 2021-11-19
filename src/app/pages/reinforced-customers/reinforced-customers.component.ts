@@ -587,75 +587,18 @@ async getSwalOptionClient(data,dataService,indice){
     }
   }
 
+
   exportListToExcel(variable){
     let resultado:any = []
-    let NombreDescarga
+    let _title =  '';
+    resultado = this.getBuscarClient()
     if(variable == 1){
       resultado = this.getBuscarClient()
-      NombreDescarga = "Cliente reforzado"
+      _title = "Cliente reforzado"
     }else{
       resultado = this.arrCoincidencias
-      NombreDescarga = "Cliente reforzado con coincidencias"
+      _title = "Cliente reforzado con coincidencias"
     }
-    
-    
-    let Newresultado:any = []
-    let resultadoFinal:any = []
-    if (resultado!= null && resultado.length > 0) {
-      for(let i =0; i< resultado.length;i++){
-        
-        Newresultado.push(resultado[i].arrClientesGC)
-       }
-       for(let index = 0 ;index < Newresultado.length; index++){
-        if(Newresultado[index].length > 1){
-          Newresultado[index].forEach(element => {
-            
-            resultadoFinal.push(element)
-          });
-        }else{
-          resultadoFinal.push(Newresultado[index][0])
-        }
-     }
-
-      
- 
-
-      let data = []
-      resultadoFinal.forEach(t => {
-       
-        let _data = {
-          "Tipo Documento" : t.STIPOIDEN.substr(0,3),
-          "N° Documento" : t.SNUM_DOCUMENTO,
-          "Nombre / Razón Social" : t.SNOM_COMPLETO,
-          "Regimen" : t.SDESREGIMEN
-           
-        }
-        t.arrListas.forEach(element => {
-          _data[element.SDESTIPOLISTA] = element.SDESESTADO
-        });
-        
-        data.push(_data);
-        });
-        
-        this.excelService.exportAsExcelFile(data, NombreDescarga);
-    } else {
-     
-      swal.fire({
-        title: NombreDescarga  ,
-        icon: 'warning',
-        text: 'No se encontraron registros',
-        showCancelButton: false,
-        confirmButtonColor: '#FA7000',
-        confirmButtonText: 'Continuar',
-        showCloseButton: true,
-        customClass: { 
-          closeButton : 'OcultarBorde'
-                       },
-         
-      }).then((result) => {
-      })
-      return
-    }
+    this.parent.exportListToExcel(_title,resultado);
   }
-
 }

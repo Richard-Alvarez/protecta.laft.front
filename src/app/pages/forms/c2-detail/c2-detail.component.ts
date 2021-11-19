@@ -345,10 +345,14 @@ export class C2DetailComponent implements OnInit {
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             this.formData.STIPO_AND_NUM_DOC = ''
             //this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC// +' - '+ this.formData.SNUM_DOCUMENTO
-            if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
+            // if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
+            //     this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC +' - '+ this.formData.SNUM_DOCUMENTO
+            // }else if(!this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
+            //     this.formData.STIPO_AND_NUM_DOC = this.formData.SNUM_DOCUMENTO
+            // }
+            this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
+            if(!this.formData.STIPO_NUM_DOC.includes(this.formData.SNUM_DOCUMENTO)){
                 this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC +' - '+ this.formData.SNUM_DOCUMENTO
-            }else if(!this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
-                this.formData.STIPO_AND_NUM_DOC = this.formData.SNUM_DOCUMENTO
             }
             this.formData.SCLIENT = localStorage.getItem('SCLIENT')
             this.formData.arrClientesGC = JSON.parse(localStorage.getItem('arrClientesGC'))
@@ -499,24 +503,28 @@ export class C2DetailComponent implements OnInit {
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             //this.formData.NIDREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.STIPO_AND_NUM_DOC = ''
+
             /* debugger */
             this.formData.SESTADO_REVISADO = localStorage.getItem("EnviarCheckbox")
             this.SESTADO_REVISADO_ACEPT = this.formData.SESTADO_REVISADO
             //this.formData.SESTADO_REVISADO = this.SFALTA_ACEPTAR_COINC == 'SI' ? '1' : this.formData.SESTADO_REVISADO
             //if(this.tipoClienteGC == "C2-BANDEJA"){
-                if(this.tipoClienteGC == "C2-BANDEJA"){
-                    if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
-                        this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC +' - '+ this.formData.SNUM_DOCUMENTO
-                    }else if(!this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
-                        this.formData.STIPO_AND_NUM_DOC = this.formData.SNUM_DOCUMENTO
-                    }
-                }else{
-                    this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
-                }
+                // if(this.tipoClienteGC == "C2-BANDEJA"){
+                //     if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
+                //         this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC +' - '+ this.formData.SNUM_DOCUMENTO
+                //     }else if(!this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
+                //         this.formData.STIPO_AND_NUM_DOC = this.formData.SNUM_DOCUMENTO
+                //     }
+                // }else{
+                //     this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
+                // }
             /*}else{
                 this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
             }*/
-            
+            this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
+            if(!this.formData.STIPO_NUM_DOC.includes(this.formData.SNUM_DOCUMENTO)){
+                this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC +' - '+ this.formData.SNUM_DOCUMENTO
+            }
         
             let dataService:any = {}
             if(this.formData.NIDALERTA == 35){

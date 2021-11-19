@@ -112,11 +112,11 @@ export class CustomerManagerComponent implements OnInit {
     this.paramCliente.NIDALERTA = 2;
     this.paramCliente.SRAZON_SOCIAL = ""
     this.paramCliente.MANUAL = true
-
     let paramClientels: any = localStorage.getItem("paramClienteReturn");
     let nIdGrupo = localStorage.getItem("NIDGRUPO")
     if (Number.parseInt(nIdGrupo) > 0) {
       this.idGrupo = Number.parseInt(nIdGrupo);
+      this.valorGrupo()
     }
 
     if (paramClientels != null && paramClientels != "" && paramClientels != "{}") {
@@ -148,7 +148,7 @@ export class CustomerManagerComponent implements OnInit {
     //    this.newArrayResult = this.DataGuardada;
 
     //  }
-    await this.getClientsByTratamiento()
+    
 
     try {
       let respSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClientReturn")
@@ -169,7 +169,7 @@ export class CustomerManagerComponent implements OnInit {
     } catch (error) {
       console.error("EL error : ", error)
     }
-
+    await this.getClientsByTratamiento()
     this.PERIODOACTUAL = await this.userConfigService.getCurrentPeriod()
 
     //await this.ListaDeCoincidencias(this.idGrupo)
@@ -177,14 +177,22 @@ export class CustomerManagerComponent implements OnInit {
   }
 
   async valorGrupo() {
+    debugger;
     this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
     this.arrSetClassSelected[0] = 'active'
+    localStorage.setItem("nSelectPestaniaClient", '0')
     if (this.idGrupo == 3 || this.idGrupo == 4) {
       debugger;
       let data = {
       NIDGRUPOSENAL : this.idGrupo
       }
+      debugger;
+      let obj = {
+        NIDSUBGRUPOSEN: -1,
+        SDESSUBGRUPO_SENAL: "--Seleccione--"
+      }
       this.SubGrupoList = await this.userConfigService.getSubGrupoSenal(data);
+      this.SubGrupoList.unshift(obj);
       if(this.SubGrupoList.length > 0)
         this.idSubGrupo = this.SubGrupoList.map(t=> t.NIDSUBGRUPOSEN)[0] 
       //this.ListaDeCoincidencias(this.idGrupo)
@@ -307,7 +315,7 @@ export class CustomerManagerComponent implements OnInit {
       let apellidoM = "";
 
 
-      let respValidacion: any = this.parametersValidate(paramCliente, NBUSCAR_POR, NTIPO_PERSONA)
+      let respValidacion: any = this.parametersValidate(paramCliente, NBUSCAR_POR, NTIPO_PERSONA,isActiveForButton)
 
 
       if (respValidacion.code == 1) {
@@ -425,10 +433,20 @@ export class CustomerManagerComponent implements OnInit {
     }
   }
 
-  parametersValidate(paramCliente, NBUSCAR_POR, NTIPO_PERSONA) {
+  parametersValidate(paramCliente, NBUSCAR_POR, NTIPO_PERSONA,isActiveForButton) {
     let objRespuesta: any = {};
     objRespuesta.code = 0
     objRespuesta.message = ''
+    if(!isActiveForButton){
+      objRespuesta.code = 0;
+      return objRespuesta
+    }
+    debugger;
+    if(this.idGrupo == 3 && this.idSubGrupo == -1 || this.idGrupo == 4 && this.idSubGrupo  == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Seleccione un sub grupo";
+        return objRespuesta
+    }
     if (NBUSCAR_POR == 1 && paramCliente.NTIPOIDEN_BUSQ == 1) {
       if (!(paramCliente.SNUM_DOCUMENTO_BUSQ + " ").trim() || paramCliente.SNUM_DOCUMENTO_BUSQ == null) {
         objRespuesta.code = 1;
@@ -465,7 +483,7 @@ export class CustomerManagerComponent implements OnInit {
         return objRespuesta
       }
     }
-    if (NBUSCAR_POR == 1 && paramCliente.NTIPOIDEN_BUSQ == 2 && paramCliente.MANUAL) {
+    if (NBUSCAR_POR == 1 && paramCliente.NTIPOIDEN_BUSQ == 2) {
       if (!(paramCliente.SNUM_DOCUMENTO_BUSQ + " ").trim() || paramCliente.SNUM_DOCUMENTO_BUSQ == null) {
         objRespuesta.code = 1;
         objRespuesta.message = "Falta ingresar el número de documento";
@@ -1342,5 +1360,38 @@ Array.prototype.forEach.call( inputs, function( input )
       reader.readAsDataURL(blob)
     })
   }
-
+  exportListToExcel(_title,resultados){
+    debugger;
+    let dataReport : any =[]
+    resultados.forEach(element => {
+      let data = {} ;
+      data["Tipo Documento"] = element.STIPOIDEN
+      data["N° Documento"] = element.SNUM_DOCUMENTO,
+      data["Nombre / Razón Social"] = element.SNOM_COMPLETO,
+      data["Regimen"] = element.SDESREGIMEN
+      this.tipoListas.forEach(tipolista => {
+        let count = element.ARRAY_IDTIPOLISTA.filter(e=> e == tipolista.NIDTIPOLISTA).length;
+        data[tipolista.SDESTIPOLISTA] = count > 0 ? 'Coincidencia' : 'Sin Coincidencia';   
+      });
+      dataReport.push(data);
+    });
+    if(dataReport.length > 0){
+        this.excelService.exportAsExcelFile(dataReport, _title)// "Cliente revizado");
+    }else {
+      swal.fire({
+        icon: 'warning',
+        text: 'No hay registros',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
+    }
+  }
 }
