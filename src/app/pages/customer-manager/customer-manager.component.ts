@@ -30,7 +30,7 @@ export class CustomerManagerComponent implements OnInit {
   GrupoList: any = []
   SubGrupoList: any = []
   idGrupo = 1
-  idSubGrupo
+  idSubGrupo = 0
   arrSetClassSelected: any = []
   arrSetClassSelectedSubModule: any = []
   NBUSCAR_POR: number = 1;
@@ -177,6 +177,7 @@ export class CustomerManagerComponent implements OnInit {
   }
 
   async valorGrupo() {
+    this.idSubGrupo = 0;
     debugger;
     this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
     this.arrSetClassSelected[0] = 'active'
@@ -299,6 +300,7 @@ export class CustomerManagerComponent implements OnInit {
     dataInput.SPRIMER_NOMBRE = this.paramCliente.SPRIMER_NOMBRE
     dataInput.SSEGUNDO_NOMBRE = this.paramCliente.SSEGUNDO_NOMBRE
     dataInput.SRAZON_SOCIAL = this.paramCliente.SRAZON_SOCIAL
+    dataInput.SRAZON_SOCIAL = this.paramCliente.SRAZON_SOCIAL
     dataInput.MANUAL = this.paramCliente.MANUAL
 
     await this.getResultsList3(dataInput, this.NBUSCAR_POR, this.NTIPO_PERSONA,isActiveForButton);
@@ -353,6 +355,7 @@ export class CustomerManagerComponent implements OnInit {
               //NTIPOIDEN_BUSQ: this.paramCliente.NTIPOIDEN_BUSQ,
               SNUM_DOCUMENTO_BUSQ: (paramCliente.SNUM_DOCUMENTO_BUSQ + ' ').trim(),
               SNOM_COMPLETO_BUSQ: null,
+              NIDSUBGRUPOSENAL: this.idSubGrupo
             };
           }
           else {
@@ -365,6 +368,7 @@ export class CustomerManagerComponent implements OnInit {
               NTIPOIDEN_BUSQ: 1,
               SNUM_DOCUMENTO_BUSQ: (paramCliente.SNUM_DOCUMENTO_BUSQ + ' ').trim(),
               SNOM_COMPLETO_BUSQ: null,
+              NIDSUBGRUPOSENAL: this.idSubGrupo
             };
           }
         }
@@ -390,6 +394,7 @@ export class CustomerManagerComponent implements OnInit {
               SNUM_DOCUMENTO_BUSQ: null,
               SNOM_COMPLETO_BUSQ: NombreCompleto,
               NIDGRUPOSENAL: this.idGrupo,
+              NIDSUBGRUPOSENAL: this.idSubGrupo
             };
           }
           else {
@@ -404,6 +409,7 @@ export class CustomerManagerComponent implements OnInit {
               SNUM_DOCUMENTO_BUSQ: null,
               SNOM_COMPLETO_BUSQ: razonSocialUpper,
               NIDGRUPOSENAL: this.idGrupo,
+              NIDSUBGRUPOSENAL: this.idSubGrupo
             };
           }
 
