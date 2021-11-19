@@ -79,7 +79,7 @@
                             </tr>
                         </thead>
                         <tbody [hidden]="encontroRespuesta">
-                            <tr *ngFor="let item of resultadoFinal">
+                            <tr *ngFor="let item of resultadoFinal; let i = index;">
                                 <td  scope="col">{{item.DFECHA_BUSQUEDA}}</td>
                                 <td  scope="col">{{item.SUSUARIO_BUSQUEDA ? item.SUSUARIO_BUSQUEDA : '-'}}</td>
                                 <td  scope="col">{{item.STIPO_DOCUMENTO}}</td>
@@ -90,18 +90,23 @@
                                 <td  scope="col" style="text-align: right;">{{item.SPORCEN_COINCIDENCIA}}</td>
                                 <td  scope="col">{{item.SLISTA}}</td>
                                 <td class=" text-center" scope="col">
-                                    <img  (click)="exportListToExcel()" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
+                                    <img  (click)="exportListToExcelIndividual(i)" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
                                 </td>
                             </tr>
                         </tbody>
                         <tbody [hidden]="noEncontroRespuesta">
                             <tr>
-                                <td class="text-center" colspan="7">No se encontró coincidencias</td>
+                                <td class="text-center" colspan="8">No se encontró coincidencias</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </article>
+        </section>
+        <section>
+            <div class="col-md-5 d-flex justify-content-between " style="padding: 5px 0px 0px 0px; margin-left: -15px; color: #a0a1cc !important;">
+                <button (click)="exportListToExcel()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda</button>
+            </div>
         </section>
     </section>
 </main>

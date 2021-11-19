@@ -80,42 +80,70 @@ export class BusquedaDemandaComponent implements OnInit {
   }*/
   async BusquedaADemandaMixta(){
 
-    let ObjLista : any = {};
-    ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
-    ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-    if(this.NBUSCAR_POR == 1){
-      ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
-    }else
-    {
-      //this.SubirExcel(ObjLista)
-      ObjLista.P_SNOMCOMPLETO = null;
+    if (this.NBUSCAR_POR == 1 && this.nombreCompleto == null) {
+      swal.fire({
+        title: 'Busqueda a Demanda',
+        icon: 'warning',
+        text: 'Ingrese nombre para busqueda',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
     }
-    ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
-    ObjLista.P_NOMBRE_RAZON = this.NOMBRE_RAZON;
+    else {
+      
+      let ObjLista : any = {};
+      ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+      ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+      if(this.NBUSCAR_POR == 1){
+        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
+      }else
+      {
+        //this.SubirExcel(ObjLista)
+        ObjLista.P_SNOMCOMPLETO = null;
+      }
+      ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
+      ObjLista.P_NOMBRE_RAZON = this.NOMBRE_RAZON;
     
 
-    this.core.loader.show()
-
+      this.core.loader.show()
     
-    let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
+      let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
 
-    respuetaService.itemsWC.forEach(t => {
-      t.SUSUARIO_BUSQUEDA = this.nombreUsuario
-    });
-
+      if (respuetaService.length != 0) {
+        respuetaService.itemsWC.forEach(t => {
+          t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
+          t.SPROVEEDOR = "WC"
+        });
+  
+        respuetaService.itemsIDE.forEach(t => {
+          t.SPROVEEDOR = "IDECON"
+        }); 
+      }
         
-    this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC);
+      this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC);
 
-    this.core.loader.hide()
 
-    if(this.resultadoFinal.length != 0){
-      this.encontroRespuesta = false;
-      this.noEncontroRespuesta = true;
-    }else{
-      this.encontroRespuesta = true;
-      this.noEncontroRespuesta = false
-    }
+      if(this.resultadoFinal.length != 0){
+        this.encontroRespuesta = false;
+        this.noEncontroRespuesta = true;
+      }else{
+        this.encontroRespuesta = true;
+        this.noEncontroRespuesta = false
+      }
+
+      this.core.loader.hide()
+      console.log("index",this.resultadoFinal)
+      console.log("index",this.resultadoFinal[1])
     
+    }
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
@@ -204,8 +232,6 @@ export class BusquedaDemandaComponent implements OnInit {
     return false
   }
 
-  
-
   cortarCararterNombre(text){        
     if(text != null){
       let newTexto = text.substring(0, 22)
@@ -227,6 +253,70 @@ export class BusquedaDemandaComponent implements OnInit {
       }
     }
     return ''
+  }
+  exportListToExcelIndividual(i){
+    debugger;
+    let resultado:any = []
+    resultado = this.resultadoFinal[i]
+    
+    let Newresultado:any = []
+    let resulFinal:any = []
+    if (resultado!= null) {/*  && resultado.length > 0 */
+      //for(let i =0; i< resultado.length;i++){
+        
+        Newresultado.push(resultado)//[i]
+      //}
+      /* for(let index = 0 ;index < Newresultado.length; index++){
+        //if(Newresultado[index].length > 1){
+          Newresultado[index].forEach(element => {
+            resulFinal.push(element)
+          });
+        //}else{
+          resulFinal.push(Newresultado[index])
+        //}
+      } */
+
+      //resultadoFinal.push(Newresultado)
+      let data = []
+      /* resulFinal */Newresultado.forEach(t => {
+       
+        let _data = {
+          "Fecha y Hora de Búsqueda" : t.DFECHA_BUSQUEDA,
+          "Usuario que Realizó la Busqueda" : t.SUSUARIO_BUSQUEDA,
+          "Tipo de Documento" : t.STIPO_DOCUMENTO,
+          "Número de Documento" : t.SNUM_DOCUMENTO,
+          "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
+          "Porcentaje de coincidencia" : t.SPORCEN_COINCIDENCIA, 
+          "Tipo de Persona	" : t.STIPO_PERSONA,
+          "Cargo" : t.SCARGO == null ? '-' : t.SCARGO,
+          "Lista" : t.SLISTA,
+          "Proveedor" : t.SPROVEEDOR
+        }
+        /* t.arrListas.forEach(element => {
+          _data[element.SDESTIPOLISTA] = element.SDESESTADO
+        }); */
+        
+        data.push(_data);
+        });
+        
+        this.excelService.exportAsExcelFile(data, "Resultados Busqueda a Demanda");
+    }else {
+      swal.fire({
+        title: 'Gestor de clientes',
+        icon: 'warning',
+        text: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+                       },
+         
+      }).then((result) => {
+      })
+      return
+    }
   }
   exportListToExcel(){
     let resultado:any = []
@@ -261,8 +351,9 @@ export class BusquedaDemandaComponent implements OnInit {
           "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
           "Porcentaje de coincidencia" : t.SPORCEN_COINCIDENCIA, 
           "Tipo de Persona	" : t.STIPO_PERSONA,
-          "Cargo" : t.SCARGO,
-          "Lista" : t.SLISTA
+          "Cargo" : t.SCARGO == null ? '-' : t.SCARGO,
+          "Lista" : t.SLISTA,
+          "Proveedor" : t.SPROVEEDOR
         }
         /* t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO
