@@ -220,7 +220,7 @@ export class LoginUpdateComponent implements OnInit {
                 valor = 1
             }
 
-           
+           debugger
             switch (valor) {
               case 1 : {
                 this.core.rutas.goClientes();

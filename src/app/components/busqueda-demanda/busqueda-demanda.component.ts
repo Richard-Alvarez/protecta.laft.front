@@ -100,11 +100,8 @@ export class BusquedaDemandaComponent implements OnInit {
   }
   /*busquedaidecon*/
   async obtenerBusquedaCoincidenciaXNombreDemanda(){
-<<<<<<< HEAD
-=======
     //var currentTime = Date.now();
     console.log("NBUSCAR_POR",this.NBUSCAR_POR)
->>>>>>> 635c8bcca24da88e1f48c90b97c643cce7e08a16
     let ObjLista : any = {};
       //P_ID : currentTime
       ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
@@ -273,15 +270,13 @@ export class BusquedaDemandaComponent implements OnInit {
       return
     }
   }
-<<<<<<< HEAD
   Buscar(event:any){
     if(event.keyCode == 13){
        document.getElementById("enter").click();
     }else{
     }
  }
-}
-=======
+
 
 
   async setDataFile(event) {
@@ -414,4 +409,3 @@ export class BusquedaDemandaComponent implements OnInit {
 }
 
 }
->>>>>>> 635c8bcca24da88e1f48c90b97c643cce7e08a16

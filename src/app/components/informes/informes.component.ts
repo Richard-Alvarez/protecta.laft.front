@@ -147,7 +147,7 @@ async DescargarReporteGeneral(){
   this.RespuestaAlertaC1 = this.ListaAlertaClientesC1[0].NIDRESPUESTA
   this.ListaAlertaClientesC3  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C3' )
   let respuestaC3 = this.ListaAlertaClientesC3.filter((it,inc) => it.NIDRESPUESTA == 1)
-
+  await this.DataReporteC2()
   if(respuestaC3.length == 0){
     this.RespuestaGlobalC3 = 'no'
   }else{
@@ -299,7 +299,7 @@ async DataAlertas(idgrupo,perido){
   listaPepRentaParticular:any = []
   listaInternacionalRentaParticularWC:any = []
   listaInternacionalRentaParticularIDECON:any = []
-  
+
 async DataReporteC2(){
 
 

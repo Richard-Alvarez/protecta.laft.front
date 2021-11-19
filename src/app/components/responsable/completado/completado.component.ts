@@ -8,7 +8,7 @@ import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { RevisadoComponent } from '../revisado/revisado.component';
 import { ResponsableGlobalComponent } from '../responsableGlobal';
-import { data } from 'jquery';
+import { HistoricoClientesComponent } from '../historico-clientes/historico-clientes.component';
 
 @Component({
   selector: 'app-completado',

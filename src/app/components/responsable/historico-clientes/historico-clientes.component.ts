@@ -107,7 +107,7 @@ export class HistoricoClientesComponent implements OnInit {
     private sbsReportService: SbsreportService,
   ) { }
 
-  async ngOnInit()  {
+  async ngOnInit(){
 
     await this.obtenerPeriodos()
    
@@ -1330,31 +1330,32 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
   getArray(state, regimen) {
+    debugger
     switch (state) {
-      case 'PENDIENTE':
-        if (regimen === 1) {
-          return this.arrResponsablesPendienteGral
-        }
-        if (regimen === 2) {
-          return this.arrResponsablesPendienteSimpli
-        }
-        break;
-      case 'COMPLETADO':
-        if (regimen === 1) {
-          return this.arrResponsablesCompleGral
-        }
-        if (regimen === 2) {
-          return this.arrResponsablesCompleSimpli
-        }
-        break;
-      case 'DEVUELTO':
-        if (regimen === 1) {
-          return this.arrResponsablesDevueltoGral
-        }
-        if (regimen === 2) {
-          return this.arrResponsablesDevueltoSimpli
-        }
-        break;
+      // case 'PENDIENTE':
+      //   if (regimen === 1) {
+      //     return this.arrResponsablesPendienteGral
+      //   }
+      //   if (regimen === 2) {
+      //     return this.arrResponsablesPendienteSimpli
+      //   }
+      //   break;
+      // case 'COMPLETADO':
+      //   if (regimen === 1) {
+      //     return this.arrResponsablesCompleGral
+      //   }
+      //   if (regimen === 2) {
+      //     return this.arrResponsablesCompleSimpli
+      //   }
+      //   break;
+      // case 'DEVUELTO':
+      //   if (regimen === 1) {
+      //     return this.arrResponsablesDevueltoGral
+      //   }
+      //   if (regimen === 2) {
+      //     return this.arrResponsablesDevueltoSimpli
+      //   }
+      //   break;
       case 'REVISADO':
         if (regimen === 1) {
           return this.arrResponsablesRevisadoGral
@@ -1363,22 +1364,22 @@ export class HistoricoClientesComponent implements OnInit {
           return this.arrResponsablesRevisadoSimpli
         }
         break;
-      case 'CERRADO':
-        if (regimen === 1) {
-          return this.arrResponsablesCerradoGral
-        }
-        if (regimen === 2) {
-          return this.arrResponsablesCerradoSimpli
-        }
-        break;
-      case 'PENDIENTE-INFORME':
-        if (regimen === 1) {
-          return this.arrResponsablesPendienteInformeGral
-        }
-        if (regimen === 2) {
-          return this.arrResponsablesPendienteInformeSimpli
-        }
-        break;
+      // case 'CERRADO':
+      //   if (regimen === 1) {
+      //     return this.arrResponsablesCerradoGral
+      //   }
+      //   if (regimen === 2) {
+      //     return this.arrResponsablesCerradoSimpli
+      //   }
+      //   break;
+      // case 'PENDIENTE-INFORME':
+      //   if (regimen === 1) {
+      //     return this.arrResponsablesPendienteInformeGral
+      //   }
+      //   if (regimen === 2) {
+      //     return this.arrResponsablesPendienteInformeSimpli
+      //   }
+      //   break;
       case 'INFORME-TERMINADO':
         if (regimen === 1) {
           return this.arrResponsablesInformeTerminadoGral
@@ -3194,7 +3195,8 @@ export class HistoricoClientesComponent implements OnInit {
      
       console.log("IDListAnno:", this.IDListAnno);
      
-        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
+        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno )
+        //this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
    
         this.IDListPeriodo = "0"
    
