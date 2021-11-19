@@ -20,41 +20,57 @@
                 </div>
             </article>
         </section>
-        <section class="row borderFormat" style="display: flex;justify-content: center;align-items: center;">
-            <article class="tab-content">
-                <div class="row form-group">
-                    <div class="col-lg-2" >
-                        <span class="fontText" style="position: relative;">Busqueda:</span>
-                    </div>
-                    <div class="col-lg-3" style="margin-left: -20px;">
-                        <select class="form-control" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" style="width: fit-content;">
-                            <option value="1">Individual</option>
-                            <option value="2">Masiva</option>
-                        </select>
-                    </div>
-                    <div  [hidden]="hideIndividual"  class="col-lg-7" style="margin-left: -20px;"><!-- class="col-lg-2" -->
-                        <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="adjunte datos de búsqueda" maxlength="100" size="30" [(ngModel)]="nombreCompleto"><!-- .nombreBusqueda -->
-                    </div>
-                    <div class="col-lg-1" [hidden]="hideIndividual" *ngIf="mostrarBotonBuscarIndividual()" style="margin-left: -20px;">
-                        <button class="btn btn-warning btnBuscarStyle" (click)="obtenerBusquedaCoincidenciaXNombreDemanda()">Buscar</button>
-                    </div>
-                    <!-- <div class="col-lg-7" [hidden]="hideMasiva" style="margin-left: -40px;">
-                        <input ng2FileSelect type="file" accept=".xlsx" [uploader]="uploader">
-                    </div> --><!-- 1 -->
-                    <div class="col-lg-7" [hidden]="hideMasiva" style="margin-left: -20px;"><!-- VIDA LEY -->
-                        <!-- <input type="file" accept=".xlsx" onclick="this.value=null;"
-                                (change)="seleccionExcel($event).target.files[0]" [(ngModel)]="archivoExcel"
-                                style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()"> -->
-                            <input type="file" accept=".xlsx" onclick="this.value=null;"
-                                (change)="setDataFile($event)" [(ngModel)]="archivoExcel"
-                                style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()">
-                    </div><!-- 2 -->
-                    <!-- <div>
-                        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="carga de archivos" accept=".xlsx">
-                    </div> --><!-- 3 -->
-                    <div class="col-lg-1" [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()" style="margin-left: -20px;">
-                        <button class="btn btn-warning btnBuscarStyle" (click)="obtenerBusquedaCoincidenciaXNombreDemanda()">Buscar</button>
-                    </div>
+        <section class="row borderFormat" >
+            <article class="tab-content" style="margin: 0 auto;width: 100%;">
+                <div class="table-responsive" >
+                    <table class=" table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col" >
+                                    <span class="fontText" >Busqueda:</span>
+                                </th>
+                                <th scope="col">
+                                    <select class="form-control" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" >
+                                        <option value="1">Individual</option>
+                                        <option value="2">Masiva</option>
+                                    </select>
+                                </th>
+                                <th [hidden]="hideIndividual" scope="col" >
+                                    <span class="fontText" >Tipo Doc:</span>
+                                </th>
+                                <th [hidden]="hideIndividual" scope="col" >
+                                    <select class="form-control" [(ngModel)]="NOMBRE_RAZON">
+                                        <option value="2" title="dni">DNI</option>
+                                        <option value="1" title="ruc">RUC</option>
+                                        <option value="2" title="ruc">CE</option>
+                                        <option value="2" title="ruc">PASS</option>
+                                    </select>
+                                </th>
+                                <th [hidden]="hideIndividual" scope="col" >
+                                    <span class="fontText" >Número Doc:</span>
+                                </th>
+                                <th [hidden]="hideIndividual"  scope="col">
+                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="Número de Documento" maxlength="100" size="34"
+                                            [(ngModel)]="numeroDoc" >
+                                </th>
+                                <th [hidden]="hideIndividual"  scope="col">
+                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="adjunte datos de búsqueda" maxlength="100" size="34"
+                                            [(ngModel)]="nombreCompleto" (keydown)="Buscar($event)">
+                                </th>
+                                <th [hidden]="hideIndividual" *ngIf="mostrarBotonBuscarIndividual()"  scope="col">
+                                    <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="BusquedaADemandaMixta()" >Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
+                                </th>
+                                <th [hidden]="hideMasiva"  scope="col">
+                                    <input type="file" accept=".xlsx" onclick="this.value=null;"
+                                            (change)="setDataFile($event)" [(ngModel)]="archivoExcel"
+                                            style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()">
+                                </th>
+                                <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()"  scope="col">
+                                    <button class="btn btn-warning btnBuscarStyle" (click)="obtenerBusquedaCoincidenciaXNombreDemanda()">Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </article>
             <article class="row" style="margin: 0 auto; width: 100%;">
@@ -69,33 +85,40 @@
                                 <th  scope="col" style="vertical-align: middle; text-align: left;">Nombre/Razón Social</th>
                                 <!-- <th scope="col" style="vertical-align: middle;">Tipo de Persona</th> -->
                                 <!-- <th scope="col" style="vertical-align: middle;">Cargo</th> -->
+                                <th  scope="col" style="vertical-align: middle;">% Coincidencia</th>
                                 <th  scope="col" style="vertical-align: middle; text-align: left;margin-right: 20px;">Lista</th>
                                 <th  scope="col" style="vertical-align: middle;">Descargar</th>
                             </tr>
                         </thead>
                         <tbody [hidden]="encontroRespuesta">
-                            <tr *ngFor="let item of resultadoFinal">
+                            <tr *ngFor="let item of resultadoFinal; let i = index;">
                                 <td  scope="col">{{item.DFECHA_BUSQUEDA}}</td>
-                                <td  scope="col">{{item.SUSUARIO_BUSQUEDA}}</td>
+                                <td  scope="col">{{item.SUSUARIO_BUSQUEDA ? item.SUSUARIO_BUSQUEDA : '-'}}</td>
                                 <td  scope="col">{{item.STIPO_DOCUMENTO}}</td>
                                 <td  scope="col">{{item.SNUM_DOCUMENTO}}</td>
                                 <td  scope="col"><div placement='top' ngbTooltip="{{item.SNOMBRE_COMPLETO}}">{{cortarCararterNombre(item.SNOMBRE_COMPLETO)}}</div></td>
                                 <!-- <td>{{item.STIPO_PERSONA}}</td>
                                 <td ><div placement='top' ngbTooltip="{{item.SCARGO}}">{{item.SCARGO ? cortarCararter(item.SCARGO) : '-'}}</div></td> -->
+                                <td  scope="col" style="text-align: right;">{{item.SPORCEN_COINCIDENCIA}}</td>
                                 <td  scope="col">{{item.SLISTA}}</td>
                                 <td class=" text-center" scope="col">
-                                    <img  (click)="exportListToExcel()" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
+                                    <img  (click)="exportListToExcelIndividual(i)" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
                                 </td>
                             </tr>
                         </tbody>
                         <tbody [hidden]="noEncontroRespuesta">
                             <tr>
-                                <td class="text-center" colspan="7">No se encontró coincidencias</td>
+                                <td class="text-center" colspan="8">No se encontró coincidencias</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </article>
+        </section>
+        <section>
+            <div class="col-md-5 d-flex justify-content-between " style="padding: 5px 0px 0px 0px; margin-left: -15px; color: #a0a1cc !important;">
+                <button (click)="exportListToExcel()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda</button>
+            </div>
         </section>
     </section>
 </main>
