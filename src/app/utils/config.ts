@@ -1,6 +1,6 @@
 class Rutas {
 
-private base: string = 'http://localhost:5001/api/'; 
+  private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
