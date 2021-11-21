@@ -439,30 +439,32 @@ font-size: 1.0625em;
   }
   /**********End File Inputs**********/
 
-
-
-  td, th {
-    padding: 15px 10px;
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    border-radius: 2px;
+  table thead tr {
+    border-bottom: solid 1px #26296D !important;
+    color: rgba(38, 41, 109, 0.6);
+    font-weight: bold;
+}
+td, th {
+  padding: 15px 10px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 2px;
 }
 table {
-  width: 100%;
-  display: table;
-  border-collapse: collapse;
-  border-spacing: 0;
+width: 100%;
+display: table;
+border-collapse: collapse;
+border-spacing: 0;
+font-size: 12px;
+font-family: Roboto;
 }
 thead {
-  color: rgba(0,0,0,0.6);
+color: rgba(0,0,0,0.6);
 }
 table, th, td {
   border: none;
-}
-table thead tr {
-  border-bottom: solid 1px #26296D !important;
-}
+} 
 table.striped>tbody>tr:nth-child(odd) {
   background-color: rgba(242,242,242,0.5);
 }
