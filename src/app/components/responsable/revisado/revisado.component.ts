@@ -355,7 +355,7 @@ filtroComplemeto(item){
 listaComplementoUsuario:any = [] 
 async ConsultaComplementoUsuarios(estado,periodo) {
   let data:any ={}
-
+debugger
   if(this.ValidadorHistorico == 0){
    
     data.NPERIODO_PROCESO = this.HistoricoPeriodo
@@ -404,6 +404,7 @@ async ListaAlertas(){
     obj.NREGIMEN = item.NREGIMEN
     obj.RESULTADO = resultado
     obj.NIDALERTA = item.NIDALERTA
+    
     this.NewArreglo.push(obj)
    
    });

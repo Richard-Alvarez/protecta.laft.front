@@ -217,7 +217,7 @@ export class HistoricoClientesComponent implements OnInit {
       }
     ]
 
-    this.NPERIODO_PROCESO = 20210630//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
+    this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
     await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
    
@@ -273,6 +273,8 @@ export class HistoricoClientesComponent implements OnInit {
 
 
   }
+
+
 
   async getAllAttachedFiles() {
     
