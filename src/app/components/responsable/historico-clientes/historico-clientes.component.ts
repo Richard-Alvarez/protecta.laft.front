@@ -217,7 +217,7 @@ export class HistoricoClientesComponent implements OnInit {
       }
     ]
 
-    this.NPERIODO_PROCESO = 20210630//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
+    this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
     await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
    
@@ -275,7 +275,9 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
 
+
   async getAllAttachedFiles() {
+    
     await this.getAttachedFiles(this.getArray(this.stateCompletado.sState, 1), 'RE')
     await this.getAttachedFiles(this.getArray(this.stateCompletado.sState, 1), 'OC')
     await this.getAttachedFiles(this.getArray(this.stateDevuelto.sState, 1), 'RE')
@@ -1423,7 +1425,7 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
   getArray(state, regimen) {
-    debugger
+    
     switch (state) {
       // case 'PENDIENTE':
       //   if (regimen === 1) {

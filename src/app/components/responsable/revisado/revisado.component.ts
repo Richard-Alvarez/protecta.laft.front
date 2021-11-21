@@ -34,7 +34,7 @@ export class RevisadoComponent implements OnInit {
     @Input() userGroupList:any = []
     @Input() ValidadorHistorico: any
     @Input() parent:ResponsableComponent
-
+    @Input() HistoricoPeriodo:any
     @Input() arrResponsable2:any = []
 
   constructor(private core: CoreService,
@@ -44,7 +44,8 @@ export class RevisadoComponent implements OnInit {
 
 
   async ngOnInit() {
-
+    console.log("ValidadorHistorico",this.ValidadorHistorico)
+    console.log("arrResponsable2",this.arrResponsable2)
 
     await this.ListaUsuario()
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
@@ -55,8 +56,7 @@ export class RevisadoComponent implements OnInit {
 
     await this.getVariablesStorage();
     this.fillFileGroup()
-    console.log(" this.arrResponsable", this.arrResponsable)
-    console.log(" this.arrResponsable2", this.arrResponsable2)
+   
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   }
 
@@ -213,6 +213,8 @@ export class RevisadoComponent implements OnInit {
       default : 
         return [];
     }*/
+     console.log("getArray",this.arrResponsable)
+     //console.log("getArray2",this.arrResponsable2)
     return this.arrResponsable;
     //return this.arrResponsablesPendienteSimpli;
   }
@@ -353,17 +355,27 @@ filtroComplemeto(item){
 listaComplementoUsuario:any = [] 
 async ConsultaComplementoUsuarios(estado,periodo) {
   let data:any ={}
-  if(estado == 'COMPLETADO'){
-    
-    data.NPERIODO_PROCESO = periodo //this.PeriodoComp
-  
-   //this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
-  }else{
-    
-    data.NPERIODO_PROCESO = this.PeriodoComp 
-  }
+debugger
+  if(this.ValidadorHistorico == 0){
    
-  this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+    data.NPERIODO_PROCESO = this.HistoricoPeriodo
+    this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  }
+  else{
+    if(estado == 'COMPLETADO'){
+    
+      data.NPERIODO_PROCESO = periodo //this.PeriodoComp
+    
+     //this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+    }else{
+      
+      data.NPERIODO_PROCESO = this.PeriodoComp 
+    }
+     
+    this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  }
+
+ 
   
 
 }
@@ -380,9 +392,11 @@ async ListaUsuario(){
 
 NewArreglo:any = []
 async ListaAlertas(){
-  this.NewArreglo = []
   debugger
-   this.arrResponsable2.forEach(item => {
+  this.arrResponsable = this.getArray(this.stateRevisado.sState,1)
+  this.NewArreglo = []
+  
+   this.arrResponsable.forEach(item => {
     let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
     let obj:any = {}
     obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
@@ -390,6 +404,7 @@ async ListaAlertas(){
     obj.NREGIMEN = item.NREGIMEN
     obj.RESULTADO = resultado
     obj.NIDALERTA = item.NIDALERTA
+    
     this.NewArreglo.push(obj)
    
    });
@@ -442,9 +457,18 @@ async descargarComplemento (item,listUsu){
 
 listaArchivosComplementos:any =[]
 async ListaDeAdjunto(){
-  let data:any ={}
-  data.NPERIODO_PROCESO = this.PeriodoComp
-  this.listaArchivosComplementos = await this.userConfigService.getListaAdjuntos(data)
+  if(this.ValidadorHistorico == 0){
+    let data:any ={}
+    data.NPERIODO_PROCESO = this.HistoricoPeriodo
+    this.listaArchivosComplementos = await this.userConfigService.getListaAdjuntos(data)
+  }
+  else{
+    let data:any ={}
+    data.NPERIODO_PROCESO = this.PeriodoComp
+    this.listaArchivosComplementos = await this.userConfigService.getListaAdjuntos(data)
+  }
+  
+
 }
 
 AlertaMensaje(mensaje){
