@@ -392,7 +392,7 @@ async ListaUsuario(){
 
 NewArreglo:any = []
 async ListaAlertas(){
-  
+  debugger
   this.arrResponsable = this.getArray(this.stateRevisado.sState,1)
   this.NewArreglo = []
   
