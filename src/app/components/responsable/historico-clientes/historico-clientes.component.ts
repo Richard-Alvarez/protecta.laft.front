@@ -111,64 +111,155 @@ export class HistoricoClientesComponent implements OnInit {
 
     await this.obtenerPeriodos()
    
-      //  this.core.config.rest.LimpiarDataGestor()
-      this.core.loader.show();
-      let usuario = this.core.storage.get('usuario')
+    //   //  this.core.config.rest.LimpiarDataGestor()
+    //   this.core.loader.show();
+    //   let usuario = this.core.storage.get('usuario')
       
-      this.STIPO_USUARIO = usuario['tipoUsuario']
-      this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
-      this.arrRegimen = this.getRegimenDinamic();
+    //   this.STIPO_USUARIO = usuario['tipoUsuario']
+    //   this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
+    //   this.arrRegimen = this.getRegimenDinamic();
     
-      if(this.IDListPeriodo === "0"){
+    //   if(this.IDListPeriodo === "0"){
 
-        this.setStatesInit();
+    //     this.setStatesInit();
 
-        this.NPERIODO_PROCESO = 0//this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
-        //await this.getOfficialAlertFormList()
-        if (this.STIPO_USUARIO === 'RE') {
-          this.userGroupListGral = [1]
-          this.userGroupListSimpli = [1]
-        }
-        //this.getTipoUsuario()
-        //this.fillFileGroup()
-        this.arrResponsablesRevisadoGral = []
+    //     this.NPERIODO_PROCESO = 0//this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
+    //     //await this.getOfficialAlertFormList()
+    //     if (this.STIPO_USUARIO === 'RE') {
+    //       this.userGroupListGral = [1]
+    //       this.userGroupListSimpli = [1]
+    //     }
+    //     //this.getTipoUsuario()
+    //     //this.fillFileGroup()
+    //     this.arrResponsablesRevisadoGral = []
   
-        this.arrResponsablesRevisadoSimpli = []
+    //     this.arrResponsablesRevisadoSimpli = []
    
-        this.arrResponsablesInformeTerminadoGral = []
+    //     this.arrResponsablesInformeTerminadoGral = []
     
-        this.arrResponsablesInformeTerminadoSimpli = []
+    //     this.arrResponsablesInformeTerminadoSimpli = []
      
       
-      }else{
-        this.setStatesInit();
-        this.NPERIODO_PROCESO = this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
-        await this.getOfficialAlertFormList()
-        if (this.STIPO_USUARIO === 'RE') {
-          this.userGroupListGral = [1]
-          this.userGroupListSimpli = [1]
-        }
-        this.getTipoUsuario()
-        this.fillFileGroup()
+    //   }else{
+    //     this.setStatesInit();
+    //     this.NPERIODO_PROCESO = this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
+    //     await this.getOfficialAlertFormList()
+    //     if (this.STIPO_USUARIO === 'RE') {
+    //       this.userGroupListGral = [1]
+    //       this.userGroupListSimpli = [1]
+    //     }
+    //     this.getTipoUsuario()
+    //     this.fillFileGroup()
      
      
-      } 
+    //   } 
     
+
+    // var URLactual = window.location + " ";
+    // let link = URLactual.split("/")
+    // let linkactual = link[link.length-1].trim()
+    // if(linkactual == 'historico-clientes'){ 
+    //   try {
+    //     window.onscroll = function() {myFunction()};
+      
+    //       function myFunction() {
+    //         if (window.scrollY > 80) {
+    //           document.getElementById('navbar_top').classList.add('fixed-top');
+    //           document.getElementById('navbar_top').classList.add('tabs-top');
+    //         } else {
+    //           document.getElementById('navbar_top').classList.remove('fixed-top');
+    //           document.getElementById('navbar_top').classList.remove('tabs-top');
+    //           document.body.style.paddingTop = '0';
+    //         } 
+              
+    //         } 
+    //   } catch (error) {
+    //     //console.error('el error: ',error)
+    //   }
+    // }
+   
+    // this.core.loader.hide();
+
+
+    ////////////////////////
+
+
+    
+    this.core.config.rest.LimpiarDataGestor()
+    this.core.loader.show();
+    let usuario = this.core.storage.get('usuario')
+    
+    this.STIPO_USUARIO = usuario['tipoUsuario']
+    this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
+    
+    this.setStatesInit();
+
+    this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
+
+
+  
+    this.arrResponsablesByCerrado = [
+      {
+        "id": "id001",
+        "usuario": "Alfredo Chan Way Diaz",
+        "fecha_movimiento": "18/12/2020 16:07:22",
+        "periodo": "01/07/20 al 30/09/20",
+        "respuesta": "Sí",
+        "comentario": "Un comentario uno"
+      },
+      {
+        "id": "id002",
+        "usuario": "Usuario de prueba",
+        "fecha_movimiento": "18/12/2020 16:07:22",
+        "periodo": "01/07/20 al 30/09/20",
+        "respuesta": "Sí",
+        "comentario": "Un comentario uno"
+      }
+    ]
+
+    this.NPERIODO_PROCESO = 20210630//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
+    await this.getOfficialAlertFormList()
+    this.arrRegimen = this.getRegimenDinamic();
+   
+    if (this.STIPO_USUARIO === 'RE') {
+      this.userGroupListGral = [1]
+      this.userGroupListSimpli = [1]
+    }
+    //this.devueltoHijo.setRegimiento(1);
+    //this.userGroupListSimpli.push('TI')
+   
+    this.getTipoUsuario()
+    this.fillFileGroup()
+    //await this.getAllAttachedFiles()
+
+    //await this.core.storage.set('stateRevisado',this.stateRevisado)
+    //await this.core.storage.set('stateCompletado',this.stateCompletado)
+    //await this.core.storage.set('stateDevuelto',this.stateDevuelto)
+   
+    //await this.core.storage.set('arrResponsablesCompleGral',this.arrResponsablesCompleGral)
+    //await this.core.storage.set('arrResponsablesCompleSimpli',this.arrResponsablesCompleSimpli)
+    //await this.core.storage.set('arrResponsablesDevueltoGral',this.arrResponsablesDevueltoGral)
+    //await this.core.storage.set('arrResponsablesDevueltoSimpli',this.arrResponsablesDevueltoSimpli)
+
+    /*this.dataResponsable.Responsable$.subscribe(arreglo => {
+      this.arrDetailC1 = arreglo
+     
+    })*/
 
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
     let linkactual = link[link.length-1].trim()
-    if(linkactual == 'historico-clientes'){ 
+    if(linkactual == 'clientes'){
       try {
         window.onscroll = function() {myFunction()};
       
           function myFunction() {
             if (window.scrollY > 80) {
               document.getElementById('navbar_top').classList.add('fixed-top');
-              document.getElementById('navbar_top').classList.add('tabs-top');
+             
             } else {
               document.getElementById('navbar_top').classList.remove('fixed-top');
-              document.getElementById('navbar_top').classList.remove('tabs-top');
+            
               document.body.style.paddingTop = '0';
             } 
               
@@ -180,9 +271,11 @@ export class HistoricoClientesComponent implements OnInit {
    
     this.core.loader.hide();
 
+
   }
 
   async getAllAttachedFiles() {
+    
     await this.getAttachedFiles(this.getArray(this.stateCompletado.sState, 1), 'RE')
     await this.getAttachedFiles(this.getArray(this.stateCompletado.sState, 1), 'OC')
     await this.getAttachedFiles(this.getArray(this.stateDevuelto.sState, 1), 'RE')
@@ -1330,7 +1423,7 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
   getArray(state, regimen) {
-    debugger
+    
     switch (state) {
       // case 'PENDIENTE':
       //   if (regimen === 1) {

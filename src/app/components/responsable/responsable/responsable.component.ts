@@ -184,7 +184,7 @@ export class ResponsableComponent implements OnInit {
       }
     ]
 
-    this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
+    this.NPERIODO_PROCESO = 20210630//parseInt(localStorage.getItem("periodo"))
     await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
    
