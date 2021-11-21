@@ -280,3 +280,30 @@ a{
    .cambiarColor{
     font-weight: 600;
   }
+
+  
+table thead tr {
+  border-bottom: solid 1px #26296D !important;
+}
+td, th {
+  padding: 15px 10px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+table {
+width: 100%;
+display: table;
+border-collapse: collapse;
+border-spacing: 0;
+}
+thead {
+color: rgba(0,0,0,0.6);
+}
+table, th, td {
+border: none;
+} 
+table.striped>tbody>tr:nth-child(odd) {
+  background-color: rgba(242,242,242,0.5);
+}
