@@ -153,6 +153,8 @@ export class BusquedaDemandaComponent implements OnInit {
 
   /*busquedaidecon*/
   async obtenerBusquedaCoincidenciaXNombreDemanda(){
+    //var currentTime = Date.now();
+    console.log("NBUSCAR_POR",this.NBUSCAR_POR)
 
     //var currentTime = Date.now();
     //console.log("NBUSCAR_POR",this.NBUSCAR_POR)
@@ -374,7 +376,10 @@ export class BusquedaDemandaComponent implements OnInit {
        document.getElementById("enter").click();
     }else{
     }
-  }
+ }
+
+
+  
 
  async setDataFile(event) {
     

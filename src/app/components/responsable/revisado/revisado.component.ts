@@ -6,6 +6,7 @@ import { CoreService } from '../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
+// import { ResponsableComponent } from '../responsable/responsable.component';
 
 @Component({
   selector: 'app-revisado',
@@ -34,6 +35,8 @@ export class RevisadoComponent implements OnInit {
     @Input() ValidadorHistorico: any
     @Input() parent:ResponsableComponent
 
+    @Input() arrResponsable2:any = []
+
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
     private renderer: Renderer2,
@@ -52,7 +55,8 @@ export class RevisadoComponent implements OnInit {
 
     await this.getVariablesStorage();
     this.fillFileGroup()
-    
+    console.log(" this.arrResponsable", this.arrResponsable)
+    console.log(" this.arrResponsable2", this.arrResponsable2)
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   }
 
@@ -377,7 +381,8 @@ async ListaUsuario(){
 NewArreglo:any = []
 async ListaAlertas(){
   this.NewArreglo = []
-   this.arrResponsable.forEach(item => {
+  debugger
+   this.arrResponsable2.forEach(item => {
     let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
     let obj:any = {}
     obj.NIDUSUARIO_ASIGNADO = item.NIDUSUARIO_ASIGNADO
