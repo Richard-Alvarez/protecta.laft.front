@@ -56,7 +56,42 @@ padding-right: 15px;">
 
         <br>
         <hr>
-        <div class="row">
+        <div  style="overflow-y:auto;">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Tipo y Nro. de Documento</th>
+                        <th>Nombre / Razón Social</th>
+                        <th *ngFor="let tipo of parent.tipoListas">{{tipo.SDESTIPOLISTA}}</th>
+                        <th>Régimen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  *ngFor="let item of getBuscarClient(); let ind = index;">
+                        <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
+                        <td>{{item.SNOM_COMPLETO}}</td>
+                        <td *ngFor="let tipo of parent.tipoListas">
+                            <span class="cambiarColor" *ngIf="parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Coincidencia</span>
+                            <span *ngIf="!parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Sin Coincidencia</span>
+                        </td>
+                        <td>{{item.SDESREGIMEN}}</td>
+                        <td>
+                            <button class="btn" data-toggle="dropdown">
+                                <span class="fas fa-bars" style="font-size: 20px;"></span>
+                            </button>
+                        <div class="dropdown-menu dropdown-menu-right" style="">
+                            <a class="dropdown-item" (click)="setDataViewCustomer(item)" routerLink="/c2-detail">Ver</a>
+                            <a class="dropdown-item" (click)="parent.update(item,'CRE','CRF','Reforzado',2,ind)">Enviar a Reforzado</a>
+                            <a class="dropdown-item" (click)="parent.update(item,'CRE','CCO','Complementario',2,ind)">Enviar a Cliente Complementario</a>
+                            <a class="dropdown-item" (click)="parent.getOptionsClient('1','CRE',item,ind)">Eliminar de Revisado</a>
+                        </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-11">
@@ -75,7 +110,6 @@ padding-right: 15px;">
                     <div class="col-lg-1">
                         <div class="row">
                             <div class="col-lg-6 txtCabecera text-center" style="padding-left: 0px">Acciones</div>
-                            <!--<div class="col-lg-12 txtCabecera text-center">Acciones</div>-->
                         </div>
                     </div>
 
@@ -121,30 +155,13 @@ padding-right: 15px;">
                 </div>
                 <hr style="size:10px;" *ngIf="arrResultados.length > 0">
             </div>
-        </div>
+        </div> -->
 
 
     </div>
 
 
-    <!--<div class="row borderFormat"  style="display: flex;justify-content: center;align-items: center;">
-            <button 
-            style="display: flex;justify-content: center;align-items: center;"
-            class="btn btn-warning text-white"
-            (click)="getProcessClientesReforzados()"
-            >Actualizar</button>  
-        </div>
-        <div class="row borderFormat"  style="display: flex;justify-content: left;align-items: left;padding-left: 800px;">    
-            <div class="col-lg-2">
-                <button 
-                style="display: flex;justify-content: center;align-items: center;"
-                class="btn btn-warning text-white">Grabar</button>     
-            </div>
-         
-      
-         </div> -->
 
 </div>
-<!--<app-paginacion-reutil [parent]="this" [currentPage]="initializePage" [totalItems]="arrResultados.length"></app-paginacion-reutil>-->
 
 <br><br>

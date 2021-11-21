@@ -42,7 +42,7 @@ export class CustomerManagerComponent implements OnInit {
   POR_NOMBRE: number = 2;
   hideNombresPersona: boolean = true;
   NIDUSUARIO_LOGUEADO;
-
+  ArrayResultCoincidencias :any =[]
 
 
 
@@ -196,7 +196,7 @@ export class CustomerManagerComponent implements OnInit {
       this.SubGrupoList.unshift(obj);
       if(this.SubGrupoList.length > 0)
         this.idSubGrupo = this.SubGrupoList.map(t=> t.NIDSUBGRUPOSEN)[0] 
-      //this.ListaDeCoincidencias(this.idGrupo)
+        this.ListaDeCoincidencias(this.idGrupo)
     }
   }
   async valorSubGrupo() {
@@ -428,6 +428,7 @@ export class CustomerManagerComponent implements OnInit {
         if (NBUSCAR_POR == 2 && NTIPO_PERSONA == 1 && (CantidadCaracteresReales <= 3)) {
           this.getDataListResults(data)
         } else {
+          debugger
           this.clientList = await this.userConfigService.getResultsList(data);
           this.clientList = this.groupClients(this.clientList);
           this.spinner.hide();
@@ -1450,7 +1451,17 @@ Array.prototype.forEach.call( inputs, function( input )
     });
   }
 
+  async ListaDeCoincidencias(id){
 
+    let data:any = {}
+    data = {
+      NIDGRUPOSENAL: id,
+      NPERIODO_PROCESO: this.PERIODOACTUAL.periodo}
+      this.spinner.show()
+    this.ArrayResultCoincidencias = await this.userConfigService.GetListaResultadoGC(data)
+    this.ArrayResultCoincidencias = this.groupClients(this.ArrayResultCoincidencias);
+    this.spinner.hide()
+  }
 
 
 }
