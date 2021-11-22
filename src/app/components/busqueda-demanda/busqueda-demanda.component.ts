@@ -141,13 +141,16 @@ export class BusquedaDemandaComponent implements OnInit {
           if (respuetaService.length != 0) {
             respuetaService.itemsWC.forEach(t => {
               t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
-              t.SPROVEEDOR = "WC"
+              t.SPROVEEDOR = "WC",
+              t.STIPOCOINCIDENCIA = "NOMBRE"
             });
             respuetaService.itemsIDE.forEach(t => {
-              t.SPROVEEDOR = "IDECON"
+              t.SPROVEEDOR = "IDECON",
+              t.STIPOCOINCIDENCIA = "NOMBRE"
             });
             respuetaService.itemsIDEDOC.forEach(t => {
-              t.SPROVEEDOR = "IDECON"
+              t.SPROVEEDOR = "IDECON",
+              t.STIPOCOINCIDENCIA = "DOCUMENTO"
             });
           }
           this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
@@ -392,7 +395,8 @@ export class BusquedaDemandaComponent implements OnInit {
           "Tipo de Persona	" : t.STIPO_PERSONA,
           "Cargo" : t.SCARGO == null ? '-' : t.SCARGO,
           "Lista" : t.SLISTA,
-          "Proveedor" : t.SPROVEEDOR
+          "Proveedor" : t.SPROVEEDOR,
+          "Coincidencia": t.STIPOCOINCIDENCIA
         }
         /* t.arrListas.forEach(element => {
           _data[element.SDESTIPOLISTA] = element.SDESESTADO

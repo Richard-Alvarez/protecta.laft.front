@@ -88,6 +88,7 @@
                                 <th  scope="col" style="vertical-align: middle;">% Coincidencia</th>
                                 <th  scope="col" style="vertical-align: middle; text-align: left;">Lista</th>
                                 <th  scope="col" style="vertical-align: middle; text-align: left;">Fuente</th>
+                                <th  scope="col" style="vertical-align: middle;">Tipo de Coincidencia</th>
                                 <th  scope="col" style="vertical-align: middle;">Descargar</th>
                             </tr>
                         </thead>
@@ -100,9 +101,10 @@
                                 <td  scope="col"><div placement='top' ngbTooltip="{{item.SNOMBRE_COMPLETO}}">{{cortarCararterNombre(item.SNOMBRE_COMPLETO)}}</div></td>
                                 <!-- <td>{{item.STIPO_PERSONA}}</td>
                                 <td ><div placement='top' ngbTooltip="{{item.SCARGO}}">{{item.SCARGO ? cortarCararter(item.SCARGO) : '-'}}</div></td> -->
-                                <td  scope="col" style="text-align: right;">{{item.SPORCEN_COINCIDENCIA}}</td>
+                                <td  scope="col" style="text-align: center;">{{item.SPORCEN_COINCIDENCIA}}</td>
                                 <td  scope="col">{{item.SLISTA}}</td>
                                 <td  scope="col">{{item.SPROVEEDOR}}</td>
+                                <td  scope="col">{{item.STIPOCOINCIDENCIA}}</td>
                                 <td class=" text-center" scope="col">
                                     <img  (click)="exportListToExcelIndividual(i)" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
                                 </td>
