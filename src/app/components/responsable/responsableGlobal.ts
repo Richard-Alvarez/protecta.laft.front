@@ -3109,7 +3109,7 @@ export class ResponsableGlobalComponent {
      
       console.log("IDListAnno:", this.IDListAnno);
      
-        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
+        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno)
    
         this.IDListPeriodo = "0"
    
