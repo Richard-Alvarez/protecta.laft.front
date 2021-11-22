@@ -36,12 +36,12 @@ z-index : 1;
 
 .btnBuscarStyle{
   border: 0;
-border-radius: .25em;
-background: initial;
-color: #fff;
-font-size: 1.0625em;
-/*background-color: rgb(250, 112, 0);*/
-/*border-bottom: #3085d6;*/
+  border-radius: .25em;
+  background: initial;
+  color: #fff;
+  font-size: 1.0625em;
+  /*background-color: rgb(250, 112, 0);*/
+  /*border-bottom: #3085d6;*/
 }
 
 .inputfile {
@@ -86,21 +86,31 @@ font-size: 1.0625em;
 
 .btnBuscarStyle{
   border: 0;
-border-radius: .25em;
-background: initial;
-color: #fff;
-font-size: 1.0625em;
-/*background-color: rgb(250, 112, 0);*/
-/*border-bottom: #3085d6;*/
+  border-radius: .25em;
+  background: initial;
+  color: #fff;
+  font-size: 1.0625em;
+  /*background-color: rgb(250, 112, 0);*/
+  /*border-bottom: #3085d6;*/
 }
 
 .BordeHr{
   border-bottom:  0.5px solid #26296D;
- }
- .containerNew{
+}
+.containerNew{
   width: 80%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: 10%;
   margin-left: 10%;
- }
+}
+
+.buttonSinBorder{
+  border-radius : inherit;
+}
+/* .footer{
+  position: -webkit-sticky;
+  position: sticky;
+  //position: relative;
+  bottom: 60px;
+} */

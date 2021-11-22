@@ -56,7 +56,7 @@ padding-right: 15px;">
 
         <br>
         <hr>
-        <div  style="overflow-y:auto;">
+        <div style="overflow-y:auto;">
             <table class="striped">
                 <thead>
                     <tr>
@@ -68,24 +68,26 @@ padding-right: 15px;">
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  *ngFor="let item of getBuscarClient(); let ind = index;">
+                    <tr *ngFor="let item of getBuscarClient(); let ind = index;">
                         <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                         <td>{{item.SNOM_COMPLETO}}</td>
                         <td *ngFor="let tipo of parent.tipoListas">
-                            <span class="cambiarColor" *ngIf="parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Coincidencia</span>
-                            <span *ngIf="!parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Sin Coincidencia</span>
+                            <div>
+                                <span class="cambiarColor" *ngIf="parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Coincidencia</span>
+                                <span *ngIf="!parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Sin Coincidencia</span>
+                            </div>
                         </td>
                         <td>{{item.SDESREGIMEN}}</td>
                         <td>
                             <button class="btn" data-toggle="dropdown">
-                                <span class="fas fa-bars" style="font-size: 20px;"></span>
-                            </button>
-                        <div class="dropdown-menu dropdown-menu-right" style="">
-                            <a class="dropdown-item" (click)="setDataViewCustomer(item)" routerLink="/c2-detail">Ver</a>
-                            <a class="dropdown-item" (click)="parent.update(item,'CRE','CRF','Reforzado',2,ind)">Enviar a Reforzado</a>
-                            <a class="dropdown-item" (click)="parent.update(item,'CRE','CCO','Complementario',2,ind)">Enviar a Cliente Complementario</a>
-                            <a class="dropdown-item" (click)="parent.getOptionsClient('1','CRE',item,ind)">Eliminar de Revisado</a>
-                        </div>
+                                    <span class="fas fa-bars" style="font-size: 20px;"></span>
+                                </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="">
+                                <a class="dropdown-item" (click)="setDataViewCustomer(item)" routerLink="/c2-detail">Ver</a>
+                                <a class="dropdown-item" (click)="parent.update(item,'CRE','CRF','Reforzado',2,ind)">Enviar a Reforzado</a>
+                                <a class="dropdown-item" (click)="parent.update(item,'CRE','CCO','Complementario',2,ind)">Enviar a Cliente Complementario</a>
+                                <a class="dropdown-item" (click)="parent.getOptionsClient('1','CRE',item,ind)">Eliminar de Revisado</a>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
