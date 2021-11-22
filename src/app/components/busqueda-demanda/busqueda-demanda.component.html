@@ -4,8 +4,8 @@
     </div>
     
 </header>
-<main class="container app-main">
-    <section class="container" >
+<main class="container-fluid app-main pl-5 pr-5">
+    <section class="container-fluid pl-3 pr-2" >
         <section class="header">
             <article class="row">
                 <button class="btn btn-link text-secondary" style="padding-left: 0px;" routerLink="/home" title="Regresar a la Pantalla Principal">
@@ -47,7 +47,7 @@
                                     </select>
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
-                                    <span class="fontText" >Número Doc:</span>
+                                    <span class="fontText" >Número Doc:</span> 
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
                                     <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="Número de Documento" maxlength="100" size="34"
