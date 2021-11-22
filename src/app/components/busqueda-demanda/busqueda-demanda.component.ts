@@ -60,7 +60,8 @@ export class BusquedaDemandaComponent implements OnInit {
 
     
     //console.log('',this.timestamp.getDate()|this.timestamp.getMonth()|this.timestamp.getFullYear());
-    /*codigodebusqueda*/console.log("codigo busqueda",this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+    /*codigodebusqueda*///console.log("codigo busqueda",this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+    console.log("codigo busqueda",(this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss')))
     //this.GenerarCodigo();
     
   }
@@ -104,21 +105,26 @@ export class BusquedaDemandaComponent implements OnInit {
       let ObjLista : any = {};
       ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
       ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-      if(this.NBUSCAR_POR == 1){
-        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
-      }else
-      {
-        this.SubirExcel(ObjLista)
-        ObjLista.P_SNOMCOMPLETO = null;
-      }
       ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
       ObjLista.P_NOMBRE_RAZON = this.NOMBRE_RAZON;
+      if(this.NBUSCAR_POR == 1){
+        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
+        ObjLista.P_SNUM_DOCUMENTO = this.numeroDoc;
+        ObjLista.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
+      }else
+      {
+        ObjLista.P_SNOMCOMPLETO = null;
+        ObjLista.P_SNUM_DOCUMENTO = null;
+        ObjLista.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
+        await this.SubirExcel(ObjLista)
+      }
     
 
       this.core.loader.show()
     
       let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
-
+      console.log("respuesta",respuetaService);
+debugger;
       if (respuetaService.length != 0) {
         respuetaService.itemsWC.forEach(t => {
           t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
@@ -127,11 +133,15 @@ export class BusquedaDemandaComponent implements OnInit {
   
         respuetaService.itemsIDE.forEach(t => {
           t.SPROVEEDOR = "IDECON"
+        });
+
+        respuetaService.itemsIDEDOC.forEach(t => {
+          t.SPROVEEDOR = "IDECON"
         }); 
       }
-        
-      this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC);
-
+        console.log("ideconDoc", respuetaService.itemsIDEDOC);
+      this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
+console.log("cancatenado triple",this.resultadoFinal);
 
       if(this.resultadoFinal.length != 0){
         this.encontroRespuesta = false;
@@ -195,6 +205,48 @@ export class BusquedaDemandaComponent implements OnInit {
     }
   }
   /*fin busqueda idecon*/
+  /*documento*/
+  async obtenerBusquedaCoincidenciaXNumeroDocDemanda(){
+    //var currentTime = Date.now();
+    //console.log("NBUSCAR_POR",this.NBUSCAR_POR)
+
+    let ObjLista : any = {};
+      //P_ID : currentTime
+      ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
+      ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+      if(this.NBUSCAR_POR == 1){
+        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',//CANDIOTTI BALLON LELIA GLORIA
+        ObjLista.P_SNUM_DOCUMENTO = this.numeroDoc;
+      }else
+      {
+
+        await this.SubirExcel(ObjLista)
+
+        ObjLista.P_SNOMCOMPLETO = null;
+      }
+      ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario;
+    
+
+    this.core.loader.show()
+
+    await this.userConfigService.GetBusquedaConcidenciaXNumeroDocDemanda(ObjLista).then(
+      (response) => {
+       this.resulBusqueda = response
+      });
+    this.core.loader.hide()
+    
+    this.resultadoFinal = this.resulBusqueda.items;
+  console.log("resultado",this.resulBusqueda);
+  console.log("resultado",this.resultadoFinal);
+    if(this.resultadoFinal.length != 0){
+      this.encontroRespuesta = false;
+      this.noEncontroRespuesta = true;
+    }else{
+      this.encontroRespuesta = true;
+      this.noEncontroRespuesta = false
+    }
+  }
+  /*findocumento*/
   
   GenerarCodigo()
   {
@@ -305,9 +357,9 @@ export class BusquedaDemandaComponent implements OnInit {
         this.excelService.exportAsExcelFile(data, "Resultados Busqueda a Demanda");
     }else {
       swal.fire({
-        title: 'Gestor de clientes',
+        title: 'Búsqueda a Demanda',
         icon: 'warning',
-        text: 'error',
+        text: 'No hay resultados de búsqueda',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar',
@@ -355,9 +407,9 @@ export class BusquedaDemandaComponent implements OnInit {
         this.excelService.exportAsExcelFile(data, "Resultados Busqueda a Demanda");
     }else {
       swal.fire({
-        title: 'Gestor de clientes',
+        title: 'Búsqueda a Demanda',
         icon: 'warning',
-        text: 'error',
+        text: 'No hay resultados de búsqueda',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar',

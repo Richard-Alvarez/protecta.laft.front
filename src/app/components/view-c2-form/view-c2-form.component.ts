@@ -59,6 +59,10 @@ export class ViewC2FormComponent implements OnInit {
     }
 
     async ngOnInit() {
+        var URLactual = window.location + " ";
+        let link = URLactual.split("/")
+       this.linkactual = link[link.length-1].trim()
+       
         this.statusRev = false
         this.Savependings = false;
         this.core.loader.show();
@@ -73,7 +77,20 @@ export class ViewC2FormComponent implements OnInit {
         }
         //parseInt(localStorage.getItem("NPERIODO_PROCESO"))
         this.alertData.SPERIODO_FECHA = this.objAlertaC2.NPERIODO_PROCESO//localStorage.getItem("fechaPeriodo")
-        this.alertData.NIDREGIMEN = this.regimen.id//parseInt(localStorage.getItem("NIDREGIMEN"))
+        debugger
+        if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
+            this.alertData.NIDREGIMEN = 0
+          }
+          else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte" ){
+            this.alertData.NIDREGIMEN = 0
+          }
+          else if(this.linkactual == "proveedor" || this.linkactual == "historico-proveedor" ){
+            this.alertData.NIDREGIMEN = 0
+          }else{
+            this.alertData.NIDREGIMEN = this.regimen.id
+          }
+        //parseInt(localStorage.getItem("NIDREGIMEN"))
+
         this.alertData.SESTADO = this.objAlertaC2.SESTADO//localStorage.getItem("SESTADO")
         this.alertData.DESREGIMEN = 'Régimen '+this.regimen.descripcion//localStorage.getItem("DESREGIMEN")
         this.STIPOUSUARIO = this.core.storage.get('usuario')['tipoUsuario'];
@@ -870,5 +887,7 @@ console.log('prueba',this.internationalList);
         }
       }
 
+
+      
    
 }
