@@ -99,7 +99,7 @@
         
        
         <div class="tab-content" style="" >
-            <div id="reg{{regimen.desCorto}}" *ngFor="let regimen of arrRegimen;let variabletabs = index;" class=" tab-pane {{getShowRegimiento2(variabletabs,regimen)}}">
+            <div id="reg{{regimen.desCorto}}" *ngFor="let regimen of  arrRegimen;let variabletabs = index;" class=" tab-pane {{getShowRegimiento2(variabletabs,regimen)}}">
                 <div class="" style="background-color:transparent !important;">
                     <div class="row">
                         <div class="col-lg-8">
@@ -111,19 +111,21 @@
                     <div class="">
                     
                          <!--REVISADO-->
-                        <div *ngIf="STIPO_USUARIO != 'RE' ">
+                        <div *ngIf=" STIPO_USUARIO != 'RE' ">
                             <div>
                                 <app-revisado [parent]="this" [regimen]="regimen"
-                                    [stateRevisado]="stateRevisado"
+                                    [stateRevisado]=" stateRevisado"
                                     [arrResponsable]="getArray(stateRevisado.sState,regimen.id)"
-                                    [userGroupList]="getArrayUserGroup(regimen.id)" [ValidadorHistorico]="0"></app-revisado>
+                                    [arrResponsable2]="getArray(stateRevisado.sState,regimen.id)"
+                                    [userGroupList]="getArrayUserGroup(regimen.id)" 
+                                    [ValidadorHistorico]="0" [HistoricoPeriodo]="IDListPeriodo"></app-revisado>
                             </div>
                         </div>
                         <br>
                         
                        
                         <!--INFORME TERMINADO-->
-                        <div *ngIf="STIPO_USUARIO != 'RE' ">
+                        <div *ngIf=" STIPO_USUARIO != 'RE' ">
                             <div>
                                 <app-informe-terminado [parent]="this" [regimen]="regimen"
                                     [stateInformeTerminado]="stateInformeTerminado"

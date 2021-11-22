@@ -163,6 +163,8 @@ console.log("cancatenado triple",this.resultadoFinal);
 
   /*busquedaidecon*/
   async obtenerBusquedaCoincidenciaXNombreDemanda(){
+    //var currentTime = Date.now();
+    console.log("NBUSCAR_POR",this.NBUSCAR_POR)
 
     //var currentTime = Date.now();
     //console.log("NBUSCAR_POR",this.NBUSCAR_POR)
@@ -426,7 +428,10 @@ console.log("cancatenado triple",this.resultadoFinal);
        document.getElementById("enter").click();
     }else{
     }
-  }
+ }
+
+
+  
 
  async setDataFile(event) {
     

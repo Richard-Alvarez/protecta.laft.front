@@ -530,7 +530,7 @@ export class ResponsableGlobalComponent {
     let valor
     if(this.linkactual == "colaborador"){
       valor = 2
-    }else if(this.linkactual == "contraparte"){
+    }else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte"){
       valor = 4
     }else{
       valor = 3
@@ -604,9 +604,9 @@ export class ResponsableGlobalComponent {
       data.NIDALERTA_CABECERA = NIDALERTA_CABECERA
       data.STIPO_CARGA = STIPO_CARGA//'INFORMES'
       data.NREGIMEN = NREGIMEN
-      if(this.linkactual == "proveedor" || this.linkactual == "contraparte")
+      if(this.linkactual == "proveedor" || this.linkactual == "contraparte" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte")
         data.NREGIMEN = 2
-      if(this.linkactual == "colaborador")
+      if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador")
         data.NREGIMEN = 1
       let respAttachFileInfo = await this.userConfigService.getAttachedFilesInformByCabecera(data)
       
@@ -1595,7 +1595,7 @@ export class ResponsableGlobalComponent {
       if(this.linkactual == "colaborador"){
          RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
-      else if(this.linkactual == "proveedor" || this.linkactual == "contraparte" ){
+      else if(this.linkactual == "proveedor" || this.linkactual == "contraparte" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte"){
          RegimenTemp = [{ 'id': 2, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
       }else{
         RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }, { 'id': 2, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
@@ -1629,9 +1629,9 @@ export class ResponsableGlobalComponent {
       //return [{'id':1,'descripcion':'General','desCorto':'Gral'},{'id':2,'descripcion':'Simplificado','desCorto':'Simpli'}]
     }
     else {
-      if(this.linkactual == "proveedor"  ){
+      if(this.linkactual == "proveedor" || this.linkactual == "historico-proveedor" ){
         return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
-      }else if(this.linkactual == "contraparte"){
+      }else if(this.linkactual == "contraparte" ||  this.linkactual == "historico-contraparte"){
         return [{ 'id': 2, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
       // }else if(this.linkactual == "contraparte"){

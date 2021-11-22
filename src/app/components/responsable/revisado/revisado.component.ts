@@ -6,6 +6,7 @@ import { CoreService } from '../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
+// import { ResponsableComponent } from '../responsable/responsable.component';
 
 @Component({
   selector: 'app-revisado',
@@ -18,7 +19,7 @@ export class RevisadoComponent implements OnInit {
     objRadioHeader:any = {};
 
     arrFilesAdjuntos:any = []
-
+    IDGrupo
     
     files: Map<string, any> = new Map<string, any>()
     listFiles: Map<string, any> = new Map<string, any>()
@@ -33,6 +34,8 @@ export class RevisadoComponent implements OnInit {
     @Input() userGroupList:any = []
     @Input() ValidadorHistorico: any
     @Input() parent:ResponsableComponent
+    @Input() HistoricoPeriodo:any
+    @Input() arrResponsable2:any = []
 
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
@@ -41,7 +44,9 @@ export class RevisadoComponent implements OnInit {
 
 
   async ngOnInit() {
-
+    this.IDGrupo = await this.ValidarGrupo()
+    console.log("ValidadorHistorico",this.ValidadorHistorico)
+    console.log("arrResponsable2",this.arrResponsable2)
 
     await this.ListaUsuario()
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
@@ -52,7 +57,7 @@ export class RevisadoComponent implements OnInit {
 
     await this.getVariablesStorage();
     this.fillFileGroup()
-    
+   
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   }
 
@@ -209,6 +214,8 @@ export class RevisadoComponent implements OnInit {
       default : 
         return [];
     }*/
+     
+     //console.log("getArray2",this.arrResponsable2)
     return this.arrResponsable;
     //return this.arrResponsablesPendienteSimpli;
   }
@@ -337,29 +344,68 @@ async ConsultaComplemento(){
  
 }
 
+linkactual
+ async ValidarGrupo(){
+  var URLactual = window.location + " ";
+  let link = URLactual.split("/")
+  this.linkactual = link[link.length-1].trim()
+  if(this.linkactual == "clientes" || this.linkactual == "historico-clientes" ){
+    return  1
+  }else if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
+    return  2
+  }
+  else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte" ){
+    return  4
+  }
+  else if(this.linkactual == "proveedor" || this.linkactual == "historico-proveedor" ){
+    return  3
+  }
+}
+
+
+// async filtroComplemeto(item){
+  
+  
+//   let resultado:any = []
+//    resultado = await this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == this.IDGrupo)
+ 
+//   return resultado
+// }
 
 filtroComplemeto(item){
+  let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA)
   
-  
-  let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
- 
   return resultado
 }
+filtroComplemeto2(item){
+  return this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA)
+}
+
 
 listaComplementoUsuario:any = [] 
 async ConsultaComplementoUsuarios(estado,periodo) {
   let data:any ={}
-  if(estado == 'COMPLETADO'){
-    
-    data.NPERIODO_PROCESO = periodo //this.PeriodoComp
-  
-   //this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
-  }else{
-    
-    data.NPERIODO_PROCESO = this.PeriodoComp 
-  }
+
+  if(this.ValidadorHistorico == 0){
    
-  this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+    data.NPERIODO_PROCESO = this.HistoricoPeriodo
+    this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  }
+  else{
+    if(estado == 'COMPLETADO'){
+    
+      data.NPERIODO_PROCESO = periodo //this.PeriodoComp
+    
+     //this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+    }else{
+      
+      data.NPERIODO_PROCESO = this.PeriodoComp 
+    }
+     
+    this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
+  }
+
+ 
   
 
 }
@@ -376,7 +422,10 @@ async ListaUsuario(){
 
 NewArreglo:any = []
 async ListaAlertas(){
+  
+  this.arrResponsable = this.getArray(this.stateRevisado.sState,1)
   this.NewArreglo = []
+  
    this.arrResponsable.forEach(item => {
     let resultado = this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_RESPONSABLE == item.NIDUSUARIO_ASIGNADO && it.NIDALERTA ==  item.NIDALERTA)
     let obj:any = {}
@@ -385,6 +434,7 @@ async ListaAlertas(){
     obj.NREGIMEN = item.NREGIMEN
     obj.RESULTADO = resultado
     obj.NIDALERTA = item.NIDALERTA
+    
     this.NewArreglo.push(obj)
    
    });
@@ -437,9 +487,18 @@ async descargarComplemento (item,listUsu){
 
 listaArchivosComplementos:any =[]
 async ListaDeAdjunto(){
-  let data:any ={}
-  data.NPERIODO_PROCESO = this.PeriodoComp
-  this.listaArchivosComplementos = await this.userConfigService.getListaAdjuntos(data)
+  if(this.ValidadorHistorico == 0){
+    let data:any ={}
+    data.NPERIODO_PROCESO = this.HistoricoPeriodo
+    this.listaArchivosComplementos = await this.userConfigService.getListaAdjuntos(data)
+  }
+  else{
+    let data:any ={}
+    data.NPERIODO_PROCESO = this.PeriodoComp
+    this.listaArchivosComplementos = await this.userConfigService.getListaAdjuntos(data)
+  }
+  
+
 }
 
 AlertaMensaje(mensaje){
