@@ -110,7 +110,8 @@ export class HistoricoClientesComponent implements OnInit {
   async ngOnInit(){
 
     await this.obtenerPeriodos()
-   
+    await this.ReemplazarData()
+    //this.NewListPeriodos =  localStorage.getItem('Combo2') 
     //   //  this.core.config.rest.LimpiarDataGestor()
     //   this.core.loader.show();
     //   let usuario = this.core.storage.get('usuario')
@@ -216,7 +217,7 @@ export class HistoricoClientesComponent implements OnInit {
         "comentario": "Un comentario uno"
       }
     ]
-
+    debugger
     this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
     await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
@@ -620,6 +621,7 @@ export class HistoricoClientesComponent implements OnInit {
       let arrPendienteInfoSimpli:any = []
       let arrInfoTerminadoSimpli:any = []
       this.core.loader.show();
+      debugger
       let respWorkListGeneral = await this.userConfigService.getWorkModuleList(data)
       this.core.loader.hide();
       //let respWorkListSimplificado = await this.userConfigService.getWorkModuleList(data)
@@ -3227,7 +3229,7 @@ export class HistoricoClientesComponent implements OnInit {
     this.renderer.addClass(this.contentIconPlus.nativeElement, "hiddenPlus");
   }*/
 
-  /*getIdRegimem(regimen){
+  /*getIdRegimem(regimen){ 
     if(regimen === 1){
       return 'regGeneral'
     }
@@ -3284,6 +3286,8 @@ export class HistoricoClientesComponent implements OnInit {
       });
        this.NewListAnnos = sinRepetidos
       console.log("Sin repetidos es:", sinRepetidos);
+
+      this.ReemplazarData()
   }
   
   BuscarPeriodo(event){
@@ -3296,12 +3300,12 @@ export class HistoricoClientesComponent implements OnInit {
         this.IDListPeriodo = "0"
    
       
-      console.log("NewListPeriodos:", this.NewListPeriodos);
      
   }
 
   async SeleccionarPeriodo(){
     console.log("IDListPeriodo",this.IDListPeriodo)
+    
    
      this.arrResponsablesRevisadoGral = []
   
@@ -3310,11 +3314,44 @@ export class HistoricoClientesComponent implements OnInit {
      this.arrResponsablesInformeTerminadoGral = []
  
      this.arrResponsablesInformeTerminadoSimpli = []
-  
-
+     //let combo1 = this.IDListAnno.toString()
+    await this.GuardarData()
     await this.ngOnInit()
     
   } 
+
+  async GuardarData(){
+    localStorage.setItem("Combo1",this.IDListAnno.toString())
+    localStorage.setItem("Combo2",this.IDListPeriodo)
+
+    
+  }
+
+  async ReemplazarData(){
+
+
+    if(localStorage.setItem("Combo1",this.IDListAnno.toString()) !== undefined){
+      this.IDListAnno = parseInt(localStorage.getItem("Combo"))
+      this.IDListPeriodo = localStorage.getItem("Combo2")
+      await this.ngOnInit()
+    }
+
+    localStorage.removeItem("Combo")
+    localStorage.removeItem("Combo2")
+    
+    
+    //localStorage.setItem("Combo1",this.IDListAnno.toString())
+    //localStorage.setItem("Combo2",this.IDListPeriodo)
+   
+    //this.IDListPeriodo
+    //this.NewListAnnos  =  localStorage.getItem("Combo")
+    //this.NewListPeriodos =  localStorage.getItem("Combo2")
+  }
+
+
+
+
+
 
 
   

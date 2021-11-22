@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener,Input } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import swal from 'sweetalert2';
 import { environment } from 'src/environments/environment'
@@ -11,6 +11,7 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import {  DataResponsableService } from '../../../services/data-responsable.service';
+import {  HistoricoClientesComponent } from '../historico-clientes/historico-clientes.component';
 import * as $ from 'jquery';
 
 @Component({
@@ -20,7 +21,7 @@ import * as $ from 'jquery';
 })
 export class ResponsableComponent implements OnInit {
 
-
+  @Input() parent:HistoricoClientesComponent
   /*indiceIconDinamic;
   boolPalomitaHeaderPlus:boolean = true;
   boolPalomitaHeaderMinus:boolean = false;*/
@@ -101,6 +102,8 @@ export class ResponsableComponent implements OnInit {
   cadenaEstadosSinForm = 'No se encontraron formularios por responder.'
   cadenaEstadosSinSenial = 'No se encontraron señales por revisar.'
 
+  validador
+
   constructor(
     private core: CoreService,
     private userConfigService: UserconfigService,
@@ -111,7 +114,7 @@ export class ResponsableComponent implements OnInit {
   ) { }
 
   async ngOnInit()  {
-
+    this.validador = localStorage.getItem("validarHistoricoclienteste")
     // // When the user scrolls the page, execute myFunction
     // window.onscroll = function() {myFunction()};
 
@@ -183,8 +186,11 @@ export class ResponsableComponent implements OnInit {
         "comentario": "Un comentario uno"
       }
     ]
-
-    this.NPERIODO_PROCESO = 20210630//parseInt(localStorage.getItem("periodo"))
+    debugger
+   
+      this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
+    
+    
     await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
    

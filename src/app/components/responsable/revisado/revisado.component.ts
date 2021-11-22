@@ -19,7 +19,7 @@ export class RevisadoComponent implements OnInit {
     objRadioHeader:any = {};
 
     arrFilesAdjuntos:any = []
-
+    IDGrupo
     
     files: Map<string, any> = new Map<string, any>()
     listFiles: Map<string, any> = new Map<string, any>()
@@ -44,6 +44,7 @@ export class RevisadoComponent implements OnInit {
 
 
   async ngOnInit() {
+    this.IDGrupo = await this.ValidarGrupo()
     console.log("ValidadorHistorico",this.ValidadorHistorico)
     console.log("arrResponsable2",this.arrResponsable2)
 
@@ -213,7 +214,7 @@ export class RevisadoComponent implements OnInit {
       default : 
         return [];
     }*/
-     console.log("getArray",this.arrResponsable)
+     
      //console.log("getArray2",this.arrResponsable2)
     return this.arrResponsable;
     //return this.arrResponsablesPendienteSimpli;
@@ -343,19 +344,48 @@ async ConsultaComplemento(){
  
 }
 
+linkactual
+ async ValidarGrupo(){
+  var URLactual = window.location + " ";
+  let link = URLactual.split("/")
+  this.linkactual = link[link.length-1].trim()
+  if(this.linkactual == "clientes" || this.linkactual == "historico-clientes" ){
+    return  1
+  }else if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
+    return  2
+  }
+  else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte" ){
+    return  4
+  }
+  else if(this.linkactual == "proveedor" || this.linkactual == "historico-proveedor" ){
+    return  3
+  }
+}
+
+
+// async filtroComplemeto(item){
+  
+  
+//   let resultado:any = []
+//    resultado = await this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == this.IDGrupo)
+ 
+//   return resultado
+// }
 
 filtroComplemeto(item){
+  let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA)
   
-  
-  let resultado = this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA && it.NIDGRUPOSENAL == 1)
- 
   return resultado
 }
+filtroComplemeto2(item){
+  return this.listaComplemento.filter(it => it.NIDALERTA == item.NIDALERTA)
+}
+
 
 listaComplementoUsuario:any = [] 
 async ConsultaComplementoUsuarios(estado,periodo) {
   let data:any ={}
-debugger
+
   if(this.ValidadorHistorico == 0){
    
     data.NPERIODO_PROCESO = this.HistoricoPeriodo
@@ -392,7 +422,7 @@ async ListaUsuario(){
 
 NewArreglo:any = []
 async ListaAlertas(){
-  debugger
+  
   this.arrResponsable = this.getArray(this.stateRevisado.sState,1)
   this.NewArreglo = []
   
