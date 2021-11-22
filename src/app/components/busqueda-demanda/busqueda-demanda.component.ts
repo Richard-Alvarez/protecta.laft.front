@@ -449,7 +449,8 @@ export class BusquedaDemandaComponent implements OnInit {
           "Tipo de Persona	" : t.STIPO_PERSONA,
           "Cargo" : t.SCARGO == null ? '-' : t.SCARGO,
           "Lista" : t.SLISTA,
-          "Proveedor" : t.SPROVEEDOR
+          "Proveedor" : t.SPROVEEDOR,
+          "Coincidencia": t.STIPOCOINCIDENCIA
         }
         
         data.push(_data);
