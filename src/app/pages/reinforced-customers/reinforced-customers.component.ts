@@ -349,36 +349,14 @@ export class ReinforcedCustomersComponent implements OnInit {
 
   arrResultadoFilter: any = []
    getBuscarClient(){
-       return this.arrResultados
+       return this.arrResultados.filter(t=>t.ISVISIBLE)
   }
 
-  setFilterResultadosClient(){
-    try {
-      let nombreCliente = ((this.txtBuscador+' ').trim()).toLowerCase()
-    
-    if(nombreCliente == ''){
-        this.arrResultadoFilter = this.arrResultados
-    }else{
 
-      this.arrResultadoFilter = []
-      this.arrResultadoFilter = this.arrResultados.filter(itResult => {
-        
-        let nombreClienteCompleto = ((itResult.obj.SNOM_COMPLETO+' ').trim()).toLowerCase()
-        
-        if(nombreClienteCompleto.includes(nombreCliente)){
-        
-          return itResult
-        }
-      });
-
+    setFilterResultadosClient(){
+      this.arrResultados.forEach(t2=>{t2.ISVISIBLE = true });
+      this.arrResultados.filter(t=> !t.SNOM_COMPLETO.toUpperCase().includes(this.txtBuscador.toUpperCase())).forEach(t2=>{t2.ISVISIBLE = false });
     }
-    } catch (error) {
-      console.error("error",error)
-    }
-    
-   
-  }
-  
   async getListProcess(event){  // DESESTIMADO
     var key = event.which || event.keyCode;
    

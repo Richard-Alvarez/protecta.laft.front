@@ -378,57 +378,13 @@ export class PreReinforcedCustomersComponent implements OnInit {
   arrResultadoFilter: any = []
   getBuscarClient(){
       // this.arrResultadoFilter = this.arrResultados
-       return this.arrResultados //this.arrResultadoFilter.length > 0 ? this.arrResultadoFilter : this.arrResultados
+       return this.arrResultados.filter(t=>t.ISVISIBLE) //this.arrResultadoFilter.length > 0 ? this.arrResultadoFilter : this.arrResultados
   }
 
   setFilterResultadosClient(){
-
-    try {
-      let nombreCliente = ((this.txtBuscador+' ').trim()).toLowerCase()
-    
-    if(nombreCliente == ''){
-        this.arrResultadoFilter = this.arrResultados
-    }else{
-
-      this.arrResultadoFilter = []
-      this.arrResultadoFilter = this.arrResultados.filter(itResult => {
-        
-        let nombreClienteCompleto = ((itResult.obj.SNOM_COMPLETO+' ').trim()).toLowerCase()
-        
-        if(nombreClienteCompleto.includes(nombreCliente)){
-        
-          return itResult
-        }
-      });
-
-    }
-    } catch (error) {
-      
-    }
-    // try {
-    //   let nombreCliente = ((this.txtBuscador+' ').trim()).toLowerCase()
-    
-    // if(nombreCliente == ''){
-    //     this.arrResultadoFilter = this.arrResultados
-    // }else{
-
-    //   this.arrResultadoFilter = []
-    //   this.arrResultados.forEach(itResult => {
-    
-    //     let nombreClienteCompleto = ((itResult.obj.SNOM_COMPLETO+' ').trim()).toLowerCase()
-
-    //     if(nombreClienteCompleto.includes(nombreCliente)){
-    
-    //       this.arrResultadoFilter.push(itResult)
-    //     }
-    //   });
-
-    // }
-    // } catch (error) {
-    
-    // }
-    
-   
+    debugger;
+    this.arrResultados.forEach(t2=>{t2.ISVISIBLE = true });
+    this.arrResultados.filter(t=> !t.SNOM_COMPLETO.toUpperCase().includes(this.txtBuscador.toUpperCase())).forEach(t2=>{t2.ISVISIBLE = false });
   }
 
   CambiarColor(item){

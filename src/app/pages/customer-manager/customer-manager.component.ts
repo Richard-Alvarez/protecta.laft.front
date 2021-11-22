@@ -597,6 +597,7 @@ export class CustomerManagerComponent implements OnInit {
     });
     listaCoincidencia.forEach((t) => {
       // console.log(t);
+      t.ISVISIBLE = true;
       t.ARRAY_IDTIPOLISTA = _items
         .filter((i) => i.SNOM_COMPLETO == t.SNOM_COMPLETO)
         .map((f) => f.NIDTIPOLISTA);
