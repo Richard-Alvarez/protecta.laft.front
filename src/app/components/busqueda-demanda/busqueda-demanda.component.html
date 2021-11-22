@@ -50,12 +50,12 @@
                                     <span class="fontText" >Número Doc:</span>
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
-                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="Número de Documento" maxlength="100" size="34"
-                                            [(ngModel)]="numeroDoc" >
+                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="Número de Documento" maxlength="{{validationCantidadCaracteres()}}" size="34"
+                                            (keypress)="validaNumericos($event)"[(ngModel)]="numeroDoc" >
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
                                     <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="Nombre completo" maxlength="100" size="34"
-                                            [(ngModel)]="nombreCompleto" (keydown)="Buscar($event)">
+                                            [(ngModel)]="nombreCompleto" (keypress)="soloLetras($event)" (keydown)="Buscar($event)">
                                 </th>
                                 <th [hidden]="hideIndividual" *ngIf="mostrarBotonBuscarIndividual()"  scope="col">
                                     <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="BusquedaADemandaMixta()" >Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta --> <!-- obtenerBusquedaCoincidenciaXNumeroDocDemanda -->
@@ -117,10 +117,12 @@
                 </div>
             </article>
         </section>
-        <section>
-            <div class="col-md-5 d-flex justify-content-between " style="padding: 5px 0px 0px 0px; margin-left: -15px; color: #a0a1cc !important;">
-                <button (click)="exportListToExcel()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda</button>
-            </div>
+        <section class="row" >
+            <article class="row" style="margin: 0 auto; width: 100%; padding-bottom: 100px" >
+                <div class="col-md-5 table-responsive" style="padding: 5px 0px 0px 0px;  color: #a0a1cc !important;"> <!-- d-flex justify-content-between  --> <!-- table-responsive -->
+                    <button (click)="exportListToExcel()" class="btn  form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda</button><!-- btn-outline-info -->
+                </div>
+            </article>
         </section>
     </section>
 </main>

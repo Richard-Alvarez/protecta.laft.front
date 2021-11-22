@@ -5,6 +5,8 @@ import { DatePipe } from '@angular/common';
 import { FileUploader } from 'ng2-file-upload';
 import { ExcelService } from 'src/app/services/excel.service';
 import swal from 'sweetalert2';
+import { async } from '@angular/core/testing';
+import { textShadow } from 'html2canvas/dist/types/css/property-descriptors/text-shadow';
 /* import * as XLSX from 'xlsx'; */
 
 @Component({
@@ -116,53 +118,98 @@ export class BusquedaDemandaComponent implements OnInit {
         ObjLista.P_SNOMCOMPLETO = null;
         ObjLista.P_SNUM_DOCUMENTO = null;
         ObjLista.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
-        await this.SubirExcel(ObjLista)
+        await this.SubirExcel(ObjLista) 
       }
-    
+      await swal.fire({
+        title: 'Consulta en proceso...',
+        icon: 'info',
+        showCancelButton: false,
+        showConfirmButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        timer:1500,
+        customClass: { 
+                      closeButton : 'OcultarBorde'
+                     },
+      }).then(async(result) => {
+        if (result) {
+          /*inicio*/
+          this.core.loader.show()
+          let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
+          console.log("respuesta",respuetaService);
+          if (respuetaService.length != 0) {
+            respuetaService.itemsWC.forEach(t => {
+              t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
+              t.SPROVEEDOR = "WC"
+            });
+            respuetaService.itemsIDE.forEach(t => {
+              t.SPROVEEDOR = "IDECON"
+            });
+            respuetaService.itemsIDEDOC.forEach(t => {
+              t.SPROVEEDOR = "IDECON"
+            });
+          }
+          this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
 
-      this.core.loader.show()
-    
-      let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
-      console.log("respuesta",respuetaService);
-debugger;
-      if (respuetaService.length != 0) {
-        respuetaService.itemsWC.forEach(t => {
-          t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
-          t.SPROVEEDOR = "WC"
-        });
-  
-        respuetaService.itemsIDE.forEach(t => {
-          t.SPROVEEDOR = "IDECON"
-        });
-
-        respuetaService.itemsIDEDOC.forEach(t => {
-          t.SPROVEEDOR = "IDECON"
-        }); 
-      }
-        console.log("ideconDoc", respuetaService.itemsIDEDOC);
-      this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
-console.log("cancatenado triple",this.resultadoFinal);
-
-      if(this.resultadoFinal.length != 0){
-        this.encontroRespuesta = false;
-        this.noEncontroRespuesta = true;
-      }else{
-        this.encontroRespuesta = true;
-        this.noEncontroRespuesta = false
-      }
-
-      this.core.loader.hide()
-      //console.log("index",this.resultadoFinal)
-      //console.log("index",this.resultadoFinal[1])
+          if(this.resultadoFinal.length != 0){
+            this.encontroRespuesta = false;
+            this.noEncontroRespuesta = true;
+          }else{
+            this.encontroRespuesta = true;
+            this.noEncontroRespuesta = false
+          }
+          this.core.loader.hide()
+          /*fin*/
+        }
+      });
     
     }
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
   }
+  validaNumericos(event: any) {
+
+    if (event.charCode >= 48 && event.charCode <= 57) {
+      return true;
+    }
+    return false;
+  }
+  validationCantidadCaracteres() {
+    if (this.NOMBRE_RAZON == 1) {
+      return '11'
+    } else if (this.NOMBRE_RAZON == 2) {
+      return '8'
+    }
+    else if (this.NOMBRE_RAZON == 3) {
+      return '12'
+    }
+    else {
+      return '12'
+    }
+  }
+  soloLetras(e) {
+    let key = e.keyCode || e.which;
+    let tecla = String.fromCharCode(key).toLowerCase();
+    let letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    let especiales = [8, 37, 39, 46];
+
+    let tecla_especial = false
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial)
+      return false;
+  }
 
   /*busquedaidecon*/
-  async obtenerBusquedaCoincidenciaXNombreDemanda(){
+  /* async obtenerBusquedaCoincidenciaXNombreDemanda(){
     //var currentTime = Date.now();
     console.log("NBUSCAR_POR",this.NBUSCAR_POR)
 
@@ -203,10 +250,10 @@ console.log("cancatenado triple",this.resultadoFinal);
       this.encontroRespuesta = true;
       this.noEncontroRespuesta = false
     }
-  }
+  } */
   /*fin busqueda idecon*/
   /*documento*/
-  async obtenerBusquedaCoincidenciaXNumeroDocDemanda(){
+  /* async obtenerBusquedaCoincidenciaXNumeroDocDemanda(){
     //var currentTime = Date.now();
     //console.log("NBUSCAR_POR",this.NBUSCAR_POR)
 
@@ -245,7 +292,7 @@ console.log("cancatenado triple",this.resultadoFinal);
       this.encontroRespuesta = true;
       this.noEncontroRespuesta = false
     }
-  }
+  } */
   /*findocumento*/
   
   GenerarCodigo()
@@ -443,7 +490,6 @@ console.log("cancatenado triple",this.resultadoFinal);
   
   let listFileNameInform: any = []
   arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-  console.log("array push",listFileNameInform);//
  
   let listFileNameCortoInform = []
   let statusFormatFile = false
@@ -456,7 +502,6 @@ console.log("cancatenado triple",this.resultadoFinal);
     }
     let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
     //listFileNameCortoInform.push(fileItem)
-    console.log("items",fileItem);//
     listFileNameCortoInform.push(fileItem)
   }
   if (statusFormatFile) {
