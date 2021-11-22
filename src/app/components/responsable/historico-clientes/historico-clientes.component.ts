@@ -108,9 +108,11 @@ export class HistoricoClientesComponent implements OnInit {
   ) { }
 
   async ngOnInit(){
-
+   
     await this.obtenerPeriodos()
-    await this.ReemplazarData()
+    
+   
+    
     //this.NewListPeriodos =  localStorage.getItem('Combo2') 
     //   //  this.core.config.rest.LimpiarDataGestor()
     //   this.core.loader.show();
@@ -199,53 +201,21 @@ export class HistoricoClientesComponent implements OnInit {
 
 
   
-    this.arrResponsablesByCerrado = [
-      {
-        "id": "id001",
-        "usuario": "Alfredo Chan Way Diaz",
-        "fecha_movimiento": "18/12/2020 16:07:22",
-        "periodo": "01/07/20 al 30/09/20",
-        "respuesta": "Sí",
-        "comentario": "Un comentario uno"
-      },
-      {
-        "id": "id002",
-        "usuario": "Usuario de prueba",
-        "fecha_movimiento": "18/12/2020 16:07:22",
-        "periodo": "01/07/20 al 30/09/20",
-        "respuesta": "Sí",
-        "comentario": "Un comentario uno"
-      }
-    ]
+    
     debugger
     this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
-    await this.getOfficialAlertFormList()
+    //await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
    
     if (this.STIPO_USUARIO === 'RE') {
       this.userGroupListGral = [1]
       this.userGroupListSimpli = [1]
     }
-    //this.devueltoHijo.setRegimiento(1);
-    //this.userGroupListSimpli.push('TI')
+ 
    
     this.getTipoUsuario()
     this.fillFileGroup()
-    //await this.getAllAttachedFiles()
-
-    //await this.core.storage.set('stateRevisado',this.stateRevisado)
-    //await this.core.storage.set('stateCompletado',this.stateCompletado)
-    //await this.core.storage.set('stateDevuelto',this.stateDevuelto)
    
-    //await this.core.storage.set('arrResponsablesCompleGral',this.arrResponsablesCompleGral)
-    //await this.core.storage.set('arrResponsablesCompleSimpli',this.arrResponsablesCompleSimpli)
-    //await this.core.storage.set('arrResponsablesDevueltoGral',this.arrResponsablesDevueltoGral)
-    //await this.core.storage.set('arrResponsablesDevueltoSimpli',this.arrResponsablesDevueltoSimpli)
-
-    /*this.dataResponsable.Responsable$.subscribe(arreglo => {
-      this.arrDetailC1 = arreglo
-     
-    })*/
 
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
@@ -269,10 +239,11 @@ export class HistoricoClientesComponent implements OnInit {
         //console.error('el error: ',error)
       }
     }
+
+    
    
     this.core.loader.hide();
-
-
+    
   }
 
 
@@ -3287,15 +3258,15 @@ export class HistoricoClientesComponent implements OnInit {
        this.NewListAnnos = sinRepetidos
       console.log("Sin repetidos es:", sinRepetidos);
 
-      this.ReemplazarData()
+      await this.ReemplazarData()
   }
   
-  BuscarPeriodo(event){
+  async BuscarPeriodo(event){
      
       console.log("IDListAnno:", this.IDListAnno);
      
-        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno )
-        //this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
+        // this.NewListPeriodos = await this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno )
+        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
    
         this.IDListPeriodo = "0"
    
@@ -3316,44 +3287,90 @@ export class HistoricoClientesComponent implements OnInit {
      this.arrResponsablesInformeTerminadoSimpli = []
      //let combo1 = this.IDListAnno.toString()
     await this.GuardarData()
-    await this.ngOnInit()
+    await this.Iniciar()
     
   } 
 
   async GuardarData(){
     localStorage.setItem("Combo1",this.IDListAnno.toString())
     localStorage.setItem("Combo2",this.IDListPeriodo)
-
+    debugger
     
   }
 
   async ReemplazarData(){
 
-
-    if(localStorage.setItem("Combo1",this.IDListAnno.toString()) !== undefined){
-      this.IDListAnno = parseInt(localStorage.getItem("Combo"))
+    
+    if(localStorage.getItem("Combo1") !== null && localStorage.getItem("Combo2") !== null  ){
+    
+      this.IDListAnno = parseInt(localStorage.getItem("Combo1"))
+      await this.BuscarPeriodo('')
       this.IDListPeriodo = localStorage.getItem("Combo2")
-      await this.ngOnInit()
-    }
+      
+      this.arrResponsablesRevisadoGral = []
+  
+     this.arrResponsablesRevisadoSimpli = []
 
-    localStorage.removeItem("Combo")
+     this.arrResponsablesInformeTerminadoGral = []
+ 
+     this.arrResponsablesInformeTerminadoSimpli = []
+
+     
+      await this.Iniciar()
+    }
+    await this.EliminarData()
+    
+
+  
+    
+  }
+
+  async EliminarData(){
+    localStorage.removeItem("Combo1")
     localStorage.removeItem("Combo2")
-    
-    
-    //localStorage.setItem("Combo1",this.IDListAnno.toString())
-    //localStorage.setItem("Combo2",this.IDListPeriodo)
-   
-    //this.IDListPeriodo
-    //this.NewListAnnos  =  localStorage.getItem("Combo")
-    //this.NewListPeriodos =  localStorage.getItem("Combo2")
   }
 
 
 
+ async Iniciar(){
+    this.core.config.rest.LimpiarDataGestor()
+    this.core.loader.show();
+    let usuario = this.core.storage.get('usuario')
+    
+    this.STIPO_USUARIO = usuario['tipoUsuario']
+    this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
+    
+    this.setStatesInit();
 
+    this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
+
+
+  
+    
+    debugger
+    this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
+    await this.getOfficialAlertFormList()
+    this.arrRegimen = this.getRegimenDinamic();
+   
+    if (this.STIPO_USUARIO === 'RE') {
+      this.userGroupListGral = [1]
+      this.userGroupListSimpli = [1]
+    }
+ 
+   
+    this.getTipoUsuario()
+    this.fillFileGroup()
+   
+
+    this.core.loader.hide();
+    }
+   
+    
+    
+  }
 
 
 
   
-}
+
 
