@@ -157,6 +157,7 @@ private base: string = 'http://localhost:5001/api/';
   public urlGetBusquedaConcidenciaXNombre: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNombre";
   public urlBusquedaADemandal: string = this.base + "monitoreoSenales/BusquedaADemandal"
   public urlGetBusquedaConcidenciaXNombreDemanda: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNombreDemanda";/*kdtr*/
+  public urlGetBusquedaConcidenciaXNumeroDocDemanda: string = this.base + "monitoreoSenales/BusquedaConcidenciaXNumeroDocDemanda";/*kdtr*/
   public urlGetBusquedaConcidenciaXDoc: string = this.base + "monitoreoSenales/BusquedaConcidenciaXDoc";
   public urlAnularClienteResultado: string = this.base + "monitoreoSenales/AnularResultadosCliente";
   public urlBusquedaConcidenciaXDocXName: string = this.base + "monitoreoSenales/BusquedaConcidenciaXDocXName";

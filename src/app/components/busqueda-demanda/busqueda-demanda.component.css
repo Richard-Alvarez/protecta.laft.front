@@ -96,3 +96,10 @@ font-size: 1.0625em;
 .BordeHr{
   border-bottom:  0.5px solid #26296D;
  }
+ .containerNew{
+  width: 80%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 10%;
+  margin-left: 10%;
+ }

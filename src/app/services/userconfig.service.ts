@@ -1524,6 +1524,19 @@ export class UserconfigService {
     })
   }
 
+  GetBusquedaConcidenciaXNumeroDocDemanda(data: any): Promise<any> {
+    debugger;
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetBusquedaConcidenciaXNumeroDocDemanda, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
   GetBusquedaConcidenciaXDoc(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

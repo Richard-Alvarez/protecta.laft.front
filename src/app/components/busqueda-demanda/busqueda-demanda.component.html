@@ -4,8 +4,8 @@
     </div>
     
 </header>
-<main class="container app-main">
-    <section class="container" >
+<main class="containerNew app-main" ><!--container app-main -->
+    <section class="" ><!-- container -->
         <section class="header">
             <article class="row">
                 <button class="btn btn-link text-secondary" style="padding-left: 0px;" routerLink="/home" title="Regresar a la Pantalla Principal">
@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th scope="col" >
-                                    <span class="fontText" >Busqueda:</span>
+                                    <span class="fontText" >Búsqueda:</span>
                                 </th>
                                 <th scope="col">
                                     <select class="form-control" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" >
@@ -54,11 +54,11 @@
                                             [(ngModel)]="numeroDoc" >
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
-                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="adjunte datos de búsqueda" maxlength="100" size="34"
+                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="Nombre completo" maxlength="100" size="34"
                                             [(ngModel)]="nombreCompleto" (keydown)="Buscar($event)">
                                 </th>
                                 <th [hidden]="hideIndividual" *ngIf="mostrarBotonBuscarIndividual()"  scope="col">
-                                    <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="BusquedaADemandaMixta()" >Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
+                                    <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="BusquedaADemandaMixta()" >Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta --> <!-- obtenerBusquedaCoincidenciaXNumeroDocDemanda -->
                                 </th>
                                 <th [hidden]="hideMasiva"  scope="col">
                                     <input type="file" accept=".xlsx" onclick="this.value=null;"
@@ -66,7 +66,7 @@
                                             style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()">
                                 </th>
                                 <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()"  scope="col">
-                                    <button class="btn btn-warning btnBuscarStyle" (click)="obtenerBusquedaCoincidenciaXNombreDemanda()">Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
+                                    <button class="btn btn-warning btnBuscarStyle" (click)="BusquedaADemandaMixta()">Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
                                 </th>
                             </tr>
                         </thead>
@@ -79,14 +79,15 @@
                         <thead >
                             <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif; ">
                                 <th  scope="col" style="vertical-align: middle;">Fecha y Hora de Búsqueda</th>
-                                <th  scope="col" style="vertical-align: middle;">Usuario que Realizó la Busqueda</th>
+                                <th  scope="col" style="vertical-align: middle;">Usuario que Realizó la Búsqueda</th>
                                 <th  scope="col" style="vertical-align: middle;">Tipo de Documento</th>
                                 <th  scope="col" style="vertical-align: middle;">Número de Documento</th>
                                 <th  scope="col" style="vertical-align: middle; text-align: left;">Nombre/Razón Social</th>
                                 <!-- <th scope="col" style="vertical-align: middle;">Tipo de Persona</th> -->
                                 <!-- <th scope="col" style="vertical-align: middle;">Cargo</th> -->
                                 <th  scope="col" style="vertical-align: middle;">% Coincidencia</th>
-                                <th  scope="col" style="vertical-align: middle; text-align: left;margin-right: 20px;">Lista</th>
+                                <th  scope="col" style="vertical-align: middle; text-align: left;">Lista</th>
+                                <th  scope="col" style="vertical-align: middle; text-align: left;">Fuente</th>
                                 <th  scope="col" style="vertical-align: middle;">Descargar</th>
                             </tr>
                         </thead>
@@ -101,6 +102,7 @@
                                 <td ><div placement='top' ngbTooltip="{{item.SCARGO}}">{{item.SCARGO ? cortarCararter(item.SCARGO) : '-'}}</div></td> -->
                                 <td  scope="col" style="text-align: right;">{{item.SPORCEN_COINCIDENCIA}}</td>
                                 <td  scope="col">{{item.SLISTA}}</td>
+                                <td  scope="col">{{item.SPROVEEDOR}}</td>
                                 <td class=" text-center" scope="col">
                                     <img  (click)="exportListToExcelIndividual(i)" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
                                 </td>
@@ -108,7 +110,7 @@
                         </tbody>
                         <tbody [hidden]="noEncontroRespuesta">
                             <tr>
-                                <td class="text-center" colspan="8">No se encontró coincidencias</td>
+                                <td class="text-center" colspan="9">No se encontró coincidencias</td>
                             </tr>
                         </tbody>
                     </table>
