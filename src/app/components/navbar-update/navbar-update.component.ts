@@ -11,25 +11,7 @@ export class NavbarUpdateComponent implements OnInit {
   constructor() { }
 
    ngOnInit() {
-    var header = $(".start-style")
-    console.log("header",header)
-    try {
-      window.onscroll = function() {  FuncionScroll() };
 
-      function FuncionScroll() {
-        
-        console.log("scroll",window.scrollY)
-        if (window.scrollY > 80) {
-          document.getElementById('start-style').classList.remove('start-style');
-          document.getElementById('navbar_top').classList.add("scroll-on")
-          // header.removeClass('start-style').addClass("scroll-on");
-        } else {
-          // header.removeClass("scroll-on").addClass('start-style');
-        }
-      }
-    } catch (error) {
-      
-    }
     
 
 
@@ -46,9 +28,9 @@ export class NavbarUpdateComponent implements OnInit {
           window.onscroll = function() {  FuncionScroll() };
 
           function FuncionScroll() {
-            
-            console.log("scroll",window.scrollY)
-            if (window.scrollY >= 10) {
+            var scroll = $(window).scrollTop();
+            console.log("scroll",scroll)
+            if (scroll >= 10) {
               header.removeClass('start-style').addClass("scroll-on");
             } else {
               header.removeClass("scroll-on").addClass('start-style');
@@ -87,6 +69,7 @@ export class NavbarUpdateComponent implements OnInit {
 
       
   }
+  
 
 
 

@@ -1633,7 +1633,11 @@ async ConsultaComplementoUsuarios(){
   }
 
   AlertaMensaje(mensaje){
-
+    if(this.STIPO_USUARIO === 'OC'){
+      this.sNameTipoUsuario = 'Oficial de Cumplimiento'
+    }else{
+      this.sNameTipoUsuario = 'Responsable'
+    }
     swal.fire({
       title: 'Bandeja del '+ this.sNameTipoUsuario,
       icon: 'warning',
