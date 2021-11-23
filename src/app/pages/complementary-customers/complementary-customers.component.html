@@ -1,57 +1,55 @@
 <div class="col-md-5 d-flex justify-content-between " style="padding: 30px 0px 0px 0px; color: #a0a1cc !important;">
-  <button (click)="exportListToExcel('Cliente Complementario')"
-    class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar
+    <button (click)="exportListToExcel('Cliente Complementario')" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar
     cliente complementario </button>
 </div>
 <div class="row mb-2 mt-2" style="padding-left: 15px;
 padding-right: 15px;">
-  <div class="borderFormat">
-    <div class="row">
-      <div class="col-lg-6">
+    <div class="borderFormat">
+        <div class="row">
+            <div class="col-lg-6">
 
-      </div>
-      <div class="col">
-        <input class="col-lg-6" [(ngModel)]="txtBuscador" (keyup)="setFilterResultadosClient()" type="text"
-          class="form-control form-control" value="" placeholder="Buscar">
-      </div>
-    </div>
-    <br>
-    <hr>
-    <div  style="overflow-y:auto;">
-        <table>
-            <thead>
-                <tr>
-                    <th>Tipo y Nro. de Documento</th>
-                    <th>Nombre / Razón Social</th>
-                    <th *ngFor="let tipo of parent.tipoListas">{{tipo.SDESTIPOLISTA}}</th>
-                    <th>Régimen</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr  *ngFor="let item of getBuscarClient(); let ind = index;">
-                    <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
-                    <td>{{item.SNOM_COMPLETO}}</td>
-                    <td *ngFor="let tipo of parent.tipoListas">
-                        <span class="cambiarColor" *ngIf="parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Coincidencia</span>
-                        <span *ngIf="!parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Sin Coincidencia</span>
-                    </td>
-                    <td>{{item.SDESREGIMEN}}</td>
-                    <td>
-                        <button class="btn" data-toggle="dropdown">
+            </div>
+            <div class="col">
+                <input class="col-lg-6" [(ngModel)]="txtBuscador" (keyup)="setFilterResultadosClient()" type="text" class="form-control form-control" value="" placeholder="Buscar">
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div style="overflow-y:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo y Nro. de Documento</th>
+                        <th>Nombre / Razón Social</th>
+                        <th *ngFor="let tipo of parent.tipoListas">{{tipo.SDESTIPOLISTA}}</th>
+                        <th>Régimen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of getBuscarClient(); let ind = index;">
+                        <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
+                        <td>{{item.SNOM_COMPLETO}}</td>
+                        <td *ngFor="let tipo of parent.tipoListas">
+                            <span class="cambiarColor" *ngIf="parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Coincidencia</span>
+                            <span *ngIf="!parent.validate(item.ARRAY_IDTIPOLISTA, tipo.NIDTIPOLISTA)">Sin Coincidencia</span>
+                        </td>
+                        <td>{{item.SDESREGIMEN}}</td>
+                        <td>
+                            <button class="btn" data-toggle="dropdown">
                             <span class="fas fa-bars" style="font-size: 20px;"></span>
                           </button>
-                          <div class="dropdown-menu dropdown-menu-right" style="">
-                            <a class="dropdown-item" (click)="setDataViewCustomer(item)" routerLink="/c2-detail">Ver</a>
-                            <a class="dropdown-item" (click)="parent.getOptionsClient('3',item.SESTADO_TRAT,item,ind)">Eliminar de
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" (click)="setDataViewCustomer(item)" routerLink="/c2-detail">Ver</a>
+                                <a class="dropdown-item" (click)="parent.getOptionsClient('3',item.SESTADO_TRAT,item,ind)">Eliminar de
                               Complementario</a>
-                          </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- <div class="row">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="row">
       <div class="col-lg-12">
         <div class="row">
           <div class="col-lg-11">
@@ -116,7 +114,7 @@ padding-right: 15px;">
       </div>
     </div> -->
 
-  </div>
+    </div>
 
 </div>
 <app-paginacion-reutil [parent]="this" [currentPage]="initializePage" [totalItems]="arrResultados.length">

@@ -382,7 +382,6 @@ export class PreReinforcedCustomersComponent implements OnInit {
   }
 
   setFilterResultadosClient(){
-    debugger;
     this.arrResultados.forEach(t2=>{t2.ISVISIBLE = true });
     this.arrResultados.filter(t=> !t.SNOM_COMPLETO.toUpperCase().includes(this.txtBuscador.toUpperCase())).forEach(t2=>{t2.ISVISIBLE = false });
   }

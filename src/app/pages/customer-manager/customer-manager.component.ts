@@ -53,7 +53,21 @@ export class CustomerManagerComponent implements OnInit {
   clientMap: Map<string, any> = new Map<string, any>();
   peopleList: any = [];
 
-
+  Alerts :any =[
+    {
+      idGrupo : 1,
+      idAlerta: 2
+    },{
+      idGrupo : 2,
+      idAlerta: 35
+    },{
+      idGrupo : 3,
+      idAlerta: 33
+    },{
+      idGrupo : 4,
+      idAlerta: 2
+    }
+  ]
 
 
 
@@ -81,7 +95,7 @@ export class CustomerManagerComponent implements OnInit {
   parentCRE: PreReinforcedCustomersComponent
   parentCRF: ReinforcedCustomersComponent
   parentCCO: ComplementaryCustomersComponent
-
+  
   @Input() ValorRegresar: number
 
 
@@ -178,16 +192,13 @@ export class CustomerManagerComponent implements OnInit {
 
   async valorGrupo() {
     this.idSubGrupo = 0;
-    debugger;
     this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
     this.arrSetClassSelected[0] = 'active'
     localStorage.setItem("nSelectPestaniaClient", '0')
     if (this.idGrupo == 3 || this.idGrupo == 4) {
-      debugger;
       let data = {
       NIDGRUPOSENAL : this.idGrupo
       }
-      debugger;
       let obj = {
         NIDSUBGRUPOSEN: -1,
         SDESSUBGRUPO_SENAL: "--Seleccione--"
@@ -419,7 +430,6 @@ export class CustomerManagerComponent implements OnInit {
         let CantprimerNombre = ((paramCliente.SPRIMER_NOMBRE) + '').length
         let CantsegundoNombre = ((paramCliente.SSEGUNDO_NOMBRE) + '').length
         let CantidadCaracteresReales = CantapellidoP + CantapellidoM + CantprimerNombre + CantsegundoNombre
-        debugger;
         if(isActiveForButton)
           localStorage.setItem('objSearch', JSON.stringify(data));
         else{
@@ -428,7 +438,6 @@ export class CustomerManagerComponent implements OnInit {
         if (NBUSCAR_POR == 2 && NTIPO_PERSONA == 1 && (CantidadCaracteresReales <= 3)) {
           this.getDataListResults(data)
         } else {
-          debugger
           this.clientList = await this.userConfigService.getResultsList(data);
           this.clientList = this.groupClients(this.clientList);
           this.spinner.hide();
@@ -448,7 +457,6 @@ export class CustomerManagerComponent implements OnInit {
       objRespuesta.code = 0;
       return objRespuesta
     }
-    debugger;
     if(this.idGrupo == 3 && this.idSubGrupo == -1 || this.idGrupo == 4 && this.idSubGrupo  == -1){
         objRespuesta.code = 1;
         objRespuesta.message = "Seleccione un sub grupo";
@@ -598,6 +606,7 @@ export class CustomerManagerComponent implements OnInit {
     listaCoincidencia.forEach((t) => {
       // console.log(t);
       t.ISVISIBLE = true;
+      t.NIDALERTA = this.Alerts.find(t=>t.idGrupo == this.idGrupo).idAlerta;
       t.ARRAY_IDTIPOLISTA = _items
         .filter((i) => i.SNOM_COMPLETO == t.SNOM_COMPLETO)
         .map((f) => f.NIDTIPOLISTA);
@@ -994,7 +1003,6 @@ export class CustomerManagerComponent implements OnInit {
   async goToDetail(item: any, TIPO_CLIENTE) {
     //item.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     try {
-
       let tipoIden = item.STIPOIDEN //+ ' - ' + item.SNUM_DOCUMENTO
       item.STIPOIDEN = tipoIden
       if (TIPO_CLIENTE == 'CRE') {
@@ -1203,7 +1211,6 @@ export class CustomerManagerComponent implements OnInit {
   }
 
   goToDetailAprobar(item) {
-    debugger;
     this.spinner.show()
     if (this.idGrupo == 2) {
       localStorage.setItem("NIDALERTA", '35')
@@ -1314,8 +1321,6 @@ Array.prototype.forEach.call( inputs, function( input )
     datosEliminar.SNOM_COMPLETO_EMPRESA = ''
     datosEliminar.SACTUALIZA = 'DEL'
     let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
-
-    debugger
     for( let i = 0; i < this.ResultadoExcel.length ; i++){
       let datosRegistroColaborador:any = {}
     datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
