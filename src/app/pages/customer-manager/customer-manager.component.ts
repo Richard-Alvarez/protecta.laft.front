@@ -1047,12 +1047,12 @@ export class CustomerManagerComponent implements OnInit {
         localStorage.setItem("INDRESIDENCIA", item.INDRESIDENCIA);
         localStorage.setItem("SESTADO_BUTTON_SAVE", '1');
         localStorage.setItem("SCLIENT", item.SCLIENT)
-        localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
         localStorage.setItem("NIDGRUPOSENAL", item.NIDGRUPOSENAL)
         // localStorage.setItem("IDGRUPO",)
         await localStorage.setItem("tipoClienteGC", "GC");
-
+        
       }
+      localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       //this.paramCliente
       // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
       // if (valuenSelectPestaniaClient == null) {
@@ -1240,6 +1240,7 @@ export class CustomerManagerComponent implements OnInit {
     localStorage.setItem('view-c2-idLista', item.NIDTIPOLISTA)
     let sEstadoRevisado = item.SESTADO_REVISADO// == '1' ? '1' : '0'
     localStorage.setItem('EnviarCheckbox', sEstadoRevisado)
+    
     localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
     this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
     // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")

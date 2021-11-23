@@ -115,25 +115,32 @@ export class C2DetailComponent implements OnInit {
   SESTADO_BUTTON_SAVE
   NewListCheck :any = []
   async ngOnInit() {  
-    this.nidregimen = localStorage.getItem("NREGIMEN");
-    this.nidalerta = localStorage.getItem("NIDALERTA");
-    var paramCliente : any =  localStorage.getItem("paramCliente");
-  
-    if (paramCliente != null && paramCliente != ""){
-        //this.parametroReturn = JSON.parse(paramCliente);
-        localStorage.setItem("paramCliente", "");
-        let pestana = localStorage.getItem("pestana");
-        let _paramCliente = JSON.parse(paramCliente);
-        _paramCliente.pestana = JSON.parse(pestana);
-        localStorage.setItem("paramClienteReturn", JSON.stringify(_paramCliente));
-    }
-    this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
-    //this.realNoFAKE()
-
+      
+      this.nidregimen = localStorage.getItem("NREGIMEN");
+      this.nidalerta = localStorage.getItem("NIDALERTA");
+      var paramCliente : any =  localStorage.getItem("paramCliente");
+      
+      if (paramCliente != null && paramCliente != ""){
+          //this.parametroReturn = JSON.parse(paramCliente);
+          localStorage.setItem("paramCliente", "");
+          let pestana = localStorage.getItem("pestana");
+          let _paramCliente = JSON.parse(paramCliente);
+          _paramCliente.pestana = JSON.parse(pestana);
+          localStorage.setItem("paramClienteReturn", JSON.stringify(_paramCliente));
+        }
+        this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
+        //this.realNoFAKE()
+        
     paramCliente =  localStorage.getItem("nSelectPestaniaClient");
+    let res = isNaN(parseInt(paramCliente));
+    if(res)
+        paramCliente = '0'
     if (!paramCliente || paramCliente != ''){
         localStorage.setItem("nSelectPestaniaClientReturn",paramCliente);
         let nSelectSubPestania = localStorage.getItem("nSelectSubPestania")
+        let res2 = isNaN(parseInt(nSelectSubPestania));
+        if(res2)
+            nSelectSubPestania = '0'
         localStorage.setItem("nSelectSubPestaniaReturn",nSelectSubPestania);
     }
 
@@ -1179,6 +1186,7 @@ export class C2DetailComponent implements OnInit {
 
     async back()
     {
+    
         //localStorage.setItem("paramClienteReturn",JSON.stringify(this.parametroReturn));
         window.history.back();
         this.core.loader.hide() 
