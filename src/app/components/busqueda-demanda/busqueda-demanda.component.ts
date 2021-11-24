@@ -87,7 +87,6 @@ export class BusquedaDemandaComponent implements OnInit {
   
   async validarNulos(){
     if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "" )|| (this.numeroDoc == null || this.numeroDoc == ""))) {
-      //debugger;
       if ((this.nombreCompleto == null || this.nombreCompleto == "") && (this.numeroDoc == null || this.numeroDoc == "")) {
         swal.fire({
           title: 'Busqueda a Demanda',
@@ -131,7 +130,6 @@ export class BusquedaDemandaComponent implements OnInit {
       }
     }
     else {
-      debugger;
       await this.BusquedaADemandaMixta();
     }
   }
@@ -168,6 +166,7 @@ export class BusquedaDemandaComponent implements OnInit {
         if (result) {
           /*inicio*/
           this.core.loader.show()
+          debugger;
           let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
           console.log("respuesta",respuetaService);
           if (respuetaService.length != 0) {

@@ -41,10 +41,10 @@
                             
                             <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;"  >
                                 <div  class="col-3 txtCabecera" style="text-align: left;">Nombre del Usuario</div>
-                                <div  class="col-3 txtCabecera"  style="text-align: left;">Perfil del Usuario</div>
+                                <div  class="col-2 txtCabecera"  style="text-align: left;">Perfil del Usuario</div>
                                 <div  class="col-3 txtCabecera"  style="text-align: left;">Cargo del Usuario</div>
                                 <div  class="col-3 txtCabecera"  style="text-align: left">Email del Usuario</div>
-                                <div  class="col-3 txtCabecera"  style="text-align: left">Estado del Usuario</div>
+                                <div  class="col-1 txtCabecera"  style="text-align: left">Estado del Usuario</div>
                                 
                                 
                                 
@@ -52,10 +52,10 @@
                             <div class="desplace ">
                                 <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of listToShow,let inc = index;" style="font-size: 14px">
                                     <div class="col-3 txtDetalle"  style="text-align: left;">{{item.nombreCompleto}}</div>
-                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.perfil}}</div>  
+                                    <div class="col-2 txtDetalle"  style="text-align: left;">{{item.perfil}}</div>  
                                     <div class="col-3 txtDetalle"  style="text-align: left;">{{item.cargo}}</div>
                                     <div class="col-3 txtDetalle"  style="text-align: left;">{{item.correo}}</div>
-                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.ESTADO}}</div>
+                                    <div class="col-1 txtDetalle"  style="text-align: left;">{{item.estUsuario}}</div>
                                                                     
                                   
 
