@@ -88,7 +88,6 @@ export class ReinforcedCustomersComponent implements OnInit {
     localStorage.setItem('boolClienteReforzado', 'true');
     localStorage.setItem('SESTADO_BUTTON_SAVE','1')
     localStorage.setItem('sEstadoTratamientoCliente','CRF');
-    // debugger
     //  let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
     //  if (valuenSelectPestaniaClient == null) {
     //    localStorage.setItem("nSelectPestaniaClient", '0')
@@ -143,7 +142,6 @@ export class ReinforcedCustomersComponent implements OnInit {
     localStorage.setItem("NIDGRUPOSENAL", "1")
     //this.core.storage.set('view-c2-arrListasAll', this.internationalList)
      this.spinner.hide()
-    //  debugger
     //  let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
     //  if (valuenSelectPestaniaClient == null) {
     //    localStorage.setItem("nSelectPestaniaClient", '0')
@@ -265,7 +263,6 @@ export class ReinforcedCustomersComponent implements OnInit {
         }
     });
     this.spinner.hide()
-    debugger;
     let mensaje = 'No se encontro registros'
     let respuestaPromiseAll: any = await Promise.all(arrCheckboxNew)
     let isComfirmedXdocXname = respuestaPromiseAll.filter(t => t.code == 0).length > 0
@@ -292,7 +289,6 @@ export class ReinforcedCustomersComponent implements OnInit {
               }
           })
     }
-    debugger;
   }
 
   async getConfigService(obj,obj2){
@@ -353,10 +349,10 @@ export class ReinforcedCustomersComponent implements OnInit {
   }
 
 
-    setFilterResultadosClient(){
-      this.arrResultados.forEach(t2=>{t2.ISVISIBLE = true });
-      this.arrResultados.filter(t=> !t.SNOM_COMPLETO.toUpperCase().includes(this.txtBuscador.toUpperCase())).forEach(t2=>{t2.ISVISIBLE = false });
-    }
+  setFilterResultadosClient(){
+    this.arrResultados.forEach(t2=>{t2.ISVISIBLE = true });
+    this.arrResultados.filter(t=> !t.SNOM_COMPLETO.toUpperCase().includes(this.txtBuscador.toUpperCase())).forEach(t2=>{t2.ISVISIBLE = false });
+  }
   async getListProcess(event){  // DESESTIMADO
     var key = event.which || event.keyCode;
    

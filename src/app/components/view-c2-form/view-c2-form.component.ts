@@ -62,7 +62,7 @@ export class ViewC2FormComponent implements OnInit {
         var URLactual = window.location + " ";
         let link = URLactual.split("/")
        this.linkactual = link[link.length-1].trim()
-       
+
         this.statusRev = false
         this.Savependings = false;
         this.core.loader.show();
@@ -105,13 +105,13 @@ export class ViewC2FormComponent implements OnInit {
         // }
 
 
-
+        await this.getClientsByList()
         //await this.getAttachedFiles('OC');
         await this.getSignalDetailList()
         await this.getInternationalList()
         await this.getComments()
         await this.verifyToComplete()
-        await this.getClientsByList()
+        //await this.getClientsByList()
        
         //await this.getListaInternacional();
         this.groupListTypes()
@@ -185,7 +185,13 @@ export class ViewC2FormComponent implements OnInit {
 
     getClientsByListArr(lista){
         
-        let resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
+        let resp
+        if( this.linkactual == "proveedor" || this.linkactual == "contraparte" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte"){
+             resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR && cli.NIDSUBGRUPOSEN == lista.NIDSUBGRUPOSEN )
+        }else{
+             resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
+        }
+        
         
         let arrDuplid = []
         let arrRespuesta = []
@@ -455,6 +461,7 @@ export class ViewC2FormComponent implements OnInit {
     getPersonByListType(listType: string, numDoc: string) {
         return this.listTypeMap.get(listType).find(it => it.SNUM_DOCUMENTO == numDoc)
     }
+
     linkactual
     async getInternationalList() {
         try {

@@ -416,35 +416,12 @@ export class ComplementaryCustomersComponent implements OnInit {
    getBuscarClient(){
       
       // this.arrResultadoFilter = this.arrResultados
-       return this.arrResultados
+       return this.arrResultados.filter(t=>t.ISVISIBLE );
   }
 
   setFilterResultadosClient(){
-    try { 
-      
-      let nombreCliente = ((this.txtBuscador+' ').trim()).toLowerCase()
-    
-    if(nombreCliente == ''){
-        this.arrResultadoFilter = this.arrResultados
-    }else{
-
-      this.arrResultadoFilter = []
-      this.arrResultados.forEach(itResult => {
-        
-        let nombreClienteCompleto = ((itResult.obj.SNOM_COMPLETO+' ').trim()).toLowerCase()
-
-        if(nombreClienteCompleto.includes(nombreCliente)){
-        
-          this.arrResultadoFilter.push(itResult)
-        }
-      });
-
-    }
-    } catch (error) {
-      console.error("error",error)
-    }
-    
-   
+    this.arrResultados.forEach(t2=>{t2.ISVISIBLE = true });
+    this.arrResultados.filter(t=> !t.SNOM_COMPLETO.toUpperCase().includes(this.txtBuscador.toUpperCase())).forEach(t2=>{t2.ISVISIBLE = false });
   }
 
   CambiarColor(item){
