@@ -7,6 +7,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import swal from 'sweetalert2';
 import { async } from '@angular/core/testing';
 import { textShadow } from 'html2canvas/dist/types/css/property-descriptors/text-shadow';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 /* import * as XLSX from 'xlsx'; */
 
 @Component({
@@ -83,27 +84,56 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     this.excelSubir = archivo;
   }*/
-  async BusquedaADemandaMixta(){
-
-    if (this.NBUSCAR_POR == 1 && this.nombreCompleto == null) {
-      swal.fire({
-        title: 'Busqueda a Demanda',
-        icon: 'warning',
-        text: 'Ingrese nombre para busqueda',
-        showCancelButton: false,
-        confirmButtonColor: '#FA7000',
-        confirmButtonText: 'Continuar',
-        showCloseButton: true,
-        customClass: { 
-          closeButton : 'OcultarBorde'
-                       },
-         
-      }).then((result) => {
-      })
-      return
+  
+  async validarNulos(){
+    if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "" )|| (this.numeroDoc == null || this.numeroDoc == ""))) {
+      if ((this.nombreCompleto == null || this.nombreCompleto == "") && (this.numeroDoc == null || this.numeroDoc == "")) {
+        swal.fire({
+          title: 'Busqueda a Demanda',
+          icon: 'warning',
+          text: 'Ingrese datos para busqueda',
+          showCancelButton: false,
+          confirmButtonColor: '#FA7000',
+          confirmButtonText: 'Continuar',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+          },
+        })
+      }
+      else if (this.nombreCompleto == null || this.nombreCompleto == "") {
+        swal.fire({
+          title: 'Busqueda a Demanda',
+          icon: 'warning',
+          text: 'Ingrese nombre para busqueda',
+          showCancelButton: false,
+          confirmButtonColor: '#FA7000',
+          confirmButtonText: 'Continuar',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+          },
+        })
+      } else if (this.numeroDoc == null || this.numeroDoc == ""){
+        swal.fire({
+          title: 'Busqueda a Demanda',
+          icon: 'warning',
+          text: 'Ingrese documento para busqueda',
+          showCancelButton: false,
+          confirmButtonColor: '#FA7000',
+          confirmButtonText: 'Continuar',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+          },
+        })
+      }
     }
     else {
-      
+      await this.BusquedaADemandaMixta();
+    }
+  }
+  async BusquedaADemandaMixta(){    
       let ObjLista : any = {};
       ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
       ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
@@ -136,6 +166,7 @@ export class BusquedaDemandaComponent implements OnInit {
         if (result) {
           /*inicio*/
           this.core.loader.show()
+          debugger;
           let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
           console.log("respuesta",respuetaService);
           if (respuetaService.length != 0) {
@@ -145,12 +176,12 @@ export class BusquedaDemandaComponent implements OnInit {
               t.STIPOCOINCIDENCIA = "NOMBRE"
             });
             respuetaService.itemsIDE.forEach(t => {
-              t.SPROVEEDOR = "IDECON",
-              t.STIPOCOINCIDENCIA = "NOMBRE"
+              t.SPROVEEDOR = "IDECON"
+              //t.STIPOCOINCIDENCIA = "NOMBRE"
             });
             respuetaService.itemsIDEDOC.forEach(t => {
-              t.SPROVEEDOR = "IDECON",
-              t.STIPOCOINCIDENCIA = "DOCUMENTO"
+              t.SPROVEEDOR = "IDECON"
+              //t.STIPOCOINCIDENCIA = "DOCUMENTO"
             });
           }
           this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
@@ -167,7 +198,7 @@ export class BusquedaDemandaComponent implements OnInit {
         }
       });
     
-    }
+    
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
@@ -393,7 +424,7 @@ export class BusquedaDemandaComponent implements OnInit {
           "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
           "Porcentaje de coincidencia" : t.SPORCEN_COINCIDENCIA, 
           "Tipo de Persona	" : t.STIPO_PERSONA,
-          "Cargo" : t.SCARGO == null ? '-' : t.SCARGO,
+          "Cargo" : (t.SCARGO == null || t.SCARGO == "")? '-' : t.SCARGO,
           "Lista" : t.SLISTA,
           "Proveedor" : t.SPROVEEDOR,
           "Coincidencia": t.STIPOCOINCIDENCIA
@@ -447,7 +478,7 @@ export class BusquedaDemandaComponent implements OnInit {
           "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
           "Porcentaje de coincidencia" : t.SPORCEN_COINCIDENCIA, 
           "Tipo de Persona	" : t.STIPO_PERSONA,
-          "Cargo" : t.SCARGO == null ? '-' : t.SCARGO,
+          "Cargo" : (t.SCARGO == null || t.SCARGO == "") ? '-' : t.SCARGO,
           "Lista" : t.SLISTA,
           "Proveedor" : t.SPROVEEDOR,
           "Coincidencia": t.STIPOCOINCIDENCIA

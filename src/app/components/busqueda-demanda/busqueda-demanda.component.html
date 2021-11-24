@@ -58,7 +58,7 @@
                                             [(ngModel)]="nombreCompleto" (keypress)="soloLetras($event)" (keydown)="Buscar($event)">
                                 </th>
                                 <th [hidden]="hideIndividual" *ngIf="mostrarBotonBuscarIndividual()"  scope="col">
-                                    <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="BusquedaADemandaMixta()" >Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta --> <!-- obtenerBusquedaCoincidenciaXNumeroDocDemanda -->
+                                    <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="validarNulos()" >Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta --> <!-- obtenerBusquedaCoincidenciaXNumeroDocDemanda -->
                                 </th>
                                 <th [hidden]="hideMasiva"  scope="col">
                                     <input type="file" accept=".xlsx" onclick="this.value=null;"
@@ -66,7 +66,7 @@
                                             style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()">
                                 </th>
                                 <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()"  scope="col">
-                                    <button class="btn btn-warning btnBuscarStyle" (click)="BusquedaADemandaMixta()">Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
+                                    <button class="btn btn-warning btnBuscarStyle" (click)="validarNulos()">Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
                                 </th>
                             </tr>
                         </thead>
@@ -112,7 +112,7 @@
                         </tbody>
                         <tbody [hidden]="noEncontroRespuesta">
                             <tr>
-                                <td class="text-center" colspan="9">No se encontró coincidencias</td>
+                                <td class="text-center" colspan="10">No se encontró coincidencias</td>
                             </tr>
                         </tbody>
                     </table>

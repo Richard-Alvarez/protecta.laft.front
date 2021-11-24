@@ -113,6 +113,7 @@ export class ProfileUsersComponent implements OnInit {
     this.totalItems = 0;
     let data: any = {};
     data.profileId = profileId
+    
     this.sbsReportService.getUsersByProfileList(data)
       .then((response) => {      
         let _data;
@@ -125,6 +126,7 @@ export class ProfileUsersComponent implements OnInit {
           this.currentPage * this.itemsPerPage
         );       
         this.core.loader.hide();
+        console.log("perfil",this.listToShow)
       });
   }
   exportListToExcel()

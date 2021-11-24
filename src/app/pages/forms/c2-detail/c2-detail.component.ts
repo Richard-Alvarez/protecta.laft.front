@@ -115,25 +115,32 @@ export class C2DetailComponent implements OnInit {
   SESTADO_BUTTON_SAVE
   NewListCheck :any = []
   async ngOnInit() {  
-    this.nidregimen = localStorage.getItem("NREGIMEN");
-    this.nidalerta = localStorage.getItem("NIDALERTA");
-    var paramCliente : any =  localStorage.getItem("paramCliente");
-  
-    if (paramCliente != null && paramCliente != ""){
-        //this.parametroReturn = JSON.parse(paramCliente);
-        localStorage.setItem("paramCliente", "");
-        let pestana = localStorage.getItem("pestana");
-        let _paramCliente = JSON.parse(paramCliente);
-        _paramCliente.pestana = JSON.parse(pestana);
-        localStorage.setItem("paramClienteReturn", JSON.stringify(_paramCliente));
-    }
-    this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
-    //this.realNoFAKE()
-
+      
+      this.nidregimen = localStorage.getItem("NREGIMEN");
+      this.nidalerta = localStorage.getItem("NIDALERTA");
+      var paramCliente : any =  localStorage.getItem("paramCliente");
+      
+      if (paramCliente != null && paramCliente != ""){
+          //this.parametroReturn = JSON.parse(paramCliente);
+          localStorage.setItem("paramCliente", "");
+          let pestana = localStorage.getItem("pestana");
+          let _paramCliente = JSON.parse(paramCliente);
+          _paramCliente.pestana = JSON.parse(pestana);
+          localStorage.setItem("paramClienteReturn", JSON.stringify(_paramCliente));
+        }
+        this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
+        //this.realNoFAKE()
+        
     paramCliente =  localStorage.getItem("nSelectPestaniaClient");
+    let res = isNaN(parseInt(paramCliente));
+    if(res)
+        paramCliente = '0'
     if (!paramCliente || paramCliente != ''){
         localStorage.setItem("nSelectPestaniaClientReturn",paramCliente);
         let nSelectSubPestania = localStorage.getItem("nSelectSubPestania")
+        let res2 = isNaN(parseInt(nSelectSubPestania));
+        if(res2)
+            nSelectSubPestania = '0'
         localStorage.setItem("nSelectSubPestaniaReturn",nSelectSubPestania);
     }
 
@@ -328,7 +335,6 @@ export class C2DetailComponent implements OnInit {
         
         this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
-            debugger;
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
             this.formData.NOMBRECOMPLETO = localStorage.getItem('NOMBRECOMPLETO')
@@ -374,7 +380,6 @@ export class C2DetailComponent implements OnInit {
            
           
         
-            debugger;
             this.formData.arrClientesGC.forEach(itemObjCliente => {
                if( this.IDGRUPOSENALGestor == 2){
                 let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 35,"STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
@@ -480,7 +485,6 @@ export class C2DetailComponent implements OnInit {
             return
         }
         if(this.tipoClienteGC == 'GC' || this.tipoClienteGC == "C2-BANDEJA"){
-            debugger;
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
            
@@ -504,7 +508,6 @@ export class C2DetailComponent implements OnInit {
             //this.formData.NIDREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.STIPO_AND_NUM_DOC = ''
 
-            /* debugger */
             this.formData.SESTADO_REVISADO = localStorage.getItem("EnviarCheckbox")
             this.SESTADO_REVISADO_ACEPT = this.formData.SESTADO_REVISADO
             //this.formData.SESTADO_REVISADO = this.SFALTA_ACEPTAR_COINC == 'SI' ? '1' : this.formData.SESTADO_REVISADO
@@ -535,7 +538,7 @@ export class C2DetailComponent implements OnInit {
                  dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
             }
             // let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
-            
+        
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
             //this.boolNameMach = this.arrCoincidenciasLista.;
             this.SCLIENT_DATA = localStorage.getItem('SCLIENT')//this.formData.SCLIENT
@@ -588,7 +591,6 @@ export class C2DetailComponent implements OnInit {
                 this.formData.NTIPO_DOCUMENTO = this.oClienteReforzado.NTIPO_DOCUMENTO//localStorage.getItem('NTIPO_DOCUMENTO')
                 this.formData.NIDREGIMEN = 1
                 this.formData.SCLIENT = localStorage.getItem('SCLIENT')
-                /* debugger */
                 this.formData.STIPO_AND_NUM_DOC = ''
                 //this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
                 if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
@@ -653,7 +655,6 @@ export class C2DetailComponent implements OnInit {
     SCLIENT_DATA
     async getHistorialRevisiones() {
         let valorAlerta
-        
         this.IDGRUPOSENAL
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             if(this.IDGRUPOSENAL == 3){
@@ -739,7 +740,6 @@ export class C2DetailComponent implements OnInit {
         this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
         try {
             
-             debugger;
             let arrayCoincidList:any = []
             let respListasWithCoincid:any = []  //= await this.userConfigService.GetListaResultadosCoincid(dataService)
             if(this.tipoClienteGC == 'C2-BANDEJA'){
@@ -777,7 +777,6 @@ export class C2DetailComponent implements OnInit {
                         this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
                     })
                 }
-                /* debugger; */
                 this.unchekAllList = this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = this.internationalList.concat(this.sacList.concat(this.pepList.concat(this.familiesPepList.concat(this.espList))))
                 
@@ -946,7 +945,7 @@ export class C2DetailComponent implements OnInit {
                  
                 return arrayCoincidList
             }else if(this.tipoClienteGC == 'GC' && (this.formData.NIDALERTA == 35 || this.formData.NIDALERTA ==  33)){
-
+            
                 this.uncheckInternationalLists = []
                 this.uncheckSacList = []
                 this.uncheckPepLists = []
@@ -1022,7 +1021,6 @@ export class C2DetailComponent implements OnInit {
                 
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
               
-                /* debugger; */
                 this.unchekAllList[dataService.NIDREGIMEN-1] = [arrInternationalService,arrListPepService,arrFamiliesService,arrSacListService,arrListEspService]
                 //this.unchekAllList = arrayDefault
                 
@@ -1188,6 +1186,7 @@ export class C2DetailComponent implements OnInit {
 
     async back()
     {
+    
         //localStorage.setItem("paramClienteReturn",JSON.stringify(this.parametroReturn));
         window.history.back();
         this.core.loader.hide() 
@@ -1414,7 +1413,6 @@ export class C2DetailComponent implements OnInit {
         return resp;
     }
     
-    /* debugger; */
     unchekAllList:any = []// = [[[false,false],[false,false],[false,false],[false,false],[false,false]],[[false,false],[false,false],[false,false],[false,false],[false,false]]] 
     async save() {
        
@@ -1587,7 +1585,6 @@ export class C2DetailComponent implements OnInit {
         }*/
         else{
             
-            /* debugger; */
             if(variabledeloscheck.length == 2){
                 if(this.unchekAllList[0] == true && this.unchekAllList[1] == true ){
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando 2 coincidencia</p>" 
@@ -1645,7 +1642,6 @@ export class C2DetailComponent implements OnInit {
                
         }).then(async (result) => {
             if (result.value) {
-                debugger;
                 this.core.loader.show();
                 let respUsuario = this.core.storage.get('usuario')
            
@@ -1678,7 +1674,6 @@ export class C2DetailComponent implements OnInit {
                             
                             //if(itemArreglos.NIDREGIMEN == regimen){
                             
-                                /* debugger; */
                                 const itemUncheck = (this.unchekAllList[itemArreglos.NIDREGIMEN-1][(itemArreglos.NIDTIPOLISTA-1)])[itemArreglos.NCONTADORLISTA];
                               
                                 if(itemArreglos.SESTADO_REVISADO == '2'){
@@ -1883,7 +1878,7 @@ export class C2DetailComponent implements OnInit {
 
     getDisableByCheck(SESTADO_REVISADO){
         //return true
-        //debugger;//this.formData.SESTADO_REVISADO == '1' ||
+        //this.formData.SESTADO_REVISADO == '1' ||
         if( SESTADO_REVISADO == '1'){//(estadoTrat != 'CRE' || estadoTrat != 'CRF' || estadoTrat != 'CCO')){
             return true
         }
@@ -1956,7 +1951,6 @@ export class C2DetailComponent implements OnInit {
     
     ValidacionCargo(Lista,estado){
         
-        /* debugger; */
                 if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
             return false
         }
@@ -2198,7 +2192,6 @@ export class C2DetailComponent implements OnInit {
         let newValorAceptador = []
         let valorAceptados = []
         
-        /* debugger; */
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             
          if(newArreglosListasPEP.length == 1 ){
@@ -2343,7 +2336,6 @@ export class C2DetailComponent implements OnInit {
   onCategoriaPressed(categoriaSelected: any, checked: boolean,indice,idlista,idRegimen){
       
   
-      /* debugger; */
     //if (checked) { //Si el elemento fue seleccionado
       //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
       if(this.formData.NIDALERTA == 2){

@@ -53,7 +53,21 @@ export class CustomerManagerComponent implements OnInit {
   clientMap: Map<string, any> = new Map<string, any>();
   peopleList: any = [];
 
-
+  Alerts :any =[
+    {
+      idGrupo : 1,
+      idAlerta: 2
+    },{
+      idGrupo : 2,
+      idAlerta: 35
+    },{
+      idGrupo : 3,
+      idAlerta: 33
+    },{
+      idGrupo : 4,
+      idAlerta: 2
+    }
+  ]
 
 
 
@@ -81,7 +95,7 @@ export class CustomerManagerComponent implements OnInit {
   parentCRE: PreReinforcedCustomersComponent
   parentCRF: ReinforcedCustomersComponent
   parentCCO: ComplementaryCustomersComponent
-
+  
   @Input() ValorRegresar: number
 
 
@@ -598,6 +612,7 @@ export class CustomerManagerComponent implements OnInit {
     listaCoincidencia.forEach((t) => {
       // console.log(t);
       t.ISVISIBLE = true;
+      t.NIDALERTA = this.Alerts.find(t=>t.idGrupo == this.idGrupo).idAlerta;
       t.ARRAY_IDTIPOLISTA = _items
         .filter((i) => i.SNOM_COMPLETO == t.SNOM_COMPLETO)
         .map((f) => f.NIDTIPOLISTA);
@@ -994,7 +1009,6 @@ export class CustomerManagerComponent implements OnInit {
   async goToDetail(item: any, TIPO_CLIENTE) {
     //item.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     try {
-
       let tipoIden = item.STIPOIDEN //+ ' - ' + item.SNUM_DOCUMENTO
       item.STIPOIDEN = tipoIden
       if (TIPO_CLIENTE == 'CRE') {
@@ -1039,12 +1053,12 @@ export class CustomerManagerComponent implements OnInit {
         localStorage.setItem("INDRESIDENCIA", item.INDRESIDENCIA);
         localStorage.setItem("SESTADO_BUTTON_SAVE", '1');
         localStorage.setItem("SCLIENT", item.SCLIENT)
-        localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
         localStorage.setItem("NIDGRUPOSENAL", item.NIDGRUPOSENAL)
         // localStorage.setItem("IDGRUPO",)
         await localStorage.setItem("tipoClienteGC", "GC");
-
+        
       }
+      localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       //this.paramCliente
       // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
       // if (valuenSelectPestaniaClient == null) {
@@ -1233,6 +1247,7 @@ export class CustomerManagerComponent implements OnInit {
     localStorage.setItem('view-c2-idLista', item.NIDTIPOLISTA)
     let sEstadoRevisado = item.SESTADO_REVISADO// == '1' ? '1' : '0'
     localStorage.setItem('EnviarCheckbox', sEstadoRevisado)
+    
     localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
     this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
     // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
@@ -1336,8 +1351,6 @@ Array.prototype.forEach.call( inputs, function( input )
     datosEliminar.SNOM_COMPLETO_EMPRESA = ''
     datosEliminar.SACTUALIZA = 'DEL'
     let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
-
-    debugger
     for( let i = 0; i < this.ResultadoExcel.length ; i++){
       let datosRegistroColaborador:any = {}
     datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
