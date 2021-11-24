@@ -528,7 +528,7 @@ export class ResponsableGlobalComponent {
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
     let valor
-    if(this.linkactual == "colaborador"){
+    if(this.linkactual == "colaborador" ||  this.linkactual == "historico-colaborador"){
       valor = 2
     }else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte"){
       valor = 4
@@ -1592,7 +1592,7 @@ export class ResponsableGlobalComponent {
     if (this.STIPO_USUARIO === "RE") {
       
       let RegimenTemp:any = []
-      if(this.linkactual == "colaborador"){
+      if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador"){
          RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }]
       }
       else if(this.linkactual == "proveedor" || this.linkactual == "contraparte" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte"){
