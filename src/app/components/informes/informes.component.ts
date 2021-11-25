@@ -3,6 +3,7 @@ import { UserconfigService } from "src/app/services/userconfig.service";
 import { SbsreportService } from 'src/app/services/sbsreport.service';
 import { CoreService } from '../../services/core.service';
 import swal from 'sweetalert2';
+import { Parse } from 'src/app/utils/parse';
 
 @Component({
   selector: 'app-informes',
@@ -12,6 +13,7 @@ import swal from 'sweetalert2';
 export class InformesComponent implements OnInit {
   IDListAnnoxGrupo:number = 0
   idGrupo:number = 0
+  idGrupoRegimen:number = 0
   ListGrupo:any = []
   NewListPeriodos:any = []
   ListPeriodos:any = []
@@ -37,6 +39,7 @@ export class InformesComponent implements OnInit {
 
   changeGrupo(){
     console.log("id grupo",this.idGrupo)
+    this.idGrupoRegimen = 0
   }
 
   async getGrupoList() {
@@ -109,8 +112,146 @@ async obtenerPeriodos(){
     console.log("Sin repetidos es:", sinRepetidos);
 }
 
-DescargarReporte(){
 
+
+ListaAlertaRG
+ListaAlerta
+PeriodoFecha
+RegimenPendiente = 0
+ListaAlertaC1
+ListaAlertaC3
+ListaAlertaS1
+ListaAlertaS2
+ListaAlertaS3
+ListaColaborador
+async DescargarReporte(ValidadorIdGrupo){
+  let bol = this.Validador("Reporte-Grupal")
+  if(bol){
+    return
+  }
+  this.core.loader.show()
+  this.ListaAlerta = await this.DataAlertas(ValidadorIdGrupo,this.IDListPeriodoxGrupo)
+  if(ValidadorIdGrupo == 1 && this.idGrupoRegimen.toString()  == '1'){
+    await this.DataReporteC2()
+    this.ListaAlertaRG = this.ListaAlerta.filter(it => (it.SNOMBRE_ALERTA).substr(0,2) == 'RG' )
+    
+
+    this.CargoRG = this.ListaAlertaRG[0].SCARGO
+   
+
+    console.log("ListaAlertaRG",this.ListaAlertaRG)
+
+    let respuestaRG = this.ListaAlertaRG.filter((it,inc) => it.NIDRESPUESTA == 1)
+    if(respuestaRG.length == 0){
+      this.RespuetasAlertaRG = 'No'
+    }else{
+      this.RespuetasAlertaRG = 'Sí'
+    }
+    let dia =  this.IDListPeriodoxGrupo.toString().substr(6,2)
+    let mes =  this.IDListPeriodoxGrupo.toString().substr(4,2)
+    let anno = this.IDListPeriodoxGrupo.toString().substr(0,4) 
+    this.PeriodoFecha = dia + '/' + mes + '/' + anno
+    
+  }
+  else if (ValidadorIdGrupo == 1 && this.idGrupoRegimen.toString()  == '2'){
+      
+    await this.DataReporteC2()
+    this.ListaAlertaC1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C1' )
+    this.RespuestaAlertaC1 = this.ListaAlertaC1[0].NIDRESPUESTA
+    this.ListaAlertaC3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'C3' )
+    let respuestaC3 = this.ListaAlertaC3.filter((it,inc) => it.NIDRESPUESTA == 1)
+    this.ListaAlertaS1  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S1' )
+    this.ListaAlertaS2  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S2' )
+    this.RespuestaAlertaS2 = this.ListaAlertaS2[0].NIDRESPUESTA
+    this.ListaAlertaS3  = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'S3' )
+
+   
+   
+    if(respuestaC3.length == 0){
+      this.RespuestaGlobalC3 = 'no'
+    }else{
+      this.RespuestaGlobalC3 = 'sí'
+    }
+    let dia =  this.IDListPeriodoxGrupo.toString().substr(6,2)
+    let mes =  this.IDListPeriodoxGrupo.toString().substr(4,2)
+    let anno = this.IDListPeriodoxGrupo.toString().substr(0,4) 
+    this.PeriodoFecha = dia + '/' + mes + '/' + anno
+
+  }else if (ValidadorIdGrupo == 2){
+
+    this.ListaColaborador = this.ListaAlerta
+    let respuestaColaborador = this.ListaAlerta.filter((it,inc) => it.NIDRESPUESTA == 1)
+    if(respuestaColaborador.length == 0){
+      this.RespuestaGlobalColaborador = 'no'
+    }else{
+      this.RespuestaGlobalColaborador = 'sí'
+  }
+  }else if (ValidadorIdGrupo == 4 || ValidadorIdGrupo == 3){ //CONTRAPARTE
+     
+    this.ListaContraparte = this.ListaAlerta
+    let Concatenar =  this.ListaContraparte.filter(it => it.SNOMBRE_ALERTA == "P2" || it.SNOMBRE_ALERTA == "P3" || it.SNOMBRE_ALERTA == "P1")
+    
+    let sinRepetidos = Concatenar.filter((valorActual, indiceActual, arreglo) => {
+      return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.SNOMBRE_ALERTA) === JSON.stringify(valorActual.SNOMBRE_ALERTA)) === indiceActual
+      });
+
+      let cargosConcatenados = ''
+      sinRepetidos.forEach(t => {
+        cargosConcatenados = cargosConcatenados.concat(t.SCARGO,', ') 
+      });
+
+      this.CargosConcatenadosContraparte = cargosConcatenados
+
+      let respuestaP5 = this.ListaAlerta.filter((it,inc) => it.NIDRESPUESTA == 1 && it.SNOMBRE_ALERTA == "P5" )
+      if(respuestaP5.length == 0){
+        this.RespuestaGlobalContraparteP5 = 'No'
+      }else{
+        this.RespuestaGlobalContraparteP5 = 'Sí'
+      }
+
+      let sinRepetidosCargos = this.ListaContraparte.filter((valorActual, indiceActual, arreglo) => {
+        return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.SCARGO) === JSON.stringify(valorActual.SCARGO)) === indiceActual
+        });
+
+      
+        
+        sinRepetidosCargos.forEach(element => {
+            let respuesta = ''
+            let listarespuestas = this.ListaContraparte.filter(it=> it.SCARGO == element.SCARGO)
+            
+            let validarRespuesta = listarespuestas.filter(it=> it.NIDRESPUESTA == 1)
+           
+            if(validarRespuesta.length == 0){
+              respuesta = 'no'
+            }else{
+             respuesta = 'sí'
+            }
+            let data:any ={}
+            data.SCARGO = element.SCARGO
+            data.RespuestaGlobal = respuesta
+            this.RespuestaGlobalContraparte.push(data)
+
+        });
+
+        this.core.loader.hide()
+  }
+
+  this.RegimenPendiente = this.idGrupoRegimen
+
+    if(this.idGrupo.toString() == '1' && this.idGrupoRegimen.toString()  == '1'){
+      this.Export2Doc("ReportesGrupal","Reportes Regimen General") 
+    }else if (this.idGrupo.toString()  == '1' && this.idGrupoRegimen.toString()   == '2'){
+      this.Export2Doc("ReportesGrupal","Reportes Regimen Simplificado") 
+    }else if(this.idGrupo.toString()  == '2'){
+      this.Export2Doc("ReportesGrupal","Reportes de Colaboradores") 
+    }else if(this.idGrupo.toString()  == '3'){
+      this.Export2Doc("ReportesGrupal","Reportes de Proveedores") 
+    }
+    else if(this.idGrupo.toString()  == '4'){
+      this.Export2Doc("ReportesGrupal","Reportes de Contraparte") 
+    }
+    this.core.loader.hide()
+    
 }
 ListaAlertaClientes:any = []
 ListaAlertaColaborador:any = []
@@ -139,6 +280,10 @@ RespuestaGlobalContraparteP5:string = ''
 
 
 async DescargarReporteGeneral(){
+  let bol = this.Validador("Reporte-General")
+  if(bol){
+    return
+  }
   this.ListaAlertaClientes = await this.DataAlertas(1,this.IDListPeriodoGlobal)
   this.ListaAlertaColaborador = await this.DataAlertas(2,this.IDListPeriodoGlobal)
   this.ListaAlertaProveedor = await this.DataAlertas(3,this.IDListPeriodoGlobal)
@@ -147,7 +292,7 @@ async DescargarReporteGeneral(){
   this.RespuestaAlertaC1 = this.ListaAlertaClientesC1[0].NIDRESPUESTA
   this.ListaAlertaClientesC3  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C3' )
   let respuestaC3 = this.ListaAlertaClientesC3.filter((it,inc) => it.NIDRESPUESTA == 1)
-  await this.DataReporteC2()
+  await this.DataReporteC2Global()
   if(respuestaC3.length == 0){
     this.RespuestaGlobalC3 = 'no'
   }else{
@@ -300,7 +445,7 @@ async DataAlertas(idgrupo,perido){
   listaInternacionalRentaParticularWC:any = []
   listaInternacionalRentaParticularIDECON:any = []
 
-async DataReporteC2(){
+async DataReporteC2Global(){
 
 
     let dataRG:any = {}
@@ -309,9 +454,9 @@ async DataReporteC2(){
     dataRG.NIDREGIMEN = 1
 
     let dataRS:any = {}
-    dataRG.NPERIODO_PROCESO = this.IDListPeriodoGlobal
-    dataRG.NIDALERTA = 2
-    dataRG.NIDREGIMEN = 2
+    dataRS.NPERIODO_PROCESO = this.IDListPeriodoGlobal
+    dataRS.NIDALERTA = 2
+    dataRS.NIDREGIMEN = 2
 
       this.core.loader.show()
       this.arrayDataResultadoGeneral =  await this.userConfigService.GetListaResultado(dataRG)
@@ -328,14 +473,145 @@ async DataReporteC2(){
       this.listaPepRenta = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
       this.listaInternacionalRentaParticularWC = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4)
       this.listaInternacionalRentaParticularIDECON = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1)
-
+    console.log("listaPepRenta",this.listaPepRenta)
     
     
   
  }
 
+ arrayDataSenal:any= []
+ arrayDataResultado:any = []
+ Cantidad:number = 0 
+ listaSoat:any = []
+ listaAhorro:any = []
+ listaPep:any = []
+ listaEspecial:any = []
+ listaEspecialMasivos:any = []
+ listaEspecialRentaParticular:any = []
+ listaInternacionalRentaParticular:any = []
+ listaInternacionalMaisvos:any = []
+ listaInternacionalSoat:any = []
+ listaInternacionalRenta:any = []
+ listaEspecialSimpli:any = []
+ listaEspecialGene:any = []
 
+ async DataReporteC2(){
+  this.arrayDataSenal= []
+  this.arrayDataResultado= []
+  this.Periodo = ''
+  this.Cantidad = 0
+  this.listaSoat = []
+  this.listaMasivos = []
+  this.listaRenta = []
+  this.listaAhorro = []
+  this.listaPep = []
+  this.listaEspecial = []
+  this.listaPepMasivos = []
+  this.listaPepSoat = []
+  this.listaPepRenta = []
+  this.listaEspecialMasivos = []
+  this.listaEspecialSoat = []
+  this.listaEspecialRenta = []
+  this.listaEspecialRentaParticular = []
+  this.listaPepRentaParticular = []
+  this.listaInternacionalRentaParticular = []
+  this.listaInternacionalMaisvos = []
+  this.listaInternacionalSoat = []
+  this.listaInternacionalRenta = []
+  this.listaEspecialSimpli = []
+  this.listaEspecialGene = []
 
+    let data:any = {}
+    data.NPERIODO_PROCESO = this.IDListPeriodoxGrupo 
+    data.NIDALERTA = 2
+    data.NIDREGIMEN = this.idGrupoRegimen
+
+      this.core.loader.show()
+      this.arrayDataResultado =  await this.userConfigService.GetListaResultado(data)
+      this.core.loader.hide()
+   
+    
+    this.listaSoat = this.arrayDataResultado.filter(it => it.RAMO == 66)
+    // this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO != 66 || it.RAMO != 76)
+    //this.listaMasivos = this.arrayDataResultado.filter(it => it.RAMO == 99)
+    this.listaMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66)
+    this.listaRenta = this.arrayDataResultado.filter(it => it.RAMO == 76 && it.NIDTIPOLISTA == 5)
+    this.listaAhorro =  this.arrayDataResultado.filter(it => it.RAMO == 71)
+    this.listaPepMasivos =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 99)
+    this.listaPepSoat =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
+    this.listaPepRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
+    this.listaEspecialMasivos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 99)
+    this.listaEspecialSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
+    this.listaEspecialRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+    this.listaEspecialRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
+    this.listaPepRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 75)
+    this.listaInternacionalRentaParticular = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75)
+    this.listaInternacionalMaisvos = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
+    this.listaInternacionalSoat = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1  && it.RAMO !== 75  && it.RAMO !== 76 )
+    this.listaInternacionalRenta = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1   && it.RAMO == 76 )
+    this.listaPep =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
+    this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 )
+    this.listaEspecialSimpli =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == 2)
+    this.listaEspecialGene =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5   && it.NIDREGIMEN == 1)
+    this.Cantidad = this.arrayDataResultado.length
+  
+ }
+
+ 
+ SwalGlobal(mensaje){
+  swal.fire({
+    title: "Gestor de Clientes",
+    icon: "warning",
+    text: mensaje,
+    showCancelButton: false,
+    confirmButtonColor: "#FA7000",
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar",
+    showCloseButton: true,
+    customClass: {
+      closeButton: 'OcultarBorde'
+    },
+  }).then(async (msg) => {
+    return
+  });
+  return
+}
+
+Validador(grupo){
+  let bol = false
+  if(grupo == 'Reporte-Grupal'){
+    if(this.idGrupo == 0 ){
+      let mensaje = 'Debe seleccionar un grupo'
+      this.SwalGlobal(mensaje)
+      return  bol = true
+    }else if (this.idGrupo == 1 && this.idGrupoRegimen == 0 ){
+      let mensaje = 'Debe seleccionar un régimen'
+      this.SwalGlobal(mensaje)
+      return  bol = true
+    }else if(this.IDListAnnoxGrupo == 0){
+      let mensaje = 'Debe seleccionar un año'
+      this.SwalGlobal(mensaje)
+      return  bol = true
+    }else if(this.IDListPeriodoxGrupo == 0){
+      let mensaje = 'Debe seleccionar un periodo'
+      this.SwalGlobal(mensaje)
+      return  bol = true
+    }
+  }
+  if(grupo == 'Reporte-General'){
+    if(this.IDListAnnoGlobal == 0 ){
+      let mensaje = 'Debe seleccionar un año'
+      this.SwalGlobal(mensaje)
+      return  bol = true
+    }else if (this.IDListPeriodoGlobal == 0 ){
+      let mensaje = 'Debe seleccionar un periodo'
+      this.SwalGlobal(mensaje)
+      return  bol = true
+    }
+    
+  }
+  
+}
 
 
 

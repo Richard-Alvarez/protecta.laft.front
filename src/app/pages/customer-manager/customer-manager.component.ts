@@ -192,13 +192,16 @@ export class CustomerManagerComponent implements OnInit {
 
   async valorGrupo() {
     this.idSubGrupo = 0;
+  
     this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
     this.arrSetClassSelected[0] = 'active'
     localStorage.setItem("nSelectPestaniaClient", '0')
     if (this.idGrupo == 3 || this.idGrupo == 4) {
+     
       let data = {
       NIDGRUPOSENAL : this.idGrupo
       }
+     
       let obj = {
         NIDSUBGRUPOSEN: -1,
         SDESSUBGRUPO_SENAL: "--Seleccione--"
@@ -430,6 +433,7 @@ export class CustomerManagerComponent implements OnInit {
         let CantprimerNombre = ((paramCliente.SPRIMER_NOMBRE) + '').length
         let CantsegundoNombre = ((paramCliente.SSEGUNDO_NOMBRE) + '').length
         let CantidadCaracteresReales = CantapellidoP + CantapellidoM + CantprimerNombre + CantsegundoNombre
+     
         if(isActiveForButton)
           localStorage.setItem('objSearch', JSON.stringify(data));
         else{
@@ -438,6 +442,7 @@ export class CustomerManagerComponent implements OnInit {
         if (NBUSCAR_POR == 2 && NTIPO_PERSONA == 1 && (CantidadCaracteresReales <= 3)) {
           this.getDataListResults(data)
         } else {
+          
           this.clientList = await this.userConfigService.getResultsList(data);
           this.clientList = this.groupClients(this.clientList);
           this.spinner.hide();
@@ -457,6 +462,7 @@ export class CustomerManagerComponent implements OnInit {
       objRespuesta.code = 0;
       return objRespuesta
     }
+   
     if(this.idGrupo == 3 && this.idSubGrupo == -1 || this.idGrupo == 4 && this.idSubGrupo  == -1){
         objRespuesta.code = 1;
         objRespuesta.message = "Seleccione un sub grupo";
@@ -1211,6 +1217,7 @@ export class CustomerManagerComponent implements OnInit {
   }
 
   goToDetailAprobar(item) {
+  
     this.spinner.show()
     if (this.idGrupo == 2) {
       localStorage.setItem("NIDALERTA", '35')
@@ -1304,11 +1311,33 @@ Array.prototype.forEach.call( inputs, function( input )
 
 
     let datosExcel:any = {}
-    datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + 'ListaColaborador.xlsx' ;
-    datosExcel.VALIDADOR = 'GESTOR-CLIENTE'
+    datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform ;
+    if(this.idGrupo == 2){
+      datosExcel.VALIDADOR = 'GESTOR-CLIENTE-COLABORADOR'
+    }else if(this.idGrupo == 3){
+      if(this.idSubGrupo == 0){
+        datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-PROVEEDOR'
+      }
+      if(this.idSubGrupo == 1){
+        datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-CRITICOS'
+      }
+      if(this.idSubGrupo == 2){
+        datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-REPRESENTANTES'
+      }
+      
+    }
+    
      this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
-
+    
+    if(this.ResultadoExcel.length != 0){
+      if(this.ResultadoExcel[0].CODIGO == 2){
+        this.SwalGlobal(this.ResultadoExcel[0].MENSAJE)
+        return
+      }
+    }
+   return
+  
     let datosEliminar:any = {}
     datosEliminar.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     datosEliminar.NTIPO_DOCUMENTO = 0
@@ -1325,10 +1354,10 @@ Array.prototype.forEach.call( inputs, function( input )
     for( let i = 0; i < this.ResultadoExcel.length ; i++){
       let datosRegistroColaborador:any = {}
     datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-    datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].ID_DOCUMENTO)
-    datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].NUMERO_DOCUMENTO
-    datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].NOMBRES_APELLIDOS
-    datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].FECHA_NACIMIENTO
+    datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
+    datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
+    datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].SNOM_COMPLETO
+    datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].DFECHA_NACIMIENTO
     datosRegistroColaborador.NIDUSUARIO = this.NIDUSUARIO_LOGUEADO
     datosRegistroColaborador.NIDGRUPOSENAL = 2
     datosRegistroColaborador.NIDSUBGRUPOSEN = 0

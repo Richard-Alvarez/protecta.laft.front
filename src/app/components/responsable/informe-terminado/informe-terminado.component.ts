@@ -534,7 +534,7 @@ Export2Doc(element, filename = ''){
  
 
   async DescargarReportesXGrupo(array){
-    
+    debugger
     console.log("Lista del array",array)
     let  validadador
     if(array.length === 0){
@@ -590,7 +590,7 @@ Export2Doc(element, filename = ''){
     let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO == 1 && it.NIDREGIMEN == validadador )//&& it.SNOMBRE_ALERTA !== 'C2')
     console.log("Validador",ValidadorGlobal.length)
     console.log("Validador 11",ValidadorGlobal)
-       if(ValidadorGlobal.length > 0 || validadador == -1 ){
+       if(ValidadorGlobal.length > 0 || validadador == -1 ){ //ValidadorGlobal se identifica para saber si todavia no se respondieron las señales
         swal.fire({
           title: 'Bandeja de Cumplimiento',
           icon: 'error',
