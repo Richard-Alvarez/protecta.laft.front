@@ -5,7 +5,7 @@ import { CoreService } from '../../services/core.service';
 import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AddCompanyDialogComponent } from '../add-company-dialog/add-company-dialog.component';
 import Swal from 'sweetalert2';
-
+import { ExcelService } from 'src/app/services/excel.service';
 @Component({
   selector: 'app-c1-detail-company',
   templateUrl: './c1-detail-company.component.html',
@@ -31,7 +31,8 @@ export class C1DetailCompanyComponent implements OnInit {
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
     private dataC1Serv: DataC1Service,
-    private modalService: NgbModal,) { }
+    private modalService: NgbModal,
+    private excelService: ExcelService,) { }
 
   ngOnInit() {
     this.arrDetailC1 = [
@@ -298,6 +299,66 @@ async getProductsCompany() {
   this.productsCompanyList = await this.userConfigService.getProductsCompany()
 }
 
+DescargarArhivo(estado,TipoUsuario){
+   
+  let respuesta = this.getArrayPreguntasDetalle()
+  let data:any = []
+  console.log("respuesta",respuesta)
   
+  if(estado == 'PENDIENTE' && TipoUsuario == 'RE'){
+    respuesta.forEach((t,inc) => {
+      let _data = {
+        "Ruc": t[0].SRUC,
+        "Razón Social": t[0].SNOMBRE_CLIENTE,
+        "Ramo": t[0].SPRODUCTO,
+      }
+      data.push(_data);
+    });
+  }else if(estado == 'COMPLETADO' && (TipoUsuario == 'RE' || TipoUsuario == 'OC')){
+    respuesta.forEach((t,inc) => {
+      let _data = {
+        "Ruc": t[0].SRUC,
+        "Razón Social": t[0].SNOMBRE_CLIENTE,
+        "Ramo": t[0].SPRODUCTO,
+        "Respuesta Pregunta 1": t[0].SRESPUESTA,
+        "Comentario Pregunta 1": t[0].SCOMENTARIO,
+        "Respuesta Pregunta 2": t[1].SRESPUESTA,
+        "Comentario Pregunta 2": t[1].SCOMENTARIO,
+     }
+    
+      data.push(_data);
+    });
+  }
+  
+  if(data.length == 0){
+    let mensaje = "No hay registro de empresas"
+    this.SwalGlobal(mensaje)
+  }
+  console.log("data",data)
+  this.excelService.exportAsExcelFile(data, "Lista de empresas");     
+     
+      
+      
+      
+    
+  
+}
+SwalGlobal(mensaje){
+  Swal.fire({
+    title: "Bandeja del Responsable",
+    icon: "warning",
+    text: mensaje,
+    showCancelButton: false,
+    confirmButtonColor: "#FA7000",
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar",
+    showCloseButton: true,
+    customClass: {
+      closeButton: 'OcultarBorde'
+    },
+  }).then(async (msg) => {
+    return
+  });
+}
 
 }
