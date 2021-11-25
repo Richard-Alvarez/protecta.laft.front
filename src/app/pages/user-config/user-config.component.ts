@@ -438,8 +438,30 @@ export class UserConfigComponent implements OnInit {
 
     }
   }
+elementoModificado : string = ""
+  validarCambioUsuario(data){
+    if(this.DataUsuario.pass != data.pass){
+      this.elementoModificado = "Contraseña";
+    }
+    if(this.DataUsuario.userFullName != data.userFullName){
+      this.elementoModificado = /*this.elementoModificado + */"Nombre del usuario";
+    }
+    if(this.DataUsuario.userRolId != data.userRolId){
+      this.elementoModificado = /*this.elementoModificado + */"Perfil";
+    }
+    if(this.DataUsuario.userCargo != data.cargoId){
+      this.elementoModificado = /*this.elementoModificado + */"Cargo";
+    }
+    if(this.DataUsuario.Email != data.userEmail){
+      this.elementoModificado = /*this.elementoModificado + */"Correo";
+    }
+    if(this.DataUsuario.userState != data.userFullName){
+      this.elementoModificado = /*this.elementoModificado + */"Estado";
+    }
+    return this.elementoModificado;
+  }
   
-  updateData() {
+  async updateData() {
    
     var re = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
     if (this.passw.length == 0) {
@@ -601,7 +623,8 @@ export class UserConfigComponent implements OnInit {
     data.systemId = this.newUsSystem === '' ? '' : this.newUsSystem;
     data.userEmail = this.newUsEmail === '' ? '' : this.newUsEmail;
     data.cargoId = this.newUsCargo === '' ? 0 : this.newUsCargo;
-  
+    
+    data.modifico = await this.validarCambioUsuario(data);
 
     if(this.DataUsuario.pass == this.newUsPass){
       //se pone el 2 para no enviar el correo
