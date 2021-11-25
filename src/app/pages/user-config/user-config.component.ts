@@ -440,6 +440,7 @@ export class UserConfigComponent implements OnInit {
   }
 elementoModificado : string = ""
   validarCambioUsuario(data){
+    debugger;
     if(this.DataUsuario.pass != data.pass){
       this.elementoModificado = "Contraseña";
     }
@@ -449,13 +450,13 @@ elementoModificado : string = ""
     if(this.DataUsuario.userRolId != data.userRolId){
       this.elementoModificado = /*this.elementoModificado + */"Perfil";
     }
-    if(this.DataUsuario.userCargo != data.cargoId){
+    if(this.DataUsuario.cargoId != data.cargoId){
       this.elementoModificado = /*this.elementoModificado + */"Cargo";
     }
-    if(this.DataUsuario.Email != data.userEmail){
+    if(this.DataUsuario.userEmail != data.userEmail){
       this.elementoModificado = /*this.elementoModificado + */"Correo";
     }
-    if(this.DataUsuario.userState != data.userFullName){
+    if(this.DataUsuario.userState != data.state){
       this.elementoModificado = /*this.elementoModificado + */"Estado";
     }
     return this.elementoModificado;
@@ -623,8 +624,6 @@ elementoModificado : string = ""
     data.systemId = this.newUsSystem === '' ? '' : this.newUsSystem;
     data.userEmail = this.newUsEmail === '' ? '' : this.newUsEmail;
     data.cargoId = this.newUsCargo === '' ? 0 : this.newUsCargo;
-    
-    data.modifico = await this.validarCambioUsuario(data);
 
     if(this.DataUsuario.pass == this.newUsPass){
       //se pone el 2 para no enviar el correo
@@ -636,6 +635,8 @@ elementoModificado : string = ""
     }
     //data.valor = 1
     data.state = this.state
+
+    data.modifico = await this.validarCambioUsuario(data);
 
     swal.fire({
       title: 'Actualización de usuario',
