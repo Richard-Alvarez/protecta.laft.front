@@ -16,6 +16,7 @@ import { analyzeFileForInjectables, CompileShallowModuleMetadata } from "@angula
 import { NgxSpinnerService } from "ngx-spinner";
 import { ExcelService } from '../../services/excel.service';
 import swal from 'sweetalert2';
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 
 //import { Validaciones } from 'src/app/utils/validacionesRegex'
@@ -219,6 +220,7 @@ export class CustomerManagerComponent implements OnInit {
     // if (this.idGrupo != 1) {
     //   //this.ListaDeCoincidencias(this.idGrupo)
     // }
+    console.log(this.idSubGrupo)
   }
 
 
@@ -1300,6 +1302,11 @@ Array.prototype.forEach.call( inputs, function( input )
       this.SwalGlobal(mensaje)
       return
     }
+    if(this.idSubGrupo == -1){
+      let mensaje = 'Tiene que seleccionar un subgrupo'
+      this.SwalGlobal(mensaje)
+      return
+    }
     let dataGrupo:any  = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
     
 
@@ -1314,16 +1321,16 @@ Array.prototype.forEach.call( inputs, function( input )
     datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform ;
     if(this.idGrupo == 2){
       datosExcel.VALIDADOR = 'GESTOR-CLIENTE-COLABORADOR'
-    }else if(this.idGrupo == 3){
-      if(this.idSubGrupo == 0){
-        datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-PROVEEDOR'
-      }
-      if(this.idSubGrupo == 1){
-        datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-CRITICOS'
-      }
-      if(this.idSubGrupo == 2){
-        datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-REPRESENTANTES'
-      }
+    }else if(this.idGrupo == 3 || this.idGrupo == 4){
+      // if(this.idSubGrupo == 0){
+       datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-CONTRAPARTE' //'GESTOR-CLIENTE-PROVEEDOR-PROVEEDOR'
+      // }
+      // if(this.idSubGrupo == 1){
+      //   datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-CRITICOS'
+      // }
+      // if(this.idSubGrupo == 2){
+      //   datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-REPRESENTANTES'
+      // }
       
     }
     
@@ -1332,11 +1339,13 @@ Array.prototype.forEach.call( inputs, function( input )
     
     if(this.ResultadoExcel.length != 0){
       if(this.ResultadoExcel[0].CODIGO == 2){
+        this.NombreArchivo = ''
         this.SwalGlobal(this.ResultadoExcel[0].MENSAJE)
+       
         return
       }
     }
-   return
+   
   
     let datosEliminar:any = {}
     datosEliminar.NPERIODO_PROCESO = this.NPERIODO_PROCESO
@@ -1345,27 +1354,29 @@ Array.prototype.forEach.call( inputs, function( input )
     datosEliminar.SNOM_COMPLETO = ''
     datosEliminar.DFECHA_NACIMIENTO = ''
     datosEliminar.NIDUSUARIO = 0
-    datosEliminar.NIDGRUPOSENAL = 2
-    datosEliminar.NIDSUBGRUPOSEN = 0
+    datosEliminar.NIDGRUPOSENAL = this.idGrupo
+    datosEliminar.NIDSUBGRUPOSEN = this.idSubGrupo
     datosEliminar.SNUM_DOCUMENTO_EMPRESA =''
     datosEliminar.SNOM_COMPLETO_EMPRESA = ''
     datosEliminar.SACTUALIZA = 'DEL'
     let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
+   
+
     for( let i = 0; i < this.ResultadoExcel.length ; i++){
       let datosRegistroColaborador:any = {}
-    datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-    datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
-    datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
-    datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].SNOM_COMPLETO
-    datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].DFECHA_NACIMIENTO
-    datosRegistroColaborador.NIDUSUARIO = this.NIDUSUARIO_LOGUEADO
-    datosRegistroColaborador.NIDGRUPOSENAL = 2
-    datosRegistroColaborador.NIDSUBGRUPOSEN = 0
-    datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = ''
-    datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = ''
-    datosRegistroColaborador.SACTUALIZA = 'INS'
+      datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+      datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
+      datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
+      datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].SNOM_COMPLETO
+      datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].DFECHA_NACIMIENTO
+      datosRegistroColaborador.NIDUSUARIO = this.NIDUSUARIO_LOGUEADO
+      datosRegistroColaborador.NIDGRUPOSENAL = this.idGrupo
+      datosRegistroColaborador.NIDSUBGRUPOSEN = this.idSubGrupo
+      datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = ''
+      datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = ''
+      datosRegistroColaborador.SACTUALIZA = 'INS'
 
-    let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
+      let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
     }
 
     

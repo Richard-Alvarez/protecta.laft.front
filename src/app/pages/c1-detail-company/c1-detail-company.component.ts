@@ -332,7 +332,7 @@ DescargarArhivo(estado,TipoUsuario){
   
   if(data.length == 0){
     let mensaje = "No hay registro de empresas"
-    this.SwalGlobal(mensaje)
+    this.SwalGlobal(mensaje,TipoUsuario)
   }
   console.log("data",data)
   this.excelService.exportAsExcelFile(data, "Lista de empresas");     
@@ -343,7 +343,13 @@ DescargarArhivo(estado,TipoUsuario){
     
   
 }
-SwalGlobal(mensaje){
+SwalGlobal(mensaje,TipoUsuario){
+  let titulo = ''
+  if(TipoUsuario == 'RE'){
+    titulo = "Responsable"
+  }else{
+    titulo = "Oficial de Cumplimiento"
+  }
   Swal.fire({
     title: "Bandeja del Responsable",
     icon: "warning",
