@@ -5,6 +5,8 @@ import { CoreService } from 'src/app/services/core.service';
 import swal from 'sweetalert2';
 import { MaestroService } from 'src/app/services/maestro.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
+import { ModalValidarCorreoComponent } from '../../pages/modal-validar-correo/modal-validar-correo.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login-update',
@@ -26,7 +28,7 @@ export class LoginUpdateComponent implements OnInit {
   //public spassword: string;
   public STIPO_USUARIO
 
-  constructor(public login: LoginService, public core: CoreService, public maestroService: MaestroService, public userConfigService: UserconfigService) { }
+  constructor(public login: LoginService, public core: CoreService, public maestroService: MaestroService, public userConfigService: UserconfigService,private modalService: NgbModal,) { }
 
   ngOnInit() {
     this.user = {susername :'', spassword:''}
@@ -268,6 +270,28 @@ export class LoginUpdateComponent implements OnInit {
 }
 
 
+Modal(){
+
   
+  
+  const modalRef = this.modalService.open(ModalValidarCorreoComponent, { size: 'lg', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false, centered : true });
+  
+  
+  modalRef.componentInstance.reference = modalRef;
+ 
+  modalRef.result.then(async (resp) => {
+   // this.core.loader.show();  
+    
+   
+    //this.core.loader.hide();
+   
+  }, (reason) => {
+    //this.core.loader.hide();
+  });
+}
+
+
+
+
 
 }
