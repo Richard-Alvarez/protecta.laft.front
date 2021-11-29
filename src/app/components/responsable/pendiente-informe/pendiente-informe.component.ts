@@ -231,13 +231,13 @@ export class PendienteInformeComponent implements OnInit {
         //let workModuleList = await this.parent.getWorkModuleAll(this.regimen.id)
         let validacionCantidadREvisados =  this.getObtenerLista()
         let validacionInforme = this.getValidarInforme()
-       
         if(ALERTA.NIDALERTA == 2){
           let dataSend = {
             NIDALERTA: ALERTA.NIDALERTA,
             NIDREGIMEN : ALERTA.NREGIMEN, 
             NPERIODO_PROCESO :this.NPERIODO_PROCESO,
             NIDGRUPOSENAL: 1,
+            NIDSUBGRUPOSEN: 0,
             NIDPROVEEDOR:  ALERTA.NREGIMEN == 1 ? 4 : 1 
           }
 
@@ -398,6 +398,7 @@ export class PendienteInformeComponent implements OnInit {
             NIDREGIMEN : 0, 
             NPERIODO_PROCESO :this.NPERIODO_PROCESO, 
             NIDGRUPOSENAL: objAlerta.NIDALERTA == 35 ? 2 : 3,
+            NIDSUBGRUPOSEN: 0,
             NIDPROVEEDOR: 1
           }
         }else{
@@ -406,6 +407,7 @@ export class PendienteInformeComponent implements OnInit {
             NIDREGIMEN : this.regimen.id, 
             NPERIODO_PROCESO : this.NPERIODO_PROCESO,
             NIDGRUPOSENAL: 1,
+            NIDSUBGRUPOSEN: 0,
             NIDPROVEEDOR:  this.regimen.id == 1 ? 4 : 1 
            
            }
@@ -507,13 +509,13 @@ export class PendienteInformeComponent implements OnInit {
     // let dataSend = {NIDALERTA: 2,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.NPERIODO_PROCESO ,NIDGRUPOSENAL: 1}
     // let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
       let respListaInternacional:any = []
-      
     if(this.linkactual == "proveedor"){
       let dataSend = {
         NIDALERTA: 33,
         NIDREGIMEN : 0, 
         NPERIODO_PROCESO :this.NPERIODO_PROCESO, 
         NIDGRUPOSENAL: 3 ,
+        NIDSUBGRUPOSEN: 0,
         NIDPROVEEDOR: 14
       }
        respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
@@ -525,6 +527,7 @@ export class PendienteInformeComponent implements OnInit {
       NIDREGIMEN :0, 
       NPERIODO_PROCESO :this.NPERIODO_PROCESO, 
       NIDGRUPOSENAL: 2  ,
+      NIDSUBGRUPOSEN: 0,
       NIDPROVEEDOR: 1
     }
        respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
@@ -536,9 +539,10 @@ export class PendienteInformeComponent implements OnInit {
       NIDREGIMEN : this.regimen.id, 
       NPERIODO_PROCESO :this.NPERIODO_PROCESO ,
       NIDGRUPOSENAL: 1,
+      NIDSUBGRUPOSEN: 0,
       NIDPROVEEDOR: this.regimen.id == 1 ? 4 : 1 
     }
-     respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
+    respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
     
   }
 
@@ -789,7 +793,6 @@ validadorC2:string = ''
 
 async DescargarReporte(item){
   this.ElimanrDiv()
-  console.log("el item",item)
   this.arrayDataSenal= []
   this.Nombre = ''
   this.Perfil = ''
@@ -904,7 +907,6 @@ async DescargarReporte(item){
     this.ValidarNombreTemplate = this.Alerta
   }
 
-  console.log("this.RegimenPendiente",this.RegimenPendiente)
 
   //this.RegimenPendiente =  item.NREGIMEN
   this.core.loader.show
@@ -1011,8 +1013,6 @@ ElimanrDiv(){
 
     //this.ListaAlertaRG = this.ListaAlerta.filter(it => it.SNOMBRE_ALERTA == 'RG1' )
     
-    console.log("La nueva lista",this.ListaAlerta)
-    console.log("La nueva lista ListaAlertaRG",this.ListaAlertaRG)
 
     this.Export2Doc('Reporte','Reporte de Clientes')
 

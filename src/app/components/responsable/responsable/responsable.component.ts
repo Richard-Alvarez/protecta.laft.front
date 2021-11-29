@@ -13,6 +13,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 import {  DataResponsableService } from '../../../services/data-responsable.service';
 import {  HistoricoClientesComponent } from '../historico-clientes/historico-clientes.component';
 import * as $ from 'jquery';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-responsable',
@@ -38,6 +39,7 @@ export class ResponsableComponent implements OnInit {
   regimeList: any[] = []
   NIDREGIMEN: number
 
+  listAcordiones :any =[]
   arrResponsablesCompleGral: any = []
   arrResponsablesPendienteGral: any = []
   arrResponsablesDevueltoGral: any = []
@@ -186,7 +188,6 @@ export class ResponsableComponent implements OnInit {
         "comentario": "Un comentario uno"
       }
     ]
-    debugger
    
       this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
     
@@ -1044,7 +1045,6 @@ export class ResponsableComponent implements OnInit {
   }
 
   async downloadUniversalFile(ruta, nameFile) {
-    debugger
     try {
       this.core.loader.show()
       let data = { ruta: ruta }
@@ -2391,7 +2391,6 @@ export class ResponsableComponent implements OnInit {
 
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-      debugger;
       this.core.loader.show()
       
   
@@ -2444,7 +2443,6 @@ export class ResponsableComponent implements OnInit {
           uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
           uploadPararms.listFiles = listFilesAdjuntos
           uploadPararms.listFileName = listFileNameAdjuntos
-          debugger
           promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
           promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
         } catch (error) {
@@ -2832,7 +2830,6 @@ export class ResponsableComponent implements OnInit {
         this.arrObjFilesAdjByCabecera.push(dataInformFile)
       }
 
-      console.log("arrObjFilesAdjByCabecera",this.arrObjFilesAdjByCabecera)
       return true
       //await this.sendFilesInformes(NIDALERTA, respPromiseFileInfo, listFileNameInform)
     } catch (error) {
@@ -2842,7 +2839,6 @@ export class ResponsableComponent implements OnInit {
 
 
   async setDataFile(event) {
- debugger
     let files = event.target.files;
 
     let arrFiles = Array.from(files)
@@ -3217,7 +3213,46 @@ export class ResponsableComponent implements OnInit {
   redictBodyM(){
     document.getElementById('consulta0').focus({ preventScroll : false})
   }
- 
+  // addAccordion(index,href){
+  //   debugger;
+  //   if(index == -1){
+  //     this.listAcordiones.push(href);
+  //     localStorage.setItem("ListAcordiones",JSON.stringify(this.listAcordiones));
+  //   }else{
+  //     if(index > 0)
+  //       if(isNullOrUndefined(this.listAcordiones[0]))
+  //       this.listAcordiones[0] = 'regGral';
+  //     this.listAcordiones[index] = href;
+  //   }
+  // }
+  // setAcordiones(){
+  //   this.listAcordiones = JSON.parse(localStorage.getItem("ListAcordionesReturn"))
+  //   if(isNullOrUndefined(this.listAcordiones))
+  //     this.listAcordiones = []
+  //   let _index = this.listAcordiones.length;
+  //   if(this.listAcordiones.length > 0){
+  //       this.listAcordiones.forEach((element,index) => {
+  //         console.log(element + ' - ' + index)
+  //         if(index == 0){
+  //           let idElement = document.getElementById(element); 
+  //           if(idElement != null)
+  //             idElement.classList.add("active")      
+  //           } else {
+  //             let idElement = document.getElementById(element);
+
+  //             if(idElement != null)
+  //               idElement.classList.add("show")      
+              
+  //               // if((_index-1) == index){
+  //               //   idElement.focus({ preventScroll : false})
+  //               // }
+  //           }
+  //         });
+  //       localStorage.setItem("ListAcordionesReturn",'[]')
+  //       this.listAcordiones.pop();
+  //     }
+        
+  // }
   
 }
 

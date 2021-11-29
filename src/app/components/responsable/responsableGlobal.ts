@@ -42,7 +42,7 @@ export class ResponsableGlobalComponent {
   userGroupListSimpli: any[] = []
   regimeList: any[] = []
   NIDREGIMEN: number
-
+  listAcordiones :any =[]
   arrResponsablesCompleGral: any = []
   arrResponsablesPendienteGral: any = []
   arrResponsablesDevueltoGral: any = []
@@ -2766,7 +2766,6 @@ export class ResponsableGlobalComponent {
         })
       }
       if (!statusDuplic) {
-        debugger;
         dataInformFile.SRUTA = STIPO_CARGA + '/' + NIDCABECERA_USUARIO + '/' + STIPO_USUARIO
         dataInformFile.NIDCABECERA_USUARIO = NIDCABECERA_USUARIO
         dataInformFile.NIDALERTA = NIDALERTA

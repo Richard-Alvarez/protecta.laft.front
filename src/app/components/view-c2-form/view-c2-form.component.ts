@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router'
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { ConfigService } from 'src/app/services/config.service';
@@ -7,13 +7,15 @@ import swal from 'sweetalert2';
 import { ExcelService } from 'src/app/services/excel.service';
 import * as moment from 'moment';
 import { dayOfYearFromWeeks } from 'ngx-bootstrap/chronos/units/week-calendar-utils';
+import { PendienteInformeComponent } from '../responsable/pendiente-informe/pendiente-informe.component'
+import { InformeTerminadoComponent } from '../responsable/informe-terminado/informe-terminado.component'
 
 @Component({
   selector: 'app-view-c2-form',
   templateUrl: './view-c2-form.component.html',
   styleUrls: ['./view-c2-form.component.css']
 })
-export class ViewC2FormComponent implements OnInit {
+export class ViewC2FormComponent implements OnInit  {
 
   alertData: any = {}
 
@@ -40,7 +42,32 @@ export class ViewC2FormComponent implements OnInit {
     public message: any = '';
     public reviewed: any[] = []
     NIDGRUPOSENAL:any
-
+    listSubGrupos:any =[]
+    config :any =[
+        {
+          NIDGRUPOSENAL : 1,
+          NIDALERTA: 2,
+          linkactual: ['clientes','historico-clientes'],
+          NIDREGIMEN : 1
+        },{
+          NIDGRUPOSENAL : 2,
+          NIDALERTA: 35,
+          linkactual: ['colaborador','historico-colaborador'],
+          NIDREGIMEN : 0
+        },{
+          NIDGRUPOSENAL : 3,
+          NIDALERTA: 33,
+          linkactual: ['proveedor','historico-contraparte'],
+          NIDREGIMEN : 0
+        },{
+          NIDGRUPOSENAL : 4,
+          NIDALERTA: 39,
+          linkactual: ['contraparte','historico-proveedor'],
+          NIDREGIMEN : 0
+        }
+      ]
+    @Input() parentPendienteInforme : PendienteInformeComponent
+    @Input() parentInformeTerminado : InformeTerminadoComponent
     @Input() vistaOrigen
     @Input() objAlertaC2
     @Input() regimen
@@ -61,8 +88,7 @@ export class ViewC2FormComponent implements OnInit {
     async ngOnInit() {
         var URLactual = window.location + " ";
         let link = URLactual.split("/")
-       this.linkactual = link[link.length-1].trim()
-
+        this.linkactual = link[link.length-1].trim()
         this.statusRev = false
         this.Savependings = false;
         this.core.loader.show();
@@ -77,7 +103,6 @@ export class ViewC2FormComponent implements OnInit {
         }
         //parseInt(localStorage.getItem("NPERIODO_PROCESO"))
         this.alertData.SPERIODO_FECHA = this.objAlertaC2.NPERIODO_PROCESO//localStorage.getItem("fechaPeriodo")
-        debugger
         if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
             this.alertData.NIDREGIMEN = 0
           }
@@ -89,66 +114,24 @@ export class ViewC2FormComponent implements OnInit {
           }else{
             this.alertData.NIDREGIMEN = this.regimen.id
           }
-        //parseInt(localStorage.getItem("NIDREGIMEN"))
-
-        this.alertData.SESTADO = this.objAlertaC2.SESTADO//localStorage.getItem("SESTADO")
-        this.alertData.DESREGIMEN = 'Régimen '+this.regimen.descripcion//localStorage.getItem("DESREGIMEN")
+        this.alertData.SESTADO = this.objAlertaC2.SESTADO
+        this.alertData.DESREGIMEN = 'Régimen '+this.regimen.descripcion
         this.STIPOUSUARIO = this.core.storage.get('usuario')['tipoUsuario'];
-
-        // let respObjFocusPosition : any = JSON.parse(localStorage.getItem("objFocusPosition"))
-
-        // if(respObjFocusPosition){
-       
-        //     let cadenaContentUsers = 'consulta'+'Alert'+respObjFocusPosition.NIDALERTA+'Lista'+respObjFocusPosition.NIDTIPOLISTA+'Regimen'+respObjFocusPosition.regimen.id
-        
-        //     this.redictM(cadenaContentUsers)
-        // }
-
-
         await this.getClientsByList()
         //await this.getAttachedFiles('OC');
         await this.getSignalDetailList()
         await this.getInternationalList()
+        await this.obtListas()
         await this.getComments()
         await this.verifyToComplete()
         //await this.getClientsByList()
        
         //await this.getListaInternacional();
-        this.groupListTypes()
-        
-       
-        // debugsger;
-        let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPosition"))
-
-        if(respObjFocusPosition && respObjFocusPosition.NIDALERTA){
-            //if (respObjFocusPosition.estado == 'PENDIENTE-INFORME' || respObjFocusPosition.estado == 'INFORME-TERMINADO'){
-                
-                if(respObjFocusPosition.regimen.id == 2){
-                    let tabGnral = document.getElementById("Gral"); 
-                    let tabSimpl = document.getElementById("Simpli"); 
-                    if(tabGnral != null)
-                    tabGnral.classList.remove("active")
-                    if(tabSimpl != null)
-                    tabSimpl.classList.add("active");
-                    let divGnral = document.getElementById("regGral"); 
-                    let divSimpl = document.getElementById("regSimpli"); 
-                    if(divGnral != null)
-                    divGnral.classList.remove("active")
-                    if(divSimpl != null)
-                    divSimpl.classList.add("active");
-                }
-               // let cadenaContentUsers = 'consulta'+'Alert'+respObjFocusPosition.NIDALERTA+'Lista'+respObjFocusPosition.NIDTIPOLISTA+'Regimen'+respObjFocusPosition.regimen.id
-                let cadenaContentUsers = respObjFocusPosition.elementoPadre
-                let cadenaContenelement = respObjFocusPosition.elemento
-              
-                this.redictM(cadenaContentUsers,cadenaContenelement)
-            //this.redictBodyM(cadenaContentUsers)
-          //}
-        }
-        this.core.loader.hide();
-       
+        await this.groupListTypes()
+        //await this.setAcordiones();
+        //this.showAfterPosition()
+          this.core.loader.hide();
     }
-
     async getClientsByList(){
         //console.warn("el this.alertData: ",this.alertData)
         var URLactual = window.location + " ";
@@ -184,10 +167,11 @@ export class ViewC2FormComponent implements OnInit {
     }
 
     getClientsByListArr(lista){
-        
         let resp
         if( this.linkactual == "proveedor" || this.linkactual == "contraparte" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte"){
-             resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR && cli.NIDSUBGRUPOSEN == lista.NIDSUBGRUPOSEN )
+             resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA &&
+                 cli.NIDPROVEEDOR == lista.NIDPROVEEDOR && 
+                 cli.NIDSUBGRUPOSEN == lista.NIDSUBGRUPOSEN )
         }else{
              resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
         }
@@ -427,7 +411,7 @@ export class ViewC2FormComponent implements OnInit {
         }
     }
 
-    groupListTypes() {
+    async groupListTypes() {
         this.signalDetailList.forEach(it => {
             if (!this.listTypeMap.has(it.SDESTIPOLISTA)) {
                 this.listTypeMap.set(it.SDESTIPOLISTA, [])
@@ -463,105 +447,69 @@ export class ViewC2FormComponent implements OnInit {
     }
 
     linkactual
+    async obtListas(){
+        let dataSend = this.config.find(t=> t.linkactual.includes(this.linkactual));
+        this.listSubGrupos = []
+        if([2,3,4].includes(dataSend.NIDGRUPOSENAL))
+            this.listSubGrupos = this.internationalList
+            .map(t=> t.SDESSUBGRUPO_SENAL)
+            .filter((value,index,array)=>{
+                return array.indexOf(value) == index;
+            })
+    }
+    getSubGrupos(subGrupoName :any){
+        return  this.internationalList.filter(t=>t.SDESSUBGRUPO_SENAL == subGrupoName)
+    }
     async getInternationalList() {
         try {
-            var URLactual = window.location + " ";
-            let link = URLactual.split("/")
-            this.linkactual = link[link.length-1].trim()
-            
-            if(this.linkactual == "proveedor"){
-                let dataSend = {
-                    NIDALERTA: 33,
-                    NIDREGIMEN : 0, 
-                    NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, 
-                    NIDGRUPOSENAL: 3,
-                    NIDPROVEEDOR: 1
-                }
-                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-                this.internationalList = respListaInternacional
-                console.log('prueba1',dataSend);
-            }else if(this.linkactual == "colaborador"){
-                let dataSend = {
-                    NIDALERTA: 35,
-                    NIDREGIMEN :0, 
-                    NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, 
-                    NIDGRUPOSENAL: 2,
-                    NIDPROVEEDOR: 1
-                }
-                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-                this.internationalList = respListaInternacional
-                console.log('prueba1',dataSend);
-            }else if(this.linkactual == "contraparte"){
-                let dataSend = {
-                    NIDALERTA: 39,
-                    NIDREGIMEN :0, 
-                    NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, 
-                    NIDGRUPOSENAL: 2,
-                    NIDPROVEEDOR: 1
-                }
-                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-                this.internationalList = respListaInternacional
-                console.log('prueba1',dataSend);
-            }else{
-                let dataSend = {
-                    NIDALERTA: this.alertData.NIDALERTA,
-                    NIDREGIMEN : this.regimen.id, 
-                    NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, 
-                    NIDGRUPOSENAL: 1,
-                    NIDPROVEEDOR:  this.regimen.id == 1 ? 4 : 1 
-                }
-                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-                this.internationalList = respListaInternacional
-                console.log('prueba1',dataSend);
-            }
-
-
-console.log('prueba',this.internationalList);
-            
-          
-           
+            let dataSend = this.config.find(t=> t.linkactual.includes(this.linkactual));
+            dataSend.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
+            dataSend.NIDREGIMEN = dataSend.NIDGRUPOSENAL == 1 ? this.regimen.id : dataSend.NIDREGIMEN
+            this.internationalList = await this.obtListaInternacional(dataSend);
         } catch (error) {
-          
         }
-// console.log('asds',this.internationalList);
     }
 
-    async getValidar() {
-        try {
-            var URLactual = window.location + " ";
-            let link = URLactual.split("/")
-            this.linkactual = link[link.length-1].trim()
+    async obtListaInternacional(dataSend){
+        return await this.userConfigService.getListaInternacional(dataSend)
+    }
 
-            if(this.linkactual == "proveedor"){
-                let dataSend = {NIDALERTA: 33,NIDREGIMEN : 0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 3  }
-                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
+    // async getValidar() {
+    //     try {
+    //         var URLactual = window.location + " ";
+    //         let link = URLactual.split("/")
+    //         this.linkactual = link[link.length-1].trim()
+    //         debugger;
+    //         if(this.linkactual == "proveedor"){
+    //             let dataSend = {NIDALERTA: 33,NIDREGIMEN : 0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 3,NIDSUBGRUPOSEN: 0  }
+    //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
                 
-                this.internationalList = respListaInternacional
+    //             this.internationalList = respListaInternacional
                
-            }else if(this.linkactual == "colaborador"){
-                let dataSend = {NIDALERTA: 35,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2  }
-                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-                this.internationalList = respListaInternacional
+    //         }else if(this.linkactual == "colaborador"){
+    //             let dataSend = {NIDALERTA: 35,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2,NIDSUBGRUPOSEN: 0  }
+    //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
+    //             this.internationalList = respListaInternacional
              
-            }else if(this.linkactual == "contraparte"){
-                let dataSend = {NIDALERTA: 39,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2  }
-                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-                this.internationalList = respListaInternacional
+    //         }else if(this.linkactual == "contraparte"){
+    //             let dataSend = {NIDALERTA: 39,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2 ,NIDSUBGRUPOSEN: 0 }
+    //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
+    //             this.internationalList = respListaInternacional
                
-            }
-            else{
-                let dataSend = {NIDALERTA: this.alertData.NIDALERTA,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 1  }
-                let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-                this.internationalList = respListaInternacional
+    //         }
+    //         else{
+    //             let dataSend = {NIDALERTA: this.alertData.NIDALERTA,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 1,NIDSUBGRUPOSEN: 0  }
+    //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
+    //             this.internationalList = respListaInternacional
         
-            }
+    //         }
             
             
-        } catch (error) {
-            //console.error("el error : ", error);
-        }
+    //     } catch (error) {
+    //         //console.error("el error : ", error);
+    //     }
 
-    }
+    // }
 
     async getExcelListInter(idtipoLista, nombreRpt) {
         this.core.loader.show();
@@ -592,8 +540,10 @@ console.log('prueba',this.internationalList);
         this.core.loader.hide();
     }
 
-    async goToDetail(item: any,lista:any,idElement:any) {
-        this.core.loader.show()
+    async goToDetail(item: any,lista:any,idElement:any,idElementSubGroup:any) {
+        //this.core.loader.show()
+        // this.addAccordion(-1,idElement)
+        debugger;
         let objFocusPosition:any = {}
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
         if(this.linkactual == "proveedor")
@@ -602,11 +552,9 @@ console.log('prueba',this.internationalList);
         objFocusPosition.estado = this.state
         objFocusPosition.elementoPadre = this.valueIdCollap
         objFocusPosition.elemento = idElement
+        objFocusPosition.elementSubGroup = idElementSubGroup
         objFocusPosition.NIDTIPOLISTA = lista.NIDTIPOLISTA
         localStorage.setItem("objFocusPosition", JSON.stringify(objFocusPosition))
-
-        
-      
         let periodoSend = parseInt(localStorage.getItem("periodo"))
         
         localStorage.setItem("NIDALERTA", this.alertData.NIDALERTA)
@@ -861,21 +809,38 @@ console.log('prueba',this.internationalList);
         link.download = `${this.alertData.SNOMBRE_ALERTA}.docx`
         link.click()
     }
-
-    redictM(cadenaFocus,element){
-        let elemCadenaFOCUS = document.getElementById(cadenaFocus)
-        elemCadenaFOCUS.classList.add("show")
-        //elemCadenaFOCUS.focus({ preventScroll : false})
-        let elemt = document.getElementById(element)
-        elemt.classList.add("show")
-        elemt.focus({ preventScroll : false})
-        localStorage.setItem("objFocusPosition","{}");
-    }
-    redictBodyM(cadenaFocus){
-        document.getElementById(cadenaFocus)
-        //.focus({ preventScroll : false})
-        //document.getElementById('consulta0').focus({ preventScroll : false})
-    }
+    // showAfterPosition(){
+    //     debugger;
+    //     let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPosition"))
+    //     if(respObjFocusPosition && respObjFocusPosition.NIDALERTA){
+    //             if(respObjFocusPosition.regimen.id == 2){
+    //                 let tabGnral = document.getElementById("Gral"); 
+    //                 let tabSimpl = document.getElementById("Simpli"); 
+    //                 if(tabGnral != null)
+    //                 tabGnral.classList.remove("active")
+    //                 if(tabSimpl != null)
+    //                 tabSimpl.classList.add("active");
+    //                 let divGnral = document.getElementById("regGral"); 
+    //                 let divSimpl = document.getElementById("regSimpli"); 
+    //                 if(divGnral != null)
+    //                 divGnral.classList.remove("active")
+    //                 if(divSimpl != null)
+    //                 divSimpl.classList.add("active");
+    //             }
+    //             let cadenaContentUsers = respObjFocusPosition.elementoPadre
+    //             let cadenaContenelement = respObjFocusPosition.elemento
+    //             this.redictM(cadenaContentUsers,cadenaContenelement)
+    //     }
+    // }
+    // redictM(cadenaFocus,element){
+    //     let elemCadenaFOCUS = document.getElementById(cadenaFocus)
+    //     elemCadenaFOCUS.classList.add("show")
+    //     //elemCadenaFOCUS.focus({ preventScroll : false})
+    //     let elemt = document.getElementById(element)
+    //     elemt.classList.add("show")
+    //     elemt.focus({ preventScroll : false})
+    //     localStorage.setItem("objFocusPosition","{}");
+    // }
 
     async ValidarGrupo(){
         var URLactual = window.location + " ";
@@ -896,5 +861,18 @@ console.log('prueba',this.internationalList);
 
 
       
-   
+    //   addAccordion(index,href){
+    //     if(this.parentInformeTerminado)
+    //         this.parentInformeTerminado.parent.addAccordion(index,href);
+    //     if(this.parentPendienteInforme)
+    //         this.parentPendienteInforme.parent.addAccordion(index,href);
+    //   }
+    //   async setAcordiones(){
+    //     if(this.parentInformeTerminado){
+    //          this.parentInformeTerminado.parent.setAcordiones()
+    //     }
+    //     if(this.parentPendienteInforme){
+    //          this.parentPendienteInforme.parent.setAcordiones()
+    //     }
+    // }
 }

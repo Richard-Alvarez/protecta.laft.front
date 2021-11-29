@@ -131,7 +131,7 @@ class Rutas {
   public urlReportCargaRescates: string = "http://localhost:3000/carga-rescates";
   public urlReportCargaSiniestros: string = "http://localhost:3000/carga-siniestro";
   public urlGetListInterbyType: string = this.base + "monitoreoSenales/getListasInternacionalesByType";
-  public urlGetListaInternacional: string = this.base + "monitoreoSenales/getListaInternacional";
+  public urlGetListaInternacional: string = this.base + "monitoreoSenales/getListaInternacional2";
   public urlGetResultadosCoincidencias: string = this.base + "monitoreoSenales/getResultadosCoincidencias";
   public urlInsertAttachedFilesByAlert: string = this.base + "monitoreoSenales/InsertAttachedFilesByAlert";
   // se modifico para probar
