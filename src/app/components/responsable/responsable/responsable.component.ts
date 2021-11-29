@@ -188,6 +188,7 @@ export class ResponsableComponent implements OnInit {
         "comentario": "Un comentario uno"
       }
     ]
+    
    
       this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
     
@@ -1045,6 +1046,7 @@ export class ResponsableComponent implements OnInit {
   }
 
   async downloadUniversalFile(ruta, nameFile) {
+    
     try {
       this.core.loader.show()
       let data = { ruta: ruta }
@@ -2391,6 +2393,7 @@ export class ResponsableComponent implements OnInit {
 
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
+      
       this.core.loader.show()
       
   
@@ -2443,6 +2446,7 @@ export class ResponsableComponent implements OnInit {
           uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
           uploadPararms.listFiles = listFilesAdjuntos
           uploadPararms.listFileName = listFileNameAdjuntos
+          
           promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
           promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
         } catch (error) {
@@ -2839,6 +2843,7 @@ export class ResponsableComponent implements OnInit {
 
 
   async setDataFile(event) {
+ 
     let files = event.target.files;
 
     let arrFiles = Array.from(files)

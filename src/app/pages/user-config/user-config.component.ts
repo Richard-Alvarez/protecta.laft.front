@@ -438,8 +438,31 @@ export class UserConfigComponent implements OnInit {
 
     }
   }
+elementoModificado : string = ""
+  validarCambioUsuario(data){
+    debugger;
+    if(this.DataUsuario.pass != data.pass){
+      this.elementoModificado = "Contraseña";
+    }
+    if(this.DataUsuario.userFullName != data.userFullName){
+      this.elementoModificado = /*this.elementoModificado + */"Nombre del usuario";
+    }
+    if(this.DataUsuario.userRolId != data.userRolId){
+      this.elementoModificado = /*this.elementoModificado + */"Perfil";
+    }
+    if(this.DataUsuario.cargoId != data.cargoId){
+      this.elementoModificado = /*this.elementoModificado + */"Cargo";
+    }
+    if(this.DataUsuario.userEmail != data.userEmail){
+      this.elementoModificado = /*this.elementoModificado + */"Correo";
+    }
+    if(this.DataUsuario.userState != data.state){
+      this.elementoModificado = /*this.elementoModificado + */"Estado";
+    }
+    return this.elementoModificado;
+  }
   
-  updateData() {
+  async updateData() {
    
     var re = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
     if (this.passw.length == 0) {
@@ -601,7 +624,6 @@ export class UserConfigComponent implements OnInit {
     data.systemId = this.newUsSystem === '' ? '' : this.newUsSystem;
     data.userEmail = this.newUsEmail === '' ? '' : this.newUsEmail;
     data.cargoId = this.newUsCargo === '' ? 0 : this.newUsCargo;
-  
 
     if(this.DataUsuario.pass == this.newUsPass){
       //se pone el 2 para no enviar el correo
@@ -613,6 +635,8 @@ export class UserConfigComponent implements OnInit {
     }
     //data.valor = 1
     data.state = this.state
+
+    data.modifico = await this.validarCambioUsuario(data);
 
     swal.fire({
       title: 'Actualización de usuario',

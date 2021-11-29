@@ -32,4 +32,30 @@
 .buttonSinBorder{
     border-radius : inherit;
   }
-  
+  .icon-descarga{
+    font-size: 30px;
+    padding: 5px;
+    color: #fd7e14;
+    float: left;
+    margin-left: 40px;
+
+  }
+  .buttonSinBorder{
+    border-radius : inherit;
+  }
+
+  .colorButton{
+    color: #B4B5D9 !important;
+    border: 1px solid #B4B5D9 !important;
+  }
+  .colorButton:hover{
+    background: transparent !important;
+    
+  }
+  .colorButton::placeholder{
+    color: #B4B5D9 !important;
+    
+  }
+  .colorButton{
+    color: #7c7ea6 !important;
+  }
