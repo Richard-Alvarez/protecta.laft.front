@@ -367,9 +367,9 @@ export class C2FormComponent implements OnInit {
         try {
             this.core.loader.show();
             let data: any = {};
-            data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-            data.P_NIDALERTA = this.alertData.NIDALERTA;
-            data.P_NIDREGIMEN = this.alertData.NIDREGIMEN;
+            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+            data.NIDALERTA = this.alertData.NIDALERTA;
+            data.NIDREGIMEN = this.alertData.NIDREGIMEN;
             let respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
             
             //this.internationalList = respResultadosCoinciden

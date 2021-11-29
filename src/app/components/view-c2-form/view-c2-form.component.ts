@@ -140,17 +140,17 @@ export class ViewC2FormComponent implements OnInit  {
 
         let data: any = {};
         if( this.linkactual == "proveedor"){
-            data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-            data.P_NIDALERTA = this.alertData.NIDALERTA;
-            data.P_NIDREGIMEN = 0;
+            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+            data.NIDALERTA = this.alertData.NIDALERTA;
+            data.NIDREGIMEN = 0;
         }else if( this.linkactual == "colaborador"){
-            data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-            data.P_NIDALERTA = this.alertData.NIDALERTA;
-            data.P_NIDREGIMEN = 0;
+            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+            data.NIDALERTA = this.alertData.NIDALERTA;
+            data.NIDREGIMEN = 0;
         }else{
-            data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-            data.P_NIDALERTA = this.alertData.NIDALERTA;
-            data.P_NIDREGIMEN = this.regimen.id;
+            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+            data.NIDALERTA = this.alertData.NIDALERTA;
+            data.NIDREGIMEN = this.regimen.id;
         }
         // data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
         // data.P_NIDALERTA = this.alertData.NIDALERTA;
@@ -543,7 +543,6 @@ export class ViewC2FormComponent implements OnInit  {
     async goToDetail(item: any,lista:any,idElement:any,idElementSubGroup:any) {
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
-        debugger;
         let objFocusPosition:any = {}
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
         if(this.linkactual == "proveedor")
@@ -591,24 +590,29 @@ export class ViewC2FormComponent implements OnInit  {
 
     async getResultadosCoincidencias() {
         try {
-            var URLactual = window.location + " ";
-             let link = URLactual.split("/")
-            this.linkactual = link[link.length-1].trim()
-            this.core.loader.show();
-            let data: any = {};
-            if( this.linkactual == "proveedor"){
-                data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-                data.P_NIDALERTA = this.alertData.NIDALERTA;
-                data.P_NIDREGIMEN = 0;
-            }else if( this.linkactual == "colaborador"){
-                data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-                data.P_NIDALERTA = this.alertData.NIDALERTA;
-                data.P_NIDREGIMEN = 0;
-            }else{
-                data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-                data.P_NIDALERTA = this.alertData.NIDALERTA;
-                data.P_NIDREGIMEN = this.alertData.NIDREGIMEN;
-            }
+            debugger;
+            let data = this.config.find(t=> t.linkactual.includes(this.linkactual));
+            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
+            data.NIDREGIMEN = data.NIDGRUPOSENAL == 1 ? this.regimen.id : data.NIDREGIMEN
+
+            // var URLactual = window.location + " ";
+            //  let link = URLactual.split("/")
+            // this.linkactual = link[link.length-1].trim()
+            // this.core.loader.show();
+            // let data: any = {};
+            // if( this.linkactual == "proveedor"){
+            //     data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+            //     data.P_NIDALERTA = this.alertData.NIDALERTA;
+            //     data.P_NIDREGIMEN = 0;
+            // }else if( this.linkactual == "colaborador"){
+            //     data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+            //     data.P_NIDALERTA = this.alertData.NIDALERTA;
+            //     data.P_NIDREGIMEN = 0;
+            // }else{
+            //     data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+            //     data.P_NIDALERTA = this.alertData.NIDALERTA;
+            //     data.P_NIDREGIMEN = this.alertData.NIDREGIMEN;
+            // }
 
             // data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
             // data.P_NIDALERTA = this.alertData.NIDALERTA;
