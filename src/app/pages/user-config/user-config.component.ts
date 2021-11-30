@@ -444,19 +444,34 @@ elementoModificado : string = ""
     if(this.DataUsuario.pass != data.pass){
       this.elementoModificado = "Contraseña";
     }
-    if(this.DataUsuario.userFullName != data.userFullName){
+    if (this.DataUsuario.pass != data.pass && this.DataUsuario.userFullName != data.userFullName){
+      this.elementoModificado = this.elementoModificado + ", " + "Nombre del usuario";
+    }
+    else if(this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName != data.userFullName){
       this.elementoModificado = /*this.elementoModificado + */"Nombre del usuario";
     }
-    if(this.DataUsuario.userRolId != data.userRolId){
-      this.elementoModificado = /*this.elementoModificado + */"Perfil";
+    if((this.DataUsuario.userFullName != data.userFullName || this.DataUsuario.pass != data.pass) && this.DataUsuario.userRolId != data.userRolId){
+      this.elementoModificado = this.elementoModificado + ", " + "Perfil";
     }
-    if(this.DataUsuario.cargoId != data.cargoId){
+    else if ((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName) && this.DataUsuario.userRolId != data.userRolId){
+      this.elementoModificado = /*this.elementoModificado + ", " +*/ "Perfil";
+    }
+    if ((this.DataUsuario.pass != data.pass || this.DataUsuario.userFullName != data.userFullName || this.DataUsuario.userRolId != data.userRolId) && this.DataUsuario.cargoId != data.cargoId){
+      this.elementoModificado = this.elementoModificado + ", " + "Cargo";
+    }
+    else if((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName && this.DataUsuario.userRolId == data.userRolId) && this.DataUsuario.cargoId != data.cargoId){
       this.elementoModificado = /*this.elementoModificado + */"Cargo";
     }
-    if(this.DataUsuario.userEmail != data.userEmail){
+    if((this.DataUsuario.pass != data.pass || this.DataUsuario.userFullName != data.userFullName || this.DataUsuario.userRolId != data.userRolId || this.DataUsuario.cargoId != data.cargoId) && this.DataUsuario.userEmail != data.userEmail){
+      this.elementoModificado = this.elementoModificado + ", " + "Correo";
+    }
+    else if((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName && this.DataUsuario.userRolId == data.userRolId && this.DataUsuario.userEmail == data.userEmail) && this.DataUsuario.userEmail != data.userEmail){
       this.elementoModificado = /*this.elementoModificado + */"Correo";
     }
-    if(this.DataUsuario.userState != data.state){
+    if((this.DataUsuario.pass != data.pass || this.DataUsuario.userFullName != data.userFullName || this.DataUsuario.userRolId != data.userRolId || this.DataUsuario.cargoId != data.cargoId || this.DataUsuario.userEmail != data.userEmail)&& this.DataUsuario.userState != data.state){
+      this.elementoModificado = this.elementoModificado + ", " + "Estado";
+    }
+    else if((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName && this.DataUsuario.userRolId == data.userRolId && this.DataUsuario.userEmail == data.userEmail && this.DataUsuario.userEmail == data.userEmail)&& this.DataUsuario.userState != data.state){
       this.elementoModificado = /*this.elementoModificado + */"Estado";
     }
     return this.elementoModificado;
