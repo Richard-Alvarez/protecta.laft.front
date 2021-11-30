@@ -1,6 +1,37 @@
-<p>actualizar-contrasenna works!</p>
 
+<div class="wrapper">
+    <div *ngIf="VALIDADOR == 1;">
+        <div class="container">
+            <h1>El link es incorrecto</h1>
+            
+            
+        </div>
+    </div>
+    
+        <div *ngIf="VALIDADOR == 2;" >
+        
 
-{{usuario}}
-
-{{correo}}
+        <div class="container">
+                <h1>Actualizar contraseña</h1>
+                
+                <form class="form">
+                    <input type="text" [(ngModel)]="password.pss1" placeholder="Contraseña">
+                    <input type="password" [(ngModel)]="password.pss2" placeholder="Confirmar contraseña">
+                    <button type="submit" id="login-button" (click)="ActualizarContrasenna()">Actualizar</button>
+                </form>
+            </div>
+        </div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>

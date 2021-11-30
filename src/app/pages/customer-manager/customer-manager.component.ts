@@ -1374,7 +1374,7 @@ Array.prototype.forEach.call( inputs, function( input )
     for( let i = 0; i < this.ResultadoExcel.length ; i++){
       let datosRegistroColaborador:any = {}
       datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-      datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
+      datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO) //== null ? "" : parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
       datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
       datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].SNOM_COMPLETO
       datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].DFECHA_NACIMIENTO

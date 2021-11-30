@@ -250,7 +250,7 @@ export class ModalValidarCorreoComponent implements OnInit {
   }
 
 
-async  generateKey() {
+  async  generateKey() {
     return CryptoJS.lib.WordArray.random(16).toString();
   }
 
