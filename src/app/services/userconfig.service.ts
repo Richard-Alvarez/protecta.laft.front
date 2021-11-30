@@ -1727,6 +1727,17 @@ export class UserconfigService {
     });
   }
 
+  GetInsertaHistorialUsuario(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetInsertaHistorialUsuario, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
   
 }

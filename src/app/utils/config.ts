@@ -171,7 +171,8 @@ class Rutas {
   public urlUpdateResourceProfile: string = this.base + "config/updateresourceprofile";
   public urlGetListaHistoryUser: string = this.base + "userConfiguration/HistorialUser";
 
-
+  public urlGetInsertaHistorialUsuario: string = this.base + "monitoreoSenales/GetInsertaHistorialUsuario";
+  
 
   public urlDeleteAdjuntosInformAlerta: string = this.base + "monitoreoSenales/DeleteAdjuntosInformAlerta";
   public urlProcessInsertFile: string = this.base + "sbsReport/processInsertFile";
