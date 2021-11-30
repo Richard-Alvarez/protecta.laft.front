@@ -181,6 +181,8 @@ import { TemplateC2GeneralComponent } from './components/responsable/templates/t
 // import { AngularSplitModule } from 'angular-split'; 
 
 import { FileUploadModule } from 'ng2-file-upload';
+import { ModalValidarCorreoComponent } from './pages/modal-validar-correo/modal-validar-correo.component';
+import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/actualizar-contrasenna.component';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -331,6 +333,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     HistoricoColaboradorComponent,
     InformesComponent,
     TemplateC2GeneralComponent,
+    ModalValidarCorreoComponent,
+    ActualizarContrasennaComponent,
     ViewC2ListComponent
 
    
@@ -363,7 +367,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     
     NO_ERRORS_SCHEMA
   ],
-  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent],
+  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent,ModalValidarCorreoComponent],
   providers: [UserconfigService, DatePipe],
   bootstrap: [AppComponent],
   exports: [BusquedaDemandaComponent]

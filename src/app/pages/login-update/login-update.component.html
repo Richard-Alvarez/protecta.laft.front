@@ -6,13 +6,15 @@
       <div class="img">
        
         <!-- <img src="https://images.typeform.com/images/7CMNSz3ZvPj7/image/default-firstframe.png">  -->
-         <!-- <img src="https://www.informese.co/wp-content/uploads/2019/09/6.png">  -->
+         <!-- <img src="https://www.informese.co/wp-content/uploads/2019/09/6.png">   -->
+          <img src="assets/img/logo.png">
+         <!-- <img src="assets/img/logo-protecta.svg" alt="Protecta Security" > -->
      </div>
       <div class="login-content">
         <form >
             <img src="assets/icons/Login_user.png">
          
-          <h2 class="title">BIENVENIDO</h2>
+          <h2 class="title">SISTEMA LAFT</h2>
                 <div class="input-div one">
                    <div class="i">
                       <i class="fas fa-user"></i>
@@ -66,8 +68,11 @@
                        <input type="text" class="input"  id="InputCaptcha" name="txtcaptcha" [(ngModel)]="captcha.txtcaptcha" maxlength="5" (keyup)="onEnter($event)" >
                     </div>
                  </div>
-                  
-                     <a href="#">Has olvidado tu contraseña?</a>
+
+                    
+                        <a href="" onclick="{return false}" class="class_a_href" (click)="Modal()">Has olvidado tu contraseña?</a> 
+                    
+                        <!-- <a target="_blank" [routerLink]="['/validador/', 'richard']">acaaaaaaaaaaa</a> -->
                   
                
 

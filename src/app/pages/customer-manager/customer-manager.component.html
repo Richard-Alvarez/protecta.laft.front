@@ -65,7 +65,7 @@
         <div class="card-header bordesCabecera" style="background: white;">
             <ul class="nav nav-pills nav-justified" *ngIf="this.idGrupo == 1;else OtrosGrupos">
                 <li class="nav-item">
-                    <a class="nav-link colortab  {{arrSetClassSelected[0]}}" data-toggle="tab" href="#cus-manag" (click)="setTipoSelectPestaniaClient(0)">Gestor de clientes</a>
+                    <a class="nav-link colortab  {{arrSetClassSelected[0]}}" data-toggle="tab" href="#cus-manag" (click)="setTipoSelectPestaniaClient(0)">Gestor Laft</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link colortab {{arrSetClassSelected[1]}}" data-toggle="tab" href="#pre" (click)="setTipoSelectPestaniaClient(1)">Cliente Revisado</a>
@@ -80,7 +80,7 @@
             <ng-template #OtrosGrupos>
                 <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
-                        <a class="nav-link colortab  {{arrSetClassSelected[0]}}" data-toggle="tab" href="#cus-manag" (click)="setTipoSelectPestaniaClient(0)">Gestor de clientes</a>
+                        <a class="nav-link colortab  {{arrSetClassSelected[0]}}" data-toggle="tab" href="#cus-manag" (click)="setTipoSelectPestaniaClient(0)">Gestor Laft</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link colortab {{arrSetClassSelected[4]}} " data-toggle="tab" href="#lista" (click)="setTipoSelectPestaniaClient(4)">Listas de Coincidencias</a>
@@ -411,11 +411,11 @@
                                         <button class="btn" data-toggle="dropdown">
                                             <span class="fas fa-bars" style="font-size: 20px;"></span> 
                                         </button>
-                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.obj.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
-                                            <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item.obj,'NNN')">Ver</a>
+                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
+                                            <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item,'NNN')">Ver</a>
                                         </div>
-                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.obj.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
-                                            <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item.obj,'NNN')">Ver</a>
+                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
+                                            <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item,'NNN')">Ver</a>
                                         </div>
                                     </td>
                                 </tr>

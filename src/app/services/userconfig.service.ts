@@ -1727,6 +1727,7 @@ export class UserconfigService {
     });
   }
 
+<<<<<<< HEAD
   GetInsertaHistorialUsuario(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
@@ -1738,6 +1739,34 @@ export class UserconfigService {
       }
     })
   }
+=======
+  GetValidarExisteCorreo(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetValidarExisteCorreo, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  GetUpdUsuarioEncriptado(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetUpdUsuarioEncriptado, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+
+  
+  
+>>>>>>> 2bf3eba825e84cfecb893141365ec0772cc19d20
 
   
 }

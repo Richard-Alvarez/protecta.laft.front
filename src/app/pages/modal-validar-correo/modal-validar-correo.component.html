@@ -1,0 +1,73 @@
+
+
+
+
+<div class="container">
+
+ 
+
+	<div style="margin: 30px">
+		
+        <div class="row mb-2 " style="margin-top: -30px;display: flex;padding-left: 30px;padding-bottom: 15px;">
+            <div class="Header">
+                <div class="row">
+                    <div class="col-lg-19">
+                        <h4 class="TitleLine">Recuperar contraseña</h4>
+                    </div>
+                </div>
+                
+            </div>
+            <br>
+            
+                
+        </div>
+		<form [formGroup]="loginForm">
+			<div class="form-group">
+				<label>Usuario*</label>
+				<input class="form-control" style="text-transform:uppercase;" formControlName="usuario" type="text" [(ngModel)]="usuario" />
+			</div>
+			<div class="error-messages">
+				<ng-container *ngFor="let error of error_messages.usuario">
+					<div class="error-message" *ngIf="loginForm.get('usuario').hasError(error.type) && (loginForm.get('usuario').dirty || loginForm.get('usuario').touched)">
+						{{ error.message }}
+					</div>
+				</ng-container>
+			</div>
+
+
+		
+
+			<div class="form-group">
+				<label>Correo*</label>
+                <input class="form-control"  style="text-transform:lowercase;" formControlName="email" [(ngModel)]="correo" />
+            </div>
+               
+			<div class="error-messages">
+				<ng-container *ngFor="let error of error_messages.email">
+					<div class="error-message" *ngIf="loginForm.get('email').hasError(error.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+						{{ error.message }}
+					</div>
+				</ng-container>
+			</div>
+
+			
+      <pre>
+        
+      </pre>
+           
+               <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-5">
+                            <button class="form-control btn btn-warning text-white" [disabled]="!loginForm.valid" (click)="Validar()">Aceptar</button>
+                        </div>
+                        
+                        <div class="col-lg-5">
+                            <button class="form-control btn btn-warning text-white" (click)="closeModal()" >Cancelar</button>
+                        </div>
+                        <div class="col-lg-1"></div>
+                    </div>
+
+          
+		</form>
+	</div>
+</div>

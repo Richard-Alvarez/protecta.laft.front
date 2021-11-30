@@ -219,6 +219,9 @@ class Rutas {
   public urlGetRegistrarDatosExcelGC:string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
   public urlGetRegistrarDatosExcelDemanda:string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
   
+  //VALIDAR SI EXISTE UN USUSARIO
+  public urlGetValidarExisteCorreo :string = this.base + "monitoreoSenales/GetValidarExisteCorreo";
+  public urlGetUpdUsuarioEncriptado :string = this.base + "monitoreoSenales/GetUpdUsuarioEncriptado";
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
