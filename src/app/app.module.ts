@@ -150,7 +150,7 @@ import { TemplateC2Component } from './components/responsable/templates/template
 import { C2InfoPolicyComponent } from './pages/forms/c2-info-policy/c2-info-policy.component';
 import { TemplatePComponent } from './components/responsable/templates/template-p/template-p.component';
 import { TemplateTComponent } from './components/responsable/templates/template-t/template-t.component';
-
+import { ViewC2ListComponent } from './components/view-c2-form/view-c2-list/view-c2-list.component';
 import { UserconfigService } from './services/userconfig.service';
 import { MantenimientoComplementoComponent } from './mantenimiento-complemento/mantenimiento-complemento.component';
 import { ModalMantenimientoComplementoComponent } from './modal-mantenimiento-complemento/modal-mantenimiento-complemento.component';
@@ -335,6 +335,7 @@ import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/a
     TemplateC2GeneralComponent,
     ModalValidarCorreoComponent,
     ActualizarContrasennaComponent,
+    ViewC2ListComponent
 
    
     //Validaciones

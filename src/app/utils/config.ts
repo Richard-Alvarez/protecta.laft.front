@@ -1,10 +1,10 @@
 class Rutas {
 
-  private base: string = 'http://localhost:5001/api/'; 
+  //private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   ///private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
- //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
  //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -131,7 +131,7 @@ class Rutas {
   public urlReportCargaRescates: string = "http://localhost:3000/carga-rescates";
   public urlReportCargaSiniestros: string = "http://localhost:3000/carga-siniestro";
   public urlGetListInterbyType: string = this.base + "monitoreoSenales/getListasInternacionalesByType";
-  public urlGetListaInternacional: string = this.base + "monitoreoSenales/getListaInternacional";
+  public urlGetListaInternacional: string = this.base + "monitoreoSenales/getListaInternacional2";
   public urlGetResultadosCoincidencias: string = this.base + "monitoreoSenales/getResultadosCoincidencias";
   public urlInsertAttachedFilesByAlert: string = this.base + "monitoreoSenales/InsertAttachedFilesByAlert";
   // se modifico para probar

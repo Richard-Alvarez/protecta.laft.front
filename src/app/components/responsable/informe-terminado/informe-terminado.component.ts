@@ -452,8 +452,6 @@ async DescargarReportesGrupo(itemAlerta){
     this.dataBase64aHTML.push(resultado)
   });
 
-     console.log("todas las base64",this.dataBase64)
-     console.log("todas las dataBase64aHTML",this.dataBase64aHTML)
 
      this.Export2Doc("Reportes","Reportes") 
      //this.dataBase64 = []
@@ -534,7 +532,6 @@ Export2Doc(element, filename = ''){
  
 
   async DescargarReportesXGrupo(array){
-    debugger
     console.log("Lista del array",array)
     let  validadador
     if(array.length === 0){
@@ -569,7 +566,6 @@ Export2Doc(element, filename = ''){
     this.idGrupo = await this.ValidarGrupo()
     
     this.ValidadorReportes = validadador
-    console.log("ValidadorReportes",this.ValidadorReportes)
     let mensaje = ''
     let data :any = {} 
     data.NIDGRUPOSENAL = this.idGrupo
@@ -586,7 +582,6 @@ Export2Doc(element, filename = ''){
     this.ListaAlerta = await this.userConfigService.GetAlertaResupuesta(data)
 
     this.core.loader.hide()
-    console.log("lista alerta",this.ListaAlerta)
     let ValidadorGlobal = this.ListaAlerta.filter(it => it.SESTADO == 1 && it.NIDREGIMEN == validadador )//&& it.SNOMBRE_ALERTA !== 'C2')
     console.log("Validador",ValidadorGlobal.length)
     console.log("Validador 11",ValidadorGlobal)
@@ -626,7 +621,6 @@ Export2Doc(element, filename = ''){
       this.CargoRG = this.ListaAlertaRG[0].SCARGO
      
 
-      console.log("ListaAlertaRG",this.ListaAlertaRG)
 
       let respuestaRG = this.ListaAlertaRG.filter((it,inc) => it.NIDRESPUESTA == 1)
       if(respuestaRG.length == 0){

@@ -115,7 +115,7 @@ export class C2DetailComponent implements OnInit {
   SESTADO_BUTTON_SAVE
   NewListCheck :any = []
   async ngOnInit() {  
-      
+    //   this.getAcordionReturn();
       this.nidregimen = localStorage.getItem("NREGIMEN");
       this.nidalerta = localStorage.getItem("NIDALERTA");
       var paramCliente : any =  localStorage.getItem("paramCliente");
@@ -204,7 +204,6 @@ export class C2DetailComponent implements OnInit {
      
 
   }
-  
  
   async ListarCargo(){
       this.listCargo = await this.userConfigService.GetListaCargo()

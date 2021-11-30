@@ -45,8 +45,6 @@ export class RevisadoComponent implements OnInit {
 
   async ngOnInit() {
     this.IDGrupo = await this.ValidarGrupo()
-    console.log("ValidadorHistorico",this.ValidadorHistorico)
-    console.log("arrResponsable2",this.arrResponsable2)
 
     await this.ListaUsuario()
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
@@ -467,14 +465,12 @@ async descargarComplemento (item,listUsu){
   // this.parent.downloadUniversalFile(listUsu.SRUTA_PDF, splitRuta[splitRuta.length - 1])
 
   await this.ListaDeAdjunto()
-  console.log("listUsu",listUsu)
   let listaArchivos = this.listaArchivosComplementos.filter(it => it.STIPO_CARGA == "COMPLEMENTO" && it.NIDALERTA == listUsu.NIDALERTA && it.NIDUSUARIO_MODIFICA == listUsu.NIDUSUARIO_ASIGNADO)
   if(listaArchivos.length ==0){
     let mensaje = "El responsable no adjunto ningun archivo"
     this.AlertaMensaje(mensaje)
   }else{
     listaArchivos.forEach(lista => {
-      console.log("listaArchivos",lista)
       var splitRuta = lista.SRUTA_ADJUNTO.split('/')
       this.parent.downloadUniversalFile(lista.SRUTA_ADJUNTO, splitRuta[splitRuta.length - 1])
     });

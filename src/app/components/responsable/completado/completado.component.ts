@@ -452,9 +452,6 @@ export class CompletadoComponent implements OnInit {
   }
 
   async addFilesUniversal2(event,item,STIPO_CARGA,STIPO_USUARIO,listUsu,indice){
-    console.log("event",event)
-    console.log("list",listUsu)
-    console.log("indice",indice)
     
    //await this.parent.addFilesAdjuntosResponsable(event, item.NIDALERTA_CABECERA, item.NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO,item.NOMBRECOMPLETO,'OC-COMPLEMENTOS')
     let data = await this.parent.setDataFile(event)
@@ -1214,7 +1211,6 @@ async ListaAlertas(){
     }
    });
   
-  console.log("NewArreglo",this.NewArreglo)
 }
 
 
@@ -1275,7 +1271,6 @@ async  AgregarUsuario(item,lilistComplemento,iUSelect){
      
   }
 
-  console.log(" this.NewArreglo 111111", this.NewArreglo)
     
   
 }
@@ -1283,14 +1278,12 @@ async  AgregarUsuario(item,lilistComplemento,iUSelect){
 async  descargarComplemento (item,listUsu){
   debugger
     await this.ListaDeAdjunto()
-    console.log("listUsu",listUsu)
     let listaArchivos = this.listaArchivosComplementos.filter(it => it.STIPO_CARGA == "COMPLEMENTO" && it.NIDALERTA == listUsu.NIDALERTA && it.NIDUSUARIO_MODIFICA == listUsu.NIDUSUARIO_ASIGNADO)
     if(listaArchivos.length ==0){
       let mensaje = "El responsable no adjunto ningun archivo"
       this.AlertaMensaje(mensaje)
     }else{
       listaArchivos.forEach(lista => {
-        console.log("listaArchivos",lista)
         var splitRuta = lista.SRUTA_ADJUNTO.split('/')
         this.parent.downloadUniversalFile(lista.SRUTA_ADJUNTO, splitRuta[splitRuta.length - 1])
       });
@@ -1319,9 +1312,8 @@ debugger
   let data:any = {}
     data.NPERIODO_PROCESO = this.PeriodoComp
     let listaAdjuntos = await this.userConfigService.getListaAdjuntos(data)
-    console.log("listaAdjuntos",listaAdjuntos)
     let newlistaAdjuntos = listaAdjuntos.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.NIDUSUARIO_MODIFICA == item.NIDUSUARIO_ASIGNADO && it.STIPO_CARGA == "COMPLEMENTO")
-    console.log("listaAdjuntos",newlistaAdjuntos)
+
    
     if(newlistaAdjuntos.length !== 0){
       newlistaAdjuntos.forEach(objAdj => {
@@ -1329,7 +1321,6 @@ debugger
         let link = valor.split("/")
         let nombre = link[link.length-1].trim()
   
-        console.log(data)
         let SRUTA = objAdj.SRUTA_ADJUNTO;
         let SRUTA_LARGA = nombre;
         this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
@@ -1379,7 +1370,6 @@ ValidarCabeceraComplemento(){
     var validador = this.NewArreglo[index].RESULTADO[indexResultado].FILE
    
   
-    console.log("validador",validador)
     if(validador.length > 0  ){
       swal.fire({
         title: 'Bandeja del formularios', //+ this.sNameTipoUsuario,
@@ -1401,15 +1391,12 @@ ValidarCabeceraComplemento(){
       })
      return
     }else{
-      debugger
-      console.log("la data", arrObj)
        arrObj.arrFiles.forEach((element,inc) => {
         this.NewArreglo[index].RESULTADO[indexResultado].SFILE_NAME.push(arrObj.listFileNameCortoInform[inc]);
         this.NewArreglo[index].RESULTADO[indexResultado].SFILE_NAME_LARGO.push(arrObj.listFileNameInform[inc]);
        });
       
       await this.NewArreglo[index].RESULTADO[indexResultado].FILE.push(arrObj);
-      console.log(" this.NewArreglo 22222", this.NewArreglo)
   
     }
    
@@ -1430,9 +1417,8 @@ ValidarCabeceraComplemento(){
     let data:any = {}
     data.NPERIODO_PROCESO = this.PeriodoComp
     let listaAdjuntos = await this.userConfigService.getListaAdjuntos(data)
-    console.log("listaAdjuntos",listaAdjuntos)
     let newlistaAdjuntos = listaAdjuntos.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.NIDUSUARIO_MODIFICA == item.NIDUSUARIO_ASIGNADO && it.STIPO_CARGA == "COMPLEMENTO-OC" )
-    console.log("listaAdjuntos",newlistaAdjuntos)
+
    
     if(newlistaAdjuntos.length !== 0){
       newlistaAdjuntos.forEach(objAdj => {
@@ -1440,7 +1426,6 @@ ValidarCabeceraComplemento(){
         let link = valor.split("/")
         let nombre = link[link.length-1].trim()
   
-        console.log(data)
         let SRUTA = objAdj.SRUTA_ADJUNTO;
         let SRUTA_LARGA = nombre;
         this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
@@ -1454,15 +1439,12 @@ ValidarCabeceraComplemento(){
 
   removeFile(item,listUsu){
    
-    console.log("NewArreglo",this.NewArreglo)
     var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == item.NIDALERTA && fil.NOMBRECOMPLETO == item.NOMBRECOMPLETO)
     var indexResultado = this.NewArreglo[index].RESULTADO.findIndex(fil => fil.ID_USUARIO == listUsu.ID_USUARIO && fil.NOMBRECOMPLETO == listUsu.NOMBRECOMPLETO)
     this.NewArreglo[index].RESULTADO[indexResultado].FILE = []
     this.NewArreglo[index].RESULTADO[indexResultado].SFILE_NAME = []
     this.NewArreglo[index].RESULTADO[indexResultado].SFILE_NAME_LARGO = []
     
-    console.log("NewArreglo",this.NewArreglo)
-    console.log("item",item)
   }
 
   descargarArchivoSubido(item,listUsu){

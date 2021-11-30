@@ -129,9 +129,10 @@ export class CustomerManagerComponent implements OnInit {
     this.paramCliente.MANUAL = true
     let paramClientels: any = localStorage.getItem("paramClienteReturn");
     let nIdGrupo = localStorage.getItem("NIDGRUPO")
+    this.PERIODOACTUAL = await this.userConfigService.getCurrentPeriod()
     if (Number.parseInt(nIdGrupo) > 0) {
       this.idGrupo = Number.parseInt(nIdGrupo);
-      this.valorGrupo()
+      this.valorGrupo(false)
     }
 
     if (paramClientels != null && paramClientels != "" && paramClientels != "{}") {
@@ -185,13 +186,12 @@ export class CustomerManagerComponent implements OnInit {
       console.error("EL error : ", error)
     }
     await this.getClientsByTratamiento()
-    this.PERIODOACTUAL = await this.userConfigService.getCurrentPeriod()
 
     //await this.ListaDeCoincidencias(this.idGrupo)
     this.spinner.hide()
   }
 
-  async valorGrupo() {
+  async valorGrupo(isAccion) {
     this.idSubGrupo = 0;
   
     this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
@@ -209,9 +209,16 @@ export class CustomerManagerComponent implements OnInit {
       }
       this.SubGrupoList = await this.userConfigService.getSubGrupoSenal(data);
       this.SubGrupoList.unshift(obj);
-      if(this.SubGrupoList.length > 0)
-        this.idSubGrupo = this.SubGrupoList.map(t=> t.NIDSUBGRUPOSEN)[0] 
-        this.ListaDeCoincidencias(this.idGrupo)
+      if(isAccion){
+        if(this.SubGrupoList.length > 0){
+          this.idSubGrupo = this.SubGrupoList.map(t=> t.NIDSUBGRUPOSEN)[0]
+        }
+      }else{
+        let nIdSubGrupo = localStorage.getItem("NIDSUBGRUPO")
+        if(Number.parseInt(nIdSubGrupo) > 0)
+          this.idSubGrupo = Number.parseInt(nIdSubGrupo)
+      }
+      this.ListaDeCoincidencias(this.idGrupo)
     }
   }
   async valorSubGrupo() {
@@ -1061,6 +1068,7 @@ export class CustomerManagerComponent implements OnInit {
         
       }
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
+      localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
       // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
       // if (valuenSelectPestaniaClient == null) {
@@ -1251,6 +1259,7 @@ export class CustomerManagerComponent implements OnInit {
     localStorage.setItem('EnviarCheckbox', sEstadoRevisado)
     
     localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
+    localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
     this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
     // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
     // if (valuenSelectPestaniaClient == null) {
@@ -1499,7 +1508,7 @@ Array.prototype.forEach.call( inputs, function( input )
   }
 
   async ListaDeCoincidencias(id){
-
+    debugger;
     let data:any = {}
     data = {
       NIDGRUPOSENAL: id,
