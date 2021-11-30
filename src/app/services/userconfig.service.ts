@@ -1727,6 +1727,19 @@ export class UserconfigService {
     });
   }
 
+<<<<<<< HEAD
+  GetInsertaHistorialUsuario(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetInsertaHistorialUsuario, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+=======
   GetValidarExisteCorreo(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
@@ -1780,6 +1793,7 @@ export class UserconfigService {
 
   
   
+>>>>>>> 2bf3eba825e84cfecb893141365ec0772cc19d20
 
   
 }
