@@ -84,6 +84,7 @@ import { HistoricoContraparteComponent } from './components/responsable/historic
 import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda-demanda.component'
 import { NavbarUpdateComponent } from './../app/components/navbar-update/navbar-update.component';
 import { InformesComponent } from './../app/components/informes/informes.component';
+import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/actualizar-contrasenna.component';
 //fin formularios antiguos
 
 const routes: Routes = [
@@ -171,6 +172,7 @@ const routes: Routes = [
   
   //
   { path: 'navbar', component: NavbarUpdateComponent},
+  { path: 'validador/:hash', component: ActualizarContrasennaComponent},
   
 ];
 @NgModule({

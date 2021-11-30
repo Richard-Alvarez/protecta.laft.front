@@ -8,6 +8,7 @@ import { InformesComponent } from '../../../../components/informes/informes.comp
 export class TemplateC2GeneralComponent implements OnInit {
 
   @Input() parent:InformesComponent
+  @Input() Validar:number
   
   constructor() { }
 

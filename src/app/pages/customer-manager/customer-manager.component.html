@@ -411,11 +411,11 @@
                                         <button class="btn" data-toggle="dropdown">
                                             <span class="fas fa-bars" style="font-size: 20px;"></span> 
                                         </button>
-                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.obj.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
-                                            <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item.obj,'NNN')">Ver</a>
+                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
+                                            <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item,'NNN')">Ver</a>
                                         </div>
-                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.obj.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
-                                            <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item.obj,'NNN')">Ver</a>
+                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
+                                            <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item,'NNN')">Ver</a>
                                         </div>
                                     </td>
                                 </tr>

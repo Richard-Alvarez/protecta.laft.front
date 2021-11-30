@@ -10,21 +10,21 @@
         <div class="container-fluid pl-5 pr-5">
             <div class="card-header bordesCabecera" style="background: white;">
                 <ul class="nav nav-pills nav-justified">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="colorLetra nav-link active" data-toggle="tab" href="#grupal"
                             style="font-size:17px;">Informes
                             Grupales</a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item">
-                        <a class="colorLetra nav-link" data-toggle="tab" href="#general" style="font-size:17px;">Informe
+                        <a class="colorLetra nav-link active" data-toggle="tab" href="#general" style="font-size:17px;">Informe
                             General</a>
                     </li>
                 </ul>
             </div>
             <div class="card-body">
                 <div class="tab-content" style="padding-bottom: 80px;">
-                    <div id="grupal" class="tab-pane fade  active show">
+                    <div id="grupal" class="tab-pane fade  ">
                         <div class=""
                             style="display: flex;justify-content: left;align-items: left;padding-right: 700px;">
                             <div class="col-lg-17">
@@ -185,7 +185,7 @@
 
 
                     </div>
-                    <div id="general" class="tab-pane fade">
+                    <div id="general" class="tab-pane fade active show">
                         <div class=""
                             style="display: flex;justify-content: left;align-items: left;padding-right: 700px;">
                             <div class="col-lg-17">
@@ -257,18 +257,20 @@
                                     </tbody>
                                 </table>
                               </div>
+
+                              <img  src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"  style="display: none" > 
                               
                             <app-template-c1  [parent]="this" [item]="" [RespuestaAlertaC1]="RespuestaAlertaC1" [Validar]="2" style="display: none" ></app-template-c1> 
-                            <app-template-c2-general  [parent]="this"  style="display: none"></app-template-c2-general>
+                            <app-template-c2-general  [parent]="this" [Validar]="2"  style="display: none"></app-template-c2-general>
                             <app-template-c3  [parent]="this" [ObjListaAlertasC3]="ListaAlertaClientesC3" [RespuestaGlobalC3]="RespuestaGlobalC3"  [Validar]="2"  style="display: none"></app-template-c3>
                             <app-template-s1   style="display: none"></app-template-s1>
                             <app-template-s2  [parent]="this" [ObjListaAlertasS2]="" [RespuestaAlertaS2]="RespuestaAlertaS2" [Validar]="2"   style="display: none" ></app-template-s2>
                             <app-template-s3  [parent]="this"[ObjListaAlertasS3]="ListaAlertaClientesS3" [Validar]="2"  style="display: none" ></app-template-s3> 
 
                             <app-template-clientes-general [objListaAlertaRG]="ListaAlertaClienteRG" [respuestaRG]="RespuetasAlertaRG" [CargoRG]="CargoRG" [Validar]="2" style="display: none" ></app-template-clientes-general>
-                            <app-template-colaborador [RespuestaGlobalColaborador]="RespuestaGlobalColaborador" style="display: none" ></app-template-colaborador>
-                            <app-template-proveedor [CargosConcatenadosContraparte]="CargosConcatenadosProveedor" [RespuestaGlobalContraparteP5]="RespuestaGlobalProveedorP5" [RespuestaGlobalContraparte]="RespuestaGlobalProveedor"  style="display: none" ></app-template-proveedor>
-                            <app-template-contraparte [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalContraparteP5" [RespuestaGlobalContraparte]="RespuestaGlobalContraparte" style="display: none" ></app-template-contraparte>
+                            <app-template-colaborador [RespuestaGlobalColaborador]="RespuestaGlobalColaborador"  [Validar]="2" style="display: none" ></app-template-colaborador>
+                            <app-template-proveedor [CargosConcatenadosContraparte]="CargosConcatenadosProveedor" [RespuestaGlobalContraparteP5]="RespuestaGlobalProveedorP5" [RespuestaGlobalContraparte]="RespuestaGlobalProveedor"  [Validar]="2" style="display: none" ></app-template-proveedor>
+                            <app-template-contraparte [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalContraparteP5" [RespuestaGlobalContraparte]="RespuestaGlobalContraparte"  [Validar]="2" style="display: none" ></app-template-contraparte>
                         </div>
                     
 

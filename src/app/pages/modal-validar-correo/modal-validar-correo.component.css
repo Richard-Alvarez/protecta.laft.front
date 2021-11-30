@@ -1,0 +1,33 @@
+.TitleLine{
+    padding-bottom: 1%;
+    position: relative;
+    z-index: 1;
+   }
+  
+   .TitleLine:before{
+    content : "";
+    position: absolute;
+    left    : 0;
+    bottom  : 0;
+    height  : 1px;
+    width   : 100%;  /* or 100px */
+    border-bottom:2px solid #FA7000;
+    }
+  
+    .buttonSinBorder{
+      border-radius : inherit;
+    }
+  
+    .fontText{
+      font-size: 0.9rem;
+    }
+
+    p {
+      font-family: Lato;
+    }
+    .error-message {
+      color: red;
+    }
+    input.ng-touched.ng-invalid {
+      border: 1px solid red;
+    }
