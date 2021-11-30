@@ -134,29 +134,33 @@ export class ViewC2FormComponent implements OnInit  {
     }
     async getClientsByList(){
         //console.warn("el this.alertData: ",this.alertData)
-        var URLactual = window.location + " ";
-        let link = URLactual.split("/")
-       this.linkactual = link[link.length-1].trim()
+        let data = this.config.find(t=> t.linkactual.includes(this.linkactual));
+            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
+            data.NIDREGIMEN = data.NIDGRUPOSENAL == 1 ? this.regimen.id : data.NIDREGIMEN
+        
+    //         var URLactual = window.location + " ";
+    //     let link = URLactual.split("/")
+    //    this.linkactual = link[link.length-1].trim()
 
-        let data: any = {};
-        if( this.linkactual == "proveedor"){
-            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-            data.NIDALERTA = this.alertData.NIDALERTA;
-            data.NIDREGIMEN = 0;
-        }else if( this.linkactual == "colaborador"){
-            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-            data.NIDALERTA = this.alertData.NIDALERTA;
-            data.NIDREGIMEN = 0;
-        }else{
-            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-            data.NIDALERTA = this.alertData.NIDALERTA;
-            data.NIDREGIMEN = this.regimen.id;
-        }
+    //     let data: any = {};
+    //     if( this.linkactual == "proveedor"){
+    //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+    //         data.NIDALERTA = this.alertData.NIDALERTA;
+    //         data.NIDREGIMEN = 0;
+    //     }else if( this.linkactual == "colaborador"){
+    //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+    //         data.NIDALERTA = this.alertData.NIDALERTA;
+    //         data.NIDREGIMEN = 0;
+    //     }else{
+    //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+    //         data.NIDALERTA = this.alertData.NIDALERTA;
+    //         data.NIDREGIMEN = this.regimen.id;
+    //     }
         // data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
         // data.P_NIDALERTA = this.alertData.NIDALERTA;
         // data.P_NIDREGIMEN = this.regimen.id;
-        let respuestaID = await this.ValidarGrupo()
-            data.NIDGRUPOSENAL =  respuestaID
+        // let respuestaID = await this.ValidarGrupo()
+        //     data.NIDGRUPOSENAL =  respuestaID
         this.core.loader.show()
         let respResultadosCoinciden:any = [] 
         respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
@@ -450,7 +454,7 @@ export class ViewC2FormComponent implements OnInit  {
     async obtListas(){
         let dataSend = this.config.find(t=> t.linkactual.includes(this.linkactual));
         this.listSubGrupos = []
-        if([2,3,4].includes(dataSend.NIDGRUPOSENAL))
+        if([3,4].includes(dataSend.NIDGRUPOSENAL))
             this.listSubGrupos = this.internationalList
             .map(t=> t.SDESSUBGRUPO_SENAL)
             .filter((value,index,array)=>{
