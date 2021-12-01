@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { SbsreportService } from '../../services/sbsreport.service';
 import Swal from 'sweetalert2';
 import { SbsReport } from '../../models/sbsReport.model';

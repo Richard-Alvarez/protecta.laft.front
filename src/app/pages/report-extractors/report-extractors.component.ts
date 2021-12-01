@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { CoreService } from '../../services/core.service';
 import { ActivatedRoute } from '@angular/router';
 import { SbsreportService } from '../../services/sbsreport.service';

@@ -34,7 +34,7 @@ import { Carga } from '../../models/carga.model';
 import { Registro } from '../../models/registro.model';
 import swal from 'sweetalert2';
 import { ExcelService } from 'src/app/services/excel.service';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 
