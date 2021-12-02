@@ -501,6 +501,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   setDataPendiente(){
+    debugger
     try {
       let arrResponsableNew = []
       let objAlertaNew:any = {}
@@ -799,6 +800,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   IsValidInfoPendientePregCabecera(preguntaCabecera){
+    debugger
     let arrPreguntasCabecera = preguntaCabecera.pregunta;
     let arrComentarios = preguntaCabecera.respuesta;
     if (arrPreguntasCabecera == null) {

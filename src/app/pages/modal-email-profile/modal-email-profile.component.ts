@@ -395,6 +395,10 @@ export class ModalEmailProfileComponent implements OnInit {
           }
         }
           
+    }else if(this.action == 7){
+      this.ActivarCombo = true
+      this.ActivarListUser = true
+      this.ActivarUser = true
     }
     else{
        this.ActivarCombo = true

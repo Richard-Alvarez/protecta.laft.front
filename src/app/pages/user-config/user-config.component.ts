@@ -442,9 +442,12 @@ elementoModificado : string = ""
   validarCambioUsuario(data){
     /*if(this.DataUsuario.pass != data.pass){
       this.elementoModificado = "Contraseña";
+     
+      
     }
     if (this.DataUsuario.pass != data.pass && this.DataUsuario.userFullName != data.userFullName){
       this.elementoModificado = this.elementoModificado + ", " + "Nombre del usuario";
+      
     }
     else if(this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName != data.userFullName){
       this.elementoModificado = "Nombre del usuario";

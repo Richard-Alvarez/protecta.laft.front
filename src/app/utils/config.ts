@@ -1,10 +1,10 @@
 class Rutas {
 
-  private base: string = 'http://localhost:5001/api/'; 
+ //private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   ///private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+ private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
  //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -171,8 +171,7 @@ class Rutas {
   public urlUpdateResourceProfile: string = this.base + "config/updateresourceprofile";
   public urlGetListaHistoryUser: string = this.base + "userConfiguration/HistorialUser";
 
-  public urlGetInsertaHistorialUsuario: string = this.base + "monitoreoSenales/GetInsertaHistorialUsuario";
-  
+
 
   public urlDeleteAdjuntosInformAlerta: string = this.base + "monitoreoSenales/DeleteAdjuntosInformAlerta";
   public urlProcessInsertFile: string = this.base + "sbsReport/processInsertFile";
@@ -208,6 +207,7 @@ class Rutas {
   public urlInsCorreoUsuario:string = this.base + "monitoreoSenales/InsCorreoUsuario";
   public urlgetListaUsuarioCorreos:string = this.base + "monitoreoSenales/getListaUsuarioCorreos";
   public urlEnvioCorreoConfirmacion:string = this.base + "monitoreoSenales/EnvioCorreoConfirmacion";
+  public urlEnvioCorreoActualizacionPass:string = this.base + "monitoreoSenales/EnvioCorreoActualizacionPass";
 
   //LISTAR LOS ADJUNTOS
   public urlgetListaAdjuntos:string = this.base + "monitoreoSenales/getListaAdjuntos";
@@ -222,6 +222,12 @@ class Rutas {
   //VALIDAR SI EXISTE UN USUSARIO
   public urlGetValidarExisteCorreo :string = this.base + "monitoreoSenales/GetValidarExisteCorreo";
   public urlGetUpdUsuarioEncriptado :string = this.base + "monitoreoSenales/GetUpdUsuarioEncriptado";
+  public urlGetValidarHash :string = this.base + "monitoreoSenales/GetValidarHash";
+  public urlValidarFechaHash :string = this.base + "monitoreoSenales/ValidarFechaHash";
+  
+  public urlGetInsertaHistorialUsuario :string = this.base + "monitoreoSenales/GetInsertaHistorialUsuario";
+  
+  
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
