@@ -2,7 +2,7 @@
 <div class="wrapper">
     <div *ngIf="VALIDADOR == 1;">
         <div class="container">
-            <h1>El link es incorrecto</h1>
+            <h1>{{this.Titulo}}</h1>
             
             
         </div>
@@ -12,13 +12,35 @@
         
 
         <div class="container">
-                <h1>Actualizar contraseña</h1>
+                <h1>{{this.Titulo}}</h1>
                 
                 <form class="form">
-                    <input type="text" [(ngModel)]="password.pss1" placeholder="Contraseña">
-                    <input type="password" [(ngModel)]="password.pss2" placeholder="Confirmar contraseña">
-                    <button type="submit" id="login-button" (click)="ActualizarContrasenna()">Actualizar</button>
+                    <input type="text" [(ngModel)]="password.pss1" placeholder="Contraseña" id="pss1" name="pss1">
+                    
+                    <input [type]="pass" [(ngModel)]="password.pss2" placeholder="Confirmar contraseña" id="pss2" name="pss2">
+                    <div class="pb-1">
+                        <button type="submit" style="cursor:pointer" id="login-button" (click)="MostrarPass()" *ngIf="!eye.show">Mostrar contraseña</button>
+                      
+                    </div>
+                    <div class="pb-1">
+                        
+                        <button type="submit" style="cursor:pointer" id="login-button" (click)="MostrarPass()"  *ngIf="eye.show">Ocultar contraseña</button>
+                        
+                    </div>
+                    <div>
+                        
+                        <button type="submit" style="cursor:pointer" id="login-button" (click)="ActualizarContrasenna()">Actualizar</button>
+                    </div>
+                    
                 </form>
+            </div>
+        </div>
+
+        <div *ngIf="VALIDADOR == 3;">
+            <div class="container">
+                <h1>{{this.Titulo}}</h1>
+                
+                
             </div>
         </div>
 	

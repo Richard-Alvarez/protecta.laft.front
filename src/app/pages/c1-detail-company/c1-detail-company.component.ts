@@ -44,6 +44,7 @@ export class C1DetailCompanyComponent implements OnInit {
     }
     this.longPreguntas = this.objAlerta.arrPreguntasTitleDetail.length
     //this.getQuestionDetail()
+    this.CalcularCantidadRespuestas()
   }
 
   getClassByColum(){
@@ -103,12 +104,13 @@ export class C1DetailCompanyComponent implements OnInit {
     (this.arrRespuestasC1[indicePregEmpresa])[indicePreg] = valor
     //console.warn("el this.arrRespuestasC1 C1: ",this.arrRespuestasC1);
 
-    
+    debugger
     this.dataC1Serv.arrRespuestasForm$.emit(this.arrRespuestasC1)
     
   }
 
   setDataInputComment(indicePregEmpresa,indicePreg,eventoCaja){
+    debugger
     let valorDetallePregunta = eventoCaja.target.value
     //console.warn("el valorDetallePregunta de data input comment: ",valorDetallePregunta)
 
@@ -124,6 +126,7 @@ export class C1DetailCompanyComponent implements OnInit {
   }
 
   setRespuestasRadio(idpregunta,valor){
+    debugger
     //console.warn("el idpregunta: ",+idpregunta+" - valor: "+valor)
     if(!this.arrSetRespuestaGeneral[idpregunta]){
       //console.warn("el 2 idpregunta: ",+valor+" - valor: "+valor)
@@ -137,6 +140,7 @@ export class C1DetailCompanyComponent implements OnInit {
     let tamanio = this.objAlerta.arrPreguntasDetalle.length
     for (let index = 0; index < tamanio; index++) {
       this.setDataInputs(index,indicePreg,valor)
+     
     }
   }
 
@@ -337,12 +341,10 @@ DescargarArhivo(estado,TipoUsuario){
   console.log("data",data)
   this.excelService.exportAsExcelFile(data, "Lista de empresas");     
      
-      
-      
-      
-    
-  
+   
 }
+
+
 SwalGlobal(mensaje,TipoUsuario){
   let titulo = ''
   if(TipoUsuario == 'RE'){
@@ -366,5 +368,57 @@ SwalGlobal(mensaje,TipoUsuario){
     return
   });
 }
+
+ListaEmpresas:any = []
+CalcularCantidadRespuestas(){
+  let tamanio = this.objAlerta.arrPreguntasDetalle.length
+  if(this.objState.sState == 'PENDIENTE')
+    for (let index = 0; index < tamanio; index++) {
+    this.arrComentariosC1.push([])
+  }else{
+   
+    for (let index = 0; index < tamanio-1; index++) {
+      this.arrComentariosC1.push([])
+  }
+   
+}
+}
+
+
+async setDataInputTextRespCommentGeneral(eventoCaja,identifica,id){
+  let valorDetallePregunta = eventoCaja.target.value
+  let textoGlobal1 =  (<HTMLInputElement>document.getElementById('inputglobal1')).value
+  let textoGlobal2 =  (<HTMLInputElement>document.getElementById('inputglobal2')).value
+
+  // if(!this.arrComentariosC1[indicePregEmpresa]){
+  //   this.arrComentariosC1[indicePregEmpresa] = [[]]
+  // }
+   //this.dataC1Serv.arrComentariosForm$.emit(this.arrComentariosC1)
+  
+    let tamanio = this.objAlerta.arrPreguntasDetalle.length
+    for (let index = 0; index < tamanio; index++) {
+     
+      (<HTMLInputElement>document.getElementById("opTextBox"+index+"-"+identifica)).value = (<HTMLInputElement>document.getElementById(id)).value;
+      
+      if(identifica == 0){
+        this.arrComentariosC1[index][identifica] = textoGlobal1
+      }else{
+        this.arrComentariosC1[index][identifica] = textoGlobal2
+      }
+      
+      
+      this.dataC1Serv.arrComentariosForm$.emit(this.arrComentariosC1)
+    }
+  
+ 
+ 
+}
+
+  
+
+
+
+ 
+
 
 }

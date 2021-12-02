@@ -1307,12 +1307,12 @@ Array.prototype.forEach.call( inputs, function( input )
   async RegistrarArchivo(){
     console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
     if(this.NombreArchivo == ''){
-      let mensaje = 'No hay archivo registrado'
+      let mensaje = 'Debe adjuntar un archivo'
       this.SwalGlobal(mensaje)
       return
     }
     if(this.idSubGrupo == -1){
-      let mensaje = 'Tiene que seleccionar un subgrupo'
+      let mensaje = 'Debe seleccionar un subgrupo'
       this.SwalGlobal(mensaje)
       return
     }

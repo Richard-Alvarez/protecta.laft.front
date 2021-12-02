@@ -69,6 +69,15 @@
     
                 </div>
             </div>
+            <div class="row" *ngIf="objState.sState === 'PENDIENTE' || (parent.STIPO_USUARIO == 'RE' && objState.sState == 'DEVUELTO')">
+                <div class="col-lg-5"  style="padding-right:0px;padding-left:0px"></div>
+                <div class="col-lg-3"  style="padding-right:0px;padding-left:0px">
+                    <input type="text" class="form-control" id="inputglobal1" (keyup)="setDataInputTextRespCommentGeneral($event,0,'inputglobal1')" placeholder="Ingrese el comentario global" />
+                </div>
+                <div class="col-lg-3"  style="padding-right:0px;padding-left:45px">
+                    <input type="text" class="form-control" id="inputglobal2" (keyup)="setDataInputTextRespCommentGeneral($event,1,'inputglobal2')" placeholder="Ingrese el comentario global" />
+                    </div>
+            </div>
             <hr>
             <div class="row" style="padding-bottom: 10px;"  *ngFor="let itemC1 of getArrayPreguntasDetalle();let indiceC1 = index;">
                 <!--<span>{{arrRespuestasC1 | json}}</span>-->
