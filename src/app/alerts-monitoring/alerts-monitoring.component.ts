@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { listLocales } from 'ngx-bootstrap/chronos';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { CoreService } from '../services/core.service';
 import { SbsreportService } from '../services/sbsreport.service';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';

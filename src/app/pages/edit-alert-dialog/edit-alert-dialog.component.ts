@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { CoreService } from '../../services/core.service';
 import swal from 'sweetalert2';
 import { SbsreportService } from 'src/app/services/sbsreport.service';

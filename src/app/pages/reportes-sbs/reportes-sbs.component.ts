@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
-import { BsDatepickerConfig, parseDate } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ActivatedRoute } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import Swal from 'sweetalert2';

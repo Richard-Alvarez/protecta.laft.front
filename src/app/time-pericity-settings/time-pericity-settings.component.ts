@@ -3,7 +3,7 @@ import swal from 'sweetalert2';
 import { CoreService } from '../services/core.service';
 import { SbsreportService } from '../services/sbsreport.service';
 import { listLocales } from 'ngx-bootstrap/chronos';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import * as moment from 'moment';
 

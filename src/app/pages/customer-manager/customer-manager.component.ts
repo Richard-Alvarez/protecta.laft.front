@@ -113,6 +113,7 @@ export class CustomerManagerComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.valorSubGrupo();
     this.AdjuntarArchivo()
     this.spinner.show()
     await this.getGrupoList()
@@ -227,7 +228,7 @@ export class CustomerManagerComponent implements OnInit {
     // if (this.idGrupo != 1) {
     //   //this.ListaDeCoincidencias(this.idGrupo)
     // }
-    console.log(this.idSubGrupo)
+    console.log("",this.idSubGrupo);
   }
 
 
@@ -1188,13 +1189,6 @@ export class CustomerManagerComponent implements OnInit {
         }
       })
     } else {
-      let data: any = {}
-      data.name = (ItemCliente.SNOM_COMPLETO).trim()
-      data.alertId = 2
-      data.periodId = this.NPERIODO_PROCESO
-      data.tipoCargaId = 2
-      data.sClient = ItemCliente.SCLIENT
-      data.nIdUsuario = this.objUsuario.idUsuario
       let respuetaService: any = await this.getBusquedaManual(ObjListaCheckSeleccionadoxNombre)
       if (respuetaService.code == 1) {
         let mensaje = respuetaService.mesaje || 'Ocurrio un error'

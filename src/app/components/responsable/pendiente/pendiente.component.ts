@@ -566,7 +566,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
            if(result.dismiss){
              return
            }
-          if(result.value = true){
+          if(result.value){
             this.core.loader.show()
             let inc = 0;
           let newArrResponsable:any = []
