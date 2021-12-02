@@ -113,6 +113,7 @@ export class CustomerManagerComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.valorSubGrupo();
     this.AdjuntarArchivo()
     this.spinner.show()
     await this.getGrupoList()
@@ -227,7 +228,7 @@ export class CustomerManagerComponent implements OnInit {
     // if (this.idGrupo != 1) {
     //   //this.ListaDeCoincidencias(this.idGrupo)
     // }
-    console.log(this.idSubGrupo)
+    console.log("",this.idSubGrupo);
   }
 
 
