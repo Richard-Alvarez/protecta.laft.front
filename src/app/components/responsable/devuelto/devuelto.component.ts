@@ -519,7 +519,7 @@ export class DevueltoComponent implements OnInit {
           let detalleCortoNew:any = []
          
           for (let indiceDetalle2 = 0; indiceDetalle2 < objPreguntaNew.length; indiceDetalle2++){
-           
+           debugger
             let NRESPUESTA =  !this.arrDetailC1[indiceDetalle1] ? null : (this.arrDetailC1[indiceDetalle1])[indiceDetalle2]
             
             let SCOMENTARIO = !this.arrDetailCommentsC1[indiceDetalle1] ? null : !(this.arrDetailCommentsC1[indiceDetalle1])[indiceDetalle2] ? null : (this.arrDetailCommentsC1[indiceDetalle1])[indiceDetalle2]
@@ -631,13 +631,13 @@ export class DevueltoComponent implements OnInit {
       obj.message = 'Falto responder alguna señal'
       return obj
     }
-
-    this.arrInputComment.forEach(item => {
+   
+    // this.arrInputComment.forEach(item => {
        
-       if((item+' ').trim() === ''){
-         obj.message = 'La respuesta esta en blanco'
-       }
-     })
+    //    if((item+' ').trim() === ''){
+    //      obj.message = 'La respuesta esta en blanco'
+    //    }
+    //  })
 
     let inc = 0;
     for (let i = 0; i < arrResponsableNew.length; i++) {
@@ -813,7 +813,9 @@ export class DevueltoComponent implements OnInit {
       for (let i = 0; i < arrPreguntasCabecera.length; i++) {
         let cabecera = arrPreguntasCabecera[i]
         let comentario = arrComentarios[i] == undefined ? "" : arrComentarios[i];
-        if ((cabecera === '1' || cabecera === '2') && (comentario === null || (comentario).trim() === '')){
+        debugger
+        // if ((cabecera === '1' || cabecera === '2') && (comentario === null || (comentario).trim() === '')){
+          if (cabecera === '1' && (comentario === null || (comentario).trim() === '')){
           objResp.code = 1
           objResp.message='Debe responder obligatoriamente el comentario de la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'
           return objResp
@@ -888,6 +890,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   setDataInputTextRespComment(indexAlerta, indexPregunta, valor){
+    debugger
     if(this.arrInputComment.length === 0){
       this.arrInputComment = [[]]
     }
@@ -916,6 +919,7 @@ export class DevueltoComponent implements OnInit {
       this.arrInputComment[indexAlerta] = []
       return ''
     }
+    debugger
     return (this.arrInputComment[indexAlerta])[indexPregunta]
   }
 

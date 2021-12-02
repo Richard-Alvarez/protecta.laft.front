@@ -1739,7 +1739,6 @@ export class UserconfigService {
     });
   }
 
-<<<<<<< HEAD
 
   GetValidarExisteCorreo(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -1753,9 +1752,6 @@ export class UserconfigService {
     });
   }
   GetUpdUsuarioEncriptado(data: any): Promise<any> {
-=======
-  GetValidarExisteCorreo(data: any): Promise<any> {
->>>>>>> 2dd0420081f5ed16557403298aac78034dd5235f
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlGetUpdUsuarioEncriptado, data).subscribe((response) => {
