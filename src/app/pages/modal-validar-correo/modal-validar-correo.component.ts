@@ -182,7 +182,7 @@ export class ModalValidarCorreoComponent implements OnInit {
       let dataCorreo:any = {}
       dataCorreo.SEMAIL = this.correo.toLowerCase()
       dataCorreo.ID_USER = resultado.ID[0].iD_USUARIO
-      
+      dataCorreo.USUARIO = this.usuario.toUpperCase()
       await this.userConfigService.EnvioCorreoActualizacionPass(dataCorreo)
       this.closeModal('edit-modal')
       return

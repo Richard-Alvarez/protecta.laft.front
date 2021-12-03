@@ -411,11 +411,12 @@ export class DevueltoComponent implements OnInit {
               
 
             })
-           
+           debugger
             arrResponsableNewAlert.forEach(objAlerta => {
               this.parent.pushObjInArrayByAlert('COMPLETADO',this.regimen.id,objAlerta)
+              
             })
-
+            this.ActualirDetallesPreguntas(arrResponsableNewAlert)
             // creando metodo para envir a completado
 
             
@@ -454,6 +455,21 @@ export class DevueltoComponent implements OnInit {
     }
     
   }
+  async ActualirDetallesPreguntas(obj){
+    debugger
+    obj.forEach(element => {
+      if(element.NIDALERTA == 1){
+        element.arrPreguntasDetalle.forEach(listaPreguntas => {
+          listaPreguntas.forEach(async (pregunta) => {
+            // pregunta.forEach(async (preg) => {
+                await this.userConfigService.insertQuestionDetail(pregunta)
+            // });
+          });
+        });
+      }
+    });
+  }
+
 
   isValidationAdjuntosForms(objAlerta){
     try {
@@ -501,7 +517,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   setDataPendiente(){
-    debugger
+    
     try {
       let arrResponsableNew = []
       let objAlertaNew:any = {}
@@ -517,9 +533,9 @@ export class DevueltoComponent implements OnInit {
           //objPreguntaNew.SRESPUESTA = this.arrDetailC1[indiceDetalle1] == '1' ? 'Sí.' : this.arrDetailC1[indiceDetalle1] == '2' ? 'No.' : null
           //objPreguntaNew.SCOMENTARIO = this.arrDetailCommentsC1[indiceDetalle1]
           let detalleCortoNew:any = []
-         
+          debugger
           for (let indiceDetalle2 = 0; indiceDetalle2 < objPreguntaNew.length; indiceDetalle2++){
-           debugger
+           
             let NRESPUESTA =  !this.arrDetailC1[indiceDetalle1] ? null : (this.arrDetailC1[indiceDetalle1])[indiceDetalle2]
             
             let SCOMENTARIO = !this.arrDetailCommentsC1[indiceDetalle1] ? null : !(this.arrDetailCommentsC1[indiceDetalle1])[indiceDetalle2] ? null : (this.arrDetailCommentsC1[indiceDetalle1])[indiceDetalle2]
@@ -800,7 +816,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   IsValidInfoPendientePregCabecera(preguntaCabecera){
-    debugger
+    
     let arrPreguntasCabecera = preguntaCabecera.pregunta;
     let arrComentarios = preguntaCabecera.respuesta;
     if (arrPreguntasCabecera == null) {
@@ -813,7 +829,7 @@ export class DevueltoComponent implements OnInit {
       for (let i = 0; i < arrPreguntasCabecera.length; i++) {
         let cabecera = arrPreguntasCabecera[i]
         let comentario = arrComentarios[i] == undefined ? "" : arrComentarios[i];
-        debugger
+        
         // if ((cabecera === '1' || cabecera === '2') && (comentario === null || (comentario).trim() === '')){
           if (cabecera === '1' && (comentario === null || (comentario).trim() === '')){
           objResp.code = 1
@@ -890,7 +906,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   setDataInputTextRespComment(indexAlerta, indexPregunta, valor){
-    debugger
+    
     if(this.arrInputComment.length === 0){
       this.arrInputComment = [[]]
     }
@@ -919,7 +935,7 @@ export class DevueltoComponent implements OnInit {
       this.arrInputComment[indexAlerta] = []
       return ''
     }
-    debugger
+    
     return (this.arrInputComment[indexAlerta])[indexPregunta]
   }
 

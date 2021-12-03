@@ -622,6 +622,7 @@ export class ViewC2FormComponent implements OnInit  {
             // data.P_NIDALERTA = this.alertData.NIDALERTA;
             // data.P_NIDREGIMEN = this.alertData.NIDREGIMEN;
             let respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
+            let IdGrupo:any = await this.ValidarGrupo()
             let arrObjCabecera:any = []
             respResultadosCoinciden.forEach(element => {
             let objCabecera:any = {}
@@ -643,6 +644,16 @@ export class ViewC2FormComponent implements OnInit  {
             //objCabecera.NTIPOCARGA =element.NTIPOCARGA
             objCabecera["Tipo de Busqueda"] =element.STIPO_BUSQUEDA
             objCabecera["Porcentaje"] =element.NPORC_APROXIMA_BUSQ
+            
+            if(IdGrupo == 3 ){
+                objCabecera["Grupo"] = "Proveedores"
+                objCabecera["SubGrupo"] = element.SDESSUBGRUPO_SENAL
+            }
+            if(IdGrupo == 4 ){
+                objCabecera["Grupo"] = "Contraparte"
+                objCabecera["SubGrupo"] = element.SDESSUBGRUPO_SENAL
+            }
+
             arrObjCabecera.push(objCabecera)
         });
 
