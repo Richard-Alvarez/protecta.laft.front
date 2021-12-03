@@ -34,10 +34,10 @@
 }
  .wrapper {
 	 background: #50a3a2;
-	 background: -webkit-linear-gradient(top left,#50a3a2 0%,#53e3a6 100%);
-	 background: -moz-linear-gradient(top left,#50a3a2 0%,#53e3a6 100%);
-	 background: -o-linear-gradient(top left,#50a3a2 0%,#53e3a6 100%);
-	 background: linear-gradient(to bottom right,#50a3a2 0%,#53e3a6 100%);
+	 background: -webkit-linear-gradient(top left,#201751 0%,#291e66 100%);
+	 background: -moz-linear-gradient(top left,#201751 0%,#291e66 100%);
+	 background: -o-linear-gradient(top left,#201751 0%,#291e66 100%);
+	 background: linear-gradient(to bottom right,#201751 0%,#291e66 100%);
 	 position: absolute;
 	 /* top: 50%; */
 	 /* left: 0; */
@@ -62,6 +62,7 @@
 	 transition-duration: 1s;
 	 transition-timing-function: ease-in-put;
 	 font-weight: 200;
+	 color: white;
 }
  form {
 	 padding: 20px 0;
@@ -92,7 +93,8 @@
  form input:focus {
 	 background-color: white;
 	 width: 300px;
-	 color: #53e3a6;
+	 /* color: #53e3a6; */
+	 color: black;
 }
  form button {
 	 appearance: none;
@@ -100,7 +102,8 @@
 	 background-color: white;
 	 border: 0;
 	 padding: 10px 15px;
-	 color: #53e3a6;
+	 /* color: #53e3a6; */
+	 color: black;
 	 border-radius: 3px;
 	 width: 250px;
 	 cursor: pointer;
@@ -124,7 +127,7 @@
 	 display: block;
 	 width: 40px;
 	 height: 40px;
-	 background-color: rgba(255,255,255,0.15);
+	 background-color:#FF7F27;
 	 bottom: -160px;
 	 -webkit-animation: square 25s infinite;
 	 animation: square 25s infinite;

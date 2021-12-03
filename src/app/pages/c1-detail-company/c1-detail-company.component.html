@@ -151,12 +151,14 @@
 
 </div>
 <br *ngIf="objAlerta.NIDALERTA === 1">
-<div *ngIf="(objAlerta.NIDALERTA == 1 && parent.STIPO_USUARIO == 'RE' && objState.sState === 'PENDIENTE') || (objAlerta.NIDALERTA == 1 && parent.STIPO_USUARIO == 'RE' && objState.sState == 'DEVUELTO')" class="btn btn-warning text-white " style="float:left" (click)="openModal()">Agregar Empresa</div>
+<div *ngIf="(objAlerta.NIDALERTA == 1 && parent.STIPO_USUARIO == 'RE' && objState.sState === 'PENDIENTE') || (objAlerta.NIDALERTA == 1 && parent.STIPO_USUARIO == 'RE' && objState.sState == 'DEVUELTO')" style="padding-bottom: 10px;">
+    <button (click)="openModal()" class="btn btn-warning text-white">Agregar Empresa</button> 
+</div>
 <!-- <div *ngIf="objAlerta.NIDALERTA === 1" class="icon-descarga" placement="top" ngbTooltip="Descargar Lista" (click)="DescargarArhivo(objState.sState)" style="cursor: pointer;" > 
     <i class="fas fa-arrow-down"></i>
 </div>  -->
-<div class="col-6" *ngIf="(objAlerta.NIDALERTA == 1  && (objState.sState === 'PENDIENTE' ||  objState.sState === 'COMPLETADO'))">
-    <button (click)="DescargarArhivo(objState.sState,parent.STIPO_USUARIO )" class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar empresas</button>
+<div class="col-6" style="padding: 0px;" *ngIf="(objAlerta.NIDALERTA == 1  && (objState.sState === 'PENDIENTE' ||  objState.sState === 'COMPLETADO' ||  objState.sState === 'REVISADO'))">
+    <button (click)="DescargarArhivo(objState.sState,parent.STIPO_USUARIO )" class="btn btn-outline-info form-control  mr-2 buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar empresas</button>
 </div>
 
 <br *ngIf="objAlerta.NIDALERTA === 1">
