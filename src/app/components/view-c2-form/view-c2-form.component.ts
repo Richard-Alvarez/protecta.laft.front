@@ -99,7 +99,7 @@ export class ViewC2FormComponent implements OnInit  {
         if(this.ValidadorHistorico != 0){
             this.alertData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
         }else{
-            this.alertData.NPERIODO_PROCESO = 20210930//parseInt(this.HistoricoPeriodo)
+            this.alertData.NPERIODO_PROCESO = parseInt(this.HistoricoPeriodo)
         }
         //parseInt(localStorage.getItem("NPERIODO_PROCESO"))
         this.alertData.SPERIODO_FECHA = this.objAlertaC2.NPERIODO_PROCESO//localStorage.getItem("fechaPeriodo")

@@ -382,6 +382,9 @@ export class ModalEmailProfileComponent implements OnInit {
 
         }else{
           this.action = 0
+          this.ActivarUser = true
+          this.ActivarListUser = true
+          this.ActivarCombo = true
           let resultado = this.ListaEmail.filter(it => it.NIDACCION == 6)
           console.log("resultado",resultado)
           console.log("ListaEmail",this.ListaEmail)
