@@ -74,7 +74,7 @@ export class ActualizarContrasennaComponent implements OnInit {
     let FechaHash = respuesta[0].FechaHash
     let FechaHashActualizada = respuesta[0].FechaHashActualizada
     let FechaActual = respuesta[0].FechaActual
-
+    debugger
     if(Date.parse(FechaHashActualizada) > Date.parse(FechaActual)) {
       this.VALIDADOR = 2
       this.Titulo = 'Actualizar contraseña'

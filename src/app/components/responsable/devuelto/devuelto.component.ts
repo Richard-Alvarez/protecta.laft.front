@@ -411,11 +411,12 @@ export class DevueltoComponent implements OnInit {
               
 
             })
-           
+           debugger
             arrResponsableNewAlert.forEach(objAlerta => {
               this.parent.pushObjInArrayByAlert('COMPLETADO',this.regimen.id,objAlerta)
+              
             })
-
+            this.ActualirDetallesPreguntas(arrResponsableNewAlert)
             // creando metodo para envir a completado
 
             
@@ -454,6 +455,21 @@ export class DevueltoComponent implements OnInit {
     }
     
   }
+  async ActualirDetallesPreguntas(obj){
+    debugger
+    obj.forEach(element => {
+      if(element.NIDALERTA == 1){
+        element.arrPreguntasDetalle.forEach(listaPreguntas => {
+          listaPreguntas.forEach(async (pregunta) => {
+            // pregunta.forEach(async (preg) => {
+                await this.userConfigService.insertQuestionDetail(pregunta)
+            // });
+          });
+        });
+      }
+    });
+  }
+
 
   isValidationAdjuntosForms(objAlerta){
     try {
@@ -501,7 +517,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   setDataPendiente(){
-    debugger
+    
     try {
       let arrResponsableNew = []
       let objAlertaNew:any = {}
@@ -517,7 +533,7 @@ export class DevueltoComponent implements OnInit {
           //objPreguntaNew.SRESPUESTA = this.arrDetailC1[indiceDetalle1] == '1' ? 'Sí.' : this.arrDetailC1[indiceDetalle1] == '2' ? 'No.' : null
           //objPreguntaNew.SCOMENTARIO = this.arrDetailCommentsC1[indiceDetalle1]
           let detalleCortoNew:any = []
-         
+          debugger
           for (let indiceDetalle2 = 0; indiceDetalle2 < objPreguntaNew.length; indiceDetalle2++){
            
             let NRESPUESTA =  !this.arrDetailC1[indiceDetalle1] ? null : (this.arrDetailC1[indiceDetalle1])[indiceDetalle2]
@@ -631,13 +647,13 @@ export class DevueltoComponent implements OnInit {
       obj.message = 'Falto responder alguna señal'
       return obj
     }
-
-    this.arrInputComment.forEach(item => {
+   
+    // this.arrInputComment.forEach(item => {
        
-       if((item+' ').trim() === ''){
-         obj.message = 'La respuesta esta en blanco'
-       }
-     })
+    //    if((item+' ').trim() === ''){
+    //      obj.message = 'La respuesta esta en blanco'
+    //    }
+    //  })
 
     let inc = 0;
     for (let i = 0; i < arrResponsableNew.length; i++) {
@@ -800,7 +816,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   IsValidInfoPendientePregCabecera(preguntaCabecera){
-    debugger
+    
     let arrPreguntasCabecera = preguntaCabecera.pregunta;
     let arrComentarios = preguntaCabecera.respuesta;
     if (arrPreguntasCabecera == null) {
@@ -813,7 +829,9 @@ export class DevueltoComponent implements OnInit {
       for (let i = 0; i < arrPreguntasCabecera.length; i++) {
         let cabecera = arrPreguntasCabecera[i]
         let comentario = arrComentarios[i] == undefined ? "" : arrComentarios[i];
-        if ((cabecera === '1' || cabecera === '2') && (comentario === null || (comentario).trim() === '')){
+        
+        // if ((cabecera === '1' || cabecera === '2') && (comentario === null || (comentario).trim() === '')){
+          if (cabecera === '1' && (comentario === null || (comentario).trim() === '')){
           objResp.code = 1
           objResp.message='Debe responder obligatoriamente el comentario de la señal '+preguntaCabecera.SNOMBRE_ALERTA+'.'
           return objResp
@@ -888,6 +906,7 @@ export class DevueltoComponent implements OnInit {
   }
 
   setDataInputTextRespComment(indexAlerta, indexPregunta, valor){
+    
     if(this.arrInputComment.length === 0){
       this.arrInputComment = [[]]
     }
@@ -916,6 +935,7 @@ export class DevueltoComponent implements OnInit {
       this.arrInputComment[indexAlerta] = []
       return ''
     }
+    
     return (this.arrInputComment[indexAlerta])[indexPregunta]
   }
 

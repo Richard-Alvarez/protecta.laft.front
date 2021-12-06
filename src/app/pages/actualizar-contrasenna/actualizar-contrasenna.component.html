@@ -17,8 +17,8 @@
                 <form class="form">
                     <input type="text" [(ngModel)]="password.pss1" placeholder="Contraseña" id="pss1" name="pss1">
                     
-                    <input [type]="pass" [(ngModel)]="password.pss2" placeholder="Confirmar contraseña" id="pss2" name="pss2">
-                    <div class="pb-1">
+                    <input type="text" [(ngModel)]="password.pss2" placeholder="Confirmar contraseña" id="pss2" name="pss2">
+                    <!-- <div class="pb-1">
                         <button type="submit" style="cursor:pointer" id="login-button" (click)="MostrarPass()" *ngIf="!eye.show">Mostrar contraseña</button>
                       
                     </div>
@@ -26,7 +26,7 @@
                         
                         <button type="submit" style="cursor:pointer" id="login-button" (click)="MostrarPass()"  *ngIf="eye.show">Ocultar contraseña</button>
                         
-                    </div>
+                    </div> -->
                     <div>
                         
                         <button type="submit" style="cursor:pointer" id="login-button" (click)="ActualizarContrasenna()">Actualizar</button>

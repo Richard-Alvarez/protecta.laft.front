@@ -178,11 +178,11 @@ export class ModalValidarCorreoComponent implements OnInit {
       dataEncrip.SDESENCRIP_ID = EncripID
       dataEncrip.SHASH = hash
 
-      this.userConfigService.GetUpdUsuarioEncriptado(dataEncrip)
+      await this.userConfigService.GetUpdUsuarioEncriptado(dataEncrip)
       let dataCorreo:any = {}
       dataCorreo.SEMAIL = this.correo.toLowerCase()
       dataCorreo.ID_USER = resultado.ID[0].iD_USUARIO
-      
+      dataCorreo.USUARIO = this.usuario.toUpperCase()
       await this.userConfigService.EnvioCorreoActualizacionPass(dataCorreo)
       this.closeModal('edit-modal')
       return
