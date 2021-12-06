@@ -1846,6 +1846,15 @@ export class C2DetailComponent implements OnInit {
             return 'colorGrillaBlanco'
         }
     }
+
+    getHide(){
+        if (this.getDisable() == true) {
+            return true
+        }
+        else{
+            return false
+        }
+    }
     getDisable(){
       
         let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.NACEPTA_COINCIDENCIA == 2)
