@@ -468,10 +468,18 @@ export class ModalEmailProfileComponent implements OnInit {
               
                this.action =  0;
                this.Seleccione = "Seleccione" ;
-            
               
-                var dropDown = (<HTMLInputElement>document.getElementById("idcombo"));
-                dropDown.selectedIndex = 0;
+               
+                // var dropDown = (<HTMLInputElement>document.getElementById("idcombo"));
+                var dropDown = document.getElementById("idcombo") as HTMLSelectElement;
+                //console.log("dropDown",dropDown.se)
+                //dropDown.setAttribute('selected','selected')
+                //console.log("dropDown",dropDown)
+                  dropDown.selectedIndex = 0;
+
+
+                   
+                
             
           
               let mensaje = "No se puede agregar otra acción de " + resultado[0].SDESACCION;
