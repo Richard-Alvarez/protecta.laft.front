@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component,OnDestroy, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router'
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { ConfigService } from 'src/app/services/config.service';
@@ -9,13 +9,15 @@ import * as moment from 'moment';
 import { dayOfYearFromWeeks } from 'ngx-bootstrap/chronos/units/week-calendar-utils';
 import { PendienteInformeComponent } from '../responsable/pendiente-informe/pendiente-informe.component'
 import { InformeTerminadoComponent } from '../responsable/informe-terminado/informe-terminado.component'
+import { isNullOrUndefined } from 'util';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-view-c2-form',
   templateUrl: './view-c2-form.component.html',
   styleUrls: ['./view-c2-form.component.css']
 })
-export class ViewC2FormComponent implements OnInit  {
+export class ViewC2FormComponent implements OnInit , OnDestroy {
 
   alertData: any = {}
 
@@ -43,6 +45,10 @@ export class ViewC2FormComponent implements OnInit  {
     public reviewed: any[] = []
     NIDGRUPOSENAL:any
     listSubGrupos:any =[]
+    _NIDSUBGRUPOSEN = 0
+    _sSubGrupo = '';
+    _NIDTIPOLISTA = 0;
+    _NIDPROVEEDOR = 0;
     config :any =[
         {
           NIDGRUPOSENAL : 1,
@@ -84,7 +90,9 @@ export class ViewC2FormComponent implements OnInit  {
     ) {
 
     }
-
+    ngOnDestroy(){
+        localStorage.setItem("objFocusPositionReturn","{}");
+    }
     async ngOnInit() {
         var URLactual = window.location + " ";
         let link = URLactual.split("/")
@@ -117,6 +125,8 @@ export class ViewC2FormComponent implements OnInit  {
         this.alertData.SESTADO = this.objAlertaC2.SESTADO
         this.alertData.DESREGIMEN = 'Régimen '+this.regimen.descripcion
         this.STIPOUSUARIO = this.core.storage.get('usuario')['tipoUsuario'];
+
+        await this.getDatosLocalStore()
         await this.getClientsByList()
         //await this.getAttachedFiles('OC');
         await this.getSignalDetailList()
@@ -449,20 +459,40 @@ export class ViewC2FormComponent implements OnInit  {
     getPersonByListType(listType: string, numDoc: string) {
         return this.listTypeMap.get(listType).find(it => it.SNUM_DOCUMENTO == numDoc)
     }
-
+    async getDatosLocalStore(){
+        let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPositionReturn"))
+        if ( !isNullOrUndefined(respObjFocusPosition)){
+            this._sSubGrupo = respObjFocusPosition.SSUBGRUPO
+            this._NIDTIPOLISTA = respObjFocusPosition.NIDTIPOLISTA
+            this._NIDPROVEEDOR = respObjFocusPosition.NIDPROVEEDOR
+            this._NIDSUBGRUPOSEN = respObjFocusPosition.NIDSUBGRUPOSEN
+        }
+    }
     linkactual
     async obtListas(){
         let dataSend = this.config.find(t=> t.linkactual.includes(this.linkactual));
         this.listSubGrupos = []
+        //_idSubGrupo
         if([3,4].includes(dataSend.NIDGRUPOSENAL))
             this.listSubGrupos = this.internationalList
             .map(t=> t.SDESSUBGRUPO_SENAL)
             .filter((value,index,array)=>{
                 return array.indexOf(value) == index;
-            })
+            }).map(t=>  { 
+                return {"name": t ,"visible": t == this._sSubGrupo? 'show' : ''}
+            });
     }
     getSubGrupos(subGrupoName :any){
-        return  this.internationalList.filter(t=>t.SDESSUBGRUPO_SENAL == subGrupoName)
+        let arrClients : any [] = this.internationalList
+        .filter(t=>t.SDESSUBGRUPO_SENAL == subGrupoName)
+        
+        arrClients.forEach(t => {
+            t.visible = (
+                this._NIDTIPOLISTA == t.NIDTIPOLISTA && 
+                this._NIDPROVEEDOR == t.NIDPROVEEDOR && 
+                this._NIDSUBGRUPOSEN == t.NIDSUBGRUPOSEN) ? 'show' : '' 
+        })
+        return  arrClients
     }
     async getInternationalList() {
         try {
@@ -470,6 +500,12 @@ export class ViewC2FormComponent implements OnInit  {
             dataSend.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
             dataSend.NIDREGIMEN = dataSend.NIDGRUPOSENAL == 1 ? this.regimen.id : dataSend.NIDREGIMEN
             this.internationalList = await this.obtListaInternacional(dataSend);
+            this.internationalList.forEach(t => {
+                t.visible = (
+                    this._NIDTIPOLISTA == t.NIDTIPOLISTA && 
+                    this._NIDPROVEEDOR == t.NIDPROVEEDOR && 
+                    this._NIDSUBGRUPOSEN == t.NIDSUBGRUPOSEN) ? 'show' : '' 
+            });
         } catch (error) {
         }
     }
@@ -544,10 +580,11 @@ export class ViewC2FormComponent implements OnInit  {
         this.core.loader.hide();
     }
 
-    async goToDetail(item: any,lista:any,idElement:any,idElementSubGroup:any) {
+    async goToDetail(item: any,lista:any,idElement:any,idElementSubGroup:any,subgruponame: any) {
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition:any = {}
+        debugger;
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
         if(this.linkactual == "proveedor")
             this.regimen.id = 1;
@@ -556,7 +593,11 @@ export class ViewC2FormComponent implements OnInit  {
         objFocusPosition.elementoPadre = this.valueIdCollap
         objFocusPosition.elemento = idElement
         objFocusPosition.elementSubGroup = idElementSubGroup
+        objFocusPosition.SSUBGRUPO = subgruponame
         objFocusPosition.NIDTIPOLISTA = lista.NIDTIPOLISTA
+        objFocusPosition.NIDPROVEEDOR = lista.NIDPROVEEDOR
+        objFocusPosition.NIDSUBGRUPOSEN = lista.NIDSUBGRUPOSEN
+        objFocusPosition.NIDBOTON = item.STIPOIDEN + item.SNUM_DOCUMENTO + item.SNOM_COMPLETO.length
         localStorage.setItem("objFocusPosition", JSON.stringify(objFocusPosition))
         let periodoSend = parseInt(localStorage.getItem("periodo"))
         

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { CoreService } from '../../../services/core.service';
@@ -23,7 +23,7 @@ import { C2PolicyComponent } from 'src/app/components/c2-policy/c2-policy.compon
   
 
 })
-export class C2DetailComponent implements OnInit {
+export class C2DetailComponent implements OnInit , OnDestroy {
     
     cities = [
         {id: 1, name: 'Vilnius'},
@@ -114,8 +114,12 @@ export class C2DetailComponent implements OnInit {
   NPERIODO_PROCESO
   SESTADO_BUTTON_SAVE
   NewListCheck :any = []
-  async ngOnInit() {  
-    //   this.getAcordionReturn();
+  ngOnDestroy(){
+      localStorage.setItem("objFocusPosition","{}")
+    }
+    async ngOnInit() {  
+        //   this.getAcordionReturn();
+        localStorage.setItem("objFocusPositionReturn", localStorage.getItem("objFocusPosition"));
       this.nidregimen = localStorage.getItem("NREGIMEN");
       this.nidalerta = localStorage.getItem("NIDALERTA");
       var paramCliente : any =  localStorage.getItem("paramCliente");
@@ -1851,6 +1855,15 @@ export class C2DetailComponent implements OnInit {
             return 'colorGrillaAleatorio'
         }else{
             return 'colorGrillaBlanco'
+        }
+    }
+
+    getHide(){
+        if (this.getDisable() == true) {
+            return true
+        }
+        else{
+            return false
         }
     }
     getDisable(){

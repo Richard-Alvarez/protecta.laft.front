@@ -1510,7 +1510,7 @@ Array.prototype.forEach.call( inputs, function( input )
   }
 
   async ListaDeCoincidencias(id){
-    debugger;
+    //debugger;
     let data:any = {}
     data = {
       NIDGRUPOSENAL: id,

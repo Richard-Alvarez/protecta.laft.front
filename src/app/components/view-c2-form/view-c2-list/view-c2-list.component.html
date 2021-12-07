@@ -18,7 +18,9 @@
                             <td scope="col" style="width: 250px">{{cliente.STIPOIDEN ? (cliente.STIPOIDEN + ' - ' +cliente.SNUM_DOCUMENTO) : ' - '}}</td>
                             <td scope="col" style="width: 300px">{{cliente.SNOM_COMPLETO}}</td>
                             <td scope="col" class="text-center">
-                                <img src="assets/icons/view3.png" title="Acceder" alt="" (click)="parent.goToDetail(cliente,lista,acordion,accordionSubGrup)" style="cursor: pointer;" />
+                                <button id="{{cliente.STIPOIDEN + cliente.SNUM_DOCUMENTO +cliente.SNOM_COMPLETO.length}}" class="colorFocus">
+                                    <img (click)="parent.goToDetail(cliente,lista,acordion,accordionSubGrup,subgruponame)" title="Acceder" alt="" src="assets/icons/view3.png" style="cursor: pointer;" />
+                                </button>
                             </td>
                             <td scope="col" class="text-center">
                                 <div>{{cliente.SESTADO_REVISADO}}</div>
