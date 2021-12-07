@@ -445,6 +445,9 @@ export class ModalEmailProfileComponent implements OnInit {
           this.ActivarCombo = true
           if(resultado.length > 0){
             this.action = 0
+            var dropDown = document.getElementById("idcombo") as HTMLSelectElement;
+                
+                  dropDown.selectedIndex = 0;
             this.ActivarUser = true
           this.ActivarListUser = true
           this.ActivarCombo = true
