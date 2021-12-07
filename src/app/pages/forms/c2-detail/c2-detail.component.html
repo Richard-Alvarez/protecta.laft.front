@@ -377,7 +377,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" >
                     <!-- style="" -->
                     <div class="col-lg-11"></div>
                     <div class="col-lg-1">
@@ -385,7 +385,7 @@
                                 [disabled]="disableFormItems" title="Guardar">Guardar
                             </button> -->
 
-                        <button class="btn btn-warning text-white" (click)="save()" [disabled]="getDisable()" *ngIf="(tipoClienteGC == 'GC' || tipoClienteGC == 'C2-BANDEJA' || tipoClienteGC == 'ACEPTA-COINCID') && (SESTADO_BUTTON_SAVE == '2' && arrCoincidenciasLista.length > 0)"
+                        <button class="btn btn-warning text-white" (click)="save()" [disabled]="getDisable()" [hidden]="getHide()" *ngIf="(tipoClienteGC == 'GC' || tipoClienteGC == 'C2-BANDEJA' || tipoClienteGC == 'ACEPTA-COINCID') && (SESTADO_BUTTON_SAVE == '2' && arrCoincidenciasLista.length > 0)"
                             title="Guardar">Guardar
                             </button>
                     </div>

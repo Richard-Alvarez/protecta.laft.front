@@ -227,7 +227,7 @@ export class CustomerManagerComponent implements OnInit {
     // if (this.idGrupo != 1) {
     //   //this.ListaDeCoincidencias(this.idGrupo)
     // }
-    console.log(this.idSubGrupo)
+    console.log("",this.idSubGrupo);
   }
 
 
@@ -307,6 +307,7 @@ export class CustomerManagerComponent implements OnInit {
     return false
   }
   async getResultsList(isActiveForButton) {
+    debugger;
     let dataInput: any = {}
     dataInput.NTIPOIDEN_BUSQ = this.paramCliente.NTIPOIDEN_BUSQ
     if (this.idGrupo == 1) {
@@ -331,6 +332,7 @@ export class CustomerManagerComponent implements OnInit {
   }
 
   async getResultsList3(paramCliente, NBUSCAR_POR, NTIPO_PERSONA,isActiveForButton) {
+    debugger;
     try {
 
 
@@ -1188,6 +1190,13 @@ export class CustomerManagerComponent implements OnInit {
         }
       })
     } else {
+      let data: any = {}
+      data.name = (ItemCliente.SNOM_COMPLETO).trim()
+      data.alertId = 2
+      data.periodId = this.NPERIODO_PROCESO
+      data.tipoCargaId = 2
+      data.sClient = ItemCliente.SCLIENT
+      data.nIdUsuario = this.objUsuario.idUsuario
       let respuetaService: any = await this.getBusquedaManual(ObjListaCheckSeleccionadoxNombre)
       if (respuetaService.code == 1) {
         let mensaje = respuetaService.mesaje || 'Ocurrio un error'
@@ -1300,12 +1309,12 @@ Array.prototype.forEach.call( inputs, function( input )
   async RegistrarArchivo(){
     console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
     if(this.NombreArchivo == ''){
-      let mensaje = 'No hay archivo registrado'
+      let mensaje = 'Debe adjuntar un archivo'
       this.SwalGlobal(mensaje)
       return
     }
     if(this.idSubGrupo == -1){
-      let mensaje = 'Tiene que seleccionar un subgrupo'
+      let mensaje = 'Debe seleccionar un subgrupo'
       this.SwalGlobal(mensaje)
       return
     }
@@ -1367,7 +1376,7 @@ Array.prototype.forEach.call( inputs, function( input )
     for( let i = 0; i < this.ResultadoExcel.length ; i++){
       let datosRegistroColaborador:any = {}
       datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-      datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
+      datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO) //== null ? "" : parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
       datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
       datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].SNOM_COMPLETO
       datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].DFECHA_NACIMIENTO
@@ -1501,7 +1510,7 @@ Array.prototype.forEach.call( inputs, function( input )
   }
 
   async ListaDeCoincidencias(id){
-    debugger;
+    //debugger;
     let data:any = {}
     data = {
       NIDGRUPOSENAL: id,

@@ -440,12 +440,14 @@ export class UserConfigComponent implements OnInit {
   }
 elementoModificado : string = ""
   validarCambioUsuario(data){
-    debugger;
     /*if(this.DataUsuario.pass != data.pass){
       this.elementoModificado = "Contraseña";
+     
+      
     }
     if (this.DataUsuario.pass != data.pass && this.DataUsuario.userFullName != data.userFullName){
       this.elementoModificado = this.elementoModificado + ", " + "Nombre del usuario";
+      
     }
     else if(this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName != data.userFullName){
       this.elementoModificado = "Nombre del usuario";
@@ -474,47 +476,40 @@ elementoModificado : string = ""
     else if((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName && this.DataUsuario.userRolId == data.userRolId && this.DataUsuario.userEmail == data.userEmail && this.DataUsuario.userEmail == data.userEmail)&& this.DataUsuario.userState != data.state){
       this.elementoModificado = "Estado";
     }*/
-    //let _data : any = {};
     
     if(this.DataUsuario.pass != data.pass){
       this.elementoModificado = "Contraseña";
       data.modificado = this.elementoModificado
-      //_data = data;
       this.userConfigService.GetInsertaHistorialUsuario(data)
     }
-    if(this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName != data.userFullName){
+    if(this.DataUsuario.userFullName != data.userFullName){
       this.elementoModificado = "Nombre del usuario";
       
       data.modificado = this.elementoModificado
-      //_data = data;
       this.userConfigService.GetInsertaHistorialUsuario(data)
     }
-    if ((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName) && this.DataUsuario.userRolId != data.userRolId){
+    if (this.DataUsuario.userRolId != data.userRolId){
       this.elementoModificado = "Perfil";
       
       data.modificado = this.elementoModificado
-      //_data = data;
       this.userConfigService.GetInsertaHistorialUsuario(data)
     }
-    if((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName && this.DataUsuario.userRolId == data.userRolId) && this.DataUsuario.cargoId != data.cargoId){
+    if(this.DataUsuario.cargoId != data.cargoId){
       this.elementoModificado = "Cargo";
       
       data.modificado = this.elementoModificado
-      //_data = data;
       this.userConfigService.GetInsertaHistorialUsuario(data)
     }
-    if((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName && this.DataUsuario.userRolId == data.userRolId && this.DataUsuario.userEmail == data.userEmail) && this.DataUsuario.userEmail != data.userEmail){
+    if(this.DataUsuario.userEmail != data.userEmail){
       this.elementoModificado = "Correo";
       
       data.modificado = this.elementoModificado
-      //_data = data;
       this.userConfigService.GetInsertaHistorialUsuario(data)
     }
-    if((this.DataUsuario.pass == data.pass && this.DataUsuario.userFullName == data.userFullName && this.DataUsuario.userRolId == data.userRolId && this.DataUsuario.userEmail == data.userEmail && this.DataUsuario.userEmail == data.userEmail)&& this.DataUsuario.userState != data.state){
+    if(this.DataUsuario.userState != data.state){
       this.elementoModificado = "Estado";
       
       data.modificado = this.elementoModificado
-      //_data = data;
       this.userConfigService.GetInsertaHistorialUsuario(data)
     }
 
@@ -672,7 +667,7 @@ elementoModificado : string = ""
     var user = this.core.storage.get('usuario');
     this.newUsUpd = user['idUsuario'];
     let data: any = {};
-debugger;
+
     data.userId = this.newUsId === '' ? 0 : this.newUsId;
     data.userName = this.newUsName === '' ? '' : this.newUsName;
     data.userFullName = this.newUsFullName === '' ? '' : this.newUsFullName;
@@ -696,7 +691,7 @@ debugger;
     data.state = this.state
 
 /*PARA CAMPO DE MODIFICADO*/
-    let _data : any = {};
+    /*let _data : any = {};
     _data.NID_USUARIO = this.newUsId === '' ? 0 : this.newUsId;
     _data.SUSUARIO = this.newUsName === '' ? '' : this.newUsName;
     _data.SNOMBRECOMPLETO = this.newUsFullName === '' ? '' : this.newUsFullName;
@@ -704,9 +699,9 @@ debugger;
     _data.NIDPROFILE = this.rol === '' ? 0 : this.rol;
     _data.SEMAIL = this.newUsEmail === '' ? '' : this.newUsEmail;
     _data.NID_CARGO= this.newUsCargo === '' ? 0 : this.newUsCargo;
-    _data.NESTADO = this.state
+    _data.NESTADO = this.state*/
 /*CAMPOS DE HISTORIAL*/
-    if(this.DataUsuario.pass != data.pass){
+    /*if(this.DataUsuario.pass != data.pass){
       this.elementoModificado = "Contraseña";
       _data.SCAMPOMODIF = this.elementoModificado
       this.userConfigService.GetInsertaHistorialUsuario(_data)
@@ -740,11 +735,11 @@ debugger;
       
       _data.SCAMPOMODIF = this.elementoModificado
       this.userConfigService.GetInsertaHistorialUsuario(_data)
-    }
+    }*/
 /*CAMPOS DE HISTORIAL*/
     
 
-    /*//data.modifico = */ //await this.validarCambioUsuario(_data);
+    /*data.modifico = */ //await this.validarCambioUsuario(data);
 
     swal.fire({
       title: 'Actualización de usuario',
@@ -760,11 +755,12 @@ debugger;
         closeButton : 'OcultarBorde'
                      },
        
-    }).then((result) => {
+    }).then( async (result) => {
       if (result.value) {
         this.core.loader.show();
-        
+        await this.validarCambioUsuario(data)
         this.userConfigService.updateUser(data)
+        
         
           .then((response) => {
             if (response.error == 0) {

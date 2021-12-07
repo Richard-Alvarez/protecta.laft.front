@@ -148,6 +148,7 @@ export class ModalValidarCorreoComponent implements OnInit {
     let resultado:any = await this.userConfigService.GetValidarExisteCorreo(data)
     this.core.loader.hide()
     if(resultado.CODE == 1){
+      this.closeModal('')
       swal.fire({
         
         icon: 'success',
@@ -177,7 +178,12 @@ export class ModalValidarCorreoComponent implements OnInit {
       dataEncrip.SDESENCRIP_ID = EncripID
       dataEncrip.SHASH = hash
 
-      this.userConfigService.GetUpdUsuarioEncriptado(dataEncrip)
+      await this.userConfigService.GetUpdUsuarioEncriptado(dataEncrip)
+      let dataCorreo:any = {}
+      dataCorreo.SEMAIL = this.correo.toLowerCase()
+      dataCorreo.ID_USER = resultado.ID[0].iD_USUARIO
+      dataCorreo.USUARIO = this.usuario.toUpperCase()
+      await this.userConfigService.EnvioCorreoActualizacionPass(dataCorreo)
       this.closeModal('edit-modal')
       return
    }else if (resultado.CODE == 0){
@@ -250,7 +256,7 @@ export class ModalValidarCorreoComponent implements OnInit {
   }
 
 
-async  generateKey() {
+  async  generateKey() {
     return CryptoJS.lib.WordArray.random(16).toString();
   }
 

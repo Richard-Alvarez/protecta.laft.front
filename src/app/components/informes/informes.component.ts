@@ -447,6 +447,10 @@ async DataAlertas(idgrupo,perido){
 
 async DataReporteC2Global(){
 
+  let dia =  this.IDListPeriodoGlobal.toString().substr(6,2)
+  let mes =  this.IDListPeriodoGlobal.toString().substr(4,2)
+  let anno = this.IDListPeriodoGlobal.toString().substr(0,4) 
+  this.Periodo = dia + '/' + mes + '/' + anno
 
     let dataRG:any = {}
     dataRG.NPERIODO_PROCESO = this.IDListPeriodoGlobal

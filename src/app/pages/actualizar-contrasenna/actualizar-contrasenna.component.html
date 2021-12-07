@@ -1,6 +1,59 @@
-<p>actualizar-contrasenna works!</p>
 
+<div class="wrapper">
+    <div *ngIf="VALIDADOR == 1;">
+        <div class="container">
+            <h1>{{this.Titulo}}</h1>
+            
+            
+        </div>
+    </div>
+    
+        <div *ngIf="VALIDADOR == 2;" >
+        
 
-{{usuario}}
+        <div class="container">
+                <h1>{{this.Titulo}}</h1>
+                
+                <form class="form">
+                    <input type="text" [(ngModel)]="password.pss1" placeholder="Contraseña" id="pss1" name="pss1">
+                    
+                    <input type="text" [(ngModel)]="password.pss2" placeholder="Confirmar contraseña" id="pss2" name="pss2">
+                    <!-- <div class="pb-1">
+                        <button type="submit" style="cursor:pointer" id="login-button" (click)="MostrarPass()" *ngIf="!eye.show">Mostrar contraseña</button>
+                      
+                    </div>
+                    <div class="pb-1">
+                        
+                        <button type="submit" style="cursor:pointer" id="login-button" (click)="MostrarPass()"  *ngIf="eye.show">Ocultar contraseña</button>
+                        
+                    </div> -->
+                    <div>
+                        
+                        <button type="submit" style="cursor:pointer" id="login-button" (click)="ActualizarContrasenna()">Actualizar</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
 
-{{correo}}
+        <div *ngIf="VALIDADOR == 3;">
+            <div class="container">
+                <h1>{{this.Titulo}}</h1>
+                
+                
+            </div>
+        </div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>

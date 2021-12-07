@@ -400,6 +400,8 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
    async sendForm(){
     // await this.EnviarCorreo()
     // return
+    
+    
     debugger
     if(this.STIPO_USUARIO === 'OC'){
       this.sNameTipoUsuario = 'Oficial de Cumplimiento'
@@ -924,7 +926,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   if(arrDetalle.length > 0){
     let arrPromisesQuestion:any = []
     let arrRequestQuestion:any = []
-    
+    debugger
     arrDetalle.forEach(ans => {
       
       ans.forEach(itemAns => {
