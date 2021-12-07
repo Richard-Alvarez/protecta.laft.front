@@ -569,7 +569,6 @@ Export2Doc(element, filename = ''){
     let mensaje = ''
     let data :any = {} 
     data.NIDGRUPOSENAL = this.idGrupo
-    debugger
     if(this.ValidadorHistorico == 0){
       data.NPERIODO_PROCESO = this.HistoricoPeriodo
       mensaje ='No hay señales en este periodo para poder descargar'

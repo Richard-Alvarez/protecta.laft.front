@@ -98,7 +98,7 @@
                         <div *ngIf="lista.NIDPROVEEDOR != 4" class="text-center"><img src="assets/icons/excel-microsoft.png" style="height: 30px;cursor: pointer;" (click)="getExcelListInter(lista.NIDTIPOLISTA,lista.SDESTIPOLISTA )" /></div>
                     </div>
                 </div>
-                <div id="{{'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id +state+ indexLista}}" class="collapse" data-parent="#tabPanelListInter" tabindex="-1">
+                <div id="{{'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id +state+ indexLista}}" class="collapse {{lista.visible}}" data-parent="#tabPanelListInter" tabindex="-1">
                     <app-view-c2-list [parent]="this" [lista]="lista" [linkactual]="linkactual" [arrayClientesByList]="arrayClientesByList" [acordion]="'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id +state+ indexLista"></app-view-c2-list>
                     <!-- <div class="card-body">
                         <div class="row" style="display: flex;justify-content: left;align-items: left">
@@ -144,13 +144,13 @@
                 <div class="row styleDivLista">
                     <div style="width: 100%;">
                         <!-- <a class="card-link text-dark" data-toggle="collapse" href="#{{'collapse'+indexsubgrupo+_subGrupo.length}}" (click)="addAccordion(2,'collapse'+indexsubgrupo+_subGrupo.length)"> -->
-                        <a class="card-link text-dark" data-toggle="collapse" href="#{{'collapse'+indexsubgrupo+_subGrupo.length}}">
-                            <div class="text-left" style="font-weight: bold;">{{_subGrupo}}</div>
+                        <a class="card-link text-dark" data-toggle="collapse" href="#{{'collapse'+indexsubgrupo+_subGrupo.name.length}}">
+                            <div class="text-left" style="font-weight: bold;">{{_subGrupo.name}}</div>
                         </a>
                     </div>
                 </div>
-                <div class="row" *ngFor="let lista of getSubGrupos(_subGrupo);let indexLista = index;">
-                    <div style="width:100%" id="{{'collapse'+indexsubgrupo+_subGrupo.length}}" class="collapse" data-parent="#accordionSubgrupo" tabindex="-1">
+                <div class="row" *ngFor="let lista of getSubGrupos(_subGrupo.name);let indexLista = index;">
+                    <div style="width:100%" id="{{'collapse'+indexsubgrupo+_subGrupo.name.length}}" class="collapse {{_subGrupo.visible}}" data-parent="#accordionSubgrupo" tabindex="-1">
                         <div class="row styleDivSubLista">
                             <div style="width: 24%;">
                                 <!-- <a class="card-link text-dark" data-toggle="collapse" href="#{{'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id + state + indexLista + lista.NIDSUBGRUPOSEN}}" (click)="addAccordion(3,'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id + state + indexLista + lista.NIDSUBGRUPOSEN)"> -->
@@ -187,9 +187,9 @@
                                 <div *ngIf="lista.NIDPROVEEDOR != 4" class="text-center"><img src="assets/icons/excel-microsoft.png" style="height: 30px;cursor: pointer;" (click)="getExcelListInter(lista.NIDTIPOLISTA,lista.SDESTIPOLISTA )" /></div>
                             </div>
                         </div>
-                        <div id="{{'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id+state+ indexLista + lista.NIDSUBGRUPOSEN}}" class="collapse p-3" style="width:100%" data-parent="#tabPanelListInter" tabindex="-1">
+                        <div id="{{'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id+state+ indexLista + lista.NIDSUBGRUPOSEN}}" class="collapse {{lista.visible}} p-3" style="width:100%" data-parent="#tabPanelListInter" tabindex="-1">
                             <app-view-c2-list [parent]="this" [lista]="lista" [linkactual]="linkactual" [arrayClientesByList]="arrayClientesByList" [acordion]="'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id+state+ indexLista + lista.NIDSUBGRUPOSEN"
-                                [accordionSubGrup]="'collapse'+indexsubgrupo+_subGrupo.length"></app-view-c2-list>
+                                [accordionSubGrup]="'collapse'+indexsubgrupo+_subGrupo.name.length" [subgruponame]="_subGrupo.name"></app-view-c2-list>
                             <!-- <div class="card-body">
                                 <div class="row" style="display: flex;justify-content: left;align-items: left">
                                     <div class="col-lg-12 form-group">

@@ -166,7 +166,6 @@ export class BusquedaDemandaComponent implements OnInit {
         if (result) {
           /*inicio*/
           this.core.loader.show()
-          debugger;
           let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
           console.log("respuesta",respuetaService);
           if (respuetaService.length != 0) {

@@ -239,7 +239,7 @@
 
 
                                 </div>
-                                <div id="{{'collap'+statePendienteInforme.sState+'Head' + regimen.desCorto + index}}" class="collapse" attr.data-parent="#{{'acordion'+ statePendienteInforme.sState + regimen.desCorto + index}}">
+                                <div id="{{'collap'+statePendienteInforme.sState+'Head' + regimen.desCorto + index}}" class="collapse {{item.visible}}" attr.data-parent="#{{'acordion'+ statePendienteInforme.sState + regimen.desCorto + index}}">
                                     <!--<app-button-download-report [item]="item" [regimen]="regimen" [STIPO_USUARIO]="STIPO_USUARIO" [parent]="this"></app-button-download-report>-->
 
                                     <div class="card-body" style="background-color: white;">

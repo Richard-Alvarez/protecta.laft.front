@@ -8,6 +8,7 @@ import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { truncateSync } from 'fs';
 import { TemplateRGComponent } from '../templates/template-rg/template-rg.component';
+import { isNullOrUndefined } from 'util';
 
 
 @Component({
@@ -33,7 +34,11 @@ export class PendienteInformeComponent implements OnInit {
     listFilesInform:any = [] 
     listFilesInformName:any = [] 
     NPERIODO_PROCESO:number
-    
+  _sSubGrupo = '';
+  _NIDTIPOLISTA = 0
+  _NIDPROVEEDOR = 0
+  _NIDSUBGRUPOSEN = 0
+  _NIDALERTA = 0
     
 
   public templateRG: TemplateRGComponent;
@@ -51,7 +56,7 @@ export class PendienteInformeComponent implements OnInit {
     private modalService: NgbModal,) {this.templateRG = new TemplateRGComponent(core,userConfigService,renderer,modalService) }
 
   async ngOnInit() {
-    
+    await this.getDatosLocalStore()
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO;
     this.fillFileGroup()
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
@@ -101,10 +106,22 @@ export class PendienteInformeComponent implements OnInit {
       return true;
     }
   }
-
+  async getDatosLocalStore(){
+    let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPositionReturn"))
+    if (!isNullOrUndefined(respObjFocusPosition)){
+        this._sSubGrupo = respObjFocusPosition.SSUBGRUPO
+        this._NIDTIPOLISTA = respObjFocusPosition.NIDTIPOLISTA
+        this._NIDPROVEEDOR = respObjFocusPosition.NIDPROVEEDOR
+        this._NIDSUBGRUPOSEN = respObjFocusPosition.NIDSUBGRUPOSEN
+        this._NIDALERTA = respObjFocusPosition.NIDALERTA
+    }
+}
   getArray(state,regimen){
+   this.arrResponsable.forEach(t => {
+    t.visible = t.NIDALERTA == this._NIDALERTA ? 'show' : ''
+   });
     
-    return this.arrResponsable;
+    return this.arrResponsable
   }
 
   getArrayUserGroup(regimen,estado){

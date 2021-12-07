@@ -36,3 +36,16 @@ td {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
     background-color: rgba(0, 0, 0, .02);
 }
+
+button.colorFocus {
+    border-width: 0px;
+    background: rgba(0, 0, 0, .0);
+    color: rgba(0, 0, 0, .0);
+}
+
+button.colorFocus:focus {
+    border-width: 0px;
+    outline: none;
+    background: rgba(0, 0, 0, .0);
+    color: red !important;
+}
