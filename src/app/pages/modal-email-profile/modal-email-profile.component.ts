@@ -37,7 +37,7 @@ export class ModalEmailProfileComponent implements OnInit {
   perfil
   action = 0
   objUsuario:any = {}
-
+  Seleccione = "Seleccione"
   validarActualizar:boolean = false
   ActivarCombo:boolean = false
   ActivarUser:boolean = false
@@ -113,7 +113,9 @@ export class ModalEmailProfileComponent implements OnInit {
        this.group = this.dataEmail.NIDGRUPOSENAL;
        this.asunto = this.dataEmail.SASUNTO_CORREO;
        this.message = this.dataEmail.SCUERPO_CORREO;
-       this.ckeditorContent =  this.dataEmail.SCUERPO_CORREO;
+       this.ckeditorContent =   this.message//this.dataEmail.SCUERPO_CORREO;
+       console.log("this.ckeditorContent",this.ckeditorContent)
+       this.textoHTML =  this.ckeditorContent
        this.contador = this.asunto.length
       }
          
@@ -170,8 +172,10 @@ export class ModalEmailProfileComponent implements OnInit {
 
 
   async Save(){
+    console.log("this.action",this.action)
     let data:any = {};
     let mensaje
+    
     if(this.dataEmail == null)
     {
         mensaje = "¿Está seguro que desea agregar una nueva plantilla de correo?"
@@ -206,7 +210,17 @@ export class ModalEmailProfileComponent implements OnInit {
     }
     let respValidacion:any = {}
       if(this.action == 1 || this.action == 2){
-        respValidacion = this.validator()
+        respValidacion = this.validator(1)
+      }else if(this.action == 7 ){
+        respValidacion = this.validator(7)
+      }
+      else if(this.action == 6 ){
+        respValidacion = this.validator(6)
+      }
+        else if(this.action == 0){
+        mensaje = "No seleccionó ninguna acción "
+        this.MensajeSwal(mensaje)
+        return
       }  else{
         respValidacion.code = 0
 
@@ -254,67 +268,105 @@ export class ModalEmailProfileComponent implements OnInit {
     
   }
 
-  validator(){
+  validator(valor){
     let usuario  = this.textoHTML.indexOf('[Usuario]');
     let link  = this.textoHTML.indexOf('[Link]');
     let instruccion  = this.textoHTML.indexOf('[Instruccion]');
     let cargo  = this.textoHTML.indexOf('[Cargo]');
     // let perfil  = this.textoHTML.indexOf('[Perfil]');
     let fechafin  = this.textoHTML.indexOf('[FechaFin]');
+    let grupo  = this.textoHTML.indexOf('[Grupo]');
 
     let objRespuesta: any = {};
     objRespuesta.code = 0
     objRespuesta.message = ''
-    if(this.group == 0){
+    if(valor == 1){
+      if(this.group == 0){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Debe seleccionar un grupo";
+        return objRespuesta
+      }
+      if(this.profiles == 0){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Debe seleccionar un perfil";
+        return objRespuesta
+      }
+      if(this.asunto == '' || this.asunto == undefined){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Debe ingresar un asunto";
+        return objRespuesta
+      }
+      if(usuario == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Usuario]";
+        return objRespuesta
+      }
+      if(link == -1){
       objRespuesta.code = 1;
-      objRespuesta.message = "Debe seleccionar un grupo";
+      objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Link]";
       return objRespuesta
+      }
+      if(instruccion == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Instruccion]";
+        return objRespuesta
     }
-    if(this.profiles == 0){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Debe seleccionar un perfil";
-      return objRespuesta
+      if(cargo == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Cargo]";
+        return objRespuesta
+      }
+      // if(perfil == -1){
+      //   objRespuesta.code = 1;
+      //   objRespuesta.message = "Es obligatorio ingresar [Perfil]";
+      //   return objRespuesta
+      // }
+      if(fechafin == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [FechaFin]";
+        return objRespuesta
+      }
+      // if(this.message == '' || this.message == undefined){
+      //   objRespuesta.code = 1;
+      //   objRespuesta.message = "Debe ingresar un mensaje";
+      //   return objRespuesta
+      // }
     }
-    if(this.asunto == '' || this.asunto == undefined){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Debe ingresar un asunto";
-      return objRespuesta
+    if(valor == 7){
+      if(this.asunto == '' || this.asunto == undefined){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Debe ingresar un asunto";
+        return objRespuesta
+      }
+      if(usuario == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Usuario]";
+        return objRespuesta
+      }
+      if(link == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Link]";
+        return objRespuesta
+        }
     }
-    if(usuario == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [Usuario]";
-      return objRespuesta
-  }
-  if(link == -1){
-    objRespuesta.code = 1;
-    objRespuesta.message = "Es obligatorio ingresar [Link]";
-    return objRespuesta
-}
-    if(instruccion == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [Instruccion]";
-      return objRespuesta
-  }
-    if(cargo == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [Cargo]";
-      return objRespuesta
+    if(valor == 6){
+      if(this.asunto == '' || this.asunto == undefined){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Debe ingresar un asunto";
+        return objRespuesta
+      }
+      if(usuario == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Usuario]";
+        return objRespuesta
+      }
+      if(grupo == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Grupo]";
+        return objRespuesta
+        }
     }
-    // if(perfil == -1){
-    //   objRespuesta.code = 1;
-    //   objRespuesta.message = "Es obligatorio ingresar [Perfil]";
-    //   return objRespuesta
-    // }
-    if(fechafin == -1){
-      objRespuesta.code = 1;
-      objRespuesta.message = "Es obligatorio ingresar [FechaFin]";
-      return objRespuesta
-    }
-    // if(this.message == '' || this.message == undefined){
-    //   objRespuesta.code = 1;
-    //   objRespuesta.message = "Debe ingresar un mensaje";
-    //   return objRespuesta
-    // }
+    
     return objRespuesta
   }
 
@@ -369,7 +421,7 @@ export class ModalEmailProfileComponent implements OnInit {
       this.ActivarCombo = false
       this.ActivarUser = true
       this.ActivarListUser = true
-    }else if(this.action == 6 ){
+    }else if(this.action == 6){
 
         if(this.validadorEstado == 2){
 
@@ -379,17 +431,23 @@ export class ModalEmailProfileComponent implements OnInit {
           let response = await this.userConfig.getListaUsuarioCorreos(data)
           this.core.loader.hide()
           this.UsuarioAgregado = response
-
-        }else{
-          this.action = 0
-          this.ActivarUser = true
-          this.ActivarListUser = true
+          this.ActivarUser = false
+          this.ActivarListUser = false
           this.ActivarCombo = true
-          let resultado = this.ListaEmail.filter(it => it.NIDACCION == 6)
+        }else{
+         
+          
+          let resultado = this.ListaEmail.filter(it => it.NIDACCION == 6 )
           console.log("resultado",resultado)
           console.log("ListaEmail",this.ListaEmail)
+          this.ActivarUser = false
+          this.ActivarListUser = false
+          this.ActivarCombo = true
           if(resultado.length > 0){
-            
+            this.action = 0
+            this.ActivarUser = true
+          this.ActivarListUser = true
+          this.ActivarCombo = true
             let mensaje = "No se puede agregar otra acción de " + resultado[0].SDESACCION
 
             this.MensajeSwal(mensaje)
@@ -399,10 +457,47 @@ export class ModalEmailProfileComponent implements OnInit {
         }
           
     }else if(this.action == 7){
+      
+      if( this.validadorEstado == 1){
+            let resultado = await this.ListaEmail.filter(it => it.NIDACCION == 7 )
+            
+            if( await  resultado.length > 0){
+              this.ActivarCombo = true;
+              this.ActivarListUser = true;
+              this.ActivarUser = true ;
+              
+               this.action =  0;
+               this.Seleccione = "Seleccione" ;
+            
+              
+                var dropDown = (<HTMLInputElement>document.getElementById("idcombo"));
+                dropDown.selectedIndex = 0;
+            
+          
+              let mensaje = "No se puede agregar otra acción de " + resultado[0].SDESACCION;
+              //(<HTMLInputElement>document.getElementById("idcombo")).setAttribute('value','0');
+              //(<HTMLInputElement>document.getElementById("idcombo")).innerText
+              this.MensajeSwal(mensaje);
+
+            
+             
+             //this.action = 0;
+            }
+      }else{
+        this.ActivarCombo = true
+        this.ActivarListUser = true
+        this.ActivarUser = true
+      }
+     
+      
+    }else if(this.action == 4){
+      
       this.ActivarCombo = true
       this.ActivarListUser = true
       this.ActivarUser = true
+     
     }
+    
     else{
        this.ActivarCombo = true
        this.ActivarUser = false
@@ -413,6 +508,7 @@ export class ModalEmailProfileComponent implements OnInit {
   changeUser(){
 
   }
+
   UsuarioAgregado:any = []
   AgregarUsuario(){
   
@@ -432,13 +528,13 @@ export class ModalEmailProfileComponent implements OnInit {
 
   async RegistrarUsuarios(){
     let data:any = {}
-
+debugger
     if(this.dataEmail == null){
-      this.UsuarioAgregado.array.forEach(async (usu) => {
+      this.UsuarioAgregado.forEach(async (usu) => {
         data.ID_USUARIO = usu.userId
-        data.NIDCORREO =  this.dataEmail.NIDCORREO
+        data.NIDCORREO =  0//usu.userEmail//this.dataEmail.NIDCORREO
         data.NIDPROFILE = this.profiles
-        data.NIDACCION = this.action
+        data.NIDACCION = parseInt(this.action.toString())
         data.TIPOOPERACION = 'I'
         this.core.loader.show()
         await this.userConfig.InsCorreoUsuario(data)
@@ -475,7 +571,7 @@ export class ModalEmailProfileComponent implements OnInit {
       console.log("UsuarioAgregado",this.UsuarioAgregado)
     }
 
-    MensajeSwal(mensaje){
+    async MensajeSwal(mensaje){
       swal.fire({
         title: "Configuración de Correos",
         icon: "warning",

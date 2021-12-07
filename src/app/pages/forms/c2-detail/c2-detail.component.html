@@ -134,6 +134,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of itemCli.arrCoincidencias; let incCli = index; ">
+                                                    
                                                     <!-- <td>{{item.STIPOIDEN}}</td>
                                                         <td>{{item.SNUM_DOCUMENTO}}</td> -->
                                                     <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
@@ -170,7 +171,7 @@
                                                     <td>
                                                         <!-- <input type="checkbox" (click)="checkValue($event)" [(ngModel)]="(unchekAllList[(itemCli.NIDTIPOLISTA-1)])[item.NCONTADORLISTA]" [disabled]="getDisableByCheck(item.SESTADO_REVISADO)">  -->
 
-                                                        <input type="checkbox" (change)="getConsole(itemCli.NIDTIPOLISTA-1,item.NCONTADORLISTA,item.NIDREGIMEN)" [disabled]="getDisableByCheck(item.NACEPTA_COINCIDENCIA)" [checked]="item.NACEPTA_COINCIDENCIA == 1 ? true : false" (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)">
+                                                        <input type="checkbox" (change)="getConsole(itemCli.NIDTIPOLISTA-1,item.NCONTADORLISTA,item.NIDREGIMEN)" [disabled]="getDisableByCheck(item.SESTADO_REVISADO)" [checked]="item.NACEPTA_COINCIDENCIA == 1 ? true : false" (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -385,9 +386,12 @@
                                 [disabled]="disableFormItems" title="Guardar">Guardar
                             </button> -->
 
-                        <button class="btn btn-warning text-white" (click)="save()" [disabled]="getDisable()" *ngIf="(tipoClienteGC == 'GC' || tipoClienteGC == 'C2-BANDEJA' || tipoClienteGC == 'ACEPTA-COINCID') && (SESTADO_BUTTON_SAVE == '2' && arrCoincidenciasLista.length > 0)"
+                        <!-- <button class="btn btn-warning text-white" (click)="save()" [disabled]="getDisable()" *ngIf="(tipoClienteGC == 'GC' || tipoClienteGC == 'C2-BANDEJA' || tipoClienteGC == 'ACEPTA-COINCID') && (SESTADO_BUTTON_SAVE == '2' && arrCoincidenciasLista.length > 0)"
                             title="Guardar">Guardar
-                            </button>
+                            </button> -->
+                            <button class="btn btn-warning text-white" (click)="save()" [hidden]="getDisable()" *ngIf="(tipoClienteGC == 'GC' || tipoClienteGC == 'C2-BANDEJA' || tipoClienteGC == 'ACEPTA-COINCID') && (SESTADO_BUTTON_SAVE == '2' && arrCoincidenciasLista.length > 0)"
+                                title="Guardar">Guardar
+                                </button>
                     </div>
                 </div>
 

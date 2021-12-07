@@ -1807,8 +1807,15 @@ export class C2DetailComponent implements OnInit {
 
                 
                 let respPromiseAll = await Promise.all(arrPromises)
-                 
+                
+                for(let index =0; index < this.ValorListaCoincidencias.length; index++ ){
+                     this.ValorListaCoincidencias[index].SESTADO_REVISADO = '1';
+                     //this.ValorListaCoincidencias[index].NACEPTA_COINCIDENCIA = '1';
+                     
+                }
+                await this.getDisable()
                 this.formData.SESTADO_REVISADO = '1'
+              
                 
                 //this.ngOnInit();//COMENTAR
 
@@ -1847,12 +1854,23 @@ export class C2DetailComponent implements OnInit {
         }
     }
     getDisable(){
-      
-        let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.NACEPTA_COINCIDENCIA == 2)
-       
+        debugger
+         //let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.NACEPTA_COINCIDENCIA === 2)
+        let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.SESTADO_REVISADO == 2)
+        console.log("ValorListaCoincidencias",this.ValorListaCoincidencias)
         if(ValorCantidad.length > 0){
+            // let ValorCantidadAceptados = this.ValorListaCoincidencias.filter(it => it.SESTADO_REVISADO === 1 || it.SESTADO_REVISADO === '1')
+            // console.log("ValorCantidadAceptados",ValorCantidadAceptados)
+            // debugger
+            // if(ValorCantidadAceptados > 0){
+            //     return true
+            // }else{
+            //     return false
+            // }
             return false
         }else{
+            console.log("this.SESTADO_REVISADO_ACEPT",this.SESTADO_REVISADO_ACEPT)
+            console.log("this.formData.SESTADO_REVISADOT",this.formData.SESTADO_REVISADO)
             if(this.SESTADO_REVISADO_ACEPT+'' == '1'){
              
                 //return false
@@ -1876,8 +1894,10 @@ export class C2DetailComponent implements OnInit {
 
 
     getDisableByCheck(SESTADO_REVISADO){
+        debugger
         //return true
         //this.formData.SESTADO_REVISADO == '1' ||
+        console.log(SESTADO_REVISADO)
         if( SESTADO_REVISADO == '1'){//(estadoTrat != 'CRE' || estadoTrat != 'CRF' || estadoTrat != 'CCO')){
             return true
         }
