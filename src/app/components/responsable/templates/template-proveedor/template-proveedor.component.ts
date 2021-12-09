@@ -12,6 +12,10 @@ export class TemplateProveedorComponent implements OnInit {
   @Input() RespuestaGlobalContraparte
   @Input() Validar:number
   @Input() parent:PendienteInformeComponent
+
+  @Input() listaProveedores
+  @Input() listaProveedoresCriticos
+  @Input() listaProveedoresRepresentantes
   constructor() { }
 
   ngOnInit() {

@@ -286,35 +286,39 @@ ValidadorRespondidoClientes
 ValidadorRespondidoColaborador
 ValidadorRespondidoProveedor
 ValidadorRespondidoContraparte
+
+listaProveedores:any = []
+listaProveedoresCriticos:any = []
+listaProveedoresRepresentantes:any = []
 async DescargarReporteGeneral(){
   let bol = this.Validador("Reporte-General")
   if(bol){
     return
   }
-  this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,this.IDListPeriodoGlobal)
-  if(this.ValidadorRespondidoClientes.length > 0){
-    let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
-    this.SwalGlobal(mensaje)
-    return
-  }
-  this.ValidadorRespondidoColaborador = await this.ValidardorRespuestas(2,this.IDListPeriodoGlobal)
-  if(this.ValidadorRespondidoColaborador.length > 0){
-    let mensaje = 'Debe cerrar todas las señales del grupo Colaborador'
-    this.SwalGlobal(mensaje)
-    return
-  }
-  this.ValidadorRespondidoProveedor = await this.ValidardorRespuestas(3,this.IDListPeriodoGlobal)
-  if(this.ValidadorRespondidoProveedor.length > 0){
-    let mensaje = 'Debe cerrar todas las señales del grupo Proveedor'
-    this.SwalGlobal(mensaje)
-    return
-  }
-  this.ValidadorRespondidoContraparte = await this.ValidardorRespuestas(4,this.IDListPeriodoGlobal)
-  if(this.ValidadorRespondidoContraparte.length > 0){
-    let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
-    this.SwalGlobal(mensaje)
-    return
-  }
+  // this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,this.IDListPeriodoGlobal)
+  // if(this.ValidadorRespondidoClientes.length > 0){
+  //   let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
+  //   this.SwalGlobal(mensaje)
+  //   return
+  // }
+  // this.ValidadorRespondidoColaborador = await this.ValidardorRespuestas(2,this.IDListPeriodoGlobal)
+  // if(this.ValidadorRespondidoColaborador.length > 0){
+  //   let mensaje = 'Debe cerrar todas las señales del grupo Colaborador'
+  //   this.SwalGlobal(mensaje)
+  //   return
+  // }
+  // this.ValidadorRespondidoProveedor = await this.ValidardorRespuestas(3,this.IDListPeriodoGlobal)
+  // if(this.ValidadorRespondidoProveedor.length > 0){
+  //   let mensaje = 'Debe cerrar todas las señales del grupo Proveedor'
+  //   this.SwalGlobal(mensaje)
+  //   return
+  // }
+  // this.ValidadorRespondidoContraparte = await this.ValidardorRespuestas(4,this.IDListPeriodoGlobal)
+  // if(this.ValidadorRespondidoContraparte.length > 0){
+  //   let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
+  //   this.SwalGlobal(mensaje)
+  //   return
+  // }
 
   this.ListaAlertaClientes = await this.DataAlertas(1,this.IDListPeriodoGlobal)
   this.ListaAlertaColaborador = await this.DataAlertas(2,this.IDListPeriodoGlobal)
