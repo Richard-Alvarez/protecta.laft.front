@@ -1109,5 +1109,14 @@ async ListaAlertas(){
 }
 
 
+getDesplegarSenal(senial){
+  if(this.STIPO_USUARIO == 'RE' && (senial === 'C3' ||  senial === 'C1')){
+   return 'show'
+  }
+  else{
+    return ''
+  }
+}
+
 
 }

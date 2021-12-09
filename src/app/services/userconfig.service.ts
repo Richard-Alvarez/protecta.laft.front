@@ -1798,7 +1798,18 @@ export class UserconfigService {
     })
   }
 
-  
+  GetListaEmpresas(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaEmpresas, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
   
 
   

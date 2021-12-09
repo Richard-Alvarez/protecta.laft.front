@@ -72,10 +72,10 @@
             <div class="row" *ngIf="objState.sState === 'PENDIENTE' || (parent.STIPO_USUARIO == 'RE' && objState.sState == 'DEVUELTO')">
                 <div class="col-lg-5"  style="padding-right:0px;padding-left:0px"></div>
                 <div class="col-lg-3"  style="padding-right:0px;padding-left:0px">
-                    <input type="text" class="form-control" id="inputglobal1" (keyup)="setDataInputTextRespCommentGeneral($event,0,'inputglobal1')" placeholder="Ingrese el comentario global" />
+                    <input type="text" class="form-control" id="inputglobal1" placement="top" ngbTooltip="{{dataToltip1}}" (keyup)="setDataInputTextRespCommentGeneral($event,0,'inputglobal1')" placeholder="Ingrese el comentario global" />
                 </div>
-                <div class="col-lg-3"  style="padding-right:0px;padding-left:45px">
-                    <input type="text" class="form-control" id="inputglobal2" (keyup)="setDataInputTextRespCommentGeneral($event,1,'inputglobal2')" placeholder="Ingrese el comentario global" />
+                <div class="col-lg-4"  style="padding-right:50px;padding-left:45px">
+                    <input type="text" class="form-control" id="inputglobal2"  placement="top" ngbTooltip="{{dataToltip2}}" (keyup)="setDataInputTextRespCommentGeneral($event,1,'inputglobal2')" placeholder="Ingrese el comentario global" />
                     </div>
             </div>
             <hr>

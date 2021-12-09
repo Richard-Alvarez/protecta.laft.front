@@ -48,6 +48,7 @@ export class ViewC2ListComponent implements  OnInit  ,AfterViewInit {
     showAfterPosition(){
         let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPositionReturn"))
         if(respObjFocusPosition && respObjFocusPosition.NIDALERTA){
+            if(respObjFocusPosition.NIDALERTA == 2)
                 if(respObjFocusPosition.regimen.id == 2){
                     let tabGnral = document.getElementById("Gral"); 
                     let tabSimpl = document.getElementById("Simpli"); 
@@ -61,7 +62,8 @@ export class ViewC2ListComponent implements  OnInit  ,AfterViewInit {
                         divGnral.classList.remove("active")
                     if(divSimpl != null)
                         divSimpl.classList.add("active");
-                }
+                
+                    }
                 let cadenaContentUsers = respObjFocusPosition.elementoPadre
                 let boton = respObjFocusPosition.NIDBOTON
                 this.redictM(cadenaContentUsers,boton)
