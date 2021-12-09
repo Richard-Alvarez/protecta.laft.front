@@ -345,7 +345,7 @@
 
 
                                         </div>
-                                        <div id="{{stateDevuelto.sHrefHead + regimen.desCorto + index}}" class="collapse" attr.data-parent="#{{stateDevuelto.sCollapHead + regimen.desCorto + index}}">
+                                        <div id="{{stateDevuelto.sHrefHead + regimen.desCorto + index}}" class="collapse {{getDesplegarSenal(item.SNOMBRE_ALERTA)}}" attr.data-parent="#{{stateDevuelto.sCollapHead + regimen.desCorto + index}}">
                                             <app-button-download-report [item]="item" [regimen]="regimen" [STIPO_USUARIO]="STIPO_USUARIO" [parent]="this"></app-button-download-report>
 
                                             <div class="row" *ngIf="STIPO_USUARIO === 'OC'">

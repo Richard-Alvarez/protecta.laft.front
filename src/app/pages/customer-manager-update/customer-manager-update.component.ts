@@ -406,7 +406,7 @@ export class CustomerManagerUpdateComponent implements OnInit {
     let objCadenasSwal:any = {}
     objCadenasSwal.titulo = ''
     if(tipoVista == 1){
-      objCadenasSwal.titulo = "Gestor de Clientes"
+      objCadenasSwal.titulo = "Gestor Laft"
     }else if(tipoVista == 2){
       objCadenasSwal.titulo = "Cliente Revisado"
     }
@@ -915,7 +915,7 @@ async getResultsList3(paramCliente,NBUSCAR_POR,NTIPO_PERSONA) {
     console.log("el respValidacion : ",respValidacion)
     if(respValidacion.code == 1){
       Swal.fire({
-        title: "Gestor de Clientes",
+        title: "Gestor Laft",
         icon: "warning",
         text: respValidacion.message,
         showCancelButton: false,
@@ -1207,7 +1207,7 @@ async getResultsList(){
       // console.log("el respValidacion : ",respValidacion)
       if(respValidacion.code == 1){
         Swal.fire({
-          title: "Gestor de Clientes",
+          title: "Gestor Laft",
           icon: "warning",
           text: respValidacion.message,
           showCancelButton: false,
@@ -1349,7 +1349,7 @@ async getResultsList(){
   getDataListResults(data){
     Swal.fire({
       
-      title: "Gestor de Clientes",
+      title: "Gestor Laft",
       icon: "warning",
       text : 'Esta busqueda puede tardar',
       showCancelButton: true,

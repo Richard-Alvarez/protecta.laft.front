@@ -620,9 +620,9 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
               arrPushResCommentsFormDetail.push(this.enviarRespCommentFormDetail(senial.arrPreguntasDetalle,inc))
             
               //arrNewConversacion.push(this.getCommentHeader(senial.NIDALERTA_CABECERA))
-              
+              this.core.loader.hide()
             } catch (error) {
-            
+              console.error(error)
             }
             inc++;
              
@@ -684,6 +684,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
      
   //   });
   // }
+  this.core.loader.hide()
   }
 
 
@@ -1430,7 +1431,7 @@ GetOcultarBoton(){
 }
 
 getDesplegarSenal(senial){
-  if(this.STIPO_USUARIO == 'RE' && senial === 'C3'){
+  if(this.STIPO_USUARIO == 'RE' && (senial === 'C3' ||  senial === 'C1')){
    return 'show'
   }
   else{
@@ -1535,6 +1536,8 @@ ValidarCabeceraComplemento(){
     let ListaUsuario = await this.userConfigService.getListaUsuarioCorreos(data)
     console.log("ListaUsuario",ListaUsuario)
     let usuario = this.core.storage.get('usuario')
+    let fechaperidod:any = localStorage.fechaPeriodo
+     fechaperidod = fechaperidod.replace("del ","")
     console.log("usuario",usuario)
     let dataCorreo:any = {}
     dataCorreo.NOMBRECOMPLETO = usuario.fullName
@@ -1542,6 +1545,7 @@ ValidarCabeceraComplemento(){
     dataCorreo.GRUPO =   this.linkactual 
     dataCorreo.USUARIO = usuario.username
     dataCorreo.mensaje = ListaUsuario[0].SCUERPO_CORREO
+    dataCorreo.PERIODO = fechaperidod
     dataCorreo.SEMAIL = []
     for(let i=0; i < ListaUsuario.length ; i++ ){
       

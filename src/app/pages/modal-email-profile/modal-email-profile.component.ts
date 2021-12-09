@@ -276,7 +276,8 @@ export class ModalEmailProfileComponent implements OnInit {
     // let perfil  = this.textoHTML.indexOf('[Perfil]');
     let fechafin  = this.textoHTML.indexOf('[FechaFin]');
     let grupo  = this.textoHTML.indexOf('[Grupo]');
-
+    let periodo  = this.textoHTML.indexOf('[Periodo]');
+    
     let objRespuesta: any = {};
     objRespuesta.code = 0
     objRespuesta.message = ''
@@ -365,6 +366,11 @@ export class ModalEmailProfileComponent implements OnInit {
         objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Grupo]";
         return objRespuesta
         }
+        if(periodo == -1){
+          objRespuesta.code = 1;
+          objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Periodo]";
+          return objRespuesta
+          }
     }
     
     return objRespuesta
