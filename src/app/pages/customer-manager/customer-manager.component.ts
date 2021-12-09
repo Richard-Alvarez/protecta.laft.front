@@ -347,7 +347,7 @@ export class CustomerManagerComponent implements OnInit {
 
       if (respValidacion.code == 1) {
         Swal.fire({
-          title: "Gestor de Clientes",
+          title: "Gestor Laft",
           icon: "warning",
           text: respValidacion.message,
           showCancelButton: false,
@@ -593,7 +593,7 @@ export class CustomerManagerComponent implements OnInit {
 
   getDataListResults(data) {
     Swal.fire({
-      title: "Gestor de Clientes",
+      title: "Gestor Laft",
       icon: "warning",
       text: 'Esta busqueda puede tardar',
       showCancelButton: true,
@@ -717,7 +717,7 @@ export class CustomerManagerComponent implements OnInit {
     let objCadenasSwal: any = {}
     objCadenasSwal.titulo = ''
     if (tipoVista == 1) {
-      objCadenasSwal.titulo = "Gestor de Clientes"
+      objCadenasSwal.titulo = "Gestor Laft"
     } else if (tipoVista == 2) {
       objCadenasSwal.titulo = "Cliente Revisado"
     }
@@ -1377,7 +1377,7 @@ Array.prototype.forEach.call( inputs, function( input )
     datosEliminar.SACTUALIZA = 'DEL'
     let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
    
-
+    let respuestaRegistros:any = []
     for( let i = 0; i < this.ResultadoExcel.length ; i++){
       let datosRegistroColaborador:any = {}
       datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
@@ -1388,13 +1388,25 @@ Array.prototype.forEach.call( inputs, function( input )
       datosRegistroColaborador.NIDUSUARIO = this.NIDUSUARIO_LOGUEADO
       datosRegistroColaborador.NIDGRUPOSENAL = this.idGrupo
       datosRegistroColaborador.NIDSUBGRUPOSEN = this.idSubGrupo
-      datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = ''
-      datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = ''
+      datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = this.ResultadoExcel[i].SNUM_DOCUMENTO_EMPRESA
+      datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = this.ResultadoExcel[i].SNOM_COMPLETO_EMPRESA
       datosRegistroColaborador.SACTUALIZA = 'INS'
 
       let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
+      respuestaRegistros.push(response)
     }
+    console.log("respuestaRegistros",respuestaRegistros)
 
+    let listaFiltro = respuestaRegistros.filter(it => it.nCode == 2)
+    if(listaFiltro.length > 0){
+        let mensaje = "Hubo un inconveniente al registrar la lista del archivo"
+        this.SwalGlobal(mensaje)
+        return 
+    }else{
+      let mensaje = "Se agregaron " + respuestaRegistros.length + " registros"
+      this.SwalGlobal(mensaje)
+      return
+    }
     
   }
 
@@ -1498,7 +1510,7 @@ Array.prototype.forEach.call( inputs, function( input )
 
   SwalGlobal(mensaje){
     Swal.fire({
-      title: "Gestor de Clientes",
+      title: "Gestor Laft",
       icon: "warning",
       text: mensaje,
       showCancelButton: false,

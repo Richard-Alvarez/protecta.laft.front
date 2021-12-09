@@ -7,6 +7,15 @@
     <br/>
 </div>
   </div>
+
+  <div *ngIf="Validar ==2">
+    <br/>
+    <p  align="center"  style="text-align: center;">  
+        <u><strong style="font-family: arial Narrow, serif; text-align: center;"  align="center">SEÑALES DE ALERTA – MONITOREO DE SEÑALES DE ALERTA</strong></u>
+    </p>
+    
+</div>
+
   <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
     <p> 
       <strong style="font-family: arial Narrow, serif;">1.1 Señales de alerta - relativas a los productos</strong>
@@ -69,7 +78,7 @@
       La Oficialía de Cumplimiento envía una primera consulta al Área de Comercial Masivos, en el cual 
       cuestiona si como parte de sus funciones identificaron la situación que describe la señal de alerta “C1”.</li>
       <li style="font-family: arial Narrow, serif; text-align: justify">
-      Luego, solicita al Área de Operaciones & TI la base de Contratantes con pólizas vigentes al cierre del tercer 
+      Luego, se realiza la consulta en el sistema LAFT, base de Contratantes con pólizas vigentes al cierre del tercer 
       trimestre, de todos los productos de la cartera de la Compañía.</li>
       <li style="font-family: arial Narrow, serif; text-align: justify">
       La Oficialía de Cumplimiento selecciona una muestra del universo de clientes, que son Cooperativas, Cajas 
@@ -116,9 +125,9 @@
           de alerta “C1”. Se tiene como sustento el correo como sustento.
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
-          En el sistema LAFT se reportaron XX entidades, de las cuales se tomó una muestra de XX entidades y el área de Cumplimiento, con el 
+          En el sistema LAFT se reportaron {{CantidadEmpresasC1}} entidades, y el área de Cumplimiento, con el 
           apoyo de Comercial Masivo, constató que su actividad económica guarda un propósito lógico con los productos contratados. Por ende, 
-          no se identificó señal de alerta.
+          no/si se identificó señal de alerta.
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
           El Área de Comercial Masivos indicó que las operaciones con los contratantes de la muestra {{RespuestaAlertaC1 == 1 ? 'si' : 'no' }}   guardan 
@@ -132,7 +141,15 @@
         </ul>   
       </div>
       <br>
-      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a></p>
+      <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: </p>
+        <ul>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+            <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a>
+          </li>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+            P:\19. RIESGOS OPERATIVOS Y LAVADO DE ACTIVOS\19.04 SPLAFT\100.001 LAFT\05.Informes Trimestrales Protecta\2021\INFORME TRIMESTRAL\3° Trimestre\1. PRODUCTOS
+          </li>
+        </ul>
 
   </div>
     

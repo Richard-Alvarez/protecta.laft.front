@@ -19,8 +19,9 @@ export class TemplateC1Component implements OnInit {
   @Input() Validar:number
   @Input() objListaAlertaC1:number
   @Input() RespuestaAlertaC1:any
+  @Input() CantidadEmpresasC1:any
   @Input() item:any
-
+  
   constructor() { }
 
   ngOnInit() {

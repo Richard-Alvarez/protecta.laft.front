@@ -124,6 +124,7 @@ ListaAlertaS1
 ListaAlertaS2
 ListaAlertaS3
 ListaColaborador
+
 async DescargarReporte(ValidadorIdGrupo){
   let bol = this.Validador("Reporte-Grupal")
   if(bol){
@@ -278,18 +279,51 @@ CargosConcatenadosContraparte:string = ''
 RespuestaGlobalContraparte:any = []
 RespuestaGlobalContraparteP5:string = ''
 
+ListaEmpresasC1
+CantidadEmpresasC1
 
+ValidadorRespondidoClientes 
+ValidadorRespondidoColaborador
+ValidadorRespondidoProveedor
+ValidadorRespondidoContraparte
 async DescargarReporteGeneral(){
   let bol = this.Validador("Reporte-General")
   if(bol){
     return
   }
+  this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,this.IDListPeriodoGlobal)
+  if(this.ValidadorRespondidoClientes.length > 0){
+    let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
+    this.SwalGlobal(mensaje)
+    return
+  }
+  this.ValidadorRespondidoColaborador = await this.ValidardorRespuestas(2,this.IDListPeriodoGlobal)
+  if(this.ValidadorRespondidoColaborador.length > 0){
+    let mensaje = 'Debe cerrar todas las señales del grupo Colaborador'
+    this.SwalGlobal(mensaje)
+    return
+  }
+  this.ValidadorRespondidoProveedor = await this.ValidardorRespuestas(3,this.IDListPeriodoGlobal)
+  if(this.ValidadorRespondidoProveedor.length > 0){
+    let mensaje = 'Debe cerrar todas las señales del grupo Proveedor'
+    this.SwalGlobal(mensaje)
+    return
+  }
+  this.ValidadorRespondidoContraparte = await this.ValidardorRespuestas(4,this.IDListPeriodoGlobal)
+  if(this.ValidadorRespondidoContraparte.length > 0){
+    let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
+    this.SwalGlobal(mensaje)
+    return
+  }
+
   this.ListaAlertaClientes = await this.DataAlertas(1,this.IDListPeriodoGlobal)
   this.ListaAlertaColaborador = await this.DataAlertas(2,this.IDListPeriodoGlobal)
   this.ListaAlertaProveedor = await this.DataAlertas(3,this.IDListPeriodoGlobal)
   this.ListaAlertaContraparte = await this.DataAlertas(4,this.IDListPeriodoGlobal)
   this.ListaAlertaClientesC1  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C1' )
   this.RespuestaAlertaC1 = this.ListaAlertaClientesC1[0].NIDRESPUESTA
+  this.ListaEmpresasC1 = await this.userConfigService.GetListaEmpresas({NPERIODO_PROCESO : this.IDListPeriodoGlobal})
+  this.CantidadEmpresasC1 = this.ListaEmpresasC1.length
   this.ListaAlertaClientesC3  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C3' )
   let respuestaC3 = this.ListaAlertaClientesC3.filter((it,inc) => it.NIDRESPUESTA == 1)
   await this.DataReporteC2Global()
@@ -564,7 +598,7 @@ async DataReporteC2Global(){
  
  SwalGlobal(mensaje){
   swal.fire({
-    title: "Gestor de Clientes",
+    title: "Informes",
     icon: "warning",
     text: mensaje,
     showCancelButton: false,
@@ -618,7 +652,12 @@ Validador(grupo){
 }
 
 
+async ValidardorRespuestas(idGrupo,periodo){
+  let resultado:any = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : periodo, NIDGRUPOSENAL : idGrupo})
 
+  let ValidadorGlobal = resultado.filter(it => it.SESTADO == 1 )
+  return ValidadorGlobal
+}
 
 
 }

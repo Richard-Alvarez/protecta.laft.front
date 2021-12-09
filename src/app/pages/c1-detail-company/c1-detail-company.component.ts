@@ -384,12 +384,14 @@ CalcularCantidadRespuestas(){
 }
 }
 
-
+dataToltip1
+dataToltip2
 async setDataInputTextRespCommentGeneral(eventoCaja,identifica,id){
   let valorDetallePregunta = eventoCaja.target.value
   let textoGlobal1 =  (<HTMLInputElement>document.getElementById('inputglobal1')).value
   let textoGlobal2 =  (<HTMLInputElement>document.getElementById('inputglobal2')).value
-
+  this.dataToltip1 = textoGlobal1
+  this.dataToltip2 = textoGlobal2
   // if(!this.arrComentariosC1[indicePregEmpresa]){
   //   this.arrComentariosC1[indicePregEmpresa] = [[]]
   // }
@@ -415,7 +417,9 @@ async setDataInputTextRespCommentGeneral(eventoCaja,identifica,id){
 }
 
   
-
+Toltip(evento){
+  return evento.target.value
+}
 
 
  
