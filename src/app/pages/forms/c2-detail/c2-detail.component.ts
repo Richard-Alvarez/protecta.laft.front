@@ -1463,7 +1463,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     
     unchekAllList:any = []// = [[[false,false],[false,false],[false,false],[false,false],[false,false]],[[false,false],[false,false],[false,false],[false,false],[false,false]]] 
     async save() {
-       
         let valor:any = this.ValidarSeleccionarListaPEP()
         
         
@@ -1707,13 +1706,12 @@ export class C2DetailComponent implements OnInit , OnDestroy {
        
                 //return
                 
-               
+                debugger;
                 let arrPromises = []
                 if(this.tipoClienteGC == 'ACEPTA-COINCID'){
              
                     let arrayRegimen = [1,2]
               
-
               
                     //arrayRegimen.forEach(regimen => {
                         //let incrementadorCheck = 0;
@@ -1840,6 +1838,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                 STIPO_BUSQUEDA: item.STIPO_BUSQUEDA,
                                 NIDCARGOPEP: this.ValorCombo[i],
                                 NIDGRUPOSENAL: valorIDGrupo,
+                                NIDSUBGRUPOSEN : this.NIDSUBGRUPOSEN,
                                 STIPO_DOCUMENTO : item.STIPOIDEN
                             }
                          
@@ -1913,7 +1912,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         }
     }
     getDisable(){
-        debugger
          //let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.NACEPTA_COINCIDENCIA === 2)
         let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.SESTADO_REVISADO == 2)
         console.log("ValorListaCoincidencias",this.ValorListaCoincidencias)
