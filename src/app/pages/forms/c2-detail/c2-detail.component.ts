@@ -94,6 +94,8 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     idCargpo:string;
     ValorCombo:any = []
     ValorListaCoincidencias:any = []
+    SNOM_COMPLETO_EMPRESA = ''
+    SNUM_DOCUMENTO_EMPRESA = ''
     config :any =[
         {
           NIDGRUPOSENAL : 1,
@@ -356,6 +358,8 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPO")
         this.NIDSUBGRUPOSEN = localStorage.getItem("NIDSUBGRUPO")
+        this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
+        this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
       
        
         //this.tipoClienteGC = this.vistaOrigen
@@ -2637,7 +2641,16 @@ async Consultar360Previous(){
               });
           } */
   } 
-
+  getOcultarPorGrupo () {
+      debugger;
+    if(this.IDGRUPOSENAL == 3 && this.NIDSUBGRUPOSEN ==2)
+        return true
+    if(this.IDGRUPOSENAL == 4 && this.NIDSUBGRUPOSEN ==3)
+        return true
+    if(this.IDGRUPOSENAL == 4 && this.NIDSUBGRUPOSEN ==4)
+        return true
+    return false;
+  }
    //Resultado360:any = []
 //   async Consultar360(item){
 
