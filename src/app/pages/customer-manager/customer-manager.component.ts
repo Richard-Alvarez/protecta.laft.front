@@ -1069,6 +1069,7 @@ export class CustomerManagerComponent implements OnInit {
         await localStorage.setItem("tipoClienteGC", "GC");
         
       }
+      
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
@@ -1168,7 +1169,11 @@ export class CustomerManagerComponent implements OnInit {
     dataPoliza.NIDALERTA = 2
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
-    let respuestaConsultaPoliza: any = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
+    let respuestaConsultaPoliza: any;
+    if(this.idGrupo == 1)
+      respuestaConsultaPoliza = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
+    else
+      respuestaConsultaPoliza = {code : 1}
     if (respuestaConsultaPoliza.code == 1) {
       Swal.fire({
         title: 'Gestor de Cliente',
