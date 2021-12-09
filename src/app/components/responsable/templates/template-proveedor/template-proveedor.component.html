@@ -159,8 +159,8 @@
                     </ul>
                     <br>
                     <strong style="font-family: arial Narrow, serif;"> SUBGRUPO PROVEEDORES</strong>
-                    <!-- <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedores.length !=0;else SinData"> -->
-                        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+                     <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedores.length !=0;else SinData"> 
+                        
                         <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                             <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                                 <tbody>
@@ -187,30 +187,30 @@
                                         </td>
                                         
                                     </tr>
-                                    <!-- <tr *ngFor="let item of listaProveedores"> -->
-                                        <tr>
+                                     <tr *ngFor="let item of listaProveedores">
+                                        
                                         <td width="250px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.STIPO_DOCUMENTO}}  -->
-                                                DNI
+                                                 {{item.STIPO_DOCUMENTO}} 
+                                               
                                             </p>
                                         </td>
                                         <td width="250px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.SNUM_DOCUMENTO_BUSQ}} -->
-                                                 11125874
+                                                {{item.SNUM_DOCUMENTO_BUSQ}}
+                                               
                                             </p>
                                         </td>
                                         <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.SNOM_COMPLETO_BUSQ}}  -->
-                                                RICHARD ALVAREZ RUIZ
+                                                {{item.SNOM_COMPLETO_BUSQ}}  
+                                                
                                             </p>
                                         </td>
                                         <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.TIPOLISTA}} -->
-                                                 LISTA INTERNACIONAL
+                                                {{item.TIPOLISTA}} 
+                                                 
                                             </p>
                                         </td>
                                         
@@ -223,8 +223,8 @@
                     <br>
 
                     <strong style="font-family: arial Narrow, serif;"> SUBGRUPO PROVEEDORES CRITICOS</strong>
-                    <!-- <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedoresCriticos.length !=0;else SinData"> -->
-                        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                     <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedoresCriticos.length !=0;else SinData"> 
+                       
                         <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                             <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                                 <tbody>
@@ -282,8 +282,8 @@
                     <br>
 
                     <strong style="font-family: arial Narrow, serif;"> SUBGRUPO REPRESENTATES LEGALES Y ACCIONISTAS</strong>
-                    <!-- <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedoresRepresentantes.length !=0;else SinData"> -->
-                        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                     <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedoresRepresentantes.length !=0;else SinData"> 
+                        
                         <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                             <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
                                 <tbody>
@@ -320,42 +320,42 @@
                                         </td>
                                         
                                     </tr>
-                                    <!-- <tr *ngFor="let item of listaProveedoresRepresentantes"> -->
-                                        <tr>
+                                    <tr *ngFor="let item of listaProveedoresRepresentantes"> 
+                                   
                                         <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.STIPO_DOCUMENTO}}  -->
-                                                DNI
+                                                 {{item.STIPO_DOCUMENTO}} 
+                                               
                                             </p>
                                         </td>
                                         <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.SNUM_DOCUMENTO_BUSQ}}  -->
-                                                75671412
+                                                {{item.SNUM_DOCUMENTO_BUSQ}} 
+                                                
                                             </p>
                                         </td>
                                         <td width="180px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.SNOM_COMPLETO_BUSQ}}  -->
-                                                RICHARD ALVAREZ RUIZ
+                                               {{item.SNOM_COMPLETO_BUSQ}}  
+                                               
                                             </p>
                                         </td>
                                         <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.TIPOLISTA}}  -->
-                                                LISTA INTERNACIONAL
+                                                 {{item.TIPOLISTA}}  
+                                               
                                             </p>
                                         </td>
                                         <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.RUC}}  -->
-                                                75671412111
+                                                 {{item.RUC}} 
+                                             
                                             </p>
                                         </td>
                                         <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                             <p>
-                                                <!-- {{item.RAZON_SOCIAL}}  -->
-                                                 RICHARD ALVAREZ RUIZ
+                                                {{item.RAZON_SOCIAL}}  
+                                               
                                             </p>
                                         </td>
                                         
