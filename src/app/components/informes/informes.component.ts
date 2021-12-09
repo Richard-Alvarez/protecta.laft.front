@@ -124,6 +124,7 @@ ListaAlertaS1
 ListaAlertaS2
 ListaAlertaS3
 ListaColaborador
+IDListxGrupo
 async DescargarReporte(ValidadorIdGrupo){
   let bol = this.Validador("Reporte-Grupal")
   if(bol){
@@ -280,21 +281,11 @@ RespuestaGlobalContraparteP5:string = ''
 
 ListaEmpresasC1
 CantidadEmpresasC1
-ValidadorRespondidoClientes 
-ValidadorRespondidoColaborador
-ValidadorRespondidoProveedor
-ValidadorRespondidoContraparte
 async DescargarReporteGeneral(){
   let bol = this.Validador("Reporte-General")
   if(bol){
     return
   }
-  this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,this.IDListPeriodoGlobal)
-  this.ValidadorRespondidoColaborador = await this.ValidardorRespuestas(2,this.IDListPeriodoGlobal)
-  this.ValidadorRespondidoProveedor = await this.ValidardorRespuestas(3,this.IDListPeriodoGlobal)
-  this.ValidadorRespondidoContraparte = await this.ValidardorRespuestas(4,this.IDListPeriodoGlobal)
-  
-
   this.ListaAlertaClientes = await this.DataAlertas(1,this.IDListPeriodoGlobal)
   this.ListaAlertaColaborador = await this.DataAlertas(2,this.IDListPeriodoGlobal)
   this.ListaAlertaProveedor = await this.DataAlertas(3,this.IDListPeriodoGlobal)
@@ -629,9 +620,7 @@ Validador(grupo){
   }
   
 }
-ValidardorRespuestas(idGrupo,periodo){
-  this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : periodo, NIDGRUPOSENAL : idGrupo})
-}
+
 
 
 
