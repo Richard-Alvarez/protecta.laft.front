@@ -1662,7 +1662,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 }
        
                 //return
-                
                 debugger;
                 let arrPromises = []
                 if(this.tipoClienteGC == 'ACEPTA-COINCID'){
@@ -1693,7 +1692,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                         valorIDGrupo = 1
                                     }
                                     //  
-                                    debugger
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: valorAlerta, 
@@ -1909,7 +1907,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
 
     getDisableByCheck(SESTADO_REVISADO){
-        debugger
         //return true
         //this.formData.SESTADO_REVISADO == '1' ||
         console.log(SESTADO_REVISADO)
