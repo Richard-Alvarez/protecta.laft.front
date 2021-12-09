@@ -94,7 +94,29 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     idCargpo:string;
     ValorCombo:any = []
     ValorListaCoincidencias:any = []
-
+    config :any =[
+        {
+          NIDGRUPOSENAL : 1,
+          NIDALERTA: 2,
+          linkactual: ['clientes','historico-clientes'],
+          NIDREGIMEN : 1
+        },{
+          NIDGRUPOSENAL : 2,
+          NIDALERTA: 35,
+          linkactual: ['colaborador','historico-colaborador'],
+          NIDREGIMEN : 0
+        },{
+          NIDGRUPOSENAL : 3,
+          NIDALERTA: 33,
+          linkactual: ['proveedor','historico-contraparte'],
+          NIDREGIMEN : 0
+        },{
+          NIDGRUPOSENAL : 4,
+          NIDALERTA: 39,
+          linkactual: ['contraparte','historico-proveedor'],
+          NIDREGIMEN : 0
+        }
+      ]
   
     public value: string[];
     public current: string;
@@ -386,21 +408,34 @@ export class C2DetailComponent implements OnInit , OnDestroy {
           
         
             this.formData.arrClientesGC.forEach(itemObjCliente => {
-               if( this.IDGRUPOSENALGestor == 2){
-                let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 35,"STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
+                let dataService:any = {};
+                dataService = this.config.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENALGestor)
+                dataService.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
+                dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
+                dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
                 arrayPromisesCoincid.push(this.getDataClientesList(dataService))
-               }else if (  this.IDGRUPOSENALGestor ==3){
-                let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 33,"STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
-                arrayPromisesCoincid.push(this.getDataClientesList(dataService))
-                // }
-                // else if( this.IDGRUPOSENALGestor == 1 && this.formData.NREGIMEN == -1 ){
-                //     let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": 1}
-                //     arrayPromisesCoincid.push(this.getDataClientesList(dataService))
-                   }
-               else{
-                let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": itemObjCliente.NIDREGIMEN}
-                arrayPromisesCoincid.push(this.getDataClientesList(dataService))
-               }
+            //    if( this.IDGRUPOSENALGestor == 2){
+            //     "NIDALERTA": 35,
+            //     "STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,
+            //     "SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,
+            //     "NIDREGIMEN": 0}
+            //    }else if (  this.IDGRUPOSENALGestor ==3){
+            //     let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,
+            //     "NIDALERTA": 33,
+            //     "STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,
+            //     "SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
+            //     arrayPromisesCoincid.push(this.getDataClientesList(dataService))
+            //     // }
+            //     // else if( this.IDGRUPOSENALGestor == 1 && this.formData.NREGIMEN == -1 ){
+            //     //     let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": 1}
+            //     //     arrayPromisesCoincid.push(this.getDataClientesList(dataService))
+            //        }
+            //    else{
+            //     let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,
+            //     "NIDALERTA": 2,"STIPOIDEN_BUSQ": itemObjCliente.NTIPO_DOCUMENTO,
+            //     "SNUM_DOCUMENTO_BUSQ": itemObjCliente.SNUM_DOCUMENTO,"NIDREGIMEN": itemObjCliente.NIDREGIMEN}
+            //     arrayPromisesCoincid.push(this.getDataClientesList(dataService))
+            //    }
                
             })
             let arrayRespCoincid = await Promise.all(arrayPromisesCoincid);
@@ -490,6 +525,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             return
         }
         if(this.tipoClienteGC == 'GC' || this.tipoClienteGC == "C2-BANDEJA"){
+            debugger
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
            
@@ -535,13 +571,21 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             }
         
             let dataService:any = {}
-            if(this.formData.NIDALERTA == 35){
-                 dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 35,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
-            }else if(this.formData.NIDALERTA ==33){
-                 dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 33,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
-            }else{
-                 dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
-            }
+            dataService = this.config.find(t=> t.NIDALERTA == this.formData.NIDALERTA)
+            dataService.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
+            dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
+            dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
+
+            
+            // if(this.formData.NIDALERTA == 35){
+            //      dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,
+            //      "NIDALERTA": 35,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,
+            //      "SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
+            // }else if(this.formData.NIDALERTA ==33){
+            //      dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 33,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": 0}
+            // }else{
+            //      dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
+            // }
             // let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
         
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
@@ -1198,7 +1242,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
 
     getListById(idList){
-        
        
         let respBusq = this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == idList)
       
@@ -1695,7 +1738,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                         valorIDGrupo = 1
                                     }
                                     //  
-                                    debugger
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: valorAlerta, 
@@ -1911,7 +1953,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
 
     getDisableByCheck(SESTADO_REVISADO){
-        debugger
         //return true
         //this.formData.SESTADO_REVISADO == '1' ||
         console.log(SESTADO_REVISADO)
@@ -2404,7 +2445,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 Arraycheckbox(){
     //this.ValorCombo = [13]
     
-
     let arreglos:any =[]
     let idListaCheck = this.IdLista ? this.IdLista : null;
     if(this.tipoClienteGC == 'ACEPTA-COINCID'){
