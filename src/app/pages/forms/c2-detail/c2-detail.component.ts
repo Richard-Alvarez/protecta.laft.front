@@ -320,6 +320,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
   SFALTA_ACEPTAR_COINC
   arrHistoricoCli:any = []
   IDGRUPOSENAL
+  NIDSUBGRUPOSEN
   IDGRUPOSENALGestor
     async getFormData() {
         this.tipoClienteCRF = await localStorage.getItem("tipoClienteCRF")
@@ -332,6 +333,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         this.SFALTA_ACEPTAR_COINC = localStorage.getItem("SFALTA_ACEPTAR_COINC")
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPO")
+        this.NIDSUBGRUPOSEN = localStorage.getItem("NIDSUBGRUPO")
       
        
         //this.tipoClienteGC = this.vistaOrigen
@@ -1693,6 +1695,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                         valorIDGrupo = 1
                                     }
                                     //  
+                                    debugger
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: valorAlerta, 
@@ -1708,8 +1711,9 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                         STIPO_BUSQUEDA: itemArreglos.STIPO_BUSQUEDA,
                                         NIDCARGOPEP: this.ValorCombo[incrementadorCheck],
                                         NIDGRUPOSENAL : valorIDGrupo,
+                                        NIDSUBGRUPOSEN : this.NIDSUBGRUPOSEN,
                                         STIPO_DOCUMENTO : itemArreglos.STIPOIDEN
-    
+                                        
                                     }
                                  
                                       let response = this.userConfigService.updateUnchecked(param)

@@ -626,16 +626,16 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         this.core.storage.set('view-c2-arrListasAll', this.internationalList)
         localStorage.setItem("NTIPOCARGA", item.NTIPOCARGA);
         localStorage.setItem("tipoClienteCRF", this.vistaOrigen);
-        
+        localStorage.setItem("NIDGRUPOSENAL", lista.NIDGRUPOSENAL);
+        localStorage.setItem("NIDSUBGRUPO", lista.NIDSUBGRUPOSEN);
         await this.configService.sOrigenVista$.emit(this.vistaOrigen)//sOrigenVista$
-       
+       debugger
         this.core.loader.hide()
         this.router.navigate(['/c2-detail'])
     }
 
     async getResultadosCoincidencias() {
         try {
-            debugger;
             let data = this.config.find(t=> t.linkactual.includes(this.linkactual));
             data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
             data.NIDREGIMEN = data.NIDGRUPOSENAL == 1 ? this.regimen.id : data.NIDREGIMEN
