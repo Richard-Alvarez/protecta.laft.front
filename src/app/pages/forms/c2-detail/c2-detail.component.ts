@@ -1705,7 +1705,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 }
        
                 //return
-                debugger;
                 let arrPromises = []
                 if(this.tipoClienteGC == 'ACEPTA-COINCID'){
              
