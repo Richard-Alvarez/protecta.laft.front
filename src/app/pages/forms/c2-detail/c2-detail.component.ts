@@ -418,7 +418,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         
             this.formData.arrClientesGC.forEach(itemObjCliente => {
                 let dataService:any = {};
-                dataService = this.config.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENALGestor)
+                dataService = this.config.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL)
                 dataService.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
                 dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
                 dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
@@ -534,7 +534,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             return
         }
         if(this.tipoClienteGC == 'GC' || this.tipoClienteGC == "C2-BANDEJA"){
-            debugger
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
            
@@ -1732,24 +1731,25 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                 const itemUncheck = (this.unchekAllList[itemArreglos.NIDREGIMEN-1][(itemArreglos.NIDTIPOLISTA-1)])[itemArreglos.NCONTADORLISTA];
                               
                                 if(itemArreglos.SESTADO_REVISADO == '2'){
-                                    let valorAlerta
-                                    let  valorIDGrupo
-                                    if(this.IDGRUPOSENALGestor == 2  ){
-                                        valorAlerta = 35
-                                        valorIDGrupo = 2
-                                    }else if(this.IDGRUPOSENALGestor == 3){
-                                        valorAlerta = 33
-                                        valorIDGrupo = 3
-                                    }else{
-                                        valorAlerta = 2
-                                        valorIDGrupo = 1
-                                    }
+                                    let _param = this.config.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL)
+                                    // let valorAlerta
+                                    // let  valorIDGrupo
+                                    // if(this.IDGRUPOSENALGestor == 2  ){
+                                    //     valorAlerta = 35
+                                    //     valorIDGrupo = 2
+                                    // }else if(this.IDGRUPOSENALGestor == 3){
+                                    //     valorAlerta = 33
+                                    //     valorIDGrupo = 3
+                                    // }else{
+                                    //     valorAlerta = 2
+                                    //     valorIDGrupo = 1
+                                    // }
                                     //  
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
-                                        NIDALERTA: valorAlerta, 
+                                        NIDALERTA: _param.NIDALERTA, 
                                         NIDRESULTADO: itemArreglos.NIDRESULTADO, 
-                                        NIDREGIMEN: itemArreglos.NIDREGIMEN == null ? 0 : itemArreglos.NIDREGIMEN,//this.formData.NREGIMEN,
+                                        NIDREGIMEN: _param.NIDALERTA == 2 ? this.formData.NREGIMEN : _param.NIDREGIMEN ,
                                         NIDTIPOLISTA: itemArreglos.NIDTIPOLISTA, 
                                         NIDPROVEEDOR: itemArreglos.NIDPROVEEDOR, 
                                         NACEPTA_COINCIDENCIA: itemUncheck ? 1 : 2, 
@@ -1759,7 +1759,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                         NTIPOCARGA: itemArreglos.NTIPOCARGA,//this.formData.NTIPOCARGA
                                         STIPO_BUSQUEDA: itemArreglos.STIPO_BUSQUEDA,
                                         NIDCARGOPEP: this.ValorCombo[incrementadorCheck],
-                                        NIDGRUPOSENAL : valorIDGrupo,
+                                        NIDGRUPOSENAL: _param.NIDGRUPOSENAL,
                                         NIDSUBGRUPOSEN : this.NIDSUBGRUPOSEN,
                                         STIPO_DOCUMENTO : itemArreglos.STIPOIDEN
                                         
@@ -1817,26 +1817,27 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                         let item = arreglos[i]
                        
                         if(item.SESTADO_REVISADO == '2'){
-                            let valorAlerta
-                            let valorIDGrupo
-                                    if(this.IDGRUPOSENALGestor == 2 ||  this.formData.NIDALERTA == 35 ){
-                                        valorAlerta = 35
-                                        this.formData.NREGIMEN = 0
-                                        valorIDGrupo = 2
-                                    }else if(this.IDGRUPOSENALGestor == 3 ||  this.formData.NIDALERTA == 33){
-                                        valorAlerta = 33
-                                        this.formData.NREGIMEN = 0
-                                        valorIDGrupo = 3
-                                    }else{
-                                        valorAlerta = 2
-                                        valorIDGrupo = 1
-                                    }
+                            let _param = this.config.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL)
+                            // let valorAlerta
+                            // let valorIDGrupo
+                            //         if(this.IDGRUPOSENALGestor == 2 ||  this.formData.NIDALERTA == 35 ){
+                            //             valorAlerta = 35
+                            //             this.formData.NREGIMEN = 0
+                            //             valorIDGrupo = 2
+                            //         }else if(this.IDGRUPOSENALGestor == 3 ||  this.formData.NIDALERTA == 33){
+                            //             valorAlerta = 33
+                            //             this.formData.NREGIMEN = 0
+                            //             valorIDGrupo = 3
+                            //         }else{
+                            //             valorAlerta = 2
+                            //             valorIDGrupo = 1
+                            //         }
                           
                             let param = {
                                 NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
-                                NIDALERTA: valorAlerta, 
+                                NIDALERTA: _param.NIDALERTA, 
                                 NIDRESULTADO: item.NIDRESULTADO, 
-                                NIDREGIMEN: this.formData.NREGIMEN,
+                                NIDREGIMEN: _param.NIDALERTA == 2 ? this.formData.NREGIMEN : _param.NIDREGIMEN ,
                                 NIDTIPOLISTA: item.NIDTIPOLISTA,  
                                 NIDPROVEEDOR: item.NIDPROVEEDOR, 
                                 NACEPTA_COINCIDENCIA: this.unchekAllList[i] ? 1 : 2, 
@@ -1846,7 +1847,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                 NTIPOCARGA:  this.formData.NTIPOCARGA,
                                 STIPO_BUSQUEDA: item.STIPO_BUSQUEDA,
                                 NIDCARGOPEP: this.ValorCombo[i],
-                                NIDGRUPOSENAL: valorIDGrupo,
+                                NIDGRUPOSENAL: _param.NIDGRUPOSENAL,
                                 NIDSUBGRUPOSEN : this.NIDSUBGRUPOSEN,
                                 STIPO_DOCUMENTO : item.STIPOIDEN
                             }
@@ -2647,7 +2648,6 @@ async Consultar360Previous(){
           } */
   } 
   getOcultarPorGrupo () {
-      debugger;
     this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
     this.NIDSUBGRUPOSEN = localStorage.getItem("NIDSUBGRUPO")
     if(this.IDGRUPOSENAL == 3 && this.NIDSUBGRUPOSEN ==2)
