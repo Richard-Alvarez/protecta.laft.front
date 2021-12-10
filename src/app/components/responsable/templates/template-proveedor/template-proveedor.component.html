@@ -152,14 +152,222 @@
                     <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
                     <ul>
                         <li style="font-family: arial Narrow, serif; text-align: justify">
-                            Con relación a la señal de alerta P4: Se revisó a los proveedores correspondientes a la base de usufructuarios, 
-                            contra el Registro Negativo LA/FT para poder identificar la señal de alerta en cuestión. Los resultados indicaron 
-                            que se identificó (cantidad de coincidencias) señales de alerta por el usufructuario 
-                            (Mencion a los que le encontraron coincidencia).
+                            Con relación a la señal de alerta P4: Se revisó a los proveedores correspondientes a la base de proveedores, 
+                            contra el Registro Negativo LA/FT para poder identificar la señal de alerta en cuestión. 
+                            Los resultados indicaron que se identificó (cantidad de coincidencias)
                         </li>
                     </ul>
                     <br>
+                    <strong style="font-family: arial Narrow, serif;"> SUBGRUPO PROVEEDORES</strong>
+                     <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedores.length !=0;else SinData"> 
+                        
+                        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                                <tbody>
+                                    <tr>
+                                        <td width="250px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                             <p>
+                                                <strong>TIPO DOC.</strong>
+                                            </p>
+                                        </td>
+                                        <td width="250px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>NRO. DOC.</strong>
+                                            </p>
+                                        </td>
+                                        <td width="300px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>NOMBRE COMPLETO </strong>
+                                            </p>
+                                        </td>
+                                        <td width="300px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>LISTA CON COINCIDENCIA</strong>
+                                            </p>
+                                        </td>
+                                        
+                                    </tr>
+                                     <tr *ngFor="let item of listaProveedores">
+                                        
+                                        <td width="250px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                 {{item.STIPO_DOCUMENTO}} 
+                                               
+                                            </p>
+                                        </td>
+                                        <td width="250px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.SNUM_DOCUMENTO_BUSQ}}
+                                               
+                                            </p>
+                                        </td>
+                                        <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.SNOM_COMPLETO_BUSQ}}  
+                                                
+                                            </p>
+                                        </td>
+                                        <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.TIPOLISTA}} 
+                                                 
+                                            </p>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </FONT>
+                        </table>
+                        <br>
+                    </div>
                     <br>
+
+                    <strong style="font-family: arial Narrow, serif;"> SUBGRUPO PROVEEDORES CRITICOS</strong>
+                     <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedoresCriticos.length !=0;else SinData"> 
+                       
+                        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                                <tbody>
+                                    <tr>
+                                        <td width="150px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                             <p>
+                                                <strong>TIPO DOC.</strong>
+                                            </p>
+                                        </td>
+                                        <td width="150px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>NRO. DOC.</strong>
+                                            </p>
+                                        </td>
+                                        <td width="300px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>NOMBRE COMPLETO </strong>
+                                            </p>
+                                        </td>
+                                        <td width="200px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>LISTA CON COINCIDENCIA</strong>
+                                            </p>
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr *ngFor="let item of listaProveedoresCriticos">
+                                        <td width="150px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.STIPO_DOCUMENTO}}
+                                            </p>
+                                        </td>
+                                        <td width="150px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.SNUM_DOCUMENTO_BUSQ}}
+                                            </p>
+                                        </td>
+                                        <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.SNOM_COMPLETO_BUSQ}}
+                                            </p>
+                                        </td>
+                                        <td width="200px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.TIPOLISTA}}
+                                            </p>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </FONT>
+                        </table>
+                        <br>
+                    </div>
+                    <br>
+
+                    <strong style="font-family: arial Narrow, serif;"> SUBGRUPO REPRESENTATES LEGALES Y ACCIONISTAS</strong>
+                     <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="listaProveedoresRepresentantes.length !=0;else SinData"> 
+                        
+                        <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                            <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                                <tbody>
+                                    <tr>
+                                        <td width="80px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                             <p>
+                                                <strong>TIPO DOC.</strong>
+                                            </p>
+                                        </td>
+                                        <td width="100px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>NRO. DOC.</strong>
+                                            </p>
+                                        </td>
+                                        <td width="200px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>NOMBRE COMPLETO </strong>
+                                            </p>
+                                        </td>
+                                        <td width="150px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>LISTA CON COINCIDENCIA</strong>
+                                            </p>
+                                        </td>
+                                        <td width="70px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>RUC</strong>
+                                            </p>
+                                        </td>
+                                        <td width="200px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                            <p>
+                                                <strong>RAZON SOCIAL</strong>
+                                            </p>
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr *ngFor="let item of listaProveedoresRepresentantes"> 
+                                   
+                                        <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                 {{item.STIPO_DOCUMENTO}} 
+                                               
+                                            </p>
+                                        </td>
+                                        <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.SNUM_DOCUMENTO_BUSQ}} 
+                                                
+                                            </p>
+                                        </td>
+                                        <td width="180px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                               {{item.SNOM_COMPLETO_BUSQ}}  
+                                               
+                                            </p>
+                                        </td>
+                                        <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                 {{item.TIPOLISTA}}  
+                                               
+                                            </p>
+                                        </td>
+                                        <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                 {{item.RUC}} 
+                                             
+                                            </p>
+                                        </td>
+                                        <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                            <p>
+                                                {{item.RAZON_SOCIAL}}  
+                                               
+                                            </p>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </FONT>
+                        </table>
+                        <br>
+                    </div>
+                    <br>
+
+
                     <ul>
                         <li style="font-family: arial Narrow, serif; text-align: justify">
                             Con relación a la señal de alerta P5: {{RespuestaGlobalContraparteP5}} se identificaron proveedores domiciliados 
@@ -169,7 +377,9 @@
                     </ul>
             </div>
         </div>
+        <ng-template #SinData>
 
+        </ng-template>
     </div>
       <div class="text-center pt-5">
         <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en:</p>
