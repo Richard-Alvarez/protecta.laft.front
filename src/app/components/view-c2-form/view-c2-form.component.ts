@@ -628,8 +628,8 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         localStorage.setItem("tipoClienteCRF", this.vistaOrigen);
         localStorage.setItem("NIDGRUPOSENAL", lista.NIDGRUPOSENAL);
         localStorage.setItem("NIDSUBGRUPO", lista.NIDSUBGRUPOSEN);
-        localStorage.setItem("SNOM_COMPLETO_EMPRESA",lista.SNOM_COMPLETO_EMPRESA);
-        localStorage.setItem("SNUM_DOCUMENTO_EMPRESA",lista.SNUM_DOCUMENTO_EMPRESA);
+        localStorage.setItem("SNOM_COMPLETO_EMPRESA",item.SNOM_COMPLETO_EMPRESA);
+        localStorage.setItem("SNUM_DOCUMENTO_EMPRESA",item.SNUM_DOCUMENTO_EMPRESA);
         await this.configService.sOrigenVista$.emit(this.vistaOrigen)//sOrigenVista$
        debugger
         this.core.loader.hide()

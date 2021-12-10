@@ -142,6 +142,9 @@ export class C2DetailComponent implements OnInit , OnDestroy {
       localStorage.setItem("objFocusPosition","{}")
     }
     async ngOnInit() {  
+        
+        this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
+        this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
         //   this.getAcordionReturn();
         localStorage.setItem("objFocusPositionReturn", localStorage.getItem("objFocusPosition"));
       this.nidregimen = localStorage.getItem("NREGIMEN");
@@ -358,9 +361,9 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPO")
         this.NIDSUBGRUPOSEN = localStorage.getItem("NIDSUBGRUPO")
-        this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
-        this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
       
+    this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
+    this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
        
         //this.tipoClienteGC = this.vistaOrigen
         
@@ -376,6 +379,8 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.formData.NEDAD = localStorage.getItem('NEDAD')
             this.formData.NEDAD = this.formData.NEDAD === 'null' ? '' : this.formData.NEDAD === undefined ? '' : this.formData.NEDAD 
             
+            this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA 
+            this.formData.SNUM_DOCUMENTO_EMPRESA = this.SNUM_DOCUMENTO_EMPRESA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
             this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
             this.formData.NTIPO_DOCUMENTO = localStorage.getItem('NTIPO_DOCUMENTO')
@@ -550,6 +555,8 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
             this.formData.NTIPO_DOCUMENTO = localStorage.getItem('NTIPO_DOCUMENTO')
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
+            this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA 
+            this.formData.SNUM_DOCUMENTO_EMPRESA = this.SNUM_DOCUMENTO_EMPRESA
             //this.formData.NIDREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.STIPO_AND_NUM_DOC = ''
 
@@ -2641,11 +2648,13 @@ async Consultar360Previous(){
   } 
   getOcultarPorGrupo () {
       debugger;
+    this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
+    this.NIDSUBGRUPOSEN = localStorage.getItem("NIDSUBGRUPO")
     if(this.IDGRUPOSENAL == 3 && this.NIDSUBGRUPOSEN ==2)
         return true
     if(this.IDGRUPOSENAL == 4 && this.NIDSUBGRUPOSEN ==3)
         return true
-    if(this.IDGRUPOSENAL == 4 && this.NIDSUBGRUPOSEN ==4)
+    if(this.IDGRUPOSENAL == 4 && this.NIDSUBGRUPOSEN ==5)
         return true
     return false;
   }
