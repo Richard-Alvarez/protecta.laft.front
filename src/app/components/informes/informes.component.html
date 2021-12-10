@@ -260,7 +260,7 @@
 
                               <img  src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"  style="display: none" > 
                               
-                            <app-template-c1  [parent]="this" [item]="" [RespuestaAlertaC1]="RespuestaAlertaC1" [CantidadEmpresasC1]="CantidadEmpresasC1" [Validar]="2" style="display: none" ></app-template-c1> 
+                           <app-template-c1  [parent]="this" [item]="" [RespuestaAlertaC1]="RespuestaAlertaC1" [CantidadEmpresasC1]="CantidadEmpresasC1" [Validar]="2" style="display: none" ></app-template-c1> 
                             <app-template-c2-general  [parent]="this" [Validar]="2"  style="display: none"></app-template-c2-general>
                             <app-template-c3  [parent]="this" [ObjListaAlertasC3]="ListaAlertaClientesC3" [RespuestaGlobalC3]="RespuestaGlobalC3"  [Validar]="2"  style="display: none"></app-template-c3>
                             <app-template-s1   style="display: none"></app-template-s1>
@@ -269,9 +269,11 @@
 
                             <app-template-clientes-general [objListaAlertaRG]="ListaAlertaClienteRG" [respuestaRG]="RespuetasAlertaRG" [CargoRG]="CargoRG" [Validar]="2" style="display: none" ></app-template-clientes-general>
                             <app-template-colaborador [RespuestaGlobalColaborador]="RespuestaGlobalColaborador"  [Validar]="2" style="display: none" ></app-template-colaborador>
-                            <app-template-proveedor  [CargosConcatenadosContraparte]="CargosConcatenadosProveedor" [RespuestaGlobalContraparteP5]="RespuestaGlobalProveedorP5" [RespuestaGlobalContraparte]="RespuestaGlobalProveedor"  [Validar]="2" style="display: none"
+                            <!-- <app-template-proveedor  [CargosConcatenadosContraparte]="CargosConcatenadosProveedor" [RespuestaGlobalContraparteP5]="RespuestaGlobalProveedorP5" [RespuestaGlobalContraparte]="RespuestaGlobalProveedor"  [Validar]="2" style="display: none"
                             [listaProveedoresCriticos]="listaProveedoresCriticos" [listaProveedoresRepresentantes]="listaProveedoresRepresentantes" [listaProveedores]="listaProveedores"></app-template-proveedor>
-                            <app-template-contraparte [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalContraparteP5" [RespuestaGlobalContraparte]="RespuestaGlobalContraparte"  [Validar]="2" style="display: none" ></app-template-contraparte>
+                            <app-template-contraparte [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalContraparteP5" [RespuestaGlobalContraparte]="RespuestaGlobalContraparte"  [Validar]="2" style="display: none" ></app-template-contraparte>  -->
+                            <app-template-proveedor-contraparte [CargosConcatenadosContraparte]="CargosConcatenadosContraparte" [RespuestaGlobalContraparteP5]="RespuestaGlobalProveedorP5" [RespuestaGlobalContraparte]="RespuestaGlobalProveedor"  [RespuestaGlobalProveedor]="RespuestaGlobalProveedor" [CargosConcatenadosProveedor]="CargosConcatenadosProveedor"
+                             [Validar]="2"  [listaProveedoresContraparte]="listaProveedoresContraparte" [cantidadProveedoresContraparte]="cantidadProveedoresContraparte" [RespuestaGlobalProveedorContraparte]="RespuestaGlobalProveedorContraparte" style="display: none"></app-template-proveedor-contraparte>
                         </div>
                     
 

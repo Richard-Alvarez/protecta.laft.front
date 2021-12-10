@@ -183,6 +183,7 @@ import { TemplateC2GeneralComponent } from './components/responsable/templates/t
 import { FileUploadModule } from 'ng2-file-upload';
 import { ModalValidarCorreoComponent } from './pages/modal-validar-correo/modal-validar-correo.component';
 import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/actualizar-contrasenna.component';
+import { TemplateProveedorContraparteComponent } from './components/responsable/templates/template-proveedor-contraparte/template-proveedor-contraparte.component';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -335,7 +336,8 @@ import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/a
     TemplateC2GeneralComponent,
     ModalValidarCorreoComponent,
     ActualizarContrasennaComponent,
-    ViewC2ListComponent
+    ViewC2ListComponent,
+    TemplateProveedorContraparteComponent
 
    
     //Validaciones

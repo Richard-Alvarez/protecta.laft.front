@@ -1,0 +1,194 @@
+<div id="proveedor" style="font-size:14.0pt">
+
+   
+    <img *ngIf="Validar !== 2" src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"> 
+    <div>
+        <br/>
+    </div>
+    
+
+<div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+    <p> 
+        <strong style="font-family: arial Narrow, serif;">1.3 Señales de alerta - Relativas a los proveedores y contrapartes</strong>
+      </p>   
+    <div>  
+       <div>
+           <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt">
+                    <tbody>
+                        <tr>
+                            <td width="50px" style="padding-left: 10px; text-align: center;">
+                                <p>
+                                    <strong>CÓDIGO</strong>
+                                </p>
+                            </td>
+                            <td width="750px" style="padding-left: 10px; text-align: center;">
+                                <p>
+                                    <strong>SEÑAL DE ALERTA</strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                                <p align="center">
+                                    P1
+                                </p>
+                            </td>
+                            <td width="750"px style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    El proveedor o contraparte se niega a proporcionar la información solicitada o 
+                                    la información proporcionada es inconsistente o de difícil verificación por parte de las empresas. 
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                                <p align="center">
+                                    P2
+                                </p>
+                            </td>
+                            <td width="750px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    El proveedor o contraparte trata de presionar a 
+                                    un trabajador para no proporcionar la información solicitada. 
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                                <p align="center">
+                                    P3
+                                </p>
+                            </td>
+                            <td width="750px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    El proveedor o contraparte indica una dirección que también es la de un negocio
+                                     diferente al declarado y/o no parece corresponder con la ocupación o actividad
+                                      económica declarada por él.  
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                                <p align="center">
+                                    P4
+                                </p>
+                            </td>
+                            <td width="750px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    Que se tome conocimiento por los medios de difusión pública u otro, según sea el caso,
+                                     que un proveedor o contraparte o sus representantes o socios, en caso de personas jurídicas,
+                                      están siendo investigado o procesado por el delito de lavado de activos, delitos precedentes, 
+                                      el delito de financiamiento del terrorismo y/o delitos conexos.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50px">
+                                <p align="center">
+                                    P5
+                                </p>
+                            </td>
+                            <td width="750px" style="padding-left: 10px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    El proveedor o contraparte está domiciliado en / o modifica su domicilio a:
+                                     países considerados paraísos fiscales o países donde existe conocida
+                                      actividad terrorista, considerados como no cooperantes por el
+                                       GAFI o sujetos a sanciones OFAC. 
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </FONT>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <div class="container" style="padding: 0px 200px;">
+            <br> 
+            <p>
+                <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta P1, P2, P3</strong>
+            </p>
+            <ol type="a">
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Se solicita a la {{CargosConcatenadosContraparte}} que confirme 
+                    si se han presentado/identificado las señales de alerta respectivas.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Se solicita a la {{CargosConcatenadosProveedor}} que confirme 
+                    si se han presentado/identificado las señales de alerta respectivas.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Se revisa la información proporcionada.
+                </li>
+            </ol>
+            <p>
+                <p><strong></strong></p>
+                <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                <ul>
+                    <li *ngFor="let item of RespuestaGlobalContraparte" style="font-family: arial Narrow, serif; text-align: justify">
+                        El {{item.SCARGO}} reportó que {{item.RespuestaGlobal}} hubo situaciones que configuraron como 
+                        señales de alerta con relación al comportamiento de usufructuarios.
+                    </li>
+                    <li *ngFor="let item of RespuestaGlobalProveedor" style="font-family: arial Narrow, serif; text-align: justify">
+                        El {{item.SCARGO}} reportó que {{item.RespuestaGlobal}} hubo situaciones que configuraron como 
+                        señales de alerta con relación al comportamiento de proveedor.
+                    </li>
+                </ul>
+        </div>
+    </div>
+    <div>
+        <div class="container" style="padding: 0px 200px;">
+            <br> 
+            <p>
+                <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta P4, P5</strong>
+            </p>
+            <ol type="a">
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Se realiza la búsqueda contra las listas internacionales y Registro Negativo, esto es ejecutada mediante el sistema LAFT.
+                    Estas consultas también se realizan de manera individual a través de la plataforma WorldCheck e información de la contraparte.
+                </li>
+                <li style="font-family: arial Narrow, serif; text-align: justify">
+                    Se revisa la información proporcionada.
+                </li>
+            </ol>
+            <p>
+                <p><strong></strong></p>
+                <strong style="font-family: arial Narrow, serif;"> Resultados:</strong>
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                        Con relación a la señal de alerta P4: Se revisó a las contrapartes correspondientes de la base de usufructuarios, 
+                        contra el Registro Negativo LA/FT, a los accionistas, socios o asociados que tengan directa o indirectamente más del 
+                        25% del capital social. En el resultado se identificó {{cantidadProveedoresContraparte}} coincidencias.
+                    </li>
+                </ul>
+                <br>
+              
+                     
+
+
+                <ul>
+                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                        Con relación a la señal de alerta P5: {{RespuestaGlobalProveedorContraparte}} se identificaron proveedores domiciliados 
+                        en / o que modificaron su domicilio a: países considerados paraísos fiscales o países donde existe conocida 
+                        actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
+                    </li>
+                </ul>
+        </div>
+    </div>
+    <ng-template #SinData>
+
+    </ng-template>
+</div>
+<p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: </p>
+<ul>
+  <li style="font-family: arial Narrow, serif; text-align: justify"> 
+    <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a>
+  </li>
+  <li style="font-family: arial Narrow, serif; text-align: justify"> 
+    •	P:\19. RIESGOS OPERATIVOS Y LAVADO DE ACTIVOS\19.04 SPLAFT\100.001 LAFT\37. Bases de datos
+  </li>
+</ul>
+</div>
+
