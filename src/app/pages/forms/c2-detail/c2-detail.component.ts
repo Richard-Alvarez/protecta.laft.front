@@ -101,7 +101,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
           NIDGRUPOSENAL : 1,
           NIDALERTA: 2,
           linkactual: ['clientes','historico-clientes'],
-          NIDREGIMEN : 2
+          NIDREGIMEN : 1
         },{
           NIDGRUPOSENAL : 2,
           NIDALERTA: 35,
@@ -583,6 +583,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         
             let dataService:any = {}
             dataService = this.config.find(t=> t.NIDALERTA == this.formData.NIDALERTA)
+            dataService.NIDREGIMEN= dataService.NIDALERTA == 2 ? this.formData.NREGIMEN : dataService.NIDREGIMEN/**/
             dataService.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
             dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
             dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
@@ -598,7 +599,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             //      dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
             // }
             // let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
-        debugger;
+        //debugger;
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
             //this.boolNameMach = this.arrCoincidenciasLista.;
             this.SCLIENT_DATA = localStorage.getItem('SCLIENT')//this.formData.SCLIENT
@@ -622,7 +623,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         
         if(this.tipoClienteGC == 'CCO' || this.tipoClienteGC == 'CRE' || this.tipoClienteGC == 'CRF'){
             //this.tipoClienteGC = await this.getOrigenVista()
-            debugger;
+            //debugger;
             this.arrListasAll = JSON.parse(localStorage.getItem('view-c2-arrListasAll'))
             
             this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
@@ -666,6 +667,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 //let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO}
                 let dataService:any = {}
                 dataService = this.config.find(t=> t.NIDALERTA == this.formData.NIDALERTA)
+                dataService.NIDREGIMEN= dataService.NIDALERTA == 2 ? this.formData.NREGIMEN : dataService.NIDREGIMEN/**/
                 dataService.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
                 dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
                 dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
@@ -778,7 +780,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
     SESTADO_REVISADO_ACEPT
     async getDataClientesList(dataService){
-        debugger;
+        //debugger;
         this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
         try {
             
@@ -815,7 +817,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
                 }
                 if(this.IdLista == 5){
-                    debugger;
+                    //debugger;
                     this.espList = await this.userConfigService.getListEspecial(dataService)
                     this.espList.forEach(it => {
                         this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
@@ -926,7 +928,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                     }
                     
                 })
-                debugger;
+                //debugger;
                 let arrListEspService = []
                 let espListService:any[] = await this.userConfigService.getListEspecial(dataService)
                 espListService.forEach(it => {
@@ -1053,7 +1055,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                     
                 })
                 let arrListEspService = []
-                debugger;
+                //debugger;
                 let espListService:any[] = await this.userConfigService.getListEspecial(dataService)
                 espListService.forEach(it => {
                     let boolAcepta = it.NACEPTA_COINCIDENCIA == 1
@@ -1330,7 +1332,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     async getListEspecial() {        
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show();
-        debugger;
+        //debugger;
         this.espList = await this.userConfigService.getListEspecial(param)
         this.espList.forEach(it => {
             this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
@@ -1713,7 +1715,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 if(this.tipoClienteGC == 'ACEPTA-COINCID'){
              
                     let arrayRegimen = [1,2]
-              
+              debugger;
               
                     //arrayRegimen.forEach(regimen => {
                         //let incrementadorCheck = 0;
@@ -1758,6 +1760,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                         STIPO_DOCUMENTO : itemArreglos.STIPOIDEN
                                         
                                     }
+                                    debugger;
                                       let response = await this.userConfigService.updateUnchecked(param)
                                       arrPromises.push(response)
                                 }
