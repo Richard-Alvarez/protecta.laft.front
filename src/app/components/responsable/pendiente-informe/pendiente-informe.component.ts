@@ -810,6 +810,7 @@ validadorC2:string = ''
 
 CantidadEmpresasC1
 ListaEmpresasC1
+listaInternacionalRentaParticularIDECON:any = []
 
 async DescargarReporte(item){
   this.ElimanrDiv()
@@ -977,6 +978,7 @@ ElimanrDiv(){
     this.listaEspecial =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 )
     this.listaEspecialSimpli =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5 && it.NIDREGIMEN == 2)
     this.listaEspecialGene =  this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 5   && it.NIDREGIMEN == 1)
+    this.listaInternacionalRentaParticularIDECON = this.arrayDataResultado.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1)
     this.Cantidad = this.arrayDataResultado.length
   }
   Resultado:any = {}
