@@ -584,7 +584,6 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition:any = {}
-        debugger;
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
         if(this.linkactual == "proveedor")
             this.regimen.id = 1;
@@ -631,7 +630,6 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         localStorage.setItem("SNOM_COMPLETO_EMPRESA",lista.SNOM_COMPLETO_EMPRESA);
         localStorage.setItem("SNUM_DOCUMENTO_EMPRESA",lista.SNUM_DOCUMENTO_EMPRESA);
         await this.configService.sOrigenVista$.emit(this.vistaOrigen)//sOrigenVista$
-       debugger
         this.core.loader.hide()
         this.router.navigate(['/c2-detail'])
     }

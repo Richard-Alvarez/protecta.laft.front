@@ -101,7 +101,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
           NIDGRUPOSENAL : 1,
           NIDALERTA: 2,
           linkactual: ['clientes','historico-clientes'],
-          NIDREGIMEN : 1
+          NIDREGIMEN : 2
         },{
           NIDGRUPOSENAL : 2,
           NIDALERTA: 35,
@@ -529,7 +529,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             return
         }
         if(this.tipoClienteGC == 'GC' || this.tipoClienteGC == "C2-BANDEJA"){
-            debugger
+            //debugger
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
            
@@ -678,7 +678,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 }else{
                     this.sDescriptRiesgo = respExperian.sDescript//'BAJO'
                 }
-
                 this.arrCoincidenciasLista = await this.getDataClientesAllList(dataService)
                 
                 //this.arrCoincidenciasLista = await respClientesAll.lista
@@ -789,7 +788,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
     SESTADO_REVISADO_ACEPT
     async getDataClientesList(dataService){
-        
+        debugger;
         this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
         try {
             
@@ -812,6 +811,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                     })
                 }
                 if(this.IdLista == 2){
+                    //debugger;
                     this.pepList = await this.userConfigService.getPepList(dataService)
                     this.pepList.forEach(it => {
                         this.uncheckPepLists.push(it.NACEPTA_COINCIDENCIA == 1)
@@ -825,6 +825,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
                 }
                 if(this.IdLista == 5){
+                    debugger;
                     this.espList = await this.userConfigService.getListEspecial(dataService)
                     this.espList.forEach(it => {
                         this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
@@ -1466,7 +1467,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
     
     unchekAllList:any = []// = [[[false,false],[false,false],[false,false],[false,false],[false,false]],[[false,false],[false,false],[false,false],[false,false],[false,false]]] 
-    async save() {
+    save() {
         let valor:any = this.ValidarSeleccionarListaPEP()
         
         
@@ -1757,8 +1758,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                         STIPO_DOCUMENTO : itemArreglos.STIPOIDEN
                                         
                                     }
-                                 
-                                      let response = this.userConfigService.updateUnchecked(param)
+                                      let response = await this.userConfigService.updateUnchecked(param)
                                       arrPromises.push(response)
                                 }
                             //}
@@ -1843,9 +1843,8 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                 NIDSUBGRUPOSEN : this.NIDSUBGRUPOSEN,
                                 STIPO_DOCUMENTO : item.STIPOIDEN
                             }
-                         
                              
-                             let response = this.userConfigService.updateUnchecked(param)
+                             let response = await this.userConfigService.updateUnchecked(param)
                              arrPromises.push(response)
                              
                         }
@@ -1916,7 +1915,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     getDisable(){
          //let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.NACEPTA_COINCIDENCIA === 2)
         let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.SESTADO_REVISADO == 2)
-        console.log("ValorListaCoincidencias",this.ValorListaCoincidencias)
+        //console.log("ValorListaCoincidencias",this.ValorListaCoincidencias)
         if(ValorCantidad.length > 0){
             // let ValorCantidadAceptados = this.ValorListaCoincidencias.filter(it => it.SESTADO_REVISADO === 1 || it.SESTADO_REVISADO === '1')
             // console.log("ValorCantidadAceptados",ValorCantidadAceptados)
@@ -1928,8 +1927,8 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             // }
             return false
         }else{
-            console.log("this.SESTADO_REVISADO_ACEPT",this.SESTADO_REVISADO_ACEPT)
-            console.log("this.formData.SESTADO_REVISADOT",this.formData.SESTADO_REVISADO)
+            //console.log("this.SESTADO_REVISADO_ACEPT",this.SESTADO_REVISADO_ACEPT)
+            //console.log("this.formData.SESTADO_REVISADOT",this.formData.SESTADO_REVISADO)
             if(this.SESTADO_REVISADO_ACEPT+'' == '1'){
              
                 //return false
@@ -2630,7 +2629,7 @@ async Consultar360Previous(){
             0
         })
         
-        console.log('asd',this.formData.NTIPO_DOCUMENTO)
+        //console.log('asd',this.formData.NTIPO_DOCUMENTO)
 
          /* if(this.ListaPoliza.length != 0){
              this.ListaPoliza.forEach(element => {
@@ -2640,7 +2639,6 @@ async Consultar360Previous(){
           } */
   } 
   getOcultarPorGrupo () {
-      debugger;
     if(this.IDGRUPOSENAL == 3 && this.NIDSUBGRUPOSEN ==2)
         return true
     if(this.IDGRUPOSENAL == 4 && this.NIDSUBGRUPOSEN ==3)
