@@ -1,4 +1,5 @@
 
+    <div style="font-size:14.0pt;">
     <div>
         
         <img *ngIf="Validar !== 2" src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"> 
@@ -17,7 +18,7 @@
             </p>  
               <!-- ESTO ES PARA LA C2 -->
               <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                     <tbody>
                         <tr>
                             <td width="50px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
@@ -84,7 +85,7 @@
         </div>
         <br>
 
-       <strong style="font-family: arial Narrow, serif;"> REGISTROS NEGATIVOS</strong>
+       <strong style="font-family: arial Narrow, serif;"> REGISTRO NEGATIVO</strong>
 
        <div>
             <ul>
@@ -96,7 +97,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaRenta.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
@@ -148,7 +149,7 @@
                                 </td>
                                 <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        {{item.STIPO_LISTA_REFERENCIA}}
+                                        {{item.SDOC_REFERENCIA}}
                                     </p>
                                 </td>
                             </tr>
@@ -169,7 +170,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaMasivos.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -221,7 +222,7 @@
                                 </td>
                                 <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        {{item.STIPO_LISTA_REFERENCIA}}
+                                        {{item.SDOC_REFERENCIA}}
                                     </p>
                                 </td>
                             </tr>
@@ -242,7 +243,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;"  *ngIf="parent.listaEspecialSoat.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
@@ -306,7 +307,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaEspecialRenta.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
@@ -326,7 +327,7 @@
                                 </td>
                                 <td width="30%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
                                     <p>
-                                        <strong>DOCUMENTO DE REFERENCIA</strong>
+                                        <strong>PRODUCTO</strong>
                                     </p>
                                 </td>
                             </tr>
@@ -348,7 +349,7 @@
                                 </td>
                                 <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        {{item.STIPO_LISTA_REFERENCIA}}
+                                        {{item.DESRAMO}}
                                     </p>
                                 </td>
                             </tr>
@@ -371,7 +372,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepRentaParticular.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -435,7 +436,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepMasivos.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -499,7 +500,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepSoat.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -562,7 +563,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepRenta.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -616,6 +617,8 @@
             </div>
         </div>
 
+        
+
         <strong style="font-family: arial Narrow, serif;">LISTAS COMPLEMENTARIAS WORLDCHECK</strong>
 
         <div>
@@ -627,7 +630,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaInternacionalRentaParticularWC.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -692,7 +695,7 @@
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaInternacionalRentaParticularIDECON.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -715,11 +718,7 @@
                                         <strong>PRODUCTO</strong>
                                     </p>
                                 </td>
-                                <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
-                                    <p>
-                                        <strong>INFORMACIÓN ADICIONAL</strong>
-                                    </p>
-                                </td>
+                                
                             </tr>
                             <tr *ngFor="let item of parent.listaInternacionalRentaParticularIDECON">
                                 <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
@@ -742,11 +741,7 @@
                                         {{item.DESRAMO}}
                                     </p>
                                 </td>
-                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                    <p>
-                                        {{item.STIPO_LISTA_REFERENCIA}}
-                                    </p>
-                                </td>
+                                
                             </tr>
                         </tbody>
                     </FONT>
@@ -754,21 +749,23 @@
                 <br>
             </div>
         </div>
+
+        <strong style="font-family: arial Narrow, serif;">LISTAS ESPECIALES DE SEGURIDAD</strong>
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+               	No se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del  {{parent.Periodo}}.
+            </li>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+                Por lo tanto, se concluye que por la señal de alerta “C2” no se identificaron casos.
+         </li>
+              
+        </ul>
         <ng-template #SinData>
 
         </ng-template>
-        <div>
-            <ul>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                   (SI/NO) se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del {{parent.Periodo}}”.
-                </li>
-                <li style="font-family: arial Narrow, serif; text-align: justify">
-                    Por lo tanto, se concluye que por la señal de alerta “C2” (SI/NO) se identificaron casos.
-                </li>
-            </ul>
-        </div>
+       
      
-        <br>
+        
         <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: </p>
         <ul>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
@@ -780,5 +777,5 @@
         </ul>
    </div>
 
-
+</div>
 

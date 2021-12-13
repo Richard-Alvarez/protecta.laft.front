@@ -300,6 +300,7 @@
                                                                         </div>
                                                                         <div class="col-lg-12" *ngIf="STIPO_USUARIO === 'RE' && item.TIPO_FORM !=='C'">
                                                                             <div class="row mt-2" style="padding-left: 0px;padding-right: 0px;" *ngFor="let pregHeadOne of item.arrPreguntasCabecera;let incPregHeadOne = index;">
+                                                                                <!-- {{pregHeadOne | json}} -->
                                                                                 <div class="col-lg-4" style="margin-right: 10px;    margin-left: -10px;">
                                                                                     <div class="tooltipT">
                                                                                         <!-- <div class="tooltiptextT">
@@ -432,7 +433,7 @@
                                                                     <div class="Header">
                                                                         <div class="row">
                                                                             <div class="col-lg-19">
-                                                                                <h4 class="TitleLine2">Complemento</h4>
+                                                                                <h4 class="TitleLine2">Complemento {{listComplemento.SNOMBRE_COMPLEMENTO}}</h4>
                                                                             </div>
                                                                         </div>
 
@@ -443,22 +444,22 @@
 
                                                                 <div class="row pt-2" style="margin-top:-20px;">
                                                                     <div class="col-lg-12">
-                                                                        <div class="borderFormat">
-                                                                            <div class="row pt-2">
-                                                                                <div class="form-group" style="padding-left: 20px;padding-top:5px">
+                                                                       <div class="">  <!-- Se comento el  borderFormat -->
+                                                                            <div class="row justify-content-center pt-4">
+                                                                                <!-- <div class="form-group" style="padding-left: 20px;padding-top:5px">
                                                                                     <span class="fontText">Nombre </span>
                                                                                 </div>
                                                                                 <div class="col-lg-1 form-group" placement="top" ngbTooltip="{{listComplemento.SNOMBRE_COMPLEMENTO}}">
                                                                                     <input [disabled]="true" id="usName" type="text" class="form-control buttonSinBorder" value={{listComplemento.SNOMBRE_COMPLEMENTO}}>
-                                                                                </div>
+                                                                                </div> -->
 
 
-                                                                                <div class="form-group" style="padding-top:5px">
+                                                                                <!-- <div class="form-group" style="padding-top:5px">
                                                                                     <span class="fontText">Descripción</span>
                                                                                 </div>
                                                                                 <div class="col-lg-3 form-group" style="padding-left:13px" placement="top" ngbTooltip="{{listComplemento.SDESCRIPCION}}">
                                                                                     <input [disabled]="true" id="usName" type="text" class="form-control buttonSinBorder" value={{listComplemento.SDESCRIPCION}}>
-                                                                                </div>
+                                                                                </div> -->
                                                                                 <div class="form-group" style="padding-top:5px">
                                                                                     <span class="fontText">Seleccionar usuario:</span>
                                                                                 </div>

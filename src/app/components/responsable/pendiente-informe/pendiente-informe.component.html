@@ -408,7 +408,7 @@
         </div>
 
         <div *ngIf="this.Alerta=='C1' && this.RegimenPendiente===2">
-            <app-template-c1 [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" [Validar]="1" style="display: none"></app-template-c1>
+            <app-template-c1 [parent]="this" [Nombre]="Nombre" [arrayDataSenal]="arrayDataSenal" [Perfil]="Perfil" [Respuesta]="Respuesta" [Alerta]="Alerta" [Validar]="1" [CantidadEmpresasC1]="CantidadEmpresasC1" style="display: none"></app-template-c1>
         </div>
 
         <div *ngIf="(this.NombreLink == 'proveedor' || this.NombreLink == 'contraparte') && this.RegimenPendiente==0">

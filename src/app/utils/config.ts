@@ -227,6 +227,7 @@ class Rutas {
   
   public urlGetInsertaHistorialUsuario :string = this.base + "monitoreoSenales/GetInsertaHistorialUsuario";
   public urlGetListaEmpresas :string = this.base + "monitoreoSenales/GetListaEmpresas"
+  public urlGetListaResultadoProveedorContraparte :string = this.base + "monitoreoSenales/GetListaResultadoProveedorContraparte"
   
   
   LimpiarDataGestor() {

@@ -69,7 +69,29 @@ export class CustomerManagerComponent implements OnInit {
       idAlerta: 2
     }
   ]
-
+  config :any =[
+    {
+      NIDGRUPOSENAL : 1,
+      NIDALERTA: 2,
+      linkactual: ['clientes','historico-clientes'],
+      NIDREGIMEN : 1
+    },{
+      NIDGRUPOSENAL : 2,
+      NIDALERTA: 35,
+      linkactual: ['colaborador','historico-colaborador'],
+      NIDREGIMEN : 0
+    },{
+      NIDGRUPOSENAL : 3,
+      NIDALERTA: 33,
+      linkactual: ['proveedor','historico-contraparte'],
+      NIDREGIMEN : 0
+    },{
+      NIDGRUPOSENAL : 4,
+      NIDALERTA: 39,
+      linkactual: ['contraparte','historico-proveedor'],
+      NIDREGIMEN : 0
+    }
+  ]
 
 
   PERSONA_JURIDICA: number = 2;
@@ -308,16 +330,22 @@ export class CustomerManagerComponent implements OnInit {
   }
   async getResultsList(isActiveForButton) {
     debugger;
-    let dataInput: any = {}
+
+    let dataInput : any = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
+
+
+
+
+    // let dataInput: any = {}
+    // if (this.idGrupo == 1) {
+      //   this.paramCliente.NIDALERTA = 2
+      // } else if (this.idGrupo == 2) {
+        //   this.paramCliente.NIDALERTA = 35
+        // } else {
+          //   this.paramCliente.NIDALERTA = 33
+          // }
+          //dataInput.NIDALERTA = this.paramCliente.NIDALERTA
     dataInput.NTIPOIDEN_BUSQ = this.paramCliente.NTIPOIDEN_BUSQ
-    if (this.idGrupo == 1) {
-      this.paramCliente.NIDALERTA = 2
-    } else if (this.idGrupo == 2) {
-      this.paramCliente.NIDALERTA = 35
-    } else {
-      this.paramCliente.NIDALERTA = 33
-    }
-    dataInput.NIDALERTA = this.paramCliente.NIDALERTA
     dataInput.SNUM_DOCUMENTO_BUSQ = this.paramCliente.SNUM_DOCUMENTO_BUSQ
     dataInput.SAPELLIDO_PATERNO = this.paramCliente.SAPELLIDO_PATERNO
     dataInput.SAPELLIDO_MATERNO = this.paramCliente.SAPELLIDO_MATERNO

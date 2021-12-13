@@ -83,7 +83,7 @@ export class ViewC2ListComponent implements  OnInit  ,AfterViewInit {
              //elemt.classList.add("show")
              elemt.focus({ preventScroll : false})
          }
-        //localStorage.setItem("objFocusPosition","{}");
+        localStorage.setItem("objFocusPosition","{}");
     }
     
 }

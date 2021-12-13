@@ -7,6 +7,7 @@ import { dismissOnDestroyToken } from '@sweetalert2/ngx-sweetalert2/lib/di';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as CryptoJS from 'crypto-js';
 
+
 @Component({
   selector: 'app-modal-validar-correo',
   templateUrl: './modal-validar-correo.component.html',
