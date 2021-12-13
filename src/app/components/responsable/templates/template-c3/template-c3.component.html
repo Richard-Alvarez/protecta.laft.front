@@ -1,5 +1,5 @@
 
-<div id="C3">
+<div id="C3" style="font-size:14.0pt;">
 
 
   <div *ngIf="Validar ==1"> 
@@ -14,7 +14,7 @@
         <strong style="font-family: arial Narrow, serif;">1.1.3.	Domiciliado o modifica su domicilio</strong>
       </p>
       <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-        <FONT FACE="Arial Narrow, serif" style="font-size: 14px;">
+        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
           <tbody>
             <tr>
               <td width="50px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
@@ -57,7 +57,7 @@
     </div>
     <br>
 
-    <div class="container" style="padding: 0px 200px;">
+    
       <p>
         <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta C3</strong>
       </p>
@@ -122,9 +122,16 @@
               </li>
           </div>
         </ul>  
-        <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: <a href="http://plataformasplaft.protectasecurity.pe/">http://plataformasplaft.protectasecurity.pe/</a></p>
+        <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: </p>
+        <ul>
+          <li style="font-family: arial Narrow, serif; text-align: justify"> 
+            <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a>
+          </li>
+         
+        </ul>
   
   <div class="text-center pt-5">
     <button class="" (click)="Export2Doc('C3', 'test');"></button>
   </div>
 
+</div>

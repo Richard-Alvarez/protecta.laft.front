@@ -43,7 +43,9 @@ export class InformesComponent implements OnInit {
   }
 
   async getGrupoList() {
+    this.core.loader.show()
     this.ListGrupo = await this.userConfigService.GetGrupoSenal()
+    this.core.loader.hide()
   }
 
   changeAnnoxGrupo(event){
@@ -83,7 +85,7 @@ export class InformesComponent implements OnInit {
  }
 
 async obtenerPeriodos(){
-   
+  this.core.loader.show()
   this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
   
   this.ListPeriodos.forEach((element,inc) => {
@@ -110,6 +112,7 @@ async obtenerPeriodos(){
     });
      this.NewListAnnos = sinRepetidos
     console.log("Sin repetidos es:", sinRepetidos);
+    this.core.loader.hide()
 }
 
 
@@ -290,6 +293,10 @@ ValidadorRespondidoContraparte
 listaProveedores:any = []
 listaProveedoresCriticos:any = []
 listaProveedoresRepresentantes:any = []
+
+listaProveedoresContraparte:any = []
+cantidadProveedoresContraparte:any =0
+RespuestaGlobalProveedorContraparte:string = ''
 async DescargarReporteGeneral(){
   let bol = this.Validador("Reporte-General")
   if(bol){
@@ -357,9 +364,14 @@ async DescargarReporteGeneral(){
       }else{
         this.RespuestaGlobalColaborador = 'sí'
       }
-  
-      //PARA PROVEEDOR
       
+      //LISTAR COINCIDENCIAS ACEPTADAS EN PROVEEDOR Y CONTRAPARTE
+      this.listaProveedoresContraparte = await this.userConfigService.GetListaResultadoProveedorContraparte({NPERIODO_PROCESO : this.IDListPeriodoGlobal})
+      this.cantidadProveedoresContraparte = this.listaProveedoresContraparte.length
+      console.log("lista de coincidencias",this.listaProveedoresContraparte)
+
+      //PARA PROVEEDOR
+        debugger
       this.ListaProveedor = this.ListaAlertaProveedor
       let ConcatenarProveedor =  this.ListaProveedor.filter(it => it.SNOMBRE_ALERTA == "P2" || it.SNOMBRE_ALERTA == "P3" || it.SNOMBRE_ALERTA == "P1")
       
@@ -451,8 +463,17 @@ async DescargarReporteGeneral(){
               this.RespuestaGlobalContraparte.push(data)
 
           });
-
-
+          this.RespuestaGlobalProveedorP5
+          if(this.RespuestaGlobalProveedorP5 == 'Sí' && this.RespuestaGlobalContraparteP5 == 'Sí' ){
+            this.RespuestaGlobalProveedorContraparte = 'Sí'
+          }else if(this.RespuestaGlobalProveedorP5 == 'No' && this.RespuestaGlobalContraparteP5 == 'Sí' ){
+            this.RespuestaGlobalProveedorContraparte = 'Sí'
+          }else if(this.RespuestaGlobalProveedorP5 == 'Sí' && this.RespuestaGlobalContraparteP5 == 'No' ){
+            this.RespuestaGlobalProveedorContraparte = 'Sí'
+          }else{
+            this.RespuestaGlobalProveedorContraparte = 'No'
+          }
+         
 
   this.Export2Doc("ReportesGlobal","Reporte General") 
 
