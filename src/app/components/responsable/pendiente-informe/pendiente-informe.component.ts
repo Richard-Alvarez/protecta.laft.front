@@ -808,6 +808,9 @@ listaEspecialSimpli:any = []
 listaEspecialGene:any = []
 validadorC2:string = ''
 
+CantidadEmpresasC1
+ListaEmpresasC1
+
 async DescargarReporte(item){
   this.ElimanrDiv()
   this.arrayDataSenal= []
@@ -865,7 +868,8 @@ async DescargarReporte(item){
   })
 
   
-
+  this.ListaEmpresasC1 = await this.userConfigService.GetListaEmpresas({NPERIODO_PROCESO : this.NPERIODO_PROCESO })
+  this.CantidadEmpresasC1 = this.ListaEmpresasC1.length
   
 
   this.Nombre = this.arrayDataSenal[0].NombreCompleto;
