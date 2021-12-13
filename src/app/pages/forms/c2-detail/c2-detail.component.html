@@ -1801,8 +1801,8 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row pl-2 pr-2 ">
+                    <hr  *ngIf="ListaPoliza.length !=0;"> 
+                    <div class="row pl-2 pr-2 " *ngIf="ListaPoliza.length !=0;else SinData">
                         <div class="col-lg-1 text-left txtCabecera">N° Póliza</div>
                         <div class="col-lg-2 text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo/Producto</div>
                         <div class="col-lg-2  text-left txtCabecera">N° Certificado</div>
@@ -1814,7 +1814,7 @@
                         <div class="text-left txtCabecera {{getValidaCabeceraPlaca(99) ? 'col-lg-1' : 'col-lg-2'}}">Fecha de Pago</div>
                         <div class="col-lg-1 text-left txtCabecera">Estado de Póliza</div>
                     </div>
-                    <div id="">
+                    <div id="" *ngIf="ListaPoliza.length !=0;">
                         <div class="card" *ngFor="let item of ListaPoliza;let inc = index;">
                             <div class="headerSenials">
                                 <div class="{{getColorGrilla(inc)}}">
@@ -1880,6 +1880,9 @@
                             </div>
                         </div>
                     </div>
+                    <ng-template #SinData>
+                        <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontró polizas</div>
+                    </ng-template>
                 </div>
 
             </div>

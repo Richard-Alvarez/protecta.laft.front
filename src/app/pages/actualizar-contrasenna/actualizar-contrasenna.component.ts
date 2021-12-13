@@ -75,7 +75,10 @@ export class ActualizarContrasennaComponent implements OnInit {
     let FechaHashActualizada = respuesta[0].FechaHashActualizada
     let FechaActual = respuesta[0].FechaActual
     debugger
-    if(Date.parse(FechaHashActualizada) > Date.parse(FechaActual)) {
+    let newFechaHashActualizada = this.converFecha(FechaHashActualizada)
+    let newFechaActual = this.converFecha(FechaActual)
+    if(newFechaHashActualizada > newFechaActual) {
+    // if(Date.parse(FechaHashActualizada) > Date.parse(FechaActual)) {
       this.VALIDADOR = 2
       this.Titulo = 'Actualizar contraseña'
       //alert("Todo correcto");
@@ -86,6 +89,18 @@ export class ActualizarContrasennaComponent implements OnInit {
       }
   }
 
+  converFecha(fecha){
+    let dia =  fecha.toString().substr(0,2)
+    let mes =  fecha.toString().substr(3,2)
+    let anno = fecha.toString().substr(6,4) 
+    let hora = fecha.toString().substr(11,2) 
+    let minuto = fecha.toString().substr(14,2) 
+    let segundo = fecha.toString().substr(17,4) 
+
+    let fechaRetorno = new Date(anno,mes,dia,hora,minuto,segundo)
+    return fechaRetorno
+  }
+   
   async decryptUsingAES256(textEncriptado) {
     let _key = CryptoJS.enc.Utf8.parse(this.token);
     let _iv = CryptoJS.enc.Utf8.parse(this.token);

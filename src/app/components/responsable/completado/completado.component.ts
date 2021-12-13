@@ -974,9 +974,9 @@ getLink(){
 }
 
 async EnviarCompUsuario(alerta,complemento){
-  
-  
-   
+  //console.log("complemento",complemento)
+ 
+
   var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == alerta.NIDALERTA && fil.NOMBRECOMPLETO == alerta.NOMBRECOMPLETO)
   let valorGrupo = this.getLink()
   let existe = this.NewArreglo[index].RESULTADO.filter(it => it.CONSULTA == 'C' )
@@ -1046,6 +1046,7 @@ async EnviarCompUsuario(alerta,complemento){
         data.FECHAPERIODO = this.PeriodoComplemento
         data.NOMBREALERTA = alerta.SNOMBRE_ALERTA
         data.SNOMBRE_RESPONSABLE =  this.OBJ_USUARIO.fullName
+        data.ASUNTO =  complemento.SDESCRIPCION
         if(false){
         // if(validador == 1){
           
