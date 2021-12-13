@@ -974,8 +974,8 @@ getLink(){
 }
 
 async EnviarCompUsuario(alerta,complemento){
-  console.log("complemento",complemento)
-  debugger
+  //console.log("complemento",complemento)
+ 
 
   var index = this.NewArreglo.findIndex(fil => fil.NIDALERTA == alerta.NIDALERTA && fil.NOMBRECOMPLETO == alerta.NOMBRECOMPLETO)
   let valorGrupo = this.getLink()
