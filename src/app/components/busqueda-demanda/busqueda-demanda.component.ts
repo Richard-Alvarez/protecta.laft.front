@@ -190,7 +190,7 @@ export class BusquedaDemandaComponent implements OnInit {
             swal.fire({
               title: 'Comuníquese con soporte',
               icon: 'warning',
-              text: 'MENSAJE: '+ respuetaService.mensaje,
+              text: 'ERROR: '+ respuetaService.mensaje,
               //titleText: 'comuniuquese con soporte',
               showCancelButton: false,
               showConfirmButton: true,
