@@ -168,7 +168,7 @@ export class BusquedaDemandaComponent implements OnInit {
           this.core.loader.show()
           let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
           console.log("respuesta",respuetaService);
-          if (respuetaService.length != 0) {
+          if (respuetaService.length != 0 && respuetaService.code == 0) {
             respuetaService.itemsWC.forEach(t => {
               t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
               t.SPROVEEDOR = "WC",
@@ -182,8 +182,27 @@ export class BusquedaDemandaComponent implements OnInit {
               t.SPROVEEDOR = "IDECON"
               //t.STIPOCOINCIDENCIA = "DOCUMENTO"
             });
+
+            this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
           }
-          this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
+          else if(respuetaService.length != 0 && respuetaService.code != 0){
+            this.core.loader.hide()
+            swal.fire({
+              title: 'Comuníquese con soporte',
+              icon: 'warning',
+              text: 'MENSAJE: '+ respuetaService.mensaje,
+              //titleText: 'comuniuquese con soporte',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#FA7000',
+              confirmButtonText: 'Continuar',
+              showCloseButton: true,
+              customClass: { 
+                            closeButton : 'OcultarBorde'
+                           },
+            })
+          }
+          //this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
 
           if(this.resultadoFinal.length != 0){
             this.encontroRespuesta = false;
