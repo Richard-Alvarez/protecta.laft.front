@@ -7,14 +7,14 @@
     </div>
     <br>
     <div class="d-flex">
-        <div class="col-lg-3 form-group pl-5" style="margin-right: 40px;">
+        <div class="col-lg-3 form-group pl-5" style="margin-right: 2px;">
             <label class="fontText">Grupo:</label>
             <select [(ngModel)]="idGrupo" name="profile" (change)="valorGrupo(true)" style="display: flex;justify-content: center;align-items: center;" class="form-control buttonSinBorder">
                 <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" >
                     {{item.SDESGRUPO_SENAL}}</option>
             </select>
         </div>
-        <div class="col-lg-4 form-group pl-5" style="margin-right: 40px;">
+        <div class="col-lg-4 form-group pl-5" style="margin-right: 5px;margin-left: -25px;">
             <div *ngIf="idGrupo == 3 || idGrupo == 4">
                 <label class="fontText">Sub Grupo:</label>
                 <select [(ngModel)]="idSubGrupo" name="profile" (change)="valorSubGrupo()" style="display: flex;justify-content: center;align-items: center;" class="form-control buttonSinBorder">
@@ -42,12 +42,17 @@
             <div class="custom-file mb-3">
 
                 <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" value="seleccionar" (change)="setDataFile($event)">
-                <label class="custom-file-label" for="customFile">{{this.NombreArchivo == '' ? "No hay archivos" : this.NombreArchivo }}</label>
+                <label class="custom-file-label" for="customFile" style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
             </div>
         </div>
 
         <div class="col-1" style="padding-top: 28px;" *ngIf="idGrupo !== 1  && idGrupo.toString() !== '1'">
             <button class="btn btnRegistrar" (click)="RegistrarArchivo()">Registrar</button>
+
+        </div>
+        <div class="col-1" style="padding-top: 28px;" *ngIf="idGrupo !== 1  && idGrupo.toString() !== '1'">
+            <button class="btn btnRegistrar" (click)="AbrirModal()">{{textoBoton}}</button>
+
         </div>
         <!-- <label class="file">
                 <input type="file" id="file" aria-label="File browser example">

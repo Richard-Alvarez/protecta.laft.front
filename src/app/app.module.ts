@@ -184,6 +184,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ModalValidarCorreoComponent } from './pages/modal-validar-correo/modal-validar-correo.component';
 import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/actualizar-contrasenna.component';
 import { TemplateProveedorContraparteComponent } from './components/responsable/templates/template-proveedor-contraparte/template-proveedor-contraparte.component';
+import { ModalGestorLaftComponent } from './pages/modal-gestor-laft/modal-gestor-laft.component';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -337,7 +338,8 @@ import { TemplateProveedorContraparteComponent } from './components/responsable/
     ModalValidarCorreoComponent,
     ActualizarContrasennaComponent,
     ViewC2ListComponent,
-    TemplateProveedorContraparteComponent
+    TemplateProveedorContraparteComponent,
+    ModalGestorLaftComponent
 
    
     //Validaciones
@@ -369,7 +371,7 @@ import { TemplateProveedorContraparteComponent } from './components/responsable/
     
     NO_ERRORS_SCHEMA
   ],
-  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent,ModalValidarCorreoComponent],
+  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent],
   providers: [UserconfigService, DatePipe],
   bootstrap: [AppComponent],
   exports: [BusquedaDemandaComponent]
