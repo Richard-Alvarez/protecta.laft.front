@@ -67,7 +67,7 @@ export class PendienteComponent implements OnInit {
 
     this.NPERIODO_PROCESO = this.parent.NPERIODO_PROCESO
     await this.getVariablesStorage();
-   
+    await this.ListaAdjutnosComplementos()
     this.fillFileGroup()
     this.arrFilesAdjuntos = [{'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'word'},
     {'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'otros'},
@@ -1663,5 +1663,29 @@ async ConsultaComplementoUsuarios(){
       } )  
       return
 
+  }
+
+  ListaAdjuntoComplemento:any = []
+  async ListaAdjutnosComplementos(){
+    let data:any = {}
+      data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+      this.ListaAdjuntoComplemento = await this.userConfigService.getListaAdjuntos(data)
+  }
+
+  async MuestraBotonDescargarPlantilla(item){
+    
+      
+     
+      let newlistaAdjuntos = this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-PLANTILLA" )
+      console.log("listaAdjuntos",newlistaAdjuntos)
+     
+      if(newlistaAdjuntos.length == 0){
+        return false
+      }else{
+        return true
+      }
+      
+     
+      
   }
 }
