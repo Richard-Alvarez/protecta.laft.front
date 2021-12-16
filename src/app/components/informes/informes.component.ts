@@ -297,6 +297,8 @@ listaProveedoresRepresentantes:any = []
 listaProveedoresContraparte:any = []
 cantidadProveedoresContraparte:any =0
 RespuestaGlobalProveedorContraparte:string = ''
+ListaRepresentantesAccionistas:any = []
+ListaUsufructuarios:any = []
 async DescargarReporteGeneral(){
   let bol = this.Validador("Reporte-General")
   if(bol){
@@ -369,6 +371,9 @@ async DescargarReporteGeneral(){
       this.listaProveedoresContraparte = await this.userConfigService.GetListaResultadoProveedorContraparte({NPERIODO_PROCESO : this.IDListPeriodoGlobal})
       this.cantidadProveedoresContraparte = this.listaProveedoresContraparte.length
       console.log("lista de coincidencias",this.listaProveedoresContraparte)
+
+      this.ListaRepresentantesAccionistas = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 3)
+      this.ListaUsufructuarios = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 2) 
 
       //PARA PROVEEDOR
         debugger
