@@ -297,8 +297,13 @@ listaProveedoresRepresentantes:any = []
 listaProveedoresContraparte:any = []
 cantidadProveedoresContraparte:any =0
 RespuestaGlobalProveedorContraparte:string = ''
-ListaRepresentantesAccionistas:any = []
+
+ListaRepresentantesAccionistasUsufructuarios:any = []
 ListaUsufructuarios:any = []
+ListaCanales:any = []
+ListaArrendatarios:any = []
+ListaRepresentantesAccionistasArrendatarios:any = []
+
 async DescargarReporteGeneral(){
   let bol = this.Validador("Reporte-General")
   if(bol){
@@ -372,9 +377,11 @@ async DescargarReporteGeneral(){
       this.cantidadProveedoresContraparte = this.listaProveedoresContraparte.length
       console.log("lista de coincidencias",this.listaProveedoresContraparte)
 
-      this.ListaRepresentantesAccionistas = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 3)
+      this.ListaRepresentantesAccionistasUsufructuarios = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 3)
       this.ListaUsufructuarios = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 2) 
-
+      this.ListaCanales = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 1) 
+      this.ListaArrendatarios = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 4) 
+      this.ListaRepresentantesAccionistasArrendatarios = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 5) 
       //PARA PROVEEDOR
         debugger
       this.ListaProveedor = this.ListaAlertaProveedor
