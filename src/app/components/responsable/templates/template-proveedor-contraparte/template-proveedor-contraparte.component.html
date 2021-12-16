@@ -166,7 +166,7 @@
 
                 <br>
                 <p style="font-family: arial Narrow, serif; text-align: justify">Representaste legales y accionistas de usufructuarios:  </p>
-                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaRepresentantesAccionistas !=0;else SinData">
+                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaRepresentantesAccionistasUsufructuariosCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                         <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                             <tbody>
@@ -202,7 +202,7 @@
                                         </p>
                                     </td>
                                 </tr> 
-                                <tr *ngFor="let item of ListaRepresentantesAccionistas">
+                                <tr *ngFor="let item of ListaRepresentantesAccionistasUsufructuariosCon">
                                     <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                         <p>
                                             {{item.TD_SDESCRIP}}
@@ -243,7 +243,7 @@
                 <br>
                 <p style="font-family: arial Narrow, serif; text-align: justify">Usufructuarios:  </p>
               
-                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaUsufructuarios !=0;else SinData">
+                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaUsufructuariosCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                         <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                             <tbody>
@@ -275,7 +275,7 @@
                                         </p>
                                     </td>
                                 </tr> 
-                                <tr *ngFor="let item of ListaUsufructuarios">
+                                <tr *ngFor="let item of ListaUsufructuariosCon">
                                     <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                         <p>
                                             {{item.TD_SDESCRIP}}
@@ -313,7 +313,7 @@
 
                 <p style="font-family: arial Narrow, serif; text-align: justify">Canales:  </p>
               
-                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaCanales !=0;else SinData">
+                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaCanalesCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                         <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                             <tbody>
@@ -345,7 +345,7 @@
                                         </p>
                                     </td>
                                 </tr> 
-                                <tr *ngFor="let item of ListaCanales">
+                                <tr *ngFor="let item of ListaCanalesCon">
                                     <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                         <p>
                                             {{item.TD_SDESCRIP}}
@@ -383,7 +383,7 @@
 
                 <p style="font-family: arial Narrow, serif; text-align: justify">Canales:  </p>
               
-                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaArrendatarios !=0;else SinData">
+                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaArrendatariosCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                         <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                             <tbody>
@@ -415,7 +415,7 @@
                                         </p>
                                     </td>
                                 </tr> 
-                                <tr *ngFor="let item of ListaArrendatarios">
+                                <tr *ngFor="let item of ListaArrendatariosCon">
                                     <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                         <p>
                                             {{item.TD_SDESCRIP}}
@@ -453,7 +453,7 @@
 
                 <p style="font-family: arial Narrow, serif; text-align: justify">Canales:  </p>
               
-                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaRepresentantesAccionistasArrendatarios !=0;else SinData">
+                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaRepresentantesAccionistasArrendatariosCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                         <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
                             <tbody>
@@ -485,7 +485,7 @@
                                         </p>
                                     </td>
                                 </tr> 
-                                <tr *ngFor="let item of ListaRepresentantesAccionistasArrendatarios">
+                                <tr *ngFor="let item of ListaRepresentantesAccionistasArrendatariosCon">
                                     <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                         <p>
                                             {{item.TD_SDESCRIP}}

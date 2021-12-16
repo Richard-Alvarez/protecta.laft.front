@@ -1,0 +1,66 @@
+
+ <div class="modal-header" id="edit-modal"  style="padding-bottom: 30px">
+        
+    <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
+</div>
+<main class="container-fluid" style="padding-left: 7rem;padding-right: 7rem;">
+   
+
+    <!-- <div class="container-fluid pl-5 pr-5"> -->
+        <div class="container-fluid">
+        <div class="row mb-2 mt-2" style="display: flex;justify-content: center;">
+            <div class="col-12 Header">
+                
+                
+
+                <div class="row mb-2 mt-2">
+                    <div class="Header">
+                        <div class="col-lg-12" style="padding-left: 0px;">
+                            <h4 class="TitleLine">Lista de Registros de {{data.SDESGRUPO_SENAL}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-2 pt-3">
+                    <div class="Header">
+                        <div class="col-lg-12" style="padding-left: 0px;">
+                            <h6 class="" style="font-weight: 400;">Subgrupo: {{data.SDESSUBGRUPO_SENAL}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+               
+                <div class="row">
+                <div class="borderFormat col-12">
+                        <div class="row" style="border-bottom: 2px solid #26296D;">
+                                <div class="col-2 txtCabecera" style="font-size: 14px;">Tipo Doc.</div>
+                                <div class="col-2 txtCabecera" style="font-size: 14px;">N° Doc.</div>
+                                <div class="col-3 txtCabecera" style="font-size: 14px;">Nombre</div>
+                                <div class="col-2 txtCabecera" style="font-size: 14px; ">Ruc</div>
+                                <div class="col-3 txtCabecera" style="font-size: 14px; ">Razón Social</div>
+                                
+                        </div>
+                        <div *ngIf="ListaRegistros != 0;else Sindata">
+                            <div class="row " id="pintaGrilla"  *ngFor="let item of ListaRegistros;let index = index" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
+                                <div class="col-2 text-left txtDetalle">{{item.TIPO_DOCUMENTO}}</div>
+                                <div class="col-2 text-left txtDetalle" >{{item.SNUM_DOCUMENTO}}</div>
+                                <div class="col-3 text-left txtDetalle" style="word-break: break-all; " title="">{{item.SNOM_COMPLETO}}</div>
+                                <div class="col-2 text-left txtDetalle" >{{item.RUC}}</div> 
+                                <div class="col-3 text-left txtDetalle" >{{item.RAZON_SOCIAL}}</div>
+                                
+                            </div>
+                        </div>
+                        <ng-template #Sindata>
+                            <div class="col-12 txtCabecera text-center pt-2" style="font-size: 14px;font-weight: 600;">No hay registros</div>
+                        </ng-template>
+                       
+                </div>
+            </div>
+                <br><br>
+            </div>       
+        </div>
+    </div>
+    
+</main>
+

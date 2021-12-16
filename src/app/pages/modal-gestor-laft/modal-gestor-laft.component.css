@@ -1,0 +1,55 @@
+.TitleLine{
+    padding-bottom: 1%;
+  position: relative;
+  z-index : 1;
+  
+  }
+  .TitleLine:before{
+  content : "";
+  position: absolute;
+  left    : 0;
+  bottom  : 0;
+  height  : 1pxs;
+  width   : 100%;  /* or 100px */
+  border-bottom:2px solid #FA7000;
+  }
+  
+  .borderFormat{
+    padding-right: 15px;padding-left: 15px;
+    padding-right: 15px;
+padding-left: 15px;
+border: 1px solid #d4d2d2;
+margin-top: 20px;
+border-top-left-radius: 20px;
+border-bottom-right-radius: 20px;
+padding: 20px;
+width: 100%;
+}
+
+
+.txtCabecera{
+  font-size: 12px;
+  font-family: Roboto;
+  color: rgba(38, 41, 109, 0.6);
+  font-weight: bold;
+  /* padding-left: 0px; */
+}
+
+.txtDetalle{
+  font-size: 12px;
+  font-family: Roboto;
+  /* padding-left: 0px; */
+}
+
+div#pintaGrilla:nth-child(even) {
+  /* background: #FF00CC;  */
+  background: rgba(90, 149, 180, 0.05); 
+
+}
+div#pintaGrilla:nth-child(odd) {
+  /* background: #CC00FF;  */
+  /* background: white;  */
+  background: rgba(250, 253, 253,0.5)
+
+
+} 

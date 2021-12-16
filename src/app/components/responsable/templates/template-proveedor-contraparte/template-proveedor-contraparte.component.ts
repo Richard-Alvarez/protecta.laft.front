@@ -18,13 +18,15 @@ export class TemplateProveedorContraparteComponent implements OnInit {
   @Input() cantidadProveedoresContraparte
   @Input() RespuestaGlobalProveedorContraparte
 
-  @Input() ListaRepresentantesAccionistasUsufructuarios
-  @Input() ListaUsufructuarios
-  @Input() ListaCanales
-  @Input() ListaArrendatarios
-  @Input() ListaRepresentantesAccionistasArrendatarios
+  @Input() ListaRepresentantesAccionistasUsufructuariosCon
+  @Input() ListaUsufructuariosCon
+  @Input() ListaCanalesCon
+  @Input() ListaArrendatariosCon
+  @Input() ListaRepresentantesAccionistasArrendatariosCon
   
-  
+  @Input() ListaRroveedoresPro
+  @Input() ListaProveedoresCriticosPro
+  @Input() ListaRepresentantesAccionistasPro
   
   @Input() Validar:number
 

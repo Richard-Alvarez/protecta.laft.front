@@ -1672,20 +1672,14 @@ async ConsultaComplementoUsuarios(){
       this.ListaAdjuntoComplemento = await this.userConfigService.getListaAdjuntos(data)
   }
 
-  async MuestraBotonDescargarPlantilla(item){
-    
-      
-     
-      let newlistaAdjuntos = this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-PLANTILLA" )
-      console.log("listaAdjuntos",newlistaAdjuntos)
-     
-      if(newlistaAdjuntos.length == 0){
-        return false
-      }else{
-        return true
-      }
-      
-     
-      
+ 
+
+  OcultarBoton(item){
+    let newlistaAdjuntos = this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-PLANTILLA" )
+    if(newlistaAdjuntos.length == 0){
+      return true
+    }else{
+      return false
+    }
   }
 }
