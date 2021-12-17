@@ -1170,10 +1170,13 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
 
   async getSeviceBusquedaManual(ItemCliente) {
     let ObjListaCheckSeleccionadoxNombre: any = {}
+    let data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
     ObjListaCheckSeleccionadoxNombre.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-    ObjListaCheckSeleccionadoxNombre.NIDALERTA = 0
+    
+    ObjListaCheckSeleccionadoxNombre.NIDALERTA = data.NIDALERTA
     ObjListaCheckSeleccionadoxNombre.SNOMCOMPLETO = (ItemCliente.SNOM_COMPLETO).trim()
     ObjListaCheckSeleccionadoxNombre.NIDGRUPOSENAL = this.idGrupo
+    ObjListaCheckSeleccionadoxNombre.NIDSUBGRUPOSEN = this.idSubGrupo
     ObjListaCheckSeleccionadoxNombre.SNUM_DOCUMENTO = ItemCliente.SNUM_DOCUMENTO
     ObjListaCheckSeleccionadoxNombre.SCLIENT = ItemCliente.SCLIENT
     ObjListaCheckSeleccionadoxNombre.NTIPOCARGA = 2
@@ -1187,7 +1190,6 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
     let respuestaConsultaPoliza: any = {};
-    debugger;
     if(this.idGrupo == 1)
       respuestaConsultaPoliza = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
     else 
