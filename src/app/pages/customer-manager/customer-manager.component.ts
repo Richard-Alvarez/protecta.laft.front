@@ -1082,6 +1082,7 @@ export class CustomerManagerComponent implements OnInit {
       }
           let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
         localStorage.setItem("NIDALERTA", data.NIDALERTA);
+        debugger
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
@@ -1181,11 +1182,12 @@ export class CustomerManagerComponent implements OnInit {
     dataPoliza.NIDALERTA = 2
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
-    let respuestaConsultaPoliza: any;
+    let respuestaConsultaPoliza: any = {};
+    debugger;
     if(this.idGrupo == 1)
       respuestaConsultaPoliza = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
-    else
-      respuestaConsultaPoliza = {code : 1}
+    else 
+     respuestaConsultaPoliza.code = 0
     if (respuestaConsultaPoliza.code == 1) {
       Swal.fire({
         title: 'Gestor de Cliente',
@@ -1272,8 +1274,8 @@ export class CustomerManagerComponent implements OnInit {
     localStorage.setItem('view-c2-idLista', item.NIDTIPOLISTA)
     let sEstadoRevisado = item.SESTADO_REVISADO// == '1' ? '1' : '0'
     localStorage.setItem('EnviarCheckbox', sEstadoRevisado)
-    
-    localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
+    debugger;
+    localStorage.setItem("NIDGRUPOSENAL", item.NIDGRUPOSENAL)
     localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
     this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
     localStorage.setItem("paramCliente", JSON.stringify(this.paramCliente))
