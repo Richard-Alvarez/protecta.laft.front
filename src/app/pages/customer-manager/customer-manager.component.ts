@@ -139,6 +139,7 @@ export class CustomerManagerComponent implements OnInit {
     this.spinner.show()
     await this.getGrupoList()
     await this.getListTipo();
+    let nIdGrupo = localStorage.getItem("NIDGRUPO")
     this.NIDUSUARIO_LOGUEADO = this.core.storage.get('usuario')['idUsuario']
     this.paramCliente.NTIPOIDEN_BUSQ = 2;
     this.paramCliente.SNUM_DOCUMENTO_BUSQ = null;
@@ -150,7 +151,6 @@ export class CustomerManagerComponent implements OnInit {
     this.paramCliente.SRAZON_SOCIAL = ""
     this.paramCliente.MANUAL = true
     let paramClientels: any = localStorage.getItem("paramClienteReturn");
-    let nIdGrupo = localStorage.getItem("NIDGRUPO")
     this.PERIODOACTUAL = await this.userConfigService.getCurrentPeriod()
     if (Number.parseInt(nIdGrupo) > 0) {
       this.idGrupo = Number.parseInt(nIdGrupo);
