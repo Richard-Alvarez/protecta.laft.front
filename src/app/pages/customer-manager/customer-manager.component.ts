@@ -1212,6 +1212,7 @@ export class CustomerManagerComponent implements OnInit {
       data.tipoCargaId = 2
       data.sClient = ItemCliente.SCLIENT
       data.nIdUsuario = this.objUsuario.idUsuario
+      debugger;
       let respuetaService: any = await this.getBusquedaManual(ObjListaCheckSeleccionadoxNombre)
       if (respuetaService.code == 1) {
         let mensaje = respuetaService.mensaje || 'Ocurrio un error'
