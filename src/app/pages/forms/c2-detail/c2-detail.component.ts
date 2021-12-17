@@ -140,9 +140,10 @@ export class C2DetailComponent implements OnInit , OnDestroy {
   NewListCheck :any = []
   ngOnDestroy(){
       localStorage.setItem("objFocusPosition","{}")
+      localStorage.getItem("NIDGRUPO")
     }
     async ngOnInit() {  
-         
+         localStorage.setItem("NIDGRUPORETURN",localStorage.getItem("NIDGRUPO"))
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
         this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
         //   this.getAcordionReturn();
