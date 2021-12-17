@@ -1062,20 +1062,11 @@ export class CustomerManagerComponent implements OnInit {
         localStorage.setItem("SESTADO_BUTTON_SAVE", '1');
         localStorage.setItem("INDRESIDENCIA", item.INDRESIDENCIA);
       } else {
-        let valorAlerta
-
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO);
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN);
         localStorage.setItem("SFECHA_NACIMIENTO", item.DFECHA_NACIMIENTO);
         localStorage.setItem("NEDAD", item.EDAD);
-        if (this.idGrupo == 3) {
-          valorAlerta = 33
-        } else if (this.idGrupo == 2) {
-          valorAlerta = 35
-        } else {
-          valorAlerta = 2
-        }
-        localStorage.setItem("NIDALERTA", valorAlerta);
+    
         localStorage.setItem("SNUM_DOCUMENTO", item.SNUM_DOCUMENTO);
         localStorage.setItem("NTIPO_DOCUMENTO", item.NTIPO_DOCUMENTO);
         localStorage.setItem("NREGIMEN", item.NIDREGIMEN);
@@ -1087,7 +1078,8 @@ export class CustomerManagerComponent implements OnInit {
         await localStorage.setItem("tipoClienteGC", "GC");
         
       }
-      
+          let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
+        localStorage.setItem("NIDALERTA", data.NIDALERTA);
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
@@ -1222,7 +1214,7 @@ export class CustomerManagerComponent implements OnInit {
       data.nIdUsuario = this.objUsuario.idUsuario
       let respuetaService: any = await this.getBusquedaManual(ObjListaCheckSeleccionadoxNombre)
       if (respuetaService.code == 1) {
-        let mensaje = respuetaService.mesaje || 'Ocurrio un error'
+        let mensaje = respuetaService.mensaje || 'Ocurrio un error'
         Swal.fire({
           title: 'Gestor de Cliente',
           icon: 'warning',
