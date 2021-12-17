@@ -1195,35 +1195,35 @@ export class CustomerManagerComponent implements OnInit {
     let dataPoliza: any = {}
     dataPoliza.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     dataPoliza.NIDGRUPOSENAL = this.idGrupo
-    dataPoliza.NIDALERTA = 2
+    dataPoliza.NIDALERTA =  this.config.find(t=> t.NIDGRUPOSENAL == dataPoliza.IDGRUPOSENAL)//2
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
     let respuestaConsultaPoliza: any;
-    if(this.idGrupo == 1)
+    //if(this.idGrupo == 1)
       respuestaConsultaPoliza = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
-    else
-      respuestaConsultaPoliza = {code : 1}
-    if (respuestaConsultaPoliza.code == 1) {
-      Swal.fire({
-        title: 'Gestor de Cliente',
-        icon: 'warning',
-        text: respuestaConsultaPoliza.mensaje,
-        showCancelButton: false,
-        showConfirmButton: true,
-        cancelButtonColor: '#dc4545',
-        confirmButtonColor: "#FA7000",
-        confirmButtonText: 'Aceptar',
-        cancelButtonText: 'Cancelar',
-        showCloseButton: true,
-        customClass: {
-          closeButton: 'OcultarBorde'
-        },
-      }).then(resp => {
-        if (!resp.dismiss) {
-          return
-        }
-      })
-    } else {
+    //else
+      //respuestaConsultaPoliza = {code : 1}
+    // if (respuestaConsultaPoliza.code == 1) {
+    //   Swal.fire({
+    //     title: 'Gestor de Cliente',
+    //     icon: 'warning',
+    //     text: respuestaConsultaPoliza.mensaje,
+    //     showCancelButton: false,
+    //     showConfirmButton: true,
+    //     cancelButtonColor: '#dc4545',
+    //     confirmButtonColor: "#FA7000",
+    //     confirmButtonText: 'Aceptar',
+    //     cancelButtonText: 'Cancelar',
+    //     showCloseButton: true,
+    //     customClass: {
+    //       closeButton: 'OcultarBorde'
+    //     },
+    //   }).then(resp => {
+    //     if (!resp.dismiss) {
+    //       return
+    //     }
+    //   })
+    // } else {
       let data: any = {}
       data.name = (ItemCliente.SNOM_COMPLETO).trim()
       data.alertId = 2
@@ -1259,7 +1259,7 @@ export class CustomerManagerComponent implements OnInit {
         ItemCliente.SESTADO_TRAT = null
         await this.goToDetailAprobar(ItemCliente)
       }
-    }
+    //}
   }
 
   goToDetailAprobar(item) {
@@ -1269,8 +1269,10 @@ export class CustomerManagerComponent implements OnInit {
       localStorage.setItem("NIDALERTA", '35')
     } else if (this.idGrupo == 3) {
       localStorage.setItem("NIDALERTA", '33')
-    } else {
+    } else if (this.idGrupo == 1) {
       localStorage.setItem("NIDALERTA", '2')
+    } else {
+      localStorage.setItem("NIDALERTA", '39')
     }
     localStorage.setItem("NPERIODO_PROCESO", this.NPERIODO_PROCESO + '')
     localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
