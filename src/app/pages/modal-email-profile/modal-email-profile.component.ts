@@ -25,7 +25,7 @@ export class ModalEmailProfileComponent implements OnInit {
   textoHTML: string = ''
   ckeConfig: any;
   ckeditorContent
-
+  CantidadDias = 0
   @Input() dataEmail: any;
   @Input() reference: any;
   @Input() ListaEmail: any;
@@ -117,6 +117,7 @@ export class ModalEmailProfileComponent implements OnInit {
        console.log("this.ckeditorContent",this.ckeditorContent)
        this.textoHTML =  this.ckeditorContent
        this.contador = this.asunto.length
+       this.CantidadDias = this.dataEmail.NCANTIDAD_DIAS
       }
          
     
@@ -207,6 +208,7 @@ export class ModalEmailProfileComponent implements OnInit {
       data.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
       data.SCUERPO_TEXTO = this.convert(this.ckeditorContent)//this.convert(dataHTML)
       data.SCUERPO_CORREO_DEF =  this.ckeditorContent//"" 
+      data.NCANTIDAD_DIAS = this.CantidadDias
     }
     let respValidacion:any = {}
       if(this.action == 1 || this.action == 2){
@@ -509,9 +511,44 @@ export class ModalEmailProfileComponent implements OnInit {
       
     }else if(this.action == 4){
       
-      this.ActivarCombo = true
-      this.ActivarListUser = true
-      this.ActivarUser = true
+      if( this.validadorEstado == 1){
+        let resultado = await this.ListaEmail.filter(it => it.NIDACCION == 4 )
+        
+        if( await  resultado.length > 0){
+          this.ActivarCombo = true;
+          this.ActivarListUser = true;
+          this.ActivarUser = true ;
+          
+           this.action =  0;
+           this.Seleccione = "Seleccione" ;
+          
+           
+            // var dropDown = (<HTMLInputElement>document.getElementById("idcombo"));
+            var dropDown = document.getElementById("idcombo") as HTMLSelectElement;
+            //console.log("dropDown",dropDown.se)
+            //dropDown.setAttribute('selected','selected')
+            //console.log("dropDown",dropDown)
+              dropDown.selectedIndex = 0;
+
+
+               
+            
+        
+      
+          let mensaje = "No se puede agregar otra acción de " + resultado[0].SDESACCION;
+          //(<HTMLInputElement>document.getElementById("idcombo")).setAttribute('value','0');
+          //(<HTMLInputElement>document.getElementById("idcombo")).innerText
+          this.MensajeSwal(mensaje);
+
+        
+         
+         //this.action = 0;
+        }
+  }else{
+    this.ActivarCombo = true
+    this.ActivarListUser = true
+    this.ActivarUser = true
+  }
      
     }
     

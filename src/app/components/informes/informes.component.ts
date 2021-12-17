@@ -297,6 +297,17 @@ listaProveedoresRepresentantes:any = []
 listaProveedoresContraparte:any = []
 cantidadProveedoresContraparte:any =0
 RespuestaGlobalProveedorContraparte:string = ''
+
+ListaRepresentantesAccionistasUsufructuariosCon:any = []
+ListaUsufructuariosCon:any = []
+ListaCanalesCon:any = []
+ListaArrendatariosCon:any = []
+ListaRepresentantesAccionistasArrendatariosCon:any = []
+
+ListaRroveedoresPro:any = []
+ListaProveedoresCriticosPro:any = []
+ListaRepresentantesAccionistasPro:any = []
+
 async DescargarReporteGeneral(){
   let bol = this.Validador("Reporte-General")
   if(bol){
@@ -369,6 +380,17 @@ async DescargarReporteGeneral(){
       this.listaProveedoresContraparte = await this.userConfigService.GetListaResultadoProveedorContraparte({NPERIODO_PROCESO : this.IDListPeriodoGlobal})
       this.cantidadProveedoresContraparte = this.listaProveedoresContraparte.length
       console.log("lista de coincidencias",this.listaProveedoresContraparte)
+
+      this.ListaRepresentantesAccionistasUsufructuariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 3)
+      this.ListaUsufructuariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 2) 
+      this.ListaCanalesCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 1) 
+      this.ListaArrendatariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 4) 
+      this.ListaRepresentantesAccionistasArrendatariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 5) 
+
+      
+      this.ListaRroveedoresPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 0)
+      this.ListaProveedoresCriticosPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 1)
+      this.ListaRepresentantesAccionistasPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 2)
 
       //PARA PROVEEDOR
         debugger

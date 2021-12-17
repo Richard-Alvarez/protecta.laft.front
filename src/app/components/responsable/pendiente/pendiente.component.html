@@ -541,7 +541,7 @@
                                                                 </div>
 
                                                                 <div *ngIf="STIPO_USUARIO=='RE' && item.TIPO_FORM == 'C'">
-                                                                    <!-- {{item | json}} -->
+                                                                     {{item | json}} 
                                                                     <div class="row">
                                                                         <div class="col-lg-8">
                                                                             <div class="row mt-2" style="">
@@ -593,7 +593,8 @@
                                         </div>
                                       </div> -->
                                                                         </div>
-                                                                        <div class="col-lg-1 parrafoAdj text-center" style="padding-left: 0px;padding-right:0px;cursor: pointer;" (click)="DescargarPlantilla(item)" >
+                                                                        <div [hidden]="OcultarBoton(item)"  class="col-lg-1 parrafoAdj text-center" style="padding-left: 0px;padding-right:0px;cursor: pointer;" (click)="DescargarPlantilla(item)" >
+                                                                            
                                                                             <div>
                                                                                 <!-- <i class="fas fa-file-download"  style="font-size: 25px;text-align: center;padding-top: 6px;color: #2e7d32;"></i> -->
                                                                                 <img src="assets/icons/Descargar_muestra.png" style="width: 38px;" />
