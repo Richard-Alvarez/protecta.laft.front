@@ -98,7 +98,7 @@
                   </ng-container>
                   <ng-template #showPagination class="row">
                       <div class="col align-self-center">
-                        <ngb-pagination [pageSize]="5" [collectionSize]="ListaRegistros.length" [(page)]="page"
+                        <ngb-pagination  [collectionSize]="ListaRegistros.length" [(page)]="page" [maxSize]="5"
                         aria-label="Default pagination"></ngb-pagination>
                       </div>
                    
