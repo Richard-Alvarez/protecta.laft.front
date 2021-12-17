@@ -17,6 +17,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ExcelService } from '../../services/excel.service';
 import swal from 'sweetalert2';
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { ModalGestorLaftComponent } from "../modal-gestor-laft/modal-gestor-laft.component";
 
 
 //import { Validaciones } from 'src/app/utils/validacionesRegex'
@@ -47,7 +48,7 @@ export class CustomerManagerComponent implements OnInit {
 
 
 
-
+  textoBoton = " Listar "
 
   hideRazonSocial: boolean = true;
   clientList: any = [];
@@ -1541,6 +1542,40 @@ Array.prototype.forEach.call( inputs, function( input )
     this.ArrayResultCoincidencias = await this.userConfigService.GetListaResultadoGC(data)
     this.ArrayResultCoincidencias = this.groupClients(this.ArrayResultCoincidencias);
     this.spinner.hide()
+  }
+  AbrirModal(){
+    let desGrupo = this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo )
+    let desSubgrupo = this.SubGrupoList.filter(it => it.NIDSUBGRUPOSEN == this.idSubGrupo)
+    debugger
+    let data:any = {}
+    data.NIDGRUPOSENAL = this.idGrupo
+    data.SDESGRUPO_SENAL = desGrupo[0].SDESGRUPO_SENAL
+    data.NIDSUBGRUPOSEN = this.idSubGrupo
+    data.SDESSUBGRUPO_SENAL = desSubgrupo[0].SDESSUBGRUPO_SENAL
+    data.NPERIODO_PROCESO = this.PERIODOACTUAL.periodo
+
+    if(this.idSubGrupo == -1){
+      let mensaje = "Tiene que seleccionar un subgrupo"
+      this.SwalGlobal(mensaje)
+      return
+    }
+
+    const modalRef = this.modalService.open(ModalGestorLaftComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
+    
+    
+    modalRef.componentInstance.reference = modalRef;
+    modalRef.componentInstance.data = data;
+    //modalRef.componentInstance.ListaEmail = this.ListCorreo;
+    modalRef.result.then(async (resp) => {
+      this.core.loader.show();  
+      //let response = await this.userConfig.GetListCorreo()
+      //this.ListCorreo = response
+      this.core.loader.hide();
+      
+    }, (reason) => {
+      
+      this.core.loader.hide();
+    });
   }
 
 
