@@ -146,17 +146,18 @@ export class CustomerManagerComponent implements OnInit {
     this.paramCliente.SPRIMER_NOMBRE = "";
     this.paramCliente.SSEGUNDO_NOMBRE = "";
     this.paramCliente.SAPELLIDO_PATERNO = "";
+    let nIdGrupo = localStorage.getItem("NIDGRUPO")
     this.paramCliente.SAPELLIDO_MATERNO = "";
-    this.paramCliente.NIDALERTA = 2;
     this.paramCliente.SRAZON_SOCIAL = ""
     this.paramCliente.MANUAL = true
     let paramClientels: any = localStorage.getItem("paramClienteReturn");
-    let nIdGrupo = localStorage.getItem("NIDGRUPO")
     this.PERIODOACTUAL = await this.userConfigService.getCurrentPeriod()
     if (Number.parseInt(nIdGrupo) > 0) {
       this.idGrupo = Number.parseInt(nIdGrupo);
       this.valorGrupo(false)
     }
+    let data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo);
+    this.paramCliente.NIDALERTA = data.NIDALERTA;
 
     if (paramClientels != null && paramClientels != "" && paramClientels != "{}") {
       this.spinner.show()
@@ -334,18 +335,6 @@ export class CustomerManagerComponent implements OnInit {
 
     let dataInput : any = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
 
-
-
-
-    // let dataInput: any = {}
-    // if (this.idGrupo == 1) {
-      //   this.paramCliente.NIDALERTA = 2
-      // } else if (this.idGrupo == 2) {
-        //   this.paramCliente.NIDALERTA = 35
-        // } else {
-          //   this.paramCliente.NIDALERTA = 33
-          // }
-          //dataInput.NIDALERTA = this.paramCliente.NIDALERTA
     dataInput.NTIPOIDEN_BUSQ = this.paramCliente.NTIPOIDEN_BUSQ
     dataInput.SNUM_DOCUMENTO_BUSQ = this.paramCliente.SNUM_DOCUMENTO_BUSQ
     dataInput.SAPELLIDO_PATERNO = this.paramCliente.SAPELLIDO_PATERNO
@@ -1073,20 +1062,11 @@ export class CustomerManagerComponent implements OnInit {
         localStorage.setItem("SESTADO_BUTTON_SAVE", '1');
         localStorage.setItem("INDRESIDENCIA", item.INDRESIDENCIA);
       } else {
-        let valorAlerta
-
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO);
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN);
         localStorage.setItem("SFECHA_NACIMIENTO", item.DFECHA_NACIMIENTO);
         localStorage.setItem("NEDAD", item.EDAD);
-        if (this.idGrupo == 3) {
-          valorAlerta = 33
-        } else if (this.idGrupo == 2) {
-          valorAlerta = 35
-        } else {
-          valorAlerta = 2
-        }
-        localStorage.setItem("NIDALERTA", valorAlerta);
+    
         localStorage.setItem("SNUM_DOCUMENTO", item.SNUM_DOCUMENTO);
         localStorage.setItem("NTIPO_DOCUMENTO", item.NTIPO_DOCUMENTO);
         localStorage.setItem("NREGIMEN", item.NIDREGIMEN);
@@ -1098,7 +1078,8 @@ export class CustomerManagerComponent implements OnInit {
         await localStorage.setItem("tipoClienteGC", "GC");
         
       }
-      
+          let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
+        localStorage.setItem("NIDALERTA", data.NIDALERTA);
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
@@ -1225,15 +1206,16 @@ export class CustomerManagerComponent implements OnInit {
       })
     } else {
       let data: any = {}
+      data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
       data.name = (ItemCliente.SNOM_COMPLETO).trim()
-      data.alertId = 2
       data.periodId = this.NPERIODO_PROCESO
       data.tipoCargaId = 2
       data.sClient = ItemCliente.SCLIENT
       data.nIdUsuario = this.objUsuario.idUsuario
+      debugger;
       let respuetaService: any = await this.getBusquedaManual(ObjListaCheckSeleccionadoxNombre)
       if (respuetaService.code == 1) {
-        let mensaje = respuetaService.mesaje || 'Ocurrio un error'
+        let mensaje = respuetaService.mensaje || 'Ocurrio un error'
         Swal.fire({
           title: 'Gestor de Cliente',
           icon: 'warning',
@@ -1265,13 +1247,8 @@ export class CustomerManagerComponent implements OnInit {
   goToDetailAprobar(item) {
   
     this.spinner.show()
-    if (this.idGrupo == 2) {
-      localStorage.setItem("NIDALERTA", '35')
-    } else if (this.idGrupo == 3) {
-      localStorage.setItem("NIDALERTA", '33')
-    } else {
-      localStorage.setItem("NIDALERTA", '2')
-    }
+    let data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo);
+    localStorage.setItem("NIDALERTA", data.NIDALERTA)
     localStorage.setItem("NPERIODO_PROCESO", this.NPERIODO_PROCESO + '')
     localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
     localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN)
@@ -1297,13 +1274,6 @@ export class CustomerManagerComponent implements OnInit {
     localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
     localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
     this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
-    // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
-    // if (valuenSelectPestaniaClient == null) {
-    //   localStorage.setItem("nSelectPestaniaClient", '0')
-    //   let valuenSelectSubPestania = localStorage.getItem("nSelectSubPestania")
-    //   if (valuenSelectSubPestania == null)
-    //     localStorage.setItem("nSelectSubPestania", '0')
-    // }
     localStorage.setItem("paramCliente", JSON.stringify(this.paramCliente))
     this.spinner.hide()
     this.router.navigate(['/c2-detail'])
