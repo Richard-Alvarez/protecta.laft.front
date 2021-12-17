@@ -561,7 +561,9 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.formData.SNUM_DOCUMENTO_EMPRESA = this.SNUM_DOCUMENTO_EMPRESA == null ? "" :this.SNUM_DOCUMENTO_EMPRESA
             //this.formData.NIDREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.STIPO_AND_NUM_DOC = ''
-
+            this.formData.NIDGRUPOSENAL = localStorage.getItem('NIDGRUPOSENAL')
+            
+            
             this.formData.SESTADO_REVISADO = localStorage.getItem("EnviarCheckbox")
             this.SESTADO_REVISADO_ACEPT = this.formData.SESTADO_REVISADO
             //this.formData.SESTADO_REVISADO = this.SFALTA_ACEPTAR_COINC == 'SI' ? '1' : this.formData.SESTADO_REVISADO
@@ -655,6 +657,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))//this.oClienteReforzado.NPERIODO_PROCESO//parseInt(localStorage.getItem('NPERIODO_PROCESO'))
                 this.formData.NTIPO_DOCUMENTO = this.oClienteReforzado.NTIPO_DOCUMENTO//localStorage.getItem('NTIPO_DOCUMENTO')
                 this.formData.NIDREGIMEN = this.oClienteReforzado.NIDREGIMEN//1
+                this.formData.NREGIMEN = this.oClienteReforzado.NIDREGIMEN//1
                 this.formData.SCLIENT = localStorage.getItem('SCLIENT')
                 this.formData.STIPO_AND_NUM_DOC = ''
                 this.formData.NIDGRUPOSENAL = this.oClienteReforzado.NIDGRUPOSENAL
@@ -1379,7 +1382,8 @@ debugger
     param = new Object(this.TiposMaestros.find(t => t.NIDALERTA == this.formData.NIDALERTA))
     param.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO;
     param.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO;
-    param.NIDREGIMEN =param.NIDALERTA == 2 ? this.formData.NIDREGIMEN : param.NIDREGIMEN ,
+    // param.NIDREGIMEN =param.NIDALERTA == 2 ? this.formData.NIDREGIMEN : param.NIDREGIMEN ,
+    param.NIDREGIMEN =param.NIDALERTA == 2 ? this.formData.NREGIMEN : param.NIDREGIMEN ,
     // {NIDGRUPOSENAL:valorIDGrupo  ,STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO, NIDREGIMEN: 99/*this.formData.NIDREGIMEN*/}
         this.core.loader.show();
         let respMovement = await this.userConfigService.getMovementHistory(param)
