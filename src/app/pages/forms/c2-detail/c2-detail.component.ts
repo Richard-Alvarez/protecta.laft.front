@@ -142,7 +142,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
       localStorage.setItem("objFocusPosition","{}")
     }
     async ngOnInit() {  
-        
+        debugger
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
         this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
         //   this.getAcordionReturn();
@@ -780,7 +780,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
     SESTADO_REVISADO_ACEPT
     async getDataClientesList(dataService){
-        //debugger;
         this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
         try {
             
@@ -803,7 +802,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                     })
                 }
                 if(this.IdLista == 2){
-                    //debugger;
                     this.pepList = await this.userConfigService.getPepList(dataService)
                     this.pepList.forEach(it => {
                         this.uncheckPepLists.push(it.NACEPTA_COINCIDENCIA == 1)
@@ -817,12 +815,12 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
                 }
                 if(this.IdLista == 5){
-                    //debugger;
                     this.espList = await this.userConfigService.getListEspecial(dataService)
                     this.espList.forEach(it => {
                         this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
                     })
                 }
+                debugger;
                 this.unchekAllList = this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = this.internationalList.concat(this.sacList.concat(this.pepList.concat(this.familiesPepList.concat(this.espList))))
                 
@@ -1290,7 +1288,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     async getInternationalLists() {        
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show(); 
-      
+      debugger;
         this.internationalList = await this.userConfigService.getInternationalLists(param)
         
         this.internationalList.forEach((it, i) => { 
@@ -1566,48 +1564,18 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             let cantidadUndefined
             let listacheckbox 
             arreglos = this.getListById(99)
-    
-
-            
-           // if(this.unchekAllList.length == 2 )  {
-               
                 for (let index = 0; index < 2; index++) { 
-                
                   for (let index2 = 0; index2 < 5; index2++) {
-                        //this.unchekAllList[index][index2].splice(1,3)
-                     
                         let valor1 = this.categoriaSelectedArray[index][index2][0]
                         let valor2 = this.categoriaSelectedArray[index][index2][1]
                          
                         newValorArreglos.push(valor1)
                         newValorArreglos.push(valor2)
                     }
-    
-                   
                 }
                  cantidadTrue = newValorArreglos.filter(it => it == true )
                 cantidadFalse = newValorArreglos.filter(it => it == false )
                 cantidadUndefined = newValorArreglos.filter(it => it == undefined )
-               
-                
-           // }
-            // else{
-            //      let idRegimen =arreglos[0].NIDREGIMEN
-            //     let listacheckbox = this.unchekAllList[idRegimen-1]
-            //     for (let index2 = 0; index2 < 5; index2++) {
-            //         newValorArreglos.push(listacheckbox[index2][0])
-            //         newValorArreglos.push(listacheckbox[index2][1])
-                   
-            //     }
-            //     cantidadTrue = newValorArreglos.filter(it => it == true )
-            //     cantidadFalse = newValorArreglos.filter(it => it == false )
-           
-            // }
-             
-           
-            
-           
-            
             if( cantidadFalse.length == 0  ){
                 mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando las coincidencia</p>" 
             }
@@ -1616,26 +1584,8 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             }
             //else if((cantidadTrue.length != 0 &&  cantidadFalse.length == 0) || (cantidadTrue.length == 0 &&  cantidadFalse.length != 0) ){
              else{    mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando "+ cantidadTrue.length + " coincidencia</p><p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando "+ cantidadFalse.length +" coincidencia</p>" 
-            }
-           
-            
-            
+            } 
         }
-        
-        
-       /*
-        if(this.tipoClienteGC == "ACEPTA-COINCID"){
-            if(variabledeloscheck[0]  && variabledeloscheck[1]  ){
-                mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando las coincidencia</p>" 
-            }
-            else if((variabledeloscheck[0] == true && variabledeloscheck[1] == false) || (variabledeloscheck[0] == false && variabledeloscheck[1] == true)){
-                mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando 1 coincidencia</p><p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando 1 coincidencia</p>" 
-            }
-           
-            else{
-                mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando las coincidencia</p>" 
-            }
-        }*/
         else{
             
             if(variabledeloscheck.length == 2){
@@ -1645,37 +1595,19 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 else if((this.unchekAllList[0] == true && this.unchekAllList[1] == false) || (this.unchekAllList[0] == false && this.unchekAllList[1] == true)){
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando 1 coincidencia</p><p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando 1 coincidencia</p>" 
                 }
-               
                 else{
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando 2 coincidencia</p>" 
                 }
             }
-    
             else{
     
                 if((this.unchekAllList[0] == true && this.unchekAllList[1] == undefined ) || this.unchekAllList[0] == true ){
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;'>¿Desea aceptar la coincidencia?</p>" 
-                    
                 }else{
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;'>¿Desea descartar la coincidencia?</p>"
-                   
-            }
-    
+                }
             }
         }
-
-
-       
-
-       
-        // if(this.unchekAllList[0] == true){
-        //     mensaje = "¿Desea aceptar la coincidencia?"
-            
-        // }else{
-        //     mensaje = "¿Desea descartar la coincidencia?"
-            
-        // }
-        
         swal.fire({
             title: 'Señal de alerta',
             //text: "¿Desea actualizar la información del cliente?",
@@ -1712,35 +1644,14 @@ export class C2DetailComponent implements OnInit , OnDestroy {
        
                 //return
                 let arrPromises = []
+                debugger;
                 if(this.tipoClienteGC == 'ACEPTA-COINCID'){
-             
-                    let arrayRegimen = [1,2]
-              debugger;
-              
-                    //arrayRegimen.forEach(regimen => {
-                        //let incrementadorCheck = 0;
                         for (let incrementadorCheck = 0; incrementadorCheck < arreglos.length; incrementadorCheck++) {
                             const itemArreglos = arreglos[incrementadorCheck];
-                            
-                            //if(itemArreglos.NIDREGIMEN == regimen){
-                            
                                 const itemUncheck = (this.unchekAllList[itemArreglos.NIDREGIMEN-1][(itemArreglos.NIDTIPOLISTA-1)])[itemArreglos.NCONTADORLISTA];
                               
                                 if(itemArreglos.SESTADO_REVISADO == '2'){
                                     let _param : any = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
-                                    // let valorAlerta
-                                    // let  valorIDGrupo
-                                    // if(this.IDGRUPOSENALGestor == 2  ){
-                                    //     valorAlerta = 35
-                                    //     valorIDGrupo = 2
-                                    // }else if(this.IDGRUPOSENALGestor == 3){
-                                    //     valorAlerta = 33
-                                    //     valorIDGrupo = 3
-                                    // }else{
-                                    //     valorAlerta = 2
-                                    //     valorIDGrupo = 1
-                                    // }
-                                    //  
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: _param.NIDALERTA, 
@@ -1760,7 +1671,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                         STIPO_DOCUMENTO : itemArreglos.STIPOIDEN
                                         
                                     }
-                                    debugger;
+                                    //debugger;
                                       let response = await this.userConfigService.updateUnchecked(param)
                                       arrPromises.push(response)
                                 }
@@ -1807,28 +1718,13 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                         }
                     })
                 }*/else{
-                   
+                   debugger;
                     for (let i = 0; i < arreglos.length; i++) {
                         //let arreglo = arreglos[i]
                         let item = arreglos[i]
                        
                         if(item.SESTADO_REVISADO == '2'){
                             let _param : any = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
-                            // let valorAlerta
-                            // let valorIDGrupo
-                            //         if(this.IDGRUPOSENALGestor == 2 ||  this.formData.NIDALERTA == 35 ){
-                            //             valorAlerta = 35
-                            //             this.formData.NREGIMEN = 0
-                            //             valorIDGrupo = 2
-                            //         }else if(this.IDGRUPOSENALGestor == 3 ||  this.formData.NIDALERTA == 33){
-                            //             valorAlerta = 33
-                            //             this.formData.NREGIMEN = 0
-                            //             valorIDGrupo = 3
-                            //         }else{
-                            //             valorAlerta = 2
-                            //             valorIDGrupo = 1
-                            //         }
-                          
                             let param = {
                                 NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                 NIDALERTA: _param.NIDALERTA, 
@@ -1847,7 +1743,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                 NIDSUBGRUPOSEN : this.NIDSUBGRUPOSEN,
                                 STIPO_DOCUMENTO : item.STIPOIDEN
                             }
-                             
+                             console.log(param);
                              let response = await this.userConfigService.updateUnchecked(param)
                              arrPromises.push(response)
                              
@@ -1860,7 +1756,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 }
 
                 
-                let respPromiseAll = await Promise.all(arrPromises)
+                //let respPromiseAll = await Promise.all(arrPromises)
                 
                 for(let index =0; index < this.ValorListaCoincidencias.length; index++ ){
                      this.ValorListaCoincidencias[index].SESTADO_REVISADO = '1';
@@ -2030,8 +1926,9 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     // }
     
     ValidacionCargo(Lista,estado){
-        
-                if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
+        debugger
+        //if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
+        if(this.SESTADO_REVISADO_ACEPT== 1 && estado == 2){
             return false
         }
         else{
@@ -2415,7 +2312,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
   categoriaSelectedArray:any = [[[],[],[],[],[]],[[],[],[],[],[]]]; 
   onCategoriaPressed(categoriaSelected: any, checked: boolean,indice,idlista,idRegimen){
       
-  
+  debugger;
     //if (checked) { //Si el elemento fue seleccionado
       //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
       if(this.formData.NIDALERTA == 2){
@@ -2527,7 +2424,7 @@ Arraycheckbox(){
 }
 ValidarRegimenGC(){
     
-    if(this.formData.NIDALERTA == 35 || this.formData.NIDALERTA == 33){
+    if(this.formData.NIDALERTA != 35 ){
         return false
     }
     else{
@@ -2536,7 +2433,7 @@ ValidarRegimenGC(){
 }
 ValidarRegimenAcepta(){
   
-    if(this.IDGRUPOSENAL == 2 || this.IDGRUPOSENAL == 3){
+    if(this.IDGRUPOSENAL != 2){
         return false
     }else{
         return true
