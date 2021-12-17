@@ -12,7 +12,7 @@ import * as $ from 'jquery';
 import {IOption} from 'ng-select'; 
 import { element } from 'protractor';
 import { forEach } from 'jszip';
-import { O_NOFOLLOW } from 'constants'; 
+import { O_NOFOLLOW } from 'constants';
 import { C2PolicyComponent } from 'src/app/components/c2-policy/c2-policy.component';
 
 
@@ -350,6 +350,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
   NIDSUBGRUPOSEN
   IDGRUPOSENALGestor
     async getFormData() {
+        debugger
         this.tipoClienteCRF = await localStorage.getItem("tipoClienteCRF")
         this.tipoClienteGC = await localStorage.getItem('tipoClienteGC')
         this.boolClienteReforzado = await JSON.parse(localStorage.getItem('boolClienteReforzado'))
@@ -559,7 +560,9 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.formData.SNUM_DOCUMENTO_EMPRESA = this.SNUM_DOCUMENTO_EMPRESA == null ? "" :this.SNUM_DOCUMENTO_EMPRESA
             //this.formData.NIDREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.STIPO_AND_NUM_DOC = ''
-
+            this.formData.NIDGRUPOSENAL = localStorage.getItem('NIDGRUPOSENAL')
+            
+            
             this.formData.SESTADO_REVISADO = localStorage.getItem("EnviarCheckbox")
             this.SESTADO_REVISADO_ACEPT = this.formData.SESTADO_REVISADO
             //this.formData.SESTADO_REVISADO = this.SFALTA_ACEPTAR_COINC == 'SI' ? '1' : this.formData.SESTADO_REVISADO
@@ -650,9 +653,12 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 this.formData.SNUM_DOCUMENTO = this.oClienteReforzado.SNUM_DOCUMENTO//localStorage.getItem('SNUM_DOCUMENTO')
                 this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))//this.oClienteReforzado.NPERIODO_PROCESO//parseInt(localStorage.getItem('NPERIODO_PROCESO'))
                 this.formData.NTIPO_DOCUMENTO = this.oClienteReforzado.NTIPO_DOCUMENTO//localStorage.getItem('NTIPO_DOCUMENTO')
-                this.formData.NIDREGIMEN = 1
+                this.formData.NIDREGIMEN = this.oClienteReforzado.NIDREGIMEN//1
+                this.formData.NREGIMEN = this.oClienteReforzado.NIDREGIMEN//1
                 this.formData.SCLIENT = localStorage.getItem('SCLIENT')
                 this.formData.STIPO_AND_NUM_DOC = ''
+                this.formData.NIDGRUPOSENAL = this.oClienteReforzado.NIDGRUPOSENAL
+                this.formData.NIDALERTA = this.oClienteReforzado.NIDALERTA
                 //this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC
                 if(this.formData.STIPO_NUM_DOC && this.formData.SNUM_DOCUMENTO){
                     this.formData.STIPO_AND_NUM_DOC = this.formData.STIPO_NUM_DOC +' - '+ this.formData.SNUM_DOCUMENTO
@@ -723,7 +729,9 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             dataHistorialEstadoCli = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
             dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
             dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;//this.formData.SCLIENT
-            
+            dataHistorialEstadoCli.NIDGRUPOSENAL = this.formData.NIDGRUPOSENAL
+            dataHistorialEstadoCli.NIDALERTA = this.formData.NIDALERTA
+            debugger
             let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
             
             this.arrHistoricoCli = await respCoincidCliHis.lista
@@ -1368,11 +1376,12 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         // }else{
         //     valorIDGrupo = 1
         // }
-
+debugger
     let param :any = {};
     param = new Object(this.TiposMaestros.find(t => t.NIDALERTA == this.formData.NIDALERTA))
     param.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO;
     param.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO;
+    // param.NIDREGIMEN =param.NIDALERTA == 2 ? this.formData.NIDREGIMEN : param.NIDREGIMEN ,
     param.NIDREGIMEN =param.NIDALERTA == 2 ? this.formData.NREGIMEN : param.NIDREGIMEN ,
     // {NIDGRUPOSENAL:valorIDGrupo  ,STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO, NIDREGIMEN: 99/*this.formData.NIDREGIMEN*/}
         this.core.loader.show();
