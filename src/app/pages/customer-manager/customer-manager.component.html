@@ -243,6 +243,20 @@
                                                 <a class="dropdown-item colorTextoDropDown" (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
                                                             coincidencias</a>
                                             </div>
+                                            <div *ngIf="item.SESTADO_TRAT == 'BAO' && item.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-right colorTextoDropDown">
+                                                <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item,'NNN')">Ver</a>
+                                                <a class="dropdown-item colorTextoDropDown" (click)="update(item,item.SESTADO_TRAT,'CRF','Reforzado',1,ind)">Enviar a
+                                                            Reforzado</a>
+                                                <a class="dropdown-item colorTextoDropDown" (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
+                                                            coincidencias</a>
+                                            </div>
+                                            <div *ngIf="item.SESTADO_TRAT == 'BMO' && item.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-right colorTextoDropDown">
+                                                <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item,'NNN')">Ver</a>
+                                                <a class="dropdown-item colorTextoDropDown" (click)="update(item,item.SESTADO_TRAT,'CRF','Reforzado',1,ind)">Enviar a
+                                                            Reforzado</a>
+                                                <a class="dropdown-item colorTextoDropDown" (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
+                                                            coincidencias</a>
+                                            </div>
                                             <div *ngIf="item.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-right colorTextoDropDown">
 
                                                 <a class="dropdown-item colorTextoDropDown" (click)="goToDetailAprobar(item)">Aprobar
@@ -253,11 +267,11 @@
                                                             coincidencias</a>
                                             </div>
                                         </div>
-                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
+                                        <div *ngIf="idGrupo != 1  && item.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
                                             <a class="dropdown-item colorTextoDropDown" (click)="goToDetailAprobar(item)">Aprobar
                                                        coincidencias</a>
                                         </div>
-                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3 ) && item.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
+                                        <div *ngIf="idGrupo != 1 && item.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
                                             <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item,'NNNN')">Ver</a>
                                             <a class="dropdown-item colorTextoDropDown" (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
                                                        coincidencias</a>

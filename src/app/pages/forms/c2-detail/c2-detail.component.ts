@@ -140,9 +140,10 @@ export class C2DetailComponent implements OnInit , OnDestroy {
   NewListCheck :any = []
   ngOnDestroy(){
       localStorage.setItem("objFocusPosition","{}")
+      localStorage.getItem("NIDGRUPO")
     }
     async ngOnInit() {  
-        
+         localStorage.setItem("NIDGRUPORETURN",localStorage.getItem("NIDGRUPO"))
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
         this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
         //   this.getAcordionReturn();
@@ -188,6 +189,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     //await this.configService.sOrigenVista$.subscribe(cadena => this.vistaOrigen = cadena )
     this.core.loader.show() 
     await this.ListarCargo()
+     
     await this.getFormData()
     //await this.getHistorialRevisiones()
     /*if(this.tipoClienteGC != 'GC'){
@@ -350,7 +352,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
   NIDSUBGRUPOSEN
   IDGRUPOSENALGestor
     async getFormData() {
-        debugger
+         debugger;
         this.tipoClienteCRF = await localStorage.getItem("tipoClienteCRF")
         this.tipoClienteGC = await localStorage.getItem('tipoClienteGC')
         this.boolClienteReforzado = await JSON.parse(localStorage.getItem('boolClienteReforzado'))
@@ -360,7 +362,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         this.INDRESIDENCIA = localStorage.getItem("INDRESIDENCIA")
         this.SFALTA_ACEPTAR_COINC = localStorage.getItem("SFALTA_ACEPTAR_COINC")
         this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
-        this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPO")
+        //this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPO")
         this.NIDSUBGRUPOSEN = localStorage.getItem("NIDSUBGRUPO")
       
     this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
@@ -503,10 +505,11 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                     
                 })
             })
-          
+             
             this.ValorListaCoincidencias = arrayClientes
             arrayRespCoincid.forEach(itemResp => {
                 itemResp.forEach(itemCoin => {
+                    debugger
                     let validLista = this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == itemCoin.NIDTIPOLISTA)
                    
                     if(validLista.length == 0){
@@ -602,7 +605,10 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             //      dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
             // }
             // let dataService:any = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,"NIDALERTA": 2,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,"SNUM_DOCUMENTO_BUSQ": this.formData.SNUM_DOCUMENTO,"NIDREGIMEN": this.formData.NREGIMEN}
-        //debugger;
+        // ;
+        
+         ;
+         debugger;
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
             //this.boolNameMach = this.arrCoincidenciasLista.;
             this.SCLIENT_DATA = localStorage.getItem('SCLIENT')//this.formData.SCLIENT
@@ -626,7 +632,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         
         if(this.tipoClienteGC == 'CCO' || this.tipoClienteGC == 'CRE' || this.tipoClienteGC == 'CRF'){
             //this.tipoClienteGC = await this.getOrigenVista()
-            //debugger;
+            // ;
             this.arrListasAll = JSON.parse(localStorage.getItem('view-c2-arrListasAll'))
             
             this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
@@ -695,6 +701,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 }else{
                     this.sDescriptRiesgo = respExperian.sDescript//'BAJO'
                 }
+                debugger
                 this.arrCoincidenciasLista = await this.getDataClientesAllList(dataService)
                 
                 //this.arrCoincidenciasLista = await respClientesAll.lista
@@ -729,9 +736,10 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             dataHistorialEstadoCli = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
             dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
             dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;//this.formData.SCLIENT
-            dataHistorialEstadoCli.NIDGRUPOSENAL = this.formData.NIDGRUPOSENAL
+            //dataHistorialEstadoCli.NIDGRUPOSENAL = this.formData.NIDGRUPOSENAL
             dataHistorialEstadoCli.NIDALERTA = this.formData.NIDALERTA
-            debugger
+            dataHistorialEstadoCli.NIDSUBGRUPOSEN = this.NIDSUBGRUPOSEN
+             
             let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
             
             this.arrHistoricoCli = await respCoincidCliHis.lista
@@ -788,7 +796,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
     SESTADO_REVISADO_ACEPT
     async getDataClientesList(dataService){
-        //debugger;
         this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
         try {
             
@@ -811,7 +818,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                     })
                 }
                 if(this.IdLista == 2){
-                    //debugger;
                     this.pepList = await this.userConfigService.getPepList(dataService)
                     this.pepList.forEach(it => {
                         this.uncheckPepLists.push(it.NACEPTA_COINCIDENCIA == 1)
@@ -825,12 +831,12 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
                 }
                 if(this.IdLista == 5){
-                    //debugger;
                     this.espList = await this.userConfigService.getListEspecial(dataService)
                     this.espList.forEach(it => {
                         this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
                     })
                 }
+                 ;
                 this.unchekAllList = this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = this.internationalList.concat(this.sacList.concat(this.pepList.concat(this.familiesPepList.concat(this.espList))))
                 
@@ -936,7 +942,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                     }
                     
                 })
-                //debugger;
+                // ;
                 let arrListEspService = []
                 let espListService:any[] = await this.userConfigService.getListEspecial(dataService)
                 espListService.forEach(it => {
@@ -1063,7 +1069,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                     
                 })
                 let arrListEspService = []
-                //debugger;
+                // ;
                 let espListService:any[] = await this.userConfigService.getListEspecial(dataService)
                 espListService.forEach(it => {
                     let boolAcepta = it.NACEPTA_COINCIDENCIA == 1
@@ -1129,9 +1135,12 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             
             else{
                 respListasWithCoincid = await this.userConfigService.GetListaResultadosCoincid(dataService)
-                 
+                 debugger;
                 let indice = 0
-                respListasWithCoincid.forEach(lis => {
+                let array : any [] = respListasWithCoincid.filter((obj,index,array)=> {
+                     return array.map(t=> t.NIDTIPOLISTA).indexOf(obj.NIDTIPOLISTA) == index
+                    });
+                    array.forEach(lis => {
                     let objNewLista: any = {}
                     objNewLista.SDESTIPOLISTA = lis.SDESTIPOLISTA
                     objNewLista.NIDTIPOLISTA = lis.NIDTIPOLISTA
@@ -1276,6 +1285,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 let lista4 = (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 4))[0] ? (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 4))[0].arrCoincidencias : []
                 let lista5 = (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 5))[0] ? (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 5))[0].arrCoincidencias : []
                 */
+               debugger;
                 this.arrCoincidenciasLista.forEach(itemLista =>{
                     if(itemLista.arrCoincidencias){
                         itemLista.arrCoincidencias.forEach(itemCoin => {
@@ -1298,7 +1308,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     async getInternationalLists() {        
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show(); 
-      
+       ;
         this.internationalList = await this.userConfigService.getInternationalLists(param)
         
         this.internationalList.forEach((it, i) => { 
@@ -1340,7 +1350,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     async getListEspecial() {        
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show();
-        //debugger;
+        // ;
         this.espList = await this.userConfigService.getListEspecial(param)
         this.espList.forEach(it => {
             this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
@@ -1376,7 +1386,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         // }else{
         //     valorIDGrupo = 1
         // }
-debugger
+ 
     let param :any = {};
     param = new Object(this.TiposMaestros.find(t => t.NIDALERTA == this.formData.NIDALERTA))
     param.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO;
@@ -1575,48 +1585,18 @@ debugger
             let cantidadUndefined
             let listacheckbox 
             arreglos = this.getListById(99)
-    
-
-            
-           // if(this.unchekAllList.length == 2 )  {
-               
                 for (let index = 0; index < 2; index++) { 
-                
                   for (let index2 = 0; index2 < 5; index2++) {
-                        //this.unchekAllList[index][index2].splice(1,3)
-                     
                         let valor1 = this.categoriaSelectedArray[index][index2][0]
                         let valor2 = this.categoriaSelectedArray[index][index2][1]
                          
                         newValorArreglos.push(valor1)
                         newValorArreglos.push(valor2)
                     }
-    
-                   
                 }
                  cantidadTrue = newValorArreglos.filter(it => it == true )
                 cantidadFalse = newValorArreglos.filter(it => it == false )
                 cantidadUndefined = newValorArreglos.filter(it => it == undefined )
-               
-                
-           // }
-            // else{
-            //      let idRegimen =arreglos[0].NIDREGIMEN
-            //     let listacheckbox = this.unchekAllList[idRegimen-1]
-            //     for (let index2 = 0; index2 < 5; index2++) {
-            //         newValorArreglos.push(listacheckbox[index2][0])
-            //         newValorArreglos.push(listacheckbox[index2][1])
-                   
-            //     }
-            //     cantidadTrue = newValorArreglos.filter(it => it == true )
-            //     cantidadFalse = newValorArreglos.filter(it => it == false )
-           
-            // }
-             
-           
-            
-           
-            
             if( cantidadFalse.length == 0  ){
                 mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando las coincidencia</p>" 
             }
@@ -1625,26 +1605,8 @@ debugger
             }
             //else if((cantidadTrue.length != 0 &&  cantidadFalse.length == 0) || (cantidadTrue.length == 0 &&  cantidadFalse.length != 0) ){
              else{    mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando "+ cantidadTrue.length + " coincidencia</p><p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando "+ cantidadFalse.length +" coincidencia</p>" 
-            }
-           
-            
-            
+            } 
         }
-        
-        
-       /*
-        if(this.tipoClienteGC == "ACEPTA-COINCID"){
-            if(variabledeloscheck[0]  && variabledeloscheck[1]  ){
-                mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando las coincidencia</p>" 
-            }
-            else if((variabledeloscheck[0] == true && variabledeloscheck[1] == false) || (variabledeloscheck[0] == false && variabledeloscheck[1] == true)){
-                mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando 1 coincidencia</p><p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando 1 coincidencia</p>" 
-            }
-           
-            else{
-                mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando las coincidencia</p>" 
-            }
-        }*/
         else{
             
             if(variabledeloscheck.length == 2){
@@ -1654,37 +1616,19 @@ debugger
                 else if((this.unchekAllList[0] == true && this.unchekAllList[1] == false) || (this.unchekAllList[0] == false && this.unchekAllList[1] == true)){
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta aceptando 1 coincidencia</p><p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando 1 coincidencia</p>" 
                 }
-               
                 else{
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;margin-bottom: 0px;'>Esta descartando 2 coincidencia</p>" 
                 }
             }
-    
             else{
     
                 if((this.unchekAllList[0] == true && this.unchekAllList[1] == undefined ) || this.unchekAllList[0] == true ){
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;'>¿Desea aceptar la coincidencia?</p>" 
-                    
                 }else{
                     mensaje = "<p style ='font-size: 1.125em;margin-top:0px;'>¿Desea descartar la coincidencia?</p>"
-                   
-            }
-    
+                }
             }
         }
-
-
-       
-
-       
-        // if(this.unchekAllList[0] == true){
-        //     mensaje = "¿Desea aceptar la coincidencia?"
-            
-        // }else{
-        //     mensaje = "¿Desea descartar la coincidencia?"
-            
-        // }
-        
         swal.fire({
             title: 'Señal de alerta',
             //text: "¿Desea actualizar la información del cliente?",
@@ -1721,35 +1665,14 @@ debugger
        
                 //return
                 let arrPromises = []
+                 ;
                 if(this.tipoClienteGC == 'ACEPTA-COINCID'){
-             
-                    let arrayRegimen = [1,2]
-              debugger;
-              
-                    //arrayRegimen.forEach(regimen => {
-                        //let incrementadorCheck = 0;
                         for (let incrementadorCheck = 0; incrementadorCheck < arreglos.length; incrementadorCheck++) {
                             const itemArreglos = arreglos[incrementadorCheck];
-                            
-                            //if(itemArreglos.NIDREGIMEN == regimen){
-                            
                                 const itemUncheck = (this.unchekAllList[itemArreglos.NIDREGIMEN-1][(itemArreglos.NIDTIPOLISTA-1)])[itemArreglos.NCONTADORLISTA];
                               
                                 if(itemArreglos.SESTADO_REVISADO == '2'){
                                     let _param : any = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
-                                    // let valorAlerta
-                                    // let  valorIDGrupo
-                                    // if(this.IDGRUPOSENALGestor == 2  ){
-                                    //     valorAlerta = 35
-                                    //     valorIDGrupo = 2
-                                    // }else if(this.IDGRUPOSENALGestor == 3){
-                                    //     valorAlerta = 33
-                                    //     valorIDGrupo = 3
-                                    // }else{
-                                    //     valorAlerta = 2
-                                    //     valorIDGrupo = 1
-                                    // }
-                                    //  
                                     let param = {
                                         NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: _param.NIDALERTA, 
@@ -1769,7 +1692,7 @@ debugger
                                         STIPO_DOCUMENTO : itemArreglos.STIPOIDEN
                                         
                                     }
-                                    debugger;
+                                     ;
                                       let response = await this.userConfigService.updateUnchecked(param)
                                       arrPromises.push(response)
                                 }
@@ -1816,28 +1739,13 @@ debugger
                         }
                     })
                 }*/else{
-                   
+                    ;
                     for (let i = 0; i < arreglos.length; i++) {
                         //let arreglo = arreglos[i]
                         let item = arreglos[i]
                        
                         if(item.SESTADO_REVISADO == '2'){
                             let _param : any = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
-                            // let valorAlerta
-                            // let valorIDGrupo
-                            //         if(this.IDGRUPOSENALGestor == 2 ||  this.formData.NIDALERTA == 35 ){
-                            //             valorAlerta = 35
-                            //             this.formData.NREGIMEN = 0
-                            //             valorIDGrupo = 2
-                            //         }else if(this.IDGRUPOSENALGestor == 3 ||  this.formData.NIDALERTA == 33){
-                            //             valorAlerta = 33
-                            //             this.formData.NREGIMEN = 0
-                            //             valorIDGrupo = 3
-                            //         }else{
-                            //             valorAlerta = 2
-                            //             valorIDGrupo = 1
-                            //         }
-                          
                             let param = {
                                 NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                 NIDALERTA: _param.NIDALERTA, 
@@ -1857,6 +1765,7 @@ debugger
                                 STIPO_DOCUMENTO : item.STIPOIDEN
                             }
                              
+                             console.log(param);
                              let response = await this.userConfigService.updateUnchecked(param)
                              arrPromises.push(response)
                              
@@ -1869,7 +1778,7 @@ debugger
                 }
 
                 
-                let respPromiseAll = await Promise.all(arrPromises)
+                //let respPromiseAll = await Promise.all(arrPromises)
                 
                 for(let index =0; index < this.ValorListaCoincidencias.length; index++ ){
                      this.ValorListaCoincidencias[index].SESTADO_REVISADO = '1';
@@ -1932,7 +1841,7 @@ debugger
         if(ValorCantidad.length > 0){
             // let ValorCantidadAceptados = this.ValorListaCoincidencias.filter(it => it.SESTADO_REVISADO === 1 || it.SESTADO_REVISADO === '1')
             // console.log("ValorCantidadAceptados",ValorCantidadAceptados)
-            // debugger
+            //  
             // if(ValorCantidadAceptados > 0){
             //     return true
             // }else{
@@ -1967,7 +1876,6 @@ debugger
     getDisableByCheck(SESTADO_REVISADO){
         //return true
         //this.formData.SESTADO_REVISADO == '1' ||
-        console.log(SESTADO_REVISADO)
         if( SESTADO_REVISADO == '1'){//(estadoTrat != 'CRE' || estadoTrat != 'CRF' || estadoTrat != 'CCO')){
             return true
         }
@@ -2039,8 +1947,9 @@ debugger
     // }
     
     ValidacionCargo(Lista,estado){
-        
-                if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
+         
+        //if(this.SESTADO_REVISADO_ACEPT== 1 && this.tipoClienteGC == 'C2-BANDEJA' && estado == 2){
+        if(this.SESTADO_REVISADO_ACEPT== 1 && estado == 2){
             return false
         }
         else{
@@ -2409,7 +2318,7 @@ debugger
             for( let index = 0; index < newArreglosListasPEP.length; index++){
                 
                 
-                if( (this.categoriaSelectedArray[index][1][index] ) && newArregloCombo[index] == undefined){
+                if( (this.categoriaSelectedArray[0][1][index] ) && newArregloCombo[index] == undefined){
                 
                     return 1 
                       
@@ -2424,17 +2333,17 @@ debugger
   categoriaSelectedArray:any = [[[],[],[],[],[]],[[],[],[],[],[]]]; 
   onCategoriaPressed(categoriaSelected: any, checked: boolean,indice,idlista,idRegimen){
       
-  
+   ;
     //if (checked) { //Si el elemento fue seleccionado
       //Agregamos la categoría seleccionada al arreglo de categorías seleccionadas
       if(this.formData.NIDALERTA == 2){
         this.categoriaSelectedArray[idRegimen-1][idlista].splice(indice,1,checked);
-      }else if(this.tipoClienteGC == 'ACEPTA-COINCID'  && (this.formData.NIDALERTA == 35 || this.formData.NIDALERTA == 33  )){
+      }else if(this.tipoClienteGC == 'ACEPTA-COINCID'  && (this.formData.NIDALERTA != 2)){
         this.categoriaSelectedArray[0][idlista].splice(indice,1,checked);
       }
-      else{
-        this.categoriaSelectedArray[indice][idlista].splice(indice,1,checked);
-      }
+    //   else{
+    //     this.categoriaSelectedArray[indice][idlista].splice(indice,1,checked);
+    //   }
 
    
     
@@ -2456,7 +2365,7 @@ debugger
 
 Arraycheckbox(){
     //this.ValorCombo = [13]
-    
+     debugger;
     let arreglos:any =[]
     let idListaCheck = this.IdLista ? this.IdLista : null;
     if(this.tipoClienteGC == 'ACEPTA-COINCID'){
@@ -2504,12 +2413,12 @@ Arraycheckbox(){
         });
      }
    }else{
-    for( let index = 0; index < arreglos.length; index++){
-        
-        this.categoriaSelectedArray[0][arreglos[0].NIDTIPOLISTA-1].splice(index,1,false);
-        
-
-        arreglos.forEach((element,inc) => {
+    
+    for( let i = 0; i < this.tipoListas.length; i++){
+        let arrayList = arreglos.filter(t => t.NIDTIPOLISTA == this.tipoListas[i].id)
+        for( let index = 0; index < arrayList.length; index++){
+            this.categoriaSelectedArray[0][arrayList[index].NIDTIPOLISTA-1].splice(index,1,false); 
+            arreglos.forEach((element,inc) => {
         
             if(element.SESTADO_REVISADO == 1 ){
                 if(element.NIDCARGOPEP == null){
@@ -2524,7 +2433,7 @@ Arraycheckbox(){
             }
         
         });
-        
+        }
     }
 }
 
@@ -2536,7 +2445,7 @@ Arraycheckbox(){
 }
 ValidarRegimenGC(){
     
-    if(this.formData.NIDALERTA == 35 || this.formData.NIDALERTA == 33){
+    if(this.formData.NIDALERTA != 35 ){
         return false
     }
     else{
@@ -2545,7 +2454,7 @@ ValidarRegimenGC(){
 }
 ValidarRegimenAcepta(){
   
-    if(this.IDGRUPOSENAL == 2 || this.IDGRUPOSENAL == 3){
+    if(this.IDGRUPOSENAL != 1){
         return false
     }else{
         return true

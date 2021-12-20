@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit,OnDestroy, Input } from "@angular/core";
 import { UserconfigService } from "src/app/services/userconfig.service";
 import { CoreService } from "src/app/services/core.service";
 import { Router } from "@angular/router";
@@ -28,7 +28,7 @@ import { ModalGestorLaftComponent } from "../modal-gestor-laft/modal-gestor-laft
   styleUrls: ["./customer-manager.component.css"],
   providers: [NgxSpinnerService]
 })
-export class CustomerManagerComponent implements OnInit {
+export class CustomerManagerComponent implements OnInit ,OnDestroy {
   GrupoList: any = []
   SubGrupoList: any = []
   idGrupo = 1
@@ -135,18 +135,22 @@ export class CustomerManagerComponent implements OnInit {
     private excelService: ExcelService,
   ) { }
 
+  ngOnDestroy(): void {
+    localStorage.getItem("NIDGRUPORETURN")
+  }
   async ngOnInit() {
     this.AdjuntarArchivo()
     this.spinner.show()
     await this.getGrupoList()
     await this.getListTipo();
+    debugger;
+    let nIdGrupo = localStorage.getItem("NIDGRUPORETURN")
     this.NIDUSUARIO_LOGUEADO = this.core.storage.get('usuario')['idUsuario']
     this.paramCliente.NTIPOIDEN_BUSQ = 2;
     this.paramCliente.SNUM_DOCUMENTO_BUSQ = null;
     this.paramCliente.SPRIMER_NOMBRE = "";
     this.paramCliente.SSEGUNDO_NOMBRE = "";
     this.paramCliente.SAPELLIDO_PATERNO = "";
-    let nIdGrupo = localStorage.getItem("NIDGRUPO")
     this.paramCliente.SAPELLIDO_MATERNO = "";
     this.paramCliente.SRAZON_SOCIAL = ""
     this.paramCliente.MANUAL = true
@@ -471,7 +475,7 @@ export class CustomerManagerComponent implements OnInit {
         if (NBUSCAR_POR == 2 && NTIPO_PERSONA == 1 && (CantidadCaracteresReales <= 3)) {
           this.getDataListResults(data)
         } else {
-          
+          debugger;
           this.clientList = await this.userConfigService.getResultsList(data);
           this.clientList = this.groupClients(this.clientList);
           this.spinner.hide();
@@ -1066,6 +1070,8 @@ export class CustomerManagerComponent implements OnInit {
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN);
         localStorage.setItem("SFECHA_NACIMIENTO", item.DFECHA_NACIMIENTO);
         localStorage.setItem("NEDAD", item.EDAD);
+        let obj : any = this.config.find(t => t.NIDGRUPOSENAL== this.idGrupo)
+        localStorage.setItem("NIDALERTA", obj.NIDALERTA);
     
         localStorage.setItem("SNUM_DOCUMENTO", item.SNUM_DOCUMENTO);
         localStorage.setItem("NTIPO_DOCUMENTO", item.NTIPO_DOCUMENTO);
@@ -1080,6 +1086,7 @@ export class CustomerManagerComponent implements OnInit {
       }
           let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
         localStorage.setItem("NIDALERTA", data.NIDALERTA);
+        debugger
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
@@ -1163,10 +1170,13 @@ export class CustomerManagerComponent implements OnInit {
 
   async getSeviceBusquedaManual(ItemCliente) {
     let ObjListaCheckSeleccionadoxNombre: any = {}
+    let data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
     ObjListaCheckSeleccionadoxNombre.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-    ObjListaCheckSeleccionadoxNombre.NIDALERTA = 0
+    
+    ObjListaCheckSeleccionadoxNombre.NIDALERTA = data.NIDALERTA
     ObjListaCheckSeleccionadoxNombre.SNOMCOMPLETO = (ItemCliente.SNOM_COMPLETO).trim()
     ObjListaCheckSeleccionadoxNombre.NIDGRUPOSENAL = this.idGrupo
+    ObjListaCheckSeleccionadoxNombre.NIDSUBGRUPOSEN = this.idSubGrupo
     ObjListaCheckSeleccionadoxNombre.SNUM_DOCUMENTO = ItemCliente.SNUM_DOCUMENTO
     ObjListaCheckSeleccionadoxNombre.SCLIENT = ItemCliente.SCLIENT
     ObjListaCheckSeleccionadoxNombre.NTIPOCARGA = 2
@@ -1179,11 +1189,11 @@ export class CustomerManagerComponent implements OnInit {
     dataPoliza.NIDALERTA = 2
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
-    let respuestaConsultaPoliza: any;
+    let respuestaConsultaPoliza: any = {};
     if(this.idGrupo == 1)
       respuestaConsultaPoliza = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
-    else
-      respuestaConsultaPoliza = {code : 1}
+    else 
+     respuestaConsultaPoliza.code = 0
     if (respuestaConsultaPoliza.code == 1) {
       Swal.fire({
         title: 'Gestor de Cliente',
@@ -1247,8 +1257,8 @@ export class CustomerManagerComponent implements OnInit {
   goToDetailAprobar(item) {
   
     this.spinner.show()
-    let data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo);
-    localStorage.setItem("NIDALERTA", data.NIDALERTA)
+    let obj : any = this.config.find(t => t.NIDGRUPOSENAL== this.idGrupo)
+    localStorage.setItem("NIDALERTA", obj.NIDALERTA)
     localStorage.setItem("NPERIODO_PROCESO", this.NPERIODO_PROCESO + '')
     localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
     localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN)
@@ -1270,8 +1280,8 @@ export class CustomerManagerComponent implements OnInit {
     localStorage.setItem('view-c2-idLista', item.NIDTIPOLISTA)
     let sEstadoRevisado = item.SESTADO_REVISADO// == '1' ? '1' : '0'
     localStorage.setItem('EnviarCheckbox', sEstadoRevisado)
-    
-    localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
+    debugger;
+    localStorage.setItem("NIDGRUPOSENAL", item.NIDGRUPOSENAL)
     localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
     this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
     localStorage.setItem("paramCliente", JSON.stringify(this.paramCliente))

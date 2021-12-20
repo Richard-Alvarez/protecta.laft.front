@@ -38,7 +38,7 @@
                                 style="text-decoration: none;">Información de Polizas</a>
                         </li>  -->
                     <li class="nav-item">
-                        <a class="nav-link " data-toggle="tab" href="#poliza" style="text-decoration: none;">Información de Polizas</a>
+                        <a class="nav-link " data-toggle="tab" href="#poliza" style="text-decoration: none;">Información de Pólizas</a>
                     </li>
                     <!--<li class="nav-item">
                             <a class="nav-link text-body" data-toggle="tab" href="#perfilPadre1"
@@ -330,47 +330,79 @@
                 </div>
                 <div *ngIf="tipoClienteGC != 'GC' && tipoClienteGC != 'C2-BANDEJA' && tipoClienteGC != 'ACEPTA-COINCID'">
                     <div *ngFor="let objCoinList of arrCoincidenciasLista;">
-                        <div class="row">
-                            <h5>{{objCoinList.SDESTIPOLISTA}}</h5>
-                            <!-- <h5 class="">{{objCoinList.SDESTIPOLISTA == "LISTAS FAMILIA PEP" ? "LISTAS FAMILIAR PEP" : objCoinList.SDESTIPOLISTA}}</h5> -->
+                        <div *ngIf="objCoinList.NIDTIPOLISTA == 2">
+                            <div class="row">
+                                <h5>{{objCoinList.SDESTIPOLISTA}}</h5>
+                            </div>
+                            <div class="row" *ngIf="objCoinList.NLENGTH_COINCID > 0">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-sm" style="font-size: 12px;">
+                                        <thead>
+                                            <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                <th scope="col" style="width:120px">Tipo y Nro. de documento</th>
+                                                <th scope="col">Nombres</th>
+                                                <th scope="col">Tipo de Coincidencia</th>
+                                                <th scope="col">Fuente</th>
+                                                <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">% aprox.</th>
+                                                <th scope="col">Cargos PEP</th>
+                                                <th *ngIf="IDGRUPOSENAL == 1" scope="col">Régimen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of objCoinList.arrCoincidencias; let incCli = index">
+                                                <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
+                                                <td>{{item.SNOM_COMPLETO}}</td>
+                                                <td>{{item.STIPO_BUSQUEDA}}</td>
+                                                <td>{{item.SORIGEN}}</td>
+                                                <td *ngIf="validatePorPorcentaje(objCoinList.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ}}</td>
+                                                <div placement='top' ngbTooltip="{{item.SNOMCARGO}}">{{cortarCararter(item.SNOMCARGO)}}</div>
+                                                <td *ngIf="IDGRUPOSENAL == 1">{{item.SDESREGIMEN}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                        </div>
-                        <div class="row" *ngIf="objCoinList.NLENGTH_COINCID > 0">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-sm" style="font-size: 12px;">
-                                    <thead>
-                                        <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
-                                            <!-- <th scope="col">Tipo de documento2</th>
-                                                <th scope="col">Nro. de documento</th> -->
-                                            <th scope="col" style="width:120px">Tipo y Nro. de documento</th>
-                                            <th scope="col">Nombres</th>
-                                            <th scope="col">Tipo de Coincidencia</th>
-                                            <th scope="col">Fuente</th>
-                                            <th scope="col">Cargos PEP</th>
-                                            <!-- <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">Porcentaje aprox.</th> -->
-                                            <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">% aprox.</th>
-                                            <th scope="col">Régimen</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of objCoinList.arrCoincidencias; let incCli = index">
-                                            <!-- <td>{{item.STIPOIDEN}}</td>
-                                                <td>{{item.SNUM_DOCUMENTO}}</td> -->
-                                            <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
-                                            <td>{{item.SNOM_COMPLETO}}</td>
-                                            <td>{{item.STIPO_BUSQUEDA}}</td>
-                                            <td>{{item.SORIGEN}}</td>
-                                            <div placement='top' ngbTooltip="{{item.SNOMCARGO}}">{{cortarCararter(item.SNOMCARGO)}}</div>
-                                            <td *ngIf="validatePorPorcentaje(objCoinList.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ}}</td>
-                                            <td>{{item.SDESREGIMEN}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            </div>
+                            <div class="row" *ngIf="objCoinList.NLENGTH_COINCID == 0">
+                                <div class="text-left txtCabeceraNegrita pl-3 pt-2">No hubo coincidencias</div>
                             </div>
 
                         </div>
-                        <div class="row" *ngIf="objCoinList.NLENGTH_COINCID == 0">
-                            <div class="text-left txtCabeceraNegrita pl-3 pt-2">No hubo coincidencias</div>
+                        <div *ngIf="objCoinList.NIDTIPOLISTA != 2">
+                            <div class="row">
+                                <h5>{{objCoinList.SDESTIPOLISTA}}</h5>
+                            </div>
+                            <div class="row" *ngIf="objCoinList.NLENGTH_COINCID > 0">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-sm" style="font-size: 12px;">
+                                        <thead>
+                                            <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                <th scope="col" style="width:120px">Tipo y Nro. de documento</th>
+                                                <th scope="col">Nombres</th>
+                                                <th scope="col">Tipo de Coincidencia</th>
+                                                <th scope="col">Fuente</th>
+                                                <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">% aprox.</th>
+                                                <th *ngIf="IDGRUPOSENAL == 1" scope="col">Régimen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of objCoinList.arrCoincidencias; let incCli = index">
+                                                <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
+                                                <td>{{item.SNOM_COMPLETO}}</td>
+                                                <td>{{item.STIPO_BUSQUEDA}}</td>
+                                                <td>{{item.SORIGEN}}</td>
+                                                <td *ngIf="validatePorPorcentaje(objCoinList.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ}}</td>
+                                                <td *ngIf="IDGRUPOSENAL == 1">{{item.SDESREGIMEN}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="row" *ngIf="objCoinList.NLENGTH_COINCID == 0">
+                                <div class="text-left txtCabeceraNegrita pl-3 pt-2">No hubo coincidencias</div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -783,7 +815,7 @@
                     <div class="row mb-2 mt-2">
                         <div class="Header">
                             <div class="col-lg-12">
-                                <h4 class="TitleLine">Historial de revisiones</h4>
+                                <h4 class="TitleLine">Historial de confirmación</h4>
                             </div>
                         </div>
                     </div>
@@ -912,7 +944,7 @@
                     <div class="row mb-2 mt-2">
                         <div class="Header">
                             <div class="col-lg-12">
-                                <h4 class="TitleLine">Historial de revisiones</h4>
+                                <h4 class="TitleLine">Historial de confirmación</h4>
                             </div>
                         </div>
                     </div>
@@ -1104,7 +1136,7 @@
                     <div class="row mb-2 mt-2">
                         <div class="Header">
                             <div class="col-lg-12">
-                                <h4 class="TitleLine">Historial de revisiones</h4>
+                                <h4 class="TitleLine">Historial de confirmación</h4>
                             </div>
                         </div>
                     </div>
@@ -1395,7 +1427,7 @@
                         <div class="row mb-2 mt-2">
                             <div class="Header">
                                 <div class="col-lg-12">
-                                    <h4 class="TitleLine">Historial de revisiones</h4>
+                                    <h4 class="TitleLine">Historial de confirmación</h4>
                                 </div>
                             </div>
                         </div>
@@ -1572,7 +1604,7 @@
                         <div class="row mb-2 mt-2">
                             <div class="Header">
                                 <div class="col-lg-12">
-                                    <h4 class="TitleLine">Historial de revisiones</h4>
+                                    <h4 class="TitleLine">Historial de confirmación</h4>
                                 </div>
                             </div>
                         </div>
@@ -1749,7 +1781,7 @@
                         <div class="row mb-2 mt-2">
                             <div class="Header">
                                 <div class="col-lg-12">
-                                    <h4 class="TitleLine">Historial de revisiones</h4>
+                                    <h4 class="TitleLine">Historial de confirmación</h4>
                                 </div>
                             </div>
                         </div>
@@ -1801,7 +1833,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr  *ngIf="ListaPoliza.length !=0;"> 
+                    <hr *ngIf="ListaPoliza.length !=0;">
                     <div class="row pl-2 pr-2 " *ngIf="ListaPoliza.length !=0;else SinData">
                         <div class="col-lg-1 text-left txtCabecera">N° Póliza</div>
                         <div class="col-lg-2 text-left txtCabecera" style="padding-left: 0px;padding-right: 0px;">Ramo/Producto</div>
@@ -1881,7 +1913,7 @@
                         </div>
                     </div>
                     <ng-template #SinData>
-                        <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontró polizas</div>
+                        <div class="text-left txtCabeceraNegrita pl-3 pt-2" style="margin-left: -15px; padding-top: 0px!important">No se encontró pólizas</div>
                     </ng-template>
                 </div>
 
