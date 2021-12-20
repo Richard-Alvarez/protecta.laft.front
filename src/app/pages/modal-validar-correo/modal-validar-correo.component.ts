@@ -192,7 +192,7 @@ export class ModalValidarCorreoComponent implements OnInit {
         
       icon: 'error',
       title: 'ERROR!',
-      text: 'Los datos insgresados son incorrectos',
+      text: 'Los datos ingresados son incorrectos',
       showConfirmButton: true,
       confirmButtonColor: "#FA7000",
       customClass: {

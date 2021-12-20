@@ -812,6 +812,16 @@ CantidadEmpresasC1
 ListaEmpresasC1
 listaInternacionalRentaParticularIDECON:any = []
 
+listaProveedoresContraparte:any=[]
+ListaRroveedoresPro:any=[]
+ListaProveedoresCriticosPro:any=[]
+ListaRepresentantesAccionistasPro:any=[]
+
+ListaRepresentantesAccionistasUsufructuariosCon:any=[]
+ListaUsufructuariosCon:any=[]
+ListaCanalesCon :any=[]
+ListaArrendatariosCon:any=[]
+ListaRepresentantesAccionistasArrendatariosCon:any=[]
 async DescargarReporte(item){
   this.ElimanrDiv()
   this.arrayDataSenal= []
@@ -900,10 +910,26 @@ async DescargarReporte(item){
 
   
   if(this.linkactual == "colaborador"){
+    
      this.NombreLink = this.linkactual
+
   }else if(this.linkactual == "proveedor"){
+    this.listaProveedoresContraparte = await this.userConfigService.GetListaResultadoProveedorContraparte({NPERIODO_PROCESO :  this.NPERIODO_PROCESO})
+    this.ListaRroveedoresPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 0)
+    this.ListaProveedoresCriticosPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 1)
+    this.ListaRepresentantesAccionistasPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 2)
+
      this.NombreLink = this.linkactual
-  }else{
+  }else if(this.linkactual == "contraparte"){
+    this.listaProveedoresContraparte = await this.userConfigService.GetListaResultadoProveedorContraparte({NPERIODO_PROCESO :  this.NPERIODO_PROCESO})
+    this.ListaRepresentantesAccionistasUsufructuariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 3)
+    this.ListaUsufructuariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 2) 
+    this.ListaCanalesCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 1) 
+    this.ListaArrendatariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 4) 
+    this.ListaRepresentantesAccionistasArrendatariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 5) 
+    this.NombreLink = this.linkactual
+  }
+  else{
      this.NombreLink = this.linkactual
   }
 
@@ -1059,6 +1085,8 @@ ElimanrDiv(){
       return 3
     }
   }
+
+  
    
 }
 
