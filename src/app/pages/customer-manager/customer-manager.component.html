@@ -253,11 +253,11 @@
                                                             coincidencias</a>
                                             </div>
                                         </div>
-                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3)  && item.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
+                                        <div *ngIf="idGrupo != 1  && item.SFALTA_ACEPTAR_COINC == 'SI'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
                                             <a class="dropdown-item colorTextoDropDown" (click)="goToDetailAprobar(item)">Aprobar
                                                        coincidencias</a>
                                         </div>
-                                        <div *ngIf="(idGrupo == 2 || idGrupo == 3 ) && item.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
+                                        <div *ngIf="idGrupo != 1 && item.SFALTA_ACEPTAR_COINC == 'NO'" class="dropdown-menu dropdown-menu-righ colorTextoDropDown">
                                             <a class="dropdown-item colorTextoDropDown" (click)="goToDetail(item,'NNNN')">Ver</a>
                                             <a class="dropdown-item colorTextoDropDown" (click)="getBusquedaCoicnidencias(item)">Realizar búsqueda de
                                                        coincidencias</a>

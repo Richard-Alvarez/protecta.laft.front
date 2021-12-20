@@ -32,7 +32,7 @@
                 
                
                 <div class="row">
-                <div class="borderFormat col-12">
+                <!-- <div class="borderFormat col-12">
                         <div class="row" style="border-bottom: 2px solid #26296D;">
                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Tipo Doc.</div>
                                 <div class="col-2 txtCabecera" style="font-size: 14px;">N° Doc.</div>
@@ -54,8 +54,55 @@
                         <ng-template #Sindata>
                             <div class="col-12 txtCabecera text-center pt-2" style="font-size: 14px;font-weight: 600;">No hay registros</div>
                         </ng-template>
+
+                        <ng-container *ngIf="ListaRegistros!=null && ListaRegistros.length>0; then showPagination">
+                        </ng-container>
+                        <ng-template #showPagination>
+                          <ngb-pagination [pageSize]="5" [collectionSize]="ListaRegistros.length" [(page)]="page"
+                            aria-label="Default pagination"></ngb-pagination>
+                        </ng-template>
                        
-                </div>
+                </div> -->
+
+
+                <table class="table table-hover table-striped" id="tableCobertura" style="width:100%;">
+                    <thead style="color: #26296DB3">
+                      <tr class="htable headgrid" style="background:transparent;">
+                        <th class="text-center">Tipo Doc.</th>
+                        <th class="text-center">N° Doc.</th>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Ruc</th>
+                        <th class="text-center">Razón Social</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tblContactos" *ngIf="ListaRegistros.length !=0; else listavacia">
+                      <tr
+                        *ngFor="let cob of ListaRegistros | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                        <td class="text-center">{{cob.TIPO_DOCUMENTO}}</td>
+                        <td class="text-center">{{cob.SNUM_DOCUMENTO}}</td>
+                        <td class="text-center">{{cob.SNOM_COMPLETO}}</td>
+                        <td class="text-center">{{cob.RUC}}</td>
+                        <td class="text-center">{{cob.RAZON_SOCIAL}}</td>
+                        
+                      </tr>
+                    </tbody>
+                    <ng-template #listavacia>
+                      <tbody id="tblContactos">
+                        <tr>
+                          <td class="text-center" colspan="6">No tiene Coberturas</td>
+                        </tr>
+                      </tbody>
+                    </ng-template>
+                  </table>
+                  <ng-container *ngIf="ListaRegistros!=null && ListaRegistros.length>0; then showPagination">
+                  </ng-container>
+                  <ng-template #showPagination class="row">
+                      <div class="col align-self-center">
+                        <ngb-pagination  [collectionSize]="ListaRegistros.length" [(page)]="page" [maxSize]="5"
+                        aria-label="Default pagination"></ngb-pagination>
+                      </div>
+                   
+                  </ng-template>
             </div>
                 <br><br>
             </div>       

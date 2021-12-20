@@ -13,7 +13,8 @@ export class ModalGestorLaftComponent implements OnInit {
   @Input() reference: any;
 
   ListaRegistros:any = []
- 
+  pageSize = 10;
+  page = 1;
   constructor( 
     private userConfigService: UserconfigService,
     private core: CoreService,) { }
