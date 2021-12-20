@@ -352,7 +352,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
   NIDSUBGRUPOSEN
   IDGRUPOSENALGestor
     async getFormData() {
-         
+         debugger;
         this.tipoClienteCRF = await localStorage.getItem("tipoClienteCRF")
         this.tipoClienteGC = await localStorage.getItem('tipoClienteGC')
         this.boolClienteReforzado = await JSON.parse(localStorage.getItem('boolClienteReforzado'))
@@ -509,6 +509,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.ValorListaCoincidencias = arrayClientes
             arrayRespCoincid.forEach(itemResp => {
                 itemResp.forEach(itemCoin => {
+                    debugger
                     let validLista = this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == itemCoin.NIDTIPOLISTA)
                    
                     if(validLista.length == 0){
@@ -607,6 +608,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         // ;
         
          ;
+         debugger;
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
             //this.boolNameMach = this.arrCoincidenciasLista.;
             this.SCLIENT_DATA = localStorage.getItem('SCLIENT')//this.formData.SCLIENT
@@ -699,6 +701,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 }else{
                     this.sDescriptRiesgo = respExperian.sDescript//'BAJO'
                 }
+                debugger
                 this.arrCoincidenciasLista = await this.getDataClientesAllList(dataService)
                 
                 //this.arrCoincidenciasLista = await respClientesAll.lista
@@ -1131,9 +1134,12 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             
             else{
                 respListasWithCoincid = await this.userConfigService.GetListaResultadosCoincid(dataService)
-                 
+                 debugger;
                 let indice = 0
-                respListasWithCoincid.forEach(lis => {
+                let array : any [] = respListasWithCoincid.filter((obj,index,array)=> {
+                     return array.map(t=> t.NIDTIPOLISTA).indexOf(obj.NIDTIPOLISTA) == index
+                    });
+                    array.forEach(lis => {
                     let objNewLista: any = {}
                     objNewLista.SDESTIPOLISTA = lis.SDESTIPOLISTA
                     objNewLista.NIDTIPOLISTA = lis.NIDTIPOLISTA
@@ -1278,6 +1284,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 let lista4 = (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 4))[0] ? (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 4))[0].arrCoincidencias : []
                 let lista5 = (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 5))[0] ? (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 5))[0].arrCoincidencias : []
                 */
+               debugger;
                 this.arrCoincidenciasLista.forEach(itemLista =>{
                     if(itemLista.arrCoincidencias){
                         itemLista.arrCoincidencias.forEach(itemCoin => {
