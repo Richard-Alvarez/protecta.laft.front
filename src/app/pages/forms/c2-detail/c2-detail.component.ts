@@ -738,6 +738,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;//this.formData.SCLIENT
             //dataHistorialEstadoCli.NIDGRUPOSENAL = this.formData.NIDGRUPOSENAL
             dataHistorialEstadoCli.NIDALERTA = this.formData.NIDALERTA
+            dataHistorialEstadoCli.NIDSUBGRUPOSEN = this.NIDSUBGRUPOSEN
              
             let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
             
