@@ -67,7 +67,7 @@ export class PendienteComponent implements OnInit {
 
     this.NPERIODO_PROCESO = this.parent.NPERIODO_PROCESO
     await this.getVariablesStorage();
-    //await this.ListaAdjutnosComplementos()
+    await this.ListaAdjutnosComplementos()
     this.fillFileGroup()
     this.arrFilesAdjuntos = [{'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'word'},
     {'name':'file1','file':'C://file1.xls','tipo':'xls'},{'name':'file2','file':'C://file2.xls','tipo':'pdf'},{'name':'file2','file':'C://file2.xls','tipo':'otros'},
@@ -1674,8 +1674,19 @@ async ConsultaComplementoUsuarios(){
 
  
 
-  OcultarBoton(item){
-    let newlistaAdjuntos = this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-PLANTILLA" )
+   OcultarBotonPlantilla(item){
+    let newlistaAdjuntos =  this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-PLANTILLA" )
+    debugger
+    if(newlistaAdjuntos.length == 0){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  OcultarBotonMuestra(item){
+    let newlistaAdjuntos =  this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-OC" )
+    debugger
     if(newlistaAdjuntos.length == 0){
       return true
     }else{

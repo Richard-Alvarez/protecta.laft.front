@@ -58,6 +58,7 @@ export class CompletadoComponent implements OnInit {
      }
 
   async ngOnInit() {
+    
     await this.ListaUsuario()
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
     this.PeriodoComplemento =  localStorage.getItem("fechaPeriodo")
@@ -75,7 +76,7 @@ export class CompletadoComponent implements OnInit {
     this.NIDUSUARIO_LOGUEADO = this.OBJ_USUARIO.idUsuario//this.core.storage.get('NIDUSUARIO')
     this.NPERIODO_PROCESO = this.core.storage.get('NPERIODO_PROCESO')
 
-    
+    this.ListaAdjutnosComplementos()
     
     await this.getTipoUsuario();
     this.fillFileGroup()
@@ -1479,6 +1480,24 @@ ValidarCabeceraComplemento(){
       } )  
       return
 
+  }
+
+  ListaAdjuntoComplemento:any = []
+  async ListaAdjutnosComplementos(){
+    let data:any = {}
+      data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+      this.ListaAdjuntoComplemento = await this.userConfigService.getListaAdjuntos(data)
+  }
+
+
+  OcultarBotonMuestra(item){
+    let newlistaAdjuntos =  this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-OC" )
+    debugger
+    if(newlistaAdjuntos.length == 0){
+      return true
+    }else{
+      return false
+    }
   }
   
 }
