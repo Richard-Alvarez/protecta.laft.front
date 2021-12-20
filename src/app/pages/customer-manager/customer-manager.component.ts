@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit,OnDestroy, Input } from "@angular/core";
 import { UserconfigService } from "src/app/services/userconfig.service";
 import { CoreService } from "src/app/services/core.service";
 import { Router } from "@angular/router";
@@ -28,7 +28,7 @@ import { ModalGestorLaftComponent } from "../modal-gestor-laft/modal-gestor-laft
   styleUrls: ["./customer-manager.component.css"],
   providers: [NgxSpinnerService]
 })
-export class CustomerManagerComponent implements OnInit {
+export class CustomerManagerComponent implements OnInit ,OnDestroy {
   GrupoList: any = []
   SubGrupoList: any = []
   idGrupo = 1
@@ -135,12 +135,16 @@ export class CustomerManagerComponent implements OnInit {
     private excelService: ExcelService,
   ) { }
 
+  ngOnDestroy(): void {
+    localStorage.getItem("NIDGRUPORETURN")
+  }
   async ngOnInit() {
     this.AdjuntarArchivo()
     this.spinner.show()
     await this.getGrupoList()
     await this.getListTipo();
-    let nIdGrupo = localStorage.getItem("NIDGRUPO")
+    debugger;
+    let nIdGrupo = localStorage.getItem("NIDGRUPORETURN")
     this.NIDUSUARIO_LOGUEADO = this.core.storage.get('usuario')['idUsuario']
     this.paramCliente.NTIPOIDEN_BUSQ = 2;
     this.paramCliente.SNUM_DOCUMENTO_BUSQ = null;
@@ -1166,10 +1170,13 @@ export class CustomerManagerComponent implements OnInit {
 
   async getSeviceBusquedaManual(ItemCliente) {
     let ObjListaCheckSeleccionadoxNombre: any = {}
+    let data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
     ObjListaCheckSeleccionadoxNombre.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-    ObjListaCheckSeleccionadoxNombre.NIDALERTA = 0
+    
+    ObjListaCheckSeleccionadoxNombre.NIDALERTA = data.NIDALERTA
     ObjListaCheckSeleccionadoxNombre.SNOMCOMPLETO = (ItemCliente.SNOM_COMPLETO).trim()
     ObjListaCheckSeleccionadoxNombre.NIDGRUPOSENAL = this.idGrupo
+    ObjListaCheckSeleccionadoxNombre.NIDSUBGRUPOSEN = this.idSubGrupo
     ObjListaCheckSeleccionadoxNombre.SNUM_DOCUMENTO = ItemCliente.SNUM_DOCUMENTO
     ObjListaCheckSeleccionadoxNombre.SCLIENT = ItemCliente.SCLIENT
     ObjListaCheckSeleccionadoxNombre.NTIPOCARGA = 2
@@ -1183,7 +1190,6 @@ export class CustomerManagerComponent implements OnInit {
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
     let respuestaConsultaPoliza: any = {};
-    debugger;
     if(this.idGrupo == 1)
       respuestaConsultaPoliza = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
     else 
