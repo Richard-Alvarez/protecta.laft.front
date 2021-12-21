@@ -1186,7 +1186,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
     let dataPoliza: any = {}
     dataPoliza.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     dataPoliza.NIDGRUPOSENAL = this.idGrupo
-    dataPoliza.NIDALERTA = 2
+    dataPoliza.NIDALERTA =  this.config.find(t=> t.NIDGRUPOSENAL == dataPoliza.IDGRUPOSENAL)//2
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
     let respuestaConsultaPoliza: any = {};
