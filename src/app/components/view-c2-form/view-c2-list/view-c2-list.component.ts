@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, AfterViewInit } from '@angular/core'
 import { ElementContainer } from 'html2canvas/dist/types/dom/element-container'
+import { isNullOrUndefined } from 'util'
 
 @Component({
     selector: 'app-view-c2-list',
@@ -7,7 +8,7 @@ import { ElementContainer } from 'html2canvas/dist/types/dom/element-container'
     styleUrls: ['./view-c2-list.component.css']
 })
 export class ViewC2ListComponent implements  OnInit  ,AfterViewInit {
-
+countView = 0
 @Input() linkactual 
 @Input() parent 
 @Input() lista : any = []
@@ -16,12 +17,13 @@ export class ViewC2ListComponent implements  OnInit  ,AfterViewInit {
 @Input() accordionSubGrup 
 @Input() subgruponame
     ngOnInit(){
-        
+        this.countView = 0; 
     }
     ngAfterViewInit() {
         this.showAfterPosition()
     }
     getClientsByListArr(lista){
+        let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPositionReturn"))
         let resp
         if( this.linkactual == "proveedor" || this.linkactual == "contraparte" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte"){
              resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA &&
@@ -66,24 +68,19 @@ export class ViewC2ListComponent implements  OnInit  ,AfterViewInit {
                     }
                 let cadenaContentUsers = respObjFocusPosition.elementoPadre
                 let boton = respObjFocusPosition.NIDBOTON
-                this.redictM(cadenaContentUsers,boton)
         }
     }
-    redictM(element,boton){
-        debugger;
-        // let elemCadenaFOCUSSubGroup =document.getElementById(elementSubGroup)
-        // if(elemCadenaFOCUSSubGroup != null)
-        //     elemCadenaFOCUSSubGroup.classList.add("show")
-        // let elemCadenaFOCUS = document.getElementById(cadenaFocus)
-        // if(elemCadenaFOCUS != null)
-        //     elemCadenaFOCUS.classList.add("show")
-        // elemCadenaFOCUS.focus({ preventScroll : false})
-         let elemt = document.getElementById(boton)
-         if(elemt != null){
-             //elemt.classList.add("show")
-             elemt.focus({ preventScroll : false})
-         }
-        localStorage.setItem("objFocusPositionReturn","{}");
+    focus (idObj){
+        let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPositionReturn"))
+        if(!isNullOrUndefined(respObjFocusPosition))
+            if(idObj == respObjFocusPosition.NIDBOTON){
+                let elemt = document.getElementById(idObj)
+                if(elemt != null){
+                    if(this.countView == 0)
+                        elemt.focus({ preventScroll : false})
+                    this.countView = this.countView + 1;
+                }
+            }
+        return true
     }
-    
 }

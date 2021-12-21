@@ -91,7 +91,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
 
     }
     ngOnDestroy(){
-        localStorage.setItem("objFocusPositionReturn","{}");
+        localStorage.removeItem("objFocusPositionReturn")
     }
     async ngOnInit() {
         var URLactual = window.location + " ";
