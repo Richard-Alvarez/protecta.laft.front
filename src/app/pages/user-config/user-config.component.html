@@ -34,11 +34,11 @@
                             <div class="borderFormat"
                                 style="display: flex;justify-content: center;align-items: center;">
                                 <div class="col-lg-2" title="Nombre del usuario"
-                                    style="display: flex;justify-content: center;align-items: center;">
+                                    style="display: flex;justify-content: center;align-items: center;padding-left: 0px;">
                                     <label class="fontText">Seleccionar usuario:</label>
                                 </div>
                                 <div class="col-lg-3" title="Nombre del usuario"
-                                    style="display: flex;justify-content: center;align-items: center;">
+                                    style="display: flex;justify-content: center;align-items: center;margin-left: -17px;padding-left: 0px;">
 
                                     <select [disabled]="userNameOff" [(ngModel)]="userId" name="userId"
                                         (change)="changeUser()" class="form-control buttonSinBorder">
@@ -177,7 +177,7 @@
                                 
                                     <div class="row">
                                         <div class="col-4" style="padding-left: 0px;">
-                                            <label class="fontText2" style="font-size: 14px;">Usuario:</label>
+                                            <label class="fontText2" style="font-size: 14px;">Usuarios:</label>
     
                                             <select [disabled]="userNameOff" [(ngModel)]="userId" name="userId"
                                                 (change)="changeUser()" class="form-control buttonSinBorder">
@@ -226,13 +226,13 @@
 
                                         <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;" >
                                             <div  class="col-1 txtCabecera" >Usuario</div>
-                                            <div  class="col-2 txtCabecera" >Nombres</div>
+                                            <div  class="col-2 txtCabecera" >Nombre Completo</div>
                                             <div  class="col-2 txtCabecera" >Perfil</div>
                                             <div  class="col-1 txtCabecera" >Cargo</div>
                                             <div  class="col-2 txtCabecera" >Email</div>
                                             <div  class="col-1 txtCabecera" >Campo Modificado</div>
-                                            <div  class="col-2 txtCabecera" >Modificado / Creado por el Usuario</div>
-                                            <div  class="col-1 txtCabecera" >Fecha de Modificación/Creación</div> 
+                                            <div  class="col-2 txtCabecera" >Usuario de Registro</div>
+                                            <div  class="col-1 txtCabecera" >Fecha de Registro</div> 
                                         </div>
                                         <div class="desplace ">
                                             <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of arrListUserLog,let inc = index;">

@@ -679,4 +679,11 @@ export class TimePericitySettingsComponent implements OnInit {
       this.currentPage * this.itemsPerPage
     );
   }
+
+  ValidarFecha(fecha){
+    debugger
+    let newFecha =  Date.parse(fecha)
+    //let newDate = moment(newFecha).format('MMMM Do YYYY, H:mm:ss a')
+    return newFecha
+  } 
 }

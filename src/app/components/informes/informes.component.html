@@ -278,7 +278,7 @@
                                     <th class="text-center">Fecha de Movimiento</th>
                                     <th class="text-center">Usuario</th>
                                     <th class="text-center">Estado</th>
-                                    <th class="text-center">Nombre del archivo</th>
+                                    <th class="text-center">Archivo Adjunto</th>
                                     <th class="text-center">Acciones</th>
                                    
                                     
@@ -334,16 +334,26 @@
                                         <div [hidden]="cob.SESTADO == 2 || (cob.SESTADO == 1 && (cob.SNOMBRE_ARCHIVO_CORTO == null || cob.SNOMBRE_ARCHIVO_CORTO == ''))" style="float:right;width: 10%;" placement='top' ngbTooltip="Eliminar archivo"><i class="far fa-times-circle" style="cursor:pointer;" (click)="removeFile(cob,index)"></i></div>
                                     </td>
                                     <td class="text-center"  style="padding-left: 30px;padding-right: 30px;">
-                                        <div style="float:left;width: 33.3%;" >
+                                        <div *ngIf="cob.VALIDAR_CANTIDAD == 0" style="float:left;width: 33.3%;" >
                                             
-                                                <input type="file" name="file" id="adjunto{{index}}" class="inputfile"  (change)="AgregarAdjunto($event,cob,index)" />
+                                             <input type="file" name="file" id="adjunto{{index}}" class="inputfile"  (change)="AgregarAdjunto($event,cob,index)"/>
                                              <div class="text-center"  >
-                                             <label for="adjunto{{index}}" style="cursor: pointer;" placement="top" ngbTooltip="Adjuntar">
-                                            <i [hidden]="cob.SESTADO == 2" class="fas fa-file-upload"  style="cursor: pointer;color:#FA7000"></i>
+                                                <label for="adjunto{{index}}" style="cursor: pointer;" placement="top" ngbTooltip="Adjuntar">
+                                                    <i [hidden]="cob.SESTADO == 2"  class="fas fa-file-upload"  style="cursor: pointer;color:#FA7000"></i>
                                                 </label>
-                                                 </div>
+                                              </div>
                                             
                                          </div>
+                                         <div *ngIf="cob.VALIDAR_CANTIDAD !== 0" style="float:left;width: 33.3%;" >
+                                            
+                                            
+                                            <div class="text-center">
+                                                <i class="fas fa-file-upload"  style="cursor: pointer;color:#FA7000" (click)="prueba($event,cob,index)"></i>
+                                              </div>
+                                           
+                                        </div>
+                                         
+                                         
                                         <div   style="float:left;width: 33.3%;" placement='top' ngbTooltip="Descargar informe general">
                                             <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporteGeneral(cob)"></i></a>
                                         </div>

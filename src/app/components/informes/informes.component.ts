@@ -25,6 +25,7 @@ export class InformesComponent implements OnInit {
   NewListAnnos:any = []
   IDListAnnoGlobal:number = 0
   ListaRegistros:any =[]
+  ListaAlertasFaltantes:any = []
   // ListaRegistros:any=[
   //   {PERIODO:20220230,USUARIO:"",ESTADO:"ACTIVO", ARCHIVO:"",FECHA:""},
   //   {PERIODO:20210930,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"20/12/2021"},
@@ -337,6 +338,7 @@ async DescargarReporteGeneral(item){
   if(bol){
     return
   }
+  debugger
   this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
   if(this.ValidadorRespondidoClientes.length > 0){
     let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
@@ -798,8 +800,13 @@ async setDataFile(event) {
     ArchivoAdjunto:any
     NombreArchivo:string = ''
     async AgregarAdjunto(evento,item,index){
+      console.log("entro en el agregar")
+      
+      this.ListaRegistros[index].FILE = "file"
+
+
      this.ArchivoAdjunto =  await this.setDataFile(evento)
-     debugger
+     
      console.log( this.ArchivoAdjunto)
    
      this.ListaRegistros[index].SNOMBRE_ARCHIVO_CORTO = await this.ArchivoAdjunto.listFileNameInform[0]
@@ -856,6 +863,14 @@ async setDataFile(event) {
      let data:any = {}
      data.VALIDADOR = 2
    this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
+    let listaAlertas
+   this.ListaRegistros.forEach(async (element,index) => {
+      listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : element.NPERIODO_PROCESO, VALIDADOR : 1})
+      let ValidadorGlobal = listaAlertas.filter(it => it.SESTADO == 1 )
+      this.ListaRegistros[index].VALIDAR_CANTIDAD = ValidadorGlobal.length
+   });
+   
+   console.log("this.ListaRegistros",this.ListaRegistros)
    this.core.loader.hide()
   }
 
@@ -891,11 +906,28 @@ async setDataFile(event) {
       data.VALIDADOR = 1
       data.NPERIODO_PROCESO = periodo
       this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
+      let listaAlertas
+      this.ListaRegistros.forEach(async (element,index) => {
+         listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : element.NPERIODO_PROCESO, VALIDADOR : 1})
+         let ValidadorGlobal = listaAlertas.filter(it => it.SESTADO == 1 )
+         this.ListaRegistros[index].VALIDAR_CANTIDAD = ValidadorGlobal.length
+      });
       this.core.loader.hide()
     }else{
       this.ListaInformes()
     }
     
   } 
+  async prueba(evento,item,index){
+    let listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : item.NPERIODO_PROCESO, VALIDADOR : 1})
+    let ValidadorCantidad = listaAlertas.filter(it => it.SESTADO == 1 )
+      if(ValidadorCantidad.length > 0){
+        let mensaje = 'Debe generarse el reporte general para adjuntar el archivo '
+        this.SwalGlobal(mensaje)
+        return
+      }
+      
+  }
+ 
 
 }
