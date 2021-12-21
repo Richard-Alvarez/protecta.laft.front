@@ -86,8 +86,8 @@
                             <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif; ">
                                 <th  scope="col" style="vertical-align: middle;">Fecha y Hora de Búsqueda</th>
                                 <th  scope="col" style="vertical-align: middle;">Usuario que Realizó la Búsqueda</th>
-                                <th  scope="col" style="vertical-align: middle;">Tipo de Documento</th>
-                                <th  scope="col" style="vertical-align: middle;">Número de Documento</th>
+                                <th  scope="col" style="vertical-align: middle;">Tipo Y Número de Documento</th>
+                                <th  scope="col" style="vertical-align: middle;">Término</th>
                                 <th  scope="col" style="vertical-align: middle; text-align: left;">Nombre/Razón Social</th>
                                 <!-- <th scope="col" style="vertical-align: middle;">Tipo de Persona</th> -->
                                 <!-- <th scope="col" style="vertical-align: middle;">Cargo</th> -->
@@ -102,8 +102,8 @@
                             <tr *ngFor="let item of resultadoFinal; let i = index;">
                                 <td  scope="col">{{item.DFECHA_BUSQUEDA}}</td>
                                 <td  scope="col">{{item.SUSUARIO_BUSQUEDA ? item.SUSUARIO_BUSQUEDA : '-'}}</td>
-                                <td  scope="col">{{item.STIPO_DOCUMENTO}}</td>
-                                <td  scope="col">{{item.SNUM_DOCUMENTO}}</td>
+                                <td  scope="col">{{item.STIPO_DOCUMENTO}} {{item.SNUM_DOCUMENTO}}</td>
+                                <td  scope="col"><div placement='top' ngbTooltip="{{item.SNOMBRE_TERMINO}}" *ngIf="item.SPROVEEDOR == 'WC'">{{cortarCararterNombre(item.SNOMBRE_TERMINO)}}</div></td>
                                 <td  scope="col"><div placement='top' ngbTooltip="{{item.SNOMBRE_COMPLETO}}">{{cortarCararterNombre(item.SNOMBRE_COMPLETO)}}</div></td>
                                 <!-- <td>{{item.STIPO_PERSONA}}</td>
                                 <td ><div placement='top' ngbTooltip="{{item.SCARGO}}">{{item.SCARGO ? cortarCararter(item.SCARGO) : '-'}}</div></td> -->
