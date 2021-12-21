@@ -48,7 +48,7 @@
                  </div> 
                 <div class="row borderFormat" style="display: flex;justify-content: left;align-items: left;padding-left: 20px;">
                     <div class="col-lg-3 form-group">
-                        <label class="fontText">Nueva frecuencia de ejecución:</label>
+                        <label class="fontText">Frecuencia de ejecución:</label>
                         <select [disabled]="newFrequencyListOff" [(ngModel)]="frequencyType" name="frequencyType"
                             id="IdSelected" style="display: flex;justify-content: center;align-items: center;"
                             class="form-control buttonSinBorder">
@@ -58,7 +58,7 @@
                         </select>
                     </div>
                     <div class="col-lg-3 form-group" title="Ingrese la fecha de inicio proceso">
-                        <label class="fontText">Nueva fecha de inicio de proceso:</label>
+                        <label class="fontText">Fecha de inicio de proceso:</label>
                         <input [disabled]="newFrequencyDateOff" type="text" [(ngModel)]="bsValueNew"
                             placeholder="SELECCIONE" class="form-control buttonSinBorder colorButton" bsDatepicker
                             #dpr="bsDatepicker"
@@ -123,13 +123,13 @@
 
                 <ng-container *ngIf="FrequencyList!=null && FrequencyList.length>0; then showPagination"></ng-container>
                 <ng-template #showPagination>
-                    <div class="row mt-4" style="padding-left: 460px;">
+                    <div class="row mt-4">
                         <div class="col-sm-12">
                             <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
                                 [collectionSize]="totalItems" [maxSize]="maxSize"
-                                (pageChange)="pageChanged(currentPage)">
-                                <ng-template ngbPaginationPrevious>Anterior</ng-template>
-                                <ng-template ngbPaginationNext>Siguiente</ng-template>
+                                (pageChange)="pageChanged(currentPage)" class="pagination-rounded-flat pagination-success">
+                                <!-- <ng-template ngbPaginationPrevious>Anterior</ng-template>
+                                <ng-template ngbPaginationNext>Siguiente</ng-template> -->
                             </ngb-pagination>
                         </div>
                     </div>

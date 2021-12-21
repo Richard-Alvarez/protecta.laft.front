@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="row" style="display: flex;justify-content: center;align-items: center;">
                                     <div class="col-lg-6 form-group" title="Nombre completo del usuario">
-                                        <span class="fontText">Nombre del usuario (*):</span>
+                                        <span class="fontText">Nombre Completo (*):</span>
                                         <input [disabled]="userFullNameOff" [(ngModel)]="fullName" id="usFullName"
                                             type="text" class="form-control buttonSinBorder"
                                             (keypress)="onlyLetters($event)">
@@ -225,14 +225,14 @@
                                         
 
                                         <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;" >
-                                            <div  class="col-1 txtCabecera" >Id Usuario</div>
-                                            <div  class="col-2 txtCabecera" >Nombres Usuario</div>
-                                            <div  class="col-2 txtCabecera" >Perfil Usuario</div>
-                                            <div  class="col-1 txtCabecera" >Cargo Usuario</div>
-                                            <div  class="col-2 txtCabecera" >Email Usuario</div>
-                                            <div  class="col-1 txtCabecera" >Campos Modificados</div>
+                                            <div  class="col-1 txtCabecera" >Usuario</div>
+                                            <div  class="col-2 txtCabecera" >Nombres</div>
+                                            <div  class="col-2 txtCabecera" >Perfil</div>
+                                            <div  class="col-1 txtCabecera" >Cargo</div>
+                                            <div  class="col-2 txtCabecera" >Email</div>
+                                            <div  class="col-1 txtCabecera" >Campo Modificado</div>
                                             <div  class="col-2 txtCabecera" >Modificado / Creado por el Usuario</div>
-                                            <div  class="col-1 txtCabecera" >Fecha de modificación</div> 
+                                            <div  class="col-1 txtCabecera" >Fecha de Modificación/Creación</div> 
                                         </div>
                                         <div class="desplace ">
                                             <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of arrListUserLog,let inc = index;">

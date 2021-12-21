@@ -4,6 +4,7 @@ import { SbsreportService } from 'src/app/services/sbsreport.service';
 import { CoreService } from '../../services/core.service';
 import swal from 'sweetalert2';
 import { Parse } from 'src/app/utils/parse';
+//import { data, trim } from 'jquery';
 
 @Component({
   selector: 'app-informes',
@@ -11,6 +12,7 @@ import { Parse } from 'src/app/utils/parse';
   styleUrls: ['./informes.component.css']
 })
 export class InformesComponent implements OnInit {
+  public Usuario
   IDListAnnoxGrupo:number = 0
   idGrupo:number = 0
   idGrupoRegimen:number = 0
@@ -22,19 +24,20 @@ export class InformesComponent implements OnInit {
   ListAnnos:any = []
   NewListAnnos:any = []
   IDListAnnoGlobal:number = 0
-  ListaRegistros:any=[
-    {PERIODO:20220230,USUARIO:"",ESTADO:"ACTIVO", ARCHIVO:"",FECHA:""},
-    {PERIODO:20210930,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"20/12/2021"},
-    {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
-    {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
-    {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
-    {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"}
-  ,{PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
-  {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
-  {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
-  {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
-  {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
-  {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"}]
+  ListaRegistros:any =[]
+  // ListaRegistros:any=[
+  //   {PERIODO:20220230,USUARIO:"",ESTADO:"ACTIVO", ARCHIVO:"",FECHA:""},
+  //   {PERIODO:20210930,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"20/12/2021"},
+  //   {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
+  //   {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
+  //   {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
+  //   {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"}
+  // ,{PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
+  // {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
+  // {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
+  // {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
+  // {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"},
+  // {PERIODO:20210630,USUARIO:"GERMAN SALINAS",ESTADO:"CERRADO", ARCHIVO:"INFORME GENERAL",FECHA:"28/08/2021"}]
   pageSize = 10;
   page = 1;
   /* Variables para los reportes */
@@ -49,6 +52,8 @@ export class InformesComponent implements OnInit {
   async ngOnInit() {
     await this.getGrupoList()
     await this.obtenerPeriodos()
+    await this.ListaInformes()
+    this.Usuario = this.core.storage.get('usuario')
   }
 
   changeGrupo(){
@@ -71,6 +76,11 @@ export class InformesComponent implements OnInit {
     //this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
     this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnnoGlobal )
     this.IDListPeriodoGlobal = 0
+    if(this.IDListAnnoGlobal == 0){
+      this.ListaInformes()
+    }
+   
+
  }
 
  Export2Doc(element, filename = ''){
@@ -322,47 +332,48 @@ ListaRroveedoresPro:any = []
 ListaProveedoresCriticosPro:any = []
 ListaRepresentantesAccionistasPro:any = []
 
-async DescargarReporteGeneral(){
+async DescargarReporteGeneral(item){
   let bol = this.Validador("Reporte-General")
   if(bol){
     return
   }
-  // this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,this.IDListPeriodoGlobal)
-  // if(this.ValidadorRespondidoClientes.length > 0){
-  //   let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
-  //   this.SwalGlobal(mensaje)
-  //   return
-  // }
-  // this.ValidadorRespondidoColaborador = await this.ValidardorRespuestas(2,this.IDListPeriodoGlobal)
-  // if(this.ValidadorRespondidoColaborador.length > 0){
-  //   let mensaje = 'Debe cerrar todas las señales del grupo Colaborador'
-  //   this.SwalGlobal(mensaje)
-  //   return
-  // }
-  // this.ValidadorRespondidoProveedor = await this.ValidardorRespuestas(3,this.IDListPeriodoGlobal)
-  // if(this.ValidadorRespondidoProveedor.length > 0){
-  //   let mensaje = 'Debe cerrar todas las señales del grupo Proveedor'
-  //   this.SwalGlobal(mensaje)
-  //   return
-  // }
-  // this.ValidadorRespondidoContraparte = await this.ValidardorRespuestas(4,this.IDListPeriodoGlobal)
-  // if(this.ValidadorRespondidoContraparte.length > 0){
-  //   let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
-  //   this.SwalGlobal(mensaje)
-  //   return
-  // }
+  this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
+  if(this.ValidadorRespondidoClientes.length > 0){
+    let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
+    this.SwalGlobal(mensaje)
+    return
+  }
+  this.ValidadorRespondidoColaborador = await this.ValidardorRespuestas(2,item.NPERIODO_PROCESO)
+  if(this.ValidadorRespondidoColaborador.length > 0){
+    let mensaje = 'Debe cerrar todas las señales del grupo Colaborador'
+    this.SwalGlobal(mensaje)
+    return
+  }
+  this.ValidadorRespondidoProveedor = await this.ValidardorRespuestas(3,item.NPERIODO_PROCESO)
+  if(this.ValidadorRespondidoProveedor.length > 0){
+    let mensaje = 'Debe cerrar todas las señales del grupo Proveedor'
+    this.SwalGlobal(mensaje)
+    return
+  }
+  this.ValidadorRespondidoContraparte = await this.ValidardorRespuestas(4,item.NPERIODO_PROCESO)
+  if(this.ValidadorRespondidoContraparte.length > 0){
+    let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
+    this.SwalGlobal(mensaje)
+    return
+  }
 
-  this.ListaAlertaClientes = await this.DataAlertas(1,this.IDListPeriodoGlobal)
-  this.ListaAlertaColaborador = await this.DataAlertas(2,this.IDListPeriodoGlobal)
-  this.ListaAlertaProveedor = await this.DataAlertas(3,this.IDListPeriodoGlobal)
-  this.ListaAlertaContraparte = await this.DataAlertas(4,this.IDListPeriodoGlobal)
+  this.ListaAlertaClientes = await this.DataAlertas(1,item.NPERIODO_PROCESO)
+  this.ListaAlertaColaborador = await this.DataAlertas(2,item.NPERIODO_PROCESO)
+  this.ListaAlertaProveedor = await this.DataAlertas(3,item.NPERIODO_PROCESO)
+  this.ListaAlertaContraparte = await this.DataAlertas(4,item.NPERIODO_PROCESO)
   this.ListaAlertaClientesC1  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C1' )
   this.RespuestaAlertaC1 = this.ListaAlertaClientesC1[0].NIDRESPUESTA
-  this.ListaEmpresasC1 = await this.userConfigService.GetListaEmpresas({NPERIODO_PROCESO : this.IDListPeriodoGlobal})
+  
+  this.ListaEmpresasC1 = await this.userConfigService.GetListaEmpresas({NPERIODO_PROCESO : item.NPERIODO_PROCESO})
   this.CantidadEmpresasC1 = this.ListaEmpresasC1.length
   this.ListaAlertaClientesC3  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C3' )
   let respuestaC3 = this.ListaAlertaClientesC3.filter((it,inc) => it.NIDRESPUESTA == 1)
-  await this.DataReporteC2Global()
+  await this.DataReporteC2Global(item)
   if(respuestaC3.length == 0){
     this.RespuestaGlobalC3 = 'no'
   }else{
@@ -516,10 +527,12 @@ async DescargarReporteGeneral(){
 }
 
 async DataAlertas(idgrupo,perido){
+  this.core.loader.show()
   let data :any = {} 
   data.NIDGRUPOSENAL = idgrupo
   data.NPERIODO_PROCESO = perido
   let resultado = await this.userConfigService.GetAlertaResupuesta(data)
+  this.core.loader.hide()
   return resultado
 }
 
@@ -540,7 +553,7 @@ async DataAlertas(idgrupo,perido){
   listaInternacionalRentaParticularWC:any = []
   listaInternacionalRentaParticularIDECON:any = []
 
-async DataReporteC2Global(){
+async DataReporteC2Global(item){
 
   let dia =  this.IDListPeriodoGlobal.toString().substr(6,2)
   let mes =  this.IDListPeriodoGlobal.toString().substr(4,2)
@@ -548,12 +561,12 @@ async DataReporteC2Global(){
   this.Periodo = dia + '/' + mes + '/' + anno
 
     let dataRG:any = {}
-    dataRG.NPERIODO_PROCESO = this.IDListPeriodoGlobal
+    dataRG.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
     dataRG.NIDALERTA = 2
     dataRG.NIDREGIMEN = 1
 
     let dataRS:any = {}
-    dataRS.NPERIODO_PROCESO = this.IDListPeriodoGlobal
+    dataRS.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
     dataRS.NIDALERTA = 2
     dataRS.NIDREGIMEN = 2
 
@@ -697,28 +710,192 @@ Validador(grupo){
       return  bol = true
     }
   }
-  if(grupo == 'Reporte-General'){
-    if(this.IDListAnnoGlobal == 0 ){
-      let mensaje = 'Debe seleccionar un año'
-      this.SwalGlobal(mensaje)
-      return  bol = true
-    }else if (this.IDListPeriodoGlobal == 0 ){
-      let mensaje = 'Debe seleccionar un periodo'
-      this.SwalGlobal(mensaje)
-      return  bol = true
-    }
+  // if(grupo == 'Reporte-General'){
+  //   if(this.IDListAnnoGlobal == 0 ){
+  //     let mensaje = 'Debe seleccionar un año'
+  //     this.SwalGlobal(mensaje)
+  //     return  bol = true
+  //   }else if (this.IDListPeriodoGlobal == 0 ){
+  //     let mensaje = 'Debe seleccionar un periodo'
+  //     this.SwalGlobal(mensaje)
+  //     return  bol = true
+  //   }
     
-  }
+  // }
   
 }
 
 
 async ValidardorRespuestas(idGrupo,periodo){
+  this.core.loader.show()
   let resultado:any = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : periodo, NIDGRUPOSENAL : idGrupo})
-
+  this.core.loader.hide()
   let ValidadorGlobal = resultado.filter(it => it.SESTADO == 1 )
   return ValidadorGlobal
 }
 
+
+
+async setDataFile(event) {
+  debugger
+   let files = event.target.files;
+
+   let arrFiles = Array.from(files)
+   
+   let listFileNameInform: any = []
+   arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+  
+   let listFileNameCortoInform = []
+   let statusFormatFile = false
+   for (let item of listFileNameInform) {
+     //let item = listFileNameInform[0]
+     let nameFile = item.split(".")
+     if (nameFile.length > 2 || nameFile.length < 2) {
+       statusFormatFile = true
+       return
+     }
+     let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+     //listFileNameCortoInform.push(fileItem)
+     listFileNameCortoInform.push(fileItem)
+   }
+   if (statusFormatFile) {
+     swal.fire({
+       title: 'Mantenimiento de complemento',
+       icon: 'warning',
+       text: 'El archivo no tiene el formato necesario',
+       showCancelButton: false,
+       showConfirmButton: true,
+       confirmButtonColor:'#FA7000',
+       confirmButtonText: 'Aceptar',
+       showCloseButton:true,
+          customClass: { 
+             closeButton : 'OcultarBorde'
+             },
+       
+     }).then(async (result) => {
+     
+     }).catch(err => {
+     
+     })
+   }
+   let listDataFileInform: any = []
+   arrFiles.forEach(fileData => {
+     listDataFileInform.push(this.handleFile(fileData))
+   })
+   let respPromiseFileInfo = await Promise.all(listDataFileInform)
+   return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+ }
+
+
+ handleFile(blob: any): Promise<any> {
+  return new Promise(resolve => {
+    const reader = new FileReader()
+    reader.onloadend = () => resolve(reader.result)
+    reader.readAsDataURL(blob)
+  })
+}
+
+    ArchivoAdjunto:any
+    NombreArchivo:string = ''
+    async AgregarAdjunto(evento,item,index){
+     this.ArchivoAdjunto =  await this.setDataFile(evento)
+     debugger
+     console.log( this.ArchivoAdjunto)
+   
+     this.ListaRegistros[index].SNOMBRE_ARCHIVO_CORTO = await this.ArchivoAdjunto.listFileNameInform[0]
+
+      console.log("this.ListaRegistros", this.ListaRegistros)
+    }
+
+
+    async Registrar(item,index){
+      if(item.SNOMBRE_ARCHIVO_CORTO == '' || item.SNOMBRE_ARCHIVO_CORTO == null){
+        let mensaje = "Tiene que adjuntar un archivo"
+        this.SwalGlobal(mensaje)
+        return
+      }else{
+
+        swal.fire({
+          title: 'Informe',
+          text: "Está seguro de registrar el Informe ?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#FA7000',
+          // cancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar',
+          cancelButtonAriaLabel: 'Cancelar'
+        }).then(async (result) => {
+          if (!result.dismiss) {
+            this.core.loader.show()
+            let data:any={}
+            data.NPERIODO_PROCESO = item.NPERIODO_PROCESO
+            data.SRUTA_ARCHIVO = 'INFORMES-GLOBALES' + '/' + item.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0]
+            data.NIDUSUARIO_MODIFICA =  this.Usuario.idUsuario
+            data.SNOMBRE_ARCHIVO_CORTO =   this.ArchivoAdjunto.listFileNameCortoInform[0]
+            data.SNOMBRE_ARCHIVO =   this.ArchivoAdjunto.listFileNameInform[0]
+            data.SRUTA = 'INFORMES-GLOBALES' + '/' + item.NPERIODO_PROCESO ;
+            data.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+            data.listFileName =  this.ArchivoAdjunto.listFileNameInform
+            debugger
+            await this.userConfigService.UpdInformes(data)
+            await this.userConfigService.UploadFilesUniversalByRuta(data)
+            await this.ListaInformes()
+            this.core.loader.hide()
+          }
+        })
+
+
+       
+      }
+     
+    }
+
+
+  async ListaInformes(){
+    this.core.loader.show()
+     let data:any = {}
+     data.VALIDADOR = 2
+   this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
+   this.core.loader.hide()
+  }
+
+  async DescargarArchivo(ruta, nameFile) {
+    
+    try {
+      this.core.loader.show()
+      let data = { ruta: ruta }
+      let response = await this.userConfigService.DownloadUniversalFileByAlert(data)
+      response = await fetch(`data:application/octet-stream;base64,${response.base64}`)
+      const blob = await response.blob()
+      let url = URL.createObjectURL(blob)
+      let link = document.createElement('a')
+      link.href = url
+      link.download = (nameFile + ' ').trim()
+      link.click()
+      this.core.loader.hide()
+    } catch (error) {
+      console.error("el error en descargar archivo: ", error)
+    }
+
+  }
+
+  removeFile(item,index){
+    this.ListaRegistros[index].SNOMBRE_ARCHIVO_CORTO = ''
+    this.ListaRegistros[index].SNOMBRE_ARCHIVO = ''
+  }
+
+  async ListarHistorial(periodo){
+    if(parseInt(periodo) !== 0){
+      this.core.loader.show()
+      let data:any = {}
+      data.VALIDADOR = 1
+      data.NPERIODO_PROCESO = periodo
+      this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
+      this.core.loader.hide()
+    }else{
+      this.ListaInformes()
+    }
+    
+  } 
 
 }
