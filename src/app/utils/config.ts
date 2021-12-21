@@ -1,6 +1,6 @@
 class Rutas {
 
- //private base: string = 'http://localhost:5001/api/'; 
+  //private base: string = 'http://localhost:5001/api/'; 
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   ///private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
@@ -230,7 +230,8 @@ class Rutas {
   public urlGetListaResultadoProveedorContraparte :string = this.base + "monitoreoSenales/GetListaResultadoProveedorContraparte"
   
   public urlGetListaOtrosClientes:string = this.base + "monitoreoSenales/GetListaOtrosClientes"
-  
+  public urlGetListaInformes:string = this.base + "monitoreoSenales/GetListaInformes"
+  public urlUpdInformes:string = this.base + "monitoreoSenales/UpdInformes"
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }

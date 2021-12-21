@@ -437,6 +437,7 @@ debugger
         reader.readAsDataURL(blob)
       })
     }
+    
     ArchivoAdjunto:any
     NombreArchivo:string = ''
     async AgregarAdjunto(evento){

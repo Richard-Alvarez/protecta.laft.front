@@ -473,6 +473,28 @@ export class BusquedaDemandaComponent implements OnInit {
       return
     }
   }
+  DescargarPlantilla(){
+    let data = []
+    let dataExample: any =[
+      {"Nombre" : 'POZO GOMERO JOSE RENATO',
+      "Tipo_Documento" : 'DNI',
+      "Documento" : '46610806'},
+      {"Nombre" : 'MI FARMA S.A.C',
+      "Tipo_Documento" : 'RUC',
+      "Documento" : '1425785698'}
+    ]
+    dataExample.forEach(t => {
+        let _data = {
+          "Nombre" : t.Nombre,
+          "Tipo de Documento" : t.Tipo_Documento,
+          "Documento" : t.Documento
+        }
+    
+        data.push(_data);
+    });
+
+    this.excelService.exportAsExcelFile(data, "Plantilla Busqueda a Demanda");
+  }
   exportListToExcel(){
     let resultado:any = []
     resultado = this.resultadoFinal

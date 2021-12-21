@@ -44,7 +44,7 @@
 
                                         <select [(ngModel)]="idGrupo" name="userId" (change)="changeGrupo()"
                                             class="form-control buttonSinBorder">
-                                            <option value="0" selected>Seleccione</option>
+                                            <option value="0" selected>Todos</option>
                                             <option *ngFor="let item of ListGrupo" value="{{item.NIDGRUPOSENAL}}">
                                                 {{item.SDESGRUPO_SENAL}}</option>
                                         </select>
@@ -124,6 +124,10 @@
                             <button class="btn btn-warning text-white" (click)="DescargarReporte(idGrupo)">Descargar Reporte </button>
                         </div>
 
+
+                        
+
+
                         <div id="ReportesGrupal">
                             <div align="left" dir="ltr" style="margin-left:-3.5pt;display: none">
                                 <table style="border: none; border-collapse: collapse; margin-right: calc(0%); width: 100%;">
@@ -189,7 +193,9 @@
                         <div class=""
                             style="display: flex;justify-content: left;align-items: left;padding-right: 700px;">
                             <div class="col-lg-17">
-                                <h4 class="TitleLine">Informe General</h4>
+                                <!-- <h4 class="TitleLine">Informe General</h4> -->
+                                <h4 class="TitleLine">Historial de informes finales</h4>
+                                
                             </div>
 
                         </div>
@@ -209,16 +215,12 @@
 
                                         <select [(ngModel)]="IDListAnnoGlobal" name="userId" (change)="changeAnnoGlobal()"
                                             class="form-control buttonSinBorder">
-                                            <option value="0" selected>Seleccione</option>
+                                            <option value="0" selected>Todos</option>
                                             <option *ngFor="let item of NewListAnnos" value="{{item.ANNO}}"
                                                 id="profileIdSelected">
                                                 {{item.ANNO}}</option>
                                         </select>
                                     </div>
- 
-                                </div>
-
-                                <div class="row justify-content-md-center pt-4">
                                     <div class="col-lg-2"
                                         style="display: flex;justify-content: center;align-items: center;">
                                         <label class="fontText">Seleccionar el periodo:</label> 
@@ -226,7 +228,25 @@
                                     <div class="col-lg-3"
                                         style="display: flex;justify-content: center;align-items: center;">
 
-                                        <select [(ngModel)]="IDListPeriodoGlobal" name="userId" 
+                                        <select [(ngModel)]="IDListPeriodoGlobal" name="userId" (change)="ListarHistorial(IDListPeriodoGlobal)"
+                                            class="form-control buttonSinBorder"> 
+                                            <option value="0" selected>Todos</option>
+                                            <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
+                                                {{item.periodo}}</option>
+                                        </select>
+                                    </div>
+ 
+                                </div>
+
+                                <!-- <div class="row justify-content-md-center pt-4">
+                                    <div class="col-lg-2"
+                                        style="display: flex;justify-content: center;align-items: center;">
+                                        <label class="fontText">Seleccionar el periodo:</label> 
+                                    </div>
+                                    <div class="col-lg-3"
+                                        style="display: flex;justify-content: center;align-items: center;">
+
+                                        <select [(ngModel)]="IDListPeriodoGlobal" name="userId" (change)="ListarHistorial(IDListPeriodoGlobal)"
                                             class="form-control buttonSinBorder"> 
                                             <option value="0" selected>Seleccione</option>
                                             <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
@@ -234,15 +254,128 @@
                                         </select>
                                     </div>
 
-                                </div>
+                                </div> -->
 
                             </div>
 
                         </div>
 
-                        <div class="row justify-content-md-center pt-3">
+                        <!-- <div class="row justify-content-md-center pt-3">
                             <button class="btn btn-warning text-white" (click)="DescargarReporteGeneral()">Descargar Reporte General </button>
+                        </div> -->
+
+                        <!-- <div class=""
+                            style="display: flex;justify-content: left;align-items: left;padding-right: 700px;">
+                            <div class="col-lg-17">
+                                <h4 class="TitleLine">Historial de informes finales</h4>
+                            </div>
+                        </div> -->
+                        <div class="pt-4">
+                            <table class="table table-hover table-striped " id="tableCobertura" style="width:100%;">
+                                <thead style="color: #26296DB3">
+                                  <tr class="htable headgrid" style="background:transparent;">
+                                    <th class="text-center">Periodo</th>
+                                    <th class="text-center">Fecha de Movimiento</th>
+                                    <th class="text-center">Usuario</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-center">Nombre del archivo</th>
+                                    <th class="text-center">Acciones</th>
+                                   
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody id="tblContactos" *ngIf="ListaRegistros.length !=0; else listavacia">
+                                  <!-- <tr *ngFor="let cob of ListaRegistros| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index ">
+                                    <td class="text-center">{{cob.DFECHA_ESTADO}}</td>
+                                    <td class="text-center">{{cob.NPERIODO_PROCESO}}</td>
+                                    <td class="text-center">{{cob.NOMBRECOMPLETO}}</td>
+                                    <td class="text-center">{{cob.SESTADO == 2 ? 'CERRADO' : 'ACTIVO'}}</td>
+                                    <td class="text-center">
+                                        <div style="float:left;width: 80%;">
+                                            <a style="cursor:pointer;color:blue"  placement='top' ngbTooltip="{{cob.SNOMBRE_ARCHIVO}}" (click)="DescargarArchivo(cob.SRUTA_ARCHIVO,cob.SNOMBRE_ARCHIVO)">{{cob.SNOMBRE_ARCHIVO_CORTO}}</a>
+                                        </div>
+                                        
+                                        <div [hidden]="cob.SESTADO == 2 || (cob.SESTADO == 1 && (cob.SNOMBRE_ARCHIVO_CORTO == null || cob.SNOMBRE_ARCHIVO_CORTO == ''))" style="float:right;width: 10%;" placement='top' ngbTooltip="Eliminar archivo"><i class="far fa-times-circle" style="cursor:pointer;" (click)="removeFile(cob,index)"></i></div>
+                                    </td>
+                                    <td [hidden]="cob.SESTADO == 1"> 
+                                        <div class="text-center" >
+                                        <label  placement="top" ngbTooltip="Ya existe un archivo">
+                                        <i  class="fas fa-file-upload"  style="color:#FA7000"></i>
+                                         </label>
+                                         
+                                         </div>
+                                         
+                                   </td>
+                                   <td [hidden]="cob.SESTADO == 2"> <input type="file" name="file" id="adjunto{{index}}" class="inputfile"  (change)="AgregarAdjunto($event,cob,index)" />
+                                    <div class="text-center" >
+                                    <label for="adjunto{{index}}" style="cursor: pointer;" placement="top" ngbTooltip="Adjuntar">
+                                    <i   class="fas fa-file-upload"  style="cursor: pointer;color:#FA7000"></i>
+                                     </label>
+                                     
+                                     </div>
+                                     </td>
+                                   
+                                    <div style="text-align: center;padding-top: 10px;"><button [disabled]="cob.SESTADO == 2" class="btn btn-warning text-white" (click)="Registrar(cob,index)">Registrar</button></div> 
+                                  </tr> -->
+
+                                  <tr *ngFor="let cob of ListaRegistros| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index ">
+                                    <td class="text-center">{{cob.FECHA_PERIODO}}</td>
+                                    <td class="text-center">{{cob.DFECHA_ESTADO}}</td>
+                                    <td class="text-center">{{cob.NOMBRECOMPLETO}}</td>
+                                    <td class="text-center">{{cob.SESTADO == 2 ? 'FINALIZADO' : 'PENDIENTE'}}</td>
+                                    <td class="text-center">
+                                        <div style="float:left;width: 80%;" [hidden]="cob.SESTADO == 1">
+                                            <a style="cursor:pointer;color:blue"  placement='top' ngbTooltip="{{cob.SNOMBRE_ARCHIVO}}" (click)="DescargarArchivo(cob.SRUTA_ARCHIVO,cob.SNOMBRE_ARCHIVO)">{{cob.SNOMBRE_ARCHIVO_CORTO}}</a>
+                                        </div>
+                                        <div style="float:left;width: 80%;" [hidden]="cob.SESTADO == 2">
+                                            <a style="color:blue;cursor: default;"  placement='top' ngbTooltip="{{cob.SNOMBRE_ARCHIVO}}">{{cob.SNOMBRE_ARCHIVO_CORTO}}</a>
+                                        </div>
+                                        
+                                        <div [hidden]="cob.SESTADO == 2 || (cob.SESTADO == 1 && (cob.SNOMBRE_ARCHIVO_CORTO == null || cob.SNOMBRE_ARCHIVO_CORTO == ''))" style="float:right;width: 10%;" placement='top' ngbTooltip="Eliminar archivo"><i class="far fa-times-circle" style="cursor:pointer;" (click)="removeFile(cob,index)"></i></div>
+                                    </td>
+                                    <td class="text-center"  style="padding-left: 30px;padding-right: 30px;">
+                                        <div style="float:left;width: 33.3%;" >
+                                            
+                                                <input type="file" name="file" id="adjunto{{index}}" class="inputfile"  (change)="AgregarAdjunto($event,cob,index)" />
+                                             <div class="text-center"  >
+                                             <label for="adjunto{{index}}" style="cursor: pointer;" placement="top" ngbTooltip="Adjuntar">
+                                            <i [hidden]="cob.SESTADO == 2" class="fas fa-file-upload"  style="cursor: pointer;color:#FA7000"></i>
+                                                </label>
+                                                 </div>
+                                            
+                                         </div>
+                                        <div   style="float:left;width: 33.3%;" placement='top' ngbTooltip="Descargar informe general">
+                                            <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporteGeneral(cob)"></i></a>
+                                        </div>
+                                        <div style="float: right;width: 33.3%;"  placement='top' ngbTooltip="Registrar">
+                                            <a *ngIf="cob.SESTADO == 1"><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer"  (click)="Registrar(cob,index)"></i></a>
+                                        </div>
+                                    </td>
+                                   
+                                   
+                                   
+                                  </tr>
+                                </tbody>
+                                <ng-template #listavacia>
+                                  <tbody id="tblContactos">
+                                    <tr>
+                                      <td class="text-center" colspan="6">No hay registros</td>
+                                    </tr>
+                                  </tbody>
+                                </ng-template>
+                              </table>
+                              <ng-container *ngIf="ListaRegistros!=null && ListaRegistros.length>0; then showPagination">
+                              </ng-container>
+                              <ng-template #showPagination class="row">
+                                  <div class="col align-self-center">
+                                    <ngb-pagination  [collectionSize]="ListaRegistros.length" [(page)]="page" [maxSize]="5"
+                                    aria-label="Default pagination"></ngb-pagination>
+                                  </div>
+                               
+                              </ng-template>
                         </div>
+                        
+
 
                         <div id="ReportesGlobal">
                             <div align="left" dir="ltr" style="margin-left:-3.5pt;display: none">

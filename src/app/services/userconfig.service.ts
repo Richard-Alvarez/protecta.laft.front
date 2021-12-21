@@ -1834,4 +1834,32 @@ export class UserconfigService {
     })
   }
 
+  GetListaInformes(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaInformes,data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  UpdInformes(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlUpdInformes, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  
+
+  
+
 }
