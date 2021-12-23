@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2,HostListener } from '@angular/core';
+import { CoreService } from 'src/app/services/core.service';
+import { UserconfigService } from '../../services/userconfig.service';
+import * as $ from 'jQuery';
 // import * as $ from 'jquery';
 
 @Component({
@@ -8,14 +11,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarUpdateComponent implements OnInit {
 
-  constructor() { }
+  constructor(public core: CoreService,
+    public userconfig: UserconfigService,
+    private renderer: Renderer2) { }
 
+
+    public updateModal = false;
+    linkactual = "";
+    public optionList: any = [];
+  public optionListSubMenu: any = [];
+  public suboptionList: any = [];
+  
+  public STIPO_USUARIO
    ngOnInit() {
 
+    var URLactual = window.location + " ";
+    let link = URLactual.split("/")
+    this.linkactual = link[link.length-1].trim()
+
+    var userSession = this.core.storage.get('usuario');
     
+    if(userSession){
+      let profile = userSession['idPerfil'];
+      if (profile == 1) {
+        this.updateModal = false;
 
+      }
+      else {
+        this.updateModal = true;
+      }
+      this.getOptions();
+    }
+  
 
-     this.Navbar()
+     //this.Navbar()
   }
 
    Navbar(){
@@ -70,7 +99,65 @@ export class NavbarUpdateComponent implements OnInit {
       
   }
   
+   openNav() {
+    document.getElementById("mySidenav").style.width = "300px";
+    // document.getElementById("main").style.marginLeft = "250px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+  }
+  
+  /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+   closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    // document.getElementById("main").style.marginLeft = "0";
+    document.body.style.backgroundColor = "white";
+  }
 
 
+
+  getOptions() {
+    var user = this.core.storage.get('usuario');
+    let profile = user['idPerfil']; 
+    let _data: any = {};
+    _data.profileId = profile;     
+    this.userconfig.getOptions(_data).then((response) => {
+      //let _data;
+      let arrayMenusMaster = [];
+      let arraySubMenus = [];
+      let sub;
+      let master;
+      let usuario = this.core.storage.get('usuario')
+      
+
+      this.STIPO_USUARIO = usuario['tipoUsuario']
+     
+      
+      
+      //_data = (response);      
+      response.forEach(item => {
+        if(item.nFatherId == 0){
+          arrayMenusMaster.push(item)
+        }else{
+          arraySubMenus.push(item);
+        }
+
+        // if(this.STIPO_USUARIO == 'RE'){
+        //   this.optionList = [];
+        //   this.optionListSubMenu = [];
+        // }else{
+          this.optionList = arrayMenusMaster;
+        this.optionListSubMenu = arraySubMenus;
+       
+
+        // }
+        
+      });
+      
+    });
+    
+    // let usuario = this.core.storage.get('usuario')
+    // this.STIPO_USUARIO = usuario['tipoUsuario']
+    
+    
+  }
 
 }

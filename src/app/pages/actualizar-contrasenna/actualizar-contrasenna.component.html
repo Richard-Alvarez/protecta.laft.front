@@ -14,11 +14,11 @@
         <div class="container">
                 <h1>{{this.Titulo}}</h1>
                 
-                <form class="form">
+                <!-- <form class="form">
                     <input type="text" [(ngModel)]="password.pss1" placeholder="Contraseña" id="pss1" name="pss1">
                     
                     <input type="text" [(ngModel)]="password.pss2" placeholder="Confirmar contraseña" id="pss2" name="pss2">
-                    <!-- <div class="pb-1">
+                     <div class="pb-1">
                         <button type="submit" style="cursor:pointer" id="login-button" (click)="MostrarPass()" *ngIf="!eye.show">Mostrar contraseña</button>
                       
                     </div>
@@ -26,13 +26,62 @@
                         
                         <button type="submit" style="cursor:pointer" id="login-button" (click)="MostrarPass()"  *ngIf="eye.show">Ocultar contraseña</button>
                         
-                    </div> -->
+                    </div> 
                     <div>
                         
                         <button type="submit" style="cursor:pointer" id="login-button" (click)="ActualizarContrasenna()">Actualizar</button>
                     </div>
                     
-                </form>
+                </form> -->
+
+
+
+                <form [formGroup]="loginForm">
+                   
+        
+                    <div class="form-group">
+                    
+                       
+                                <input class="form-control" placeholder="Contraseña" id="pss1" name="pss1" formControlName="password" [(ngModel)]="password.pss1" type="text" />
+                           
+                        </div>
+                        
+                       
+                    
+                    
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.password">
+                            <div class="error-message" *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+        
+                    <div class="form-group">
+                        <input class="form-control" formControlName="confirmpassword" type="text" [(ngModel)]="password.pss2"  placeholder="Confirmar contraseña" id="pss2" name="pss2"/>
+                            
+                        
+                        
+                    </div>
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.confirmpassword">
+                            <div class="error-message" *ngIf="loginForm.get('confirmpassword').hasError(error.type) && (loginForm.get('confirmpassword').dirty || loginForm.get('confirmpassword').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                        <!-- <ng-container>
+                            <div class="error-message" *ngIf="(loginForm.errors.passwordNotMatch == true)">
+                                Las contraseñas no son iguales
+                            </div>
+                        </ng-container>  -->
+                    </div>
+                    <pre>
+                        <!-- Form Error - {{ loginForm.errors | json }} -->
+                    </pre>
+                     <button class="form-control btn btn-warning text-white" [disabled]="!loginForm.valid" (click)="ActualizarContrasenna()">Actualizar</button>
+                               
+               </form>
+
             </div>
         </div>
 
