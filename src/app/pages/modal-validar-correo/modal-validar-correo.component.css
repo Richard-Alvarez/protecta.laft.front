@@ -31,3 +31,16 @@
     input.ng-touched.ng-invalid {
       border: 1px solid red;
     }
+
+    @media screen and (max-width: 900px){
+      
+      .boton{
+        padding-bottom: 10px;
+      }
+    }
+
+    @media screen and (max-width: 1000px){
+      .boton{
+        padding-bottom: 10px;
+      }
+    }

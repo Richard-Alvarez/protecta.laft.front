@@ -96,6 +96,8 @@ export class LoginUpdateComponent implements OnInit {
     }
   }
 
+  
+
   CambiarFocus(){
     
     document.getElementById('InputUsername').addEventListener('keyup', inputUser);

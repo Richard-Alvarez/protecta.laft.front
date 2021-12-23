@@ -192,6 +192,15 @@
 	 height: 160px;
 	 animation-delay: 11s;
 }
+
+.error-message {
+	color: white;
+	/* font-weight: 600; */
+  }
+  input.ng-touched.ng-invalid {
+	border: 1px solid red;
+  }
+
  @-webkit-keyframes square {
 	 0% {
 		 transform: translateY(0);
