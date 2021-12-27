@@ -1,23 +1,50 @@
+<div id="mySidenav" class="sidenav">
 
-
-
-  
-  <div id="mySidenav" class="sidenav">
-    
-   <nav class="sidebar">
-    <div class="dismiss" (click)="closeNav()" >
+  <nav class="sidebar">
+    <div class="dismiss" (click)="closeNav()">
       <!-- <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a> -->
       <!-- <a (click)="closeNav()" href="javascript:void(0)" class="closebtn" ><i class="fas fa-arrow-left"  ></i></a> -->
-      <i class="fas fa-arrow-left"  >&times;</i>
-    </div> 
+      <i class="fas fa-arrow-left">&times;</i>
+    </div>
     <div class="logo">
-      <h3 style="display: flex;justify-content: center;"><a href="index.html">Bootstrap 4 Template with Sidebar Menu</a></h3>
-    </div> 
+      <h3 style="display: flex;justify-content: center;"><a href="index.html">Bootstrap 4 Template with Sidebar Menu</a>
+      </h3>
+    </div>
     <ul class="list-unstyled menu-elements">
       <li class="active">
         <a class="scroll-link" href="#top-content"><i class="fas fa-home"></i>Inicio</a>
       </li>
+      <li *ngFor="let option of optionList; let index = index;">
+
+        <a *ngIf="option.nTieneHijo == 0" [routerLink]="['/' + option.sRouterLink]">T
+
+
+          <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
+
+        </a>
+        <a *ngIf="option.nTieneHijo == 1">
+          <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
+
+        </a>
+
+
+
+      </li>
       <li>
+        <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button"
+          aria-controls="otherSections">
+          <i class="fas fa-sync"></i>Consultas
+        </a>
+        <ul class="collapse list-unstyled" id="otherSections">
+          <li>
+            <a class="scroll-link" href="#section-3">Our projects</a>
+          </li>
+          <li>
+            <a class="scroll-link" href="#section-4">We think that...</a>
+          </li>
+        </ul>
+      </li>
+      <!-- <li>
         <a class="scroll-link" href="#section-1"><i class="fas fa-cog"></i> Usuario</a>
       </li>
       <li>
@@ -28,9 +55,11 @@
       </li>
       <li>
         <a class="scroll-link" href="#section-6"><i class="fas fa-envelope"></i> Gestor LAFT</a>
-      </li>
+      </li> -->
+
       <li>
-        <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+        <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button"
+          aria-controls="otherSections">
           <i class="fas fa-sync"></i>Consultas
         </a>
         <ul class="collapse list-unstyled" id="otherSections">
@@ -44,16 +73,12 @@
       </li>
     </ul>
 
-    
-   </nav>
-    
-  </div>
-  <header class="header" id="header">
-    <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span>
-    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-    <div class="header_img"> <img src="../../../assets//img/logo.png" alt=""> </div>
+
+  </nav>
+
+</div>
+<header class="header" id="header">
+  <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span>
+  <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+  <div class="header_img"> <img src="../../../assets//img/logo.png" alt=""> </div>
 </header>
-   
-
-
-

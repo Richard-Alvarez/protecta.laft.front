@@ -219,6 +219,9 @@ export class ModalEmailProfileComponent implements OnInit {
       else if(this.action == 6 ){
         respValidacion = this.validator(6)
       }
+      else if(this.action == 4 ){
+        respValidacion = this.validator(4)
+      }
         else if(this.action == 0){
         mensaje = "No seleccionó ninguna acción "
         this.MensajeSwal(mensaje)
@@ -371,6 +374,29 @@ export class ModalEmailProfileComponent implements OnInit {
         if(periodo == -1){
           objRespuesta.code = 1;
           objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Periodo]";
+          return objRespuesta
+          }
+    }
+
+    if(valor == 4){
+      if(this.asunto == '' || this.asunto == undefined){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Debe ingresar un asunto";
+        return objRespuesta
+      }
+      if(periodo == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Periodo]";
+        return objRespuesta
+      }
+      if(grupo == -1){
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Grupo]";
+        return objRespuesta
+        }
+        if(link == -1){
+          objRespuesta.code = 1;
+          objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Link]";
           return objRespuesta
           }
     }

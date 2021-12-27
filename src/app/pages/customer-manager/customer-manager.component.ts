@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy, Input } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { UserconfigService } from "src/app/services/userconfig.service";
 import { CoreService } from "src/app/services/core.service";
 import { Router } from "@angular/router";
@@ -28,7 +28,7 @@ import { ModalGestorLaftComponent } from "../modal-gestor-laft/modal-gestor-laft
   styleUrls: ["./customer-manager.component.css"],
   providers: [NgxSpinnerService]
 })
-export class CustomerManagerComponent implements OnInit ,OnDestroy {
+export class CustomerManagerComponent implements OnInit, OnDestroy {
   GrupoList: any = []
   SubGrupoList: any = []
   idGrupo = 1
@@ -44,7 +44,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
   POR_NOMBRE: number = 2;
   hideNombresPersona: boolean = true;
   NIDUSUARIO_LOGUEADO;
-  ArrayResultCoincidencias :any =[]
+  ArrayResultCoincidencias: any = []
 
 
 
@@ -55,42 +55,42 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
   clientMap: Map<string, any> = new Map<string, any>();
   peopleList: any = [];
 
-  Alerts :any =[
+  Alerts: any = [
     {
-      idGrupo : 1,
+      idGrupo: 1,
       idAlerta: 2
-    },{
-      idGrupo : 2,
+    }, {
+      idGrupo: 2,
       idAlerta: 35
-    },{
-      idGrupo : 3,
+    }, {
+      idGrupo: 3,
       idAlerta: 33
-    },{
-      idGrupo : 4,
+    }, {
+      idGrupo: 4,
       idAlerta: 2
     }
   ]
-  config :any =[
+  config: any = [
     {
-      NIDGRUPOSENAL : 1,
+      NIDGRUPOSENAL: 1,
       NIDALERTA: 2,
-      linkactual: ['clientes','historico-clientes'],
-      NIDREGIMEN : 1
-    },{
-      NIDGRUPOSENAL : 2,
+      linkactual: ['clientes', 'historico-clientes'],
+      NIDREGIMEN: 1
+    }, {
+      NIDGRUPOSENAL: 2,
       NIDALERTA: 35,
-      linkactual: ['colaborador','historico-colaborador'],
-      NIDREGIMEN : 0
-    },{
-      NIDGRUPOSENAL : 3,
+      linkactual: ['colaborador', 'historico-colaborador'],
+      NIDREGIMEN: 0
+    }, {
+      NIDGRUPOSENAL: 3,
       NIDALERTA: 33,
-      linkactual: ['proveedor','historico-contraparte'],
-      NIDREGIMEN : 0
-    },{
-      NIDGRUPOSENAL : 4,
+      linkactual: ['proveedor', 'historico-contraparte'],
+      NIDREGIMEN: 0
+    }, {
+      NIDGRUPOSENAL: 4,
       NIDALERTA: 39,
-      linkactual: ['contraparte','historico-proveedor'],
-      NIDREGIMEN : 0
+      linkactual: ['contraparte', 'historico-proveedor'],
+      NIDREGIMEN: 0
     }
   ]
 
@@ -119,7 +119,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
   parentCRE: PreReinforcedCustomersComponent
   parentCRF: ReinforcedCustomersComponent
   parentCCO: ComplementaryCustomersComponent
-  
+
   @Input() ValorRegresar: number
 
 
@@ -160,7 +160,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
       this.idGrupo = Number.parseInt(nIdGrupo);
       this.valorGrupo(false)
     }
-    let data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo);
+    let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo);
     this.paramCliente.NIDALERTA = data.NIDALERTA;
 
     if (paramClientels != null && paramClientels != "" && paramClientels != "{}") {
@@ -192,7 +192,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
     //    this.newArrayResult = this.DataGuardada;
 
     //  }
-    
+
 
     try {
       let respSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClientReturn")
@@ -221,29 +221,29 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
 
   async valorGrupo(isAccion) {
     this.idSubGrupo = 0;
-  
+
     this.arrSetClassSelected = this.arrSetClassSelected.map(t => { return '' })
     this.arrSetClassSelected[0] = 'active'
     localStorage.setItem("nSelectPestaniaClient", '0')
     if (this.idGrupo == 3 || this.idGrupo == 4) {
-     
+
       let data = {
-      NIDGRUPOSENAL : this.idGrupo
+        NIDGRUPOSENAL: this.idGrupo
       }
-     
+
       let obj = {
         NIDSUBGRUPOSEN: -1,
         SDESSUBGRUPO_SENAL: "--Seleccione--"
       }
       this.SubGrupoList = await this.userConfigService.getSubGrupoSenal(data);
       this.SubGrupoList.unshift(obj);
-      if(isAccion){
-        if(this.SubGrupoList.length > 0){
-          this.idSubGrupo = this.SubGrupoList.map(t=> t.NIDSUBGRUPOSEN)[0]
+      if (isAccion) {
+        if (this.SubGrupoList.length > 0) {
+          this.idSubGrupo = this.SubGrupoList.map(t => t.NIDSUBGRUPOSEN)[0]
         }
-      }else{
+      } else {
         let nIdSubGrupo = localStorage.getItem("NIDSUBGRUPO")
-        if(Number.parseInt(nIdSubGrupo) > 0)
+        if (Number.parseInt(nIdSubGrupo) > 0)
           this.idSubGrupo = Number.parseInt(nIdSubGrupo)
       }
       this.ListaDeCoincidencias(this.idGrupo)
@@ -255,7 +255,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
     // if (this.idGrupo != 1) {
     //   //this.ListaDeCoincidencias(this.idGrupo)
     // }
-    console.log("",this.idSubGrupo);
+    console.log("", this.idSubGrupo);
   }
 
 
@@ -269,10 +269,10 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
       localStorage.setItem("nSelectSubPestania", '0')
     }
   }
-  setTipoSelectSubPestania(idpestania){
-    this.arrSetClassSelectedSubModule = this.arrSetClassSelectedSubModule.map(t=> {return ''})
+  setTipoSelectSubPestania(idpestania) {
+    this.arrSetClassSelectedSubModule = this.arrSetClassSelectedSubModule.map(t => { return '' })
     this.arrSetClassSelectedSubModule[idpestania] = 'active'
-    localStorage.setItem("nSelectSubPestania",idpestania)
+    localStorage.setItem("nSelectSubPestania", idpestania)
   }
   hideControls() {
     if (this.NBUSCAR_POR == this.POR_DOCUMENTO) {
@@ -337,7 +337,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
   async getResultsList(isActiveForButton) {
     debugger;
 
-    let dataInput : any = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
+    let dataInput: any = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
 
     dataInput.NTIPOIDEN_BUSQ = this.paramCliente.NTIPOIDEN_BUSQ
     dataInput.SNUM_DOCUMENTO_BUSQ = this.paramCliente.SNUM_DOCUMENTO_BUSQ
@@ -349,11 +349,11 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
     dataInput.SRAZON_SOCIAL = this.paramCliente.SRAZON_SOCIAL
     dataInput.MANUAL = this.paramCliente.MANUAL
 
-    await this.getResultsList3(dataInput, this.NBUSCAR_POR, this.NTIPO_PERSONA,isActiveForButton);
+    await this.getResultsList3(dataInput, this.NBUSCAR_POR, this.NTIPO_PERSONA, isActiveForButton);
 
   }
 
-  async getResultsList3(paramCliente, NBUSCAR_POR, NTIPO_PERSONA,isActiveForButton) {
+  async getResultsList3(paramCliente, NBUSCAR_POR, NTIPO_PERSONA, isActiveForButton) {
     debugger;
     try {
 
@@ -364,7 +364,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
       let apellidoM = "";
 
 
-      let respValidacion: any = this.parametersValidate(paramCliente, NBUSCAR_POR, NTIPO_PERSONA,isActiveForButton)
+      let respValidacion: any = this.parametersValidate(paramCliente, NBUSCAR_POR, NTIPO_PERSONA, isActiveForButton)
 
 
       if (respValidacion.code == 1) {
@@ -466,10 +466,10 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
         let CantprimerNombre = ((paramCliente.SPRIMER_NOMBRE) + '').length
         let CantsegundoNombre = ((paramCliente.SSEGUNDO_NOMBRE) + '').length
         let CantidadCaracteresReales = CantapellidoP + CantapellidoM + CantprimerNombre + CantsegundoNombre
-     
-        if(isActiveForButton)
+
+        if (isActiveForButton)
           localStorage.setItem('objSearch', JSON.stringify(data));
-        else{
+        else {
           data = JSON.parse(localStorage.getItem('objSearch'));
         }
         if (NBUSCAR_POR == 2 && NTIPO_PERSONA == 1 && (CantidadCaracteresReales <= 3)) {
@@ -487,19 +487,19 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
     }
   }
 
-  parametersValidate(paramCliente, NBUSCAR_POR, NTIPO_PERSONA,isActiveForButton) {
+  parametersValidate(paramCliente, NBUSCAR_POR, NTIPO_PERSONA, isActiveForButton) {
     let objRespuesta: any = {};
     objRespuesta.code = 0
     objRespuesta.message = ''
-    if(!isActiveForButton){
+    if (!isActiveForButton) {
       objRespuesta.code = 0;
       return objRespuesta
     }
-   
-    if(this.idGrupo == 3 && this.idSubGrupo == -1 || this.idGrupo == 4 && this.idSubGrupo  == -1){
-        objRespuesta.code = 1;
-        objRespuesta.message = "Seleccione un sub grupo";
-        return objRespuesta
+
+    if (this.idGrupo == 3 && this.idSubGrupo == -1 || this.idGrupo == 4 && this.idSubGrupo == -1) {
+      objRespuesta.code = 1;
+      objRespuesta.message = "Seleccione un sub grupo";
+      return objRespuesta
     }
     if (NBUSCAR_POR == 1 && paramCliente.NTIPOIDEN_BUSQ == 1) {
       if (!(paramCliente.SNUM_DOCUMENTO_BUSQ + " ").trim() || paramCliente.SNUM_DOCUMENTO_BUSQ == null) {
@@ -645,7 +645,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
     listaCoincidencia.forEach((t) => {
       // console.log(t);
       t.ISVISIBLE = true;
-      t.NIDALERTA = this.Alerts.find(t=>t.idGrupo == this.idGrupo).idAlerta;
+      t.NIDALERTA = this.Alerts.find(t => t.idGrupo == this.idGrupo).idAlerta;
       t.ARRAY_IDTIPOLISTA = _items
         .filter((i) => i.SNOM_COMPLETO == t.SNOM_COMPLETO)
         .map((f) => f.NIDTIPOLISTA);
@@ -1070,9 +1070,9 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN);
         localStorage.setItem("SFECHA_NACIMIENTO", item.DFECHA_NACIMIENTO);
         localStorage.setItem("NEDAD", item.EDAD);
-        let obj : any = this.config.find(t => t.NIDGRUPOSENAL== this.idGrupo)
+        let obj: any = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
         localStorage.setItem("NIDALERTA", obj.NIDALERTA);
-    
+
         localStorage.setItem("SNUM_DOCUMENTO", item.SNUM_DOCUMENTO);
         localStorage.setItem("NTIPO_DOCUMENTO", item.NTIPO_DOCUMENTO);
         localStorage.setItem("NREGIMEN", item.NIDREGIMEN);
@@ -1082,11 +1082,11 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
         localStorage.setItem("NIDGRUPOSENAL", item.NIDGRUPOSENAL)
         // localStorage.setItem("IDGRUPO",)
         await localStorage.setItem("tipoClienteGC", "GC");
-        
+
       }
-          let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
-        localStorage.setItem("NIDALERTA", data.NIDALERTA);
-        debugger
+      let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
+      localStorage.setItem("NIDALERTA", data.NIDALERTA);
+      debugger
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
@@ -1170,9 +1170,9 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
 
   async getSeviceBusquedaManual(ItemCliente) {
     let ObjListaCheckSeleccionadoxNombre: any = {}
-    let data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
+    let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
     ObjListaCheckSeleccionadoxNombre.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-    
+
     ObjListaCheckSeleccionadoxNombre.NIDALERTA = data.NIDALERTA
     ObjListaCheckSeleccionadoxNombre.SNOMCOMPLETO = (ItemCliente.SNOM_COMPLETO).trim()
     ObjListaCheckSeleccionadoxNombre.NIDGRUPOSENAL = this.idGrupo
@@ -1186,14 +1186,14 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
     let dataPoliza: any = {}
     dataPoliza.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     dataPoliza.NIDGRUPOSENAL = this.idGrupo
-    dataPoliza.NIDALERTA =  this.config.find(t=> t.NIDGRUPOSENAL == dataPoliza.IDGRUPOSENAL)//2
+    dataPoliza.NIDALERTA = this.config.find(t => t.NIDGRUPOSENAL == dataPoliza.IDGRUPOSENAL)//2
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
     let respuestaConsultaPoliza: any = {};
-    if(this.idGrupo == 1)
+    if (this.idGrupo == 1)
       respuestaConsultaPoliza = await this.userConfigService.ValidarPolizaVigente(dataPoliza)
-    else 
-     respuestaConsultaPoliza.code = 0
+    else
+      respuestaConsultaPoliza.code = 0
     if (respuestaConsultaPoliza.code == 1) {
       Swal.fire({
         title: 'Gestor de Cliente',
@@ -1216,7 +1216,7 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
       })
     } else {
       let data: any = {}
-      data = this.config.find(t=> t.NIDGRUPOSENAL == this.idGrupo)
+      data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
       data.name = (ItemCliente.SNOM_COMPLETO).trim()
       data.periodId = this.NPERIODO_PROCESO
       data.tipoCargaId = 2
@@ -1255,9 +1255,9 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
   }
 
   goToDetailAprobar(item) {
-  
+
     this.spinner.show()
-    let obj : any = this.config.find(t => t.NIDGRUPOSENAL== this.idGrupo)
+    let obj: any = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
     localStorage.setItem("NIDALERTA", obj.NIDALERTA)
     localStorage.setItem("NPERIODO_PROCESO", this.NPERIODO_PROCESO + '')
     localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
@@ -1294,61 +1294,59 @@ export class CustomerManagerComponent implements OnInit ,OnDestroy {
   }
 
 
-  AdjuntarArchivo(){
-    var inputs = document.querySelectorAll( '.inputfile' );
-Array.prototype.forEach.call( inputs, function( input )
-{
-	var label	 = input.nextElementSibling,
-		labelVal = label.innerHTML;
+  AdjuntarArchivo() {
+    var inputs = document.querySelectorAll('.inputfile');
+    Array.prototype.forEach.call(inputs, function (input) {
+      var label = input.nextElementSibling,
+        labelVal = label.innerHTML;
 
-	input.addEventListener( 'change', function( e )
-	{
-		var fileName = '';
-		if( this.files && this.files.length > 1 )
-			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-		else
-			fileName = e.target.value.split( '\\' ).pop();
+      input.addEventListener('change', function (e) {
+        var fileName = '';
+        if (this.files && this.files.length > 1)
+          fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+        else
+          fileName = e.target.value.split('\\').pop();
 
-		if( fileName )
-			label.querySelector( 'span' ).innerHTML = fileName;
-		else
-			label.innerHTML = labelVal;
-	});
-});
+        if (fileName)
+          label.querySelector('span').innerHTML = fileName;
+        else
+          label.innerHTML = labelVal;
+      });
+    });
   }
 
-  ArchivoAdjunto:any
-  ResultadoExcel:any
-  NombreArchivo:string = ''
-  async RegistrarArchivo(){
+  ArchivoAdjunto: any
+  ResultadoExcel: any
+  NombreArchivo: string = ''
+  async RegistrarArchivo() {
     console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
-    if(this.NombreArchivo == ''){
+    if (this.NombreArchivo == '') {
       let mensaje = 'Debe adjuntar un archivo'
       this.SwalGlobal(mensaje)
       return
     }
-    if(this.idSubGrupo == -1){
+    if (this.idSubGrupo == -1) {
       let mensaje = 'Debe seleccionar un subgrupo'
       this.SwalGlobal(mensaje)
       return
     }
-    let dataGrupo:any  = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
-    
+    let dataGrupo: any = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
 
-    let uploadPararms:any = {}
-    uploadPararms.SRUTA = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' ;
+
+    let uploadPararms: any = {}
+    uploadPararms.SRUTA = 'ARCHIVOS-GC' + '/' + dataGrupo[0].SDESGRUPO_SENAL + '/' + this.NPERIODO_PROCESO + '/';
     uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
-    uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
+    uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
     await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
 
 
-    let datosExcel:any = {}
-    datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/'+ dataGrupo[0].SDESGRUPO_SENAL +'/'+ this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform ;
-    if(this.idGrupo == 2){
+    let datosExcel: any = {}
+    datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/' + dataGrupo[0].SDESGRUPO_SENAL + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform;
+    if (this.idGrupo == 2) {
       datosExcel.VALIDADOR = 'GESTOR-CLIENTE-COLABORADOR'
-    }else if(this.idGrupo == 3 || this.idGrupo == 4){
+    } else if (this.idGrupo == 3 || this.idGrupo == 4) {
       // if(this.idSubGrupo == 0){
-       datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-CONTRAPARTE' //'GESTOR-CLIENTE-PROVEEDOR-PROVEEDOR'
+      datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-CONTRAPARTE' //'GESTOR-CLIENTE-PROVEEDOR-PROVEEDOR'
       // }
       // if(this.idSubGrupo == 1){
       //   datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-CRITICOS'
@@ -1356,23 +1354,23 @@ Array.prototype.forEach.call( inputs, function( input )
       // if(this.idSubGrupo == 2){
       //   datosExcel.VALIDADOR = 'GESTOR-CLIENTE-PROVEEDOR-REPRESENTANTES'
       // }
-      
+
     }
-    
-     this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+
+    this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
-    
-    if(this.ResultadoExcel.length != 0){
-      if(this.ResultadoExcel[0].CODIGO == 2){
+
+    if (this.ResultadoExcel.length != 0) {
+      if (this.ResultadoExcel[0].CODIGO == 2) {
         this.NombreArchivo = ''
         this.SwalGlobal(this.ResultadoExcel[0].MENSAJE)
-       
+
         return
       }
     }
-   
-  
-    let datosEliminar:any = {}
+
+
+    let datosEliminar: any = {}
     datosEliminar.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     datosEliminar.NTIPO_DOCUMENTO = 0
     datosEliminar.SNUM_DOCUMENTO = ''
@@ -1381,14 +1379,14 @@ Array.prototype.forEach.call( inputs, function( input )
     datosEliminar.NIDUSUARIO = 0
     datosEliminar.NIDGRUPOSENAL = this.idGrupo
     datosEliminar.NIDSUBGRUPOSEN = this.idSubGrupo
-    datosEliminar.SNUM_DOCUMENTO_EMPRESA =''
+    datosEliminar.SNUM_DOCUMENTO_EMPRESA = ''
     datosEliminar.SNOM_COMPLETO_EMPRESA = ''
     datosEliminar.SACTUALIZA = 'DEL'
     let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
-   
-    let respuestaRegistros:any = []
-    for( let i = 0; i < this.ResultadoExcel.length ; i++){
-      let datosRegistroColaborador:any = {}
+
+    let respuestaRegistros: any = []
+    for (let i = 0; i < this.ResultadoExcel.length; i++) {
+      let datosRegistroColaborador: any = {}
       datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
       datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO) //== null ? "" : parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
       datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
@@ -1404,102 +1402,102 @@ Array.prototype.forEach.call( inputs, function( input )
       let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
       respuestaRegistros.push(response)
     }
-    console.log("respuestaRegistros",respuestaRegistros)
+    console.log("respuestaRegistros", respuestaRegistros)
 
     let listaFiltro = respuestaRegistros.filter(it => it.nCode == 2)
-    if(listaFiltro.length > 0){
-        let mensaje = "Hubo un inconveniente al registrar la lista del archivo"
-        this.SwalGlobal(mensaje)
-        return 
-    }else{
+    if (listaFiltro.length > 0) {
+      let mensaje = "Hubo un inconveniente al registrar la lista del archivo"
+      this.SwalGlobal(mensaje)
+      return
+    } else {
       let mensaje = "Se agregaron " + respuestaRegistros.length + " registros"
       this.SwalGlobal(mensaje)
       return
     }
-    
+
   }
 
 
   async setDataFile(event) {
-    
-     let files = event.target.files;
- 
-     let arrFiles = Array.from(files)
-     
-     let listFileNameInform: any = []
-     arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-    
-     let listFileNameCortoInform = []
-     let statusFormatFile = false
-     for (let item of listFileNameInform) {
-       //let item = listFileNameInform[0]
-       let nameFile = item.split(".")
-       if (nameFile.length > 2 || nameFile.length < 2) {
-         statusFormatFile = true
-         return
-       }
-       let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
-       //listFileNameCortoInform.push(fileItem)
-       listFileNameCortoInform.push(fileItem)
-     }
-     if (statusFormatFile) {
-       swal.fire({
-         title: 'Mantenimiento de complemento',
-         icon: 'warning',
-         text: 'El archivo no tiene el formato necesario',
-         showCancelButton: false,
-         showConfirmButton: true,
-         confirmButtonColor:'#FA7000',
-         confirmButtonText: 'Aceptar',
-         showCloseButton:true,
-            customClass: { 
-               closeButton : 'OcultarBorde'
-               },
-         
-       }).then(async (result) => {
-       
-       }).catch(err => {
-       
-       })
-     }
-     let listDataFileInform: any = []
-     arrFiles.forEach(fileData => {
-       listDataFileInform.push(this.handleFile(fileData))
-     })
-     let respPromiseFileInfo = await Promise.all(listDataFileInform)
-     if(listFileNameCortoInform.length == 0){
-      this.NombreArchivo = ''
-     }else{ 
-      this.NombreArchivo = listFileNameCortoInform[0]
-     }
-     
-     return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
-   }
 
-   handleFile(blob: any): Promise<any> {
+    let files = event.target.files;
+
+    let arrFiles = Array.from(files)
+
+    let listFileNameInform: any = []
+    arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+
+    let listFileNameCortoInform = []
+    let statusFormatFile = false
+    for (let item of listFileNameInform) {
+      //let item = listFileNameInform[0]
+      let nameFile = item.split(".")
+      if (nameFile.length > 2 || nameFile.length < 2) {
+        statusFormatFile = true
+        return
+      }
+      let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+      //listFileNameCortoInform.push(fileItem)
+      listFileNameCortoInform.push(fileItem)
+    }
+    if (statusFormatFile) {
+      swal.fire({
+        title: 'Mantenimiento de complemento',
+        icon: 'warning',
+        text: 'El archivo no tiene el formato necesario',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Aceptar',
+        showCloseButton: true,
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
+      }).then(async (result) => {
+
+      }).catch(err => {
+
+      })
+    }
+    let listDataFileInform: any = []
+    arrFiles.forEach(fileData => {
+      listDataFileInform.push(this.handleFile(fileData))
+    })
+    let respPromiseFileInfo = await Promise.all(listDataFileInform)
+    if (listFileNameCortoInform.length == 0) {
+      this.NombreArchivo = ''
+    } else {
+      this.NombreArchivo = listFileNameCortoInform[0]
+    }
+
+    return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+  }
+
+  handleFile(blob: any): Promise<any> {
     return new Promise(resolve => {
       const reader = new FileReader()
       reader.onloadend = () => resolve(reader.result)
       reader.readAsDataURL(blob)
     })
   }
-  exportListToExcel(_title,resultados){
-    let dataReport : any =[]
+  exportListToExcel(_title, resultados) {
+    let dataReport: any = []
     resultados.forEach(element => {
-      let data = {} ;
+      let data = {};
       data["Tipo Documento"] = element.STIPOIDEN
       data["N° Documento"] = element.SNUM_DOCUMENTO,
-      data["Nombre / Razón Social"] = element.SNOM_COMPLETO,
-      data["Regimen"] = element.SDESREGIMEN
+        data["Nombre / Razón Social"] = element.SNOM_COMPLETO,
+        data["Regimen"] = element.SDESREGIMEN
       this.tipoListas.forEach(tipolista => {
-        let count = element.ARRAY_IDTIPOLISTA.filter(e=> e == tipolista.NIDTIPOLISTA).length;
-        data[tipolista.SDESTIPOLISTA] = count > 0 ? 'Coincidencia' : 'Sin Coincidencia';   
+        let count = element.ARRAY_IDTIPOLISTA.filter(e => e == tipolista.NIDTIPOLISTA).length;
+        data[tipolista.SDESTIPOLISTA] = count > 0 ? 'Coincidencia' : 'Sin Coincidencia';
       });
       dataReport.push(data);
     });
-    if(dataReport.length > 0){
-        this.excelService.exportAsExcelFile(dataReport, _title)// "Cliente revizado");
-    }else {
+    if (dataReport.length > 0) {
+      this.excelService.exportAsExcelFile(dataReport, _title)// "Cliente revizado");
+    } else {
       swal.fire({
         icon: 'warning',
         text: 'No hay registros',
@@ -1507,17 +1505,17 @@ Array.prototype.forEach.call( inputs, function( input )
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar',
         showCloseButton: true,
-        customClass: { 
-          closeButton : 'OcultarBorde'
-                       },
-         
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
       }).then((result) => {
       })
       return
     }
   }
 
-  SwalGlobal(mensaje){
+  SwalGlobal(mensaje) {
     Swal.fire({
       title: "Gestor Laft",
       icon: "warning",
@@ -1535,48 +1533,58 @@ Array.prototype.forEach.call( inputs, function( input )
     });
   }
 
-  async ListaDeCoincidencias(id){
+  async ListaDeCoincidencias(id) {
     //debugger;
-    let data:any = {}
+    let data: any = {}
     data = {
       NIDGRUPOSENAL: id,
-      NPERIODO_PROCESO: this.PERIODOACTUAL.periodo}
-      this.spinner.show()
+      NPERIODO_PROCESO: this.PERIODOACTUAL.periodo
+    }
+    this.spinner.show()
     this.ArrayResultCoincidencias = await this.userConfigService.GetListaResultadoGC(data)
     this.ArrayResultCoincidencias = this.groupClients(this.ArrayResultCoincidencias);
     this.spinner.hide()
   }
-  AbrirModal(){
-    let desGrupo = this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo )
+  AbrirModal() {
+    let desGrupo = this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
     let desSubgrupo = this.SubGrupoList.filter(it => it.NIDSUBGRUPOSEN == this.idSubGrupo)
     debugger
-    let data:any = {}
-    data.NIDGRUPOSENAL = this.idGrupo
-    data.SDESGRUPO_SENAL = desGrupo[0].SDESGRUPO_SENAL
-    data.NIDSUBGRUPOSEN = this.idSubGrupo
-    data.SDESSUBGRUPO_SENAL = desSubgrupo[0].SDESSUBGRUPO_SENAL
-    data.NPERIODO_PROCESO = this.PERIODOACTUAL.periodo
+    let data: any = {}
+    if (this.idGrupo == 2) {
+      data.NIDGRUPOSENAL = this.idGrupo
+      data.SDESGRUPO_SENAL = desGrupo[0].SDESGRUPO_SENAL
+      //data.NIDSUBGRUPOSEN = this.idSubGrupo
+      //data.SDESSUBGRUPO_SENAL = desSubgrupo[0].SDESSUBGRUPO_SENAL
+      data.NPERIODO_PROCESO = this.PERIODOACTUAL.periodo
+    } else {
+      data.NIDGRUPOSENAL = this.idGrupo
+      data.SDESGRUPO_SENAL = desGrupo[0].SDESGRUPO_SENAL
+      data.NIDSUBGRUPOSEN = this.idSubGrupo
+      data.SDESSUBGRUPO_SENAL = desSubgrupo[0].SDESSUBGRUPO_SENAL
+      data.NPERIODO_PROCESO = this.PERIODOACTUAL.periodo
+    }
 
-    if(this.idSubGrupo == -1){
+
+    if (this.idSubGrupo == -1) {
       let mensaje = "Tiene que seleccionar un subgrupo"
       this.SwalGlobal(mensaje)
       return
     }
 
     const modalRef = this.modalService.open(ModalGestorLaftComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
-    
-    
+
+
     modalRef.componentInstance.reference = modalRef;
     modalRef.componentInstance.data = data;
     //modalRef.componentInstance.ListaEmail = this.ListCorreo;
     modalRef.result.then(async (resp) => {
-      this.core.loader.show();  
+      this.core.loader.show();
       //let response = await this.userConfig.GetListCorreo()
       //this.ListCorreo = response
       this.core.loader.hide();
-      
+
     }, (reason) => {
-      
+
       this.core.loader.hide();
     });
   }

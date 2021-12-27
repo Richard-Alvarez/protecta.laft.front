@@ -1,13 +1,13 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/'; 
+  private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
- //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
- //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
+  //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
   //private base: string = 'https://soatservicios.protectaseurity.pe/ApiLAFT/api/';
   //private basePolicy: string = 'https://localhost:5001/api/';
@@ -190,49 +190,49 @@ class Rutas {
   public urlGetListaComplementos: string = this.base + "monitoreoSenales/GetListaComplementos";
   public urlGetListaPolizas: string = this.base + "monitoreoSenales/GetListaPolizas";
   //Para complementos
-  public urlListaUsariosComp:string = this.base + "monitoreoSenales/ListaUsariosComp";
+  public urlListaUsariosComp: string = this.base + "monitoreoSenales/ListaUsariosComp";
   public urlGetUpdComplementoCab: string = this.base + "monitoreoSenales/GetUpdComplementoCab";
   public urlGetInsCormularioComplUsu: string = this.base + "monitoreoSenales/GetInsCormularioComplUsu";
   public urlGetValFormularioCompl: string = this.base + "monitoreoSenales/GetValFormularioCompl";
-  public urlGetListaCompUsu:string = this.base + "monitoreoSenales/GetListaCompUsu";
-  public urlGetListaComplementoUsuario:string = this.base + "monitoreoSenales/GetListaComplementoUsuario";
+  public urlGetListaCompUsu: string = this.base + "monitoreoSenales/GetListaCompUsu";
+  public urlGetListaComplementoUsuario: string = this.base + "monitoreoSenales/GetListaComplementoUsuario";
 
   //Para Validar Contraseña por primera vez 
   public urlGetActPassUsuario: string = this.base + "monitoreoSenales/GetActPassUsuario";
   public urlGetUpdPssUsuario: string = this.base + "monitoreoSenales/GetUpdPssUsuario";
 
   //Para generar reportes por grupo
-  public urlGetAlertaResupuesta:string = this.base + "monitoreoSenales/GetAlertaResupuesta";
+  public urlGetAlertaResupuesta: string = this.base + "monitoreoSenales/GetAlertaResupuesta";
 
   //Para envio de correos
-  public urlInsCorreoUsuario:string = this.base + "monitoreoSenales/InsCorreoUsuario";
-  public urlgetListaUsuarioCorreos:string = this.base + "monitoreoSenales/getListaUsuarioCorreos";
-  public urlEnvioCorreoConfirmacion:string = this.base + "monitoreoSenales/EnvioCorreoConfirmacion";
-  public urlEnvioCorreoActualizacionPass:string = this.base + "monitoreoSenales/EnvioCorreoActualizacionPass";
+  public urlInsCorreoUsuario: string = this.base + "monitoreoSenales/InsCorreoUsuario";
+  public urlgetListaUsuarioCorreos: string = this.base + "monitoreoSenales/getListaUsuarioCorreos";
+  public urlEnvioCorreoConfirmacion: string = this.base + "monitoreoSenales/EnvioCorreoConfirmacion";
+  public urlEnvioCorreoActualizacionPass: string = this.base + "monitoreoSenales/EnvioCorreoActualizacionPass";
 
   //LISTAR LOS ADJUNTOS
-  public urlgetListaAdjuntos:string = this.base + "monitoreoSenales/getListaAdjuntos";
+  public urlgetListaAdjuntos: string = this.base + "monitoreoSenales/getListaAdjuntos";
   //ELIMINAR ADJUNTOS
-  public urlgetDeleteAdjuntos:string = this.base + "monitoreoSenales/getDeleteAdjuntos";
-  
+  public urlgetDeleteAdjuntos: string = this.base + "monitoreoSenales/getDeleteAdjuntos";
+
   //LEER DATOS DE UN EXCEL
-  public urlLeerDataExcel:string = this.base + "monitoreoSenales/LeerDataExcel";
-  public urlGetRegistrarDatosExcelGC:string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
-  public urlGetRegistrarDatosExcelDemanda:string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
-  
+  public urlLeerDataExcel: string = this.base + "monitoreoSenales/LeerDataExcel";
+  public urlGetRegistrarDatosExcelGC: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
+  public urlGetRegistrarDatosExcelDemanda: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
+
   //VALIDAR SI EXISTE UN USUSARIO
-  public urlGetValidarExisteCorreo :string = this.base + "monitoreoSenales/GetValidarExisteCorreo";
-  public urlGetUpdUsuarioEncriptado :string = this.base + "monitoreoSenales/GetUpdUsuarioEncriptado";
-  public urlGetValidarHash :string = this.base + "monitoreoSenales/GetValidarHash";
-  public urlValidarFechaHash :string = this.base + "monitoreoSenales/ValidarFechaHash";
-  
-  public urlGetInsertaHistorialUsuario :string = this.base + "monitoreoSenales/GetInsertaHistorialUsuario";
-  public urlGetListaEmpresas :string = this.base + "monitoreoSenales/GetListaEmpresas"
-  public urlGetListaResultadoProveedorContraparte :string = this.base + "monitoreoSenales/GetListaResultadoProveedorContraparte"
-  
-  public urlGetListaOtrosClientes:string = this.base + "monitoreoSenales/GetListaOtrosClientes"
-  public urlGetListaInformes:string = this.base + "monitoreoSenales/GetListaInformes"
-  public urlUpdInformes:string = this.base + "monitoreoSenales/UpdInformes"
+  public urlGetValidarExisteCorreo: string = this.base + "monitoreoSenales/GetValidarExisteCorreo";
+  public urlGetUpdUsuarioEncriptado: string = this.base + "monitoreoSenales/GetUpdUsuarioEncriptado";
+  public urlGetValidarHash: string = this.base + "monitoreoSenales/GetValidarHash";
+  public urlValidarFechaHash: string = this.base + "monitoreoSenales/ValidarFechaHash";
+
+  public urlGetInsertaHistorialUsuario: string = this.base + "monitoreoSenales/GetInsertaHistorialUsuario";
+  public urlGetListaEmpresas: string = this.base + "monitoreoSenales/GetListaEmpresas"
+  public urlGetListaResultadoProveedorContraparte: string = this.base + "monitoreoSenales/GetListaResultadoProveedorContraparte"
+
+  public urlGetListaOtrosClientes: string = this.base + "monitoreoSenales/GetListaOtrosClientes"
+  public urlGetListaInformes: string = this.base + "monitoreoSenales/GetListaInformes"
+  public urlUpdInformes: string = this.base + "monitoreoSenales/UpdInformes"
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }
