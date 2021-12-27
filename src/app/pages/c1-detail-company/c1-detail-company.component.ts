@@ -318,7 +318,7 @@ DescargarArhivo(estado,TipoUsuario){
       }
       data.push(_data);
     });
-  }else if(estado == 'COMPLETADO' && (TipoUsuario == 'RE' || TipoUsuario == 'OC')){
+  }else if((estado == 'COMPLETADO' || estado == 'REVISADO' )&& (TipoUsuario == 'RE' || TipoUsuario == 'OC')){
     respuesta.forEach((t,inc) => {
       let _data = {
         "Ruc": t[0].SRUC,
@@ -337,6 +337,7 @@ DescargarArhivo(estado,TipoUsuario){
   if(data.length == 0){
     let mensaje = "No hay registro de empresas"
     this.SwalGlobal(mensaje,TipoUsuario)
+    return
   }
   console.log("data",data)
   this.excelService.exportAsExcelFile(data, "Lista de empresas");     

@@ -1,38 +1,46 @@
+<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
 
- <div class="modal-header" id="edit-modal"  style="padding-bottom: 30px">
-        
-    <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
+  <button type="button" class="swal2-close" (click)="closeModal('edit-modal')" aria-label="Close this dialog"
+    style="display: flex;outline:none;">×</button>
 </div>
 <main class="container-fluid" style="padding-left: 7rem;padding-right: 7rem;">
-   
 
-    <!-- <div class="container-fluid pl-5 pr-5"> -->
-        <div class="container-fluid">
-        <div class="row mb-2 mt-2" style="display: flex;justify-content: center;">
-            <div class="col-12 Header">
-                
-                
 
-                <div class="row mb-2 mt-2">
-                    <div class="Header">
-                        <div class="col-lg-12" style="padding-left: 0px;">
-                            <h4 class="TitleLine">Lista de Registros de {{data.SDESGRUPO_SENAL}}</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-2 mt-2 pt-3">
-                    <div class="Header">
-                        <div class="col-lg-12" style="padding-left: 0px;">
-                            <h6 class="" style="font-weight: 400;">Subgrupo: {{data.SDESSUBGRUPO_SENAL}}</h6>
-                        </div>
-                    </div>
-                </div>
+  <!-- <div class="container-fluid pl-5 pr-5"> -->
+  <div class="container-fluid">
+    <div class="row mb-2 mt-2" style="display: flex;justify-content: center;">
+      <div class="col-12 Header">
 
-                
-                
-               
-                <div class="row">
-                <!-- <div class="borderFormat col-12">
+
+
+        <div class="row mb-2 mt-2">
+          <div class="Header">
+            <div class="col-lg-12" style="padding-left: 0px;">
+              <h4 class="TitleLine">Lista de Registros de {{data.SDESGRUPO_SENAL}}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2 mt-2 pt-3">
+          <div class="Header" *ngIf="data.NIDGRUPOSENAL !== '2'">
+            <div class="col-lg-12" style="padding-left: 0px;">
+              <h6 class="" style="font-weight: 400;">Subgrupo: {{data.SDESSUBGRUPO_SENAL}}</h6>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row pt-3">
+          <div class="col">
+            <input class="" [(ngModel)]="txtBuscador" 
+                (keyup)="getListAlertsFilters()" 
+                type="text"
+                class="form-control form-control" value=""
+                placeholder="Buscar por alerta, descripción o usuario">
+        </div>
+        </div> -->
+
+
+        <div class="row">
+          <!-- <div class="borderFormat col-12">
                         <div class="row" style="border-bottom: 2px solid #26296D;">
                                 <div class="col-2 txtCabecera" style="font-size: 14px;">Tipo Doc.</div>
                                 <div class="col-2 txtCabecera" style="font-size: 14px;">N° Doc.</div>
@@ -65,56 +73,58 @@
                 </div> -->
 
 
-                <table class="table table-hover table-striped" id="tableCobertura" style="width:100%;">
-                    <thead style="color: #26296DB3">
-                      <tr class="htable headgrid" style="background:transparent;">
-                        <th class="text-center">Tipo Doc.</th>
-                        <th class="text-center">N° Doc.</th>
-                        <th class="text-center">Nombre</th>
-                        <th class="text-center">Ruc</th>
-                        <th class="text-center">Razón Social</th>
-                      </tr>
-                    </thead>
-                    <tbody id="tblContactos" *ngIf="ListaRegistros.length !=0; else listavacia">
-                      <tr
-                        *ngFor="let cob of ListaRegistros | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-                        <td class="text-center">{{cob.TIPO_DOCUMENTO}}</td>
-                        <td class="text-center">{{cob.SNUM_DOCUMENTO}}</td>
-                        <td class="text-center">{{cob.SNOM_COMPLETO}}</td>
-                        <td class="text-center">{{cob.RUC}}</td>
-                        <td class="text-center">{{cob.RAZON_SOCIAL}}</td>
-                        
-                      </tr>
-                    </tbody>
-                    <ng-template #listavacia>
-                      <tbody id="tblContactos">
-                        <tr>
-                          <td class="text-center" colspan="6">No tiene Coberturas</td>
-                        </tr>
-                      </tbody>
-                    </ng-template>
-                  </table>
-                  <ng-container *ngIf="ListaRegistros!=null && ListaRegistros.length>0; then showPagination">
-                  </ng-container>
-                  <ng-template #showPagination class="row">
-                      <div class="col align-self-center">
-                        <ngb-pagination  [collectionSize]="ListaRegistros.length" [(page)]="page" [maxSize]="5"
-                        aria-label="Default pagination"></ngb-pagination>
-                      </div>
-                   
-                  </ng-template>
+          <table class="table table-hover table-striped" id="tableCobertura" style="width:100%;">
+            <thead style="color: #26296DB3">
+              <tr class="htable headgrid" style="background:transparent;">
+                <th class="text-center">Tipo Doc.</th>
+                <th class="text-center">N° Doc.</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">Ruc</th>
+                <th class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">Razón Social</th>
+              </tr>
+            </thead>
+            <tbody id="tblContactos" *ngIf="ListaRegistros.length !=0; else listavacia">
+              <tr *ngFor="let cob of ListaRegistros | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                <td class="text-center">{{cob.TIPO_DOCUMENTO}}</td>
+                <td class="text-center">{{cob.SNUM_DOCUMENTO}}</td>
+                <td class="text-center">{{cob.SNOM_COMPLETO}}</td>
+                <td class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">{{cob.RUC}}</td>
+                <td class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">{{cob.RAZON_SOCIAL}}</td>
+
+              </tr>
+            </tbody>
+
+
+            <ng-template #listavacia>
+              <tbody id="tblContactos">
+                <tr>
+                  <td class="text-center" colspan="6">No hay registros</td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+
+          <ng-container *ngIf="ListaRegistros!=null && ListaRegistros.length>0; then showPagination">
+          </ng-container>
+          <ng-template #showPagination class="row">
+            <div class="col align-self-center">
+              <ngb-pagination [collectionSize]="ListaRegistros.length" [(page)]="page" [maxSize]="5"
+                aria-label="Default pagination"></ngb-pagination>
             </div>
 
-            <div class="row" style="padding-left:0px">
-              <div class="col-6" style="padding-left:0px">
-                <button (click)="DescargarLista()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Lista </button>
-              </div>
-              <div class="col-6"></div>
-            </div>
-                <br><br>
-            </div>       
+          </ng-template>
         </div>
-    </div>
-    
-</main>
 
+        <div class="row" style="padding-left:0px">
+          <div class="col-6" style="padding-left:0px">
+            <button (click)="DescargarLista()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i
+                class="fas fa-download"></i> Descargar Lista </button>
+          </div>
+          <div class="col-6"></div>
+        </div>
+        <br><br>
+      </div>
+    </div>
+  </div>
+
+</main>

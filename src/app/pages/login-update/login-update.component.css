@@ -317,7 +317,7 @@
     .container{
       grid-template-columns: 1fr;
     }
-  
+    
     .img{
       display: none;
     }
@@ -329,6 +329,7 @@
     .login-content{
       justify-content: center;
     }
+    
   }
 
   input:-webkit-autofill,

@@ -1,91 +1,84 @@
-<body class="hero-anime"> 
+<div id="mySidenav" class="sidenav">
 
-    <div id="start-style" class="navigation-wrap bg-light start-header start-style">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <nav  id="navbar-top" class="navbar navbar-expand-md navbar-light">
-            
-              <!-- <a class="navbar-brand" href="https://front.codes/" target="_blank"><img src="https://assets.codepen.io/1462889/fcy.png" alt=""></a>   -->
-               <a class="navbar-brand" href="https://front.codes/" target="_blank"><img src="assets/img/logo-protecta.svg" alt=""></a> 
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto py-4 py-md-0">
-                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                  </li>
-                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                    <a class="nav-link" href="#">Portfolio</a>
-                  </li>
-                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                    <a class="nav-link" href="#">Agency</a>
-                  </li>
-                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </div>
-                  </li>
-                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                    <a class="nav-link" href="#">Journal</a>
-                  </li>
-                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                    <a class="nav-link" href="#">Contact</a>
-                  </li>
-                </ul>
-              </div>
-              
-            </nav>    
-          </div>
-        </div>
-      </div>
+  <nav class="sidebar">
+    <div class="dismiss" (click)="closeNav()">
+      <!-- <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a> -->
+      <!-- <a (click)="closeNav()" href="javascript:void(0)" class="closebtn" ><i class="fas fa-arrow-left"  ></i></a> -->
+      <i class="fas fa-arrow-left">&times;</i>
     </div>
-    <div class="section full-height">
-      <div class="absolute-center">
-        <div class="section">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-          <h1><span>B</span><span>o</span><span>o</span><span>t</span><span>s</span><span>t</span><span>r</span><span>a</span><span>p</span> <span>4</span><br>
-          <span>m</span><span>e</span><span>n</span><span>u</span></h1>
-          <p>scroll for nav animation</p> 
-              </div>  
-            </div>    
-          </div>    
-        </div>
-        <div class="section mt-5">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div id="switch">
-                  <div id="circle"></div>
-                </div>
-              </div>  
-            </div>    
-          </div>      
-        </div>
-      </div>
+    <div class="logo">
+      <h3 style="display: flex;justify-content: center;"><a href="index.html">Bootstrap 4 Template with Sidebar Menu</a>
+      </h3>
     </div>
-    <div class="my-5 py-5">
-    </div>
-    
-  <!-- Link to page
-  ================================================== -->
-  
-    <a href="https://front.codes/" class="logo" target="_blank">
-      <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
-    </a>
-  
-  </body>
+    <ul class="list-unstyled menu-elements">
+      <li class="active">
+        <a class="scroll-link" href="#top-content"><i class="fas fa-home"></i>Inicio</a>
+      </li>
+      <li *ngFor="let option of optionList; let index = index;">
+
+        <a *ngIf="option.nTieneHijo == 0" [routerLink]="['/' + option.sRouterLink]">T
+
+
+          <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
+
+        </a>
+        <a *ngIf="option.nTieneHijo == 1">
+          <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
+
+        </a>
+
+
+
+      </li>
+      <li>
+        <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button"
+          aria-controls="otherSections">
+          <i class="fas fa-sync"></i>Consultas
+        </a>
+        <ul class="collapse list-unstyled" id="otherSections">
+          <li>
+            <a class="scroll-link" href="#section-3">Our projects</a>
+          </li>
+          <li>
+            <a class="scroll-link" href="#section-4">We think that...</a>
+          </li>
+        </ul>
+      </li>
+      <!-- <li>
+        <a class="scroll-link" href="#section-1"><i class="fas fa-cog"></i> Usuario</a>
+      </li>
+      <li>
+        <a class="scroll-link" href="#section-2"><i class="fas fa-user"></i> Configuracion</a>
+      </li>
+      <li>
+        <a class="scroll-link" href="#section-5"><i class="fas fa-pencil-alt"></i> Modulo de Trabajo</a>
+      </li>
+      <li>
+        <a class="scroll-link" href="#section-6"><i class="fas fa-envelope"></i> Gestor LAFT</a>
+      </li> -->
+
+      <li>
+        <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button"
+          aria-controls="otherSections">
+          <i class="fas fa-sync"></i>Consultas
+        </a>
+        <ul class="collapse list-unstyled" id="otherSections">
+          <li>
+            <a class="scroll-link" href="#section-3">Our projects</a>
+          </li>
+          <li>
+            <a class="scroll-link" href="#section-4">We think that...</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+
+  </nav>
+
+</div>
+<header class="header" id="header">
+  <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span>
+  <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+  <div class="header_img"> <img src="../../../assets//img/logo.png" alt=""> </div>
+</header>
