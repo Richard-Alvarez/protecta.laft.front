@@ -41,13 +41,13 @@
                                     <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
                                         <!-- <th scope="col" style="text-align: center;">N°</th> -->
                                         <th scope="col" style="text-align: center; width: 15%;">Alerta</th>
-                                        <th scope="col" >Descripción</th>
+                                        <th scope="col" style="width: 20.9%;">Descripción</th>
                                         <th scope="col" style="text-align: center; width: 9%;">Estado</th>
-                                        <th scope="col" style="text-align: center; width: 7.5%;">Fecha de registro</th>
+                                        <th scope="col" style="text-align: center; width: 8%;">Fecha de registro</th>
                                         <th scope="col" style="text-align: center; width: 10%;">Usuario</th>
                                         <th scope="col" style="text-align: center; width: 11%;">Grupo</th>
-                                        <th scope="col" style="text-align: center; width: 9.4%;">Reg. General</th>
-                                        <th scope="col" style="text-align: center; width: 9.4%;">Reg. Simplificado</th>
+                                        <th scope="col" style="text-align: center; width: 9.5%;">Reg. General</th>
+                                        <th scope="col" style="text-align: center; width: 9.5%;">Reg. Simplificado</th>
                                         <th scope="col" style="text-align: center; width: 6%;">Editar</th>
                                     </tr>
                                 </thead>
@@ -67,19 +67,19 @@
                                     <tr *ngFor="let item of processlistToShow; let index = index">
                                         <!-- <td class="text-center">{{item.alertId}}</td> -->
                                         <td class="text-center vertical" style="width: 15%;">{{item.alertName}}</td>
-                                        <td class="vertical" style="text-align: justify;">{{item.alertDescription}}</td>
+                                        <td class="vertical" style="text-align: justify; width: 22%">{{item.alertDescription}}</td>
                                         <!-- <td class="text-center" hidden>{{item.alertStatus}}</td> -->
                                         <td class="text-center vertical" style="width: 9%;">{{item.statusDescription}}</td>
-                                        <td class="text-center vertical" style="width: 7.5%;">{{item.registerDate}}</td>
+                                        <td class="text-center vertical" style="width: 8%;">{{item.registerDate}}</td>
                                         <td class="text-center vertical" style="width: 10%;">{{item.userFullName}}</td>
                                         <td class="text-center vertical" style="width: 11%;">{{item.sennalDescripcion}}</td>
-                                        <td class="text-center vertical" style="width: 9.4%;">
+                                        <td class="text-center vertical" style="width: 9.5%;">
                                             <!-- {{item.regimenGen}} -->
                                             <!-- <input   type="checkbox" value="1" id="ValorCheckGene" [checked]="true"  [(ngModel)]="ValorCheck"> -->
                                             <input type="checkbox" onclick="return false;" disabled  [checked]="ValidarDisable(1,item.regimenGen)"  > 
                                          
                                         </td>
-                                        <td class="text-center vertical" style="width: 9.4%;">
+                                        <td class="text-center vertical" style="width: 9.5%;">
                                             <!-- {{item.regimenSim}} -->
                                             <!-- <input   type="checkbox" value="2" id="ValorCheckSimp"   [(ngModel)]="ValorCheck"> -->
                                              <!-- <input type="checkbox" [(ngModel)]="checkbox" ng-true-value="1" ng-false-value="2" ng-checked="checkbox == {{item.regimenGen}}" />  -->
