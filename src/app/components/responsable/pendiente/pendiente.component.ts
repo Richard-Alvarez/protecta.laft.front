@@ -1555,6 +1555,7 @@ ValidarCabeceraComplemento(){
     dataCorreo.mensaje = ListaUsuario[0].SCUERPO_CORREO
     dataCorreo.PERIODO = fechaperidod
     dataCorreo.SEMAIL = []
+    dataCorreo.PERIODO_ASUNTO = this.PeriodoComplemento
     for(let i=0; i < ListaUsuario.length ; i++ ){
       
      
