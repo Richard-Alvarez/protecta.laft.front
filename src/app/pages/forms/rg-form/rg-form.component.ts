@@ -438,7 +438,7 @@ export class RgFormComponent implements OnInit {
         let canvas_image_width: any = HTML_Width
         let canvas_image_height: any = HTML_Height
 
-        let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1
+        let totalPDFPages = 4//Math.ceil(HTML_Height / PDF_Height) - 1
 
         html2canvas(data, { allowTaint: true }).then(canvas => {
             canvas.getContext('2d')

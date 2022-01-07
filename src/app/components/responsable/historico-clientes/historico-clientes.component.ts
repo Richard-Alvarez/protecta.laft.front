@@ -16,7 +16,7 @@ import * as $ from 'jquery';
   styleUrls: ['./historico-clientes.component.css']
 })
 export class HistoricoClientesComponent implements OnInit {
-
+  ValidadorHistorico:number = 0
   /*indiceIconDinamic;
   boolPalomitaHeaderPlus:boolean = true;
   boolPalomitaHeaderMinus:boolean = false;*/

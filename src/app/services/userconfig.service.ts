@@ -1858,6 +1858,44 @@ export class UserconfigService {
     })
   }
 
+  getCorreo_OC(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlgetCorreo_OC).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  UpdActualizarCorreoOC(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlUpdActualizarCorreoOC, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  ActulizarContrasenaEncriptada(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlActulizarContrasenaEncriptada, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  
+
   
 
   

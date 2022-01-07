@@ -40,8 +40,8 @@
                           </strong>
                       </label>
              </div>  -->
-    <div class="col-3" style="padding-top: 28px;" *ngIf="idGrupo !== 1 && idGrupo.toString() !== '1'">
-      <div class="custom-file mb-3">
+    <div class="col-3" style="padding-top: 28px;" >
+      <div class="custom-file mb-3" *ngIf="idGrupo !== 1 && idGrupo.toString() !== '1'  && (idGrupo.toString() !== '2' && idSubGrupo.toString() !== '0')">
 
         <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" value="seleccionar"
           (change)="setDataFile($event)">
@@ -55,7 +55,7 @@
       <button class="btn btnRegistrar" (click)="RegistrarArchivo()">Registrar</button>
 
     </div>
-    <div class="col-1" style="padding-top: 28px;" *ngIf="idGrupo !== 1  && idGrupo.toString() !== '1'">
+    <div class="col-1" style="padding-top: 28px;" *ngIf="idGrupo !== 1  && idGrupo.toString() !== '1' ">
       <button class="btn btnRegistrar" (click)="AbrirModal()">{{textoBoton}}</button>
 
     </div>

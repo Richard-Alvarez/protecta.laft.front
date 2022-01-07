@@ -242,6 +242,7 @@ export class LoginUpdateComponent implements OnInit {
 
           }else{
             this.core.rutas.goHome();
+           
           }
         } else {
           swal.fire({

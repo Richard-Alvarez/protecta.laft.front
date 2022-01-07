@@ -49,13 +49,14 @@ export class PendienteInformeComponent implements OnInit {
   @Input() parent:ResponsableComponent
   //@Input() parent2:TemplateRGComponent
  
-  
+  ValidadorHistorico:number = 1
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
     private renderer: Renderer2,
     private modalService: NgbModal,) {this.templateRG = new TemplateRGComponent(core,userConfigService,renderer,modalService) }
 
   async ngOnInit() {
+   
     await this.getDatosLocalStore()
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO;
     this.fillFileGroup()

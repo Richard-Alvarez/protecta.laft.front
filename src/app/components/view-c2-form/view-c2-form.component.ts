@@ -1,4 +1,4 @@
-import { Component,OnDestroy, Input, OnInit} from '@angular/core';
+import { Component, OnDestroy, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { ConfigService } from 'src/app/services/config.service';
@@ -13,13 +13,13 @@ import { isNullOrUndefined } from 'util';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
-  selector: 'app-view-c2-form',
-  templateUrl: './view-c2-form.component.html',
-  styleUrls: ['./view-c2-form.component.css']
+    selector: 'app-view-c2-form',
+    templateUrl: './view-c2-form.component.html',
+    styleUrls: ['./view-c2-form.component.css']
 })
-export class ViewC2FormComponent implements OnInit , OnDestroy {
+export class ViewC2FormComponent implements OnInit, OnDestroy {
 
-  alertData: any = {}
+    alertData: any = {}
 
     signalDetailList: any[] = []
     internationalList: any[] = []
@@ -35,7 +35,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
     listFileName: Map<string, any> = new Map<string, any>()
     listFilesToShow: Map<string, any> = new Map<string, any>()
     arrayDocuments: any[] = [];
-    arrayClientesByList:any = [];
+    arrayClientesByList: any = [];
     public statusRev: boolean
     public Savependings: boolean
 
@@ -43,42 +43,42 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
     public uploadDate: any = '';
     public message: any = '';
     public reviewed: any[] = []
-    NIDGRUPOSENAL:any
-    listSubGrupos:any =[]
+    NIDGRUPOSENAL: any
+    listSubGrupos: any = []
     _NIDSUBGRUPOSEN = 0
     _sSubGrupo = '';
     _NIDTIPOLISTA = 0;
     _NIDPROVEEDOR = 0;
-    config :any =[
+    config: any = [
         {
-          NIDGRUPOSENAL : 1,
-          NIDALERTA: 2,
-          linkactual: ['clientes','historico-clientes'],
-          NIDREGIMEN : 1
-        },{
-          NIDGRUPOSENAL : 2,
-          NIDALERTA: 35,
-          linkactual: ['colaborador','historico-colaborador'],
-          NIDREGIMEN : 0
-        },{
-          NIDGRUPOSENAL : 3,
-          NIDALERTA: 33,
-          linkactual: ['proveedor','historico-contraparte'],
-          NIDREGIMEN : 0
-        },{
-          NIDGRUPOSENAL : 4,
-          NIDALERTA: 39,
-          linkactual: ['contraparte','historico-proveedor'],
-          NIDREGIMEN : 0
+            NIDGRUPOSENAL: 1,
+            NIDALERTA: 2,
+            linkactual: ['clientes', 'historico-clientes'],
+            NIDREGIMEN: 1
+        }, {
+            NIDGRUPOSENAL: 2,
+            NIDALERTA: 35,
+            linkactual: ['colaborador', 'historico-colaborador'],
+            NIDREGIMEN: 0
+        }, {
+            NIDGRUPOSENAL: 3,
+            NIDALERTA: 33,
+            linkactual: ['proveedor', 'historico-proveedor'],
+            NIDREGIMEN: 0
+        }, {
+            NIDGRUPOSENAL: 4,
+            NIDALERTA: 39,
+            linkactual: ['contraparte', 'historico-contraparte'],
+            NIDREGIMEN: 0
         }
-      ]
-    @Input() parentPendienteInforme : PendienteInformeComponent
-    @Input() parentInformeTerminado : InformeTerminadoComponent
+    ]
+    @Input() parentPendienteInforme: PendienteInformeComponent
+    @Input() parentInformeTerminado: InformeTerminadoComponent
     @Input() vistaOrigen
     @Input() objAlertaC2
     @Input() regimen
     @Input() valueIdCollap
-    @Input() state:any = {}
+    @Input() state: any = {}
     @Input() ValidadorHistorico
     @Input() HistoricoPeriodo
     constructor(
@@ -90,13 +90,13 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
     ) {
 
     }
-    ngOnDestroy(){
+    ngOnDestroy() {
         localStorage.removeItem("objFocusPositionReturn")
     }
     async ngOnInit() {
         var URLactual = window.location + " ";
         let link = URLactual.split("/")
-        this.linkactual = link[link.length-1].trim()
+        this.linkactual = link[link.length - 1].trim()
         this.statusRev = false
         this.Savependings = false;
         this.core.loader.show();
@@ -104,26 +104,27 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         this.alertData.SDESCRIPCION_ALERTA = this.objAlertaC2.SDESCRIPCION_ALERTA//localStorage.getItem("SDESCRIPCION_ALERTA")
         this.alertData.SNOMBRE_ESTADO = this.objAlertaC2.SNOMBRE_ESTADO//localStorage.getItem("SNOMBRE_ESTADO")
         this.alertData.NIDALERTA = this.objAlertaC2.NIDALERTA//parseInt(localStorage.getItem("NIDALERTA"))
-        if(this.ValidadorHistorico != 0){
+        debugger
+        if (this.ValidadorHistorico != 0) {
             this.alertData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
-        }else{
+        } else {
             this.alertData.NPERIODO_PROCESO = parseInt(this.HistoricoPeriodo)
         }
         //parseInt(localStorage.getItem("NPERIODO_PROCESO"))
         this.alertData.SPERIODO_FECHA = this.objAlertaC2.NPERIODO_PROCESO//localStorage.getItem("fechaPeriodo")
-        if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
+        if (this.linkactual == "colaborador" || this.linkactual == "historico-colaborador") {
             this.alertData.NIDREGIMEN = 0
-          }
-          else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte" ){
+        }
+        else if (this.linkactual == "contraparte" || this.linkactual == "historico-contraparte") {
             this.alertData.NIDREGIMEN = 0
-          }
-          else if(this.linkactual == "proveedor" || this.linkactual == "historico-proveedor" ){
+        }
+        else if (this.linkactual == "proveedor" || this.linkactual == "historico-proveedor") {
             this.alertData.NIDREGIMEN = 0
-          }else{
+        } else {
             this.alertData.NIDREGIMEN = this.regimen.id
-          }
+        }
         this.alertData.SESTADO = this.objAlertaC2.SESTADO
-        this.alertData.DESREGIMEN = 'Régimen '+this.regimen.descripcion
+        this.alertData.DESREGIMEN = 'Régimen ' + this.regimen.descripcion
         this.STIPOUSUARIO = this.core.storage.get('usuario')['tipoUsuario'];
 
         await this.getDatosLocalStore()
@@ -135,79 +136,79 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         await this.getComments()
         await this.verifyToComplete()
         //await this.getClientsByList()
-       
+
         //await this.getListaInternacional();
         await this.groupListTypes()
         //await this.setAcordiones();
         //this.showAfterPosition()
-          this.core.loader.hide();
+        this.core.loader.hide();
     }
-    async getClientsByList(){
+    async getClientsByList() {
         //console.warn("el this.alertData: ",this.alertData)
-        let data = this.config.find(t=> t.linkactual.includes(this.linkactual));
-            data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
-            data.NIDREGIMEN = data.NIDGRUPOSENAL == 1 ? this.regimen.id : data.NIDREGIMEN
-        
-    //         var URLactual = window.location + " ";
-    //     let link = URLactual.split("/")
-    //    this.linkactual = link[link.length-1].trim()
+        let data = this.config.find(t => t.linkactual.includes(this.linkactual));
+        data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
+        data.NIDREGIMEN = data.NIDGRUPOSENAL == 1 ? this.regimen.id : data.NIDREGIMEN
 
-    //     let data: any = {};
-    //     if( this.linkactual == "proveedor"){
-    //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-    //         data.NIDALERTA = this.alertData.NIDALERTA;
-    //         data.NIDREGIMEN = 0;
-    //     }else if( this.linkactual == "colaborador"){
-    //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-    //         data.NIDALERTA = this.alertData.NIDALERTA;
-    //         data.NIDREGIMEN = 0;
-    //     }else{
-    //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
-    //         data.NIDALERTA = this.alertData.NIDALERTA;
-    //         data.NIDREGIMEN = this.regimen.id;
-    //     }
+        //         var URLactual = window.location + " ";
+        //     let link = URLactual.split("/")
+        //    this.linkactual = link[link.length-1].trim()
+
+        //     let data: any = {};
+        //     if( this.linkactual == "proveedor"){
+        //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+        //         data.NIDALERTA = this.alertData.NIDALERTA;
+        //         data.NIDREGIMEN = 0;
+        //     }else if( this.linkactual == "colaborador"){
+        //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+        //         data.NIDALERTA = this.alertData.NIDALERTA;
+        //         data.NIDREGIMEN = 0;
+        //     }else{
+        //         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
+        //         data.NIDALERTA = this.alertData.NIDALERTA;
+        //         data.NIDREGIMEN = this.regimen.id;
+        //     }
         // data.P_NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
         // data.P_NIDALERTA = this.alertData.NIDALERTA;
         // data.P_NIDREGIMEN = this.regimen.id;
         // let respuestaID = await this.ValidarGrupo()
         //     data.NIDGRUPOSENAL =  respuestaID
         this.core.loader.show()
-        let respResultadosCoinciden:any = [] 
+        let respResultadosCoinciden: any = []
         respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
         this.core.loader.hide()
-       
-        
+
+
         this.arrayClientesByList = respResultadosCoinciden
     }
 
-    getClientsByListArr(lista){
+    getClientsByListArr(lista) {
         let resp
-        if( this.linkactual == "proveedor" || this.linkactual == "contraparte" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte"){
-             resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA &&
-                 cli.NIDPROVEEDOR == lista.NIDPROVEEDOR && 
-                 cli.NIDSUBGRUPOSEN == lista.NIDSUBGRUPOSEN )
-        }else{
-             resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR )
+        if (this.linkactual == "proveedor" || this.linkactual == "contraparte" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte") {
+            resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA &&
+                cli.NIDPROVEEDOR == lista.NIDPROVEEDOR &&
+                cli.NIDSUBGRUPOSEN == lista.NIDSUBGRUPOSEN)
+        } else {
+            resp = this.arrayClientesByList.filter(cli => cli.SDESTIPOLISTA == lista.SDESTIPOLISTA && cli.NIDPROVEEDOR == lista.NIDPROVEEDOR)
         }
-        
-        
+
+
         let arrDuplid = []
         let arrRespuesta = []
         resp.forEach(itemRes => {
             let respDuplid = arrDuplid.filter(duplid => duplid == itemRes.SNOM_COMPLETO)
 
-            if (respDuplid.length  == 0) {
+            if (respDuplid.length == 0) {
                 arrRespuesta.push(itemRes)
                 arrDuplid.push(itemRes.SNOM_COMPLETO)
             }
         })
-        
+
         return arrRespuesta
     }
 
     async getSignalDetailList() {
         let respuestaID = await this.ValidarGrupo()
-        let data = { NPERIODO_PROCESO: this.alertData.NPERIODO_PROCESO, NIDALERTA: this.alertData.NIDALERTA, NIDREGIMEN: this.alertData.NIDREGIMEN , NIDGRUPOSENAL: respuestaID }
+        let data = { NPERIODO_PROCESO: this.alertData.NPERIODO_PROCESO, NIDALERTA: this.alertData.NIDALERTA, NIDREGIMEN: this.alertData.NIDREGIMEN, NIDGRUPOSENAL: respuestaID }
         this.signalDetailList = await this.userConfigService.getSignalList(data)
         this.signalDetailList.forEach(it => it.estadoRevisado = it.SESTADO_REVISADO == '1' ? true : false)
     }
@@ -227,11 +228,11 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         var user = this.core.storage.get('usuario');
         let userId = user['idUsuario'];
 
-      
+
         let param = { NPERIODO_PROCESO: this.alertData.NPERIODO_PROCESO, NIDALERTA: this.alertData.NIDALERTA, NTIPOIDEN_BUSQ: item.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: item.SNUM_DOCUMENTO, SESTADO_REVISADO: status, NIDUSUARIO_REVISADO: userId }
-      
+
         let response = await this.userConfigService.updateStatusToReviewed(param)
-       
+
         item.DFECHA_REVISADO = response.dfechaRevisado.day + "/" + response.dfechaRevisado.month + "/" + response.dfechaRevisado.year
         this.core.loader.hide()
     }
@@ -254,7 +255,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         let coincidences = this.getListOfPeople(this.listTypeMap)
         let count = coincidences.length
         let actives = []
-      
+
         for (let i = 0; i < coincidences.length; i++) {
             if (coincidences[i].estadoRevisado == true) {
                 actives.push(coincidences[i])
@@ -291,11 +292,11 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
                     updateAlert.periodId = this.alertData.NPERIODO_PROCESO
                     updateAlert.status = '2'
                     updateAlert.regimeId = this.alertData.NIDREGIMEN
-                   
+
                     this.userConfigService.updateStatusAlert(updateAlert)
                         .then((response) => {
                             this.core.loader.hide();
-                            
+
                             if (response.error == 0) {
                                 swal.fire({
                                     title: 'Señal de alerta',
@@ -322,7 +323,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
                                 return
                             }
                         }).catch(() => {
-                            
+
                             this.core.loader.hide();
                         });
                 }
@@ -335,14 +336,14 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         let getCommentList: any = {};
         getCommentList.alertId = this.alertData.NIDALERTA
         getCommentList.periodId = this.alertData.NPERIODO_PROCESO
-       
+
         this.userConfigService.getCommentList(getCommentList)
             .then((response) => {
                 this.core.loader.hide();
-                
+
                 this.commentList = response
             }).catch(() => {
-               
+
                 this.core.loader.hide();
             });
         this.core.loader.hide();
@@ -350,7 +351,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
 
     saveComment() {
         this.core.loader.show();
-        
+
         if (this.commentBody == null) {
             this.core.loader.hide();
             swal.fire({
@@ -384,11 +385,11 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
                     updateCommentList.periodId = this.alertData.NPERIODO_PROCESO
                     updateCommentList.comment = this.commentBody
                     updateCommentList.userId = userId
-                   
+
                     this.userConfigService.updateCommentList(updateCommentList)
                         .then((response) => {
                             this.core.loader.hide();
-                           
+
                             if (response.error != 0) {
                                 swal.fire({
                                     title: 'Comentarios',
@@ -416,7 +417,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
                                 return
                             }
                         }).catch(() => {
-                         
+
                             this.core.loader.hide();
                         });
                     this.core.loader.hide();
@@ -459,9 +460,9 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
     getPersonByListType(listType: string, numDoc: string) {
         return this.listTypeMap.get(listType).find(it => it.SNUM_DOCUMENTO == numDoc)
     }
-    async getDatosLocalStore(){
-        let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPositionReturn"))
-        if ( !isNullOrUndefined(respObjFocusPosition)){
+    async getDatosLocalStore() {
+        let respObjFocusPosition: any = JSON.parse(localStorage.getItem("objFocusPositionReturn"))
+        if (!isNullOrUndefined(respObjFocusPosition)) {
             this._sSubGrupo = respObjFocusPosition.SSUBGRUPO
             this._NIDTIPOLISTA = respObjFocusPosition.NIDTIPOLISTA
             this._NIDPROVEEDOR = respObjFocusPosition.NIDPROVEEDOR
@@ -469,48 +470,48 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         }
     }
     linkactual
-    async obtListas(){
-        let dataSend = this.config.find(t=> t.linkactual.includes(this.linkactual));
+    async obtListas() {
+        let dataSend = this.config.find(t => t.linkactual.includes(this.linkactual));
         this.listSubGrupos = []
         //_idSubGrupo
-        if([3,4].includes(dataSend.NIDGRUPOSENAL))
+        if ([3, 4].includes(dataSend.NIDGRUPOSENAL))
             this.listSubGrupos = this.internationalList
-            .map(t=> t.SDESSUBGRUPO_SENAL)
-            .filter((value,index,array)=>{
-                return array.indexOf(value) == index;
-            }).map(t=>  { 
-                return {"name": t ,"visible": t == this._sSubGrupo? 'show' : ''}
-            });
+                .map(t => t.SDESSUBGRUPO_SENAL)
+                .filter((value, index, array) => {
+                    return array.indexOf(value) == index;
+                }).map(t => {
+                    return { "name": t, "visible": t == this._sSubGrupo ? 'show' : '' }
+                });
     }
-    getSubGrupos(subGrupoName :any){
-        let arrClients : any [] = this.internationalList
-        .filter(t=>t.SDESSUBGRUPO_SENAL == subGrupoName)
-        
+    getSubGrupos(subGrupoName: any) {
+        let arrClients: any[] = this.internationalList
+            .filter(t => t.SDESSUBGRUPO_SENAL == subGrupoName)
+
         arrClients.forEach(t => {
             t.visible = (
-                this._NIDTIPOLISTA == t.NIDTIPOLISTA && 
-                this._NIDPROVEEDOR == t.NIDPROVEEDOR && 
-                this._NIDSUBGRUPOSEN == t.NIDSUBGRUPOSEN) ? 'show' : '' 
+                this._NIDTIPOLISTA == t.NIDTIPOLISTA &&
+                this._NIDPROVEEDOR == t.NIDPROVEEDOR &&
+                this._NIDSUBGRUPOSEN == t.NIDSUBGRUPOSEN) ? 'show' : ''
         })
-        return  arrClients
+        return arrClients
     }
     async getInternationalList() {
         try {
-            let dataSend = this.config.find(t=> t.linkactual.includes(this.linkactual));
+            let dataSend = this.config.find(t => t.linkactual.includes(this.linkactual));
             dataSend.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
             dataSend.NIDREGIMEN = dataSend.NIDGRUPOSENAL == 1 ? this.regimen.id : dataSend.NIDREGIMEN
             this.internationalList = await this.obtListaInternacional(dataSend);
             this.internationalList.forEach(t => {
                 t.visible = (
-                    this._NIDTIPOLISTA == t.NIDTIPOLISTA && 
-                    this._NIDPROVEEDOR == t.NIDPROVEEDOR && 
-                    this._NIDSUBGRUPOSEN == t.NIDSUBGRUPOSEN) ? 'show' : '' 
+                    this._NIDTIPOLISTA == t.NIDTIPOLISTA &&
+                    this._NIDPROVEEDOR == t.NIDPROVEEDOR &&
+                    this._NIDSUBGRUPOSEN == t.NIDSUBGRUPOSEN) ? 'show' : ''
             });
         } catch (error) {
         }
     }
 
-    async obtListaInternacional(dataSend){
+    async obtListaInternacional(dataSend) {
         return await this.userConfigService.getListaInternacional(dataSend)
     }
 
@@ -523,28 +524,28 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
     //         if(this.linkactual == "proveedor"){
     //             let dataSend = {NIDALERTA: 33,NIDREGIMEN : 0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 3,NIDSUBGRUPOSEN: 0  }
     //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
-                
+
     //             this.internationalList = respListaInternacional
-               
+
     //         }else if(this.linkactual == "colaborador"){
     //             let dataSend = {NIDALERTA: 35,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2,NIDSUBGRUPOSEN: 0  }
     //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
     //             this.internationalList = respListaInternacional
-             
+
     //         }else if(this.linkactual == "contraparte"){
     //             let dataSend = {NIDALERTA: 39,NIDREGIMEN :0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 2 ,NIDSUBGRUPOSEN: 0 }
     //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
     //             this.internationalList = respListaInternacional
-               
+
     //         }
     //         else{
     //             let dataSend = {NIDALERTA: this.alertData.NIDALERTA,NIDREGIMEN : this.regimen.id, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 1,NIDSUBGRUPOSEN: 0  }
     //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
     //             this.internationalList = respListaInternacional
-        
+
     //         }
-            
-            
+
+
     //     } catch (error) {
     //         //console.error("el error : ", error);
     //     }
@@ -559,7 +560,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO;
         data.NIDTIPOLISTA = idtipoLista;
         let respListInter = await this.userConfigService.getListInterbyType(data);
-        if(respListInter.code == 2 || respListInter.lista.length == 0){
+        if (respListInter.code == 2 || respListInter.lista.length == 0) {
             this.core.loader.hide();
             swal.fire({
                 title: 'Señal de alerta',
@@ -573,19 +574,19 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
             })
         }
         if (respListInter.lista.length > 1) {
-           
+
             await this.excelService.exportAsExcelFile(respListInter.lista, "REGISTROS DE " + nombreRpt);
-            
+
         }
         this.core.loader.hide();
     }
 
-    async goToDetail(item: any,lista:any,idElement:any,idElementSubGroup:any,subgruponame: any) {
+    async goToDetail(item: any, lista: any, idElement: any, idElementSubGroup: any, subgruponame: any) {
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
-        let objFocusPosition:any = {}
+        let objFocusPosition: any = {}
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
-        if(this.linkactual == "proveedor")
+        if (this.linkactual == "proveedor")
             this.regimen.id = 1;
         objFocusPosition.regimen = this.regimen
         objFocusPosition.estado = this.state
@@ -599,7 +600,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         objFocusPosition.NIDBOTON = item.STIPOIDEN + item.SNUM_DOCUMENTO + item.SNOM_COMPLETO.length
         localStorage.setItem("objFocusPosition", JSON.stringify(objFocusPosition))
         let periodoSend = parseInt(localStorage.getItem("periodo"))
-        
+
         localStorage.setItem("NIDALERTA", this.alertData.NIDALERTA)
         localStorage.setItem("NPERIODO_PROCESO", this.alertData.NPERIODO_PROCESO)
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
@@ -614,21 +615,21 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
         localStorage.setItem("NREGIMEN", this.regimen.id)
         localStorage.setItem("SCLIENT", item.SCLIENT)
         localStorage.setItem('boolClienteReforzado', 'false')
-        
+
         localStorage.setItem('vistaOrigen', this.vistaOrigen)
         localStorage.setItem('tipoClienteGC', this.vistaOrigen)
         localStorage.setItem('view-c2-sNombreLista', lista.SDESTIPOLISTA)
         localStorage.setItem('view-c2-idLista', lista.NIDTIPOLISTA)
         let sEstadoRevisado = item.SESTADO_REVISADO == 'Si' ? '1' : '0'
-        localStorage.setItem('EnviarCheckbox',sEstadoRevisado)
+        localStorage.setItem('EnviarCheckbox', sEstadoRevisado)
         localStorage.setItem("SESTADO_BUTTON_SAVE", '2');
         this.core.storage.set('view-c2-arrListasAll', this.internationalList)
         localStorage.setItem("NTIPOCARGA", item.NTIPOCARGA);
         localStorage.setItem("tipoClienteCRF", this.vistaOrigen);
         localStorage.setItem("NIDGRUPOSENAL", lista.NIDGRUPOSENAL);
         localStorage.setItem("NIDSUBGRUPO", lista.NIDSUBGRUPOSEN);
-        localStorage.setItem("SNOM_COMPLETO_EMPRESA", (isNullOrUndefined(item.SNOM_COMPLETO_EMPRESA) ? "" :item.SNOM_COMPLETO_EMPRESA));
-        localStorage.setItem("SNUM_DOCUMENTO_EMPRESA", (isNullOrUndefined(item.SNUM_DOCUMENTO_EMPRESA) ? "" :item.SNUM_DOCUMENTO_EMPRESA));
+        localStorage.setItem("SNOM_COMPLETO_EMPRESA", (isNullOrUndefined(item.SNOM_COMPLETO_EMPRESA) ? "" : item.SNOM_COMPLETO_EMPRESA));
+        localStorage.setItem("SNUM_DOCUMENTO_EMPRESA", (isNullOrUndefined(item.SNUM_DOCUMENTO_EMPRESA) ? "" : item.SNUM_DOCUMENTO_EMPRESA));
         await this.configService.sOrigenVista$.emit(this.vistaOrigen)//sOrigenVista$
         this.core.loader.hide()
         this.router.navigate(['/c2-detail'])
@@ -636,7 +637,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
 
     async getResultadosCoincidencias() {
         try {
-            let data = this.config.find(t=> t.linkactual.includes(this.linkactual));
+            let data = this.config.find(t => t.linkactual.includes(this.linkactual));
             data.NPERIODO_PROCESO = this.alertData.NPERIODO_PROCESO
             data.NIDREGIMEN = data.NIDGRUPOSENAL == 1 ? this.regimen.id : data.NIDREGIMEN
 
@@ -663,40 +664,40 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
             // data.P_NIDALERTA = this.alertData.NIDALERTA;
             // data.P_NIDREGIMEN = this.alertData.NIDREGIMEN;
             let respResultadosCoinciden = await this.userConfigService.getResultadosCoincidencias(data);
-            let IdGrupo:any = await this.ValidarGrupo()
-            let arrObjCabecera:any = []
+            let IdGrupo: any = await this.ValidarGrupo()
+            let arrObjCabecera: any = []
             respResultadosCoinciden.forEach(element => {
-            let objCabecera:any = {}
-            objCabecera["Tipo Documento"] = element.STIPOIDEN	
-            objCabecera["Número Documento"] =element.SNUM_DOCUMENTO	
-            objCabecera.Nombre =element.SNOM_COMPLETO	
-            objCabecera["Tipo de lista"] =element.SDESTIPOLISTA	
-            objCabecera["Acepta Coincidencia"] =element.SDESESTADO	
-            //objCabecera.Origen =element.SORIGEN
-            objCabecera.Proveedor =element.SDESPROVEEDOR
-            //objCabecera["Tipo Documento"] =element.NTIPO_DOCUMENTO	
-            objCabecera["Fecha de Nacimiento"] =element.DFECHA_NACIMIENTO	
-            objCabecera["Edad"] =element.EDAD	
-            //bjCabecera =element.SOCUPACION	
-            //objCabecera =element.SCARGO	
-            //objCabecera =element.SZONA_GEO	
-            objCabecera["Fecha Revisado"] =element.DFECHA_REVISADO	
-            objCabecera["Estado Revisado"] =element.SESTADO_REVISADO// =="1" ? "Sí" : "No" 
-            //objCabecera.NTIPOCARGA =element.NTIPOCARGA
-            objCabecera["Tipo de Busqueda"] =element.STIPO_BUSQUEDA
-            objCabecera["Porcentaje"] =element.NPORC_APROXIMA_BUSQ
-            
-            if(IdGrupo == 3 ){
-                objCabecera["Grupo"] = "Proveedores"
-                objCabecera["SubGrupo"] = element.SDESSUBGRUPO_SENAL
-            }
-            if(IdGrupo == 4 ){
-                objCabecera["Grupo"] = "Contraparte"
-                objCabecera["SubGrupo"] = element.SDESSUBGRUPO_SENAL
-            }
+                let objCabecera: any = {}
+                objCabecera["Tipo Documento"] = element.STIPOIDEN
+                objCabecera["Número Documento"] = element.SNUM_DOCUMENTO
+                objCabecera.Nombre = element.SNOM_COMPLETO
+                objCabecera["Tipo de lista"] = element.SDESTIPOLISTA
+                objCabecera["Acepta Coincidencia"] = element.SDESESTADO
+                //objCabecera.Origen =element.SORIGEN
+                objCabecera.Proveedor = element.SDESPROVEEDOR
+                //objCabecera["Tipo Documento"] =element.NTIPO_DOCUMENTO	
+                objCabecera["Fecha de Nacimiento"] = element.DFECHA_NACIMIENTO
+                objCabecera["Edad"] = element.EDAD
+                //bjCabecera =element.SOCUPACION	
+                //objCabecera =element.SCARGO	
+                //objCabecera =element.SZONA_GEO	
+                objCabecera["Fecha Revisado"] = element.DFECHA_REVISADO
+                objCabecera["Estado Revisado"] = element.SESTADO_REVISADO// =="1" ? "Sí" : "No" 
+                //objCabecera.NTIPOCARGA =element.NTIPOCARGA
+                objCabecera["Tipo de Busqueda"] = element.STIPO_BUSQUEDA
+                objCabecera["Porcentaje"] = element.NPORC_APROXIMA_BUSQ
 
-            arrObjCabecera.push(objCabecera)
-        });
+                if (IdGrupo == 3) {
+                    objCabecera["Grupo"] = "Proveedores"
+                    objCabecera["SubGrupo"] = element.SDESSUBGRUPO_SENAL
+                }
+                if (IdGrupo == 4) {
+                    objCabecera["Grupo"] = "Contraparte"
+                    objCabecera["SubGrupo"] = element.SDESSUBGRUPO_SENAL
+                }
+
+                arrObjCabecera.push(objCabecera)
+            });
 
             //this.internationalList = respResultadosCoinciden
             if (respResultadosCoinciden.length > 0) {
@@ -753,7 +754,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
             let archivos = await this.userConfigService.getAttachedFilesByAlert(data)
             archivos.forEach(it => this.arrayDocuments.push({ name: it.SRUTA_ADJUNTO }))
         } catch (error) {
-         
+
         }
     }
 
@@ -775,17 +776,17 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
                 let data = await this.handleFile(files[i])
                 listFiles.push(data)
             }
-           
+
             await this.sendFiles('OC');
         } catch (error) {
-           
+
         }
 
     }
 
     async insertAttachedFiles(data: any) {//SERVICIO QUE SUBE EL NOMBRE DEL ADJUNTO
         let response = await this.userConfigService.insertAttachedFilesByAlert(data)
-      
+
     }
 
     async sendFiles(tipoUsuario: string) {
@@ -819,7 +820,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
 
             }
             this.userConfigService.uploadFilesByAlert(data).then(response => {
-              
+
             });
 
             /*listFileName.foreach(item => {
@@ -828,7 +829,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
             //this.getListFilesToShow('C2','OC');
             //this.getAttachedFiles('OC');
             let identificator = false;
-            
+
             for (let i = 0; i < listFileName.length; i++) {
                 this.arrayDocuments.forEach(item => {
                     if (item === listFileName[i]) {
@@ -838,7 +839,7 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
                 if (identificator === false) {
                     this.arrayDocuments.push({ name: listFileName[i] })
                 }
-                
+
             }
 
         }
@@ -902,25 +903,25 @@ export class ViewC2FormComponent implements OnInit , OnDestroy {
     //     localStorage.setItem("objFocusPosition","{}");
     // }
 
-    async ValidarGrupo(){
+    async ValidarGrupo() {
         var URLactual = window.location + " ";
         let link = URLactual.split("/")
-        this.linkactual = link[link.length-1].trim()
-        if(this.linkactual == "clientes" || this.linkactual == "historico-clientes" ){
-          return  1
-        }else if(this.linkactual == "colaborador" || this.linkactual == "historico-colaborador" ){
-          return  2
+        this.linkactual = link[link.length - 1].trim()
+        if (this.linkactual == "clientes" || this.linkactual == "historico-clientes") {
+            return 1
+        } else if (this.linkactual == "colaborador" || this.linkactual == "historico-colaborador") {
+            return 2
         }
-        else if(this.linkactual == "contraparte" || this.linkactual == "historico-contraparte" ){
-          return  4
+        else if (this.linkactual == "contraparte" || this.linkactual == "historico-contraparte") {
+            return 4
         }
-        else if(this.linkactual == "proveedor" || this.linkactual == "historico-proveedor" ){
-          return  3
+        else if (this.linkactual == "proveedor" || this.linkactual == "historico-proveedor") {
+            return 3
         }
-      }
+    }
 
 
-      
+
     //   addAccordion(index,href){
     //     if(this.parentInformeTerminado)
     //         this.parentInformeTerminado.parent.addAccordion(index,href);

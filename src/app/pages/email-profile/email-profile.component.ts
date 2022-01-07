@@ -5,8 +5,10 @@ import { UserconfigService } from '../../services/userconfig.service';
 import swal from 'sweetalert2';
 import { ModalEmailProfileComponent } from '../modal-email-profile/modal-email-profile.component';
 import { ModalEmailAgregarComponent } from '../modal-email-agregar/modal-email-agregar.component';
+import { ModalConfirmacionCorreoComponent } from '../modal-confirmacion-correo/modal-confirmacion-correo.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { htmlToText } from "html-to-text";
+import { ModalValidarContrasennaComponent } from '../modal-validar-contrasenna/modal-validar-contrasenna.component';
 @Component({
   selector: 'app-email-profile',
   templateUrl: './email-profile.component.html',
@@ -138,6 +140,21 @@ export class EmailProfileComponent implements OnInit {
     // let dataList = await this.userConfig.GetListConifgCorreoDefault()
   
   }
-
+  ModalVerificacionCorreo(){
+    const modalRef = this.modalService.open(ModalConfirmacionCorreoComponent, { size: 'lg', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false, centered : true });
+    
+    
+    modalRef.componentInstance.reference = modalRef;
+   
+    modalRef.result.then(async (resp) => {
+     // this.core.loader.show();  
+      
+     
+      //this.core.loader.hide();
+     
+    }, (reason) => {
+      //this.core.loader.hide();
+    });
+  }
    
 }

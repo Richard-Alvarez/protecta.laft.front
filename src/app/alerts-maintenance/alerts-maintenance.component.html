@@ -11,7 +11,7 @@
                 <div class="row"
                     style="display: flex;justify-content: left;align-items: center;padding-right: 800px;">
                     <div class="col-lg-15">
-                        <h4 class="TitleLine">Mantenimiento de Alertas</h4>
+                        <h4 class="TitleLine">Mantenimiento de Alerta</h4>
                     </div>
                 </div>
                 <div class="row" style="display: flex;justify-content: left;align-items: left; ">
@@ -106,12 +106,14 @@
                 <ng-template #showPagination>
                     <div class="row mt-4">
                         <div class="col-sm-12">
-                            <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
-                                [collectionSize]="totalItems" [maxSize]="maxSize"
+                             <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
+                                [collectionSize]="totalItems" [maxSize]="maxSize" aria-label="Default pagination"
                                 (pageChange)="pageChanged(currentPage)"> 
-                                <ng-template ngbPaginationPrevious>Anterior</ng-template>
-                                <ng-template ngbPaginationNext>Siguiente</ng-template>
-                            </ngb-pagination>
+                                <!-- <ng-template ngbPaginationPrevious>Anterior</ng-template>
+                                <ng-template ngbPaginationNext>Siguiente</ng-template> -->
+                            </ngb-pagination> 
+                            <!-- <ngb-pagination [collectionSize]="processlistToShow.length" [(page)]="page" [maxSize]="5"
+                aria-label="Default pagination"></ngb-pagination> -->
                         </div>
                     </div>
                 </ng-template>

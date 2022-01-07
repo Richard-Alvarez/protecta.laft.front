@@ -333,7 +333,9 @@ ListaRroveedoresPro:any = []
 ListaProveedoresCriticosPro:any = []
 ListaRepresentantesAccionistasPro:any = []
 
+idintificaAnno
 async DescargarReporteGeneral(item){
+  this.idintificaAnno = item.NPERIODO_PROCESO.toString().substr(0,4)
   let bol = this.Validador("Reporte-General")
   if(bol){
     return

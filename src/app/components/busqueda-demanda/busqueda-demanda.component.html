@@ -4,7 +4,8 @@
     </div>
     
 </header>
-<main class="containerNew app-main">
+
+<main  class="containerNew app-main">
     <section class="" >
         <section class="header">
             <article class="row">
@@ -82,29 +83,29 @@
                     </table>
                 </div>
             </article>
-            <article class="row pt-3" style="margin: 0 auto; width: 100%;">
+            <article id="cont" class="row pt-3" style="margin: 0 auto; width: 100%;">
                 <div class="table-responsive" >
                     <table class="table table-striped table-sm" style="font-size: 12px;">
                         <thead >
                             <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif; ">
-                                <th  scope="col" style="vertical-align: middle;">Fecha y Hora de Búsqueda</th>
-                                <th  scope="col" style="vertical-align: middle;">Usuario que Realizó la Búsqueda</th>
-                                <th  scope="col" style="vertical-align: middle;">Tipo Y Número de Documento</th>
-                                <th  scope="col" style="vertical-align: middle;">Término</th>
-                                <th  scope="col" style="vertical-align: middle; text-align: left;">Nombre/Razón Social</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Fecha y Hora de Búsqueda</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Usuario que Realizó la Búsqueda</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Tipo Y Número de Documento</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Término</th>
+                                <th  scope="col" style="vertical-align: middle; text-align: left;border-bottom: 2px solid rgba(38, 41, 109, 1);">Nombre/Razón Social</th>
                                 <!-- <th scope="col" style="vertical-align: middle;">Tipo de Persona</th> -->
                                 <!-- <th scope="col" style="vertical-align: middle;">Cargo</th> -->
                                 <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1)">% Coincidencia</th>
                                 <th  scope="col" style="vertical-align: middle; text-align: left;border-bottom: 2px solid rgba(38, 41, 109, 1)">Lista</th>
                                 <th  scope="col" style="vertical-align: middle; text-align: left;border-bottom: 2px solid rgba(38, 41, 109, 1)">Fuente</th>
                                 <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1)">Tipo de Coincidencia</th>
-                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1)">Descargar</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1)" >Descargar</th>
                             </tr>
                         </thead>
-                        <tbody [hidden]="encontroRespuesta">
+                        <tbody [hidden]="false">
                             <tr *ngFor="let item of resultadoFinal; let i = index;">
                                 <td  scope="col">{{item.DFECHA_BUSQUEDA}}</td>
-                                <td  scope="col">{{item.SUSUARIO_BUSQUEDA ? item.SUSUARIO_BUSQUEDA : '-'}}</td>
+                                <td  scope="col">{{item.SUSUARIO_BUSQUEDA != '' ? item.SUSUARIO_BUSQUEDA : '-'}} </td>
                                 <td  scope="col">{{item.STIPO_DOCUMENTO}} {{item.SNUM_DOCUMENTO}}</td>
                                 <td  scope="col"><div placement='top' ngbTooltip="{{item.SNOMBRE_TERMINO}}" *ngIf="item.SPROVEEDOR == 'WC'">{{cortarCararterNombre(item.SNOMBRE_TERMINO)}}</div></td>
                                 <td  scope="col"><div placement='top' ngbTooltip="{{item.SNOMBRE_COMPLETO}}">{{cortarCararterNombre(item.SNOMBRE_COMPLETO)}}</div></td>
@@ -114,7 +115,7 @@
                                 <td  scope="col">{{item.SLISTA}}</td>
                                 <td  scope="col">{{item.SPROVEEDOR}}</td>
                                 <td  scope="col">{{item.STIPOCOINCIDENCIA}}</td>
-                                <td class=" text-center" scope="col">
+                                <td class=" text-center" scope="col" >
                                     <img  (click)="exportListToExcelIndividual(i)" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
                                 </td>
                             </tr>
@@ -127,13 +128,23 @@
                     </table>
                 </div>
             </article>
+
+            
         </section>
         <section class="row pt-2" >
-            <article class="row" style="margin: 0 auto; width: 100%; padding-bottom: 100px" >
+            <article class="row justify-content-between" style="margin: 0 auto; width: 100%; padding-bottom: 100px" >
                 <div class="col-md-5 table-responsive" style="padding: 5px 0px 0px 0px;  color: #a0a1cc !important;"> <!-- d-flex justify-content-between  --> <!-- table-responsive -->
-                    <button (click)="exportListToExcel()" class="btn  form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda</button><!-- btn-outline-info -->
+                    <button (click)="exportListToExcel()" class="btn  form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda Excel</button><!-- btn-outline-info -->
                 </div>
-            </article>
+                <div class="col-md-5 table-responsive" style="padding: 5px 30px 0px 0px;  color: #a0a1cc !important;"> 
+                    <button (click)="convertirPdf()" class="btn  form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda en PDF </button>
+                </div>
+             </article>
+              <!-- <article class="row" style="margin: 0 auto; width: 100%; padding-bottom: 100px" >
+                <div class="col-md-5 table-responsive" style="padding: 5px 0px 0px 0px;  color: #a0a1cc !important;"> 
+                    <button (click)="convertirPdf()" class="btn  form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda en PDF </button>
+                </div>
+            </article>    -->
         </section>
     </section>
 </main>

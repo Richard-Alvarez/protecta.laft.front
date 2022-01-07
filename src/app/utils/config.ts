@@ -1,13 +1,13 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/';
+  private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
-  private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
+  //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRODUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
   //private base: string = 'https://soatservicios.protectaseurity.pe/ApiLAFT/api/';
   //private basePolicy: string = 'https://localhost:5001/api/';
@@ -233,6 +233,10 @@ class Rutas {
   public urlGetListaOtrosClientes: string = this.base + "monitoreoSenales/GetListaOtrosClientes"
   public urlGetListaInformes: string = this.base + "monitoreoSenales/GetListaInformes"
   public urlUpdInformes: string = this.base + "monitoreoSenales/UpdInformes"
+  public urlgetCorreo_OC: string = this.base + "monitoreoSenales/getCorreo_OC"
+  public urlUpdActualizarCorreoOC: string = this.base + "monitoreoSenales/UpdActualizarCorreoOC"
+  public urlActulizarContrasenaEncriptada: string = this.base + "monitoreoSenales/ActulizarContrasenaEncriptada"
+  
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
   }

@@ -185,6 +185,7 @@ import { ModalValidarCorreoComponent } from './pages/modal-validar-correo/modal-
 import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/actualizar-contrasenna.component';
 import { TemplateProveedorContraparteComponent } from './components/responsable/templates/template-proveedor-contraparte/template-proveedor-contraparte.component';
 import { ModalGestorLaftComponent } from './pages/modal-gestor-laft/modal-gestor-laft.component';
+import { ModalConfirmacionCorreoComponent } from './pages/modal-confirmacion-correo/modal-confirmacion-correo.component';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -339,7 +340,8 @@ import { ModalGestorLaftComponent } from './pages/modal-gestor-laft/modal-gestor
     ActualizarContrasennaComponent,
     ViewC2ListComponent,
     TemplateProveedorContraparteComponent,
-    ModalGestorLaftComponent
+    ModalGestorLaftComponent,
+    ModalConfirmacionCorreoComponent
 
    
     //Validaciones
@@ -371,7 +373,7 @@ import { ModalGestorLaftComponent } from './pages/modal-gestor-laft/modal-gestor
     
     NO_ERRORS_SCHEMA
   ],
-  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent],
+  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent],
   providers: [UserconfigService, DatePipe],
   bootstrap: [AppComponent],
   exports: [BusquedaDemandaComponent]
