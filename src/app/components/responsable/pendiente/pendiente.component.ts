@@ -1510,7 +1510,7 @@ textHtml
 
 ValidarTexto(texto){
   let textoReemplazado:any = ''
-  let newTexto
+  let newTexto = ''
   debugger
   if(texto.indexOf("[Periodo]") != -1 ){
     newTexto = texto.replace("[Periodo]", this.PeriodoComplemento);

@@ -42,13 +42,14 @@ export class ModalEmailProfileComponent implements OnInit {
   ActivarCombo: boolean = false
   ActivarUser: boolean = false
   ActivarListUser: boolean = false
-
+  PeriodoAsunto:string = ''
   constructor(
     private core: CoreService,
     private userConfig: UserconfigService,
   ) { }
 
   async ngOnInit() {
+    this.PeriodoAsunto =  localStorage.getItem("fechaPeriodo")
     this.ActivarCombo = true
     this.getTitulo()
 
@@ -192,6 +193,7 @@ export class ModalEmailProfileComponent implements OnInit {
       data.SCUERPO_TEXTO = this.convert(this.textoHTML)
       data.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
       data.NCANTIDAD_DIAS = this.CantidadDias
+      //data.PERIODO_ASUNTO = this.PeriodoAsunto
 
     } else {
       mensaje = "¿Está seguro de actualizar la plantilla del correo?"
@@ -209,6 +211,7 @@ export class ModalEmailProfileComponent implements OnInit {
       data.SCUERPO_TEXTO = this.convert(this.ckeditorContent)//this.convert(dataHTML)
       data.SCUERPO_CORREO_DEF = this.ckeditorContent//"" 
       data.NCANTIDAD_DIAS = this.CantidadDias
+      //data.PERIODO_ASUNTO = this.PeriodoAsunto
     }
     let respValidacion: any = {}
     if (this.action == 1 || this.action == 2) {

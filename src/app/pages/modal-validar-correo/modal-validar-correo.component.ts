@@ -51,6 +51,7 @@ export class ModalValidarCorreoComponent implements OnInit {
   public correo:string = ''
   public usuario:string = ''
   public KeyEncrip:any = ''
+  public PeriodoAsunto:string = ''
   @Input() reference: any;
 
   constructor(
@@ -93,7 +94,7 @@ export class ModalValidarCorreoComponent implements OnInit {
    }
 
   async ngOnInit() {
-    
+    this.PeriodoAsunto =  localStorage.getItem("fechaPeriodo")
   }
 
 
@@ -178,12 +179,14 @@ export class ModalValidarCorreoComponent implements OnInit {
       dataEncrip.SENCRIP_ID = this.KeyEncrip
       dataEncrip.SDESENCRIP_ID = EncripID
       dataEncrip.SHASH = hash
-
+     
       await this.userConfigService.GetUpdUsuarioEncriptado(dataEncrip)
       let dataCorreo:any = {}
       dataCorreo.SEMAIL = this.correo.toLowerCase()
       dataCorreo.ID_USER = resultado.ID[0].iD_USUARIO
       dataCorreo.USUARIO = this.usuario.toUpperCase()
+      dataCorreo.PERIODO_ASUNTO = this.PeriodoAsunto
+
       await this.userConfigService.EnvioCorreoActualizacionPass(dataCorreo)
       this.closeModal('edit-modal')
       return

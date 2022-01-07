@@ -124,7 +124,8 @@
     <div class="row pt-1" style="display: flex;justify-content: left;align-items: left;padding: 0px 100px;">
         <div class="col-lg-12" title="Asunto del correo">
             <div class="form-group">
-                <label for="comment" class="fontText">Asunto:</label>
+                <label for="comment" class="fontText">Asunto:</label><br>
+                <label for="comment" class="fontText">Eiqueta si desea que aparezca en el asunto el periodo actual: [Periodo]</label>
                 <textarea class="form-control" style="max-height: 100px; height:150px;min-height: 40px;" (keyup)="onKey($event)"  [(ngModel)]="asunto" id="usSubjectDescription" rows="5" maxlength="200"></textarea>
                 <span class="fontText">Caracteres: {{contador}} de 200</span>
                 
