@@ -49,6 +49,7 @@ export class PendienteComponent implements OnInit {
     @Input() userGroupList:any = []
     @Input() parent:ResponsableComponent
   
+    PeriodoComplemento
 
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,
@@ -60,7 +61,7 @@ export class PendienteComponent implements OnInit {
 
 
   async ngOnInit() {
-
+    this.PeriodoComplemento =  localStorage.getItem("fechaPeriodo")
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
     this.linkactual = link[link.length-1].trim()
@@ -1509,6 +1510,13 @@ textHtml
 
 ValidarTexto(texto){
   let textoReemplazado:any = ''
+  let newTexto
+  debugger
+  if(texto.indexOf("[Periodo]") != -1 ){
+    newTexto = texto.replace("[Periodo]", this.PeriodoComplemento);
+    texto = newTexto;
+
+  }
   textoReemplazado = texto.replace(/\n/g, '<br>');
   //textoReemplazado = document.write(textoReemplazado)
   //return textoReemplazado;

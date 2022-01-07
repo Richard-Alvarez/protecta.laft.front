@@ -1348,6 +1348,12 @@ textHtml
 
 ValidarTexto(texto){
   let textoReemplazado:any = ''
+  let newTexto
+  if(texto.indexOf("[Periodo]") != -1 ){
+    newTexto = texto.replace("[Periodo]", this.PeriodoComplemento);
+    texto = newTexto;
+
+  }
   textoReemplazado = texto.replace(/\n/g, '<br>');
   //textoReemplazado = document.write(textoReemplazado)
   //return textoReemplazado;

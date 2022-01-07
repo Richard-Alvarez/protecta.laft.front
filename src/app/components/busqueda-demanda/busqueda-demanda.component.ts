@@ -819,9 +819,9 @@ swal.fire({
 });
 }
 
-convertirPdf(){
+convertirPdf(item){
 
- 
+ debugger
 
   if(this.resultadoFinal.length === 0){
     let mensaje = 'No existen registros'
@@ -832,8 +832,10 @@ convertirPdf(){
   var col = [["Fecha y Hora de Búsqueda", "Usuario que Realizó la Búsqueda","Tipo Y Número de Documento","Término","Nombre/Razón Social","	% Coincidencia","	Lista","Fuente","Tipo de Coincidencia"]];
   var rows = [];
 
-  
-  var itemNew = this.resultadoFinal
+  let itemArray:any =  []
+  itemArray.push(item)
+
+  var itemNew = itemArray//this.resultadoFinal
   
  
   itemNew.forEach(element => {
