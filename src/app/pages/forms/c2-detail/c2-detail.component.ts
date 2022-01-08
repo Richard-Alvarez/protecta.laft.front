@@ -1383,6 +1383,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         let param :any = {};
         param = new Object(this.TiposMaestros.find(t => t.NIDALERTA == this.formData.NIDALERTA))
         let _param : any = {};
+        _param.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM
         _param.NIDGRUPOSENAL = param.NIDGRUPOSENAL;
         _param.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO;
         _param.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO;

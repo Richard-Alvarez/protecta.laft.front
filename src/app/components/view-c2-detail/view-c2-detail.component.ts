@@ -166,7 +166,12 @@ export class ViewC2DetailComponent implements OnInit {
     }
 
     async getMovementHistory() {        
-        let param = {STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO, NIDREGIMEN: this.formData.NIDREGIMEN}
+        let param = {
+            NPERIODO_PROCESO : this.formData.NPERIODO_PROCESO,
+            STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, 
+            SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO, 
+            NIDREGIMEN: this.formData.NIDREGIMEN
+        }
         this.core.loader.show();
         this.movementHistory = await this.userConfigService.getMovementHistory(param)
         this.core.loader.hide();
