@@ -233,17 +233,33 @@
                                             <div  class="col-1 txtCabecera" >Campo Modificado</div>
                                             <div  class="col-2 txtCabecera" >Usuario de Registro</div>
                                             <div  class="col-1 txtCabecera" >Fecha de Registro</div> 
+                                            <!--<div  class="col-1 txtCabecera" >Usuario</div>
+                                            <div  class="col-2 txtCabecera" >Nombre Completo</div>
+                                            <div  class="col-2 txtCabecera" >Perfil</div>
+                                            <div  class="col-1 txtCabecera" >Cargo</div>
+                                            <div  class="col-2 txtCabecera" >Email</div>
+                                            <div  class="col-1 txtCabecera" >Campo Modificado</div>
+                                            <div  class="col-2 txtCabecera" >Usuario de Registro</div>
+                                            <div  class="col-1 txtCabecera" >Fecha de Registro</div>-->
                                         </div>
                                         <div class="desplace ">
                                             <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of arrListUserLog,let inc = index;">
                                                 <div class="col-1 txtDetalle"  >{{item.USUARIO}}</div>
                                                 <div class="col-2 txtDetalle"  >{{item.NOMBRECOMPLETO}}</div>
                                                 <div class="col-2 txtDetalle"  >{{item.SPERFIL}}</div>
-                                               <div class="col-1 txtDetalle"   >{{item.SCARGO}}</div>                                     
-                                               <div class="col-2 txtDetalle" style="word-wrap: break-word;"  >{{item.SEMAIL}}</div>
-                                               <div class="col-1 txtDetalle"   >{{item.SMODIFICADO}}</div>
-                                               <div class="col-2 txtDetalle"  >{{item.SUSU_MODIFICA}}</div>
-                                               <div class="col-1 txtDetalle"   >{{item.DFECHA_REGISTRO}}</div>
+                                                <div class="col-1 txtDetalle palabrasLargas"  >{{item.SCARGO}}</div>                                     
+                                                <div class="col-2 txtDetalle palabrasLargas"  >{{item.SEMAIL}}</div>
+                                                <div class="col-1 txtDetalle"  >{{item.SMODIFICADO}}</div>
+                                                <div class="col-2 txtDetalle"  >{{item.SUSU_MODIFICA}}</div>
+                                                <div class="col-1 txtDetalle"   >{{item.DFECHA_REGISTRO}}</div>
+                                                <!--<div class="col-1 txtDetalle"  >{{item.USUARIO}}</div>
+                                                <div class="col-2 txtDetalle"  >{{item.NOMBRECOMPLETO}}</div>
+                                                <div class="col-2 txtDetalle"  >{{item.SPERFIL}}</div>
+                                                <div class="col-1 txtDetalle"   >{{item.SCARGO}}</div>                                     
+                                                <div class="col-2 txtDetalle" style="word-wrap: break-word;"  >{{item.SEMAIL}}</div>
+                                                <div class="col-1 txtDetalle"   >{{item.SMODIFICADO}}</div>
+                                                <div class="col-2 txtDetalle"  >{{item.SUSU_MODIFICA}}</div>
+                                                <div class="col-1 txtDetalle"   >{{item.DFECHA_REGISTRO}}</div>-->
                                             </div> 
                                         </div>
                                     </div>

@@ -638,16 +638,19 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
   }
 
   groupClients(listaCoincidencia) {
+    debugger;
     let _items = listaCoincidencia;
     listaCoincidencia = listaCoincidencia.filter((value, index, array) => {
-      return array.map((t) => t.SNOM_COMPLETO).indexOf(value.SNOM_COMPLETO) == index;
+      return array.map((t) => t.NPERIODO_PROCESO_VALID + t.SNOM_COMPLETO).indexOf(value.NPERIODO_PROCESO_VALID + value.SNOM_COMPLETO ) == index;
     });
+
+
     listaCoincidencia.forEach((t) => {
       // console.log(t);
       t.ISVISIBLE = true;
       t.NIDALERTA = this.Alerts.find(t => t.idGrupo == this.idGrupo).idAlerta;
       t.ARRAY_IDTIPOLISTA = _items
-        .filter((i) => i.SNOM_COMPLETO == t.SNOM_COMPLETO)
+        .filter((i) => i.SNOM_COMPLETO == t.SNOM_COMPLETO && i.NPERIODO_PROCESO_VALID == t.NPERIODO_PROCESO_VALID)
         .map((f) => f.NIDTIPOLISTA);
     });
     return listaCoincidencia;
@@ -1086,7 +1089,8 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       }
       let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
       localStorage.setItem("NIDALERTA", data.NIDALERTA);
-      debugger
+      localStorage.setItem("NPERIODO_PROCESO_ITEM", item.NPERIODO_PROCESO_VALID);
+      
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
@@ -1261,6 +1265,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     let obj: any = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
     localStorage.setItem("NIDALERTA", obj.NIDALERTA)
     localStorage.setItem("NPERIODO_PROCESO", this.NPERIODO_PROCESO + '')
+    localStorage.setItem("NPERIODO_PROCESO_ITEM", item.NPERIODO_PROCESO_VALID);
     localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
     localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN)
     localStorage.setItem("SFECHA_NACIMIENTO", item.DFECHA_NACIMIENTO)
