@@ -2,6 +2,9 @@
 .container{
     font-family: 'Roboto', sans-serif;
 }
+.palabrasLargas{
+  word-wrap: break-word;
+}
 .styleButtonActive{
     background: #26296D 0% 0% no-repeat padding-box;
     color: white;

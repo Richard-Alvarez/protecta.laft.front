@@ -45,7 +45,7 @@
     "html2canvas": "^1.3.3",
     "igniteui-angular": "^8.2.31",
     "jquery": "^3.6.0",
-    "jspdf": "^2.4.0",
+    "jspdf": "^2.5.0",
     "jspdf-autotable": "^3.5.23",
     "jszip": "^3.7.1",
     "mdbootstrap": "^4.20.0",
