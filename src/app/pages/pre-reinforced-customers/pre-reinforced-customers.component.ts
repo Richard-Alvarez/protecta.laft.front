@@ -21,7 +21,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
   respClientesRefor = [];
   NPERIODO_PROCESO;
   NIDALERTA;
-  NIDREGIMEN;
+  NIDREGIMEN: number = 1;
   SESTADO_TRAT;
   arrayFinalCliRefor = [];
   txtBuscador;
@@ -35,7 +35,6 @@ export class PreReinforcedCustomersComponent implements OnInit {
   @Input() parent: CustomerManagerComponent
   @Input() parentCRF
   initializePage = 1
-
   constructor(
     private userConfigService: UserconfigService,
     private core: CoreService,
@@ -302,58 +301,58 @@ export class PreReinforcedCustomersComponent implements OnInit {
 
   
 
-  async getSwalOptionClient(data,dataService,indice){
+  // async getSwalOptionClient(data,dataService,indice){
 
-    swal.fire({
-      title: 'Cliente Revisado',
-      icon: 'warning',
-      text: data.pregunta,
-      showCancelButton: true,
-      showConfirmButton: true,
-      // cancelButtonColor: '#545b62',
-      confirmButtonColor:'#FA7000',
-      confirmButtonText: data.boton1,
-      cancelButtonText: 'Cancelar',
-      showCloseButton: true,
-      customClass: { 
-        closeButton : 'OcultarBorde'
-                     }
-    }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
+  //   swal.fire({
+  //     title: 'Cliente Revisado',
+  //     icon: 'warning',
+  //     text: data.pregunta,
+  //     showCancelButton: true,
+  //     showConfirmButton: true,
+  //     // cancelButtonColor: '#545b62',
+  //     confirmButtonColor:'#FA7000',
+  //     confirmButtonText: data.boton1,
+  //     cancelButtonText: 'Cancelar',
+  //     showCloseButton: true,
+  //     customClass: { 
+  //       closeButton : 'OcultarBorde'
+  //                    }
+  //   }).then(async (result) => {
+  //     /* Read more about isConfirmed, isDenied below */
     
-      if (result.value) {
+  //     if (result.value) {
         
-         this.spinner.show()
+  //        this.spinner.show()
        
-        let respServiceUpd = await this.userConfigService.UpdateTratamientoCliente(dataService);
-        try {
-          await this.parent.getClientsByTratamiento()
-        } catch (error) {
+  //       let respServiceUpd = await this.userConfigService.UpdateTratamientoCliente(dataService);
+  //       try {
+  //         await this.parent.getClientsByTratamiento()
+  //       } catch (error) {
          
-        }
-          this.spinner.hide()
-         swal.fire({
-          title:'Eliminado  con éxito',
-            text:'',
-           icon: 'warning',
-           confirmButtonColor: "#FA7000",
+  //       }
+  //         this.spinner.hide()
+  //        swal.fire({
+  //         title:'Eliminado  con éxito',
+  //           text:'',
+  //          icon: 'warning',
+  //          confirmButtonColor: "#FA7000",
 
-           showCloseButton: true,
-           customClass: { 
-            closeButton : 'OcultarBorde'
-                         }
-         })
+  //          showCloseButton: true,
+  //          customClass: { 
+  //           closeButton : 'OcultarBorde'
+  //                        }
+  //        })
         
-        // //let valorIndice = this.eliminarFila("")
+  //       // //let valorIndice = this.eliminarFila("")
        
 
-      } else {
-        return
-        //swal.fire('Changes are not saved', '', 'info')
-      }
-      //await this.parent.getResultsList()
-    })
-  }
+  //     } else {
+  //       return
+  //       //swal.fire('Changes are not saved', '', 'info')
+  //     }
+  //     //await this.parent.getResultsList()
+  //   })
+  // }
 
   eliminarFila(arrayQuitarRegistro){
     //this.arrResultados.splice(arrayQuitarRegistro, 1)
@@ -378,6 +377,7 @@ export class PreReinforcedCustomersComponent implements OnInit {
   arrResultadoFilter: any = []
   getBuscarClient(){
       // this.arrResultadoFilter = this.arrResultados
+      //this.arrResultados = this.parent.getserviceRevisado();
        return this.arrResultados.filter(t=>t.ISVISIBLE) //this.arrResultadoFilter.length > 0 ? this.arrResultadoFilter : this.arrResultados
   }
 
@@ -451,5 +451,8 @@ export class PreReinforcedCustomersComponent implements OnInit {
       })
       return
     }
+  }
+  BuscarTratamiento(){
+    
   }
 }
