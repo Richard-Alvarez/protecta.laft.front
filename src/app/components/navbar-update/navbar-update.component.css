@@ -166,77 +166,16 @@ border-radius: 3px;}
 
 
 
-
-
- .checkbox {
-  position: absolute;
-  display: block;
-  height: 32px;
-  width: 32px;
-  top: 20px;
-  left: 20px;
-  z-index: 5;
-  opacity: 0;
-  cursor: pointer;
+/**************************************/
+#head-1{
+  float:left;width: 10%;background-color: darkkhaki;height: 100px;text-align: center;padding-top:30px;
 }
-
-.hamburger-lines {
-  display: block;
-  height: 26px;
-  width: 32px;
-  position: absolute;
-  top: 17px;
-  left: 20px;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+#head-2{
+  float:left;width: 50%;background-color: burlywood;height: 100px;
 }
-
- .hamburger-lines .line {
-  display: block;
-  height: 4px;
-  width: 100%;
-  border-radius: 10px;
-  background: #0e2431;
+#head-3{
+  float:left;width: 40%;background-color: cyan;height: 100px;
 }
-
-.hamburger-lines .line1 {
-  transform-origin: 0% 0%;
-  transition: transform 0.4s ease-in-out;
-}
-
- .hamburger-lines .line2 {
-  transition: transform 0.2s ease-in-out;
-}
-
-.hamburger-lines .line3 {
-  transform-origin: 0% 100%;
-  transition: transform 0.4s ease-in-out;
-}
-
-
-
-input[type="checkbox"]:checked ~ .menu-items {
-  transform: translateX(0);
-}
-
- input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
-  transform: rotate(45deg);
-}
-
- input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
-  transform: scaleY(0);
-}
-
- input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
-  transform: rotate(-45deg);
-}
-
- input[type="checkbox"]:checked ~ .logo{
-  display: none;
-}
-
 
 .welcome__icon {
   font-size: 30px;
@@ -247,4 +186,40 @@ input[type="checkbox"]:checked ~ .menu-items {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+@media screen and (max-width: 1050px){
+  .container{
+    grid-gap: 5rem;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  form{
+    width: 290px;
+  }
+
+  .login-content h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+  }
+
+  .img img{
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 900px){
+  #head-1{
+    float:left;width: 20%;background-color: darkkhaki;height: 100px;text-align: center;padding-top:30px;
+  }
+  #head-2{
+    float:left;width: 80%;background-color: burlywood;height: 100px;
+  }
+  #head-3{
+    display: none;
+    /* float:left;width: 40%;background-color: cyan;height: 100px; */
+  }
+  
 }

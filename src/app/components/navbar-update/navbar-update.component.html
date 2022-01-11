@@ -1,5 +1,31 @@
-<div id="cabecera" class="container-fluid"  style="background: rgb(240, 238, 237);margin: 0px;float: top;z-index:4;top:0; position: sticky;max-height: 100px;">
-    <div class="row" >
+<div id="cabecera" class="container-fluid"  style="background: rgb(240, 238, 237);margin: 0px;float: top;z-index:4;top:0; position: sticky;max-height: 100px;padding: 0px;">
+  <div id="head-1" style="">
+    <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" (click)="openNav()"></span> 
+  </div>
+  <div id="head-2" style="">
+    <a  (click)="Home()" style="cursor: pointer;">
+        <img src="assets/img/logo-protecta.svg" alt="Protecta Security" style="position: relative;height:100px">
+    </a>
+  </div>
+  <div id="head-3" style="">
+    
+        <div class="" style="padding-top: 25px;float: left;width: 80%;" >
+            <div class="" style="float:right;font-weight: 500;">
+                Usuario:  RICHI
+                <br>
+                Oficial de Cumplimiento
+              </div>
+            </div>
+              
+       
+        
+        <div class="" style="padding-top: 25px;padding-right: 20px;float: right;">
+          <i class="fa fa-user welcome__icon"  aria-hidden="true"></i>
+        </div>
+    
+  </div>
+
+    <!-- <div class="row" >
         <div class="col-1" style="background-color: blue;">
            <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" (click)="openNav()"></span> 
            
@@ -14,20 +40,26 @@
         <div class="col-4" style="background-color: red;">
                
                  <div class="row">
-                   <div class="col-8"  style="height: 100px;">
-                     Richard Alvarez Ruiz
-                     <br>
-                     Oficial de Cumplimiento
+                  
+                   <div class="col-10"  style="height: 100px; padding-right: 0px;">
+                    <div class="" style="padding-top: 25px;float:right;">
+                      Usuario:  RICHI
+                      <br>
+                      Oficial de Cumplimiento
+                    </div>
+                     
                    </div>
-                   <div class="col-4"  style="height: 100px;">
-                    <i class="fa fa-user welcome__icon"  aria-hidden="true"></i>
-                   </div>
-                 </div>
+                    <div class="col-2"  style="height: 100px;">
+                        <div class="" style="padding-top: 25px;">
+                          <i class="fa fa-user welcome__icon"  aria-hidden="true" style="float:right;"></i>
+                        </div>
+                    </div>
+          </div>
              
            
             
         </div>
-    </div>   
+    </div>    -->
 </div>
 <!-- <div *ngIf="Ocultar()" id="cabecera" class="container-fluid"  
 style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:0;">
