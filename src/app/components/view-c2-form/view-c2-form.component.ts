@@ -582,6 +582,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     }
 
     async goToDetail(item: any, lista: any, idElement: any, idElementSubGroup: any, subgruponame: any) {
+        debugger
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition: any = {}
