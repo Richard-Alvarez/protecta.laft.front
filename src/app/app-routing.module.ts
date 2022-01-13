@@ -85,6 +85,7 @@ import { BusquedaDemandaComponent } from './components/busqueda-demanda/busqueda
 import { NavbarUpdateComponent } from './../app/components/navbar-update/navbar-update.component';
 import { InformesComponent } from './../app/components/informes/informes.component';
 import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/actualizar-contrasenna.component';
+import { SearchforregimenComponent } from './pages/searchforregimen/searchforregimen.component';
 //fin formularios antiguos
 
 const routes: Routes = [
@@ -128,6 +129,7 @@ const routes: Routes = [
   { path: 'proveedor',component: ProveedorComponent},
   { path: 'contraparte', component: ContraparteComponent },
   { path: 'colaborador', component: ColaboradorComponent },
+  { path: 'searchforregimen', component: SearchforregimenComponent },
   { path: 'perfiles', component: PerfilesComponent },
 
   { path: 'view-form-database', component: ViewFormDatabaseComponent },

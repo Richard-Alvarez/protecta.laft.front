@@ -219,6 +219,7 @@ class Rutas {
   public urlLeerDataExcel: string = this.base + "monitoreoSenales/LeerDataExcel";
   public urlGetRegistrarDatosExcelGC: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
   public urlGetRegistrarDatosExcelDemanda: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
+  public urlGetClientsforRegimen: string = this.base + "monitoreoSenales/GetClientsforRegimen";
 
   //VALIDAR SI EXISTE UN USUSARIO
   public urlGetValidarExisteCorreo: string = this.base + "monitoreoSenales/GetValidarExisteCorreo";
