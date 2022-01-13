@@ -30,13 +30,7 @@ export class SearchforregimenComponent implements OnInit {
     private SbsreportService: SbsreportService,
     private excelService: ExcelService,
     private spinner: NgxSpinnerService
-    ) { 
-   this.config = {
-      itemsPerPage: 10,
-      currentPage: 1,
-      totalItems: this.Colleccion.count
-    };
-  }
+    ) { }
 
   async ngOnInit() {
     await this.fillCombos();
@@ -80,15 +74,16 @@ export class SearchforregimenComponent implements OnInit {
     );
   }
   pageChanged(currentPage) {
+    debugger
     this.currentPage = currentPage;
-    this.data = this.data.slice(
+    this.Colleccion.data = this.data.slice(
       (this.currentPage - 1) * this.itemsPerPage,
       this.currentPage * this.itemsPerPage
     );
   }
   descarga(){
     let data :any = []
-    this.Colleccion.data.forEach(element => {
+    this.data.forEach(element => {
       let _data : any = {}
       _data["Periodo"] = element.SRANGOPERIODO;
       _data["Tipo de Documento"] = element.SDESCRIPT;
