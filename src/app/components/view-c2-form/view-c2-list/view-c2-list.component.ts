@@ -37,11 +37,13 @@ countView = 0
         let arrDuplid = []
         let arrRespuesta = []
         resp.forEach(itemRes => {
-            let respDuplid = arrDuplid.filter(duplid => duplid == itemRes.SNOM_COMPLETO)
-
+            
+            //let respDuplid = arrDuplid.filter(duplid => duplid == itemRes.SNOM_COMPLETO)
+            let respDuplid = arrDuplid.filter(duplid => duplid == itemRes.SCLIENT)
+            
             if (respDuplid.length  == 0) {
                 arrRespuesta.push(itemRes)
-                arrDuplid.push(itemRes.SNOM_COMPLETO)
+                arrDuplid.push(itemRes.SCLIENT)
             }
         })
         

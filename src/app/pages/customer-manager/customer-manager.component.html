@@ -39,14 +39,14 @@
                       </label>
              </div>  -->
         <div class="col-3" style="padding-top: 28px;">
-            <div class="custom-file mb-3" *ngIf="idGrupo !== 1 && idGrupo.toString() !== '1'  && (idGrupo.toString() !== '2' && idSubGrupo.toString() !== '0')">
+            <div class="custom-file mb-3" *ngIf=" !(idGrupo == 1)  &&  !(idGrupo == 3 && idSubGrupo == 0 )">
 
                 <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" value="seleccionar" (change)="setDataFile($event)">
                 <label class="custom-file-label" for="customFile" style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
             </div>
         </div>
 
-        <div class="col-1" style="padding-top: 28px;" *ngIf="(idGrupo !== 1  && idGrupo.toString() !== '1') && (idGrupo.toString() !== '2' && idSubGrupo.toString() !== '0')">
+        <div class="col-1" style="padding-top: 28px;" *ngIf=" !(idGrupo == 1)  &&  !(idGrupo == 3 && idSubGrupo == 0 )">
             <button class="btn btnRegistrar" (click)="RegistrarArchivo()">Registrar</button>
 
         </div>
