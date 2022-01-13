@@ -70,7 +70,7 @@
                             <tr *ngIf="this.Colleccion.count == 0 || this.Colleccion.count == undefined" class="ce">
                                 <td class="text-center" colspan="6">No se han encontrado resultados</td>
                             </tr>
-                            <tr *ngFor="let item of this.Colleccion.data | paginate : config">
+                            <tr *ngFor="let item of this.Colleccion.data ">
                                 <td style="width: 16%;">{{item.SRANGOPERIODO}}</td>
                                 <td style="width: 12%;">{{item.SDESCRIPT}}</td>
                                 <td style="width: 12%;">{{item.SCLINUMDOCU}}</td>
@@ -80,7 +80,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <ng-container *ngIf="this.data!=null && this.data.length>0; then showPagination"></ng-container>
+                    <ng-container *ngIf="this.data.length>0; then showPagination"></ng-container>
                     <ng-template #showPagination>
                         <div class="row mt-4">
                             <div class="col-sm-12">
