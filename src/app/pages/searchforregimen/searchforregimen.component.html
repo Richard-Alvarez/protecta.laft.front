@@ -83,7 +83,11 @@
                     <ng-container *ngIf="this.data.length>0; then showPagination"></ng-container>
                     <ng-template #showPagination>
                         <div class="row mt-4">
-                            <div class="col-sm-12">
+                            <div class="col-sm-4">
+                                <button (click)="descarga()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados </button>
+
+                            </div>
+                            <div class="col-sm-4">
                                 <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage" [collectionSize]="totalItems" [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
                                 </ngb-pagination>
                             </div>
