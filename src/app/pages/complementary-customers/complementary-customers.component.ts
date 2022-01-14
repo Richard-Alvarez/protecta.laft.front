@@ -337,7 +337,7 @@ export class ComplementaryCustomersComponent implements OnInit {
 
         let respServiceUpd = await this.userConfigService.UpdateTratamientoCliente(dataService);
         try {
-          await this.parent.getClientsByTratamiento()
+          await this.parent.getserviceComplementario()
         } catch (error) {
           console.error("El error :" ,error)
         }

@@ -1,34 +1,50 @@
-/* The side navigation menu */
-.sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: #333; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  /*padding-top: 60px;  Place content 60px from the top */
-  transition: all 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.5);
+body {
+  font-family: "Lato", sans-serif;
 }
 
-/* The navigation menu links */
+.caja{
+  height: 100%;
+  width: 0;
+  background-color: rgb(228, 224, 224);
+  left: 0;
+  position: fixed;
+  z-index: 2;
+}
+
+.sidenav {
+
+  height:100vh;
+  width: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 3;
+  background-color:rgb(228, 224, 224);
+  position: fixed;
+  overflow-y: auto;
+  transition: 0.5s;
+  padding-top: 60px;
+  padding-bottom: 40%;
+
+}
+
 .sidenav a {
-  padding: 8px 8px 8px 32px;
+ 
+  padding-left: 8px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 0px;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+  font-size: 20px;
+  color: #484141;
   display: block;
   transition: 0.3s;
 }
 
-/* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-  color: #f1f1f1;
+  color: #0e0c0c;
 }
 
-/* Position and style the close button (top right corner) */
 .sidenav .closebtn {
   position: absolute;
   top: 0;
@@ -37,151 +53,173 @@
   margin-left: 50px;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-  transition: margin-left .5s;
-  padding: 20px;
+#arrayMenu {
+  overflow-y: scroll;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
+@media screen {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
 
 
-.header {
-  width: 100%;
-  height: var(--header-height);
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 1rem;
-  background-color: var(--white-color);
-  z-index: var(--z-fixed);
-  transition: .5s;
-  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.5);
+.abrirNav {
+  width: 350px;
 }
 
-.header_toggle {
-  color: var(--first-color);
-  font-size: 1.5rem;
-  cursor: pointer
+.cerrarNav {
+  width: 0px;
 }
 
-.header_img {
-  width: 320px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  /* border-radius: 50%; */
-  overflow: hidden
+.abrirCuerpo {
+  margin-left: 0px;
 }
 
-.header_img img {
-  width: 280px
+.cerrarCuerpo {
+  margin-left: 350px;
 }
 
+/***EL SUBMENU***/
 
+.sideNav2 {
+  display: none;
+}
 
-/***** Sidebar *****/
-
-
-
-.sidebar ul.menu-elements {
-  padding: 10px 0;
-  border-bottom: 1px solid #444;
-  transition: all .3s;
+.sideNav2 a {
+  font-size: 15px;
+  padding-left: 50px;
+  padding-top: 8px;
+  
   
 }
-
-.sidebar ul li a {
-  display: block;
-  padding: 15px 20px;
-  border: 0;
-  color: #fff;
-  font-size: 18px;
-  font-family:  'Roboto',sans-serif;
-  width: 300px;
+.sideNav2 a:hover {
+  color: #2f3697;
 }
 
-.sidebar ul li a:hover,
-.sidebar ul li a:focus,
-.sidebar ul li.active > a:hover,
-.sidebar ul li.active > a:focus {
-  outline: 0;
-  background: #555;
-  color: #fff;
+
+
+.reducirCuerpo {
+    margin-left: 350px;
 }
 
-.sidebar ul li a i {
-  margin-right: 5px;
+
+.sidenav::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+.sidenav::-webkit-scrollbar{
+  width: 5px;
+    background-color: #F5F5F5;
+}
+.sidenav::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
 }
 
-.sidebar ul li.active > a,
-a[aria-expanded="true"] {
-  background: #444;
-  color: #fff;
+.PositionAbsolute{
+  position: sticky ;
 }
 
-.sidebar ul ul a {
-  background: #444;
-  padding-left: 30px;
-  font-size: 14px;
+.PositionFixed{
+  position: fixed ;
 }
 
-.sidebar ul ul li.active > a {
-  background: #555;
-}
 
-.sidebar a[data-toggle="collapse"] {
-  position: relative;
-}
-
-.sidebar .dropdown-toggle::after {
-  display: block;
+#navbar-toggle {
   position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+  top: -99999px;
+  left: -99999px;
+  opacity: 0;
+  visibility: hidden;
 }
 
-.sidebar .logo {
-  padding: 40px 20px;
-  border-bottom: 1px solid #444;
-  transition: all .3s;
-  width: 300px;
+.nav-menu {
+  display: none;
 }
 
-.sidebar .logo a {
-  display: inline-block;
-  width: 172px;
-  height: 34px;
-  background: url(../../../assets/img/prueba.png) left top no-repeat;
-  border: 0;
-  text-indent: -999999px;
+#navbar-toggle:checked + label .nav-menu {
+  display: block;
 }
 
-.dismiss {
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  transition: all .3s;
-  background: #444;
-  border-radius: 4px;
+.open-button {
+  background: #c42d2d;
+  color: #fff;
+  width: 150px;
   text-align: center;
-  line-height: 35px;
-  cursor: pointer;
+  padding: 10px 0;
+  box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.22);
+  border-radius: 5px;
+  cursor:pointer
+}
+.menu{    background: #333;
+color: #fff;
+padding: 15px;
+margin-top: 10px;
+width: 150px;
+border-radius: 3px;}
+
+
+
+
+
+
+
+/**************************************/
+#head-1{
+  float:left;width: 10%;background-color: darkkhaki;height: 100px;text-align: center;padding-top:30px;
+}
+#head-2{
+  float:left;width: 50%;background-color: burlywood;height: 100px;
+}
+#head-3{
+  float:left;width: 40%;background-color: cyan;height: 100px;
 }
 
-.dismiss:hover,
-.dismiss:focus {
-  background: #555;
-  color: #fff;
+.welcome__icon {
+  font-size: 30px;
+  border: 2px solid #2b0d61;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+
+@media screen and (max-width: 1050px){
+  .container{
+    grid-gap: 5rem;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  form{
+    width: 290px;
+  }
+
+  .login-content h2{
+        font-size: 2.4rem;
+        margin: 8px 0;
+  }
+
+  .img img{
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 900px){
+  #head-1{
+    float:left;width: 20%;background-color: darkkhaki;height: 100px;text-align: center;padding-top:30px;
+  }
+  #head-2{
+    float:left;width: 80%;background-color: burlywood;height: 100px;
+  }
+  #head-3{
+    display: none;
+    /* float:left;width: 40%;background-color: cyan;height: 100px; */
+  }
+  
+}

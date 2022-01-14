@@ -20,7 +20,7 @@ export class ReinforcedCustomersComponent implements OnInit {
   respClientesRefor = [];
   NPERIODO_PROCESO;
   NIDALERTA;
-  NIDREGIMEN;
+  NIDREGIMEN : number= 1;
   SESTADO_TRAT;
   arrayFinalCliRefor = [];
   txtBuscador;
@@ -495,7 +495,7 @@ async getSwalOptionClient(data,dataService,indice){
 
         let respServiceUpd = await this.userConfigService.UpdateTratamientoCliente(dataService);
         try {
-          await this.parent.getClientsByTratamiento()
+          await this.parent.getserviceReforzado()
         } catch (error) {
           
         }

@@ -1,84 +1,118 @@
-<div id="mySidenav" class="sidenav">
+<div id="cabecera" class="container-fluid"  style="background: rgb(240, 238, 237);margin: 0px;float: top;z-index:4;top:0; position: sticky;max-height: 100px;padding: 0px;">
+  <div id="head-1" style="">
+    <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" (click)="openNav()"></span> 
+  </div>
+  <div id="head-2" style="">
+    <a  (click)="Home()" style="cursor: pointer;">
+        <img src="assets/img/logo-protecta.svg" alt="Protecta Security" style="position: relative;height:100px">
+    </a>
+  </div>
+  <div id="head-3" style="">
+    
+        <div class="" style="padding-top: 25px;float: left;width: 80%;" >
+            <div class="" style="float:right;font-weight: 500;">
+                Usuario:  RICHI
+                <br>
+                Oficial de Cumplimiento
+              </div>
+            </div>
+              
+       
+        
+        <div class="" style="padding-top: 25px;padding-right: 20px;float: right;">
+          <i class="fa fa-user welcome__icon"  aria-hidden="true"></i>
+        </div>
+    
+  </div>
 
-  <nav class="sidebar">
-    <div class="dismiss" (click)="closeNav()">
-      <!-- <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a> -->
-      <!-- <a (click)="closeNav()" href="javascript:void(0)" class="closebtn" ><i class="fas fa-arrow-left"  ></i></a> -->
-      <i class="fas fa-arrow-left">&times;</i>
-    </div>
-    <div class="logo">
-      <h3 style="display: flex;justify-content: center;"><a href="index.html">Bootstrap 4 Template with Sidebar Menu</a>
-      </h3>
-    </div>
-    <ul class="list-unstyled menu-elements">
-      <li class="active">
-        <a class="scroll-link" href="#top-content"><i class="fas fa-home"></i>Inicio</a>
-      </li>
-      <li *ngFor="let option of optionList; let index = index;">
-
-        <a *ngIf="option.nTieneHijo == 0" [routerLink]="['/' + option.sRouterLink]">T
-
-
-          <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
-
-        </a>
-        <a *ngIf="option.nTieneHijo == 1">
-          <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
-
-        </a>
-
-
-
-      </li>
-      <li>
-        <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button"
-          aria-controls="otherSections">
-          <i class="fas fa-sync"></i>Consultas
-        </a>
-        <ul class="collapse list-unstyled" id="otherSections">
-          <li>
-            <a class="scroll-link" href="#section-3">Our projects</a>
-          </li>
-          <li>
-            <a class="scroll-link" href="#section-4">We think that...</a>
-          </li>
-        </ul>
-      </li>
-      <!-- <li>
-        <a class="scroll-link" href="#section-1"><i class="fas fa-cog"></i> Usuario</a>
-      </li>
-      <li>
-        <a class="scroll-link" href="#section-2"><i class="fas fa-user"></i> Configuracion</a>
-      </li>
-      <li>
-        <a class="scroll-link" href="#section-5"><i class="fas fa-pencil-alt"></i> Modulo de Trabajo</a>
-      </li>
-      <li>
-        <a class="scroll-link" href="#section-6"><i class="fas fa-envelope"></i> Gestor LAFT</a>
-      </li> -->
-
-      <li>
-        <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button"
-          aria-controls="otherSections">
-          <i class="fas fa-sync"></i>Consultas
-        </a>
-        <ul class="collapse list-unstyled" id="otherSections">
-          <li>
-            <a class="scroll-link" href="#section-3">Our projects</a>
-          </li>
-          <li>
-            <a class="scroll-link" href="#section-4">We think that...</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-
-  </nav>
-
+    <!-- <div class="row" >
+        <div class="col-1" style="background-color: blue;">
+           <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" (click)="openNav()"></span> 
+           
+        </div>
+        <div class="col-7" style="background-color: yellow;">
+            
+            <a  (click)="Home()" style="cursor: pointer;">
+                <img src="assets/img/logo-protecta.svg" alt="Protecta Security" style="position: relative;height:100px">
+            </a>
+            
+        </div>
+        <div class="col-4" style="background-color: red;">
+               
+                 <div class="row">
+                  
+                   <div class="col-10"  style="height: 100px; padding-right: 0px;">
+                    <div class="" style="padding-top: 25px;float:right;">
+                      Usuario:  RICHI
+                      <br>
+                      Oficial de Cumplimiento
+                    </div>
+                     
+                   </div>
+                    <div class="col-2"  style="height: 100px;">
+                        <div class="" style="padding-top: 25px;">
+                          <i class="fa fa-user welcome__icon"  aria-hidden="true" style="float:right;"></i>
+                        </div>
+                    </div>
+          </div>
+             
+           
+            
+        </div>
+    </div>    -->
 </div>
-<header class="header" id="header">
-  <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span>
-  <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-  <div class="header_img"> <img src="../../../assets//img/logo.png" alt=""> </div>
-</header>
+<!-- <div *ngIf="Ocultar()" id="cabecera" class="container-fluid"  
+style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:0;">
+    <div class="row" >
+        <div class="col-1 mt-4 mb-4 ml-4 mr-2" >
+            <span class="fas fa-bars"  style="font-size:30px;cursor:pointer" ></span>
+        </div>
+        <div class="col-3 mt-1 mb-1 " (click)="Home()"  style="cursor: pointer;">
+            <img src="assets/img/logo-protecta.svg" alt="Protecta Security" >
+        </div>
+       
+    </div>   
+
+
+</div> -->
+
+<div class="sidenav" #mySidenav >
+
+    <a  class="closebtn mt-1" style="cursor:pointer;" (click)="closeNav()">&times;</a>
+    
+    <div  *ngFor="let option of optionList; let index = index;" (click)="activeSidenav(index)" id="{{index}}">
+       
+        <a *ngIf="option.nTieneHijo == 1" >
+            <span  class="fas fa-angle-right col-lg-1"  style="font-size:20px;cursor:pointer"></span>
+            
+            <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
+            
+        </a>
+        <a *ngIf="option.nTieneHijo == 0" [routerLink]="['/' + option.sRouterLink]">
+            <span *ngIf="option.nTieneHijo == 1" class="fas fa-angle-right col-lg-1"  style="font-size:20px;cursor:pointer"></span>
+            
+            <span class="col-lg-11" style="white-space: initial;">{{ option.sName }}</span>
+            
+        </a>
+        
+        
+        
+        <div *ngFor="let subM of optionListSubMenu" class="sideNav2 col-lg-12">
+            <div  (click)="changeClient($event)" id="{{ subM.sName }}">
+                <a *ngIf="subM.nFatherId == option.nResourceId" [routerLink]="['/' + subM.sRouterLink]" >{{ subM.sName }}</a>
+            </div>
+           
+            
+        </div>
+        
+        <hr>
+
+    </div>
+    <div class="close-window col-lg-11" style="cursor: pointer;" >
+        <a  (click)="CerrarSession()" >Cerrar Sesión</a>
+    
+    
+</div> 
+
+
+

@@ -213,7 +213,6 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.error("EL error : ", error)
     }
-    await this.getClientsByTratamiento()
 
     //await this.ListaDeCoincidencias(this.idGrupo)
     this.spinner.hide()
@@ -696,14 +695,24 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       return "Descargar lista de coincidencias de contraparte"
     }
   }
-  async getClientsByTratamiento() {
+ 
+  async getserviceRevisado(){
     this.spinner.show()
     let respCRE = await this.getDataResultadoTratamiento('CRE')
-    let respCCO = await this.getDataResultadoTratamiento('CCO')
     this.arrClientesRevisado = await this.groupClients(respCRE)
-    this.arrClientesCompl = await this.groupClients(respCCO)
-    await this.getserviceReforzado()
     this.spinner.hide()
+  }
+  async getserviceComplementario(){
+    this.spinner.show()
+    let respCRE = await this.getDataResultadoTratamiento('CCO')
+    this.arrClientesCompl = await this.groupClients(respCRE)
+    this.spinner.hide()
+  }
+  async getserviceReforzado(){
+    let respCRF = await this.getDataResultadoTratamiento('CRF')
+    let respClientesCoincidencias = await this.getDataResultadoCoincidenciasPen()
+    this.arrClientesRefor = await this.groupClients(respCRF)
+    this.arrClientesCoincid = await this.groupClients(respClientesCoincidencias.lista)
   }
 
   async getDataResultadoTratamiento(SESTADO_TRAT) {
@@ -718,12 +727,6 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     return respDataTrat
   }
 
-  async getserviceReforzado() {
-    let respCRF = await this.getDataResultadoTratamiento('CRF')
-    let respClientesCoincidencias = await this.getDataResultadoCoincidenciasPen()
-    this.arrClientesRefor = await this.groupClients(respCRF)
-    this.arrClientesCoincid = await this.groupClients(respClientesCoincidencias.lista)
-  }
   async getDataResultadoCoincidenciasPen() {
     let data: any = {};
     data.NPERIODO_PROCESO = this.NPERIODO_PROCESO;

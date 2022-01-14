@@ -186,6 +186,7 @@ import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/a
 import { TemplateProveedorContraparteComponent } from './components/responsable/templates/template-proveedor-contraparte/template-proveedor-contraparte.component';
 import { ModalGestorLaftComponent } from './pages/modal-gestor-laft/modal-gestor-laft.component';
 import { ModalConfirmacionCorreoComponent } from './pages/modal-confirmacion-correo/modal-confirmacion-correo.component';
+import { SearchforregimenComponent } from './pages/searchforregimen/searchforregimen.component';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -341,7 +342,8 @@ import { ModalConfirmacionCorreoComponent } from './pages/modal-confirmacion-cor
     ViewC2ListComponent,
     TemplateProveedorContraparteComponent,
     ModalGestorLaftComponent,
-    ModalConfirmacionCorreoComponent
+    ModalConfirmacionCorreoComponent,
+    SearchforregimenComponent
 
    
     //Validaciones
@@ -367,7 +369,7 @@ import { ModalConfirmacionCorreoComponent } from './pages/modal-confirmacion-cor
     // MenuItem,
     ReactiveFormsModule,
     //TooltipModule
-    FileUploadModule,
+    FileUploadModule
   ],
   schemas: [
     

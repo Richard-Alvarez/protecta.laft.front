@@ -1,0 +1,108 @@
+<app-navbar></app-navbar>
+<main class="container-fluid app-main pl-5 pr-5">
+    <div class="row  pl-5 pr-5">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+      <span class="fas fa-chevron-left"></span> Pantalla Principal
+    </button>
+    </div>
+
+    <br>
+    <div class="container-fluid pl-5 pr-5">
+        <div class="row2">
+            <div class="col-lg-19">
+                <h4 class="TitleLine">Búsqueda por régimen</h4>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div class="borderFormat">
+                <div class="row form-group">
+                    <div class="col-lg-1">
+                        <span class="fontText">Año:</span>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-control" [(ngModel)]="NANO">
+                            <option value="0">
+                                --Todos--</option>
+                            <option *ngFor="let item of this.listAnos" value="{{item}}">
+                                {{item}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2" style="margin-right: -60px;">
+                        <span class="fontText">Periodo:</span>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-control" [(ngModel)]="NPERIODO_PROCESO">
+                            <option value="0">
+                                --Todos--</option>
+                            <option *ngFor="let item of this.listPeriodos" value="{{item}}">
+                                {{item}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1">
+                        <span class="fontText">Régimen:</span>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-control" [(ngModel)]="NIDREGIMEN">
+                            <option value="0">
+                                --Todos--</option>
+                            <option *ngFor="let item of this.listRegimens" value="{{item.NIDREGIMEN}}">
+                                {{item.SNOMBRE}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <button _ngcontent-qgx-c1="" (click)="getResult()" class="btn btn-warning text-white ">Buscar</button>
+                    </div>
+                </div>
+                <div class="" style="overflow-y:none;">
+                    <hr>
+                    <table class="striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 16%;">Periodo</th>
+                                <th style="width: 12%;">Tipo de Documento</th>
+                                <th style="width: 12%;">Número de Documento</th>
+                                <th style="width: 30%;">Nombres</th>
+                                <th style="width: 15%;">Régimen</th>
+                                <th style="width: 15%;">Producto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="this.Colleccion.count == 0 || this.Colleccion.count == undefined" class="ce">
+                                <td class="text-center" colspan="6">No se han encontrado resultados</td>
+                            </tr>
+                            <tr *ngFor="let item of this.Colleccion.data ">
+                                <td style="width: 16%;">{{item.SRANGOPERIODO}}</td>
+                                <td style="width: 12%;">{{item.SDESCRIPT}}</td>
+                                <td style="width: 12%;">{{item.SCLINUMDOCU}}</td>
+                                <td style="width: 30%;">{{item.SNAME}}</td>
+                                <td style="width: 15%;">{{item.SDESREGIMEN}}</td>
+                                <td style="width: 15%;">{{item.SDESPRODUCTO}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ng-container *ngIf="this.data.length>0; then showPagination"></ng-container>
+                    <ng-template #showPagination>
+                        <div class="row mt-4">
+                            <div class="col-sm-4">
+                                <button (click)="descarga()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados </button>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage" [collectionSize]="totalItems" [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
+                                </ngb-pagination>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <!-- <div *ngIf="this.Colleccion.count > 0" class="row px-3 justify-content-between">
+                        <pagination-controls (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                        <div>
+                            <button (click)="descarga()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar </button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<br>
+<app-footer></app-footer>

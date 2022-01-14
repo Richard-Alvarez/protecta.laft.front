@@ -10,28 +10,43 @@ import * as $ from 'jQuery';
   styleUrls: ['./navbar-update.component.css']
 })
 export class NavbarUpdateComponent implements OnInit {
-
-  constructor(public core: CoreService,
-    public userconfig: UserconfigService,
-    private renderer: Renderer2) { }
-
-
-  public updateModal = false;
-  linkactual = "";
+  @ViewChild('toggleButton',{static: false}) toggleButton: ElementRef;
+  @ViewChild('menu',{static: false}) menu: ElementRef;
+  @ViewChild('mySidenav',{static: false}) contenido: ElementRef;
   public optionList: any = [];
   public optionListSubMenu: any = [];
   public suboptionList: any = [];
-
+  public updateModal = false;
   public STIPO_USUARIO
+
+  sidebarNav: any;
+  contentButton: any;
+  linkactual = "";
+
+  isMenuOpen = false;
+
+  constructor(public core: CoreService,
+              public userconfig: UserconfigService,
+              private renderer: Renderer2
+              )
+  {
+//     this.renderer.listen('window', 'click',(e:Event)=>{
+     
+//      if(e.target !== this.contenido.nativeElement && e.target!==this.menu.nativeElement){
+//          this.isMenuOpen=false;
+//      }
+//  });
+  }
+
   ngOnInit() {
 
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
-    this.linkactual = link[link.length - 1].trim()
+    this.linkactual = link[link.length-1].trim()
 
     var userSession = this.core.storage.get('usuario');
-
-    if (userSession) {
+    
+    if(userSession){
       let profile = userSession['idPerfil'];
       if (profile == 1) {
         this.updateModal = false;
@@ -43,83 +58,44 @@ export class NavbarUpdateComponent implements OnInit {
       this.getOptions();
     }
 
-
-    //this.Navbar()
-  }
-
-  Navbar() {
-    /* Please ❤ this if you like it! */
-
-    console.log("scroll", window.scrollY)
-
-    var header = $(".start-style");
-
-    window.onscroll = function () { FuncionScroll() };
-
-    function FuncionScroll() {
-      var scroll = $(window).scrollTop();
-      console.log("scroll", scroll)
-      if (scroll >= 10) {
-        header.removeClass('start-style').addClass("scroll-on");
-      } else {
-        header.removeClass("scroll-on").addClass('start-style');
-      }
-    }
-
-    //Animation
-
-    $(document).ready(function () {
-      $('body.hero-anime').removeClass('hero-anime');
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
     });
 
-    //Menu On Hover
-
-    $('body').on('mouseenter mouseleave', '.nav-item', function (e) {
-      if ($(window).width() > 750) {
-        var _d = $(e.target).closest('.nav-item'); _d.addClass('show');
-        setTimeout(function () {
-          _d[_d.is(':hover') ? 'addClass' : 'removeClass']('show');
-        }, 1);
-      }
-    });
-
-    //Switch light/dark
-
-    $("#switch").on('click', function () {
-      if ($("body").hasClass("dark")) {
-        $("body").removeClass("dark");
-        $("#switch").removeClass("switched");
-      }
-      else {
-        $("body").addClass("dark");
-        $("#switch").addClass("switched");
-      }
-    });
-
-
+     
+    
   }
 
-  openNav() {
-    document.getElementById("mySidenav").style.width = "300px";
-    // document.getElementById("main").style.marginLeft = "250px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-
+public text: String;
+@HostListener('click', ["$event"])
+  clickInside($event) {
+    this.text = "clicked inside";
+    $event.stopPropagation();
+    
+  }
+  
+  @HostListener('document:click')
+  clickout() {
+      this.text = "clicked outside";
+      
+      this.closeNav()
   }
 
-  /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
-  closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    // document.getElementById("main").style.marginLeft = "0";
-    document.body.style.backgroundColor = "white";
+  opened: boolean;
+  clickOutside() {
+    this.opened = !this.opened;
+    
   }
 
+  
 
-
+  //Obtiene la lista de opciones
   getOptions() {
     var user = this.core.storage.get('usuario');
-    let profile = user['idPerfil'];
+    let profile = user['idPerfil']; 
     let _data: any = {};
-    _data.profileId = profile;
+    _data.profileId = profile;     
     this.userconfig.getOptions(_data).then((response) => {
       //let _data;
       let arrayMenusMaster = [];
@@ -127,17 +103,17 @@ export class NavbarUpdateComponent implements OnInit {
       let sub;
       let master;
       let usuario = this.core.storage.get('usuario')
-
+      
 
       this.STIPO_USUARIO = usuario['tipoUsuario']
-
-
-
+     
+      
+      
       //_data = (response);      
       response.forEach(item => {
-        if (item.nFatherId == 0) {
+        if(item.nFatherId == 0){
           arrayMenusMaster.push(item)
-        } else {
+        }else{
           arraySubMenus.push(item);
         }
 
@@ -145,20 +121,107 @@ export class NavbarUpdateComponent implements OnInit {
         //   this.optionList = [];
         //   this.optionListSubMenu = [];
         // }else{
-        this.optionList = arrayMenusMaster;
+          this.optionList = arrayMenusMaster;
         this.optionListSubMenu = arraySubMenus;
-
+       
 
         // }
-
+        
       });
-
+      
     });
-
+    
     // let usuario = this.core.storage.get('usuario')
     // this.STIPO_USUARIO = usuario['tipoUsuario']
+    
+    
+  }
+  
 
+  showMore(data:any) { 
+   
+    let _data: any = {};
+    _data.nFatherId = data;
+    
+    // this.userconfig.getSubOptions(_data).then((response) => {
+    //   let childrens;
+    //   childrens = (response);      
+    //   this.suboptionList = childrens;     
+    // });
+  }
+
+  setToggleSidebar(){
+    this.renderer.addClass(this.contenido.nativeElement, "claseNueva");
+  }
+  
+  closeNav(){
+    //this.renderer.addClass(this.contenido.nativeElement, "cerrarNav");
+    this.renderer.removeClass(this.contenido.nativeElement, "abrirNav");
+    
+  }
+
+  openNav(){
+    if (this.contenido.nativeElement.classList.contains("abrirNav")){
+      this.renderer.removeClass(this.contenido.nativeElement, "abrirNav");
+     
+    }
+   
+    else {
+      this.renderer.addClass(this.contenido.nativeElement, "abrirNav");
+     
+    }
+     
+  }
+
+
+  CerrarSession() {
+    this.core.storage.remove('usuario');
+    localStorage.clear()
+    this.core.rutas.goLogin();
+    //localStorage.removeItem('DataGuardada')
+  }
+
+  activeSidenav(context){
+    let div = document.getElementById(context);
+    let nav = div.getElementsByClassName("sideNav2");
+    for (let i = 0; i< nav.length ; i++){
+      if (nav[i].getAttribute("style") == "display: block")
+        nav[i].setAttribute("style","display: none");
+      else
+        nav[i].setAttribute("style","display: block");
+    }
+    
+  }
+
+  activarStyle(){
+    if(this.linkactual == "clientes" ){
+      return 'PositionAbsolute'
+     }
+     else{
+       return 'PositionFixed'
+     }
+  }
+
+  Ocultar(){
+    if(this.linkactual == "clientes" ){
+      return false
+     }
+     else{
+       return true
+     }
+  }
+  Home(){
+    this.core.rutas.goHome();
+  }
+
+  changeClient(event:any){
+    // console.log("evento",event)
+    // console.log("evento",event.target)
+    // console.log("evento",event.target.innerHTML)
+    // console.log("evento",event.target.id)
+    localStorage.setItem('ValorHistorial', event.target.innerHTML);
 
   }
 
-}
+  
+} 

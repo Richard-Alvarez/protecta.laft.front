@@ -7,7 +7,7 @@ padding-right: 15px;">
     <div class="borderFormat">
         <div class="row">
             <div class="col-lg-6">
-
+                <button (click)="this.parent.getserviceComplementario()" class="btn btn-warning btnBuscarStyle">Buscar</button>
             </div>
             <div class="col">
                 <input class="col-lg-6" [(ngModel)]="txtBuscador" (keyup)="setFilterResultadosClient()" type="text" class="form-control form-control" value="" placeholder="Buscar">

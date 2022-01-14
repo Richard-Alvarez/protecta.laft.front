@@ -210,7 +210,12 @@ export class ModalEmailProfileComponent implements OnInit {
       data.NIDUSUARIO_MODIFICA = this.objUsuario.idUsuario
       data.SCUERPO_TEXTO = this.convert(this.ckeditorContent)//this.convert(dataHTML)
       data.SCUERPO_CORREO_DEF = this.ckeditorContent//"" 
-      data.NCANTIDAD_DIAS = this.CantidadDias
+      if( this.action == 4){
+        data.NCANTIDAD_DIAS = this.CantidadDias
+      }else{
+        data.NCANTIDAD_DIAS = 0
+      }
+      
       //data.PERIODO_ASUNTO = this.PeriodoAsunto
     }
     let respValidacion: any = {}
@@ -265,6 +270,7 @@ export class ModalEmailProfileComponent implements OnInit {
       }).then(async (respuesta) => {
 
         if (!respuesta.dismiss) {
+          debugger
           this.core.loader.show();
           await this.userConfig.getUpdateCorreos(data)
           await this.RegistrarUsuarios()
@@ -633,7 +639,7 @@ export class ModalEmailProfileComponent implements OnInit {
       dataDelete.ID_USUARIO = 0
       dataDelete.NIDCORREO = this.dataEmail.NIDCORREO
       dataDelete.NIDPROFILE = 0
-      dataDelete.NIDACCION = 0
+      dataDelete.NIDACCION = 6
       dataDelete.TIPOOPERACION = 'D'
       this.core.loader.show()
       await this.userConfig.InsCorreoUsuario(dataDelete)

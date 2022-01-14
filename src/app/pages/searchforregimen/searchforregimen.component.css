@@ -170,7 +170,7 @@
 
 .inputfile:focus+label,
 .inputfile+label:hover {
-    background-color: #FA7000;
+    /* background-color: #FA7000; */
 }
 
 .inputfile+label {
@@ -342,15 +342,174 @@ a .colorTextoDropDown {
 }
 
 .BordeHr {
-    border: 0.5px solid #26296D;
+    border: 2px solid #26296D;
+    display: table-row;
 }
 
-.btnBuscarStyle {
-    border: 0;
-    border-radius: .25em;
-    background: initial;
+.btnRegistrar {
+    background-image: linear-gradient(to right, #f1974c, #fd7e14, #f97b11);
+    color: white;
+}
+
+
+/*********************************** PARA ADJUNTAR ARCHIVO *********************/
+
+
+/**********File Inputs**********/
+
+.container-input {
+    text-align: center;
+    /* background: #282828; */
+    /* border-top: 5px solid #c39f77; */
+    /* padding: 50px 0; */
+    border-radius: 6px;
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile+label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* cursor: pointer; */
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+}
+
+.Puntero {
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.inputfile+label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+}
+
+.iborrainputfile {
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Lato';
+}
+
+
+/* style 7 */
+
+.inputfile-7+label {
+    /* color: #c39f77;*/
+    color: blue
+}
+
+.inputfile-7+label {
+    /* border: 1px solid #c39f77; */
+    border: 1px solid #fd7e14;
+    font-size: 1rem;
+    background-color: #fff;
+    padding: 0;
+    float: right;
+}
+
+.inputfile-7:focus+label,
+.inputfile-7.has-focus+label,
+.inputfile-7+label:hover {
+    /* border-color: #f79544; */
+}
+
+.inputfile-7+label span,
+.inputfile-7+label strong {
+    padding: 0.625rem 1.25rem;
+}
+
+.inputfile-7+label span {
+    width: 200px;
+    min-height: 1em;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.inputfile-7+label strong {
+    height: 100%;
     color: #fff;
-    font-size: 1.0625em;
-    /*background-color: rgb(250, 112, 0);*/
-    /*border-bottom: #3085d6;*/
+    /* background-color: #c39f77; */
+    background-color: #fd7e14;
+    display: inline-block;
+}
+
+.inputfile-7:focus+label strong,
+.inputfile-7.has-focus+label strong,
+.inputfile-7+label:hover strong {
+    /* background-color: #f79544; */
+}
+
+@media screen and (max-width: 50em) {
+    .inputfile-7+label strong {
+        display: block;
+    }
+}
+
+
+/**********End File Inputs**********/
+
+table thead tr {
+    border-bottom: solid 1px #26296D !important;
+    color: rgba(38, 41, 109, 0.6);
+    font-weight: bold;
+}
+
+td,
+th {
+    padding: 15px 10px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+table {
+    width: 100%;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 12px;
+    font-family: Roboto;
+}
+
+thead {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+table,
+th,
+td {
+    border: none;
+    text-align: left;
+}
+
+table.striped>tbody>tr:nth-child(odd) {
+    background-color: rgba(242, 242, 242, 0.5);
+}
+
+.row2 {
+    display: flex;
+    flex-wrap: wrap;
 }
