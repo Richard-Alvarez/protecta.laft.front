@@ -36,56 +36,64 @@
                 </div>
                 <div class="row">
                     <div class=" borderFormat">
-                       
+                        <!-- <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;"  >
+                            <div  class="col-3 txtCabecera" style="text-align: left;">Nombre del Usuario</div>
+                            <div  class="col-2 txtCabecera"  style="text-align: left;">Perfil del Usuario</div>
+                            <div  class="col-3 txtCabecera"  style="text-align: left;">Cargo del Usuario</div>
+                            <div  class="col-3 txtCabecera"  style="text-align: left">Email del Usuario</div>
+                            <div  class="col-1 txtCabecera"  style="text-align: left">Estado</div>
+                        </div>
+                        <div class="desplace ">
+                            <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of listToShow,let inc = index;" style="font-size: 14px">
+                                <div class="col-3 txtDetalle"  style="text-align: left;">{{item.nombreCompleto}}</div>
+                                <div class="col-2 txtDetalle"  style="text-align: left;">{{item.perfil}}</div>  
+                                <div class="col-3 txtDetalle"  style="text-align: left;">{{item.cargo}}</div>
+                                <div class="col-3 txtDetalle"  style="text-align: left;">{{item.correo}}</div>
+                                <div class="col-1 txtDetalle"  style="text-align: left;">{{item.estUsuario}}</div>
+                            </div> 
+                        </div> -->
+                        <table style="width: 100%; overflow-x: auto; display: block; white-space: nowrap;">
+                            <thead style="border-bottom: 2px solid #26296D; width: 100%;">
+                                <tr >
+                                    <th class=" txtCabecera" style="padding: 15px; width: 26%;">Nombre del Usuario</th>
+                                    <th class=" txtCabecera" style="padding: 15px; width: 26%;">Perfil del Usuario</th>
+                                    <th class=" txtCabecera" style="padding: 15px; width: 26%;">Cargo del Usuario</th>
+                                    <th class=" txtCabecera" style="padding: 15px; width: 26%;">Email del Usuario</th>
+                                    <th class=" txtCabecera" style="padding: 15px; width: 14%;">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr id="pintaGrilla" *ngFor="let item of listToShow,let inc = index;">
+                                    <td class=" txtDetalle" style="padding: 15px;">{{item.nombreCompleto}}</td>
+                                    <td class=" txtDetalle" style="padding: 15px;">{{item.perfil}}</td>
+                                    <td class=" txtDetalle" style="padding: 15px;">{{item.cargo}}</td>
+                                    <td class=" txtDetalle" style="padding: 15px;">{{item.correo}}</td>
+                                    <td class=" txtDetalle" style="padding: 15px;">{{item.estUsuario}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            
-                            <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;"  >
-                                <div  class="col-3 txtCabecera" style="text-align: left;">Nombre del Usuario</div>
-                                <div  class="col-2 txtCabecera"  style="text-align: left;">Perfil del Usuario</div>
-                                <div  class="col-3 txtCabecera"  style="text-align: left;">Cargo del Usuario</div>
-                                <div  class="col-3 txtCabecera"  style="text-align: left">Email del Usuario</div>
-                                <div  class="col-1 txtCabecera"  style="text-align: left">Estado</div>
-                                
-                                
-                                
+                        <div class="" style="padding-top: 2%;padding-bottom: 2%;padding-left: 0px">
+                            <div class="row">
+                                <!-- <div class="col-md-3">
+                
+                                </div> -->
+                                <div class="col-md-6 d-flex justify-content-between " style="padding: 0px 200px 0px 0px; color:#7c7ea6 !important;">
+                                    <!-- <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"
+                                        (click)="exportListToExcel()">
+                                        <div class="row">
+                                        <div class="col-4" style="text-align: right;padding-right: 15px;padding-left: 0px;margin-left: -20px;"> <img src="assets/icons/excel-microsoft.png" style="width: 24px;"/></div>
+                                        <i class="fas fa-download"></i> 
+                                        <div class="col-6" style="color: black;padding-left: 5px;text-align: left;"> Descargar Registro de Usuarios</div>
+                                        </div>
+                                    </button>-->
+                                    <button (click)="exportListToExcel()" class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton">
+                                        <i class="fas fa-download"></i> Descargar historial de usuarios 
+                                    </button>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
                             </div>
-                            <div class="desplace ">
-                                <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of listToShow,let inc = index;" style="font-size: 14px">
-                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.nombreCompleto}}</div>
-                                    <div class="col-2 txtDetalle"  style="text-align: left;">{{item.perfil}}</div>  
-                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.cargo}}</div>
-                                    <div class="col-3 txtDetalle"  style="text-align: left;">{{item.correo}}</div>
-                                    <div class="col-1 txtDetalle"  style="text-align: left;">{{item.estUsuario}}</div>
-                                                                    
-                                  
-
-
-                                </div> 
-                            </div>
-
-                            <div class="" style="padding-top: 2%;padding-bottom: 2%;padding-left: 0px">
-                                <div class="row">
-                                    <!-- <div class="col-md-3">
-                    
-                                    </div> -->
-                                    <div class="col-md-6 d-flex justify-content-between " style="padding: 0px 200px 0px 0px; color:#7c7ea6 !important;">
-                                       <!-- <button class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"
-                                            (click)="exportListToExcel()">
-                                            <div class="row">
-
-                                               <div class="col-4" style="text-align: right;padding-right: 15px;padding-left: 0px;margin-left: -20px;"> <img src="assets/icons/excel-microsoft.png" style="width: 24px;"/></div>
-                                             <i class="fas fa-download"></i> 
-                                                <div class="col-6" style="color: black;padding-left: 5px;text-align: left;"> Descargar Registro de Usuarios</div></div></button>-->
-                                                <button (click)="exportListToExcel()" class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar historial de usuarios </button>
-                                            
-                                         
-                                    </div>
-                                    <div class="col-md-3">
-                                    </div>
-                                </div>            
-                          
-
-
                         </div>
                     </div>
                 </div>
@@ -95,7 +103,7 @@
                 <ng-template #showPagination>
                     <div class="contenedor" style="display: flex;
                     justify-content: center;padding-top: 40px;">
-                    <div class="row" style="">
+                    <div class="row" >
                         <div class="col-12" style="text-align: center;">
                             <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
                                 [collectionSize]="totalItems" [maxSize]="maxSize"
