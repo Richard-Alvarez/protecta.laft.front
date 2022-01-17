@@ -8,6 +8,7 @@ import { Parse } from 'src/app/utils/parse';
 import { ResponsableComponent } from '../responsable/responsable.component';
 import { async } from '@angular/core/testing';
 import { Console } from 'console';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-informe-terminado',
@@ -30,7 +31,11 @@ export class InformeTerminadoComponent implements OnInit {
   listFilesToShow: Map<string, any> = new Map<string, any>()
 
   NPERIODO_PROCESO:number
-
+  _sSubGrupo = '';
+  _NIDTIPOLISTA = 0
+  _NIDPROVEEDOR = 0
+  _NIDSUBGRUPOSEN = 0
+  _NIDALERTA = 0
   @Input() regimen: any = {}
   @Input() arrResponsable: any = []
   @Input() stateInformeTerminado: any = {}
@@ -45,6 +50,7 @@ export class InformeTerminadoComponent implements OnInit {
     private modalService: NgbModal,) { }
 
   async ngOnInit() {
+    await this.getDatosLocalStore()
     this.STIPO_USUARIO = this.parent.STIPO_USUARIO;
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
@@ -91,9 +97,22 @@ export class InformeTerminadoComponent implements OnInit {
       return true;
     }
   }
-
+  async getDatosLocalStore(){
+    let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPositionReturn"))
+    if (!isNullOrUndefined(respObjFocusPosition)){
+        this._sSubGrupo = respObjFocusPosition.SSUBGRUPO
+        this._NIDTIPOLISTA = respObjFocusPosition.NIDTIPOLISTA
+        this._NIDPROVEEDOR = respObjFocusPosition.NIDPROVEEDOR
+        this._NIDSUBGRUPOSEN = respObjFocusPosition.NIDSUBGRUPOSEN
+        this._NIDALERTA = respObjFocusPosition.NIDALERTA
+    }
+}
   getArray(state, regimen) {
-    return this.arrResponsable;
+    this.arrResponsable
+    .forEach(t => {
+      t.visible = t.NIDALERTA == this._NIDALERTA ? 'show' : ''
+     });
+     return this.arrResponsable
   }
 
   getArrayUserGroup(regimen, estado) {
@@ -152,7 +171,7 @@ export class InformeTerminadoComponent implements OnInit {
   }
 
   fillFileGroup() {
-    let alerts = this.getArray(this.stateInformeTerminado.sState, this.regimen.id)
+    let alerts : any = this.getArray(this.stateInformeTerminado.sState, this.regimen.id)
     alerts.forEach(it => {
         this.files.set(`${it.NIDALERTA_CABECERA}|${this.STIPO_USUARIO}`, [])
         this.listFiles.set(`${it.NIDALERTA_CABECERA}|${this.STIPO_USUARIO}`, [])
