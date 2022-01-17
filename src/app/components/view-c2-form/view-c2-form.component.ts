@@ -604,6 +604,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
 
         localStorage.setItem("NIDALERTA", this.alertData.NIDALERTA)
         localStorage.setItem("NPERIODO_PROCESO", this.alertData.NPERIODO_PROCESO)
+        
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN)
         localStorage.setItem("SFECHA_NACIMIENTO", item.DFECHA_NACIMIENTO)
