@@ -373,6 +373,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         //this.tipoClienteGC = this.vistaOrigen
         
         this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
+        debugger;
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
@@ -387,7 +388,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA == null ? "" :this.SNOM_COMPLETO_EMPRESA
             this.formData.SNUM_DOCUMENTO_EMPRESA = this.SNUM_DOCUMENTO_EMPRESA == null ? "" :this.SNUM_DOCUMENTO_EMPRESA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
-            this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+            this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
             this.formData.NTIPO_DOCUMENTO = localStorage.getItem('NTIPO_DOCUMENTO')
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             this.formData.STIPO_AND_NUM_DOC = ''
@@ -424,7 +425,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.formData.arrClientesGC.forEach(itemObjCliente => {
                 let dataService:any = {};
                 dataService = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
-                dataService.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM
+                dataService.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
                 dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
                 dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
                 dataService.NIDSUBGRUPOSENAL = this.NIDSUBGRUPOSEN
@@ -558,7 +559,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.formData.SZONA_GEOGRAFICA = localStorage.getItem('SZONA_GEOGRAFICA')
             this.formData.SZONA_GEOGRAFICA = this.formData.SZONA_GEOGRAFICA === 'null' ? '' : this.formData.SZONA_GEOGRAFICA === undefined ? '' : this.formData.SZONA_GEOGRAFICA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
-            this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+            this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
             this.formData.NTIPO_DOCUMENTO = localStorage.getItem('NTIPO_DOCUMENTO')
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA == null ? "" :this.SNOM_COMPLETO_EMPRESA
@@ -592,7 +593,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             let dataService:any = {}
             dataService = new Object(this.TiposMaestros.find(t=> t.NIDALERTA == this.formData.NIDALERTA))
             dataService.NIDREGIMEN= dataService.NIDALERTA == 2 ? this.formData.NREGIMEN : dataService.NIDREGIMEN/**/
-            dataService.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM
+            dataService.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
             dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
             dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
             dataService.NIDSUBGRUPOSENAL = this.NIDSUBGRUPOSEN
@@ -659,7 +660,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 this.formData.SCARGO = this.oClienteReforzado.SCARGO//localStorage.getItem('SCARGO')
                 this.formData.SZONA_GEOGRAFICA = this.oClienteReforzado.SZONA_GEO//localStorage.getItem('SZONA_GEOGRAFICA')
                 this.formData.SNUM_DOCUMENTO = this.oClienteReforzado.SNUM_DOCUMENTO//localStorage.getItem('SNUM_DOCUMENTO')
-                this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))//this.oClienteReforzado.NPERIODO_PROCESO//parseInt(localStorage.getItem('NPERIODO_PROCESO'))
+                this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))//this.oClienteReforzado.NPERIODO_PROCESO//parseInt(localStorage.getItem('NPERIODO_PROCESO'))
                 this.formData.NTIPO_DOCUMENTO = this.oClienteReforzado.NTIPO_DOCUMENTO//localStorage.getItem('NTIPO_DOCUMENTO')
                 this.formData.NIDREGIMEN = this.oClienteReforzado.NIDREGIMEN//1
                 this.formData.NREGIMEN = this.oClienteReforzado.NIDREGIMEN//1
@@ -682,7 +683,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 let dataService:any = {}
                 dataService = new Object(this.TiposMaestros.find(t=> t.NIDALERTA == this.formData.NIDALERTA))
                 dataService.NIDREGIMEN= dataService.NIDALERTA == 2 ? this.formData.NREGIMEN : dataService.NIDREGIMEN/**/
-                dataService.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM
+                dataService.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
                 dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
                 dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
                 
@@ -736,7 +737,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
        //if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             let dataHistorialEstadoCli: any = {}
             dataHistorialEstadoCli = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
-            dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM //this.NPERIODO_PROCESO
+            dataHistorialEstadoCli.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO //this.NPERIODO_PROCESO
             dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;//this.formData.SCLIENT
             //dataHistorialEstadoCli.NIDGRUPOSENAL = this.formData.NIDGRUPOSENAL
             dataHistorialEstadoCli.NIDALERTA = this.formData.NIDALERTA
@@ -1308,7 +1309,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
 
     async getInternationalLists() {        
-        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
+        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show(); 
        ;
         this.internationalList = await this.userConfigService.getInternationalLists(param)
@@ -1320,7 +1321,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
 
     async getPepList() {       
-        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
+        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show();
         this.pepList = await this.userConfigService.getPepList(param)
         this.pepList.forEach(it => {
@@ -1330,7 +1331,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
 
     async getFamiliesPepList() {            
-        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
+        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show(); 
         this.familiesPepList = await this.userConfigService.getFamiliesPepList(param)
         this.familiesPepList.forEach(it => {
@@ -1340,7 +1341,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
 
     async getSacList() {        
-        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
+        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         ///this.core.loader.show();
         this.sacList = await this.userConfigService.getSacList(param)
         // this.sacList.forEach(it => {
@@ -1350,7 +1351,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     }
 
     async getListEspecial() {        
-        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
+        let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
         //this.core.loader.show();
         // ;
         this.espList = await this.userConfigService.getListEspecial(param)
@@ -1383,7 +1384,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         let param :any = {};
         param = new Object(this.TiposMaestros.find(t => t.NIDALERTA == this.formData.NIDALERTA))
         let _param : any = {};
-        _param.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM
+        _param.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
         _param.NIDGRUPOSENAL = param.NIDGRUPOSENAL;
         _param.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO;
         _param.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO;
@@ -1406,7 +1407,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
     async getPolicyList(){       
        
-        let param = {P_NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, P_NIDALERTA: 2/*this.formData.NIDALERTA*/, P_NTIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, P_SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO,P_NIDREGIMEN: 99, P_NTIPOCARGA : this.formData.NTIPOCARGA == 'null' || this.formData.NTIPOCARGA == null ? '2' : this.formData.NTIPOCARGA }//this.formData.NIDREGIMEN}
+        let param = {P_NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, P_NIDALERTA: 2/*this.formData.NIDALERTA*/, P_NTIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, P_SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO,P_NIDREGIMEN: 99, P_NTIPOCARGA : this.formData.NTIPOCARGA == 'null' || this.formData.NTIPOCARGA == null ? '2' : this.formData.NTIPOCARGA }//this.formData.NIDREGIMEN}
         
         this.core.loader.show();  
         this.policyList = await this.userConfigService.getPolicyList(param)
@@ -1666,7 +1667,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                                 if(itemArreglos.SESTADO_REVISADO == '2'){
                                     let _param : any = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
                                     let param = {
-                                        NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, //
+                                        NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                         NIDALERTA: _param.NIDALERTA, 
                                         NIDRESULTADO: itemArreglos.NIDRESULTADO, 
                                         NIDREGIMEN: _param.NIDALERTA == 2 ? this.formData.NREGIMEN : _param.NIDREGIMEN ,
@@ -1739,7 +1740,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                         if(item.SESTADO_REVISADO == '2'){
                             let _param : any = new Object(this.TiposMaestros.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
                             let param = {
-                                NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, //
+                                NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, //
                                 NIDALERTA: _param.NIDALERTA, 
                                 NIDRESULTADO: item.NIDRESULTADO, 
                                 NIDREGIMEN: _param.NIDALERTA == 2 ? this.formData.NREGIMEN : _param.NIDREGIMEN ,
@@ -1881,7 +1882,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
      getValidaCabeceraPlacaFunc(policyRegimen){
        
         let listFiltrada
-        let param = {P_NPERIODO_PROCESO: this.NPERIODO_PROCESO_ITEM, P_NIDALERTA: this.formData.NIDALERTA, P_NTIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, P_SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO,P_NIDREGIMEN: this.formData.NIDREGIMEN}
+        let param = {P_NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, P_NIDALERTA: this.formData.NIDALERTA, P_NTIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, P_SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO,P_NIDREGIMEN: this.formData.NIDREGIMEN}
         //this.policyList = await this.userConfigService.getPolicyList(param)
         listFiltrada = policyRegimen.filter( item=> (item.RAMO+' ').trim() == "SOAT")
         
