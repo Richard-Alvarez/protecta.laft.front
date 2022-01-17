@@ -277,18 +277,33 @@ a{
     font-family: Roboto;
   }
 
-  div#pintaGrilla:nth-child(even) {
+  #pintaGrilla:nth-child(even) {
     /* background: #FF00CC;  */
     background: rgba(90, 149, 180, 0.05); 
     padding-top: 10px;
     padding-bottom: 10px;
  
  }
- div#pintaGrilla:nth-child(odd) {
+ #pintaGrilla:nth-child(odd) {
     /* background: #CC00FF;  */
     /* background: white;  */
-    background: rgba(250, 253, 253,0.5)
- 
- 
+    background: rgba(250, 253, 253,0.5) 
  } 
+ /***************************table tbody***************************/
+ table{
+   display: block;
+   white-space: nowrap;
+   overflow-x: auto;
+   width: 100%;
+ }
+ .lineaTabla{
+   border-bottom: 2px solid #26296D;
+ }
+ th,td{
+   padding: 15px;
+ }
+ /* tbody, thead{
+   display: table;
+   width: 100%;
+ } */
  

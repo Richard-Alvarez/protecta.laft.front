@@ -170,8 +170,7 @@
                                     
 
                                 <!-- <h4 class="TitleLine">Historial de control de cambios de los datos actualizados y
-                                    creados</h4>
-                                -->
+                                    creados</h4>-->
 
                                 <br>
                                 
@@ -190,21 +189,18 @@
                                     </div>
                                    
                                 </div>
-                                <div class="row">
-                                    <div class="borderFormat">
-
+                                <!-- <div class="row">
+                                    <div class="borderFormat"> -->
                                         <!-- <table class="table table-striped table-sm">
                                             <thead>
-                                                <tr
-                                                    style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
+                                                <tr class=" lineaTabla" > style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;"
                                                     <th class="txtCabecera">ID Usuario</th>
                                                     <th class="txtCabecera">Nombres Usuario</th>
                                                     <th class="txtCabecera">Perfil Usuario</th>
                                                     <th class="txtCabecera">Cargo Usuario</th>
-                                                    <th class="txtCabecera" style="text-align:center ;width: 20%">Email
-                                                        Usuario</th>
-                                                    <th class="txtCabecera" style="text-align:center ;width: 20%">
-                                                        Modificado / Creado por</th>
+                                                    <th class="txtCabecera" style="text-align:center ;width: 20%">Email Usuario</th>
+                                                    <th class="txtCabecera">Campo Modificado</th>
+                                                    <th class="txtCabecera" style="text-align:center ;width: 20%">Modificado / Creado por</th>
                                                     <th class="txtCabecera">Fecha de Modificacion</th>
                                                 </tr>
                                             </thead>
@@ -214,17 +210,14 @@
                                                     <td class="txtDetalle">{{item.NOMBRECOMPLETO}}</td>
                                                     <td class="txtDetalle">{{item.SPERFIL}}</td>
                                                     <td class="txtDetalle">{{item.SCARGO}}</td>
-                                                    <td class="txtDetalle" style="text-align:center ;width: 20%">
-                                                        {{item.SEMAIL}}</td>
-                                                    <td class="txtDetalle" style="text-align:center ;width: 20%">
-                                                        {{item.SUSU_MODIFICA}}</td>
+                                                    <td class="txtDetalle" style="text-align:center ;width: 20%">{{item.SEMAIL}}</td>
+                                                    <td class="txtDetalle">{{item.SMODIFICADO}}</td>
+                                                    <td class="txtDetalle" style="text-align:center ;width: 20%">{{item.SUSU_MODIFICA}}</td>
                                                     <td class="txtDetalle">{{item.DFECHA_REGISTRO}}</td>
                                                 </tr>
                                             </tbody>
                                         </table> -->
-                                        
-
-                                        <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;" >
+                                        <!-- <div class="row d-flex form-group"  style="border-bottom: 2px solid #26296D;" >
                                             <div  class="col-1 txtCabecera" >Usuario</div>
                                             <div  class="col-2 txtCabecera" >Nombre Completo</div>
                                             <div  class="col-2 txtCabecera" >Perfil</div>
@@ -233,14 +226,6 @@
                                             <div  class="col-1 txtCabecera" >Campo Modificado</div>
                                             <div  class="col-2 txtCabecera" >Usuario de Registro</div>
                                             <div  class="col-1 txtCabecera" >Fecha de Registro</div> 
-                                            <!--<div  class="col-1 txtCabecera" >Usuario</div>
-                                            <div  class="col-2 txtCabecera" >Nombre Completo</div>
-                                            <div  class="col-2 txtCabecera" >Perfil</div>
-                                            <div  class="col-1 txtCabecera" >Cargo</div>
-                                            <div  class="col-2 txtCabecera" >Email</div>
-                                            <div  class="col-1 txtCabecera" >Campo Modificado</div>
-                                            <div  class="col-2 txtCabecera" >Usuario de Registro</div>
-                                            <div  class="col-1 txtCabecera" >Fecha de Registro</div>-->
                                         </div>
                                         <div class="desplace ">
                                             <div class="d-flex form-group row"  id="pintaGrilla" *ngFor="let item of arrListUserLog,let inc = index;">
@@ -252,19 +237,49 @@
                                                 <div class="col-1 txtDetalle"  >{{item.SMODIFICADO}}</div>
                                                 <div class="col-2 txtDetalle"  >{{item.SUSU_MODIFICA}}</div>
                                                 <div class="col-1 txtDetalle"   >{{item.DFECHA_REGISTRO}}</div>
-                                                <!--<div class="col-1 txtDetalle"  >{{item.USUARIO}}</div>
-                                                <div class="col-2 txtDetalle"  >{{item.NOMBRECOMPLETO}}</div>
-                                                <div class="col-2 txtDetalle"  >{{item.SPERFIL}}</div>
-                                                <div class="col-1 txtDetalle"   >{{item.SCARGO}}</div>                                     
-                                                <div class="col-2 txtDetalle" style="word-wrap: break-word;"  >{{item.SEMAIL}}</div>
-                                                <div class="col-1 txtDetalle"   >{{item.SMODIFICADO}}</div>
-                                                <div class="col-2 txtDetalle"  >{{item.SUSU_MODIFICA}}</div>
-                                                <div class="col-1 txtDetalle"   >{{item.DFECHA_REGISTRO}}</div>-->
                                             </div> 
-                                        </div>
+                                        </div> -->
+                                    <!-- </div>
+                                </div> -->
+                                <!-- Prueba tabla deslizable -->
+                                <div class="row">
+                                    <div class="borderFormat">
+                                        <table >
+                                            <thead class=" lineaTabla">
+                                                <tr >
+                                                    <th class="txtCabecera " style="width: 10%;" >Usuario</th>
+                                                    <th class="txtCabecera " style="width: 18%;">Nombre Completo</th>
+                                                    <th class="txtCabecera " style="width: 18%;">Perfil</th>
+                                                    <th class="txtCabecera " style="width: 18%;">Cargo</th>
+                                                    <th class="txtCabecera " style="width: 18%;">Email</th>
+                                                    <th class="txtCabecera " style="width: 9%;">Campo Modificado</th>
+                                                    <th class="txtCabecera " style="width: 18%;">Usuario de Registro</th>
+                                                    <th class="txtCabecera " style="width: 9%;">Fecha de Registro</th>
+                                                    <!-- <th class="txtCabecera" style="width: 8.5%;">Usuario</th>
+                                                    <th class="txtCabecera" style="width: 17%;">Nombre Completo</th>
+                                                    <th class="txtCabecera" style="width: 17%;">Perfil</th>
+                                                    <th class="txtCabecera" style="width: 17%;">Cargo</th>
+                                                    <th class="txtCabecera" style="width: 17%">Email</th>
+                                                    <th class="txtCabecera" style="width: 8.5%;">Campo Modificado</th>
+                                                    <th class="txtCabecera" style="width: 17%;">Usuario de Registro</th>
+                                                    <th class="txtCabecera" style="width: 8.5%;">Fecha de Registro</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr id="pintaGrilla" *ngFor="let item of arrListUserLog,let inc = index;">
+                                                    <td class="txtDetalle ">{{item.USUARIO}}</td>
+                                                    <td class="txtDetalle ">{{item.NOMBRECOMPLETO}}</td>
+                                                    <td class="txtDetalle ">{{item.SPERFIL}}</td>
+                                                    <td class="txtDetalle ">{{item.SCARGO}}</td>
+                                                    <td class="txtDetalle ">{{item.SEMAIL}}</td>
+                                                    <td class="txtDetalle ">{{item.SMODIFICADO}}</td>
+                                                    <td class="txtDetalle ">{{item.SUSU_MODIFICA}}</td>
+                                                    <td class="txtDetalle ">{{item.DFECHA_REGISTRO}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
