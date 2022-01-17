@@ -50,6 +50,7 @@
         "jszip": "^3.7.1",
         "mdbootstrap": "^4.20.0",
         "minireset.css": "0.0.7",
+        "ng-multiselect-dropdown": "^0.3.7",
         "ng-recaptcha": "^5.0.0",
         "ng-select": "^1.0.2",
         "ng-uikit-pro-standard": "^1.0.0",
