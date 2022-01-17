@@ -187,6 +187,10 @@ import { TemplateProveedorContraparteComponent } from './components/responsable/
 import { ModalGestorLaftComponent } from './pages/modal-gestor-laft/modal-gestor-laft.component';
 import { ModalConfirmacionCorreoComponent } from './pages/modal-confirmacion-correo/modal-confirmacion-correo.component';
 import { SearchforregimenComponent } from './pages/searchforregimen/searchforregimen.component';
+import { ComplementoSinSennalComponent } from './complemento-sin-sennal/complemento-sin-sennal.component';
+import { ModalComplementoSinSennalComponent } from './modal-complemento-sin-sennal/modal-complemento-sin-sennal.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -343,7 +347,10 @@ import { SearchforregimenComponent } from './pages/searchforregimen/searchforreg
     TemplateProveedorContraparteComponent,
     ModalGestorLaftComponent,
     ModalConfirmacionCorreoComponent,
-    SearchforregimenComponent
+    SearchforregimenComponent,
+    ComplementoSinSennalComponent,
+    ModalComplementoSinSennalComponent,
+    ComplementoRespuestaComponent
 
    
     //Validaciones
@@ -369,13 +376,15 @@ import { SearchforregimenComponent } from './pages/searchforregimen/searchforreg
     // MenuItem,
     ReactiveFormsModule,
     //TooltipModule
-    FileUploadModule
+    FileUploadModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   schemas: [
     
     NO_ERRORS_SCHEMA
   ],
-  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent],
+  entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,
+    ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent,ModalComplementoSinSennalComponent],
   providers: [UserconfigService, DatePipe],
   bootstrap: [AppComponent],
   exports: [BusquedaDemandaComponent]

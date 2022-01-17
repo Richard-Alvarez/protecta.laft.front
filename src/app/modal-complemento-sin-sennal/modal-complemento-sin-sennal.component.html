@@ -1,0 +1,125 @@
+<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
+    <!--<i class="fas fa-times" (click)="closeModal('edit-modal')"></i>-->
+    <!-- <div>{{dataEmail.grupo + ' - ' +dataEmail.perfil}}</div> -->
+    <!-- <div class="close" aria-label="Close" (click)="closeModal('edit-modal')">
+        <span aria-hidden="true">&times;</span>
+    </div> -->
+    <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
+</div>
+<br>
+
+<div class="container">
+
+    <div class="row mb-2 " style="margin-top: -30px;display: flex;padding-left: 125px;">
+        <div class="Header">
+            <div class="row">
+                <div class="col-lg-19">
+                    <h4 class="TitleLine">Agregar Complemento sin Señal</h4>
+                </div>
+            </div>
+            
+        </div>
+        <br>
+            
+    </div>
+    
+    <div class="row pt-3" style="display: flex;justify-content: left;align-items: left;padding: 0px 100px;">
+        
+        <div class="col-lg-7 form-group">
+            <label class="fontText">Usuario:</label>
+            <!-- <select  [(ngModel)]="action" name="profile" (change)="CambioPlantilla($event)"
+               
+                style="display: flex;justify-content: center;align-items: center;"
+                class="form-control buttonSinBorder">
+                <option value="0" selected>Seleccione</option>
+                <option *ngFor="let item of ActionList" value="{{item.NIDACCION}}" id="profileIdSelected">
+                    {{item.SDESCRIPT}}</option>
+            </select> -->
+            <ng-multiselect-dropdown
+                [settings]="dropdownSettings"
+                [data]="dropdownList"
+                [(ngModel)]="selectedItems"
+                (onSelect)="onItemSelect($event)">
+            </ng-multiselect-dropdown>
+            
+        </div>
+
+        <!-- <div class="col-lg-3 form-group"  >
+            <label class="fontText">Estado:</label>
+            <select  [(ngModel)]="group" name="profile"
+               
+                style="display: flex;justify-content: center;align-items: center;"
+                class="form-control buttonSinBorder">
+                <option value="0" selected>Seleccione</option>
+                <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="profileIdSelected">
+                    {{item.SDESGRUPO_SENAL}}</option>
+               
+            </select>
+        </div> -->
+        <!-- <div style="width:50%">
+            <ng-multiselect-dropdown
+                [settings]="dropdownSettings"
+                [data]="dropdownList">
+            </ng-multiselect-dropdown>
+        </div> -->
+      
+        
+       
+    </div>
+    
+    <div class="row" style="display: flex;justify-content: left;align-items: left; padding: 0px 100px;">
+        <div class="col-lg-12" title="Asunto del correo">
+            <div class="form-group">
+                <label for="comment" class="fontText">Descripción:</label>
+                <textarea class="form-control" style="max-height: 300px; height:50px;min-height: 200px;" [(ngModel)]="asunto" id="usSubjectDescription" rows="5" maxlength="200"></textarea>
+                
+            </div>
+         
+        </div>
+    </div>
+
+
+
+    <div class="container-input" >
+        <div class="icon-descarga" placement="top" ngbTooltip="Descargar Archivo" (click)="DescargarArhivo()" style="cursor: pointer;" [hidden]="OcultarDescarga"> 
+           <i class="fas fa-arrow-down"></i>
+      </div> 
+        
+   <!-- <input type="file" name="file-7" id="file-7" class="inputfile inputfile-7" data-multiple-caption="{count} archivos seleccionados" multiple (change)="AgregarAdjunto($event)" /> -->
+   <input type="file" name="file-7" id="file-7" class="inputfile inputfile-7" (change)="AgregarAdjunto($event)" />
+   <label for="file-7">
+       <span class="iborrainputfile">{{this.NombreArchivo}}</span>
+       <strong class="Puntero">
+       <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17" viewBox="0 0 20 17">
+           <path
+           d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
+           </path>
+       </svg>
+       Adjuntar plantilla
+       </strong>
+   </label>
+
+   <div class="icon-descarga2" placement="top" ngbTooltip="Eliminar archivo" (click)="EliminarArchivo()" style="cursor: pointer;"> 
+     <i class="fas fa-trash-alt"></i>
+   </div> 
+   </div>
+
+
+
+   
+</div>
+<br>
+<div class="row" style="padding: 0px 150px;">
+    <div class="col-lg-7">
+
+    </div>
+    <div class="col-lg-3">
+      
+        <button (click)="Regresar()" class="btn btn-warning text-white " style="width: 150px;">Regresar</button>
+    </div>
+    <div class="col-lg-2">
+       
+        <button (click)="Save()" class="btn btn-warning text-white "  style="width: 150px;">Guardar</button>
+    </div>
+</div>
+<br>
