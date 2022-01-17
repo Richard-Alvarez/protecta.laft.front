@@ -45,7 +45,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
   hideNombresPersona: boolean = true;
   NIDUSUARIO_LOGUEADO;
   ArrayResultCoincidencias: any = []
-
+  context :string= "GL"
 
 
   textoBoton = " Listar "
@@ -1090,6 +1090,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
         await localStorage.setItem("tipoClienteGC", "GC");
 
       }
+      localStorage.setItem("context", this.context)
       let data = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
       localStorage.setItem("NIDALERTA", data.NIDALERTA);
       localStorage.setItem("NPERIODO_PROCESO_ITEM", item.NPERIODO_PROCESO_VALID);
@@ -1277,6 +1278,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     localStorage.setItem("SNUM_DOCUMENTO", item.SNUM_DOCUMENTO)
     localStorage.setItem("NTIPO_DOCUMENTO", item.NTIPO_DOCUMENTO)
     localStorage.setItem("NREGIMEN", item.NIDREGIMEN)
+    localStorage.setItem("context", this.context) 
     localStorage.setItem('boolClienteReforzado', 'false')
 
     localStorage.setItem('vistaOrigen', 'ACEPTA-COINCID')

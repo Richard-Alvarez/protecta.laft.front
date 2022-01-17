@@ -37,6 +37,7 @@ export class InformeTerminadoComponent implements OnInit {
   _NIDSUBGRUPOSEN = 0
   _NIDALERTA = 0
   @Input() regimen: any = {}
+  @Input() context:string
   @Input() arrResponsable: any = []
   @Input() stateInformeTerminado: any = {}
   @Input() userGroupList: any = []

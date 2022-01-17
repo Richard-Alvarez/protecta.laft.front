@@ -26,6 +26,7 @@ export class ResponsableComponent implements OnInit {
   /*indiceIconDinamic;
   boolPalomitaHeaderPlus:boolean = true;
   boolPalomitaHeaderMinus:boolean = false;*/
+  context : string = "MT"
   boolTextAreaHeader = false;
   objRadioHeader: any = {};
   boolStyleRegGeneral = true;

@@ -42,6 +42,7 @@ export class CompletadoComponent implements OnInit {
   //userGroupList:any = []
 
   @Input() regimen:any = {}
+  @Input() context:string
   @Input() arrResponsable:any = []
   @Input() stateCompletado:any = {}
   @Input() userGroupList:any = []
