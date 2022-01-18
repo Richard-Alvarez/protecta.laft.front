@@ -284,7 +284,7 @@
                                             </div>
                                         </div>
                                         <div *ngIf="item.NIDALERTA === 2 || item.NIDALERTA === 33 || item.NIDALERTA === 35 || item.NIDALERTA === 39">
-                                            <app-view-c2-form [parentInformeTerminado]="this" [vistaOrigen]="'C2-BANDEJA'" [objAlertaC2]="item" [regimen]="regimen" [valueIdCollap]="'collap'+'Alert'+item.NIDALERTA+'Regimen'+regimen.id+stateInformeTerminado.sState+'Head' + regimen.desCorto +index"
+                                            <app-view-c2-form [parentInformeTerminado]="this" [vistaOrigen]="'C2-BANDEJA'" [objAlertaC2]="item" [context]="context" [regimen]="regimen" [valueIdCollap]="'collap'+'Alert'+item.NIDALERTA+'Regimen'+regimen.id+stateInformeTerminado.sState+'Head' + regimen.desCorto +index"
                                                 [state]="stateInformeTerminado.sState" [ValidadorHistorico]="ValidadorHistorico" [HistoricoPeriodo]="HistoricoPeriodo"></app-view-c2-form>
                                         </div>
 

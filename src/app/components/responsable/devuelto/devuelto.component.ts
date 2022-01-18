@@ -24,7 +24,7 @@ export class DevueltoComponent implements OnInit {
   //regimen:any = {};
   userGroupListGral:any = []
   userGroupListSimpli:any = []
-
+  
   arrInputCommentGeneral:any = [];
   arrInputComment:any = [];
   sNameTipoUsuario
@@ -36,12 +36,13 @@ export class DevueltoComponent implements OnInit {
   arrPrueba:any = []
   arrDetailC1:any = []
   arrDetailCommentsC1:any = []
-
-    files: Map<string, any> = new Map<string, any>()
-    listFiles: Map<string, any> = new Map<string, any>()
-    listFileName: Map<string, any> = new Map<string, any>()
-    listFilesToShow: Map<string, any> = new Map<string, any>()
-   
+  
+  files: Map<string, any> = new Map<string, any>()
+  listFiles: Map<string, any> = new Map<string, any>()
+  listFileName: Map<string, any> = new Map<string, any>()
+  listFilesToShow: Map<string, any> = new Map<string, any>()
+  
+  @Input() context:string 
   @Input() regimen:any = {}
   @Input() arrResponsable:any = []
   @Input() stateDevuelto:any = {}

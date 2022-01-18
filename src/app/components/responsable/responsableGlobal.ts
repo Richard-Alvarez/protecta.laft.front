@@ -58,7 +58,7 @@ export class ResponsableGlobalComponent {
   arrResponsablesCerradoSimpli: any = []
   arrResponsablesPendienteInformeSimpli: any = []
   arrResponsablesInformeTerminadoSimpli: any = []
-
+  context :string= "GL"
   arrResponsablesByCerrado: any = []
 
   arrEstados: any = []
