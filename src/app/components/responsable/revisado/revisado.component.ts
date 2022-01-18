@@ -29,6 +29,7 @@ export class RevisadoComponent implements OnInit {
     PeriodoComp
 
     @Input() regimen:any = {}
+    @Input() context:string
     @Input() arrResponsable:any = []
     @Input() stateRevisado:any = {}
     @Input() userGroupList:any = []

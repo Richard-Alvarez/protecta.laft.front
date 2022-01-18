@@ -28,6 +28,7 @@ export class CerradoComponent implements OnInit {
    
 
   @Input() parent:any
+  @Input() context:string
   @Input() regimen:any = {}
   @Input() arrResponsable:any = []
   @Input() stateCerrado:any = {}

@@ -43,6 +43,7 @@ export class PendienteInformeComponent implements OnInit {
 
   public templateRG: TemplateRGComponent;
   @Input() regimen:any = {}
+  @Input() context:string
   @Input() arrResponsable:any = []
   @Input() statePendienteInforme:any = {}
   @Input() userGroupList:any = []

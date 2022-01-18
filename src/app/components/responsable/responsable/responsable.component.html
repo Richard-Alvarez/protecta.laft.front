@@ -3,52 +3,51 @@
 <!-- </div> -->
 
 <header>
-  <div class="">
-    <app-navbar></app-navbar>
-  </div>
-
-  <nav id="navbar_top" class="" style="padding-top: 10px;">
-
-    <div class="Prueba row" style="margin-left: 50px;margin-right: 50px;">
-
-      <div class="col-12">
-        <div class="card-header bordesCabecera" style="background: white;">
-          <ul class="nav nav-pills nav-justified">
-            <li class="nav-item" style="" *ngFor="let tabs of arrRegimen;let variabletabs = index;">
-              <!-- <a id="{{tabs.desCorto}}" class="nav-link colortab {{getActiveRegimiento(variabletabs)}} " data-toggle="tab" href="#reg{{tabs.desCorto}}" 
-                            style="font-size: 17px;height: 61px;    padding-top: 15px;"
-                            > {{"Régimen " + tabs.descripcion }}</a> -->
-              <!-- <a id="{{tabs.desCorto}}" class="nav-link colortab {{getActiveRegimiento(variabletabs)}} " data-toggle="tab" href="#reg{{tabs.desCorto}}" (click)="addAccordion(0,'reg' +tabs.desCorto)" style="font-size: 17px;"> {{"Régimen " + tabs.descripcion }}</a> -->
-              <a id="{{tabs.desCorto}}" class="nav-link colortab {{getActiveRegimiento(variabletabs)}} "
-                data-toggle="tab" href="#reg{{tabs.desCorto}}" style="font-size: 17px;">
-                {{"Régimen " + tabs.descripcion }}</a>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-
-
+    <div class="">
+        <app-navbar></app-navbar>
     </div>
 
+    <nav id="navbar_top" class="" style="padding-top: 10px;">
 
-  </nav>
+        <div class="Prueba row" style="margin-left: 50px;margin-right: 50px;">
+
+            <div class="col-12">
+                <div class="card-header bordesCabecera" style="background: white;">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="nav-item" style="" *ngFor="let tabs of arrRegimen;let variabletabs = index;">
+                            <!-- <a id="{{tabs.desCorto}}" class="nav-link colortab {{getActiveRegimiento(variabletabs)}} " data-toggle="tab" href="#reg{{tabs.desCorto}}" 
+                            style="font-size: 17px;height: 61px;    padding-top: 15px;"
+                            > {{"Régimen " + tabs.descripcion }}</a> -->
+                            <!-- <a id="{{tabs.desCorto}}" class="nav-link colortab {{getActiveRegimiento(variabletabs)}} " data-toggle="tab" href="#reg{{tabs.desCorto}}" (click)="addAccordion(0,'reg' +tabs.desCorto)" style="font-size: 17px;"> {{"Régimen " + tabs.descripcion }}</a> -->
+                            <a id="{{tabs.desCorto}}" class="nav-link colortab {{getActiveRegimiento(variabletabs)}} " data-toggle="tab" href="#reg{{tabs.desCorto}}" style="font-size: 17px;">
+                {{"Régimen " + tabs.descripcion }}</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </nav>
 </header>
 
 
 <main class="container-fluid app-main">
 
-  <div class="row pl-5 pr-5">
-    <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+    <div class="row pl-5 pr-5">
+        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
       <span class="fas fa-chevron-left"></span> Pantalla Principal
     </button>
-  </div>
-  <!-- <br> -->
+    </div>
+    <!-- <br> -->
 
 
-  <div class="container-fluid pl-5 pr-5">
+    <div class="container-fluid pl-5 pr-5">
 
-    <!-- <div class="Prueba row">
+        <!-- <div class="Prueba row">
                 <div class="col-12">
                     <div class="card-header bordesCabecera" style="background: white;" >
                         <ul class="nav nav-pills nav-justified">
@@ -67,134 +66,115 @@
 
 
 
-    <div class="tab-content" style="">
-      <div id="reg{{regimen.desCorto}}" *ngFor="let regimen of arrRegimen;let variabletabs = index;"
-        class=" tab-pane {{getShowRegimiento2(variabletabs,regimen)}}">
-        <div class="" style="background-color:transparent !important;">
-          <div class="row">
-            <div class="col-lg-8">
+        <div class="tab-content" style="">
+            <div id="reg{{regimen.desCorto}}" *ngFor="let regimen of arrRegimen;let variabletabs = index;" class=" tab-pane {{getShowRegimiento2(variabletabs,regimen)}}">
+                <div class="" style="background-color:transparent !important;">
+                    <div class="row">
+                        <div class="col-lg-8">
 
-            </div>
-            <!-- <div class="col-lg-4">
+                        </div>
+                        <!-- <div class="col-lg-4">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="buquedaLetters" placeholder="Búsqueda por señal">
                             </div>
                         </div> -->
 
-          </div>
-          <div class="">
+                    </div>
+                    <div class="">
 
-            <!--PENDIENTE-->
-            <div>
-              <app-pendiente [parent]="this" [regimen]="regimen" [statePendiente]="statePendiente"
-                [arrResponsable]="getArray(statePendiente.sState,regimen.id)"
-                [userGroupList]="getArrayUserGroup(regimen.id)"></app-pendiente>
-            </div>
-            <br>
+                        <!--PENDIENTE-->
+                        <div>
+                            <app-pendiente [parent]="this" [regimen]="regimen" [statePendiente]="statePendiente" [context]="context" [arrResponsable]="getArray(statePendiente.sState,regimen.id)" [userGroupList]="getArrayUserGroup(regimen.id)"></app-pendiente>
+                        </div>
+                        <br>
 
-            <div *ngIf="STIPO_USUARIO != 'RE'">
-              <!--COMPLETADO-->
-              <div>
-                <div>
-                  <app-completado [parent]="this" [regimen]="regimen" [stateCompletado]="stateCompletado"
-                    [arrResponsable]="getArray(stateCompletado.sState,regimen.id)"
-                    [userGroupList]="getArrayUserGroup(regimen.id)"></app-completado>
-                </div>
-              </div>
-              <br>
-              <!--DEVUELTO-->
-              <div>
-                <div>
-                  <!--<div *ngIf="(getArray(stateDevuelto.sState,regimen.id)).length !== 0">-->
-                  <app-devuelto [parent]="this" [regimen]="regimen" [stateDevuelto]="stateDevuelto"
-                    [arrResponsable]="getArray(stateDevuelto.sState,regimen.id)"
-                    [userGroupList]="getArrayUserGroup(regimen.id)"></app-devuelto>
-                </div>
-              </div>
-              <br>
-            </div>
-            <div *ngIf="STIPO_USUARIO === 'RE'">
-              <!--DEVUELTO-->
-              <div>
-                <div>
-                  <!--<div *ngIf="(getArray(stateDevuelto.sState,regimen.id)).length !== 0">-->
-                  <app-devuelto [parent]="this" [regimen]="regimen" [stateDevuelto]="stateDevuelto"
-                    [arrResponsable]="getArray(stateDevuelto.sState,regimen.id)"
-                    [userGroupList]="getArrayUserGroup(regimen.id)"></app-devuelto>
-                </div>
-              </div>
-              <br>
-              <!--COMPLETADO-->
-              <div>
-                <div>
-                  <app-completado [parent]="this" [regimen]="regimen" [stateCompletado]="stateCompletado"
-                    [arrResponsable]="getArray(stateCompletado.sState,regimen.id)"
-                    [userGroupList]="getArrayUserGroup(regimen.id)"></app-completado>
-                </div>
-              </div>
-              <br>
+                        <div *ngIf="STIPO_USUARIO != 'RE'">
+                            <!--COMPLETADO-->
+                            <div>
+                                <div>
+                                    <app-completado [parent]="this" [regimen]="regimen" [stateCompletado]="stateCompletado" [context]="context" [arrResponsable]="getArray(stateCompletado.sState,regimen.id)" [userGroupList]="getArrayUserGroup(regimen.id)"></app-completado>
+                                </div>
+                            </div>
+                            <br>
+                            <!--DEVUELTO-->
+                            <div>
+                                <div>
+                                    <!--<div *ngIf="(getArray(stateDevuelto.sState,regimen.id)).length !== 0">-->
+                                    <app-devuelto [parent]="this" [regimen]="regimen" [stateDevuelto]="stateDevuelto" [context]="context" [arrResponsable]="getArray(stateDevuelto.sState,regimen.id)" [userGroupList]="getArrayUserGroup(regimen.id)"></app-devuelto>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div *ngIf="STIPO_USUARIO === 'RE'">
+                            <!--DEVUELTO-->
+                            <div>
+                                <div>
+                                    <!--<div *ngIf="(getArray(stateDevuelto.sState,regimen.id)).length !== 0">-->
+                                    <app-devuelto [parent]="this" [regimen]="regimen" [stateDevuelto]="stateDevuelto" [context]="context" [arrResponsable]="getArray(stateDevuelto.sState,regimen.id)" [userGroupList]="getArrayUserGroup(regimen.id)"></app-devuelto>
+                                </div>
+                            </div>
+                            <br>
+                            <!--COMPLETADO-->
+                            <div>
+                                <div>
+                                    <app-completado [parent]="this" [regimen]="regimen" [stateCompletado]="stateCompletado" [context]="context" [arrResponsable]="getArray(stateCompletado.sState,regimen.id)" [userGroupList]="getArrayUserGroup(regimen.id)"></app-completado>
+                                </div>
+                            </div>
+                            <br>
 
-            </div>
+                        </div>
 
 
-            <!--REVISADO-->
-            <div *ngIf="STIPO_USUARIO != 'RE' ">
-              <div>
-                <app-revisado [parent]="this" [regimen]="regimen" [stateRevisado]="stateRevisado"
-                  [arrResponsable]="getArray(stateRevisado.sState,regimen.id)"
-                  [userGroupList]="getArrayUserGroup(regimen.id)"></app-revisado>
-              </div>
-            </div>
-            <br>
-            <!--CERRADO-->
-            <!--<div>
+                        <!--REVISADO-->
+                        <div *ngIf="STIPO_USUARIO != 'RE' ">
+                            <div>
+                                <app-revisado [parent]="this" [regimen]="regimen" [stateRevisado]="stateRevisado" [context]="context" [arrResponsable]="getArray(stateRevisado.sState,regimen.id)" [userGroupList]="getArrayUserGroup(regimen.id)"></app-revisado>
+                            </div>
+                        </div>
+                        <br>
+                        <!--CERRADO-->
+                        <!--<div>
                             <div>
                                 <app-cerrado [parent]="this" [regimen]="regimen" [stateCerrado]="stateCerrado" [arrResponsable]="getArray(stateCerrado.sState,regimen.id)" [userGroupList]="getArrayUserGroup(regimen.id)"></app-cerrado>
                             </div>
                         </div>
                         <br>-->
-            <!--PENDIENTE DE INFORME-->
-            <div *ngIf="STIPO_USUARIO != 'RE' ">
-              <div>
-                <app-pendiente-informe [parent]="this" [regimen]="regimen"
-                  [statePendienteInforme]="statePendienteInforme"
-                  [arrResponsable]="getArray(statePendienteInforme.sState,regimen.id)"
-                  [userGroupList]="getArrayUserGroup(regimen.id)" [ValidadorHistorico]="1"></app-pendiente-informe>
-              </div>
+                        <!--PENDIENTE DE INFORME-->
+                        <div *ngIf="STIPO_USUARIO != 'RE' ">
+                            <div>
+                                <app-pendiente-informe [parent]="this" [regimen]="regimen" [statePendienteInforme]="statePendienteInforme" [arrResponsable]="getArray(statePendienteInforme.sState,regimen.id)" [context]="context" [userGroupList]="getArrayUserGroup(regimen.id)" [ValidadorHistorico]="1"></app-pendiente-informe>
+                            </div>
+                        </div>
+                        <br>
+                        <!--INFORME TERMINADO-->
+                        <div *ngIf="STIPO_USUARIO != 'RE' ">
+                            <div>
+                                <app-informe-terminado [parent]="this" [regimen]="regimen" [stateInformeTerminado]="stateInformeTerminado" [arrResponsable]="getArray(stateInformeTerminado.sState,regimen.id)" [context]="context" [userGroupList]="getArrayUserGroup(regimen.id)" [ValidadorHistorico]="1"></app-informe-terminado>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
             </div>
-            <br>
-            <!--INFORME TERMINADO-->
-            <div *ngIf="STIPO_USUARIO != 'RE' ">
-              <div>
-                <app-informe-terminado [parent]="this" [regimen]="regimen"
-                  [stateInformeTerminado]="stateInformeTerminado"
-                  [arrResponsable]="getArray(stateInformeTerminado.sState,regimen.id)"
-                  [userGroupList]="getArrayUserGroup(regimen.id)" [ValidadorHistorico]="1"></app-informe-terminado>
-              </div>
-            </div>
 
 
-
-          </div>
         </div>
 
-      </div>
 
 
     </div>
 
 
 
-  </div>
 
 
 
 
 
-
-
-
-  <!-- <div class="row">
+    <!-- <div class="row">
         <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
             <span class="fas fa-chevron-left"></span> Pantalla Principal
         </button>

@@ -44,6 +44,7 @@ export class PendienteComponent implements OnInit {
     linkactual = "";
     dataMultiplex:any
     @Input() regimen:any = {}
+    @Input() context:string
     @Input() arrResponsable:any = []
     @Input() statePendiente:any = {}
     @Input() userGroupList:any = []

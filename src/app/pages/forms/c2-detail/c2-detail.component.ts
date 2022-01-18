@@ -62,6 +62,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     uncheckSacList: any[] = []
     uncheckListEspecial: any[] = []
     disableFormItems:boolean
+    context:string = ""
     processlistAdress
     currentPageAdress;
     rotateAdress;
@@ -97,6 +98,10 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     SNOM_COMPLETO_EMPRESA = ''
     SNUM_DOCUMENTO_EMPRESA = ''
     NPERIODO_PROCESO_ITEM = ''
+    TIPOCARGA : any = { 
+        AUTOMATICO : 1,
+        MANUAL : 2
+    }
      TiposMaestros : any =[
         {
           NIDGRUPOSENAL : 1,
@@ -366,6 +371,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         //this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPO")
         this.NIDSUBGRUPOSEN = localStorage.getItem("NIDSUBGRUPO")
         this.NPERIODO_PROCESO_ITEM = localStorage.getItem("NPERIODO_PROCESO_ITEM")
+        this.context = localStorage.getItem("context")
       
     this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
     this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
@@ -429,6 +435,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
                 dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
                 dataService.NIDSUBGRUPOSENAL = this.NIDSUBGRUPOSEN
+                dataService.NTIPOCARGA = this.context == "MT" ? this.TIPOCARGA.AUTOMATICO : 0
                 arrayPromisesCoincid.push(this.getDataClientesList(dataService))
             //    if( this.IDGRUPOSENALGestor == 2){
             //     "NIDALERTA": 35,
@@ -597,7 +604,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             dataService.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO
             dataService.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO
             dataService.NIDSUBGRUPOSENAL = this.NIDSUBGRUPOSEN
-            
+            dataService.NTIPOCARGA = this.context == "MT" ? this.TIPOCARGA.AUTOMATICO : 0
             // if(this.formData.NIDALERTA == 35){
             //      dataService = {"NPERIODO_PROCESO" : this.formData.NPERIODO_PROCESO,
             //      "NIDALERTA": 35,"STIPOIDEN_BUSQ": this.formData.NTIPO_DOCUMENTO,

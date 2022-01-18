@@ -76,6 +76,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     @Input() parentInformeTerminado: InformeTerminadoComponent
     @Input() vistaOrigen
     @Input() objAlertaC2
+    @Input() context:string
     @Input() regimen
     @Input() valueIdCollap
     @Input() state: any = {}
@@ -602,6 +603,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
         let periodoSend = parseInt(localStorage.getItem("periodo"))
 
         localStorage.setItem("NIDALERTA", this.alertData.NIDALERTA)
+        localStorage.setItem("context", this.context)
         localStorage.setItem("NPERIODO_PROCESO", this.alertData.NPERIODO_PROCESO)
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN)
