@@ -10,7 +10,7 @@
     <div class="container-fluid pl-5 pr-5">
         <div class="row2">
             <div class="col-lg-19">
-                <h4 class="TitleLine">Búsqueda por régimen</h4>
+                <h4 class="TitleLine">Consultas Pep</h4>
             </div>
         </div>
         <div class="tab-content">
@@ -27,7 +27,7 @@
                                 {{item}}</option>
                         </select>
                     </div>
-                    <div class="col-lg-2" style="margin-right: -60px;">
+                    <div class="col-lg-1" >
                         <span class="fontText">Período:</span>
                     </div>
                     <div class="col-lg-2">
@@ -38,15 +38,15 @@
                                 {{item}}</option>
                         </select>
                     </div>
-                    <div class="col-lg-1">
-                        <span class="fontText">Régimen:</span>
+                    <div class="col-lg-1" >
+                        <span class="fontText">Tipo Lista:</span>
                     </div>
                     <div class="col-lg-2">
-                        <select class="form-control" [(ngModel)]="NIDREGIMEN">
+                        <select class="form-control" [(ngModel)]="NIDTIPOLISTA">
                             <option value="0">
                                 --Todos--</option>
-                            <option *ngFor="let item of this.listRegimens" value="{{item.NIDREGIMEN}}">
-                                {{item.SNOMBRE}}</option>
+                            <option *ngFor="let item of this.listType" value="{{item.NIDTIPOLISTA}}">
+                                {{item.SDESTIPOLISTA}}</option>
                         </select>
                     </div>
                     <div class="col-lg-2">
@@ -58,12 +58,12 @@
                     <table class="striped">
                         <thead>
                             <tr>
-                                <th style="width: 16%;">Período</th>
-                                <th style="width: 12%;">Tipo de Documento</th>
-                                <th style="width: 12%;">Número de Documento</th>
-                                <th style="width: 30%;">Nombres</th>
-                                <th style="width: 15%;">Régimen</th>
-                                <th style="width: 15%;">Producto</th>
+                                <th style="width: 14%;">Período</th>
+                                <th style="width: 14%;">Tipo de Documento</th>
+                                <th style="width: 14%;">Número de Documento</th>
+                                <th style="width: 14%;">Nombres</th>
+                                <th style="width: 30%;">Producto</th>
+                                <th style="width: 14%;">Tipo Lista</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,12 +71,12 @@
                                 <td class="text-center" colspan="6">No se han encontrado resultados</td>
                             </tr>
                             <tr *ngFor="let item of this.Colleccion.data ">
-                                <td style="width: 16%;">{{item.SRANGOPERIODO}}</td>
-                                <td style="width: 12%;">{{item.SDESCRIPT}}</td>
-                                <td style="width: 12%;">{{item.SCLINUMDOCU}}</td>
-                                <td style="width: 30%;">{{item.SNAME}}</td>
-                                <td style="width: 15%;">{{item.SDESREGIMEN}}</td>
-                                <td style="width: 15%;">{{item.SDESPRODUCTO}}</td>
+                                <td style="width: 14%;">{{item.SRANGOPERIODO}}</td>
+                                <td style="width: 14%;">{{item.STIPO_DOCUMENTO}}</td>
+                                <td style="width: 14%;">{{item.SNUM_DOCUMENTO}}</td>
+                                <td style="width: 14%;">{{item.SNOM_COMPLETO}}</td>
+                                <td style="width: 30%;">{{item.SDESPRODUCTO}}</td>
+                                <td style="width: 14%;">{{item.SDESTIPOLISTA}}</td>
                             </tr>
                         </tbody>
                     </table>
