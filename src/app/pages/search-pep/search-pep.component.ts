@@ -106,7 +106,7 @@ export class SearchPepComponent implements OnInit {
       _data["Tipo Lista"] = element.SDESTIPOLISTA;
       data.push(_data);
     });
-    this.excelService.exportAsExcelFile(data, "Lista de Clientes");
+    this.excelService.exportAsExcelFile(data, "Lista de Clientes fuente LAFT");
   }
   setPanelShow(index) {
     this.arrayPanel = ['fade', 'fade']
@@ -195,6 +195,6 @@ export class SearchPepComponent implements OnInit {
       lista.push(obj);
     }
     
-    this.excelService.exportAsExcelSeacsaFile(lista, "Lista de Clientes");
+    this.excelService.exportAsExcelSeacsaFile(lista, "Lista de Clientes fuente SEACSA");
   }
 }

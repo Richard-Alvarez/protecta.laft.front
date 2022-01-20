@@ -95,8 +95,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <ng-container *ngIf="this.data.length>0; then showPagination"></ng-container>
-                        <ng-template #showPagination>
+                        <ng-container *ngIf="this.data.length>0; then showPagination1"></ng-container>
+                        <ng-template #showPagination1>
                             <div class="row mt-4">
                                 <div class="col-sm-4">
                                     <button (click)="descarga()"
