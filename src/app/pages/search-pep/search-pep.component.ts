@@ -126,8 +126,8 @@ export class SearchPepComponent implements OnInit {
   }
   async getParamSeacsa() {
     let param: any = {};
-    param.FECHAINICIO = this.FECHAINICIO.toLocaleDateString()
-    param.FECHAFIN = this.FECHAFIN.toLocaleDateString()
+    param.FECHAINICIO = this.FECHAINICIO == null ? null :this.FECHAINICIO.toLocaleDateString()
+    param.FECHAFIN = this.FECHAFIN == null ? null : this.FECHAFIN.toLocaleDateString()
     return param;
   }
   pageChangedSeacsa(currentPage) {
@@ -172,6 +172,7 @@ export class SearchPepComponent implements OnInit {
         lista.push(obj);
       }
       let obj: any = {}
+      debugger
       obj["DATOS DE LA POLIZA"] = this.dataSeacsa[i].COD_TIPPROD
       obj["DATOS DE LA POLIZA2"] = this.dataSeacsa[i].NUM_POLIZA
       obj["DATOS DE LA POLIZA3"] = this.dataSeacsa[i].FEC_EMISION
