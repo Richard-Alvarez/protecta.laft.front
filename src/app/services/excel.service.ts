@@ -133,7 +133,19 @@ export class ExcelService {
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, excelFileName);
   }
-
+  public exportAsExcelFileToHTML(html: any, excelFileName: string): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(html);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+  public exportAsExcelSeacsaFile(json: any[], excelFileName: string): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    worksheet["!merges"] = JSON.parse('[{"s":{"r":0,"c":0},"e":{"r":0,"c":3}},{"s":{"r":0,"c":4},"e":{"r":0,"c":6}},{"s":{"r":0,"c":7},"e":{"r":0,"c":14}},{"s":{"r":0,"c":15},"e":{"r":0,"c":19}}]')
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
 
   private wrapAndCenterCell(cell: XLSX.CellObject) {
     const wrapAndCenterCellStyle = { alignment: { wrapText: true, vertical: 'center', horizontal: 'center' } };

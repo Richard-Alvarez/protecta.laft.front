@@ -470,14 +470,14 @@ a .colorTextoDropDown {
 
 /**********End File Inputs**********/
 
-table thead tr {
+table thead tr:last-child {
     border-bottom: solid 1px #26296D !important;
     color: rgba(38, 41, 109, 0.6);
     font-weight: bold;
 }
 
 td,
-th {
+th:last-child {
     padding: 15px 10px;
     display: table-cell;
     text-align: center;
@@ -499,17 +499,40 @@ thead {
 }
 
 table,
-th,
+th:last-child,
 td {
     border: none;
     text-align: left;
 }
 
-table.striped>tbody>tr:nth-child(odd) {
+ table.striped>tbody>tr:nth-child(odd) {
     background-color: rgba(242, 242, 242, 0.5);
-}
+} 
 
 .row2 {
     display: flex;
     flex-wrap: wrap;
+}
+
+
+th[colspan] {
+    text-align: center;
+    color: rgba(38, 41, 109, 0.6);
+}
+
+
+
+.columnGroup1 {
+    background-color: #b2e2f2;
+}
+.columnGroup2 {
+    background-color: #d8f8e1
+;
+}
+.columnGroup3 {
+    background-color: #fdf9c4;
+}
+.columnGroup4 {
+    background-color: #ffda9e
+    ;
 }
