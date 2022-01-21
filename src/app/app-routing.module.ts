@@ -86,6 +86,7 @@ import { NavbarUpdateComponent } from './../app/components/navbar-update/navbar-
 import { InformesComponent } from './../app/components/informes/informes.component';
 import { ActualizarContrasennaComponent } from './pages/actualizar-contrasenna/actualizar-contrasenna.component';
 import { SearchforregimenComponent } from './pages/searchforregimen/searchforregimen.component';
+import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 import { ComplementoSinSennalComponent } from './../app/complemento-sin-sennal/complemento-sin-sennal.component';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 //fin formularios antiguos
@@ -180,6 +181,7 @@ const routes: Routes = [
   { path: 'complemento-sin-sennal', component: ComplementoSinSennalComponent},
   
   { path: 'complemento-respuesta', component: ComplementoRespuestaComponent},
+  { path: 'search-pep', component: SearchPepComponent},
   
   
 ];

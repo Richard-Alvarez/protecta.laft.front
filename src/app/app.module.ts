@@ -191,6 +191,7 @@ import { ComplementoSinSennalComponent } from './complemento-sin-sennal/compleme
 import { ModalComplementoSinSennalComponent } from './modal-complemento-sin-sennal/modal-complemento-sin-sennal.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
+import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -350,7 +351,8 @@ import { ComplementoRespuestaComponent } from './complemento-respuesta/complemen
     SearchforregimenComponent,
     ComplementoSinSennalComponent,
     ModalComplementoSinSennalComponent,
-    ComplementoRespuestaComponent
+    ComplementoRespuestaComponent,
+    SearchPepComponent
 
    
     //Validaciones
