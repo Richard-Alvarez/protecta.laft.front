@@ -193,6 +193,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 
+
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
