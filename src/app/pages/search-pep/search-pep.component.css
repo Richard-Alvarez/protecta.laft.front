@@ -480,7 +480,7 @@ td,
 tr:last-child>th {
     padding: 15px 10px;
     display: table-cell;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     border-radius: 2px;
 }
@@ -538,3 +538,32 @@ th[colspan] {
     background-color: #ffda9e
     ;
 }
+
+/* 
+  .table-fixed thead,
+.table-fixed tfoot{
+  width: 100%;
+}
+
+.table-fixed tbody {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tfoot,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+  display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead > tr> th,
+.table-fixed tfoot > tr> td{
+  float: left;
+  border-bottom-width: 0;
+} */
+

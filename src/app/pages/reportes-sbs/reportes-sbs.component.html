@@ -55,18 +55,11 @@
                        <input [disabled]="amFreMOff" [(ngModel)]="amountFrecMulti" type="text" class="form-control buttonSinBorder" maxlength="20">
                     </div>-->
                     <div class="col-lg-3 form-group mt-1" title="Ingrese la fecha de inicio">
-                        <label class="fontText">Fecha Inicio(*):</label>
+                        <label class="fontText" title="se va a calcular el tipo de cambio segun este mes">Mes a procesar(*):</label>
                         <input type="text" [(ngModel)]="bsValueIni" placeholder="DESDE"
                             class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
                             [maxDate]="maxDate"
-                            [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
-                    </div>
-                    <div class="col-lg-3 form-group mt-1" title="Ingrese la fecha de fin">
-                        <label class="fontText">Fecha Fin(*):</label>
-                        <input type="text" [(ngModel)]="bsValueFin" placeholder="HASTA"
-                            class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
-                            [maxDate]="maxDate"
-                            [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
+                            [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange',minMode: 'month'}">
                     </div>
                     <div class="col form-group" >
                         <button style="margin-top: 30px;width: 100%;" class="btn btn-warning text-white "
