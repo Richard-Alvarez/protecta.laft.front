@@ -1,11 +1,11 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/';
+  private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -239,6 +239,7 @@ class Rutas {
   public urlgetCorreo_OC: string = this.base + "monitoreoSenales/getCorreo_OC"
   public urlUpdActualizarCorreoOC: string = this.base + "monitoreoSenales/UpdActualizarCorreoOC"
   public urlActulizarContrasenaEncriptada: string = this.base + "monitoreoSenales/ActulizarContrasenaEncriptada"
+  public urlUpdRutaComplementos: string = this.base + "monitoreoSenales/UpdRutaComplementos"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

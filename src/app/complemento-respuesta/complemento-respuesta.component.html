@@ -60,21 +60,21 @@
                         <div >
                             <div  class="table-responsive">
                                 <div  class="col-lg-3" style="display: flex;justify-content: left;">
-                                    <h5  class="TitleLine" style="font-size: 18px;">Alfredo Chan Way Diaz
+                                    <h5  class="TitleLine" style="font-size: 18px;">{{NombreCompleto}}
                                     </h5>
                                 </div>
                             </div><br >
-                            <div class="card-body" style="background: #EEEEF2;">
-                            <div class="row " style="font-size:14px;margin:0px;background: #EEEEF2;">
+                            <div  *ngFor="let item of listaComplementoPendiente;let index = index"  class="card m-2 " style="background: #EEEEF2;">
+                            <div class="row pt-2" style="font-size:14px;margin:0px;background: #EEEEF2;">
                                 <div class="col-7">
                                   
-                                Acá iria la descripción 
+                                {{item.SNOM_COMPLEMENTO}}
                                     
 
                         
                                 </div>
 
-                                <div class="col-lg-1 text-center">
+                                <div class="col-lg-1 text-center" style="cursor: pointer;" (click)="DescargarArhivo(item,'OC')">
                                   
                                     <div>
                                       
@@ -88,9 +88,9 @@
                                     </div>
 
                                     <div class="col-lg-2" style="padding-left: 0px;">
-                                        <input type="file" name="file" id="archivoComplemento{{regimen.id}}-{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item,'COMPLEMENTO','RE')" />
+                                        <input type="file" name="file" id="archivoComplemento{{index}}" class="inputfile" multiple (change)="addFilesUniversal($event,item,'COMPLEMENTO','RE')" />
                                         <div class="text-center" style="display:table-caption">
-                                            <label for="archivoComplemento{{regimen.id}}-{{index}}" style="cursor: pointer;">
+                                            <label for="archivoComplemento{{index}}" style="cursor: pointer;">
                                             <!-- <img src="assets/icons/excel-microsoft.png" style="width: 38px;" /> -->
                                             <!-- <img src="assets/icons/Adjuntar_complemento.png" style="width: 38px;" /> -->
                                             <a><i style="width: 38px;padding-top:8px;color: #706d6d" class="fas fa-paperclip fa-2x fa-lg"></i></a>
@@ -102,7 +102,7 @@
                                     </div>
                                 <div class="col-2">
                                     <button 
-                                    class="btn btn-warning text-white " type="button"> Enviar </button>
+                                    class="btn btn-warning text-white " type="button" (click)="Guardar(item)" > Enviar </button>
                                    
                                 </div>
                             </div>
@@ -177,21 +177,21 @@
                       <div >
                           <div  class="table-responsive">
                               <div  class="col-lg-3" style="display: flex;justify-content: left;">
-                                  <h5  class="TitleLine" style="font-size: 18px;">Alfredo Chan Way Diaz
+                                  <h5  class="TitleLine" style="font-size: 18px;">{{NombreCompleto}}
                                   </h5>
                               </div>
                           </div><br >
-                          <div class="card-body" style="background: #EEEEF2;">
+                          <div  *ngFor="let item of listaComplementoCompletado;let index = index"  class="card m-2 " style="background: #EEEEF2;">
                           <div class="row " style="font-size:14px;margin:0px;background: #EEEEF2;">
                               <div class="col-10">
                                 
-                              Acá iria la descripción 
+                                {{item.SNOM_COMPLEMENTO}}
                                   
 
                       
                               </div>
 
-                              <div class="col-lg-1 text-center">
+                              <div class="col-lg-1 text-center" (click)="DescargarArhivo(item,'OC')">
                                 
                                   <div>
                                     
