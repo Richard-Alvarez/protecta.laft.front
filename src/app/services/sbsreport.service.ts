@@ -492,6 +492,17 @@ export class SbsreportService {
       }
     });
   }
+  getPromedioTipoCambio(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetPromedioTipoCambio, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
 
   processCargaFile(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
