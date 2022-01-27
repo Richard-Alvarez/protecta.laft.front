@@ -176,6 +176,7 @@ class Rutas {
 
   public urlDeleteAdjuntosInformAlerta: string = this.base + "monitoreoSenales/DeleteAdjuntosInformAlerta";
   public urlProcessInsertFile: string = this.base + "sbsReport/processInsertFile";
+  public urlGetPromedioTipoCambio: string = this.base + "sbsReport/getPromedioTipoCambio";
   public urlProcessCargaFile: string = this.base + "sbsReport/processCargaFile";
   public urlProcessPagosManuales: string = this.base + "sbsReport/processPagosManuales";
   public urlGetListaCargo: string = this.base + "monitoreoSenales/GetListaCargo";
