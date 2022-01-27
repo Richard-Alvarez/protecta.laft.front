@@ -49,22 +49,33 @@ export class ComplementoRespuestaComponent implements OnInit {
     if(usuario == 'OC'){
        SRUTA = item.SRUTA_FILE_NAME;
        SRUTA_LARGA = item.SFILE_NAME_LARGO;
+
+       if(SRUTA == '' || SRUTA == null){
+        let mensaje = "No hay archivos para descargar"
+        await this.MensajesAlertas(mensaje)
+        return
+
+      }else{
+        await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+        }
+
     }else{
-       SRUTA = item.SRUTA_FILE_NAME_RE;
-       SRUTA_LARGA = item.SFILE_NAME_LARGO_RE;
-    }
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      let listaRutas = await this.userConfigService.getListaAdjuntos(data)
+      listaRutas =  listaRutas.filter(it => it.STIPO_CARGA== 'COMPLEMENTO-SIN-SENNAL-RE' && it.STIPO_CARGA== item.NIDCOMP_CAB_USUARIO)
+      listaRutas.forEach(async (element) => {
+        SRUTA = item.SRUTA_FILE_NAME_RE;
+        SRUTA_LARGA = item.SFILE_NAME_LARGO_RE;
+        await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+     } );
+       
+    // getListaAdjuntos
     
     
-    if(SRUTA == '' || SRUTA == null){
-      let mensaje = "No hay archivos para descargar"
-      await this.MensajesAlertas(mensaje)
-      return
-    }else{
-      await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
-      }
 
     }
-   
+  }
   
 
   async downloadUniversalFile(ruta, nameFile) {
