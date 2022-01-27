@@ -163,7 +163,7 @@ export class ModalComplementoSinSennalComponent implements OnInit {
   }
 
 
-  async setDataFile(event) {
+  async setDataFile(event,item) {
     debugger
      let files = event.target.files;
  
@@ -208,9 +208,10 @@ export class ModalComplementoSinSennalComponent implements OnInit {
      let listDataFileInform: any = []
      arrFiles.forEach(fileData => {
        listDataFileInform.push(this.handleFile(fileData))
+       
      })
      let respPromiseFileInfo = await Promise.all(listDataFileInform)
-     return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
+     return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform}
    }
  
 
@@ -225,8 +226,8 @@ export class ModalComplementoSinSennalComponent implements OnInit {
 
   ArchivoAdjunto:any
   NombreArchivo:string = ''
-  async AgregarAdjunto(evento){
-   this.ArchivoAdjunto =  await this.setDataFile(evento)
+  async AgregarAdjunto(evento,item){
+   this.ArchivoAdjunto =  await this.setDataFile(evento,item)
    console.log( this.ArchivoAdjunto)
  
     this.NombreArchivo = this.ArchivoAdjunto.listFileNameInform[0]

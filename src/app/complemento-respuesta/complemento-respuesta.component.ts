@@ -117,6 +117,104 @@ export class ComplementoRespuestaComponent implements OnInit {
     data.SRUTA_PDF = ''
     await this.userConfigService.GetUpdComplementoCab(data)
     await this.ConsultaComplementoUsuarios()
+    
+    let  filtroArchivos = this.ListaArchivos.filter(it => it.IdComplemento == item.NIDCOMP_CAB_USUARIO )
+    console.log("lista que se envia",filtroArchivos)
+    debugger
+    filtroArchivos.forEach(async (element,i) => {
+      let uploadPararms: any = {}
+      uploadPararms.NIDALERTA = 99
+      uploadPararms.NREGIMEN = 0;
+      uploadPararms.STIPO_CARGA = "COMPLEMENTO-SIN-SENNAL-RE";
+      uploadPararms.NIDALERTA_CABECERA =  item.NIDCOMP_CAB_USUARIO;
+      uploadPararms.NPERIODO_PROCESO = this.PeriodoComp;
+      uploadPararms.NIDUSUARIO_MODIFICA =  this.IdUsuario
+      element.listFileNameInform.forEach(async (archivo,i) => {
+        uploadPararms.SRUTA_ADJUNTO = "COMPLEMENTO-SIN-SENNAL-RE" + '/'  +  this.PeriodoComp + '/' + item.NIDCOMP_CAB_USUARIO + '/' + archivo;
+        uploadPararms.SRUTA = "COMPLEMENTO-SIN-SENNAL-RE" + + '/' + this.PeriodoComp + '/' +  item.NIDCOMP_CAB_USUARIO ;
+        
+        await this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms)
+      });
+     
+    });
+    
+          
   }
 
-}
+
+  async setDataFile(event,item) {
+    debugger
+     let files = event.target.files;
+ 
+     let arrFiles = Array.from(files)
+     
+     let listFileNameInform: any = []
+     arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+    
+     let listFileNameCortoInform = []
+     let statusFormatFile = false
+     for (let item of listFileNameInform) {
+       //let item = listFileNameInform[0]
+       let nameFile = item.split(".")
+       if (nameFile.length > 2 || nameFile.length < 2) {
+         statusFormatFile = true
+         return
+       }
+       let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+       //listFileNameCortoInform.push(fileItem)
+       listFileNameCortoInform.push(fileItem)
+     }
+     if (statusFormatFile) {
+       swal.fire({
+         title: 'Mantenimiento de complemento',
+         icon: 'warning',
+         text: 'El archivo no tiene el formato necesario',
+         showCancelButton: false,
+         showConfirmButton: true,
+         confirmButtonColor:'#FA7000',
+         confirmButtonText: 'Aceptar',
+         showCloseButton:true,
+            customClass: { 
+               closeButton : 'OcultarBorde'
+               },
+         
+       }).then(async (result) => {
+       
+       }).catch(err => {
+       
+       })
+     }
+     let listDataFileInform: any = []
+     arrFiles.forEach(fileData => {
+       listDataFileInform.push(this.handleFile(fileData))
+     })
+     let respPromiseFileInfo = await Promise.all(listDataFileInform)
+     return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform,IdComplemento : item.NIDCOMP_CAB_USUARIO , nombreCorto: listFileNameCortoInform[0] }
+   }
+ 
+
+   handleFile(blob: any): Promise<any> {
+    return new Promise(resolve => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.readAsDataURL(blob)
+    })
+  }
+
+
+  ArchivoAdjunto:any 
+  NombreArchivo:string = ''
+  ListaArchivos:any  = []
+  async AgregarAdjunto(evento,index,item){
+   this.ArchivoAdjunto =  await this.setDataFile(evento,item)
+   console.log( this.ArchivoAdjunto)
+ 
+    this.NombreArchivo = this.ArchivoAdjunto.listFileNameInform[0]
+    
+    console.log("this.ArchivoAdjunto", this.ArchivoAdjunto)
+    console.log("this.NombreArchivo", this.NombreArchivo)
+
+    this.ListaArchivos.push(this.ArchivoAdjunto)
+    console.log("this.ListaArchivos", this.ListaArchivos)
+  }
+} 
