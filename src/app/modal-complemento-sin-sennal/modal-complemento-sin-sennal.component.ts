@@ -188,6 +188,7 @@ export class ModalComplementoSinSennalComponent implements OnInit {
               }
 
          }
+         this.Regresar('')
          this.core.loader.hide()
   }
 

@@ -66,6 +66,7 @@
                                 <thead>
                                     <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
                                         <th scope="col" style="text-align: left;">Descripción</th>
+                                        <th scope="col" style="text-align: left;">Comentario</th>
                                         <th scope="col" style="text-align: left;">Fecha de creación</th>
                                         <th scope="col" style="text-align: left;">Usuaurio asignado</th>
                                         <th scope="col" style="text-align: left;">Estado</th>
@@ -88,7 +89,20 @@
                                 <tbody>
                                     <tr *ngFor="let item of FiltrolistaComplementoUsuario | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
                                      
-                                        <td class="text-left vertical;" style="white-space: nowrap;" >{{item.SNOM_COMPLEMENTO}}</td>
+                                        <!-- <td class="text-left vertical;" style="white-space: nowrap;" >{{item.SNOM_COMPLEMENTO}}</td> -->
+                                        <td >
+                                           
+                                            <div class="text-left txtDetalle" style="white-space: nowrap;" placement='top' ngbTooltip="{{item.SNOM_COMPLEMENTO}}" title=""> {{cortarCararter(convert(item.SNOM_COMPLEMENTO))}}</div>
+                                              
+                                            </td>
+
+
+                                        <td >
+                                            
+                                            <div class="text-left txtDetalle"  placement='top' ngbTooltip="{{item.SCOMENTARIO}}" title="">{{cortarCararter(convert(item.SCOMENTARIO))}}</div>
+                
+                                           
+                                        </td>   
                                         <td style="text-align: justify;">{{item.DFECHA_ESTADO_MOVIMIENTO}}</td>                                       
                                         <td style="text-align: justify;">{{item.NOMBRECOMPLETO}}</td>    
                                         <td class="text-left vertical">{{item.SNOMBRE_ESTADO}}</td>

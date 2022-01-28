@@ -1102,6 +1102,42 @@ export class UserconfigService {
     })
 
   }
+  getListWebLinksCliente(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListWebLinksCliente, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+
+  }
+  getDeleteWebLinksCoincidence(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetDeleteWebLinksCoincidence, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+
+  }
+  addWebLinkscliente(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlAddWebLinkscliente, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+
+  }
   getPepList(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

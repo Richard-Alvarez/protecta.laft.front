@@ -98,20 +98,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     SNOM_COMPLETO_EMPRESA = ''
     SNUM_DOCUMENTO_EMPRESA = ''
     NPERIODO_PROCESO_ITEM = ''
-    arrWebsLinks : any = [{
-        SURI : "https://gestion.pe/peru/politica/pedro-castillo-admite-que-se-reunio-con-karelim-lopez-en-palacio-de-gobierno-si-vino-al-despacho-la-recibi-nndc-noticia/?ref=signwall",
-        SESTADO_TRAT : "Activo"
-    },
-    {
-        SURI : "https://elperuano.pe/noticia/138114-marina-confirma-segundo-derrame-de-petroleo-de-repsol",
-        SESTADO_TRAT : "Deshabilitado"
-    },
-    {
-        SURI : "https://elcomercio.pe/lima/sucesos/repsol-niega-nuevo-un-derrame-de-petroleo-en-el-mar-pese-a-reportes-de-oefa-marina-de-guerra-y-osinergmin-ventanilla-la-pampilla-nndc-noticia/?ref=signwall",
-        SESTADO_TRAT : "No Encontrado"
-    }
-
-    ]
+    arrWebsLinks : any = []
     TIPOCARGA : any = { 
         AUTOMATICO : 1,
         MANUAL : 2
@@ -163,99 +150,50 @@ export class C2DetailComponent implements OnInit , OnDestroy {
       localStorage.getItem("NIDGRUPO")
     }
     async ngOnInit() {  
-         localStorage.setItem("NIDGRUPORETURN",localStorage.getItem("NIDGRUPO"))
+        this.core.loader.show() 
+        localStorage.setItem("NIDGRUPORETURN",localStorage.getItem("NIDGRUPO"))
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
         this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
-        //   this.getAcordionReturn();
         localStorage.setItem("objFocusPositionReturn", localStorage.getItem("objFocusPosition"));
-      this.nidregimen = localStorage.getItem("NREGIMEN");
-      this.nidalerta = localStorage.getItem("NIDALERTA");
-      var paramCliente : any =  localStorage.getItem("paramCliente");
-      
-      if (paramCliente != null && paramCliente != ""){
-          //this.parametroReturn = JSON.parse(paramCliente);
-          localStorage.setItem("paramCliente", "");
-          let pestana = localStorage.getItem("pestana");
-          let _paramCliente = JSON.parse(paramCliente);
-          _paramCliente.pestana = JSON.parse(pestana);
-          localStorage.setItem("paramClienteReturn", JSON.stringify(_paramCliente));
+        this.nidregimen = localStorage.getItem("NREGIMEN");
+        this.nidalerta = localStorage.getItem("NIDALERTA");
+        var paramCliente : any =  localStorage.getItem("paramCliente");
+        if (paramCliente != null && paramCliente != ""){
+            localStorage.setItem("paramCliente", "");
+            let pestana = localStorage.getItem("pestana");
+            let _paramCliente = JSON.parse(paramCliente);
+            _paramCliente.pestana = JSON.parse(pestana);
+            localStorage.setItem("paramClienteReturn", JSON.stringify(_paramCliente));
         }
         this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONALES'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIAR PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
-        //this.realNoFAKE()
-        
-    paramCliente =  localStorage.getItem("nSelectPestaniaClient");
-    let res = isNaN(parseInt(paramCliente));
-    if(res)
-        paramCliente = '0'
-    if (!paramCliente || paramCliente != ''){
-        localStorage.setItem("nSelectPestaniaClientReturn",paramCliente);
-        let nSelectSubPestania = localStorage.getItem("nSelectSubPestania")
-        let res2 = isNaN(parseInt(nSelectSubPestania));
-        if(res2)
-            nSelectSubPestania = '0'
-        localStorage.setItem("nSelectSubPestaniaReturn",nSelectSubPestania);
-    }
-
-  
-    this.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
-
-
-
-
-
-
-
-    //this.vistaOrigen = this.core.storage.get('vistaOrigen')
-    //await this.configService.sOrigenVista$.subscribe(cadena => this.vistaOrigen = cadena )
-    this.core.loader.show() 
-    await this.ListarCargo()
-     
-    await this.getFormData()
-    //await this.getHistorialRevisiones()
-    /*if(this.tipoClienteGC != 'GC'){
-        await this.getInternationalLists()
-        await this.getPepList()
-        await this.getFamiliesPepList()
-        await this.getSacList()
-        await this.getListEspecial();
-    }*/
-      
-      //await this.getValidaCabeceraPlaca()
-        
-      //await this.getAddressList()
-      await this.getMovementHistory()
-      await this.getPolicyList()
-     
-      this.core.loader.hide()
-    //   this.arrRevisionesHis = [
-    //       {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'},
-    //       {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'},
-    //       {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual'}
-    //   ]
-    //   this.arrCaracteristicasHis = [
-    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'PEP'},
-    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'Otras Fuentes',tipoPep:'PEP'},
-    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'FPEP'},
-    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'Otras Razones',tipoPep:'PEP'},
-    //     {id:1,periodo:'30/09/2020',estadoCli:'REVISADO',nombreCli:'Luis Alejandro Torres Valdivia',usuario:'GSALINAS',fechaModif:'08/12/2021',comentario:'Se reviso de manera manual',fuente:'WC',tipoPep:'FPEP'}
-    // ]
-    if(this.formData.NIDREGIMEN == '2'){
-        this.nombreRegimen = 'RÉGIMEN SIMPLIFICADO:'
-    }else if(this.formData.NIDREGIMEN == '1'){
-        this.nombreRegimen = 'RÉGIMEN GENERAL:'
-    }
-    this.nombreRegimenSimpli = 'RÉGIMEN SIMPLIFICADO:'
-    this.nombreRegimenGral = 'RÉGIMEN GENERAL:'
-    
-    
-    this.Arraycheckbox()
-  
-
-
-    //await this.Consultar360Previous();
-     await this.consultarPoliza();
-     
-
+        paramCliente =  localStorage.getItem("nSelectPestaniaClient");
+        let res = isNaN(parseInt(paramCliente));
+        if(res)
+            paramCliente = '0'
+        if (!paramCliente || paramCliente != ''){
+            localStorage.setItem("nSelectPestaniaClientReturn",paramCliente);
+            let nSelectSubPestania = localStorage.getItem("nSelectSubPestania")
+            let res2 = isNaN(parseInt(nSelectSubPestania));
+            if(res2)
+                nSelectSubPestania = '0'
+            localStorage.setItem("nSelectSubPestaniaReturn",nSelectSubPestania);
+        }
+        this.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+        await this.ListarCargo()
+        await this.getFormData()
+        await this.getMovementHistory()
+        await this.getPolicyList()
+        await this.getListWebLinksCliente()
+        if(this.formData.NIDREGIMEN == '2'){
+            this.nombreRegimen = 'RÉGIMEN SIMPLIFICADO:'
+        }else if(this.formData.NIDREGIMEN == '1'){
+            this.nombreRegimen = 'RÉGIMEN GENERAL:'
+        }
+        this.nombreRegimenSimpli = 'RÉGIMEN SIMPLIFICADO:'
+        this.nombreRegimenGral = 'RÉGIMEN GENERAL:'
+        this.Arraycheckbox()
+        await this.consultarPoliza();
+        this.core.loader.hide()
   }
  
   async ListarCargo(){
@@ -284,8 +222,75 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
   }
     
-
-
+ async getListWebLinksCliente(){
+     let data :any = {};
+     data.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
+     data.NIDGRUPOSENAL = this.IDGRUPOSENAL
+     data.NIDSUBGRUPOSEN = this.NIDSUBGRUPOSEN
+     data.NIDPROVEEDOR = 4
+     data.NIDTIPOLISTA = this.context != "MT" ? 0 : this.IdLista
+     data.SNUM_DOCUMENTO = this.formData.SNUM_DOCUMENTO
+    await this.userConfigService.getListWebLinksCliente(data).then( async response => {
+            this.arrWebsLinks = await response;
+    });
+ }
+ async onDeleteWebLinks(SID){
+    this.core.loader.show()
+    let data :any = { SROWID : SID}
+    await this.userConfigService.getDeleteWebLinksCoincidence(data).then(async response => {
+        if(response.nCode == 0){
+            await this.getListWebLinksCliente().then(() =>{
+                this.core.loader.hide()
+                swal.fire({
+                    title: 'Fuentes publicas del cliente',
+                    text : response.sMessage.value,
+                    icon :'success',
+                    confirmButtonColor :'#FA7000'
+                })
+            });
+        }else {
+            swal.fire({
+                title: 'Ocurrio un problema',
+                text : response.sMessage.value,
+                icon :'warning',
+                confirmButtonColor :'#FA7000'
+            })
+            this.core.loader.hide()
+        }
+        
+    });
+ }
+ async addWebLinks (){
+    
+    swal.fire({
+        title: 'Fuentes publicas del cliente',
+        text : 'Agregar el url de la fuente publica',
+        icon :'info',
+        input: 'url',
+        confirmButtonColor :'#FA7000'
+    }).then(async (option)=>{
+        this.core.loader.show()
+        console.log(option);
+        let data :any ={}
+        data.SURI = option.value
+        data.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
+        data.NIDGRUPOSENAL = this.IDGRUPOSENAL
+        data.NIDSUBGRUPOSEN = this.NIDSUBGRUPOSEN
+        data.NIDPROVEEDOR = 4
+        data.NIDTIPOLISTA = this.context != "MT" ? 0 : this.IdLista
+        data.SNUM_DOCUMENTO = this.formData.SNUM_DOCUMENTO
+        await this.userConfigService.addWebLinkscliente(data).then(async(response)=>{
+            await this.getListWebLinksCliente()
+            this.core.loader.hide()
+            swal.fire({
+                title: 'Fuentes publicas del cliente',
+                text : response.sMessage.value,
+                icon :'success',
+                confirmButtonColor :'#FA7000'
+            })
+        })
+    });
+ }
   realNoFAKE(){
     this.tipoListas = [{'id': 1,nombre:'LISTAS INTERNACIONAL'},{'id': 2,nombre:'LISTAS PEP'},{'id': 3,nombre:'LISTAS FAMILIA PEP'}, {'id': 5,nombre:'LISTAS ESPECIALES'}, {'id': 4,nombre:'LISTAS SAC'}]
     this.resultadosCoincid = /*servicio*/[{id:1,nombre:"Marco",edad:24,SDESTIPOLISTA: "LISTAS INTERNACIONAL"},{id:2,nombre:"Marco",edad:24,SDESTIPOLISTA: "LISTAS PEP"}]
@@ -372,7 +377,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
   NIDSUBGRUPOSEN
   IDGRUPOSENALGestor
     async getFormData() {
-         debugger;
         this.tipoClienteCRF = await localStorage.getItem("tipoClienteCRF")
         this.tipoClienteGC = await localStorage.getItem('tipoClienteGC')
         this.boolClienteReforzado = await JSON.parse(localStorage.getItem('boolClienteReforzado'))
@@ -393,7 +397,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         //this.tipoClienteGC = this.vistaOrigen
         
         this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
-        debugger;
         if(this.tipoClienteGC == 'ACEPTA-COINCID'){
             this.formData.NREGIMEN = parseInt(localStorage.getItem("NREGIMEN"))
             this.formData.NIDALERTA = parseInt(localStorage.getItem("NIDALERTA"))
@@ -533,7 +536,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.ValorListaCoincidencias = arrayClientes
             arrayRespCoincid.forEach(itemResp => {
                 itemResp.forEach(itemCoin => {
-                    debugger
                     let validLista = this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == itemCoin.NIDTIPOLISTA)
                    
                     if(validLista.length == 0){
@@ -632,7 +634,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         // ;
         
          ;
-         debugger;
             this.arrCoincidenciasLista = await this.getDataClientesList(dataService)
             //this.boolNameMach = this.arrCoincidenciasLista.;
             this.SCLIENT_DATA = localStorage.getItem('SCLIENT')//this.formData.SCLIENT
@@ -725,7 +726,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 }else{
                     this.sDescriptRiesgo = respExperian.sDescript//'BAJO'
                 }
-                debugger
                 this.arrCoincidenciasLista = await this.getDataClientesAllList(dataService)
                 
                 //this.arrCoincidenciasLista = await respClientesAll.lista
@@ -1159,7 +1159,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             
             else{
                 respListasWithCoincid = await this.userConfigService.GetListaResultadosCoincid(dataService)
-                 debugger;
                 let indice = 0
                 let array : any [] = respListasWithCoincid.filter((obj,index,array)=> {
                      return array.map(t=> t.NIDTIPOLISTA).indexOf(obj.NIDTIPOLISTA) == index
@@ -1309,7 +1308,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
                 let lista4 = (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 4))[0] ? (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 4))[0].arrCoincidencias : []
                 let lista5 = (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 5))[0] ? (this.arrCoincidenciasLista.filter(it => it.NIDTIPOLISTA == 5))[0].arrCoincidencias : []
                 */
-               debugger;
                 this.arrCoincidenciasLista.forEach(itemLista =>{
                     if(itemLista.arrCoincidencias){
                         itemLista.arrCoincidencias.forEach(itemCoin => {
@@ -1331,75 +1329,65 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
     async getInternationalLists() {        
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
-        //this.core.loader.show(); 
        ;
         this.internationalList = await this.userConfigService.getInternationalLists(param)
         
         this.internationalList.forEach((it, i) => { 
             this.uncheckInternationalLists.push(it.NACEPTA_COINCIDENCIA == 1)
         })
-        //this.core.loader.hide();
     }
 
     async getPepList() {       
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
-        //this.core.loader.show();
         this.pepList = await this.userConfigService.getPepList(param)
         this.pepList.forEach(it => {
             this.uncheckPepLists.push(it.NACEPTA_COINCIDENCIA == 1)
         })
-        //this.core.loader.hide();
     }
 
     async getFamiliesPepList() {            
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
-        //this.core.loader.show(); 
         this.familiesPepList = await this.userConfigService.getFamiliesPepList(param)
         this.familiesPepList.forEach(it => {
             this.uncheckFamiliesPepList.push(it.NACEPTA_COINCIDENCIA == 1)
         })
-        //this.core.loader.hide();
     }
 
     async getSacList() {        
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
-        ///this.core.loader.show();
         this.sacList = await this.userConfigService.getSacList(param)
         // this.sacList.forEach(it => {
         //     this.uncheckSacList.push(it.NACEPTA_COINCIDENCIA == 1)
         // })
-        //this.core.loader.hide();
     }
 
     async getListEspecial() {        
         let param = {NIDALERTA: this.formData.NIDALERTA, NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, NIDREGIMEN: this.formData.NIDREGIMEN, STIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO}
-        //this.core.loader.show();
         // ;
         this.espList = await this.userConfigService.getListEspecial(param)
         this.espList.forEach(it => {
             this.uncheckListEspecial.push(it.NACEPTA_COINCIDENCIA == 1)
         })
-        //this.core.loader.hide();
     }
 
-    async getAddressList() {        
-        let param = {NIDDOC_TYPE:this.formData.NTIPO_DOCUMENTO, SIDDOC: this.formData.SNUM_DOCUMENTO}
-        this.core.loader.show();
-        this.currentPageAdress = 1;
-        this.rotateAdress = true;
-        this.maxSizeAdress = 5;
-        this.itemsPerPageAdress = 10;
-        this.totalItemsAdress = 0;
+    // async getAddressList() {        
+    //     let param = {NIDDOC_TYPE:this.formData.NTIPO_DOCUMENTO, SIDDOC: this.formData.SNUM_DOCUMENTO}
+    //     this.core.loader.show();
+    //     this.currentPageAdress = 1;
+    //     this.rotateAdress = true;
+    //     this.maxSizeAdress = 5;
+    //     this.itemsPerPageAdress = 10;
+    //     this.totalItemsAdress = 0;
 
-        this.addressList = await this.userConfigService.getAddressList(param)
-        this.processlistAdress = this.addressList;
-        this.totalItemsAdress = this.processlistAdress.length;
-        this.processlistToShowAdress = this.processlistAdress.slice(
-          (this.currentPageAdress - 1) * this.itemsPerPageAdress,
-          this.currentPageAdress * this.itemsPerPageAdress
-        );
-        this.core.loader.hide();
-    }
+    //     this.addressList = await this.userConfigService.getAddressList(param)
+    //     this.processlistAdress = this.addressList;
+    //     this.totalItemsAdress = this.processlistAdress.length;
+    //     this.processlistToShowAdress = this.processlistAdress.slice(
+    //       (this.currentPageAdress - 1) * this.itemsPerPageAdress,
+    //       this.currentPageAdress * this.itemsPerPageAdress
+    //     );
+    //     this.core.loader.hide();
+    // }
 
     async getMovementHistory() { 
         let param :any = {};
@@ -1410,10 +1398,8 @@ export class C2DetailComponent implements OnInit , OnDestroy {
         _param.STIPOIDEN_BUSQ = this.formData.NTIPO_DOCUMENTO;
         _param.SNUM_DOCUMENTO_BUSQ = this.formData.SNUM_DOCUMENTO;
         _param.NIDREGIMEN = param.NIDALERTA == 2 ? this.formData.NREGIMEN : param.NIDREGIMEN
-        this.core.loader.show();
         let respMovement = await this.userConfigService.getMovementHistory(_param)
         this.movementHistory = respMovement
-        this.core.loader.hide();
     }
     policySimpli:any = []
     policyGral:any = []
@@ -1430,9 +1416,7 @@ export class C2DetailComponent implements OnInit , OnDestroy {
        
         let param = {P_NPERIODO_PROCESO: this.formData.NPERIODO_PROCESO, P_NIDALERTA: 2/*this.formData.NIDALERTA*/, P_NTIPOIDEN_BUSQ: this.formData.NTIPO_DOCUMENTO, P_SNUM_DOCUMENTO_BUSQ: this.formData.SNUM_DOCUMENTO,P_NIDREGIMEN: 99, P_NTIPOCARGA : this.formData.NTIPOCARGA == 'null' || this.formData.NTIPOCARGA == null ? '2' : this.formData.NTIPOCARGA }//this.formData.NIDREGIMEN}
         
-        this.core.loader.show();  
         this.policyList = await this.userConfigService.getPolicyList(param)
-        
         this.policyList.forEach(pol => {
             if(pol.NIDREGIMEN == 1){
                 this.policyGral.push(pol)
@@ -1447,31 +1431,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
             this.bolSoatGral = this.getValidaCabeceraPlacaFunc(this.policyGral)
             this.bolSoatSimpli = this.getValidaCabeceraPlacaFunc(this.policySimpli)
         }
-        
-        //this.policyGral = this.policyList
-        //this.policySimpli = this.policyList
-        /*this.policyList.forEach(item=> {
-            if(item.SPRODUCTO === 'SOAT'){
-                this.policyListSOAT.push(item); 
-            }
-            if(item.SPRODUCTO === 'RV'){
-                this.policyListRT.push(item); 
-            }
-            if(item.SPRODUCTO === 'VL'){//AT
-                this.policyListAT.push(item); 
-            }
-            if(item.SPRODUCTO === 'VL'){//ACCIDENTES
-                this.policyListAP.push(item); 
-            }
-        })*/
-        this.core.loader.hide();
-        
-                     /* prueba param 360 */
-        /* this.certif= this.policySimpli[0].NCERTIF;
-        this.fecpoli= this.policySimpli[0].DFEC_INI_POLIZA;
-        this.poliza= this.policySimpli[0].SNUM_POLIZA; */
-        
-       
     }
 
     getListCheckedById(idList){
@@ -2379,7 +2338,6 @@ export class C2DetailComponent implements OnInit , OnDestroy {
 
 Arraycheckbox(){
     //this.ValorCombo = [13]
-     debugger;
     let arreglos:any =[]
     let idListaCheck = this.IdLista ? this.IdLista : null;
     if(this.tipoClienteGC == 'ACEPTA-COINCID'){
@@ -2475,65 +2433,6 @@ ValidarRegimenAcepta(){
     }
     
 }
-/**/
-/* ResultadoPrevious: any = []
-detResult: any =[]
-async Consultar360Previous(){
-    let data = {
-      TipoDocumento: this.formData.NTIPO_DOCUMENTO,
-      NumeroDocumento: this.formData.SNUM_DOCUMENTO,
-      //Nombres: null,
-      //Poliza: null,
-      CodAplicacion: "LAFT",
-      //Producto: null,
-      //FechaSolicitud: null,
-      //Rol: null,
-      //Tipo: null,
-      //estado: null,
-      //Ramo: null,
-      pagina: 1,
-      NumeroResgistros: "10000000",
-      //Endoso: null,
-      Usuario: "1"
-    }
-    await this.userConfigService.Consulta360Previous(data).then(
-      (response) => {
-        this.ResultadoPrevious = response
-    });
-    
-    this.detResult= this.ResultadoPrevious.certificados
-    
-
-  } */
-  /* ResultadoDetail:any = {}
-  async Consultar360_2(item){
-
-    
-    let data:any = {
-    Ramo : item.ramo.idRamo,
-    Producto : item.idProduct,
-    Poliza : item.nroPolicy,
-    Certificado : item.nroCertificate,
-    FechaConsulta : item.fechaInicioVigencia, //fecha inicio vigencia
-    Endoso : item.endoso,    //Solo para rentas
-    }
-    
-     await this.userConfigService.Consulta360(data).then(
-       (response) => {
-        this.ResultadoDetail = response
-       });
-    
-    
-    
-    
-    
-
-    // this.desc= item.ramo.descripcion;
-    // this.desCor= item.ramo.descripcionCorta;
-    // this.prod= item.producto;
-    // this.estado= item.status;
-  } */
-
    ListaPoliza:any = []
   async consultarPoliza(){
     let data:any = {}
@@ -2553,26 +2452,12 @@ async Consultar360Previous(){
         data.P_NPAGENUM = 1
         data.P_NLIMITPERPAGE = 10000000
         data.P_NUSER = 0
-
-        this.core.loader.show()
         this.ListaPoliza = await this.userConfigService.GetListaPolizas(data)
-        this.core.loader.hide()
-        
-        
         this.ListaPoliza.reverse((a,b)=>{
             a.ESTADO > b.ESTADO ? 1 :
             a.ESTADO < b.ESTADO ? -1 :
             0
         })
-        
-        //console.log('asd',this.formData.NTIPO_DOCUMENTO)
-
-         /* if(this.ListaPoliza.length != 0){
-             this.ListaPoliza.forEach(element => {
-
-                  this.Consultar360(element)
-              });
-          } */
   } 
   getOcultarPorGrupo () {
     this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
@@ -2585,125 +2470,5 @@ async Consultar360Previous(){
         return true
     return false;
   }
-   //Resultado360:any = []
-//   async Consultar360(item){
 
-
-//     let data:any = {
-//     Ramo : item.IDRAMO,
-//     Producto : item.COD_PRODUCTO,
-//     Poliza : item.POLIZA,
-//     Certificado : item.NCERTIF,
-//     FechaConsulta : item.INICIO_VIG_POLIZA,//fecha inicio vigencia
-//     Endoso : null,    //Solo para rentas
-//     }
-
-//     this.core.loader.show()
-//      await this.userConfigService.Consulta360(data).then(
-//        (response) => {
-//         this.Resultado360 = response
-//        });
-//        this.core.loader.hide()
-
-//   } 
-/* async showdata(item){
-    switch (item.IDRAMO) {
-      case "61":
-        $('#InfoCanal').css("display","none")
-        $('#InfoCoberturas').css("display","block")
-        break;
-      case "64":
-        break;
-      case "66":
-        $('#CardPlaca').css("display","block")
-        $('#CardPlanilla').css("display","block")
-        $('#InfoAsegurado').css("display","none")
-        $('#InfoBeneficiarios').css("display","none")
-        $('#InfoVehiculo').css("display","block")
-        $('#InfoDirecSOAT').css("display","block")
-        $('#InfoCanal').css("display","block")
-        $('#InfoIntermediario').css("display","block")
-        $('#InfoTarifa').css("display","block")
-        $('#InfoCoberturas').css("display","block")
-        break;
-      case "71":
-        $('#InfoAsegurado').css("display","block")
-        $('#InfoCanal').css("display","block")
-        $('#InfoIntermediario').css("display","block")
-        $('#InfoCoberturas').css("display","block")
-        break;
-      case "72":
-        break;
-      case "73":
-        $('#DAsegIniVig').css("display","block")
-        $('#DAsegFinVig').css("display","block")
-        $('#DAsegMonedaSal').css("display","block")
-        $('#DAsegSalario').css("display","block")
-        $('#DAsegTasa').css("display","block")
-        $('#InfoAsegurado').css("display","block")
-        $('#InfoCanal').css("display","block")
-        $('#InfoIntermediario').css("display","block")
-        $('#InfoCoberturas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
-        break;
-      case "74":
-        $('#InfoAsegurado').css("display","none")
-        $('#InfoCredito').css("display","block")
-        $('#InfoCoberturas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
-        break;
-      case "75":
-        $('#h4Asegurado').text('Datos del titular')
-        $('#DAsegDocum').css("display","block")
-        $('#DAsegCUSPP').css("display","block")
-        $('#InfoRentaTotal').css("display","block")
-        $('#InfoCanal').css("display","none")
-        $('#InfoCoberturas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
-        break;
-      case "76":
-        $('#h4Asegurado').text('Datos del Titular')
-        $('#DAsegDocum').css("display","block")
-        $('#DAsegCUSPP').css("display","block")
-        $('#DAsegIniVig').css("display","block")
-        $('#DAsegFinVig').css("display","block")
-        $('#DAsegTipPension').css("display","block")
-        $('#DAsegTipRenta').css("display","block")
-        $('#DAsegModalidad').css("display","block")
-        $('#DAsegAnDif').css("display","block")
-        $('#DAsegMesGarant').css("display","block")
-        $('#DAsegMoneda').css("display","block")
-        $('#DAsegReajTemp').css("display","block")
-        $('#DAsegPrimDef').css("display","block")
-        $('#DAsegPenDef').css("display","block") 
-        $('#DAsegIniVigSCTR').css("display","none")
-        $('#DAsegFinVigSCTR').css("display","none")
-        $('#DAsegMonedaSal').css("display","none")
-        $('#DAsegSalario').css("display","none")
-        $('#DAsegTasa').css("display","none") 
-        $('#InfoCanal').css("display","none")
-        $('#InfoCoberRentas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
-        $('#InfoPensiones').css("display","block")
-        //$('#titlebenef').text(this.DatosAsegurado.name)
-        break;
-      case "77":
-        $('#InfoCoberturas').css("display","block")
-        $('#InfoBeneficiarios').css("display","block")
-        break;
-      case "80":
-        $('#DAsegMonedaSal').css("display","none")
-        $('#DAsegSalario').css("display","none")
-        $('#DAsegTasa').css("display","none")
-        $('#InfoCoberturas').css("display","block")
-        
-        break;
-      case "81":
-        break;
-      case "82":
-        break;
-      default:
-        break;
-    }
-  } */
 }
