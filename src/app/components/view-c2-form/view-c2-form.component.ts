@@ -583,6 +583,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     }
 
     async goToDetail(item: any, lista: any, idElement: any, idElementSubGroup: any, subgruponame: any) {
+        debugger
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition: any = {}
@@ -605,6 +606,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
         localStorage.setItem("NIDALERTA", this.alertData.NIDALERTA)
         localStorage.setItem("context", this.context)
         localStorage.setItem("NPERIODO_PROCESO", this.alertData.NPERIODO_PROCESO)
+        
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN)
         localStorage.setItem("SFECHA_NACIMIENTO", item.DFECHA_NACIMIENTO)

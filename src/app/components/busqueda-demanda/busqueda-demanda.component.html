@@ -117,7 +117,8 @@
                                 <td  scope="col">{{item.STIPOCOINCIDENCIA}}</td>
                                 <td class=" text-center" scope="col" >
                                     <!-- <img  (click)="exportListToExcelIndividual(i)" src="assets/icons/edit.png" title="Descargar Excel" alt="" style="cursor: pointer;height:20px;width: 17px;"/> -->
-                                    <img  (click)="convertirPdf(item)" src="assets/icons/pdf2.png" title="Descargar Pdf" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
+                                    <!-- <img  (click)="convertirPdf(item)" src="assets/icons/pdf2.png" title="Descargar Pdf" alt="" style="cursor: pointer;height:20px;width: 17px;"/> -->
+                                    <img  (click)="CrearPdf(item)" src="assets/icons/pdf2.png" title="Descargar Pdf" alt="" style="cursor: pointer;height:20px;width: 17px;"/>
                                 </td>
                             </tr>
                         </tbody>
@@ -139,6 +140,9 @@
                 </div>
                 <!-- <div class="col-md-5 table-responsive" style="padding: 5px 30px 0px 0px;  color: #a0a1cc !important;"> 
                     <button (click)="convertirPdf()" class="btn  form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Resultados a Demanda en PDF </button>
+                </div> -->
+                <!-- <div class="col-md-5 table-responsive" style="padding: 5px 0px 0px 0px;  color: #a0a1cc !important;"> 
+                    <button (click)="CrearPdf()" class="btn  form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>PDF</button>
                 </div> -->
              </article>
               

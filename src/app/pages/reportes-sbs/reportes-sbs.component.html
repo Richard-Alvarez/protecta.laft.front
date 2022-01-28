@@ -1,106 +1,40 @@
-
 <main class=" app-main">
-    
-    <div class="">
-        <!--<div class="row mb-2 ">-->
-            <!--<div class="Header">-->
-                <!--<div class="col-lg-6">
-                    <h4 class="TitleLine">Generación de Reportes SBS</h4>
-                </div>
-               <div class="row borderFormat"
-                style="display: flex;justify-content: center;align-items: center;padding-left: 900px;">             
-                <div class="col-lg-1" title="Volver a Inicio"
-                    style="display: flex;justify-content: center;align-items: center;">
-                    <button style="display: flex;justify-content: center;align-items: center;"
-                        class="btn btn-warning text-white buttonSinBorder" routerLink="/report-extractors">Volver</button>
-                </div>
-            </div>-->
 
-                <div class="row borderFormat" style="margin-left: 1px;">
-                    <!--div class="col-lg-2 form-group" style="padding-top: 25px;">
-                    </div>-->
-                    <div class="col-lg-2 form-group mt-1" title="Tipo de cambio">
-                        <p class="" ><label class="fontText">Tipo de Cambio(*):</label></p>
-                        <input [disabled]="exTypeOff" [(ngModel)]="exchangeRate" type="number"
+    <div class="">
+        <div class="row borderFormat" style="margin-left: 1px;">
+            <div class="col-lg-2 form-group mt-1" title="Tipo de cambio">
+                <p class=""><label class="fontText">Tipo de Cambio(*):</label></p>
+                <input [disabled]="exTypeOff" [(ngModel)]="exchangeRate" type="number"
                     class="form-control buttonSinBorder">
-                    </div>
-                    <div class="col-lg-3 form-group mt-1" title="Tipo de cambio">
-                        <p class=""><label class="fontText">Monto(Operaciones Únicas):</label></p>
-                        <input [disabled]="amOff" [(ngModel)]="Iamount" type="text"  class="form-control buttonSinBorder" maxlength="20">
-                    </div>
-                    <div class="col-lg-3 form-group mt-1" title="Tipo de cambio" style="padding-left: 0px; padding-right: 0px;">
-                        <p><label class="fontText">Monto Único(Operaciones Mútiples):</label></p>
-                        <input [disabled]="amUniMOff" [(ngModel)]="IamountUnicaMulti" type="text" class="form-control buttonSinBorder" maxlength="20">
-                    </div>
-                    <div class="col-lg-4 form-group mt-1" title="Tipo de cambio">
-                    <p><label class="fontText">Monto Frecuente(Operaciones Mútiples):</label></p>
-                        <input [disabled]="amFreMOff" [(ngModel)]="IamountFrecMulti" type="text" class="form-control buttonSinBorder" maxlength="20">
-                    </div>
-                    
-                    <!--<div class="col-lg-3 form-group mt-1" title="Tipo de cambio">
-                        <label class="fontText">Tipo de Cambio(*):</label>
-                        <input [disabled]="exTypeOff" [(ngModel)]="exchangeRate" type="number"
-                            class="form-control buttonSinBorder">
-                    </div>
-                    <div class="col-lg-3 form-group mt-1" title="Ingrese el monto">
-                        <label class="fontText">Monto(Operaciones Únicas):</label>
-                       <input [disabled]="amOff" [(ngModel)]="amount" type="text" class="form-control buttonSinBorder" maxlength="20">
-                    </div>
-                    <div class="col-lg-3 form-group mt-1" title="Ingrese el monto unico">
-                        <label class="fontText">Monto Unico(Operaciones Mútiples):</label>
-                       <input [disabled]="amUniMOff" [(ngModel)]="amountUnicaMulti" type="text" class="form-control buttonSinBorder" maxlength="20">
-                    </div>
-                    <div class="col-lg-3 form-group mt-1" title="Ingrese el monto frecuente">
-                        <label class="fontText">Monto Frecuente(Operaciones Mútiples):</label>
-                       <input [disabled]="amFreMOff" [(ngModel)]="amountFrecMulti" type="text" class="form-control buttonSinBorder" maxlength="20">
-                    </div>-->
-                    <div class="col-lg-3 form-group mt-1" title="Ingrese la fecha de inicio">
-                        <label class="fontText">Fecha Inicio(*):</label>
-                        <input type="text" [(ngModel)]="bsValueIni" placeholder="DESDE"
-                            class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
-                            [maxDate]="maxDate"
-                            [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
-                    </div>
-                    <div class="col-lg-3 form-group mt-1" title="Ingrese la fecha de fin">
-                        <label class="fontText">Fecha Fin(*):</label>
-                        <input type="text" [(ngModel)]="bsValueFin" placeholder="HASTA"
-                            class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
-                            [maxDate]="maxDate"
-                            [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
-                    </div>
-                    <div class="col form-group" >
-                        <button style="margin-top: 30px;width: 100%;" class="btn btn-warning text-white "
-                            title="Descargar Archivo" (click)= "getFunReporProccess()">Generar Archivo</button>
-                    </div>
-                    <!--<div class="col-lg-6 form-group mt-1" title="Señales" style="width: 225px;">
-                        <label class="fontText"></label>
-                        <select name="docTypeId" 
-                            class="form-control buttonSinBorder" (change)="changeComboReporte($event)">
-                            <option value="0" selected>Generar excel</option>
-                            <option value="1" >Generar texto plano</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-6 form-group" style="padding-top: 25px;">
-                    </div>-->
-                    <!--<div class="col-lg-3 form-group" ></div>
-                    <div class="col-lg-3 form-group" >
-                        <button style="margin-top: auto;width: 100%;" class="btn btn-warning text-white "
-                            title="Descargar Archivo" (click)= "generateSbsReport()">Generar Archivo</button>
-                    </div>
-                    <div class="col-lg-3 form-group" ></div>-->
-                    <!--<div class="col-lg-3 form-group" style="padding-top: 25px;">
-                        <button style="margin-top: auto;width: 100%;" class="btn btn-warning text-white buttonSinBorder"
-                            title="Descargar Excel" (click)="generateSbsReportAsCsv()">Generar excel</button>
-                    </div>
-                    <div class="col-lg-3 form-group" style="padding-top: 25px;">
-                        <button style="margin-top: auto;width: 100%;" class="btn btn-warning text-white buttonSinBorder"
-                            title="Descargar Texto Plano" (click)="generateSbsReportAsTextPlain()">Generar texto
-                            plano</button>
-                    </div>-->
-                    
-                </div>
-            <!--</div>-->
-        <!--</div>-->
+            </div>
+            <div class="col-lg-3 form-group mt-1" title="Tipo de cambio">
+                <p class=""><label class="fontText">Monto(Operaciones Únicas):</label></p>
+                <input [disabled]="amOff" [(ngModel)]="Iamount" type="text" class="form-control buttonSinBorder"
+                    maxlength="20">
+            </div>
+            <div class="col-lg-3 form-group mt-1" title="Tipo de cambio" style="padding-left: 0px; padding-right: 0px;">
+                <p><label class="fontText">Monto Único(Operaciones Mútiples):</label></p>
+                <input [disabled]="amUniMOff" [(ngModel)]="IamountUnicaMulti" type="text"
+                    class="form-control buttonSinBorder" maxlength="20">
+            </div>
+            <div class="col-lg-4 form-group mt-1" title="Tipo de cambio">
+                <p><label class="fontText">Monto Frecuente(Operaciones Mútiples):</label></p>
+                <input [disabled]="amFreMOff" [(ngModel)]="IamountFrecMulti" type="text"
+                    class="form-control buttonSinBorder" maxlength="20">
+            </div>
+            <div class="col-lg-3 form-group mt-1" title="Ingrese la fecha de inicio">
+                <label class="fontText" title="se va a calcular el tipo de cambio segun este mes">Mes a
+                    procesar(*):</label>
+                <input type="text" readonly [(ngModel)]="bsValueMonth" placeholder="DESDE" (ngModelChange)="changeMonth()"
+                    class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
+                    [maxDate]="maxDate"
+                    [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange',minMode: 'month'}">
+            </div>
+            <div class="col form-group">
+                <button style="margin-top: 30px;width: 100%;" class="btn btn-warning text-white "
+                    title="Descargar Archivo" (click)="getFunReporProccess()">Generar Archivo</button>
+            </div>
+        </div>
         <br><br>
     </div>
 </main>

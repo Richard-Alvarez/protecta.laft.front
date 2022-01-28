@@ -98,6 +98,20 @@ export class C2DetailComponent implements OnInit , OnDestroy {
     SNOM_COMPLETO_EMPRESA = ''
     SNUM_DOCUMENTO_EMPRESA = ''
     NPERIODO_PROCESO_ITEM = ''
+    arrWebsLinks : any = [{
+        SURI : "https://gestion.pe/peru/politica/pedro-castillo-admite-que-se-reunio-con-karelim-lopez-en-palacio-de-gobierno-si-vino-al-despacho-la-recibi-nndc-noticia/?ref=signwall",
+        SESTADO_TRAT : "Activo"
+    },
+    {
+        SURI : "https://elperuano.pe/noticia/138114-marina-confirma-segundo-derrame-de-petroleo-de-repsol",
+        SESTADO_TRAT : "Deshabilitado"
+    },
+    {
+        SURI : "https://elcomercio.pe/lima/sucesos/repsol-niega-nuevo-un-derrame-de-petroleo-en-el-mar-pese-a-reportes-de-oefa-marina-de-guerra-y-osinergmin-ventanilla-la-pampilla-nndc-noticia/?ref=signwall",
+        SESTADO_TRAT : "No Encontrado"
+    }
+
+    ]
     TIPOCARGA : any = { 
         AUTOMATICO : 1,
         MANUAL : 2

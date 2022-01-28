@@ -18,24 +18,26 @@
                     
                     <div class="col-lg-5 form-group">
                         <label class="fontText">Usuiaro:</label>
-                        <select [disabled]="profileListOff" [(ngModel)]="usuario" name="profile"
-                            (change)="changeProfile()"
+                        <select  [(ngModel)]="usuario" name="profile"
+                            (change)="Changeuser()"
                             style="display: flex;justify-content: center;align-items: center;"
                             class="form-control buttonSinBorder">
                             <option value="0" selected>--Todos--</option>
-                            <!-- <option *ngFor="let item of ProfileList" value="{{item.profileId}}" id="profileIdSelected">
-                                {{item.profileName}}</option> -->
+                            <option *ngFor="let item of ListUser" value="{{item.userId}}" id="profileIdSelected">
+                                {{item.userFullName}}</option>
                         </select>
                     </div>
                     
 
                     <div class="col-lg-3 form-group">
                         <label class="fontText">Estado:</label>
-                        <select [disabled]="groupListOff" [(ngModel)]="estado" name="group"
-                          (change)="changeGroup()"
+                        <select  [(ngModel)]="estado" name="group"
+                          (change)="ChangeEstado()"
                             style="display: flex;justify-content: center;align-items: center;"
                             class="form-control buttonSinBorder">
                             <option value="0" selected>--Todos--</option>
+                            <option value="1" selected>COMPLETADO</option>
+                            <option value="2" selected>PENDIENTE</option>
                             <!-- <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="groupIdSelected">
                                 {{item.SDESGRUPO_SENAL}}</option>  -->
                         </select>
@@ -67,12 +69,12 @@
                                         <th scope="col" style="text-align: left;">Fecha de creación</th>
                                         <th scope="col" style="text-align: left;">Usuaurio asignado</th>
                                         <th scope="col" style="text-align: left;">Estado</th>
-                                        <th scope="col" style="text-align: center;">Muestra</th>
-                                        <th scope="col" style="text-align: center;">Documento</th>
+                                        <th scope="col" style="text-align: center;">Muestra OC</th>
+                                        <th scope="col" style="text-align: center;">Documento RE</th>
                                     </tr>
                                 </thead>
                                 <ng-container
-                                    *ngIf="AlertList!=null && AlertList.length>0; then showGrid else hideGrid">
+                                    *ngIf="listaComplementoUsuario!=null && listaComplementoUsuario.length>0; then showGrid else hideGrid">
                                 </ng-container>
                             </table>
                             <ng-template #hideGrid>
@@ -84,29 +86,29 @@
                             </ng-template>
                             <ng-template #showGrid>
                                 <tbody>
-                                    <tr *ngFor="let item of AlertList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
+                                    <tr *ngFor="let item of listaComplementoUsuario | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
                                      
-                                        <td class="text-left vertical;" style="white-space: nowrap;" >{{item.descripcion}}</td>
-                                        <td style="text-align: justify;">{{item.fecha}}</td>                                       
-                                        <td style="text-align: justify;">{{item.usuario}}</td>    
-                                        <td class="text-left vertical">{{item.estado}}</td>
+                                        <td class="text-left vertical;" style="white-space: nowrap;" >{{item.SNOM_COMPLEMENTO}}</td>
+                                        <td style="text-align: justify;">{{item.DFECHA_ESTADO_MOVIMIENTO}}</td>                                       
+                                        <td style="text-align: justify;">{{item.NOMBRECOMPLETO}}</td>    
+                                        <td class="text-left vertical">{{item.SNOMBRE_ESTADO}}</td>
                                         <td class="text-center vertical">
-                                            <a *ngIf="item.muestra1 == '1'" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos"><i
+                                            <a *ngIf="(item.SFILE_NAME_LARGO != '')" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos del oficial"><i (click)="DescargarArhivo(item,'OC')"
                                                 class="fas fa-file-excel"  style="color:green;font-size: 20px;"></i></a>
                                         </td>
                                         <td class="text-center vertical">
-                                            <a *ngIf="item.muestra2 == '1'" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos"><i
+                                            <a *ngIf="(item.SFILE_NAME_LARGO_RE != '')" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos del responsable"><i (click)="DescargarArhivo(item,'RE')"
                                                 class="fas fa-file-excel"  style="color:green;font-size: 20px;"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </ng-template>
 
-                            <ng-container *ngIf="AlertList!=null && AlertList.length>0; then showPagination">
+                            <ng-container *ngIf="listaComplementoUsuario!=null && listaComplementoUsuario.length>0; then showPagination">
                             </ng-container>
                             <ng-template #showPagination class="row">
                                 <div class="col align-self-center">
-                                  <ngb-pagination  [collectionSize]="AlertList.length" [(page)]="page" [maxSize]="5"
+                                  <ngb-pagination  [collectionSize]="listaComplementoUsuario.length" [(page)]="page" [maxSize]="5"
                                   aria-label="Default pagination"></ngb-pagination>
                                 </div>
                              

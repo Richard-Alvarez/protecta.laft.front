@@ -1049,6 +1049,12 @@ async EnviarCompUsuario(alerta,complemento){
         data.NOMBREALERTA = alerta.SNOMBRE_ALERTA
         data.SNOMBRE_RESPONSABLE =  this.OBJ_USUARIO.fullName
         data.ASUNTO =  complemento.SDESCRIPCION
+        data.SNOM_COMPLEMENTO =  ''
+        data.SFILE_NAME_RE =  ''
+        data.SRUTA_FILE_NAME_RE =  ''
+        data.SFILE_NAME_LARGO_RE =  ''
+        
+        data.VALIDADOR_CORREO = "COMPLETADO"
         if(false){
         // if(validador == 1){
           

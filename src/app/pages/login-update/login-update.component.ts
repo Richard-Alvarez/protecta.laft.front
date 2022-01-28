@@ -199,6 +199,11 @@ export class LoginUpdateComponent implements OnInit {
           
           let resultadoPerfil =  await this.userConfigService.GetGrupoXPerfil(data) 
           let ValidadorContra = await this.ValidarUsuarioContra(usuario.idUsuario)
+          let dataUsuario = await this.userConfigService.ListaUsariosComp()
+          debugger
+          let resUsuario:any ={}
+          resUsuario = dataUsuario.filter(it=> it.ID_USUARIO == usuario.idUsuario)
+          localStorage.setItem("resUser", JSON.stringify(resUsuario[0]))
           localStorage.setItem("ValidadorContraUsuario", ValidadorContra.indicador)
           console.log("el resultado",ValidadorContra.indicador)
 

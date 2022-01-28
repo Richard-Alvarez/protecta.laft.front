@@ -176,6 +176,7 @@ class Rutas {
 
   public urlDeleteAdjuntosInformAlerta: string = this.base + "monitoreoSenales/DeleteAdjuntosInformAlerta";
   public urlProcessInsertFile: string = this.base + "sbsReport/processInsertFile";
+  public urlGetPromedioTipoCambio: string = this.base + "sbsReport/getPromedioTipoCambio";
   public urlProcessCargaFile: string = this.base + "sbsReport/processCargaFile";
   public urlProcessPagosManuales: string = this.base + "sbsReport/processPagosManuales";
   public urlGetListaCargo: string = this.base + "monitoreoSenales/GetListaCargo";
@@ -220,6 +221,8 @@ class Rutas {
   public urlGetRegistrarDatosExcelGC: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
   public urlGetRegistrarDatosExcelDemanda: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
   public urlGetClientsforRegimen: string = this.base + "monitoreoSenales/GetClientsforRegimen";
+  public urlGetSearchClientsPep: string = this.base + "monitoreoSenales/GetSearchClientsPep";
+  public urlGetSearchClientsPepSeacsa: string = this.base + "monitoreoSenales/GetSearchClientsPepSeacsa";
 
   //VALIDAR SI EXISTE UN USUSARIO
   public urlGetValidarExisteCorreo: string = this.base + "monitoreoSenales/GetValidarExisteCorreo";
@@ -237,6 +240,7 @@ class Rutas {
   public urlgetCorreo_OC: string = this.base + "monitoreoSenales/getCorreo_OC"
   public urlUpdActualizarCorreoOC: string = this.base + "monitoreoSenales/UpdActualizarCorreoOC"
   public urlActulizarContrasenaEncriptada: string = this.base + "monitoreoSenales/ActulizarContrasenaEncriptada"
+  public urlUpdRutaComplementos: string = this.base + "monitoreoSenales/UpdRutaComplementos"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
