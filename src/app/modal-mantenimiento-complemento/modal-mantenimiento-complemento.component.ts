@@ -41,14 +41,14 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
     await  this.getGrupoList()
     await this.listData()
     if (this.data == 'null') {
-       this.fTitle = 'Agregar complemento';
+       this.fTitle = 'Agregar Complemento';
        this.desactivar = false
       
 
      
     }
     else {
-      this.fTitle = 'Editar complemento';
+      this.fTitle = 'Editar Complemento';
       this.desactivar = true
       
     }

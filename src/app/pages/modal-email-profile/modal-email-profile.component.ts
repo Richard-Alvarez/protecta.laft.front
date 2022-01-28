@@ -414,6 +414,23 @@ export class ModalEmailProfileComponent implements OnInit {
         return objRespuesta
       }
     }
+    if (valor == 8) {
+      if (this.asunto == '' || this.asunto == undefined) {
+        objRespuesta.code = 1;
+        objRespuesta.message = "Debe ingresar un asunto";
+        return objRespuesta
+      }
+      // if (usuario == -1) {
+      //   objRespuesta.code = 1;
+      //   objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Usuario]";
+      //   return objRespuesta
+      // }
+      // if (link == -1) {
+      //   objRespuesta.code = 1;
+      //   objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Link]";
+      //   return objRespuesta
+      // }
+    }
 
     return objRespuesta
   }
@@ -590,7 +607,49 @@ export class ModalEmailProfileComponent implements OnInit {
         this.ActivarUser = true
       }
 
-    }
+    }else if (this.action == 8) {
+
+      if (this.validadorEstado == 1) {
+        let resultado = await this.ListaEmail.filter(it => it.NIDACCION == 8)
+
+        if (await resultado.length > 0) {
+          this.ActivarCombo = true;
+          this.ActivarListUser = true;
+          this.ActivarUser = true;
+
+          this.action = 0;
+          this.Seleccione = "Seleccione";
+
+
+          // var dropDown = (<HTMLInputElement>document.getElementById("idcombo"));
+          var dropDown = document.getElementById("idcombo") as HTMLSelectElement;
+          //console.log("dropDown",dropDown.se)
+          //dropDown.setAttribute('selected','selected')
+          //console.log("dropDown",dropDown)
+          dropDown.selectedIndex = 0;
+
+
+
+
+
+
+          let mensaje = "No se puede agregar otra acción de " + resultado[0].SDESACCION;
+          //(<HTMLInputElement>document.getElementById("idcombo")).setAttribute('value','0');
+          //(<HTMLInputElement>document.getElementById("idcombo")).innerText
+          this.MensajeSwal(mensaje);
+
+
+
+          //this.action = 0;
+        }
+      } else {
+        this.ActivarCombo = true
+        this.ActivarListUser = true
+        this.ActivarUser = true
+      }
+
+
+    } 
 
     else {
       this.ActivarCombo = true

@@ -30,7 +30,8 @@ export class ModalComplementoSinSennalComponent implements OnInit {
   UserIdLogeado
   ListUser:any = []
   listaComplementoUsuario:any = []
-  Descripcion
+  Descripcion:string = ''
+  PeriodoCompleto
   constructor(  
     private userConfigService: UserconfigService,
     private core: CoreService,
@@ -41,6 +42,7 @@ export class ModalComplementoSinSennalComponent implements OnInit {
     this.variableGlobalUser = this.core.storage.get('usuario');
     this.UserNombreLogeado = this.variableGlobalUser["fullName"]
     this.UserIdLogeado = this.variableGlobalUser["idUsuario"]
+    this.PeriodoCompleto =  localStorage.getItem("fechaPeriodo")
     this.getUsers()
 
     this.dropdownList = [
@@ -94,12 +96,25 @@ export class ModalComplementoSinSennalComponent implements OnInit {
   async Save(){
    
           console.log("this.selectedItems",this.selectedItems)
+
+          if(this.selectedItems.length == 0){
+            let mensaje = "Debe seleccionar un usuario"
+            this.MensajesAlertas(mensaje)
+            return
+          }
+          if(this.Descripcion == ''){
+            let mensaje = "Debe ingresar una descripcion"
+            this.MensajesAlertas(mensaje)
+            return
+          }
           let data:any = {}
           let response:any 
           let RespuestaID:number
           
           let validador = (this.NombreArchivo  == '' || this.NombreArchivo  == null ) ? 0 : 1
-
+          let respuestaCorreo = await this.userConfigService.getCuerpoCorreo({NIDACCION:8})
+          console.log("this.respuestaCorreo",respuestaCorreo)
+          debugger
             this.core.loader.show()
          for(let i=0; i < this.selectedItems.length; i++ ){
               data.NPERIODO_PROCESO  = this.PeriodoComp
@@ -129,6 +144,20 @@ export class ModalComplementoSinSennalComponent implements OnInit {
               console.log("data",data);
               response = await this.userConfigService.GetInsCormularioComplUsu(data)
               RespuestaID = response.ID
+
+
+              let UsuarioCorreo = this.ListUser.filter(it => it.userId == this.selectedItems[i].userId )
+              debugger
+              let dataCorreo:any = {}
+              dataCorreo.NOMBRECOMPLETO = UsuarioCorreo[0].userFullName
+              dataCorreo.SEMAIL = UsuarioCorreo[0].userEmail
+              dataCorreo.FECHAPERIODO  = this.PeriodoCompleto
+              dataCorreo.MENSAJE = respuestaCorreo.SCUERPO_CORREO
+              dataCorreo.ASUNTO = respuestaCorreo.SASUNTO_CORREO
+              
+              this.userConfigService.EnvioCorreoComplementoSinSennal(dataCorreo)
+
+             
 
               if(validador != 0){
 
@@ -240,6 +269,28 @@ export class ModalComplementoSinSennalComponent implements OnInit {
     this.reference.close('edit-modal');
   }
 
+  
+  MensajesAlertas(mensaje){
+    swal.fire({
+      title: 'Mantenimiento de complemento',
+      icon: 'warning',
+      text: mensaje,
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonColor:'#FA7000',
+      confirmButtonText: 'Aceptar',
+      showCloseButton:true,
+         customClass: { 
+            closeButton : 'OcultarBorde'
+            },
+      
+    }).then(async (result) => {
+    
+    }).catch(err => {
+    
+    })
+    return
+  }
  
   
 }

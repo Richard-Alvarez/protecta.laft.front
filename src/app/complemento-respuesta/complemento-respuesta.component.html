@@ -3,255 +3,160 @@
 <!-- </div> -->
 
 <header>
-    <div class="">
-      <app-navbar></app-navbar>
-    </div>
-  
-  
-  
-  </header>
-  
-  
-  <main class="container-fluid app-main">
-  
-    <div class="row pl-5 pr-5">
-      <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
-        <span class="fas fa-chevron-left"></span> Pantalla Principal
-      </button>
-    </div>
-    <!-- <br> -->
+  <div class="">
+    <app-navbar></app-navbar>
+  </div>
+
+
+
+</header>
+
+
+<main class="container-fluid app-main">
+
+  <div class="row pl-5 pr-5">
+    <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+      <span class="fas fa-chevron-left"></span> Pantalla Principal
+    </button>
+  </div>
+  <!-- <br> -->
   <!-- PENDIENTE -->
-    <div class="container-fluid pl-5 pr-5 pt-3">
-  
-   
-  
-  
-      <div class="tab-content" style="">
-        <div  class="row">
-            <div  class="col-lg-12">
-                <div  class="row">
-                    <div  class="col-lg-3">
-                        <div  class="card" style="margin-bottom: 0;border-bottom: none;">
-                            <div  class="card-header card-header-2" style="background-color: white;padding: 10px">
-                                <div  class="text-left">
-                                    <div 
-                                        style="color: white;font-size: 20px;font-weight: bold;float: left;"
-                                        class="badge badge-warning"> P </div>
-                                </div>
-                                <div  class="text-left">
-                                    <div  class=""
-                                        style="padding-left: 5px;font-size: 20px;font-weight: bold;float: left;"> -</div>
-                                </div>
-                                <div  class="text-left">
-                                    <div  class="badge" style="font-size: 20px;font-weight: bold;">
-                                        Pendiente</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div  class="col-lg-9"></div>
+  <div class="container-fluid pl-5 pr-5 pt-3">
+
+
+
+
+    <div class="tab-content" style="">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="card" style="margin-bottom: 0;border-bottom: none;">
+                <div class="card-header card-header-2" style="background-color: white;padding: 10px">
+                  <div class="text-left">
+                    <div style="color: white;font-size: 20px;font-weight: bold;float: left;"
+                      class="badge badge-warning"> P </div>
+                  </div>
+                  <div class="text-left">
+                    <div class="" style="padding-left: 5px;font-size: 20px;font-weight: bold;float: left;"> -</div>
+                  </div>
+                  <div class="text-left">
+                    <div class="badge" style="font-size: 20px;font-weight: bold;">
+                      Pendiente</div>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div  class="col-lg-12">
-                <div  class="card">
-                    <div >
-                       
-                        <div ><br ></div>
-                        <div >
-                            <div  class="table-responsive">
-                                <div  class="col-lg-3" style="display: flex;justify-content: left;">
-                                    <h5  class="TitleLine" style="font-size: 18px;">{{NombreCompleto}}
-                                    </h5>
-                                </div>
-                            </div><br >
-                            <div  *ngFor="let item of listaComplementoPendiente;let index = index"  class="card m-2 " style="background: #EEEEF2;">
-                            <div class="row pt-2" style="font-size:14px;margin:0px;background: #EEEEF2;">
-                                <div class="col-7">
-                                  
-                                {{item.SNOM_COMPLEMENTO}}
-                                    
+            <div class="col-lg-9"></div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="card">
+            <div>
 
-                        
-                                </div>
-
-                                <div class="col-lg-1 text-center" style="cursor: pointer;" (click)="DescargarArhivo(item,'OC')">
-                                  
-                                    <div>
-                                      
-                                        <img src="assets/icons/Descargar_muestra.png" style="width: 38px;" />
-                                    </div>
-                                    <div>
-                                        Descargar Muestra
-                                    </div>
+              <div><br></div>
+              <div>
+                <div class="table-responsive">
+                  <div class="col-lg-3" style="display: flex;justify-content: left;">
+                    <h5 class="TitleLine" style="font-size: 18px;">{{NombreCompleto}}
+                    </h5>
+                  </div>
+                </div><br>
+                <div *ngIf="listaComplementoPendiente.length !== 0;else ListaVaciaPendiente">
+                    <div *ngFor="let item of listaComplementoPendiente;let index = index" class="card m-2 "
+                    style="background: #EEEEF2;">
+                    <div class="row pt-2" style="font-size:14px;margin:0px;background: #EEEEF2;">
+                      <div class="col-7">
+  
+                        {{item.SNOM_COMPLEMENTO}}
     
                             
-                                    </div>
-
-                                    <div class="col-lg-1" style="padding-left: 0px;">
-                                        <input type="file" name="file" id="archivoComplemento{{index}}" class="inputfile" multiple (change)="AgregarAdjunto($event,index,item)" />
-                                        <div class="text-center" style="display:table-caption">
-                                            <label for="archivoComplemento{{index}}" style="cursor: pointer;">
-                                            <!-- <img src="assets/icons/excel-microsoft.png" style="width: 38px;" /> -->
-                                            <!-- <img src="assets/icons/Adjuntar_complemento.png" style="width: 38px;" /> -->
-                                            <a><i style="width: 38px;padding-top:8px;color: #706d6d" class="fas fa-paperclip fa-2x fa-lg"></i></a>
-                                            <div class="parrafoAdj text-center">
-                                            <div class="">Adjuntar </div>
-                                            </div>
-                                        </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div *ngFor="let adj of ListaArchivos">
-                                             <div *ngIf='item.NIDCOMP_CAB_USUARIO == adj.IdComplemento'> 
-                                                <div *ngFor="let adjNombre of adj.listFileNameCortoInform;let i = index;">
-                                                    <div>
-                                                        {{adjNombre}}
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                <div class="col-1">
-                                    <button 
-                                    class="btn btn-warning text-white " type="button" (click)="Guardar(item)" > Enviar </button>
-                                   
-                                </div>
+  
+                      </div>
+  
+                      <div class="col-lg-1 text-center">
+                        <!-- <div *ngIf="item.SRUTA_FILE_NAME != ''" (click)="DescargarArhivo(item,'OC')"  style="cursor: pointer;">
+                            <div>
+  
+                                <img src="assets/icons/Descargar_muestra.png" style="width: 38px;" />
+                              </div>
+                              <div>
+                                Descargar Muestra
+                              </div>
+                        </div> -->
+                       
+  
+  
+                      </div>
+  
+                      <div class="col-lg-1" style="padding-left: 0px;">
+                        <input type="file" name="file" id="archivoComplemento{{index}}" class="inputfile" multiple
+                          (change)="AgregarAdjunto($event,index,item)" />
+                        <div class="text-center" style="display:table-caption">
+                          <label for="archivoComplemento{{index}}" style="cursor: pointer;">
+                            <!-- <img src="assets/icons/excel-microsoft.png" style="width: 38px;" /> -->
+                            <!-- <img src="assets/icons/Adjuntar_complemento.png" style="width: 38px;" /> -->
+                            <a><i style="width: 38px;padding-top:8px;color: #706d6d"
+                                class="fas fa-paperclip fa-2x fa-lg"></i></a>
+                            <div class="parrafoAdj text-center">
+                              <div class="">Adjuntar </div>
                             </div>
-                            <!-- <div class="col-1">
-                                <div class="form-check">
-                                   <input  class="" style="height: 30px;width: 30px;" type="checkbox" value="">
-                                </div>
-                            </div> -->
-
-                        
-                           
+                          </label>
                         </div>
-                            <!-- <div  class="row pt-3">
+                      </div>
+                      <div class="col-lg-2">
+                        <div *ngFor="let adj of ListaArchivos">
+                          <div *ngIf='item.NIDCOMP_CAB_USUARIO == adj.IdComplemento'>
+                            <div *ngFor="let adjNombre of adj.listFileNameCortoInform;let i = index;">
+                              <div >
+                                <div style="color: blue;float:left;width:90%">{{adjNombre}} </div>
+                                <td class="text-center" style="float:right">
+                                    <i class="fas fa-trash-alt" (click)="EliminarArchivo(item,adjNombre,i,index)" style="cursor: pointer;"></i>
+                            </td>
+                              </div>
+  
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-1">
+                        <button class="btn btn-warning text-white " type="button" (click)="Guardar(item)"> Enviar
+                        </button>
+  
+                      </div>
+                    </div>
+                    <!-- <div class="col-1">
+                                  <div class="form-check">
+                                     <input  class="" style="height: 30px;width: 30px;" type="checkbox" value="">
+                                  </div>
+                              </div> -->
+  
+  
+  
+                  </div>
+                </div>
+
+                <ng-template #ListaVaciaPendiente>
+                    <div class="card m-2" style="background: #EEEEF2;">
+                      <div class="row" style="font-size:14px;margin:0px;background: #EEEEF2;margin: 20px;">
+                        <div class="col-12 text-center" style="font-weight: 500;">
+                          No hay registros
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+               
+                <!-- <div  class="row pt-3">
                                 <div  class="col-lg-10"></div>
                                 <div  class="col-lg-2 text-right"><button 
                                         class="btn btn-warning text-white " type="button"> Guardar </button></div>
                             </div> -->
-                        
-                        </div>
-                        <div ><br ></div>
-                    </div>
-                </div>
+
+              </div>
+              <div><br></div>
             </div>
+          </div>
         </div>
-  
-  
-      </div>
-  
-  
-  
-    </div>
-  
-  
-  <!-- COMPLETADO -->
-
-  <div class="container-fluid pl-5 pr-5 pt-3">
-  
-   
-  
-  
-    <div class="tab-content" style="">
-      <div  class="row">
-          <div  class="col-lg-12">
-              <div  class="row">
-                  <div  class="col-lg-3">
-                      <div  class="card" style="margin-bottom: 0;border-bottom: none;">
-                          <div  class="card-header card-header-2" style="background-color: white;padding: 10px">
-                              <div  class="text-left">
-                                  <div 
-                                      style="color: white;font-size: 20px;font-weight: bold;float: left;background-color: #628E37;"
-                                      class="badge badge-success"> C </div>
-                              </div>
-                              <div  class="text-left">
-                                  <div  class=""
-                                      style="padding-left: 5px;font-size: 20px;font-weight: bold;float: left;"> -</div>
-                              </div>
-                              <div  class="text-left">
-                                  <div  class="badge" style="font-size: 20px;font-weight: bold;">
-                                      Completado</div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div  class="col-lg-9"></div>
-              </div>
-          </div>
-          <div  class="col-lg-12">
-              <div  class="card">
-                  <div >
-                     
-                      <div ><br ></div>
-                      <div >
-                          <div  class="table-responsive">
-                              <div  class="col-lg-3" style="display: flex;justify-content: left;">
-                                  <h5  class="TitleLine" style="font-size: 18px;">{{NombreCompleto}}
-                                  </h5>
-                              </div>
-                          </div><br >
-                          <div  *ngFor="let item of listaComplementoCompletado;let index = index"  class="card m-2 " style="background: #EEEEF2;">
-                          <div class="row " style="font-size:14px;margin:0px;background: #EEEEF2;">
-                              <div class="col-10">
-                                
-                                {{item.SNOM_COMPLEMENTO}}
-                                  
-
-                      
-                              </div>
-
-                              <div class="col-lg-1 text-center" (click)="DescargarArhivo(item,'OC')">
-                                
-                                  <div>
-                                    
-                                      <img src="assets/icons/Descargar_muestra.png" style="width: 38px;" />
-                                  </div>
-                                  <div>
-                                      Descargar Muestra
-                                  </div>
-  
-                          
-                                  </div>
-
-                                  <div class="col-lg-1 text-center" style="padding-left: 0px;">
-                                    <div>
-                                    
-                                        <img src="assets/icons/Descargar_muestra.png" style="width: 38px;" />
-                                    </div>
-                                    <div>
-                                        Descargar Archivos 
-                                    </div>
-                                  </div>
-                                 
-                              <!-- <div class="col-2">
-                                  <button 
-                                  class="btn btn-warning text-white " type="button"> Enviar </button>
-                                 
-                              </div> -->
-                          </div>
-                          <!-- <div class="col-1">
-                              <div class="form-check">
-                                 <input  class="" style="height: 30px;width: 30px;" type="checkbox" value="">
-                              </div>
-                          </div> -->
-
-                      
-                         
-                      </div>
-                          <!-- <div  class="row pt-3">
-                              <div  class="col-lg-10"></div>
-                              <div  class="col-lg-2 text-right"><button 
-                                      class="btn btn-warning text-white " type="button"> Guardar </button></div>
-                          </div> -->
-                      
-                      </div>
-                      <div ><br ></div>
-                  </div>
-              </div>
-          </div>
       </div>
 
 
@@ -260,12 +165,131 @@
 
 
   </div>
-    
+
+
+  <!-- COMPLETADO -->
+
+  <div class="container-fluid pl-5 pr-5 pt-3">
+
+
+
+
+    <div class="tab-content" style="">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="card" style="margin-bottom: 0;border-bottom: none;">
+                <div class="card-header card-header-2" style="background-color: white;padding: 10px">
+                  <div class="text-left">
+                    <div style="color: white;font-size: 20px;font-weight: bold;float: left;background-color: #628E37;"
+                      class="badge badge-success"> C </div>
+                  </div>
+                  <div class="text-left">
+                    <div class="" style="padding-left: 5px;font-size: 20px;font-weight: bold;float: left;"> -</div>
+                  </div>
+                  <div class="text-left">
+                    <div class="badge" style="font-size: 20px;font-weight: bold;">
+                      Completado</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-9"></div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="card">
+            <div>
+
+              <div><br></div>
+              <div>
+                <div class="table-responsive">
+                  <div class="col-lg-3" style="display: flex;justify-content: left;">
+                    <h5 class="TitleLine" style="font-size: 18px;">{{NombreCompleto}}
+                    </h5>
+                  </div>
+                </div><br>
+                <div *ngIf="listaComplementoCompletado.length !== 0;else ListaVaciaCompletado">
+
+
+                  <div *ngFor="let item of listaComplementoCompletado;let index = index" class="card m-2 "
+                    style="background: #EEEEF2;">
+                    <div class="row " style="font-size:14px;margin:0px;background: #EEEEF2;">
+                      <div class="col-10">
+
+                        {{item.SNOM_COMPLEMENTO}}
+
+
+
+                      </div>
+
+                      <div class="col-lg-1 text-center">
+                        <!-- <div *ngIf="item.SRUTA_FILE_NAME != ''" (click)="DescargarArhivo(item,'OC')"  style="cursor: pointer;">
+                            <div>
+  
+                                <img src="assets/icons/Descargar_muestra.png" style="width: 38px;" />
+                              </div>
+                              <div>
+                                Descargar Muestra
+                              </div>
+                        </div> -->
+                       
   
   
-  
-  </main>
-  
-  <br>
-  <app-footer></app-footer>
-  
+                      </div>
+
+                      <div class="col-lg-1 text-center p-2" style="padding-left: 0px;" (click)="DescargarArhivo(item,'RE')">
+                        <div>
+
+                          <img src="assets/icons/Descargar_muestra.png" style="width: 38px;" />
+                        </div>
+                        <div>
+                          Descargar Archivos
+                        </div>
+                      </div>
+
+                      <!-- <div class="col-2">
+                                  <button 
+                                  class="btn btn-warning text-white " type="button"> Enviar </button>
+                                 
+                              </div> -->
+                    </div>
+
+                  </div>
+                </div>
+
+                <ng-template #ListaVaciaCompletado>
+                  <div class="card m-2" style="background: #EEEEF2;">
+                    <div class="row" style="font-size:14px;margin:0px;background: #EEEEF2;margin: 20px;">
+                      <div class="col-12 text-center" style="font-weight: 500;">
+                        No hay registros
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+
+
+              </div>
+
+
+            </div>
+            <div><br></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+ 
+
+
+
+</main>
+
+<br>
+<app-footer></app-footer>
