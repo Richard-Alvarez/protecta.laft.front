@@ -4,6 +4,8 @@ import { CoreService } from "src/app/services/core.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComplementoSinSennalComponent } from "../../app/modal-complemento-sin-sennal/modal-complemento-sin-sennal.component";
 import swal from 'sweetalert2';
+import { htmlToText } from "html-to-text";
+
 @Component({
   selector: 'app-complemento-sin-sennal',
   templateUrl: './complemento-sin-sennal.component.html',
@@ -227,6 +229,26 @@ export class ComplementoSinSennalComponent implements OnInit {
    }else{
      return true
    }
+  }
+
+  cortarCararter(texto){
+    
+    
+    let newTexto = texto.substring(0, 20)
+    if(texto.length < 25 ){
+     return texto
+    }else{
+     return newTexto + '...'
+    }
+   
+   }
+
+   convert(texto) {
+   
+
+    let text = htmlToText(texto,{wordwrap: 130})
+    return text
+    
   }
      
 }

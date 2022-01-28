@@ -18,16 +18,19 @@ export class ComplementoRespuestaComponent implements OnInit {
   variableGlobalUser
   NombreCompleto
   PeriodoComp
+  PeriodoComplemento
   listaComplementoPendiente:any = []
   listaComplementoCompletado:any = []
   IdUsuario
-
+  comentario:any = []
   async ngOnInit() {
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
+    this.PeriodoComplemento =  localStorage.getItem("fechaPeriodo")
     this.variableGlobalUser = this.core.storage.get('usuario');
     this.NombreCompleto = this.variableGlobalUser["fullName"]
     this.IdUsuario = this.variableGlobalUser["idUsuario"]
     await this.ConsultaComplementoUsuarios()
+    console.log(this.comentario)
   }
 
   async ConsultaComplementoUsuarios(){
@@ -135,11 +138,12 @@ export class ComplementoRespuestaComponent implements OnInit {
     return
   }
 
-  async Guardar(item){
-
+  async Guardar(item,index){
+    console.log("comentario",this.comentario)
+    
     let data:any = {}
     data.NIDCOMP_CAB_USUARIO = item.NIDCOMP_CAB_USUARIO
-    data.SCOMENTARIO = ''
+    data.SCOMENTARIO = this.comentario[index]
     data.SRUTA_PDF = ''
     
     
@@ -294,6 +298,25 @@ export class ComplementoRespuestaComponent implements OnInit {
     this.ListaArchivos[indexGlobal].listFileNameInform.splice(i,1)
     this.ListaArchivos[indexGlobal].respPromiseFileInfo.splice(i,1)
     console.log("this.ListaArchivos", this.ListaArchivos)
+  }
+
+  textHtml
+  ValidarTexto(texto){
+    let textoReemplazado:any = ''
+    let newTexto = ''
+    debugger
+    if(texto.indexOf("[Periodo]") != -1 ){
+      newTexto = texto.replace("[Periodo]", this.PeriodoComplemento);
+      texto = newTexto;
+  
+    }
+    textoReemplazado = texto.replace(/\n/g, '<br>');
+    //textoReemplazado = document.write(textoReemplazado)
+    //return textoReemplazado;
+    this.textHtml =textoReemplazado
+  
+   //return  document.getElementById('textonuevo').innerHTML = ``+ textoReemplazado + ``
+   //return textoReemplazado
   }
  
 } 
