@@ -26,11 +26,13 @@ export class ComplementoSinSennalComponent implements OnInit {
   ListUser:any = []
   PeriodoComp
   listaComplementoUsuario:any=[]
-  
+  FiltrolistaComplementoUsuario:any=[]
+  listaRutas:any = []
   async ngOnInit() {
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
     await this.getUsers()
     await this.ConsultaComplementoUsuarios()
+    await this.ObtenerRutas()
 
     this.AlertList = [
       {descripcion:"Estos es una descripcion",fecha:"14/01/2022",usuario:"German Salinas",estado:"PENDIENTE", muestra1:1,muestra2:2},
@@ -91,8 +93,8 @@ export class ComplementoSinSennalComponent implements OnInit {
   
    this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
    this.listaComplementoUsuario = this.listaComplementoUsuario.filter(it => it.NIDALERTA == 99)
-  }
-
+   this.FiltrolistaComplementoUsuario = this.listaComplementoUsuario 
+ }
 
   async DescargarArhivo(item,usuario){
     let SRUTA = ''
@@ -100,21 +102,48 @@ export class ComplementoSinSennalComponent implements OnInit {
     if(usuario == 'OC'){
        SRUTA = item.SRUTA_FILE_NAME;
        SRUTA_LARGA = item.SFILE_NAME_LARGO;
+
+       if(SRUTA == '' || SRUTA == null){
+        let mensaje = "No hay archivos para descargar"
+        await this.MensajesAlertas(mensaje)
+        return
+
+      }else{
+        await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+        }
+
     }else{
-       SRUTA = item.SRUTA_FILE_NAME_RE;
-       SRUTA_LARGA = item.SFILE_NAME_LARGO_RE;
-    }
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      //let listaRutas = await this.userConfigService.getListaAdjuntos(data)
+      let NewlistaRutas =  this.listaRutas.filter(it => it.STIPO_CARGA== 'COMPLEMENTO-SIN-SENNAL-RE' && it.NIDALERTA_CABECERA== item.NIDCOMP_CAB_USUARIO)
+      NewlistaRutas.forEach(async (element) => {
+        SRUTA = element.SRUTA_ADJUNTO;
+
+        let texto = SRUTA
+        let tamaño1 = texto.length
+        let valor1 = texto.indexOf('/')
+        let newTexto1 = texto.slice(valor1 + 1,tamaño1)
+
+        let tamaño2 = newTexto1.length
+        let valor2 = newTexto1.indexOf('/')
+        let newTexto2 = newTexto1.slice(valor2 + 1,tamaño2)
+
+        let tamaño3 = newTexto2.length
+        let valor3 = newTexto2.indexOf('/')
+        let newTexto3 = newTexto2.slice(valor3 + 1,tamaño3)
+        
+        SRUTA_LARGA = newTexto3;
+
+        await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+     });
+       
+    // getListaAdjuntos
     
     
-    if(SRUTA == '' || SRUTA == null){
-      let mensaje = "No hay archivos para descargar"
-      await this.MensajesAlertas(mensaje)
-      return
-    }else{
-      await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
-      }
 
     }
+  }
    
   
 
@@ -160,11 +189,44 @@ export class ComplementoSinSennalComponent implements OnInit {
     return
   }
 
+  arrayFinalListToShow
+  totalItems
+  Changeuser(id){
+    console.log(id)
+    if(id == 0){
+      this.FiltrolistaComplementoUsuario =  this.listaComplementoUsuario
+    }else{
+      this.FiltrolistaComplementoUsuario =  this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_ASIGNADO == id )
+    }
+   
 
-  Changeuser(){
-
+    
+    
   }
-  ChangeEstado(){
-
+  ChangeEstado(id){
+    console.log(id)
+    if(id == 0){
+      this.FiltrolistaComplementoUsuario =  this.listaComplementoUsuario
+    }else{
+      this.FiltrolistaComplementoUsuario =  this.listaComplementoUsuario.filter(it => it.SESTADO == id )
+    }
   }
+
+  async ObtenerRutas(){
+    let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      
+    this.listaRutas = await this.userConfigService.getListaAdjuntos(data)
+  }
+ 
+  FiltarRutas(item){
+
+   let  bol =  this.listaRutas.filter(it => it.STIPO_CARGA== 'COMPLEMENTO-SIN-SENNAL-RE' && it.NIDALERTA_CABECERA== item.NIDCOMP_CAB_USUARIO)
+   if(bol.length == 0){
+     return false
+   }else{
+     return true
+   }
+  }
+     
 }

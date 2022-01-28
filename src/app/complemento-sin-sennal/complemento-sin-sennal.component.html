@@ -19,7 +19,7 @@
                     <div class="col-lg-5 form-group">
                         <label class="fontText">Usuiaro:</label>
                         <select  [(ngModel)]="usuario" name="profile"
-                            (change)="Changeuser()"
+                            (change)="Changeuser(usuario)"
                             style="display: flex;justify-content: center;align-items: center;"
                             class="form-control buttonSinBorder">
                             <option value="0" selected>--Todos--</option>
@@ -32,7 +32,7 @@
                     <div class="col-lg-3 form-group">
                         <label class="fontText">Estado:</label>
                         <select  [(ngModel)]="estado" name="group"
-                          (change)="ChangeEstado()"
+                          (change)="ChangeEstado(estado)"
                             style="display: flex;justify-content: center;align-items: center;"
                             class="form-control buttonSinBorder">
                             <option value="0" selected>--Todos--</option>
@@ -69,12 +69,12 @@
                                         <th scope="col" style="text-align: left;">Fecha de creación</th>
                                         <th scope="col" style="text-align: left;">Usuaurio asignado</th>
                                         <th scope="col" style="text-align: left;">Estado</th>
-                                        <th scope="col" style="text-align: center;">Muestra OC</th>
-                                        <th scope="col" style="text-align: center;">Documento RE</th>
+                                        <!-- <th scope="col" style="text-align: center;">Muestra OC</th> -->
+                                        <th scope="col" style="text-align: center;">Documento</th>
                                     </tr>
                                 </thead>
                                 <ng-container
-                                    *ngIf="listaComplementoUsuario!=null && listaComplementoUsuario.length>0; then showGrid else hideGrid">
+                                    *ngIf="FiltrolistaComplementoUsuario!=null && FiltrolistaComplementoUsuario.length>0; then showGrid else hideGrid">
                                 </ng-container>
                             </table>
                             <ng-template #hideGrid>
@@ -86,29 +86,29 @@
                             </ng-template>
                             <ng-template #showGrid>
                                 <tbody>
-                                    <tr *ngFor="let item of listaComplementoUsuario | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
+                                    <tr *ngFor="let item of FiltrolistaComplementoUsuario | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
                                      
                                         <td class="text-left vertical;" style="white-space: nowrap;" >{{item.SNOM_COMPLEMENTO}}</td>
                                         <td style="text-align: justify;">{{item.DFECHA_ESTADO_MOVIMIENTO}}</td>                                       
                                         <td style="text-align: justify;">{{item.NOMBRECOMPLETO}}</td>    
                                         <td class="text-left vertical">{{item.SNOMBRE_ESTADO}}</td>
-                                        <td class="text-center vertical">
+                                        <!-- <td class="text-center vertical">
                                             <a *ngIf="(item.SFILE_NAME_LARGO != '')" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos del oficial"><i (click)="DescargarArhivo(item,'OC')"
                                                 class="fas fa-file-excel"  style="color:green;font-size: 20px;"></i></a>
-                                        </td>
+                                        </td> -->
                                         <td class="text-center vertical">
-                                            <a *ngIf="(item.SFILE_NAME_LARGO_RE != '')" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos del responsable"><i (click)="DescargarArhivo(item,'RE')"
+                                            <a *ngIf="FiltarRutas(item)" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos del responsable"><i (click)="DescargarArhivo(item,'RE')"
                                                 class="fas fa-file-excel"  style="color:green;font-size: 20px;"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </ng-template>
 
-                            <ng-container *ngIf="listaComplementoUsuario!=null && listaComplementoUsuario.length>0; then showPagination">
+                            <ng-container *ngIf="FiltrolistaComplementoUsuario!=null && FiltrolistaComplementoUsuario.length>0; then showPagination">
                             </ng-container>
                             <ng-template #showPagination class="row">
                                 <div class="col align-self-center">
-                                  <ngb-pagination  [collectionSize]="listaComplementoUsuario.length" [(page)]="page" [maxSize]="5"
+                                  <ngb-pagination  [collectionSize]="FiltrolistaComplementoUsuario.length" [(page)]="page" [maxSize]="5"
                                   aria-label="Default pagination"></ngb-pagination>
                                 </div>
                              

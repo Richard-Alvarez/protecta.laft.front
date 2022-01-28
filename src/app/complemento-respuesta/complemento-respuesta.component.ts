@@ -18,8 +18,8 @@ export class ComplementoRespuestaComponent implements OnInit {
   variableGlobalUser
   NombreCompleto
   PeriodoComp
-  listaComplementoPendiente
-  listaComplementoCompletado
+  listaComplementoPendiente:any = []
+  listaComplementoCompletado:any = []
   IdUsuario
 
   async ngOnInit() {
@@ -49,22 +49,48 @@ export class ComplementoRespuestaComponent implements OnInit {
     if(usuario == 'OC'){
        SRUTA = item.SRUTA_FILE_NAME;
        SRUTA_LARGA = item.SFILE_NAME_LARGO;
+
+       if(SRUTA == '' || SRUTA == null){
+        let mensaje = "No hay archivos para descargar"
+        await this.MensajesAlertas(mensaje)
+        return
+
+      }else{
+        await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+        }
+
     }else{
-       SRUTA = item.SRUTA_FILE_NAME_RE;
-       SRUTA_LARGA = item.SFILE_NAME_LARGO_RE;
-    }
+      let data:any = {}
+      data.NPERIODO_PROCESO = this.PeriodoComp
+      let listaRutas = await this.userConfigService.getListaAdjuntos(data)
+      listaRutas =  listaRutas.filter(it => it.STIPO_CARGA== 'COMPLEMENTO-SIN-SENNAL-RE' && it.NIDALERTA_CABECERA== item.NIDCOMP_CAB_USUARIO)
+      listaRutas.forEach(async (element) => {
+        SRUTA = element.SRUTA_ADJUNTO;
+
+        let texto = SRUTA
+        let tamaño1 = texto.length
+        let valor1 = texto.indexOf('/')
+        let newTexto1 = texto.slice(valor1 + 1,tamaño1)
+
+        let tamaño2 = newTexto1.length
+        let valor2 = newTexto1.indexOf('/')
+        let newTexto2 = newTexto1.slice(valor2 + 1,tamaño2)
+
+        let tamaño3 = newTexto2.length
+        let valor3 = newTexto2.indexOf('/')
+        let newTexto3 = newTexto2.slice(valor3 + 1,tamaño3)
+        
+        SRUTA_LARGA = newTexto3;
+
+        await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
+     });
+       
+    // getListaAdjuntos
     
     
-    if(SRUTA == '' || SRUTA == null){
-      let mensaje = "No hay archivos para descargar"
-      await this.MensajesAlertas(mensaje)
-      return
-    }else{
-      await this.downloadUniversalFile(SRUTA, SRUTA_LARGA)
-      }
 
     }
-   
+  }
   
 
   async downloadUniversalFile(ruta, nameFile) {
@@ -115,8 +141,159 @@ export class ComplementoRespuestaComponent implements OnInit {
     data.NIDCOMP_CAB_USUARIO = item.NIDCOMP_CAB_USUARIO
     data.SCOMENTARIO = ''
     data.SRUTA_PDF = ''
-    await this.userConfigService.GetUpdComplementoCab(data)
-    await this.ConsultaComplementoUsuarios()
+    
+    
+    let  filtroArchivos = this.ListaArchivos.filter(it => it.IdComplemento == item.NIDCOMP_CAB_USUARIO )
+    console.log("lista que se envia",filtroArchivos)
+    debugger
+    if(filtroArchivos.length == 0){
+      let mensaje = "Debe registrar un archivo"
+      this.MensajesAlertas(mensaje)
+      return
+    }
+    if(filtroArchivos[0].arrFiles.length == 0){
+      let mensaje = "Debe registrar un archivo"
+      this.MensajesAlertas(mensaje)
+      return
+    }
+
+
+    swal.fire({
+      title: 'Mantenimiento de complemento',
+      icon: 'warning',
+      text: 'Está seguro de registrar el complemento?',
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonColor:'#FA7000',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      showCloseButton:true,
+         customClass: { 
+            closeButton : 'OcultarBorde'
+            },
+      
+    }).then(async (result) => {
+      if (result.value) {
+            await this.userConfigService.GetUpdComplementoCab(data)
+            await this.ConsultaComplementoUsuarios()
+            debugger
+            filtroArchivos.forEach(async (element,i) => {
+              let uploadPararms: any = {}
+              uploadPararms.NIDALERTA = 99
+              uploadPararms.NREGIMEN = 0;
+              uploadPararms.STIPO_CARGA = "COMPLEMENTO-SIN-SENNAL-RE";
+              uploadPararms.NIDALERTA_CABECERA =  item.NIDCOMP_CAB_USUARIO;
+              uploadPararms.NPERIODO_PROCESO = this.PeriodoComp;
+              uploadPararms.NIDUSUARIO_MODIFICA =  this.IdUsuario
+              element.listFileNameInform.forEach(async (archivo,i) => {
+                uploadPararms.SRUTA_ADJUNTO = "COMPLEMENTO-SIN-SENNAL-RE" + '/'  +  this.PeriodoComp + '/' + item.NIDCOMP_CAB_USUARIO + '/' + archivo;
+                uploadPararms.SRUTA = "COMPLEMENTO-SIN-SENNAL-RE" + '/' + this.PeriodoComp + '/' +  item.NIDCOMP_CAB_USUARIO ;
+              
+                await this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms)
+                //await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
+              });
+            
+            });
+            
+            let newDataArchivo:any = {}   
+            newDataArchivo.SRUTA =  "COMPLEMENTO-SIN-SENNAL-RE"  + '/' + this.PeriodoComp + '/' +  item.NIDCOMP_CAB_USUARIO ;
+            newDataArchivo.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+            newDataArchivo.listFileName =  this.ArchivoAdjunto.listFileNameInform
+            await this.userConfigService.UploadFilesUniversalByRuta(newDataArchivo)
+      }
+    }).catch(err => { 
+
+     })
+    
+
+
+    
   }
 
-}
+
+  async setDataFile(event,item) {
+    debugger
+     let files = event.target.files;
+ 
+     let arrFiles = Array.from(files)
+     
+     let listFileNameInform: any = []
+     arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+    
+     let listFileNameCortoInform = []
+     let statusFormatFile = false
+     for (let item of listFileNameInform) {
+       //let item = listFileNameInform[0]
+       let nameFile = item.split(".")
+       if (nameFile.length > 2 || nameFile.length < 2) {
+         statusFormatFile = true
+         return
+       }
+       let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+       //listFileNameCortoInform.push(fileItem)
+       listFileNameCortoInform.push(fileItem)
+     }
+     if (statusFormatFile) {
+       swal.fire({
+         title: 'Mantenimiento de complemento',
+         icon: 'warning',
+         text: 'El archivo no tiene el formato necesario',
+         showCancelButton: false,
+         showConfirmButton: true,
+         confirmButtonColor:'#FA7000',
+         confirmButtonText: 'Aceptar',
+         showCloseButton:true,
+            customClass: { 
+               closeButton : 'OcultarBorde'
+               },
+         
+       }).then(async (result) => {
+       
+       }).catch(err => {
+       
+       })
+     }
+     let listDataFileInform: any = []
+     arrFiles.forEach(fileData => {
+       listDataFileInform.push(this.handleFile(fileData))
+     })
+     let respPromiseFileInfo = await Promise.all(listDataFileInform)
+     return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform,IdComplemento : item.NIDCOMP_CAB_USUARIO  }
+   }
+ 
+
+   handleFile(blob: any): Promise<any> {
+    return new Promise(resolve => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.readAsDataURL(blob)
+    })
+  }
+
+
+  ArchivoAdjunto:any 
+  NombreArchivo:string = ''
+  ListaArchivos:any  = []
+  async AgregarAdjunto(evento,index,item){
+   this.ArchivoAdjunto =  await this.setDataFile(evento,item)
+   console.log( this.ArchivoAdjunto)
+ 
+    this.NombreArchivo = this.ArchivoAdjunto.listFileNameInform[0]
+    
+    console.log("this.ArchivoAdjunto", this.ArchivoAdjunto)
+    console.log("this.NombreArchivo", this.NombreArchivo)
+
+    this.ListaArchivos.push(this.ArchivoAdjunto)
+    console.log("this.ListaArchivos", this.ListaArchivos)
+  }
+
+  EliminarArchivo(item,archivo,i,indexGlobal){
+    //let filtroArchivo = this.ListaArchivos.filter(it=> it.IdComplemento == item.NIDCOMP_CAB_USUARIO)
+    this.ListaArchivos[indexGlobal].arrFiles.splice(i,1)
+    this.ListaArchivos[indexGlobal].listFileNameCortoInform.splice(i,1)
+    this.ListaArchivos[indexGlobal].listFileNameInform.splice(i,1)
+    this.ListaArchivos[indexGlobal].respPromiseFileInfo.splice(i,1)
+    console.log("this.ListaArchivos", this.ListaArchivos)
+  }
+ 
+} 

@@ -244,6 +244,11 @@ class Rutas {
   public urlUpdActualizarCorreoOC: string = this.base + "monitoreoSenales/UpdActualizarCorreoOC"
   public urlActulizarContrasenaEncriptada: string = this.base + "monitoreoSenales/ActulizarContrasenaEncriptada"
   public urlUpdRutaComplementos: string = this.base + "monitoreoSenales/UpdRutaComplementos"
+
+  public urlEnvioCorreoComplementoSinSennal: string = this.base + "monitoreoSenales/EnvioCorreoComplementoSinSennal"
+  public urlgetCorreoCustomAction: string = this.base + "monitoreoSenales/getCorreoCustomAction"
+  public urlgetCuerpoCorreo: string = this.base + "monitoreoSenales/getCuerpoCorreo"
+  
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
