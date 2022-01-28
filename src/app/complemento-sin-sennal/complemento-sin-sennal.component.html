@@ -32,7 +32,7 @@
                     <div class="col-lg-3 form-group">
                         <label class="fontText">Estado:</label>
                         <select  [(ngModel)]="estado" name="group"
-                          (change)="ChangeEstado()"
+                          (change)="ChangeEstado(estado)"
                             style="display: flex;justify-content: center;align-items: center;"
                             class="form-control buttonSinBorder">
                             <option value="0" selected>--Todos--</option>
@@ -74,7 +74,7 @@
                                     </tr>
                                 </thead>
                                 <ng-container
-                                    *ngIf="listaComplementoUsuario!=null && listaComplementoUsuario.length>0; then showGrid else hideGrid">
+                                    *ngIf="FiltrolistaComplementoUsuario!=null && FiltrolistaComplementoUsuario.length>0; then showGrid else hideGrid">
                                 </ng-container>
                             </table>
                             <ng-template #hideGrid>
@@ -86,7 +86,7 @@
                             </ng-template>
                             <ng-template #showGrid>
                                 <tbody>
-                                    <tr *ngFor="let item of listaComplementoUsuario | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
+                                    <tr *ngFor="let item of FiltrolistaComplementoUsuario | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
                                      
                                         <td class="text-left vertical;" style="white-space: nowrap;" >{{item.SNOM_COMPLEMENTO}}</td>
                                         <td style="text-align: justify;">{{item.DFECHA_ESTADO_MOVIMIENTO}}</td>                                       
@@ -104,11 +104,11 @@
                                 </tbody>
                             </ng-template>
 
-                            <ng-container *ngIf="listaComplementoUsuario!=null && listaComplementoUsuario.length>0; then showPagination">
+                            <ng-container *ngIf="FiltrolistaComplementoUsuario!=null && FiltrolistaComplementoUsuario.length>0; then showPagination">
                             </ng-container>
                             <ng-template #showPagination class="row">
                                 <div class="col align-self-center">
-                                  <ngb-pagination  [collectionSize]="listaComplementoUsuario.length" [(page)]="page" [maxSize]="5"
+                                  <ngb-pagination  [collectionSize]="FiltrolistaComplementoUsuario.length" [(page)]="page" [maxSize]="5"
                                   aria-label="Default pagination"></ngb-pagination>
                                 </div>
                              

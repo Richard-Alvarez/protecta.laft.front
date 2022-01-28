@@ -26,6 +26,7 @@ export class ComplementoSinSennalComponent implements OnInit {
   ListUser:any = []
   PeriodoComp
   listaComplementoUsuario:any=[]
+  FiltrolistaComplementoUsuario:any=[]
   listaRutas:any = []
   async ngOnInit() {
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
@@ -92,8 +93,8 @@ export class ComplementoSinSennalComponent implements OnInit {
   
    this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
    this.listaComplementoUsuario = this.listaComplementoUsuario.filter(it => it.NIDALERTA == 99)
-  }
-
+   this.FiltrolistaComplementoUsuario = this.listaComplementoUsuario 
+ }
 
   async DescargarArhivo(item,usuario){
     let SRUTA = ''
@@ -188,12 +189,27 @@ export class ComplementoSinSennalComponent implements OnInit {
     return
   }
 
+  arrayFinalListToShow
+  totalItems
+  Changeuser(id){
+    console.log(id)
+    if(id == 0){
+      this.FiltrolistaComplementoUsuario =  this.listaComplementoUsuario
+    }else{
+      this.FiltrolistaComplementoUsuario =  this.listaComplementoUsuario.filter(it => it.NIDUSUARIO_ASIGNADO == id )
+    }
+   
 
-  Changeuser(nombre){
-    this.listaComplementoUsuario =  this.listaComplementoUsuario.includes(nombre)
+    
+    
   }
-  ChangeEstado(item){
-    this.listaComplementoUsuario =  this.listaComplementoUsuario.includes()
+  ChangeEstado(id){
+    console.log(id)
+    if(id == 0){
+      this.FiltrolistaComplementoUsuario =  this.listaComplementoUsuario
+    }else{
+      this.FiltrolistaComplementoUsuario =  this.listaComplementoUsuario.filter(it => it.SESTADO == id )
+    }
   }
 
   async ObtenerRutas(){
