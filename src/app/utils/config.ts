@@ -56,6 +56,9 @@ class Rutas {
   public urlGetRegimeList: string = this.base + "monitoreoSenales/GetRegimeList";
   public urlGetCurrentPeriod: string = this.base + "monitoreoSenales/GetCurrentPeriod";
   public urlGetInternationalLists: string = this.base + "monitoreoSenales/GetInternationalLists";
+  public urlGetListWebLinksCliente: string = this.base + "monitoreoSenales/getListWebLinksCliente";
+  public urlGetDeleteWebLinksCoincidence: string = this.base + "monitoreoSenales/getDeleteWebLinksCoincidence";
+  public urlAddWebLinkscliente: string = this.base + "monitoreoSenales/addWebLinkscliente";
   public urlGetPepList: string = this.base + "monitoreoSenales/GetPepList";
   public urlGetFamiliesPepList: string = this.base + "monitoreoSenales/GetFamiliesPepList";
   public urlGetSacList: string = this.base + "monitoreoSenales/GetSacList";

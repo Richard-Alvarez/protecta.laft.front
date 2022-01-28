@@ -969,7 +969,7 @@
                             <div class="Header">
                                 <h4 class="TitleLine ">Historial detalles fuentes publicas</h4>
                             </div>
-                            <button class="WebLinks"> 
+                            <button class="WebLinks" (click)="addWebLinks()"> 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                                 </svg>  Agregar
@@ -980,17 +980,19 @@
                         <table class="table table-striped table-sm">
                             <thead style="font-size: 14px;">
                                 <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
-                                    <th scope="col" style="width: 70%;">Link de la fuente</th>
-                                    <th scope="col" style="width: 25%;">Estado</th>
-                                    <th scope="col" style="width: 5%; text-align: center;">eliminar</th>
+                                    <th scope="col" style="width: 65%;">Link de la fuente</th>
+                                    <th scope="col" style="width: 15%;">Estado</th>
+                                    <th scope="col" style="width: 15%;">Tipo lista</th>
+                                    <th scope="col" style="width: 5%; text-align: center;">Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody style="font-size: 12px;">
                                 <tr *ngFor="let item of arrWebsLinks" id="{{item.SROWID}}" style="border-top: 3px ridge; border-bottom: 3px ridge;">
-                                    <td style="width: 70%;">{{item.SURI}}</td>
-                                    <td style="width: 25%;">{{item.SESTADO_TRAT}}</td>
+                                    <td style="width: 65%;"><a href="{{item.SURI}}" target="_blank" >{{item.SURI}}</a></td>
+                                    <td style="width: 15%;">{{item.SIDSTATE == 1 ? "HABILITADO" : "NO ENCONTRO"}}</td>
+                                    <td style="width: 15%;">{{item.SDESTIPOLISTA }}</td>
                                     <td style="width: 5%; text-align: center;"><i class="fas fa-trash-alt" title="Eliminar país" alt=""
-                                        style="cursor: pointer;"></i> </td>
+                                        style="cursor: pointer;" (click)="onDeleteWebLinks(item.SROWID)"></i> </td>
                                 </tr>
                             </tbody>
                         </table>
