@@ -187,7 +187,7 @@
                                 <div *ngIf="lista.NIDPROVEEDOR != 4" class="text-center"><img src="assets/icons/excel-microsoft.png" style="height: 30px;cursor: pointer;" (click)="getExcelListInter(lista.NIDTIPOLISTA,lista.SDESTIPOLISTA )" /></div>
                             </div>
                         </div>
-                        <div id="{{'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id+state+ indexLista + lista.NIDSUBGRUPOSEN}}" class="collapse {{lista.visible}} p-3" style="width:100%" data-parent="#tabPanelListInter" tabindex="-1">
+                        <div id="{{'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id+state+ indexLista + lista.NIDSUBGRUPOSEN}}" class="collapse {{lista.visible}} p-3" style="width:100%; " data-parent="#tabPanelListInter" tabindex="-1">
                             <app-view-c2-list [parent]="this" [lista]="lista" [linkactual]="linkactual" [arrayClientesByList]="arrayClientesByList" [acordion]="'consulta'+'Alert'+objAlertaC2.NIDALERTA+'Lista'+lista.NIDTIPOLISTA+'Regimen'+regimen.id+state+ indexLista + lista.NIDSUBGRUPOSEN"
                                 [accordionSubGrup]="'collapse'+indexsubgrupo+_subGrupo.name.length" [subgruponame]="_subGrupo.name"></app-view-c2-list>
                             <!-- <div class="card-body">
