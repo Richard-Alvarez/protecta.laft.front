@@ -205,7 +205,7 @@ async DescargarReporte(ValidadorIdGrupo){
     let mes =  this.IDListPeriodoxGrupo.toString().substr(4,2)
     let anno = this.IDListPeriodoxGrupo.toString().substr(0,4) 
     this.PeriodoFecha = dia + '/' + mes + '/' + anno
-
+    
   }else if (ValidadorIdGrupo == 2){
 
     this.ListaColaborador = this.ListaAlerta
@@ -558,10 +558,13 @@ async DataAlertas(idgrupo,perido){
   listaInternacionalRentaParticularIDECON:any = []
 
 async DataReporteC2Global(item){
-
-  let dia =  this.IDListPeriodoGlobal.toString().substr(6,2)
-  let mes =  this.IDListPeriodoGlobal.toString().substr(4,2)
-  let anno = this.IDListPeriodoGlobal.toString().substr(0,4) 
+  console.log("el valor del seleccionado",item)
+  // let dia =  this.IDListPeriodoGlobal.toString().substr(6,2)
+  // let mes =  this.IDListPeriodoGlobal.toString().substr(4,2)
+  // let anno = this.IDListPeriodoGlobal.toString().substr(0,4) 
+  let dia =  item.NPERIODO_PROCESO.toString().substr(6,2)
+  let mes =  item.NPERIODO_PROCESO.toString().substr(4,2)
+  let anno = item.NPERIODO_PROCESO.toString().substr(0,4) 
   this.Periodo = dia + '/' + mes + '/' + anno
 
     let dataRG:any = {}
@@ -579,7 +582,7 @@ async DataReporteC2Global(item){
       this.arrayDataResultadoSimplificado =  await this.userConfigService.GetListaResultado(dataRS)
       this.core.loader.hide()
 
-      this.listaRenta = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+      this.listaRenta = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
       this.listaMasivos = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76)
       this.listaEspecialSoat =  this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
       this.listaEspecialRenta = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
