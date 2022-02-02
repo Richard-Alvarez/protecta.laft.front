@@ -46,9 +46,10 @@ export class ReportesSbsComponent implements OnInit {
   amountUnicaMulti: any;
   amountFrecMulti: any;
 
-  Iamount: any;
-  IamountUnicaMulti: any;
-  IamountFrecMulti: any;
+  Iamount: number;
+  IamountAtRt: number;
+  IamountUnicaMulti: number;
+  IamountFrecMulti: number;
 
   exTypeOff = false;
   amOff = false;
@@ -134,9 +135,10 @@ export class ReportesSbsComponent implements OnInit {
           this.amount = _data.amount;
           this.amountUnicaMulti = _data.amountUniMulti;
           this.amountFrecMulti = _data.amountFrecMulti;
-          this.Iamount = this.formatNumberDecimal(_data.amount);
-          this.IamountUnicaMulti = this.formatNumberDecimal(_data.amountUniMulti);
-          this.IamountFrecMulti = this.formatNumberDecimal(_data.amountFrecMulti);
+          this.Iamount = _data.amount;
+          this.IamountAtRt = _data.amountrtat;
+          this.IamountUnicaMulti = _data.amountUniMulti;
+          this.IamountFrecMulti = _data.amountFrecMulti;
           return resolve(_data);
         });
     });
@@ -218,6 +220,7 @@ export class ReportesSbsComponent implements OnInit {
       data.OPE = 3
       data.TC = this.exchangeRate === '' ? 0 : this.exchangeRate;
       data.MONTO = this.amount === '' ? 0 : this.amount;
+      data.MONTOATRT =this.IamountAtRt;
       data.nameReport = this.ReportCode === '' ? 0 : this.ReportCode;
       data.nameFile = name
       data.sbsFileType = name
