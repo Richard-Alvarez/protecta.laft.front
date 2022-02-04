@@ -31,6 +31,7 @@ export class ComplementoRespuestaComponent implements OnInit {
     this.IdUsuario = this.variableGlobalUser["idUsuario"]
     await this.ConsultaComplementoUsuarios()
     console.log(this.comentario)
+    console.log(this.ListaArchivos)
   }
 
   async ConsultaComplementoUsuarios(){
@@ -43,6 +44,9 @@ export class ComplementoRespuestaComponent implements OnInit {
       this.listaComplementoCompletado = response.filter(it => it.NIDALERTA == 99 && it.NIDUSUARIO_ASIGNADO == this.IdUsuario && it.SESTADO == 2)
       console.log("lista P", this.listaComplementoPendiente)
       console.log("lista C", this.listaComplementoCompletado)
+      // this.listaComplementoPendiente.forEach(element => {
+      //   this.ListaArchivos.push([])
+      // });
   }
 
 
@@ -282,11 +286,11 @@ export class ComplementoRespuestaComponent implements OnInit {
    this.ArchivoAdjunto =  await this.setDataFile(evento,item)
    console.log( this.ArchivoAdjunto)
  
-    this.NombreArchivo = this.ArchivoAdjunto.listFileNameInform[0]
+    //this.NombreArchivo = this.ArchivoAdjunto.listFileNameInform[0]
     
-    console.log("this.ArchivoAdjunto", this.ArchivoAdjunto)
-    console.log("this.NombreArchivo", this.NombreArchivo)
-
+    //console.log("this.ArchivoAdjunto", this.ArchivoAdjunto)
+    //console.log("this.NombreArchivo", this.NombreArchivo)
+    if( this.ListaArchivos)
     this.ListaArchivos.push(this.ArchivoAdjunto)
     console.log("this.ListaArchivos", this.ListaArchivos)
   }

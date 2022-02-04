@@ -230,6 +230,9 @@ export class ModalEmailProfileComponent implements OnInit {
     else if (this.action == 4) {
       respValidacion = this.validator(4)
     }
+    else if (this.action == 8) {
+      respValidacion = this.validator(8)
+    }
     else if (this.action == 0) {
       mensaje = "No seleccionó ninguna acción "
       this.MensajeSwal(mensaje)
@@ -291,6 +294,8 @@ export class ModalEmailProfileComponent implements OnInit {
     let fechafin = this.textoHTML.indexOf('[FechaFin]');
     let grupo = this.textoHTML.indexOf('[Grupo]');
     let periodo = this.textoHTML.indexOf('[Periodo]');
+    let credencial = this.textoHTML.indexOf('[Credencial]');
+    let id = this.textoHTML.indexOf('[Id]');
 
     let objRespuesta: any = {};
     objRespuesta.code = 0
@@ -420,16 +425,36 @@ export class ModalEmailProfileComponent implements OnInit {
         objRespuesta.message = "Debe ingresar un asunto";
         return objRespuesta
       }
-      // if (usuario == -1) {
-      //   objRespuesta.code = 1;
-      //   objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Usuario]";
-      //   return objRespuesta
-      // }
-      // if (link == -1) {
-      //   objRespuesta.code = 1;
-      //   objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Link]";
-      //   return objRespuesta
-      // }
+      if (usuario == -1) {
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto de [Usuario]";
+        return objRespuesta
+      }
+      if (link == -1) {
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Link]";
+        return objRespuesta
+      }
+      if (cargo == -1) {
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Cargo]";
+        return objRespuesta
+      }
+      if (fechafin == -1) {
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [FechaFin]";
+        return objRespuesta
+      }
+      if (credencial == -1) {
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Credencial]";
+        return objRespuesta
+      }
+      if (id == -1) {
+        objRespuesta.code = 1;
+        objRespuesta.message = "Es obligatorio que el mensaje tenga un texto der [Id]";
+        return objRespuesta
+      }
     }
 
     return objRespuesta
