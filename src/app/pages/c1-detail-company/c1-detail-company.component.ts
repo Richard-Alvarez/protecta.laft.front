@@ -104,13 +104,13 @@ export class C1DetailCompanyComponent implements OnInit {
     (this.arrRespuestasC1[indicePregEmpresa])[indicePreg] = valor
     //console.warn("el this.arrRespuestasC1 C1: ",this.arrRespuestasC1);
 
-    debugger
+    
     this.dataC1Serv.arrRespuestasForm$.emit(this.arrRespuestasC1)
     
   }
 
   setDataInputComment(indicePregEmpresa,indicePreg,eventoCaja){
-    debugger
+    
     let valorDetallePregunta = eventoCaja.target.value
     //console.warn("el valorDetallePregunta de data input comment: ",valorDetallePregunta)
 
@@ -126,7 +126,7 @@ export class C1DetailCompanyComponent implements OnInit {
   }
 
   setRespuestasRadio(idpregunta,valor){
-    debugger
+    
     //console.warn("el idpregunta: ",+idpregunta+" - valor: "+valor)
     if(!this.arrSetRespuestaGeneral[idpregunta]){
       //console.warn("el 2 idpregunta: ",+valor+" - valor: "+valor)

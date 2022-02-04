@@ -58,10 +58,10 @@ export class ModalComplementoSinSennalComponent implements OnInit {
       "defaultOpen": false,
       "idField": "userId",
       "textField": "userFullName",
-      "selectAllText": "Select All",
-      "unSelectAllText": "UnSelect All",
+      "selectAllText": "Seleccionar todos",
+      "unSelectAllText": "Quitar todos",
       "enableCheckAll": true,
-      "itemsShowLimit": 3,
+      "itemsShowLimit": 5,
       "allowSearchFilter": true,
       "limitSelection": -1
     };
@@ -114,7 +114,7 @@ export class ModalComplementoSinSennalComponent implements OnInit {
           let validador = (this.NombreArchivo  == '' || this.NombreArchivo  == null ) ? 0 : 1
           let respuestaCorreo = await this.userConfigService.getCuerpoCorreo({NIDACCION:8})
           console.log("this.respuestaCorreo",respuestaCorreo)
-          debugger
+          
             this.core.loader.show()
          for(let i=0; i < this.selectedItems.length; i++ ){
               data.NPERIODO_PROCESO  = this.PeriodoComp
@@ -147,7 +147,7 @@ export class ModalComplementoSinSennalComponent implements OnInit {
 
 
               let UsuarioCorreo = this.ListUser.filter(it => it.userId == this.selectedItems[i].userId )
-              debugger
+              
               let dataCorreo:any = {}
               dataCorreo.NOMBRECOMPLETO = UsuarioCorreo[0].userFullName
               dataCorreo.SEMAIL = UsuarioCorreo[0].userEmail
@@ -194,7 +194,7 @@ export class ModalComplementoSinSennalComponent implements OnInit {
 
 
   async setDataFile(event,item) {
-    debugger
+    
      let files = event.target.files;
  
      let arrFiles = Array.from(files)

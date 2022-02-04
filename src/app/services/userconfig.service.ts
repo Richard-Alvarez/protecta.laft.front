@@ -1191,7 +1191,7 @@ export class UserconfigService {
   }
 
   updateUnchecked(data: any): Promise<any> {
-    debugger;
+
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlUpdateUnchecked, data).subscribe(response => {
@@ -1610,7 +1610,7 @@ export class UserconfigService {
   }
 
   GetBusquedaConcidenciaXNumeroDocDemanda(data: any): Promise<any> {
-    debugger;
+    
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlGetBusquedaConcidenciaXNumeroDocDemanda, data).subscribe(response => {

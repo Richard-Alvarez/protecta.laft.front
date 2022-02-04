@@ -149,7 +149,7 @@
                                 </td>
                                 <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        {{item.SDOC_REFERENCIA}}
+                                        {{item.SDOC_REFERENCIA  == '' ? 'No se encontró información' : item.SDOC_REFERENCIA  }}
                                     </p>
                                 </td>
                             </tr>
@@ -222,7 +222,7 @@
                                 </td>
                                 <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        {{item.SDOC_REFERENCIA}}
+                                        {{item.SDOC_REFERENCIA  == '' ? 'No se encontró información' : item.SDOC_REFERENCIA  }}
                                     </p>
                                 </td>
                             </tr>

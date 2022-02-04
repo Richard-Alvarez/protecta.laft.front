@@ -277,7 +277,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             confirmButtonColor: '#FA7000'
         }).then(async (option) => {
             if (option.isConfirmed) {
-                debugger;
+                
                 let arrCoincidencias: any = []
                 if (this.context != "MT") {
                     this.arrCoincidenciasLista.forEach(element => {

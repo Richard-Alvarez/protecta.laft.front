@@ -202,7 +202,7 @@ export class HistoricoClientesComponent implements OnInit {
 
   
     
-    debugger
+    
     this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
     //await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();
@@ -592,7 +592,7 @@ export class HistoricoClientesComponent implements OnInit {
       let arrPendienteInfoSimpli:any = []
       let arrInfoTerminadoSimpli:any = []
       this.core.loader.show();
-      debugger
+      
       let respWorkListGeneral = await this.userConfigService.getWorkModuleList(data)
       this.core.loader.hide();
       //let respWorkListSimplificado = await this.userConfigService.getWorkModuleList(data)
@@ -1048,7 +1048,7 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
   async downloadUniversalFile(ruta, nameFile) {
-    debugger
+    
     try {
       this.core.loader.show()
       let data = { ruta: ruta }
@@ -2396,7 +2396,7 @@ export class HistoricoClientesComponent implements OnInit {
 
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-      debugger;
+      
       this.core.loader.show()
       
   
@@ -2449,7 +2449,7 @@ export class HistoricoClientesComponent implements OnInit {
           uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
           uploadPararms.listFiles = listFilesAdjuntos
           uploadPararms.listFileName = listFileNameAdjuntos
-          debugger
+          
           promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
           promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
         } catch (error) {
@@ -2846,7 +2846,7 @@ export class HistoricoClientesComponent implements OnInit {
 
 
   async setDataFile(event) {
- debugger
+ 
     let files = event.target.files;
 
     let arrFiles = Array.from(files)
@@ -3294,7 +3294,7 @@ export class HistoricoClientesComponent implements OnInit {
   async GuardarData(){
     localStorage.setItem("Combo1",this.IDListAnno.toString())
     localStorage.setItem("Combo2",this.IDListPeriodo)
-    debugger
+    
     
   }
 
@@ -3347,7 +3347,7 @@ export class HistoricoClientesComponent implements OnInit {
 
   
     
-    debugger
+    
     this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
     await this.getOfficialAlertFormList()
     this.arrRegimen = this.getRegimenDinamic();

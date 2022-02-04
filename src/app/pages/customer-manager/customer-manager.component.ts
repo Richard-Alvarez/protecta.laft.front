@@ -143,7 +143,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     this.spinner.show()
     await this.getGrupoList()
     await this.getListTipo();
-    debugger;
+    
     let nIdGrupo = localStorage.getItem("NIDGRUPORETURN")
     this.NIDUSUARIO_LOGUEADO = this.core.storage.get('usuario')['idUsuario']
     this.paramCliente.NTIPOIDEN_BUSQ = 2;
@@ -334,7 +334,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     return false
   }
   async getResultsList(isActiveForButton) {
-    debugger;
+   
 
     let dataInput: any = this.config.find(t => t.NIDGRUPOSENAL == this.idGrupo)
 
@@ -353,7 +353,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
   }
 
   async getResultsList3(paramCliente, NBUSCAR_POR, NTIPO_PERSONA, isActiveForButton) {
-    debugger;
+  
     try {
 
 
@@ -474,7 +474,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
         if (NBUSCAR_POR == 2 && NTIPO_PERSONA == 1 && (CantidadCaracteresReales <= 3)) {
           this.getDataListResults(data)
         } else {
-          debugger;
+          
           this.clientList = await this.userConfigService.getResultsList(data);
           this.clientList = this.groupClients(this.clientList);
           this.spinner.hide();
@@ -637,7 +637,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
   }
 
   groupClients(listaCoincidencia) {
-    debugger;
+ 
     let _items = listaCoincidencia;
     listaCoincidencia = listaCoincidencia.filter((value, index, array) => {
       return array.map((t) => t.NPERIODO_PROCESO_VALID + t.SNOM_COMPLETO).indexOf(value.NPERIODO_PROCESO_VALID + value.SNOM_COMPLETO ) == index;
@@ -1194,7 +1194,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     let dataPoliza: any = {}
     dataPoliza.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     dataPoliza.NIDGRUPOSENAL = this.idGrupo
-    debugger
+    
     dataPoliza.NIDALERTA =  data.NIDALERTA//2
     dataPoliza.NIDREGIMEN = ItemCliente.NIDREGIMEN
     dataPoliza.SCLIENT = ItemCliente.SCLIENT
@@ -1231,7 +1231,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       data.tipoCargaId = 2
       data.sClient = ItemCliente.SCLIENT
       data.nIdUsuario = this.objUsuario.idUsuario
-      debugger;
+     
       let respuetaService: any = await this.getBusquedaManual(ObjListaCheckSeleccionadoxNombre)
       if (respuetaService.code == 1) {
         let mensaje = respuetaService.mensaje || 'Ocurrio un error'
@@ -1291,7 +1291,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     localStorage.setItem('view-c2-idLista', item.NIDTIPOLISTA)
     let sEstadoRevisado = item.SESTADO_REVISADO// == '1' ? '1' : '0'
     localStorage.setItem('EnviarCheckbox', sEstadoRevisado)
-    debugger;
+  
     localStorage.setItem("NIDGRUPOSENAL", item.NIDGRUPOSENAL)
     localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
     this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
@@ -1343,13 +1343,13 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     }
     let dataGrupo: any = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
 
-
+    this.core.loader.show()
     let uploadPararms: any = {}
     uploadPararms.SRUTA = 'ARCHIVOS-GC' + '/' + dataGrupo[0].SDESGRUPO_SENAL + '/' + this.NPERIODO_PROCESO + '/';
     uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
     uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
     await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-
+    this.core.loader.hide()
 
     let datosExcel: any = {}
     datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/' + dataGrupo[0].SDESGRUPO_SENAL + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform;
@@ -1367,10 +1367,10 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       // }
 
     }
-
+    this.core.loader.show()
     this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
-
+    this.core.loader.hide()
     if (this.ResultadoExcel.length != 0) {
       if (this.ResultadoExcel[0].CODIGO == 2) {
         this.NombreArchivo = ''
@@ -1393,10 +1393,12 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     datosEliminar.SNUM_DOCUMENTO_EMPRESA = ''
     datosEliminar.SNOM_COMPLETO_EMPRESA = ''
     datosEliminar.SACTUALIZA = 'DEL'
+    this.core.loader.show()
     let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
-
+    this.core.loader.hide()
     let respuestaRegistros: any = []
     for (let i = 0; i < this.ResultadoExcel.length; i++) {
+      this.core.loader.show()
       let datosRegistroColaborador: any = {}
       datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
       datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO) //== null ? "" : parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
@@ -1409,8 +1411,9 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = this.ResultadoExcel[i].SNUM_DOCUMENTO_EMPRESA
       datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = this.ResultadoExcel[i].SNOM_COMPLETO_EMPRESA
       datosRegistroColaborador.SACTUALIZA = 'INS'
-
+      
       let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
+      this.core.loader.hide()
       respuestaRegistros.push(response)
     }
     console.log("respuestaRegistros", respuestaRegistros)
@@ -1545,7 +1548,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
   }
 
   async ListaDeCoincidencias(id) {
-    //debugger;
+  
     let data: any = {}
     data = {
       NIDGRUPOSENAL: id,
@@ -1559,7 +1562,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
   AbrirModal() {
     let desGrupo = this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
     let desSubgrupo = this.SubGrupoList.filter(it => it.NIDSUBGRUPOSEN == this.idSubGrupo)
-    debugger
+    
     let data: any = {}
     if (this.idGrupo == 2) {
       data.NIDGRUPOSENAL = this.idGrupo

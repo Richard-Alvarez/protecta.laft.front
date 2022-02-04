@@ -159,7 +159,7 @@ export class ModalValidarCorreoComponent implements OnInit {
         showConfirmButton: false,
         timer: 5000
       })
-      debugger
+      
       //this.EncripId = await this.ObtenerTokenFromUI()
       this.KeyEncrip = await this.generateKey()
       let EncripUsuario = await this.encryptUsingAES256(this.usuario.toUpperCase())

@@ -52,7 +52,7 @@ export class C2PolicyComponent implements OnInit {
        (response) => {
        
         this.Resultado360 = response
-        debugger
+        
        });
        this.core.loader.hide()
     console.log("entro en el servicio de 360 resultado c2policy", this.Resultado360)
@@ -102,7 +102,7 @@ export class C2PolicyComponent implements OnInit {
     this.planilla = (this.Resultado360.planilla == '') || (this.Resultado360.planilla == null) ? '-' : this.Resultado360.planilla
     this.Moneda = (this.Resultado360.monedaPoliza == '') || (this.Resultado360.monedaPoliza == null) ? '-' : this.Resultado360.monedaPoliza
     this.MonedaSal = (this.Resultado360.monedaSalario == '') || (this.Resultado360.monedaSalario == null) ? '-' : this.Resultado360.monedaSalario
-    debugger
+    
     this.Contratante = this.Resultado360.contratante  
     this.Contratante.name = (this.Resultado360.contratante.name  == '') || (this.Resultado360.contratante.name  == null) ? '-' : this.Resultado360.contratante.name
 

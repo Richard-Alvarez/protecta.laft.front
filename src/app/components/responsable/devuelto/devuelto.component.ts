@@ -412,7 +412,7 @@ export class DevueltoComponent implements OnInit {
               
 
             })
-           debugger
+           
             arrResponsableNewAlert.forEach(objAlerta => {
               this.parent.pushObjInArrayByAlert('COMPLETADO',this.regimen.id,objAlerta)
               
@@ -457,7 +457,7 @@ export class DevueltoComponent implements OnInit {
     
   }
   async ActualirDetallesPreguntas(obj){
-    debugger
+    
     obj.forEach(element => {
       if(element.NIDALERTA == 1){
         element.arrPreguntasDetalle.forEach(listaPreguntas => {
@@ -534,7 +534,7 @@ export class DevueltoComponent implements OnInit {
           //objPreguntaNew.SRESPUESTA = this.arrDetailC1[indiceDetalle1] == '1' ? 'Sí.' : this.arrDetailC1[indiceDetalle1] == '2' ? 'No.' : null
           //objPreguntaNew.SCOMENTARIO = this.arrDetailCommentsC1[indiceDetalle1]
           let detalleCortoNew:any = []
-          debugger
+          
           for (let indiceDetalle2 = 0; indiceDetalle2 < objPreguntaNew.length; indiceDetalle2++){
            
             let NRESPUESTA =  !this.arrDetailC1[indiceDetalle1] ? null : (this.arrDetailC1[indiceDetalle1])[indiceDetalle2]

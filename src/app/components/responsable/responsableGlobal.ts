@@ -303,6 +303,7 @@ export class ResponsableGlobalComponent {
   }
 
   async getOfficialAlertFormList() {
+    
     //this.userGroup:any = {}//new Map<string, any>()
     this.userGroupListGral = []
     this.userGroupListSimpli = []
@@ -325,7 +326,7 @@ export class ResponsableGlobalComponent {
     this.alertFormList = await this.userConfigService.getOfficialAlertFormList(data)
     this.alertFormListSimpli = await this.userConfigService.getOfficialAlertFormList(data2)
    //this.alertFormListContraparte = await this.userConfigService.getOfficialAlertFormList(data3)
-    
+   
 
     let numPregunta = 0
     let respBusquedaGral = await this.getFormsByHead(this.alertFormList, 1, numPregunta);
@@ -2466,8 +2467,8 @@ export class ResponsableGlobalComponent {
 
 
       
-      
-      if (listFiles.length === 0) {
+      if (false) {
+      // if (listFiles.length === 0) {
         this.core.loader.hide()
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
@@ -2523,8 +2524,8 @@ export class ResponsableGlobalComponent {
         return
       }
 
-
-      if (listFiles.length > 0) {
+      if (true) {
+      // if (listFiles.length > 0) {
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',

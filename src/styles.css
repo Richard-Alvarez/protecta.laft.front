@@ -292,3 +292,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
   content: "" !important;
 
 }
+
+
+ .multiselect-dropdown .dropdown-btn .selected-item {
+  /* background-color: #27246d !important; */
+  /* color: black !important; */
+  /* border: 1px solid black !important; */
+  max-width: 500px !important;
+  margin: 2px !important;
+  
+}
+
+ .multiselect-dropdown .dropdown-btn .selected-item a{
+  
+  /* color: black !important; */
+  
+}
