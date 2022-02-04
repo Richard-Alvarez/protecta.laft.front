@@ -221,7 +221,7 @@ export class ResponsableComponent implements OnInit {
       this.arrDetailC1 = arreglo
      
     })*/
-    debugger;
+   
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
     let linkactual = link[link.length - 1].trim()
@@ -743,7 +743,6 @@ export class ResponsableComponent implements OnInit {
     let respPromiseAdjuntosComplementoAll = await Promise.all(arrPromiseAdjuntosComplemento);
 
     //let respPromiseAdjInfoAll = await Promise.all(arrPromiseAdjuntosInfo);
-
     let arrayAlertList = []
     arrayBusqueda.forEach((item, indiceArray) => {
       let arrayPreguntasCabecera = []
@@ -2499,8 +2498,8 @@ export class ResponsableComponent implements OnInit {
 
 
 
-
-      if (listFiles.length === 0) {
+      if (false) {
+      // if (listFiles.length === 0) {
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',
@@ -2551,7 +2550,8 @@ export class ResponsableComponent implements OnInit {
       }
 
 
-      if (listFiles.length > 0) {
+      // if (listFiles.length > 0) {
+        if (true) {
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',
@@ -3218,7 +3218,7 @@ export class ResponsableComponent implements OnInit {
     document.getElementById('consulta0').focus({ preventScroll: false })
   }
   // addAccordion(index,href){
-  //   debugger;
+ 
   //   if(index == -1){
   //     this.listAcordiones.push(href);
   //     localStorage.setItem("ListAcordiones",JSON.stringify(this.listAcordiones));

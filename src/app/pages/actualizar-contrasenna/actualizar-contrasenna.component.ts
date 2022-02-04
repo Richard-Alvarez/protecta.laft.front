@@ -117,7 +117,7 @@ export class ActualizarContrasennaComponent implements OnInit {
   }
   async ValidarHash(){
     let respuesta:any = await this.userConfig.GetValidarHash(this.data)
-    debugger
+    
     if(respuesta[0].RESPUESTA.length == 0){
       this.VALIDADOR = 1
       this.Titulo = 'El link es incorrecto'
@@ -138,7 +138,7 @@ export class ActualizarContrasennaComponent implements OnInit {
   
   
   async ValidarFecha(){
-    debugger
+    
     let dataFecha:any ={}
     dataFecha.USUARIO = this.usuario.slice(1,this.usuario.length-1)
     dataFecha.CORREO = this.correo.slice(1,this.correo.length-1)
@@ -147,7 +147,7 @@ export class ActualizarContrasennaComponent implements OnInit {
     let FechaHash = respuesta[0].FechaHash
     let FechaHashActualizada = respuesta[0].FechaHashActualizada
     let FechaActual = respuesta[0].FechaActual
-    debugger
+    
     let newFechaHashActualizada = this.converFecha(FechaHashActualizada)
     let newFechaActual = this.converFecha(FechaActual)
     if(newFechaHashActualizada > newFechaActual) {

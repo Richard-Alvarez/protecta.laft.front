@@ -150,7 +150,7 @@ export class ComplementoSinSennalComponent implements OnInit {
   
 
   async downloadUniversalFile(ruta, nameFile) {
-    debugger
+    
     try {
       this.core.loader.show()
       let data = { ruta: ruta }

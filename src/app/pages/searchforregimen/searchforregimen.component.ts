@@ -43,7 +43,7 @@ export class SearchforregimenComponent implements OnInit {
   .filter((item,index,array)=>{
     return array.indexOf(item) == index;
   })
-  debugger
+  
   this.listAnos = frecuencias
   .map(t=> t.nperiodO_PROCESO.substring(0,4))
   .filter((item,index,array)=>{
@@ -53,7 +53,7 @@ export class SearchforregimenComponent implements OnInit {
   async getResult(){
     this.spinner.show()
     let param : any = await this.getParam();
-    debugger;
+   
     this.data = await this.userConfigService.getClientsforRegimen(param);
     this.Colleccion.data = this.sliceAlertsArray(this.data)
     this.Colleccion.count = this.data.length
@@ -74,7 +74,7 @@ export class SearchforregimenComponent implements OnInit {
     );
   }
   pageChanged(currentPage) {
-    debugger
+    
     this.currentPage = currentPage;
     this.Colleccion.data = this.data.slice(
       (this.currentPage - 1) * this.itemsPerPage,

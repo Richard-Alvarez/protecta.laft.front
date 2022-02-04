@@ -172,7 +172,7 @@ export class SearchPepComponent implements OnInit {
         lista.push(obj);
       }
       let obj: any = {}
-      debugger
+      
       obj["DATOS DE LA POLIZA"] = this.dataSeacsa[i].COD_TIPPROD
       obj["DATOS DE LA POLIZA2"] = this.dataSeacsa[i].NUM_POLIZA
       obj["DATOS DE LA POLIZA3"] = this.dataSeacsa[i].FEC_EMISION

@@ -404,7 +404,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
     // return
     
     
-    debugger
+    
     if(this.STIPO_USUARIO === 'OC'){
       this.sNameTipoUsuario = 'Oficial de Cumplimiento'
     }else{
@@ -576,13 +576,13 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           let arrPushResCommentsForm:any = []
           let arrPushFilesForm:any = []
           let arrPushResCommentsFormDetail:any = []
-         debugger
+         
           let dataComplementario = respSetDataPendiente.array.filter(it => it.TIPO_FORM == 'C')
           respSetDataPendiente.array.forEach(senial => {
             //senial.SCOMENTARIO = this.arrInputComment[inc]
             try {
               if(dataComplementario.length != 0){
-                debugger;
+             
                 
                 dataComplementario.forEach(async (element) => {
                   
@@ -610,7 +610,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
              
             
-               debugger;
+              
               arrPushFilesForm.push(this.parent.sendFilesAdjuntosCabecera(senial.NIDALERTA_CABECERA,senial.NIDALERTA,this.regimen.id,'ADJUNTOS-FORM',"PENDIENTE","RE"))
              
               arrPushFilesForm.push(this.parent.sendFilesUniversalUploadByRuta(senial.NIDALERTA,senial.NIDALERTA_CABECERA,this.regimen.id,'ADJUNTOS-SUSTENTO'))
@@ -644,7 +644,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
           let resPromiseAllByAlert = await Promise.all([Promise.all(respPromiseByAlerts),Promise.all(arrPromiseGetAdjuntos)])
       
           let indiceEniarCompletado = 0
-          debugger;
+          
           resPromiseAllByAlert[0].forEach((senial:any,inc) => {
             let arrRespuestaSet = []
             senial.arrPreguntasCabecera.forEach((ans,indicePregCab) => {
@@ -785,7 +785,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
 
   async removeFiles(indice,objItem,indexInput,STIPO_CARGA){
   
-   debugger;
+
     return await this.parent.removeFileAdjuntosFiles(indice,objItem,indexInput,STIPO_CARGA)
   }
   getTipoUsuario(){
@@ -929,7 +929,7 @@ getFilesCabecera(objAlertaItem,STIPO_CARGA,NREGIMEN){
   if(arrDetalle.length > 0){
     let arrPromisesQuestion:any = []
     let arrRequestQuestion:any = []
-    debugger
+  
     arrDetalle.forEach(ans => {
       
       ans.forEach(itemAns => {
@@ -1406,11 +1406,11 @@ UltimoTooltip(indice, longitud){
 
 //async addFilesUniversal(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO){
 addFilesUniversal(event,item,STIPO_CARGA,STIPO_USUARIO){
-   debugger
+
   this.parent.addFilesAdjuntosResponsable(event, item.NIDALERTA_CABECERA, item.NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO,item.NOMBRECOMPLETO,'')
 }
 async addFilesComplemento(event,NIDALERTA_USUARIO,NIDALERTA,NREGIMEN,STIPO_CARGA,STIPO_USUARIO,NOMBRECOMPLETO){
-  debugger;
+
   await this.parent.addFilesComplementoResponsable(event, NIDALERTA_USUARIO, NIDALERTA,this.regimen.id,STIPO_CARGA,STIPO_USUARIO)
 }
  capitalizarPrimeraLetra(texto : string ) {
@@ -1512,7 +1512,7 @@ textHtml
 ValidarTexto(texto){
   let textoReemplazado:any = ''
   let newTexto = ''
-  debugger
+  
   if(texto.indexOf("[Periodo]") != -1 ){
     newTexto = texto.replace("[Periodo]", this.PeriodoComplemento);
     texto = newTexto;
@@ -1608,7 +1608,7 @@ async ConsultaComplementoUsuarios(){
   }
 
   async DescargarPlantilla(item){
-    debugger
+    
       // let listaAlertaComp = await this.userConfigService.GetListaAlertaComplemento()
       // let DATA = listaAlertaComp.filter(it => it.NIDALERTA == item.NIDALERTA)
 
@@ -1686,7 +1686,7 @@ async ConsultaComplementoUsuarios(){
 
    OcultarBotonPlantilla(item){
     let newlistaAdjuntos =  this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-PLANTILLA" )
-    debugger
+    
     if(newlistaAdjuntos.length == 0){
       return true
     }else{
@@ -1696,7 +1696,8 @@ async ConsultaComplementoUsuarios(){
 
   OcultarBotonMuestra(item){
     let newlistaAdjuntos =  this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-OC" )
-    debugger
+    
+    
     if(newlistaAdjuntos.length == 0){
       return true
     }else{

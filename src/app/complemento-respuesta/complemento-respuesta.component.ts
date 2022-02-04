@@ -97,7 +97,7 @@ export class ComplementoRespuestaComponent implements OnInit {
   
 
   async downloadUniversalFile(ruta, nameFile) {
-    debugger
+    
     try {
       this.core.loader.show()
       let data = { ruta: ruta }
@@ -149,7 +149,7 @@ export class ComplementoRespuestaComponent implements OnInit {
     
     let  filtroArchivos = this.ListaArchivos.filter(it => it.IdComplemento == item.NIDCOMP_CAB_USUARIO )
     console.log("lista que se envia",filtroArchivos)
-    debugger
+    
     if(filtroArchivos.length == 0){
       let mensaje = "Debe registrar un archivo"
       this.MensajesAlertas(mensaje)
@@ -180,7 +180,7 @@ export class ComplementoRespuestaComponent implements OnInit {
       if (result.value) {
             await this.userConfigService.GetUpdComplementoCab(data)
             await this.ConsultaComplementoUsuarios()
-            debugger
+            
             filtroArchivos.forEach(async (element,i) => {
               let uploadPararms: any = {}
               uploadPararms.NIDALERTA = 99
@@ -216,7 +216,7 @@ export class ComplementoRespuestaComponent implements OnInit {
 
 
   async setDataFile(event,item) {
-    debugger
+    
      let files = event.target.files;
  
      let arrFiles = Array.from(files)
@@ -304,7 +304,7 @@ export class ComplementoRespuestaComponent implements OnInit {
   ValidarTexto(texto){
     let textoReemplazado:any = ''
     let newTexto = ''
-    debugger
+    
     if(texto.indexOf("[Periodo]") != -1 ){
       newTexto = texto.replace("[Periodo]", this.PeriodoComplemento);
       texto = newTexto;

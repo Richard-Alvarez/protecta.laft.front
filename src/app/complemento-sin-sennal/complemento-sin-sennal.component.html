@@ -10,14 +10,14 @@
             <div class="Header">
                 <div class="row">
                     <div class="col-lg-19">
-                        <h4 class="TitleLine">Complemento sin señal</h4>
+                        <h4 class="TitleLine">Complemento sin Señal</h4>
                     </div>
                 </div>
                
                 <div class="row borderFormat" style="width: 103%">
                     
                     <div class="col-lg-5 form-group">
-                        <label class="fontText">Usuiaro:</label>
+                        <label class="fontText">Usuario:</label>
                         <select  [(ngModel)]="usuario" name="profile"
                             (change)="Changeuser(usuario)"
                             style="display: flex;justify-content: center;align-items: center;"
@@ -36,8 +36,8 @@
                             style="display: flex;justify-content: center;align-items: center;"
                             class="form-control buttonSinBorder">
                             <option value="0" selected>--Todos--</option>
-                            <option value="1" selected>COMPLETADO</option>
-                            <option value="2" selected>PENDIENTE</option>
+                            <option value="2" selected>COMPLETADO</option>
+                            <option value="1" selected>PENDIENTE</option>
                             <!-- <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="groupIdSelected">
                                 {{item.SDESGRUPO_SENAL}}</option>  -->
                         </select>
@@ -67,8 +67,8 @@
                                     <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
                                         <th scope="col" style="text-align: left;">Descripción</th>
                                         <th scope="col" style="text-align: left;">Comentario</th>
-                                        <th scope="col" style="text-align: left;">Fecha de creación</th>
-                                        <th scope="col" style="text-align: left;">Usuaurio asignado</th>
+                                        <th scope="col" style="text-align: left;">Fecha de Creación</th>
+                                        <th scope="col" style="text-align: left;">Usuaurio Asignado</th>
                                         <th scope="col" style="text-align: left;">Estado</th>
                                         <!-- <th scope="col" style="text-align: center;">Muestra OC</th> -->
                                         <th scope="col" style="text-align: center;">Documento</th>
@@ -112,7 +112,7 @@
                                         </td> -->
                                         <td class="text-center vertical">
                                             <a *ngIf="FiltarRutas(item)" style="cursor: pointer" placement="top" ngbTooltip="Descargar archivos del responsable"><i (click)="DescargarArhivo(item,'RE')"
-                                                class="fas fa-file-excel"  style="color:green;font-size: 20px;"></i></a>
+                                                class="fas fa-arrow-down"  style="color:#fd7e14;font-size: 20px;"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>

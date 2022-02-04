@@ -113,7 +113,7 @@ export class ModalMantenimientoComplementoComponent implements OnInit {
   }
 
   async GuardarCambios(){
-debugger
+
     let respValidacion:any = this.validator()
     if(respValidacion.code == 1){
       swal.fire({
@@ -264,7 +264,7 @@ debugger
            closeButton : 'OcultarBorde'
                        },
        }).then(async (respuesta) =>{
-             debugger
+             
                if(!respuesta.dismiss){
                 let validador = (this.NombreArchivo  == '' || this.NombreArchivo  == null ) ? 0 : 1
                 let dataRegistro:any = {};
@@ -277,7 +277,7 @@ debugger
                 dataRegistro.SESTADO =  this.estado == true ? 1 : 2
                 dataRegistro.NIDUSUARIO_MODIFICA = this.Usuario.idUsuario
                 dataRegistro.TIPOOPERACION = 'M'
-                debugger
+                
                 if(validador == 0){
                   dataRegistro.SRUTA_FILE_NAME = ''
                   dataRegistro.SFILE_NAME =  ''
@@ -380,7 +380,7 @@ debugger
 
 
   async setDataFile(event) {
-      debugger
+      
        let files = event.target.files;
    
        let arrFiles = Array.from(files)
@@ -466,7 +466,7 @@ debugger
     
   
     async downloadUniversalFile(ruta, nameFile) {
-      debugger
+      
       try {
         this.core.loader.show()
         let data = { ruta: ruta }
@@ -507,7 +507,7 @@ debugger
       return
     }
     EliminarArchivo(){
-      debugger
+      
       this.NombreArchivo = ""
     }
 }

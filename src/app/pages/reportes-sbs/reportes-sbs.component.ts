@@ -162,7 +162,7 @@ export class ReportesSbsComponent implements OnInit {
   
   getFunReporProccess(){
     let info:any = {}
-    debugger
+    
     try {
       info.valueMonth = this.months[this.bsValueMonth.getMonth()] + " del " + this.bsValueMonth.getFullYear()
     } catch (error) {

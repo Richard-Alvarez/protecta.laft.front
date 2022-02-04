@@ -270,7 +270,7 @@ export class ModalEmailProfileComponent implements OnInit {
       }).then(async (respuesta) => {
 
         if (!respuesta.dismiss) {
-          debugger
+          
           this.core.loader.show();
           await this.userConfig.getUpdateCorreos(data)
           await this.RegistrarUsuarios()
@@ -681,7 +681,7 @@ export class ModalEmailProfileComponent implements OnInit {
 
   async RegistrarUsuarios() {
     let data: any = {}
-    debugger
+    
     if (this.dataEmail == null) {
       this.UsuarioAgregado.forEach(async (usu) => {
         data.ID_USUARIO = usu.userId

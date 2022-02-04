@@ -1068,7 +1068,7 @@ async EnviarCompUsuario(alerta,complemento){
         }
         await this.userConfigService.GetInsCormularioComplUsu(data)
       
-        debugger
+        
         console.log("la data",data)
         if(element.CONSULTA == 'C'){
           if(validador == 1){
@@ -1285,7 +1285,7 @@ async  AgregarUsuario(item,lilistComplemento,iUSelect){
 }
 
 async  descargarComplemento (item,listUsu){
-  debugger
+  
     await this.ListaDeAdjunto()
     let listaArchivos = this.listaArchivosComplementos.filter(it => it.STIPO_CARGA == "COMPLEMENTO" && it.NIDALERTA == listUsu.NIDALERTA && it.NIDUSUARIO_MODIFICA == listUsu.NIDUSUARIO_ASIGNADO)
     if(listaArchivos.length ==0){
@@ -1301,7 +1301,7 @@ async  descargarComplemento (item,listUsu){
   
 }
 async descargarComplemento2 (item){
-  // debugger
+ 
   // let SRUTA_PDF = '';
   // if(this.NewArreglo == undefined){
   //   this.NewArreglo = []
@@ -1317,7 +1317,7 @@ async descargarComplemento2 (item){
   // SRUTA_PDF = obj[0].RESULTADO[0].SRUTA_PDF == null ? SRUTA_PDF : obj[0].RESULTADO[0].SRUTA_PDF
   // var splitRuta = SRUTA_PDF.split('/')
   // this.parent.downloadUniversalFile(SRUTA_PDF, splitRuta[splitRuta.length - 1])
-debugger
+
   let data:any = {}
     data.NPERIODO_PROCESO = this.PeriodoComp
     let listaAdjuntos = await this.userConfigService.getListaAdjuntos(data)
@@ -1428,7 +1428,7 @@ ValidarCabeceraComplemento(){
     // this.parent.downloadUniversalFile(SRUTA, SRUTA_LARGA)
 
      //await this.ConsultaComplementoUsuarios()
-     debugger
+     
     let data:any = {}
     data.NPERIODO_PROCESO = this.PeriodoComp
     let listaAdjuntos = await this.userConfigService.getListaAdjuntos(data)
@@ -1505,7 +1505,7 @@ ValidarCabeceraComplemento(){
 
   OcultarBotonMuestra(item){
     let newlistaAdjuntos =  this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-OC" )
-    debugger
+    
     if(newlistaAdjuntos.length == 0){
       return true
     }else{

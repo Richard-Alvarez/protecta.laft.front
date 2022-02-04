@@ -340,7 +340,7 @@ async DescargarReporteGeneral(item){
   if(bol){
     return
   }
-  debugger
+  
   this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
   if(this.ValidadorRespondidoClientes.length > 0){
     let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
@@ -422,7 +422,7 @@ async DescargarReporteGeneral(item){
       this.ListaRepresentantesAccionistasPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 2)
 
       //PARA PROVEEDOR
-        debugger
+        
       this.ListaProveedor = this.ListaAlertaProveedor
       let ConcatenarProveedor =  this.ListaProveedor.filter(it => it.SNOMBRE_ALERTA == "P2" || it.SNOMBRE_ALERTA == "P3" || it.SNOMBRE_ALERTA == "P1")
       
@@ -744,7 +744,7 @@ async ValidardorRespuestas(idGrupo,periodo){
 
 
 async setDataFile(event) {
-  debugger
+  
    let files = event.target.files;
 
    let arrFiles = Array.from(files)
@@ -848,7 +848,7 @@ async setDataFile(event) {
             data.SRUTA = 'INFORMES-GLOBALES' + '/' + item.NPERIODO_PROCESO ;
             data.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
             data.listFileName =  this.ArchivoAdjunto.listFileNameInform
-            debugger
+            
             await this.userConfigService.UpdInformes(data)
             await this.userConfigService.UploadFilesUniversalByRuta(data)
             await this.ListaInformes()

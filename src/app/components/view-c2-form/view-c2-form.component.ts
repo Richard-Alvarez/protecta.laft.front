@@ -105,7 +105,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
         this.alertData.SDESCRIPCION_ALERTA = this.objAlertaC2.SDESCRIPCION_ALERTA//localStorage.getItem("SDESCRIPCION_ALERTA")
         this.alertData.SNOMBRE_ESTADO = this.objAlertaC2.SNOMBRE_ESTADO//localStorage.getItem("SNOMBRE_ESTADO")
         this.alertData.NIDALERTA = this.objAlertaC2.NIDALERTA//parseInt(localStorage.getItem("NIDALERTA"))
-        debugger
+        
         if (this.ValidadorHistorico != 0) {
             this.alertData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
         } else {
@@ -521,7 +521,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     //         var URLactual = window.location + " ";
     //         let link = URLactual.split("/")
     //         this.linkactual = link[link.length-1].trim()
-    //         debugger;
+   
     //         if(this.linkactual == "proveedor"){
     //             let dataSend = {NIDALERTA: 33,NIDREGIMEN : 0, NPERIODO_PROCESO :this.alertData.NPERIODO_PROCESO, NIDGRUPOSENAL: 3,NIDSUBGRUPOSEN: 0  }
     //             let respListaInternacional = await this.userConfigService.getListaInternacional(dataSend);
@@ -554,7 +554,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     // }
 
     async getExcelListInter(idtipoLista, nombreRpt) {
-        debugger;
+        
         this.core.loader.show();
         let data: any = {};
         data.NIDALERTA = 2;
@@ -583,7 +583,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     }
 
     async goToDetail(item: any, lista: any, idElement: any, idElementSubGroup: any, subgruponame: any) {
-        debugger
+        
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition: any = {}
@@ -875,7 +875,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
         link.click()
     }
     // showAfterPosition(){
-    //     debugger;
+    
     //     let respObjFocusPosition:any = JSON.parse(localStorage.getItem("objFocusPosition"))
     //     if(respObjFocusPosition && respObjFocusPosition.NIDALERTA){
     //             if(respObjFocusPosition.regimen.id == 2){
