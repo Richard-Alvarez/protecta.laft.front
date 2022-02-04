@@ -43,7 +43,8 @@ export class ModalGestorLaftComponent implements OnInit {
 
     this.ListaRegistros.forEach((t, inc) => {
       let _data = {
-        "NTIPO_DOCUMENTO": t.NTIPO_DOCUMENTO,
+        "NTIPO_DOCUMENTO": t.IDDOC_TYPE,
+        "SDES_DOCUMENTO": t.NTIPO_DOCUMENTO,
         "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
         "SNOM_COMPLETO": t.SNOM_COMPLETO,
         "SNUM_DOCUMENTO_EMPRESA": t.RUC,
