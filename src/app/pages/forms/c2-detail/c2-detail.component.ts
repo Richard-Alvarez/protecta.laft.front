@@ -294,8 +294,8 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                             .filter((item, index, array) => { return array.indexOf(item) == index }) : []
                         if (TipoLista.length == 1)
                             this.IdLista = TipoLista[0]
-                        else if (TipoLista.length > 1)
-                            debugger
+                        // else if (TipoLista.length > 1)
+                            
                     }
                 }
                 this.core.loader.show()

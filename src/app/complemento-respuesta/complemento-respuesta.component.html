@@ -130,13 +130,13 @@
                         </div>
                       </div>
                       <div class="col-2">
-                        <div *ngFor="let adj of ListaArchivos">
+                        <div *ngFor="let adj of ListaArchivos;let iList = index;">
                           <div *ngIf='item.NIDCOMP_CAB_USUARIO == adj.IdComplemento'>
                             <div *ngFor="let adjNombre of adj.listFileNameCortoInform;let i = index;">
                               <div >
                                 <div style="color: blue;float:left;width:90%">{{adjNombre}} </div>
                                 <td class="text-center" style="float:right">
-                                    <i class="fas fa-trash-alt" (click)="EliminarArchivo(item,adjNombre,i,index)" style="cursor: pointer;"></i>
+                                    <i class="fas fa-trash-alt" (click)="EliminarArchivo(item,adjNombre,i,index,iList)" style="cursor: pointer;"></i>
                             </td>
                               </div>
   
