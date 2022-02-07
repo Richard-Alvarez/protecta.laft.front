@@ -31,6 +31,7 @@ export class ComplementoRespuestaComponent implements OnInit {
     this.IdUsuario = this.variableGlobalUser["idUsuario"]
     await this.ConsultaComplementoUsuarios()
     console.log(this.comentario)
+    console.log(this.ListaArchivos)
   }
 
   async ConsultaComplementoUsuarios(){
@@ -43,6 +44,9 @@ export class ComplementoRespuestaComponent implements OnInit {
       this.listaComplementoCompletado = response.filter(it => it.NIDALERTA == 99 && it.NIDUSUARIO_ASIGNADO == this.IdUsuario && it.SESTADO == 2)
       console.log("lista P", this.listaComplementoPendiente)
       console.log("lista C", this.listaComplementoCompletado)
+      // this.listaComplementoPendiente.forEach(element => {
+      //   this.ListaArchivos.push([])
+      // });
   }
 
 
@@ -193,17 +197,22 @@ export class ComplementoRespuestaComponent implements OnInit {
                 uploadPararms.SRUTA_ADJUNTO = "COMPLEMENTO-SIN-SENNAL-RE" + '/'  +  this.PeriodoComp + '/' + item.NIDCOMP_CAB_USUARIO + '/' + archivo;
                 uploadPararms.SRUTA = "COMPLEMENTO-SIN-SENNAL-RE" + '/' + this.PeriodoComp + '/' +  item.NIDCOMP_CAB_USUARIO ;
               
-                await this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms)
+                await this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms) //este comente 
                 //await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
               });
-            
+              
             });
             
             let newDataArchivo:any = {}   
             newDataArchivo.SRUTA =  "COMPLEMENTO-SIN-SENNAL-RE"  + '/' + this.PeriodoComp + '/' +  item.NIDCOMP_CAB_USUARIO ;
-            newDataArchivo.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
-            newDataArchivo.listFileName =  this.ArchivoAdjunto.listFileNameInform
-            await this.userConfigService.UploadFilesUniversalByRuta(newDataArchivo)
+            filtroArchivos.forEach(async (adj,i) => {
+              newDataArchivo.listFiles = adj.respPromiseFileInfo
+              newDataArchivo.listFileName =  adj.listFileNameInform
+              await this.userConfigService.UploadFilesUniversalByRuta(newDataArchivo)
+            });
+
+           
+           //console.log("ArchivoAdjunto",this.ArchivoAdjunto)
       }
     }).catch(err => { 
 
@@ -276,27 +285,36 @@ export class ComplementoRespuestaComponent implements OnInit {
 
 
   ArchivoAdjunto:any 
+
   NombreArchivo:string = ''
   ListaArchivos:any  = []
   async AgregarAdjunto(evento,index,item){
    this.ArchivoAdjunto =  await this.setDataFile(evento,item)
-   console.log( this.ArchivoAdjunto)
- 
-    this.NombreArchivo = this.ArchivoAdjunto.listFileNameInform[0]
+   console.log("archivo",this.ArchivoAdjunto)
+   console.log("el item",item)
+    //this.NombreArchivo = this.ArchivoAdjunto.listFileNameInform[0]
     
-    console.log("this.ArchivoAdjunto", this.ArchivoAdjunto)
-    console.log("this.NombreArchivo", this.NombreArchivo)
-
+    //console.log("this.ArchivoAdjunto", this.ArchivoAdjunto)
+    //console.log("this.NombreArchivo", this.NombreArchivo)
+    //if(this.ListaArchivos)
     this.ListaArchivos.push(this.ArchivoAdjunto)
     console.log("this.ListaArchivos", this.ListaArchivos)
+
+    
+
+
+
   }
 
-  EliminarArchivo(item,archivo,i,indexGlobal){
+  EliminarArchivo(item,archivo,i,indexGlobal,iList){
+    console.log("el index",i)
+    console.log("el index indexGlobal ",indexGlobal)
+    console.log("el index iList ",iList)
     //let filtroArchivo = this.ListaArchivos.filter(it=> it.IdComplemento == item.NIDCOMP_CAB_USUARIO)
-    this.ListaArchivos[indexGlobal].arrFiles.splice(i,1)
-    this.ListaArchivos[indexGlobal].listFileNameCortoInform.splice(i,1)
-    this.ListaArchivos[indexGlobal].listFileNameInform.splice(i,1)
-    this.ListaArchivos[indexGlobal].respPromiseFileInfo.splice(i,1)
+    this.ListaArchivos[iList].arrFiles.splice(i,1)
+    this.ListaArchivos[iList].listFileNameCortoInform.splice(i,1)
+    this.ListaArchivos[iList].listFileNameInform.splice(i,1)
+    this.ListaArchivos[iList].respPromiseFileInfo.splice(i,1)
     console.log("this.ListaArchivos", this.ListaArchivos)
   }
 

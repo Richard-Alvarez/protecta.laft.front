@@ -32,6 +32,7 @@ export class ModalComplementoSinSennalComponent implements OnInit {
   listaComplementoUsuario:any = []
   Descripcion:string = ''
   PeriodoCompleto
+  fechafin:string = ''
   constructor(  
     private userConfigService: UserconfigService,
     private core: CoreService,
@@ -94,6 +95,11 @@ export class ModalComplementoSinSennalComponent implements OnInit {
   }
 
   async Save(){
+
+          let dia =  this.PeriodoComp.toString().substr(6,2)
+          let mes = this.PeriodoComp.toString().substr(4,2)
+          let anno = this.PeriodoComp.toString().substr(0,4) 
+          this.fechafin = dia + '/' + mes + '/' + anno
    
           console.log("this.selectedItems",this.selectedItems)
 
@@ -143,21 +149,28 @@ export class ModalComplementoSinSennalComponent implements OnInit {
 
               console.log("data",data);
               response = await this.userConfigService.GetInsCormularioComplUsu(data)
-              RespuestaID = response.ID
-
+              //RespuestaID = 1//response.ID
+              
 
               let UsuarioCorreo = this.ListUser.filter(it => it.userId == this.selectedItems[i].userId )
-              
+
+              let ResponseCargo = await this.userConfigService.getCargoList({profileId: UsuarioCorreo[0].userRolId })
+              console.log("UsuarioCorreo",ResponseCargo);
+               console.log("UsuarioCorreo",UsuarioCorreo);
               let dataCorreo:any = {}
               dataCorreo.NOMBRECOMPLETO = UsuarioCorreo[0].userFullName
               dataCorreo.SEMAIL = UsuarioCorreo[0].userEmail
               dataCorreo.FECHAPERIODO  = this.PeriodoCompleto
               dataCorreo.MENSAJE = respuestaCorreo.SCUERPO_CORREO
               dataCorreo.ASUNTO = respuestaCorreo.SASUNTO_CORREO
-              
+              dataCorreo.ID = UsuarioCorreo[0].userName
+              dataCorreo.CARGO = ResponseCargo[0].cargoName
+              dataCorreo.FECHAFIN = this.fechafin
+              dataCorreo.USERID = UsuarioCorreo[0].userId
+              console.log("dataCorreo",dataCorreo);
               this.userConfigService.EnvioCorreoComplementoSinSennal(dataCorreo)
 
-             
+              
 
               if(validador != 0){
 

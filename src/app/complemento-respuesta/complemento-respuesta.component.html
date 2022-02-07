@@ -56,12 +56,12 @@
 
               <div><br></div>
               <div>
-                <div class="table-responsive">
+                <!-- <div class="table-responsive">
                   <div class="col-lg-3" style="display: flex;justify-content: left;">
                     <h5 class="TitleLine" style="font-size: 18px;">{{NombreCompleto}}
                     </h5>
                   </div>
-                </div><br>
+                </div><br> -->
 
                 <div class="row pt-2" style="font-size:14px;margin:0px;background: #EEEEF2;">
                   <div class="col-5 txtCabecera" > Descripción</div>
@@ -130,13 +130,13 @@
                         </div>
                       </div>
                       <div class="col-2">
-                        <div *ngFor="let adj of ListaArchivos">
+                        <div *ngFor="let adj of ListaArchivos;let iList = index;">
                           <div *ngIf='item.NIDCOMP_CAB_USUARIO == adj.IdComplemento'>
                             <div *ngFor="let adjNombre of adj.listFileNameCortoInform;let i = index;">
                               <div >
                                 <div style="color: blue;float:left;width:90%">{{adjNombre}} </div>
                                 <td class="text-center" style="float:right">
-                                    <i class="fas fa-trash-alt" (click)="EliminarArchivo(item,adjNombre,i,index)" style="cursor: pointer;"></i>
+                                    <i class="fas fa-trash-alt" (click)="EliminarArchivo(item,adjNombre,i,index,iList)" style="cursor: pointer;"></i>
                             </td>
                               </div>
   
@@ -229,12 +229,12 @@
 
               <div><br></div>
               <div>
-                <div class="table-responsive">
+                <!-- <div class="table-responsive">
                   <div class="col-lg-3" style="display: flex;justify-content: left;">
                     <h5 class="TitleLine" style="font-size: 18px;">{{NombreCompleto}}
                     </h5>
                   </div>
-                </div><br>
+                </div><br> -->
 
                 <div class="row pt-2" style="font-size:14px;margin:0px;background: #EEEEF2;">
                   <div class="col-5 txtCabecera" > Descripción</div>
