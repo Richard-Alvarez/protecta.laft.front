@@ -46,7 +46,7 @@ export class RevisadoComponent implements OnInit {
 
   async ngOnInit() {
     this.IDGrupo = await this.ValidarGrupo()
-
+    this.core.loader.show()
     await this.ListaUsuario()
     this.PeriodoComp =  parseInt(localStorage.getItem("periodo"))
     await this.ConsultaComplementoUsuarios('REVISADO',this.PeriodoComp)
@@ -56,7 +56,7 @@ export class RevisadoComponent implements OnInit {
 
     await this.getVariablesStorage();
     this.fillFileGroup()
-   
+    this.core.loader.hide()
     //this.arrFilesAdjuntos = [{'name':'archivoPrueba1','file':'C://file1.xls','tipo':'xls'},{'name':'archivoPrueba2','file':'C://file2.xls','tipo':'pdf'},{'name':'archivoDocPrueba1','file':'C://file2.xls','tipo':'doc'}]
   }
 
@@ -383,6 +383,7 @@ filtroComplemeto2(item){
 
 listaComplementoUsuario:any = [] 
 async ConsultaComplementoUsuarios(estado,periodo) {
+  this.core.loader.show()
   let data:any ={}
 
   if(this.ValidadorHistorico == 0){
@@ -404,7 +405,7 @@ async ConsultaComplementoUsuarios(estado,periodo) {
     this.listaComplementoUsuario = await this.userConfigService.GetListaComplementoUsuario(data)
   }
 
- 
+  this.core.loader.hide()
   
 
 }
@@ -414,8 +415,9 @@ async ConsultaComplementoUsuarios(estado,periodo) {
 ListUser:any = []
 userId:number = 0
 async ListaUsuario(){
+  this.core.loader.show()
     this.ListUser = await this.userConfigService.ListaUsariosComp()
-  
+    this.core.loader.hide()
 }
 
 
