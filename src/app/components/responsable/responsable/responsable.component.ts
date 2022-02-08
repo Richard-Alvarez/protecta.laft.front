@@ -115,7 +115,6 @@ export class ResponsableComponent implements OnInit {
     private excelService: ExcelService,
     private dataResponsable: DataResponsableService,
   ) { }
-
   async ngOnInit() {
     this.validador = localStorage.getItem("validarHistoricoclienteste")
     // // When the user scrolls the page, execute myFunction

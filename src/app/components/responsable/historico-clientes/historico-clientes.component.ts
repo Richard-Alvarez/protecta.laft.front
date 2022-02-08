@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy,ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import swal from 'sweetalert2';
 import { CoreService } from '../../../services/core.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ExcelService } from 'src/app/services/excel.service';
-import {  DataResponsableService } from '../../../services/data-responsable.service';
+import { DataResponsableService } from '../../../services/data-responsable.service';
 import { SbsreportService } from '../../../services/sbsreport.service';
 import * as $ from 'jquery';
 
@@ -15,8 +15,8 @@ import * as $ from 'jquery';
   templateUrl: './historico-clientes.component.html',
   styleUrls: ['./historico-clientes.component.css']
 })
-export class HistoricoClientesComponent implements OnInit {
-  ValidadorHistorico:number = 0
+export class HistoricoClientesComponent implements OnInit ,OnDestroy {
+  ValidadorHistorico: number = 0
   /*indiceIconDinamic;
   boolPalomitaHeaderPlus:boolean = true;
   boolPalomitaHeaderMinus:boolean = false;*/
@@ -90,8 +90,8 @@ export class HistoricoClientesComponent implements OnInit {
   tabRegimenSimplificado: any
 
 
-  arrListSections:any = []
-  objPositionPage:any = {}
+  arrListSections: any = []
+  objPositionPage: any = {}
 
 
   cadenaEstadosSinForm = 'No se encontraron formularios por responder.'
@@ -106,150 +106,58 @@ export class HistoricoClientesComponent implements OnInit {
     private dataResponsable: DataResponsableService,
     private sbsReportService: SbsreportService,
   ) { }
+  ngOnDestroy() {
+    localStorage.removeItem("objFocusPositionReturn")
+}
+  async ngOnInit() {
+debugger;
+    this.obtenerPeriodos().then(async() => {
+      this.core.config.rest.LimpiarDataGestor()
+      this.core.loader.show();
+      let usuario = this.core.storage.get('usuario')
+      this.STIPO_USUARIO = usuario['tipoUsuario']
+      this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
+      this.setStatesInit();
+      this.arrListSections = [{ 'nombre': 'Pendiente', 'href': '' }, { 'nombre': 'Completado', 'href': '' }, { 'nombre': 'Devuelto', 'href': '' }, { 'nombre': 'Revisado', 'href': '' }, { 'nombre': 'PendienteInforme', 'href': '' }]
 
-  async ngOnInit(){
-   
-    await this.obtenerPeriodos()
-    
-   
-    
-    //this.NewListPeriodos =  localStorage.getItem('Combo2') 
-    //   //  this.core.config.rest.LimpiarDataGestor()
-    //   this.core.loader.show();
-    //   let usuario = this.core.storage.get('usuario')
-      
-    //   this.STIPO_USUARIO = usuario['tipoUsuario']
-    //   this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
-    //   this.arrRegimen = this.getRegimenDinamic();
-    
-    //   if(this.IDListPeriodo === "0"){
+      this.NPERIODO_PROCESO = this.IDListPeriodo
+      this.arrRegimen = await this.getRegimenDinamic();
+      if (this.STIPO_USUARIO === 'RE') {
+        this.userGroupListGral = [1]
+        this.userGroupListSimpli = [1]
+      }
+      this.getTipoUsuario()
+      this.fillFileGroup()
+      var URLactual = window.location + " ";
+      let link = URLactual.split("/")
+      let linkactual = link[link.length - 1].trim()
+      if (linkactual == 'clientes') {
+        try {
+          window.onscroll = function () { myFunction() };
 
-    //     this.setStatesInit();
-
-    //     this.NPERIODO_PROCESO = 0//this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
-    //     //await this.getOfficialAlertFormList()
-    //     if (this.STIPO_USUARIO === 'RE') {
-    //       this.userGroupListGral = [1]
-    //       this.userGroupListSimpli = [1]
-    //     }
-    //     //this.getTipoUsuario()
-    //     //this.fillFileGroup()
-    //     this.arrResponsablesRevisadoGral = []
-  
-    //     this.arrResponsablesRevisadoSimpli = []
-   
-    //     this.arrResponsablesInformeTerminadoGral = []
-    
-    //     this.arrResponsablesInformeTerminadoSimpli = []
-     
-      
-    //   }else{
-    //     this.setStatesInit();
-    //     this.NPERIODO_PROCESO = this.IDListPeriodo//parseInt(localStorage.getItem("periodo"))
-    //     await this.getOfficialAlertFormList()
-    //     if (this.STIPO_USUARIO === 'RE') {
-    //       this.userGroupListGral = [1]
-    //       this.userGroupListSimpli = [1]
-    //     }
-    //     this.getTipoUsuario()
-    //     this.fillFileGroup()
-     
-     
-    //   } 
-    
-
-    // var URLactual = window.location + " ";
-    // let link = URLactual.split("/")
-    // let linkactual = link[link.length-1].trim()
-    // if(linkactual == 'historico-clientes'){ 
-    //   try {
-    //     window.onscroll = function() {myFunction()};
-      
-    //       function myFunction() {
-    //         if (window.scrollY > 80) {
-    //           document.getElementById('navbar_top').classList.add('fixed-top');
-    //           document.getElementById('navbar_top').classList.add('tabs-top');
-    //         } else {
-    //           document.getElementById('navbar_top').classList.remove('fixed-top');
-    //           document.getElementById('navbar_top').classList.remove('tabs-top');
-    //           document.body.style.paddingTop = '0';
-    //         } 
-              
-    //         } 
-    //   } catch (error) {
-    //     //console.error('el error: ',error)
-    //   }
-    // }
-   
-    // this.core.loader.hide();
-
-
-    ////////////////////////
-
-
-    
-    this.core.config.rest.LimpiarDataGestor()
-    this.core.loader.show();
-    let usuario = this.core.storage.get('usuario')
-    
-    this.STIPO_USUARIO = usuario['tipoUsuario']
-    this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
-    
-    this.setStatesInit();
-
-    this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
-
-
-  
-    
-    
-    this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
-    //await this.getOfficialAlertFormList()
-    this.arrRegimen = this.getRegimenDinamic();
-   
-    if (this.STIPO_USUARIO === 'RE') {
-      this.userGroupListGral = [1]
-      this.userGroupListSimpli = [1]
-    }
- 
-   
-    this.getTipoUsuario()
-    this.fillFileGroup()
-   
-
-    var URLactual = window.location + " ";
-    let link = URLactual.split("/")
-    let linkactual = link[link.length-1].trim()
-    if(linkactual == 'clientes'){
-      try {
-        window.onscroll = function() {myFunction()};
-      
           function myFunction() {
             if (window.scrollY > 80) {
               document.getElementById('navbar_top').classList.add('fixed-top');
-             
+
             } else {
               document.getElementById('navbar_top').classList.remove('fixed-top');
-            
-              document.body.style.paddingTop = '0';
-            } 
-              
-            } 
-      } catch (error) {
-        //console.error('el error: ',error)
-      }
-    }
 
-    
-   
-    this.core.loader.hide();
-    
+              document.body.style.paddingTop = '0';
+            }
+
+          }
+        } catch (error) {
+          //console.error('el error: ',error)
+        }
+      }
+      this.core.loader.hide();
+    });
   }
 
 
 
   async getAllAttachedFiles() {
-    
+
     await this.getAttachedFiles(this.getArray(this.stateCompletado.sState, 1), 'RE')
     await this.getAttachedFiles(this.getArray(this.stateCompletado.sState, 1), 'OC')
     await this.getAttachedFiles(this.getArray(this.stateDevuelto.sState, 1), 'RE')
@@ -289,10 +197,10 @@ export class HistoricoClientesComponent implements OnInit {
   async setDataCommentHeadersByAlerts(item) {
     let respComments = await this.getCommentHeader(item.NIDALERTA_CABECERA)
     item.arrConversacionCabecera = respComments
-    let respComentarioActual = respComments.filter(a =>  a.STIPO_USUARIO == 'RE')
-  
+    let respComentarioActual = respComments.filter(a => a.STIPO_USUARIO == 'RE')
+
     item.SCOMENTARIOa_ULTIMO = respComentarioActual[0] ? respComentarioActual[0].SCOMENTARIO : ''
-    
+
     return item
   }
 
@@ -301,7 +209,7 @@ export class HistoricoClientesComponent implements OnInit {
 
     let arrRespComments = []
     respWorkDetalle.forEach(item => {
-      let respuestaCustom = item.NRESPUESTA == 1 ? 'Sí' : item.NRESPUESTA == 2 ?'No' : ''
+      let respuestaCustom = item.NRESPUESTA == 1 ? 'Sí' : item.NRESPUESTA == 2 ? 'No' : ''
       item.SRESPUESTA = respuestaCustom
       arrRespComments.push(this.setDataCommentHeadersByAlerts(item))
     })
@@ -314,7 +222,7 @@ export class HistoricoClientesComponent implements OnInit {
     //let dataSendAttachedByAlert = {NIDALERTA: objAlerta.NIDALERTA, NREGIMEN: NREGIMEN, NPERIODO_PROCESO: this.NPERIODO_PROCESO, STIPO_CARGA: 'ADJUNTOS'}
     let respAdjuntos = await this.getAttachedFilesInformByAlert(objAlerta.NIDALERTA, NREGIMEN, 'ADJUNTOS')//this.userConfigService.getAttachedFilesInformByAlert(dataSendAttachedByAlert)
     //let respAdjuntosSustento = await this.getAttachedFilesInformByCacebera(objAlerta.NIDALERTA,objAlerta.NIDALERTA_CABECERA, NREGIMEN, 'ADJUNTOS-SUSTENTO')
-    
+
     let dataWork = { NIDALERTA: objAlerta.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: NREGIMEN }
     let respWorkDetalle = await this.getWorkModuleDetailData(dataWork)
     resp.forEach(element => {
@@ -343,7 +251,7 @@ export class HistoricoClientesComponent implements OnInit {
 
     resp.sort((a, b) => new Date(a.DFECHA_REGISTRO) < new Date(b.DFECHA_REGISTRO))
     respAdjuntos.sort((a, b) => new Date(a.DFECHA_REGISTRO) < new Date(b.DFECHA_REGISTRO))
-  
+
     let objFormByAlert: any = {}
     objFormByAlert.NIDALERTA = objAlerta.NIDALERTA
     objFormByAlert.SDESCRIPCION_ALERTA = objAlerta.SDESCRIPCION_ALERTA
@@ -353,7 +261,7 @@ export class HistoricoClientesComponent implements OnInit {
     objFormByAlert.SNOMBRE_ESTADO = objAlerta.SNOMBRE_ESTADO
     objFormByAlert.NREGIMEN = NREGIMEN
     objFormByAlert.ULTFECREV = objAlerta.ULTFECREV
-    
+
     objFormByAlert.arrUsuariosForm = respWorkDetalle
     objFormByAlert.arrConversacionCabecera = []
     //objFormByAlert.DFECHA_REVISADO = objAlerta.DFECHA_REVISADO,
@@ -369,9 +277,9 @@ export class HistoricoClientesComponent implements OnInit {
     this.userGroupListSimpli = []
     // let data = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 1 }
     // let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 2 }
-    let data = { NPERIODO_PROCESO:  this.NPERIODO_PROCESO, NIDREGIMEN: 1, NIDGRUPOSENAL: 1 }
-    let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 2 , NIDGRUPOSENAL: 1}
-    
+    let data = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 1, NIDGRUPOSENAL: 1 }
+    let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 2, NIDGRUPOSENAL: 1 }
+
     this.alertFormList = await this.userConfigService.getOfficialAlertFormList(data)
     this.alertFormListSimpli = await this.userConfigService.getOfficialAlertFormList(data2)
 
@@ -383,7 +291,7 @@ export class HistoricoClientesComponent implements OnInit {
     let respBusquedaSimpli = await this.getFormsByHead(this.alertFormListSimpli, 2, numPregunta);
     this.alertFormList = respBusquedaGral.array
     this.alertFormListSimpli = respBusquedaSimpli.array
-    
+
     //this.alertFormList.forEach(it => it.estado = it.SESTADO_REVISADO == '1' ? true : false)
     this.alertFormList.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
     this.alertFormListSimpli.sort((a, b) => a.DFECHA_ESTADO_MOVIMIENTO - b.DFECHA_ESTADO_MOVIMIENTO)
@@ -392,12 +300,12 @@ export class HistoricoClientesComponent implements OnInit {
     let arrInfoTerminadoGral = []
     let arrInfoTerminadoSimpli = []
     //this.alertFormList.forEach(t => {t.SESTADO = "3",t.SNOMBRE_ESTADO = "PENDIENTE"});
-   
-   
+
+
     this.alertFormList.forEach(item => {
       item.RESULTADO = []
       item.NREGIMEN = 1
-      if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO ) {
+      if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteGral.push(item);
         }
@@ -450,11 +358,11 @@ export class HistoricoClientesComponent implements OnInit {
     })
     //this.alertFormListSimpli.forEach(t => {t.SESTADO = "3",t.SNOMBRE_ESTADO = "PENDIENTE"});
 
-    
+
     this.alertFormListSimpli.forEach(item => {
-     
+
       item.NREGIMEN = 2
-      if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO ) {
+      if (this.STIPO_USUARIO === 'RE' && item.NIDUSUARIO_ASIGNADO === this.ID_USUARIO) {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteSimpli.push(item);
         }
@@ -471,7 +379,7 @@ export class HistoricoClientesComponent implements OnInit {
         //   this.arrResponsablesCerradoGral.push(item);
         // }
       }
-      if (this.STIPO_USUARIO === 'OC'  && item.TIPO_FORM !== 'C') {
+      if (this.STIPO_USUARIO === 'OC' && item.TIPO_FORM !== 'C') {
         if (item.SESTADO === '1') {//PENDIENTE
           this.arrResponsablesPendienteSimpli.push(item);
         }
@@ -530,26 +438,26 @@ export class HistoricoClientesComponent implements OnInit {
       let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral),
       Promise.all(arrPendienteInfoSimpli), Promise.all(arrInfoTerminadoSimpli)])
       */
-     
-      let arrWorkModulePromise:any = []
-      let arrRegimenNewTmp = [1,2]
-      
+
+      let arrWorkModulePromise: any = []
+      let arrRegimenNewTmp = [1, 2]
+
       arrRegimenNewTmp.forEach(regimenItem => {
-        
+
         let respWorkModulelist = this.getWorkModuleAll(regimenItem)
         arrWorkModulePromise.push(respWorkModulelist)
-        
+
       });
-      let respGroupPromiseAll:any = await Promise.all(arrWorkModulePromise)
-      
+      let respGroupPromiseAll: any = await Promise.all(arrWorkModulePromise)
+
       this.arrResponsablesPendienteInformeGral = (respGroupPromiseAll[0]).arrPendienteInfo //respGroupPromiseAll[0]
       this.arrResponsablesInformeTerminadoGral = /*(respGroupPromiseAll[0]).arrPendienteInfo//PRUEBA/*/(respGroupPromiseAll[0]).arrInfoTerminado
       this.arrResponsablesPendienteInformeSimpli = (respGroupPromiseAll[1]).arrPendienteInfo
       this.arrResponsablesInformeTerminadoSimpli = (respGroupPromiseAll[1]).arrInfoTerminado
-      
+
     }
 
-   
+
     let objTiUser: any = 'TI'
 
     this.userGroupListGral = await this.groupUsers(this.alertFormList)
@@ -557,23 +465,23 @@ export class HistoricoClientesComponent implements OnInit {
     ///this.addAlertsToPendienteInforme()
 
 
-   
+
     this.userGroupListGral.push(objTiUser)
     this.userGroupListSimpli.push(objTiUser)
   }
 
-  async getAndSetWorkModuleAll(){
-    let arrWorkModulePromise:any = []
-    let arrRegimenNewTmp = [1,2]
-   
+  async getAndSetWorkModuleAll() {
+    let arrWorkModulePromise: any = []
+    let arrRegimenNewTmp = [1, 2]
+
     arrRegimenNewTmp.forEach(regimenItem => {
-     
+
       let respWorkModulelist = this.getWorkModuleAll(regimenItem)
       arrWorkModulePromise.push(respWorkModulelist)
-      
+
     });
-    let respGroupPromiseAll:any = await Promise.all(arrWorkModulePromise)
-    
+    let respGroupPromiseAll: any = await Promise.all(arrWorkModulePromise)
+
     this.arrResponsablesPendienteInformeGral = (respGroupPromiseAll[0]).arrPendienteInfo //respGroupPromiseAll[0]
     this.arrResponsablesInformeTerminadoGral = /*(respGroupPromiseAll[0]).arrPendienteInfo//PRUEBA/*/(respGroupPromiseAll[0]).arrInfoTerminado
     this.arrResponsablesPendienteInformeSimpli = (respGroupPromiseAll[1]).arrPendienteInfo
@@ -581,22 +489,22 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
 
-  async getWorkModuleAll(regimen){
-    
-    try { 
+  async getWorkModuleAll(regimen) {
+
+    try {
       let data = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: regimen, NIDGRUPOSENAL: 1 }
       // let data = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 0 , NIDGRUPOSENAL: 2 }
       //let data2 = { NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: 2 }
-      let arrPendienteInfoGral:any = []
-      let arrInfoTerminadoGral:any = []
-      let arrPendienteInfoSimpli:any = []
-      let arrInfoTerminadoSimpli:any = []
+      let arrPendienteInfoGral: any = []
+      let arrInfoTerminadoGral: any = []
+      let arrPendienteInfoSimpli: any = []
+      let arrInfoTerminadoSimpli: any = []
       this.core.loader.show();
-      
+
       let respWorkListGeneral = await this.userConfigService.getWorkModuleList(data)
       this.core.loader.hide();
       //let respWorkListSimplificado = await this.userConfigService.getWorkModuleList(data)
-     
+
       respWorkListGeneral.forEach(idWork => {
         //idWork.arrAdjuntosInform.sort((a, b) => a.DFECHA_REGISTRO > b.DFECHA_REGISTRO)
         if (idWork.SESTADO === '1') {
@@ -626,12 +534,12 @@ export class HistoricoClientesComponent implements OnInit {
       this.core.loader.show();
       let respGroupPromiseAll = await Promise.all([Promise.all(arrPendienteInfoGral), Promise.all(arrInfoTerminadoGral)])
       this.core.loader.hide();
-     
-      
-     
-      return {arrPendienteInfo:respGroupPromiseAll[0],arrInfoTerminado:respGroupPromiseAll[1]}
+
+
+
+      return { arrPendienteInfo: respGroupPromiseAll[0], arrInfoTerminado: respGroupPromiseAll[1] }
     } catch (error) {
-        console.log(error)
+      console.log(error)
     }
   }
 
@@ -674,7 +582,7 @@ export class HistoricoClientesComponent implements OnInit {
     return respAttachFileInfo
   }
 
-  async getAttachedFilesInformByCacebera(NIDALERTA,NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
+  async getAttachedFilesInformByCacebera(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
       let data: any = {}
       data.NIDALERTA = NIDALERTA
@@ -683,10 +591,10 @@ export class HistoricoClientesComponent implements OnInit {
       data.STIPO_CARGA = STIPO_CARGA//'INFORMES'
       data.NREGIMEN = NREGIMEN
       let respAttachFileInfo = await this.userConfigService.getAttachedFilesInformByCabecera(data)
-     
+
       return respAttachFileInfo
     } catch (error) {
-      console.error("el error en get cabecera adjuntos : ",error)
+      console.error("el error en get cabecera adjuntos : ", error)
       return []
     }
   }
@@ -701,24 +609,24 @@ export class HistoricoClientesComponent implements OnInit {
     let arrPromiseAdjuntosComplemento = []
     //let tmpArrayAlerts = []
     arrayBusqueda.forEach(item => {
-      
+
       arrPromise.push(this.getQuestionHeader(item, regimen));
       arrPromiseChat.push(this.getCommentHeader(item.NIDALERTA_CABECERA))
       arrPromisePregDetail.push(this.getQuestionDetail(item))
-      arrPromiseAdjuntosSustento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, regimen, 'ADJUNTOS-SUSTENTO'))
-      arrPromiseAdjuntosComplemento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA,item.NIDALERTA_CABECERA, 1, 'COMPLEMENTO'))
-      
-      
-      if(this.STIPO_USUARIO == 'RE' && item.SESTADO == "3"){
-        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,'RE'))
-        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,'OC'))
-      }else if(this.STIPO_USUARIO == 'RE'){
-        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,this.STIPO_USUARIO))
-      }else{
-        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,'RE'))
-        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item,'OC'))
+      arrPromiseAdjuntosSustento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA, item.NIDALERTA_CABECERA, regimen, 'ADJUNTOS-SUSTENTO'))
+      arrPromiseAdjuntosComplemento.push(this.getAttachedFilesInformByCacebera(item.NIDALERTA, item.NIDALERTA_CABECERA, 1, 'COMPLEMENTO'))
+
+
+      if (this.STIPO_USUARIO == 'RE' && item.SESTADO == "3") {
+        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item, 'RE'))
+        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item, 'OC'))
+      } else if (this.STIPO_USUARIO == 'RE') {
+        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item, this.STIPO_USUARIO))
+      } else {
+        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item, 'RE'))
+        arrPromiseAdjuntos.push(this.getAdjuntosByCabecera(item, 'OC'))
       }
-      
+
 
       /*let respDuplid = tmpArrayAlerts.filter(alr => alr.NIDALERTA === item.NIDALERTA)
       if(respDuplid.length === 0){
@@ -741,11 +649,11 @@ export class HistoricoClientesComponent implements OnInit {
     let respPromiseAdjuntosAll = await Promise.all(arrPromiseAdjuntos);
     let respPromiseAdjuntosSustentoAll = await Promise.all(arrPromiseAdjuntosSustento);
     let respPromiseAdjuntosComplementoAll = await Promise.all(arrPromiseAdjuntosComplemento);
-   
+
     //let respPromiseAdjInfoAll = await Promise.all(arrPromiseAdjuntosInfo);
-    
+
     let arrayAlertList = []
-    arrayBusqueda.forEach((item,indiceArray) => {
+    arrayBusqueda.forEach((item, indiceArray) => {
       let arrayPreguntasCabecera = []
       let arrayConversacionCabecera = []
       let arrayPreguntasDetail = []
@@ -754,8 +662,8 @@ export class HistoricoClientesComponent implements OnInit {
       let arrPreguntaDetalle = []
       let arrAdjuntosNew = []
 
-      let objFechaComentarioOC:any = {}
-     
+      let objFechaComentarioOC: any = {}
+
       objAlerta = item;
       respPromiseAllPreguntas.forEach(preg => {
         preg.forEach(obj => {
@@ -771,14 +679,14 @@ export class HistoricoClientesComponent implements OnInit {
         })
       })
       respPromiseComentariosAll.forEach(chat => {
-        chat.forEach((chatItem,indiceChat) => {
+        chat.forEach((chatItem, indiceChat) => {
           if (chatItem.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA) {
             let fechaNew = new Date(objFechaComentarioOC.DFECHA_REGISTRO)
             let antes = objFechaComentarioOC.DFECHA_REGISTRO ? new Date(objFechaComentarioOC.DFECHA_REGISTRO) : null
-            if(chatItem.STIPO_MENSAJE === 'COM' && chatItem.STIPO_USUARIO === 'OC'){
+            if (chatItem.STIPO_MENSAJE === 'COM' && chatItem.STIPO_USUARIO === 'OC') {
               objFechaComentarioOC = chatItem
             }
-            if(chatItem.STIPO_MENSAJE === 'COM' && chatItem.STIPO_USUARIO === 'OC' && fechaNew > antes){
+            if (chatItem.STIPO_MENSAJE === 'COM' && chatItem.STIPO_USUARIO === 'OC' && fechaNew > antes) {
               objFechaComentarioOC = chatItem
             }
             let objChatItem: any = {}
@@ -819,11 +727,11 @@ export class HistoricoClientesComponent implements OnInit {
         })
 
       })
-     
+
       let arrayTmpDataAdjuntosSustento = []
       respPromiseAdjuntosSustentoAll.forEach(it => {
         it.forEach(element => {
-          if(element.NIDALERTA_CABECERA == item.NIDALERTA_CABECERA && element.NIDALERTA == item.NIDALERTA){//porsiacado tambien el regimen
+          if (element.NIDALERTA_CABECERA == item.NIDALERTA_CABECERA && element.NIDALERTA == item.NIDALERTA) {//porsiacado tambien el regimen
             let rutaSplit = (element.SRUTA_ADJUNTO).split("/")
             element.name = rutaSplit[6]
             let nombreArchivoSplit = (rutaSplit[6]).split(".")
@@ -831,13 +739,13 @@ export class HistoricoClientesComponent implements OnInit {
             arrayTmpDataAdjuntosSustento.push(element)
           }
 
-          
+
         })
       });
       let arrayTmpDataAdjuntosComplemento = []
       respPromiseAdjuntosComplementoAll.forEach(it => {
         it.forEach(element => {
-          if(element.NIDALERTA_CABECERA == item.NIDALERTA_CABECERA && element.NIDALERTA == item.NIDALERTA){
+          if (element.NIDALERTA_CABECERA == item.NIDALERTA_CABECERA && element.NIDALERTA == item.NIDALERTA) {
             let rutaSplit = (element.SRUTA_ADJUNTO).split("/")
             element.name = rutaSplit[6]
             let nombreArchivoSplit = (rutaSplit[6]).split(".")
@@ -845,7 +753,7 @@ export class HistoricoClientesComponent implements OnInit {
             arrayTmpDataAdjuntosComplemento.push(element)
           }
 
-          
+
         })
       });
       //console.error("el arrPreguntasTitleDetail 55: ",arrPreguntasTitleDetail)
@@ -862,7 +770,7 @@ export class HistoricoClientesComponent implements OnInit {
             return detalle.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA
           });
           let returnDetaDuplic: any[] = resultDetalle;
-          
+
 
           resultDetalle.forEach(pregDet => {
             let respDetaDuplic = returnDetaDuplic.filter(detaDuplic => {
@@ -879,7 +787,7 @@ export class HistoricoClientesComponent implements OnInit {
               //   }
               // })
               let RespuestaTmpArray = arrayTmpDeta.filter(itenDetTmpA => itenDetTmpA === pregDet.NIDALERTA_DETALLE)
-             
+
               if (RespuestaTmpArray.length === 0) {
                 arrayDetalleResult.push(respDetaDuplic);
                 arrayTmpDeta.push(pregDet.NIDALERTA_DETALLE)
@@ -899,11 +807,11 @@ export class HistoricoClientesComponent implements OnInit {
 
       respPromiseAdjuntosAll.forEach(itemAdjunto => {
         itemAdjunto.forEach(itemAdj => {
-          if(itemAdj.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA){
+          if (itemAdj.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA) {
             let splitRuta = (itemAdj.SRUTA_ADJUNTO).split("/")
             let nameAdj = splitRuta[3].split(".")
             itemAdj.name = splitRuta[3] ? splitRuta[3] : ''
-            itemAdj.nameCorto = nameAdj[0].length > 15 ? (nameAdj[0]).substr(0,15) + '....' + nameAdj[1] : splitRuta[3]
+            itemAdj.nameCorto = nameAdj[0].length > 15 ? (nameAdj[0]).substr(0, 15) + '....' + nameAdj[1] : splitRuta[3]
             arrAdjuntosNew.push(itemAdj)
           }
         })
@@ -921,7 +829,7 @@ export class HistoricoClientesComponent implements OnInit {
       objAlerta.arrAdjuntosSustento = arrayTmpDataAdjuntosSustento
       objAlerta.arrPromiseAdjuntosComplemento = arrayTmpDataAdjuntosComplemento
       objAlerta.RESULTADO = []
-      
+
       objAlerta.SCOMENTARIO_OC = objFechaComentarioOC.SCOMENTARIO
       arrayAlertList.push(objAlerta)
       indiceArray++
@@ -929,50 +837,50 @@ export class HistoricoClientesComponent implements OnInit {
     return { array: arrayAlertList, numPregunta: numPregunta };
   }
 
-  async getFormsDetailAlgorit(item){
+  async getFormsDetailAlgorit(item) {
 
     let respQuestion = await this.getQuestionDetail(item)
-    
+
     let arrayDetalleResult: any = []
-      if (item.NIDALERTA === 1) {
+    if (item.NIDALERTA === 1) {
 
-        let arrayTmpDeta: any = []
-          let resultDetalle: any[] = respQuestion.filter(detalle => {
-            return detalle.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA
-          });
-          let returnDetaDuplic: any[] = resultDetalle;
-          
+      let arrayTmpDeta: any = []
+      let resultDetalle: any[] = respQuestion.filter(detalle => {
+        return detalle.NIDALERTA_CAB_USUARIO === item.NIDALERTA_CABECERA
+      });
+      let returnDetaDuplic: any[] = resultDetalle;
 
-          resultDetalle.forEach(pregDet => {
-            let respDetaDuplic = returnDetaDuplic.filter(detaDuplic => {
-              let SRESPUESTA = detaDuplic.NRESPUESTA == '1' ? 'Sí.' : detaDuplic.NRESPUESTA == '2' ? 'No.' : null
-              detaDuplic.SRESPUESTA = SRESPUESTA;
-              return detaDuplic.NIDALERTA_DETALLE === pregDet.NIDALERTA_DETALLE && detaDuplic.NIDALERTA_DET === pregDet.NIDALERTA_DET && detaDuplic.SPRODUCTO === pregDet.SPRODUCTO
-            })
-            //arrayDetalleResult.push(respDetaDuplic);
-            if (respDetaDuplic.length > 0) {
-              let stateInside = false;
-              // arrayTmpDeta.forEach(itenDetTmpA => {
-              //   if(itenDetTmpA === pregDet.NIDALERTA_DETALLE){
-              //     stateInside = true;
-              //   }
-              // })
-              let RespuestaTmpArray = arrayTmpDeta.filter(itenDetTmpA => itenDetTmpA === pregDet.NIDALERTA_DETALLE)
-              
-              if (RespuestaTmpArray.length === 0) {
-                arrayDetalleResult.push(respDetaDuplic);
-                arrayTmpDeta.push(pregDet.NIDALERTA_DETALLE)
-              }
 
-            }
-          })
-      }
+      resultDetalle.forEach(pregDet => {
+        let respDetaDuplic = returnDetaDuplic.filter(detaDuplic => {
+          let SRESPUESTA = detaDuplic.NRESPUESTA == '1' ? 'Sí.' : detaDuplic.NRESPUESTA == '2' ? 'No.' : null
+          detaDuplic.SRESPUESTA = SRESPUESTA;
+          return detaDuplic.NIDALERTA_DETALLE === pregDet.NIDALERTA_DETALLE && detaDuplic.NIDALERTA_DET === pregDet.NIDALERTA_DET && detaDuplic.SPRODUCTO === pregDet.SPRODUCTO
+        })
+        //arrayDetalleResult.push(respDetaDuplic);
+        if (respDetaDuplic.length > 0) {
+          let stateInside = false;
+          // arrayTmpDeta.forEach(itenDetTmpA => {
+          //   if(itenDetTmpA === pregDet.NIDALERTA_DETALLE){
+          //     stateInside = true;
+          //   }
+          // })
+          let RespuestaTmpArray = arrayTmpDeta.filter(itenDetTmpA => itenDetTmpA === pregDet.NIDALERTA_DETALLE)
 
-      
-      return arrayDetalleResult
+          if (RespuestaTmpArray.length === 0) {
+            arrayDetalleResult.push(respDetaDuplic);
+            arrayTmpDeta.push(pregDet.NIDALERTA_DETALLE)
+          }
+
+        }
+      })
+    }
+
+
+    return arrayDetalleResult
   }
 
-  async getAdjuntosByCabecera(itemAlerta,STIPO_USU){
+  async getAdjuntosByCabecera(itemAlerta, STIPO_USU) {
     let data = { NIDALERTA_CAB_USUARIO: itemAlerta.NIDALERTA_CABECERA, STIPO_USUARIO: STIPO_USU }
     let resp = await this.userConfigService.getAttachedFiles(data)
     resp.forEach(itemFile => {
@@ -998,7 +906,7 @@ export class HistoricoClientesComponent implements OnInit {
 
 
 
-    
+
     return itemDetail
   }
 
@@ -1016,22 +924,22 @@ export class HistoricoClientesComponent implements OnInit {
     })
   }
 
-  async getAdjuntosCabeceraById(item,STIPO_USU){
+  async getAdjuntosCabeceraById(item, STIPO_USU) {
     try {
-      let data = {NIDALERTA_CAB_USUARIO: item.NIDALERTA_CABECERA, STIPO_USUARIO: STIPO_USU}
+      let data = { NIDALERTA_CAB_USUARIO: item.NIDALERTA_CABECERA, STIPO_USUARIO: STIPO_USU }
       let resp = await this.userConfigService.getAttachedFiles(data)
-      
+
       resp.forEach(respItem => {
         //respItem.SRUTA_ADJUNTO = respItem.SCOMENTARIO
         let RUTA_SPLIT = (respItem.SRUTA_ADJUNTO).split("/")
         let nombreAdj = RUTA_SPLIT[3].split(".")
         respItem.name = RUTA_SPLIT[3]
         respItem.STIPO_USUARIO = STIPO_USU
-        respItem.nameCorto = nombreAdj[0].length > 15 ? nombreAdj[0].substr(0,15)+ '....' +nombreAdj[1] : RUTA_SPLIT[3]
+        respItem.nameCorto = nombreAdj[0].length > 15 ? nombreAdj[0].substr(0, 15) + '....' + nombreAdj[1] : RUTA_SPLIT[3]
       })
       return resp
     } catch (error) {
-      
+
     }
   }
 
@@ -1048,7 +956,7 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
   async downloadUniversalFile(ruta, nameFile) {
-    
+
     try {
       this.core.loader.show()
       let data = { ruta: ruta }
@@ -1240,7 +1148,7 @@ export class HistoricoClientesComponent implements OnInit {
         }
 
         this.userConfigService.uploadFiles(data).then(response => {
-          
+
         });
       }
     })
@@ -1272,7 +1180,7 @@ export class HistoricoClientesComponent implements OnInit {
         }
 
         this.userConfigService.uploadFiles(data).then(response => {
-          
+
         });
       }
     })
@@ -1281,12 +1189,12 @@ export class HistoricoClientesComponent implements OnInit {
 
   async insertAttachedFiles(data: any) {
     let response = await this.userConfigService.insertAttachedFiles(data)
-    
+
   }
 
   async insertAttachedFilesByAlert(data: any) {
     let response = await this.userConfigService.insertAttachedFilesByAlert(data)
-    
+
   }
 
 
@@ -1300,19 +1208,19 @@ export class HistoricoClientesComponent implements OnInit {
     param.NIDUSUARIO_ASIGNADO = data.NIDUSUARIO_ASIGNADO,
       param.NIDALERTA_CABECERA = data.NIDALERTA_CABECERA
     param.NIDREGIMEN = regimen//data.NIDREGIMEN 
-    
+
     try {
       let answersHeaderList = []
       let questionsHeaderList = []
       questionsHeaderList = await this.userConfigService.getQuestionHeader(param)
-    
+
       /*if (questionsHeaderList.length > 0) {
           datosCabecera = questionsHeaderList[0]
           questionsHeaderList.forEach(it => answersHeaderList.push(it))
       }*/
       return questionsHeaderList
     } catch (error) {
-     
+
     }
   }
 
@@ -1372,7 +1280,7 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
   getClassBagdeState(state) {
-    
+
     if (state === 'PENDIENTE') {
       return 'badge-warning'
     }
@@ -1393,12 +1301,12 @@ export class HistoricoClientesComponent implements OnInit {
 
 
   getValor(valor1, valor2, valor3) {
-    
+
     return valor1 + valor2 + valor3;
   }
 
   getArray(state, regimen) {
-    
+
     switch (state) {
       // case 'PENDIENTE':
       //   if (regimen === 1) {
@@ -1504,7 +1412,7 @@ export class HistoricoClientesComponent implements OnInit {
     }
   }
 
-  
+
   // getTexWhite(indice) {
   //   //await this.setVariableRegimen(regimen)
   //   let valor = this.getActiveRegimiento(1)
@@ -1515,8 +1423,8 @@ export class HistoricoClientesComponent implements OnInit {
   //   }
   // }
 
-  getRegimenDinamic() {
-    
+  async getRegimenDinamic() {
+
     if (this.STIPO_USUARIO === "RE") {
       let RegimenTemp = [{ 'id': 1, 'descripcion': 'General', 'desCorto': 'Gral' }, { 'id': 2, 'descripcion': 'Simplificado', 'desCorto': 'Simpli' }]
       let estado = [this.statePendiente, this.stateCompletado, this.stateDevuelto]
@@ -1526,10 +1434,10 @@ export class HistoricoClientesComponent implements OnInit {
         let estadoRegimen = []
 
         estado.forEach(est => {
-          
-          
+
+
           let ResponsableTmp = this.getArray(est.sState, reg.id)
-          
+
           if (ResponsableTmp.length === 0) {
             estadoRegimen.push(false)
 
@@ -1538,7 +1446,7 @@ export class HistoricoClientesComponent implements OnInit {
             estadoRegimen.push(true)
           }
         })
-       
+
         if (estadoRegimen.filter(it => it === true).length > 0) {
           newRegimen.push(reg)
         }
@@ -1715,7 +1623,7 @@ export class HistoricoClientesComponent implements OnInit {
     }
 
   }
- 
+
 
 
   solicitarComplemento(indice) {
@@ -1727,22 +1635,22 @@ export class HistoricoClientesComponent implements OnInit {
       showConfirmButton: true,
       //cancelButtonColor: '#dc4545',
       confirmButtonText: 'Solicitar',
-      confirmButtonColor:'#FA7000',
+      confirmButtonColor: '#FA7000',
       showCloseButton: true,
       cancelButtonText: 'Cancelar',
-      customClass: { 
-        closeButton : 'OcultarBorde'
-                     },
-       
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+
     }).then(async (result) => {
-   
+
     }).catch(err => {
 
     })
   }
 
   async setVariableRegimen(regimen) {
-   
+
     await this.core.storage.set('regimenPadre', regimen)
   }
 
@@ -1833,7 +1741,7 @@ export class HistoricoClientesComponent implements OnInit {
       default:
         arrayDefault = []
     }
-    
+
     obj.RESULTADO = obj.RESULTADO
     arrayDefault.push(obj);
     return arrayDefault;
@@ -1847,11 +1755,11 @@ export class HistoricoClientesComponent implements OnInit {
     comentariosCabecera.forEach(item => {
       item.NIDALERTA_CAB_USUARIO = NIDALERTA_CABECERA
       item.SRESPUESTA = item.NRESPUESTA == 1 ? 'Sí.' : item.NRESPUESTA == 2 ? 'No.' : ''
-      if(item.STIPO_MENSAJE === "ADJ"){
-        let nameAdj= (item.SCOMENTARIO).split("/")
+      if (item.STIPO_MENSAJE === "ADJ") {
+        let nameAdj = (item.SCOMENTARIO).split("/")
         item.SRUTA_ADJUNTO = item.SCOMENTARIO
         item.SCOMENTARIO = nameAdj[3]
-        
+
       }
       arrComentariosCabecera.push(item)
     })
@@ -1862,90 +1770,90 @@ export class HistoricoClientesComponent implements OnInit {
     }*/
   }
 
-  removeFileAdjuntosFiles(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
+  removeFileAdjuntosFiles(indice, dataObjAlerta, indiceAlerta, STIPO_CARGA) {//adjuntar por formulario
     //STIPO_CARGA="ADJUNTOS-FORM"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
 
-    let filtroFiles =  this.arrObjFilesAdjByCabecera.filter(it => 
+    let filtroFiles = this.arrObjFilesAdjByCabecera.filter(it =>
       it.NIDCABECERA_USUARIO == dataObjAlerta.NIDALERTA_CABECERA &&
       it.STIPO_CARGA === STIPO_CARGA)
-    
-    if(filtroFiles.length > 0){
-      let objFile:any = filtroFiles[0]
-      objFile.arrFiles.splice(indice,1)
-      objFile.arrFilesName.splice(indice,1)
-      objFile.arrFilesNameCorto.splice(indice,1)
+
+    if (filtroFiles.length > 0) {
+      let objFile: any = filtroFiles[0]
+      objFile.arrFiles.splice(indice, 1)
+      objFile.arrFilesName.splice(indice, 1)
+      objFile.arrFilesNameCorto.splice(indice, 1)
 
       let indiceArrObjFiles = 0
       this.arrObjFilesAdjByCabecera.forEach(it => {
-        if(it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
+        if (it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA) {
           it = objFile
         }
         indiceArrObjFiles++
       })
-      
-      
+
+
     }
-    
+
 
   }
 
-  removeFileAdjuntosFilesInf(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
-    STIPO_CARGA="ADJUNTOS"
+  removeFileAdjuntosFilesInf(indice, dataObjAlerta, indiceAlerta, STIPO_CARGA) {//adjuntar por formulario
+    STIPO_CARGA = "ADJUNTOS"
     //let arrResponsableTmp = this.arrResponsable[indiceAlerta]
-   
-    let filtroFiles =  this.arrObjFilesInformeByAlert.filter(it => 
-      it.NIDCABECERA_USUARIO == dataObjAlerta.NIDALERTA_CABECERA && 
+
+    let filtroFiles = this.arrObjFilesInformeByAlert.filter(it =>
+      it.NIDCABECERA_USUARIO == dataObjAlerta.NIDALERTA_CABECERA &&
       it.STIPO_CARGA === STIPO_CARGA)
 
-      
-   
-    let objFile:any = filtroFiles[0]
-    objFile.arrFiles.splice(indice,1)
-    objFile.arrFilesName.splice(indice,1)
-    objFile.arrFilesNameCorto.splice(indice,1)
-   
+
+
+    let objFile: any = filtroFiles[0]
+    objFile.arrFiles.splice(indice, 1)
+    objFile.arrFilesName.splice(indice, 1)
+    objFile.arrFilesNameCorto.splice(indice, 1)
+
     let indiceArrObjFiles = 0
     this.arrObjFilesInformeByAlert.forEach(it => {
-      if(it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
+      if (it.NIDCABECERA_USUARIO === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA) {
         it = objFile
       }
       indiceArrObjFiles++
     })
-    
-  
+
+
 
   }
 
-  removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta,indiceAlerta,STIPO_CARGA){//adjuntar por formulario
-     
- 
-    let filtroFiles =  this.arrObjFilesInformeByAlert.filter(it => 
-      it.NIDALERTA_CABECERA == dataObjAlerta.NIDALERTA_CABECERA && 
-      it.STIPO_CARGA == STIPO_CARGA && 
+  removeFileAdjuntosFilesInfFormularios(indice, dataObjAlerta, indiceAlerta, STIPO_CARGA) {//adjuntar por formulario
+
+
+    let filtroFiles = this.arrObjFilesInformeByAlert.filter(it =>
+      it.NIDALERTA_CABECERA == dataObjAlerta.NIDALERTA_CABECERA &&
+      it.STIPO_CARGA == STIPO_CARGA &&
       it.NREGIMEN == dataObjAlerta.NREGIMEN)
 
-  
-    let objFile:any = filtroFiles[0]
-    objFile.arrFiles.splice(indice,1)
-    objFile.arrFilesName.splice(indice,1)
-    objFile.arrFilesNameCorto.splice(indice,1)
-  
+
+    let objFile: any = filtroFiles[0]
+    objFile.arrFiles.splice(indice, 1)
+    objFile.arrFilesName.splice(indice, 1)
+    objFile.arrFilesNameCorto.splice(indice, 1)
+
     let indiceArrObjFiles = 0
 
     //this.arrObjFilesInformeByAlert = this.arrObjFilesInformeByAlert.filter(it => it.NIDALERTA != dataObjAlerta.NIDALERTA)
-     this.arrObjFilesInformeByAlert.forEach(it => {
-       if(it.NIDALERTA_CABECERA === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA){
-         it = objFile
-       }
-       indiceArrObjFiles++
-     })
-   
+    this.arrObjFilesInformeByAlert.forEach(it => {
+      if (it.NIDALERTA_CABECERA === dataObjAlerta.NIDALERTA_CABECERA && it.STIPO_CARGA === STIPO_CARGA) {
+        it = objFile
+      }
+      indiceArrObjFiles++
+    })
+
     //archivoSustento{{regimen.id}}-{{index}}
-   
-    let respArchivos = document.getElementById('archivoSustento'+dataObjAlerta.NREGIMEN+'-'+indiceAlerta)
-   
-  
+
+    let respArchivos = document.getElementById('archivoSustento' + dataObjAlerta.NREGIMEN + '-' + indiceAlerta)
+
+
     /*let files = respArchivos.files;
     let arrFiles = Array.from(files)
   
@@ -1953,7 +1861,7 @@ export class HistoricoClientesComponent implements OnInit {
     ////document.getElementById('').ELEMENT_NODE
   }
 
-  
+
 
   async insertComentariosHeader(data, senial) {
     ////console.error("senial :",senial)
@@ -1977,7 +1885,7 @@ export class HistoricoClientesComponent implements OnInit {
     respQuestionDetail.forEach(item => {
       arrQuestionDetailList.push(item)
     })*/
-   
+
     /*let first = this.questionsList[0]
     this.questionDetailList = response.preguntas[first]
     await this.fillAnswers(response)*/
@@ -1990,8 +1898,8 @@ export class HistoricoClientesComponent implements OnInit {
     let arrComentariosCabecera = []
     comentariosCabecera.forEach(item => {
       item.NIDALERTA_CAB_USUARIO = NIDALERTA_CABECERA
-      if(item.STIPO_MENSAJE === "ADJ"){
-        let nameAdj= (item.SCOMENTARIO).split("/")
+      if (item.STIPO_MENSAJE === "ADJ") {
+        let nameAdj = (item.SCOMENTARIO).split("/")
         item.SCOMENTARIO = nameAdj[3]
       }
       arrComentariosCabecera.push(item)
@@ -2012,7 +1920,7 @@ export class HistoricoClientesComponent implements OnInit {
       arrNewConversacion.push(this.getCommentHeaderWithAlert(senial, senial.NIDALERTA_CABECERA))
     })
     let respPromiseAllComments = await Promise.all(arrNewConversacion)
-  
+
     /*switch (sState) {
       case 'PENDIENTE':{
         if(regimen === 1){
@@ -2045,41 +1953,41 @@ export class HistoricoClientesComponent implements OnInit {
     }
   }
 
-  async addFilesComplemento (event: any, NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA){
-    try{
-     
-     
+  async addFilesComplemento(event: any, NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
+    try {
+
+
       //archivoSustento{{regimen.id}}-{{index}}
       let files = event.target.files;
 
       let arrFiles = Array.from(files)
-     
+
       let listFileNameInform: any = []
       arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-   
+
 
       let respValidation = await this.isValidationAddFilesInforme(listFileNameInform);
-  
+
 
       let listFileNameCortoInform = []
       for (let item of listFileNameInform) {
         let nameFile = item.split(".")
-        let fileItem = item && nameFile[0].length > 14 ? nameFile[0].substr(0, 15)+ '....' + nameFile[1] : item
+        let fileItem = item && nameFile[0].length > 14 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
         listFileNameCortoInform.push(fileItem)
       }
-      
+
       let listDataFileInform: any = []
       arrFiles.forEach(fileData => {
         listDataFileInform.push(this.handleFile(fileData))
       })
       let respPromiseFileInfoBinary = await Promise.all(listDataFileInform)
-    
-      let dataInfoFilesTmp = this.arrObjFilesInformeByAlert.filter(itemInfo => 
-        itemInfo.NIDALERTA == NIDALERTA && 
-        itemInfo.NREGIMEN == NREGIMEN && 
+
+      let dataInfoFilesTmp = this.arrObjFilesInformeByAlert.filter(itemInfo =>
+        itemInfo.NIDALERTA == NIDALERTA &&
+        itemInfo.NREGIMEN == NREGIMEN &&
         itemInfo.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
         itemInfo.STIPO_CARGA == STIPO_CARGA)
-    }catch (error) {
+    } catch (error) {
 
     }
 
@@ -2087,74 +1995,73 @@ export class HistoricoClientesComponent implements OnInit {
 
   async addFilesInforme(event: any, NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-     
-      
+
+
       //archivoSustento{{regimen.id}}-{{index}}
       let files = event.target.files;
 
       let arrFiles: any = Array.from(files)
-      if(STIPO_CARGA == "ADJUNTOS-SUSTENTO"){
+      if (STIPO_CARGA == "ADJUNTOS-SUSTENTO") {
         let extensiones = arrFiles.map(t => t.name.split(".")[1])
         let extCount = extensiones.length;
-        if (extCount > 0)
-        {
-           
-          if(extensiones.map(t => ['xlsx','xls','csv'].includes(t)).filter(t => t).length != extCount){
-            return  {
-              message : "Solo se pueden cargar archivos xlsx , xls y csv",
-              code : 1
+        if (extCount > 0) {
+
+          if (extensiones.map(t => ['xlsx', 'xls', 'csv'].includes(t)).filter(t => t).length != extCount) {
+            return {
+              message: "Solo se pueden cargar archivos xlsx , xls y csv",
+              code: 1
             }
           };
         }
       }
 
-     
+
       let listFileNameInform: any = []
       arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-      
+
 
       let respValidation = await this.isValidationAddFilesInforme(listFileNameInform);
-     
+
 
       let listFileNameCortoInform = []
       for (let item of listFileNameInform) {
         let nameFile = item.split(".")
-        let fileItem = item && nameFile[0].length > 14 ? nameFile[0].substr(0, 15)+ '....' + nameFile[1] : item
+        let fileItem = item && nameFile[0].length > 14 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
         listFileNameCortoInform.push(fileItem)
       }
-      
+
       let listDataFileInform: any = []
       arrFiles.forEach(fileData => {
         listDataFileInform.push(this.handleFile(fileData))
       })
       let respPromiseFileInfoBinary = await Promise.all(listDataFileInform)
-     
-      
-      let dataInfoFilesTmp = this.arrObjFilesInformeByAlert.filter(itemInfo => 
-                                                                   itemInfo.NIDALERTA == NIDALERTA && 
-                                                                   itemInfo.NREGIMEN == NREGIMEN && 
-                                                                   itemInfo.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
-                                                                   itemInfo.STIPO_CARGA == STIPO_CARGA)
-     
-      let respAddFilesInArray = this.addFilesInArrayGlobalResponsable(dataInfoFilesTmp, NIDALERTA_CABECERA, NREGIMEN,NIDALERTA,STIPO_CARGA,listFileNameInform,respPromiseFileInfoBinary,listFileNameCortoInform)
-     
-      return  {
-        message : "",
-        code : 0
+
+
+      let dataInfoFilesTmp = this.arrObjFilesInformeByAlert.filter(itemInfo =>
+        itemInfo.NIDALERTA == NIDALERTA &&
+        itemInfo.NREGIMEN == NREGIMEN &&
+        itemInfo.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
+        itemInfo.STIPO_CARGA == STIPO_CARGA)
+
+      let respAddFilesInArray = this.addFilesInArrayGlobalResponsable(dataInfoFilesTmp, NIDALERTA_CABECERA, NREGIMEN, NIDALERTA, STIPO_CARGA, listFileNameInform, respPromiseFileInfoBinary, listFileNameCortoInform)
+
+      return {
+        message: "",
+        code: 0
       }
     } catch (error) {
       console.error("el arrFiles error 879 : ", error)
     }
   }
 
-  addFilesInArrayGlobalResponsable(dataInfoFilesTmp, NIDALERTA_CABECERA, NREGIMEN,NIDALERTA,STIPO_CARGA,listFileNameInform,respPromiseFileInfoBinary,listFileNameCortoInform){
+  addFilesInArrayGlobalResponsable(dataInfoFilesTmp, NIDALERTA_CABECERA, NREGIMEN, NIDALERTA, STIPO_CARGA, listFileNameInform, respPromiseFileInfoBinary, listFileNameCortoInform) {
     try {
       let dataInformFile: any = {}
       let statusDuplic = false
-   
+
       if (dataInfoFilesTmp.length > 0) {
-      
-        
+
+
         let indiceFile = 0
         this.arrObjFilesInformeByAlert.forEach(it => {
           if (it.NIDALERTA == NIDALERTA && it.NREGIMEN === NREGIMEN && it.STIPO_CARGA === STIPO_CARGA) {
@@ -2162,26 +2069,25 @@ export class HistoricoClientesComponent implements OnInit {
             dataInformFile.NREGIMEN = NREGIMEN
             dataInformFile.NIDALERTA_CABECERA = NIDALERTA_CABECERA
             dataInformFile.STIPO_CARGA = STIPO_CARGA
-            let arrayFilesNamePush:any = []
-            let arrayFilesPush:any = []
-            let arrayFilesNamesCortoPush:any = []
-           
+            let arrayFilesNamePush: any = []
+            let arrayFilesPush: any = []
+            let arrayFilesNamesCortoPush: any = []
+
             let incArrFileName = 0;
-            if(it.arrFilesName.length > 0)
-            {
+            if (it.arrFilesName.length > 0) {
               it.arrFilesName.forEach(itemFileName => {
                 let incrementadorFileName = 0;
                 let respFilterNameCoincid = []
                 listFileNameInform.forEach(itemNameCoin => {
                   let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemNameCoin)
-             
-                  if(respFilterDuplid.length == 0){
-                    if(itemNameCoin == itemFileName){
+
+                  if (respFilterDuplid.length == 0) {
+                    if (itemNameCoin == itemFileName) {
                       arrayFilesNamePush.push(itemNameCoin);
                       arrayFilesPush.push(respPromiseFileInfoBinary[incrementadorFileName]);
                       arrayFilesNamesCortoPush.push(listFileNameCortoInform[incrementadorFileName]);
                       //respFilterNameCoincid.push(it)
-                    }else{
+                    } else {
                       arrayFilesNamePush.push(itemNameCoin)
                       arrayFilesPush.push(respPromiseFileInfoBinary[incrementadorFileName]);
                       arrayFilesNamesCortoPush.push(listFileNameCortoInform[incrementadorFileName]);
@@ -2191,8 +2097,8 @@ export class HistoricoClientesComponent implements OnInit {
                   incrementadorFileName++
                 })
                 let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemFileName)
-                
-                if(respFilterDuplid.length == 0){
+
+                if (respFilterDuplid.length == 0) {
                   arrayFilesNamePush.push(itemFileName)
                   arrayFilesPush.push(it.arrFilesName[incArrFileName]);
                   arrayFilesNamesCortoPush.push(it.arrFilesName[incArrFileName]);
@@ -2206,19 +2112,18 @@ export class HistoricoClientesComponent implements OnInit {
                 this.arrObjFilesInformeByAlert[indiceFile] = dataInformFile
                 statusDuplic = true
               })
-            }else 
-            {
-              let arrayFilesNamePush:any = []
-              let arrayFilesPush:any = []
-              let arrayFilesNamesCortoPush:any = []
+            } else {
+              let arrayFilesNamePush: any = []
+              let arrayFilesPush: any = []
+              let arrayFilesNamesCortoPush: any = []
               let incrementadorFileName = 0;
               listFileNameInform.forEach(itemNameCoin => {
                 let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemNameCoin)
-                
-                if(respFilterDuplid.length == 0){
-                    arrayFilesNamePush.push(itemNameCoin)
-                    arrayFilesPush.push(respPromiseFileInfoBinary[incrementadorFileName]);
-                    arrayFilesNamesCortoPush.push(listFileNameCortoInform[incrementadorFileName]);
+
+                if (respFilterDuplid.length == 0) {
+                  arrayFilesNamePush.push(itemNameCoin)
+                  arrayFilesPush.push(respPromiseFileInfoBinary[incrementadorFileName]);
+                  arrayFilesNamesCortoPush.push(listFileNameCortoInform[incrementadorFileName]);
                 }
                 incrementadorFileName++
               })
@@ -2234,48 +2139,48 @@ export class HistoricoClientesComponent implements OnInit {
       if (!statusDuplic) {
         let statusFirtsFile = false
         //let respDuplidArrsObjs = 
-        this.arrObjFilesInformeByAlert.forEach((it,incrementFiles) => {
-          
-          
-          if(it.NIDALERTA == NIDALERTA && it.NREGIMEN == NREGIMEN && 
-            it.STIPO_CARGA == STIPO_CARGA && it.NIDALERTA_CABECERA == NIDALERTA_CABECERA){
-              statusFirtsFile = true
-              let arrayFilesNamePush = []
-              let arrayFilesPush = []
-              let arrayFilesNamesCortoPush = []
-              
-              
-      
-              listFileNameInform.forEach((itemFileName,incrementName) => {
-                let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemFileName)
-              
-      
-                if(respFilterDuplid.length == 0){
-                  arrayFilesNamePush.push(itemFileName)
-                  arrayFilesPush.push(respPromiseFileInfoBinary[incrementName]);
-                  arrayFilesNamesCortoPush.push(listFileNameCortoInform[incrementName]);
-                }
-              })
-                    
-        
-      
-      
-              dataInformFile.NIDALERTA = NIDALERTA
-              dataInformFile.NREGIMEN = NREGIMEN
-              dataInformFile.NIDALERTA_CABECERA = NIDALERTA_CABECERA
-              dataInformFile.STIPO_CARGA = STIPO_CARGA
-              dataInformFile.arrFilesName = arrayFilesNamePush//listFileNameInform
-              dataInformFile.arrFiles = arrayFilesPush//respPromiseFileInfoBinary
-              dataInformFile.arrFilesNameCorto = arrayFilesNamesCortoPush//listFileNameCortoInform
-            
-              this.arrObjFilesInformeByAlert[incrementFiles] = dataInformFile
+        this.arrObjFilesInformeByAlert.forEach((it, incrementFiles) => {
+
+
+          if (it.NIDALERTA == NIDALERTA && it.NREGIMEN == NREGIMEN &&
+            it.STIPO_CARGA == STIPO_CARGA && it.NIDALERTA_CABECERA == NIDALERTA_CABECERA) {
+            statusFirtsFile = true
+            let arrayFilesNamePush = []
+            let arrayFilesPush = []
+            let arrayFilesNamesCortoPush = []
+
+
+
+            listFileNameInform.forEach((itemFileName, incrementName) => {
+              let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemFileName)
+
+
+              if (respFilterDuplid.length == 0) {
+                arrayFilesNamePush.push(itemFileName)
+                arrayFilesPush.push(respPromiseFileInfoBinary[incrementName]);
+                arrayFilesNamesCortoPush.push(listFileNameCortoInform[incrementName]);
+              }
+            })
+
+
+
+
+            dataInformFile.NIDALERTA = NIDALERTA
+            dataInformFile.NREGIMEN = NREGIMEN
+            dataInformFile.NIDALERTA_CABECERA = NIDALERTA_CABECERA
+            dataInformFile.STIPO_CARGA = STIPO_CARGA
+            dataInformFile.arrFilesName = arrayFilesNamePush//listFileNameInform
+            dataInformFile.arrFiles = arrayFilesPush//respPromiseFileInfoBinary
+            dataInformFile.arrFilesNameCorto = arrayFilesNamesCortoPush//listFileNameCortoInform
+
+            this.arrObjFilesInformeByAlert[incrementFiles] = dataInformFile
 
 
           }
-          
+
         })
-        if(!statusFirtsFile){
-       
+        if (!statusFirtsFile) {
+
           dataInformFile.NIDALERTA = NIDALERTA
           dataInformFile.NREGIMEN = NREGIMEN
           dataInformFile.NIDALERTA_CABECERA = NIDALERTA_CABECERA
@@ -2283,27 +2188,27 @@ export class HistoricoClientesComponent implements OnInit {
           dataInformFile.arrFilesName = listFileNameInform
           dataInformFile.arrFiles = respPromiseFileInfoBinary
           dataInformFile.arrFilesNameCorto = listFileNameCortoInform
-          
+
           this.arrObjFilesInformeByAlert.push(dataInformFile)
         }
-        
+
         /*if(respDuplidArrsObjs > 0){
           
         }else{
           
         }*/
-        
+
       }
 
-   
+
       return true
     } catch (error) {
-     
+
       return false
     }
   }
 
-  isValidationAddFilesInforme(listFileNameInform){
+  isValidationAddFilesInforme(listFileNameInform) {
     let statusFormatFile = false
     for (let item of listFileNameInform) {
       let nameFile = item.split(".")
@@ -2312,63 +2217,63 @@ export class HistoricoClientesComponent implements OnInit {
         return
       }
     }
-    
-      if (statusFormatFile) {
-        swal.fire({
-          title: 'Bandeja del Oficial de Cumplimiento',
-          icon: 'warning',
-          text: 'El archivo no tiene el formato necesario',
-          showCancelButton: false,
-          showConfirmButton: true,
-          confirmButtonColor:'#FA7000',
-          confirmButtonText: 'Aceptar',
-          showCloseButton:true,
-          customClass: { 
-            closeButton : 'OcultarBorde'
-                         },
-           
-        }).then(async (result) => {
-          
-          this.core.loader.hide()
-          return
-        }).catch(err => {
-          console.log("el error : ",err);
-        })
-      }
+
+    if (statusFormatFile) {
+      swal.fire({
+        title: 'Bandeja del Oficial de Cumplimiento',
+        icon: 'warning',
+        text: 'El archivo no tiene el formato necesario',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Aceptar',
+        showCloseButton: true,
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
+      }).then(async (result) => {
+
+        this.core.loader.hide()
+        return
+      }).catch(err => {
+        console.log("el error : ", err);
+      })
+    }
   }
 
   async sendFilesUniversalUpload(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
       this.core.loader.show()
-      
+
       let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
         alertaItem.NIDALERTA == NIDALERTA &&
-        alertaItem.NREGIMEN == NREGIMEN && 
+        alertaItem.NREGIMEN == NREGIMEN &&
         alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
         alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
-        
+
 
       let listFilesAdjuntos = []//archivos
       let listFileNameAdjuntos = []//nombre de archivos
-  
+
       respListFilesAdjuntos.forEach(itemFile => {
         itemFile.arrFiles.forEach(objFile => listFilesAdjuntos.push(objFile))
         itemFile.arrFilesName.forEach(objFile => listFileNameAdjuntos.push(objFile))
       })
-  
-     
+
+
       //this.arrObjFilesInformeByAlert = []//el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021
 
       let promiseUploadAttachedAdjuntos = []
       let promiseUploadFileAdjuntos = []
       for (let i = 0; i < listFileNameAdjuntos.length; i++) {
         let ruta = ''
-        if(NIDALERTA_CABECERA){
+        if (NIDALERTA_CABECERA) {
           ruta = STIPO_CARGA + '/' + NIDALERTA + '/CABECERA/' + NIDALERTA_CABECERA + '/' + this.NPERIODO_PROCESO + '/' + NREGIMEN + '/' + listFileNameAdjuntos[i]
-        }else{
+        } else {
           ruta = STIPO_CARGA + '/' + NIDALERTA + '/' + this.NPERIODO_PROCESO + '/' + NREGIMEN + '/' + listFileNameAdjuntos[i]
         }
-        
+
         let uploadPararms: any = {}
         uploadPararms.NIDALERTA = NIDALERTA;
         uploadPararms.NREGIMEN = NREGIMEN;
@@ -2379,48 +2284,48 @@ export class HistoricoClientesComponent implements OnInit {
         uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
         uploadPararms.listFiles = listFilesAdjuntos
         uploadPararms.listFileName = listFileNameAdjuntos
-        
+
         promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
         promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
       }
-      
-  
-  
-      
-    } catch(error) {
-      console.error("el error : ",error)
+
+
+
+
+    } catch (error) {
+      console.error("el error : ", error)
     }
   }
 
 
   async sendFilesUniversalUploadByRuta(NIDALERTA, NIDALERTA_CABECERA, NREGIMEN, STIPO_CARGA) {
     try {
-      
+
       this.core.loader.show()
-      
-  
+
+
       let respListFilesAdjuntos = [];
-      if(STIPO_CARGA == 'COMPLEMENTO')
-          respListFilesAdjuntos = this.arrObjFilesAdjByCabecera.filter(alertaItem =>
+      if (STIPO_CARGA == 'COMPLEMENTO')
+        respListFilesAdjuntos = this.arrObjFilesAdjByCabecera.filter(alertaItem =>
           alertaItem.NIDALERTA == NIDALERTA &&
-          alertaItem.NREGIMEN == NREGIMEN && 
+          alertaItem.NREGIMEN == NREGIMEN &&
           alertaItem.NIDCABECERA_USUARIO == NIDALERTA_CABECERA &&
           alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
       else
-          respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
+        respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
           alertaItem.NIDALERTA == NIDALERTA &&
-          alertaItem.NREGIMEN == NREGIMEN && 
+          alertaItem.NREGIMEN == NREGIMEN &&
           alertaItem.NIDALERTA_CABECERA == NIDALERTA_CABECERA &&
           alertaItem.STIPO_CARGA == STIPO_CARGA)//archivos base64
       let listFilesAdjuntos = []//archivos
       let listFileNameAdjuntos = []//nombre de archivos
-  
+
       respListFilesAdjuntos.forEach(itemFile => {
         itemFile.arrFiles.forEach(objFile => listFilesAdjuntos.push(objFile))
         itemFile.arrFilesName.forEach(objFile => listFileNameAdjuntos.push(objFile))
       })
-  
+
       //this.arrObjFilesInformeByAlert = []//el this.arrObjFilesInformeByAlert HOY 4 DE MAYO 2021
 
       let promiseUploadAttachedAdjuntos = []
@@ -2430,14 +2335,14 @@ export class HistoricoClientesComponent implements OnInit {
         try {
           let ruta = ''
           let rutaAdjunto = ''
-          if(NIDALERTA_CABECERA){
+          if (NIDALERTA_CABECERA) {
             ruta = STIPO_CARGA + '/' + NIDALERTA + '/CABECERA/' + NIDALERTA_CABECERA + '/' + this.NPERIODO_PROCESO + '/' + NREGIMEN + '/' + itemAdjunto//listFileNameAdjuntos[i]
             rutaAdjunto = STIPO_CARGA + '/' + NIDALERTA + '/CABECERA/' + NIDALERTA_CABECERA + '/' + this.NPERIODO_PROCESO + '/' + NREGIMEN
-          }else{
+          } else {
             ruta = STIPO_CARGA + '/' + NIDALERTA + '/' + this.NPERIODO_PROCESO + '/' + NREGIMEN + '/' + itemAdjunto//listFileNameAdjuntos[i]
             rutaAdjunto = STIPO_CARGA + '/' + NIDALERTA + '/' + this.NPERIODO_PROCESO + '/' + NREGIMEN
           }
-          
+
           let uploadPararms: any = {}
           uploadPararms.NIDALERTA = NIDALERTA;
           uploadPararms.NREGIMEN = NREGIMEN;
@@ -2449,21 +2354,21 @@ export class HistoricoClientesComponent implements OnInit {
           uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
           uploadPararms.listFiles = listFilesAdjuntos
           uploadPararms.listFileName = listFileNameAdjuntos
-          
+
           promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
           promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
         } catch (error) {
-          console.error("el error : ",error)
+          console.error("el error : ", error)
         }
 
       })
-      
+
       let respAwaitResponse1 = await Promise.all(promiseUploadAttachedAdjuntos)
       let respAwaitResponse2 = await Promise.all(promiseUploadFileAdjuntos)
-  
-      
-    } catch(error) {
-      console.error("el error : ",error)
+
+
+    } catch (error) {
+      console.error("el error : ", error)
     }
   }
 
@@ -2474,7 +2379,7 @@ export class HistoricoClientesComponent implements OnInit {
       let files = this.getFiles(alerta, tipoUsuario)
       let listFiles = this.getListFiles(alerta, tipoUsuario)
       let listFileName = this.getListFileName(alerta, tipoUsuario)*/
-      
+
       let STIPO_CARGA = 'INFORMES'
       let STIPO_CARGA_ADJ = 'ADJUNTOS'
       let respListFiles = this.arrObjFilesInformeByAlert.filter(alertaItem =>
@@ -2484,7 +2389,7 @@ export class HistoricoClientesComponent implements OnInit {
       let respListFilesAdjuntos = this.arrObjFilesInformeByAlert.filter(alertaItem =>
         alertaItem.NIDALERTA == NIDALERTA && alertaItem.NREGIMEN === NREGIMEN
         && alertaItem.STIPO_CARGA === STIPO_CARGA_ADJ)//archivos base64
-      
+
       let listFiles = []//archivos
       let listFileName = []//nombre de archivos
 
@@ -2503,7 +2408,7 @@ export class HistoricoClientesComponent implements OnInit {
 
 
 
-      
+
       if (listFiles.length === 0) {
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
@@ -2512,25 +2417,25 @@ export class HistoricoClientesComponent implements OnInit {
           showCancelButton: false,
           showConfirmButton: true,
           confirmButtonText: 'Aceptar',
-          confirmButtonColor:'#FA7000',
-          showCloseButton:true,
-           customClass: { 
-              closeButton : 'OcultarBorde'
-              },
+          confirmButtonColor: '#FA7000',
+          showCloseButton: true,
+          customClass: {
+            closeButton: 'OcultarBorde'
+          },
 
         }).then(async (result: any) => {
           if (result.value) {
             ////
-            
+
           }
         })
       }
       let objAlertaItem = (this.getArray("PENDIENTE-INFORME", NREGIMEN)).filter(it => it.NIDALERTA == NIDALERTA && it.NREGIMEN == NREGIMEN)
       let cantidadResponsables = objAlertaItem[0].arrUsuariosForm.length
       let cantidadInformes = listFileName.length
-     
+
       if (false) {
-        
+
         swal.fire({
           title: 'Bandeja del ' + this.sNameTipoUsuario,
           icon: 'warning',
@@ -2538,15 +2443,15 @@ export class HistoricoClientesComponent implements OnInit {
           showCancelButton: false,
           showConfirmButton: true,
           confirmButtonText: 'Aceptar',
-          confirmButtonColor:'#FA7000',
-          showCloseButton:true,
-           customClass: { 
-              closeButton : 'OcultarBorde'
-              },
+          confirmButtonColor: '#FA7000',
+          showCloseButton: true,
+          customClass: {
+            closeButton: 'OcultarBorde'
+          },
         }).then(async (result: any) => {
           if (result.value) {
             ////
-            
+
           }
         })
         this.core.loader.hide()
@@ -2562,18 +2467,18 @@ export class HistoricoClientesComponent implements OnInit {
           showCancelButton: true,
           showConfirmButton: true,
           //cancelButtonColor:'#dc4545',
-          confirmButtonColor:'#FA7000',
+          confirmButtonColor: '#FA7000',
           confirmButtonText: 'Aceptar',
           cancelButtonText: 'Cancelar',
           showCloseButton: true,
-          
-           customClass: { 
-              closeButton : 'OcultarBorde'
-              },
+
+          customClass: {
+            closeButton: 'OcultarBorde'
+          },
         }).then(async (result: any) => {
           if (result.value) {
             this.core.loader.show()
-           
+
             this.arrObjFilesInformeByAlert = []
             let data: any = {};
             //let user = this.core.storage.get('usuario');
@@ -2588,7 +2493,7 @@ export class HistoricoClientesComponent implements OnInit {
             //data.alerta = alerta
             data.NIDALERTA = NIDALERTA;
             data.NPERIODO_PROCESO = NPERIODO_PROCESO
-        
+
             //data.nIdCabUsuario = this.datosCabecera.NIDALERTA_CABECERA
 
             let respGetArrayAlert = this.getArray("PENDIENTE-INFORME", NREGIMEN);
@@ -2609,7 +2514,7 @@ export class HistoricoClientesComponent implements OnInit {
               uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
               uploadPararms.listFiles = listFiles
               uploadPararms.listFileName = listFileName
-              
+
               promiseUploadAttached.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
               promiseUploadFile.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
@@ -2628,7 +2533,7 @@ export class HistoricoClientesComponent implements OnInit {
               uploadPararms.NIDUSUARIO_MODIFICA = this.ID_USUARIO
               uploadPararms.listFiles = listFilesAdjuntos
               uploadPararms.listFileName = listFileNameAdjuntos
-              
+
               promiseUploadAttachedAdjuntos.push(this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms))
               promiseUploadFileAdjuntos.push(this.userConfigService.UploadFilesInformByAlert(uploadPararms))
 
@@ -2672,7 +2577,7 @@ export class HistoricoClientesComponent implements OnInit {
             dataUpdateStatus.status = "2"
             dataUpdateStatus.regimeId = NREGIMEN
             let respServiceUpdateStatus = await this.userConfigService.updateStatusAlert(dataUpdateStatus)
-         
+
 
             arrAcumuladorIndiceFile.forEach(itemFIle => {
               this.arrObjFilesInformeByAlert.splice(itemFIle, 1)
@@ -2693,17 +2598,17 @@ export class HistoricoClientesComponent implements OnInit {
 
 
             let respPushObj = this.pushObjInArrayByAlert("INFORME-TERMINADO", NREGIMEN, respFilterAlert[0])//push a informe terminado
-           
+
             this.arrObjFilesInformeByAlert = []
-         
+
             this.core.loader.hide()
 
-            
+
             /*this.userConfigService.uploadFilesByAlert(data).then(response => {
              
             });*/
           } else {
-            
+
             this.core.loader.hide()
           }
 
@@ -2724,28 +2629,28 @@ export class HistoricoClientesComponent implements OnInit {
   }
   arrObjFilesAdjByCabecera: any = []
   arrObjFilesComplemento: any = []
-  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO,NOMBRECOMPLETO,ValidadorComplementos) {
+  async addFilesAdjuntosResponsable(event: any, NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA, STIPO_USUARIO, NOMBRECOMPLETO, ValidadorComplementos) {
     try {
-      
+
       let respSetData = await this.setDataFile(event)
       //respPromiseFileInfo
       //listFileNameCortoInform
       //arrFiles
 
-      if(ValidadorComplementos == 'OC-COMPLEMENTOS'){
+      if (ValidadorComplementos == 'OC-COMPLEMENTOS') {
         this.arrObjFilesComplemento = respSetData
       }
-      
-     
 
-     
+
+
+
       let dataInformFile: any = {}
       let dataInfoFilesTmp = this.arrObjFilesAdjByCabecera.filter(itemInfo => itemInfo.NIDCABECERA_USUARIO == NIDCABECERA_USUARIO && itemInfo.NIDALERTA == NIDALERTA && itemInfo.NREGIMEN === NREGIMEN && itemInfo.STIPO_CARGA === STIPO_CARGA)
-      
+
       let statusDuplic = false
       if (dataInfoFilesTmp.length > 0) {
-       
-        let indiceFile = 0 
+
+        let indiceFile = 0
         this.arrObjFilesAdjByCabecera.forEach(it => {
           if (it.NIDCABECERA_USUARIO == NIDCABECERA_USUARIO && it.NIDALERTA == NIDALERTA && it.NREGIMEN === NREGIMEN && it.STIPO_CARGA === STIPO_CARGA) {
             dataInformFile.SRUTA = STIPO_CARGA + '/' + NIDCABECERA_USUARIO + '/' + STIPO_USUARIO
@@ -2756,51 +2661,51 @@ export class HistoricoClientesComponent implements OnInit {
             dataInformFile.STIPO_CARGA = STIPO_CARGA
             dataInformFile.NOMBRECOMPLETO = NOMBRECOMPLETO
 
-            let arrayFilesNamePush:any = []
-            let arrayFilesPush:any = []
-            let arrayFilesNamesCortoPush:any = []
+            let arrayFilesNamePush: any = []
+            let arrayFilesPush: any = []
+            let arrayFilesNamesCortoPush: any = []
 
             let incArrFileName = 0;
-            if (it.arrFilesName.length > 0) 
-            it.arrFilesName.forEach(itemFileName => {
-              let incrementadorFileName = 0;
-              let respFilterNameCoincid = []
-              respSetData.listFileNameInform.forEach(itemNameCoin => {
-                let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemNameCoin)
+            if (it.arrFilesName.length > 0)
+              it.arrFilesName.forEach(itemFileName => {
+                let incrementadorFileName = 0;
+                let respFilterNameCoincid = []
+                respSetData.listFileNameInform.forEach(itemNameCoin => {
+                  let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemNameCoin)
 
-                if(respFilterDuplid.length == 0){
-                  if(itemNameCoin == itemFileName){
-                    arrayFilesNamePush.push(itemNameCoin);
-                    arrayFilesPush.push(respSetData.respPromiseFileInfo[incrementadorFileName]);
-                    arrayFilesNamesCortoPush.push(respSetData.listFileNameCortoInform[incrementadorFileName]);
-                    //respFilterNameCoincid.push(it)
-                  }else{
-                    arrayFilesNamePush.push(itemNameCoin)
-                    arrayFilesPush.push(respSetData.respPromiseFileInfo[incrementadorFileName]);
-                    arrayFilesNamesCortoPush.push(respSetData.listFileNameCortoInform[incrementadorFileName]);
+                  if (respFilterDuplid.length == 0) {
+                    if (itemNameCoin == itemFileName) {
+                      arrayFilesNamePush.push(itemNameCoin);
+                      arrayFilesPush.push(respSetData.respPromiseFileInfo[incrementadorFileName]);
+                      arrayFilesNamesCortoPush.push(respSetData.listFileNameCortoInform[incrementadorFileName]);
+                      //respFilterNameCoincid.push(it)
+                    } else {
+                      arrayFilesNamePush.push(itemNameCoin)
+                      arrayFilesPush.push(respSetData.respPromiseFileInfo[incrementadorFileName]);
+                      arrayFilesNamesCortoPush.push(respSetData.listFileNameCortoInform[incrementadorFileName]);
+                    }
                   }
+
+                  incrementadorFileName++
+                })
+                let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemFileName)
+
+                if (respFilterDuplid.length == 0) {
+                  arrayFilesNamePush.push(itemFileName)
+                  arrayFilesPush.push(it.arrFilesName[incArrFileName]);
+                  arrayFilesNamesCortoPush.push(it.arrFilesName[incArrFileName]);
                 }
-
-                incrementadorFileName++
+                incArrFileName++
               })
-              let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemFileName)
-
-              if(respFilterDuplid.length == 0){
-                arrayFilesNamePush.push(itemFileName)
-                arrayFilesPush.push(it.arrFilesName[incArrFileName]);
-                arrayFilesNamesCortoPush.push(it.arrFilesName[incArrFileName]);
-              }
-              incArrFileName++
-            })
-            else{
+            else {
               let incrementadorFileName = 0;
               respSetData.listFileNameInform.forEach(itemNameCoin => {
                 let respFilterDuplid = arrayFilesNamePush.filter(itemFil => itemFil == itemNameCoin)
-              
-                if(respFilterDuplid.length == 0){
-                    arrayFilesNamePush.push(itemNameCoin)
-                    arrayFilesPush.push(respSetData.respPromiseFileInfo[incrementadorFileName]);
-                    arrayFilesNamesCortoPush.push(respSetData.listFileNameCortoInform[incrementadorFileName]);
+
+                if (respFilterDuplid.length == 0) {
+                  arrayFilesNamePush.push(itemNameCoin)
+                  arrayFilesPush.push(respSetData.respPromiseFileInfo[incrementadorFileName]);
+                  arrayFilesNamesCortoPush.push(respSetData.listFileNameCortoInform[incrementadorFileName]);
                 }
                 incrementadorFileName++
               })
@@ -2820,9 +2725,9 @@ export class HistoricoClientesComponent implements OnInit {
           indiceFile++
         })
       }
-     
+
       if (!statusDuplic) {
-      
+
         dataInformFile.SRUTA = STIPO_CARGA + '/' + NIDCABECERA_USUARIO + '/' + STIPO_USUARIO
         dataInformFile.NIDCABECERA_USUARIO = NIDCABECERA_USUARIO
         dataInformFile.NIDALERTA = NIDALERTA
@@ -2836,24 +2741,24 @@ export class HistoricoClientesComponent implements OnInit {
         this.arrObjFilesAdjByCabecera.push(dataInformFile)
       }
 
-      console.log("arrObjFilesAdjByCabecera",this.arrObjFilesAdjByCabecera)
+      console.log("arrObjFilesAdjByCabecera", this.arrObjFilesAdjByCabecera)
       return true
       //await this.sendFilesInformes(NIDALERTA, respPromiseFileInfo, listFileNameInform)
     } catch (error) {
-  
+
     }
   }
 
 
   async setDataFile(event) {
- 
+
     let files = event.target.files;
 
     let arrFiles = Array.from(files)
-    
+
     let listFileNameInform: any = []
     arrFiles.forEach(it => listFileNameInform.push(it["name"]))
-   
+
     let listFileNameCortoInform = []
     let statusFormatFile = false
     for (let item of listFileNameInform) {
@@ -2874,17 +2779,17 @@ export class HistoricoClientesComponent implements OnInit {
         text: 'El archivo no tiene el formato necesario',
         showCancelButton: false,
         showConfirmButton: true,
-        confirmButtonColor:'#FA7000',
+        confirmButtonColor: '#FA7000',
         confirmButtonText: 'Aceptar',
-        showCloseButton:true,
-           customClass: { 
-              closeButton : 'OcultarBorde'
-              },
-        
+        showCloseButton: true,
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
       }).then(async (result) => {
-      
+
       }).catch(err => {
-      
+
       })
     }
     let listDataFileInform: any = []
@@ -2902,20 +2807,20 @@ export class HistoricoClientesComponent implements OnInit {
       let files = this.getFiles(alerta, tipoUsuario)
       let listFiles = this.getListFiles(alerta, tipoUsuario)
       let listFileName = this.getListFileName(alerta, tipoUsuario)*/
-     
+
       //let STIPO_CARGA = 'ADJUNTOS-FORM'
 
 
       let respValidData = await this.getValidationAndData(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA)
 
-    
+
 
 
       if (respValidData.listFiles.length > 0) {
         //let data: any = {};
         //let user = this.core.storage.get('usuario');
         let NPERIODO_PROCESO = this.NPERIODO_PROCESO//this.core.storage.get('NPERIODO_PROCESO');
-        
+
 
         let promiseUploadAttached = []
         let promiseUploadFile = []
@@ -2926,7 +2831,7 @@ export class HistoricoClientesComponent implements OnInit {
           uploadPararms.NIDALERTA_CABECERA = NIDCABECERA_USUARIO
           uploadPararms.NREGIMEN = NREGIMEN;
           uploadPararms.STIPO_CARGA = STIPO_CARGA;
-          uploadPararms.STIPO_USUARIO= STIPO_USU;
+          uploadPararms.STIPO_USUARIO = STIPO_USU;
           uploadPararms.NPERIODO_PROCESO = NPERIODO_PROCESO;
           uploadPararms.SRUTA_ADJUNTO = ruta + '/' + respValidData.listFileName[i];
           uploadPararms.SRUTA = ruta;
@@ -2934,7 +2839,7 @@ export class HistoricoClientesComponent implements OnInit {
           uploadPararms.NIDUSUARIO_ASIGNADO = this.ID_USUARIO
           uploadPararms.listFiles = respValidData.listFiles
           uploadPararms.listFileName = respValidData.listFileName
-       
+
           promiseUploadAttached.push(this.userConfigService.insertAttachedFiles(uploadPararms))
           promiseUploadFile.push(this.userConfigService.UploadFilesUniversalByRuta(uploadPararms))
 
@@ -2945,7 +2850,7 @@ export class HistoricoClientesComponent implements OnInit {
         let respPromiseAllAttached = await Promise.all(promiseUploadAttached)
         let respPromiseAllUploadFile = await Promise.all(promiseUploadFile)
 
-  
+
 
         //return true
 
@@ -2972,9 +2877,9 @@ export class HistoricoClientesComponent implements OnInit {
         arrAcumuladorIndiceFile.forEach(itemFile => {
           this.arrObjFilesAdjByCabecera.splice(itemFile, 1)
         })
-        
+
         //let respArrayResponsable = this.getArray(SESTADO, NREGIMEN)
-        
+
         //let indicadorObjSplice = 0
         /*let indicadorObj = 0
         respArrayResponsable.forEach(objAler => {
@@ -2988,36 +2893,36 @@ export class HistoricoClientesComponent implements OnInit {
 
 
         ///////let respPushObj = this.pushObjInArrayByAlert("INFORME-TERMINADO", NREGIMEN, respFilterAlert[0])//push a informe terminado
-        
+
       } else {
         return false
       }
-      
+
       //this.core.loader.hide()
       return null
     } catch (error) {
-     
+
     }
   }
 
   getValidationAndData(NIDCABECERA_USUARIO, NIDALERTA, NREGIMEN, STIPO_CARGA) {
     try {
-      
-    let respListFiles = this.arrObjFilesAdjByCabecera.filter(alertaItem =>
-      alertaItem.NIDALERTA == NIDALERTA && alertaItem.NREGIMEN === NREGIMEN
-      && alertaItem.STIPO_CARGA === STIPO_CARGA && alertaItem.NIDCABECERA_USUARIO === NIDCABECERA_USUARIO)//archivos base64
 
-    let listFiles = []//archivos
-    let listFileName = []//nombre de archivos
+      let respListFiles = this.arrObjFilesAdjByCabecera.filter(alertaItem =>
+        alertaItem.NIDALERTA == NIDALERTA && alertaItem.NREGIMEN === NREGIMEN
+        && alertaItem.STIPO_CARGA === STIPO_CARGA && alertaItem.NIDCABECERA_USUARIO === NIDCABECERA_USUARIO)//archivos base64
+
+      let listFiles = []//archivos
+      let listFileName = []//nombre de archivos
 
 
-    respListFiles.forEach(itemFile => {
-      itemFile.arrFiles.forEach(objFile => listFiles.push(objFile))
-      itemFile.arrFilesName.forEach(objFile => listFileName.push(objFile))
-    })
-    return { listFiles: listFiles, listFileName: listFileName }
+      respListFiles.forEach(itemFile => {
+        itemFile.arrFiles.forEach(objFile => listFiles.push(objFile))
+        itemFile.arrFilesName.forEach(objFile => listFileName.push(objFile))
+      })
+      return { listFiles: listFiles, listFileName: listFileName }
     } catch (error) {
-      console.error("el erorr : ",error)
+      console.error("el erorr : ", error)
     }
   }
 
@@ -3031,26 +2936,26 @@ export class HistoricoClientesComponent implements OnInit {
   }
 
   async fillReport(itemAlerta, NIDUSUARIO_ASIGNADO) {
-   
+
     try {
-     
-      let objALERTA_NEW:any = {};
-      let arrayRG = [7,8,9,10,11,12,13,14,15]
+
+      let objALERTA_NEW: any = {};
+      let arrayRG = [7, 8, 9, 10, 11, 12, 13, 14, 15]
       let respFilterRG = arrayRG.filter(it => it == itemAlerta.NIDALERTA)
-      if(respFilterRG.length > 0){
+      if (respFilterRG.length > 0) {
         objALERTA_NEW.NIDALERTA = 7
         //objALERTA_NEW.NIDALERTA = itemAlerta.NIDALERTA
-        objALERTA_NEW.NOM_ALERTA = "RG"      
-      }else{
+        objALERTA_NEW.NOM_ALERTA = "RG"
+      } else {
         objALERTA_NEW.NIDALERTA = itemAlerta.NIDALERTA
         objALERTA_NEW.NOM_ALERTA = itemAlerta.SNOMBRE_ALERTA
       }
-      if(itemAlerta.NIDALERTA == 2) {
-        NIDUSUARIO_ASIGNADO = 0 
+      if (itemAlerta.NIDALERTA == 2) {
+        NIDUSUARIO_ASIGNADO = 0
       }
       //let param = { NIDALERTA: objALERTA_NEW.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: itemAlerta.NREGIMEN, NIDUSUARIO_ASIGNADO: NIDUSUARIO_ASIGNADO, SNOMBRE_ALERTA: objALERTA_NEW.NOM_ALERTA }
-      let param = { NIDALERTA: objALERTA_NEW.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: itemAlerta.NREGIMEN, NIDUSUARIO_ASIGNADO: NIDUSUARIO_ASIGNADO, SNOMBRE_ALERTA: objALERTA_NEW.NOM_ALERTA,P_NIDALERTA_ORI: itemAlerta.NIDALERTA  }
-     
+      let param = { NIDALERTA: objALERTA_NEW.NIDALERTA, NPERIODO_PROCESO: this.NPERIODO_PROCESO, NIDREGIMEN: itemAlerta.NREGIMEN, NIDUSUARIO_ASIGNADO: NIDUSUARIO_ASIGNADO, SNOMBRE_ALERTA: objALERTA_NEW.NOM_ALERTA, P_NIDALERTA_ORI: itemAlerta.NIDALERTA }
+
       let response = await this.userConfigService.fillReport(param)
       response = await fetch(`data:application/octet-stream;base64,${response.base64}`)
       const blob = await response.blob()
@@ -3060,76 +2965,76 @@ export class HistoricoClientesComponent implements OnInit {
       link.download = objALERTA_NEW.NOM_ALERTA + '.docx'
       link.click()
     } catch (error) {
-      
+
     }
   }
 
-  async getExcelListAlert(NIDALERTA,NIDREGIMEN) {
+  async getExcelListAlert(NIDALERTA, NIDREGIMEN) {
     let jsonData: any = {};
     jsonData.P_NIDALERTA = NIDALERTA;
     jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
 
-    
+
     let respData: any = [];
     if (NIDALERTA == 3) {
 
-        respData = await this.userConfigService.getListGafiAlert(jsonData);
+      respData = await this.userConfigService.getListGafiAlert(jsonData);
 
-        
-        if (respData.length > 0) {
-            await this.excelService.exportAsExcelFile(respData, "Registros de alerta C3");
-        }
+
+      if (respData.length > 0) {
+        await this.excelService.exportAsExcelFile(respData, "Registros de alerta C3");
+      }
     }
     if (NIDALERTA == 4) {
-        //let respData:any = [];
-        jsonData.P_NIDREGIMEN = NIDREGIMEN;
-        respData = await this.userConfigService.getListNCAlert(jsonData);
+      //let respData:any = [];
+      jsonData.P_NIDREGIMEN = NIDREGIMEN;
+      respData = await this.userConfigService.getListNCAlert(jsonData);
 
-        
-        if (respData.length > 0) {
-            await this.excelService.exportAsExcelFile(respData, "Registros de alerta S1");
-        }
+
+      if (respData.length > 0) {
+        await this.excelService.exportAsExcelFile(respData, "Registros de alerta S1");
+      }
     }
 
     if (NIDALERTA == 5) {
-        //let respData:any = [];
-        respData = await this.userConfigService.getListDirDuplicAlert(jsonData);
+      //let respData:any = [];
+      respData = await this.userConfigService.getListDirDuplicAlert(jsonData);
 
-        
-        if (respData.length > 0) {
-            await this.excelService.exportAsExcelFile(respData, "Registros de alerta S2");
-        }
+
+      if (respData.length > 0) {
+        await this.excelService.exportAsExcelFile(respData, "Registros de alerta S2");
+      }
     }
     if (NIDALERTA == 10) {
-        //let jsonData:any = {};
-        //jsonData.P_NIDALERTA = this.NIDALERTA;//this.NIDALERTA;
-        //jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+      //let jsonData:any = {};
+      //jsonData.P_NIDALERTA = this.NIDALERTA;//this.NIDALERTA;
+      //jsonData.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
 
-       
 
-        respData = await this.userConfigService.getListClienteRentasRAltoAlert(jsonData);
 
-       
-        if (respData.length > 0) {
-            await this.excelService.exportAsExcelFile(respData, "Registros de alerta RG4");
-        }
+      respData = await this.userConfigService.getListClienteRentasRAltoAlert(jsonData);
+
+
+      if (respData.length > 0) {
+        await this.excelService.exportAsExcelFile(respData, "Registros de alerta RG4");
+      }
     }
     if (respData.length <= 0) {
-        swal.fire({
-            title: 'Bandeja de Formularios',
-            icon: 'warning',
-            text: 'No hay información para esta alerta y período.',
-            showCancelButton: false,
-            confirmButtonColor: '#FA7000',
-            confirmButtonText: 'Continuar',
-            showCloseButton: true,
-            customClass: { 
-              closeButton : 'OcultarBorde'
-                           },
-             
-        }).then((result) => {
-        })
-        return true;
+      swal.fire({
+        title: 'Bandeja de Formularios',
+        icon: 'warning',
+        text: 'No hay información para esta alerta y período.',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
+      }).then((result) => {
+      })
+      return true;
     }
   }
 
@@ -3151,10 +3056,10 @@ export class HistoricoClientesComponent implements OnInit {
       }
       indiceSrc++
     }*/
-    /*if(){
+  /*if(){
 
-    }*/
-    
+  }*/
+
   //}
 
   /*getEtiquetaDinamic(indice,icono){
@@ -3208,169 +3113,156 @@ export class HistoricoClientesComponent implements OnInit {
       return 'regSimpli'
     }
   }*/
-  redict(){
-    document.getElementById('acordionPENDIENTE-INFORMEGral0').focus({ preventScroll : false})
+  redict() {
+    document.getElementById('acordionPENDIENTE-INFORMEGral0').focus({ preventScroll: false })
   }
-  redictBody(){
-    document.getElementById('consulta0').focus({ preventScroll : false})
-  }
-
-  redictM(){
-    document.getElementById('acordionPENDIENTE-INFORMEGral0').focus({ preventScroll : false})
-  }
-  redictBodyM(){
-    document.getElementById('consulta0').focus({ preventScroll : false})
+  redictBody() {
+    document.getElementById('consulta0').focus({ preventScroll: false })
   }
 
+  redictM() {
+    document.getElementById('acordionPENDIENTE-INFORMEGral0').focus({ preventScroll: false })
+  }
+  redictBodyM() {
+    document.getElementById('consulta0').focus({ preventScroll: false })
+  }
 
-  ListPeriodos:any = []
-  ListAnnos:any =[]
-  IDListAnno:number = 0
-  IDListPeriodo:string = "0"
+
+  ListPeriodos: any = []
+  ListAnnos: any = []
+  IDListAnno: number = 0
+  IDListPeriodo: string = "0"
   NewListAnnos
-  NewListPeriodos 
-  async obtenerPeriodos(){
-   
-    this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
-    
-    this.ListPeriodos.forEach((element,inc) => {
-        let anno =  element.endDate.toString().substr(6,4)
-        let mes = element.endDate.toString().substr(3,2)
-        let dia = element.endDate.toString().substr(0,2) 
-        this.ListPeriodos[inc].periodo =  anno + mes + dia
-        
-    });
-    console.log("Periodos",this.ListPeriodos)
-    
-      for( let i = 0; i < this.ListPeriodos.length ; i++){
-        let exists = true
-        let data:any = {}
-        data.ID = i
-        data.ANNO =  this.ListPeriodos[i].endDate.toString().substr(6,4) 
-        data.FECHAEND =  this.ListPeriodos[i].endDate
-        this.ListAnnos.push(data)
-       
-      }
-     
-     let sinRepetidos = this.ListAnnos.filter((valorActual, indiceActual, arreglo) => {
-          return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.ANNO) === JSON.stringify(valorActual.ANNO)) === indiceActual
+  NewListPeriodos
+  async obtenerPeriodos() {
+
+    // this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
+    await this.sbsReportService.getSignalFrequencyList().then(ListPeriodos => {
+      this.ListPeriodos = ListPeriodos
+      this.ListPeriodos.forEach((element, inc) => {
+        let anno = element.endDate.toString().substr(6, 4)
+        let mes = element.endDate.toString().substr(3, 2)
+        let dia = element.endDate.toString().substr(0, 2)
+        this.ListPeriodos[inc].periodo = anno + mes + dia
       });
-       this.NewListAnnos = sinRepetidos
+      console.log("Periodos", this.ListPeriodos)
+      for (let i = 0; i < this.ListPeriodos.length; i++) {
+        let exists = true
+        let data: any = {}
+        data.ID = i
+        data.ANNO = this.ListPeriodos[i].endDate.toString().substr(6, 4)
+        data.FECHAEND = this.ListPeriodos[i].endDate
+        this.ListAnnos.push(data)
+      }
+      let sinRepetidos = this.ListAnnos.filter((valorActual, indiceActual, arreglo) => {
+        return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.ANNO) === JSON.stringify(valorActual.ANNO)) === indiceActual
+      });
+      this.NewListAnnos = sinRepetidos
       console.log("Sin repetidos es:", sinRepetidos);
+    }).then(async() => {
+      await this.ReemplazarData().then(async()=>{
+       await this.EliminarData()
+      })
+    }).then(async()=>{
+      await this.Iniciar()
+    })
 
-      await this.ReemplazarData()
-  }
-  
-  async BuscarPeriodo(event){
-     
-      console.log("IDListAnno:", this.IDListAnno);
-     
-        // this.NewListPeriodos = await this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno )
-        this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
-   
-        this.IDListPeriodo = "0"
-   
-      
-     
+
   }
 
-  async SeleccionarPeriodo(){
-    console.log("IDListPeriodo",this.IDListPeriodo)
-    
-   
-     this.arrResponsablesRevisadoGral = []
-  
-     this.arrResponsablesRevisadoSimpli = []
+  async BuscarPeriodo(event) {
 
-     this.arrResponsablesInformeTerminadoGral = []
- 
-     this.arrResponsablesInformeTerminadoSimpli = []
-     //let combo1 = this.IDListAnno.toString()
-    await this.GuardarData()
+    console.log("IDListAnno:", this.IDListAnno);
+
+    // this.NewListPeriodos = await this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno )
+    this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6, 4) == this.IDListAnno && it.status !== "VIGENTE")
+
+    this.IDListPeriodo = "0"
+
+
+
+  }
+
+  async SeleccionarPeriodo() {
+    console.log("IDListPeriodo", this.IDListPeriodo)
+
+
+    this.arrResponsablesRevisadoGral = []
+
+    this.arrResponsablesRevisadoSimpli = []
+
+    this.arrResponsablesInformeTerminadoGral = []
+
+    this.arrResponsablesInformeTerminadoSimpli = []
+    //let combo1 = this.IDListAnno.toString()
+    //await this.GuardarData()
     await this.Iniciar()
-    
-  } 
 
-  async GuardarData(){
-    localStorage.setItem("Combo1",this.IDListAnno.toString())
-    localStorage.setItem("Combo2",this.IDListPeriodo)
-    
-    
   }
 
-  async ReemplazarData(){
+  // async GuardarData() {
+  //   localStorage.setItem("Combo1", this.IDListAnno.toString())
+  //   localStorage.setItem("Combo2", this.IDListPeriodo)
+  // }
 
-    
-    if(localStorage.getItem("Combo1") !== null && localStorage.getItem("Combo2") !== null  ){
-    
+  async ReemplazarData() {
+    if (localStorage.getItem("Combo1") !== null && localStorage.getItem("Combo2") !== null) {
       this.IDListAnno = parseInt(localStorage.getItem("Combo1"))
       await this.BuscarPeriodo('')
       this.IDListPeriodo = localStorage.getItem("Combo2")
-      
       this.arrResponsablesRevisadoGral = []
-  
-     this.arrResponsablesRevisadoSimpli = []
-
-     this.arrResponsablesInformeTerminadoGral = []
- 
-     this.arrResponsablesInformeTerminadoSimpli = []
-
-     
-      await this.Iniciar()
+      this.arrResponsablesRevisadoSimpli = []
+      this.arrResponsablesInformeTerminadoGral = []
+      this.arrResponsablesInformeTerminadoSimpli = []
     }
-    await this.EliminarData()
-    
-
-  
-    
   }
 
-  async EliminarData(){
+  async EliminarData() {
     localStorage.removeItem("Combo1")
     localStorage.removeItem("Combo2")
   }
 
 
 
- async Iniciar(){
+  async Iniciar() {
     this.core.config.rest.LimpiarDataGestor()
     this.core.loader.show();
     let usuario = this.core.storage.get('usuario')
-    
+
     this.STIPO_USUARIO = usuario['tipoUsuario']
     this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
-    
+
     this.setStatesInit();
 
-    this.arrListSections = [{'nombre':'Pendiente','href':''},{'nombre':'Completado','href':''},{'nombre':'Devuelto','href':''},{'nombre':'Revisado','href':''},{'nombre':'PendienteInforme','href':''}]
+    this.arrListSections = [{ 'nombre': 'Pendiente', 'href': '' }, { 'nombre': 'Completado', 'href': '' }, { 'nombre': 'Devuelto', 'href': '' }, { 'nombre': 'Revisado', 'href': '' }, { 'nombre': 'PendienteInforme', 'href': '' }]
 
 
-  
-    
-    
-    this.NPERIODO_PROCESO =  this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
+
+
+
+    this.NPERIODO_PROCESO = this.IDListPeriodo//parseInt(localStorage.getItem("periodo")) this.IDListPeriodo/
     await this.getOfficialAlertFormList()
-    this.arrRegimen = this.getRegimenDinamic();
-   
+    this.arrRegimen = await this.getRegimenDinamic();
+
     if (this.STIPO_USUARIO === 'RE') {
       this.userGroupListGral = [1]
       this.userGroupListSimpli = [1]
     }
- 
-   
+
+
     this.getTipoUsuario()
     this.fillFileGroup()
-   
+
 
     this.core.loader.hide();
-    }
-   
-    
-    
   }
 
 
 
-  
+}
+
+
+
+
 
 

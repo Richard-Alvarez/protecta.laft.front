@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit,OnDestroy ,ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import swal from 'sweetalert2';
 import { environment } from 'src/environments/environment'
@@ -23,7 +23,7 @@ import { SbsreportService } from '../../services/sbsreport.service';
 // })
 
 
-export class ResponsableGlobalComponent {
+export class ResponsableGlobalComponent implements OnDestroy {
 
 
   /*indiceIconDinamic;
@@ -119,10 +119,12 @@ export class ResponsableGlobalComponent {
     // private spinner: NgxSpinnerService,
     
   ) { }
-
+  ngOnDestroy() {
+    localStorage.removeItem("objFocusPositionReturn")
+  }
   async ngOnInit() {
 
-    await this.obtenerPeriodos()
+  
 
     var URLactual = window.location + " ";
     let link = URLactual.split("/")
@@ -137,6 +139,31 @@ export class ResponsableGlobalComponent {
     this.IDPERFIL = usuario['idPerfil']
     this.ID_USUARIO = this.core.storage.get('usuario')['idUsuario']
   if(this.linkactual == "historico-colaborador" || this.linkactual == "historico-proveedor" || this.linkactual == "historico-contraparte"){
+      await this.obtenerPeriodos().then(()=>{
+        this.getDataComplements();
+      })
+  }else{
+    this.setStatesInit();
+    this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
+    await this.getOfficialAlertFormList()
+    this.arrRegimen = this.getRegimenDinamic();
+    
+    if (this.STIPO_USUARIO === 'RE') {
+      this.userGroupListGral = [1]
+      this.userGroupListSimpli = [1]
+    }
+    //this.devueltoHijo.setRegimiento(1);
+    //this.userGroupListSimpli.push('TI')
+   
+    this.getTipoUsuario()
+    this.fillFileGroup()
+  }
+    
+    this.core.loader.hide();
+
+  }
+
+  async getDataComplements(){
     if(this.IDListPeriodo === "0"){
       this.setStatesInit();
       //this.NPERIODO_PROCESO = 0
@@ -177,27 +204,7 @@ export class ResponsableGlobalComponent {
       this.fillFileGroup()
       
     }
-  }else{
-    this.setStatesInit();
-    this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
-    await this.getOfficialAlertFormList()
-    this.arrRegimen = this.getRegimenDinamic();
-    
-    if (this.STIPO_USUARIO === 'RE') {
-      this.userGroupListGral = [1]
-      this.userGroupListSimpli = [1]
-    }
-    //this.devueltoHijo.setRegimiento(1);
-    //this.userGroupListSimpli.push('TI')
-   
-    this.getTipoUsuario()
-    this.fillFileGroup()
   }
-    
-    this.core.loader.hide();
-
-  }
-
   async getAllAttachedFiles() {
   //    await this.getAttachedFiles(this.getArray(this.stateCompletado.sState, 1), 'RE')
   //    await this.getAttachedFiles(this.getArray(this.stateCompletado.sState, 1), 'OC')
@@ -3076,35 +3083,53 @@ export class ResponsableGlobalComponent {
   NewListAnnos
   NewListPeriodos 
   async obtenerPeriodos(){
-   
-    this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
-    
-    this.ListPeriodos.forEach((element,inc) => {
-        let anno =  element.endDate.toString().substr(6,4)
-        let mes = element.endDate.toString().substr(3,2)
-        let dia = element.endDate.toString().substr(0,2) 
-        this.ListPeriodos[inc].periodo =  anno + mes + dia
-        
-    });
-    console.log("Periodos",this.ListPeriodos)
-    
-      for( let i = 0; i < this.ListPeriodos.length ; i++){
-        let exists = true
-        let data:any = {}
-        data.ID = i
-        data.ANNO =  this.ListPeriodos[i].endDate.toString().substr(6,4) 
-        data.FECHAEND =  this.ListPeriodos[i].endDate
-        this.ListAnnos.push(data)
-       
-      }
-     
-     let sinRepetidos = this.ListAnnos.filter((valorActual, indiceActual, arreglo) => {
-          return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.ANNO) === JSON.stringify(valorActual.ANNO)) === indiceActual
+    this.sbsReportService.getSignalFrequencyList().then(ListPeriodos => {
+      this.ListPeriodos = ListPeriodos
+      this.ListPeriodos.forEach((element, inc) => {
+        let anno = element.endDate.toString().substr(6, 4)
+        let mes = element.endDate.toString().substr(3, 2)
+        let dia = element.endDate.toString().substr(0, 2)
+        this.ListPeriodos[inc].periodo = anno + mes + dia
       });
-       this.NewListAnnos = sinRepetidos
+      console.log("Periodos", this.ListPeriodos)
+      for (let i = 0; i < this.ListPeriodos.length; i++) {
+        let exists = true
+        let data: any = {}
+        data.ID = i
+        data.ANNO = this.ListPeriodos[i].endDate.toString().substr(6, 4)
+        data.FECHAEND = this.ListPeriodos[i].endDate
+        this.ListAnnos.push(data)
+      }
+      let sinRepetidos = this.ListAnnos.filter((valorActual, indiceActual, arreglo) => {
+        return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.ANNO) === JSON.stringify(valorActual.ANNO)) === indiceActual
+      });
+      this.NewListAnnos = sinRepetidos
       console.log("Sin repetidos es:", sinRepetidos);
+    }).then(() => {
+      this.ReemplazarData().then(()=>{
+        this.EliminarData()
+      })
+    }).then(()=>{
+      this.getDataComplements();
+    })
   }
-  
+  async ReemplazarData() {
+    if (localStorage.getItem("Combo1") !== null && localStorage.getItem("Combo2") !== null) {
+      this.IDListAnno = parseInt(localStorage.getItem("Combo1"))
+      await this.BuscarPeriodo('')
+      this.IDListPeriodo = localStorage.getItem("Combo2")
+      this.arrResponsablesRevisadoGral = []
+      this.arrResponsablesRevisadoSimpli = []
+      this.arrResponsablesInformeTerminadoGral = []
+      this.arrResponsablesInformeTerminadoSimpli = []
+    }
+  }
+
+  async EliminarData() {
+    localStorage.removeItem("Combo1")
+    localStorage.removeItem("Combo2")
+  }
+
   BuscarPeriodo(event){
      
       console.log("IDListAnno:", this.IDListAnno);
@@ -3121,7 +3146,7 @@ export class ResponsableGlobalComponent {
   async SeleccionarPeriodo(){
     console.log("IDListPeriodo",this.IDListPeriodo)
     this.VALIDADOR = 1
-    await this.ngOnInit()
+    await this.getDataComplements()
     
   } 
 
