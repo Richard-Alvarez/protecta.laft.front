@@ -147,11 +147,14 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     NPERIODO_PROCESO
     SESTADO_BUTTON_SAVE
     NewListCheck: any = []
+    ValidadorHistorico
+    HistoricoPeriodo
     ngOnDestroy() {
         localStorage.setItem("objFocusPosition", "{}")
         localStorage.getItem("NIDGRUPO")
     }
     async ngOnInit() {
+        debugger
         this.core.loader.show()
         localStorage.setItem("NIDGRUPORETURN", localStorage.getItem("NIDGRUPO"))
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
@@ -160,6 +163,10 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         this.nidregimen = localStorage.getItem("NREGIMEN");
         this.nidalerta = localStorage.getItem("NIDALERTA");
         var paramCliente: any = localStorage.getItem("paramCliente");
+
+        this.ValidadorHistorico = localStorage.getItem("ValidadorHistorico");
+        this.HistoricoPeriodo = localStorage.getItem("NuevoPeriodoHistorico");
+
         if (paramCliente != null && paramCliente != "") {
             localStorage.setItem("paramCliente", "");
             let pestana = localStorage.getItem("pestana");
@@ -180,7 +187,12 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 nSelectSubPestania = '0'
             localStorage.setItem("nSelectSubPestaniaReturn", nSelectSubPestania);
         }
-        this.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+        //this.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+        if (this.ValidadorHistorico != 0) {
+            this.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+        } else {
+            this.NPERIODO_PROCESO= parseInt(this.HistoricoPeriodo)
+        }
         await this.ListarCargo()
         await this.getFormData()
         await this.getMovementHistory()
@@ -407,6 +419,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     NIDSUBGRUPOSEN
     IDGRUPOSENALGestor
     async getFormData() {
+        debugger
         this.tipoClienteCRF = await localStorage.getItem("tipoClienteCRF")
         this.tipoClienteGC = await localStorage.getItem('tipoClienteGC')
         this.boolClienteReforzado = await JSON.parse(localStorage.getItem('boolClienteReforzado'))
@@ -441,7 +454,14 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA == null ? "" : this.SNOM_COMPLETO_EMPRESA
             this.formData.SNUM_DOCUMENTO_EMPRESA = this.SNUM_DOCUMENTO_EMPRESA == null ? "" : this.SNUM_DOCUMENTO_EMPRESA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
+
             this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
+            // if (this.ValidadorHistorico != 0) {
+            //     this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
+            // } else {
+            //     this.formData.NPERIODO_PROCESO  = parseInt(this.HistoricoPeriodo)
+            // }
+
             this.formData.NTIPO_DOCUMENTO = localStorage.getItem('NTIPO_DOCUMENTO')
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             this.formData.STIPO_AND_NUM_DOC = ''
@@ -612,7 +632,14 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             this.formData.SZONA_GEOGRAFICA = localStorage.getItem('SZONA_GEOGRAFICA')
             this.formData.SZONA_GEOGRAFICA = this.formData.SZONA_GEOGRAFICA === 'null' ? '' : this.formData.SZONA_GEOGRAFICA === undefined ? '' : this.formData.SZONA_GEOGRAFICA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
-            this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
+
+            //this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
+            if (this.ValidadorHistorico != 0) {
+                this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
+            } else {
+                this.formData.NPERIODO_PROCESO  = parseInt(this.HistoricoPeriodo)
+            }
+
             this.formData.NTIPO_DOCUMENTO = localStorage.getItem('NTIPO_DOCUMENTO')
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA == null ? "" : this.SNOM_COMPLETO_EMPRESA
