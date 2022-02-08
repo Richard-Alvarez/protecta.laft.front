@@ -98,6 +98,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     ValorCombo: any = []
     ValorListaCoincidencias: any = []
     SNOM_COMPLETO_EMPRESA = ''
+    NIDPROVEEDOR = ''
     SNUM_DOCUMENTO_EMPRESA = ''
     NPERIODO_PROCESO_ITEM = ''
     arrWebsLinks: any = []
@@ -147,19 +148,27 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     NPERIODO_PROCESO
     SESTADO_BUTTON_SAVE
     NewListCheck: any = []
+    ValidadorHistorico
+    HistoricoPeriodo
     ngOnDestroy() {
         localStorage.setItem("objFocusPosition", "{}")
         localStorage.getItem("NIDGRUPO")
     }
     async ngOnInit() {
+        debugger
         this.core.loader.show()
         localStorage.setItem("NIDGRUPORETURN", localStorage.getItem("NIDGRUPO"))
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
+        this.NIDPROVEEDOR = localStorage.getItem("NIDPROVEEDOR")
         this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
         localStorage.setItem("objFocusPositionReturn", localStorage.getItem("objFocusPosition"));
         this.nidregimen = localStorage.getItem("NREGIMEN");
         this.nidalerta = localStorage.getItem("NIDALERTA");
         var paramCliente: any = localStorage.getItem("paramCliente");
+
+        this.ValidadorHistorico = localStorage.getItem("ValidadorHistorico");
+        this.HistoricoPeriodo = localStorage.getItem("NuevoPeriodoHistorico");
+
         if (paramCliente != null && paramCliente != "") {
             localStorage.setItem("paramCliente", "");
             let pestana = localStorage.getItem("pestana");
@@ -180,11 +189,17 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 nSelectSubPestania = '0'
             localStorage.setItem("nSelectSubPestaniaReturn", nSelectSubPestania);
         }
-        this.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+        //this.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+        if (this.ValidadorHistorico != 0) {
+            this.NPERIODO_PROCESO = parseInt(localStorage.getItem('periodo'))
+        } else {
+            this.NPERIODO_PROCESO = parseInt(this.HistoricoPeriodo)
+        }
         await this.ListarCargo()
         await this.getFormData()
         await this.getMovementHistory()
         await this.getPolicyList()
+        //if(this.NIDPROVEEDOR == "4")
         await this.getListWebLinksCliente(0)
         if (this.formData.NIDREGIMEN == '2') {
             this.nombreRegimen = 'RÉGIMEN SIMPLIFICADO:'
@@ -228,18 +243,49 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         await this.getListWebLinksCliente(NPROCESO)
         this.core.loader.hide()
     }
+    async validElements() {
+        let arrCoincidencias: any = []
+        if (this.context != "MT") {
+            this.arrCoincidenciasLista.forEach(element => {
+                if (!isNullOrUndefined(element.arrCoincidencias)) {
+                    element.arrCoincidencias.forEach(element2 => {
+                        arrCoincidencias.push(element2)
+                    });
+                }
+            });
+            let TipoListaWC: any = []
+            let TipoLista: any = []
+            if (!isNullOrUndefined(arrCoincidencias)) {
+                TipoListaWC = arrCoincidencias.length > 0 ? arrCoincidencias.filter(t => t.NIDPROVEEDOR == 4) : []
+                if (TipoListaWC.length > 0) {
+                    this.NIDPROVEEDOR = '4';
+                    TipoLista = TipoListaWC
+                        .map(t => t.NIDTIPOLISTA)
+                        .filter((item, index, array) => { return array.indexOf(item) == index })
+                    if (TipoLista.length > 0)
+                        this.IdLista = TipoLista[0]
+                }
+
+            }
+        }else {
+            this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
+        }
+    }
     async getListWebLinksCliente(NPROCESO) {
-        let data: any = {};
-        data.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
-        data.NIDGRUPOSENAL = this.IDGRUPOSENAL
-        data.NIDSUBGRUPOSEN = this.NIDSUBGRUPOSEN
-        data.NIDPROVEEDOR = 4
-        data.NIDTIPOLISTA = this.context != "MT" ? 0 : this.IdLista
-        data.SNUM_DOCUMENTO = this.formData.SNUM_DOCUMENTO
-        data.SPROCESO = NPROCESO || '0'
-        await this.userConfigService.getListWebLinksCliente(data).then(response => {
-            this.arrWebsLinks = response;
-        });
+        await this.validElements();
+        if (this.NIDPROVEEDOR == '4') {
+            let data: any = {};
+            data.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
+            data.NIDGRUPOSENAL = this.IDGRUPOSENAL
+            data.NIDSUBGRUPOSEN = this.NIDSUBGRUPOSEN
+            data.NIDPROVEEDOR = this.NIDPROVEEDOR
+            data.NIDTIPOLISTA = this.context != "MT" ? 0 : this.IdLista
+            data.SNUM_DOCUMENTO = this.formData.SNUM_DOCUMENTO
+            data.SPROCESO = NPROCESO || '0'
+            await this.userConfigService.getListWebLinksCliente(data).then(response => {
+                this.arrWebsLinks = response;
+            });
+        }
     }
     async onDeleteWebLinks(SID) {
         this.core.loader.show()
@@ -277,27 +323,6 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             confirmButtonColor: '#FA7000'
         }).then(async (option) => {
             if (option.isConfirmed) {
-                
-                let arrCoincidencias: any = []
-                if (this.context != "MT") {
-                    this.arrCoincidenciasLista.forEach(element => {
-                        if (!isNullOrUndefined(element.arrCoincidencias)) {
-                            element.arrCoincidencias.forEach(element2 => {
-                                arrCoincidencias.push(element2)
-                            });
-                        }
-                    });
-                    let TipoLista: any = []
-                    if (!isNullOrUndefined(arrCoincidencias)) {
-                        TipoLista = arrCoincidencias.length > 0 ? arrCoincidencias.filter(t => t.NIDPROVEEDOR == 4)
-                            .map(t => t.NIDTIPOLISTA)
-                            .filter((item, index, array) => { return array.indexOf(item) == index }) : []
-                        if (TipoLista.length == 1)
-                            this.IdLista = TipoLista[0]
-                        // else if (TipoLista.length > 1)
-                            
-                    }
-                }
                 this.core.loader.show()
                 console.log(option);
                 let data: any = {}
@@ -305,7 +330,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 data.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
                 data.NIDGRUPOSENAL = this.IDGRUPOSENAL
                 data.NIDSUBGRUPOSEN = this.NIDSUBGRUPOSEN
-                data.NIDPROVEEDOR = 4
+                data.NIDPROVEEDOR = 4 //this.NIDPROVEEDOR
                 data.NIDTIPOLISTA = this.IdLista
                 data.SNUM_DOCUMENTO = this.formData.SNUM_DOCUMENTO
                 await this.userConfigService.addWebLinkscliente(data).then(async (response) => {
@@ -407,6 +432,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     NIDSUBGRUPOSEN
     IDGRUPOSENALGestor
     async getFormData() {
+        debugger
         this.tipoClienteCRF = await localStorage.getItem("tipoClienteCRF")
         this.tipoClienteGC = await localStorage.getItem('tipoClienteGC')
         this.boolClienteReforzado = await JSON.parse(localStorage.getItem('boolClienteReforzado'))
@@ -415,7 +441,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         this.SESTADO_BUTTON_SAVE = localStorage.getItem("SESTADO_BUTTON_SAVE")
         this.INDRESIDENCIA = localStorage.getItem("INDRESIDENCIA")
         this.SFALTA_ACEPTAR_COINC = localStorage.getItem("SFALTA_ACEPTAR_COINC")
-        this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
+        
         //this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPO")
         this.NIDSUBGRUPOSEN = localStorage.getItem("NIDSUBGRUPO")
         this.NPERIODO_PROCESO_ITEM = localStorage.getItem("NPERIODO_PROCESO_ITEM")
@@ -441,7 +467,14 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA == null ? "" : this.SNOM_COMPLETO_EMPRESA
             this.formData.SNUM_DOCUMENTO_EMPRESA = this.SNUM_DOCUMENTO_EMPRESA == null ? "" : this.SNUM_DOCUMENTO_EMPRESA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
+
             this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
+            // if (this.ValidadorHistorico != 0) {
+            //     this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
+            // } else {
+            //     this.formData.NPERIODO_PROCESO  = parseInt(this.HistoricoPeriodo)
+            // }
+
             this.formData.NTIPO_DOCUMENTO = localStorage.getItem('NTIPO_DOCUMENTO')
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             this.formData.STIPO_AND_NUM_DOC = ''
@@ -612,7 +645,14 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             this.formData.SZONA_GEOGRAFICA = localStorage.getItem('SZONA_GEOGRAFICA')
             this.formData.SZONA_GEOGRAFICA = this.formData.SZONA_GEOGRAFICA === 'null' ? '' : this.formData.SZONA_GEOGRAFICA === undefined ? '' : this.formData.SZONA_GEOGRAFICA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
-            this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
+
+            //this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
+            if (this.ValidadorHistorico != 0) {
+                this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
+            } else {
+                this.formData.NPERIODO_PROCESO = parseInt(this.HistoricoPeriodo)
+            }
+
             this.formData.NTIPO_DOCUMENTO = localStorage.getItem('NTIPO_DOCUMENTO')
             this.formData.NTIPOCARGA = localStorage.getItem('NTIPOCARGA')
             this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA == null ? "" : this.SNOM_COMPLETO_EMPRESA

@@ -17,7 +17,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
     templateUrl: './view-c2-form.component.html',
     styleUrls: ['./view-c2-form.component.css']
 })
-export class ViewC2FormComponent implements OnInit, OnDestroy {
+export class ViewC2FormComponent implements OnInit {
 
     alertData: any = {}
 
@@ -81,7 +81,9 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     @Input() valueIdCollap
     @Input() state: any = {}
     @Input() ValidadorHistorico
-    @Input() HistoricoPeriodo
+    @Input() HistoricoPeriodo :any
+    @Input() IDListAnno : any
+
     constructor(
         private userConfigService: UserconfigService,
         private configService: ConfigService,
@@ -91,9 +93,9 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     ) {
 
     }
-    ngOnDestroy() {
-        localStorage.removeItem("objFocusPositionReturn")
-    }
+    // ngOnDestroy() {
+    //     localStorage.removeItem("objFocusPositionReturn")
+    // }
     async ngOnInit() {
         var URLactual = window.location + " ";
         let link = URLactual.split("/")
@@ -583,10 +585,11 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     }
 
     async goToDetail(item: any, lista: any, idElement: any, idElementSubGroup: any, subgruponame: any) {
-        
+        debugger
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition: any = {}
+        debugger;
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
         if (this.linkactual == "proveedor")
             this.regimen.id = 1;
@@ -606,6 +609,14 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
         localStorage.setItem("NIDALERTA", this.alertData.NIDALERTA)
         localStorage.setItem("context", this.context)
         localStorage.setItem("NPERIODO_PROCESO", this.alertData.NPERIODO_PROCESO)
+        localStorage.setItem("ValidadorHistorico", this.ValidadorHistorico)
+        localStorage.setItem("NuevoPeriodoHistorico", this.HistoricoPeriodo)
+        // if (this.ValidadorHistorico != 0) {
+        //     localStorage.setItem("NPERIODO_PROCESO",  this.alertData.NPERIODO_PROCESO)
+        // } else {
+        //     localStorage.setItem("NPERIODO_PROCESO", this.HistoricoPeriodo)
+            
+        // }
         
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN)
@@ -618,6 +629,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
         localStorage.setItem("NTIPO_DOCUMENTO", item.NTIPO_DOCUMENTO)
         localStorage.setItem("NREGIMEN", this.regimen.id)
         localStorage.setItem("SCLIENT", item.SCLIENT)
+        localStorage.setItem("NIDPROVEEDOR", item.NIDPROVEEDOR)
         localStorage.setItem('boolClienteReforzado', 'false')
 
         localStorage.setItem('vistaOrigen', this.vistaOrigen)
@@ -637,6 +649,10 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
         await this.configService.sOrigenVista$.emit(this.vistaOrigen)//sOrigenVista$
         this.core.loader.hide()
         this.router.navigate(['/c2-detail'])
+        //historicos
+        if(!isNullOrUndefined(this.IDListAnno))
+            localStorage.setItem("Combo1", this.IDListAnno.toString())
+        localStorage.setItem("Combo2", this.HistoricoPeriodo)
     }
 
     async getResultadosCoincidencias() {

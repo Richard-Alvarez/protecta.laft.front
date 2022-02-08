@@ -374,7 +374,7 @@
                                         <div *ngIf="item.NIDALERTA === 2 || item.NIDALERTA === 33 || item.NIDALERTA === 35 || item.NIDALERTA === 39">
 
                                             <app-view-c2-form [parentPendienteInforme]="this" [vistaOrigen]="'C2-BANDEJA'" [context]="context" [objAlertaC2]="item" [regimen]="regimen" [valueIdCollap]="'collap'+statePendienteInforme.sState+'Head' + regimen.desCorto + index" [state]="statePendienteInforme.sState"
-                                                [ValidadorHistorico]="ValidadorHistorico">
+                                                [ValidadorHistorico]="ValidadorHistorico" [IDListAnno]="IDListAnno">
                                             </app-view-c2-form>
                                         </div>
 

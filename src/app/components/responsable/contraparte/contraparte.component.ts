@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import swal from 'sweetalert2';
 import { environment } from 'src/environments/environment'
@@ -18,7 +18,7 @@ import { SbsreportService } from '../../../services/sbsreport.service';
   templateUrl: './contraparte.component.html',
   styleUrls: ['./contraparte.component.css']
 })
-export class ContraparteComponent implements OnInit {
+export class ContraparteComponent implements OnInit ,OnDestroy {
   statePendiente: any = { sState: 'PENDIENTE', sCollapHead: 'acordionPENDIENTE', sHrefHead: 'collapPENDIENTEHead', arrayForms: 'arrResponsablesPendiente' }
   stateRevisado: any = { sState: 'REVISADO', sCollapHead: 'acordionREVISADO', sHrefHead: 'collapREVISADOHead', arrayForms: 'arrResponsablesRevisado' };
   stateCompletado: any = { sState: 'COMPLETADO', sCollapHead: 'acordionCOMPLETADO', sHrefHead: 'collapCOMPLETADOHead', arrayForms: 'arrResponsablesPendiente' };
@@ -41,6 +41,9 @@ export class ContraparteComponent implements OnInit {
     private sbsReportService: SbsreportService,
   ) {this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService) }
 
+  ngOnDestroy() {
+    localStorage.removeItem("objFocusPositionReturn")
+  }
   async ngOnInit() {
 
     let usuario = this.core.storage.get('usuario')

@@ -44,6 +44,7 @@ export class InformeTerminadoComponent implements OnInit {
   @Input() parent/*: ResponsableComponent*/
   @Input() ValidadorHistorico: any
   @Input() HistoricoPeriodo: any
+  @Input() IDListAnno: any
 
   constructor(private core: CoreService,
     private userConfigService: UserconfigService,

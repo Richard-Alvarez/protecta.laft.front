@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit,OnDestroy, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import swal from 'sweetalert2';
 import { environment } from 'src/environments/environment'
@@ -20,7 +20,7 @@ import { SbsreportService } from '../../../services/sbsreport.service';
   templateUrl: './historico-colaborador.component.html',
   styleUrls: ['./historico-colaborador.component.css']
 })
-export class HistoricoColaboradorComponent implements OnInit {
+export class HistoricoColaboradorComponent implements OnInit ,OnDestroy {
 
   statePendiente: any = { sState: 'PENDIENTE', sCollapHead: 'acordionPENDIENTE', sHrefHead: 'collapPENDIENTEHead', arrayForms: 'arrResponsablesPendiente' }
   stateRevisado: any = { sState: 'REVISADO', sCollapHead: 'acordionREVISADO', sHrefHead: 'collapREVISADOHead', arrayForms: 'arrResponsablesRevisado' };
@@ -44,7 +44,9 @@ export class HistoricoColaboradorComponent implements OnInit {
     private sbsReportService: SbsreportService,
    )
   { this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService)}
-
+  ngOnDestroy() {
+    localStorage.removeItem("objFocusPositionReturn")
+}
   async ngOnInit() {
      //   var pathname = window.location.pathname;
   //  alert(pathname);
