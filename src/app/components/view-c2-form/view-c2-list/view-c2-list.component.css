@@ -54,6 +54,7 @@ button.colorFocus:focus {
   -webkit-appearance: none;
 }
 .scroll_k::-webkit-scrollbar:vertical {
+  /*ancho del scroll vertical*/
   width: 10px;
 }
 .scroll_k::-webkit-scrollbar-button:increment,
@@ -61,6 +62,7 @@ button.colorFocus:focus {
   display: none;
 }
 .scroll_k::-webkit-scrollbar:horizontal {
+  /*alto del scroll horizontal --no se utiliza*/
   height: 10px;
 }
 .scroll_k::-webkit-scrollbar-thumb {
