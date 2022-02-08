@@ -1046,7 +1046,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     this.spinner.hide();
   }
   async goToDetail(item: any, TIPO_CLIENTE) {
-    //item.NPERIODO_PROCESO = this.NPERIODO_PROCESO
+    debugger;
     try {
       let tipoIden = item.STIPOIDEN //+ ' - ' + item.SNUM_DOCUMENTO
       item.STIPOIDEN = tipoIden
@@ -1096,6 +1096,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       localStorage.setItem("NPERIODO_PROCESO_ITEM", item.NPERIODO_PROCESO_VALID);
       
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
+      localStorage.setItem("NIDGRUPOSENAL", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
       //this.paramCliente
       // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")

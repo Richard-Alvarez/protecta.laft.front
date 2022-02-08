@@ -629,6 +629,7 @@ export class ViewC2FormComponent implements OnInit {
         localStorage.setItem("NTIPO_DOCUMENTO", item.NTIPO_DOCUMENTO)
         localStorage.setItem("NREGIMEN", this.regimen.id)
         localStorage.setItem("SCLIENT", item.SCLIENT)
+        localStorage.setItem("NIDPROVEEDOR", item.NIDPROVEEDOR)
         localStorage.setItem('boolClienteReforzado', 'false')
 
         localStorage.setItem('vistaOrigen', this.vistaOrigen)
@@ -649,7 +650,8 @@ export class ViewC2FormComponent implements OnInit {
         this.core.loader.hide()
         this.router.navigate(['/c2-detail'])
         //historicos
-        localStorage.setItem("Combo1", this.IDListAnno.toString())
+        if(!isNullOrUndefined(this.IDListAnno))
+            localStorage.setItem("Combo1", this.IDListAnno.toString())
         localStorage.setItem("Combo2", this.HistoricoPeriodo)
     }
 
