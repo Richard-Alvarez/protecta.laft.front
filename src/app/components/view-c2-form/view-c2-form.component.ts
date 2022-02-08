@@ -583,7 +583,7 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
     }
 
     async goToDetail(item: any, lista: any, idElement: any, idElementSubGroup: any, subgruponame: any) {
-        
+        debugger
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition: any = {}
@@ -606,6 +606,14 @@ export class ViewC2FormComponent implements OnInit, OnDestroy {
         localStorage.setItem("NIDALERTA", this.alertData.NIDALERTA)
         localStorage.setItem("context", this.context)
         localStorage.setItem("NPERIODO_PROCESO", this.alertData.NPERIODO_PROCESO)
+        localStorage.setItem("ValidadorHistorico", this.ValidadorHistorico)
+        localStorage.setItem("NuevoPeriodoHistorico", this.HistoricoPeriodo)
+        // if (this.ValidadorHistorico != 0) {
+        //     localStorage.setItem("NPERIODO_PROCESO",  this.alertData.NPERIODO_PROCESO)
+        // } else {
+        //     localStorage.setItem("NPERIODO_PROCESO", this.HistoricoPeriodo)
+            
+        // }
         
         localStorage.setItem("NOMBRECOMPLETO", item.SNOM_COMPLETO)
         localStorage.setItem("STIPO_NUM_DOC", item.STIPOIDEN)
