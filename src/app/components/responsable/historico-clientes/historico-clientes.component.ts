@@ -126,8 +126,10 @@ debugger;
         this.userGroupListGral = [1]
         this.userGroupListSimpli = [1]
       }
-      this.getTipoUsuario()
-      this.fillFileGroup()
+      
+      await this.getTipoUsuario()
+      await this.fillFileGroup()
+     
       var URLactual = window.location + " ";
       let link = URLactual.split("/")
       let linkactual = link[link.length - 1].trim()
@@ -205,8 +207,9 @@ debugger;
   }
 
   async getWorkModuleDetailData(dataWork) {
+    this.core.loader.show()
     let respWorkDetalle = await this.userConfigService.getWorkModuleDetail(dataWork)
-
+    this.core.loader.hide()
     let arrRespComments = []
     respWorkDetalle.forEach(item => {
       let respuestaCustom = item.NRESPUESTA == 1 ? 'Sí' : item.NRESPUESTA == 2 ? 'No' : ''
@@ -272,6 +275,7 @@ debugger;
   }
 
   async getOfficialAlertFormList() {
+    this.core.loader.show()
     //this.userGroup:any = {}//new Map<string, any>()
     this.userGroupListGral = []
     this.userGroupListSimpli = []
@@ -468,6 +472,7 @@ debugger;
 
     this.userGroupListGral.push(objTiUser)
     this.userGroupListSimpli.push(objTiUser)
+    this.core.loader.hide()
   }
 
   async getAndSetWorkModuleAll() {
@@ -578,7 +583,9 @@ debugger;
     data.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     data.STIPO_CARGA = STIPO_CARGA//'INFORMES'
     data.NREGIMEN = NREGIMEN
+    this.core.loader.show()
     let respAttachFileInfo = await this.userConfigService.getAttachedFilesInformByAlert(data)
+    this.core.loader.hide()
     return respAttachFileInfo
   }
 
@@ -590,7 +597,9 @@ debugger;
       data.NIDALERTA_CABECERA = NIDALERTA_CABECERA
       data.STIPO_CARGA = STIPO_CARGA//'INFORMES'
       data.NREGIMEN = NREGIMEN
+      this.core.loader.show()
       let respAttachFileInfo = await this.userConfigService.getAttachedFilesInformByCabecera(data)
+      this.core.loader.hide()
 
       return respAttachFileInfo
     } catch (error) {
@@ -1750,7 +1759,9 @@ debugger;
 
   async getCommentHeader(NIDALERTA_CABECERA) {
     let data = { NIDALERTA_CAB_USUARIO: NIDALERTA_CABECERA, STIPO_USUARIO: this.STIPO_USUARIO }
+    this.core.loader.show()
     let comentariosCabecera = await this.userConfigService.getCommentHeader(data)
+    this.core.loader.hide()
     let arrComentariosCabecera = []
     comentariosCabecera.forEach(item => {
       item.NIDALERTA_CAB_USUARIO = NIDALERTA_CABECERA
@@ -3196,7 +3207,9 @@ debugger;
     this.arrResponsablesInformeTerminadoSimpli = []
     //let combo1 = this.IDListAnno.toString()
     //await this.GuardarData()
+    this.core.loader.show()
     await this.Iniciar()
+    this.core.loader.hide()
 
   }
 
