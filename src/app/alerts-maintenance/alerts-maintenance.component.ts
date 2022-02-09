@@ -36,8 +36,11 @@ export class AlertsMaintenanceComponent implements OnInit {
   txtBuscador;
   public arrayFinalListToShow = [];
 
-  
-
+  public Validador: number = 0
+  public NumeroPagina: number = 0
+  pageSize = 10;
+  page = 1;
+  FiltrolistaComplementoUsuario:any = []
 
   constructor(
     private core: CoreService,
@@ -64,10 +67,24 @@ export class AlertsMaintenanceComponent implements OnInit {
       this.core.rutas.goLogin();
     }
     this.core.loader.hide();
+debugger
+    if(this.Validador == 1){
+      this.currentPage = this.NumeroPagina
+      //this.currentPage = 1;
+    }else{
+      this.currentPage = 1;
+    }
   }
 
   async getAlertList() {
-    this.currentPage = 1;
+    debugger
+    if(this.Validador == 1){
+      this.NumeroPagina = this.currentPage
+      //this.currentPage = 1;
+    }else{
+      this.currentPage = 1;
+    }
+   
     this.rotate = true;
     this.maxSize = 5;
     this.itemsPerPage = 10;
@@ -75,6 +92,7 @@ export class AlertsMaintenanceComponent implements OnInit {
     this.sbsReportService.getAlertList()
       .then((response) => {
         this.processlist = response;
+        this.FiltrolistaComplementoUsuario = this.processlist 
         this.totalItems = this.processlist.length;
         this.arrayFinalListToShow = this.processlist
         this.processlistToShow = this.sliceAlertsArray(this.processlist);
@@ -82,6 +100,7 @@ export class AlertsMaintenanceComponent implements OnInit {
         
         
         if (this.processlist.length != 0) {
+         
           this.core.loader.hide();
         }
         else {
@@ -120,6 +139,7 @@ export class AlertsMaintenanceComponent implements OnInit {
         }).then((result) => {
         })
       });
+      
   }
 
   updateAlertFromList(data: any) {
@@ -128,13 +148,22 @@ export class AlertsMaintenanceComponent implements OnInit {
     modalRef.componentInstance.reference = modalRef;
     modalRef.componentInstance.alert = data;
     modalRef.result.then((Interval) => {
-      this.currentPage = 1;
+      //this.currentPage = 1;
       this.rotate = true;
       this.maxSize = 2;
       this.itemsPerPage = 10;
       this.totalItems = 0;
+      this.Validador = 1
       clearInterval(Interval);
       this.getAlertList();
+      debugger
+      if(this.Validador == 1){
+        this.currentPage = this.NumeroPagina
+        //this.currentPage = 1;
+      }else{
+        this.currentPage = 1;
+      }
+      
     }, (reason) => {
       this.core.loader.hide();
     });
@@ -152,14 +181,26 @@ export class AlertsMaintenanceComponent implements OnInit {
   }
 
   pageChanged(currentPage) {
-    this.currentPage = currentPage;
+
+    if(this.Validador == 1){
+      this.currentPage = this.NumeroPagina;
+      console.log("currentPage", this.currentPage)
+      //this.currentPage = 1;
+    }else{
+      this.currentPage = currentPage;
+      console.log("this.currentPage", this.currentPage)
+    }
+
+    
+   
+    
     this.processlistToShow = this.arrayFinalListToShow.slice(
       (this.currentPage - 1) * this.itemsPerPage,
       this.currentPage * this.itemsPerPage
     );
   }
 
-  getListAlertsFilters(){
+  getListAlertsFilters2(){
     //this.processlistToShow - this.arrayFinalListToShow
 
     if((this.txtBuscador+'').trim() === ''){
@@ -184,6 +225,34 @@ export class AlertsMaintenanceComponent implements OnInit {
       
 
      
+    }
+  }
+  getListAlertsFilters(){
+    //this.processlistToShow - this.arrayFinalListToShow
+
+    if((this.txtBuscador+'').trim() === ''){
+      //this.processlist = this.sliceAlertsArray(this.processlist);
+      this.FiltrolistaComplementoUsuario = this.processlist
+      //this.totalItems = this.processlist.length
+      //return
+    }else{
+      this.arrayFinalListToShow = [];
+      let txtNombre = this.txtBuscador.toLowerCase();
+      this.processlist.forEach(item => {
+        let nomUsuario = item.userFullName.toLowerCase();
+        let nomDescription = item.alertDescription.toLowerCase();
+        let nomAlert = item.alertName.toLowerCase();
+        if(nomUsuario.includes(txtNombre) || nomDescription.includes(txtNombre) || nomAlert.includes(txtNombre)){
+          this.arrayFinalListToShow.push(item);
+        }
+      })
+      this.totalItems = this.arrayFinalListToShow.length
+      
+      let resp = this.sliceAlertsArray(this.arrayFinalListToShow);
+      this.FiltrolistaComplementoUsuario = resp;
+      
+
+      
     }
   }
   ValidarDisable(regimen,valor){
