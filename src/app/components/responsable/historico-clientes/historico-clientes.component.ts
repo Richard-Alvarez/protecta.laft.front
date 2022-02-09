@@ -275,6 +275,7 @@ debugger;
   }
 
   async getOfficialAlertFormList() {
+    this.core.loader.show()
     //this.userGroup:any = {}//new Map<string, any>()
     this.userGroupListGral = []
     this.userGroupListSimpli = []
@@ -471,6 +472,7 @@ debugger;
 
     this.userGroupListGral.push(objTiUser)
     this.userGroupListSimpli.push(objTiUser)
+    this.core.loader.hide()
   }
 
   async getAndSetWorkModuleAll() {
@@ -3205,7 +3207,9 @@ debugger;
     this.arrResponsablesInformeTerminadoSimpli = []
     //let combo1 = this.IDListAnno.toString()
     //await this.GuardarData()
+    this.core.loader.show()
     await this.Iniciar()
+    this.core.loader.hide()
 
   }
 

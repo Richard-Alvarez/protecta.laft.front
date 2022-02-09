@@ -1528,11 +1528,17 @@ ValidarTexto(texto){
 }
 
 CountComplemento:number
-ValidarCabeceraComplemento(){
+ ValidarCabeceraComplemento(){
   let valor = this.arrResponsable.filter(it => it.TIPO_FORM == 'C')
+  console.log("cantidad",valor.length)
+    //return this.CountComplemento == valor.length
+    if(valor.length == 0){
+      return 'col-8'
+    }else{
+      return 'col-5'
+    }
   
-    return this.CountComplemento == valor.length
-  
+  //return valor.length
   }
 
   async EnviarCorreo(){
