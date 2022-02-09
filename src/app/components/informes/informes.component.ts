@@ -514,6 +514,7 @@ async DescargarReporteGeneral(item){
               this.RespuestaGlobalContraparte.push(data)
 
           });
+          debugger
           this.RespuestaGlobalProveedorP5
           if(this.RespuestaGlobalProveedorP5 == 'Sí' && this.RespuestaGlobalContraparteP5 == 'Sí' ){
             this.RespuestaGlobalProveedorContraparte = 'Sí'

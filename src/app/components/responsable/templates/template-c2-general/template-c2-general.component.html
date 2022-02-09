@@ -18,7 +18,7 @@
             </p>  
               <!-- ESTO ES PARA LA C2 -->
               <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                     <tbody>
                         <tr>
                             <td width="50px" style="padding-left: 10px; padding-right: 10px; text-align: center;">
@@ -90,14 +90,14 @@
        <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaRenta.length}} coincidencias
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaRenta.length}} coincidencias
                     exactas entre el Registro Negativo y la base de clientes - RENTA PARTICULAR vigente al cierre del {{parent.Periodo}},
                     por ende, se consideran como señales de alerta “C2”.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaRenta.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
@@ -149,7 +149,7 @@
                                 </td>
                                 <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        {{item.SDOC_REFERENCIA  == '' ? 'No se encontró información' : item.SDOC_REFERENCIA  }}
+                                        {{item.SDOC_REFERENCIA  == null ? 'No se encontró información' : item.SDOC_REFERENCIA  }}
                                     </p>
                                 </td>
                             </tr>
@@ -163,14 +163,14 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaMasivos.length}}
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaMasivos.length}}
                     coincidencias exactas entre el Registro Negativo y la base de clientes – MASIVOS vigente al cierre {{parent.Periodo}},
                     por ende, se consideran como señales de alerta “C2”.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaMasivos.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -193,11 +193,11 @@
                                         <strong>PRODUCTO</strong>
                                     </p>
                                 </td>
-                                <td width="28%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                <!-- <td width="28%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                                     <p>
                                         <strong>DOCUMENTO DE REFERENCIA</strong>
                                     </p>
-                                </td>
+                                </td> -->
                             </tr>
                             <tr *ngFor="let item of parent.listaMasivos">
                                 <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
@@ -220,11 +220,11 @@
                                         {{item.DESRAMO}}
                                     </p>
                                 </td>
-                                <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <!-- <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                     <p>
-                                        {{item.SDOC_REFERENCIA  == '' ? 'No se encontró información' : item.SDOC_REFERENCIA  }}
+                                        {{item.SDOC_REFERENCIA  == null ? 'No se encontró información' : item.SDOC_REFERENCIA  }}
                                     </p>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </FONT>
@@ -236,14 +236,14 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialSoat.length}}
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaEspecialSoat.length}}
                     coincidencias exactas entre el Registro Negativo y la base de clientes – SOAT vigente al cierre del {{parent.Periodo}},
                     por ende, se consideran como señales de alerta “C2”.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;"  *ngIf="parent.listaEspecialSoat.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
@@ -300,14 +300,14 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaEspecialRenta.length}}
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaEspecialRenta.length}}
                     coincidencias exactas entre el Registro Negativo y la base de clientes – RENTAS VITALICIAS vigente al
                     cierre del {{parent.Periodo}}, por ende, se consideran como señales de alerta “C2”.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaEspecialRenta.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 10px; background-color:#002060;">
@@ -365,14 +365,14 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepRentaParticular.length}} coincidencias
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaPepRentaParticular.length}} coincidencias
                     exactas de clientes PEP y la base de clientes vigentes - RENTA PARTICULAR al cierre del {{parent.Periodo}}, por ende, se consideran
                     como señales de alerta “C2”.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepRentaParticular.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -429,14 +429,14 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepMasivos.length}} coincidencias
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaPepMasivos.length}} coincidencias
                     exactas de clientes PEP y la base de clientes vigentes - MASIVOS al cierre del {{parent.Periodo}}, por ende, se consideran
                     como señales de alerta “C2”.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepMasivos.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -493,14 +493,14 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepSoat.length}} coincidencias
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaPepSoat.length}} coincidencias
                     exactas de clientes PEP y la base de clientes vigentes - SOAT al cierre del {{parent.Periodo}}, por ende, se consideran
                     como señales de alerta “C2”.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepSoat.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -556,14 +556,14 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaPepRenta.length}} coincidencias
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaPepRenta.length}} coincidencias
                     exactas de Listas PEP y la base de clientes vigentes - RENTAS VITALICIAS al cierre del {{parent.Periodo}}, por ende, se consideran
                     como señales de alerta “C2”.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaPepRenta.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -624,13 +624,13 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalRentaParticularWC.length}} coincidencias
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaInternacionalRentaParticularWC.length}} coincidencias
                     exactas de listas complementarias de WORLDCHECK y la base de clientes vigentes - RENTA PARTICULAR al cierre del {{parent.Periodo}}.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaInternacionalRentaParticularWC.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -689,13 +689,13 @@
         <div>
             <ul>
                 <li style="font-family: arial Narrow, serif; text-align: justify">
-                    De acuerdo a los resultados reportados por el área de TI, se identificaron {{parent.listaInternacionalRentaParticularIDECON.length}} coincidencias
+                    De acuerdo a los resultados reportados por el sistema LAFT, se identificaron {{parent.listaInternacionalRentaParticularIDECON.length}} coincidencias
                     exactas de listas internacionales y la base de clientes vigentes - RENTA PARTICULAR al cierre del {{parent.Periodo}}.
                 </li>
             </ul>
             <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaInternacionalRentaParticularIDECON.length !=0;else SinData">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                    <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                    <FONT FACE="Arial Narrow, serif" style="font-size:10.0pt;">
                         <tbody>
                             <tr>
                                 <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
