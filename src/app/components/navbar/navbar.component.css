@@ -236,3 +236,11 @@ input[type="checkbox"]:checked ~ .menu-items {
  input[type="checkbox"]:checked ~ .logo{
   display: none;
 }
+
+
+@media screen and (max-width: 1000px){
+ 
+   img{
+    width: 400px;
+  }
+}

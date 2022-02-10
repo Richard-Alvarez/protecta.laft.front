@@ -13,11 +13,13 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { ResponsableGlobalComponent } from '../responsableGlobal';  
 import { SbsreportService } from '../../../services/sbsreport.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-historico-contraparte',
   templateUrl: './historico-contraparte.component.html',
-  styleUrls: ['./historico-contraparte.component.css']
+  styleUrls: ['./historico-contraparte.component.css'],
+  providers: [NgxSpinnerService]
 })
 export class HistoricoContraparteComponent implements OnInit ,OnDestroy {
   statePendiente: any = { sState: 'PENDIENTE', sCollapHead: 'acordionPENDIENTE', sHrefHead: 'collapPENDIENTEHead', arrayForms: 'arrResponsablesPendiente' }
@@ -40,7 +42,8 @@ export class HistoricoContraparteComponent implements OnInit ,OnDestroy {
     private modalService: NgbModal,
     private excelService: ExcelService,
     private sbsReportService: SbsreportService,
-  ) {this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService) }
+    private spinner: NgxSpinnerService,
+  ) {this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService,spinner) }
   ngOnDestroy() {
     localStorage.removeItem("objFocusPositionReturn")
 }

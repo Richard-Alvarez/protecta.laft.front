@@ -37,11 +37,12 @@ export class MantenimientoComplementoComponent implements OnInit {
 
 
   
-  async updateAlertFromList(data: any) {
+   updateAlertFromList(data: any) {
    
     //this.core.loader.show(); 
     const modalRef =  this.modalService.open
       (ModalMantenimientoComplementoComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
+      
     modalRef.componentInstance.reference = modalRef;
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.lista =  this.listcomplemento;

@@ -7,13 +7,15 @@ import * as moment from 'moment';
 import { ExcelService } from 'src/app/services/excel.service';
 import { DataResponsableService } from '../../../services/data-responsable.service';
 import { SbsreportService } from '../../../services/sbsreport.service';
+import { NgxSpinnerService } from "ngx-spinner";
 import * as $ from 'jquery';
 
 
 @Component({
   selector: 'app-historico-clientes',
   templateUrl: './historico-clientes.component.html',
-  styleUrls: ['./historico-clientes.component.css']
+  styleUrls: ['./historico-clientes.component.css'],
+  providers: [NgxSpinnerService]
 })
 export class HistoricoClientesComponent implements OnInit ,OnDestroy {
   ValidadorHistorico: number = 0
@@ -105,6 +107,7 @@ export class HistoricoClientesComponent implements OnInit ,OnDestroy {
     private excelService: ExcelService,
     private dataResponsable: DataResponsableService,
     private sbsReportService: SbsreportService,
+    private spinner: NgxSpinnerService,
   ) { }
   ngOnDestroy() {
     localStorage.removeItem("objFocusPositionReturn")
@@ -3207,9 +3210,11 @@ debugger;
     this.arrResponsablesInformeTerminadoSimpli = []
     //let combo1 = this.IDListAnno.toString()
     //await this.GuardarData()
-    this.core.loader.show()
+    //this.core.loader.show()
+    this.spinner.show()
     await this.Iniciar()
-    this.core.loader.hide()
+    this.spinner.hide()
+    //this.core.loader.hide()
 
   }
 

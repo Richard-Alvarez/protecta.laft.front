@@ -16,11 +16,13 @@ import { SbsreportService } from '../../services/sbsreport.service';
 
 
 
-// @Component({
+ //@Component({
   
-  
-//   providers: [NgxSpinnerService]
-// })
+  //selector: '',
+  //templateUrl: '',
+  //styleUrls: [''],
+  //providers: [NgxSpinnerService]
+//})
 
 
 export class ResponsableGlobalComponent implements OnDestroy {
@@ -116,7 +118,7 @@ export class ResponsableGlobalComponent implements OnDestroy {
     private modalService: NgbModal,
     private excelService: ExcelService,
     private sbsReportService: SbsreportService,
-    // private spinner: NgxSpinnerService,
+     private spinner: NgxSpinnerService,
     
   ) { }
   ngOnDestroy() {
@@ -3146,8 +3148,9 @@ export class ResponsableGlobalComponent implements OnDestroy {
   async SeleccionarPeriodo(){
     console.log("IDListPeriodo",this.IDListPeriodo)
     this.VALIDADOR = 1
+    this.spinner.show()
     await this.getDataComplements()
-    
+    this.spinner.hide()
   } 
 
 

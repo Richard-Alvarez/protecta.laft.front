@@ -13,12 +13,13 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { ResponsableGlobalComponent } from '../responsableGlobal';  
 import { SbsreportService } from '../../../services/sbsreport.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-historico-colaborador',
   templateUrl: './historico-colaborador.component.html',
-  styleUrls: ['./historico-colaborador.component.css']
+  styleUrls: ['./historico-colaborador.component.css'],
+  providers: [NgxSpinnerService]
 })
 export class HistoricoColaboradorComponent implements OnInit ,OnDestroy {
 
@@ -42,8 +43,9 @@ export class HistoricoColaboradorComponent implements OnInit ,OnDestroy {
     private modalService: NgbModal,
     private excelService: ExcelService,
     private sbsReportService: SbsreportService,
+    private spinner: NgxSpinnerService,
    )
-  { this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService)}
+  { this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService,spinner)}
   ngOnDestroy() {
     localStorage.removeItem("objFocusPositionReturn")
 }

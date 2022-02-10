@@ -13,11 +13,13 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { ResponsableGlobalComponent } from '../responsableGlobal';  
 import { SbsreportService } from '../../../services/sbsreport.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-colaborador',
   templateUrl: './colaborador.component.html',
-  styleUrls: ['./colaborador.component.css']
+  styleUrls: ['./colaborador.component.css'],
+  providers: [NgxSpinnerService]
 })
 export class ColaboradorComponent implements OnInit ,OnDestroy {
   statePendiente: any = { sState: 'PENDIENTE', sCollapHead: 'acordionPENDIENTE', sHrefHead: 'collapPENDIENTEHead', arrayForms: 'arrResponsablesPendiente' }
@@ -40,8 +42,9 @@ export class ColaboradorComponent implements OnInit ,OnDestroy {
     private modalService: NgbModal,
     private excelService: ExcelService,
     private sbsReportService: SbsreportService,
+    private spinner: NgxSpinnerService,
    )
-  { this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService)}
+  { this.localResponsable = new ResponsableGlobalComponent(core,userConfigService,renderer,modalService,excelService,sbsReportService,spinner)}
 
   ngOnDestroy() {
     localStorage.removeItem("objFocusPositionReturn")
