@@ -160,7 +160,7 @@ export class UserConfigComponent implements OnInit {
     await this.getUsers();
     //await this.getUserState();
     await this.getProfileList();
-    await this.getCargoList("0");
+    //await this.getCargoList("0");
     var user = this.core.storage.get('usuario');
     let profileId = user['idPerfil'];
     let userN = user['username'];

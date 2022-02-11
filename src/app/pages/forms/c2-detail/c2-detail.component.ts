@@ -155,7 +155,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         localStorage.getItem("NIDGRUPO")
     }
     async ngOnInit() {
-        debugger
+        
         this.core.loader.show()
         localStorage.setItem("NIDGRUPORETURN", localStorage.getItem("NIDGRUPO"))
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
@@ -432,7 +432,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     NIDSUBGRUPOSEN
     IDGRUPOSENALGestor
     async getFormData() {
-        debugger
+        
         this.tipoClienteCRF = await localStorage.getItem("tipoClienteCRF")
         this.tipoClienteGC = await localStorage.getItem('tipoClienteGC')
         this.boolClienteReforzado = await JSON.parse(localStorage.getItem('boolClienteReforzado'))

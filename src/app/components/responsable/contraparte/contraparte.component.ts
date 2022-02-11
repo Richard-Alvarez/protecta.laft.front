@@ -53,13 +53,13 @@ export class ContraparteComponent implements OnInit ,OnDestroy {
     this.STIPO_USUARIO = usuario['tipoUsuario']
     
     this.IDPERFIL = usuario['idPerfil']
-
+    this.spinner.show()
     await this.localResponsable.ngOnInit();
     // this.arrRegimen = this.localResponsable.arrRegimen
 
    
     await this.getListaPerfilGrupo(1)
-    
+    this.spinner.hide()
   }
 
   private ListaGrupos:any = []

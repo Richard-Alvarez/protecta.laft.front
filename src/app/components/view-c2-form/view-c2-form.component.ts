@@ -585,11 +585,11 @@ export class ViewC2FormComponent implements OnInit {
     }
 
     async goToDetail(item: any, lista: any, idElement: any, idElementSubGroup: any, subgruponame: any) {
-        debugger
+       
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition: any = {}
-        debugger;
+    
         objFocusPosition.NIDALERTA = this.alertData.NIDALERTA
         if (this.linkactual == "proveedor")
             this.regimen.id = 1;

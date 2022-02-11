@@ -39,7 +39,7 @@ export class MantenimientoComplementoComponent implements OnInit {
   
    updateAlertFromList(data: any) {
    
-    //this.core.loader.show(); 
+    this.core.loader.show(); 
     const modalRef =  this.modalService.open
       (ModalMantenimientoComplementoComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
       
@@ -51,11 +51,11 @@ export class MantenimientoComplementoComponent implements OnInit {
      
      
      
-      this.core.loader.show()
+     
       await this.listaComplemento()
       this.core.loader.hide();
     }, (reason) => {
-      //this.core.loader.hide();
+      this.core.loader.hide();
     });
 
   }

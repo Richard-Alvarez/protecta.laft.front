@@ -1046,7 +1046,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     this.spinner.hide();
   }
   async goToDetail(item: any, TIPO_CLIENTE) {
-    debugger;
+
     try {
       let tipoIden = item.STIPOIDEN //+ ' - ' + item.SNUM_DOCUMENTO
       item.STIPOIDEN = tipoIden
