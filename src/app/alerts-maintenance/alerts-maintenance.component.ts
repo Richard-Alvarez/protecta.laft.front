@@ -67,7 +67,7 @@ export class AlertsMaintenanceComponent implements OnInit {
       this.core.rutas.goLogin();
     }
     this.core.loader.hide();
-debugger
+
     if(this.Validador == 1){
       this.currentPage = this.NumeroPagina
       //this.currentPage = 1;
@@ -77,7 +77,7 @@ debugger
   }
 
   async getAlertList() {
-    debugger
+    
     if(this.Validador == 1){
       this.NumeroPagina = this.currentPage
       //this.currentPage = 1;
@@ -156,7 +156,7 @@ debugger
       this.Validador = 1
       clearInterval(Interval);
       this.getAlertList();
-      debugger
+      
       if(this.Validador == 1){
         this.currentPage = this.NumeroPagina
         //this.currentPage = 1;

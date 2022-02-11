@@ -237,7 +237,7 @@ async DescargarReporte(ValidadorIdGrupo){
       }else{
         this.RespuestaGlobalContraparteP5 = 'Sí'
       }
-debugger
+
       let sinRepetidosCargos = this.ListaContraparte.filter((valorActual, indiceActual, arreglo) => {
         return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.SCARGO) === JSON.stringify(valorActual.SCARGO)) === indiceActual
         });
@@ -422,7 +422,7 @@ async DescargarReporteGeneral(item){
       this.ListaRepresentantesAccionistasPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 2)
 
       //PARA PROVEEDOR
-        debugger
+        
       this.ListaProveedor = this.ListaAlertaProveedor
       //let ConcatenarProveedor =  this.ListaProveedor.filter(it => it.SNOMBRE_ALERTA == "P2" || it.SNOMBRE_ALERTA == "P3" || it.SNOMBRE_ALERTA == "P1")
       let ConcatenarProveedor =  this.ListaProveedor.filter(it =>  it.SNOMBRE_ALERTA == "P1")
@@ -518,7 +518,7 @@ async DescargarReporteGeneral(item){
 
           });
           this.RespuestaGlobalContraparte =  this.RespuestaGlobalContraparte.filter(it => it.SNOMBRE_ALERTA != "P4" && it.SNOMBRE_ALERTA != "P5")
-          debugger
+          
           this.RespuestaGlobalProveedorP5
           if(this.RespuestaGlobalProveedorP5 == 'Sí' && this.RespuestaGlobalContraparteP5 == 'Sí' ){
             this.RespuestaGlobalProveedorContraparte = 'Sí'

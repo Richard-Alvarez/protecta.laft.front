@@ -113,7 +113,7 @@ export class HistoricoClientesComponent implements OnInit ,OnDestroy {
     localStorage.removeItem("objFocusPositionReturn")
 }
   async ngOnInit() {
-debugger;
+
     this.obtenerPeriodos().then(async() => {
       this.core.config.rest.LimpiarDataGestor()
       this.core.loader.show();

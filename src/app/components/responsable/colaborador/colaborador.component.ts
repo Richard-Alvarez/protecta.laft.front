@@ -59,12 +59,12 @@ export class ColaboradorComponent implements OnInit ,OnDestroy {
 
     let usuario = this.core.storage.get('usuario')
     this.STIPO_USUARIO = usuario['tipoUsuario']
-    
+    this.spinner.show()
     this.IDPERFIL = usuario['idPerfil']
     await this.localResponsable.ngOnInit();
     // this.arrRegimen = this.localResponsable.arrRegimen
 
-   
+    this.spinner.hide()
       
   
   }

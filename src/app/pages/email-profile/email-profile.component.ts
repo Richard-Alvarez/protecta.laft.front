@@ -65,6 +65,7 @@ export class EmailProfileComponent implements OnInit {
 
 
   async getModalByItem(data){
+    this.core.loader.show();  
     const modalRef = this.modalService.open(ModalEmailProfileComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
     
     
@@ -72,7 +73,7 @@ export class EmailProfileComponent implements OnInit {
     modalRef.componentInstance.dataEmail = data;
     modalRef.componentInstance.ListaEmail = this.ListCorreo;
     modalRef.result.then(async (resp) => {
-      this.core.loader.show();  
+   
       let response = await this.userConfig.GetListCorreo()
       this.ListCorreo = response
       this.core.loader.hide();
