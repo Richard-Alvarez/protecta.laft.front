@@ -4,8 +4,8 @@ class Rutas {
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
-  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
+  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -57,6 +57,7 @@ class Rutas {
   public urlGetCurrentPeriod: string = this.base + "monitoreoSenales/GetCurrentPeriod";
   public urlGetInternationalLists: string = this.base + "monitoreoSenales/GetInternationalLists";
   public urlGetListWebLinksCliente: string = this.base + "monitoreoSenales/getListWebLinksCliente";
+  public urlGetClientWcEstado: string = this.base + "monitoreoSenales/getClientWcEstado";
   public urlGetDeleteWebLinksCoincidence: string = this.base + "monitoreoSenales/getDeleteWebLinksCoincidence";
   public urlAddWebLinkscliente: string = this.base + "monitoreoSenales/addWebLinkscliente";
   public urlGetPepList: string = this.base + "monitoreoSenales/GetPepList";
