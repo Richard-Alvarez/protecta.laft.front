@@ -9,8 +9,10 @@ import { CoreService } from 'src/app/services/core.service';
 export class FooterComponent implements OnInit {
 
   constructor(private core: CoreService) { }
-
+  year
   ngOnInit() {
+    var currentTime = new Date();
+    this.year = currentTime.getFullYear()
   }
 
 }
