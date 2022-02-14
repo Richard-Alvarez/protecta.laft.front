@@ -1114,6 +1114,18 @@ export class UserconfigService {
     })
 
   }
+  getClientWcEstado(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetClientWcEstado, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+
+  }
   getDeleteWebLinksCoincidence(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

@@ -43,6 +43,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
 
 
     selectedCargo: any
+    SREPORT_COINCIDENCE :any = ""
     selectedCargo0: any;
     selectedCargo1: any;
     selectedCargo2: any;
@@ -65,6 +66,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     uncheckListEspecial: any[] = []
     disableFormItems: boolean
     context: string = ""
+    SESTADOCOINCIDENCIA: string = ''
     processlistAdress
     currentPageAdress;
     rotateAdress;
@@ -200,7 +202,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         await this.getMovementHistory()
         await this.getPolicyList()
         //if(this.NIDPROVEEDOR == "4")
-        await this.getListWebLinksCliente(0)
+        await this.validarReforzado()
         if (this.formData.NIDREGIMEN == '2') {
             this.nombreRegimen = 'RÉGIMEN SIMPLIFICADO:'
         } else if (this.formData.NIDREGIMEN == '1') {
@@ -271,8 +273,24 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             this.IDGRUPOSENAL = localStorage.getItem("NIDGRUPOSENAL")
         }
     }
+    async validarReforzado(){
+        let data : any ={}
+        data.SCLIENT = this.SCLIENT_DATA
+        data.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
+        data.SESTADO_TRAT = "CRF"
+        await this.userConfigService.getClientWcEstado(data).then( async response => {
+            if(!isNullOrUndefined(response)){
+                if(response.NIDRESULTADO > 0){
+                    this.SESTADOCOINCIDENCIA = 'CRF';
+                    this.NIDPROVEEDOR == response.NIDPROVEEDOR
+                    this.SREPORT_COINCIDENCE = response.SREPORT_COINCIDENCE
+                    await this.getListWebLinksCliente(0)
+                }
+            }
+        });
+    }
     async getListWebLinksCliente(NPROCESO) {
-        await this.validElements();
+        //await this.validElements();
         if (this.NIDPROVEEDOR == '4') {
             let data: any = {};
             data.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO
@@ -1838,7 +1856,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 //this.SCLIENT_DATA Trae el sclient para todos
                 await this.getMovementHistory()
                 await this.getHistorialRevisiones()
-
+                await this.validarReforzado()
 
 
                 this.core.loader.hide();

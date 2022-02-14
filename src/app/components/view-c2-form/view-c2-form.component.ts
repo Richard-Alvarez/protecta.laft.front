@@ -646,6 +646,7 @@ export class ViewC2FormComponent implements OnInit {
         localStorage.setItem("NIDSUBGRUPO", lista.NIDSUBGRUPOSEN);
         localStorage.setItem("SNOM_COMPLETO_EMPRESA", (isNullOrUndefined(item.SNOM_COMPLETO_EMPRESA) ? "" : item.SNOM_COMPLETO_EMPRESA));
         localStorage.setItem("SNUM_DOCUMENTO_EMPRESA", (isNullOrUndefined(item.SNUM_DOCUMENTO_EMPRESA) ? "" : item.SNUM_DOCUMENTO_EMPRESA));
+        localStorage.setItem("NPERIODO_PROCESO_ITEM", this.alertData.NPERIODO_PROCESO);
         await this.configService.sOrigenVista$.emit(this.vistaOrigen)//sOrigenVista$
         this.core.loader.hide()
         this.router.navigate(['/c2-detail'])
