@@ -1,32 +1,130 @@
 <app-navbar></app-navbar>
-<main class="container-fluid app-main pl-5 pr-5">
-    <div class="row  pl-5 pr-5">
-        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+<main class="container-fluid app-main " style="padding-left: 7rem;padding-right: 7rem;">
+  <div class="row">
+    <button class="btn btn-link text-secondary" style="padding-left: 6px;" routerLink="/home"
+      title="Regresar al Pantalla Principal">
       <span class="fas fa-chevron-left"></span> Pantalla Principal
     </button>
-    </div>
-    <br>
-    <div class="d-flex">
-        
+  </div>
 
-      
-        <div class="col-3" style="padding-top: 28px;">
+  <div class="container-fluid">
+    <div class="row mb-2 mt-2" style="display: flex;justify-content: center;">
+      <div class="col-12 Header">
+
+
+
+        <div class="row mb-2 mt-2">
+          <div class="Header">
+            <div class="col-lg-12" style="padding-left: 0px;">
+              <h4 class="TitleLine">Registros Negativos</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-end">
+          <div class="col-3" style="padding-top: 28px;">
             <div class="custom-file mb-3">
 
-                <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" value="seleccionar" (change)="setDataFile($event)">
-                <label class="custom-file-label" for="customFile" style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
+              <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx"
+                value="seleccionar" (change)="setDataFile($event)">
+              <label class="custom-file-label" for="customFile"
+                style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
+            </div>
+          </div>
+
+          <div class="col-1" style="padding-top: 28px;">
+            <button class="btn btnRegistrar" (click)="RegistrarArchivo()">Registrar</button>
+
+          </div>
+        </div>
+
+
+        <div class="borderFormat">
+        
+          <div class="row form-group">
+            <div style="padding: 5px 15px 0px">
+                <span class="fontText">Nombre Completo:</span>
+            </div>
+            <div class="col-lg-5">
+                <input class="form-control" style="text-transform: uppercase" (keypress)="soloLetras($event)" type="text" [(ngModel)]="nombreCompleto">
+            </div>
+            <div style="padding: 5px 15px 0px">
+                <span class="fontText">Número de Documento:</span>
+            </div>
+            <div class="col-lg-3">
+                <input class="form-control" style="text-transform: uppercase" (keypress)="soloLetras($event)" type="text" [(ngModel)]="documento">
             </div>
         </div>
 
-        <div class="col-1" style="padding-top: 28px;">
-            <button class="btn btnRegistrar" (click)="RegistrarArchivo()">Registrar</button>
+        <div class="row form-group">
+           
+            <div style="padding: 5px 15px 0px">
+              <span class="fontText">Tipo de documento:</span>
+            </div>
+            <div class="col-lg-3">
+              <select class="form-control" (change)='changeTipoDocumento()' [(ngModel)]="TIPO">
+                <option value="0">--Todos--</option>
+                <option value="1">ALIAS</option>
+                <option value="2">BAJO</option>
+                <option value="3">MEDIO</option>
+                <option value="4">ALTO</option>
+              
+              </select>
+            </div>
+
+            <div class="col-2" >
+                <button class="btn btnRegistrar" style="width: 100%;" (click)="Buscar()">Buscar</button>
+    
+              </div>
+        </div>
+            
+           
+
+
+         
+
+
+
 
         </div>
-       
-     
 
+        <div class="borderFormat" style="overflow-y:auto;">
+            <hr>
+            <table class="striped" style="margin-top: -50px;">
+                <thead>
+                    <tr>
+                        <th>Tipo de Persona</th>
+                        <th>Nombre / Razón Social</th>
+                        <th>Tipo de Documento</th>
+                        <th>Número de Documento</th>
+                        
+                        <th>Estado</th>
+                        
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of this.listNegativa; let ind = index;">
+                        <td>{{item.NPERIODO_PROCESO}}</td>
+                        <td>{{item.SNOM_COMPLETO}}</td>
+                        <td>{{item.STIPOIDEN}}</td>
+                        <td>{{item.SNUM_DOCUMENTO}}</td>
+                        
+                        
+                        <td>{{item.SDESESTADO_TRAT}}</td>
+                        
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br><br>
+      </div>
     </div>
-    
+  </div>
+  <div class="" style="padding-bottom: 80px;">
+
+  </div>
 </main>
-<br>
 <app-footer></app-footer>

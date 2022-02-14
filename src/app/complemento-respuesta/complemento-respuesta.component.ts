@@ -122,7 +122,7 @@ export class ComplementoRespuestaComponent implements OnInit {
 
   MensajesAlertas(mensaje){
     swal.fire({
-      title: 'Mantenimiento de complemento',
+      title: 'Solicitud de Información',
       icon: 'warning',
       text: mensaje,
       showCancelButton: false,
@@ -167,7 +167,7 @@ export class ComplementoRespuestaComponent implements OnInit {
 
 
     swal.fire({
-      title: 'Mantenimiento de complemento',
+      title: 'Solicitud de Información',
       icon: 'warning',
       text: 'Está seguro de registrar el complemento?',
       showCancelButton: true,

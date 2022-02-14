@@ -23,6 +23,10 @@ export class RegistroNegativoComponent implements OnInit {
   NombreArchivo: string = ''
   ArchivoAdjunto: any
   ResultadoExcel: any
+  nombreCompleto = ''
+  documento:number 
+  TIPO:any = 0
+  listNegativa:any = []
   ngOnInit() {
   }
 
