@@ -89,6 +89,8 @@ import { SearchforregimenComponent } from './pages/searchforregimen/searchforreg
 import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 import { ComplementoSinSennalComponent } from './../app/complemento-sin-sennal/complemento-sin-sennal.component';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
+import { RegistroNegativoComponent } from '../app/components/registro-negativo/registro-negativo.component';
+
 //fin formularios antiguos
 
 const routes: Routes = [
@@ -182,6 +184,7 @@ const routes: Routes = [
   
   { path: 'complemento-respuesta', component: ComplementoRespuestaComponent},
   { path: 'search-pep', component: SearchPepComponent},
+  { path: 'registro-negativo', component: RegistroNegativoComponent},
   
   
 ];
