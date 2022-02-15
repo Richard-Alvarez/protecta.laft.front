@@ -2028,10 +2028,32 @@ export class UserconfigService {
 
 
   
-
+  GetRegistrarDatosExcelRegistronegativo(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetRegistrarDatosExcelRegistronegativo, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  
+  GetListaRegistroNegativo(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaRegistroNegativo, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
   
   
-
+  
 
   
 

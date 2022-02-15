@@ -469,3 +469,10 @@
   table.striped>tbody>tr:nth-child(odd) {
     background-color: rgba(242,242,242,0.5);
   }
+
+  .icon-descarga{
+    font-size: 30px;
+    float: left;
+   
+    color: #fd7e14;
+  }

@@ -23,9 +23,9 @@ export class RegistroNegativoComponent implements OnInit {
   NombreArchivo: string = ''
   ArchivoAdjunto: any
   ResultadoExcel: any
-  nombreCompleto = ''
-  documento:number 
-  TIPO:any = 0
+  nombreCompleto:string = ''
+  documento:string = '' 
+  TIPO:any = '0'
   listNegativa:any = []
   ngOnInit() {
   }
@@ -65,26 +65,29 @@ export class RegistroNegativoComponent implements OnInit {
         return
       }
     }
-
-    return
+    
+    
     
     let respuestaRegistros: any = []
     for (let i = 0; i < this.ResultadoExcel.length; i++) {
       this.core.loader.show()
-      let datosRegistroColaborador: any = {}
-      datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-      datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO) //== null ? "" : parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
-      datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
-      datosRegistroColaborador.SNOM_COMPLETO = this.ResultadoExcel[i].SNOM_COMPLETO
-      datosRegistroColaborador.DFECHA_NACIMIENTO = this.ResultadoExcel[i].DFECHA_NACIMIENTO
-      datosRegistroColaborador.NIDUSUARIO = this.NIDUSUARIO_LOGUEADO
-      datosRegistroColaborador.NIDGRUPOSENAL = this.idGrupo
-      datosRegistroColaborador.NIDSUBGRUPOSEN = this.idSubGrupo
-      datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = this.ResultadoExcel[i].SNUM_DOCUMENTO_EMPRESA
-      datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = this.ResultadoExcel[i].SNOM_COMPLETO_EMPRESA
-      datosRegistroColaborador.SACTUALIZA = 'INS'
+      let datosRegistrosNegativos: any = {}
+      datosRegistrosNegativos.SNID = this.ResultadoExcel[i].N
+      datosRegistrosNegativos.STIPOPERSONA = this.ResultadoExcel[i].TIPO_DE_PERSONA //parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
+      datosRegistrosNegativos.STIPODOC_PAIS = this.ResultadoExcel[i].PAIS_NACIONALIDAD
+      datosRegistrosNegativos.SNUMIDENTIDAD = this.ResultadoExcel[i].N_ID
+      datosRegistrosNegativos.SAPE_PATERNO = this.ResultadoExcel[i].APELLIDO_PATERNO
+      datosRegistrosNegativos.SAPE_MATERNO = this.ResultadoExcel[i].APELLIDO_MATERNO
+      datosRegistrosNegativos.SNOMBRES_RS = this.ResultadoExcel[i].NOMBRES_RAZON_SOCIAL
+      datosRegistrosNegativos.SSENAL_LAFT = this.ResultadoExcel[i].SEÑAL_LAFT
+      datosRegistrosNegativos.SFILTRO1 = this.ResultadoExcel[i].FILTRO
+      datosRegistrosNegativos.SFEDESCUBRIMIENTO = this.ResultadoExcel[i].FECHA_DESCUBRIMIENTO
+      datosRegistrosNegativos.SDOCREFERENCIA = this.ResultadoExcel[i].DOCUMENTO_REFERENCIA
+      datosRegistrosNegativos.STIPOLISTA = this.ResultadoExcel[i].TIPO_LISTA
+      datosRegistrosNegativos.SNUMDOCUMENTO = this.ResultadoExcel[i].NRO_DOC
+      datosRegistrosNegativos.SNOM_COMPLETO = this.ResultadoExcel[i].NOMBRE_COMPLETO
       
-      let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
+      let response = await this.userConfigService.GetRegistrarDatosExcelRegistronegativo(datosRegistrosNegativos)
       this.core.loader.hide()
       respuestaRegistros.push(response)
     }
@@ -185,5 +188,53 @@ export class RegistroNegativoComponent implements OnInit {
       reader.onloadend = () => resolve(reader.result)
       reader.readAsDataURL(blob)
     })
+  }
+
+
+  async Buscar(){
+    this.nombreCompleto
+    this.documento
+    this.TIPO
+    console.log(this.TIPO)
+    let data:any = {}
+    data.SNUMIDENTIDAD = this.documento
+    data.SNOM_COMPLETO = this.nombreCompleto
+    data.SSENAL_LAFT = this.TIPO
+    if(this.documento == '' && this.TIPO == '0' ){
+      data.VALIDADOR = 'NOMBRE'
+    }
+    if(this.nombreCompleto == '' &&  this.TIPO == '0'){
+      data.VALIDADOR = 'DOCUMENTO'
+    }
+    if(this.documento == '' && this.nombreCompleto == ''){
+      data.VALIDADOR = 'SENNAL'
+    }
+    if(this.TIPO == '0'){
+      data.VALIDADOR = 'TODOS'
+    }
+    
+    this.core.loader.show()
+    this.listNegativa = await this.userConfigService.GetListaRegistroNegativo(data)
+    this.core.loader.hide()
+  }
+  changeTipo(){}
+
+  async DescargarPlantilla(){
+    let data:any = {}
+    try {
+      this.core.loader.show()
+      let data = { ruta: "PLANTILLAS/REGISTRO-NEGATIVO/PLANTILLA-REGISTRO-NEGATIVO.xlsx" }
+      let response = await this.userConfigService.DownloadUniversalFileByAlert(data)
+      response = await fetch(`data:application/octet-stream;base64,${response.base64}`)
+      const blob = await response.blob()
+      let url = URL.createObjectURL(blob)
+      let link = document.createElement('a')
+      link.href = url
+      link.download = "Plantilla-Registro-Negativo.xlsx"
+      link.click()
+      this.core.loader.hide()
+    } catch (error) {
+      console.error("el error en descargar archivo: ", error)
+    }
   }
 }

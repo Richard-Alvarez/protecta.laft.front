@@ -21,7 +21,15 @@
           </div>
         </div>
 
-        <div class="row justify-content-end">
+        <div class="row ">
+        <div class="col-7"></div>
+        <div class="col-1" style="padding-top: 13px;">
+            <div class="container-input" >
+                <div class="icon-descarga" placement="top" ngbTooltip="Descargar plantilla" (click)="DescargarPlantilla()" style="cursor: pointer;"> 
+                   <i class="fas fa-arrow-down"></i>
+              </div> 
+            </div>
+        </div>
           <div class="col-3" style="padding-top: 28px;">
             <div class="custom-file mb-3">
 
@@ -59,15 +67,15 @@
         <div class="row form-group">
            
             <div style="padding: 5px 15px 0px">
-              <span class="fontText">Tipo de documento:</span>
+              <span class="fontText">Señal Laft:</span>
             </div>
             <div class="col-lg-3">
-              <select class="form-control" (change)='changeTipoDocumento()' [(ngModel)]="TIPO">
+              <select class="form-control" (change)='changeTipo()' [(ngModel)]="TIPO">
                 <option value="0">--Todos--</option>
-                <option value="1">ALIAS</option>
-                <option value="2">BAJO</option>
-                <option value="3">MEDIO</option>
-                <option value="4">ALTO</option>
+                <option value="ALIAS">ALIAS</option>
+                <option value="BAJO">BAJO</option>
+                <option value="MEDIO">MEDIO</option>
+                <option value="ALTO">ALTO</option>
               
               </select>
             </div>
@@ -93,25 +101,26 @@
             <table class="striped" style="margin-top: -50px;">
                 <thead>
                     <tr>
-                        <th>Tipo de Persona</th>
-                        <th>Nombre / Razón Social</th>
-                        <th>Tipo de Documento</th>
                         <th>Número de Documento</th>
+                        <th>Nombre Completo</th>
+                        <th>Señal Laft</th>
+                        <th>Filtro</th>
+                       
                         
-                        <th>Estado</th>
+                        <th>Tipo de Persona</th>
                         
-                        <th>Acciones</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of this.listNegativa; let ind = index;">
-                        <td>{{item.NPERIODO_PROCESO}}</td>
+                        <td>{{item.SNUMIDENTIDAD}}</td>
                         <td>{{item.SNOM_COMPLETO}}</td>
-                        <td>{{item.STIPOIDEN}}</td>
-                        <td>{{item.SNUM_DOCUMENTO}}</td>
+                        <td>{{item.SSENAL_LAFT}}</td>
+                        <td>{{item.SFILTRO1}}</td>
                         
                         
-                        <td>{{item.SDESESTADO_TRAT}}</td>
+                        <td>{{item.STIPOPERSONA}}</td>
                         
                         
                     </tr>
