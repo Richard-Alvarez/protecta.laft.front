@@ -11,6 +11,7 @@
         </button>
     </div>
     <br>
+   
 
     <!-- <div class="row mb-2 mt-2">
             <div class="Header">
@@ -222,7 +223,7 @@
                                 <div class="row">
                                     <div class="table-responsive2">
                                         <table class="table table-striped table-sm" style="font-size: 12px;">
-                                            TERMINO : {{this.nidregimen }}
+                                            
                                             <thead>
                                                 <tr
                                                     style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
@@ -319,6 +320,7 @@
                             <div class="row">
                                 <h5>{{itemCli.SDESTIPOLISTA == 'POLIZAS' ? 'PÓLIZAS' : itemCli.SDESTIPOLISTA }}</h5>
                             </div>
+                         
                             <div class="row">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-sm" style="font-size: 12px;">
@@ -329,6 +331,8 @@
                                                     <th scope="col">Nro. de documento</th> -->
                                                 <th scope="col" style="width:120px">Tipo y Nro. de documento </th>
                                                 <th scope="col">Nombres</th>
+                                                <th *ngIf="this.NIDPROVEEDOR == '4'" scope="col">
+                                                    Termino encontrado</th>
                                                 <th scope="col">Tipo de Coincidencia</th>
                                                 <th scope="col">Fuente</th>
                                                 <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col">Cargos
@@ -345,6 +349,8 @@
                                                     <td>{{item.SNUM_DOCUMENTO}}</td> -->
                                                 <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                                                 <td>{{item.SNOM_COMPLETO}}</td>
+                                                <td *ngIf="this.NIDPROVEEDOR == '4'">
+                                                    {{item.STERMINO_COINCIDENCIA}}</td>
                                                 <td>{{item.STIPO_BUSQUEDA}}</td>
                                                 <td>{{item.SORIGEN}}</td>
                                                 <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" placement='top'
@@ -367,6 +373,7 @@
                 </div>
                 <div
                     *ngIf="tipoClienteGC != 'GC' && tipoClienteGC != 'C2-BANDEJA' && tipoClienteGC != 'ACEPTA-COINCID'">
+                
                     <div *ngFor="let objCoinList of arrCoincidenciasLista;">
                         <div *ngIf="objCoinList.NIDTIPOLISTA == 2">
                             <div class="row">
@@ -380,6 +387,8 @@
                                                 style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
                                                 <th scope="col" style="width:120px">Tipo y Nro. de documento</th>
                                                 <th scope="col">Nombres</th>
+                                                <th *ngIf="this.NIDPROVEEDOR == '4'" scope="col">
+                                                    Termino encontrado</th>
                                                 <th scope="col">Tipo de Coincidencia</th>
                                                 <th scope="col">Fuente</th>
                                                 <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')"
@@ -392,6 +401,8 @@
                                             <tr *ngFor="let item of objCoinList.arrCoincidencias; let incCli = index">
                                                 <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                                                 <td>{{item.SNOM_COMPLETO}}</td>
+                                                <td *ngIf="this.NIDPROVEEDOR == '4'">
+                                                    {{item.STERMINO_COINCIDENCIA}}</td>
                                                 <td>{{item.STIPO_BUSQUEDA}}</td>
                                                 <td>{{item.SORIGEN}}</td>
                                                 <td *ngIf="validatePorPorcentaje(objCoinList.arrCoincidencias,'D')">
