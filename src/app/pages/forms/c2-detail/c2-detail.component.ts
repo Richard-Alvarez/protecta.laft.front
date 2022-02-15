@@ -313,7 +313,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 await this.getListWebLinksCliente(0).then(() => {
                     this.core.loader.hide()
                     swal.fire({
-                        title: 'Fuentes publicas del cliente',
+                        title: 'Fuentes públicas del cliente',
                         text: response.sMessage.value,
                         icon: 'success',
                         confirmButtonColor: '#FA7000'
@@ -334,8 +334,8 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     async addWebLinks() {
 
         swal.fire({
-            title: 'Fuentes publicas del cliente',
-            text: 'Agregar el url de la fuente publica',
+            title: 'Fuentes públicas del cliente',
+            text: 'Agregar el url de la fuente pública',
             icon: 'info',
             input: 'text',
             confirmButtonColor: '#FA7000'
@@ -355,7 +355,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                     await this.getListWebLinksCliente(0)
                     this.core.loader.hide()
                     swal.fire({
-                        title: 'Fuentes publicas del cliente',
+                        title: 'Fuentes públicas del cliente',
                         text: response.sMessage.value,
                         icon: 'success',
                         confirmButtonColor: '#FA7000'
