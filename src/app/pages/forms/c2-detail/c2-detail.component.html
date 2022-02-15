@@ -222,6 +222,7 @@
                                 <div class="row">
                                     <div class="table-responsive2">
                                         <table class="table table-striped table-sm" style="font-size: 12px;">
+                                            TERMINO : {{this.nidregimen }}
                                             <thead>
                                                 <tr
                                                     style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
@@ -229,7 +230,7 @@
                                                         <th scope="col">Nro. de documento</th> -->
                                                     <th scope="col" style="width:120px">Tipo y Nro. de documento</th>
                                                     <th scope="col">Nombres</th>
-                                                    <th *ngIf="this.nidregimen == 1 && this.nidalerta == 2" scope="col">
+                                                    <th *ngIf="this.NIDPROVEEDOR == '4'" scope="col">
                                                         Termino encontrado</th>
                                                     <th scope="col">Tipo de Coincidencia</th>
                                                     <th scope="col">Fuente</th>
@@ -250,7 +251,7 @@
                                                         <td>{{item.SNUM_DOCUMENTO}}</td> -->
                                                     <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                                                     <td>{{item.SNOM_COMPLETO}}</td>
-                                                    <td *ngIf="this.nidregimen == 1 && this.nidalerta == 2">
+                                                    <td *ngIf="this.NIDPROVEEDOR == '4'">
                                                         {{item.STERMINO_COINCIDENCIA}}</td>
                                                     <td>{{item.STIPO_BUSQUEDA}}</td>
                                                     <td>{{item.SORIGEN}}</td>

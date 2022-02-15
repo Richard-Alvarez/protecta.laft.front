@@ -192,6 +192,7 @@ import { ModalComplementoSinSennalComponent } from './modal-complemento-sin-senn
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 import { SearchPepComponent } from './pages/search-pep/search-pep.component';
+import { RegistroNegativoComponent } from './components/registro-negativo/registro-negativo.component';
 
 
 //import { Validaciones } from './utils/validacionesRegex'
@@ -353,7 +354,8 @@ import { SearchPepComponent } from './pages/search-pep/search-pep.component';
     ComplementoSinSennalComponent,
     ModalComplementoSinSennalComponent,
     ComplementoRespuestaComponent,
-    SearchPepComponent
+    SearchPepComponent,
+    RegistroNegativoComponent
 
    
     //Validaciones
