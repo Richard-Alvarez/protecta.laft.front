@@ -20,17 +20,28 @@
             </div>
           </div>
         </div>
+        <!-- <div class="row">
+            <div class="col-lg-8">
+
+            </div>
+            <div class="col-lg-4" style="padding-top: 28px;">
+                <button class="btn btnRegistrar" style="width: 74%;" (click)="DescargarPlantilla()"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                    width="24" height="24"
+                    viewBox="0 0 48 48"
+                    style=" fill:#000000;"><path fill="#4CAF50" d="M41,10H25v28h16c0.553,0,1-0.447,1-1V11C42,10.447,41.553,10,41,10z"></path><path fill="#FFF" d="M32 15H39V18H32zM32 25H39V28H32zM32 30H39V33H32zM32 20H39V23H32zM25 15H30V18H25zM25 25H30V28H25zM25 30H30V33H25zM25 20H30V23H25z"></path><path fill="#2E7D32" d="M27 42L6 38 6 10 27 6z"></path><path fill="#FFF" d="M19.129,31l-2.411-4.561c-0.092-0.171-0.186-0.483-0.284-0.938h-0.037c-0.046,0.215-0.154,0.541-0.324,0.979L13.652,31H9.895l4.462-7.001L10.274,17h3.837l2.001,4.196c0.156,0.331,0.296,0.725,0.42,1.179h0.04c0.078-0.271,0.224-0.68,0.439-1.22L19.237,17h3.515l-4.199,6.939l4.316,7.059h-3.74V31z"></path></svg>
+                    Plantilla</button>
+    
+              </div>
+        </div> -->
 
         <div class="row ">
-        <div class="col-7"></div>
-        <div class="col-1" style="padding-top: 13px;">
-            <div class="container-input" >
-                <div class="icon-descarga" placement="top" ngbTooltip="Descargar plantilla" (click)="DescargarPlantilla()" style="cursor: pointer;"> 
-                   <i class="fas fa-arrow-down"></i>
-              </div> 
-            </div>
+        <div class="col-xl-4 col-lg-3"></div>
+       
+        <div class="col-lg-4 col-xl-3" style="padding-top: 28px;">
+            <button  (click)="DescargarPlantilla()" class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Plantilla </button>
         </div>
-          <div class="col-3" style="padding-top: 28px;">
+        
+          <div class="col-xl-3 col-lg-3" style="padding-top: 28px;">
             <div class="custom-file mb-3">
 
               <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx"
@@ -40,36 +51,39 @@
             </div>
           </div>
 
-          <div class="col-1" style="padding-top: 28px;">
-            <button class="btn btnRegistrar" (click)="RegistrarArchivo()">Registrar</button>
+          <div class="col-xl-2 col-lg-2" style="padding-top: 28px;">
+            <button class="btn btnRegistrar" style="width: 100%;" (click)="RegistrarArchivo()">Registrar</button>
 
           </div>
+        
+          
+          
         </div>
 
 
         <div class="borderFormat">
         
           <div class="row form-group">
-            <div style="padding: 5px 15px 0px">
+            <div style="padding: 5px 15px 0px;width:185px">
                 <span class="fontText">Nombre Completo:</span>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-9 col-xl-5">
                 <input class="form-control" style="text-transform: uppercase" (keypress)="soloLetras($event)" type="text" [(ngModel)]="nombreCompleto">
             </div>
-            <div style="padding: 5px 15px 0px">
+            <div class="textoDoc" style="padding: 5px 15px 0px;width:185px">
                 <span class="fontText">Número de Documento:</span>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-9 col-xl-3">
                 <input class="form-control" style="text-transform: uppercase" (keypress)="soloLetras($event)" type="text" [(ngModel)]="documento">
             </div>
         </div>
 
-        <div class="row form-group">
+        <div class="row form-group ">
            
-            <div style="padding: 5px 15px 0px">
+            <div style="padding: 5px 15px 0px;width:185px">
               <span class="fontText">Señal Laft:</span>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-xl-5">
               <select class="form-control" (change)='changeTipo()' [(ngModel)]="TIPO">
                 <option value="0">--Todos--</option>
                 <option value="ALIAS">ALIAS</option>
@@ -79,8 +93,8 @@
               
               </select>
             </div>
-
-            <div class="col-2" >
+            <div class="" style="width:185px"></div>
+            <div class="col-lg-2 col-xl-3">
                 <button class="btn btnRegistrar" style="width: 100%;" (click)="Buscar()">Buscar</button>
     
               </div>
@@ -97,7 +111,7 @@
         </div>
 
         <div class="borderFormat" style="overflow-y:auto;">
-            <hr>
+            <br>
             <table class="striped" style="margin-top: -50px;">
                 <thead>
                     <tr>
@@ -108,10 +122,17 @@
                        
                         
                         <th>Tipo de Persona</th>
+                        <th>Doc. Referencia</th>
+                        <th>Tipo Lista</th>
+                        <th>Fecha Descubrimiento</th>
                         
                        
                     </tr>
                 </thead>
+                <ng-container
+                                    *ngIf="listNegativa!=null && listNegativa.length>0; then showGrid else hideGrid">
+                                </ng-container>
+                                <ng-template #showGrid>
                 <tbody>
                     <tr *ngFor="let item of this.listNegativa; let ind = index;">
                         <td>{{item.SNUMIDENTIDAD}}</td>
@@ -121,11 +142,24 @@
                         
                         
                         <td>{{item.STIPOPERSONA}}</td>
+                        <td>{{item.SDOCREFERENCIA}}</td>
+                        <td>{{item.STIPOLISTA}}</td>
+                        <td>{{item.SFEDESCUBRIMIENTO}}</td>
+                        
                         
                         
                     </tr>
                 </tbody>
+            </ng-template>
             </table>
+
+            <ng-template #hideGrid>
+                <tbody>
+                    <tr style="text-align: center;">
+                        <td colspan="10">No hay registros</td>
+                    </tr>
+                </tbody>
+            </ng-template>
         </div>
 
         <br><br>
