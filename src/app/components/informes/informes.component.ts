@@ -43,6 +43,24 @@ export class InformesComponent implements OnInit {
   page = 1;
   /* Variables para los reportes */
   RespuestaAlertaC1
+  NombreMeses:any = [
+    {mes:'01',nombre:'Enero'},
+    {mes:'02',nombre:'Febrero'},
+    {mes:'03',nombre:'Marzo'},
+    {mes:'04',nombre:'Abril'},
+    {mes:'05',nombre:'Mayo'},
+    {mes:'06',nombre:'Junio'},
+    {mes:'07',nombre:'Julio'},
+    {mes:'08',nombre:'Agosto'},
+    {mes:'09',nombre:'Septiembre'},
+    {mes:'10',nombre:'Octubre'},
+    {mes:'11',nombre:'Noviembre'},
+    {mes:'12',nombre:'Diciembre'},
+
+
+]
+mesIncio:string =''
+mesFin:string = ''
   
   constructor(
     private userConfigService: UserconfigService,
@@ -335,6 +353,17 @@ ListaRepresentantesAccionistasPro:any = []
 
 idintificaAnno
 async DescargarReporteGeneral(item){
+  console.log("item",item)
+  let nombreMesInicio =  item.FECHA_PERIODO.substr(3,2)
+  let nombreMesFin = item.FECHA_PERIODO.substr(17,2)
+  let resultadoInicio = this.NombreMeses.filter(it => it.mes == nombreMesInicio)
+  let resultadoFin = this.NombreMeses.filter(it => it.mes == nombreMesFin)
+  debugger
+  this.mesIncio = resultadoInicio[0].nombre
+  this.mesFin = resultadoFin[0].nombre
+  console.log("this.mesIncio",this.mesIncio)
+  console.log("this.mesFin",this.mesFin)
+  
   this.idintificaAnno = item.NPERIODO_PROCESO.toString().substr(0,4)
   let bol = this.Validador("Reporte-General")
   if(bol){

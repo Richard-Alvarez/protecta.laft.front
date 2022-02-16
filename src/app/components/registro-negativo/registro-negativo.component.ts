@@ -201,21 +201,21 @@ export class RegistroNegativoComponent implements OnInit {
     data.SNUMIDENTIDAD = this.documento
     data.SNOM_COMPLETO = this.nombreCompleto
     data.SSENAL_LAFT = this.TIPO
-    if(this.TIPO == '0' && this.documento !== '' && this.nombreCompleto !== ''){
-      let mensaje = 'Solo debe tener seleccionado una opción'
-      this.SwalGlobal(mensaje)
-      return
-    }
-    else if(this.documento == '' && this.TIPO == '0' ){
+    // if(this.TIPO == '0' && this.documento !== '' && this.nombreCompleto !== ''){
+    //   let mensaje = 'Solo debe tener seleccionado una opción'
+    //   this.SwalGlobal(mensaje)
+    //   return
+    // }
+     if(this.documento == '' && this.TIPO == '0' ){
       data.VALIDADOR = 'NOMBRE'
     }
-    else if(this.nombreCompleto == '' &&  this.TIPO == '0'){
+     if(this.nombreCompleto == '' &&  this.TIPO == '0'){
       data.VALIDADOR = 'DOCUMENTO'
     }
-    else if(this.documento == '' && this.nombreCompleto == ''){
+     if(this.documento == '' && this.nombreCompleto == ''){
       data.VALIDADOR = 'SENNAL'
     }
-    else if(this.TIPO == '0' && this.documento == '' && this.nombreCompleto == ''){
+     if(this.TIPO == '0' && this.documento == '' && this.nombreCompleto == ''){
       data.VALIDADOR = 'TODOS'
     }
     
