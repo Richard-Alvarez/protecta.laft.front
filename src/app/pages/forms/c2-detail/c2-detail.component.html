@@ -123,16 +123,11 @@
                                             <thead>
                                                 <tr
                                                     style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
-                                                    <!-- <th scope="col">Tipo de documento</th>
-                                                        <th scope="col">Nro. de documento</th> -->
                                                     <th scope="col" style="width:120px">Tipo y Nro. de documento</th>
                                                     <th scope="col" style="width: 250px;">Nombres</th>
                                                     <th scope="col">Tipo de Coincidencia</th>
                                                     <th scope="col">Fuente</th>
-                                                    <!-- <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">Porcentaje aprox.</th> -->
-                                                    <!-- <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">% aprox.</th>  -->
-                                                    <!-- <th *ngIf="validatePorPorcentaje2(itemCli.NIDTIPOLISTA)" scope="col">% aprox.</th> -->
-                                                    <th scope="col">% aprox.</th>
+                                                    <th *ngIf="itemCli.SHOWPROCENTAJE == 1" scope="col">% aprox.</th>
                                                     <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA)" scope="col">
                                                         Cargos PEP</th>
                                                     <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA)" scope="col"
@@ -143,32 +138,19 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of itemCli.arrCoincidencias; let incCli = index; ">
-
-                                                    <!-- <td>{{item.STIPOIDEN}}</td>
-                                                        <td>{{item.SNUM_DOCUMENTO}}</td> -->
                                                     <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                                                     <td style="width: 250px;">{{item.SNOM_COMPLETO}}</td>
                                                     <td>{{item.STIPO_BUSQUEDA}}</td>
                                                     <td>{{item.SORIGEN}}</td>
-                                                    <!-- <td *ngIf="validatePorPorcentaje(itemCli.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ}}</td>  -->
-                                                    <!-- <td *ngIf="validatePorPorcentaje2(itemCli.NIDTIPOLISTA)">{{item.NPORC_APROXIMA_BUSQ}}</td> -->
-                                                    <!-- <td *ngIf="validatePorPorcentaje(itemCli.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ }}</td>  -->
-                                                    <td>{{item.NPORC_APROXIMA_BUSQ }}</td>
-                                                    <!-- <div *ngIf="item.SESTADO_REVISADO== '1'; else Respuesta"> -->
+                                                    <td *ngIf="itemCli.SHOWPROCENTAJE == 0">{{item.NPORC_APROXIMA_BUSQ }}</td>
                                                     <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col"
                                                         placement='top' ngbTooltip="{{item.SNOMCARGO}}">
                                                         <div>{{cortarCararter(item.SNOMCARGO)}}</div>
                                                     </div>
-                                                    <!-- </div> -->
-                                                    <!-- <ng-template #Respuesta> -->
-
                                                     <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col"
                                                         placement='top' ngbTooltip="{{item.SCARGO_PEP}}">
                                                         <div>{{cortarCararter(item.SCARGO_PEP)}}</div>
                                                     </div>
-                                                    <!-- </ng-template> -->
-
-
                                                     <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA)" scope="col"
                                                         style="width: 250px;">
 
@@ -184,8 +166,6 @@
                                                     </th>
                                                     <td *ngIf="ValidarRegimenAcepta()">{{item.SDESREGIMEN}}</td>
                                                     <td>
-                                                        <!-- <input type="checkbox" (click)="checkValue($event)" [(ngModel)]="(unchekAllList[(itemCli.NIDTIPOLISTA-1)])[item.NCONTADORLISTA]" [disabled]="getDisableByCheck(item.SESTADO_REVISADO)">  -->
-
                                                         <input type="checkbox"
                                                             (change)="getConsole(itemCli.NIDTIPOLISTA-1,item.NCONTADORLISTA,item.NIDREGIMEN)"
                                                             [disabled]="getDisableByCheck(item.SESTADO_REVISADO)"
@@ -227,18 +207,13 @@
                                             <thead>
                                                 <tr
                                                     style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
-                                                    <!-- <th scope="col">Tipo de documento</th>
-                                                        <th scope="col">Nro. de documento</th> -->
                                                     <th scope="col" style="width:120px">Tipo y Nro. de documento</th>
                                                     <th scope="col">Nombres</th>
                                                     <th *ngIf="this.NIDPROVEEDOR == '4'" scope="col">
                                                         Termino encontrado</th>
                                                     <th scope="col">Tipo de Coincidencia</th>
                                                     <th scope="col">Fuente</th>
-
-                                                    <!-- <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">Porcentaje aprox.</th> -->
-                                                    <!-- <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">% aprox.</th> -->
-                                                    <th scope="col">% aprox.</th>
+                                                    <th *ngIf="itemCli.SHOWPROCENTAJE == 1" scope="col">% aprox.</th>
                                                     <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col">
                                                         Cargos PEP</th>
                                                     <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,2)" scope="col"
@@ -248,53 +223,32 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of itemCli.arrCoincidencias; let incCli = index">
-                                                    <!-- <td>{{item.STIPOIDEN}}</td>
-                                                        <td>{{item.SNUM_DOCUMENTO}}</td> -->
                                                     <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                                                     <td>{{item.SNOM_COMPLETO}}</td>
                                                     <td *ngIf="this.NIDPROVEEDOR == '4'">
                                                         {{item.STERMINO_COINCIDENCIA}}</td>
                                                     <td>{{item.STIPO_BUSQUEDA}}</td>
                                                     <td>{{item.SORIGEN}}</td>
-                                                    <!-- <td *ngIf="validatePorPorcentaje(itemCli.arrCoincidencias,'D')">{{item.NPORC_APROXIMA_BUSQ}}</td> -->
-                                                    <td>{{item.NPORC_APROXIMA_BUSQ}}</td>
-                                                    <!-- <div *ngIf="item.SESTADO_REVISADO == '1'"> -->
+                                                    <td *ngIf="itemCli.SHOWPROCENTAJE == 1">{{item.NPORC_APROXIMA_BUSQ}}</td>
                                                     <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col"
                                                         placement='top' ngbTooltip="{{item.SNOMCARGO}}">
                                                         <div>{{cortarCararter(item.SNOMCARGO)}}</div>
                                                     </div>
-
-                                                    <!-- </div> -->
-                                                    <!-- <ng-template #Respuesta> -->
-                                                    <!-- <div *ngIf="item.SESTADO_REVISADO == '2'"> -->
                                                     <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,2)" scope="col"
                                                         placement='top' ngbTooltip="{{item.SCARGO_PEP}}">
                                                         <div>{{cortarCararter(item.SCARGO_PEP)}}</div>
                                                     </div>
-                                                    <!-- </div>  -->
-                                                    <!-- <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)"  scope="col" placement='top' ngbTooltip="{{item.SNOMCARGO}}" >
-                                                                        <div>{{cortarCararter(item.SNOMCARGO)}}</div></div> -->
-                                                    <!-- </ng-template> -->
-
                                                     <td *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,2)" scope="col"
                                                         style="width: 250px;">
                                                         <ng-select placeholder="Seleccionar" [disabled]="getDisable()"
                                                             [items]="listCargo" bindLabel="label"
                                                             [(ngModel)]="ValorCombo[incCli]" bindValue="id"
                                                             (change)="ValorCargo($event)">
-                                                            |
-
                                                         </ng-select>
-
-
                                                     </td>
-
                                                     <td>
-
-
-                                                        <!-- <input type="checkbox" (change)="Valordelcheckbox($event)"  [(ngModel)]="unchekAllList[item.NCONTADORLISTA]" [disabled]="getDisable()">  -->
                                                         <input type="checkbox" [(ngModel)]="unchekAllList[incCli]"
-                                                            [disabled]="getDisable()"
+                                                            [disabled]="item.SESTADO_REVISADO == 1"
                                                             (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)">
                                                     </td>
                                                 </tr>
@@ -327,8 +281,6 @@
                                         <thead>
                                             <tr
                                                 style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
-                                                <!-- <th scope="col">Tipo de documento</th>
-                                                    <th scope="col">Nro. de documento</th> -->
                                                 <th scope="col" style="width:120px">Tipo y Nro. de documento </th>
                                                 <th scope="col">Nombres</th>
                                                 <th *ngIf="this.NIDPROVEEDOR == '4'" scope="col">
@@ -337,16 +289,15 @@
                                                 <th scope="col">Fuente</th>
                                                 <th *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" scope="col">Cargos
                                                     PEP</th>
-                                                <!-- <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')" scope="col">Porcentaje aprox.</th> -->
-                                                <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')"
+                                                <th *ngIf="itemCli.SHOWPROCENTAJE == 1"
                                                     scope="col">% aprox.</th>
                                                 <th *ngIf="ValidarRegimenAcepta()" scope="col">Régimen</th>
+                                                <!--007-->
+                                                <th scope="col">Marcar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let item of itemCli.arrCoincidencias; let incCli = index">
-                                                <!-- <td>{{item.STIPOIDEN}}</td>
-                                                    <td>{{item.SNUM_DOCUMENTO}}</td> -->
                                                 <td>{{item.STIPOIDEN}} {{item.SNUM_DOCUMENTO}}</td>
                                                 <td>{{item.SNOM_COMPLETO}}</td>
                                                 <td *ngIf="this.NIDPROVEEDOR == '4'">
@@ -356,9 +307,15 @@
                                                 <div *ngIf="ValidacionCargo(itemCli.SDESTIPOLISTA,1)" placement='top'
                                                     ngbTooltip="{{item.SNOMCARGO}}">{{cortarCararter(item.SNOMCARGO)}}
                                                 </div>
-                                                <td *ngIf="validatePorPorcentaje(itemCli.arrCoincidencias,'D')">
+                                                <td *ngIf="itemCli.SHOWPROCENTAJE == 1">
                                                     {{item.NPORC_APROXIMA_BUSQ}}</td>
                                                 <td *ngIf="ValidarRegimenAcepta()">{{item.SDESREGIMEN}}</td>
+                                                <!--007-->
+                                                <td>
+                                                    <input type="checkbox" [(ngModel)]="unchekAllList[incCli]"
+                                                    [disabled]="item.SESTADO_REVISADO == 1"
+                                                        (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)">
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -391,10 +348,12 @@
                                                     Termino encontrado</th>
                                                 <th scope="col">Tipo de Coincidencia</th>
                                                 <th scope="col">Fuente</th>
-                                                <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')"
+                                                <th *ngIf="objCoinList.SHOWPROCENTAJE == 1"
                                                     scope="col">% aprox.</th>
                                                 <th scope="col">Cargos PEP</th>
                                                 <th *ngIf="IDGRUPOSENAL == 1" scope="col">Régimen</th>
+                                                <!--007-->
+                                                <th scope="col">Marcar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -405,11 +364,17 @@
                                                     {{item.STERMINO_COINCIDENCIA}}</td>
                                                 <td>{{item.STIPO_BUSQUEDA}}</td>
                                                 <td>{{item.SORIGEN}}</td>
-                                                <td *ngIf="validatePorPorcentaje(objCoinList.arrCoincidencias,'D')">
+                                                <td *ngIf="objCoinList.SHOWPROCENTAJE == 1">
                                                     {{item.NPORC_APROXIMA_BUSQ}}</td>
                                                 <div placement='top' ngbTooltip="{{item.SNOMCARGO}}">
                                                     {{cortarCararter(item.SNOMCARGO)}}</div>
                                                 <td *ngIf="IDGRUPOSENAL == 1">{{item.SDESREGIMEN}}</td>
+                                                   <!--007-->
+                                                   <td>
+                                                    <input type="checkbox" [(ngModel)]="unchekAllList[incCli]"
+                                                    [disabled]="item.SESTADO_REVISADO == 1"
+                                                        (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)">
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -435,9 +400,11 @@
                                                 <th scope="col">Nombres</th>
                                                 <th scope="col">Tipo de Coincidencia</th>
                                                 <th scope="col">Fuente</th>
-                                                <th *ngIf="validatePorPorcentaje(arrCoincidenciasLista,'C')"
+                                                <th *ngIf="objCoinList.SHOWPROCENTAJE == 1"
                                                     scope="col">% aprox.</th>
                                                 <th *ngIf="IDGRUPOSENAL == 1" scope="col">Régimen</th>
+                                                <!--007-->
+                                                <th scope="col">Marcar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -446,9 +413,15 @@
                                                 <td>{{item.SNOM_COMPLETO}}</td>
                                                 <td>{{item.STIPO_BUSQUEDA}}</td>
                                                 <td>{{item.SORIGEN}}</td>
-                                                <td *ngIf="validatePorPorcentaje(objCoinList.arrCoincidencias,'D')">
+                                                <td *ngIf="objCoinList.SHOWPROCENTAJE == 1">
                                                     {{item.NPORC_APROXIMA_BUSQ}}</td>
                                                 <td *ngIf="IDGRUPOSENAL == 1">{{item.SDESREGIMEN}}</td>
+                                                   <!--007-->
+                                                   <td>
+                                                    <input type="checkbox" [(ngModel)]="unchekAllList[incCli]"
+                                                    [disabled]="item.SESTADO_REVISADO == 1"
+                                                        (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)">
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -468,16 +441,8 @@
                 </div>
 
                 <div class="row">
-                    <!-- style="" -->
                     <div class="col-lg-11"></div>
                     <div class="col-lg-1">
-                        <!-- <button class="btn btn-warning text-white" (click)="save()"
-                                [disabled]="disableFormItems" title="Guardar">Guardar
-                            </button> -->
-
-                        <!-- <button class="btn btn-warning text-white" (click)="save()" [disabled]="getDisable()" *ngIf="(tipoClienteGC == 'GC' || tipoClienteGC == 'C2-BANDEJA' || tipoClienteGC == 'ACEPTA-COINCID') && (SESTADO_BUTTON_SAVE == '2' && arrCoincidenciasLista.length > 0)"
-                            title="Guardar">Guardar
-                            </button> -->
                         <button class="btn btn-warning text-white" (click)="save()" [hidden]="getDisable()"
                             *ngIf="(tipoClienteGC == 'GC' || tipoClienteGC == 'C2-BANDEJA' || tipoClienteGC == 'ACEPTA-COINCID') && (SESTADO_BUTTON_SAVE == '2' && arrCoincidenciasLista.length > 0)"
                             title="Guardar">Guardar
