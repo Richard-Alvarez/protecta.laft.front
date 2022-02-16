@@ -202,20 +202,20 @@ export class RegistroNegativoComponent implements OnInit {
     data.SNOM_COMPLETO = this.nombreCompleto
     data.SSENAL_LAFT = this.TIPO
     if(this.TIPO == '0' && this.documento !== '' && this.nombreCompleto !== ''){
-      let mensaje = 'Solo debe tener seleccionado Señal Laft'
+      let mensaje = 'Solo debe tener seleccionado una opción'
       this.SwalGlobal(mensaje)
       return
     }
     else if(this.documento == '' && this.TIPO == '0' ){
       data.VALIDADOR = 'NOMBRE'
     }
-    if(this.nombreCompleto == '' &&  this.TIPO == '0'){
+    else if(this.nombreCompleto == '' &&  this.TIPO == '0'){
       data.VALIDADOR = 'DOCUMENTO'
     }
-    if(this.documento == '' && this.nombreCompleto == ''){
+    else if(this.documento == '' && this.nombreCompleto == ''){
       data.VALIDADOR = 'SENNAL'
     }
-    if(this.TIPO == '0' && this.documento == '' && this.nombreCompleto == ''){
+    else if(this.TIPO == '0' && this.documento == '' && this.nombreCompleto == ''){
       data.VALIDADOR = 'TODOS'
     }
     

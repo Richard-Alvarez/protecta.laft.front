@@ -16,7 +16,7 @@
             <article>
                 <div class="row" style="display: flex;justify-content: flex-start;align-items: center;">
                     <div class="col-lg-30">
-                        <h4 class="TitleLine">Búsqueda de coincidencias a demanda</h4>
+                        <h4 class="TitleLine">Búsqueda de Coincidencias a Demanda</h4>
                     </div>
                 </div>
             </article>
@@ -28,7 +28,7 @@
                         <thead>
                             <tr>
                                 <th scope="col" >
-                                    <span class="fontText" >Búsqueda:</span>
+                                    <span class="fontText" >Tipo de Búsqueda:</span>
                                 </th>
                                 <th scope="col">
                                     <select class="form-control" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" >
@@ -65,19 +65,28 @@
                                     <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="validarNulos()" >Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta --> <!-- obtenerBusquedaCoincidenciaXNumeroDocDemanda -->
                                 </th>
                                 <th [hidden]="hideMasiva"  scope="col">
-                                    <input type="file" accept=".xlsx" onclick="this.value=null;"
+                                    <!-- <input type="file" accept=".xlsx" onclick="this.value=null;"
                                             (change)="setDataFile($event)" [(ngModel)]="archivoExcel"
-                                            style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()">
+                                            style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()"> -->
+                                            <div class="custom-file">
+
+                                                <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" onclick="this.value=null;"
+                                                  value="seleccionar" (change)="setDataFile($event)" [(ngModel)]="archivoExcel">
+                                                <label class="custom-file-label" for="customFile"
+                                                  style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
+                                              </div>  
+                                        
                                 </th>
                                 <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()"  scope="col">
                                     <button class="btn btn-warning btnBuscarStyle" (click)="validarNulos()">Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
                                 </th>
                                 <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()" scope="col" style="align-items: center;">
-                                    <i class="fas fa-file-excel fa-3x" style="color: rgb(10, 117, 76); font-size: 35px;" (click)="DescargarPlantilla()"></i>
+                                    <!-- <i class="fas fa-file-excel fa-3x" style="color: rgb(10, 117, 76); font-size: 35px;" (click)="DescargarPlantilla()"></i> -->
+                                    <button  (click)="DescargarPlantilla()" class="btn btn-outline-info form-control ml-2 mr-2 buttonSinBorder colorButton"><i class="fas fa-download"></i>  Plantilla </button>
                                 </th>
-                                <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()" scope="col" style="align-items: center;">
+                                <!-- <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()" scope="col" style="align-items: center;">
                                     <span class="fontText" style="color: #555555;" (click)="DescargarPlantilla()">Plantila</span>
-                                </th>
+                                </th> -->
                             </tr>
                         </thead>
                     </table>

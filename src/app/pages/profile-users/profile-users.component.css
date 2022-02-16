@@ -250,9 +250,9 @@ a{
   color: rgba(38, 41, 109, 0.6);
   font-weight: bold;
 }
-.colorButton{
+/* .colorButton{
   color: #7c7ea6 !important;
-}
+} */
 #pintaGrilla:nth-child(even) {
   /* background: #FF00CC;  */
   background: rgba(90, 149, 180, 0.05); 

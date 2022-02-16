@@ -17,9 +17,9 @@
                
                 </div>
                 <div class="row borderFormat" style="display: flex;justify-content: center;align-items: center;">
-
-                    <div class="col-lg-4 form-group">                
-                        <span style="font-size: 14px">Nombre:</span>
+                    <span style="font-size: 14px;margin-top: 10px;">Nombre:</span>
+                    <div class="col-lg-4 form-group" style="margin-top: 25px;">                
+                       
                         <input [disabled]="namesOff" [(ngModel)]="inCountryName" placeholder="Ingresar el país"
                             id="usName" type="text" class="form-control buttonSinBorder">                                     
                  
@@ -28,7 +28,12 @@
                     <div class="col-lg-3 form-group" [hidden]="activeAdd"> 
                         <br>                        
                         <button 
-                        class="btn btn-warning text-white " (click)="enableControls()">Agregar</button>
+                        class="btn btn-warning text-white " (click)="enableControls()"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-plus-circle-fill"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                    </svg> Agregar</button>
                     </div>
                     <div class="col-lg-1 form-group" [hidden]="activeSave">            
                         <br>         

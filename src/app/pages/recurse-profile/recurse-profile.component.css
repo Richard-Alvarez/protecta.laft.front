@@ -277,10 +277,10 @@ a{
   max-height: 500px;
   
 }
-.colorButton{
+/* .colorButton{
   color: #B4B5D9 !important;
   border: 1px solid #B4B5D9 !important;
-}
+} */
 .colorButton:hover{
   background: transparent !important;
   
@@ -360,6 +360,6 @@ div#pintaGrillaHistory:nth-child(odd) {
   width: 113px;
   display: inline-table;
 }
-.colorButton{
+/* .colorButton{
   color: #7c7ea6 !important;
-}
+} */
