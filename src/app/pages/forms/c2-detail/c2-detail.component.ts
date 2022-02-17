@@ -159,6 +159,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     async ngOnInit() {
         
         this.core.loader.show()
+        await this.getListTipo()
         localStorage.setItem("NIDGRUPORETURN", localStorage.getItem("NIDGRUPO"))
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
         this.NIDPROVEEDOR = localStorage.getItem("NIDPROVEEDOR")
@@ -178,7 +179,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             _paramCliente.pestana = JSON.parse(pestana);
             localStorage.setItem("paramClienteReturn", JSON.stringify(_paramCliente));
         }
-        this.tipoListas = [{ 'id': 1, nombre: 'LISTAS INTERNACIONALES' }, { 'id': 2, nombre: 'LISTAS PEP' }, { 'id': 3, nombre: 'LISTAS FAMILIAR PEP' }, { 'id': 5, nombre: 'LISTAS ESPECIALES' }, { 'id': 4, nombre: 'LISTAS SAC' }]
+        //this.tipoListas = [{ 'id': 1, nombre: 'LISTAS INTERNACIONALES' }, { 'id': 2, nombre: 'LISTAS PEP' }, { 'id': 3, nombre: 'LISTAS FAMILIAR PEP' }, { 'id': 5, nombre: 'LISTAS ESPECIALES' }, { 'id': 4, nombre: 'LISTAS SAC' }]
         paramCliente = localStorage.getItem("nSelectPestaniaClient");
         let res = isNaN(parseInt(paramCliente));
         if (res)
@@ -214,7 +215,11 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         await this.consultarPoliza();
         this.core.loader.hide()
     }
+    async getListTipo() {
 
+        this.tipoListas = await this.userConfigService.getListaTipo();
+        this.tipoListas = this.tipoListas.filter(t => t.NIDTIPOLISTA != 0)
+      }
     async ListarCargo() {
         this.listCargo = await this.userConfigService.GetListaCargo()
 
@@ -365,7 +370,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         });
     }
     realNoFAKE() {
-        this.tipoListas = [{ 'id': 1, nombre: 'LISTAS INTERNACIONAL' }, { 'id': 2, nombre: 'LISTAS PEP' }, { 'id': 3, nombre: 'LISTAS FAMILIA PEP' }, { 'id': 5, nombre: 'LISTAS ESPECIALES' }, { 'id': 4, nombre: 'LISTAS SAC' }]
+        //this.tipoListas = [{ 'id': 1, nombre: 'LISTAS INTERNACIONAL' }, { 'id': 2, nombre: 'LISTAS PEP' }, { 'id': 3, nombre: 'LISTAS FAMILIA PEP' }, { 'id': 5, nombre: 'LISTAS ESPECIALES' }, { 'id': 4, nombre: 'LISTAS SAC' }]
         this.resultadosCoincid = /*servicio*/[{ id: 1, nombre: "Marco", edad: 24, SDESTIPOLISTA: "LISTAS INTERNACIONAL" }, { id: 2, nombre: "Marco", edad: 24, SDESTIPOLISTA: "LISTAS PEP" }]
 
 
@@ -394,8 +399,8 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                         if (itLista.id == 2) {
 
                         }
-                        if (itLista.nombre == lista.SDESTIPOLISTA) {
-                            let respFilterListaNew = respFilterLista.filter(it => itLista.id == it.id)
+                        if (itLista.SDESTIPOLISTA == lista.SDESTIPOLISTA) {
+                            let respFilterListaNew = respFilterLista.filter(it => itLista.NIDTIPOLISTA == it.id)
                             if (respFilterListaNew.length > 0) {
                                 //
                             } else {
@@ -404,7 +409,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                             }
 
                         } else {
-                            let respFilterListaNew = respFilterLista.filter(it => itLista.id == it.id)
+                            let respFilterListaNew = respFilterLista.filter(it => itLista.NIDTIPOLISTA == it.id)
                             if (respFilterListaNew.length > 0) {
                                 this.tipoListas.forEach((filterLista, inc) => {
                                     if (filterLista.nombre == lista.SDESTIPOLISTA) {
@@ -815,108 +820,41 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                     this.sDescriptRiesgo = respExperian.sDescript//'BAJO'
                 }
                 this.arrCoincidenciasLista = await this.getDataClientesAllList(dataService)
-
-                //this.arrCoincidenciasLista = await respClientesAll.lista
-
             }
         }
 
-
-
         if (this.tipoClienteGC == 'CCO' || this.tipoClienteGC == 'CRE' || this.tipoClienteGC == 'CRF' || this.tipoClienteCRF == 'CRF') {
-            /*let dataHistorialEstadoCli:any = {}
-            dataHistorialEstadoCli.NIDALERTA = 2
-            dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-            dataHistorialEstadoCli.SCLIENT = this.oClienteReforzado.SCLIENT
-            
-            let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-            
-            this.arrHistoricoCli = await respCoincidCliHis.lista*/
             this.SCLIENT_DATA = this.oClienteReforzado.SCLIENT
-
             await this.getHistorialRevisiones()
         }
-
-
     }
 
     SCLIENT_DATA
     async getHistorialRevisiones() {
-        // this.IDGRUPOSENAL
-        //if(this.tipoClienteGC == 'ACEPTA-COINCID'){
         let dataHistorialEstadoCli: any = {}
         dataHistorialEstadoCli = new Object(this.TiposMaestros.find(t => t.NIDGRUPOSENAL == this.IDGRUPOSENAL))
-        dataHistorialEstadoCli.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO //this.NPERIODO_PROCESO
-        dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;//this.formData.SCLIENT
-        //dataHistorialEstadoCli.NIDGRUPOSENAL = this.formData.NIDGRUPOSENAL
+        dataHistorialEstadoCli.NPERIODO_PROCESO = this.formData.NPERIODO_PROCESO 
+        dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;
         dataHistorialEstadoCli.NIDALERTA = this.formData.NIDALERTA
         dataHistorialEstadoCli.NIDSUBGRUPOSEN = this.NIDSUBGRUPOSEN
-
         let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-
         this.arrHistoricoCli = await respCoincidCliHis.lista
-        /* }
-         else{
-             let dataHistorialEstadoCli: any = {}
-             dataHistorialEstadoCli = this.config.find(t=> t.NIDGRUPOSENAL == this.IDGRUPOSENAL)
-             dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-             dataHistorialEstadoCli.SCLIENT = this.SCLIENT_DATA;//this.formData.SCLIENT
-             
-             let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-             
-             this.arrHistoricoCli = await respCoincidCliHis.lista
-         }*/
-
     }
-
-
-
-
-    /*async getHistorialRevisiones(){
-        let dataHistorialEstadoCli:any = {}
-        dataHistorialEstadoCli.NIDALERTA = 2
-        dataHistorialEstadoCli.NPERIODO_PROCESO = this.NPERIODO_PROCESO
-        dataHistorialEstadoCli.SCLIENT = localStorage.getItem('SCLIENT')//this.oClienteReforzado.SCLIENT
-        
-        let respCoincidCliHis = await this.userConfigService.GetHistorialEstadoCli(dataHistorialEstadoCli)
-        
-        this.arrHistoricoCli = await respCoincidCliHis.lista
-    }*/
-
     getConsole(idlista, idcoincidencia, regimen) {
-
-
-
-
-
         let bolActiveCheck = this.unchekAllList[regimen - 1][idlista][idcoincidencia]
-
         this.unchekAllList[regimen - 1][idlista][idcoincidencia] = !bolActiveCheck ? true : false
-
-
-        //   let Valor = this.unchekAllList[1][1].filter(it => it == true)
-
-        //     let valor = this.unchekAllList[1][1].filter(it => it == true)
-
-        //   if(valor.length > 0){
-
-        //   }else{
-
-        //   }
-
-
     }
+
     SESTADO_REVISADO_ACEPT
     async getDataClientesList(dataService) {
-        this.tipoListas = [{ 'id': 1, nombre: 'LISTAS INTERNACIONALES' }, { 'id': 2, nombre: 'LISTAS PEP' }, { 'id': 3, nombre: 'LISTAS FAMILIAR PEP' }, { 'id': 5, nombre: 'LISTAS ESPECIALES' }, { 'id': 4, nombre: 'LISTAS SAC' }]
         try {
 
             let arrayCoincidList: any = []
-            let respListasWithCoincid: any = []  //= await this.userConfigService.GetListaResultadosCoincid(dataService)
+            let respListasWithCoincid: any = [] 
             if (this.tipoClienteGC == 'C2-BANDEJA') {
 
 
-
+                debugger
                 if (this.IdLista == 1) {
                     this.internationalList = await this.userConfigService.getInternationalLists(dataService)
                     this.internationalList.forEach((it, i) => {
@@ -955,44 +893,31 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 let indiceList = 0
                 sumaArrays.forEach(item => {
                     let objListaCliente: any = {}
-                    let objTipoLista: any = (this.tipoListas.filter(it => it.id == item.NIDTIPOLISTA))[0]
+                    let objTipoLista: any = (this.tipoListas.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA))[0]
                     let respValid = arrayCoincidList.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA)
-
                     if (respValid.length == 0 && objTipoLista) {
-                        objListaCliente.NIDTIPOLISTA = objTipoLista.id
-                        objListaCliente.SDESTIPOLISTA = objTipoLista.nombre
+                        objListaCliente.NIDTIPOLISTA = objTipoLista.NIDTIPOLISTA
+                        objListaCliente.SDESTIPOLISTA = objTipoLista.SDESTIPOLISTA
                         let incL = 0
                         let arrObjsListas = []
                         let respEstado = (sumaArrays.filter(it => it.SESTADO_REVISADO == 1))[0]
                         this.SESTADO_REVISADO_ACEPT = respEstado ? respEstado.SESTADO_REVISADO : '2'
                         sumaArrays.forEach((it) => {
                             if (it.NIDTIPOLISTA == item.NIDTIPOLISTA) {
-
                                 it.NCONTADORLISTA = incL
                                 arrObjsListas.push(it)
                                 incL++
                             }
                         })
-
-                        /*arrObjsListas.forEach(itemList => {
-                            let arrayListaCliente: any = []
-                            if (item.NIDTIPOLISTA == item.NIDTIPOLISTA) {
-                                item.NCONTADORLISTA = indiceList
-                                arrayListaCliente.push(item)
-                                indiceList++
-                            }
-                        })*/
-
-                        objListaCliente.arrCoincidencias = arrObjsListas//arrayListaCliente
+                        objListaCliente.SHOWPROCENTAJE = this.validListas(arrObjsListas)
+                        objListaCliente.arrCoincidencias = arrObjsListas
                         arrayCoincidList.push(objListaCliente)
                     }
 
                 })
                 return arrayCoincidList
             } else if (this.tipoClienteGC == 'ACEPTA-COINCID') {
-
-
-
+                debugger
                 this.uncheckInternationalLists = []
                 this.uncheckSacList = []
                 this.uncheckPepLists = []
@@ -1012,7 +937,6 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 internationalListService = await this.userConfigService.getInternationalLists(dataService)
                 internationalListService.forEach((it, i) => {
                     let boolAcepta = it.NACEPTA_COINCIDENCIA == 1
-                    //boolAcepta = this.SFALTA_ACEPTAR_COINC != 'SI'
                     if (dataService.NIDREGIMEN == it.NIDREGIMEN) {
                         arrInternationalService.push(boolAcepta)
                     }
@@ -1024,18 +948,15 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 arrSacListService = await this.userConfigService.getSacList(dataService)
                 arrSacListService.forEach(it => {
                     let boolAcepta = it.NACEPTA_COINCIDENCIA == 1
-                    //boolAcepta = this.SFALTA_ACEPTAR_COINC != 'SI'
                     if (dataService.NIDREGIMEN == it.NIDREGIMEN) {
                         arrSacService.push(boolAcepta)
                     }
 
                 })
-                //this.pepList = await this.userConfigService.getPepList(dataService)
                 let arrListPepService = []
                 let pepListService: any[] = await this.userConfigService.getPepList(dataService)
                 pepListService.forEach(it => {
                     let boolAcepta = it.NACEPTA_COINCIDENCIA == 1
-                    //boolAcepta = this.SFALTA_ACEPTAR_COINC != 'SI'
                     arrListPepService.push(boolAcepta)
                     if (dataService.NIDREGIMEN == it.NIDREGIMEN) {
                         this.uncheckPepLists.push(boolAcepta)
@@ -1048,7 +969,6 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 familiesServiceList = await this.userConfigService.getFamiliesPepList(dataService)
                 familiesServiceList.forEach(it => {
                     let boolAcepta = it.NACEPTA_COINCIDENCIA == 1
-                    //boolAcepta = this.SFALTA_ACEPTAR_COINC != 'SI'
                     if (dataService.NIDREGIMEN == it.NIDREGIMEN) {
                         arrFamiliesService.push(boolAcepta)
                     }
@@ -1059,56 +979,33 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 let espListService: any[] = await this.userConfigService.getListEspecial(dataService)
                 espListService.forEach(it => {
                     let boolAcepta = it.NACEPTA_COINCIDENCIA == 1
-                    //boolAcepta = this.SFALTA_ACEPTAR_COINC != 'SI'
                     arrListEspService.push(boolAcepta)
-                    //if(dataService.NIDREGIMEN == it.NIDREGIMEN){
-
-                    //}
-
                 })
-
-                //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
-
-
                 this.unchekAllList[dataService.NIDREGIMEN - 1] = [arrInternationalService, arrListPepService, arrFamiliesService, arrSacListService, arrListEspService]
-                //this.unchekAllList = arrayDefault
-
-                //this.unchekAllList = arrayDefault[dataService.NIDREGIMEN]
-                //this.unchekAllList = [this.uncheckInternationalLists,this.uncheckPepLists,this.uncheckFamiliesPepList,this.uncheckSacList,this.uncheckListEspecial]//this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = internationalListService.concat(arrSacService.concat(pepListService.concat(familiesServiceList.concat(espListService))))
 
 
                 let indiceList = 0
                 sumaArrays.forEach(item => {
                     let objListaCliente: any = {}
-                    let objTipoLista: any = (this.tipoListas.filter(it => it.id == item.NIDTIPOLISTA))[0]
+                    let objTipoLista: any = (this.tipoListas.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA))[0]
                     let respValid = arrayCoincidList.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA)
 
                     if (respValid.length == 0 && objTipoLista) {
-                        objListaCliente.NIDTIPOLISTA = objTipoLista.id
-                        objListaCliente.SDESTIPOLISTA = objTipoLista.nombre
+                        objListaCliente.NIDTIPOLISTA = objTipoLista.NIDTIPOLISTA
+                        objListaCliente.SDESTIPOLISTA = objTipoLista.SDESTIPOLISTA
                         let incL = 0
                         let arrObjsListas = []
                         let respEstado = (sumaArrays.filter(it => it.SESTADO_REVISADO == 1))[0]
                         this.SESTADO_REVISADO_ACEPT = respEstado ? respEstado.SESTADO_REVISADO : '2'
                         sumaArrays.forEach((it) => {
                             if (it.NIDTIPOLISTA == item.NIDTIPOLISTA) {
-
                                 it.NCONTADORLISTA = incL
                                 arrObjsListas.push(it)
                                 incL++
                             }
                         })
-
-                        /*arrObjsListas.forEach(itemList => {
-                            let arrayListaCliente: any = []
-                            if (item.NIDTIPOLISTA == item.NIDTIPOLISTA) {
-                                item.NCONTADORLISTA = indiceList
-                                arrayListaCliente.push(item)
-                                indiceList++
-                            }
-                        })*/
-
+                        objListaCliente.SHOWPROCENTAJE = this.validListas(arrObjsListas)
                         objListaCliente.arrCoincidencias = arrObjsListas//arrayListaCliente
                         arrayCoincidList.push(objListaCliente)
                     }
@@ -1118,7 +1015,6 @@ export class C2DetailComponent implements OnInit, OnDestroy {
 
                 return arrayCoincidList
             } else if (this.tipoClienteGC == 'GC' && (this.formData.NIDALERTA == 35 || this.formData.NIDALERTA == 33)) {
-
                 this.uncheckInternationalLists = []
                 this.uncheckSacList = []
                 this.uncheckPepLists = []
@@ -1196,29 +1092,24 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 //let arrayDefault = [[[],[],[],[],[]],[[],[],[],[],[]]]
 
                 this.unchekAllList[dataService.NIDREGIMEN - 1] = [arrInternationalService, arrListPepService, arrFamiliesService, arrSacListService, arrListEspService]
-                //this.unchekAllList = arrayDefault
-
-                //this.unchekAllList = arrayDefault[dataService.NIDREGIMEN]
-                //this.unchekAllList = [this.uncheckInternationalLists,this.uncheckPepLists,this.uncheckFamiliesPepList,this.uncheckSacList,this.uncheckListEspecial]//this.uncheckInternationalLists.concat(this.uncheckSacList.concat(this.uncheckPepLists.concat(this.uncheckFamiliesPepList.concat(this.uncheckListEspecial))))
                 let sumaArrays = internationalListService.concat(arrSacService.concat(pepListService.concat(familiesServiceList.concat(espListService))))
 
 
                 let indiceList = 0
                 sumaArrays.forEach(item => {
                     let objListaCliente: any = {}
-                    let objTipoLista: any = (this.tipoListas.filter(it => it.id == item.NIDTIPOLISTA))[0]
+                    let objTipoLista: any = (this.tipoListas.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA))[0]
                     let respValid = arrayCoincidList.filter(it => it.NIDTIPOLISTA == item.NIDTIPOLISTA)
 
                     if (respValid.length == 0 && objTipoLista) {
-                        objListaCliente.NIDTIPOLISTA = objTipoLista.id
-                        objListaCliente.SDESTIPOLISTA = objTipoLista.nombre
+                        objListaCliente.NIDTIPOLISTA = objTipoLista.NIDTIPOLISTA
+                        objListaCliente.SDESTIPOLISTA = objTipoLista.SDESTIPOLISTA
                         let incL = 0
                         let arrObjsListas = []
                         let respEstado = (sumaArrays.filter(it => it.SESTADO_REVISADO == 1))[0]
                         this.SESTADO_REVISADO_ACEPT = respEstado ? respEstado.SESTADO_REVISADO : '2'
                         sumaArrays.forEach((it) => {
                             if (it.NIDTIPOLISTA == item.NIDTIPOLISTA) {
-
                                 it.NCONTADORLISTA = incL
                                 arrObjsListas.push(it)
                                 incL++
@@ -1233,7 +1124,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                                 indiceList++
                             }
                         })*/
-
+                        objListaCliente.SHOWPROCENTAJE = this.validListas(arrObjsListas)
                         objListaCliente.arrCoincidencias = arrObjsListas//arrayListaCliente
                         arrayCoincidList.push(objListaCliente)
                     }
@@ -1246,6 +1137,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
 
 
             else {
+                debugger
                 respListasWithCoincid = await this.userConfigService.GetListaResultadosCoincid(dataService)
                 let indice = 0
                 let array: any[] = respListasWithCoincid.filter((obj, index, array) => {
@@ -1283,7 +1175,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                             //return objClienteCoin
                         }
                     })
-
+                    objNewLista.SHOWPROCENTAJE = this.validListas(respClientesCoincid)
                     objNewLista.arrCoincidencias = arrayResultadosTrat//respClientesCoincid
                     arrayCoincidList.push(objNewLista)
 
@@ -1304,6 +1196,11 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         let respListasWithCoincid = await this.userConfigService.GetListaResultadosCoincid(dataService)
         let arrayCoincidList: any = []
 
+        let arrInternationalService: any = []
+        let arrListPepService: any = []
+        let arrFamiliesService: any = []
+        let arrSacListService: any = []
+        let arrListEspService: any = []
         respListasWithCoincid.forEach(lis => {
             let respValidList = arrayCoincidList.filter(it => it.NIDTIPOLISTA == lis.NIDTIPOLISTA)
             if (respValidList.length == 0) {
@@ -1312,6 +1209,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                 objNewLista.SDESTIPOLISTA = lis.SDESTIPOLISTA
                 let respClientesCoincid = respListasWithCoincid.filter(it => {
                     if (it.NIDTIPOLISTA == lis.NIDTIPOLISTA) {
+                        debugger;
                         let objClienteCoin: any = {}
                         objClienteCoin.SNOM_COMPLETO = it.SNOM_COMPLETO
                         objClienteCoin.NACEPTA_COINCIDENCIA = it.NACEPTA_COINCIDENCIA
@@ -1321,45 +1219,37 @@ export class C2DetailComponent implements OnInit, OnDestroy {
                         objClienteCoin.SORIGEN = it.SORIGEN
                         objClienteCoin.STIPOIDEN = it.STIPOIDEN
                         objClienteCoin.STIPO_BUSQUEDA = it.STIPO_BUSQUEDA
+                        if(it.NIDTIPOLISTA == 1){
+                            arrInternationalService
+                        }else if (it.NIDTIPOLISTA == 2){
+                            arrListPepService
+                        }else if (it.NIDTIPOLISTA == 3){
+                            arrFamiliesService
+                        }else if (it.NIDTIPOLISTA == 4){
+                            arrSacListService
+                        }else if (it.NIDTIPOLISTA == 5){
+                            arrListEspService
+                        }
                         return objClienteCoin
                     }
                 })
-
-
+                this.unchekAllList[dataService.NIDREGIMEN - 1] = [arrInternationalService, arrListPepService, arrFamiliesService, arrSacListService, arrListEspService]
+                objNewLista.SHOWPROCENTAJE = this.validListas(respClientesCoincid)
                 objNewLista.arrCoincidencias = respClientesCoincid
                 objNewLista.NLENGTH_COINCID = objNewLista.arrCoincidencias.length
                 arrayCoincidList.push(objNewLista)
             }
-
         })
-
-        /*arrayCoincidList.forEach(list => {
-            let respFilterList = this.tipoListas.filter(it => list.SDESTIPOLISTA != it.nombre)
-            
-            let bolListaIgual = false
-            respFilterList.forEach(itemList => {
-                if(!bolListaIgual && itemList.nombre == list.SDESTIPOLISTA){
-                    bolListaIgual = true
-                }
-            })
-            respFilterList.forEach(itemLi => {
-                if(!bolListaIgual){
-                    let objNewLista:any = {}
-                    objNewLista.SDESTIPOLISTA = itemLi.nombre
-                    objNewLista.NLENGTH_COINCID = 0
-                    objNewLista.arrCoincidencias = []
-                    arrayCoincidList.push(objNewLista)
-                }
-            })
-            
-
-        })*/
-
-
-
         return arrayCoincidList
     }
-
+    validListas(respClientesCoincid){
+        let cantidadListaEspecial = respClientesCoincid.length
+        let cantidadCoincidenciaNombre = respClientesCoincid.filter(t=> t.STIPO_BUSQUEDA == "DOCUMENTO").length
+        if(cantidadCoincidenciaNombre > 0 && cantidadListaEspecial > 0 && cantidadCoincidenciaNombre == cantidadListaEspecial)
+            return 0
+        else 
+            return 1
+    }
     async back() {
 
         //localStorage.setItem("paramClienteReturn",JSON.stringify(this.parametroReturn));
@@ -1897,40 +1787,20 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         }
     }
     getDisable() {
-        //let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.NACEPTA_COINCIDENCIA === 2)
         let ValorCantidad = this.ValorListaCoincidencias.filter(it => it.SESTADO_REVISADO == 2)
-        //console.log("ValorListaCoincidencias",this.ValorListaCoincidencias)
         if (ValorCantidad.length > 0) {
-            // let ValorCantidadAceptados = this.ValorListaCoincidencias.filter(it => it.SESTADO_REVISADO === 1 || it.SESTADO_REVISADO === '1')
-            // console.log("ValorCantidadAceptados",ValorCantidadAceptados)
-            //  
-            // if(ValorCantidadAceptados > 0){
-            //     return true
-            // }else{
-            //     return false
-            // }
             return false
         } else {
-            //console.log("this.SESTADO_REVISADO_ACEPT",this.SESTADO_REVISADO_ACEPT)
-            //console.log("this.formData.SESTADO_REVISADOT",this.formData.SESTADO_REVISADO)
             if (this.SESTADO_REVISADO_ACEPT + '' == '1') {
-
-                //return false
                 return true
             }
             if (this.formData.SESTADO_REVISADO == '1') {
-
                 return true
             }
             else {
-
                 return false
             }
-
         }
-
-
-
     }
 
 
@@ -2135,86 +2005,11 @@ export class C2DetailComponent implements OnInit, OnDestroy {
 
     }
 
-    validatePorPorcentaje2(IDLISTA) {
-
-
-
-
-        let ContList = this.arrCoincidenciasLista.filter(Coinci => Coinci.NIDTIPOLISTA == IDLISTA)
-        if (ContList.length > 0) {
-            ContList.forEach(element => {
-
-                let respuestafilterNom = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "NOMBRES")
-                let respuestafilterDoc = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "DOCUMENTO")
-                if (respuestafilterNom.length > 0) {
-
-                    return true
-                }
-                if (respuestafilterDoc.length > 0 && respuestafilterNom.length == 0) {
-
-                    return false
-                }
-            });
-
-        }
-        else {
-
-            return false
-        }
-
-
-
-    }
     Lista1 = false
     Lista2 = false
     Lista3 = false
     Lista4 = false
     Lista5 = false
-
-    validatePorPorcentaje3() {
-        let IDLISTA: any = [1, 2, 3, 4, 5]
-        let ContList1 = this.arrCoincidenciasLista.filter(Coinci => Coinci.NIDTIPOLISTA == 1)
-        let ContList2 = this.arrCoincidenciasLista.filter(Coinci => Coinci.NIDTIPOLISTA == 2)
-        let ContList3 = this.arrCoincidenciasLista.filter(Coinci => Coinci.NIDTIPOLISTA == 3)
-        let ContList4 = this.arrCoincidenciasLista.filter(Coinci => Coinci.NIDTIPOLISTA == 4)
-        let ContList5 = this.arrCoincidenciasLista.filter(Coinci => Coinci.NIDTIPOLISTA == 5)
-
-        ContList1.forEach(element => {
-
-            let respuestafilterNom = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "NOMBRES")
-            let respuestafilterDoc = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "DOCUMENTO")
-            if (respuestafilterNom.length > 0) {
-                return this.Lista1 = true
-            }
-            if (respuestafilterDoc.length > 0 && respuestafilterNom.length == 0) {
-                return this.Lista1 = false
-            }
-        });
-        ContList2.forEach(element => {
-
-            let respuestafilterNom = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "NOMBRES")
-            let respuestafilterDoc = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "DOCUMENTO")
-            if (respuestafilterNom.length > 0) {
-                return this.Lista2 = true
-            }
-            if (respuestafilterDoc.length > 0 && respuestafilterNom.length == 0) {
-                return this.Lista2 = false
-            }
-        });
-        ContList5.forEach(element => {
-
-            let respuestafilterNom = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "NOMBRES")
-            let respuestafilterDoc = element.arrCoincidencias.filter(t => t.STIPO_BUSQUEDA == "DOCUMENTO")
-            if (respuestafilterNom.length > 0) {
-                return this.Lista5 = true
-            }
-            if (respuestafilterDoc.length > 0 && respuestafilterNom.length == 0) {
-                return this.Lista5 = false
-            }
-        });
-
-
-    }
 
     cortarCararter(texto) {
 
@@ -2473,7 +2268,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         } else {
 
             for (let i = 0; i < this.tipoListas.length; i++) {
-                let arrayList = arreglos.filter(t => t.NIDTIPOLISTA == this.tipoListas[i].id)
+                let arrayList = arreglos.filter(t => t.NIDTIPOLISTA == this.tipoListas[i].NIDTIPOLISTA)
                 for (let index = 0; index < arrayList.length; index++) {
                     this.categoriaSelectedArray[0][arrayList[index].NIDTIPOLISTA - 1].splice(index, 1, false);
                     arreglos.forEach((element, inc) => {
