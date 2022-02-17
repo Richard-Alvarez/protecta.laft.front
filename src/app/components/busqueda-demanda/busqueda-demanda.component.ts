@@ -826,20 +826,35 @@ CrearPdf(item) {
   doc.text('Tipo de documento', tamañoCabecera + 2, SeparacionCabecera + 56);
 
   doc.setFontSize(11);
-  doc.text(dataNOMBRE_RAZON, tamañoCabecera + 60, SeparacionCabecera + 56);
+  // doc.text(dataNOMBRE_RAZON, tamañoCabecera + 60, SeparacionCabecera + 56);
+  doc.text(item.STIPO_DOCUMENTO, tamañoCabecera + 60, SeparacionCabecera + 56);
 
   doc.setFontSize(11);
   doc.text('Número de documento', tamañoCabecera + 2, SeparacionCabecera + 66);
 
   doc.setFontSize(11);
-  doc.text(dataNUMERODOC, tamañoCabecera + 60, SeparacionCabecera + 66);
+  // doc.text(dataNUMERODOC, tamañoCabecera + 60, SeparacionCabecera + 66);
+  doc.text(item.SNUM_DOCUMENTO, tamañoCabecera + 60, SeparacionCabecera + 66);
 
   doc.setFontSize(11);
   doc.text('Nombre/Rázon Social', tamañoCabecera + 2, SeparacionCabecera + 76);
 
-  if(dataNOMBRECOMPLETO.length >= 38){
-    let newNombre1 = (dataNOMBRECOMPLETO).substr(0,38) + '-'
-    let newNombre2 = (dataNOMBRECOMPLETO).substr(38,dataNOMBRECOMPLETO.length)
+  // if(dataNOMBRECOMPLETO.length >= 38){
+  //   let newNombre1 = (dataNOMBRECOMPLETO).substr(0,38) + '-'
+  //   let newNombre2 = (dataNOMBRECOMPLETO).substr(38,dataNOMBRECOMPLETO.length)
+  //   doc.setFontSize(10);
+  //   doc.text(newNombre1, tamañoCabecera + 60, SeparacionCabecera + 74);
+
+  //   doc.setFontSize(10);
+  //   doc.text(newNombre2, tamañoCabecera + 60, SeparacionCabecera + 79);
+  // }else{
+  //   doc.setFontSize(11);
+  //   doc.text(dataNOMBRECOMPLETO, tamañoCabecera + 60, SeparacionCabecera + 76);
+  // }
+
+  if(item.SNOMBRE_COMPLETO.length >= 38){
+    let newNombre1 = (item.SNOMBRE_COMPLETO).substr(0,38) + '-'
+    let newNombre2 = (item.SNOMBRE_COMPLETO).substr(38,item.SNOMBRE_COMPLETO.length)
     doc.setFontSize(10);
     doc.text(newNombre1, tamañoCabecera + 60, SeparacionCabecera + 74);
 
@@ -847,7 +862,7 @@ CrearPdf(item) {
     doc.text(newNombre2, tamañoCabecera + 60, SeparacionCabecera + 79);
   }else{
     doc.setFontSize(11);
-    doc.text(dataNOMBRECOMPLETO, tamañoCabecera + 60, SeparacionCabecera + 76);
+    doc.text(item.SNOMBRE_COMPLETO, tamañoCabecera + 60, SeparacionCabecera + 76);
   }
   
   doc.text('Coincidencia Encontrada: ',tamañoCabecera, SeparacionCabecera + 100 );

@@ -55,6 +55,7 @@ export class ComplementoSinSennalComponent implements OnInit {
   }
 
   abrirModal(data){
+    this.core.loader.show();
     const modalRef = this.modalService.open(ModalComplementoSinSennalComponent, { size: 'xl', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
 
 
@@ -62,7 +63,7 @@ export class ComplementoSinSennalComponent implements OnInit {
     modalRef.componentInstance.data = data;
     //modalRef.componentInstance.ListaEmail = this.ListCorreo;
     modalRef.result.then(async (resp) => {
-      this.core.loader.show();
+    
       //let response = await this.userConfig.GetListCorreo()
       //this.ListCorreo = response
       await this.ConsultaComplementoUsuarios()
