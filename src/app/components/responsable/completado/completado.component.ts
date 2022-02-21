@@ -1087,7 +1087,7 @@ async EnviarCompUsuario(alerta,complemento){
               uploadPararms.STIPO_CARGA = "COMPLEMENTO-OC";
               uploadPararms.NREGIMEN = this.regimen.id;
               uploadPararms.NIDALERTA_CABECERA =  alerta.NIDALERTA_CABECERA;
-              
+              uploadPararms.NID_USUARIO = element.ID_USUARIO
               await this.userConfigService.insertAttachedFilesInformByAlert(uploadPararms)
   
   

@@ -1700,14 +1700,19 @@ async ConsultaComplementoUsuarios(){
     }
   }
 
-  OcultarBotonMuestra(item){
-    let newlistaAdjuntos =  this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-OC" )
+   OcultarBotonMuestra(item){
+    console.log(item)
     
+    let newlistaAdjuntos =  this.ListaAdjuntoComplemento.filter(it =>  it.NIDALERTA == item.NIDALERTA && it.STIPO_CARGA == "COMPLEMENTO-OC" && it.NID_USUARIO ==  item.NIDUSUARIO_ASIGNADO   )
+    console.log("newlistaAdjuntos",newlistaAdjuntos)
     
     if(newlistaAdjuntos.length == 0){
+      console.log("true")
       return true
     }else{
+      console.log("false")
       return false
+      
     }
   }
 }
