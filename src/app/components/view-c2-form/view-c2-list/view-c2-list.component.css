@@ -49,7 +49,7 @@ button.colorFocus:focus {
   background: rgba(0, 0, 0, 0);
   color: red !important;
 }
-/*scroll para motores Webkit y blink (Chrome, Safari, Opera... )*/
+/*scroll para motores Webkit y blink (Chrome, Safari, Opera... )*/ /*kdtr*/
 .scroll_k::-webkit-scrollbar {
   -webkit-appearance: none;
 }
@@ -73,9 +73,10 @@ button.colorFocus:focus {
 .scroll_k::-webkit-scrollbar-track {
   border-radius: 10px;
 }
-/*scroll para firefox*/
+/*scroll para firefox*/ /*kdtr*/
 .scroll_k {
   /*Estilos estándar experimentales (Principalmente Firefox)*/
   scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0);
   scrollbar-width: thin;
 }
+/*fin scroll*/
