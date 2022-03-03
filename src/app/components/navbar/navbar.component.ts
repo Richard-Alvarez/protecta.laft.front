@@ -26,6 +26,13 @@ export class NavbarComponent implements OnInit {
 
   isMenuOpen = false;
 
+
+
+  FECHAINICIO: Date = null;
+  FECHAFIN: Date = null;
+
+
+
   constructor(public core: CoreService,
               public userconfig: UserconfigService,
               private renderer: Renderer2
@@ -67,6 +74,10 @@ export class NavbarComponent implements OnInit {
      
     
   }
+
+
+
+
 
 public text: String;
 @HostListener('click', ["$event"])

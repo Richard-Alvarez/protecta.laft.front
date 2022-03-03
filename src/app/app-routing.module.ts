@@ -178,7 +178,7 @@ const routes: Routes = [
   { path: 'informes', component: InformesComponent},
   
   //
-  { path: 'navbar', component: NavbarUpdateComponent},
+  { path: 'navbar-update', component: NavbarUpdateComponent},
   { path: 'validador/:hash', component: ActualizarContrasennaComponent},
   { path: 'complemento-sin-sennal', component: ComplementoSinSennalComponent},
   
