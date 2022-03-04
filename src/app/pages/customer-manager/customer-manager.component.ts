@@ -1354,6 +1354,8 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
 
     let datosExcel: any = {}
     datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/' + dataGrupo[0].SDESGRUPO_SENAL + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform;
+    datosExcel.idGrupo = this.idGrupo
+    datosExcel.idSubGrupo = this.idSubGrupo
     if (this.idGrupo == 2) {
       datosExcel.VALIDADOR = 'GESTOR-CLIENTE-COLABORADOR'
     } else if (this.idGrupo == 3 || this.idGrupo == 4) {
@@ -1380,7 +1382,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
         return
       }
     }
-
+    
 
     let datosEliminar: any = {}
     datosEliminar.NPERIODO_PROCESO = this.NPERIODO_PROCESO
@@ -1411,6 +1413,8 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       datosRegistroColaborador.NIDSUBGRUPOSEN = this.idSubGrupo
       datosRegistroColaborador.SNUM_DOCUMENTO_EMPRESA = this.ResultadoExcel[i].SNUM_DOCUMENTO_EMPRESA
       datosRegistroColaborador.SNOM_COMPLETO_EMPRESA = this.ResultadoExcel[i].SNOM_COMPLETO_EMPRESA
+      datosRegistroColaborador.NACIONALIDAD = this.ResultadoExcel[i].NACIONALIDAD
+      datosRegistroColaborador.CARGO = this.ResultadoExcel[i].CARGO
       datosRegistroColaborador.SACTUALIZA = 'INS'
       
       let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
