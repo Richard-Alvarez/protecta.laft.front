@@ -20,6 +20,8 @@ export class SearchPepComponent implements OnInit {
   NIDTIPOLISTA: number = 0;
   FECHAINICIO: Date = null;
   FECHAFIN: Date = null;
+  SNUM_DOCUMENTO_SEACSA : string = '';
+  SNUM_DOCUMENTO : string = '';
 
   //lista de datos
   listPeriodos: any = []
@@ -79,6 +81,7 @@ export class SearchPepComponent implements OnInit {
     param.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     param.NANO = this.NANO
     param.NIDTIPOLISTA = this.NIDTIPOLISTA
+    param.SNUM_DOCUMENTO = this.SNUM_DOCUMENTO
     return param;
   }
   sliceAlertsArray(arreglo) {
@@ -128,6 +131,7 @@ export class SearchPepComponent implements OnInit {
     let param: any = {};
     param.FECHAINICIO = this.FECHAINICIO == null ? null :this.FECHAINICIO.toLocaleDateString()
     param.FECHAFIN = this.FECHAFIN == null ? null : this.FECHAFIN.toLocaleDateString()
+    param.SNUM_DOCUMENTO = this.SNUM_DOCUMENTO_SEACSA;
     return param;
   }
   pageChangedSeacsa(currentPage) {
