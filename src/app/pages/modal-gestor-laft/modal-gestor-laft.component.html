@@ -73,16 +73,14 @@
                 </div> -->
 
 
-          <table class="table table-hover table-striped" id="tableCobertura" style="width:100%;">
+          <table *ngIf="ValidarOtros()" class="table table-hover table-striped" id="tableCobertura" style="width:100%;">
             <thead style="color: #26296DB3">
               <tr class="htable headgrid" style="background:transparent;">
                 <th class="text-center">Tipo Doc.</th>
                 <th class="text-center">N° Doc.</th>
                 <th class="text-center">Nombre</th>
-                <th class="text-center" *ngIf="(data.NIDGRUPOSENAL !== '2') && (data.NIDGRUPOSENAL == '4' && (data.NIDSUBGRUPOSEN == '5' || data.NIDSUBGRUPOSEN == '3' ) && (data.NIDGRUPOSENAL == '3' &&  data.NIDSUBGRUPOSEN == '2' ))">Ruc</th>
-                <th class="text-center" *ngIf="(data.NIDGRUPOSENAL !== '2') && (data.NIDGRUPOSENAL == '4' && (data.NIDSUBGRUPOSEN == '5' || data.NIDSUBGRUPOSEN == '3' ) && (data.NIDGRUPOSENAL == '3' &&  data.NIDSUBGRUPOSEN == '2' ))">Razón Social</th>
-                <th class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">Nacionalidad</th>
-                <th class="text-center" *ngIf="(data.NIDGRUPOSENAL == '3' && data.NIDSUBGRUPOSEN ==2) || (data.NIDGRUPOSENAL == 4 && (data.NIDSUBGRUPOSEN == 5 || data.NIDSUBGRUPOSEN == 3))">Cargo</th>
+                <th class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'" >Nacionalidad</th>
+               
               </tr>
             </thead>
             <tbody id="tblContactos" *ngIf="ListaRegistros.length !=0; else listavacia">
@@ -90,10 +88,43 @@
                 <td class="text-center">{{cob.TIPO_DOCUMENTO}}</td>
                 <td class="text-center">{{cob.SNUM_DOCUMENTO}}</td>
                 <td class="text-center">{{cob.SNOM_COMPLETO}}</td>
-                <td class="text-center" *ngIf="(data.NIDGRUPOSENAL !== '2') && (data.NIDGRUPOSENAL == '4' && (data.NIDSUBGRUPOSEN == '5' || data.NIDSUBGRUPOSEN == '3' ) && (data.NIDGRUPOSENAL == '3' &&  data.NIDSUBGRUPOSEN == '2' ))">{{cob.RUC}}</td>
-                <td class="text-center" *ngIf="(data.NIDGRUPOSENAL !== '2') && (data.NIDGRUPOSENAL == '4' && (data.NIDSUBGRUPOSEN == '5' || data.NIDSUBGRUPOSEN == '3' ) && (data.NIDGRUPOSENAL == '3' &&  data.NIDSUBGRUPOSEN == '2' ))">{{cob.RAZON_SOCIAL}}</td>
                 <td class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">{{cob.NACIONALIDAD}}</td>
-                <td class="text-center" *ngIf="(data.NIDGRUPOSENAL == '3' && data.NIDSUBGRUPOSEN ==2)  || (data.NIDGRUPOSENAL == 4 && (data.NIDSUBGRUPOSEN == 5 || data.NIDSUBGRUPOSEN == 3))">{{cob.CARGO}}</td>
+               
+
+              </tr>
+            </tbody>
+
+
+            <ng-template #listavacia>
+              <tbody id="tblContactos">
+                <tr>
+                  <td class="text-center" colspan="6">No hay registros</td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+
+          <table *ngIf="ValidarACC()" class="table table-hover table-striped" id="tableCobertura" style="width:100%;">
+            <thead style="color: #26296DB3">
+              <tr class="htable headgrid" style="background:transparent;">
+                <th class="text-center">Tipo Doc.</th>
+                <th class="text-center">N° Doc.</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Ruc</th>
+                <th class="text-center" >Razón Social</th>
+                <th class="text-center" >Nacionalidad</th>
+                <th class="text-center">Cargo</th>
+              </tr>
+            </thead>
+            <tbody id="tblContactos" *ngIf="ListaRegistros.length !=0; else listavacia">
+              <tr *ngFor="let cob of ListaRegistros | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                <td class="text-center">{{cob.TIPO_DOCUMENTO}}</td>
+                <td class="text-center">{{cob.SNUM_DOCUMENTO}}</td>
+                <td class="text-center">{{cob.SNOM_COMPLETO}}</td>
+                <td class="text-center">{{cob.RUC}}</td>
+                <td class="text-center" >{{cob.RAZON_SOCIAL}}</td>
+                <td class="text-center" >{{cob.NACIONALIDAD}}</td>
+                <td class="text-center" >{{cob.CARGO}}</td>
 
               </tr>
             </tbody>
