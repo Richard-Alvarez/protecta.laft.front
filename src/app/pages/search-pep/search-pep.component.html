@@ -63,6 +63,12 @@
                                     {{item.SDESTIPOLISTA}}</option>
                             </select>
                         </div>
+                        <div class="col-lg-1">
+                            <span class="fontText">N° Documento:</span>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" [(ngModel)]="SNUM_DOCUMENTO" placeholder="ingrese número de documento">
+                        </div>
                         <div class="col-lg-2">
                             <button _ngcontent-qgx-c1="" (click)="getResultLaft()"
                                 class="btn btn-warning text-white ">Buscar</button>
@@ -139,6 +145,12 @@
                                 class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
                                 [maxDate]="maxDate"
                                 [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
+                        </div>
+                        <div class="col-lg-1">
+                            <span class="fontText">N° Documento:</span>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" [(ngModel)]="SNUM_DOCUMENTO_SEACSA" placeholder="ingrese número de documento">
                         </div>
                         <div class="col-lg-2">
                             <button _ngcontent-qgx-c1="" (click)="getResultSeacsa()"
