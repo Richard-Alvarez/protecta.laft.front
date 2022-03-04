@@ -79,8 +79,10 @@
                 <th class="text-center">Tipo Doc.</th>
                 <th class="text-center">N° Doc.</th>
                 <th class="text-center">Nombre</th>
-                <th class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">Ruc</th>
-                <th class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">Razón Social</th>
+                <th class="text-center" *ngIf="(data.NIDGRUPOSENAL !== '2') && (data.NIDGRUPOSENAL == '4' && (data.NIDSUBGRUPOSEN == '5' || data.NIDSUBGRUPOSEN == '3' ) && (data.NIDGRUPOSENAL == '3' &&  data.NIDSUBGRUPOSEN == '2' ))">Ruc</th>
+                <th class="text-center" *ngIf="(data.NIDGRUPOSENAL !== '2') && (data.NIDGRUPOSENAL == '4' && (data.NIDSUBGRUPOSEN == '5' || data.NIDSUBGRUPOSEN == '3' ) && (data.NIDGRUPOSENAL == '3' &&  data.NIDSUBGRUPOSEN == '2' ))">Razón Social</th>
+                <th class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">Nacionalidad</th>
+                <th class="text-center" *ngIf="(data.NIDGRUPOSENAL == '3' && data.NIDSUBGRUPOSEN ==2) || (data.NIDGRUPOSENAL == 4 && (data.NIDSUBGRUPOSEN == 5 || data.NIDSUBGRUPOSEN == 3))">Cargo</th>
               </tr>
             </thead>
             <tbody id="tblContactos" *ngIf="ListaRegistros.length !=0; else listavacia">
@@ -88,8 +90,10 @@
                 <td class="text-center">{{cob.TIPO_DOCUMENTO}}</td>
                 <td class="text-center">{{cob.SNUM_DOCUMENTO}}</td>
                 <td class="text-center">{{cob.SNOM_COMPLETO}}</td>
-                <td class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">{{cob.RUC}}</td>
-                <td class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">{{cob.RAZON_SOCIAL}}</td>
+                <td class="text-center" *ngIf="(data.NIDGRUPOSENAL !== '2') && (data.NIDGRUPOSENAL == '4' && (data.NIDSUBGRUPOSEN == '5' || data.NIDSUBGRUPOSEN == '3' ) && (data.NIDGRUPOSENAL == '3' &&  data.NIDSUBGRUPOSEN == '2' ))">{{cob.RUC}}</td>
+                <td class="text-center" *ngIf="(data.NIDGRUPOSENAL !== '2') && (data.NIDGRUPOSENAL == '4' && (data.NIDSUBGRUPOSEN == '5' || data.NIDSUBGRUPOSEN == '3' ) && (data.NIDGRUPOSENAL == '3' &&  data.NIDSUBGRUPOSEN == '2' ))">{{cob.RAZON_SOCIAL}}</td>
+                <td class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">{{cob.NACIONALIDAD}}</td>
+                <td class="text-center" *ngIf="(data.NIDGRUPOSENAL == '3' && data.NIDSUBGRUPOSEN ==2)  || (data.NIDGRUPOSENAL == 4 && (data.NIDSUBGRUPOSEN == 5 || data.NIDSUBGRUPOSEN == 3))">{{cob.CARGO}}</td>
 
               </tr>
             </tbody>
