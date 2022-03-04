@@ -12,7 +12,10 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'
 import { textDecorationLine } from 'html2canvas/dist/types/css/property-descriptors/text-decoration-line';
+import { addSubtract } from 'ngx-bootstrap/chronos/moment/add-subtract';
 /* import * as XLSX from 'xlsx'; */
+import { toInt } from 'ngx-bootstrap/chronos/utils/type-checks';
+import { DocumentCloner } from 'html2canvas/dist/types/dom/document-cloner';
 const PDF_EXTENSION = ".pdf";
 @Component({
   selector: 'app-busqueda-demanda',
@@ -69,21 +72,16 @@ export class BusquedaDemandaComponent implements OnInit {
     
     let dataUser = localStorage.getItem("resUser")
     this.DataUserLogin = JSON.parse(dataUser)
-    console.log(this.DataUserLogin)
+    //console.log(this.DataUserLogin)
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
     this.nombreCompleto = null;
     this.numeroDoc = null;
     this.variableGlobalUser = this.core.storage.get('usuario');//
     this.idUsuario = this.variableGlobalUser["idUsuario"] //sessionStorage.usuario["fullName"]//
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
-    console.log("nombre usuario",this.nombreUsuario); //nombreusuario
+    //console.log("nombre usuario",this.nombreUsuario); //nombreusuario
 
-    
-    //console.log('',this.timestamp.getDate()|this.timestamp.getMonth()|this.timestamp.getFullYear());
-    /*codigodebusqueda*///console.log("codigo busqueda",this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
-    console.log("codigo busqueda",(this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss')))
-    //this.GenerarCodigo();
-    
+    //console.log("codigo busqueda",(this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss')))
   }
   
   archivoExcel:File;
@@ -92,23 +90,99 @@ export class BusquedaDemandaComponent implements OnInit {
   getDate() {
     return new Date();
   }
-  /*excelSubir: File;
-  seleccionExcel(archivo: File) {
-    this.excelSubir = null;
-    if (!archivo) {
-      this.excelSubir = null;
-      return;
+  /* lo ejecuta el boton buscar [individual]*/
+  async validarNulos() {
+    /*validar si es busqueda individual el nombre o numero de documento sea nulo o vacio*/
+    // if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "" )|| (this.numeroDoc == null || this.numeroDoc == ""))) {
+          /*si no ingresa ningun dato en nombre ni documento*/
+    //   if ((this.nombreCompleto == null || this.nombreCompleto == "") && (this.numeroDoc == null || this.numeroDoc == "")) {
+    //     swal.fire({
+    //       title: 'Búsqueda a Demanda',
+    //       icon: 'warning',
+    //       text: 'Ingrese datos para búsqueda',
+    //       showCancelButton: false,
+    //       confirmButtonColor: '#FA7000',
+    //       confirmButtonText: 'Continuar',
+    //       showCloseButton: true,
+    //       customClass: { 
+    //         closeButton : 'OcultarBorde'
+    //       },
+    //     })
+    //   }
+          /*si no ingresa nombre pero si documento*/
+    //   else if (this.nombreCompleto == null || this.nombreCompleto == "") {
+    //     swal.fire({
+    //       title: 'Búsqueda a Demanda',
+    //       icon: 'warning',
+    //       text: 'Ingrese nombre para búsqueda',
+    //       showCancelButton: false,
+    //       confirmButtonColor: '#FA7000',
+    //       confirmButtonText: 'Continuar',
+    //       showCloseButton: true,
+    //       customClass: { 
+    //         closeButton : 'OcultarBorde'
+    //       },
+    //     })
+
+    //   }
+          /*si no ingresa documento pero si nombre*/
+    //   else if (this.numeroDoc == null || this.numeroDoc == "") {
+    //     swal.fire({
+    //       title: 'Búsqueda a Demanda',
+    //       icon: 'warning',
+    //       text: 'Ingrese documento para búsqueda',
+    //       showCancelButton: false,
+    //       confirmButtonColor: '#FA7000',
+    //       confirmButtonText: 'Continuar',
+    //       showCloseButton: true,
+    //       customClass: { 
+    //         closeButton : 'OcultarBorde'
+    //       },
+    //     })
+    //   }
+    // }
+    
+    /*si no ingresa almenos un campo muestra mensaje*/
+    if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "" ) && (this.numeroDoc == null || this.numeroDoc == ""))) {
+      swal.fire({
+        title: 'Búsqueda a Demanda',
+        icon: 'warning',
+        text: 'Ingrese al menos un dato',
+        showCancelButton: false,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+        },
+      })
     }
-    this.excelSubir = archivo;
-  }*/
-  
-  async validarNulos(){
-    if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "" )|| (this.numeroDoc == null || this.numeroDoc == ""))) {
-      if ((this.nombreCompleto == null || this.nombreCompleto == "") && (this.numeroDoc == null || this.numeroDoc == "")) {
+    /*si ingresa solo nombre o nombre y documento valida que almenos el nombre contenga 3 datos y llama al servicio de busqueda*/
+    else if (this.NBUSCAR_POR == 1 && !(this.nombreCompleto == null || this.nombreCompleto == "" )) {
+      /*expresion regular que asegura ingreso 3 nombres*/
+      const reg = /[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+/;
+      let pr = reg.test(this.nombreCompleto);
+      /*si coincide el formato con la expresion regular ingresa*/
+      if (pr) {
+        /*si el campo de documento es diferente a nulo o vacio [""] entra a verificar la cantidad de digitos*/
+        if (!(this.numeroDoc == null || this.numeroDoc == "")) {
+          let prueba = this.validarDigitosIngresados()
+          //console.log(`devuelve con nombre ${prueba}`)
+          /*si es correcta la contidad de caracter con  el tipo de documento ingresa a llamar al servicio de busqueda*/
+          if (prueba) {
+            await this.BusquedaADemandaMixta();
+          }
+        }
+        /*en caso el campo de documento sea nulo o vacio [""] llamara al servicio de busqueda*/
+        else {
+          await this.BusquedaADemandaMixta();
+        }
+      }
+      else {
         swal.fire({
-          title: 'Busqueda a Demanda',
-          icon: 'warning',
-          text: 'Ingrese datos para busqueda',
+          title: 'Búsqueda a Demanda',
+          icon: 'info',
+          text: 'Ingrese Nombre completo con el formato solicitado',
           showCancelButton: false,
           confirmButtonColor: '#FA7000',
           confirmButtonText: 'Continuar',
@@ -118,38 +192,40 @@ export class BusquedaDemandaComponent implements OnInit {
           },
         })
       }
-      else if (this.nombreCompleto == null || this.nombreCompleto == "") {
-        swal.fire({
-          title: 'Busqueda a Demanda',
-          icon: 'warning',
-          text: 'Ingrese nombre para busqueda',
-          showCancelButton: false,
-          confirmButtonColor: '#FA7000',
-          confirmButtonText: 'Continuar',
-          showCloseButton: true,
-          customClass: { 
-            closeButton : 'OcultarBorde'
-          },
-        })
-      } else if (this.numeroDoc == null || this.numeroDoc == ""){
-        swal.fire({
-          title: 'Busqueda a Demanda',
-          icon: 'warning',
-          text: 'Ingrese documento para busqueda',
-          showCancelButton: false,
-          confirmButtonColor: '#FA7000',
-          confirmButtonText: 'Continuar',
-          showCloseButton: true,
-          customClass: { 
-            closeButton : 'OcultarBorde'
-          },
-        })
-      }
     }
+    /*si ingresa solo documento procedera a llamar al servicio de busqueda*/
     else {
-      await this.BusquedaADemandaMixta();
+      // var numdoc = document.getElementById('doc')
+      // var maxlen = numdoc.getAttribute('maxlength')
+      // //console.log(maxlen)
+      // if (this.numeroDoc.length == Number(maxlen)) {
+      //   //console.log(`${this.numeroDoc.length} es igual a ${Number(maxlen)}`)
+      //   await this.BusquedaADemandaMixta();
+      // //console.log('realiza busqueda a demanda');
+      // }
+      // else {
+      //   swal.fire({
+      //     title: 'Búsqueda a Demanda',
+      //     icon: 'info',
+      //     text: 'La cantidad de digitos es incorrecto',
+      //     showCancelButton: false,
+      //     confirmButtonColor: '#FA7000',
+      //     confirmButtonText: 'Continuar',
+      //     showCloseButton: true,
+      //     customClass: { 
+      //       closeButton : 'OcultarBorde'
+      //     },
+      //   })
+      // }
+      let prueba = this.validarDigitosIngresados()
+      console.log(`devuelve solo documento ${prueba}`)
+      if (prueba) {
+        await this.BusquedaADemandaMixta()
+      }
     }
   }
+  
+  /*servicio de busqueda*/
   async BusquedaADemandaMixta(){    
       let ObjLista : any = {};
       ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
@@ -239,6 +315,7 @@ export class BusquedaDemandaComponent implements OnInit {
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
   }
+  /*valida que solo se pueda ingresar números*/
   validaNumericos(event: any) {
 
     if (event.charCode >= 48 && event.charCode <= 57) {
@@ -246,6 +323,7 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     return false;
   }
+  /*valida segun el tipo de documento, cuantos digitos puede ingresar*/
   validationCantidadCaracteres() {
     if (this.NOMBRE_RAZON == 1) {
       return '11'
@@ -259,6 +337,34 @@ export class BusquedaDemandaComponent implements OnInit {
       return '12'
     }
   }
+  /*valido si la cantidad de digitos ingresados en el input de documento es el mismo que el permitido por el tipo de documento*/
+  validarDigitosIngresados() {
+    var numdoc = document.getElementById('doc')
+      var maxlen = numdoc.getAttribute('maxlength')
+      //console.log(maxlen)
+      if (this.numeroDoc.length == Number(maxlen)) {
+        //console.log(`${this.numeroDoc.length} es igual a ${Number(maxlen)}`)
+        //await this.BusquedaADemandaMixta();
+        return true;
+      //console.log('realiza busqueda a demanda');
+      }
+      else {
+        swal.fire({
+          title: 'Búsqueda a Demanda',
+          icon: 'info',
+          text: 'La cantidad de digitos es incorrecto',
+          showCancelButton: false,
+          confirmButtonColor: '#FA7000',
+          confirmButtonText: 'Continuar',
+          showCloseButton: true,
+          customClass: { 
+            closeButton : 'OcultarBorde'
+          },
+        })
+        return false;
+      }
+  }
+  /*valida que solo se pueda ingresar letras*/
   soloLetras(e) {
     let key = e.keyCode || e.which;
     let tecla = String.fromCharCode(key).toLowerCase();
@@ -364,14 +470,14 @@ export class BusquedaDemandaComponent implements OnInit {
     }
   } */
   /*findocumento*/
-  
+  /*genera codigo para la busqueda a demanda*/
   GenerarCodigo()
   {
     var codigo = Math.floor(Math.random()*999999)
-    console.log("codigo unico",codigo);
+    //console.log("codigo unico",codigo);
     return codigo.toString();
   }
-  
+  /*ocultar controles individual/masivo*/
   hideControls() {
     if (this.NBUSCAR_POR == this.POR_INDIVIDUAL) {
       this.hideMasiva = true;
@@ -387,24 +493,25 @@ export class BusquedaDemandaComponent implements OnInit {
       this.hideIndividual = true;
     }
   }
-
+/*llama a modificar ocultar controles*/
   searchTypeChange(event: any) {
     this.hideControls();
   }
-
+/*en caso seleccione individual*/
   mostrarBotonBuscarIndividual(){
     if(this.NBUSCAR_POR==1){
       return true
     }
     return false
   }
+  /*en caso sea masivo*/
   mostrarBotonBuscarMasiva(){
     if(this.NBUSCAR_POR==2){
       return true
     }
     return false
   }
-
+/*si el resultado de la busqueda es muy largo, corta a cantidad de caracteres especificado*/
   cortarCararterNombre(text){        
     if(text != null){
       let newTexto = text.substring(0, 22)
@@ -416,6 +523,7 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     return ''
   }
+  /*cortar carecteres al resultado cargo*/
   cortarCararter(texto){        
     if(texto != null){
       let newTexto = texto.substring(0, 10)
@@ -427,34 +535,20 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     return ''
   }
+  /*en desuso, descargaba la fila del resultado en formato excel*/
   exportListToExcelIndividual(i){
     let resultado:any = []
     resultado = this.resultadoFinal[i]
     
     let Newresultado:any = []
     let resulFinal:any = []
-    if (resultado!= null) {/*  && resultado.length > 0 */
-      //for(let i =0; i< resultado.length;i++){
-        
-        Newresultado.push(resultado)//[i]
-      //}
-      /* for(let index = 0 ;index < Newresultado.length; index++){
-        //if(Newresultado[index].length > 1){
-          Newresultado[index].forEach(element => {
-            resulFinal.push(element)
-          });
-        //}else{
-          resulFinal.push(Newresultado[index])
-        //}
-      } */
-
-      //resultadoFinal.push(Newresultado)
+    if (resultado!= null) {
+      Newresultado.push(resultado)
       let data = []
-      /* resulFinal */Newresultado.forEach(t => {
-       
+      Newresultado.forEach(t => {
         let _data = {
           "Fecha y Hora de Búsqueda" : t.DFECHA_BUSQUEDA,
-          "Usuario que Realizó la Busqueda" : t.SUSUARIO_BUSQUEDA,
+          "Usuario que Realizó la Búsqueda" : t.SUSUARIO_BUSQUEDA,
           "Tipo de Documento" : t.STIPO_DOCUMENTO,
           "Número de Documento" : t.SNUM_DOCUMENTO,
           "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
@@ -464,15 +558,10 @@ export class BusquedaDemandaComponent implements OnInit {
           "Lista" : t.SLISTA,
           "Proveedor" : t.SPROVEEDOR,
           "Coincidencia": t.STIPOCOINCIDENCIA
-        }
-        /* t.arrListas.forEach(element => {
-          _data[element.SDESTIPOLISTA] = element.SDESESTADO
-        }); */
-        
+        } 
         data.push(_data);
         });
-        
-        this.excelService.exportAsExcelFile(data, "Resultados Busqueda a Demanda");
+      this.excelService.exportAsExcelFile(data, "Resultados Búsqueda a Demanda");
     }else {
       swal.fire({
         title: 'Búsqueda a Demanda',
@@ -491,6 +580,7 @@ export class BusquedaDemandaComponent implements OnInit {
       return
     }
   }
+  /*en caso sea masiva, descargara una plantilla para guia de como se debe subir el archivo*/
   DescargarPlantilla(){
     let data = []
     let dataExample: any =[
@@ -507,32 +597,24 @@ export class BusquedaDemandaComponent implements OnInit {
           "Tipo de Documento" : t.Tipo_Documento,
           "Documento" : t.Documento
         }
-    
         data.push(_data);
     });
-
-    this.excelService.exportAsExcelFile(data, "Plantilla Busqueda a Demanda");
+    this.excelService.exportAsExcelFile(data, "Plantilla Búsqueda a Demanda");
   }
+  /*descarga todos los resultados de la busqueda a demanda en formato excel*/
   exportListToExcel(){
-
-
     let resultado:any = []
     resultado = this.resultadoFinal
-    
     let Newresultado:any = []
     if (resultado!= null && resultado.length > 0) {
       for(let i =0; i< resultado.length;i++){
-        
         Newresultado.push(resultado[i])
        }
-
-      //resultadoFinal.push(Newresultado)
       let data = []
       Newresultado.forEach(t => {
-       
         let _data = {
           "Fecha y Hora de Búsqueda" : t.DFECHA_BUSQUEDA,
-          "Usuario que Realizó la Busqueda" : t.SUSUARIO_BUSQUEDA,
+          "Usuario que Realizó la Búsqueda" : t.SUSUARIO_BUSQUEDA,
           "Tipo de Documento" : t.STIPO_DOCUMENTO,
           "Número de Documento" : t.SNUM_DOCUMENTO,
           "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
@@ -543,11 +625,9 @@ export class BusquedaDemandaComponent implements OnInit {
           "Proveedor" : t.SPROVEEDOR,
           "Coincidencia": t.STIPOCOINCIDENCIA
         }
-        
         data.push(_data);
         });
-        
-        this.excelService.exportAsExcelFile(data, "Resultados Busqueda a Demanda");
+        this.excelService.exportAsExcelFile(data, "Resultados Búsqueda a Demanda");
     }else {
       swal.fire({
         title: 'Búsqueda a Demanda',
@@ -566,12 +646,13 @@ export class BusquedaDemandaComponent implements OnInit {
       return
     }
   }
+  /*al presionar la tecla enter ejecutar la funcion click en el boton buscar [insividual]*/
   Buscar(event:any){
     if(event.keyCode == 13){
        document.getElementById("enter").click();
     }else{
     }
- }
+  }
 
 
   
@@ -633,7 +714,7 @@ export class BusquedaDemandaComponent implements OnInit {
   
   return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
  // return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
- console.log("this archivo", this.ArchivoAdjunto);
+ //console.log("this archivo", this.ArchivoAdjunto);
 }
 
 handleFile(blob: any): Promise<any> {
@@ -689,7 +770,7 @@ async SubirExcel(obj){
 
 SwalGlobal(mensaje){
 swal.fire({
-  title: "Busqueda a Demanda",
+  title: "Búsqueda a Demanda",
   icon: "warning",
   text: mensaje,
   showCancelButton: false,
@@ -708,7 +789,7 @@ swal.fire({
 convertirPdf(item){
   console.log(item)
  
-return
+//return descomentar
   if(this.resultadoFinal.length === 0){
     let mensaje = 'No existen registros'
     this.SwalGlobal(mensaje)
