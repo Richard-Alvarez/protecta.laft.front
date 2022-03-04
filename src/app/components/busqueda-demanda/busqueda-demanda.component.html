@@ -51,18 +51,25 @@
                                     <span class="fontText" >Número Doc:</span> 
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
-                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="" maxlength="{{validationCantidadCaracteres()}}" size="20"
-                                            (keypress)="validaNumericos($event)"[(ngModel)]="numeroDoc" >
+                                    <input id="doc" class="form-control" type="text"  placeholder="documento" maxlength="{{validationCantidadCaracteres()}}" size="20"
+                                            (keypress)="validaNumericos($event)"[(ngModel)]="numeroDoc" ><!-- style="text-transform: uppercase;" -->
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
-                                    <span class="fontText" >Nombre:</span> 
+                                    <span class="fontText" >Nombre completo:</span> 
                                 </th>
-                                <th [hidden]="hideIndividual"  scope="col">
-                                    <input class="form-control" type="text" style="text-transform: uppercase;" placeholder="" maxlength="100" size="34"
-                                            [(ngModel)]="nombreCompleto" (keypress)="soloLetras($event)" (keydown)="Buscar($event)">
+                                <th [hidden]="hideIndividual"  scope="col" >
+                                    <input class="form-control" type="text"  placeholder="nombre completo" maxlength="100" size="34"
+                                            [(ngModel)]="nombreCompleto" (keypress)="soloLetras($event)" pattern="[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+" ><!--(keydown)="Buscar($event)"--><!-- style="text-transform: uppercase;" -->
+                                </th>
+                                <th >
+                                    <div type="button" data-toggle="tooltip" data-placement="top" title="[Apellido1] [Apellido2] [Nombre]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info" viewBox="0 0 16 16" style="border: 1px solid #A6A6A6; border-radius: 50px">
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                        </svg>
+                                    </div>
                                 </th>
                                 <th [hidden]="hideIndividual" *ngIf="mostrarBotonBuscarIndividual()"  scope="col">
-                                    <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="validarNulos()" >Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta --> <!-- obtenerBusquedaCoincidenciaXNumeroDocDemanda -->
+                                    <button id="enter" class="btn btn-warning btnBuscarStyle" (click)="validarNulos()" >Buscar</button>
                                 </th>
                                 <th [hidden]="hideMasiva"  scope="col">
                                     <!-- <input type="file" accept=".xlsx" onclick="this.value=null;"
@@ -78,7 +85,7 @@
                                         
                                 </th>
                                 <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()"  scope="col">
-                                    <button class="btn btn-warning btnBuscarStyle" (click)="validarNulos()">Buscar</button><!-- obtenerBusquedaCoincidenciaXNombreDemanda() --><!-- BusquedaADemandaMixta -->
+                                    <button class="btn btn-warning btnBuscarStyle" (click)="validarNulos()">Buscar</button>
                                 </th>
                                 <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()" scope="col" style="align-items: center;">
                                     <!-- <i class="fas fa-file-excel fa-3x" style="color: rgb(10, 117, 76); font-size: 35px;" (click)="DescargarPlantilla()"></i> -->
