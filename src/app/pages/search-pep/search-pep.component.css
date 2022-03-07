@@ -466,7 +466,12 @@ a .colorTextoDropDown {
         display: block;
     }
 }
-
+@media (min-width: 1550px) { 
+    .col-xlg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+ }
 
 /**********End File Inputs**********/
 

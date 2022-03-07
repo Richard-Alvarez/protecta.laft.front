@@ -1,252 +1,259 @@
 <app-navbar></app-navbar>
 <main class="container-fluid app-main pl-5 pr-5">
-    <div class="row  pl-5 pr-5">
-        <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
-            <span class="fas fa-chevron-left"></span> Pantalla Principal
-        </button>
-    </div>
+  <div class="row  pl-5 pr-5">
+    <button class="btn btn-link text-secondary" routerLink="/home" title="Regresar al Pantalla Principal">
+      <span class="fas fa-chevron-left"></span> Pantalla Principal
+    </button>
+  </div>
 
-    <br>
-    <div class="container-fluid pl-5 pr-5">
-        <!-- <div class="row2">
+  <br>
+  <div class="container-fluid pl-5 pr-5">
+    <!-- <div class="row2">
             <div class="col-lg-19">
                 <h4 class="TitleLine">Consultas Pep</h4>
             </div>
         </div> -->
-        <div class="card-header bordesCabecera" style="background: white;">
-            <ul class="nav nav-pills nav-justified">
-                <li class="nav-item">
-                    <a class="colorLetra nav-link {{this.arrayTabs[0]}}" (click)="setPanelShow(0)" data-toggle="tab" href="#laft"
-                        style="font-size:17px;">Consultas PEP - FPEP (LAFT)</a>
-                </li>
+    <div class="card-header bordesCabecera" style="background: white;">
+      <ul class="nav nav-pills nav-justified">
+        <li class="nav-item">
+          <a class="colorLetra nav-link {{this.arrayTabs[0]}}" (click)="setPanelShow(0)" data-toggle="tab" href="#laft"
+            style="font-size:17px;">Consultas PEP - FPEP (LAFT)</a>
+        </li>
 
-                <li class="nav-item">
-                    <a class="colorLetra nav-link {{this.arrayTabs[1]}}" (click)="setPanelShow(1)" data-toggle="tab" href="#seacsa" style="font-size:17px;">Consultas
-                        PEP (SEACSA)</a>
-                </li>
-            </ul>
-        </div>
-        <div class="card-body">
-            <div class="tab-content">
-                <div id="laft" class="mb-2 mt-2 tab-pane {{this.arrayPanel[0]}}">
-                    <div class="row form-group">
-                        <div class="col-lg-1">
-                            <span class="fontText">Año:</span>
-                        </div>
-                        <div class="col-lg-2">
-                            <select class="form-control" [(ngModel)]="NANO">
-                                <option value="0">
-                                    --Todos--</option>
-                                <option *ngFor="let item of this.listAnos" value="{{item}}">
-                                    {{item}}</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-1">
-                            <span class="fontText">Período:</span>
-                        </div>
-                        <div class="col-lg-2">
-                            <select class="form-control" [(ngModel)]="NPERIODO_PROCESO">
-                                <option value="0">
-                                    --Todos--</option>
-                                <option *ngFor="let item of this.listPeriodos" value="{{item}}">
-                                    {{item}}</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-1">
-                            <span class="fontText">Tipo Lista:</span>
-                        </div>
-                        <div class="col-lg-2">
-                            <select class="form-control" [(ngModel)]="NIDTIPOLISTA">
-                                <option value="0">
-                                    --Todos--</option>
-                                <option *ngFor="let item of this.listType" value="{{item.NIDTIPOLISTA}}">
-                                    {{item.SDESTIPOLISTA}}</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-1">
-                            <span class="fontText">N° Documento:</span>
-                        </div>
-                        <div class="col-lg-2">
-                            <input type="text" class="form-control" [(ngModel)]="SNUM_DOCUMENTO" placeholder="ingrese número de documento">
-                        </div>
-                        <div class="col-lg-2">
-                            <button _ngcontent-qgx-c1="" (click)="getResultLaft()"
-                                class="btn btn-warning text-white ">Buscar</button>
-                        </div>
-                    </div>
-                    <div class="" style="overflow-y:none;">
-                        <hr>
-                        <table class="striped">
-                            <thead>
-                                <tr>
-                                    <th style="width: 15%;">Período</th>
-                                    <th style="width: 15%;">Tipo de Documento</th>
-                                    <th style="width: 15%;">Número de Documento</th>
-                                    <th style="width: 25%;">Nombre Completo</th>
-                                    <th style="width: 15%;">Producto</th>
-                                    <th style="width: 15%;">Tipo Lista</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngIf="this.Colleccion.count == 0 || this.Colleccion.count == undefined" class="ce">
-                                    <td class="text-center" colspan="6">No se han encontrado resultados</td>
-                                </tr>
-                                <tr *ngFor="let item of this.Colleccion.data ">
-                                    <td style="width: 15%;">{{item.SRANGOPERIODO}}</td>
-                                    <td style="width: 15%;">{{item.STIPO_DOCUMENTO}}</td>
-                                    <td style="width: 15%;">{{item.SNUM_DOCUMENTO}}</td>
-                                    <td style="width: 25%;">{{item.SNOM_COMPLETO}}</td>
-                                    <td style="width: 15%;">{{item.SDESPRODUCTO}}</td>
-                                    <td style="width: 15%;">{{item.SDESTIPOLISTA}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <ng-container *ngIf="this.data.length>0; then showPagination1"></ng-container>
-                        <ng-template #showPagination1>
-                            <div class="row mt-4">
-                                <div class="col-sm-4">
-                                    <button (click)="descarga()"
-                                        class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i
-                                            class="fas fa-download"></i> Descargar Resultados </button>
+        <li class="nav-item">
+          <a class="colorLetra nav-link {{this.arrayTabs[1]}}" (click)="setPanelShow(1)" data-toggle="tab"
+            href="#seacsa" style="font-size:17px;">Consultas
+            PEP (SEACSA)</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content">
+        <div id="laft" class="mb-2 mt-2 tab-pane {{this.arrayPanel[0]}}">
+          <div class="row  form-group">
+            <div class="col-lg-11 col-sm-12">
+              <div class="row">
+                <div class="col-xlg-3 col-lg-6 justify-content-between d-flex py-1">
+                  <label class="fontText">Año:</label>
+                  <div class="col-sm-8 ">
+                    <select class="form-control buttonSinBorder colorButton " [(ngModel)]="NANO">
+                      <option value="0">
+                        --Todos--</option>
+                      <option *ngFor="let item of this.listAnos" value="{{item}}">
+                        {{item}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xlg-3 col-lg-6 justify-content-between d-flex py-1">
+                  <label class="fontText">Período:</label>
+                  <div class="col-sm-8">
+                    <select class="form-control buttonSinBorder colorButton" [(ngModel)]="NPERIODO_PROCESO">
+                      <option value="0">
+                        --Todos--</option>
+                      <option *ngFor="let item of this.listPeriodos" value="{{item}}">
+                        {{item}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xlg-3 col-lg-6 justify-content-between d-flex py-1">
+                  <label class="fontText">Tipo Lista:</label>
+                  <div class="col-sm-8">
+                    <select class="form-control buttonSinBorder colorButton" [(ngModel)]="NIDTIPOLISTA">
+                      <option value="0">
+                        --Todos--</option>
+                      <option *ngFor="let item of this.listType" value="{{item.NIDTIPOLISTA}}">
+                        {{item.SDESTIPOLISTA}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xlg-3 col-lg-6 justify-content-between d-flex py-1">
+                  <label class="fontText">N° Documento:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control buttonSinBorder colorButton" [(ngModel)]="SNUM_DOCUMENTO"
+                      placeholder="Ingrese número de documento">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-1  py-1">
+              <button _ngcontent-qgx-c1="" (click)="getResultLaft()" class="btn btn-warning text-white ">Buscar</button>
+            </div>
+          </div>
+          <div class="" style="overflow-y:none;">
+            <hr>
+            <table class="striped">
+              <thead>
+                <tr>
+                  <th style="width: 15%;">Período</th>
+                  <th style="width: 15%;">Tipo de Documento</th>
+                  <th style="width: 15%;">Número de Documento</th>
+                  <th style="width: 25%;">Nombre Completo</th>
+                  <th style="width: 15%;">Producto</th>
+                  <th style="width: 15%;">Tipo Lista</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="this.Colleccion.count == 0 || this.Colleccion.count == undefined" class="ce">
+                  <td class="text-center" colspan="6">No se han encontrado resultados</td>
+                </tr>
+                <tr *ngFor="let item of this.Colleccion.data ">
+                  <td style="width: 15%;">{{item.SRANGOPERIODO}}</td>
+                  <td style="width: 15%;">{{item.STIPO_DOCUMENTO}}</td>
+                  <td style="width: 15%;">{{item.SNUM_DOCUMENTO}}</td>
+                  <td style="width: 25%;">{{item.SNOM_COMPLETO}}</td>
+                  <td style="width: 15%;">{{item.SDESPRODUCTO}}</td>
+                  <td style="width: 15%;">{{item.SDESTIPOLISTA}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <ng-container *ngIf="this.data.length>0; then showPagination1"></ng-container>
+            <ng-template #showPagination1>
+              <div class="row mt-4">
+                <div class="col-sm-4">
+                  <button (click)="descarga()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i
+                      class="fas fa-download"></i> Descargar Resultados </button>
 
-                                </div>
-                                <div class="col-sm-4">
-                                    <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
-                                        [collectionSize]="totalItems" [maxSize]="maxSize"
-                                        aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
-                                    </ngb-pagination>
-                                </div>
-                            </div>
-                        </ng-template>
-                        <!-- <div *ngIf="this.Colleccion.count > 0" class="row px-3 justify-content-between">
+                </div>
+                <div class="col-sm-4">
+                  <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage" [collectionSize]="totalItems"
+                    [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
+                  </ngb-pagination>
+                </div>
+              </div>
+            </ng-template>
+            <!-- <div *ngIf="this.Colleccion.count > 0" class="row px-3 justify-content-between">
                         <pagination-controls (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
                         <div>
                             <button (click)="descarga()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar </button>
                         </div>
                     </div> -->
-                    </div>
+          </div>
+        </div>
+        <div id="seacsa" class="mb-2 mt-2 tab-pane {{this.arrayPanel[1]}}">
+          <div class="row form-group">
+            <div class="col-lg-11 col-sm-12">
+              <div class="row">
+                <div class="col-xlg-3 col-lg-6 justify-content-between d-flex py-1">
+                  <span class="fontText">Fecha Inicio:</span>
+                  <div class="col-sm-8">
+                    <input type="text" [(ngModel)]="FECHAINICIO" placeholder="Desde"
+                      class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
+                      [maxDate]="maxDate"
+                      [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
+                  </div>
                 </div>
-                <div id="seacsa" class="mb-2 mt-2 tab-pane {{this.arrayPanel[1]}}">
-                    <div class="row form-group">
-                        <div class="col-lg-1">
-                            <span class="fontText">Fecha Inicio:</span>
-                        </div>
-                        <div col-lg-2 title="Ingrese la fecha de inicio">
-                            <input type="text" [(ngModel)]="FECHAINICIO" placeholder="DESDE"
-                                class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
-                                [maxDate]="maxDate"
-                                [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
-                        </div>
-                        <div class="col-lg-1">
-                            <span class="fontText">Fecha Fin:</span>
-                        </div>
-                        <div col-lg-2 title="Ingrese la fecha de fin">
-                            <input type="text" [(ngModel)]="FECHAFIN" placeholder="DESDE"
-                                class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
-                                [maxDate]="maxDate"
-                                [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
-                        </div>
-                        <div class="col-lg-1">
-                            <span class="fontText">N° Documento:</span>
-                        </div>
-                        <div class="col-lg-2">
-                            <input type="text" class="form-control" [(ngModel)]="SNUM_DOCUMENTO_SEACSA" placeholder="ingrese número de documento">
-                        </div>
-                        <div class="col-lg-2">
-                            <button _ngcontent-qgx-c1="" (click)="getResultSeacsa()"
-                                class="btn btn-warning text-white ">Buscar</button>
-                        </div>
+                <div class="col-xlg-3 col-lg-6 justify-content-between d-flex py-1">
+                  <span class="fontText">Fecha Fin:</span>
+                  <div class="col-sm-8">
+                    <input type="text" [(ngModel)]="FECHAFIN" placeholder="Hasta"
+                      class="form-control buttonSinBorder colorButton" bsDatepicker #dpr="bsDatepicker"
+                      [maxDate]="maxDate"
+                      [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange' }">
+                  </div>
+                </div>
+                <div class="col-xlg-3 col-lg-6 justify-content-between d-flex py-1">
+                    <span class="fontText">N° Documento:</span>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control buttonSinBorder colorButton" [(ngModel)]="SNUM_DOCUMENTO_SEACSA"
+                        placeholder="Ingrese número de documento">
                     </div>
-                    <div class="" style="overflow-y:none;">
-                        <hr>
-                        <table id="seacsa" class="striped">
-                            <thead>
-                                <tr>
-                                    <th class="columnGroup1" colspan="4">DATOS DE LA PÓLIZA</th>
-                                    <th class="columnGroup2" colspan="3">DATOS TITULAR PÓLIZA</th>
-                                    <th class="columnGroup3" colspan="8">INFORMACIÓN PEP</th>
-                                    <th class="columnGroup4" colspan="5">INFORMACIÓN FAMILIAR PEP - TITULAR</th>
-                                </tr>
-                                <tr>
-                                    <th class="columnGroup1">Producto</th>
-                                    <th class="columnGroup1">Póliza</th>
-                                    <th class="columnGroup1">Fecha Emisión</th>
-                                    <th class="columnGroup1">Estado</th>
-                                    <th class="columnGroup2">Nombre Completo</th>
-                                    <th class="columnGroup2">Tipo Documento</th>
-                                    <th class="columnGroup2">Número Documento</th>
-                                    <th class="columnGroup3">Parentesco</th>
-                                    <th class="columnGroup3">Nombre Completo</th>
-                                    <th class="columnGroup3">Tipo Documento</th>
-                                    <th class="columnGroup3">Número Documento</th>
-                                    <th class="columnGroup3">Nacionalidad</th>
-                                    <th class="columnGroup3">Institución</th>
-                                    <th class="columnGroup3">Tipo Organización</th>
-                                    <th class="columnGroup3">Cargo</th>
-                                    <th class="columnGroup4">Parentesco</th>
-                                    <th class="columnGroup4">Nombre Completo</th>
-                                    <th class="columnGroup4">Tipo Documento</th>
-                                    <th class="columnGroup4">Número Documento</th>
-                                    <th class="columnGroup4">Nacionalidad</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngIf="this.ColleccionSeacsa.count == 0 || this.ColleccionSeacsa.count == undefined" class="ce">
-                                    <td class="text-center" colspan="20">No se han encontrado resultados</td>
-                                </tr>
-                                <tr *ngFor="let item of this.ColleccionSeacsa.data ">
-                                    <td >{{item.COD_TIPPROD}}</td>
-                                    <td >{{item.NUM_POLIZA}}</td>
-                                    <td >{{item.FEC_EMISION}}</td>
-                                    <td >{{item.ESTADO_POL}}</td>
-                                    <td >{{item.SNOMBRECOMPLETO}}</td>
-                                    <td >{{item.SDESCRIPT}}</td>
-                                    <td >{{item.NUM_IDENBEN}}</td>
-                                    <td >{{item.PARENTESCO_PEP}}</td>
-                                    <td >{{item.GLS_NOMBREPEP}}</td>
-                                    <td >{{item.TIP_DOCPEP}}</td>
-                                    <td >{{item.NUM_IDENPEP}}</td>
-                                    <td >{{item.GLS_NACIONALIDAD}}</td>
-                                    <td >{{item.GLS_INSTITUCION}}</td>
-                                    <td >{{item.TIP_ORGANIZACION}}</td>
-                                    <td >{{item.DESC_CARGO}}</td>
-                                    <td >{{item.PARENTESCO_FAMPEP}}</td>
-                                    <td >{{item.GLS_NOMBREFAM}}</td>
-                                    <td >{{item.TIP_DOCFAMPEP}}</td>
-                                    <td >{{item.NUM_IDENFAM}}</td>
-                                    <td >{{item.GLS_NACIONALIDADFAM}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <ng-container *ngIf="this.dataSeacsa.length>0; then showPagination"></ng-container>
-                        <ng-template #showPagination>
-                            <div class="row mt-4">
-                                <div class="col-sm-4">
-                                    <button (click)="descargaSeacsa()"
-                                        class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i
-                                            class="fas fa-download"></i> Descargar Resultados </button>
+                  </div>
+              </div>
+            </div>
+            <div>
+              <button _ngcontent-qgx-c1="" (click)="getResultSeacsa()"
+                class="btn btn-warning text-white ">Buscar</button>
+            </div>
+          </div>
+          <div class="" style="overflow-y:none;">
+            <hr>
+            <table id="seacsa" class="striped">
+              <thead>
+                <tr>
+                  <th class="columnGroup1" colspan="4">DATOS DE LA PÓLIZA</th>
+                  <th class="columnGroup2" colspan="3">DATOS TITULAR PÓLIZA</th>
+                  <th class="columnGroup3" colspan="8">INFORMACIÓN PEP</th>
+                  <th class="columnGroup4" colspan="5">INFORMACIÓN FAMILIAR PEP - TITULAR</th>
+                </tr>
+                <tr>
+                  <th class="columnGroup1">Producto</th>
+                  <th class="columnGroup1">Póliza</th>
+                  <th class="columnGroup1">Fecha Emisión</th>
+                  <th class="columnGroup1">Estado</th>
+                  <th class="columnGroup2">Nombre Completo</th>
+                  <th class="columnGroup2">Tipo Documento</th>
+                  <th class="columnGroup2">Número Documento</th>
+                  <th class="columnGroup3">Parentesco</th>
+                  <th class="columnGroup3">Nombre Completo</th>
+                  <th class="columnGroup3">Tipo Documento</th>
+                  <th class="columnGroup3">Número Documento</th>
+                  <th class="columnGroup3">Nacionalidad</th>
+                  <th class="columnGroup3">Institución</th>
+                  <th class="columnGroup3">Tipo Organización</th>
+                  <th class="columnGroup3">Cargo</th>
+                  <th class="columnGroup4">Parentesco</th>
+                  <th class="columnGroup4">Nombre Completo</th>
+                  <th class="columnGroup4">Tipo Documento</th>
+                  <th class="columnGroup4">Número Documento</th>
+                  <th class="columnGroup4">Nacionalidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="this.ColleccionSeacsa.count == 0 || this.ColleccionSeacsa.count == undefined" class="ce">
+                  <td class="text-center" colspan="20">No se han encontrado resultados</td>
+                </tr>
+                <tr *ngFor="let item of this.ColleccionSeacsa.data ">
+                  <td>{{item.COD_TIPPROD}}</td>
+                  <td>{{item.NUM_POLIZA}}</td>
+                  <td>{{item.FEC_EMISION}}</td>
+                  <td>{{item.ESTADO_POL}}</td>
+                  <td>{{item.SNOMBRECOMPLETO}}</td>
+                  <td>{{item.SDESCRIPT}}</td>
+                  <td>{{item.NUM_IDENBEN}}</td>
+                  <td>{{item.PARENTESCO_PEP}}</td>
+                  <td>{{item.GLS_NOMBREPEP}}</td>
+                  <td>{{item.TIP_DOCPEP}}</td>
+                  <td>{{item.NUM_IDENPEP}}</td>
+                  <td>{{item.GLS_NACIONALIDAD}}</td>
+                  <td>{{item.GLS_INSTITUCION}}</td>
+                  <td>{{item.TIP_ORGANIZACION}}</td>
+                  <td>{{item.DESC_CARGO}}</td>
+                  <td>{{item.PARENTESCO_FAMPEP}}</td>
+                  <td>{{item.GLS_NOMBREFAM}}</td>
+                  <td>{{item.TIP_DOCFAMPEP}}</td>
+                  <td>{{item.NUM_IDENFAM}}</td>
+                  <td>{{item.GLS_NACIONALIDADFAM}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <ng-container *ngIf="this.dataSeacsa.length>0; then showPagination"></ng-container>
+            <ng-template #showPagination>
+              <div class="row mt-4">
+                <div class="col-sm-4">
+                  <button (click)="descargaSeacsa()"
+                    class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i
+                      class="fas fa-download"></i> Descargar Resultados </button>
 
-                                </div>
-                                <div class="col-sm-4">
-                                    <ngb-pagination [(page)]="currentPage2" [pageSize]="itemsPerPage2"
-                                        [collectionSize]="totalItems2" [maxSize]="maxSize2"
-                                        aria-label="Default pagination" (pageChange)="pageChangedSeacsa(currentPage2)">
-                                    </ngb-pagination>
-                                </div>
-                            </div>
-                        </ng-template>
-                        <!-- <div *ngIf="this.Colleccion.count > 0" class="row px-3 justify-content-between">
+                </div>
+                <div class="col-sm-4">
+                  <ngb-pagination [(page)]="currentPage2" [pageSize]="itemsPerPage2" [collectionSize]="totalItems2"
+                    [maxSize]="maxSize2" aria-label="Default pagination" (pageChange)="pageChangedSeacsa(currentPage2)">
+                  </ngb-pagination>
+                </div>
+              </div>
+            </ng-template>
+            <!-- <div *ngIf="this.Colleccion.count > 0" class="row px-3 justify-content-between">
                             <pagination-controls (pageChange)="onPageChange($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
                             <div>
                                 <button (click)="descarga()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar </button>
                             </div>
                         </div> -->
-                    </div>
-                </div>
-                
-            </div>
+          </div>
         </div>
+
+      </div>
     </div>
+  </div>
 </main>
 <br>
 <app-footer></app-footer>
