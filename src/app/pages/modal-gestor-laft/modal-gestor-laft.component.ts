@@ -52,6 +52,7 @@ export class ModalGestorLaftComponent implements OnInit {
           "SDES_DOCUMENTO": t.NTIPO_DOCUMENTO,
           "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
           "SNOM_COMPLETO": t.SNOM_COMPLETO,
+          "NACIONALIDAD": t.NACIONALIDAD,
          
         }
       }else if((idgrupo == 4 && (idsubgrupo == 1 || idsubgrupo == 4 || idsubgrupo == 2)) || (idgrupo == 3 && ( idsubgrupo == 0 || idsubgrupo == 1))){

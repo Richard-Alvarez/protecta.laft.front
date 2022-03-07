@@ -15,9 +15,11 @@
                 </div>
                
                 <div class="row borderFormat" style="width: 103%">
-                    
-                    <div class="col-lg-5 form-group">
+                    <div class="col-1" style="padding-top: 7px;">
                         <label class="fontText">Perfiles:</label>
+                    </div>
+                    <div class="col-lg-5 form-group">
+                       
                         <select [disabled]="profileListOff" [(ngModel)]="profiles" name="profile"
                             (change)="changeProfile()"
                             style="display: flex;justify-content: center;align-items: center;"
@@ -27,10 +29,13 @@
                                 {{item.profileName}}</option>
                         </select>
                     </div>
-                    
+                    <div class="col-1" style="padding-top: 7px;">
+                        <label class="fontText">Grupos:</label>
+                    </div>
 
                     <div class="col-lg-3 form-group">
-                        <label class="fontText">Grupos:</label>
+                        
+                       
                         <select [disabled]="groupListOff" [(ngModel)]="group" name="group"
                           (change)="changeGroup()"
                             style="display: flex;justify-content: center;align-items: center;"
