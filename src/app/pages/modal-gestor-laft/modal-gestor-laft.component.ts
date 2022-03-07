@@ -40,19 +40,47 @@ export class ModalGestorLaftComponent implements OnInit {
   DescargarLista() {
 
     let data: any = []
+    let idgrupo = this.data.NIDGRUPOSENAL
+    let idsubgrupo = this.data.NIDSUBGRUPOSEN
+    
 
     this.ListaRegistros.forEach((t, inc) => {
-      let _data = {
-        "NTIPO_DOCUMENTO": t.IDDOC_TYPE,
-        "SDES_DOCUMENTO": t.NTIPO_DOCUMENTO,
-        "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
-        "SNOM_COMPLETO": t.SNOM_COMPLETO,
-        "SNUM_DOCUMENTO_EMPRESA": t.RUC,
-        "SNOM_COMPLETO_EMPRESA": t.RAZON_SOCIAL,
-        //"Ramo": t.SDESGRUPO_SENAL,
-        //"SDESSUBGRUPO_SENAL": t.SDESSUBGRUPO_SENAL,
-        //"TIPO_DOCUMENTO": t.TIPO_DOCUMENTO,
+      let _data:any ={}
+      if(idgrupo == 2){
+         _data = {
+          "NTIPO_DOCUMENTO": t.IDDOC_TYPE,
+          "SDES_DOCUMENTO": t.NTIPO_DOCUMENTO,
+          "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+          "SNOM_COMPLETO": t.SNOM_COMPLETO,
+         
+        }
+      }else if((idgrupo == 4 && (idsubgrupo == 1 || idsubgrupo == 4 || idsubgrupo == 2)) || (idgrupo == 3 && ( idsubgrupo == 0 || idsubgrupo == 1))){
+        _data = {
+          "NTIPO_DOCUMENTO": t.IDDOC_TYPE,
+          "SDES_DOCUMENTO": t.NTIPO_DOCUMENTO,
+          "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+          "SNOM_COMPLETO": t.SNOM_COMPLETO,
+          "NACIONALIDAD": t.NACIONALIDAD,
+          
+        }
       }
+      else{
+         _data = {
+          "NTIPO_DOCUMENTO": t.IDDOC_TYPE,
+          "SDES_DOCUMENTO": t.NTIPO_DOCUMENTO,
+          "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+          "SNOM_COMPLETO": t.SNOM_COMPLETO,
+          "SNUM_DOCUMENTO_EMPRESA": t.RUC,
+          "SNOM_COMPLETO_EMPRESA": t.RAZON_SOCIAL,
+          "NACIONALIDAD": t.NACIONALIDAD,
+          "CARGO": t.CARGO,
+          //"Ramo": t.SDESGRUPO_SENAL,
+          //"SDESSUBGRUPO_SENAL": t.SDESSUBGRUPO_SENAL,
+          //"TIPO_DOCUMENTO": t.TIPO_DOCUMENTO,
+        }
+      } 
+
+     
       data.push(_data);
     });
 
@@ -84,6 +112,41 @@ export class ModalGestorLaftComponent implements OnInit {
       return
     });
   }
+
+  ValidarACC(){
+    let idgrupo = this.data.NIDGRUPOSENAL
+    let idsubgrupo = this.data.NIDSUBGRUPOSEN
+
+    if(idgrupo == '4' && (idsubgrupo == '5' || idsubgrupo == '3')){
+      return true
+    }
+    else if(idgrupo == '3' && idsubgrupo == '2' ){
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
+  ValidarOtros(){
+    let idgrupo = this.data.NIDGRUPOSENAL
+    let idsubgrupo = this.data.NIDSUBGRUPOSEN
+
+    if(idgrupo == '4' && (idsubgrupo == '1' || idsubgrupo == '2'|| idsubgrupo == '4')){
+      return true
+    }
+    else if(idgrupo == '3' && (idsubgrupo == '1' || idsubgrupo == '0')){
+      return true
+    }
+    else if(idgrupo == '2'){
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
+  
 
   // getListAlertsFilters(){
   //   //this.processlistToShow - this.arrayFinalListToShow

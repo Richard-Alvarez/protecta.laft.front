@@ -2,7 +2,8 @@
 
     <div class="">
         <div class="row borderFormat" style="margin-left: 1px;">
-            <div class=" col-xl-3 col-sxl-2 form-group" title="Ingrese la fecha de inicio">
+            <div class=" col-xl-3 col-sxl-2 form-group" title="Mes a
+            procesar(*)">
                 <p><label class="fontText" title="se va a calcular el tipo de cambio segun este mes">Mes a
                     procesar(*):</label></p>
                 <input type="text" readonly [(ngModel)]="bsValueMonth" placeholder="DESDE" (ngModelChange)="changeMonth()"
@@ -10,27 +11,27 @@
                     [maxDate]="maxDate"
                     [bsConfig]="{isAnimated: true, dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-orange',minMode: 'month'}">
             </div>
-            <div class=" col-md-4 col-xl-3  col-sxl-2 form-group" title="Tipo de cambio">
-                <p class=""><label class="fontText">Tipo de Cambio(*):</label></p>
+            <div class=" col-md-4 col-xl-3  col-sxl-2 form-group" title="Tipo de Cambio mes anterior(*)">
+                <p class=""><label class="fontText">Tipo de Cambio mes anterior(*):</label></p>
                 <input [disabled]="exTypeOff" [(ngModel)]="exchangeRate" type="number"
                     class="form-control buttonSinBorder">
             </div>
-            <div class="col-md-4 col-xl-3 col-sxl-2 form-group" title="Tipo de cambio">
+            <div class="col-md-4 col-xl-3 col-sxl-2 form-group" title="Monto(Operaciones Únicas)">
                 <p class=""><label class="fontText">Monto(Operaciones Únicas):</label></p>
                 <input [disabled]="amOff" [(ngModel)]="Iamount" type="text" class="form-control buttonSinBorder"
                     maxlength="20">
             </div>
-            <div class="col-md-4 col-xl-3 col-sxl-2 form-group" title="Tipo de cambio">
+            <div class="col-md-4 col-xl-3 col-sxl-2 form-group" title="Monto AT RT(Operaciones Únicas)">
                 <p class=""><label class="fontText">Monto AT RT(Operaciones Únicas):</label></p>
                 <input [disabled]="amOff" [(ngModel)]="IamountAtRt" type="text" class="form-control buttonSinBorder"
                     maxlength="20">
             </div>
-            <div class="col-md-4 col-xl-3 col-sxl-2 form-group" title="Tipo de cambio">
+            <div class="col-md-4 col-xl-3 col-sxl-2 form-group" title="Monto Único(Operaciones Mútiples)">
                 <p><label class="fontText">Monto Único(Operaciones Mútiples):</label></p>
                 <input [disabled]="amUniMOff" [(ngModel)]="IamountUnicaMulti" type="text"
                     class="form-control buttonSinBorder" maxlength="20">
             </div>
-            <div class="col-md-4 col-xl-3 col-sxl-2 form-group" title="Tipo de cambio">
+            <div class="col-md-4 col-xl-3 col-sxl-2 form-group" title="Monto Frecuente(Operaciones Mútiples)">
                 <p><label class="fontText">Monto Frecuente(Operaciones Mútiples):</label></p>
                 <input [disabled]="amFreMOff" [(ngModel)]="IamountFrecMulti" type="text"
                     class="form-control buttonSinBorder" maxlength="20">
