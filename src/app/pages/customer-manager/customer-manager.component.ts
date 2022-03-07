@@ -1416,6 +1416,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       datosRegistroColaborador.NACIONALIDAD = this.ResultadoExcel[i].NACIONALIDAD
       datosRegistroColaborador.CARGO = this.ResultadoExcel[i].CARGO
       datosRegistroColaborador.SACTUALIZA = 'INS'
+      console.log("datosRegistroColaborador",datosRegistroColaborador)
       
       let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
       this.core.loader.hide()

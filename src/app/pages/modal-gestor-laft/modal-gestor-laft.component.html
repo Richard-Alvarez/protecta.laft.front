@@ -79,7 +79,7 @@
                 <th class="text-center">Tipo Doc.</th>
                 <th class="text-center">N° Doc.</th>
                 <th class="text-center">Nombre</th>
-                <th class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'" >Nacionalidad</th>
+                <th class="text-center" >Nacionalidad</th>
                
               </tr>
             </thead>
@@ -88,7 +88,7 @@
                 <td class="text-center">{{cob.TIPO_DOCUMENTO}}</td>
                 <td class="text-center">{{cob.SNUM_DOCUMENTO}}</td>
                 <td class="text-center">{{cob.SNOM_COMPLETO}}</td>
-                <td class="text-center" *ngIf="data.NIDGRUPOSENAL !== '2'">{{cob.NACIONALIDAD}}</td>
+                <td class="text-center">{{cob.NACIONALIDAD}}</td>
                
 
               </tr>
