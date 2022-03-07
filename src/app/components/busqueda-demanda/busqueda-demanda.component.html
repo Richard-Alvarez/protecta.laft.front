@@ -28,37 +28,38 @@
                         <thead>
                             <tr>
                                 <th scope="col" >
-                                    <span class="fontText" >Tipo de Búsqueda:</span>
+                                    <span class="fontText" >Tipo de búsqueda:</span>
                                 </th>
-                                <th scope="col">
+                                <th scope="col" width="125px">
                                     <select class="form-control" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" >
                                         <option value="1">Individual</option>
                                         <option value="2">Masiva</option>
                                     </select>
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
-                                    <span class="fontText" >Tipo Doc:</span>
+                                    <span class="fontText" >Tipo doc:</span>
                                 </th>
-                                <th [hidden]="hideIndividual" scope="col" >
-                                    <select class="form-control" [(ngModel)]="NOMBRE_RAZON">
-                                        <option value="2" title="dni">DNI</option>
-                                        <option value="1" title="ruc">RUC</option>
-                                        <option value="2" title="ruc">CE</option>
-                                        <option value="2" title="ruc">PASS</option>
+                                <th [hidden]="hideIndividual" scope="col" width="135px">
+                                    <select id="tipoDoc" class="form-control" [(ngModel)]="NOMBRE_RAZON">
+                                        <option class="opti" value="0" title="SELCCIONAR">Seleccione</option>
+                                        <option class="opti" value="2" title="dni">DNI</option>
+                                        <option class="opti" value="1" title="ruc">RUC</option>
+                                        <option class="opti" value="3" title="ce">CE</option>
+                                        <option class="opti" value="4" title="pass">PASS</option>
                                     </select>
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
-                                    <span class="fontText" >Número Doc:</span> 
+                                    <span class="fontText" >Número doc:</span> 
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
-                                    <input id="doc" class="form-control" type="text"  placeholder="documento" maxlength="{{validationCantidadCaracteres()}}" size="20"
-                                            (keypress)="validaNumericos($event)"[(ngModel)]="numeroDoc" ><!-- style="text-transform: uppercase;" -->
+                                    <input id="doc" class="form-control" type="text"  placeholder="Documento" maxlength="{{validationCantidadCaracteres()}}" size="20"
+                                            (keypress)="validaNumericos($event)"[(ngModel)]="numeroDoc" [disabled]="this.NOMBRE_RAZON == 0"><!-- style="text-transform: uppercase;" -->
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
                                     <span class="fontText" >Nombre completo:</span> 
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col" >
-                                    <input class="form-control" type="text"  placeholder="nombre completo" maxlength="100" size="34"
+                                    <input class="form-control" type="text"  placeholder="Nombre completo" maxlength="100" size="30"
                                             [(ngModel)]="nombreCompleto" (keypress)="soloLetras($event)" pattern="[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+" ><!--(keydown)="Buscar($event)"--><!-- style="text-transform: uppercase;" -->
                                 </th>
                                 <th >
@@ -75,14 +76,12 @@
                                     <!-- <input type="file" accept=".xlsx" onclick="this.value=null;"
                                             (change)="setDataFile($event)" [(ngModel)]="archivoExcel"
                                             style="font-size: 14px !important;" (filesChange)="lastFileAt=getDate()"> -->
-                                            <div class="custom-file">
-
-                                                <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" onclick="this.value=null;"
-                                                  value="seleccionar" (change)="setDataFile($event)" [(ngModel)]="archivoExcel">
-                                                <label class="custom-file-label" for="customFile"
-                                                  style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
-                                              </div>  
-                                        
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" onclick="this.value=null;"
+                                            value="seleccionar" (change)="setDataFile($event)" [(ngModel)]="archivoExcel">
+                                        <label class="custom-file-label" for="customFile"
+                                            style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
+                                    </div>
                                 </th>
                                 <th [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()"  scope="col">
                                     <button class="btn btn-warning btnBuscarStyle" (click)="validarNulos()">Buscar</button>
