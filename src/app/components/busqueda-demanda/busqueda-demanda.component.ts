@@ -2,20 +2,12 @@ import { Component, OnInit, NgModule, Input, Output } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { DatePipe } from '@angular/common';
-import { FileUploader } from 'ng2-file-upload';
 import { ExcelService } from 'src/app/services/excel.service';
 import swal from 'sweetalert2';
-import { async } from '@angular/core/testing';
-import { textShadow } from 'html2canvas/dist/types/css/property-descriptors/text-shadow';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable'
-import { textDecorationLine } from 'html2canvas/dist/types/css/property-descriptors/text-decoration-line';
-import { addSubtract } from 'ngx-bootstrap/chronos/moment/add-subtract';
-/* import * as XLSX from 'xlsx'; */
-import { toInt } from 'ngx-bootstrap/chronos/utils/type-checks';
-import { DocumentCloner } from 'html2canvas/dist/types/dom/document-cloner';
+import autoTable from 'jspdf-autotable';
+import { DataBusqueda } from './interfaces/data.interface';
+
 const PDF_EXTENSION = ".pdf";
 @Component({
   selector: 'app-busqueda-demanda',
@@ -23,7 +15,7 @@ const PDF_EXTENSION = ".pdf";
   styleUrls: ['./busqueda-demanda.component.css']
 })
 export class BusquedaDemandaComponent implements OnInit {
-  fileToUpload: File = null;//
+  fileToUpload: File = null;
   timestamp = Date();
     
   hideMasiva: boolean = true;
@@ -33,28 +25,26 @@ export class BusquedaDemandaComponent implements OnInit {
   noEncontroRespuesta: boolean = true;
 
   NBUSCAR_POR: number = 1;
-  NOMBRE_RAZON: number = 2;
+  NOMBRE_RAZON: number = 0;//2;
   
   POR_INDIVIDUAL: number = 1;
   POR_MASIVA: number = 2;
 
   NPERIODO_PROCESO: number;
-  nombreCompleto : string;
-  numeroDoc : string;
+  nombreCompleto : string = null;
+  numeroDoc : string = null;
   idUsuario : number;
   nombreUsuario: string;
-  variableGlobalUser;
-  resulBusqueda : any = []
-  resultadoFinal : any []
-  resultadoFinal2 :any []
-  
 
- 
+  resulBusqueda: any = [];
+  resultadoFinal: any[];
+  resultadoFinal2: any[];
   
-  ArchivoAdjunto:any
-  ResultadoExcel:any
-  NombreArchivo:string = ''
-  DataUserLogin
+  ArchivoAdjunto: any;
+  ResultadoExcel: any;
+  NombreArchivo: string = '';
+  variableGlobalUser;
+  DataUserLogin;
 
   constructor(
     public datepipe: DatePipe,
@@ -69,19 +59,21 @@ export class BusquedaDemandaComponent implements OnInit {
   [{DFECHA_BUSQUEDA: '04/01/2022 11:48:36 a.m.',SCARGO: "-",SLISTA: "LISTAS INTERNACIONALES",SNOMBRE_BUSQUEDA: "CHAVEZ CONDORI CESAR AUGUSTO",SNOMBRE_COMPLETO: "Cesar Augusto CONDORI TORRES",SNOMBRE_TERMINO: "CONDORI,César Augusto",SNUM_DOCUMENTO: "01319667",SPORCEN_COINCIDENCIA: 75,STIPO_DOCUMENTO: "DNI",STIPO_PERSONA: "PERSONA NATURAL"},
   
 ]
-    
+    /*obtener usuario que logeado*/
     let dataUser = localStorage.getItem("resUser")
     this.DataUserLogin = JSON.parse(dataUser)
-    //console.log(this.DataUserLogin)
+                //console.log(this.DataUserLogin)
+    /*obtener el periodo actual*/
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
-    this.nombreCompleto = null;
-    this.numeroDoc = null;
+                //this.nombreCompleto = null;
+                //this.numeroDoc = null;
+    /*obtiene el id usuario del historial*/
     this.variableGlobalUser = this.core.storage.get('usuario');//
-    this.idUsuario = this.variableGlobalUser["idUsuario"] //sessionStorage.usuario["fullName"]//
+    this.idUsuario = this.variableGlobalUser["idUsuario"] //sessionStorage.usuario["fullName"]
+    /*obtiene el nombre de usuario del historial de sesion*/
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
-    //console.log("nombre usuario",this.nombreUsuario); //nombreusuario
-
-    //console.log("codigo busqueda",(this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss')))
+                //console.log("nombre usuario",this.nombreUsuario); //nombreusuario
+                //console.log("codigo busqueda",(this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss')))
   }
   
   archivoExcel:File;
@@ -123,7 +115,6 @@ export class BusquedaDemandaComponent implements OnInit {
     //         closeButton : 'OcultarBorde'
     //       },
     //     })
-
     //   }
           /*si no ingresa documento pero si nombre*/
     //   else if (this.numeroDoc == null || this.numeroDoc == "") {
@@ -147,10 +138,10 @@ export class BusquedaDemandaComponent implements OnInit {
       swal.fire({
         title: 'Búsqueda a Demanda',
         icon: 'warning',
-        text: 'Ingrese al menos un dato',
+        text: 'Debe ingresar uno de los campos para la búsqueda',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
-        confirmButtonText: 'Continuar',
+        confirmButtonText: 'Aceptar',
         showCloseButton: true,
         customClass: { 
           closeButton : 'OcultarBorde'
@@ -166,10 +157,9 @@ export class BusquedaDemandaComponent implements OnInit {
       if (pr) {
         /*si el campo de documento es diferente a nulo o vacio [""] entra a verificar la cantidad de digitos*/
         if (!(this.numeroDoc == null || this.numeroDoc == "")) {
-          let prueba = this.validarDigitosIngresados()
-          //console.log(`devuelve con nombre ${prueba}`)
+          let cantCorr = this.validarDigitosIngresados()
           /*si es correcta la contidad de caracter con  el tipo de documento ingresa a llamar al servicio de busqueda*/
-          if (prueba) {
+          if (cantCorr) {
             await this.BusquedaADemandaMixta();
           }
         }
@@ -185,7 +175,7 @@ export class BusquedaDemandaComponent implements OnInit {
           text: 'Ingrese Nombre completo con el formato solicitado',
           showCancelButton: false,
           confirmButtonColor: '#FA7000',
-          confirmButtonText: 'Continuar',
+          confirmButtonText: 'Aceptar',
           showCloseButton: true,
           customClass: { 
             closeButton : 'OcultarBorde'
@@ -217,100 +207,128 @@ export class BusquedaDemandaComponent implements OnInit {
       //     },
       //   })
       // }
-      let prueba = this.validarDigitosIngresados()
-      console.log(`devuelve solo documento ${prueba}`)
-      if (prueba) {
+      let cantCorr = this.validarDigitosIngresados()
+      //console.log(`devuelve solo documento ${prueba}`)
+      if (cantCorr) {
         await this.BusquedaADemandaMixta()
       }
     }
   }
   
   /*servicio de busqueda*/
-  async BusquedaADemandaMixta(){    
-      let ObjLista : any = {};
-      ObjLista.P_SCODBUSQUEDA = (this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss'))
-      ObjLista.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-      ObjLista.P_SNOMBREUSUARIO = this.nombreUsuario//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
-      ObjLista.P_NOMBRE_RAZON = this.NOMBRE_RAZON;
-      if(this.NBUSCAR_POR == 1){
-        ObjLista.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
-        ObjLista.P_SNUM_DOCUMENTO = this.numeroDoc;
-        ObjLista.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
-      }else
-      {
-        ObjLista.P_SNOMCOMPLETO = null;
-        ObjLista.P_SNUM_DOCUMENTO = null;
-        ObjLista.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
-        await this.SubirExcel(ObjLista) 
-      }
-      await swal.fire({
-        title: 'Consulta en proceso...',
-        icon: 'info',
-        showCancelButton: false,
-        showConfirmButton: false,
-        confirmButtonColor: '#FA7000',
-        confirmButtonText: 'Continuar',
-        showCloseButton: true,
-        timer:1500,
-        customClass: { 
-                      closeButton : 'OcultarBorde'
-                     },
-      }).then(async(result) => {
-        if (result) {
-          /*inicio*/
-          this.core.loader.show()
-          let respuetaService: any = await this.getBusquedaADemanda(ObjLista);
-          console.log("respuesta",respuetaService);
-          if (respuetaService.length != 0 && respuetaService.code == 0) {
-            respuetaService.itemsWC.forEach(t => {
+  async BusquedaADemandaMixta() {
+    let id = this.idUsuario.toString();
+    let cod = this.GenerarCodigo();
+    let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
+    //console.log(`codigo de busqueda ${id} ${cod} ${fecha}`)
+    let data : DataBusqueda = {};
+    data.P_SCODBUSQUEDA = id.concat(cod,fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
+    data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+    data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
+    data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
+    console.log(`data ${JSON.stringify(data)}`)
+    data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
+    if(this.NBUSCAR_POR == 1){
+      data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
+      data.P_SNUM_DOCUMENTO = this.numeroDoc;
+    }
+    else {
+      data.P_SNOMCOMPLETO = null;
+      data.P_SNUM_DOCUMENTO = null;
+      await this.SubirExcel(data) 
+    }
+    var whoSearch
+    //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
+    if (this.numeroDoc && (this.nombreCompleto == null || this.nombreCompleto == '')) {
+      whoSearch = 'IDECON'
+    }
+    //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
+    else {
+      whoSearch = 'WC e IDECON'
+    }
+    await swal.fire({
+      title: 'Consulta en proceso...',
+      icon: 'info',
+      text: `La búsqueda se realizará en ${whoSearch}`,
+      showCancelButton: false,
+      showConfirmButton: false,
+      showCloseButton: true,
+      timer:5000,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+      },
+    })
+    .then(async (result) => {
+      if (result) {
+        /*inicio*/
+        this.core.loader.show()
+        let respuestaService: any = await this.getBusquedaADemanda(data);
+        //console.log("respuesta", respuestaService);
+          //console.log(`${Object.keys(respuestaService).length}`);/*obtiene las llaves "keys", se puede usar para aplicar .length y no obtener undefined*/
+          //console.log(`${JSON.stringify(respuestaService).length} ${respuestaService.code}`);/*combierte el objeto en cadena, se puede usar para aplicar .length a un objeto*/
+          //console.log(`${Object.entries(respuestaService).length}`);/*obtiene las llaves y sus valores "keys/values", se puede usar para aplicar . lenght y no obtener undefined*/
+        /*si existe respuesta*/
+        //debugger;
+        if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
+          if(respuestaService.itemsWC){
+            respuestaService.itemsWC.forEach(t => {
               t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
               t.SPROVEEDOR = "WC",
               t.STIPOCOINCIDENCIA = "NOMBRE"
             });
-            respuetaService.itemsIDE.forEach(t => {
+          }
+          if (respuestaService.itemsIDE) {
+            respuestaService.itemsIDE.forEach(t => {
               t.SPROVEEDOR = "IDECON"
               //t.STIPOCOINCIDENCIA = "NOMBRE"
             });
-            respuetaService.itemsIDEDOC.forEach(t => {
+          }
+          if (respuestaService.itemsIDEDOC) {//hasOwnProperty verifica que contenga
+            respuestaService.itemsIDEDOC.forEach(t => {
               t.SPROVEEDOR = "IDECON"
               //t.STIPOCOINCIDENCIA = "DOCUMENTO"
             });
-
-            this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
           }
-          else if(respuetaService.length != 0 && respuetaService.code != 0){
-            this.core.loader.hide()
-            swal.fire({
-              title: 'Comuníquese con soporte',
-              icon: 'warning',
-              text: 'ERROR: '+ respuetaService.mensaje,
-              //titleText: 'comuniuquese con soporte',
-              showCancelButton: false,
-              showConfirmButton: true,
-              confirmButtonColor: '#FA7000',
-              confirmButtonText: 'Continuar',
-              showCloseButton: true,
-              customClass: { 
-                            closeButton : 'OcultarBorde'
-                           },
-            })
+          if (respuestaService.itemsWC && respuestaService.itemsIDE && respuestaService.itemsIDEDOC) {
+            this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC).concat(respuestaService.itemsIDEDOC);
           }
-          //this.resultadoFinal = respuetaService.itemsIDE.concat( respuetaService.itemsWC).concat(respuetaService.itemsIDEDOC);
-
-          if(this.resultadoFinal.length != 0){
-            this.encontroRespuesta = false;
-            this.noEncontroRespuesta = true;
-          }else{
-            this.encontroRespuesta = true;
-            this.noEncontroRespuesta = false
+          else if (respuestaService.itemsWC && respuestaService.itemsIDE) {
+            this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC);
           }
-          this.GuardarData()
-          this.core.loader.hide()
-          /*fin*/
+          else {
+            this.resultadoFinal = respuestaService.itemsIDEDOC;
+          }
         }
-      });
-    
-    
+        /*si no existe respuesta o retorna codigo 1*/
+        else if(Object.entries(respuestaService).length !== 0 && respuestaService.code != 0){
+          this.core.loader.hide()
+          swal.fire({
+            title: 'Comuníquese con soporte',
+            icon: 'warning',
+            text: 'ERROR: '+ respuestaService.mensaje,
+            //titleText: 'comuniuquese con soporte',
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonColor: '#FA7000',
+            confirmButtonText: 'Continuar',
+            showCloseButton: true,
+            customClass: { 
+                          closeButton : 'OcultarBorde'
+                          },
+          })
+        }
+        if (this.resultadoFinal.length != 0) {
+          this.encontroRespuesta = false;
+          this.noEncontroRespuesta = true;
+        }else{
+          this.encontroRespuesta = true;
+          this.noEncontroRespuesta = false
+        }
+        this.GuardarData()
+        this.core.loader.hide()
+        /*fin*/
+      }
+    });
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
@@ -337,11 +355,34 @@ export class BusquedaDemandaComponent implements OnInit {
       return '12'
     }
   }
+  
+  ShowSelected() {
+    let select = (document.getElementById('tipoDoc')) as HTMLSelectElement;
+    //var ind = select.value;
+    let text = select.options[select.selectedIndex].innerText;
+    //console.log(`tipo de documento text es ${text}`);
+    return text;
+  }
+
   /*valido si la cantidad de digitos ingresados en el input de documento es el mismo que el permitido por el tipo de documento*/
   validarDigitosIngresados() {
     var numdoc = document.getElementById('doc')
-      var maxlen = numdoc.getAttribute('maxlength')
-      //console.log(maxlen)
+    var maxlen = numdoc.getAttribute('maxlength')
+    if (this.ShowSelected() == 'Seleccione' /* && (this.nombreCompleto == null || this.nombreCompleto == "") */) {
+      swal.fire({
+        title: 'Búsqueda a Demanda',
+        text: `Seleccione Tipo doc para búsqueda`,
+        icon: 'info',
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Aceptar',
+        showCloseButton: true,
+        customClass: { 
+          closeButton : 'OcultarBorde'
+        },
+      })
+      return false;
+    }
+    else {
       if (this.numeroDoc.length == Number(maxlen)) {
         //console.log(`${this.numeroDoc.length} es igual a ${Number(maxlen)}`)
         //await this.BusquedaADemandaMixta();
@@ -351,11 +392,12 @@ export class BusquedaDemandaComponent implements OnInit {
       else {
         swal.fire({
           title: 'Búsqueda a Demanda',
+          text: `La cantidad de dígitos es incorrecto. ` +
+                `Ingresó ${this.numeroDoc.length} digito(s). ` +
+                `Debe ingresar ${ maxlen } dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
           icon: 'info',
-          text: 'La cantidad de digitos es incorrecto',
-          showCancelButton: false,
           confirmButtonColor: '#FA7000',
-          confirmButtonText: 'Continuar',
+          confirmButtonText: 'Aceptar',
           showCloseButton: true,
           customClass: { 
             closeButton : 'OcultarBorde'
@@ -363,6 +405,8 @@ export class BusquedaDemandaComponent implements OnInit {
         })
         return false;
       }
+      
+    }
   }
   /*valida que solo se pueda ingresar letras*/
   soloLetras(e) {

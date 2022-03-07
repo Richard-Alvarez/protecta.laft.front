@@ -243,4 +243,30 @@ export class RegistroNegativoComponent implements OnInit {
       console.error("el error en descargar archivo: ", error)
     }
   }
+
+  soloLetras(e) {
+    let key = e.keyCode || e.which;
+    let tecla = String.fromCharCode(key).toLowerCase();
+    let letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    let especiales = [8, 37, 39, 46];
+
+    let tecla_especial = false
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial)
+      return false;
+  }
+
+   validaNumericos(event) {
+    if(event.charCode >= 48 && event.charCode <= 57){
+      return true;
+     }
+     return false;        
+}
 }
