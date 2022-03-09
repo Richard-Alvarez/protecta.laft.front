@@ -7,6 +7,8 @@ import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { DataBusqueda } from './interfaces/data.interface';
+import { TipoCoincidencia } from './interfaces/tipo-coincidencia.interface';
+import { Console } from 'console';
 
 const PDF_EXTENSION = ".pdf";
 @Component({
@@ -45,6 +47,9 @@ export class BusquedaDemandaComponent implements OnInit {
   NombreArchivo: string = '';
   variableGlobalUser;
   DataUserLogin;
+
+  tipoCoin: TipoCoincidencia;
+
 
   constructor(
     public datepipe: DatePipe,
@@ -151,9 +156,11 @@ export class BusquedaDemandaComponent implements OnInit {
     /*si ingresa solo nombre o nombre y documento valida que almenos el nombre contenga 3 datos y llama al servicio de busqueda*/
     else if (this.NBUSCAR_POR == 1 && !(this.nombreCompleto == null || this.nombreCompleto == "" )) {
       /*expresion regular que asegura ingreso 3 nombres*/
-      const reg = /[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+/;
+      const reg = /[a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+/;
       let pr = reg.test(this.nombreCompleto);
       /*si coincide el formato con la expresion regular ingresa*/
+      console.log(`esto se esta buscando ${this.nombreCompleto} y esta es la expresion regular ${reg}`);
+       (`asd`);
       if (pr) {
         /*si el campo de documento es diferente a nulo o vacio [""] entra a verificar la cantidad de digitos*/
         if (!(this.numeroDoc == null || this.numeroDoc == "")) {
@@ -252,7 +259,7 @@ export class BusquedaDemandaComponent implements OnInit {
       text: `La búsqueda se realizará en ${whoSearch}`,
       showCancelButton: false,
       showConfirmButton: false,
-      showCloseButton: true,
+      showCloseButton: false,
       timer:5000,
       customClass: { 
         closeButton : 'OcultarBorde'
@@ -298,6 +305,7 @@ export class BusquedaDemandaComponent implements OnInit {
           else {
             this.resultadoFinal = respuestaService.itemsIDEDOC;
           }
+          this.tipoCoin = { "Lista": ['FPEP IDECON', 'PEP IDECON', 'Listas Internacionales IDECON','PEP WC','Listas Internacionales WC', 'Listas Especiales'], "Encontro": true };/*prueba*/
         }
         /*si no existe respuesta o retorna codigo 1*/
         else if(Object.entries(respuestaService).length !== 0 && respuestaService.code != 0){
