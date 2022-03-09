@@ -360,6 +360,7 @@ export class C2FormComponent implements OnInit {
         localStorage.setItem("SNUM_DOCUMENTO", item.SNUM_DOCUMENTO)
         localStorage.setItem("NTIPO_DOCUMENTO", item.NTIPO_DOCUMENTO)
         localStorage.setItem('boolClienteReforzado', 'false')
+        
         this.router.navigate(['/c2-detail'])
     }
 

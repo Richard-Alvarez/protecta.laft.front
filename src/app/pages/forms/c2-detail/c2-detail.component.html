@@ -85,7 +85,8 @@
                                     <th scope="col">Fecha de Nacimiento</th>
                                     <th *ngIf="getOcultarEdad()" scope="col">Edad</th>
                                     <th *ngIf="getOcultarPorGrupo()">Nombre Empresa</th>
-                                    <th *ngIf="getOcultarPorGrupo()">Numero de Empresa</th>
+                                    <th *ngIf="getOcultarPorGrupo()">Cargo</th>
+                                    
                                     <!-- <th scope="col">Ocupación</th>
                                         <th scope="col">Cargo</th>
                                         <th scope="col">Zona Geográfica</th> -->
@@ -100,7 +101,7 @@
                                         <td class="fuenteTd">{{formData.NEDAD}}</td>
                                     </div>
                                     <td *ngIf="getOcultarPorGrupo()">{{formData.SNOM_COMPLETO_EMPRESA}}</td>
-                                    <td *ngIf="getOcultarPorGrupo()">{{formData.SNUM_DOCUMENTO_EMPRESA}}</td>
+                                    <td *ngIf="getOcultarPorGrupo()">{{formData.CARGO}}</td>
                                     <!-- <td class="fuenteTd">{{formData.SOCUPACION}}</td>
                                         <td class="fuenteTd">{{formData.SCARGO}}</td>
                                         <td class="fuenteTd">{{formData.SZONA_GEOGRAFICA}}</td> -->

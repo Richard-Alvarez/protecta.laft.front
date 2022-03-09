@@ -152,6 +152,9 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     NewListCheck: any = []
     ValidadorHistorico
     HistoricoPeriodo
+
+    CARGO
+    NACIONALIDAD
     ngOnDestroy() {
         localStorage.setItem("objFocusPosition", "{}")
         localStorage.getItem("NIDGRUPO")
@@ -164,11 +167,15 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
         this.NIDPROVEEDOR = localStorage.getItem("NIDPROVEEDOR")
         this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
+        this.CARGO = localStorage.getItem("CARGO")
+        this.NACIONALIDAD = localStorage.getItem("NACIONALIDAD")
         localStorage.setItem("objFocusPositionReturn", localStorage.getItem("objFocusPosition"));
         this.nidregimen = localStorage.getItem("NREGIMEN");
         this.nidalerta = localStorage.getItem("NIDALERTA");
         var paramCliente: any = localStorage.getItem("paramCliente");
-
+        // this.NACIONALIDAD = localStorage.getItem('NACIONALIDAD') === 'null' ? '':  localStorage.getItem('NACIONALIDAD')
+        // this.CARGO = localStorage.getItem('CARGO') === 'null' ? '' :  localStorage.getItem('CARGO')
+        
         this.ValidadorHistorico = localStorage.getItem("ValidadorHistorico");
         this.HistoricoPeriodo = localStorage.getItem("NuevoPeriodoHistorico");
 
@@ -472,7 +479,8 @@ export class C2DetailComponent implements OnInit, OnDestroy {
 
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
         this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
-
+        this.formData.NACIONALIDAD = localStorage.getItem('NACIONALIDAD') === 'null' ? '':  localStorage.getItem('NACIONALIDAD')
+        this.formData.CARGO = localStorage.getItem('CARGO') === 'null' ? '' :  localStorage.getItem('CARGO')
         //this.tipoClienteGC = this.vistaOrigen
 
         this.IdLista = parseInt(localStorage.getItem('view-c2-idLista'))
@@ -490,7 +498,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             this.formData.SNOM_COMPLETO_EMPRESA = this.SNOM_COMPLETO_EMPRESA == null ? "" : this.SNOM_COMPLETO_EMPRESA
             this.formData.SNUM_DOCUMENTO_EMPRESA = this.SNUM_DOCUMENTO_EMPRESA == null ? "" : this.SNUM_DOCUMENTO_EMPRESA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
-
+            
             this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
             // if (this.ValidadorHistorico != 0) {
             //     this.formData.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"))
@@ -668,7 +676,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             this.formData.SZONA_GEOGRAFICA = localStorage.getItem('SZONA_GEOGRAFICA')
             this.formData.SZONA_GEOGRAFICA = this.formData.SZONA_GEOGRAFICA === 'null' ? '' : this.formData.SZONA_GEOGRAFICA === undefined ? '' : this.formData.SZONA_GEOGRAFICA
             this.formData.SNUM_DOCUMENTO = localStorage.getItem('SNUM_DOCUMENTO')
-
+            
             //this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
             if (this.ValidadorHistorico != 0) {
                 this.formData.NPERIODO_PROCESO = this.NPERIODO_PROCESO_ITEM || parseInt(localStorage.getItem('periodo'))
@@ -827,6 +835,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
             this.SCLIENT_DATA = this.oClienteReforzado.SCLIENT
             await this.getHistorialRevisiones()
         }
+        console.log("this.formData: ",this.formData)
     }
 
     SCLIENT_DATA

@@ -585,7 +585,7 @@ export class ViewC2FormComponent implements OnInit {
     }
 
     async goToDetail(item: any, lista: any, idElement: any, idElementSubGroup: any, subgruponame: any) {
-       
+        console.log("item : ",item)
         //this.core.loader.show()
         // this.addAccordion(-1,idElement)
         let objFocusPosition: any = {}
@@ -647,6 +647,8 @@ export class ViewC2FormComponent implements OnInit {
         localStorage.setItem("SNOM_COMPLETO_EMPRESA", (isNullOrUndefined(item.SNOM_COMPLETO_EMPRESA) ? "" : item.SNOM_COMPLETO_EMPRESA));
         localStorage.setItem("SNUM_DOCUMENTO_EMPRESA", (isNullOrUndefined(item.SNUM_DOCUMENTO_EMPRESA) ? "" : item.SNUM_DOCUMENTO_EMPRESA));
         localStorage.setItem("NPERIODO_PROCESO_ITEM", this.alertData.NPERIODO_PROCESO);
+        localStorage.setItem("NACIONALIDAD", item.NACIONALIDAD);
+        localStorage.setItem("CARGO", item.CARGO);
         await this.configService.sOrigenVista$.emit(this.vistaOrigen)//sOrigenVista$
         this.core.loader.hide()
         this.router.navigate(['/c2-detail'])
