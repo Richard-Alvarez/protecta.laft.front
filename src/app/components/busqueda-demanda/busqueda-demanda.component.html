@@ -53,7 +53,7 @@
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
                                     <input id="doc" class="form-control" type="text"  placeholder="Documento" maxlength="{{validationCantidadCaracteres()}}" size="20"
-                                            (keypress)="validaNumericos($event)"[(ngModel)]="numeroDoc" [disabled]="this.NOMBRE_RAZON == 0"><!-- style="text-transform: uppercase;" -->
+                                            (keypress)="validaNumericos($event)"[(ngModel)]="numeroDoc" ><!-- [disabled]="this.NOMBRE_RAZON == 0" -->
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
                                     <span class="fontText" >Nombre completo:</span> 
