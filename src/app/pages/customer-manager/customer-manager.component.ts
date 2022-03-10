@@ -1522,7 +1522,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     } else {
       swal.fire({
         icon: 'warning',
-        text: 'No hay registros',
+        text: 'No se han encontrado resultados',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar',
