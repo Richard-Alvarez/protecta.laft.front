@@ -527,7 +527,9 @@ th[colspan] {
     padding: 0.75rem;
 }
 
-
+.positionbutton {
+    align-self: flex-end;
+}
 
 .columnGroup1 {
     background-color: #b2e2f2;
