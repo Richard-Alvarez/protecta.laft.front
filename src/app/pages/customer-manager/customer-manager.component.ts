@@ -1046,7 +1046,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     this.spinner.hide();
   }
   async goToDetail(item: any, TIPO_CLIENTE) {
-
+   
     try {
       let tipoIden = item.STIPOIDEN //+ ' - ' + item.SNUM_DOCUMENTO
       item.STIPOIDEN = tipoIden
@@ -1098,6 +1098,8 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       localStorage.setItem("NIDGRUPO", this.idGrupo.toString())
       localStorage.setItem("NIDGRUPOSENAL", this.idGrupo.toString())
       localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
+      localStorage.setItem("NACIONALIDAD", item.NACIONALIDAD)
+      localStorage.setItem("CARGO", item.CARGO)
       //this.paramCliente
       // let valuenSelectPestaniaClient = localStorage.getItem("nSelectPestaniaClient")
       // if (valuenSelectPestaniaClient == null) {
