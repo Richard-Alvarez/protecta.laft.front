@@ -50,6 +50,9 @@ export class BusquedaDemandaComponent implements OnInit {
 
   tipoCoin: TipoCoincidencia;
 
+  listas = ['LISTAS FAMILIAR PEP', 'LISTAS PEP', 'LISTAS INTERNACIONALES'];
+  resultadoFinalAgregado:any = []
+
 
   constructor(
     public datepipe: DatePipe,
@@ -159,8 +162,8 @@ export class BusquedaDemandaComponent implements OnInit {
       const reg = /[a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+/;
       let pr = reg.test(this.nombreCompleto);
       /*si coincide el formato con la expresion regular ingresa*/
-      console.log(`esto se esta buscando ${this.nombreCompleto} y esta es la expresion regular ${reg}`);
-       (`asd`);
+      /* console.log(`esto se esta buscando ${this.nombreCompleto} y esta es la expresion regular ${reg}`);
+       (`asd`); */
       if (pr) {
         /*si el campo de documento es diferente a nulo o vacio [""] entra a verificar la cantidad de digitos*/
         if (!(this.numeroDoc == null || this.numeroDoc == "")) {
@@ -233,7 +236,7 @@ export class BusquedaDemandaComponent implements OnInit {
     data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
     data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
     data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
-    console.log(`data ${JSON.stringify(data)}`)
+    //console.log(`data ${JSON.stringify(data)}`)
     data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
     if(this.NBUSCAR_POR == 1){
       data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
@@ -277,22 +280,27 @@ export class BusquedaDemandaComponent implements OnInit {
         /*si existe respuesta*/
         //debugger;
         if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
+          this.resultadoFinalAgregado = [];
+
           if(respuestaService.itemsWC){
             respuestaService.itemsWC.forEach(t => {
               t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
               t.SPROVEEDOR = "WC",
-              t.STIPOCOINCIDENCIA = "NOMBRE"
+              t.STIPOCOINCIDENCIA = "NOMBRE",
+              t.BUSQUEDA = "Con coincidencia"
             });
           }
           if (respuestaService.itemsIDE) {
             respuestaService.itemsIDE.forEach(t => {
               t.SPROVEEDOR = "IDECON"
+              t.BUSQUEDA = "Con coincidencia"
               //t.STIPOCOINCIDENCIA = "NOMBRE"
             });
           }
           if (respuestaService.itemsIDEDOC) {//hasOwnProperty verifica que contenga
             respuestaService.itemsIDEDOC.forEach(t => {
               t.SPROVEEDOR = "IDECON"
+              t.BUSQUEDA = "Con coincidencia"
               //t.STIPOCOINCIDENCIA = "DOCUMENTO"
             });
           }
@@ -305,6 +313,52 @@ export class BusquedaDemandaComponent implements OnInit {
           else {
             this.resultadoFinal = respuestaService.itemsIDEDOC;
           }
+          
+          
+          this.resultadoFinal.forEach(t => {
+            for (let i = 0; i < this.listas.length; i++) {
+              let list = this.listas[i];
+              if (t.SLISTA == list) {
+                let datatrue = {
+                  "DFECHA_BUSQUEDA" : t.DFECHA_BUSQUEDA,
+                  "SUSUARIO_BUSQUEDA" : t.SUSUARIO_BUSQUEDA,
+                  "SNOMBRE_COMPLETO" : t.SNOMBRE_COMPLETO,
+                  "STIPO_DOCUMENTO" : t.STIPO_DOCUMENTO,
+                  "SNUM_DOCUMENTO" : t.SNUM_DOCUMENTO,
+                  "STIPO_PERSONA" : t.STIPO_PERSONA,
+                  "SCARGO" : t.SCARGO,
+                  "SPORCEN_COINCIDENCIA" : t.SPORCEN_COINCIDENCIA,
+                  "SLISTA" : t.SLISTA,
+                  "STIPOCOINCIDENCIA" : t.STIPOCOINCIDENCIA,
+                  "SPROVEEDOR" : t.SPROVEEDOR,
+                  "BUSQUEDA" : t.BUSQUEDA
+                }
+                console.log(`arregloque hara push ${JSON.stringify(datatrue)}`)
+                this.resultadoFinalAgregado.push(datatrue);
+                console.log(`como va quedando el nuevo arreglo${JSON.stringify(this.resultadoFinalAgregado)}`)
+              } else {
+                let datatrue = {
+                  "DFECHA_BUSQUEDA" : t.DFECHA_BUSQUEDA,
+                  "SUSUARIO_BUSQUEDA" : t.SUSUARIO_BUSQUEDA,
+                  "SNOMBRE_COMPLETO" : "-",
+                  "STIPO_DOCUMENTO" : "-",
+                  "SNUM_DOCUMENTO" : "-",
+                  "STIPO_PERSONA" : "-",
+                  "SCARGO" : "-",
+                  "SPORCEN_COINCIDENCIA" : "-",
+                  "SLISTA" : list,
+                  "STIPOCOINCIDENCIA" : "-",
+                  "SPROVEEDOR" : t.SPROVEEDOR,
+                  "BUSQUEDA" : "Sin coincidencia"
+                }
+                console.log(`arregloque hara push ${JSON.stringify(datatrue)}`)
+                this.resultadoFinalAgregado.push(datatrue);
+                console.log(`como va quedando el nuevo arreglo${JSON.stringify(this.resultadoFinalAgregado)}`)
+              }
+              //console.log(`resultado del foreach ${resultadoAgregado}`)
+            }
+          });
+          console.log(`Resultado Final : ${JSON.stringify(this.resultadoFinalAgregado)}`)
           this.tipoCoin = { "Lista": ['FPEP IDECON', 'PEP IDECON', 'Listas Internacionales IDECON','PEP WC','Listas Internacionales WC', 'Listas Especiales'], "Encontro": true };/*prueba*/
         }
         /*si no existe respuesta o retorna codigo 1*/

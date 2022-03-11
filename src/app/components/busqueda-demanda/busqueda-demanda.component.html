@@ -105,22 +105,24 @@
                             <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif; ">
                                 <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Fecha y Hora de Búsqueda</th>
                                 <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Usuario que Realizó la Búsqueda</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Búsqueda</th>
                                 <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Tipo Y Número de Documento</th>
                                 <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Término</th>
-                                <th  scope="col" style="vertical-align: middle; text-align: left;border-bottom: 2px solid rgba(38, 41, 109, 1);">Nombre/Razón Social</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1); text-align: left;">Nombre/Razón Social</th>
                                 <!-- <th scope="col" style="vertical-align: middle;">Tipo de Persona</th> -->
                                 <!-- <th scope="col" style="vertical-align: middle;">Cargo</th> -->
-                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1)">% Coincidencia</th>
-                                <th  scope="col" style="vertical-align: middle; text-align: left;border-bottom: 2px solid rgba(38, 41, 109, 1)">Lista</th>
-                                <th  scope="col" style="vertical-align: middle; text-align: left;border-bottom: 2px solid rgba(38, 41, 109, 1)">Fuente</th>
-                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1)">Tipo de Coincidencia</th>
-                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1)" >Descargar</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">% Coincidencia</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1); text-align: left;">Lista</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1); text-align: left;">Fuente</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);">Tipo de Coincidencia</th>
+                                <th  scope="col" style="vertical-align: middle;border-bottom: 2px solid rgba(38, 41, 109, 1);" >Descargar</th>
                             </tr>
                         </thead>
                         <tbody [hidden]="false">
-                            <tr *ngFor="let item of resultadoFinal; let i = index;">
+                            <tr *ngFor="let item of resultadoFinalAgregado; let i = index;">
                                 <td  scope="col">{{item.DFECHA_BUSQUEDA}}</td>
                                 <td  scope="col">{{item.SUSUARIO_BUSQUEDA != '' ? item.SUSUARIO_BUSQUEDA : '-'}} </td>
+                                <td  scope="col">{{item.BUSQUEDA}}</td>
                                 <td  scope="col">{{item.STIPO_DOCUMENTO}} {{item.SNUM_DOCUMENTO}}</td>
                                 <td  scope="col"><div placement='top' ngbTooltip="{{item.SNOMBRE_TERMINO}}" *ngIf="item.SPROVEEDOR == 'WC'">{{cortarCararterNombre(item.SNOMBRE_TERMINO)}}</div></td>
                                 <td  scope="col"><div placement='top' ngbTooltip="{{item.SNOMBRE_COMPLETO}}">{{cortarCararterNombre(item.SNOMBRE_COMPLETO)}}</div></td>
@@ -139,7 +141,7 @@
                         </tbody>
                         <tbody [hidden]="noEncontroRespuesta">
                             <tr>
-                                <td class="text-center" colspan="10">No se encontró coincidencias</td>
+                                <td class="text-center" colspan="11">No se encontró coincidencias</td>
                             </tr>
                         </tbody>
                     </table>
