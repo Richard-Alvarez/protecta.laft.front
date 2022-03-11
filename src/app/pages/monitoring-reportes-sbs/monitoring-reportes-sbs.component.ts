@@ -399,7 +399,7 @@ export class MonitoringReportesSbsComponent implements OnInit {
       swal.fire({
         title: 'Reportes SBS',
         icon: 'warning',
-        text: 'No hay registros para exportar',
+        text: 'No se han encontrado resultados para exportar',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar'

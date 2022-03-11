@@ -86,21 +86,21 @@
                                 <div class="row" style="display: flex;justify-content: center;align-items: center;">
                                     <div class="col-lg-3 form-group" title="Nombre del usuario">
                                         <span class="fontText">Usuario (*):</span>
-                                        <input [disabled]="userOff" [(ngModel)]="name" id="usName" type="text"
+                                        <input [disabled]="userOff" [(ngModel)]="name" id="usName" type="text" placeholder="Ingrese el Usuario"
                                             class="form-control buttonSinBorder">
 
                                     </div>
 
                                     <div class="col-lg-3 form-group" title="Contraseña del usuario">
                                         <span class="fontText">Contraseña (*):</span>
-                                        <input [disabled]="userPassOff" [(ngModel)]="passw" id="usPass" type="password"
+                                        <input [disabled]="userPassOff" [(ngModel)]="passw" id="usPass" type="password"  placeholder="Ingrese la Contraseña"
                                             class="form-control buttonSinBorder">
                                     </div>
                                 </div>
                                 <div class="row" style="display: flex;justify-content: center;align-items: center;">
                                     <div class="col-lg-6 form-group" title="Nombre completo del usuario">
                                         <span class="fontText">Nombre Completo (*):</span>
-                                        <input [disabled]="userFullNameOff" [(ngModel)]="fullName" id="usFullName"
+                                        <input [disabled]="userFullNameOff" [(ngModel)]="fullName" id="usFullName"  placeholder="Ingrese el Nombre"
                                             type="text" class="form-control buttonSinBorder"
                                             (keypress)="onlyLetters($event)">
                                     </div>
@@ -135,7 +135,7 @@
                                 <div class="row" style="display: flex;justify-content: center;align-items: center;">
                                     <div class="col-lg-6 form-group" title="Correo electrónico del usuario">
                                         <span class="fontText">Email (*):</span>
-                                        <input [disabled]="userEmailOff" [(ngModel)]="email" id="usEmail" type="text"
+                                        <input [disabled]="userEmailOff" [(ngModel)]="email" id="usEmail" type="text" placeholder="Ingrese el Email"
                                             class="form-control buttonSinBorder">
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                         <span class="fontText">Estado (*):</span>
                                         <select [disabled]="stateOff" [(ngModel)]="state" id="usState" name="userAllRol"
                                             class="form-control buttonSinBorder">
-                                            <option value="-1" >Seleccionar</option>
+                                            <option value="-1" >Seleccione</option>
                                             <option value="0" >Inactivo</option>
                                             <option value="1" >Activo</option>
                                             <!-- <option *ngFor="let item of stateList" value="{{item.}}"

@@ -216,7 +216,7 @@ export class AlertsMonitoringComponent implements OnInit {
       swal.fire({
         title: 'Monitoreo de alertas',
         icon: 'warning',
-        text: 'No hay registros para exportar',
+        text: 'No se han encontrado resultados para exportar',
         showCancelButton: false,
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar'

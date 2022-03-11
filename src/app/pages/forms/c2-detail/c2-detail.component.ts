@@ -167,8 +167,9 @@ export class C2DetailComponent implements OnInit, OnDestroy {
         this.SNOM_COMPLETO_EMPRESA = localStorage.getItem("SNOM_COMPLETO_EMPRESA")
         this.NIDPROVEEDOR = localStorage.getItem("NIDPROVEEDOR")
         this.SNUM_DOCUMENTO_EMPRESA = localStorage.getItem("SNUM_DOCUMENTO_EMPRESA")
-        this.CARGO = localStorage.getItem("CARGO")
-        this.NACIONALIDAD = localStorage.getItem("NACIONALIDAD")
+        this.CARGO = localStorage.getItem("CARGO") === 'null' ? '' : localStorage.getItem("CARGO");
+       
+        this.NACIONALIDAD = localStorage.getItem("NACIONALIDAD")  === 'null' ? '' : localStorage.getItem("NACIONALIDAD");
         localStorage.setItem("objFocusPositionReturn", localStorage.getItem("objFocusPosition"));
         this.nidregimen = localStorage.getItem("NREGIMEN");
         this.nidalerta = localStorage.getItem("NIDALERTA");
@@ -1884,6 +1885,19 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     // validatePorPorcentaje2(){
 
     // }
+
+    getOcultarDiferentesClientes(){
+        let idgrupo = localStorage.getItem("NIDGRUPOSENAL")
+       
+        if (idgrupo == '1'){
+            return true
+        }else{
+            return false;
+        }
+           
+       
+        
+    }
 
     ValidacionCargo(Lista, estado) {
 
