@@ -43,7 +43,7 @@
                                         style="display: flex;justify-content: center;align-items: center;">
 
                                         <select [(ngModel)]="idGrupo" name="userId" (change)="changeGrupo()"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                             <option value="0" selected>Todos</option>
                                             <option *ngFor="let item of ListGrupo" value="{{item.NIDGRUPOSENAL}}">
                                                 {{item.SDESGRUPO_SENAL}}</option>
@@ -62,7 +62,7 @@
                                         style="display: flex;justify-content: center;align-items: center;">
 
                                         <select [(ngModel)]="idGrupoRegimen" name="userId"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                             <option value="0" selected>Seleccione</option>
                                             <option value="1" selected>General</option>
                                             <option value="2" selected>Simplificado</option>
@@ -82,7 +82,7 @@
                                         style="display: flex;justify-content: center;align-items: center;">
 
                                         <select [(ngModel)]="IDListAnnoxGrupo" name="userId" (change)="changeAnnoxGrupo()"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                             <option value="0" selected>Seleccione</option>
                                             <option *ngFor="let item of NewListAnnos" value="{{item.ANNO}}"
                                                 id="profileIdSelected">
@@ -101,7 +101,7 @@
                                         style="display: flex;justify-content: center;align-items: center;">
 
                                         <select [(ngModel)]="IDListPeriodoxGrupo" name="userId"
-                                            class="form-control buttonSinBorder"> 
+                                            class="form-control buttonSinBorder colorButton"> 
                                             <option value="0" selected>Seleccione</option>
                                             <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
                                                 {{item.periodo}}</option>
@@ -214,7 +214,7 @@
                                         style="display: flex;justify-content: center;align-items: center;">
 
                                         <select [(ngModel)]="IDListAnnoGlobal" name="userId" (change)="changeAnnoGlobal()"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                             <option value="0" selected>Todos</option>
                                             <option *ngFor="let item of NewListAnnos" value="{{item.ANNO}}"
                                                 id="profileIdSelected">
@@ -229,7 +229,7 @@
                                         style="display: flex;justify-content: center;align-items: center;">
 
                                         <select [(ngModel)]="IDListPeriodoGlobal" name="userId" (change)="ListarHistorial(IDListPeriodoGlobal)"
-                                            class="form-control buttonSinBorder"> 
+                                            class="form-control buttonSinBorder colorButton"> 
                                             <option value="0" selected>Todos</option>
                                             <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
                                                 {{item.periodo}}</option>
@@ -318,7 +318,7 @@
                                     <div style="text-align: center;padding-top: 10px;"><button [disabled]="cob.SESTADO == 2" class="btn btn-warning text-white" (click)="Registrar(cob,index)">Registrar</button></div> 
                                   </tr> -->
 
-                                  <tr *ngFor="let cob of ListaRegistros| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index ">
+                                  <tr class="animated fadeIn" *ngFor="let cob of ListaRegistros| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index ">
                                     <td class="text-center">{{cob.FECHA_PERIODO}}</td>
                                     <td class="text-center">{{cob.DFECHA_ESTADO}}</td>
                                     <td class="text-center">{{cob.NOMBRECOMPLETO}}</td>

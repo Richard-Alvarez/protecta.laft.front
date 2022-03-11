@@ -31,7 +31,7 @@
                                     <span class="fontText" >Tipo de búsqueda:</span>
                                 </th>
                                 <th scope="col" width="125px">
-                                    <select class="form-control" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" >
+                                    <select class="form-control buttonSinBorder colorButton" (change)="searchTypeChange($event)" [(ngModel)]="NBUSCAR_POR" >
                                         <option value="1">Individual</option>
                                         <option value="2">Masiva</option>
                                     </select>
@@ -40,7 +40,7 @@
                                     <span class="fontText" >Tipo doc:</span>
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" width="135px">
-                                    <select id="tipoDoc" class="form-control" [(ngModel)]="NOMBRE_RAZON">
+                                    <select id="tipoDoc" class="form-control buttonSinBorder colorButton" [(ngModel)]="NOMBRE_RAZON">
                                         <option class="opti" value="0" title="SELCCIONAR">Seleccione</option>
                                         <option class="opti" value="2" title="dni">DNI</option>
                                         <option class="opti" value="1" title="ruc">RUC</option>
@@ -49,17 +49,17 @@
                                     </select>
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
-                                    <span class="fontText" >Número doc:</span> 
+                                    <span class="fontText" >Número de Documento:</span> 
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col">
-                                    <input id="doc" class="form-control" type="text"  placeholder="Documento" maxlength="{{validationCantidadCaracteres()}}" size="20"
+                                    <input id="doc" class="form-control buttonSinBorder colorButton" type="text"  placeholder="Número de Documento" maxlength="{{validationCantidadCaracteres()}}" size="20"
                                             (keypress)="validaNumericos($event)"[(ngModel)]="numeroDoc" ><!-- [disabled]="this.NOMBRE_RAZON == 0" -->
                                 </th>
                                 <th [hidden]="hideIndividual" scope="col" >
                                     <span class="fontText" >Nombre completo:</span> 
                                 </th>
                                 <th [hidden]="hideIndividual"  scope="col" >
-                                    <input class="form-control" type="text"  placeholder="Nombre completo" maxlength="100" size="30"
+                                    <input class="form-control buttonSinBorder colorButton" type="text"  placeholder="Nombre completo" maxlength="100" size="30"
                                             [(ngModel)]="nombreCompleto" (keypress)="soloLetras($event)" pattern="[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+" ><!--(keydown)="Buscar($event)"--><!-- style="text-transform: uppercase;" -->
                                 </th>
                                 <th [hidden]="hideIndividual">
@@ -119,7 +119,11 @@
                             </tr>
                         </thead>
                         <tbody [hidden]="false">
+<<<<<<< HEAD
                             <tr *ngFor="let item of resultadoFinalAgregado; let i = index;">
+=======
+                            <tr class="animated fadeIn" *ngFor="let item of resultadoFinal; let i = index;">
+>>>>>>> 421071d7000d7ff5030a87a7e20f15c0d925cce4
                                 <td  scope="col">{{item.DFECHA_BUSQUEDA}}</td>
                                 <td  scope="col">{{item.SUSUARIO_BUSQUEDA != '' ? item.SUSUARIO_BUSQUEDA : '-'}} </td>
                                 <td  scope="col">{{item.BUSQUEDA}}</td>

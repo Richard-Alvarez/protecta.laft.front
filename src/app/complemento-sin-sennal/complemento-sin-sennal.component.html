@@ -21,7 +21,7 @@
                         <select  [(ngModel)]="usuario" name="profile"
                             (change)="Changeuser(usuario)"
                             style="display: flex;justify-content: center;align-items: center;"
-                            class="form-control buttonSinBorder">
+                            class="form-control  buttonSinBorder colorButton">
                             <option value="0" selected>--Todos--</option>
                             <option *ngFor="let item of ListUser" value="{{item.userId}}" id="profileIdSelected">
                                 {{item.userFullName}}</option>
@@ -34,7 +34,7 @@
                         <select  [(ngModel)]="estado" name="group"
                           (change)="ChangeEstado(estado)"
                             style="display: flex;justify-content: center;align-items: center;"
-                            class="form-control buttonSinBorder">
+                            class="form-control  buttonSinBorder colorButton">
                             <option value="0" selected>--Todos--</option>
                             <option value="2" selected>COMPLETADO</option>
                             <option value="1" selected>PENDIENTE</option>
@@ -88,7 +88,7 @@
                             </ng-template>
                             <ng-template #showGrid>
                                 <tbody>
-                                    <tr *ngFor="let item of FiltrolistaComplementoUsuario | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
+                                    <tr  class="animated fadeIn" *ngFor="let item of FiltrolistaComplementoUsuario | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let index = index">
                                      
                                         <!-- <td class="text-left vertical;" style="white-space: nowrap;" >{{item.SNOM_COMPLEMENTO}}</td> -->
                                         <td >

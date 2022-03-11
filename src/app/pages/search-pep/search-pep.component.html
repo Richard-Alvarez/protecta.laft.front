@@ -112,7 +112,7 @@
                 <tr *ngIf="this.Colleccion.count == 0 || this.Colleccion.count == undefined" class="ce">
                   <td class="text-center" colspan="6">No se han encontrado resultados</td>
                 </tr>
-                <tr *ngFor="let item of this.Colleccion.data ">
+                <tr class="animated fadeIn" *ngFor="let item of this.Colleccion.data ">
                   <td style="width: 15%;">{{item.SRANGOPERIODO}}</td>
                   <td style="width: 15%;">{{item.STIPO_DOCUMENTO}}</td>
                   <td style="width: 15%;">{{item.SNUM_DOCUMENTO}}</td>
@@ -231,7 +231,7 @@
                 <tr *ngIf="this.ColleccionSeacsa.count == 0 || this.ColleccionSeacsa.count == undefined" class="ce">
                   <td class="text-center" colspan="20">No se han encontrado resultados</td>
                 </tr>
-                <tr *ngFor="let item of this.ColleccionSeacsa.data ">
+                <tr class="animated fadeIn" *ngFor="let item of this.ColleccionSeacsa.data ">
                   <td>{{item.COD_TIPPROD}}</td>
                   <td>{{item.NUM_POLIZA}}</td>
                   <td>{{item.FEC_EMISION}}</td>

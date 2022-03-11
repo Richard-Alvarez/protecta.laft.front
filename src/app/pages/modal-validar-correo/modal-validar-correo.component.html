@@ -24,7 +24,7 @@
 		<form [formGroup]="loginForm">
 			<div class="form-group">
 				<label>Usuario*</label>
-				<input class="form-control" style="text-transform:uppercase;" formControlName="usuario" type="text" [(ngModel)]="usuario" />
+				<input class="form-control buttonSinBorder colorButton" style="text-transform:uppercase;" formControlName="usuario" type="text" [(ngModel)]="usuario" />
 			</div>
 			<div class="error-messages">
 				<ng-container *ngFor="let error of error_messages.usuario">
@@ -39,7 +39,7 @@
 
 			<div class="form-group">
 				<label>Correo*</label>
-                <input class="form-control"  style="text-transform:lowercase;" formControlName="email" [(ngModel)]="correo" />
+                <input class="form-control buttonSinBorder colorButton"  style="text-transform:lowercase;" formControlName="email" [(ngModel)]="correo" />
             </div>
                
 			<div class="error-messages">

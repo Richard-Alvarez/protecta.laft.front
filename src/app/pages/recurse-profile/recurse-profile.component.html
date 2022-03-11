@@ -73,7 +73,7 @@
                                         {{name}}
                                     </div>
                                 </div> 
-                                <div class="d-flex form-group " id="pintaGrilla"  *ngFor="let item of arrayRecurse">
+                                <div class="d-flex form-group animated fadeIn " id="pintaGrilla"  *ngFor="let item of arrayRecurse">
                                     <div class="txtDetalle rows-table">{{item.sNameMenu}}</div>
                                     <div class="txtDetalle rows-table">{{item.sNameSubMenu}}</div>
                                     <!-- <div class="txtDetalle" style="text-align:center ;width: 108px;">{{item.sDescription}}</div> -->
@@ -147,7 +147,7 @@
                                     <div class="col-4">
                                         <label class="fontText2">Perfiles:</label>
                                         <select  [(ngModel)]="profiles" name="profile"
-                                            (change)="changeProfile()" class="form-control buttonSinBorder">
+                                            (change)="changeProfile()" class="form-control buttonSinBorder colorButton">
                                             <option value="0" selected>Seleccione</option>
                                             <option value="-1" selected>Todos</option>
                                             <option *ngFor="let item of arrayResponseProfile" value="{{item.profileId}}"
@@ -238,7 +238,7 @@
                                   </div>
                              </div>
                              <div class="desplace2">
-                                 <div class="d-flex form-group"  id="pintaGrillaHistory" *ngFor="let item of arrayResponseHistory">
+                                 <div class="d-flex form-group animated fadeIn"  id="pintaGrillaHistory" *ngFor="let item of arrayResponseHistory">
                                      <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sProfileName}}</div>
                                      <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sOpcion}}</div>
                                      <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sAccion}}</div>
