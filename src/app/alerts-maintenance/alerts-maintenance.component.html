@@ -37,7 +37,7 @@
                                 <input class="" [(ngModel)]="txtBuscador" 
                                     (keyup)="getListAlertsFilters()" 
                                     type="text"
-                                    class="form-control form-control" value=""
+                                    class="form-control buttonSinBorder colorButton" value=""
                                     placeholder="Buscar por alerta, descripción o usuario">
                             </div>
                             <div class="col-lg-12 form-group">
@@ -70,7 +70,7 @@
                                     </ng-template>
                                     <ng-template #showGrid>
                                         <tbody >
-                                            <tr *ngFor="let item of FiltrolistaComplementoUsuario  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let index = index ">
+                                            <tr class="animated fadeIn" *ngFor="let item of FiltrolistaComplementoUsuario  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let index = index ">
                                                 <!-- <td class="text-center">{{item.alertId}}</td> -->
                                                 <td class="text-center vertical" style="width: 15%;">{{item.alertName}}</td>
                                                 <td class="vertical" style="text-align: justify; width: 22%">{{item.alertDescription}}</td>

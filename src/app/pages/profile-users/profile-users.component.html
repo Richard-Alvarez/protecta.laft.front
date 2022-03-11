@@ -21,7 +21,7 @@
                         <label class="fontText2">Perfiles:</label>
                         <select [disabled]="profileListOff" [(ngModel)]="profiles" name="profile"
                             (change)="changeProfile()"
-                            class="form-control buttonSinBorder">
+                            class="form-control buttonSinBorder colorButton">
                             <option value="0" selected>Seleccione</option>
                             <option value="-1" selected>Todos</option>
                             <option *ngFor="let item of ProfileList" value="{{item.profileId}}" id="profileIdSelected">
@@ -63,7 +63,7 @@
                                 </tr>
                             </thead>
                             <tbody >
-                                <tr id="pintaGrilla" *ngFor="let item of listToShow,let inc = index;">
+                                <tr id="pintaGrilla" *ngFor="let item of listToShow,let inc = index;" class="animated fadeIn">
                                     <td class=" txtDetalle" style="padding: 15px;">{{item.nombreCompleto}}</td>
                                     <td class=" txtDetalle" style="padding: 15px;">{{item.perfil}}</td>
                                     <td class=" txtDetalle" style="padding: 15px;">{{item.cargo}}</td>

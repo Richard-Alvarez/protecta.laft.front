@@ -49,7 +49,7 @@
                                 <div class="col-1 txtCabecera text-center" style="font-size: 14px;">Editar</div>
                         </div>
                         <div *ngIf="listcomplemento.length != 0;else listaVacia;">
-                            <div class="row animated fadeIn " id="pintaGrilla"  *ngFor="let item of listcomplemento;let index = index" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
+                            <div class="row animated fadeIn" id="pintaGrilla"  *ngFor="let item of listcomplemento;let index = index" style="padding-top: 1.1rem; padding-bottom: 1.1rem;">
                                 <div class="col-2 text-left txtDetalle">{{item.SNOMBRE_COMPLEMENTO}}</div>
                                 <div class="col-2 text-left txtDetalle" >{{item.SDESCRIPCION}}</div>
                                 <div class="col-1 text-left txtDetalle" >{{item.SDESGRUPO_SENAL}}</div>
