@@ -23,7 +23,7 @@
                                          <select  [(ngModel)]="localResponsable.IDListAnno" name="profile" 
                                             (change)="localResponsable.BuscarPeriodo($event)"
                                              style="display: flex;justify-content: center;align-items: center;"
-                                             class="form-control buttonSinBorder">
+                                             class="form-control buttonSinBorder colorButton">
                                              <option value="0" selected>Seleccione</option>
                                              <option *ngFor="let item of localResponsable.NewListAnnos" value="{{item.ANNO}}" id="profileIdSelected" >
                                                  {{item.ANNO}}</option>
@@ -46,7 +46,7 @@
                                         <select  [(ngModel)]="localResponsable.IDListPeriodo" name="profile" 
                                         (change)="localResponsable.SeleccionarPeriodo($event)"
                                             style="display: flex;justify-content: center;align-items: center;"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                             <option value="0" selected>Seleccione</option>
                                             <option *ngFor="let item of localResponsable.NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
                                                 {{item.periodo}}</option>

@@ -31,7 +31,7 @@
             <select [disabled]="validarActualizar" id="idcombo" [(ngModel)]="action" name="action" (change)="CambioCombo($event)" 
                
                 style="display: flex;justify-content: center;align-items: center;"
-                class="form-control buttonSinBorder">
+                class="form-control buttonSinBorder colorButton">
                 <option value=0 selected="selected">{{Seleccione}}</option>
                 <option *ngFor="let item of ActionList" value={{item.NIDACCION}} id="actionIdSelected">
                     {{item.SDESCRIPT}}</option>
@@ -40,7 +40,7 @@
 
         <div class="col-lg-4 form-group" *ngIf="action == '4'">
             <label class="fontText">Cantidad de días:</label>
-            <input  [(ngModel)]="CantidadDias" type="text" class="form-control buttonSinBorder"/>
+            <input  [(ngModel)]="CantidadDias" type="text" class="form-control buttonSinBorder colorButton"/>
                                               
         </div>
 
@@ -49,7 +49,7 @@
             <select [disabled]="validarActualizar" [(ngModel)]="group" name="profile"
                
                 style="display: flex;justify-content: center;align-items: center;"
-                class="form-control buttonSinBorder">
+                class="form-control buttonSinBorder colorButton">
                 <option value="0" selected>Seleccione</option>
                 <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="profileIdSelected">
                     {{item.SDESGRUPO_SENAL}}</option>
@@ -62,7 +62,7 @@
             <select [disabled]="validarActualizar" [(ngModel)]="profiles" name="profile"
                
                 style="display: flex;justify-content: center;align-items: center;"
-                class="form-control buttonSinBorder">
+                class="form-control buttonSinBorder colorButton">
                 <option value="0" selected>Seleccione</option>
                 <option *ngFor="let item of ProfileList" value="{{item.NIDPROFILE}}" id="profileIdSelected">
                     {{item.SNAME}}</option>
@@ -77,7 +77,7 @@
             <label class="fontText">Usuario:</label>
             <select [(ngModel)]="userId" name="userId" 
                 (change)="changeUser()"   style="display: flex;justify-content: center;align-items: center;"
-                class="form-control buttonSinBorder select-css">
+                class="form-control buttonSinBorder colorButton">
                 <option value="0" selected>Seleccione</option>
                 <option *ngFor="let item of ListUser" value="{{item.userId}}"
                     id="userIdSelected">
@@ -127,7 +127,7 @@
                 
                 <label for="comment" class="fontText">Etiqueta si desea que aparezca en el asunto el periodo actual: [Periodo]</label>    <br> 
                 <label for="comment" class="fontText">Asunto:</label><br>
-                <textarea class="form-control" style="max-height: 100px; height:150px;min-height: 40px;" (keyup)="onKey($event)"  [(ngModel)]="asunto" id="usSubjectDescription" rows="5" maxlength="200"></textarea>
+                <textarea class="form-control buttonSinBorder" style="max-height: 100px; height:150px;min-height: 40px;" (keyup)="onKey($event)"  [(ngModel)]="asunto" id="usSubjectDescription" rows="5" maxlength="200"></textarea>
                 <span class="fontText">Caracteres: {{contador}} de 200</span>
                 
             </div>

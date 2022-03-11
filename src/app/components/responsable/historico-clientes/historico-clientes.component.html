@@ -53,7 +53,7 @@
               <div class=" form-group">
                 <select [(ngModel)]="IDListAnno" name="profile" (change)="BuscarPeriodo($event)"
                   style="display: flex;justify-content: center;align-items: center;"
-                  class="form-control buttonSinBorder">
+                  class="form-control buttonSinBorder colorButton">
                   <option value="0" selected>Seleccione</option>
                   <option *ngFor="let item of NewListAnnos" value="{{item.ANNO}}" id="profileIdSelected">
                     {{item.ANNO}}</option>
@@ -75,7 +75,7 @@
               <div class=" form-group">
                 <select [(ngModel)]="IDListPeriodo" name="profile" (change)="SeleccionarPeriodo($event)"
                   style="display: flex;justify-content: center;align-items: center;"
-                  class="form-control buttonSinBorder">
+                  class="form-control buttonSinBorder colorButton">
                   <option value="0" selected>Seleccione</option>
                   <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected">
                     {{item.periodo}}</option>

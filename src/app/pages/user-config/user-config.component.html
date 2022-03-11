@@ -41,7 +41,7 @@
                                     style="display: flex;justify-content: center;align-items: center;margin-left: -17px;padding-left: 0px;">
 
                                     <select [disabled]="userNameOff" [(ngModel)]="userId" name="userId"
-                                        (change)="changeUser()" class="form-control buttonSinBorder">
+                                        (change)="changeUser()" class="form-control buttonSinBorder colorButton">
                                         <option value="0" selected>Seleccione</option>
                                         <option *ngFor="let item of ListUser" value="{{item.userId}}"
                                             id="userIdSelected">
@@ -87,21 +87,21 @@
                                     <div class="col-lg-3 form-group" title="Nombre del usuario">
                                         <span class="fontText">Usuario (*):</span>
                                         <input [disabled]="userOff" [(ngModel)]="name" id="usName" type="text" placeholder="Ingrese el Usuario"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
 
                                     </div>
 
                                     <div class="col-lg-3 form-group" title="Contraseña del usuario">
                                         <span class="fontText">Contraseña (*):</span>
                                         <input [disabled]="userPassOff" [(ngModel)]="passw" id="usPass" type="password"  placeholder="Ingrese la Contraseña"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                     </div>
                                 </div>
                                 <div class="row" style="display: flex;justify-content: center;align-items: center;">
                                     <div class="col-lg-6 form-group" title="Nombre completo del usuario">
                                         <span class="fontText">Nombre Completo (*):</span>
                                         <input [disabled]="userFullNameOff" [(ngModel)]="fullName" id="usFullName"  placeholder="Ingrese el Nombre"
-                                            type="text" class="form-control buttonSinBorder"
+                                            type="text" class="form-control buttonSinBorder colorButton"
                                             (keypress)="onlyLetters($event)">
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                         <span class="fontText">Perfil (*):</span>
                                         <select [disabled]="userRolOff" [(ngModel)]="rol" id="userAllRol"
                                             name="userAllRol" (change)="changeProfile()"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                             <option value="0" selected>Seleccione</option>
                                             <option *ngFor="let item of profileList" value="{{item.profileId}}"
                                                 id="userIdSelected">
@@ -124,7 +124,7 @@
                                     <div class="col-lg-6 form-group" title="Cargo del usuario">
                                         <span class="fontText">Cargo (*):</span>
                                         <select [disabled]="cargoOff" [(ngModel)]="cargo" id="usCargo" name="userAllRol"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                             <option value="0" selected>Seleccione</option>
                                             <option *ngFor="let item of cargoList" value="{{item.cargoId}}"
                                                 id="cargoSelected">
@@ -136,14 +136,14 @@
                                     <div class="col-lg-6 form-group" title="Correo electrónico del usuario">
                                         <span class="fontText">Email (*):</span>
                                         <input [disabled]="userEmailOff" [(ngModel)]="email" id="usEmail" type="text" placeholder="Ingrese el Email"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                     </div>
                                 </div>
                                 <div class="row" style="display: flex;justify-content: center;align-items: center;">
                                     <div class="col-lg-6 form-group" title="Estado del usuario">
                                         <span class="fontText">Estado (*):</span>
                                         <select [disabled]="stateOff" [(ngModel)]="state" id="usState" name="userAllRol"
-                                            class="form-control buttonSinBorder">
+                                            class="form-control buttonSinBorder colorButton">
                                             <option value="-1" >Seleccione</option>
                                             <option value="0" >Inactivo</option>
                                             <option value="1" >Activo</option>
@@ -179,7 +179,7 @@
                                             <label class="fontText2" style="font-size: 14px;">Usuarios:</label>
     
                                             <select [disabled]="userNameOff" [(ngModel)]="userId" name="userId"
-                                                (change)="changeUser()" class="form-control buttonSinBorder">
+                                                (change)="changeUser()" class="form-control buttonSinBorder colorButton">
                                                 <option value="0" selected>Seleccione</option>
                                                 <option *ngFor="let item of ListUser" value="{{item.userId}}"
                                                     id="userIdSelected">
@@ -266,7 +266,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr id="pintaGrilla" *ngFor="let item of arrListUserLog,let inc = index;">
+                                                <tr id="pintaGrilla" class="animated fadeIn" *ngFor="let item of arrListUserLog,let inc = index;">
                                                     <td class="txtDetalle ">{{item.USUARIO}}</td>
                                                     <td class="txtDetalle ">{{item.NOMBRECOMPLETO}}</td>
                                                     <td class="txtDetalle ">{{item.SPERFIL}}</td>

@@ -22,7 +22,7 @@
 <div class="row" style="padding-left: 100px;">
     <div class="col-lg-3 form-group" title="Nombre de Alerta">
         <span class="fontText">Nombre:</span>
-        <input [(ngModel)]="alertName" id="usAlertName" [disabled]="alertdisabled('')" type="text" class="form-control buttonSinBorder">
+        <input [(ngModel)]="alertName" id="usAlertName" [disabled]="alertdisabled('')" type="text" class="form-control buttonSinBorder colorButton">
     </div>
     <div  *ngIf="validarActivador()" class="col-lg-2 form-group" title="Estado de alerta"   >
         <label class="custom-control custom-checkbox" >
@@ -50,7 +50,7 @@
         <select  [(ngModel)]="group" name="profile" (change)="LimpiarCheck($event)"
            
             style="display: flex;justify-content: center;align-items: center;"
-            class="form-control buttonSinBorder">
+            class="form-control buttonSinBorder colorButton">
             <option value="0" selected>Seleccione</option>
             <option *ngFor="let item of GrupoList" value="{{item.NIDGRUPOSENAL}}" id="profileIdSelected">
                 {{item.SDESGRUPO_SENAL}}</option>
@@ -151,7 +151,7 @@
                             </td>
                        
                             <td class="text-left" style="width: 200px;padding-top:25px;">
-                                <select class="form-control" [(ngModel)]="processlistToShow[index].originId" [disabled]="alertdisabled('')">
+                                <select class="form-control buttonSinBorder colorButton" [(ngModel)]="processlistToShow[index].originId" [disabled]="alertdisabled('')">
                                     <option value="0">Seleccione</option>
                                     <option value="1">Cabecera</option>
                                     <option value="2">Detalle</option> 
