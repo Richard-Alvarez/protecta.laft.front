@@ -7,7 +7,7 @@ import { UserconfigService } from "src/app/services/userconfig.service";
 import { Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { mergeNsAndName } from '@angular/compiler';
+import { mergeNsAndName, TransitiveCompileNgModuleMetadata } from '@angular/compiler';
 @Component({
   selector: 'app-registro-negativo',
   templateUrl: './registro-negativo.component.html',
@@ -41,8 +41,13 @@ export class RegistroNegativoComponent implements OnInit {
       return
     }
     
-   
-
+     await this.SwalProcesando()
+      console.log('calling');
+      const result = await this.FuncionDeEspera(3000);
+      console.log(result);
+     
+    
+    this.spinner.show()
     
     let uploadPararms: any = {}
     uploadPararms.SRUTA = 'ARCHIVOS-REGISTO-NEGATIVO' + '/';
@@ -63,16 +68,21 @@ export class RegistroNegativoComponent implements OnInit {
       if (this.ResultadoExcel[0].CODIGO == 2) {
         this.NombreArchivo = ''
         this.SwalGlobal(this.ResultadoExcel[0].MENSAJE)
-
+        this.spinner.hide()
         return
       }
     }
+
+      
+    
+
     
     
-    this.spinner.show()
+    
+   
     let respuestaRegistros: any = []
     for (let i = 0; i < this.ResultadoExcel.length; i++) {
-      this.core.loader.show()
+      
       let datosRegistrosNegativos: any = {}
       datosRegistrosNegativos.SNID = this.ResultadoExcel[i].N
       datosRegistrosNegativos.STIPOPERSONA = this.ResultadoExcel[i].TIPO_DE_PERSONA //parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
@@ -90,7 +100,7 @@ export class RegistroNegativoComponent implements OnInit {
       datosRegistrosNegativos.SNOM_COMPLETO = this.ResultadoExcel[i].NOMBRE_COMPLETO
       
       let response = await this.userConfigService.GetRegistrarDatosExcelRegistronegativo(datosRegistrosNegativos)
-      this.core.loader.hide()
+      
       respuestaRegistros.push(response)
     }
     this.spinner.hide()
@@ -100,17 +110,19 @@ export class RegistroNegativoComponent implements OnInit {
     if (listaFiltro.length > 0) {
       let mensaje = "Hubo un inconveniente al registrar la lista del archivo"
       this.SwalGlobal(mensaje)
+      this.spinner.hide()
       return
     } else {
       let mensaje = "Se agregaron " + respuestaRegistros.length + " registros"
       this.SwalGlobalConfirmacion(mensaje)
+      this.spinner.hide()
       return
     }
 
   }
 
-  SwalGlobal(mensaje) {
-    Swal.fire({
+  async SwalGlobal(mensaje) {
+    await Swal.fire({
       title: "Registro Negativo",
       icon: "warning",
       text: mensaje,
@@ -142,6 +154,31 @@ export class RegistroNegativoComponent implements OnInit {
       },
     }).then(async (msg) => {
       return
+    });
+  }
+
+  async SwalProcesando(){
+    
+     Swal.fire({
+      
+      title: 'Registro Negativo',
+      text: 'Procesando...',
+      imageUrl: 'assets/icons/Preloader.gif',
+      showConfirmButton: false,
+      imageAlt: 'Loading...',
+      timer:5000,
+      customClass: { 
+        closeButton : 'OcultarBorde'
+      },
+    })
+  }
+
+
+  async FuncionDeEspera(tiempo) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('resolved');
+      }, tiempo);
     });
   }
 
@@ -239,9 +276,9 @@ export class RegistroNegativoComponent implements OnInit {
       data.VALIDADOR = 'TODOS'
     }
     
-    this.core.loader.show()
+    this.spinner.show()
     this.listNegativa = await this.userConfigService.GetListaRegistroNegativo(data)
-    this.core.loader.hide()
+    this.spinner.hide()
   }
   changeTipo(){}
 
