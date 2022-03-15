@@ -11,7 +11,8 @@ import { mergeNsAndName } from '@angular/compiler';
 @Component({
   selector: 'app-registro-negativo',
   templateUrl: './registro-negativo.component.html',
-  styleUrls: ['./registro-negativo.component.css']
+  styleUrls: ['./registro-negativo.component.css'],
+  providers: [NgxSpinnerService]
 })
 export class RegistroNegativoComponent implements OnInit {
 
@@ -40,24 +41,24 @@ export class RegistroNegativoComponent implements OnInit {
       return
     }
     
-   debugger
+   
 
-    this.core.loader.show()
+    
     let uploadPararms: any = {}
     uploadPararms.SRUTA = 'ARCHIVOS-REGISTO-NEGATIVO' + '/';
     uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
     uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
     await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-    this.core.loader.hide()
+    
 
     let datosExcel: any = {}
     datosExcel.RutaExcel = 'ARCHIVOS-REGISTO-NEGATIVO' + '/' + this.ArchivoAdjunto.listFileNameInform;
     datosExcel.VALIDADOR = 'REGISTO-NEGATIVO'
    
-    this.core.loader.show()
+    
     this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
-    this.core.loader.hide()
+    
     if (this.ResultadoExcel.length != 0) {
       if (this.ResultadoExcel[0].CODIGO == 2) {
         this.NombreArchivo = ''
@@ -68,7 +69,7 @@ export class RegistroNegativoComponent implements OnInit {
     }
     
     
-    
+    this.spinner.show()
     let respuestaRegistros: any = []
     for (let i = 0; i < this.ResultadoExcel.length; i++) {
       this.core.loader.show()
@@ -92,6 +93,7 @@ export class RegistroNegativoComponent implements OnInit {
       this.core.loader.hide()
       respuestaRegistros.push(response)
     }
+    this.spinner.hide()
     console.log("respuestaRegistros", respuestaRegistros)
 
     let listaFiltro = respuestaRegistros.filter(it => it.nCode == 2)
@@ -101,7 +103,7 @@ export class RegistroNegativoComponent implements OnInit {
       return
     } else {
       let mensaje = "Se agregaron " + respuestaRegistros.length + " registros"
-      this.SwalGlobal(mensaje)
+      this.SwalGlobalConfirmacion(mensaje)
       return
     }
 
@@ -111,6 +113,24 @@ export class RegistroNegativoComponent implements OnInit {
     Swal.fire({
       title: "Registro Negativo",
       icon: "warning",
+      text: mensaje,
+      showCancelButton: false,
+      confirmButtonColor: "#FA7000",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCloseButton: true,
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+    }).then(async (msg) => {
+      return
+    });
+  }
+
+  SwalGlobalConfirmacion(mensaje) {
+    Swal.fire({
+      title: "Registro Negativo",
+      icon: "success",
       text: mensaje,
       showCancelButton: false,
       confirmButtonColor: "#FA7000",

@@ -1346,13 +1346,13 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     }
     let dataGrupo: any = await this.GrupoList.filter(it => it.NIDGRUPOSENAL == this.idGrupo)
 
-    this.core.loader.show()
+   
     let uploadPararms: any = {}
     uploadPararms.SRUTA = 'ARCHIVOS-GC' + '/' + dataGrupo[0].SDESGRUPO_SENAL + '/' + this.NPERIODO_PROCESO + '/';
     uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
     uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
     await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-    this.core.loader.hide()
+   
 
     let datosExcel: any = {}
     datosExcel.RutaExcel = 'ARCHIVOS-GC' + '/' + dataGrupo[0].SDESGRUPO_SENAL + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform;
@@ -1372,10 +1372,10 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       // }
 
     }
-    this.core.loader.show()
+    
     this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
-    this.core.loader.hide()
+    
     if (this.ResultadoExcel.length != 0) {
       if (this.ResultadoExcel[0].CODIGO == 2) {
         this.NombreArchivo = ''
@@ -1398,12 +1398,14 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     datosEliminar.SNUM_DOCUMENTO_EMPRESA = ''
     datosEliminar.SNOM_COMPLETO_EMPRESA = ''
     datosEliminar.SACTUALIZA = 'DEL'
-    this.core.loader.show()
+   
     let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelGC(datosEliminar)
-    this.core.loader.hide()
+   
     let respuestaRegistros: any = []
+    
+    this.spinner.show()
     for (let i = 0; i < this.ResultadoExcel.length; i++) {
-      this.core.loader.show()
+      
       let datosRegistroColaborador: any = {}
       datosRegistroColaborador.NPERIODO_PROCESO = this.NPERIODO_PROCESO
       datosRegistroColaborador.NTIPO_DOCUMENTO = parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO) //== null ? "" : parseInt(this.ResultadoExcel[i].NTIPO_DOCUMENTO)
@@ -1419,11 +1421,12 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       datosRegistroColaborador.CARGO = this.ResultadoExcel[i].CARGO
       datosRegistroColaborador.SACTUALIZA = 'INS'
       console.log("datosRegistroColaborador",datosRegistroColaborador)
-      
+     
       let response = await this.userConfigService.GetRegistrarDatosExcelGC(datosRegistroColaborador)
-      this.core.loader.hide()
+      
       respuestaRegistros.push(response)
     }
+    this.spinner.hide()
     console.log("respuestaRegistros", respuestaRegistros)
 
     let listaFiltro = respuestaRegistros.filter(it => it.nCode == 2)

@@ -14,6 +14,7 @@ export class SearchforregimenComponent implements OnInit {
   NIDREGIMEN:number = 0;
   NPERIODO_PROCESO:number = 0;
   NANO:number = 0;
+  SNUM_DOCUMENTO : string = '';
   Colleccion: any ={ data : [], count : 0};
   data: any =[]
   public page: number;
@@ -65,6 +66,7 @@ export class SearchforregimenComponent implements OnInit {
     param.NPERIODO_PROCESO = this.NPERIODO_PROCESO
     param.NANO = this.NANO
     param.NIDREGIMEN = this.NIDREGIMEN
+    param.SNUM_DOCUMENTO = this.SNUM_DOCUMENTO
     return param;
   }
   sliceAlertsArray(arreglo){

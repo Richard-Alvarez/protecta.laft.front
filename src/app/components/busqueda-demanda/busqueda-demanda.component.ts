@@ -376,33 +376,36 @@ export class BusquedaDemandaComponent implements OnInit {
   validarDigitosIngresados() {
     var numdoc = document.getElementById('doc')
     var maxlen = numdoc.getAttribute('maxlength')
-    if (this.ShowSelected() == 'Seleccione' /* && (this.nombreCompleto == null || this.nombreCompleto == "") */) {
-      swal.fire({
-        title: 'Búsqueda a Demanda',
-        text: `Seleccione Tipo doc para búsqueda`,
-        icon: 'info',
-        confirmButtonColor: '#FA7000',
-        confirmButtonText: 'Aceptar',
-        showCloseButton: true,
-        customClass: { 
-          closeButton : 'OcultarBorde'
-        },
-      })
-      return false;
-    }
-    else {
+    /*valida que si esta en el tipo de doc "seleccione", seleccione un tipo de doc*/
+    //if (this.ShowSelected() == 'Seleccione' /* && (this.nombreCompleto == null || this.nombreCompleto == "") */) {
+      //swal.fire({
+      //  title: 'Búsqueda a Demanda',
+      //  text: `Seleccione Tipo doc para búsqueda`,
+      //  icon: 'info',
+      //  confirmButtonColor: '#FA7000',
+      //  confirmButtonText: 'Aceptar',
+      //  showCloseButton: true,
+      //  customClass: { 
+      //    closeButton : 'OcultarBorde'
+      //  },
+      //})
+      //return false;
+    //}
+    //else {
+      /*valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento*/
+    if (this.ShowSelected() != 'Seleccione') { 
       if (this.numeroDoc.length == Number(maxlen)) {
         //console.log(`${this.numeroDoc.length} es igual a ${Number(maxlen)}`)
         //await this.BusquedaADemandaMixta();
         return true;
-      //console.log('realiza busqueda a demanda');
+        //console.log('realiza busqueda a demanda');
       }
       else {
         swal.fire({
           title: 'Búsqueda a Demanda',
           text: `La cantidad de dígitos es incorrecto. ` +
-                `Ingresó ${this.numeroDoc.length} digito(s). ` +
-                `Debe ingresar ${ maxlen } dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
+          `Ingresó ${this.numeroDoc.length} digito(s). ` +
+          `Debe ingresar ${ maxlen } dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
           icon: 'info',
           confirmButtonColor: '#FA7000',
           confirmButtonText: 'Aceptar',
@@ -413,8 +416,12 @@ export class BusquedaDemandaComponent implements OnInit {
         })
         return false;
       }
-      
     }
+    /*en caso este la opcion "seleccione" retorna true para aceptar la busqueda*/
+    else {
+      return true;
+    }
+    //}
   }
   /*valida que solo se pueda ingresar letras*/
   soloLetras(e) {

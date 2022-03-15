@@ -32,8 +32,9 @@ export class ModalGestorLaftComponent implements OnInit {
   }
 
   async ListaClientes() {
-
+    this.core.loader.show()
     this.ListaRegistros = await this.userConfigService.GetListaOtrosClientes(this.data)
+    this.core.loader.hide()
   }
 
 
