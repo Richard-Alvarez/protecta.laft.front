@@ -1,10 +1,10 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/';
+  private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
@@ -250,6 +250,7 @@ class Rutas {
   public urlgetCorreoCustomAction: string = this.base + "monitoreoSenales/getCorreoCustomAction"
   public urlgetCuerpoCorreo: string = this.base + "monitoreoSenales/getCuerpoCorreo"
   public urlGetRegistrarDatosExcelRegistronegativo: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelRegistronegativo"
+  public urlpreCargaRegistrosNegativos: string = this.base + "monitoreoSenales/preCargaRegistrosNegativos"
   public urlGetListaRegistroNegativo: string = this.base + "monitoreoSenales/GetListaRegistroNegativo"
   
   

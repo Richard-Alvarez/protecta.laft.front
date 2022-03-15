@@ -61,21 +61,33 @@ export class RegistroNegativoComponent implements OnInit {
     datosExcel.VALIDADOR = 'REGISTO-NEGATIVO'
    
     
-    this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+    //this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+    this.ResultadoExcel = await this.userConfigService.GetRegistrarDatosExcelRegistronegativo(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
     
-    if (this.ResultadoExcel.length != 0) {
-      if (this.ResultadoExcel[0].CODIGO == 2) {
+    debugger
+      if (this.ResultadoExcel.codigo == 2) {
         this.NombreArchivo = ''
-        this.SwalGlobal(this.ResultadoExcel[0].MENSAJE)
+        this.SwalGlobal(this.ResultadoExcel.mensaje)
+        this.spinner.hide()
+        return
+      }else{
+        let cantidadPararestar = this.ResultadoExcel.items.numero.filter(it => it == null).length
+        let cantidadTotal = this.ResultadoExcel.items.numero.length - cantidadPararestar
+       
+        let mensaje = "Se agregaron " + cantidadTotal + " registros"
+        this.SwalGlobalConfirmacion(mensaje)
         this.spinner.hide()
         return
       }
-    }
-
-      
     
 
+  
+    
+     
+    
+    
+    
     
     
     
