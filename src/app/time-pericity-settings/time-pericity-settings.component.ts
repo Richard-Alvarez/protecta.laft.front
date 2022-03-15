@@ -107,12 +107,12 @@ export class TimePericitySettingsComponent implements OnInit {
     if(data == "2")
     {
       this.frequencySuspended = false;
-      this.fStatus = "Ejecución desactivada:";
+      this.fStatus = "Ejecución Desactivada:";
     }
     else
     {
       this.frequencySuspended = true;
-      this.fStatus = "Ejecución activada:";
+      this.fStatus = "Ejecución Activada:";
     }
   }
   
