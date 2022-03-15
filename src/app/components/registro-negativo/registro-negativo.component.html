@@ -73,14 +73,14 @@
                 <span class="fontText">Nombre Completo:</span>
             </div>
             <div class="col-lg-9 col-xl-3">
-                <input class="form-control" (keypress)="soloLetras($event)" type="text" [(ngModel)]="nombreCompleto" placeholder="Nombre Completo">
+                <input class="form-control buttonSinBorder colorButton" (keypress)="soloLetras($event)" type="text" [(ngModel)]="nombreCompleto" placeholder="Nombre Completo">
             </div>
            
             <div class="textoDoc" style="padding: 5px 15px 0px;width:182px">
                 <span class="fontText">Número de Documento:</span>
             </div>
             <div class="col-lg-9 col-xl-2">
-                <input class="form-control" (keypress)="validaNumericos($event)" type="text" [(ngModel)]="documento"  placeholder="Número de Documento">
+                <input class="form-control buttonSinBorder colorButton" (keypress)="validaNumericos($event)" type="text" [(ngModel)]="documento"  placeholder="Número de Documento">
             </div>
             <div style="padding: 5px 15px 0px;width:100px">
               <span class="fontText">Señal Laft:</span>
