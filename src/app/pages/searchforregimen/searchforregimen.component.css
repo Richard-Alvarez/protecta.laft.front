@@ -19,6 +19,9 @@
     /* or 100px */
     border-bottom: 2px solid #FA7000;
 }
+.positionbutton {
+    align-self: flex-end;
+}
 
 .styleButtonActive {
     background: #26296D 0% 0% no-repeat padding-box;
@@ -30,7 +33,12 @@
     float: right;
     margin-left: 3%;
 }
-
+@media (min-width: 1550px) { 
+    .col-xlg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+ }
 .styleButtonDisable {
     background: transparent;
     color: black;
