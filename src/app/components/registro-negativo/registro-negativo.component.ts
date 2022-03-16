@@ -29,6 +29,8 @@ export class RegistroNegativoComponent implements OnInit {
   documento:string = '' 
   TIPO:any = '0'
   listNegativa:any = []
+  pageSize = 10;
+  page = 1;
   ngOnInit() {
   }
 
