@@ -2054,8 +2054,21 @@ export class UserconfigService {
       }
     });
   }
-  
 
+  getDeleteRegistrosNegativos(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlgetDeleteRegistrosNegativos).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  
+  
+  
 
 
 }

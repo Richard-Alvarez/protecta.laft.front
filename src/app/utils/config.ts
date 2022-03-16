@@ -252,6 +252,8 @@ class Rutas {
   public urlGetRegistrarDatosExcelRegistronegativo: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelRegistronegativo"
   public urlpreCargaRegistrosNegativos: string = this.base + "monitoreoSenales/preCargaRegistrosNegativos"
   public urlGetListaRegistroNegativo: string = this.base + "monitoreoSenales/GetListaRegistroNegativo"
+  public urlgetDeleteRegistrosNegativos: string = this.base + "monitoreoSenales/getDeleteRegistrosNegativos"
+  
   
   
   LimpiarDataGestor() {
