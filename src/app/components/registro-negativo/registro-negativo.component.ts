@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CoreService } from "src/app/services/core.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ExcelService } from '../../services/excel.service';
@@ -34,6 +34,7 @@ export class RegistroNegativoComponent implements OnInit {
   ngOnInit() {
   }
 
+  @ViewChild('myInput',{static: false}) myInputVariable: ElementRef;
 
   async RegistrarArchivo() {
     console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
@@ -43,10 +44,10 @@ export class RegistroNegativoComponent implements OnInit {
       return
     }
     
-     await this.SwalProcesando()
-      console.log('calling');
-      const result = await this.FuncionDeEspera(3000);
-      console.log(result);
+    //  await this.SwalProcesando()
+    //   console.log('calling');
+    //   const result = await this.FuncionDeEspera(3000);
+    //   console.log(result);
      
     
     this.spinner.show()
@@ -67,7 +68,10 @@ export class RegistroNegativoComponent implements OnInit {
     this.ResultadoExcel = await this.userConfigService.GetRegistrarDatosExcelRegistronegativo(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
     
-    debugger
+    this.NombreArchivo = ''
+    await this.reset()
+    this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
+    
       if (this.ResultadoExcel.codigo == 2) {
         this.NombreArchivo = ''
         this.SwalGlobal(this.ResultadoExcel.mensaje)
@@ -135,6 +139,12 @@ export class RegistroNegativoComponent implements OnInit {
 
   }
 
+  async reset() {
+    console.log(this.myInputVariable.nativeElement.files);
+    this.myInputVariable.nativeElement.value = "";
+    console.log(this.myInputVariable.nativeElement.files);
+}
+
   async SwalGlobal(mensaje) {
     await Swal.fire({
       title: "Registro Negativo",
@@ -198,7 +208,7 @@ export class RegistroNegativoComponent implements OnInit {
 
 
   async setDataFile(event) {
-
+    console.log("entro al evento : ", event)
     let files = event.target.files;
 
     let arrFiles = Array.from(files)

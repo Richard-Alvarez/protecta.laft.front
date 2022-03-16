@@ -41,7 +41,7 @@
         <div class="col-3" style="padding-top: 28px;">
             <div class="custom-file mb-3" *ngIf=" !(idGrupo == 1)  &&  !(idGrupo == 3 && idSubGrupo == 0 )">
 
-                <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" value="seleccionar" (change)="setDataFile($event)">
+                <input #myInput type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" value="seleccionar" (change)="setDataFile($event)">
                 <label class="custom-file-label" for="customFile" style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
             </div>
         </div>

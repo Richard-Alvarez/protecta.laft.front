@@ -49,8 +49,8 @@
           <div class="col-xl-3 col-lg-3" style="padding-top: 28px;">
             <div class="custom-file mb-3">
 
-              <input type="file" class="custom-file-input buttonSinBorder colorButton" id="customFile" name="filename" accept=".xlsx" 
-                value="seleccionar" (change)="setDataFile($event)">
+              <input #myInput type="file" class="custom-file-input buttonSinBorder colorButton" id="customFile" name="filename" accept=".xlsx" 
+                (change)="setDataFile($event)">
               <label class="custom-file-label" for="customFile"
                 style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
             </div>
@@ -136,7 +136,7 @@
                         <th>Doc. Referencia</th>
                         <th>Tipo Lista</th>
                         <th>Fecha Descubrimiento</th>
-                        
+                        <th>Pais</th>
                        
                     </tr>
                 </thead>
@@ -155,6 +155,7 @@
                         <td>{{item.SDOCREFERENCIA}}</td>
                         <td>{{item.STIPOLISTA}}</td>
                         <td>{{item.SFEDESCUBRIMIENTO}}</td>
+                        <td>{{item.STIPODOC_PAIS}}</td>
                         
                         
                         
