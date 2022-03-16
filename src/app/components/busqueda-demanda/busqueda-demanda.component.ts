@@ -9,6 +9,7 @@ import autoTable from 'jspdf-autotable';
 import { DataBusqueda } from './interfaces/data.interface';
 import { TipoCoincidencia } from './interfaces/tipo-coincidencia.interface';
 import { Console } from 'console';
+import { forEach } from 'jszip';
 
 const PDF_EXTENSION = ".pdf";
 @Component({
@@ -50,6 +51,10 @@ export class BusquedaDemandaComponent implements OnInit {
 
   tipoCoin: TipoCoincidencia;
 
+  listas = ['LISTAS FAMILIAR PEP', 'LISTAS PEP', 'LISTAS INTERNACIONALES', 'LISTAS ESPECIALES'];
+  prove = ['IDECON', 'REGISTRO NEGATIVO','WC']
+  resultadoFinalAgregado: any = []
+  whoSearch: string;
 
   constructor(
     public datepipe: DatePipe,
@@ -159,8 +164,8 @@ export class BusquedaDemandaComponent implements OnInit {
       const reg = /[a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+/;
       let pr = reg.test(this.nombreCompleto);
       /*si coincide el formato con la expresion regular ingresa*/
-      console.log(`esto se esta buscando ${this.nombreCompleto} y esta es la expresion regular ${reg}`);
-       (`asd`);
+      /* console.log(`esto se esta buscando ${this.nombreCompleto} y esta es la expresion regular ${reg}`);
+       (`asd`); */
       if (pr) {
         /*si el campo de documento es diferente a nulo o vacio [""] entra a verificar la cantidad de digitos*/
         if (!(this.numeroDoc == null || this.numeroDoc == "")) {
@@ -233,7 +238,7 @@ export class BusquedaDemandaComponent implements OnInit {
     data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
     data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
     data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
-    console.log(`data ${JSON.stringify(data)}`)
+    //console.log(`data ${JSON.stringify(data)}`)
     data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
     if(this.NBUSCAR_POR == 1){
       data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
@@ -244,19 +249,19 @@ export class BusquedaDemandaComponent implements OnInit {
       data.P_SNUM_DOCUMENTO = null;
       await this.SubirExcel(data) 
     }
-    var whoSearch
+    
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
     if (this.numeroDoc && (this.nombreCompleto == null || this.nombreCompleto == '')) {
-      whoSearch = 'IDECON'
+      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
     else {
-      whoSearch = 'WC e IDECON'
+      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
       title: 'Consulta en proceso...',
       icon: 'info',
-      text: `La búsqueda se realizará en ${whoSearch}`,
+      text: `La búsqueda se realizará en ${this.whoSearch}`,
       showCancelButton: false,
       showConfirmButton: false,
       showCloseButton: false,
@@ -277,22 +282,27 @@ export class BusquedaDemandaComponent implements OnInit {
         /*si existe respuesta*/
         //debugger;
         if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
+          this.resultadoFinalAgregado = [];
+
           if(respuestaService.itemsWC){
             respuestaService.itemsWC.forEach(t => {
               t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
               t.SPROVEEDOR = "WC",
-              t.STIPOCOINCIDENCIA = "NOMBRE"
+              t.STIPOCOINCIDENCIA = "NOMBRE",
+              t.BUSQUEDA = "Con coincidencia"
             });
           }
           if (respuestaService.itemsIDE) {
             respuestaService.itemsIDE.forEach(t => {
-              t.SPROVEEDOR = "IDECON"
+              //t.SPROVEEDOR = "IDECON"
+              t.BUSQUEDA = "Con coincidencia"
               //t.STIPOCOINCIDENCIA = "NOMBRE"
             });
           }
           if (respuestaService.itemsIDEDOC) {//hasOwnProperty verifica que contenga
             respuestaService.itemsIDEDOC.forEach(t => {
-              t.SPROVEEDOR = "IDECON"
+              //t.SPROVEEDOR = "IDECON"
+              t.BUSQUEDA = "Con coincidencia"
               //t.STIPOCOINCIDENCIA = "DOCUMENTO"
             });
           }
@@ -305,7 +315,376 @@ export class BusquedaDemandaComponent implements OnInit {
           else {
             this.resultadoFinal = respuestaService.itemsIDEDOC;
           }
-          this.tipoCoin = { "Lista": ['FPEP IDECON', 'PEP IDECON', 'Listas Internacionales IDECON','PEP WC','Listas Internacionales WC', 'Listas Especiales'], "Encontro": true };/*prueba*/
+          console.log(`coincidencia ${this.resultadoFinal}`)
+          
+          let proveedorCoinciden: any = []
+          this.resultadoFinal.forEach(t => {
+            proveedorCoinciden.push(t.SPROVEEDOR)
+            //let expBusqWC = /^WC*/
+            //let expBusqIdec = /[A-Z]*[, ]?IDECON[ A-Z]*/
+            //let expBusqListEsp=/[A-Z]*[, ]?[ A-Z ]*Listas Especiales/
+            /* for (let i = 0; i < prove.length; i++) {
+              let prov = prove[i];
+              if (prov == t.SPROVEEDOR) {
+                t.boolCoincidencia = true;
+              } else {
+                t.boolCoincidencia = false;
+              }
+              console.log(` booleano : ${prov} == ${t.SPROVEEDOR} ${t.boolCoincidencia}`)
+              if (t.boolCoincidencia) {
+                console.log(`coincidencia en alguna lista : ${t.boolCoincidencia} ... ${prov}... ${t.SPROVEEDOR}`)
+                for (let i = 0; i < this.listas.length; i++) {
+                  let list = this.listas[i];
+                  if (t.SLISTA == list) {
+                    console.log(`listas con coincidencia ${list}`)
+                    let datatrue = {
+                      "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                      "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                      "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
+                      "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                      "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
+                      "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+                      "STIPO_PERSONA": t.STIPO_PERSONA,
+                      "SCARGO": t.SCARGO,
+                      "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
+                      "SLISTA": t.SLISTA,
+                      "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
+                      "SPROVEEDOR": t.SPROVEEDOR,
+                      "BUSQUEDA": t.BUSQUEDA
+                    }
+                    this.resultadoFinalAgregado.push(datatrue);
+                  }
+                  else if (t.SLISTAS != list) {
+                    console.log(`listas sin coincidencia ${list}`)
+                    let datatrue = {
+                      "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                      "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                      "SNOMBRE_COMPLETO": "-",
+                      "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                      "STIPO_DOCUMENTO": "",
+                      "SNUM_DOCUMENTO": "-",
+                      "STIPO_PERSONA": "-",
+                      "SCARGO": "-",
+                      "SPORCEN_COINCIDENCIA": "-",
+                      "SLISTA": list,
+                      "STIPOCOINCIDENCIA": "-",
+                      "SPROVEEDOR": t.SPROVEEDOR,
+                      "BUSQUEDA": "Sin coincidencia"
+                    }
+                    this.resultadoFinalAgregado.push(datatrue);
+                  }
+                }
+              }
+            } */
+            /* if (prove.includes(t.SPROVEEDOR)) {
+              t.boolCoincidencia = true;
+            } else {
+              t.boolCoincidencia = false;
+            }
+            console.log(` booleano : ${t.SPROVEEDOR} ${t.boolCoincidencia}`)
+            if (t.boolCoincidencia) {
+              console.log(`coincidencia en alguna lista : ${t.boolCoincidencia} ...... ${t.SPROVEEDOR}`)
+              for (let i = 0; i < this.listas.length; i++) {
+                let list = this.listas[i];
+                if (t.SLISTA == list) {
+                  console.log(`listas con coincidencia ${list}`)
+                  let datatrue = {
+                    "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                    "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                    "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
+                    "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                    "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
+                    "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+                    "STIPO_PERSONA": t.STIPO_PERSONA,
+                    "SCARGO": t.SCARGO,
+                    "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
+                    "SLISTA": t.SLISTA,
+                    "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
+                    "SPROVEEDOR": t.SPROVEEDOR,
+                    "BUSQUEDA": t.BUSQUEDA
+                  }
+                  this.resultadoFinalAgregado.push(datatrue);
+                }
+                else if (t.SLISTAS != list) {
+                  console.log(`listas sin coincidencia ${list}`)
+                  let datatrue = {
+                    "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                    "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                    "SNOMBRE_COMPLETO": "-",
+                    "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                    "STIPO_DOCUMENTO": "",
+                    "SNUM_DOCUMENTO": "-",
+                    "STIPO_PERSONA": "-",
+                    "SCARGO": "-",
+                    "SPORCEN_COINCIDENCIA": "-",
+                    "SLISTA": list,
+                    "STIPOCOINCIDENCIA": "-",
+                    "SPROVEEDOR": t.SPROVEEDOR,
+                    "BUSQUEDA": "Sin coincidencia"
+                  }
+                  this.resultadoFinalAgregado.push(datatrue);
+                }                  
+              }
+            } */
+            /*si no encuentra ninguna lista de alguno de los proveedores[ WC, IDECON o Listas Especiales]*/
+            /* let prove = ['WC', 'IDECON', 'Listas Especiales']
+            for (let i = 0; i < prove.length; i++) {
+              let prov = prove[i];
+              debugger;
+              if (t.SPROVEEDOR =! prov) {
+                let datatrue = {
+                  "DFECHA_BUSQUEDA" : t.DFECHA_BUSQUEDA,
+                  "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                  "SNOMBRE_COMPLETO" : '-',
+                  "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                  "STIPO_DOCUMENTO" : '-',
+                  "SNUM_DOCUMENTO" : '-',
+                  "STIPO_PERSONA" : '-',
+                  "SCARGO" : '-',
+                  "SPORCEN_COINCIDENCIA" : '-',
+                  "SLISTA" : t.SLISTA,
+                  "STIPOCOINCIDENCIA" : '-',
+                  "SPROVEEDOR" : prov,
+                  "BUSQUEDA" : 'Sin Coincidencia'
+                }
+                console.log(`arregloque hara push ${JSON.stringify(datatrue)}`)
+                this.resultadoFinalAgregado.push(datatrue);
+                console.log(`como va quedando el nuevo arreglo${JSON.stringify(this.resultadoFinalAgregado)}`)
+              }
+            } */
+          });
+          this.prove.forEach(p => {
+            if (proveedorCoinciden.includes(p)) {
+              for (let i = 0; i < this.resultadoFinal.length; i++) {
+                let t = this.resultadoFinal[i];
+                if (p == t.SPROVEEDOR) {
+                  console.log(`coincidencia en alguna lista : ... ${p}... ${t.SPROVEEDOR}`)
+                  for (let i = 0; i < this.listas.length; i++) {
+                    let list = this.listas[i];
+                    if (t.SLISTA == list) {
+                      console.log(`listas con coincidencia ${list}`)
+                      let datatrue = {
+                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                        "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
+                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                        "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
+                        "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+                        "STIPO_PERSONA": t.STIPO_PERSONA,
+                        "SCARGO": t.SCARGO,
+                        "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
+                        "SLISTA": t.SLISTA,
+                        "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
+                        "SPROVEEDOR": t.SPROVEEDOR,
+                        "BUSQUEDA": t.BUSQUEDA
+                      }
+                      this.resultadoFinalAgregado.push(datatrue);
+                    }
+                    else if (t.SLISTAS != list) {
+                      console.log(`listas sin coincidencia ${list}`)
+                      let datatrue = {
+                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                        "SNOMBRE_COMPLETO": "-",
+                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                        "STIPO_DOCUMENTO": "",
+                        "SNUM_DOCUMENTO": "-",
+                        "STIPO_PERSONA": "-",
+                        "SCARGO": "-",
+                        "SPORCEN_COINCIDENCIA": "-",
+                        "SLISTA": list,
+                        "STIPOCOINCIDENCIA": "-",
+                        "SPROVEEDOR": t.SPROVEEDOR,
+                        "BUSQUEDA": "Sin coincidencia"
+                      }
+                      this.resultadoFinalAgregado.push(datatrue);
+                    }
+                  }
+                }
+              }
+            }
+            /* else {
+              console.log(`sin coincidencia en ninguna : ... ${p}... `)
+                  for (let i = 0; i < this.listas.length; i++) {
+                    let list = this.listas[i];
+                    console.log(`listas sin coincidencia ${list}`)
+                    let datafalse = {
+                      "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                      "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                      "SNOMBRE_COMPLETO": "-",
+                      "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                      "STIPO_DOCUMENTO": "",
+                      "SNUM_DOCUMENTO": "-",
+                      "STIPO_PERSONA": "-",
+                      "SCARGO": "-",
+                      "SPORCEN_COINCIDENCIA": "-",
+                      "SLISTA": list,
+                      "STIPOCOINCIDENCIA": "-",
+                      "SPROVEEDOR": p,
+                      "BUSQUEDA": "Sin coincidencia"
+                    }
+                    this.resultadoFinalAgregado.push(datafalse);
+                  }
+            } */
+          });
+          /* for (let i = 0; i < this.resultadoFinal.length; i++) {
+            let t = this.resultadoFinal[i];
+            for (let i = 0; i < this.prove.length; i++) {
+              let prov = this.prove[i];
+              debugger;
+              if (proveedorCoinciden.includes(prov)) {
+                if (prov == t.SPROVEEDOR) {
+                  console.log(`coincidencia en alguna lista : ... ${prov}... ${t.SPROVEEDOR}`)
+                  for (let i = 0; i < this.listas.length; i++) {
+                    let list = this.listas[i];
+                    if (t.SLISTA == list) {
+                      console.log(`listas con coincidencia ${list}`)
+                      let datatrue = {
+                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                        "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
+                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                        "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
+                        "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+                        "STIPO_PERSONA": t.STIPO_PERSONA,
+                        "SCARGO": t.SCARGO,
+                        "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
+                        "SLISTA": t.SLISTA,
+                        "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
+                        "SPROVEEDOR": t.SPROVEEDOR,
+                        "BUSQUEDA": t.BUSQUEDA
+                      }
+                      this.resultadoFinalAgregado.push(datatrue);
+                    }
+                    else if (t.SLISTAS != list) {
+                      console.log(`listas sin coincidencia ${list}`)
+                      let datatrue = {
+                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                        "SNOMBRE_COMPLETO": "-",
+                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                        "STIPO_DOCUMENTO": "",
+                        "SNUM_DOCUMENTO": "-",
+                        "STIPO_PERSONA": "-",
+                        "SCARGO": "-",
+                        "SPORCEN_COINCIDENCIA": "-",
+                        "SLISTA": list,
+                        "STIPOCOINCIDENCIA": "-",
+                        "SPROVEEDOR": t.SPROVEEDOR,
+                        "BUSQUEDA": "Sin coincidencia"
+                      }
+                      this.resultadoFinalAgregado.push(datatrue);
+                    }
+                  }
+                }
+              }
+              else {
+                //if () {
+                  console.log(`sin coincidencia en ninguna : ... ${prov}... `)
+                  for (let i = 0; i < this.listas.length; i++) {
+                    let list = this.listas[i];
+                    console.log(`listas sin coincidencia ${list}`)
+                    let datafalse = {
+                      "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                      "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                      "SNOMBRE_COMPLETO": "-",
+                      "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                      "STIPO_DOCUMENTO": "",
+                      "SNUM_DOCUMENTO": "-",
+                      "STIPO_PERSONA": "-",
+                      "SCARGO": "-",
+                      "SPORCEN_COINCIDENCIA": "-",
+                      "SLISTA": list,
+                      "STIPOCOINCIDENCIA": "-",
+                      "SPROVEEDOR": prov,
+                      "BUSQUEDA": "Sin coincidencia"
+                    }
+                    this.resultadoFinalAgregado.push(datafalse);
+                  }
+                //}
+              }
+            }
+          } */
+          /* this.resultadoFinal.forEach(t => {
+            t.conteo[t.SPROVEEDOR] = 0
+            for (let i = 0; i < this.prove.length; i++) {
+              let prov = this.prove[i];
+              debugger;
+              if (proveedorCoinciden.includes(prov)) {
+                if (prov == t.SPROVEEDOR && t.conte[t.SPROVEEDOR] == 0) {
+                  console.log(`coincidencia en alguna lista : ... ${prov}... ${t.SPROVEEDOR}`)
+                  for (let i = 0; i < this.listas.length; i++) {
+                    let list = this.listas[i];
+                    if (t.SLISTA == list) {
+                      console.log(`listas con coincidencia ${list}`)
+                      let datatrue = {
+                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                        "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
+                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                        "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
+                        "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+                        "STIPO_PERSONA": t.STIPO_PERSONA,
+                        "SCARGO": t.SCARGO,
+                        "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
+                        "SLISTA": t.SLISTA,
+                        "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
+                        "SPROVEEDOR": t.SPROVEEDOR,
+                        "BUSQUEDA": t.BUSQUEDA
+                      }
+                      this.resultadoFinalAgregado.push(datatrue);
+                    }
+                    else if (t.SLISTAS != list) {
+                      console.log(`listas sin coincidencia ${list}`)
+                      let datatrue = {
+                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                        "SNOMBRE_COMPLETO": "-",
+                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                        "STIPO_DOCUMENTO": "",
+                        "SNUM_DOCUMENTO": "-",
+                        "STIPO_PERSONA": "-",
+                        "SCARGO": "-",
+                        "SPORCEN_COINCIDENCIA": "-",
+                        "SLISTA": list,
+                        "STIPOCOINCIDENCIA": "-",
+                        "SPROVEEDOR": t.SPROVEEDOR,
+                        "BUSQUEDA": "Sin coincidencia"
+                      }
+                      this.resultadoFinalAgregado.push(datatrue);
+                    }
+                  }
+                }
+              }
+              else {
+                if () {
+                  console.log(`sin coincidencia en ninguna : ... ${prov}... `)
+                  for (let i = 0; i < this.listas.length; i++) {
+                    let list = this.listas[i];
+                    console.log(`listas sin coincidencia ${list}`)
+                    let datafalse = {
+                      "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+                      "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+                      "SNOMBRE_COMPLETO": "-",
+                      "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+                      "STIPO_DOCUMENTO": "",
+                      "SNUM_DOCUMENTO": "-",
+                      "STIPO_PERSONA": "-",
+                      "SCARGO": "-",
+                      "SPORCEN_COINCIDENCIA": "-",
+                      "SLISTA": list,
+                      "STIPOCOINCIDENCIA": "-",
+                      "SPROVEEDOR": prov,
+                      "BUSQUEDA": "Sin coincidencia"
+                    }
+                    this.resultadoFinalAgregado.push(datafalse);
+                  }
+                }
+              }
+            }
+          }) */
+          console.log(`Resultado Final : ${JSON.stringify(this.resultadoFinalAgregado)}`)
+          
         }
         /*si no existe respuesta o retorna codigo 1*/
         else if(Object.entries(respuestaService).length !== 0 && respuestaService.code != 0){

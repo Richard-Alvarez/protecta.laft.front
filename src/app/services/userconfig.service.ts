@@ -2039,6 +2039,9 @@ export class UserconfigService {
       }
     });
   }
+
+  
+
   
   GetListaRegistroNegativo(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
