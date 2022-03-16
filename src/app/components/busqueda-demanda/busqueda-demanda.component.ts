@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, Input, Output } from '@angular/core';
+import { Component, OnInit, NgModule, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { DatePipe } from '@angular/common';
@@ -55,6 +55,8 @@ export class BusquedaDemandaComponent implements OnInit {
   prove = ['IDECON', 'REGISTRO NEGATIVO','WC']
   resultadoFinalAgregado: any = []
   whoSearch: string;
+
+  @ViewChild('myInput',{static: false}) myInputVariable: ElementRef;
 
   constructor(
     public datepipe: DatePipe,
@@ -1202,7 +1204,10 @@ async SubirExcel(obj){
     console.log("respuesta de inserccion a tabla carga",response);
   }
 
-
+ 
+  this.NombreArchivo = ''
+  await this.reset()
+  this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
 }
 
 
@@ -1473,5 +1478,13 @@ GuardarData(){
   localStorage.setItem("NUMERODOC", data.NUMERODOC)
   localStorage.setItem("NOMBRECOMPLETO", data.NOMBRECOMPLETO)
 }
+
+
+async reset() {
+  console.log(this.myInputVariable.nativeElement.files);
+  this.myInputVariable.nativeElement.value = "";
+  console.log(this.myInputVariable.nativeElement.files);
+}
+
 
 }

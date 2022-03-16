@@ -1372,6 +1372,11 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       // }
 
     }
+
+     
+    this.NombreArchivo = ''
+    await this.reset()
+    this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
     
     this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
