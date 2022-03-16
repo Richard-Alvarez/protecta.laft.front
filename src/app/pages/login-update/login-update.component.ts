@@ -182,6 +182,7 @@ export class LoginUpdateComponent implements OnInit {
       this.login.ValidateExistClient(json).then(async (response) => {
         if (response.ingreso) {          
           localStorage.removeItem("fromFormsDatabase")
+          //this.login.setToken(response.token);
           this.maestroService.setUser(response);
           let resp = await this.userConfigService.getCurrentPeriod()
         
