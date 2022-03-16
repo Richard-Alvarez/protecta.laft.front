@@ -89,6 +89,23 @@
                                             Buscar
                                     </button>
                                 </div>
+                                <div [hidden]="hideMasiva" class="col-xl-4 col-lg-6 d-flex py-1 col-lg-1 ">
+                                    <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12 " style="align-items: self-end; padding: 0;">
+                                        <div class="custom-file col-xs-12 col-sm-12" style="padding: 0;">
+                                            <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx" onclick="this.value=null;"
+                                                value="seleccionar" (change)="setDataFile($event)" [(ngModel)]="archivoExcel">
+                                            <label class="custom-file-label" for="customFile"
+                                                style="background-color:#e9ecef">{{this.NombreArchivo == '' ? "Adjuntar Archivo" : this.NombreArchivo }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div [hidden]="hideMasiva" class="col-xl-4 col-lg-6 d-flex py-1 col-lg-1 "  style="align-items: self-end">
+                                    <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12" style="padding:0">
+                                        <div *ngIf="mostrarBotonBuscarMasiva()"  class="col-xs-12 col-sm-12" style="align-items: center; padding:0">
+                                            <button  (click)="DescargarPlantilla()" class="btn btn-outline-info form-control mr-2 buttonSinBorder colorButton"><i class="fas fa-download"></i> Descargar Plantilla </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div [hidden]="hideMasiva" *ngIf="mostrarBotonBuscarMasiva()"
                                     class="col-lg-1  py-1 positionbutton" style="align-self: flex-end;padding-left: 0;">
                                     <button _ngcontent-qgx-c1="" id="enter" class="btn btn-warning text-white px-4 btnBuscarStyle"
