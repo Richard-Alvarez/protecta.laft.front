@@ -1444,7 +1444,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       return
     } else {
       let mensaje = "Se agregaron " + respuestaRegistros.length + " registros"
-      this.SwalGlobal(mensaje)
+      this.SwalGlobalConfirmacion(mensaje)
       return
     }
     
@@ -1552,6 +1552,24 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     Swal.fire({
       title: "Gestor Laft",
       icon: "warning",
+      text: mensaje,
+      showCancelButton: false,
+      confirmButtonColor: "#FA7000",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCloseButton: true,
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+    }).then(async (msg) => {
+      return
+    });
+  }
+
+  SwalGlobalConfirmacion(mensaje) {
+    Swal.fire({
+      title: "Gestor Laft",
+      icon: "success",
       text: mensaje,
       showCancelButton: false,
       confirmButtonColor: "#FA7000",
