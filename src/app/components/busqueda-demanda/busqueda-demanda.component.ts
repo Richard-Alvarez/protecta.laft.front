@@ -229,11 +229,11 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-    if (!(this.numeroDoc == null || this .numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
+    if ((this.numeroDoc == null || this .numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
       this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1){
+    else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this .numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)){
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
