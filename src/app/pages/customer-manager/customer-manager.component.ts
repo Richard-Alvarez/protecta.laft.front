@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef } from "@angular/core";
 import { UserconfigService } from "src/app/services/userconfig.service";
 import { CoreService } from "src/app/services/core.service";
 import { Router } from "@angular/router";
@@ -125,7 +125,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
 
   valorActive: string = ''
   PERIODOACTUAL
-
+  @ViewChild('myInput',{static: false}) myInputVariable: ElementRef;
   constructor(
     private userConfigService: UserconfigService,
     private core: CoreService,
@@ -1372,6 +1372,11 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       // }
 
     }
+
+     
+    this.NombreArchivo = ''
+    await this.reset()
+    this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
     
     this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
     console.log("Resultado Excel", this.ResultadoExcel)
@@ -1429,6 +1434,9 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     this.spinner.hide()
     console.log("respuestaRegistros", respuestaRegistros)
 
+    // this.NombreArchivo = ''
+    // this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
+
     let listaFiltro = respuestaRegistros.filter(it => it.nCode == 2)
     if (listaFiltro.length > 0) {
       let mensaje = "Hubo un inconveniente al registrar la lista del archivo"
@@ -1436,10 +1444,10 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       return
     } else {
       let mensaje = "Se agregaron " + respuestaRegistros.length + " registros"
-      this.SwalGlobal(mensaje)
+      this.SwalGlobalConfirmacion(mensaje)
       return
     }
-
+    
   }
 
 
@@ -1558,6 +1566,24 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     });
   }
 
+  SwalGlobalConfirmacion(mensaje) {
+    Swal.fire({
+      title: "Gestor Laft",
+      icon: "success",
+      text: mensaje,
+      showCancelButton: false,
+      confirmButtonColor: "#FA7000",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCloseButton: true,
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+    }).then(async (msg) => {
+      return
+    });
+  }
+
   async ListaDeCoincidencias(id) {
   
     let data: any = {}
@@ -1614,5 +1640,10 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     });
   }
 
+  async reset() {
+    console.log(this.myInputVariable.nativeElement.files);
+    this.myInputVariable.nativeElement.value = "";
+    console.log(this.myInputVariable.nativeElement.files);
+}
 
 }

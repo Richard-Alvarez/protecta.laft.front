@@ -9,56 +9,63 @@
     <!-- <br> -->
 
 
-    <div class="container-fluid pt-3 pb-3"> 
-        
-        <div class="row pl-5 pr5">
-                    <div class="col-4" style="padding-left:0px">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="pt-1" style="float:left">
-                                    Seleccione un Año:
-                                 </div>
-                                 <div class="col-7" style="float:left">
-                                     <div class=" form-group">
-                                         <select  [(ngModel)]="localResponsable.IDListAnno" name="profile" 
-                                            (change)="localResponsable.BuscarPeriodo($event)"
-                                             style="display: flex;justify-content: center;align-items: center;"
-                                             class="form-control buttonSinBorder colorButton">
-                                             <option value="0" selected>Seleccione</option>
-                                             <option *ngFor="let item of localResponsable.NewListAnnos" value="{{item.ANNO}}" id="profileIdSelected" >
-                                                 {{item.ANNO}}</option>
-                                         </select>
-                                     </div>  
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+    <div class="" style="padding-bottom: 30px;">
+        <div class="container">
+            
     
-                    <div class="col-4">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="pt-1" style="float:left">
-                                    Seleccione un Periodo:
-                                 </div>
-                                 <div class="col-7" style="float:left">
-                                    <div class=" form-group">
-                                        <select  [(ngModel)]="localResponsable.IDListPeriodo" name="profile" 
-                                        (change)="localResponsable.SeleccionarPeriodo($event)"
-                                            style="display: flex;justify-content: center;align-items: center;"
-                                            class="form-control buttonSinBorder colorButton">
-                                            <option value="0" selected>Seleccione</option>
-                                            <option *ngFor="let item of localResponsable.NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
-                                                {{item.periodo}}</option>
-                                        </select>
-                                    </div>  
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row justify-content-md-center pt-4">
+                <div class="col-lg-2"
+                    style="display: flex;justify-content: center;align-items: center;">
+                    <label class="fontText">Seleccione el Año:</label>
+                </div>
+                <div class="col-lg-3"
+                    style="display: flex;justify-content: center;align-items: center;">
     
+                    <select [(ngModel)]="localResponsable.IDListAnno" name="userId" (change)="localResponsable.BuscarPeriodo($event)"
+                        class="form-control buttonSinBorder colorButton">
+                        <option value="0" selected>Seleccione</option>
+                        <option *ngFor="let item of localResponsable.NewListAnnos" value="{{item.ANNO}}"
+                            id="profileIdSelected">
+                            {{item.ANNO}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2"
+                    style="display: flex;justify-content: center;align-items: center;">
+                    <label class="fontText">Seleccione el Periodo:</label> 
+                </div>
+                <div class="col-lg-3"
+                    style="display: flex;justify-content: center;align-items: center;">
+    
+                    <select [(ngModel)]="localResponsable.IDListPeriodo" name="userId" (change)="localResponsable.SeleccionarPeriodo($event)"
+                        class="form-control buttonSinBorder colorButton"> 
+                        <option value="0" selected>Seleccione</option>
+                        <option *ngFor="let item of localResponsable.NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
+                            {{item.periodo}}</option>
+                    </select>
+                </div>
+    
+            </div>
+    
+            <!-- <div class="row justify-content-md-center pt-4">
+                <div class="col-lg-2"
+                    style="display: flex;justify-content: center;align-items: center;">
+                    <label class="fontText">Seleccionar el periodo:</label> 
+                </div>
+                <div class="col-lg-3"
+                    style="display: flex;justify-content: center;align-items: center;">
+    
+                    <select [(ngModel)]="IDListPeriodoGlobal" name="userId" (change)="ListarHistorial(IDListPeriodoGlobal)"
+                        class="form-control buttonSinBorder"> 
+                        <option value="0" selected>Seleccione</option>
+                        <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
+                            {{item.periodo}}</option>
+                    </select>
+                </div>
+    
+            </div> -->
     
         </div>
+    
     </div>
 
     <div class="container-fluid pl-5 pr-5">

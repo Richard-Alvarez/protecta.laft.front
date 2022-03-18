@@ -92,7 +92,13 @@ export class ModalGestorLaftComponent implements OnInit {
       return
     }
     console.log("data", data)
-    this.excelService.exportAsExcelFile(data, "Lista");
+    let nombre = ''
+    if(this.data.SDESGRUPO_SENAL == 'Colaboradores'){
+      nombre = 'Colaboradores'
+    }else{
+      nombre =  this.data.SDESSUBGRUPO_SENAL
+    }
+    this.excelService.exportAsExcelFile(data, nombre);
 
 
   }
