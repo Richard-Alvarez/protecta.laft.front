@@ -1646,4 +1646,40 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     console.log(this.myInputVariable.nativeElement.files);
 }
 
+
+
+
+async DescargarPlantilla(idGrupo){
+  let data:any = {}
+  let nombre = ''
+  console.log(idGrupo)
+  if(idGrupo == 4){
+    nombre = "PLANTILLA-CONTRAPARTE"
+  }else if(idGrupo == 2){
+    nombre = "PLANTILLA-COLABORADOR"
+  }else if(idGrupo == 3){
+    nombre = "PLANTILLA-PROVEEDOR"
+  }else{
+    let mensaje = "No existe una plantilla para este grupo"
+      this.SwalGlobal(mensaje)
+      return 
+  }
+
+  try {
+    this.core.loader.show()
+    let data = { ruta: `PLANTILLAS/GESTOR-LAFT/${nombre}.xlsx` }
+    let response = await this.userConfigService.DownloadUniversalFileByAlert(data)
+    response = await fetch(`data:application/octet-stream;base64,${response.base64}`)
+    const blob = await response.blob()
+    let url = URL.createObjectURL(blob)
+    let link = document.createElement('a')
+    link.href = url
+    link.download = `${nombre}.xlsx`
+    link.click()
+    this.core.loader.hide()
+  } catch (error) {
+    console.error("el error en descargar archivo: ", error)
+  }
+}
+
 }
