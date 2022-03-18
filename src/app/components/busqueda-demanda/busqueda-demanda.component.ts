@@ -51,9 +51,6 @@ export class BusquedaDemandaComponent implements OnInit {
 
   tipoCoin: TipoCoincidencia;
 
-  listas = ['LISTAS FAMILIAR PEP', 'LISTAS PEP', 'LISTAS INTERNACIONALES', 'LISTAS ESPECIALES'];
-  prove = ['IDECON', 'REGISTRO NEGATIVO','WC']
-  resultadoFinalAgregado: any = []
   whoSearch: string;
 
   @ViewChild('myInput',{static: false}) myInputVariable: ElementRef;
@@ -263,8 +260,6 @@ export class BusquedaDemandaComponent implements OnInit {
         /*si existe respuesta*/
         //debugger;
         if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-          this.resultadoFinalAgregado = [];
-          debugger;
           if(respuestaService.itemsWC){
             respuestaService.itemsWC.forEach(t => {
               t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
@@ -298,65 +293,6 @@ export class BusquedaDemandaComponent implements OnInit {
           }
           console.log(`coincidencia ${JSON.stringify(this.resultadoFinal)}`)
           
-          let proveedorCoinciden: any = []
-          this.resultadoFinal.forEach(t => {
-            proveedorCoinciden.push(t.SPROVEEDOR)
-          });
-          this.prove.forEach(p => {
-            if (proveedorCoinciden.includes(p)) {
-              debugger;
-              for (let i = 0; i < this.resultadoFinal.length; i++) {
-                let t = this.resultadoFinal[i];
-                if (p == t.SPROVEEDOR) {
-                  console.log(`coincidencia en alguna lista : ... ${p}... ${t.SPROVEEDOR}`)
-                  for (let i = 0; i < this.listas.length; i++) {
-                    let list = this.listas[i];
-                    if (t.SLISTA == list) {
-                      console.log(`listas con coincidencia ${list}`)
-                      let datatrue = {
-                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
-                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
-                        "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
-                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
-                        "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
-                        "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
-                        "STIPO_PERSONA": t.STIPO_PERSONA,
-                        "SCARGO": t.SCARGO,
-                        "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
-                        "SLISTA": t.SLISTA,
-                        "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
-                        "SPROVEEDOR": t.SPROVEEDOR,
-                        "BUSQUEDA": t.BUSQUEDA
-                      }
-                      this.resultadoFinalAgregado.push(datatrue);
-                    }
-                    else if (t.SLISTAS != list) {
-                      console.log(`listas sin coincidencia ${list}`)
-                      let datatrue = {
-                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
-                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
-                        "SNOMBRE_COMPLETO": "-",
-                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
-                        "STIPO_DOCUMENTO": "",
-                        "SNUM_DOCUMENTO": "-",
-                        "STIPO_PERSONA": "-",
-                        "SCARGO": "-",
-                        "SPORCEN_COINCIDENCIA": "-",
-                        "SLISTA": list,
-                        "STIPOCOINCIDENCIA": "-",
-                        "SPROVEEDOR": t.SPROVEEDOR,
-                        "BUSQUEDA": "Sin coincidencia"
-                      }
-                      this.resultadoFinalAgregado.push(datatrue);
-                    }
-                  }
-                }
-              }
-            }
-          });
-          
-          console.log(`Resultado Final : ${JSON.stringify(this.resultadoFinalAgregado)}`)
-          
         }
         /*si no existe respuesta o retorna codigo 1*/
         else if(Object.entries(respuestaService).length !== 0 && respuestaService.code != 0){
@@ -376,7 +312,7 @@ export class BusquedaDemandaComponent implements OnInit {
                           },
           })
         }
-        if (this.resultadoFinalAgregado.length != 0) {
+        if (this.resultadoFinal.length != 0) {
           this.encontroRespuesta = false;
           this.noEncontroRespuesta = true;
         }else{

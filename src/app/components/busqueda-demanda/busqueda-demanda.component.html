@@ -184,7 +184,7 @@
                                         </tr>
                                     </thead>
                                     <tbody [hidden]="false">
-                                        <tr class="animated fadeIn" *ngFor="let item of resultadoFinalAgregado; let i = index;">
+                                        <tr class="animated fadeIn" *ngFor="let item of resultadoFinal; let i = index;">
                                             <td >{{item.DFECHA_BUSQUEDA}}</td>
                                             <td >{{item.SUSUARIO_BUSQUEDA != '' ? item.SUSUARIO_BUSQUEDA : '-'}} </td>
                                             <td >{{item.SLISTA}}</td>
