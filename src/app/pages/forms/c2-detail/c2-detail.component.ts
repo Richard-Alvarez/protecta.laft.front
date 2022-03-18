@@ -1889,7 +1889,7 @@ export class C2DetailComponent implements OnInit, OnDestroy {
     getOcultarDiferentesClientes(){
         let idgrupo = localStorage.getItem("NIDGRUPOSENAL")
        
-        if (idgrupo == '1'){
+        if (idgrupo == '1' || idgrupo == '2'){
             return true
         }else{
             return false;
