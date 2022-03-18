@@ -25,7 +25,7 @@ export class BusquedaDemandaComponent implements OnInit {
   hideIndividual: boolean = false;
 
   encontroRespuesta: boolean = true;
-  noEncontroRespuesta: boolean = true;
+  noEncontroRespuesta: boolean = false;
 
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
