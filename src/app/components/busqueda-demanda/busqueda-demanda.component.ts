@@ -256,106 +256,101 @@ export class BusquedaDemandaComponent implements OnInit {
         /*inicio*/
         this.core.loader.show()
         let respuestaService: any = await this.getBusquedaADemanda(data);
-        //console.log("respuesta", respuestaService);
-          //console.log(`${Object.keys(respuestaService).length}`);/*obtiene las llaves "keys", se puede usar para aplicar .length y no obtener undefined*/
-          //console.log(`${JSON.stringify(respuestaService).length} ${respuestaService.code}`);/*combierte el objeto en cadena, se puede usar para aplicar .length a un objeto*/
-          //console.log(`${Object.entries(respuestaService).length}`);/*obtiene las llaves y sus valores "keys/values", se puede usar para aplicar . lenght y no obtener undefined*/
-        /*si existe respuesta*/
-        //debugger;
         if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-          this.resultadoFinalAgregado = [];
           debugger;
-          if(respuestaService.itemsWC){
-            respuestaService.itemsWC.forEach(t => {
-              t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
-              t.SPROVEEDOR = "WC",
-              t.STIPOCOINCIDENCIA = "NOMBRE",
-              t.BUSQUEDA = "Con coincidencia"
-            });
-          }
-          if (respuestaService.itemsIDE) {
-            respuestaService.itemsIDE.forEach(t => {
-              //t.SPROVEEDOR = "IDECON"
-              t.BUSQUEDA = "Con coincidencia"
-              //t.STIPOCOINCIDENCIA = "NOMBRE"
-            });
-          }
-          if (respuestaService.itemsIDEDOC) {//hasOwnProperty verifica que contenga
-            respuestaService.itemsIDEDOC.forEach(t => {
-              //t.SPROVEEDOR = "IDECON"
-              t.BUSQUEDA = "Con coincidencia"
-              //t.STIPOCOINCIDENCIA = "DOCUMENTO"
-            });
-          }
-          if (respuestaService.itemsWC && respuestaService.itemsIDE && respuestaService.itemsIDEDOC) {
-            this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC).concat(respuestaService.itemsIDEDOC);
-          }
-          else if (respuestaService.itemsWC && respuestaService.itemsIDE) {
-            this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC);
-          }
-          else {
-            this.resultadoFinal = respuestaService.itemsIDEDOC;
-          }
-          console.log(`coincidencia ${JSON.stringify(this.resultadoFinal)}`)
+          this.resultadoFinalAgregado = respuestaService.items;
+
+          // if(respuestaService.itemsWC){
+          //   respuestaService.itemsWC.forEach(t => {
+          //     t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
+          //     t.SPROVEEDOR = "WC",
+          //     t.STIPOCOINCIDENCIA = "NOMBRE",
+          //     t.BUSQUEDA = "Con coincidencia"
+          //   });
+          // }
+          // if (respuestaService.itemsIDE) {
+          //   respuestaService.itemsIDE.forEach(t => {
+          //     //t.SPROVEEDOR = "IDECON"
+          //     t.BUSQUEDA = "Con coincidencia"
+          //     //t.STIPOCOINCIDENCIA = "NOMBRE"
+          //   });
+          // }
+          // if (respuestaService.itemsIDEDOC) {//hasOwnProperty verifica que contenga
+          //   respuestaService.itemsIDEDOC.forEach(t => {
+          //     //t.SPROVEEDOR = "IDECON"
+          //     t.BUSQUEDA = "Con coincidencia"
+          //     //t.STIPOCOINCIDENCIA = "DOCUMENTO"
+          //   });
+          // }
+          // if (respuestaService.itemsWC && respuestaService.itemsIDE && respuestaService.itemsIDEDOC) {
+          //   this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC).concat(respuestaService.itemsIDEDOC);
+          // }
+          // else if (respuestaService.itemsWC && respuestaService.itemsIDE) {
+          //   this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC);
+          // }
+          // else {
+          //   this.resultadoFinal = respuestaService.itemsIDEDOC;
+          // }
+          // console.log(`coincidencia ${JSON.stringify(this.resultadoFinal)}`)
           
-          let proveedorCoinciden: any = []
-          this.resultadoFinal.forEach(t => {
-            proveedorCoinciden.push(t.SPROVEEDOR)
-          });
-          this.prove.forEach(p => {
-            if (proveedorCoinciden.includes(p)) {
-              debugger;
-              for (let i = 0; i < this.resultadoFinal.length; i++) {
-                let t = this.resultadoFinal[i];
-                if (p == t.SPROVEEDOR) {
-                  console.log(`coincidencia en alguna lista : ... ${p}... ${t.SPROVEEDOR}`)
-                  for (let i = 0; i < this.listas.length; i++) {
-                    let list = this.listas[i];
-                    if (t.SLISTA == list) {
-                      console.log(`listas con coincidencia ${list}`)
-                      let datatrue = {
-                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
-                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
-                        "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
-                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
-                        "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
-                        "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
-                        "STIPO_PERSONA": t.STIPO_PERSONA,
-                        "SCARGO": t.SCARGO,
-                        "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
-                        "SLISTA": t.SLISTA,
-                        "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
-                        "SPROVEEDOR": t.SPROVEEDOR,
-                        "BUSQUEDA": t.BUSQUEDA
-                      }
-                      this.resultadoFinalAgregado.push(datatrue);
-                    }
-                    else if (t.SLISTAS != list) {
-                      console.log(`listas sin coincidencia ${list}`)
-                      let datatrue = {
-                        "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
-                        "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
-                        "SNOMBRE_COMPLETO": "-",
-                        "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
-                        "STIPO_DOCUMENTO": "",
-                        "SNUM_DOCUMENTO": "-",
-                        "STIPO_PERSONA": "-",
-                        "SCARGO": "-",
-                        "SPORCEN_COINCIDENCIA": "-",
-                        "SLISTA": list,
-                        "STIPOCOINCIDENCIA": "-",
-                        "SPROVEEDOR": t.SPROVEEDOR,
-                        "BUSQUEDA": "Sin coincidencia"
-                      }
-                      this.resultadoFinalAgregado.push(datatrue);
-                    }
-                  }
-                }
-              }
-            }
-          });
+          // let proveedorCoinciden: any = []
+          // this.resultadoFinal.forEach(t => {
+          //   proveedorCoinciden.push(t.SPROVEEDOR)
+          // });
+          // this.prove.forEach(p => {
+          //   if (proveedorCoinciden.includes(p)) {
+          //     debugger;
+          //     for (let i = 0; i < this.resultadoFinal.length; i++) {
+          //       let t = this.resultadoFinal[i];
+          //       if (p == t.SPROVEEDOR) {
+          //         console.log(`coincidencia en alguna lista : ... ${p}... ${t.SPROVEEDOR}`)
+          //         for (let i = 0; i < this.listas.length; i++) {
+          //           let list = this.listas[i];
+          //           if (t.SLISTA == list) {
+          //             console.log(`listas con coincidencia ${list}`)
+          //             let datatrue = {
+          //               "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+          //               "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+          //               "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
+          //               "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+          //               "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
+          //               "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+          //               "STIPO_PERSONA": t.STIPO_PERSONA,
+          //               "SCARGO": t.SCARGO,
+          //               "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
+          //               "SLISTA": t.SLISTA,
+          //               "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
+          //               "SPROVEEDOR": t.SPROVEEDOR,
+          //               "BUSQUEDA": t.BUSQUEDA
+          //             }
+          //             this.resultadoFinalAgregado.push(datatrue);
+          //           }
+          //           else if (t.SLISTAS != list) {
+          //             console.log(`listas sin coincidencia ${list}`)
+          //             let datatrue = {
+          //               "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+          //               "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+          //               "SNOMBRE_COMPLETO": "-",
+          //               "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+          //               "STIPO_DOCUMENTO": "",
+          //               "SNUM_DOCUMENTO": "-",
+          //               "STIPO_PERSONA": "-",
+          //               "SCARGO": "-",
+          //               "SPORCEN_COINCIDENCIA": "-",
+          //               "SLISTA": list,
+          //               "STIPOCOINCIDENCIA": "-",
+          //               "SPROVEEDOR": t.SPROVEEDOR,
+          //               "BUSQUEDA": "Sin coincidencia"
+          //             }
+          //             this.resultadoFinalAgregado.push(datatrue);
+          //           }
+          //         }
+          //       }
+          //     }
+          //   }
+          // });
           
-          console.log(`Resultado Final : ${JSON.stringify(this.resultadoFinalAgregado)}`)
+          // console.log(`Resultado Final : ${JSON.stringify(this.resultadoFinalAgregado)}`)
           
         }
         /*si no existe respuesta o retorna codigo 1*/
@@ -592,11 +587,6 @@ export class BusquedaDemandaComponent implements OnInit {
     if (this.NBUSCAR_POR == this.POR_INDIVIDUAL) {
       this.hideMasiva = true;
       this.hideIndividual = false;
-
-      //this.paramCliente.SPRIMER_NOMBRE = ''
-      //this.paramCliente.SSEGUNDO_NOMBRE = ''
-      //this.paramCliente.SAPELLIDO_PATERNO = ''
-      //this.paramCliente.SAPELLIDO_MATERNO = ''
     }
     else {
       this.hideMasiva = false;
@@ -781,14 +771,12 @@ export class BusquedaDemandaComponent implements OnInit {
   let listFileNameCortoInform = []
   let statusFormatFile = false
   for (let item of listFileNameInform) {
-    //let item = listFileNameInform[0]
     let nameFile = item.split(".")
     if (nameFile.length > 2 || nameFile.length < 2) {
       statusFormatFile = true
       return
     }
     let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
-    //listFileNameCortoInform.push(fileItem)
     listFileNameCortoInform.push(fileItem)
   }
   if (statusFormatFile) {
@@ -823,8 +811,6 @@ export class BusquedaDemandaComponent implements OnInit {
   }
   
   return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
- // return { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
- //console.log("this archivo", this.ArchivoAdjunto);
 }
 
 handleFile(blob: any): Promise<any> {
@@ -924,10 +910,7 @@ convertirPdf(item){
 
   });
 
-  //doc.autoTable(col, rows);
   autoTable(doc, {
-    // styles: { fillColor: [255, 0, 0] },
-    // columnStyles: { 0: { halign: 'center', fillColor: [0, 255, 0] } },
     headStyles: {fontSize: 9},
     bodyStyles: {fontSize: 8},
     columnStyles: { 5: { halign: 'center'} },
