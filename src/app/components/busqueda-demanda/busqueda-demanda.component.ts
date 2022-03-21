@@ -535,7 +535,7 @@ export class BusquedaDemandaComponent implements OnInit {
         obj["COINCIDENCIA ENCONTRADA4"] = t.snombrE_COMPLETO
         obj["COINCIDENCIA ENCONTRADA5"] = t.sporceN_COINCIDENCIA
         obj["COINCIDENCIA ENCONTRADA6"] = t.stipocoincidencia
-        obj["COINCIDENCIA ENCONTRADA7"] = t.cargo
+        obj["COINCIDENCIA ENCONTRADA7"] = t.scargo
         data.push(obj);
       });
       this.excelService.exportAsExcelDemandaFile(data, "Resultados Búsqueda a Demanda");
