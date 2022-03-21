@@ -135,14 +135,23 @@ export class BusquedaDemandaComponent implements OnInit {
         swal.fire({
           title: 'Búsqueda a Demanda',
           icon: 'info',
-          text: 'Ingrese Nombre completo con el formato solicitado',
-          showCancelButton: false,
+          text: 'Para un busqueda mas exacta ingrese tres datos del nombre completo',
+          showCancelButton: true,
+          cancelButtonText: 'Modificar',
+          cancelButtonColor: '#2b245b',
           confirmButtonColor: '#FA7000',
-          confirmButtonText: 'Aceptar',
+          confirmButtonText: 'Continuar',
           showCloseButton: true,
           customClass: {
             closeButton: 'OcultarBorde'
           },
+        }).then(async(result) => {
+          if (result.isConfirmed) {
+            await this.BusquedaADemandaMixta();
+          }
+          else if (result.dismiss === swal.DismissReason.cancel) {
+            return;
+          }
         })
       }
     }
@@ -181,10 +190,13 @@ export class BusquedaDemandaComponent implements OnInit {
 
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
     if ((this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
-      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
+      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)) {
+    else if (this.NBUSCAR_POR == 2) {
+      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+    }
+    else if (!(this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
@@ -207,7 +219,7 @@ export class BusquedaDemandaComponent implements OnInit {
           let respuestaService: any = await this.getBusquedaADemanda(data);
           if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
             debugger;
-            //this.resultadoFinalAgregado = respuestaService.items;
+            this.resultadoFinal = respuestaService.items;
           }
           /*si no existe respuesta o retorna codigo 1*/
           else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
@@ -253,7 +265,6 @@ export class BusquedaDemandaComponent implements OnInit {
   }
   /*valida segun el tipo de documento, cuantos digitos puede ingresar*/
   validationCantidadCaracteres() {
-    debugger
     if (this.NOMBRE_RAZON == 1) {
       return '11'
     } else if (this.NOMBRE_RAZON == 2) {
@@ -280,22 +291,7 @@ export class BusquedaDemandaComponent implements OnInit {
     debugger
     var numdoc = document.getElementById('doc')
     var maxlen = numdoc.getAttribute('maxlength')
-    /*valida que si esta en el tipo de doc "seleccione", seleccione un tipo de doc*/
-    //if (this.ShowSelected() == 'Seleccione' /* && (this.nombreCompleto == null || this.nombreCompleto == "") */) {
-    //swal.fire({
-    //  title: 'Búsqueda a Demanda',
-    //  text: `Seleccione Tipo doc para búsqueda`,
-    //  icon: 'info',
-    //  confirmButtonColor: '#FA7000',
-    //  confirmButtonText: 'Aceptar',
-    //  showCloseButton: true,
-    //  customClass: { 
-    //    closeButton : 'OcultarBorde'
-    //  },
-    //})
-    //return false;
-    //}
-    //else {
+    
     /*valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento*/
     if (this.ShowSelected() != 'Seleccione') {
       if (this.numeroDoc.length == Number(maxlen)) {
