@@ -20,7 +20,7 @@ const PDF_EXTENSION = ".pdf";
 export class BusquedaDemandaComponent implements OnInit {
   fileToUpload: File = null;
   timestamp = Date();
-    
+
   hideMasiva: boolean = true;
   hideIndividual: boolean = false;
 
@@ -29,20 +29,20 @@ export class BusquedaDemandaComponent implements OnInit {
 
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
-  resultadoFinalAgregado : any = []
+  resultadoFinalAgregado: any = []
   POR_INDIVIDUAL: number = 1;
   POR_MASIVA: number = 2;
 
   NPERIODO_PROCESO: number;
-  nombreCompleto : string = null;
-  numeroDoc : string = null;
-  idUsuario : number;
+  nombreCompleto: string = null;
+  numeroDoc: string = null;
+  idUsuario: number;
   nombreUsuario: string;
 
   resulBusqueda: any = [];
   resultadoFinal: any[];
   resultadoFinal2: any[];
-  
+
   ArchivoAdjunto: any;
   ResultadoExcel: any;
   NombreArchivo: string = '';
@@ -53,40 +53,40 @@ export class BusquedaDemandaComponent implements OnInit {
 
   whoSearch: string;
 
-  @ViewChild('myInput',{static: false}) myInputVariable: ElementRef;
+  @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
 
   constructor(
     public datepipe: DatePipe,
     private core: CoreService,
     private userConfigService: UserconfigService,
     private excelService: ExcelService,
-    ) { } 
+  ) { }
 
   ngOnInit() {
     this.resultadoFinal = []
-   this.resultadoFinal2 =
-  [{DFECHA_BUSQUEDA: '04/01/2022 11:48:36 a.m.',SCARGO: "-",SLISTA: "LISTAS INTERNACIONALES",SNOMBRE_BUSQUEDA: "CHAVEZ CONDORI CESAR AUGUSTO",SNOMBRE_COMPLETO: "Cesar Augusto CONDORI TORRES",SNOMBRE_TERMINO: "CONDORI,César Augusto",SNUM_DOCUMENTO: "01319667",SPORCEN_COINCIDENCIA: 75,STIPO_DOCUMENTO: "DNI",STIPO_PERSONA: "PERSONA NATURAL"},
-  
-]
+    this.resultadoFinal2 =
+      [{ DFECHA_BUSQUEDA: '04/01/2022 11:48:36 a.m.', SCARGO: "-", SLISTA: "LISTAS INTERNACIONALES", SNOMBRE_BUSQUEDA: "CHAVEZ CONDORI CESAR AUGUSTO", SNOMBRE_COMPLETO: "Cesar Augusto CONDORI TORRES", SNOMBRE_TERMINO: "CONDORI,César Augusto", SNUM_DOCUMENTO: "01319667", SPORCEN_COINCIDENCIA: 75, STIPO_DOCUMENTO: "DNI", STIPO_PERSONA: "PERSONA NATURAL" },
+
+      ]
     /*obtener usuario que logeado*/
     let dataUser = localStorage.getItem("resUser")
     this.DataUserLogin = JSON.parse(dataUser)
-                //console.log(this.DataUserLogin)
+    //console.log(this.DataUserLogin)
     /*obtener el periodo actual*/
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
-                //this.nombreCompleto = null;
-                //this.numeroDoc = null;
+    //this.nombreCompleto = null;
+    //this.numeroDoc = null;
     /*obtiene el id usuario del historial*/
     this.variableGlobalUser = this.core.storage.get('usuario');//
     this.idUsuario = this.variableGlobalUser["idUsuario"] //sessionStorage.usuario["fullName"]
     /*obtiene el nombre de usuario del historial de sesion*/
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
-                //console.log("nombre usuario",this.nombreUsuario); //nombreusuario
-                //console.log("codigo busqueda",(this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss')))
+    //console.log("nombre usuario",this.nombreUsuario); //nombreusuario
+    //console.log("codigo busqueda",(this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss')))
   }
-  
-  archivoExcel:File;
-  clearInsert(){this.archivoExcel = null;}
+
+  archivoExcel: File;
+  clearInsert() { this.archivoExcel = null; }
   lastFileAt: Date;
   getDate() {
     return new Date();
@@ -95,7 +95,7 @@ export class BusquedaDemandaComponent implements OnInit {
   async validarNulos() {
     /*validar si es busqueda individual el nombre o numero de documento sea nulo o vacio*/
     // if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "" )|| (this.numeroDoc == null || this.numeroDoc == ""))) {
-          /*si no ingresa ningun dato en nombre ni documento*/
+    /*si no ingresa ningun dato en nombre ni documento*/
     //   if ((this.nombreCompleto == null || this.nombreCompleto == "") && (this.numeroDoc == null || this.numeroDoc == "")) {
     //     swal.fire({
     //       title: 'Búsqueda a Demanda',
@@ -110,7 +110,7 @@ export class BusquedaDemandaComponent implements OnInit {
     //       },
     //     })
     //   }
-          /*si no ingresa nombre pero si documento*/
+    /*si no ingresa nombre pero si documento*/
     //   else if (this.nombreCompleto == null || this.nombreCompleto == "") {
     //     swal.fire({
     //       title: 'Búsqueda a Demanda',
@@ -125,7 +125,7 @@ export class BusquedaDemandaComponent implements OnInit {
     //       },
     //     })
     //   }
-          /*si no ingresa documento pero si nombre*/
+    /*si no ingresa documento pero si nombre*/
     //   else if (this.numeroDoc == null || this.numeroDoc == "") {
     //     swal.fire({
     //       title: 'Búsqueda a Demanda',
@@ -141,9 +141,9 @@ export class BusquedaDemandaComponent implements OnInit {
     //     })
     //   }
     // }
-    
+
     /*si no ingresa almenos un campo muestra mensaje*/
-    if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "" ) && (this.numeroDoc == null || this.numeroDoc == ""))) {
+    if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "") && (this.numeroDoc == null || this.numeroDoc == ""))) {
       swal.fire({
         title: 'Búsqueda a Demanda',
         icon: 'warning',
@@ -152,8 +152,8 @@ export class BusquedaDemandaComponent implements OnInit {
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Aceptar',
         showCloseButton: true,
-        customClass: { 
-          closeButton : 'OcultarBorde'
+        customClass: {
+          closeButton: 'OcultarBorde'
         },
       })
     }
@@ -161,7 +161,7 @@ export class BusquedaDemandaComponent implements OnInit {
       await this.BusquedaADemandaMixta();
     }
     /*si ingresa solo nombre o nombre y documento valida que almenos el nombre contenga 3 datos y llama al servicio de busqueda*/
-    else if (this.NBUSCAR_POR == 1 && !(this.nombreCompleto == null || this.nombreCompleto == "" )) {
+    else if (this.NBUSCAR_POR == 1 && !(this.nombreCompleto == null || this.nombreCompleto == "")) {
       /*expresion regular que asegura ingreso 3 nombres*/
       const reg = /[a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+/;
       let pr = reg.test(this.nombreCompleto);
@@ -189,8 +189,8 @@ export class BusquedaDemandaComponent implements OnInit {
           confirmButtonColor: '#FA7000',
           confirmButtonText: 'Aceptar',
           showCloseButton: true,
-          customClass: { 
-            closeButton : 'OcultarBorde'
+          customClass: {
+            closeButton: 'OcultarBorde'
           },
         })
       }
@@ -203,7 +203,7 @@ export class BusquedaDemandaComponent implements OnInit {
       }
     }
   }
-  
+
   /*servicio de busqueda*/
   async BusquedaADemandaMixta() {
     debugger;
@@ -211,29 +211,29 @@ export class BusquedaDemandaComponent implements OnInit {
     let cod = this.GenerarCodigo();
     let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
     //console.log(`codigo de busqueda ${id} ${cod} ${fecha}`)
-    let data : DataBusqueda = {};
-    data.P_SCODBUSQUEDA = id.concat(cod,fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
+    let data: DataBusqueda = {};
+    data.P_SCODBUSQUEDA = id.concat(cod, fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
     data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
     data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
     data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
     //console.log(`data ${JSON.stringify(data)}`)
     data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
-    if(this.NBUSCAR_POR == 1){
+    if (this.NBUSCAR_POR == 1) {
       data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
       data.P_SNUM_DOCUMENTO = this.numeroDoc;
     }
     else {
       data.P_SNOMCOMPLETO = null;
       data.P_SNUM_DOCUMENTO = null;
-      await this.SubirExcel(data) 
+      await this.SubirExcel(data)
     }
-    
+
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-    if ((this.numeroDoc == null || this .numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
+    if ((this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
       this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this .numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)){
+    else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)) {
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
@@ -243,143 +243,143 @@ export class BusquedaDemandaComponent implements OnInit {
       showCancelButton: false,
       showConfirmButton: false,
       showCloseButton: false,
-      timer:5000,
-      customClass: { 
-        closeButton : 'OcultarBorde'
+      timer: 5000,
+      customClass: {
+        closeButton: 'OcultarBorde'
       },
     })
-    .then(async (result) => {
-      if (result) {
-        /*inicio*/
-        this.core.loader.show()
-        let respuestaService: any = await this.getBusquedaADemanda(data);
-        if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-          debugger;
-          this.resultadoFinalAgregado = respuestaService.items;
+      .then(async (result) => {
+        if (result) {
+          /*inicio*/
+          this.core.loader.show()
+          let respuestaService: any = await this.getBusquedaADemanda(data);
+          if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
+            debugger;
+            this.resultadoFinalAgregado = respuestaService.items;
 
-          // if(respuestaService.itemsWC){
-          //   respuestaService.itemsWC.forEach(t => {
-          //     t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
-          //     t.SPROVEEDOR = "WC",
-          //     t.STIPOCOINCIDENCIA = "NOMBRE",
-          //     t.BUSQUEDA = "Con coincidencia"
-          //   });
-          // }
-          // if (respuestaService.itemsIDE) {
-          //   respuestaService.itemsIDE.forEach(t => {
-          //     //t.SPROVEEDOR = "IDECON"
-          //     t.BUSQUEDA = "Con coincidencia"
-          //     //t.STIPOCOINCIDENCIA = "NOMBRE"
-          //   });
-          // }
-          // if (respuestaService.itemsIDEDOC) {//hasOwnProperty verifica que contenga
-          //   respuestaService.itemsIDEDOC.forEach(t => {
-          //     //t.SPROVEEDOR = "IDECON"
-          //     t.BUSQUEDA = "Con coincidencia"
-          //     //t.STIPOCOINCIDENCIA = "DOCUMENTO"
-          //   });
-          // }
-          // if (respuestaService.itemsWC && respuestaService.itemsIDE && respuestaService.itemsIDEDOC) {
-          //   this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC).concat(respuestaService.itemsIDEDOC);
-          // }
-          // else if (respuestaService.itemsWC && respuestaService.itemsIDE) {
-          //   this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC);
-          // }
-          // else {
-          //   this.resultadoFinal = respuestaService.itemsIDEDOC;
-          // }
-          // console.log(`coincidencia ${JSON.stringify(this.resultadoFinal)}`)
-          
-          // let proveedorCoinciden: any = []
-          // this.resultadoFinal.forEach(t => {
-          //   proveedorCoinciden.push(t.SPROVEEDOR)
-          // });
-          // this.prove.forEach(p => {
-          //   if (proveedorCoinciden.includes(p)) {
-          //     debugger;
-          //     for (let i = 0; i < this.resultadoFinal.length; i++) {
-          //       let t = this.resultadoFinal[i];
-          //       if (p == t.SPROVEEDOR) {
-          //         console.log(`coincidencia en alguna lista : ... ${p}... ${t.SPROVEEDOR}`)
-          //         for (let i = 0; i < this.listas.length; i++) {
-          //           let list = this.listas[i];
-          //           if (t.SLISTA == list) {
-          //             console.log(`listas con coincidencia ${list}`)
-          //             let datatrue = {
-          //               "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
-          //               "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
-          //               "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
-          //               "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
-          //               "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
-          //               "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
-          //               "STIPO_PERSONA": t.STIPO_PERSONA,
-          //               "SCARGO": t.SCARGO,
-          //               "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
-          //               "SLISTA": t.SLISTA,
-          //               "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
-          //               "SPROVEEDOR": t.SPROVEEDOR,
-          //               "BUSQUEDA": t.BUSQUEDA
-          //             }
-          //             this.resultadoFinalAgregado.push(datatrue);
-          //           }
-          //           else if (t.SLISTAS != list) {
-          //             console.log(`listas sin coincidencia ${list}`)
-          //             let datatrue = {
-          //               "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
-          //               "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
-          //               "SNOMBRE_COMPLETO": "-",
-          //               "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
-          //               "STIPO_DOCUMENTO": "",
-          //               "SNUM_DOCUMENTO": "-",
-          //               "STIPO_PERSONA": "-",
-          //               "SCARGO": "-",
-          //               "SPORCEN_COINCIDENCIA": "-",
-          //               "SLISTA": list,
-          //               "STIPOCOINCIDENCIA": "-",
-          //               "SPROVEEDOR": t.SPROVEEDOR,
-          //               "BUSQUEDA": "Sin coincidencia"
-          //             }
-          //             this.resultadoFinalAgregado.push(datatrue);
-          //           }
-          //         }
-          //       }
-          //     }
-          //   }
-          // });
-          
-          // console.log(`Resultado Final : ${JSON.stringify(this.resultadoFinalAgregado)}`)
-          
-        }
-        /*si no existe respuesta o retorna codigo 1*/
-        else if(Object.entries(respuestaService).length !== 0 && respuestaService.code != 0){
+            // if(respuestaService.itemsWC){
+            //   respuestaService.itemsWC.forEach(t => {
+            //     t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
+            //     t.SPROVEEDOR = "WC",
+            //     t.STIPOCOINCIDENCIA = "NOMBRE",
+            //     t.BUSQUEDA = "Con coincidencia"
+            //   });
+            // }
+            // if (respuestaService.itemsIDE) {
+            //   respuestaService.itemsIDE.forEach(t => {
+            //     //t.SPROVEEDOR = "IDECON"
+            //     t.BUSQUEDA = "Con coincidencia"
+            //     //t.STIPOCOINCIDENCIA = "NOMBRE"
+            //   });
+            // }
+            // if (respuestaService.itemsIDEDOC) {//hasOwnProperty verifica que contenga
+            //   respuestaService.itemsIDEDOC.forEach(t => {
+            //     //t.SPROVEEDOR = "IDECON"
+            //     t.BUSQUEDA = "Con coincidencia"
+            //     //t.STIPOCOINCIDENCIA = "DOCUMENTO"
+            //   });
+            // }
+            // if (respuestaService.itemsWC && respuestaService.itemsIDE && respuestaService.itemsIDEDOC) {
+            //   this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC).concat(respuestaService.itemsIDEDOC);
+            // }
+            // else if (respuestaService.itemsWC && respuestaService.itemsIDE) {
+            //   this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC);
+            // }
+            // else {
+            //   this.resultadoFinal = respuestaService.itemsIDEDOC;
+            // }
+            // console.log(`coincidencia ${JSON.stringify(this.resultadoFinal)}`)
+
+            // let proveedorCoinciden: any = []
+            // this.resultadoFinal.forEach(t => {
+            //   proveedorCoinciden.push(t.SPROVEEDOR)
+            // });
+            // this.prove.forEach(p => {
+            //   if (proveedorCoinciden.includes(p)) {
+            //     debugger;
+            //     for (let i = 0; i < this.resultadoFinal.length; i++) {
+            //       let t = this.resultadoFinal[i];
+            //       if (p == t.SPROVEEDOR) {
+            //         console.log(`coincidencia en alguna lista : ... ${p}... ${t.SPROVEEDOR}`)
+            //         for (let i = 0; i < this.listas.length; i++) {
+            //           let list = this.listas[i];
+            //           if (t.SLISTA == list) {
+            //             console.log(`listas con coincidencia ${list}`)
+            //             let datatrue = {
+            //               "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+            //               "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+            //               "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
+            //               "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+            //               "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
+            //               "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
+            //               "STIPO_PERSONA": t.STIPO_PERSONA,
+            //               "SCARGO": t.SCARGO,
+            //               "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
+            //               "SLISTA": t.SLISTA,
+            //               "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
+            //               "SPROVEEDOR": t.SPROVEEDOR,
+            //               "BUSQUEDA": t.BUSQUEDA
+            //             }
+            //             this.resultadoFinalAgregado.push(datatrue);
+            //           }
+            //           else if (t.SLISTAS != list) {
+            //             console.log(`listas sin coincidencia ${list}`)
+            //             let datatrue = {
+            //               "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
+            //               "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
+            //               "SNOMBRE_COMPLETO": "-",
+            //               "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
+            //               "STIPO_DOCUMENTO": "",
+            //               "SNUM_DOCUMENTO": "-",
+            //               "STIPO_PERSONA": "-",
+            //               "SCARGO": "-",
+            //               "SPORCEN_COINCIDENCIA": "-",
+            //               "SLISTA": list,
+            //               "STIPOCOINCIDENCIA": "-",
+            //               "SPROVEEDOR": t.SPROVEEDOR,
+            //               "BUSQUEDA": "Sin coincidencia"
+            //             }
+            //             this.resultadoFinalAgregado.push(datatrue);
+            //           }
+            //         }
+            //       }
+            //     }
+            //   }
+            // });
+
+            // console.log(`Resultado Final : ${JSON.stringify(this.resultadoFinalAgregado)}`)
+
+          }
+          /*si no existe respuesta o retorna codigo 1*/
+          else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
+            this.core.loader.hide()
+            swal.fire({
+              title: 'Comuníquese con soporte',
+              icon: 'warning',
+              text: 'ERROR: ' + respuestaService.mensaje,
+              //titleText: 'comuniuquese con soporte',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#FA7000',
+              confirmButtonText: 'Continuar',
+              showCloseButton: true,
+              customClass: {
+                closeButton: 'OcultarBorde'
+              },
+            })
+          }
+          if (this.resultadoFinal.length != 0) {
+            this.encontroRespuesta = false;
+            this.noEncontroRespuesta = true;
+          } else {
+            this.encontroRespuesta = true;
+            this.noEncontroRespuesta = false
+          }
+          this.GuardarData()
           this.core.loader.hide()
-          swal.fire({
-            title: 'Comuníquese con soporte',
-            icon: 'warning',
-            text: 'ERROR: '+ respuestaService.mensaje,
-            //titleText: 'comuniuquese con soporte',
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmButtonColor: '#FA7000',
-            confirmButtonText: 'Continuar',
-            showCloseButton: true,
-            customClass: { 
-                          closeButton : 'OcultarBorde'
-                          },
-          })
+          /*fin*/
         }
-        if (this.resultadoFinal.length != 0) {
-          this.encontroRespuesta = false;
-          this.noEncontroRespuesta = true;
-        }else{
-          this.encontroRespuesta = true;
-          this.noEncontroRespuesta = false
-        }
-        this.GuardarData()
-        this.core.loader.hide()
-        /*fin*/
-      }
-    });
+      });
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
@@ -407,7 +407,7 @@ export class BusquedaDemandaComponent implements OnInit {
       return '12'
     }
   }
-  
+
   ShowSelected() {
     let select = (document.getElementById('tipoDoc')) as HTMLSelectElement;
     //var ind = select.value;
@@ -423,22 +423,22 @@ export class BusquedaDemandaComponent implements OnInit {
     var maxlen = numdoc.getAttribute('maxlength')
     /*valida que si esta en el tipo de doc "seleccione", seleccione un tipo de doc*/
     //if (this.ShowSelected() == 'Seleccione' /* && (this.nombreCompleto == null || this.nombreCompleto == "") */) {
-      //swal.fire({
-      //  title: 'Búsqueda a Demanda',
-      //  text: `Seleccione Tipo doc para búsqueda`,
-      //  icon: 'info',
-      //  confirmButtonColor: '#FA7000',
-      //  confirmButtonText: 'Aceptar',
-      //  showCloseButton: true,
-      //  customClass: { 
-      //    closeButton : 'OcultarBorde'
-      //  },
-      //})
-      //return false;
+    //swal.fire({
+    //  title: 'Búsqueda a Demanda',
+    //  text: `Seleccione Tipo doc para búsqueda`,
+    //  icon: 'info',
+    //  confirmButtonColor: '#FA7000',
+    //  confirmButtonText: 'Aceptar',
+    //  showCloseButton: true,
+    //  customClass: { 
+    //    closeButton : 'OcultarBorde'
+    //  },
+    //})
+    //return false;
     //}
     //else {
-      /*valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento*/
-    if (this.ShowSelected() != 'Seleccione') { 
+    /*valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento*/
+    if (this.ShowSelected() != 'Seleccione') {
       if (this.numeroDoc.length == Number(maxlen)) {
         //console.log(`${this.numeroDoc.length} es igual a ${Number(maxlen)}`)
         //await this.BusquedaADemandaMixta();
@@ -449,14 +449,14 @@ export class BusquedaDemandaComponent implements OnInit {
         swal.fire({
           title: 'Búsqueda a Demanda',
           text: `La cantidad de dígitos es incorrecto. ` +
-          `Ingresó ${this.numeroDoc.length} digito(s). ` +
-          `Debe ingresar ${ maxlen } dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
+            `Ingresó ${this.numeroDoc.length} digito(s). ` +
+            `Debe ingresar ${maxlen} dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
           icon: 'info',
           confirmButtonColor: '#FA7000',
           confirmButtonText: 'Aceptar',
           showCloseButton: true,
-          customClass: { 
-            closeButton : 'OcultarBorde'
+          customClass: {
+            closeButton: 'OcultarBorde'
           },
         })
         return false;
@@ -575,9 +575,8 @@ export class BusquedaDemandaComponent implements OnInit {
   } */
   /*findocumento*/
   /*genera codigo para la busqueda a demanda*/
-  GenerarCodigo()
-  {
-    var codigo = Math.floor(Math.random()*999999)
+  GenerarCodigo() {
+    var codigo = Math.floor(Math.random() * 999999)
     //console.log("codigo unico",codigo);
     return codigo.toString();
   }
@@ -592,142 +591,100 @@ export class BusquedaDemandaComponent implements OnInit {
       this.hideIndividual = true;
     }
   }
-/*llama a modificar ocultar controles*/
+  /*llama a modificar ocultar controles*/
   searchTypeChange(event: any) {
     this.hideControls();
   }
-/*en caso seleccione individual*/
-  mostrarBotonBuscarIndividual(){
-    if(this.NBUSCAR_POR==1){
+  /*en caso seleccione individual*/
+  mostrarBotonBuscarIndividual() {
+    if (this.NBUSCAR_POR == 1) {
       return true
     }
     return false
   }
   /*en caso sea masivo*/
-  mostrarBotonBuscarMasiva(){
-    if(this.NBUSCAR_POR==2){
+  mostrarBotonBuscarMasiva() {
+    if (this.NBUSCAR_POR == 2) {
       return true
     }
     return false
   }
-/*si el resultado de la busqueda es muy largo, corta a cantidad de caracteres especificado*/
-  cortarCararterNombre(text){        
-    if(text != null){
+  /*si el resultado de la busqueda es muy largo, corta a cantidad de caracteres especificado*/
+  cortarCararterNombre(text) {
+    if (text != null) {
       let newTexto = text.substring(0, 22)
-      if(text.length < 22 ){
+      if (text.length < 22) {
         return text
-      }else{
+      } else {
         return newTexto + '...'
       }
     }
     return ''
   }
   /*cortar carecteres al resultado cargo*/
-  cortarCararter(texto){        
-    if(texto != null){
+  cortarCararter(texto) {
+    if (texto != null) {
       let newTexto = texto.substring(0, 10)
-      if(texto.length < 15 ){
+      if (texto.length < 15) {
         return texto
-      }else{
+      } else {
         return newTexto + '...'
       }
     }
     return ''
   }
-  /*en desuso, descargaba la fila del resultado en formato excel*/
-  exportListToExcelIndividual(i){
-    let resultado:any = []
-    resultado = this.resultadoFinal[i]
-    
-    let Newresultado:any = []
-    let resulFinal:any = []
-    if (resultado!= null) {
-      Newresultado.push(resultado)
-      let data = []
-      Newresultado.forEach(t => {
-        let _data = {
-          "Fecha y Hora de Búsqueda" : t.DFECHA_BUSQUEDA,
-          "Usuario que Realizó la Búsqueda" : t.SUSUARIO_BUSQUEDA,
-          "Tipo de Documento" : t.STIPO_DOCUMENTO,
-          "Número de Documento" : t.SNUM_DOCUMENTO,
-          "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
-          "Porcentaje de coincidencia" : t.SPORCEN_COINCIDENCIA, 
-          "Tipo de Persona	" : t.STIPO_PERSONA,
-          "Cargo" : (t.SCARGO == null || t.SCARGO == "")? '-' : t.SCARGO,
-          "Lista" : t.SLISTA,
-          "Proveedor" : t.SPROVEEDOR,
-          "Coincidencia": t.STIPOCOINCIDENCIA
-        } 
-        data.push(_data);
-        });
-      this.excelService.exportAsExcelFile(data, "Resultados Búsqueda a Demanda");
-    }else {
-      swal.fire({
-        title: 'Búsqueda a Demanda',
-        icon: 'warning',
-        text: 'No hay resultados de búsqueda',
-        showCancelButton: false,
-        confirmButtonColor: '#FA7000',
-        confirmButtonText: 'Continuar',
-        showCloseButton: true,
-        customClass: { 
-          closeButton : 'OcultarBorde'
-                       },
-         
-      }).then((result) => {
-      })
-      return
-    }
-  }
-  /*en caso sea masiva, descargara una plantilla para guia de como se debe subir el archivo*/
-  DescargarPlantilla(){
-    let data = []
-    let dataExample: any =[
-      {"Nombre" : 'POZO GOMERO JOSE RENATO',
-      "Tipo_Documento" : 'DNI',
-      "Documento" : '46610806'},
-      {"Nombre" : 'MI FARMA S.A.C',
-      "Tipo_Documento" : 'RUC',
-      "Documento" : '1425785698'}
-    ]
-    dataExample.forEach(t => {
-        let _data = {
-          "Nombre" : t.Nombre,
-          "Tipo de Documento" : t.Tipo_Documento,
-          "Documento" : t.Documento
-        }
-        data.push(_data);
-    });
-    this.excelService.exportAsExcelFile(data, "Plantilla Búsqueda a Demanda");
-  }
   /*descarga todos los resultados de la busqueda a demanda en formato excel*/
-  exportListToExcel(){
-    let resultado:any = []
-    resultado = this.resultadoFinal
-    let Newresultado:any = []
-    if (resultado!= null && resultado.length > 0) {
-      for(let i =0; i< resultado.length;i++){
+  exportListToExcel() {
+    let resultado: any = []
+    resultado = this.resultadoFinalAgregado
+    debugger;
+    let Newresultado: any = []
+    if (resultado != null && resultado.length > 0) {
+      for (let i = 0; i < resultado.length; i++) {
         Newresultado.push(resultado[i])
-       }
+      }
       let data = []
-      Newresultado.forEach(t => {
-        let _data = {
-          "Fecha y Hora de Búsqueda" : t.DFECHA_BUSQUEDA,
-          "Usuario que Realizó la Búsqueda" : t.SUSUARIO_BUSQUEDA,
-          "Tipo de Documento" : t.STIPO_DOCUMENTO,
-          "Número de Documento" : t.SNUM_DOCUMENTO,
-          "Nombre/Razón Social" : t.SNOMBRE_COMPLETO,
-          "Porcentaje de coincidencia" : t.SPORCEN_COINCIDENCIA, 
-          "Tipo de Persona	" : t.STIPO_PERSONA,
-          "Cargo" : (t.SCARGO == null || t.SCARGO == "") ? '-' : t.SCARGO,
-          "Lista" : t.SLISTA,
-          "Proveedor" : t.SPROVEEDOR,
-          "Coincidencia": t.STIPOCOINCIDENCIA
+      Newresultado.forEach((t, index) => {
+        if (index == 0) {
+          //fill headers 
+          let obj: any = {}
+          obj["DATOS DE LA BUSQUEDA"] = "Fecha y Hora de Búsqueda"
+          obj["DATOS DE LA BUSQUEDA2"] = "Usuario que Realizó la Búsqueda"
+          obj["DATOS DE LA BUSQUEDA3"] = "Lista"
+          obj["DATOS DE LA BUSQUEDA4"] = "Fuente"
+          obj["DATOS DE LA BUSQUEDA5"] = "Búsqueda"
+          obj["PERSONA QUE SE BUSCA"] = "Tipo de Documento"
+          obj["PERSONA QUE SE BUSCA2"] = "Número de Documento"
+          obj["PERSONA QUE SE BUSCA3"] = "Nombre/Razón Social"
+          obj["COINCIDENCIA ENCONTRADA"] = "Tipo de Documento"
+          obj["COINCIDENCIA ENCONTRADA2"] = "Número de Documento"
+          obj["COINCIDENCIA ENCONTRADA3"] = "Término"
+          obj["COINCIDENCIA ENCONTRADA4"] = "Nombre/Razón Social"
+          obj["COINCIDENCIA ENCONTRADA5"] = "Porcentaje de coincidencia"
+          obj["COINCIDENCIA ENCONTRADA6"] = "Tipo de Coincidencia"
+          obj["COINCIDENCIA ENCONTRADA7"] = "Cargo"
+          data.push(obj);
         }
-        data.push(_data);
-        });
-        this.excelService.exportAsExcelFile(data, "Resultados Búsqueda a Demanda");
-    }else {
+        let obj: any = {}
+        obj["DATOS DE LA BUSQUEDA"] = t.dfechA_BUSQUEDA
+        obj["DATOS DE LA BUSQUEDA2"] = t.susuariO_BUSQUEDA
+        obj["DATOS DE LA BUSQUEDA3"] = t.sdestipolista
+        obj["DATOS DE LA BUSQUEDA4"] = t.sdesproveedor
+        obj["DATOS DE LA BUSQUEDA5"] = t.scoincidencia
+        obj["PERSONA QUE SE BUSCA"] = '-'
+        obj["PERSONA QUE SE BUSCA2"] = t.snumdoC_BUSQUEDA
+        obj["PERSONA QUE SE BUSCA3"] = t.snombrE_BUSQUEDA
+        obj["COINCIDENCIA ENCONTRADA"] = t.stipO_DOCUMENTO
+        obj["COINCIDENCIA ENCONTRADA2"] = t.snuM_DOCUMENTO
+        obj["COINCIDENCIA ENCONTRADA3"] = t.snombrE_TERMINO
+        obj["COINCIDENCIA ENCONTRADA4"] = t.snombrE_COMPLETO
+        obj["COINCIDENCIA ENCONTRADA5"] = t.sporceN_COINCIDENCIA
+        obj["COINCIDENCIA ENCONTRADA6"] = t.stipocoincidencia
+        obj["COINCIDENCIA ENCONTRADA7"] = t.cargo
+        data.push(obj);
+      });
+      this.excelService.exportAsExcelDemandaFile(data, "Resultados Búsqueda a Demanda");
+    } else {
       swal.fire({
         title: 'Búsqueda a Demanda',
         icon: 'warning',
@@ -736,194 +693,194 @@ export class BusquedaDemandaComponent implements OnInit {
         confirmButtonColor: '#FA7000',
         confirmButtonText: 'Continuar',
         showCloseButton: true,
-        customClass: { 
-          closeButton : 'OcultarBorde'
-                       },
-         
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
       }).then((result) => {
       })
       return
     }
   }
   /*al presionar la tecla enter ejecutar la funcion click en el boton buscar [insividual]*/
-  Buscar(event:any){
-    if(event.keyCode == 13){
-       document.getElementById("enter").click();
-    }else{
+  Buscar(event: any) {
+    if (event.keyCode == 13) {
+      document.getElementById("enter").click();
+    } else {
     }
   }
 
 
-  
 
- async setDataFile(event) {
-    
-  let files = event.target.files;
 
-  let arrFiles = Array.from(files)
+  async setDataFile(event) {
 
-  console.log("arreglo excel",arrFiles);//
-  
-  let listFileNameInform: any = []
-  arrFiles.forEach(it => listFileNameInform.push(it["name"]))
- 
-  let listFileNameCortoInform = []
-  let statusFormatFile = false
-  for (let item of listFileNameInform) {
-    let nameFile = item.split(".")
-    if (nameFile.length > 2 || nameFile.length < 2) {
-      statusFormatFile = true
-      return
+    let files = event.target.files;
+
+    let arrFiles = Array.from(files)
+
+    console.log("arreglo excel", arrFiles);//
+
+    let listFileNameInform: any = []
+    arrFiles.forEach(it => listFileNameInform.push(it["name"]))
+
+    let listFileNameCortoInform = []
+    let statusFormatFile = false
+    for (let item of listFileNameInform) {
+      let nameFile = item.split(".")
+      if (nameFile.length > 2 || nameFile.length < 2) {
+        statusFormatFile = true
+        return
+      }
+      let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
+      listFileNameCortoInform.push(fileItem)
     }
-    let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
-    listFileNameCortoInform.push(fileItem)
+    if (statusFormatFile) {
+      swal.fire({
+        title: 'Mantenimiento de complemento',
+        icon: 'warning',
+        text: 'El archivo no tiene el formato necesario',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Aceptar',
+        showCloseButton: true,
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
+      }).then(async (result) => {
+
+      }).catch(err => {
+
+      })
+    }
+    let listDataFileInform: any = []
+    arrFiles.forEach(fileData => {
+      listDataFileInform.push(this.handleFile(fileData))
+    })
+    let respPromiseFileInfo = await Promise.all(listDataFileInform)
+    if (listFileNameCortoInform.length == 0) {
+      this.NombreArchivo = ''
+    } else {
+      this.NombreArchivo = listFileNameCortoInform[0]
+    }
+
+    return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
   }
-  if (statusFormatFile) {
-    swal.fire({
-      title: 'Mantenimiento de complemento',
-      icon: 'warning',
-      text: 'El archivo no tiene el formato necesario',
-      showCancelButton: false,
-      showConfirmButton: true,
-      confirmButtonColor:'#FA7000',
-      confirmButtonText: 'Aceptar',
-      showCloseButton:true,
-         customClass: { 
-            closeButton : 'OcultarBorde'
-            },
-      
-    }).then(async (result) => {
-    
-    }).catch(err => {
-    
+
+  handleFile(blob: any): Promise<any> {
+    return new Promise(resolve => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.readAsDataURL(blob)
     })
   }
-  let listDataFileInform: any = []
-  arrFiles.forEach(fileData => {
-    listDataFileInform.push(this.handleFile(fileData))
-  })
-  let respPromiseFileInfo = await Promise.all(listDataFileInform)
-  if(listFileNameCortoInform.length == 0){
-   this.NombreArchivo = ''
-  }else{ 
-   this.NombreArchivo = listFileNameCortoInform[0]
-  }
-  
-  return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
-}
 
-handleFile(blob: any): Promise<any> {
- return new Promise(resolve => {
-   const reader = new FileReader()
-   reader.onloadend = () => resolve(reader.result)
-   reader.readAsDataURL(blob)
- })
-}
+  async SubirExcel(obj) {
+    if (this.NombreArchivo == '') {
+      let mensaje = 'No hay archivo registrado'
+      this.SwalGlobal(mensaje)
+      return
+    }
 
-async SubirExcel(obj){
-  if(this.NombreArchivo == ''){
-   let mensaje = 'No hay archivo registrado'
-   this.SwalGlobal(mensaje)
-   return
-  }
+    let uploadPararms: any = {}
+    uploadPararms.SRUTA = 'ARCHIVOS-DEMANDA' + '/' + this.NPERIODO_PROCESO + '/';
+    uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
+    uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
+    await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
+    let datosExcel: any = {}
+    datosExcel.RutaExcel = 'ARCHIVOS-DEMANDA' + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0];
+    datosExcel.VALIDADOR = 'DEMANDA'
+    this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
+    console.log("Resultado Excel", this.ResultadoExcel)
+    let datosEliminar: any = {}
+    datosEliminar.SCODBUSQUEDA = ''
+    datosEliminar.SNOMBREUSUARIO = ''
+    datosEliminar.SNOMBRE_COMPLETO = ''
+    datosEliminar.STIPO_DOCUMENTO = ''
+    datosEliminar.SNUM_DOCUMENTO = ''
+    datosEliminar.VALIDAR = 'DEL'
+    let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
+    console.log("respuesta de eliminar", responseEliminar);
+    for (let i = 0; i < this.ResultadoExcel.length; i++) {
+      let datosRegistroColaborador: any = {}
+      datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
+      datosRegistroColaborador.SNOMBREUSUARIO = this.nombreUsuario
+      datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
+      datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
+      datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
+      datosRegistroColaborador.VALIDAR = 'INS'
 
-  let uploadPararms:any = {}
-  uploadPararms.SRUTA = 'ARCHIVOS-DEMANDA' + '/'+ this.NPERIODO_PROCESO + '/' ;
-  uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
-  uploadPararms.listFileName =  this.ArchivoAdjunto.listFileNameInform
-  await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-  let datosExcel:any = {}
-  datosExcel.RutaExcel = 'ARCHIVOS-DEMANDA' +'/'+ this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0] ;
-  datosExcel.VALIDADOR = 'DEMANDA'
-  this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
-  console.log("Resultado Excel", this.ResultadoExcel)
-  let datosEliminar:any = {}
-  datosEliminar.SCODBUSQUEDA = ''
-  datosEliminar.SNOMBREUSUARIO = ''
-  datosEliminar.SNOMBRE_COMPLETO = ''
-  datosEliminar.STIPO_DOCUMENTO = ''
-  datosEliminar.SNUM_DOCUMENTO = ''
-  datosEliminar.VALIDAR = 'DEL'
-  let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
-  console.log("respuesta de eliminar", responseEliminar);
-  for( let i = 0; i < this.ResultadoExcel.length ; i++){
-    let datosRegistroColaborador:any = {}
-    datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
-    datosRegistroColaborador.SNOMBREUSUARIO = this.nombreUsuario
-    datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
-    datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
-    datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
-    datosRegistroColaborador.VALIDAR = 'INS'
+      let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
+      console.log("respuesta de inserccion a tabla carga", response);
+    }
 
-    let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
-    console.log("respuesta de inserccion a tabla carga",response);
+
+    this.NombreArchivo = ''
+    await this.reset()
+    this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
   }
 
- 
-  this.NombreArchivo = ''
-  await this.reset()
-  this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
-}
 
-
-SwalGlobal(mensaje){
-swal.fire({
-  title: "Búsqueda a Demanda",
-  icon: "warning",
-  text: mensaje,
-  showCancelButton: false,
-  confirmButtonColor: "#FA7000",
-  confirmButtonText: "Aceptar",
-  cancelButtonText: "Cancelar",
-  showCloseButton: true,
-  customClass: {
-    closeButton: 'OcultarBorde'
-  },
-}).then(async (msg) => {
-  return
-});
-}
-
-convertirPdf(item){
-  console.log(item)
- 
-//return descomentar
-  if(this.resultadoFinal.length === 0){
-    let mensaje = 'No existen registros'
-    this.SwalGlobal(mensaje)
-    return
+  SwalGlobal(mensaje) {
+    swal.fire({
+      title: "Búsqueda a Demanda",
+      icon: "warning",
+      text: mensaje,
+      showCancelButton: false,
+      confirmButtonColor: "#FA7000",
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      showCloseButton: true,
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+    }).then(async (msg) => {
+      return
+    });
   }
-  var doc = new jsPDF('l','mm','a4');
-  var col = [["Fecha y Hora de Búsqueda", "Usuario que Realizó la Búsqueda","Tipo Y Número de Documento","Término","Nombre/Razón Social","	% Coincidencia","	Lista","Fuente","Tipo de Coincidencia"]];
-  var rows = [];
 
-  let itemArray:any =  []
-  itemArray.push(item)
+  convertirPdf(item) {
+    console.log(item)
 
-  var itemNew = itemArray//this.resultadoFinal
-  
- 
-  itemNew.forEach(element => {
-    var temp = [element.DFECHA_BUSQUEDA, element.SUSUARIO_BUSQUEDA, element.STIPO_DOCUMENTO +' '+element.SNUM_DOCUMENTO,element.SNOMBRE_TERMINO,element.SNOMBRE_COMPLETO,element.SPORCEN_COINCIDENCIA,element.SLISTA,element.SPROVEEDOR,element.STIPOCOINCIDENCIA];
-    rows.push(temp);
+    //return descomentar
+    if (this.resultadoFinal.length === 0) {
+      let mensaje = 'No existen registros'
+      this.SwalGlobal(mensaje)
+      return
+    }
+    var doc = new jsPDF('l', 'mm', 'a4');
+    var col = [["Fecha y Hora de Búsqueda", "Usuario que Realizó la Búsqueda", "Tipo Y Número de Documento", "Término", "Nombre/Razón Social", "	% Coincidencia", "	Lista", "Fuente", "Tipo de Coincidencia"]];
+    var rows = [];
 
-  });
+    let itemArray: any = []
+    itemArray.push(item)
 
-  autoTable(doc, {
-    headStyles: {fontSize: 9},
-    bodyStyles: {fontSize: 8},
-    columnStyles: { 5: { halign: 'center'} },
-    head: col,
-    body: rows,
-    didDrawCell: (data) => { 
-     
-    },
-});
-  // doc.save('Test.pdf');
-  const nameReport = 'Coincidencias a Demanda' + ("0" + new Date().getDate()).slice(-2) + ("0" + (new Date().getMonth() + 1)).slice(-2) + new Date().getFullYear() +
-                ("0" + new Date().getHours()).slice(-2) + ("0" + new Date().getMinutes()).slice(-2) + ("0" + new Date().getSeconds()).slice(-2)
-  doc.save(nameReport + PDF_EXTENSION)
-}
+    var itemNew = itemArray//this.resultadoFinal
+
+
+    itemNew.forEach(element => {
+      var temp = [element.DFECHA_BUSQUEDA, element.SUSUARIO_BUSQUEDA, element.STIPO_DOCUMENTO + ' ' + element.SNUM_DOCUMENTO, element.SNOMBRE_TERMINO, element.SNOMBRE_COMPLETO, element.SPORCEN_COINCIDENCIA, element.SLISTA, element.SPROVEEDOR, element.STIPOCOINCIDENCIA];
+      rows.push(temp);
+
+    });
+
+    autoTable(doc, {
+      headStyles: { fontSize: 9 },
+      bodyStyles: { fontSize: 8 },
+      columnStyles: { 5: { halign: 'center' } },
+      head: col,
+      body: rows,
+      didDrawCell: (data) => {
+
+      },
+    });
+    // doc.save('Test.pdf');
+    const nameReport = 'Coincidencias a Demanda' + ("0" + new Date().getDate()).slice(-2) + ("0" + (new Date().getMonth() + 1)).slice(-2) + new Date().getFullYear() +
+      ("0" + new Date().getHours()).slice(-2) + ("0" + new Date().getMinutes()).slice(-2) + ("0" + new Date().getSeconds()).slice(-2)
+    doc.save(nameReport + PDF_EXTENSION)
+  }
 
 
 CrearPdf(item) {
@@ -1078,7 +1035,7 @@ debugger
       doc.setFontSize(11);
       doc.text('Tipo de documento', tamañoCabecera + 2, SeparacionCabecera + 111);
       doc.setFontSize(11);
-      doc.text(item.snombrE_COMPLETO, tamañoCabecera + 60, SeparacionCabecera + 111);
+      doc.text(item.stipO_DOCUMENTO, tamañoCabecera + 60, SeparacionCabecera + 111);
 
       doc.setFontSize(11);
       doc.text('Número de documento', tamañoCabecera + 2, SeparacionCabecera + 121);
@@ -1134,42 +1091,40 @@ debugger
   }
 
 
-
-
   
 
-//  doc.fromHTML( 'Paranyan <b>loves</b> jsPDF', tamañoCabecera + 2, SeparacionCabecera + 200)
 
-const nameReport = 'Coincidencias a Demanda' + ("0" + new Date().getDate()).slice(-2) + ("0" + (new Date().getMonth() + 1)).slice(-2) + new Date().getFullYear() +
-  ("0" + new Date().getHours()).slice(-2) + ("0" + new Date().getMinutes()).slice(-2) + ("0" + new Date().getSeconds()).slice(-2)
-  doc.save(nameReport + PDF_EXTENSION)
-}
+    //  doc.fromHTML( 'Paranyan <b>loves</b> jsPDF', tamañoCabecera + 2, SeparacionCabecera + 200)
 
-
-GuardarData(){
-  let data :any = {}
-  //data.NOMBRE_RAZON = this.NOMBRE_RAZON
-  data.NUMERODOC = this.numeroDoc == null ? '-' : this.numeroDoc
-  data.NOMBRECOMPLETO = this.nombreCompleto
+    const nameReport = 'Coincidencias a Demanda' + ("0" + new Date().getDate()).slice(-2) + ("0" + (new Date().getMonth() + 1)).slice(-2) + new Date().getFullYear() +
+      ("0" + new Date().getHours()).slice(-2) + ("0" + new Date().getMinutes()).slice(-2) + ("0" + new Date().getSeconds()).slice(-2)
+    doc.save(nameReport + PDF_EXTENSION)
+  }
 
 
-  if(this.NOMBRE_RAZON == 1) {data.NOMBRE_RAZON = 'RUC'}
-  else if(this.NOMBRE_RAZON == 2) {data.NOMBRE_RAZON = 'DNI'}
-  else if(this.NOMBRE_RAZON == 3) {data.NOMBRE_RAZON = 'CE'}
-  else if(this.NOMBRE_RAZON == 4) {data.NOMBRE_RAZON = 'PASS'}
-  else {data.NOMBRE_RAZON = '-'}
+  GuardarData(){
+    let data :any = {}
+    //data.NOMBRE_RAZON = this.NOMBRE_RAZON
+    data.NUMERODOC = this.numeroDoc == null ? '-' : this.numeroDoc
+    data.NOMBRECOMPLETO = this.nombreCompleto
+  
+  
+    if(this.NOMBRE_RAZON == 1) {data.NOMBRE_RAZON = 'RUC'}
+    else if(this.NOMBRE_RAZON == 2) {data.NOMBRE_RAZON = 'DNI'}
+    else if(this.NOMBRE_RAZON == 3) {data.NOMBRE_RAZON = 'CE'}
+    else if(this.NOMBRE_RAZON == 4) {data.NOMBRE_RAZON = 'PASS'}
+    else {data.NOMBRE_RAZON = '-'}
+  
+    localStorage.setItem("NOMBRE_RAZON", data.NOMBRE_RAZON)
+    localStorage.setItem("NUMERODOC", data.NUMERODOC)
+    localStorage.setItem("NOMBRECOMPLETO", data.NOMBRECOMPLETO == null ? '-' : data.NOMBRECOMPLETO )
+  }
 
-  localStorage.setItem("NOMBRE_RAZON", data.NOMBRE_RAZON)
-  localStorage.setItem("NUMERODOC", data.NUMERODOC)
-  localStorage.setItem("NOMBRECOMPLETO", data.NOMBRECOMPLETO == null ? '-' : data.NOMBRECOMPLETO )
-}
-
-
-async reset() {
-  console.log(this.myInputVariable.nativeElement.files);
-  this.myInputVariable.nativeElement.value = "";
-  console.log(this.myInputVariable.nativeElement.files);
-}
+  async reset() {
+    console.log(this.myInputVariable.nativeElement.files);
+    this.myInputVariable.nativeElement.value = "";
+    console.log(this.myInputVariable.nativeElement.files);
+  }
 
 
 
