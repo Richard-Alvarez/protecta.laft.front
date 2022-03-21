@@ -181,10 +181,12 @@ export class BusquedaDemandaComponent implements OnInit {
 
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
     if ((this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
-      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
+      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
     else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)) {
+      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
+    }else {
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
@@ -205,8 +207,7 @@ export class BusquedaDemandaComponent implements OnInit {
           this.core.loader.show()
           let respuestaService: any = await this.getBusquedaADemanda(data);
           if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-            debugger;
-            //this.resultadoFinalAgregado = respuestaService.items;
+            this.resultadoFinalAgregado = respuestaService.items;
           }
           /*si no existe respuesta o retorna codigo 1*/
           else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
@@ -252,7 +253,6 @@ export class BusquedaDemandaComponent implements OnInit {
   }
   /*valida segun el tipo de documento, cuantos digitos puede ingresar*/
   validationCantidadCaracteres() {
-    debugger
     if (this.NOMBRE_RAZON == 1) {
       return '11'
     } else if (this.NOMBRE_RAZON == 2) {
