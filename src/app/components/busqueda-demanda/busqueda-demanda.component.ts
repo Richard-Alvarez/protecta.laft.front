@@ -338,6 +338,7 @@ export class BusquedaDemandaComponent implements OnInit {
   }
   /*valida segun el tipo de documento, cuantos digitos puede ingresar*/
   validationCantidadCaracteres() {
+    debugger
     if (this.NOMBRE_RAZON == 1) {
       return '11'
     } else if (this.NOMBRE_RAZON == 2) {
@@ -361,6 +362,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
   /*valido si la cantidad de digitos ingresados en el input de documento es el mismo que el permitido por el tipo de documento*/
   validarDigitosIngresados() {
+    debugger
     var numdoc = document.getElementById('doc')
     var maxlen = numdoc.getAttribute('maxlength')
     /*valida que si esta en el tipo de doc "seleccione", seleccione un tipo de doc*/
