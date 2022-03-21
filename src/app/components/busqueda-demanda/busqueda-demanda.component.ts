@@ -181,16 +181,18 @@ export class BusquedaDemandaComponent implements OnInit {
 
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
     if ((this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
-      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
+      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
     else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)) {
+      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
+    }else {
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
       title: 'Consulta en proceso...',
       icon: 'info',
-      text: `La búsqueda se realizará en ${this.whoSearch}`,
+      text: `La búsqueda se realizará en WC, IDECON y REGISTRO NEGATIVO`,
       showCancelButton: false,
       showConfirmButton: false,
       showCloseButton: false,
@@ -206,7 +208,7 @@ export class BusquedaDemandaComponent implements OnInit {
           let respuestaService: any = await this.getBusquedaADemanda(data);
           if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
             debugger;
-            //this.resultadoFinalAgregado = respuestaService.items;
+            this.resultadoFinalAgregado = respuestaService.items;
           }
           /*si no existe respuesta o retorna codigo 1*/
           else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
