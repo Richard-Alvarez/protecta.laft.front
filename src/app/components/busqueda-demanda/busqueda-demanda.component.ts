@@ -184,14 +184,23 @@ export class BusquedaDemandaComponent implements OnInit {
         swal.fire({
           title: 'Búsqueda a Demanda',
           icon: 'info',
-          text: 'Ingrese Nombre completo con el formato solicitado',
-          showCancelButton: false,
+          text: 'Para un busqueda mas exacta ingrese tres datos del nombre completo',
+          showCancelButton: true,
+          cancelButtonText: 'Modificar',
+          cancelButtonColor: '#2b245b',
           confirmButtonColor: '#FA7000',
-          confirmButtonText: 'Aceptar',
+          confirmButtonText: 'Continuar',
           showCloseButton: true,
           customClass: {
             closeButton: 'OcultarBorde'
           },
+        }).then(async(result) => {
+          if (result.isConfirmed) {
+            await this.BusquedaADemandaMixta();
+          }
+          else if (result.dismiss === swal.DismissReason.cancel) {
+            return;
+          }
         })
       }
     }
@@ -233,7 +242,10 @@ export class BusquedaDemandaComponent implements OnInit {
       this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)) {
+    else if (this.NBUSCAR_POR == 2) {
+      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+    }
+    else if (!(this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
@@ -256,99 +268,6 @@ export class BusquedaDemandaComponent implements OnInit {
           if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
             debugger;
             this.resultadoFinalAgregado = respuestaService.items;
-
-            // if(respuestaService.itemsWC){
-            //   respuestaService.itemsWC.forEach(t => {
-            //     t.SUSUARIO_BUSQUEDA = this.nombreUsuario,
-            //     t.SPROVEEDOR = "WC",
-            //     t.STIPOCOINCIDENCIA = "NOMBRE",
-            //     t.BUSQUEDA = "Con coincidencia"
-            //   });
-            // }
-            // if (respuestaService.itemsIDE) {
-            //   respuestaService.itemsIDE.forEach(t => {
-            //     //t.SPROVEEDOR = "IDECON"
-            //     t.BUSQUEDA = "Con coincidencia"
-            //     //t.STIPOCOINCIDENCIA = "NOMBRE"
-            //   });
-            // }
-            // if (respuestaService.itemsIDEDOC) {//hasOwnProperty verifica que contenga
-            //   respuestaService.itemsIDEDOC.forEach(t => {
-            //     //t.SPROVEEDOR = "IDECON"
-            //     t.BUSQUEDA = "Con coincidencia"
-            //     //t.STIPOCOINCIDENCIA = "DOCUMENTO"
-            //   });
-            // }
-            // if (respuestaService.itemsWC && respuestaService.itemsIDE && respuestaService.itemsIDEDOC) {
-            //   this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC).concat(respuestaService.itemsIDEDOC);
-            // }
-            // else if (respuestaService.itemsWC && respuestaService.itemsIDE) {
-            //   this.resultadoFinal = respuestaService.itemsIDE.concat(respuestaService.itemsWC);
-            // }
-            // else {
-            //   this.resultadoFinal = respuestaService.itemsIDEDOC;
-            // }
-            // console.log(`coincidencia ${JSON.stringify(this.resultadoFinal)}`)
-
-            // let proveedorCoinciden: any = []
-            // this.resultadoFinal.forEach(t => {
-            //   proveedorCoinciden.push(t.SPROVEEDOR)
-            // });
-            // this.prove.forEach(p => {
-            //   if (proveedorCoinciden.includes(p)) {
-            //     debugger;
-            //     for (let i = 0; i < this.resultadoFinal.length; i++) {
-            //       let t = this.resultadoFinal[i];
-            //       if (p == t.SPROVEEDOR) {
-            //         console.log(`coincidencia en alguna lista : ... ${p}... ${t.SPROVEEDOR}`)
-            //         for (let i = 0; i < this.listas.length; i++) {
-            //           let list = this.listas[i];
-            //           if (t.SLISTA == list) {
-            //             console.log(`listas con coincidencia ${list}`)
-            //             let datatrue = {
-            //               "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
-            //               "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
-            //               "SNOMBRE_COMPLETO": t.SNOMBRE_COMPLETO,
-            //               "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
-            //               "STIPO_DOCUMENTO": t.STIPO_DOCUMENTO,
-            //               "SNUM_DOCUMENTO": t.SNUM_DOCUMENTO,
-            //               "STIPO_PERSONA": t.STIPO_PERSONA,
-            //               "SCARGO": t.SCARGO,
-            //               "SPORCEN_COINCIDENCIA": t.SPORCEN_COINCIDENCIA,
-            //               "SLISTA": t.SLISTA,
-            //               "STIPOCOINCIDENCIA": t.STIPOCOINCIDENCIA,
-            //               "SPROVEEDOR": t.SPROVEEDOR,
-            //               "BUSQUEDA": t.BUSQUEDA
-            //             }
-            //             this.resultadoFinalAgregado.push(datatrue);
-            //           }
-            //           else if (t.SLISTAS != list) {
-            //             console.log(`listas sin coincidencia ${list}`)
-            //             let datatrue = {
-            //               "DFECHA_BUSQUEDA": t.DFECHA_BUSQUEDA,
-            //               "SUSUARIO_BUSQUEDA": t.SUSUARIO_BUSQUEDA,
-            //               "SNOMBRE_COMPLETO": "-",
-            //               "SNOMBRE_BUSQUEDA": t.SNOMBRE_BUSQUEDA,
-            //               "STIPO_DOCUMENTO": "",
-            //               "SNUM_DOCUMENTO": "-",
-            //               "STIPO_PERSONA": "-",
-            //               "SCARGO": "-",
-            //               "SPORCEN_COINCIDENCIA": "-",
-            //               "SLISTA": list,
-            //               "STIPOCOINCIDENCIA": "-",
-            //               "SPROVEEDOR": t.SPROVEEDOR,
-            //               "BUSQUEDA": "Sin coincidencia"
-            //             }
-            //             this.resultadoFinalAgregado.push(datatrue);
-            //           }
-            //         }
-            //       }
-            //     }
-            //   }
-            // });
-
-            // console.log(`Resultado Final : ${JSON.stringify(this.resultadoFinalAgregado)}`)
-
           }
           /*si no existe respuesta o retorna codigo 1*/
           else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
@@ -419,22 +338,7 @@ export class BusquedaDemandaComponent implements OnInit {
   validarDigitosIngresados() {
     var numdoc = document.getElementById('doc')
     var maxlen = numdoc.getAttribute('maxlength')
-    /*valida que si esta en el tipo de doc "seleccione", seleccione un tipo de doc*/
-    //if (this.ShowSelected() == 'Seleccione' /* && (this.nombreCompleto == null || this.nombreCompleto == "") */) {
-    //swal.fire({
-    //  title: 'Búsqueda a Demanda',
-    //  text: `Seleccione Tipo doc para búsqueda`,
-    //  icon: 'info',
-    //  confirmButtonColor: '#FA7000',
-    //  confirmButtonText: 'Aceptar',
-    //  showCloseButton: true,
-    //  customClass: { 
-    //    closeButton : 'OcultarBorde'
-    //  },
-    //})
-    //return false;
-    //}
-    //else {
+    
     /*valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento*/
     if (this.ShowSelected() != 'Seleccione') {
       if (this.numeroDoc.length == Number(maxlen)) {
