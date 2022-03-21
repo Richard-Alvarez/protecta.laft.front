@@ -302,6 +302,7 @@ export class RegistroNegativoComponent implements OnInit {
     
     this.spinner.show()
     this.listNegativa = await this.userConfigService.GetListaRegistroNegativo(data)
+    this.listNegativa = this.listNegativa.filter(it => it.SNID != null)
     this.spinner.hide()
   }
   changeTipo(){}
@@ -349,5 +350,42 @@ export class RegistroNegativoComponent implements OnInit {
       return true;
      }
      return false;        
+}
+
+exportListToExcel() {
+  let dataReport: any = []
+  this.listNegativa.forEach(element => {
+    let data = {};
+    data["Número de Documento"] = element.SNUMIDENTIDAD
+    data["Nombre Completo"] = element.SNOM_COMPLETO,
+    data["Señal Laft"] = element.SSENAL_LAFT,
+    data["Filtro"] = element.NOMBRE
+    data["Tipo de Persona"] = element.STIPOPERSONA
+    data["Doc. Referencia"] = element.SDOCREFERENCIA
+    data["Tipo Lista"] = element.STIPOLISTA
+    data["Fecha Descubrimiento"] = element.SFEDESCUBRIMIENTO
+    data["Pais"] = element.STIPODOC_PAIS
+
+    dataReport.push(data);
+  });
+
+  if (dataReport.length > 0) {
+    this.excelService.exportAsExcelFile(dataReport, "Lista registro negativo")
+  } else {
+    Swal.fire({
+      icon: 'warning',
+      text: 'No se han encontrado resultados',
+      showCancelButton: false,
+      confirmButtonColor: '#FA7000',
+      confirmButtonText: 'Continuar',
+      showCloseButton: true,
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+
+    }).then((result) => {
+    })
+    return
+  }
 }
 }
