@@ -180,7 +180,16 @@
 
         </div>
 
-        <br><br>
+        <div *ngIf="this.listNegativa.length > 0" class="row mt-4">
+          <div class="col-sm-4">
+            <button (click)="exportListToExcel()"
+              class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
+              Descargar Resultados
+            </button>
+          </div>
+        </div>
+
+        <br>
       </div>
 
 
@@ -204,6 +213,8 @@
 
     </div>
   </div>
+
+  
   <div class="" style="padding-bottom: 80px;">
 
   </div>
