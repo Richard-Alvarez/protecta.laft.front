@@ -1080,7 +1080,7 @@ debugger
       doc.setFontSize(11);
       doc.text('Tipo de coincidencia', tamañoCabecera + 2, SeparacionCabecera + 171);
       doc.setFontSize(11);
-      doc.text(item.scoincidencia, tamañoCabecera + 60, SeparacionCabecera + 171);
+      doc.text(item.stipocoincidencia, tamañoCabecera + 60, SeparacionCabecera + 171);
 
       doc.setFontSize(11);
       doc.text('Cargo PEP', tamañoCabecera + 2, SeparacionCabecera + 181);
