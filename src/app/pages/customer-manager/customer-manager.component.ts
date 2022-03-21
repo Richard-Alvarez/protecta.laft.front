@@ -1299,6 +1299,8 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     localStorage.setItem("NIDSUBGRUPO", this.idSubGrupo.toString())
     this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
     localStorage.setItem("paramCliente", JSON.stringify(this.paramCliente))
+    localStorage.setItem("NACIONALIDAD", item.NACIONALIDAD)
+    localStorage.setItem("CARGO", item.CARGO)
     this.spinner.hide()
     this.router.navigate(['/c2-detail'])
   }

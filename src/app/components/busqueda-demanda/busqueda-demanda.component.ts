@@ -29,7 +29,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
-  
+  resultadoFinalAgregado : any = []
   POR_INDIVIDUAL: number = 1;
   POR_MASIVA: number = 2;
 
@@ -51,9 +51,6 @@ export class BusquedaDemandaComponent implements OnInit {
 
   tipoCoin: TipoCoincidencia;
 
-  listas = ['LISTAS FAMILIAR PEP', 'LISTAS PEP', 'LISTAS INTERNACIONALES', 'LISTAS ESPECIALES'];
-  prove = ['IDECON', 'REGISTRO NEGATIVO','WC']
-  resultadoFinalAgregado: any = []
   whoSearch: string;
 
   @ViewChild('myInput',{static: false}) myInputVariable: ElementRef;
@@ -232,11 +229,11 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-    if (!(this.numeroDoc == null || this .numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
+    if ((this.numeroDoc == null || this .numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
       this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1){
+    else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this .numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)){
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
@@ -371,7 +368,7 @@ export class BusquedaDemandaComponent implements OnInit {
                           },
           })
         }
-        if (this.resultadoFinalAgregado.length != 0) {
+        if (this.resultadoFinal.length != 0) {
           this.encontroRespuesta = false;
           this.noEncontroRespuesta = true;
         }else{
