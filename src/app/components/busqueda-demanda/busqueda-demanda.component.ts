@@ -190,7 +190,8 @@ export class BusquedaDemandaComponent implements OnInit {
     await swal.fire({
       title: 'Consulta en proceso...',
       icon: 'info',
-      text: `La búsqueda se realizará en ${this.whoSearch}`,
+      // text: `La búsqueda se realizará en ${this.whoSearch}`,
+      text: `La búsqueda se realizará en IDECON y REGISTRO NEGATIVO`,
       showCancelButton: false,
       showConfirmButton: false,
       showCloseButton: false,
