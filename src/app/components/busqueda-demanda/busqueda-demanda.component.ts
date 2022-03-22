@@ -525,6 +525,31 @@ export class BusquedaDemandaComponent implements OnInit {
       return
     }
   }
+  /*en caso sea masiva, descargara una plantilla para guia de como se debe subir el archivo*/
+  DescargarPlantilla() {
+    let data = []
+    let dataExample: any = [
+      {
+        "Nombre": 'POZO GOMERO JOSE RENATO',
+        "Tipo_Documento": 'DNI',
+        "Documento": '46610806'
+      },
+      {
+        "Nombre": 'MI FARMA S.A.C',
+        "Tipo_Documento": 'RUC',
+        "Documento": '1425785698'
+      }
+    ]
+    dataExample.forEach(t => {
+      let _data = {
+        "Nombre": t.Nombre,
+        "Tipo de Documento": t.Tipo_Documento,
+        "Documento": t.Documento
+      }
+      data.push(_data);
+    });
+    this.excelService.exportAsExcelFile(data, "Plantilla Búsqueda a Demanda");
+  }
   /*descarga todos los resultados de la busqueda a demanda en formato excel*/
   exportListToExcel() {
     let resultado: any = []
