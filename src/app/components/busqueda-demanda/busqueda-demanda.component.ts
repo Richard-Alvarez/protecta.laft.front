@@ -29,7 +29,6 @@ export class BusquedaDemandaComponent implements OnInit {
 
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
-  resultadoFinalAgregado: any = []
   POR_INDIVIDUAL: number = 1;
   POR_MASIVA: number = 2;
 
@@ -135,7 +134,7 @@ export class BusquedaDemandaComponent implements OnInit {
         swal.fire({
           title: 'Búsqueda a Demanda',
           icon: 'info',
-          text: 'Para un busqueda mas exacta ingrese tres datos del nombre completo',
+          text: 'Para un busqueda más exacta ingrese tres datos del nombre completo',
           showCancelButton: true,
           cancelButtonText: 'Modificar',
           cancelButtonColor: '#2b245b',
@@ -189,14 +188,11 @@ export class BusquedaDemandaComponent implements OnInit {
     }
 
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-    if ((this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
+    if (!(this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
       this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2) {
-      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
-    }
-    else if (!(this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
+    else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
@@ -217,7 +213,6 @@ export class BusquedaDemandaComponent implements OnInit {
           this.core.loader.show()
           let respuestaService: any = await this.getBusquedaADemanda(data);
           if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-            debugger;
             this.resultadoFinal = respuestaService.items;
           }
           /*si no existe respuesta o retorna codigo 1*/
@@ -264,7 +259,6 @@ export class BusquedaDemandaComponent implements OnInit {
   }
   /*valida segun el tipo de documento, cuantos digitos puede ingresar*/
   validationCantidadCaracteres() {
-    debugger
     if (this.NOMBRE_RAZON == 1) {
       return '11'
     } else if (this.NOMBRE_RAZON == 2) {
@@ -488,10 +482,53 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     return ''
   }
+  /*en desuso, descargaba la fila del resultado en formato excel*/
+  exportListToExcelIndividual(i) {
+    let resultado: any = []
+    resultado = this.resultadoFinal[i]
+    
+    let Newresultado: any = []
+    let resulFinal: any = []
+    if (resultado != null) {
+      Newresultado.push(resultado)
+      let data = []
+      Newresultado.forEach(t => {
+        let _data = {
+          "Fecha y Hora de Búsqueda": t.DFECHA_BUSQUEDA,
+          "Usuario que Realizó la Búsqueda": t.SUSUARIO_BUSQUEDA,
+          "Tipo de Documento": t.STIPO_DOCUMENTO,
+          "Número de Documento": t.SNUM_DOCUMENTO,
+          "Nombre/Razón Social": t.SNOMBRE_COMPLETO,
+          "Porcentaje de coincidencia": t.SPORCEN_COINCIDENCIA,
+          "Tipo de Persona	": t.STIPO_PERSONA,
+          "Cargo": (t.SCARGO == null || t.SCARGO == "") ? '-' : t.SCARGO,
+          "Lista": t.SLISTA,
+          "Proveedor": t.SPROVEEDOR,
+          "Coincidencia": t.STIPOCOINCIDENCIA
+        }
+        data.push(_data);
+      });
+      this.excelService.exportAsExcelFile(data, "Resultados Búsqueda a Demanda");
+    } else {
+      swal.fire({
+        title: 'Búsqueda a Demanda',
+        icon: 'warning',
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
+      }).then((result) => {
+      })
+      return
+    }
+  }
   /*descarga todos los resultados de la busqueda a demanda en formato excel*/
   exportListToExcel() {
     let resultado: any = []
-    resultado = this.resultadoFinalAgregado
+    resultado = this.resultadoFinal
     debugger;
     let Newresultado: any = []
     if (resultado != null && resultado.length > 0) {
