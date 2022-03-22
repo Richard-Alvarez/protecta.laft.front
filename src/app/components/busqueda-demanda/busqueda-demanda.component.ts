@@ -165,86 +165,100 @@ export class BusquedaDemandaComponent implements OnInit {
 
   /*servicio de busqueda*/
   async BusquedaADemandaMixta() {
-    ;
-    let id = this.idUsuario.toString();
-    let cod = this.GenerarCodigo();
-    let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
-    //console.log(`codigo de busqueda ${id} ${cod} ${fecha}`)
-    let data: DataBusqueda = {};
-    data.P_SCODBUSQUEDA = id.concat(cod, fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
-    data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-    data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
-    data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
-    //console.log(`data ${JSON.stringify(data)}`)
-    data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
-    if (this.NBUSCAR_POR == 1) {
-      data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
-      data.P_SNUM_DOCUMENTO = this.numeroDoc;
-    }
-    else {
-      data.P_SNOMCOMPLETO = null;
-      data.P_SNUM_DOCUMENTO = null;
-      await this.SubirExcel(data)
-    }
-
-    //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-    if (!(this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
-      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
-    }
-    //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
-      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
-    }
-    await swal.fire({
-      title: 'Consulta en proceso...',
-      icon: 'info',
-      text: `La búsqueda se realizará en WC, IDECON y REGISTRO NEGATIVO`,
-      showCancelButton: false,
-      showConfirmButton: false,
-      showCloseButton: false,
-      timer: 5000,
+    swal.fire({
+      title: 'Búsqueda a Demanda',
+      icon: 'question',
+      text: '¿Realizar Búsqueda?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#2b245b',
+      confirmButtonColor: '#FA7000',
+      confirmButtonText: 'Aceptar',
+      showCloseButton: true,
       customClass: {
         closeButton: 'OcultarBorde'
       },
-    })
-      .then(async (result) => {
-        if (result) {
-          /*inicio*/
-          this.core.loader.show()
-          let respuestaService: any = await this.getBusquedaADemanda(data);
-          if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-            this.resultadoFinal = respuestaService.items;
-          }
-          /*si no existe respuesta o retorna codigo 1*/
-          else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
-            this.core.loader.hide()
-            swal.fire({
-              title: 'Comuníquese con soporte',
-              icon: 'warning',
-              text: 'ERROR: ' + respuestaService.mensaje,
-              //titleText: 'comuniuquese con soporte',
-              showCancelButton: false,
-              showConfirmButton: true,
-              confirmButtonColor: '#FA7000',
-              confirmButtonText: 'Continuar',
-              showCloseButton: true,
-              customClass: {
-                closeButton: 'OcultarBorde'
-              },
-            })
-          }
-          if (this.resultadoFinal.length != 0) {
-            this.encontroRespuesta = false;
-            this.noEncontroRespuesta = true;
-          } else {
-            this.encontroRespuesta = true;
-            this.noEncontroRespuesta = false
-          }
-          this.GuardarData()
-          this.core.loader.hide()
-          /*fin*/
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let id = this.idUsuario.toString();
+        let cod = this.GenerarCodigo();
+        let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
+        //console.log(`codigo de busqueda ${id} ${cod} ${fecha}`)
+        let data: DataBusqueda = {};
+        data.P_SCODBUSQUEDA = id.concat(cod, fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
+        data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+        data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
+        data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
+        //console.log(`data ${JSON.stringify(data)}`)
+        data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
+        if (this.NBUSCAR_POR == 1) {
+          data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
+          data.P_SNUM_DOCUMENTO = this.numeroDoc;
         }
-      });
+        else {
+          data.P_SNOMCOMPLETO = null;
+          data.P_SNUM_DOCUMENTO = null;
+          await this.SubirExcel(data)
+        }
+        //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
+        if (!(this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
+          this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
+        }
+        //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
+        else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
+          this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+        }
+        await swal.fire({
+          title: 'Consulta en proceso...',
+          icon: 'info',
+          text: `La búsqueda se realizará en ${this.whoSearch}`,
+          showCancelButton: false,
+          showConfirmButton: false,
+          showCloseButton: false,
+          timer: 5000,
+          customClass: {
+            closeButton: 'OcultarBorde'
+          },
+        }).then(async (result) => {
+          if (result) {
+            /*inicio*/
+            this.core.loader.show()
+            let respuestaService: any = await this.getBusquedaADemanda(data);
+            if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
+              this.resultadoFinal = respuestaService.items;
+            }
+            /*si no existe respuesta o retorna codigo 1*/
+            else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
+              this.core.loader.hide()
+              swal.fire({
+                title: 'Comuníquese con soporte',
+                icon: 'warning',
+                text: 'ERROR: ' + respuestaService.mensaje,
+                //titleText: 'comuniuquese con soporte',
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonColor: '#FA7000',
+                confirmButtonText: 'Continuar',
+                showCloseButton: true,
+                customClass: {
+                  closeButton: 'OcultarBorde'
+                },
+              })
+            }
+            if (this.resultadoFinal.length != 0) {
+              this.encontroRespuesta = false;
+              this.noEncontroRespuesta = true;
+            } else {
+              this.encontroRespuesta = true;
+              this.noEncontroRespuesta = false
+            }
+            this.GuardarData()
+            this.core.loader.hide()
+            /*fin*/
+          }
+        });
+      }
+    })
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
