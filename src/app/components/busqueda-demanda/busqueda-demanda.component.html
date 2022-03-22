@@ -150,8 +150,8 @@
               <tr *ngIf="this.resultadoFinalAgregado.length == 0">
                 <td class="text-center" colspan="13">No se encontró coincidencias</td>
               </tr>
-              <tr class="animated fadeIn" *ngFor="let item of resultadoFinalAgregado; let i = index;">
-                <td>{{item.dfechA_BUSQUEDA}}</td>
+              <tr class="animated fadeIn" *ngFor="let item of resultadoFinalAgregado; let i = index;" style="text-transform: uppercase;">
+                <td>{{item.dfechA_BUSQUEDA }}</td>
                 <td>{{item.susuariO_BUSQUEDA != '' ? item.susuariO_BUSQUEDA : '-'}} </td>
                 <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
                 <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
@@ -159,7 +159,7 @@
                 <td>{{item.snumdoC_BUSQUEDA == null || item.snumdoC_BUSQUEDA == '' ? '-': item.snumdoC_BUSQUEDA}}
                 </td>
                 <td>{{item.snombrE_BUSQUEDA == null || item.snombrE_BUSQUEDA == '' ? '-': item.snombrE_BUSQUEDA}}</td>
-                <td>{{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO) }}</td>
+                <td>{{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO)}}</td>
                 <td>
                   <div placement='top' ngbTooltip="{{item.snombrE_TERMINO}}">
                     {{cortarCararterNombre(item.snombrE_TERMINO == null || item.snombrE_TERMINO == '' ? '-': item.snombrE_TERMINO)}}</div>
