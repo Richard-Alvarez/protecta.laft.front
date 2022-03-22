@@ -15,7 +15,7 @@
     <div class="tab-content">
       <div>
         <div class="row form-group">
-          <div class="col-lg-11 col-sm-12">
+          <div class="col-lg-11 col-sm-12" style="padding-right: 0px;padding-left: 30px;">
             <div class="row">
               <div class="col-xl-2 col-lg-6 d-flex py-1">
                 <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12" style="padding:0">
@@ -87,7 +87,7 @@
                   Buscar
                 </button>
               </div>
-              <div [hidden]="hideMasiva" class="col-xl-4 col-lg-6 d-flex py-1 col-lg-1 ">
+              <div [hidden]="hideMasiva" class="col-xl-3 col-lg-6 d-flex py-1 col-lg-1 ">
                 <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12 " style="align-items: self-end; padding: 0;">
                   <div class="custom-file col-xs-12 col-sm-12" style="padding: 0;">
                     <input #myInput type="file" class="custom-file-input" id="customFile" name="filename" accept=".xlsx"
@@ -98,12 +98,12 @@
                   </div>
                 </div>
               </div>
-              <div [hidden]="hideMasiva" class="col-xl-4 col-lg-6 d-flex py-1 col-lg-1 " style="align-items: self-end">
+              <div [hidden]="hideMasiva" class="col-xl-3 col-lg-6 d-flex py-1 " style="align-items: self-end; padding-left:0px">
                 <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12">
                   <div *ngIf="mostrarBotonBuscarMasiva()" class="col-xs-12 col-sm-12"
                     style="align-items: center; padding:0">
                     <button (click)="DescargarPlantilla()"
-                      class="btn btn-outline-info form-control mr-2 buttonSinBorder colorButton"><i
+                      class="btn btn-outline-info form-control buttonSinBorder colorButton"><i
                         class="fas fa-download"></i> Descargar Plantilla </button>
                   </div>
                 </div>
