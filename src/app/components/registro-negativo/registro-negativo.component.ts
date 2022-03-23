@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { mergeNsAndName, TransitiveCompileNgModuleMetadata } from '@angular/compiler';
+
 @Component({
   selector: 'app-registro-negativo',
   templateUrl: './registro-negativo.component.html',
@@ -388,4 +389,7 @@ exportListToExcel() {
     return
   }
 }
+
+
+
 }
