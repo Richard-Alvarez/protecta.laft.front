@@ -18,11 +18,11 @@
           <div class="col-lg-11 col-sm-12">
             <div class="row">
               <div class="col-xl-2 col-lg-6 d-flex py-1">
-                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12">
-                  <div class="col-xs-12 col-sm-12">
+                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12" style="padding:0">
+                  <div class="col-xs-12 col-sm-12" style="padding:0">
                     <label class="fontText">Tipo de Búsqueda:</label>
                   </div>
-                  <div class="col-xs-12 col-sm-12">
+                  <div class="col-xs-12 col-sm-12" style="padding:0">
                     <select class="form-control buttonSinBorder colorButton " (change)="searchTypeChange($event)"
                       [(ngModel)]="NBUSCAR_POR">
                       <option value="1">Individual</option>
@@ -32,11 +32,11 @@
                 </div>
               </div>
               <div [hidden]="hideIndividual" class="col-xl-2 col-lg-6 d-flex py-1">
-                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12">
-                  <div class="col-xs-12 col-sm-12">
+                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12" style="padding:0">
+                  <div class="col-xs-12 col-sm-12" style="padding:0">
                     <label class="fontText">Tipo de Documento:</label>
                   </div>
-                  <div class="col-xs-12 col-sm-12">
+                  <div class="col-xs-12 col-sm-12" style="padding:0">
                     <select id="tipoDoc" class="form-control buttonSinBorder colorButton" [(ngModel)]="NOMBRE_RAZON">
                       <option value="0" title="Seleccione">Seleccione</option>
                       <option value="2" title="DNI">DNI</option>
@@ -48,11 +48,11 @@
                 </div>
               </div>
               <div [hidden]="hideIndividual" class="col-xl-3 col-lg-6 d-flex py-1">
-                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12">
-                  <div class="col-xs-12 col-sm-12">
+                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12" style="padding:0">
+                  <div class="col-xs-12 col-sm-12" style="padding:0">
                     <label class="fontText">Número de Documento:</label>
                   </div>
-                  <div class="col-xs-12 col-sm-12">
+                  <div class="col-xs-12 col-sm-12" style="padding:0">
                     <input id="doc" type="text" class="form-control buttonSinBorder colorButton"
                       maxlength="{{validationCantidadCaracteres()}}" size="20" (keypress)="validaNumericos($event)"
                       [(ngModel)]="numeroDoc" placeholder="Número de Documento">
@@ -60,11 +60,11 @@
                 </div>
               </div>
               <div [hidden]="hideIndividual" class="col-xl-4 col-lg-6 d-flex py-1">
-                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12">
-                  <div class="col-xs-12 col-sm-12">
+                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12" style="padding:0">
+                  <div class="col-xs-12 col-sm-12" style="padding:0">
                     <label class="fontText">Nombre Completo:</label>
                   </div>
-                  <div class="col-xs-12 col-sm-12" style="display:flex;">
+                  <div class="col-xs-12 col-sm-12" style="display:flex;padding:0">
                     <input type="text" class="form-control buttonSinBorder colorButton" maxlength="100" size="30"
                       [(ngModel)]="nombreCompleto" (keypress)="soloLetras($event)"
                       pattern="[a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+"
@@ -147,11 +147,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngIf="this.resultadoFinalAgregado.length == 0">
+              <tr *ngIf="this.resultadoFinal.length == 0">
                 <td class="text-center" colspan="13">No se encontró coincidencias</td>
               </tr>
-              <tr class="animated fadeIn" *ngFor="let item of resultadoFinalAgregado; let i = index;" style="text-transform: uppercase;">
-                <td>{{item.dfechA_BUSQUEDA }}</td>
+              <tr class="animated fadeIn" *ngFor="let item of dataPrueba; let i = index;" style="text-transform: uppercase;" >
+                <td>{{item.dfechA_BUSQUEDA}}</td>
                 <td>{{item.susuariO_BUSQUEDA != '' ? item.susuariO_BUSQUEDA : '-'}} </td>
                 <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
                 <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
@@ -177,7 +177,7 @@
               </tr>
             </tbody>
           </table>
-          <div *ngIf="this.resultadoFinalAgregado.length > 0" class="row mt-4">
+          <div *ngIf="this.resultadoFinal.length > 0" class="row mt-4">
             <div class="col-sm-4">
               <button (click)="exportListToExcel()"
                 class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>

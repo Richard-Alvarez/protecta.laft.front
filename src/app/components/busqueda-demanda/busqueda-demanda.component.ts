@@ -29,7 +29,6 @@ export class BusquedaDemandaComponent implements OnInit {
 
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
-  resultadoFinalAgregado: any = []
   POR_INDIVIDUAL: number = 1;
   POR_MASIVA: number = 2;
 
@@ -42,7 +41,7 @@ export class BusquedaDemandaComponent implements OnInit {
   resulBusqueda: any = [];
   resultadoFinal: any[];
   resultadoFinal2: any[];
-
+  dataPrueba:any = []
   ArchivoAdjunto: any;
   ResultadoExcel: any;
   NombreArchivo: string = '';
@@ -66,8 +65,86 @@ export class BusquedaDemandaComponent implements OnInit {
     this.resultadoFinal = []
     this.resultadoFinal2 =
       [{ DFECHA_BUSQUEDA: '04/01/2022 11:48:36 a.m.', SCARGO: "-", SLISTA: "LISTAS INTERNACIONALES", SNOMBRE_BUSQUEDA: "CHAVEZ CONDORI CESAR AUGUSTO", SNOMBRE_COMPLETO: "Cesar Augusto CONDORI TORRES", SNOMBRE_TERMINO: "CONDORI,César Augusto", SNUM_DOCUMENTO: "01319667", SPORCEN_COINCIDENCIA: 75, STIPO_DOCUMENTO: "DNI", STIPO_PERSONA: "PERSONA NATURAL" },
-
       ]
+     this.dataPrueba = [{
+      dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
+      nidproveedor: 4,
+      nidtipolista: 2,
+      scargo: "President of Peru (Jul 2001 - Jul 2006). President of Peru Posible (PP) (Sep 1994 - ). Presidential Candidate (Jan 2011 - Apr 2011) (Nov 2015 - 2016). Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP)." ,
+      scoincidencia: "CON COINCIDENCIA",
+      sdesproveedor: "WORDLCHECKONE",
+      sdestipolista: "LISTAS PEP",
+      snombrE_BUSQUEDA: " ALEJANDRO TOLEDO MANRIQUE",
+      snombrE_COMPLETO: "Alejandro Celestino TOLEDO MANRIQUE",
+      snombrE_TERMINO: "TOLEDO MANRIQUE,Alejandro",
+      snuM_DOCUMENTO: "08774976",
+      snumdoC_BUSQUEDA: null,
+      sporceN_COINCIDENCIA: "100",
+      sporceN_SCORE: null,
+      stipO_DOCUMENTO: "DNI",
+      stipO_PERSONA: "PERSONA NATURAL",
+      stipocoincidencia: "NOMBRE",
+      susuariO_BUSQUEDA: "German Salinas Arroyo",
+     },
+     {
+      dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
+      nidproveedor: 4,
+      nidtipolista: 2,
+      scargo: "President of Peru (Jul 2001 - Jul 2006). President o.",
+      scoincidencia: "CON COINCIDENCIA",
+      sdesproveedor: "WORDLCHECKONE",
+      sdestipolista: "LISTAS PEP",
+      snombrE_BUSQUEDA: " ALEJANDRO TOLEDO MANRIQUE",
+      snombrE_COMPLETO: "Alejandro Celestino TOLEDO MANRIQUE",
+      snombrE_TERMINO: "TOLEDO MANRIQUE,Alejandro",
+      snuM_DOCUMENTO: "08774976",
+      snumdoC_BUSQUEDA: null,
+      sporceN_COINCIDENCIA: "100",
+      sporceN_SCORE: null,
+      stipO_DOCUMENTO: "DNI",
+      stipO_PERSONA: "PERSONA NATURAL",
+      stipocoincidencia: "NOMBRE",
+      susuariO_BUSQUEDA: "German Salinas Arroyo",
+     },
+     {
+      dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
+      nidproveedor: 4,
+      nidtipolista: 2,
+      scargo: "President of Peru (Jul 2001 - Jul 2006). President of Peru Posible (PP) (Sep 1994 - ). Presidential Candidate (Jan 2011 - Apr 2011).",
+      scoincidencia: "CON COINCIDENCIA",
+      sdesproveedor: "WORDLCHECKONE",
+      sdestipolista: "LISTAS PEP",
+      snombrE_BUSQUEDA: " ALEJANDRO TOLEDO MANRIQUE",
+      snombrE_COMPLETO: "Alejandro Celestino TOLEDO MANRIQUE",
+      snombrE_TERMINO: "TOLEDO MANRIQUE,Alejandro",
+      snuM_DOCUMENTO: "08774976",
+      snumdoC_BUSQUEDA: null,
+      sporceN_COINCIDENCIA: "100",
+      sporceN_SCORE: null,
+      stipO_DOCUMENTO: "DNI",
+      stipO_PERSONA: "PERSONA NATURAL",
+      stipocoincidencia: "NOMBRE",
+      susuariO_BUSQUEDA: "German Salinas Arroyo",
+     },{
+      dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
+      nidproveedor: 4,
+      nidtipolista: 2,
+      scargo: "President of Peru (Jul 2001 - Jul 2006). President of Peru Posible (PP) (Sep 1994 - ).",
+      scoincidencia: "CON COINCIDENCIA",
+      sdesproveedor: "WORDLCHECKONE",
+      sdestipolista: "LISTAS PEP",
+      snombrE_BUSQUEDA: " ALEJANDRO TOLEDO MANRIQUE",
+      snombrE_COMPLETO: "Alejandro Celestino TOLEDO MANRIQUE",
+      snombrE_TERMINO: "TOLEDO MANRIQUE,Alejandro",
+      snuM_DOCUMENTO: "08774976",
+      snumdoC_BUSQUEDA: null,
+      sporceN_COINCIDENCIA: "100",
+      sporceN_SCORE: null,
+      stipO_DOCUMENTO: "DNI",
+      stipO_PERSONA: "PERSONA NATURAL",
+      stipocoincidencia: "NOMBRE",
+      susuariO_BUSQUEDA: "German Salinas Arroyo",
+     }] 
     /*obtener usuario que logeado*/
     let dataUser = localStorage.getItem("resUser")
     this.DataUserLogin = JSON.parse(dataUser)
@@ -135,7 +212,7 @@ export class BusquedaDemandaComponent implements OnInit {
         swal.fire({
           title: 'Búsqueda a Demanda',
           icon: 'info',
-          text: 'Para un busqueda mas exacta ingrese tres datos del nombre completo',
+          text: 'Para un busqueda más exacta ingrese tres datos del nombre completo',
           showCancelButton: true,
           cancelButtonText: 'Modificar',
           cancelButtonColor: '#2b245b',
@@ -189,13 +266,11 @@ export class BusquedaDemandaComponent implements OnInit {
     }
 
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-    if ((this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
-      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+    if (!(this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
+      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)) {
-      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
-    }else {
+    else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
       this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
     await swal.fire({
@@ -216,8 +291,7 @@ export class BusquedaDemandaComponent implements OnInit {
           this.core.loader.show()
           let respuestaService: any = await this.getBusquedaADemanda(data);
           if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-            
-            this.resultadoFinalAgregado = respuestaService.items;
+            this.resultadoFinal = respuestaService.items;
           }
           /*si no existe respuesta o retorna codigo 1*/
           else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
@@ -486,10 +560,79 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     return ''
   }
+  /*en desuso, descargaba la fila del resultado en formato excel*/
+  exportListToExcelIndividual(i) {
+    let resultado: any = []
+    resultado = this.resultadoFinal[i]
+    
+    let Newresultado: any = []
+    let resulFinal: any = []
+    if (resultado != null) {
+      Newresultado.push(resultado)
+      let data = []
+      Newresultado.forEach(t => {
+        let _data = {
+          "Fecha y Hora de Búsqueda": t.DFECHA_BUSQUEDA,
+          "Usuario que Realizó la Búsqueda": t.SUSUARIO_BUSQUEDA,
+          "Tipo de Documento": t.STIPO_DOCUMENTO,
+          "Número de Documento": t.SNUM_DOCUMENTO,
+          "Nombre/Razón Social": t.SNOMBRE_COMPLETO,
+          "Porcentaje de coincidencia": t.SPORCEN_COINCIDENCIA,
+          "Tipo de Persona	": t.STIPO_PERSONA,
+          "Cargo": (t.SCARGO == null || t.SCARGO == "") ? '-' : t.SCARGO,
+          "Lista": t.SLISTA,
+          "Proveedor": t.SPROVEEDOR,
+          "Coincidencia": t.STIPOCOINCIDENCIA
+        }
+        data.push(_data);
+      });
+      this.excelService.exportAsExcelFile(data, "Resultados Búsqueda a Demanda");
+    } else {
+      swal.fire({
+        title: 'Búsqueda a Demanda',
+        icon: 'warning',
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
+      }).then((result) => {
+      })
+      return
+    }
+  }
+  /*en caso sea masiva, descargara una plantilla para guia de como se debe subir el archivo*/
+  DescargarPlantilla() {
+    let data = []
+    let dataExample: any = [
+      {
+        "Nombre": 'POZO GOMERO JOSE RENATO',
+        "Tipo_Documento": 'DNI',
+        "Documento": '46610806'
+      },
+      {
+        "Nombre": 'MI FARMA S.A.C',
+        "Tipo_Documento": 'RUC',
+        "Documento": '1425785698'
+      }
+    ]
+    dataExample.forEach(t => {
+      let _data = {
+        "Nombre": t.Nombre,
+        "Tipo de Documento": t.Tipo_Documento,
+        "Documento": t.Documento
+      }
+      data.push(_data);
+    });
+    this.excelService.exportAsExcelFile(data, "Plantilla Búsqueda a Demanda");
+  }
   /*descarga todos los resultados de la busqueda a demanda en formato excel*/
   exportListToExcel() {
     let resultado: any = []
-    resultado = this.resultadoFinalAgregado
+    resultado = this.resultadoFinal
+    debugger;
     let Newresultado: any = []
     if (resultado != null && resultado.length > 0) {
       for (let i = 0; i < resultado.length; i++) {
@@ -532,7 +675,7 @@ export class BusquedaDemandaComponent implements OnInit {
         obj["COINCIDENCIA ENCONTRADA4"] = t.snombrE_COMPLETO
         obj["COINCIDENCIA ENCONTRADA5"] = t.sporceN_COINCIDENCIA
         obj["COINCIDENCIA ENCONTRADA6"] = t.stipocoincidencia
-        obj["COINCIDENCIA ENCONTRADA7"] = t.cargo
+        obj["COINCIDENCIA ENCONTRADA7"] = t.scargo
         data.push(obj);
       });
       this.excelService.exportAsExcelDemandaFile(data, "Resultados Búsqueda a Demanda");
@@ -879,7 +1022,21 @@ CrearPdf(item) {
       doc.rect(25, SeparacionCabecera + 145, 160, 10);
       doc.rect(25, SeparacionCabecera + 155, 160, 10);
       doc.rect(25, SeparacionCabecera + 165, 160, 10);
-      doc.rect(25, SeparacionCabecera + 175, 160, 10);
+      
+      if(item.scargo.length >= 55){
+        let cantidad:number = (item.scargo.length / 55)
+        let tamanoCuadro = 10
+        let lineaVertical = 235
+        for(let i=0; i < cantidad ; i++ ){
+          tamanoCuadro = tamanoCuadro + 4
+          lineaVertical = lineaVertical + 4
+        }
+        doc.rect(25, SeparacionCabecera + 175, 160, tamanoCuadro);
+        doc.line(80, lineaVertical, 80, 235);
+      }else{
+        doc.rect(25, SeparacionCabecera + 175, 160, 10);
+      }
+      //doc.rect(25, SeparacionCabecera + 175, 160, 10);
       doc.setLineWidth(0.1);
       doc.line(80, 235, 80, 155); // vertical line
       
@@ -934,11 +1091,36 @@ CrearPdf(item) {
       doc.setFontSize(11);
       doc.text(item.stipocoincidencia, tamañoCabecera + 60, SeparacionCabecera + 171);
 
-      doc.setFontSize(11);
-      doc.text('Cargo PEP', tamañoCabecera + 2, SeparacionCabecera + 181);
-      doc.setFontSize(11);
-      doc.text(item.scargo, tamañoCabecera + 60, SeparacionCabecera + 181);
+       doc.setFontSize(11);
+       doc.text('Cargo PEP', tamañoCabecera + 2, SeparacionCabecera + 181);
+      // doc.setFontSize(11);
+      // doc.text(item.scargo, tamañoCabecera + 60, SeparacionCabecera + 181);
 
+      if(item.scargo.length >= 55){
+        let cantidad:number = (item.scargo.length / 55)
+        let valor = 174
+        let texto = item.scargo
+        for(let i=0; i < cantidad ; i++ ){
+           valor = valor + 5
+           console.log("el valor :", valor)
+          let newNombre1 = (texto).substr(0,58) + ' -'
+          doc.setFontSize(10);
+          doc.text(newNombre1, tamañoCabecera + 58, SeparacionCabecera + valor);
+          texto = texto.slice(60)
+        }
+
+        // let newNombre1 = (item.scargo).substr(0,60) + ' -'
+        // let newNombre2 = (item.scargo).substr(60,item.scargo.length)
+        // doc.setFontSize(10);
+        // doc.text(newNombre1, tamañoCabecera + 60, SeparacionCabecera + 179);
+    
+        // doc.setFontSize(10);
+        // doc.text(newNombre2, tamañoCabecera + 60, SeparacionCabecera + 184);
+      }else{
+        doc.setFontSize(11);
+        doc.text(item.scargo, tamañoCabecera + 60, SeparacionCabecera + 181);
+      }
+    
 
   }
 
