@@ -7,9 +7,6 @@ import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { DataBusqueda } from './interfaces/data.interface';
-import { TipoCoincidencia } from './interfaces/tipo-coincidencia.interface';
-import { Console } from 'console';
-import { forEach } from 'jszip';
 
 const PDF_EXTENSION = ".pdf";
 @Component({
@@ -48,9 +45,6 @@ export class BusquedaDemandaComponent implements OnInit {
   variableGlobalUser;
   DataUserLogin;
 
-  tipoCoin: TipoCoincidencia;
-
-
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
 
   constructor(
@@ -69,7 +63,7 @@ export class BusquedaDemandaComponent implements OnInit {
       dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
       nidproveedor: 4,
       nidtipolista: 2,
-      scargo: "President of Peru (Jul 2001 - Jul 2006). President of Peru Posible (PP) (Sep 1994 - ). Presidential Candidate (Jan 2011 - Apr 23011) (Nov 2015 - 2016). Economist. Member2 o3f Peru Posible (PP).  Economi3st. Member of Peru 2Posible (PP).  Economistd. 2Member of Peru Posible (2PP).  Econom3ist. Member of Peru 2Posibl2e (PP)." ,
+      scargo: "President of Peru (Jul 2001 - Jul 2006). President of Peru Posible (PP) (Sep 1994 - ). Presidential Candidate (Jan 2011 - Apr 2011) (Nov 2015 - 2016). Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP)." ,
       scoincidencia: "CON COINCIDENCIA",
       sdesproveedor: "WORDLCHECKONE",
       sdestipolista: "LISTAS PEP",
@@ -1109,17 +1103,10 @@ CrearPdf(item) {
         let cantidad:number = (item.scargo.length / 55)
         let valor = 174
         let texto = item.scargo
-        let newNombre1 = ''
-        debugger
         for(let i=0; i < cantidad ; i++ ){
            valor = valor + 5
            console.log("el valor :", valor)
-           if( i < cantidad - 1){
-             newNombre1 = (texto).substr(0,58) + ' -'
-           }else{
-             newNombre1 = (texto).substr(0,58) 
-           }
-          
+          let newNombre1 = (texto).substr(0,58) + ' -'
           doc.setFontSize(10);
           doc.text(newNombre1, tamañoCabecera + 58, SeparacionCabecera + valor);
           texto = texto.slice(59)
