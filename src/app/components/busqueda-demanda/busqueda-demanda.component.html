@@ -149,7 +149,7 @@
                             <tr *ngIf="this.resultadoFinal.length == 0">
                                 <td class="text-center" colspan="13">No se encontró coincidencias</td>
                             </tr>
-                            <tr class="animated fadeIn" *ngFor="let item of dataPrueba; let i = index;">
+                            <tr class="animated fadeIn" *ngFor="let item of resultadoFinal; let i = index;">
                                 <td>{{item.dfechA_BUSQUEDA}}</td>
                                 <td>{{item.susuariO_BUSQUEDA != '' ? item.susuariO_BUSQUEDA : '-'}}</td>
                                 <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
