@@ -1953,6 +1953,17 @@ export class UserconfigService {
       }
     })
   }
+  getListProveedor(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetListProveedor).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
   UpdActualizarCorreoOC(data: any): Promise<any> {
     return new Promise((resolve, reject) => {

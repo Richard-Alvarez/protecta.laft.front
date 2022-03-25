@@ -6,4 +6,5 @@ export interface DataBusqueda{
   P_SNOMCOMPLETO?: string;
   P_SNUM_DOCUMENTO?: string;
   P_TIPOBUSQUEDA?: number;
+  LFUENTES? : any[];
 }

@@ -116,6 +116,50 @@
                   Buscar
                 </button>
               </div>
+              <div ngbDropdown class="d-inline-block">
+                <button
+                  class="btn btn-warning text-white"
+                  id="dropdownForm1"
+                  ngbDropdownToggle
+                >
+                  Listas de Fuentes
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                  <form class="px-4 py-3">
+                    <div class="form-check" *ngFor="let item of listafuentes">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="exampleDropdownFormEmail1"
+                        (click)= "clickcheckbox()"
+                        [(ngModel)]="item.ISCHECK" 
+                        [ngModelOptions]="{standalone: true}"
+                      />
+                      <label
+                        for="exampleDropdownFormEmail1"
+                        style="inline-size: max-content"
+                        >{{item.SDESPROVEEDOR}}</label
+                      >
+                    </div>
+                  </form>
+                  <div class="dropdown-divider"></div>
+                  <button ngbDropdownItem>Buscar</button>
+                </div>
+              </div>
+              <div [hidden]="hideIndividual" class="col-xl-2 col-lg-6 d-flex py-1">
+                <div class="row col-2 col-sm-4 col-md-6 col-lg-8 col-xl-12">
+                  <div class="col-xs-12 col-sm-12">
+                    <label class="fontText">Coincidencia:</label>
+                  </div>
+                  <div class="col-xs-12 col-sm-12">
+                    <select id="tipoDoc" class="form-control buttonSinBorder colorButton" [(ngModel)]="COINCIDENCIA">
+                      <option value="0" title="Todos">Todos</option>
+                      <option value="1" title="DNI">CON COINCIDENCIA</option>
+                      <option value="2" title="RUC">SIN COINCIDENCIA</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

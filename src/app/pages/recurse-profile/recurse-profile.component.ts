@@ -1,4 +1,5 @@
 import { OnInit,Input, Component} from "@angular/core";
+import { FormsModule} from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { ExcelService } from 'src/app/services/excel.service';
