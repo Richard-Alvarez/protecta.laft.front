@@ -98,16 +98,16 @@
                                 <tr>
                                     <td class="fuenteTd">{{formData.NOMBRECOMPLETO}}</td>
                                     <td class="fuenteTd">{{formData.STIPO_AND_NUM_DOC}}</td>
-                                    <td *ngIf="getOcultarDiferentesClientes()" class="fuenteTd">{{formData.SFECHA_NACIMIENTO}}</td>
+                                    <td  class="fuenteTd" *ngIf="getOcultarDiferentesClientes()" class="fuenteTd">{{formData.SFECHA_NACIMIENTO}}</td>
                                     <!-- <div *ngIf="getOcultarEdad()">
                                         <td class="fuenteTd">{{formData.NEDAD}}</td>
                                     </div> -->
                                     <div *ngIf="getOcultarDiferentesClientes()">
                                         <td class="fuenteTd">{{formData.NEDAD}}</td>
                                     </div> 
-                                    <td *ngIf="getOcultarPorGrupo()">{{formData.SNOM_COMPLETO_EMPRESA}}</td>
-                                    <td *ngIf="getOcultarPorGrupo()">{{formData.SNUM_DOCUMENTO_EMPRESA}}</td>
-                                    <td *ngIf="getOcultarPorGrupo()">{{this.CARGO}}</td>
+                                    <td class="fuenteTd" *ngIf="getOcultarPorGrupo()">{{formData.SNOM_COMPLETO_EMPRESA}}</td>
+                                    <td  class="fuenteTd" *ngIf="getOcultarPorGrupo()">{{formData.SNUM_DOCUMENTO_EMPRESA}}</td>
+                                    <td class="fuenteTd" *ngIf="getOcultarPorGrupo()">{{this.CARGO}}</td>
                                     <!-- <td class="fuenteTd">{{formData.SOCUPACION}}</td>
                                         <td class="fuenteTd">{{formData.SCARGO}}</td>
                                         <td class="fuenteTd">{{formData.SZONA_GEOGRAFICA}}</td> -->
@@ -727,10 +727,12 @@
                                 <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif;">
                                     <th scope="col">Nombres Completos</th>
                                     <th scope="col">Tipo y Número de Documento</th>
-                                    <th scope="col">Fecha de Nacimiento</th>
-                                    <th *ngIf="getOcultarEdad()" scope="col">Edad</th>
+                                    <th *ngIf="getOcultarDiferentesClientes()" scope="col">Fecha de Nacimiento</th>
+                                    <!-- <th *ngIf="getOcultarEdad()" scope="col">Edad</th> -->
+                                    <th *ngIf="getOcultarDiferentesClientes()" scope="col">Edad</th>
                                     <th *ngIf="getOcultarPorGrupo()">Nombre Empresa</th>
                                     <th *ngIf="getOcultarPorGrupo()">Numero de Empresa</th>
+                                    <th *ngIf="getOcultarPorGrupo()">Cargo</th>
 
                                     <!-- <th scope="col">Ocupación</th>
                                         <th scope="col">Cargo</th>
@@ -741,12 +743,16 @@
                                 <tr>
                                     <td class="fuenteTd">{{formData.NOMBRECOMPLETO}}</td>
                                     <td class="fuenteTd">{{formData.STIPO_AND_NUM_DOC}}</td>
-                                    <td class="fuenteTd">{{formData.SFECHA_NACIMIENTO}}</td>
-                                    <div *ngIf="getOcultarEdad()">
+                                    <td  class="fuenteTd" *ngIf="getOcultarDiferentesClientes()" class="fuenteTd">{{formData.SFECHA_NACIMIENTO}}</td>
+                                    <!-- <div *ngIf="getOcultarEdad()">
                                         <td class="fuenteTd">{{formData.NEDAD}}</td>
-                                    </div>
-                                    <td *ngIf="getOcultarPorGrupo()">{{formData.SNOM_COMPLETO_EMPRESA}}</td>
-                                    <td *ngIf="getOcultarPorGrupo()">{{formData.SNUM_DOCUMENTO_EMPRESA}}</td>
+                                    </div> -->
+                                    <div *ngIf="getOcultarDiferentesClientes()">
+                                        <td class="fuenteTd">{{formData.NEDAD}}</td>
+                                    </div> 
+                                    <td class="fuenteTd" *ngIf="getOcultarPorGrupo()">{{formData.SNOM_COMPLETO_EMPRESA}}</td>
+                                    <td  class="fuenteTd" *ngIf="getOcultarPorGrupo()">{{formData.SNUM_DOCUMENTO_EMPRESA}}</td>
+                                    <td class="fuenteTd" *ngIf="getOcultarPorGrupo()">{{this.CARGO}}</td>
                                     <!-- <td class="fuenteTd">{{formData.SOCUPACION}}</td>
                                         <td class="fuenteTd">{{formData.SCARGO}}</td>
                                         <td class="fuenteTd">{{formData.SZONA_GEOGRAFICA}}</td> -->
