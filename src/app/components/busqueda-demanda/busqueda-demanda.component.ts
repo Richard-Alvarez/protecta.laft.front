@@ -7,9 +7,6 @@ import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { DataBusqueda } from './interfaces/data.interface';
-import { TipoCoincidencia } from './interfaces/tipo-coincidencia.interface';
-import { Console } from 'console';
-import { forEach } from 'jszip';
 
 const PDF_EXTENSION = ".pdf";
 @Component({
@@ -29,7 +26,6 @@ export class BusquedaDemandaComponent implements OnInit {
   COINCIDENCIA : number = 0;
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
-  resultadoFinalAgregado: any = []
   POR_INDIVIDUAL: number = 1;
   POR_MASIVA: number = 2;
 
@@ -43,15 +39,12 @@ export class BusquedaDemandaComponent implements OnInit {
   resultadoFinal: any[];
   resultadoFinal2: any[];
   listafuentes: any = [];
+  dataPrueba:any = []
   ArchivoAdjunto: any;
   ResultadoExcel: any;
   NombreArchivo: string = '';
   variableGlobalUser;
   DataUserLogin;
-
-  tipoCoin: TipoCoincidencia;
-
-  whoSearch: string;
 
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
 
@@ -69,18 +62,13 @@ export class BusquedaDemandaComponent implements OnInit {
     /*obtener usuario que logeado*/
     let dataUser = localStorage.getItem("resUser")
     this.DataUserLogin = JSON.parse(dataUser)
-    //console.log(this.DataUserLogin)
     /*obtener el periodo actual*/
     this.NPERIODO_PROCESO = parseInt(localStorage.getItem("periodo"));
-    //this.nombreCompleto = null;
-    //this.numeroDoc = null;
     /*obtiene el id usuario del historial*/
     this.variableGlobalUser = this.core.storage.get('usuario');//
     this.idUsuario = this.variableGlobalUser["idUsuario"] //sessionStorage.usuario["fullName"]
     /*obtiene el nombre de usuario del historial de sesion*/
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
-    //console.log("nombre usuario",this.nombreUsuario); //nombreusuario
-    //console.log("codigo busqueda",(this.idUsuario + this.GenerarCodigo()+this.datepipe.transform(this.timestamp,'ddMMyyyyhhmmss')))
   }
 
   archivoExcel: File;
@@ -145,7 +133,7 @@ export class BusquedaDemandaComponent implements OnInit {
         swal.fire({
           title: 'Búsqueda a Demanda',
           icon: 'info',
-          text: 'Para un busqueda mas exacta ingrese tres datos del nombre completo',
+          text: 'Para un busqueda más exacta ingrese tres datos del nombre completo',
           showCancelButton: true,
           cancelButtonText: 'Modificar',
           cancelButtonColor: '#2b245b',
@@ -174,92 +162,119 @@ export class BusquedaDemandaComponent implements OnInit {
     }
   }
 
-  /*servicio de busqueda*/
-  async BusquedaADemandaMixta() {
-    ;
-    let id = this.idUsuario.toString();
-    let cod = this.GenerarCodigo();
-    let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
-    //console.log(`codigo de busqueda ${id} ${cod} ${fecha}`)
-    let data: DataBusqueda = {};
-    data.P_SCODBUSQUEDA = id.concat(cod, fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
-    data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-    data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
-    data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
-    //console.log(`data ${JSON.stringify(data)}`)
-    data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
-    data.LFUENTES = this.listafuentes;
-    if (this.NBUSCAR_POR == 1) {
-      data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
-      data.P_SNUM_DOCUMENTO = this.numeroDoc;
-    }
-    else {
-      data.P_SNOMCOMPLETO = null;
-      data.P_SNUM_DOCUMENTO = null;
-      await this.SubirExcel(data)
-    }
-
+  async provBusquedaReali() {
+    let whoSearch: string = '';
     //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-    if ((this.numeroDoc == null || this.numeroDoc == "") && !(this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
-      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+    if (!(this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
+      whoSearch = 'IDECON y REGISTRO NEGATIVO'
     }
     //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || ((this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1)) {
-      this.whoSearch = 'IDECON y REGISTRO NEGATIVO'
-    } else {
-      this.whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+    else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
+      whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
     }
-    await swal.fire({
-      title: 'Consulta en proceso...',
-      icon: 'info',
-      text: `La búsqueda se realizará en WC, IDECON y REGISTRO NEGATIVO`,
-      showCancelButton: false,
-      showConfirmButton: false,
-      showCloseButton: false,
-      timer: 5000,
+    return whoSearch;
+  }
+  /*servicio de busqueda*/
+  async BusquedaADemandaMixta() {
+    swal.fire({
+      title: 'Búsqueda a Demanda',
+      icon: 'question',
+      text: '¿Realizar Búsqueda?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#2b245b',
+      confirmButtonColor: '#FA7000',
+      confirmButtonText: 'Aceptar',
+      showCloseButton: true,
       customClass: {
         closeButton: 'OcultarBorde'
       },
-    })
-      .then(async (result) => {
-        if (result) {
-          /*inicio*/
-          this.core.loader.show()
-          let respuestaService: any = await this.getBusquedaADemanda(data);
-          if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-
-            this.resultadoFinalAgregado = respuestaService.items;
-          }
-          /*si no existe respuesta o retorna codigo 1*/
-          else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
-            this.core.loader.hide()
-            swal.fire({
-              title: 'Comuníquese con soporte',
-              icon: 'warning',
-              text: 'ERROR: ' + respuestaService.mensaje,
-              //titleText: 'comuniuquese con soporte',
-              showCancelButton: false,
-              showConfirmButton: true,
-              confirmButtonColor: '#FA7000',
-              confirmButtonText: 'Continuar',
-              showCloseButton: true,
-              customClass: {
-                closeButton: 'OcultarBorde'
-              },
-            })
-          }
-          if (this.resultadoFinal.length != 0) {
-            this.encontroRespuesta = false;
-            this.noEncontroRespuesta = true;
-          } else {
-            this.encontroRespuesta = true;
-            this.noEncontroRespuesta = false
-          }
-          this.GuardarData()
-          this.core.loader.hide()
-          /*fin*/
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let id = this.idUsuario.toString();
+        let cod = this.GenerarCodigo();
+        let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
+        let data: DataBusqueda = {};
+        data.P_SCODBUSQUEDA = id.concat(cod, fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
+        data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+        data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
+        data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
+        data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
+        data.LFUENTES = this.listafuentes;
+        if (this.NBUSCAR_POR == 1) {
+          data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
+          data.P_SNUM_DOCUMENTO = this.numeroDoc;
         }
-      });
+        else {
+          data.P_SNOMCOMPLETO = null;
+          data.P_SNUM_DOCUMENTO = null;
+          await this.SubirExcel(data)
+        }
+        await swal.fire({
+          title: 'Consulta en proceso...',
+          icon: 'info',
+          text: `La búsqueda se realizará en ${await this.provBusquedaReali()}`,
+          showCancelButton: false,
+          showConfirmButton: false,
+          showCloseButton: false,
+          timer: 5000,
+          customClass: {
+            closeButton: 'OcultarBorde'
+          },
+        }).then(async (result) => {
+          if (result) {
+            /*inicio*/
+            this.core.loader.show()
+            let respuestaService: any = await this.getBusquedaADemanda(data);
+            console.log(respuestaService)
+            if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
+              this.resultadoFinal2 = respuestaService.items;
+              this.resultadoFinal = this.resultadoFinal2
+              this.filterCoincidencia();
+            }
+            /*si no existe respuesta o retorna codigo 1*/
+            else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
+              this.core.loader.hide()
+              swal.fire({
+                title: 'Comuníquese con soporte',
+                icon: 'warning',
+                text: 'ERROR: ' + respuestaService.mensaje,
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonColor: '#FA7000',
+                confirmButtonText: 'Continuar',
+                showCloseButton: true,
+                customClass: {
+                  closeButton: 'OcultarBorde'
+                },
+              })
+            }
+            if (this.resultadoFinal.length != 0) {
+              this.encontroRespuesta = false;
+              this.noEncontroRespuesta = true;
+            } else {
+              this.encontroRespuesta = true;
+              this.noEncontroRespuesta = false
+            }
+            this.GuardarData()
+            this.core.loader.hide()
+            /*fin*/
+          }
+        });
+      }
+    })
+  }
+  async filterCoincidencia(){
+    if(this.COINCIDENCIA == 1){
+      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("CON"));
+    }else if (this.COINCIDENCIA == 2){
+      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("SIN"))
+    }else{
+      this.resultadoFinal = this.resultadoFinal2
+    }
+  }
+  getResultados(){
+    return 
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
@@ -497,10 +512,79 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     return ''
   }
+  /*en desuso, descargaba la fila del resultado en formato excel*/
+  exportListToExcelIndividual(i) {
+    let resultado: any = []
+    resultado = this.resultadoFinal[i]
+    
+    let Newresultado: any = []
+    let resulFinal: any = []
+    if (resultado != null) {
+      Newresultado.push(resultado)
+      let data = []
+      Newresultado.forEach(t => {
+        let _data = {
+          "Fecha y Hora de Búsqueda": t.DFECHA_BUSQUEDA,
+          "Usuario que Realizó la Búsqueda": t.SUSUARIO_BUSQUEDA,
+          "Tipo de Documento": t.STIPO_DOCUMENTO,
+          "Número de Documento": t.SNUM_DOCUMENTO,
+          "Nombre/Razón Social": t.SNOMBRE_COMPLETO,
+          "Porcentaje de coincidencia": t.SPORCEN_COINCIDENCIA,
+          "Tipo de Persona	": t.STIPO_PERSONA,
+          "Cargo": (t.SCARGO == null || t.SCARGO == "") ? '-' : t.SCARGO,
+          "Lista": t.SLISTA,
+          "Proveedor": t.SPROVEEDOR,
+          "Coincidencia": t.STIPOCOINCIDENCIA
+        }
+        data.push(_data);
+      });
+      this.excelService.exportAsExcelFile(data, "Resultados Búsqueda a Demanda");
+    } else {
+      swal.fire({
+        title: 'Búsqueda a Demanda',
+        icon: 'warning',
+        confirmButtonColor: '#FA7000',
+        confirmButtonText: 'Continuar',
+        showCloseButton: true,
+        customClass: {
+          closeButton: 'OcultarBorde'
+        },
+
+      }).then((result) => {
+      })
+      return
+    }
+  }
+  /*en caso sea masiva, descargara una plantilla para guia de como se debe subir el archivo*/
+  DescargarPlantilla() {
+    let data = []
+    let dataExample: any = [
+      {
+        "Nombre": 'POZO GOMERO JOSE RENATO',
+        "Tipo_Documento": 'DNI',
+        "Documento": '46610806'
+      },
+      {
+        "Nombre": 'MI FARMA S.A.C',
+        "Tipo_Documento": 'RUC',
+        "Documento": '1425785698'
+      }
+    ]
+    dataExample.forEach(t => {
+      let _data = {
+        "Nombre": t.Nombre,
+        "Tipo de Documento": t.Tipo_Documento,
+        "Documento": t.Documento
+      }
+      data.push(_data);
+    });
+    this.excelService.exportAsExcelFile(data, "Plantilla Búsqueda a Demanda");
+  }
   /*descarga todos los resultados de la busqueda a demanda en formato excel*/
   exportListToExcel() {
     let resultado: any = []
-    resultado = this.resultadoFinalAgregado
+    resultado = this.resultadoFinal
+    debugger;
     let Newresultado: any = []
     if (resultado != null && resultado.length > 0) {
       for (let i = 0; i < resultado.length; i++) {
@@ -543,7 +627,7 @@ export class BusquedaDemandaComponent implements OnInit {
         obj["COINCIDENCIA ENCONTRADA4"] = t.snombrE_COMPLETO
         obj["COINCIDENCIA ENCONTRADA5"] = t.sporceN_COINCIDENCIA
         obj["COINCIDENCIA ENCONTRADA6"] = t.stipocoincidencia
-        obj["COINCIDENCIA ENCONTRADA7"] = t.cargo
+        obj["COINCIDENCIA ENCONTRADA7"] = t.scargo
         data.push(obj);
       });
       this.excelService.exportAsExcelDemandaFile(data, "Resultados Búsqueda a Demanda");
@@ -890,7 +974,21 @@ export class BusquedaDemandaComponent implements OnInit {
       doc.rect(25, SeparacionCabecera + 145, 160, 10);
       doc.rect(25, SeparacionCabecera + 155, 160, 10);
       doc.rect(25, SeparacionCabecera + 165, 160, 10);
-      doc.rect(25, SeparacionCabecera + 175, 160, 10);
+      
+      if(item.scargo.length >= 55){
+        let cantidad:number = (item.scargo.length / 55)
+        let tamanoCuadro = 10
+        let lineaVertical = 235
+        for(let i=0; i < cantidad ; i++ ){
+          tamanoCuadro = tamanoCuadro + 4
+          lineaVertical = lineaVertical + 4
+        }
+        doc.rect(25, SeparacionCabecera + 175, 160, tamanoCuadro);
+        doc.line(80, lineaVertical, 80, 235);
+      }else{
+        doc.rect(25, SeparacionCabecera + 175, 160, 10);
+      }
+      //doc.rect(25, SeparacionCabecera + 175, 160, 10);
       doc.setLineWidth(0.1);
       doc.line(80, 235, 80, 155); // vertical line
 
@@ -945,11 +1043,36 @@ export class BusquedaDemandaComponent implements OnInit {
       doc.setFontSize(11);
       doc.text(item.stipocoincidencia, tamañoCabecera + 60, SeparacionCabecera + 171);
 
-      doc.setFontSize(11);
-      doc.text('Cargo PEP', tamañoCabecera + 2, SeparacionCabecera + 181);
-      doc.setFontSize(11);
-      doc.text(item.scargo, tamañoCabecera + 60, SeparacionCabecera + 181);
+       doc.setFontSize(11);
+       doc.text('Cargo PEP', tamañoCabecera + 2, SeparacionCabecera + 181);
+      // doc.setFontSize(11);
+      // doc.text(item.scargo, tamañoCabecera + 60, SeparacionCabecera + 181);
 
+      if(item.scargo.length >= 55){
+        let cantidad:number = (item.scargo.length / 55)
+        let valor = 174
+        let texto = item.scargo
+        for(let i=0; i < cantidad ; i++ ){
+           valor = valor + 5
+           console.log("el valor :", valor)
+          let newNombre1 = (texto).substr(0,58) + ' -'
+          doc.setFontSize(10);
+          doc.text(newNombre1, tamañoCabecera + 58, SeparacionCabecera + valor);
+          texto = texto.slice(59)
+        }
+
+        // let newNombre1 = (item.scargo).substr(0,60) + ' -'
+        // let newNombre2 = (item.scargo).substr(60,item.scargo.length)
+        // doc.setFontSize(10);
+        // doc.text(newNombre1, tamañoCabecera + 60, SeparacionCabecera + 179);
+    
+        // doc.setFontSize(10);
+        // doc.text(newNombre2, tamañoCabecera + 60, SeparacionCabecera + 184);
+      }else{
+        doc.setFontSize(11);
+        doc.text(item.scargo, tamañoCabecera + 60, SeparacionCabecera + 181);
+      }
+    
 
     }
 
