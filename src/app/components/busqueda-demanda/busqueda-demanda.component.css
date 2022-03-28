@@ -548,3 +548,13 @@ th[colspan] {
   background-color: #ffda9e
   ;
 }
+
+.color-second-button {
+        border-color: #fd7e14;
+        color: #fd7e14;
+}
+button .color-secod-button :hover {
+    background-color:#fd7e14;
+    border-color: white;
+    color: white;
+}
