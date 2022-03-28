@@ -23,7 +23,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
   encontroRespuesta: boolean = true;
   noEncontroRespuesta: boolean = false;
-
+  COINCIDENCIA : number = 0;
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
   POR_INDIVIDUAL: number = 1;
@@ -34,7 +34,7 @@ export class BusquedaDemandaComponent implements OnInit {
   numeroDoc: string = null;
   idUsuario: number;
   nombreUsuario: string;
-
+  listafuentes : any = [];
   resulBusqueda: any = [];
   resultadoFinal: any[];
   resultadoFinal2: any[];
@@ -267,6 +267,7 @@ export class BusquedaDemandaComponent implements OnInit {
         data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
         data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
         data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
+        data.LFUENTES = this.listafuentes;
         if (this.NBUSCAR_POR == 1) {
           data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
           data.P_SNUM_DOCUMENTO = this.numeroDoc;
@@ -293,7 +294,9 @@ export class BusquedaDemandaComponent implements OnInit {
             this.core.loader.show()
             let respuestaService: any = await this.getBusquedaADemanda(data);
             if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-              this.resultadoFinal = respuestaService.items;
+              this.resultadoFinal2 = respuestaService.items;
+              this.resultadoFinal = this.resultadoFinal2
+              this.filterCoincidencia();
             }
             /*si no existe respuesta o retorna codigo 1*/
             else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
@@ -326,6 +329,15 @@ export class BusquedaDemandaComponent implements OnInit {
         });
       }
     })
+  }
+  async filterCoincidencia(){
+    if(this.COINCIDENCIA == 1){
+      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("CON"));
+    }else if (this.COINCIDENCIA == 2){
+      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("SIN"))
+    }else{
+      this.resultadoFinal = this.resultadoFinal2
+    }
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
