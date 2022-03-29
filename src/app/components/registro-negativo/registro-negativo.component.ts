@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { mergeNsAndName, TransitiveCompileNgModuleMetadata } from '@angular/compiler';
-//import { Workbook } from 'exceljs';
+import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-registro-negativo',
@@ -395,61 +395,77 @@ exportListToExcel() {
 abc=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","U","V","W","X","Y","Z"];
 abcAdapatado = ["A","B","C","D","E","F","G","H","I"];
 dataReport2
-// exportExcel() {
+exportExcel() {
 
   
 
-//   const workBook = new Workbook();
-//   const workSheet = workBook.addWorksheet('test');
-//   const excelData = [];
-//   const headerNames = Object.keys(this.listNegativa[0]);
-//   workSheet.addRow([
-//     "Número de Documento",
-//      "Nombre Completo",
-//      "Señal Laft",
-//      "Filtro",
-//      "Tipo de Persona",
-//      "Doc. Referencia",
-//      "Tipo Lista",
-//      "Fecha Descubrimiento",
-//      "Pais"
-//     ]);
+  const workBook = new Workbook();
+  const workSheet = workBook.addWorksheet('test');
+  const excelData = [];
+  const headerNames = Object.keys(this.listNegativa[0]);
+  workSheet.addRow([
+    "Número de Documento",
+     "Nombre Completo",
+     "Señal Laft",
+     "Filtro",
+     "Tipo de Persona",
+     "Doc. Referencia",
+     "Tipo Lista",
+     "Fecha Descubrimiento",
+     "Pais"
+    ]);
 
-//     this.abcAdapatado.forEach(item =>{
-//       workSheet.getCell(`${item}1`).fill = {
-//         type: 'pattern',
-//         pattern: 'solid',
-//         fgColor: { argb: 'F08080' },
-//       };
-//     })
+    this.abcAdapatado.forEach((item,index) =>{
+      workSheet.getCell(`${item}1`).font =  {color: {argb: 'FFFFFF'}}
+      workSheet.getCell(`${item}1`).border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+      if(index >= 3){
+        workSheet.getCell(`${item}1`).fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '0070C0' },
+          
+          }
+        
+          
+      }else{
+        workSheet.getCell(`${item}1`).fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '44546A' },
+          }
+      }
+    })
 
-//   this.listNegativa.forEach((element) => {
-//     const row = workSheet.addRow([ element.SNUMIDENTIDAD,
-//     element.SNOM_COMPLETO,
-//    element.SSENAL_LAFT,
-//    element.NOMBRE,
-//     element.STIPOPERSONA,
-//      element.SDOCREFERENCIA,
-//      element.STIPOLISTA,
-//      element.SFEDESCUBRIMIENTO,
-//      element.STIPODOC_PAIS]);
+  this.listNegativa.forEach((element) => {
+    const row = workSheet.addRow([ element.SNUMIDENTIDAD,
+    element.SNOM_COMPLETO,
+   element.SSENAL_LAFT,
+   element.NOMBRE,
+    element.STIPOPERSONA,
+     element.SDOCREFERENCIA,
+     element.STIPOLISTA,
+     element.SFEDESCUBRIMIENTO,
+     element.STIPODOC_PAIS]);
    
-//     for ( let i = 1; i < this.listNegativa.length ; i++) {
-//       const col = row.getCell(i);
-//       // col.fill = {
-//       //   type: 'pattern',
-//       //   pattern: 'solid',
-//       //   fgColor: {argb:  'FFC000'}
-//       // };
-//     }
-//   });
+    for ( let i = 1; i < this.listNegativa.length ; i++) {
+      const col = row.getCell(i);
+      if(i == 3){
+         col.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: {argb:  'FFC000'}
+      };
+      }
+     
+    }
+  });
 
-//   workBook.xlsx.writeBuffer().then( data => {
-//     let blob = new Blob([data], {
-//       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-//     });
-//     saveAs(blob, 'test.xlsx');
-//   })
-// }
+  workBook.xlsx.writeBuffer().then( data => {
+    let blob = new Blob([data], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    });
+    saveAs(blob, 'test.xlsx');
+  })
+}
 
 }
