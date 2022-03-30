@@ -23,7 +23,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
   encontroRespuesta: boolean = true;
   noEncontroRespuesta: boolean = false;
-
+  COINCIDENCIA : number = 0;
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
   POR_INDIVIDUAL: number = 1;
@@ -34,7 +34,7 @@ export class BusquedaDemandaComponent implements OnInit {
   numeroDoc: string = null;
   idUsuario: number;
   nombreUsuario: string;
-
+  listafuentes : any = [];
   resulBusqueda: any = [];
   resultadoFinal: any[];
   resultadoFinal2: any[];
@@ -54,90 +54,9 @@ export class BusquedaDemandaComponent implements OnInit {
     private excelService: ExcelService,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.resultadoFinal = []
-    this.resultadoFinal2 =
-      [{ DFECHA_BUSQUEDA: '04/01/2022 11:48:36 a.m.', SCARGO: "-", SLISTA: "LISTAS INTERNACIONALES", SNOMBRE_BUSQUEDA: "CHAVEZ CONDORI CESAR AUGUSTO", SNOMBRE_COMPLETO: "Cesar Augusto CONDORI TORRES", SNOMBRE_TERMINO: "CONDORI,César Augusto", SNUM_DOCUMENTO: "01319667", SPORCEN_COINCIDENCIA: 75, STIPO_DOCUMENTO: "DNI", STIPO_PERSONA: "PERSONA NATURAL" },
-      ]
-     this.dataPrueba = [{
-      dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
-      nidproveedor: 4,
-      nidtipolista: 2,
-      scargo: "President of Peru (Jul 2001 - Jul 2006). President of Peru Posible (PP) (Sep 1994 - ). Presidential Candidate (Jan 2011 - Apr 2011) (Nov 2015 - 2016). Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP).  Economist. Member of Peru Posible (PP)." ,
-      scoincidencia: "CON COINCIDENCIA",
-      sdesproveedor: "WORDLCHECKONE",
-      sdestipolista: "LISTAS PEP",
-      snombrE_BUSQUEDA: " ALEJANDRO TOLEDO MANRIQUE",
-      snombrE_COMPLETO: "Alejandro Celestino TOLEDO MANRIQUE",
-      snombrE_TERMINO: "TOLEDO MANRIQUE,Alejandro",
-      snuM_DOCUMENTO: "08774976",
-      snumdoC_BUSQUEDA: null,
-      sporceN_COINCIDENCIA: "100",
-      sporceN_SCORE: null,
-      stipO_DOCUMENTO: "DNI",
-      stipO_PERSONA: "PERSONA NATURAL",
-      stipocoincidencia: "NOMBRE",
-      susuariO_BUSQUEDA: "German Salinas Arroyo",
-     },
-     {
-      dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
-      nidproveedor: 4,
-      nidtipolista: 2,
-      scargo: "President of Peru (Jul 2001 - Jul 2006). President o.",
-      scoincidencia: "CON COINCIDENCIA",
-      sdesproveedor: "WORDLCHECKONE",
-      sdestipolista: "LISTAS PEP",
-      snombrE_BUSQUEDA: " ALEJANDRO TOLEDO MANRIQUE",
-      snombrE_COMPLETO: "Alejandro Celestino TOLEDO MANRIQUE",
-      snombrE_TERMINO: "TOLEDO MANRIQUE,Alejandro",
-      snuM_DOCUMENTO: "08774976",
-      snumdoC_BUSQUEDA: null,
-      sporceN_COINCIDENCIA: "100",
-      sporceN_SCORE: null,
-      stipO_DOCUMENTO: "DNI",
-      stipO_PERSONA: "PERSONA NATURAL",
-      stipocoincidencia: "NOMBRE",
-      susuariO_BUSQUEDA: "German Salinas Arroyo",
-     },
-     {
-      dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
-      nidproveedor: 4,
-      nidtipolista: 2,
-      scargo: "President of Peru (Jul 2001 - Jul 2006). President of Peru Posible (PP) (Sep 1994 - ). Presidential Candidate (Jan 2011 - Apr 2011).",
-      scoincidencia: "CON COINCIDENCIA",
-      sdesproveedor: "WORDLCHECKONE",
-      sdestipolista: "LISTAS PEP",
-      snombrE_BUSQUEDA: " ALEJANDRO TOLEDO MANRIQUE",
-      snombrE_COMPLETO: "Alejandro Celestino TOLEDO MANRIQUE",
-      snombrE_TERMINO: "TOLEDO MANRIQUE,Alejandro",
-      snuM_DOCUMENTO: "08774976",
-      snumdoC_BUSQUEDA: null,
-      sporceN_COINCIDENCIA: "100",
-      sporceN_SCORE: null,
-      stipO_DOCUMENTO: "DNI",
-      stipO_PERSONA: "PERSONA NATURAL",
-      stipocoincidencia: "NOMBRE",
-      susuariO_BUSQUEDA: "German Salinas Arroyo",
-     },{
-      dfechA_BUSQUEDA: "22/03/2022 4:00:08 PM",
-      nidproveedor: 4,
-      nidtipolista: 2,
-      scargo: "President of Peru (Jul 2001 - Jul 2006). President of Peru Posible (PP) (Sep 1994 - ).",
-      scoincidencia: "CON COINCIDENCIA",
-      sdesproveedor: "WORDLCHECKONE",
-      sdestipolista: "LISTAS PEP",
-      snombrE_BUSQUEDA: " ALEJANDRO TOLEDO MANRIQUE",
-      snombrE_COMPLETO: "Alejandro Celestino TOLEDO MANRIQUE",
-      snombrE_TERMINO: "TOLEDO MANRIQUE,Alejandro",
-      snuM_DOCUMENTO: "08774976",
-      snumdoC_BUSQUEDA: null,
-      sporceN_COINCIDENCIA: "100",
-      sporceN_SCORE: null,
-      stipO_DOCUMENTO: "DNI",
-      stipO_PERSONA: "PERSONA NATURAL",
-      stipocoincidencia: "NOMBRE",
-      susuariO_BUSQUEDA: "German Salinas Arroyo",
-     }] 
+    await this.getLista();
     /*obtener usuario que logeado*/
     let dataUser = localStorage.getItem("resUser")
     this.DataUserLogin = JSON.parse(dataUser)
@@ -149,7 +68,15 @@ export class BusquedaDemandaComponent implements OnInit {
     /*obtiene el nombre de usuario del historial de sesion*/
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
   }
+  async getLista() {
 
+    this.listafuentes = await this.userConfigService.getListProveedor();
+    this.listafuentes.forEach(element => {
+      element.ISCHECK = true;
+    });
+    console.log(this.listafuentes)
+    return this.listafuentes;
+  }
   archivoExcel: File;
   clearInsert() { this.archivoExcel = null; }
   lastFileAt: Date;
@@ -267,6 +194,7 @@ export class BusquedaDemandaComponent implements OnInit {
         data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
         data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
         data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
+        data.LFUENTES = this.listafuentes;
         if (this.NBUSCAR_POR == 1) {
           data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
           data.P_SNUM_DOCUMENTO = this.numeroDoc;
@@ -293,7 +221,9 @@ export class BusquedaDemandaComponent implements OnInit {
             this.core.loader.show()
             let respuestaService: any = await this.getBusquedaADemanda(data);
             if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
-              this.resultadoFinal = respuestaService.items;
+              this.resultadoFinal2 = respuestaService.items;
+              this.resultadoFinal = this.resultadoFinal2
+              this.filterCoincidencia();
             }
             /*si no existe respuesta o retorna codigo 1*/
             else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
@@ -326,6 +256,15 @@ export class BusquedaDemandaComponent implements OnInit {
         });
       }
     })
+  }
+  async filterCoincidencia(){
+    if(this.COINCIDENCIA == 1){
+      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("CON"));
+    }else if (this.COINCIDENCIA == 2){
+      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("SIN"))
+    }else{
+      this.resultadoFinal = this.resultadoFinal2
+    }
   }
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
