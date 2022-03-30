@@ -14,7 +14,7 @@ class Rutas {
   private basePolicy: string = 'http://190.216.170.173/ApiPoliza/api/';
   //private basePolicy: string = 'https://soatservicios.protectasecurity.pe/ApiPoliza/api/';
   //private basePolicy: string = 'https://localhost:5001/api/';
-
+ 
   public urlLogin: string = this.base + "login";
   public urlCaptcha: string = this.base + "login/getcaptcha";
   public urlMenu: string = this.base + "menuConfig/getOptionList";
