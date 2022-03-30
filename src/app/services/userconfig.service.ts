@@ -1800,6 +1800,18 @@ export class UserconfigService {
       }
     });
   }
+  ObtenerPlantillaCotizacion(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlObtenerPlantillaCotizacion, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
 
   GetRegistrarDatosExcelGC(data: any): Promise<any> {
     return new Promise((resolve, reject) => {

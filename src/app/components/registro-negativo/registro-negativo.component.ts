@@ -401,6 +401,7 @@ exportExcel() {
 
   const workBook = new Workbook();
   const workSheet = workBook.addWorksheet('test');
+ 
   const excelData = [];
   const headerNames = Object.keys(this.listNegativa[0]);
   workSheet.addRow([
@@ -464,8 +465,51 @@ exportExcel() {
     let blob = new Blob([data], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
-    saveAs(blob, 'test.xlsx');
+    saveAs(blob,  "Lista registro negativo");
   })
+}
+
+filter: any = {};
+excel() {
+
+  try {
+    this.userConfigService.ObtenerPlantillaCotizacion(this.filter).then(res => {
+      
+      if (res == '') {
+        Swal.fire('Información', 'Error al descargar Excel o no se encontraron resultados', 'error');
+      } else {
+        const blob = this.b64toBlob(res);
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a')
+        a.href = blobUrl
+        a.download = 'Reporte de Cotizaciones.xlsx'
+        a.click()
+      };
+    });
+  } catch (error) {
+    
+    Swal.fire('Información', 'Error al descargar Excel', 'error');
+  }
+}
+
+b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+  const byteCharacters = atob(b64Data);
+  const byteArrays = [];
+
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  const blob = new Blob(byteArrays, { type: contentType });
+  return blob;
 }
 
 }

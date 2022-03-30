@@ -1,10 +1,10 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/';
+  private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
@@ -255,6 +255,7 @@ class Rutas {
   public urlgetDeleteRegistrosNegativos: string = this.base + "monitoreoSenales/getDeleteRegistrosNegativos"
   public urlGetListProveedor: string = this.base + "monitoreoSenales/getListProveedor"
   
+  public urlObtenerPlantillaCotizacion: string = this.base + "monitoreoSenales/ObtenerPlantillaCotizacion"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
