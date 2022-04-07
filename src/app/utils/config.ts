@@ -256,6 +256,7 @@ class Rutas {
   public urlGetListProveedor: string = this.base + "monitoreoSenales/getListProveedor"
   
   public urlObtenerPlantillaCotizacion: string = this.base + "monitoreoSenales/ObtenerPlantillaCotizacion"
+  public urlGetSetearDataExcel: string = this.base + "monitoreoSenales/GetSetearDataExcel"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
