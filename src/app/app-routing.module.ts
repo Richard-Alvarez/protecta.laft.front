@@ -90,12 +90,9 @@ import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 import { ComplementoSinSennalComponent } from './../app/complemento-sin-sennal/complemento-sin-sennal.component';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 import { RegistroNegativoComponent } from '../app/components/registro-negativo/registro-negativo.component';
-<<<<<<< HEAD
 import { Es10Component } from './components/es10/es10.component';
 import { ActividadComponent } from './components/actividad/actividad.component';
-=======
 import { InformeN1Component } from '../app/components/informe-n1/informe-n1.component';
->>>>>>> 2af8ca9f25105b7c1961428c45c36e2e15ca9653
 
 //fin formularios antiguos
 

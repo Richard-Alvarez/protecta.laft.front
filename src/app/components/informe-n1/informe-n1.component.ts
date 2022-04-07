@@ -14,7 +14,7 @@ export class InformeN1Component implements OnInit {
   }
 
   setDate(){
-    this.userConfigService.GetSetearDataExcel()
+    //this.userConfigService.GetSetearDataExcel()
   }
 
 }
