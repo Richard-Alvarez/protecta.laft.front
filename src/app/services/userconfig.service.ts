@@ -1812,6 +1812,18 @@ export class UserconfigService {
       }
     });
   }
+  ObtenerPlantillaEs10(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlObtenerPlantillaEs10).subscribe(response => {
+          debugger;
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
   GetRegistrarDatosExcelGC(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -2051,6 +2063,18 @@ export class UserconfigService {
       }
     });
   }
+  
+  GetRegistrarDatosExcelEs10(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetRegistrarDatosExcelEs10, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
 
   
 
@@ -2059,6 +2083,18 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlGetListaRegistroNegativo, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  
+  GetListaEs10(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaEs10, data).subscribe((response) => {
           return resolve(response);
         });
       } catch (error) {

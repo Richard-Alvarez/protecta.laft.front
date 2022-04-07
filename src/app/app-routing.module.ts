@@ -90,6 +90,8 @@ import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 import { ComplementoSinSennalComponent } from './../app/complemento-sin-sennal/complemento-sin-sennal.component';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 import { RegistroNegativoComponent } from '../app/components/registro-negativo/registro-negativo.component';
+import { Es10Component } from './components/es10/es10.component';
+import { ActividadComponent } from './components/actividad/actividad.component';
 
 //fin formularios antiguos
 
@@ -109,6 +111,8 @@ const routes: Routes = [
   { path: 'user-config', component: UserConfigComponent },
   //LAFT II - MENÚS
   { path: 'alert-management', component: AlertManagementComponent },
+  { path: 'es10', component: Es10Component },
+  { path: 'actividad', component: ActividadComponent},
   { path: 'forms-database', component: FormsDatabaseComponent },
   { path: 'work-module', component: WorkModuleComponent },
   { path: 'customer-manager', component: CustomerManagerComponent },

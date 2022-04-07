@@ -1,11 +1,11 @@
 class Rutas {
 
-  private base: string = 'http://localhost:5001/api/';
+  //private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
-  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -250,12 +250,15 @@ class Rutas {
   public urlgetCorreoCustomAction: string = this.base + "monitoreoSenales/getCorreoCustomAction"
   public urlgetCuerpoCorreo: string = this.base + "monitoreoSenales/getCuerpoCorreo"
   public urlGetRegistrarDatosExcelRegistronegativo: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelRegistronegativo"
+  public urlGetRegistrarDatosExcelEs10: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelEs10"
   public urlpreCargaRegistrosNegativos: string = this.base + "monitoreoSenales/preCargaRegistrosNegativos"
-  public urlGetListaRegistroNegativo: string = this.base + "monitoreoSenales/GetListaRegistroNegativo"
   public urlgetDeleteRegistrosNegativos: string = this.base + "monitoreoSenales/getDeleteRegistrosNegativos"
   public urlGetListProveedor: string = this.base + "monitoreoSenales/getListProveedor"
+  public urlGetListaRegistroNegativo: string = this.base + "monitoreoSenales/GetListaRegistroNegativo"
+  public urlGetListaEs10: string = this.base + "monitoreoSenales/GetListaEs10"
   
   public urlObtenerPlantillaCotizacion: string = this.base + "monitoreoSenales/ObtenerPlantillaCotizacion"
+  public urlObtenerPlantillaEs10: string = this.base + "monitoreoSenales/obtenerPlantillaEs10"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
