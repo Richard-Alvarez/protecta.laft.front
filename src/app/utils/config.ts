@@ -258,7 +258,11 @@ class Rutas {
   public urlGetListaEs10: string = this.base + "monitoreoSenales/GetListaEs10"
   
   public urlObtenerPlantillaCotizacion: string = this.base + "monitoreoSenales/ObtenerPlantillaCotizacion"
+<<<<<<< HEAD
   public urlObtenerPlantillaEs10: string = this.base + "monitoreoSenales/obtenerPlantillaEs10"
+=======
+  public urlGetSetearDataExcel: string = this.base + "monitoreoSenales/GetSetearDataExcel"
+>>>>>>> 2af8ca9f25105b7c1961428c45c36e2e15ca9653
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

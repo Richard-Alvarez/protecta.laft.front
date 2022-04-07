@@ -1825,6 +1825,19 @@ export class UserconfigService {
     })
   }
 
+  GetSetearDataExcel(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetSetearDataExcel, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
   GetRegistrarDatosExcelGC(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
