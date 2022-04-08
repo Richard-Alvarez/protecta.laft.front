@@ -194,10 +194,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 import { RegistroNegativoComponent } from './components/registro-negativo/registro-negativo.component';
+import { Es10Component } from './components/es10/es10.component';
+import { ActividadComponent } from './components/actividad/actividad.component';
 import { InformeN1Component } from './components/informe-n1/informe-n1.component';
 import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
-
-
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -360,7 +360,10 @@ import { InformeKRIComponent } from './components/informe-kri/informe-kri.compon
     SearchPepComponent,
     RegistroNegativoComponent,
     InformeN1Component,
-    InformeKRIComponent
+    InformeKRIComponent,
+    Es10Component,
+    ActividadComponent,
+    InformeN1Component
 
    
     //Validaciones

@@ -250,12 +250,15 @@ class Rutas {
   public urlgetCorreoCustomAction: string = this.base + "monitoreoSenales/getCorreoCustomAction"
   public urlgetCuerpoCorreo: string = this.base + "monitoreoSenales/getCuerpoCorreo"
   public urlGetRegistrarDatosExcelRegistronegativo: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelRegistronegativo"
+  public urlGetRegistrarDatosExcelEs10: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelEs10"
   public urlpreCargaRegistrosNegativos: string = this.base + "monitoreoSenales/preCargaRegistrosNegativos"
-  public urlGetListaRegistroNegativo: string = this.base + "monitoreoSenales/GetListaRegistroNegativo"
   public urlgetDeleteRegistrosNegativos: string = this.base + "monitoreoSenales/getDeleteRegistrosNegativos"
   public urlGetListProveedor: string = this.base + "monitoreoSenales/getListProveedor"
+  public urlGetListaRegistroNegativo: string = this.base + "monitoreoSenales/GetListaRegistroNegativo"
+  public urlGetListaEs10: string = this.base + "monitoreoSenales/GetListaEs10"
   
   public urlObtenerPlantillaCotizacion: string = this.base + "monitoreoSenales/ObtenerPlantillaCotizacion"
+  public urlObtenerPlantillaEs10: string = this.base + "monitoreoSenales/obtenerPlantillaEs10"
   public urlGetSetearDataExcel: string = this.base + "monitoreoSenales/GetSetearDataExcel"
   
   LimpiarDataGestor() {
