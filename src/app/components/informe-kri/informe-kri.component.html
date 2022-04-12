@@ -36,50 +36,6 @@
 
                         </div>
 
-
-                        <div class="borderFormat">
-                            <div class="container">
-                                
-
-                                <div class="row justify-content-md-center pt-4">
-                                    <div class="col-lg-2"
-                                        style="display: flex;justify-content: center;align-items: center;">
-                                        <label class="fontText">Seleccionar el Año:</label>
-                                    </div>
-                                    <div class="col-lg-3"
-                                        style="display: flex;justify-content: center;align-items: center;">
-
-                                        <select [(ngModel)]="IDListAnnoGlobal" name="userId" (change)="changeAnnoGlobal()"
-                                            class="form-control buttonSinBorder colorButton">
-                                            <option value="0" selected>Todos</option>
-                                            <option *ngFor="let item of NewListAnnos" value="{{item.ANNO}}"
-                                                id="profileIdSelected">
-                                                {{item.ANNO}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-2"
-                                        style="display: flex;justify-content: center;align-items: center;">
-                                        <label class="fontText">Seleccionar el Periodo:</label> 
-                                    </div>
-                                    <div class="col-lg-3"
-                                        style="display: flex;justify-content: center;align-items: center;">
-
-                                        <select [(ngModel)]="IDListPeriodoGlobal" name="userId" (change)="ListarHistorial(IDListPeriodoGlobal)"
-                                            class="form-control buttonSinBorder colorButton"> 
-                                            <option value="0" selected>Todos</option>
-                                            <option *ngFor="let item of NewListPeriodos" value="{{item.periodo}}" id="profileIdSelected" >
-                                                {{item.periodo}}</option>
-                                        </select>
-                                    </div>
- 
-                                </div>
-
-                                
-
-                            </div>
-
-                        </div>
-
                         
                         <div class="pt-4">
                             <table class="table table-hover table-striped " id="tableCobertura" style="width:100%;">
@@ -112,7 +68,7 @@
                                         <div [hidden]="cob.SESTADO == 2 || (cob.SESTADO == 1 && (cob.SNOMBRE_ARCHIVO_CORTO == null || cob.SNOMBRE_ARCHIVO_CORTO == ''))" style="float:right;width: 10%;" placement='top' ngbTooltip="Eliminar archivo"><i class="far fa-times-circle" style="cursor:pointer;" (click)="removeFile(cob,index)"></i></div>
                                     </td>
                                     <td class="text-center"  style="padding-left: 30px;padding-right: 30px;">
-                                        <div *ngIf="cob.VALIDAR_CANTIDAD == 0" style="float:left;width: 33.3%;" >
+                                        <div *ngIf="(cob.SNOMBRE_ARCHIVO_CORTO != '' || cob.SNOMBRE_ARCHIVO_CORTO == null)" style="float:left;width: 33.3%;" >
                                             
                                              <input type="file" name="file" id="adjunto{{index}}" class="inputfile"  (change)="AgregarAdjunto($event,cob,index)"/>
                                              <div class="text-center"  >
@@ -122,15 +78,6 @@
                                               </div>
                                             
                                          </div>
-                                         <div *ngIf="cob.VALIDAR_CANTIDAD !== 0" style="float:left;width: 33.3%;" >
-                                            
-                                            
-                                            <div class="text-center">
-                                                <i class="fas fa-file-upload"  style="cursor: pointer;color:#FA7000" (click)="prueba($event,cob,index)"></i>
-                                              </div>
-                                           
-                                        </div>
-                                         
                                          
                                         <div   style="float:left;width: 33.3%;" placement='top' ngbTooltip="Descargar informe general">
                                             <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporte()"></i></a>
@@ -163,7 +110,11 @@
                               </ng-template>
                         </div>
                         
-
+                        <div id="ReportesGlobal">
+                           
+                           <app-template-kri  style="display: none" ></app-template-kri> 
+                            
+                        </div>
 
                     </div> 
                 </div>
