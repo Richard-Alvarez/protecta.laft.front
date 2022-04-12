@@ -1,11 +1,11 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/';
+  private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -260,6 +260,9 @@ class Rutas {
   public urlObtenerPlantillaCotizacion: string = this.base + "monitoreoSenales/ObtenerPlantillaCotizacion"
   public urlObtenerPlantillaEs10: string = this.base + "monitoreoSenales/obtenerPlantillaEs10"
   public urlGetSetearDataExcel: string = this.base + "monitoreoSenales/GetSetearDataExcel"
+  public urlGetKriListContratantes: string = this.base + "monitoreoSenales/GetKriListContratantes"
+  public urlGetRegistrarDatosActividadEconomica: string = this.base + "monitoreoSenales/GetRegistrarDatosActividadEconomica"
+  public urlGetListaActividadEconomica: string = this.base + "monitoreoSenales/GetListaActividadEconomica"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

@@ -1824,11 +1824,35 @@ export class UserconfigService {
       }
     })
   }
+  GetKriListContratantes(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetKriListContratantes).subscribe(response => {
+          debugger;
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
   GetSetearDataExcel(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlGetSetearDataExcel, data).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  GetListaActividadEconomica(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetListaActividadEconomica, data).subscribe((response) => {
           return resolve(response);
 
         });
@@ -2081,6 +2105,17 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlGetRegistrarDatosExcelEs10, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  GetRegistrarDatosActividadEconomica(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetRegistrarDatosActividadEconomica, data).subscribe((response) => {
           return resolve(response);
         });
       } catch (error) {
