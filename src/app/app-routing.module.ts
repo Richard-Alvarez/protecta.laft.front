@@ -94,6 +94,7 @@ import { Es10Component } from './components/es10/es10.component';
 import { ActividadComponent } from './components/actividad/actividad.component';
 import { InformeN1Component } from '../app/components/informe-n1/informe-n1.component';
 import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
+import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
 
 //fin formularios antiguos
 
@@ -193,6 +194,7 @@ const routes: Routes = [
   { path: 'registro-negativo', component: RegistroNegativoComponent},
   { path: 'informe-N1', component: InformeN1Component},
   { path: 'informe-KRI', component: InformeKRIComponent},
+  { path: 'report', component: TemplateReporteBusquedaDemandaComponent},
   
   
 ];

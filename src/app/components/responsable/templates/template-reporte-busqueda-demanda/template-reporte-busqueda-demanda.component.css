@@ -1,0 +1,63 @@
+.image {
+/* background-image: url('http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png'); */
+/* width: 100% ;
+height:50px;
+background-repeat: no-repeat; */
+margin: 31px 0px 10px 450px;
+}
+
+.Report{
+    width: 730px !important;
+
+}
+.title {
+    /* text-decoration: underline; */
+    text-align: center;
+}
+
+.title p {
+    font-size: 40px;
+}
+
+.TitleLine {
+    padding-bottom: 1%;
+    position: relative;
+    z-index: 1;
+}
+
+.TitleLine:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1pxs;
+    width: 100%;
+    /* or 100px */
+    border-bottom: 2px solid black;
+}
+
+td,
+th {
+  /* border: 1px solid #dddddd; */
+  text-align: left;
+  padding: 8px;
+  word-wrap: break-word;
+  font-size: 12px;
+}
+
+tr:nth-child(even) {
+  /* background-color: #dddddd; */
+}
+
+table {
+
+   border-collapse: collapse;
+   table-layout: fixed;
+     
+  }
+
+  /* th, td {
+    border: 1px solid blue;
+    width: 100px;
+    word-wrap: break-word;
+} */
