@@ -34,9 +34,7 @@
                             </div>
 
                         </div>
-
-
-                        <div class="borderFormat">
+                        <!-- <div class="borderFormat">
                             <div class="container">
                                 
 
@@ -77,7 +75,7 @@
 
                             </div>
 
-                        </div>
+                        </div> -->
 
                         
                         <div class="pt-4">
@@ -96,6 +94,7 @@
                                 </thead>
                                 <tbody id="tblContactos" *ngIf="ListaRegistros.length !=0; else listavacia">
                                  <tr class="animated fadeIn" *ngFor="let cob of ListaRegistros| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let index = index ">
+                                     
                                     <td class="text-center">{{cob.FECHA_PERIODO}}</td>
                                     <td class="text-center">{{cob.DFECHA_ESTADO}}</td>
                                     <td class="text-center">{{cob.NOMBRECOMPLETO}}</td>
@@ -111,7 +110,7 @@
                                         <div [hidden]="cob.SESTADO == 2 || (cob.SESTADO == 1 && (cob.SNOMBRE_ARCHIVO_CORTO == null || cob.SNOMBRE_ARCHIVO_CORTO == ''))" style="float:right;width: 10%;" placement='top' ngbTooltip="Eliminar archivo"><i class="far fa-times-circle" style="cursor:pointer;" (click)="removeFile(cob,index)"></i></div>
                                     </td>
                                     <td class="text-center"  style="padding-left: 30px;padding-right: 30px;">
-                                        <div *ngIf="cob.VALIDAR_CANTIDAD == 0" style="float:left;width: 33.3%;" >
+                                        <div *ngIf="(cob.SNOMBRE_ARCHIVO_CORTO != '' || cob.SNOMBRE_ARCHIVO_CORTO == null)" style="float:left;width: 33.3%;" >
                                             
                                              <input type="file" name="file" id="adjunto{{index}}" class="inputfile"  (change)="AgregarAdjunto($event,cob,index)"/>
                                              <div class="text-center"  >
@@ -121,14 +120,6 @@
                                               </div>
                                             
                                          </div>
-                                         <div *ngIf="cob.VALIDAR_CANTIDAD !== 0" style="float:left;width: 33.3%;" >
-                                            
-                                            
-                                            <div class="text-center">
-                                                <i class="fas fa-file-upload"  style="cursor: pointer;color:#FA7000" (click)="prueba($event,cob,index)"></i>
-                                              </div>
-                                           
-                                        </div>
                                          
                                          
                                         <div   style="float:left;width: 33.3%;" placement='top' ngbTooltip="Descargar informe general">

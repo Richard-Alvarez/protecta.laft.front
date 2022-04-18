@@ -3,6 +3,10 @@ import { UserconfigService } from "src/app/services/userconfig.service";
 import { CoreService } from '../../services/core.service';
 import { SbsreportService } from 'src/app/services/sbsreport.service';
 import swal from 'sweetalert2';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
+const PDF_EXTENSION = ".pdf";
 
 @Component({
   selector: 'app-informe-kri',
@@ -38,75 +42,35 @@ export class InformeKRIComponent implements OnInit {
   }]
   IDListAnnoGlobal: number = 0
   public Usuario
-
+  public PeriodoInforme
+  
 
   async ngOnInit() {
 
-    await this.obtenerPeriodos()
+   
     await this.ListaInformes()
     this.Usuario = this.core.storage.get('usuario')
+    this.PeriodoInforme =  localStorage.getItem("periodo")
   }
 
   setDate() {
     //this.userConfigService.GetSetearDataExcel()
   }
 
-  changeAnnoGlobal(event) {
-    //this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6,4) == this.IDListAnno && it.status !== "VIGENTE")
-    this.NewListPeriodos = this.ListPeriodos.filter(it => it.endDate.toString().substr(6, 4) == this.IDListAnnoGlobal)
-    this.IDListPeriodoGlobal = 0
-    if (this.IDListAnnoGlobal == 0) {
-      this.ListaInformes()
-    }
 
-
-  }
 
 
   async ListaInformes() {
     this.core.loader.show()
     let data: any = {}
     data.VALIDADOR = 2
+    data.INFORME = 'KRI'
     this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
-    let listaAlertas
-    this.ListaRegistros.forEach(async (element, index) => {
-      listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO: element.NPERIODO_PROCESO, VALIDADOR: 1 })
-      let ValidadorGlobal = listaAlertas.filter(it => it.SESTADO == 1)
-      this.ListaRegistros[index].VALIDAR_CANTIDAD = ValidadorGlobal.length
-    });
-
-  }
-
-  async obtenerPeriodos() {
-    this.core.loader.show()
-    this.ListPeriodos = await this.sbsReportService.getSignalFrequencyList()
-
-    this.ListPeriodos.forEach((element, inc) => {
-      let anno = element.endDate.toString().substr(6, 4)
-      let mes = element.endDate.toString().substr(3, 2)
-      let dia = element.endDate.toString().substr(0, 2)
-      this.ListPeriodos[inc].periodo = anno + mes + dia
-
-    });
-
-
-    for (let i = 0; i < this.ListPeriodos.length; i++) {
-      let exists = true
-      let data: any = {}
-      data.ID = i
-      data.ANNO = this.ListPeriodos[i].endDate.toString().substr(6, 4)
-      data.FECHAEND = this.ListPeriodos[i].endDate
-      this.ListAnnos.push(data)
-
-    }
-
-    let sinRepetidos = this.ListAnnos.filter((valorActual, indiceActual, arreglo) => {
-      return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.ANNO) === JSON.stringify(valorActual.ANNO)) === indiceActual
-    });
-    this.NewListAnnos = sinRepetidos
-    console.log("Sin repetidos es:", sinRepetidos);
+    
     this.core.loader.hide()
   }
+
+ 
 
   async DescargarArchivo(ruta, nameFile) {
     
@@ -234,7 +198,7 @@ SwalGlobal(mensaje){
 }
 
 DescargarReporte(){
-
+  this.Export2Doc("ReportesGlobal","Reporte KRI") 
 }
 
 
@@ -244,10 +208,14 @@ async Registrar(item,index){
     this.SwalGlobal(mensaje)
     return
   }else{
-
+    let dia =  this.PeriodoInforme.toString().substr(6,2)
+    let mes =  this.PeriodoInforme.toString().substr(4,2)
+    let anno = this.PeriodoInforme.toString().substr(0,4) 
+    let fechaPeriodo = dia + '/' + mes + '/' + anno;
+   
     swal.fire({
       title: 'Informe',
-      text: "Está seguro de registrar el Informe ?",
+      text: `Está seguro de registrar el Informe KRI del periodo ${fechaPeriodo}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#FA7000',
@@ -259,11 +227,11 @@ async Registrar(item,index){
         this.core.loader.show()
         let data:any={}
         data.NPERIODO_PROCESO = item.NPERIODO_PROCESO
-        data.SRUTA_ARCHIVO = 'INFORMES-GLOBALES' + '/' + item.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0]
+        data.SRUTA_ARCHIVO = 'INFORMES-KRI' + '/' + item.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0]
         data.NIDUSUARIO_MODIFICA =  this.Usuario.idUsuario
         data.SNOMBRE_ARCHIVO_CORTO =   this.ArchivoAdjunto.listFileNameCortoInform[0]
         data.SNOMBRE_ARCHIVO =   this.ArchivoAdjunto.listFileNameInform[0]
-        data.SRUTA = 'INFORMES-GLOBALES' + '/' + item.NPERIODO_PROCESO ;
+        data.SRUTA = 'INFORMES-KRI' + '/' + item.NPERIODO_PROCESO ;
         data.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
         data.listFileName =  this.ArchivoAdjunto.listFileNameInform
         
@@ -280,30 +248,35 @@ async Registrar(item,index){
  
 }
 
-async ListarHistorial(periodo){
-  if(parseInt(periodo) !== 0){
-    this.core.loader.show()
-    let data:any = {}
-    data.VALIDADOR = 1
-    data.NPERIODO_PROCESO = periodo
-    this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
-    let listaAlertas
-    this.ListaRegistros.forEach(async (element,index) => {
-       listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : element.NPERIODO_PROCESO, VALIDADOR : 1})
-       let ValidadorGlobal = listaAlertas.filter(it => it.SESTADO == 1 )
-       this.ListaRegistros[index].VALIDAR_CANTIDAD = ValidadorGlobal.length
-    });
-    this.core.loader.hide()
-  }else{
-    this.ListaInformes()
-  }
-  
-} 
-
 removeFile(item,index){
   this.ListaRegistros[index].SNOMBRE_ARCHIVO_CORTO = ''
   this.ListaRegistros[index].SNOMBRE_ARCHIVO = ''
 }
 
+
+Export2Doc(element, filename = ''){
+ 
+  setTimeout(function(){
+ 
+    var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'></head><body>";
+    var postHtml = "</body></html>";
+    var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+    
+    var blob = new Blob(['\ufeff', html],{
+        type: 'application/msword'
+    });
+  
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
+    filename = filename?filename+'.doc': 'document.doc';
+    var downloadLink = document.createElement("a");
+    document.body.appendChild(downloadLink);
+    downloadLink.href = url;
+    downloadLink.download = filename;
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+   },1);
+ 
+    
+ }
 
 }

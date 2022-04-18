@@ -901,10 +901,11 @@ async setDataFile(event) {
     this.core.loader.show()
      let data:any = {}
      data.VALIDADOR = 2
+     data.INFORME = 'GENERAL'
    this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
     let listaAlertas
    this.ListaRegistros.forEach(async (element,index) => {
-      listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : element.NPERIODO_PROCESO, VALIDADOR : 1})
+      listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : element.NPERIODO_PROCESO, VALIDADOR : 1, INFORME: 'GENERAL'})
       let ValidadorGlobal = listaAlertas.filter(it => it.SESTADO == 1 )
       this.ListaRegistros[index].VALIDAR_CANTIDAD = ValidadorGlobal.length
    });
@@ -944,10 +945,11 @@ async setDataFile(event) {
       let data:any = {}
       data.VALIDADOR = 1
       data.NPERIODO_PROCESO = periodo
+      data.INFORME = 'GENERAL'
       this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
       let listaAlertas
       this.ListaRegistros.forEach(async (element,index) => {
-         listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : element.NPERIODO_PROCESO, VALIDADOR : 1})
+         listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : element.NPERIODO_PROCESO, VALIDADOR : 1 ,INFORME : 'GENERAL'})
          let ValidadorGlobal = listaAlertas.filter(it => it.SESTADO == 1 )
          this.ListaRegistros[index].VALIDAR_CANTIDAD = ValidadorGlobal.length
       });
@@ -958,7 +960,7 @@ async setDataFile(event) {
     
   } 
   async prueba(evento,item,index){
-    let listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : item.NPERIODO_PROCESO, VALIDADOR : 1})
+    let listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : item.NPERIODO_PROCESO, VALIDADOR : 1, INFORME : 'GENERAL'})
     let ValidadorCantidad = listaAlertas.filter(it => it.SESTADO == 1 )
       if(ValidadorCantidad.length > 0){
         let mensaje = 'Debe generarse el reporte general para adjuntar el archivo '

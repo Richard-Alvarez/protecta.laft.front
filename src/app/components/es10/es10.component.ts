@@ -279,15 +279,15 @@ export class Es10Component implements OnInit {
     let data: any = [];
     this.ListEs10.forEach(t => {
       let _data: any = {}
-      _data["Periodo"] = t.NPERIODO_PROCESO;
-      _data["Ramo"] = t.SRAMO;
-      _data["Riego"] = t.SRIESGO;
-      _data["Código riesgo"] = t.NCOD_RIESGO;
-      _data["Código registro"] = t.SCOD_REGISTRO;
-      _data["Nombre comercial"] = t.SNOM_COMERCIAL;
-      _data["Moneda"] = t.SMONEDA;
-      _data["Inicio de compra"] = t.DFEC_INI_COMERCIAL;
-      _data["N° asegurados"] = t.NCANT_ASEGURADOS;
+      _data["Periodo"] = t.nPeriodoProceso;
+      _data["Ramo"] = t.sRamo;
+      _data["Riego"] = t.sRiesgo;
+      _data["Código riesgo"] = t.nCodRiesgo;
+      _data["Código registro"] = t.sCodRegistro;
+      _data["Nombre comercial"] = t.sNomComercial;
+      _data["Moneda"] = t.sMoneda;
+      _data["Inicio de compra"] = t.sFechaIniComercial;
+      _data["N° asegurados"] = t.nCantAsegurados;
       data.push(_data)
     });
     this.excelService.exportAsExcelFile(data, "Lista de productos o polizas vigentes - ES10");

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ExcelService } from 'src/app/services/excel.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
@@ -15,9 +15,11 @@ export class ActividadComponent implements OnInit {
   ResultadoExcel: any = {}
   NPERIODO_PROCESO: Number
   NPERIODO_PROCESO_SEARCH: Number
+  SREGISTRO: string = ''
   listPeriodos: any = []
+  response: any = []
   ListActividad: any = []
-  myInputVariable :any ={}
+  @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
   constructor(private userConfigService: UserconfigService,
     private spinner: NgxSpinnerService,
     private SbsreportService: SbsreportService,
@@ -46,17 +48,17 @@ export class ActividadComponent implements OnInit {
     }
     this.spinner.show()
     let uploadPararms: any = {}
-    uploadPararms.SRUTA = 'ARCHIVOS-ES10' + '/';
+    uploadPararms.SRUTA = 'ARCHIVOS-ACTIVIDADECONOMICA' + '/';
     uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
     uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
     await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
 
 
     let datosExcel: any = {}
-    datosExcel.RutaExcel = 'ARCHIVOS-ES10' + '/' + this.ArchivoAdjunto.listFileNameInform;
+    datosExcel.RutaExcel = 'ARCHIVOS-ACTIVIDADECONOMICA' + '/' + this.ArchivoAdjunto.listFileNameInform;
     datosExcel.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-    datosExcel.VALIDADOR = 'ES10'
-    this.ResultadoExcel = await this.userConfigService.GetRegistrarDatosExcelEs10(datosExcel)
+    datosExcel.VALIDADOR = 'ACTIVIDADECONOMICA'
+    this.ResultadoExcel = await this.userConfigService.GetRegistrarDatosActividadEconomica(datosExcel)
     this.NombreArchivo = ''
     await this.reset()
     this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
@@ -67,7 +69,7 @@ export class ActividadComponent implements OnInit {
       this.spinner.hide()
       return
     } else {
-      let cantidadTotal = this.ResultadoExcel.items.periodoProceso.length
+      let cantidadTotal = this.ResultadoExcel.items.nPeriodoProceso.length
       let mensaje = "Se agregaron " + cantidadTotal + " registros"
       this.SwalGlobalConfirmacion(mensaje)
       this.spinner.hide()
@@ -76,7 +78,7 @@ export class ActividadComponent implements OnInit {
   }
   SwalGlobalConfirmacion(mensaje) {
     Swal.fire({
-      title: "Anexo ES10",
+      title: "Actividad Económica",
       icon: "success",
       text: mensaje,
       showCancelButton: false,
@@ -93,7 +95,7 @@ export class ActividadComponent implements OnInit {
   }
   async SwalGlobal(mensaje) {
     await Swal.fire({
-      title: "Anexo ES10",
+      title: "Actividad Económica",
       icon: "warning",
       text: mensaje,
       showCancelButton: false,
@@ -136,7 +138,7 @@ export class ActividadComponent implements OnInit {
     }
     if (statusFormatFile) {
       Swal.fire({
-        title: 'Mantenimiento de complemento',
+        title: 'Actividad Económica',
         icon: 'warning',
         text: 'El archivo no tiene el formato necesario',
         showCancelButton: false,
@@ -179,30 +181,30 @@ export class ActividadComponent implements OnInit {
   }
   async Buscar() {
     let data: any = {}
-    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO_SEARCH;
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
     this.spinner.show()
-    //this.ListActividad = await this.userConfigService.GetListActividad(data)
+    this.response = await this.userConfigService.GetListaActividadEconomica(data)
+    this.ListActividad  = this.response;
     this.spinner.hide()
   }
   excel() {
-
+    this.spinner.show()
     try {
-      this.userConfigService.ObtenerPlantillaEs10().then(res => {
-
-        if (res == '') {
-          Swal.fire('Información', 'Error al descargar Excel o no se encontraron resultados', 'error');
-        } else {
-          debugger;
-          const blob = this.b64toBlob(res.base64);
-          const blobUrl = URL.createObjectURL(blob);
-          const a = document.createElement('a')
-          a.href = blobUrl
-          a.download = 'Reporte de Cotizaciones.xlsx'
-          a.click()
-        };
+      this.userConfigService.GetKriListContratantes().then(res => {
+        let data : any = []
+        res.forEach(t=> {
+          let item : any = {};
+          item["Periodo"] = t.NPERIODO_PROCESO;
+          item["Razón social"] = t.NOMBRE_RAZONSOCIAL;
+          item["Número de ruc"] = t.NRODOCUMENTO;
+          item["Tipo contribuyente"] = "";
+          item["Actividad Económica"] = "";
+          data.push(item);
+        })
+        this.excelService.exportAsExcelFile(data, "Actividad economica");
       });
     } catch (error) {
-
+      this.spinner.hide()
       Swal.fire('Información', 'Error al descargar Excel', 'error');
     }
   }
@@ -230,10 +232,20 @@ export class ActividadComponent implements OnInit {
     this.ListActividad.forEach(t => {
       let _data: any = {}
       _data["Periodo"] = t.NPERIODO_PROCESO;
-      _data["Ramo"] = t.SRAMO;
+      _data["Razón social"] = t.SDESCRIPTION;
+      _data["Número de ruc"] = t.SNUM_RUC;
+      _data["Tipo contribuyente"] = t.STIPOCONTRIBUYENTE;
+      _data["Actividad Económica"] = t.SACTIVITYECONOMY;
       data.push(_data)
     });
-    this.excelService.exportAsExcelFile(data, "Actividad economica");
+    this.excelService.exportAsExcelFile(data, "Actividad económica");
   }
-
+  eventChange(){
+    if ( this.SREGISTRO == ""){
+      this.ListActividad = this.response
+    }else{
+      this.ListActividad = this.response.filter(t=>(t.SDESCRIPTION + "" + t.SNUM_RUC).toUpperCase().includes(this.SREGISTRO.toUpperCase()))
+      
+    }
+  }
 }
