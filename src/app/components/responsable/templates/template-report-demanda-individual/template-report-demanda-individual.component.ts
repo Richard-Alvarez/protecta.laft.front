@@ -7,11 +7,11 @@ const PDF_EXTENSION = ".pdf";
 
 
 @Component({
-  selector: 'app-template-reporte-busqueda-demanda',
-  templateUrl: './template-reporte-busqueda-demanda.component.html',
-  styleUrls: ['./template-reporte-busqueda-demanda.component.css']
+  selector: 'app-template-report-demanda-individual',
+  templateUrl: './template-report-demanda-individual.component.html',
+  styleUrls: ['./template-report-demanda-individual.component.css']
 })
-export class TemplateReporteBusquedaDemandaComponent implements OnInit {
+export class TemplateReportDemandaIndividualComponent implements OnInit {
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
   @ViewChild("pdfViewerAutoLoad", { static: true }) pdfViewerAutoLoad;
   data = [

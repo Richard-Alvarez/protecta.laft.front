@@ -200,6 +200,7 @@ import { InformeN1Component } from './components/informe-n1/informe-n1.component
 import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
 import { TemplateKRIComponent } from './components/responsable/templates/template-kri/template-kri.component';
 import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
+import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -367,7 +368,8 @@ import { TemplateReporteBusquedaDemandaComponent } from './components/responsabl
     ActividadComponent,
     InformeN1Component,
     TemplateKRIComponent,
-    TemplateReporteBusquedaDemandaComponent
+    TemplateReporteBusquedaDemandaComponent,
+    TemplateReportDemandaIndividualComponent
 
    
     //Validaciones
