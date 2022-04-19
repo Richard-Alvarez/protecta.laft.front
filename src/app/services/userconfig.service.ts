@@ -352,6 +352,18 @@ export class UserconfigService {
       }
     });
   }
+  getPeriodoSemestral(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetPeriodoSemestral).subscribe((response) => {
+          return resolve(response);
+
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
   getSubGrupoSenal(data): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
@@ -1416,6 +1428,17 @@ export class UserconfigService {
       }
     })
   }
+  GetKriSearchZonaGeografica(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetKriSearchZonaGeografica, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
   getResultadoTratamiento(data): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -2014,6 +2037,17 @@ export class UserconfigService {
       }
     })
   }
+  GetKriListZonasGeograficas(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetKriListZonasGeograficas).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
   UpdActualizarCorreoOC(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -2143,6 +2177,17 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlGetListaEs10, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  GetRegistrarDatosZonaGeografica(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetRegistrarDatosZonaGeografica, data).subscribe((response) => {
           return resolve(response);
         });
       } catch (error) {

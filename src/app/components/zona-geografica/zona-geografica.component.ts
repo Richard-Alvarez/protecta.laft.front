@@ -2,27 +2,29 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ExcelService } from 'src/app/services/excel.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
-import { SbsreportService } from "src/app/services/sbsreport.service";
 import Swal from "sweetalert2";
 @Component({
-  selector: 'app-actividad',
-  templateUrl: './actividad.component.html',
-  styleUrls: ['./actividad.component.css']
+  selector: 'app-zona-geografica',
+  templateUrl: './zona-geografica.component.html',
+  styleUrls: ['./zona-geografica.component.css']
 })
-export class ActividadComponent implements OnInit {
+export class ZonaGeograficaComponent implements OnInit {
+
   NombreArchivo: any = ""
   ArchivoAdjunto: any = {}
   ResultadoExcel: any = {}
   NPERIODO_PROCESO: string = '0'
+  NDEPARTAMENTO: string = '0'
   SREGISTRO: string = ''
   listPeriodos: any = []
   response: any = []
-  ListActividad: any = []
+  ListZonaGeo: any = []
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
+  ListDepartamentos: any[];
   constructor(private userConfigService: UserconfigService,
     private spinner: NgxSpinnerService,
-    private SbsreportService: SbsreportService,
     private excelService: ExcelService) { }
+
 
   async ngOnInit() {
     this.listPeriodos = await this.listarPeriodos()
@@ -45,17 +47,18 @@ export class ActividadComponent implements OnInit {
     }
     this.spinner.show()
     let uploadPararms: any = {}
-    uploadPararms.SRUTA = 'ARCHIVOS-ACTIVIDADECONOMICA' + '/';
+    uploadPararms.SRUTA = 'ARCHIVOS-ZONAGEOGRAFICA' + '/';
     uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
     uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
     await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
 
 
     let datosExcel: any = {}
-    datosExcel.RutaExcel = 'ARCHIVOS-ACTIVIDADECONOMICA' + '/' + this.ArchivoAdjunto.listFileNameInform;
+    datosExcel.RutaExcel = 'ARCHIVOS-ZONAGEOGRAFICA' + '/' + this.ArchivoAdjunto.listFileNameInform;
     datosExcel.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-    datosExcel.VALIDADOR = 'ACTIVIDADECONOMICA'
-    this.ResultadoExcel = await this.userConfigService.GetRegistrarDatosActividadEconomica(datosExcel)
+    datosExcel.VALIDADOR = 'ZONAGEOGRAFICA'
+    this.ResultadoExcel = await this.userConfigService.GetRegistrarDatosZonaGeografica(datosExcel)
+    debugger;
     this.NombreArchivo = ''
     await this.reset()
     this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
@@ -66,7 +69,7 @@ export class ActividadComponent implements OnInit {
       this.spinner.hide()
       return
     } else {
-      let cantidadTotal = this.ResultadoExcel.items.nPeriodoProceso.length
+      let cantidadTotal = this.ResultadoExcel.items.periodoProceso.length
       let mensaje = "Se agregaron " + cantidadTotal + " registros"
       this.SwalGlobalConfirmacion(mensaje)
       this.spinner.hide()
@@ -75,7 +78,7 @@ export class ActividadComponent implements OnInit {
   }
   SwalGlobalConfirmacion(mensaje) {
     Swal.fire({
-      title: "Actividad Económica",
+      title: "Zona Geográfica",
       icon: "success",
       text: mensaje,
       showCancelButton: false,
@@ -92,7 +95,7 @@ export class ActividadComponent implements OnInit {
   }
   async SwalGlobal(mensaje) {
     await Swal.fire({
-      title: "Actividad Económica",
+      title: "Zona Geográfica",
       icon: "warning",
       text: mensaje,
       showCancelButton: false,
@@ -135,7 +138,7 @@ export class ActividadComponent implements OnInit {
     }
     if (statusFormatFile) {
       Swal.fire({
-        title: 'Actividad Económica',
+        title: 'Zona Geográfica',
         icon: 'warning',
         text: 'El archivo no tiene el formato necesario',
         showCancelButton: false,
@@ -178,9 +181,10 @@ export class ActividadComponent implements OnInit {
   }
   async Buscar() {
     let data: any = {}
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
     if (this.NPERIODO_PROCESO == "0"){
       Swal.fire({
-      title: 'Actividad económica',
+      title: 'Zona Geográfica',
       icon: 'info',
       text: 'Seleccionar un período para realizar la búsqueda',
       showCancelButton: false,
@@ -198,28 +202,35 @@ export class ActividadComponent implements OnInit {
 
       })
     }else {
-    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
-    this.spinner.show()
-    this.response = await this.userConfigService.GetListaActividadEconomica(data)
-    this.ListActividad  = this.response;
-    this.spinner.hide()
+    
+      this.spinner.show()
+      await this.userConfigService.GetKriSearchZonaGeografica(data).then( res => {
+        this.response = res;
+        this.ListZonaGeo  = this.response.zonaGeografica;
+      }).then(()=> {
+        this.fillDropList();
+        this.spinner.hide()
+      });
     }
   }
   excel() {
     this.spinner.show()
     try {
-      this.userConfigService.GetKriListContratantes().then(res => {
+      this.userConfigService.GetKriListZonasGeograficas().then(res => {
         let data : any = []
         res.forEach(t=> {
           let item : any = {};
           item["Periodo"] = t.NPERIODO_PROCESO;
-          item["Razón social"] = t.NOMBRE_RAZONSOCIAL;
-          item["Número de ruc"] = t.NRODOCUMENTO;
-          item["Tipo contribuyente"] = "";
-          item["Actividad Económica"] = "";
+          item["Tipo Documento"] = t.TIP_DOC;
+          item["Número de Documento"] = t.NUM_IDENBEN;
+          item["Primer Nombre"] = t.NOMBEN;
+          item["Segundo Nombre"] = t.NOMSEGBEN;
+          item["Apellido paterno"] = t.PATBEN;
+          item["Apellido materno"] = t.MATBEN;
+          item["Departamento"] = t.GLS_REGION;
           data.push(item);
         })
-        this.excelService.exportAsExcelFile(data, "Actividad economica");
+        this.excelService.exportAsExcelFile(data, "Zona Geográfica");
       }).then( () =>{
         this.spinner.hide()
       });
@@ -249,23 +260,45 @@ export class ActividadComponent implements OnInit {
   }
   exportExcel() {
     let data: any = [];
-    this.ListActividad.forEach(t => {
+    this.ListZonaGeo.forEach(t => {
       let _data: any = {}
-      _data["Periodo"] = t.NPERIODO_PROCESO;
-      _data["Razón social"] = t.SDESCRIPTION;
-      _data["Número de ruc"] = t.SNUM_RUC;
-      _data["Tipo contribuyente"] = t.STIPOCONTRIBUYENTE;
-      _data["Actividad Económica"] = t.SACTIVITYECONOMY;
+      _data["Periodo"] = t.nPeriodoProceso;
+      _data["Tipo Documento"] = t.tipDoc;
+      _data["Número de Documento"] = t.numDoc;
+      _data["Primer Nombre"] = t.primerNombre;
+      _data["Segundo Nombre"] = t.segundoNombre;
+      _data["Apellido paterno"] = t.apellidoParterno;
+      _data["Apellido materno"] = t.apellidoMaterno;
+      _data["Departamento"] = t.region;
       data.push(_data)
     });
-    this.excelService.exportAsExcelFile(data, "Actividad económica");
+    this.excelService.exportAsExcelFile(data, "Zona Geográfica");
   }
   eventChange(){
-    if ( this.SREGISTRO == ""){
-      this.ListActividad = this.response
+    this.ListZonaGeo = this.response.zonaGeografica
+    if ( this.SREGISTRO == "" && this.NDEPARTAMENTO == "0"){
+      this.ListZonaGeo = this.response.zonaGeografica
     }else{
-      this.ListActividad = this.response.filter(t=>(t.SDESCRIPTION + "" + t.SNUM_RUC).toUpperCase().includes(this.SREGISTRO.toUpperCase()))
-      
+      if(this.NDEPARTAMENTO != "0"){
+        this.ListZonaGeo = this.ListZonaGeo.filter( t=> t.region == this.NDEPARTAMENTO);
+      }
+      if(this.SREGISTRO != ""){
+        this.ListZonaGeo = this.ListZonaGeo.filter(t=>(t.tipDoc + "" + t.numDoc + "" + t.primerNombre + "" + t.segundoNombre + "" + t.apellidoParterno + "" + t.apellidoMaterno ).toUpperCase().includes(this.SREGISTRO.toUpperCase()))
+      }
     }
+  }
+  async fillDropList() {
+    this.ListDepartamentos = await this.fillArray(this.response.departamentos)
+  }
+  async fillArray(fuente){
+    var array = [];
+    fuente.forEach(t=>{
+      var _item = {
+        id : t,
+        valueText : t
+      }
+      array.push(_item);
+    })
+    return array;
   }
 }

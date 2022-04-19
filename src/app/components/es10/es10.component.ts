@@ -13,7 +13,7 @@ export class Es10Component implements OnInit {
   NombreArchivo: any = ""
   ArchivoAdjunto: any = {}
   ResultadoExcel: any = {}
-  NPERIODO_PROCESO: Number
+  NPERIODO_PROCESO: Number = 0
   NPERIODO_PROCESO_SEARCH: Number
   listPeriodos: any = []
   ListEs10: any = []
@@ -32,12 +32,11 @@ export class Es10Component implements OnInit {
     private excelService: ExcelService) { }
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
   async ngOnInit() {
-    this.NPERIODO_PROCESO = Number.parseInt(localStorage.getItem("periodo"));
-    this.NPERIODO_PROCESO_SEARCH = this.NPERIODO_PROCESO;
     this.listPeriodos = await this.listarPeriodos()
   }
+ 
   async listarPeriodos() {
-    let frecuencias: any = await this.SbsreportService.getSignalFrequencyList();
+    let frecuencias: any = await this.userConfigService.getPeriodoSemestral();
     console.log(frecuencias)
     return frecuencias
       .map(t => t.nperiodO_PROCESO)
@@ -103,7 +102,6 @@ export class Es10Component implements OnInit {
 
     let datosExcel: any = {}
     datosExcel.RutaExcel = 'ARCHIVOS-ES10' + '/' + this.ArchivoAdjunto.listFileNameInform;
-    datosExcel.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
     datosExcel.VALIDADOR = 'ES10'
     this.ResultadoExcel = await this.userConfigService.GetRegistrarDatosExcelEs10(datosExcel)
     this.NombreArchivo = ''
@@ -125,7 +123,7 @@ export class Es10Component implements OnInit {
   }
   SwalGlobalConfirmacion(mensaje) {
     Swal.fire({
-      title: "ES10",
+      title: "Anexo Es10",
       icon: "success",
       text: mensaje,
       showCancelButton: false,
@@ -142,7 +140,7 @@ export class Es10Component implements OnInit {
   }
   async SwalGlobal(mensaje) {
     await Swal.fire({
-      title: "ES10",
+      title: "Anexo Es10",
       icon: "warning",
       text: mensaje,
       showCancelButton: false,
@@ -185,7 +183,7 @@ export class Es10Component implements OnInit {
     }
     if (statusFormatFile) {
       Swal.fire({
-        title: 'Mantenimiento de complemento',
+        title: 'Anexo Es10',
         icon: 'warning',
         text: 'El archivo no tiene el formato necesario',
         showCancelButton: false,
@@ -228,12 +226,33 @@ export class Es10Component implements OnInit {
   }
   async Buscar() {
     let data: any = {}
-    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO_SEARCH;
-    this.spinner.show()
-    this.Response = await this.userConfigService.GetListaEs10(data)
-    this.ListEs10 = this.Response.es10;
-    await this.fillDropList();
-    this.spinner.hide()
+    data.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
+    if (this.NPERIODO_PROCESO == 0){
+      Swal.fire({
+      title: 'Anexo Es10',
+      icon: 'info',
+      text: 'Seleccionar un período para realizar la búsqueda',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonColor: '#FA7000',
+      confirmButtonText: 'Aceptar',
+      showCloseButton: true,
+      customClass: {
+        closeButton: 'OcultarBorde'
+      },
+
+      }).then(async (result) => {
+
+      }).catch(err => {
+
+      })
+    }else {
+      this.spinner.show()
+      this.Response = await this.userConfigService.GetListaEs10(data)
+      this.ListEs10 = this.Response.es10;
+      await this.fillDropList();
+      this.spinner.hide()
+    }
   }
   excel() {
 

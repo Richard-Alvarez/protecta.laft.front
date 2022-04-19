@@ -199,6 +199,7 @@ import { ActividadComponent } from './components/actividad/actividad.component';
 import { InformeN1Component } from './components/informe-n1/informe-n1.component';
 import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
 import { TemplateKRIComponent } from './components/responsable/templates/template-kri/template-kri.component';
+import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
 import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
 import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
 //import { Validaciones } from './utils/validacionesRegex'
@@ -369,7 +370,9 @@ import { TemplateReportDemandaIndividualComponent } from './components/responsab
     InformeN1Component,
     TemplateKRIComponent,
     TemplateReporteBusquedaDemandaComponent,
-    TemplateReportDemandaIndividualComponent
+    TemplateReportDemandaIndividualComponent,
+    ZonaGeograficaComponent,
+    TemplateReporteBusquedaDemandaComponent
 
    
     //Validaciones
