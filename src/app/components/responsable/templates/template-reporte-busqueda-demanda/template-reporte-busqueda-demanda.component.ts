@@ -96,7 +96,7 @@ export class TemplateReporteBusquedaDemandaComponent implements OnInit {
         // head: columns,
         // body: data,
         html: "#table42",
-        startY: 400,
+        startY: 600,
         // styles: {fillColor: [100, 255, 255]},
         headStyles: {
           fillColor: [239, 154, 154],
