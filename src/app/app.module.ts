@@ -200,6 +200,7 @@ import { InformeN1Component } from './components/informe-n1/informe-n1.component
 import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
 import { TemplateKRIComponent } from './components/responsable/templates/template-kri/template-kri.component';
 import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
+import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -367,7 +368,8 @@ import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geogr
     ActividadComponent,
     InformeN1Component,
     TemplateKRIComponent,
-    ZonaGeograficaComponent
+    ZonaGeograficaComponent,
+    TemplateReporteBusquedaDemandaComponent
 
    
     //Validaciones

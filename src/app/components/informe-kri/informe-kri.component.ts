@@ -3,6 +3,10 @@ import { UserconfigService } from "src/app/services/userconfig.service";
 import { CoreService } from '../../services/core.service';
 import { SbsreportService } from 'src/app/services/sbsreport.service';
 import swal from 'sweetalert2';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
+const PDF_EXTENSION = ".pdf";
 
 @Component({
   selector: 'app-informe-kri',
@@ -39,6 +43,7 @@ export class InformeKRIComponent implements OnInit {
   IDListAnnoGlobal: number = 0
   public Usuario
   public PeriodoInforme
+  
 
   async ngOnInit() {
 
@@ -193,7 +198,7 @@ SwalGlobal(mensaje){
 }
 
 DescargarReporte(){
-  this.Export2Doc("ReportesGlobal","Reporte General") 
+  this.Export2Doc("ReportesGlobal","Reporte KRI") 
 }
 
 
@@ -226,6 +231,7 @@ async Registrar(item,index){
         data.NIDUSUARIO_MODIFICA =  this.Usuario.idUsuario
         data.SNOMBRE_ARCHIVO_CORTO =   this.ArchivoAdjunto.listFileNameCortoInform[0]
         data.SNOMBRE_ARCHIVO =   this.ArchivoAdjunto.listFileNameInform[0]
+        data.VALIDADOR =  'KRI'
         data.SRUTA = 'INFORMES-KRI' + '/' + item.NPERIODO_PROCESO ;
         data.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
         data.listFileName =  this.ArchivoAdjunto.listFileNameInform

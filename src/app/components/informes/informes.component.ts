@@ -879,6 +879,7 @@ async setDataFile(event) {
             data.NIDUSUARIO_MODIFICA =  this.Usuario.idUsuario
             data.SNOMBRE_ARCHIVO_CORTO =   this.ArchivoAdjunto.listFileNameCortoInform[0]
             data.SNOMBRE_ARCHIVO =   this.ArchivoAdjunto.listFileNameInform[0]
+            data.VALIDADOR =  'GENERAL'
             data.SRUTA = 'INFORMES-GLOBALES' + '/' + item.NPERIODO_PROCESO ;
             data.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
             data.listFileName =  this.ArchivoAdjunto.listFileNameInform

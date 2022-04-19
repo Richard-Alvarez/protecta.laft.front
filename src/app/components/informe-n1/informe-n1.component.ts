@@ -215,12 +215,14 @@ async Registrar(item,index){
     }).then(async (result) => {
       if (!result.dismiss) {
         this.core.loader.show()
+        debugger
         let data:any={}
         data.NPERIODO_PROCESO = item.NPERIODO_PROCESO
         data.SRUTA_ARCHIVO = 'INFORMES-N1' + '/' + item.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0]
         data.NIDUSUARIO_MODIFICA =  this.Usuario.idUsuario
         data.SNOMBRE_ARCHIVO_CORTO =   this.ArchivoAdjunto.listFileNameCortoInform[0]
         data.SNOMBRE_ARCHIVO =   this.ArchivoAdjunto.listFileNameInform[0]
+        data.VALIDADOR =  'N1'
         data.SRUTA = 'INFORMES-N1' + '/' + item.NPERIODO_PROCESO ;
         data.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
         data.listFileName =  this.ArchivoAdjunto.listFileNameInform
