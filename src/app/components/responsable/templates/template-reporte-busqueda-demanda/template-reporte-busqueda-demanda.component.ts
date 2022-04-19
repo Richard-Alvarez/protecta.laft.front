@@ -15,44 +15,11 @@ export class TemplateReporteBusquedaDemandaComponent implements OnInit {
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
   @ViewChild("pdfViewerAutoLoad", { static: true }) pdfViewerAutoLoad;
   data = [
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz Richard Alvarez Ruiz Richard Alvarez RuizRichard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
+    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', porcentaje : 100 , coincidencia : 'NOMBRE' ,fuente : 'IDECON',nombre:'Richard Alvarez Ruiz Richard Alvarez Ruiz Richard Alvarez RuizRichard Alvarez Ruiz' } ,
+    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', porcentaje : 100 , coincidencia : 'NOMBRE' ,fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
+  
 
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } , {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } , {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } , {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } , {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
-    {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
+    
 
     
   ]
@@ -101,7 +68,7 @@ export class TemplateReporteBusquedaDemandaComponent implements OnInit {
         headStyles: {
           fillColor: [239, 154, 154],
           textColor: [0, 0, 0],
-          halign: 'center'
+          halign: 'left'
       },
       bodyStyles:{
         cellWidth:'wrap'
@@ -110,10 +77,12 @@ export class TemplateReporteBusquedaDemandaComponent implements OnInit {
       columnStyles: {
         
          0: {cellWidth: 100},
-         1: {cellWidth: 200},
-         3: {cellWidth: 300},
+         1: {cellWidth: 100},
+         2: {cellWidth: 250},
+         3: {cellWidth: 100},
          4: {cellWidth: 80},
-        5: {cellWidth: 80},
+        5: {cellWidth: 70},
+        6: {cellWidth: 80 , },
        
       },
     
