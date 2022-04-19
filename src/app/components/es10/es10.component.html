@@ -47,7 +47,7 @@
                     <div class="col-xs-12 col-sm-12">
                       <select class="form-control buttonSinBorder colorButton" [(ngModel)]="NPERIODO_PROCESO">
                         <option value="0">
-                          --Todos--</option>
+                          --Seleccione--</option>
                         <option *ngFor="let item of this.listPeriodos" value="{{item}}">
                           {{item}}</option>
                       </select>
@@ -150,15 +150,30 @@
               </tr>
             </tbody>
           </table>
+          <ng-container *ngIf="this.ListEs10.length>0; then showPagination1"></ng-container>
+          <ng-template #showPagination1>
+            <div class="row mt-4">
+              <div class="col-sm-4">
+                <button (click)="exportExcel()" class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i
+                    class="fas fa-download"></i> Descargar Resultados </button>
+
+              </div>
+              <div class="col-sm-4">
+                <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage" [collectionSize]="totalItems"
+                  [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
+                </ngb-pagination>
+              </div>
+            </div>
+          </ng-template>
         </div>
-        <div *ngIf="this.ListEs10.length > 0" class="row mt-4">
+        <!-- <div *ngIf="this.ListEs10.length > 0" class="row mt-4">
           <div class="col-sm-4">
             <button (click)="exportExcel()"
               class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
               Descargar Resultados
             </button>
           </div>
-        </div>
+        </div> -->
         <br>
       </div>
     </div>
