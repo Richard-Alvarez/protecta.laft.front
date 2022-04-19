@@ -26,6 +26,12 @@ export class Es10Component implements OnInit {
   SPOLIZA : string = "0"
   SMONEDA : string = "0"
   SREGISTRO : string = ""
+    //paginador
+    currentPage = 1;
+    rotate = true;
+    maxSize = 5;
+    itemsPerPage = 10;
+    totalItems = 0;
   constructor(private userConfigService: UserconfigService,
     private spinner: NgxSpinnerService,
     private SbsreportService: SbsreportService,
@@ -62,28 +68,31 @@ export class Es10Component implements OnInit {
     return array;
   }
   eventChange (){
-    this.ListEs10 = this.Response.es10;
+    this.Response.ListEs10 = this.Response.es10;
+    this.currentPage = 1;
     if ( this.SRIEGO == "0" && this.SMONEDA == "0" && this.SPOLIZA == "0" && this.SREGISTRO == ""){
-      this.ListEs10 = this.Response.es10
+      this.Response.ListEs10 = this.Response.es10
     }else{
       debugger;
       if(this.SRIEGO != "0")
       {
-        this.ListEs10 = this.ListEs10.filter(t=>t.sRiesgo == this.SRIEGO)
+        this.Response.ListEs10 = this.Response.ListEs10.filter(t=>t.sRiesgo == this.SRIEGO)
       }
       if(this.SMONEDA != "0")
       {
-        this.ListEs10 = this.ListEs10.filter(t=>t.sMoneda == this.SMONEDA)
+        this.Response.ListEs10 = this.Response.ListEs10.filter(t=>t.sMoneda == this.SMONEDA)
       }
       if(this.SPOLIZA != "0")
       {
-        this.ListEs10 = this.ListEs10.filter(t=>t.sNomComercial == this.SPOLIZA)
+        this.Response.ListEs10 = this.Response.ListEs10.filter(t=>t.sNomComercial == this.SPOLIZA)
       }
       if(this.SREGISTRO != "")
       {
-        this.ListEs10 = this.ListEs10.filter(t=>t.sCodRegistro.toUpperCase().includes(this.SREGISTRO.toUpperCase()))
+        this.Response.ListEs10 = this.Response.ListEs10.filter(t=>t.sCodRegistro.toUpperCase().includes(this.SREGISTRO.toUpperCase()))
       }
     }
+    this.ListEs10 = this.sliceAlertsArray(this.Response.ListEs10)
+    this.totalItems = this.Response.ListEs10.length;
   }
   async RegistrarArchivo() {
     console.log("ArchivoAdjunto Excel", this.ArchivoAdjunto)
@@ -249,8 +258,9 @@ export class Es10Component implements OnInit {
     }else {
       this.spinner.show()
       this.Response = await this.userConfigService.GetListaEs10(data)
-      this.ListEs10 = this.Response.es10;
+      this.Response.ListEs10 = this.Response.es10;
       await this.fillDropList();
+      this.eventChange();
       this.spinner.hide()
     }
   }
@@ -296,7 +306,7 @@ export class Es10Component implements OnInit {
   }
   exportExcel() {
     let data: any = [];
-    this.ListEs10.forEach(t => {
+    this.Response.ListEs10.forEach(t => {
       let _data: any = {}
       _data["Periodo"] = t.nPeriodoProceso;
       _data["Ramo"] = t.sRamo;
@@ -309,6 +319,19 @@ export class Es10Component implements OnInit {
       _data["N° asegurados"] = t.nCantAsegurados;
       data.push(_data)
     });
-    this.excelService.exportAsExcelFile(data, "Lista de productos o polizas vigentes - ES10");
+    this.excelService.exportAsExcelFile(data, "Anexo ES10");
+  }
+  sliceAlertsArray(arreglo) {
+    return arreglo.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
+    );
+  }
+  pageChanged(currentPage) {
+    this.currentPage = currentPage;
+    this.ListEs10 = this.Response.ListEs10.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
+    );
   }
 }

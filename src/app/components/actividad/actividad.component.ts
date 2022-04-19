@@ -18,6 +18,13 @@ export class ActividadComponent implements OnInit {
   listPeriodos: any = []
   response: any = []
   ListActividad: any = []
+  ListResponse: any = []
+    //paginador
+    currentPage = 1;
+    rotate = true;
+    maxSize = 5;
+    itemsPerPage = 10;
+    totalItems = 0;
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
   constructor(private userConfigService: UserconfigService,
     private spinner: NgxSpinnerService,
@@ -202,6 +209,7 @@ export class ActividadComponent implements OnInit {
     this.spinner.show()
     this.response = await this.userConfigService.GetListaActividadEconomica(data)
     this.ListActividad  = this.response;
+    this.eventChange();
     this.spinner.hide()
     }
   }
@@ -217,6 +225,7 @@ export class ActividadComponent implements OnInit {
           item["Número de ruc"] = t.NRODOCUMENTO;
           item["Tipo contribuyente"] = "";
           item["Actividad Económica"] = "";
+          item["Sector"] = "";
           data.push(item);
         })
         this.excelService.exportAsExcelFile(data, "Actividad economica");
@@ -256,16 +265,33 @@ export class ActividadComponent implements OnInit {
       _data["Número de ruc"] = t.SNUM_RUC;
       _data["Tipo contribuyente"] = t.STIPOCONTRIBUYENTE;
       _data["Actividad Económica"] = t.SACTIVITYECONOMY;
+      _data["Sector"] = t.SSECTOR;
       data.push(_data)
     });
     this.excelService.exportAsExcelFile(data, "Actividad económica");
   }
   eventChange(){
+    this.currentPage = 1;
     if ( this.SREGISTRO == ""){
       this.ListActividad = this.response
     }else{
       this.ListActividad = this.response.filter(t=>(t.SDESCRIPTION + "" + t.SNUM_RUC).toUpperCase().includes(this.SREGISTRO.toUpperCase()))
       
     }
+    this.ListResponse = this.sliceAlertsArray(this.ListActividad)
+    this.totalItems = this.ListActividad.length;
+  }
+  sliceAlertsArray(arreglo) {
+    return arreglo.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
+    );
+  }
+  pageChanged(currentPage) {
+    this.currentPage = currentPage;
+    this.ListResponse = this.ListActividad.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
+    );
   }
 }

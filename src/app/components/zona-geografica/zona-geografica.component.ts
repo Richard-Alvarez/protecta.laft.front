@@ -19,6 +19,12 @@ export class ZonaGeograficaComponent implements OnInit {
   listPeriodos: any = []
   response: any = []
   ListZonaGeo: any = []
+  //paginador
+  currentPage = 1;
+  rotate = true;
+  maxSize = 5;
+  itemsPerPage = 10;
+  totalItems = 0;
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
   ListDepartamentos: any[];
   constructor(private userConfigService: UserconfigService,
@@ -206,7 +212,8 @@ export class ZonaGeograficaComponent implements OnInit {
       this.spinner.show()
       await this.userConfigService.GetKriSearchZonaGeografica(data).then( res => {
         this.response = res;
-        this.ListZonaGeo  = this.response.zonaGeografica;
+        this.response.ListZonaGeo  = this.response.zonaGeografica;
+        this.eventChange();
       }).then(()=> {
         this.fillDropList();
         this.spinner.hide()
@@ -260,7 +267,7 @@ export class ZonaGeograficaComponent implements OnInit {
   }
   exportExcel() {
     let data: any = [];
-    this.ListZonaGeo.forEach(t => {
+    this.response.ListZonaGeo.forEach(t => {
       let _data: any = {}
       _data["Periodo"] = t.nPeriodoProceso;
       _data["Tipo Documento"] = t.tipDoc;
@@ -275,17 +282,20 @@ export class ZonaGeograficaComponent implements OnInit {
     this.excelService.exportAsExcelFile(data, "Zona Geográfica");
   }
   eventChange(){
-    this.ListZonaGeo = this.response.zonaGeografica
+    this.currentPage = 1;
+    this.response.ListZonaGeo = this.response.zonaGeografica
     if ( this.SREGISTRO == "" && this.NDEPARTAMENTO == "0"){
-      this.ListZonaGeo = this.response.zonaGeografica
+      this.response.ListZonaGeo = this.response.zonaGeografica
     }else{
       if(this.NDEPARTAMENTO != "0"){
-        this.ListZonaGeo = this.ListZonaGeo.filter( t=> t.region == this.NDEPARTAMENTO);
+        this.response.ListZonaGeo = this.response.ListZonaGeo.filter( t=> t.region == this.NDEPARTAMENTO);
       }
       if(this.SREGISTRO != ""){
-        this.ListZonaGeo = this.ListZonaGeo.filter(t=>(t.tipDoc + "" + t.numDoc + "" + t.primerNombre + "" + t.segundoNombre + "" + t.apellidoParterno + "" + t.apellidoMaterno ).toUpperCase().includes(this.SREGISTRO.toUpperCase()))
+        this.response.ListZonaGeo = this.response.ListZonaGeo.filter(t=>(t.tipDoc + "" + t.numDoc + "" + t.primerNombre + "" + t.segundoNombre + "" + t.apellidoParterno + "" + t.apellidoMaterno ).toUpperCase().includes(this.SREGISTRO.toUpperCase()))
       }
     }
+    this.ListZonaGeo = this.sliceAlertsArray(this.response.ListZonaGeo)
+    this.totalItems = this.response.ListZonaGeo.length;
   }
   async fillDropList() {
     this.ListDepartamentos = await this.fillArray(this.response.departamentos)
@@ -300,5 +310,19 @@ export class ZonaGeograficaComponent implements OnInit {
       array.push(_item);
     })
     return array;
+  }
+
+  sliceAlertsArray(arreglo) {
+    return arreglo.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
+    );
+  }
+  pageChanged(currentPage) {
+    this.currentPage = currentPage;
+    this.ListZonaGeo = this.response.ListZonaGeo.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
+    );
   }
 }
