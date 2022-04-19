@@ -263,6 +263,10 @@ class Rutas {
   public urlGetKriListContratantes: string = this.base + "monitoreoSenales/GetKriListContratantes"
   public urlGetRegistrarDatosActividadEconomica: string = this.base + "monitoreoSenales/GetRegistrarDatosActividadEconomica"
   public urlGetListaActividadEconomica: string = this.base + "monitoreoSenales/GetListaActividadEconomica"
+  public urlGetPeriodoSemestral: string = this.base + "monitoreoSenales/GetPeriodoSemestral"
+  public urlGetKriListZonasGeograficas: string = this.base + "monitoreoSenales/GetKriListZonasGeograficas"
+  public urlGetKriSearchZonaGeografica: string = this.base + "monitoreoSenales/GetKriSearchZonaGeografica"
+  public urlGetRegistrarDatosZonaGeografica: string = this.base + "monitoreoSenales/GetRegistrarDatosZonaGeografica"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

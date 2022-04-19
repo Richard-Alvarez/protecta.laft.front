@@ -199,6 +199,7 @@ import { ActividadComponent } from './components/actividad/actividad.component';
 import { InformeN1Component } from './components/informe-n1/informe-n1.component';
 import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
 import { TemplateKRIComponent } from './components/responsable/templates/template-kri/template-kri.component';
+import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -365,7 +366,8 @@ import { TemplateKRIComponent } from './components/responsable/templates/templat
     Es10Component,
     ActividadComponent,
     InformeN1Component,
-    TemplateKRIComponent
+    TemplateKRIComponent,
+    ZonaGeograficaComponent
 
    
     //Validaciones

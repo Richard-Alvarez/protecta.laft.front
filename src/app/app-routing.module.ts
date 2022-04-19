@@ -94,6 +94,7 @@ import { Es10Component } from './components/es10/es10.component';
 import { ActividadComponent } from './components/actividad/actividad.component';
 import { InformeN1Component } from '../app/components/informe-n1/informe-n1.component';
 import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
+import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
 
 //fin formularios antiguos
 
@@ -114,6 +115,7 @@ const routes: Routes = [
   //LAFT II - MENÚS
   { path: 'alert-management', component: AlertManagementComponent },
   { path: 'es10', component: Es10Component },
+  { path: 'zona-geografica', component: ZonaGeograficaComponent},
   { path: 'actividad', component: ActividadComponent},
   { path: 'forms-database', component: FormsDatabaseComponent },
   { path: 'work-module', component: WorkModuleComponent },
