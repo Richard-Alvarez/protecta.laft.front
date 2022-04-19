@@ -50,18 +50,23 @@
               <tr>
                 <th scope="col">Tipo Documento</th>
                 <th scope="col">N° Documento</th>
-                <th scope="col">Lista</th>
+                <th scope="col">Nombre Razón social</th>
+                <th scope="col">Tipo lista</th>
+                <th scope="col">% coincidencias</th>
                 <th scope="col">Fuente</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Tipo de coincidencia</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item  of  data"> 
                 <td>{{item.tipoDoc}}</td>
                 <td>{{item.numeroDoc}}</td>
-                <td>{{item.lista}}</td>
-                <td>{{item.fuente}}</td>
                 <td>{{item.nombre}}</td>
+                <td>{{item.lista}}</td>
+                <td>{{item.porcentaje}}</td>
+                <td>{{item.fuente}}</td>
+                <td>{{item.coincidencia}}</td>
+                
               </tr>
              
             </tbody>
