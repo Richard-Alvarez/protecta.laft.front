@@ -3,6 +3,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ExcelService } from 'src/app/services/excel.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import Swal from "sweetalert2";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalZonaGeograficaComponent } from 'src/app/pages/modal-zona-geografica/modal-zona-geografica.component';
 @Component({
   selector: 'app-zona-geografica',
   templateUrl: './zona-geografica.component.html',
@@ -29,7 +31,9 @@ export class ZonaGeograficaComponent implements OnInit {
   ListDepartamentos: any[];
   constructor(private userConfigService: UserconfigService,
     private spinner: NgxSpinnerService,
-    private excelService: ExcelService) { }
+    private excelService: ExcelService,
+    private modalService: NgbModal,
+    ) { }
 
 
   async ngOnInit() {
@@ -324,5 +328,24 @@ export class ZonaGeograficaComponent implements OnInit {
       (this.currentPage - 1) * this.itemsPerPage,
       this.currentPage * this.itemsPerPage
     );
+  }
+
+  UpdateItem(data){
+    const modalRef = this.modalService.open(ModalZonaGeograficaComponent, { size: 'lg', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
+
+
+    modalRef.componentInstance.reference = modalRef;
+    modalRef.componentInstance.data = data;
+    //modalRef.componentInstance.ListaEmail = this.ListCorreo;
+    modalRef.result.then(async (resp) => {
+      this.spinner.show();
+      //let response = await this.userConfig.GetListCorreo()
+      //this.ListCorreo = response
+      this.spinner.hide();
+
+    }, (reason) => {
+
+      this.spinner.hide();
+    });
   }
 }

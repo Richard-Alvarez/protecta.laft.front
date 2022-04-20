@@ -4,6 +4,8 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { UserconfigService } from 'src/app/services/userconfig.service';
 import { SbsreportService } from "src/app/services/sbsreport.service";
 import Swal from "sweetalert2";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalActivadEconomicaComponent } from 'src/app/pages/modal-activad-economica/modal-activad-economica.component';
 @Component({
   selector: 'app-actividad',
   templateUrl: './actividad.component.html',
@@ -29,7 +31,8 @@ export class ActividadComponent implements OnInit {
   constructor(private userConfigService: UserconfigService,
     private spinner: NgxSpinnerService,
     private SbsreportService: SbsreportService,
-    private excelService: ExcelService) { }
+    private excelService: ExcelService,
+    private modalService: NgbModal,) { }
 
   async ngOnInit() {
     this.listPeriodos = await this.listarPeriodos()
@@ -293,5 +296,23 @@ export class ActividadComponent implements OnInit {
       (this.currentPage - 1) * this.itemsPerPage,
       this.currentPage * this.itemsPerPage
     );
+  }
+  UpdateItem(data){
+    const modalRef = this.modalService.open(ModalActivadEconomicaComponent, { size: 'lg', backdropClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
+
+
+    modalRef.componentInstance.reference = modalRef;
+    modalRef.componentInstance.data = data;
+    //modalRef.componentInstance.ListaEmail = this.ListCorreo;
+    modalRef.result.then(async (resp) => {
+      this.spinner.show();
+      //let response = await this.userConfig.GetListCorreo()
+      //this.ListCorreo = response
+      this.spinner.hide();
+
+    }, (reason) => {
+
+      this.spinner.hide();
+    });
   }
 }

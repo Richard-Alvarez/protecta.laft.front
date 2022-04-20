@@ -96,6 +96,7 @@ import { InformeN1Component } from '../app/components/informe-n1/informe-n1.comp
 import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
 import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
 import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
+import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
 
 //fin formularios antiguos
 
@@ -197,6 +198,7 @@ const routes: Routes = [
   { path: 'informe-N1', component: InformeN1Component},
   { path: 'informe-KRI', component: InformeKRIComponent},
   { path: 'report', component: TemplateReporteBusquedaDemandaComponent},
+  { path: 'report2', component: TemplateReportDemandaIndividualComponent},
   
   
 ];
