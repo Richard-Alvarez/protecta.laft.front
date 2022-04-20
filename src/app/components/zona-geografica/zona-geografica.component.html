@@ -99,6 +99,7 @@
               <th>Apellido Paterno</th>
               <th>Apellido Materno</th>
               <th>Departamento</th>
+              <th>Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -114,6 +115,10 @@
               <td>{{item.apellidoParterno}}</td>
               <td>{{item.apellidoMaterno}}</td>
               <td>{{item.region}}</td>
+              <td class="text-center vertical" style="width: 6%;">
+                <img src="assets/icons/edit.png" color="blue" title="Editar alerta" alt=""
+                    style="cursor: pointer;" (click)="UpdateItem(item)" />
+            </td>
             </tr>
           </tbody>
         </table>

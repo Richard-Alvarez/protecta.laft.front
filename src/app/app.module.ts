@@ -202,6 +202,8 @@ import { TemplateKRIComponent } from './components/responsable/templates/templat
 import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
 import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
 import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
+import { ModalZonaGeograficaComponent } from './pages/modal-zona-geografica/modal-zona-geografica.component';
+import { ModalActivadEconomicaComponent } from './pages/modal-activad-economica/modal-activad-economica.component';
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -372,7 +374,9 @@ import { TemplateReportDemandaIndividualComponent } from './components/responsab
     TemplateReporteBusquedaDemandaComponent,
     TemplateReportDemandaIndividualComponent,
     ZonaGeograficaComponent,
-    TemplateReporteBusquedaDemandaComponent
+    TemplateReporteBusquedaDemandaComponent,
+    ModalZonaGeograficaComponent,
+    ModalActivadEconomicaComponent
 
    
     //Validaciones
@@ -406,7 +410,7 @@ import { TemplateReportDemandaIndividualComponent } from './components/responsab
     NO_ERRORS_SCHEMA
   ],
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,
-    ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent,ModalComplementoSinSennalComponent],
+    ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent,ModalComplementoSinSennalComponent,ModalZonaGeograficaComponent,ModalActivadEconomicaComponent],
   providers: [UserconfigService, DatePipe],
   bootstrap: [AppComponent],
   exports: [BusquedaDemandaComponent]

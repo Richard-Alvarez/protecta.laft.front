@@ -82,6 +82,7 @@
               <th>Tipo de contribuyente</th>
               <th>Actividad económica</th>
               <th>Sector</th>
+              <th>Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -95,6 +96,10 @@
               <td>{{item.STIPOCONTRIBUYENTE}}</td>
               <td>{{item.SACTIVITYECONOMY}}</td>
               <td>{{item.SSECTOR}}</td>
+              <td class="text-center vertical" style="width: 6%;">
+                <img src="assets/icons/edit.png" color="blue" title="Editar alerta" alt=""
+                    style="cursor: pointer;" (click)="UpdateItem(item)" />
+              </td>
             </tr>
           </tbody>
         </table>
