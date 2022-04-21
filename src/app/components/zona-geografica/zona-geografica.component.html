@@ -92,6 +92,7 @@
           <thead>
             <tr>
               <th>Período</th>
+              <th>Producto</th>
               <th>Tipo de Documento</th>
               <th>Número de Documento</th>
               <th>Primer Nombre</th>
@@ -108,6 +109,7 @@
             </tr>
             <tr *ngFor="let item of ListZonaGeo">
               <td>{{item.nPeriodoProceso}}</td>
+              <td>{{item.sProducto}}</td>
               <td>{{item.tipDoc}}</td>
               <td>{{item.numDoc}}</td>
               <td>{{item.primerNombre}}</td>
