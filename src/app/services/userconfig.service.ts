@@ -24,6 +24,17 @@ export class UserconfigService {
         }
     })
   }
+  updZonasGeograficas(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+        try {
+            this.laft.post(this.core.config.rest.urlUpdZonasGeograficas, data).subscribe(response => {
+                return resolve(response)
+            })
+        } catch (error) {
+            return reject(error)
+        }
+    })
+  }
 
   getPolicyList(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
