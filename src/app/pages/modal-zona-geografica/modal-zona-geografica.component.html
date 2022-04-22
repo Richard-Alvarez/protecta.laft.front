@@ -1,0 +1,93 @@
+<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
+   
+    <button type="button" class="swal2-close"  (click)="closeModal('edit-modal')" aria-label="Close this dialog" style="display: flex;outline:none;">×</button>
+</div>
+<div class="row mb-2 mt-2" style="display: flex;padding-left: 125px;">
+ <div class="Header">
+     <div class="row">
+         <div class="col-lg-19">
+             <h4 class="TitleLine">Actualizar Registros</h4>
+         </div>
+     </div>
+     
+ </div>
+ <br>
+     
+</div>
+<div class="row" style="padding-left: 100px;">
+ <div class="col-lg-10 form-group" title="Nombre de Alerta">
+     <span class="fontText">Periodo:</span>
+     <input [(ngModel)]="data.nPeriodoProceso" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+ </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+ <div class="col-lg-10 form-group" title="Nombre de Alerta">
+     <span class="fontText">Producto:</span>
+     <input [(ngModel)]="data.sProducto" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+ </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+    <div class="col-lg-10 form-group" title="Nombre de Alerta">
+        <span class="fontText">Tipo de Documento:</span>
+        <input [(ngModel)]="data.tipDoc" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+    </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+    <div class="col-lg-10 form-group" title="Nombre de Alerta">
+        <span class="fontText">Número de Documento	:</span>
+        <input [(ngModel)]="data.numDoc" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+    </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+    <div class="col-lg-10 form-group" title="Nombre de Alerta">
+        <span class="fontText">Primer Nombre:</span>
+        <input [(ngModel)]="data.primerNombre" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+    </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+    <div class="col-lg-10 form-group" title="Nombre de Alerta">
+        <span class="fontText">Segundo Nombre:</span>
+        <input [(ngModel)]="data.segundoNombre" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+    </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+    <div class="col-lg-10 form-group" title="Nombre de Alerta">
+        <span class="fontText">Apellido Paterno:</span>
+        <input [(ngModel)]="data.apellidoParterno" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+    </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+    <div class="col-lg-10 form-group" title="Nombre de Alerta">
+        <span class="fontText">Apellido Materno:</span>
+        <input [(ngModel)]="data.apellidoMaterno" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+    </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+    <div class="col-lg-10 form-group" title="Nombre de Alerta">
+        <span class="fontText">Departamento:</span>
+        <input [(ngModel)]="departamento" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="row" >
+ <div class="col-lg-6 form-group" title="Guardar" style="text-align:right">
+     <br>
+     <button style="width: 100px;"
+         class="btn btn-warning text-white" (click)="GuardarCambios(data.rowId)" >Guardar</button>
+ </div>
+ 
+ <div class="col-lg-2 form-group" title="Guardar" style="">
+     <br>
+     <button style="width: 100px; background-color: gray;"
+         class="btn text-white" (click)="closeModal('edit-modal')">Cancelar</button>
+ </div>
+</div>
+<br><br>
+

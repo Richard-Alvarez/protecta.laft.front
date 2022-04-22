@@ -194,8 +194,16 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 import { RegistroNegativoComponent } from './components/registro-negativo/registro-negativo.component';
-
-
+import { Es10Component } from './components/es10/es10.component';
+import { ActividadComponent } from './components/actividad/actividad.component';
+import { InformeN1Component } from './components/informe-n1/informe-n1.component';
+import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
+import { TemplateKRIComponent } from './components/responsable/templates/template-kri/template-kri.component';
+import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
+import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
+import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
+import { ModalZonaGeograficaComponent } from './pages/modal-zona-geografica/modal-zona-geografica.component';
+import { ModalActivadEconomicaComponent } from './pages/modal-activad-economica/modal-activad-economica.component';
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -356,7 +364,19 @@ import { RegistroNegativoComponent } from './components/registro-negativo/regist
     ModalComplementoSinSennalComponent,
     ComplementoRespuestaComponent,
     SearchPepComponent,
-    RegistroNegativoComponent
+    RegistroNegativoComponent,
+    InformeN1Component,
+    InformeKRIComponent,
+    Es10Component,
+    ActividadComponent,
+    InformeN1Component,
+    TemplateKRIComponent,
+    TemplateReporteBusquedaDemandaComponent,
+    TemplateReportDemandaIndividualComponent,
+    ZonaGeograficaComponent,
+    TemplateReporteBusquedaDemandaComponent,
+    ModalZonaGeograficaComponent,
+    ModalActivadEconomicaComponent
 
    
     //Validaciones
@@ -390,7 +410,7 @@ import { RegistroNegativoComponent } from './components/registro-negativo/regist
     NO_ERRORS_SCHEMA
   ],
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,
-    ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent,ModalComplementoSinSennalComponent],
+    ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent,ModalComplementoSinSennalComponent,ModalZonaGeograficaComponent,ModalActivadEconomicaComponent],
   providers: [UserconfigService, DatePipe],
   bootstrap: [AppComponent],
   exports: [BusquedaDemandaComponent]

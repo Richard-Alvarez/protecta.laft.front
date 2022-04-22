@@ -44,6 +44,7 @@
         "hammerjs": "^2.0.8",
         "html-to-text": "^7.1.1",
         "html2canvas": "^1.3.3",
+        "html2pdf.js": "^0.10.1",
         "igniteui-angular": "^8.2.31",
         "jquery": "^3.6.0",
         "jspdf": "^2.5.0",

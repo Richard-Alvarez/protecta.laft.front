@@ -470,20 +470,29 @@ exportExcel() {
 }
 
 filter: any = {};
-excel() {
+async excel() {
 
   try {
-    this.userConfigService.ObtenerPlantillaCotizacion(this.filter).then(res => {
+    this.userConfigService.ObtenerPlantillaCotizacion(this.filter).then(async res => {
       
       if (res == '') {
         Swal.fire('Información', 'Error al descargar Excel o no se encontraron resultados', 'error');
       } else {
-        const blob = this.b64toBlob(res);
-        const blobUrl = URL.createObjectURL(blob);
-        const a = document.createElement('a')
-        a.href = blobUrl
-        a.download = 'Reporte de Cotizaciones.xlsx'
-        a.click()
+        // const blob = this.b64toBlob(res);
+        // const blobUrl = URL.createObjectURL(blob);
+        // const a = document.createElement('a')
+        // a.href = blobUrl
+        // a.download = 'Reporte de Cotizaciones.xlsx'
+        
+       
+        let response = await fetch(`data:application/octet-stream;base64,${res}`)
+        const blob = await response.blob()
+        let url = URL.createObjectURL(blob)
+        let link = document.createElement('a')
+        link.href = url
+        link.download = "Plantilla-Registro-Negativo.xlsx"
+        link.click()
+       
       };
     });
   } catch (error) {

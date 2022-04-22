@@ -90,6 +90,13 @@ import { SearchPepComponent } from './pages/search-pep/search-pep.component';
 import { ComplementoSinSennalComponent } from './../app/complemento-sin-sennal/complemento-sin-sennal.component';
 import { ComplementoRespuestaComponent } from './complemento-respuesta/complemento-respuesta.component';
 import { RegistroNegativoComponent } from '../app/components/registro-negativo/registro-negativo.component';
+import { Es10Component } from './components/es10/es10.component';
+import { ActividadComponent } from './components/actividad/actividad.component';
+import { InformeN1Component } from '../app/components/informe-n1/informe-n1.component';
+import { InformeKRIComponent } from './components/informe-kri/informe-kri.component';
+import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
+import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
+import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
 
 //fin formularios antiguos
 
@@ -109,6 +116,9 @@ const routes: Routes = [
   { path: 'user-config', component: UserConfigComponent },
   //LAFT II - MENÚS
   { path: 'alert-management', component: AlertManagementComponent },
+  { path: 'es10', component: Es10Component },
+  { path: 'zona-geografica', component: ZonaGeograficaComponent},
+  { path: 'actividad', component: ActividadComponent},
   { path: 'forms-database', component: FormsDatabaseComponent },
   { path: 'work-module', component: WorkModuleComponent },
   { path: 'customer-manager', component: CustomerManagerComponent },
@@ -185,6 +195,10 @@ const routes: Routes = [
   { path: 'complemento-respuesta', component: ComplementoRespuestaComponent},
   { path: 'search-pep', component: SearchPepComponent},
   { path: 'registro-negativo', component: RegistroNegativoComponent},
+  { path: 'informe-N1', component: InformeN1Component},
+  { path: 'informe-KRI', component: InformeKRIComponent},
+  { path: 'report', component: TemplateReporteBusquedaDemandaComponent},
+  { path: 'report2', component: TemplateReportDemandaIndividualComponent},
   
   
 ];

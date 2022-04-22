@@ -1,11 +1,11 @@
 class Rutas {
 
-  private base: string = 'http://localhost:5001/api/';
+  //private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
-  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'http://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -14,7 +14,7 @@ class Rutas {
   private basePolicy: string = 'http://190.216.170.173/ApiPoliza/api/';
   //private basePolicy: string = 'https://soatservicios.protectasecurity.pe/ApiPoliza/api/';
   //private basePolicy: string = 'https://localhost:5001/api/';
- 
+
   public urlLogin: string = this.base + "login";
   public urlCaptcha: string = this.base + "login/getcaptcha";
   public urlMenu: string = this.base + "menuConfig/getOptionList";
@@ -250,12 +250,24 @@ class Rutas {
   public urlgetCorreoCustomAction: string = this.base + "monitoreoSenales/getCorreoCustomAction"
   public urlgetCuerpoCorreo: string = this.base + "monitoreoSenales/getCuerpoCorreo"
   public urlGetRegistrarDatosExcelRegistronegativo: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelRegistronegativo"
+  public urlGetRegistrarDatosExcelEs10: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelEs10"
   public urlpreCargaRegistrosNegativos: string = this.base + "monitoreoSenales/preCargaRegistrosNegativos"
-  public urlGetListaRegistroNegativo: string = this.base + "monitoreoSenales/GetListaRegistroNegativo"
   public urlgetDeleteRegistrosNegativos: string = this.base + "monitoreoSenales/getDeleteRegistrosNegativos"
   public urlGetListProveedor: string = this.base + "monitoreoSenales/getListProveedor"
+  public urlGetListaRegistroNegativo: string = this.base + "monitoreoSenales/GetListaRegistroNegativo"
+  public urlGetListaEs10: string = this.base + "monitoreoSenales/GetListaEs10"
   
   public urlObtenerPlantillaCotizacion: string = this.base + "monitoreoSenales/ObtenerPlantillaCotizacion"
+  public urlObtenerPlantillaEs10: string = this.base + "monitoreoSenales/obtenerPlantillaEs10"
+  public urlGetSetearDataExcel: string = this.base + "monitoreoSenales/GetSetearDataExcel"
+  public urlGetKriListContratantes: string = this.base + "monitoreoSenales/GetKriListContratantes"
+  public urlGetRegistrarDatosActividadEconomica: string = this.base + "monitoreoSenales/GetRegistrarDatosActividadEconomica"
+  public urlGetListaActividadEconomica: string = this.base + "monitoreoSenales/GetListaActividadEconomica"
+  public urlGetPeriodoSemestral: string = this.base + "monitoreoSenales/GetPeriodoSemestral"
+  public urlGetKriListZonasGeograficas: string = this.base + "monitoreoSenales/GetKriListZonasGeograficas"
+  public urlGetKriSearchZonaGeografica: string = this.base + "monitoreoSenales/GetKriSearchZonaGeografica"
+  public urlGetRegistrarDatosZonaGeografica: string = this.base + "monitoreoSenales/GetRegistrarDatosZonaGeografica"
+  public urlUpdZonasGeograficas: string = this.base + "monitoreoSenales/UpdZonasGeograficas"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   public optionList: any = [];
   public optionListSubMenu: any = [];
   public suboptionList: any = [];
+  public pruebaSubmenu: any = [];
   public updateModal = false;
   public STIPO_USUARIO
 
@@ -72,7 +73,7 @@ export class NavbarComponent implements OnInit {
     });
 
      
-    
+   
   }
 
 
@@ -109,6 +110,7 @@ public text: String;
     let _data: any = {};
     _data.profileId = profile;     
     this.userconfig.getOptions(_data).then((response) => {
+      
       //let _data;
       let arrayMenusMaster = [];
       let arraySubMenus = [];
@@ -140,12 +142,19 @@ public text: String;
         // }
         
       });
-      
+      this.pruebaSubmenu = this.optionList
+      this.optionList.forEach((item,index) => {
+        let res = this.optionListSubMenu.filter(it => it.nFatherId == item.nResourceId)
+        this.optionList[index].subgruposnuevos = res
+      })
+      // console.log("this.optionListSubMenu",this.optionListSubMenu)
+      // console.log("this.optionList",this.optionList)
+      // console.log("this.pruebaSubmenu",this.pruebaSubmenu)
     });
     
     // let usuario = this.core.storage.get('usuario')
     // this.STIPO_USUARIO = usuario['tipoUsuario']
-    
+   
     
   }
   

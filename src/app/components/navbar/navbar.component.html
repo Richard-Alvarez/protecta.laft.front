@@ -59,12 +59,11 @@ style="background: rgb(240, 238, 237);margin-left: 0px;float: top;z-index:4;top:
         
         
         
-        <div *ngFor="let subM of optionListSubMenu" class="sideNav2 col-lg-12">
-            <div  (click)="changeClient($event)" id="{{ subM.sName }}">
-                <a *ngIf="subM.nFatherId == option.nResourceId" [routerLink]="['/' + subM.sRouterLink]" style="white-space: nowrap;" >{{ subM.sName }}</a>
+        <div *ngFor="let subM of option.subgruposnuevos" class="sideNav2 col-lg-12">
+            <div (click)="changeClient($event)" id="{{ subM.sName }}">
+                <a  [routerLink]="['/' + subM.sRouterLink]" style="white-space: nowrap;" >{{ subM.sName }}</a>
             </div>
            
-            
         </div>
         
         <hr>
