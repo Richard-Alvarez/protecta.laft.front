@@ -232,6 +232,7 @@ export class ZonaGeograficaComponent implements OnInit {
         res.forEach(t=> {
           let item : any = {};
           item["Periodo"] = t.NPERIODO_PROCESO;
+          item["Producto"] = t.COD_TIPPROD;
           item["Tipo Documento"] = t.TIP_DOC;
           item["Número de Documento"] = t.NUM_IDENBEN;
           item["Primer Nombre"] = t.NOMBEN;
@@ -274,6 +275,7 @@ export class ZonaGeograficaComponent implements OnInit {
     this.response.ListZonaGeo.forEach(t => {
       let _data: any = {}
       _data["Periodo"] = t.nPeriodoProceso;
+      _data["Producto"] = t.sProducto;
       _data["Tipo Documento"] = t.tipDoc;
       _data["Número de Documento"] = t.numDoc;
       _data["Primer Nombre"] = t.primerNombre;

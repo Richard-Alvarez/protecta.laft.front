@@ -17,43 +17,49 @@
 <div class="row" style="padding-left: 100px;">
  <div class="col-lg-10 form-group" title="Nombre de Alerta">
      <span class="fontText">Periodo:</span>
-     <input [(ngModel)]="Periodo" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton">
+     <input [(ngModel)]="data.nPeriodoProceso" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
+ </div>
+</div>
+<div class="row" style="padding-left: 100px;">
+ <div class="col-lg-10 form-group" title="Nombre de Alerta">
+     <span class="fontText">Producto:</span>
+     <input [(ngModel)]="data.sProducto" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
  </div>
 </div>
 <div class="row" style="padding-left: 100px;">
     <div class="col-lg-10 form-group" title="Nombre de Alerta">
         <span class="fontText">Tipo de Documento:</span>
-        <input [(ngModel)]="tipoDoc" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton">
+        <input [(ngModel)]="data.tipDoc" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
     </div>
 </div>
 <div class="row" style="padding-left: 100px;">
     <div class="col-lg-10 form-group" title="Nombre de Alerta">
         <span class="fontText">Número de Documento	:</span>
-        <input [(ngModel)]="numDoc" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton">
+        <input [(ngModel)]="data.numDoc" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
     </div>
 </div>
 <div class="row" style="padding-left: 100px;">
     <div class="col-lg-10 form-group" title="Nombre de Alerta">
         <span class="fontText">Primer Nombre:</span>
-        <input [(ngModel)]="primerNom" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton">
+        <input [(ngModel)]="data.primerNombre" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
     </div>
 </div>
 <div class="row" style="padding-left: 100px;">
     <div class="col-lg-10 form-group" title="Nombre de Alerta">
         <span class="fontText">Segundo Nombre:</span>
-        <input [(ngModel)]="segundoNom" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton">
+        <input [(ngModel)]="data.segundoNombre" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
     </div>
 </div>
 <div class="row" style="padding-left: 100px;">
     <div class="col-lg-10 form-group" title="Nombre de Alerta">
         <span class="fontText">Apellido Paterno:</span>
-        <input [(ngModel)]="apellidoMa" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton">
+        <input [(ngModel)]="data.apellidoParterno" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
     </div>
 </div>
 <div class="row" style="padding-left: 100px;">
     <div class="col-lg-10 form-group" title="Nombre de Alerta">
         <span class="fontText">Apellido Materno:</span>
-        <input [(ngModel)]="apellidoPa" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton">
+        <input [(ngModel)]="data.apellidoMaterno" id="usAlertNama" type="text" class="form-control buttonSinBorder colorButton" readonly>
     </div>
 </div>
 <div class="row" style="padding-left: 100px;">
@@ -74,7 +80,7 @@
  <div class="col-lg-6 form-group" title="Guardar" style="text-align:right">
      <br>
      <button style="width: 100px;"
-         class="btn btn-warning text-white" (click)="GuardarCambios()" >Guardar</button>
+         class="btn btn-warning text-white" (click)="GuardarCambios(data.rowId)" >Guardar</button>
  </div>
  
  <div class="col-lg-2 form-group" title="Guardar" style="">
