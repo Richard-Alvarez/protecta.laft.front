@@ -54,7 +54,6 @@ export class Es10Component implements OnInit {
     this.ListRiesgo = await this.fillArray(this.Response.riesgosFilter)
     this.ListPolizas = await this.fillArray(this.Response.polizaFilter)
     this.ListMoneda = await this.fillArray(this.Response.monedaFilter)
-    debugger;
   }
   async fillArray(fuente){
     var array = [];
@@ -317,6 +316,7 @@ export class Es10Component implements OnInit {
       _data["Moneda"] = t.sMoneda;
       _data["Inicio de compra"] = t.sFechaIniComercial;
       _data["N° asegurados"] = t.nCantAsegurados;
+      _data["Régimen"] = t.sRegimen;
       data.push(_data)
     });
     this.excelService.exportAsExcelFile(data, "Anexo ES10");
