@@ -5,6 +5,7 @@ import { SbsreportService } from 'src/app/services/sbsreport.service';
 import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 const PDF_EXTENSION = ".pdf";
 
@@ -45,10 +46,6 @@ export class InformeKRIComponent implements OnInit {
   public PeriodoInforme
   
 
-  zonasGeograficas 
-  zonaGeograficaCuadro 
-  es10Cuadro
-  es10
   async ngOnInit() {
 
    
@@ -200,13 +197,137 @@ SwalGlobal(mensaje){
   });
   return
 }
-miami
-general
-simplificado
+es10
+es10Total= 0
+es10CuadroSimpli:any 
+es10CuadroGene:any  
+es10CuadroTotal = 0
+cabeceraSegumientoEvaluacion:any 
+zonageofraficanacional
+zonageofraficanacionalSubTotal:any = {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PROCENTAJE:0}
+zonageofrafica
+zonageofraficaSubTotal:any
+actividadEconomicaCuadroSisFinan
+actividadEconomicaCuadroIndustria
+actividadEconomicaCuadroEnsenansa
+actividadEconomicaCuadroEntidades
+actividadEconomicaCuadroOtros
+zonaGeograficaCuadroFinalLima
+zonaGeograficaCuadroFinalOtros
+zonaGeograficaCuadroFinalExtranjero
+actividadEconomicaTotal = 0
+SumaZonaGeografica:any
+Resultado = {
+  es10: [{nCantAsegurados: 9130,
+    nCodRiesgo: 74,
+    nPeriodoProceso: 0,
+    sCodRegistro: "VI2097410028",
+    sFechaIniComercial: "01/06/2017 12:00:00 a.m.",
+    sMoneda: "PEN",
+    sNomComercial: "MICROSEGURO DE DESGRAVAMEN (S/)",
+    sRamo: "VIDA",
+    sRegimen: null,
+    sRiesgo: null}],
+    es10Total: 0,
+    es10CuadroSimpli : {SREGIMEN: 'GENERAL', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0},
+    es10CuadroGene : {SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0},
+    es10CuadroTotal: 0,
+    cabeceraSegumientoEvaluacion : [{valor: 1, periodo: '2018 - II'},{valor: 2, periodo: '2019 - I'},{valor: 3, periodo: '2019 - II'}
+  ,{valor: 4, periodo: '2020 - I'},{valor: 5, periodo: '2020 - II'},{valor: 6, periodo: '2021 - I'}],
+    zonageofraficanacional : [{GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456",NPORCENTAJE:100}],
+    zonageofraficanacionalSubTotal: {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PROCENTAJE:0.0},
+    zonageofrafica : [{GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456",NPORCENTAJE:100}],
+    zonageofraficaSubTotal: {GLS_REGION: "MIAMI", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456",NPORCENTAJE:100},
+    actividadEconomicaCuadroSisFinan: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaCuadroIndustria: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaCuadroEnsenansa: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaCuadroEntidades: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaCuadroOtros: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaTotal: 0,
+    zonaGeograficaCuadroFinalLima:{SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE: 85.05},
+zonaGeograficaCuadroFinalOtros:{SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE: 85.05},
+zonaGeograficaCuadroFinalExtranjero:{SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE: 85.05},
+SumaZonaGeografica: {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PORCENTAJE:0}
+}
 async DescargarReporte(){
+  let data:any = {}
+  data.NPERIODO_PROCESO = 20211231
+  let response = await this.userConfigService.getInformeKri(data)
+  this.es10 = response.es10
+  response.es10.forEach(data => {
+    this.es10Total =  this.es10Total + parseInt(data.nCantAsegurados)
+  })
+  this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "SIMPLIFICADO")
+  this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "GENERAL")
+   response.es10Cuadro.forEach(data => {
+     this.es10CuadroTotal =  this.es10CuadroTotal + parseInt(data.NCANT_ASEGURADOS)
+   })
+   
+  this.zonageofraficanacional  = response.zonasGeograficas.filter(it => it.GLS_REGION !== "MIAMI")
+  this.zonageofraficanacional.forEach(data => {
+    this.zonageofraficanacionalSubTotal.VIDA_RENTA    =  this.zonageofraficanacionalSubTotal.VIDA_RENTA + parseInt(data.NVIDA_RENTA)
+    this.zonageofraficanacionalSubTotal.RENTA_TOTAL    =  this.zonageofraficanacionalSubTotal.RENTA_TOTAL + parseInt(data.NRENTA_TOTAL)
+    this.zonageofraficanacionalSubTotal.AHORRO_TOTAL   =  this.zonageofraficanacionalSubTotal.AHORRO_TOTAL + parseInt(data.NAHORRO_TOTAL)
+    this.zonageofraficanacionalSubTotal.SUBTOTAL   =  this.zonageofraficanacionalSubTotal.SUBTOTAL+ parseInt(data.NTOTAL)
+    this.zonageofraficanacionalSubTotal.PROCENTAJE      =  this.zonageofraficanacionalSubTotal.PROCENTAJE + data.NPORCENTAJE
   
+  })
+  this.zonageofraficanacionalSubTotal.PROCENTAJE = this.zonageofraficanacionalSubTotal.PROCENTAJE.toFixed(2)
+  this.zonageofrafica = response.zonasGeograficas.filter(it => it.GLS_REGION == "MIAMI")
+  this.zonageofraficaSubTotal = response.zonasGeograficas.find(it => it.GLS_REGION == "MIAMI")
+  this.actividadEconomicaCuadroOtros =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "OTROS")
+  if(this.actividadEconomicaCuadroOtros == undefined) {this.actividadEconomicaCuadroOtros = {SSECTOR: 'OTROS', NCANTIDAD: '0', NPORCENTAJE:0}}
+ 
+  this.actividadEconomicaCuadroSisFinan =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "FINANCIERO") 
+  if(this.actividadEconomicaCuadroSisFinan == undefined) {this.actividadEconomicaCuadroSisFinan = {SSECTOR: 'FINANCIERO', NCANTIDAD: '0', NPORCENTAJE:0}}
+  this.actividadEconomicaCuadroIndustria =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "INDUSTRIA")
+  if(this.actividadEconomicaCuadroIndustria == undefined) {this.actividadEconomicaCuadroIndustria = {SSECTOR: 'INDUSTRIA', NCANTIDAD: '0', NPORCENTAJE:0}}
+  this.actividadEconomicaCuadroEnsenansa =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "EDUCATIVO")
+  if(this.actividadEconomicaCuadroEnsenansa == undefined) {this.actividadEconomicaCuadroEnsenansa = {SSECTOR: 'EDUCATIVO', NCANTIDAD: '0', NPORCENTAJE:0}}
+  this.actividadEconomicaCuadroEntidades =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "INSTITUCIONES PUBLICAS")
+  if(this.actividadEconomicaCuadroEntidades == undefined) {this.actividadEconomicaCuadroEntidades = {SSECTOR: 'INSTITUCIONES PUBLICAS', NCANTIDAD: '0', NPORCENTAJE:0}}
   
-  //console.log("this.listInforme",this.listInforme)
+  response.actividadEconomicaCuadro.forEach(data => {
+    this.actividadEconomicaTotal =  this.actividadEconomicaTotal + parseInt(data.NCANTIDAD)
+  })
+
+  this.zonaGeograficaCuadroFinalLima = response.zonaGeograficaCuadro.find(it => it.SREGION == "LIMA")
+  this.zonaGeograficaCuadroFinalOtros = response.zonaGeograficaCuadro.find(it => it.SREGION == "OTROS")
+  this.zonaGeograficaCuadroFinalExtranjero = response.zonaGeograficaCuadro.find(it => it.SREGION == "EXTRANJERO")
+
+
+  this.SumaZonaGeografica = {}
+  this.SumaZonaGeografica.VIDA_RENTA = Number(this.zonageofraficanacionalSubTotal.VIDA_RENTA) +  Number(this.zonageofraficaSubTotal.NVIDA_RENTA)
+  this.SumaZonaGeografica.RENTA_TOTAL = Number(this.zonageofraficanacionalSubTotal.RENTA_TOTAL) +  Number(this.zonageofraficaSubTotal.NRENTA_TOTAL)
+  this.SumaZonaGeografica.AHORRO_TOTAL = Number(this.zonageofraficanacionalSubTotal.AHORRO_TOTAL) +  Number(this.zonageofraficaSubTotal.NAHORRO_TOTAL)
+  this.SumaZonaGeografica.SUBTOTAL = Number(this.zonageofraficanacionalSubTotal.SUBTOTAL) +  Number(this.zonageofraficaSubTotal.NTOTAL)
+  this.SumaZonaGeografica.PORCENTAJE = Number(this.zonageofraficanacionalSubTotal.PROCENTAJE) +   Number(this.zonageofraficaSubTotal.NPORCENTAJE)
+
+  this.Resultado = {
+    es10: this.es10,
+    es10Total: this.es10Total,
+    es10CuadroSimpli : this.es10CuadroSimpli,
+    es10CuadroGene : this.es10CuadroGene,
+    es10CuadroTotal: this.es10CuadroTotal,
+    cabeceraSegumientoEvaluacion : this.cabeceraSegumientoEvaluacion,
+    zonageofraficanacional : this.zonageofraficanacional,
+    zonageofraficanacionalSubTotal: this.zonageofraficanacionalSubTotal,
+    zonageofrafica : this.zonageofrafica,
+    zonageofraficaSubTotal:this.zonageofraficaSubTotal,
+    actividadEconomicaCuadroSisFinan: this.actividadEconomicaCuadroSisFinan,
+    actividadEconomicaCuadroIndustria: this.actividadEconomicaCuadroIndustria,
+    actividadEconomicaCuadroEnsenansa: this.actividadEconomicaCuadroEnsenansa,
+    actividadEconomicaCuadroEntidades: this.actividadEconomicaCuadroEntidades,
+    actividadEconomicaCuadroOtros: this.actividadEconomicaCuadroOtros,
+    actividadEconomicaTotal: this.actividadEconomicaTotal,
+    zonaGeograficaCuadroFinalLima: this.zonaGeograficaCuadroFinalLima,
+    zonaGeograficaCuadroFinalOtros:this.zonaGeograficaCuadroFinalOtros,
+    zonaGeograficaCuadroFinalExtranjero: this.zonaGeograficaCuadroFinalExtranjero,
+    SumaZonaGeografica: this.SumaZonaGeografica
+  }
+
+ 
+  console.log(response)
   this.Export2Doc("ReportesGlobal","Reporte KRI") 
 }
 
