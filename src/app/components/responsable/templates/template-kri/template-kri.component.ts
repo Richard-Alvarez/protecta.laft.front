@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-template-kri',
@@ -6,6 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./template-kri.component.css']
 })
 export class TemplateKRIComponent implements OnInit {
+
+  @Input() zonasGeograficas
+  @Input() zonaGeograficaCuadro
+  @Input() es10Cuadro
+  @Input() es10
+  @Input() miami
+  @Input() general
+  @Input() simplificado
+
   dataResolucion = [
     {
       ramo: 'VIDA',
@@ -60,6 +69,7 @@ export class TemplateKRIComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
