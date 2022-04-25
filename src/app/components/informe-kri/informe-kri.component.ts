@@ -205,18 +205,7 @@ general
 simplificado
 async DescargarReporte(){
   
-  let data:any= {}
-  data.NPERIODO_PROCESO = 20211231 //this.PeriodoInforme
- 
-  let response = await this.userConfigService.getInformeKri(data)
-  this.zonasGeograficas = response.zonasGeograficas
-  this.zonaGeograficaCuadro = response.zonaGeograficaCuadro
-  this.es10Cuadro = response.es10Cuadro
-  this.es10 = response.es10
-  this.miami = response.zonasGeograficas.filter(it => it.GLS_REGION == "MIAMI")
-  this.general = response.es10Cuadro.fin(it => it == "GENERAL")
-  this.simplificado = response.es10Cuadro.fin(it => it == "SIMPLICADO")
-  console.log("es10",this.es10)
+  
   //console.log("this.listInforme",this.listInforme)
   this.Export2Doc("ReportesGlobal","Reporte KRI") 
 }
