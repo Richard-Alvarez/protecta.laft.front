@@ -36,6 +36,20 @@ export class UserconfigService {
     })
   }
 
+  getInformeKri(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+        try {
+            this.laft.post(this.core.config.rest.urlgetInformeKri, data).subscribe(response => {
+                return resolve(response)
+            })
+        } catch (error) {
+            return reject(error)
+        }
+    })
+  }
+
+  
+
   getPolicyList(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
         try {

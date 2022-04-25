@@ -631,7 +631,7 @@ style="
   </tr>
   
   
-  <tr *ngFor="let item of dataResolucion">
+  <tr *ngFor="let item of Resultado.es10">
     <td style="border: none; padding: 0cm 0cm 0cm 0cm">
       <p
         style="
@@ -672,7 +672,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 13px">{{item.ramo}}</span>
+        <span style="font-size: 13px">{{item.sRamo}}</span>
       </p>
     </td>
     <td
@@ -699,7 +699,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 13px">{{item.riesgo}}</span>
+        <span style="font-size: 13px">{{item.nCodRiesgo}}</span>
       </p>
     </td>
     <td
@@ -727,7 +727,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 13px">{{item.codigo}}</span>
+        <span style="font-size: 13px">{{item.sCodRegistro}}</span>
       </p>
     </td>
     <td
@@ -755,7 +755,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 13px">{{item.nombre}}</span>
+        <span style="font-size: 13px">{{item.sNomComercial}}</span>
       </p>
     </td>
     <td
@@ -782,7 +782,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 13px">{{item.ramo}}</span>
+        <span style="font-size: 13px">{{item.sMoneda}}</span>
       </p>
     </td>
     <td
@@ -810,7 +810,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 13px">{{item.fecha}}</span>
+        <span style="font-size: 13px">{{item.sFechaIniComercial}}</span>
       </p>
     </td>
     <td
@@ -837,7 +837,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 13px">{{item.asegurado}}</span>
+        <span style="font-size: 13px">{{item.nCantAsegurados}}</span>
       </p>
     </td>
     <td style="border: none; padding: 0cm 0cm 0cm 0cm">
@@ -931,7 +931,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 13px">{{dataTotal.monto}}</span>
+        <span style="font-size: 13px">{{Resultado.es10Total}}</span>
       </p>
     </td>
     <td style="border: none; padding: 0cm 0cm 0cm 0cm">
@@ -989,19 +989,19 @@ style="
         </tr>
         <tr>
             <td style="width:120.5pt;border:solid windowtext 1.0pt;border-top:  none;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt;">
-                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">564,157</span></p>
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">{{Resultado.es10CuadroTotal}}</span></p>
             </td>
             <td style="width:56.85pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt;">
-                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">562,440</span></p>
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">{{Resultado.es10CuadroSimpli.NCANT_ASEGURADOS}}</span></p>
             </td>
             <td style="width:99.1pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt;">
-                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">99.70%</span></p>
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">{{Resultado.es10CuadroSimpli.NPORCENTAJE}}%</span></p>
             </td>
             <td style="width:77.15pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt;">
-                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">1,717</span></p>
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">{{Resultado.es10CuadroGene.NCANT_ASEGURADOS}}</span></p>
             </td>
             <td style="width:88.05pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt;">
-                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">0.30%</span></p>
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:13px;">{{Resultado.es10CuadroGene.NPORCENTAJE}}%</span></p>
             </td>
         </tr>
     </tbody>
@@ -1192,37 +1192,37 @@ style="
     </tr>
     <tr>
         <td style="width:69.25pt;border:solid windowtext 1.0pt;border-top:  none;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'>52</p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'>{{Resultado.actividadEconomicaTotal}}</p>
         </td>
         <td style="width:44.3pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">15</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroSisFinan.NCANTIDAD}}</span></p>
         </td>
         <td style="width:35.1pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:-4.25pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="color:black;">28.85%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:-4.25pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroSisFinan.NPORCENTAJE}}%</span></p>
         </td>
         <td style="width:33.0pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">3</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroIndustria.NCANTIDAD}}</span></p>
         </td>
         <td style="width:43.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">5.77%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroIndustria.NPORCENTAJE}}%</span></p>
         </td>
         <td style="width:35.55pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">13</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroEnsenansa.NCANTIDAD}}</span></p>
         </td>
         <td style="width:43.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">25.00%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroEnsenansa.NPORCENTAJE}}%</span></p>
         </td>
         <td style="width:35.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">8</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroEntidades.NCANTIDAD}}</span></p>
         </td>
         <td style="width:42.05pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">15.38%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroEntidades.NPORCENTAJE}}%</span></p>
         </td>
         <td style="width:30.35pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">13</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroOtros.NCANTIDAD}}</span></p>
         </td>
         <td style="width:43.35pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:17.3pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">25.00%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:36.0pt;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;margin:0cm;text-align:center;'><span style="color:black;">{{Resultado.actividadEconomicaCuadroOtros.NPORCENTAJE}}%</span></p>
         </td>
     </tr>
 </tbody>
@@ -1447,24 +1447,24 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;color:black;'>Porcentaje</span></p>
         </td>
     </tr>
-    <tr *ngFor="let item of dataZonaNacional">
+    <tr *ngFor="let item of Resultado.zonageofraficanacional">
         <td style="width:105.0pt;border:solid windowtext 1.0pt;border-top:none;padding:  0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.departamento}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.GLS_REGION}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.vidaRentaTemporal}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.NVIDA_RENTA}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.rentaTotal}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.NRENTA_TOTAL}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.ahorroTotal}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.NAHORRO_TOTAL}}</span></p>
         </td>
         <td style="width:65.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.subtotal}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.NTOTAL}}</span></p>
         </td>
         <td style="width:60.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.porcentaje}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.NPORCENTAJE}}%</span></p>
         </td>
     </tr>
     
@@ -1513,24 +1513,24 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>Porcentaje</span></p>
         </td>
     </tr>
-    <tr>
+    <tr *ngFor="let item of Resultado.zonageofrafica">
         <td style="width:105.0pt;border:solid windowtext 1.0pt;border-top:none;padding:  0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>Miami</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.GLS_REGION}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>1</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.NVIDA_RENTA}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>0</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.NRENTA_TOTAL}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>0</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.NAHORRO_TOTAL}}</span></p>
         </td>
         <td style="width:65.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>1</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.NTOTAL}}</span></p>
         </td>
         <td style="width:60.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>0.07%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.NPORCENTAJE}}%</span></p>
         </td>
     </tr>
     <tr>

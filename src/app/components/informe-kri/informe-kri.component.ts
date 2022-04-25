@@ -196,8 +196,90 @@ SwalGlobal(mensaje){
   });
   return
 }
+es10
+es10Total= 0
+es10CuadroSimpli:any 
+es10CuadroGene:any  
+es10CuadroTotal = 0
+cabeceraSegumientoEvaluacion:any 
+zonageofraficanacional
+zonageofrafica
+actividadEconomicaCuadroSisFinan
+actividadEconomicaCuadroIndustria
+actividadEconomicaCuadroEnsenansa
+actividadEconomicaCuadroEntidades
+actividadEconomicaCuadroOtros
+actividadEconomicaTotal = 0
+Resultado = {
+  es10: [{nCantAsegurados: 9130,
+    nCodRiesgo: 74,
+    nPeriodoProceso: 0,
+    sCodRegistro: "VI2097410028",
+    sFechaIniComercial: "01/06/2017 12:00:00 a.m.",
+    sMoneda: "PEN",
+    sNomComercial: "MICROSEGURO DE DESGRAVAMEN (S/)",
+    sRamo: "VIDA",
+    sRegimen: null,
+    sRiesgo: null}],
+    es10Total: 0,
+    es10CuadroSimpli : {SREGIMEN: 'GENERAL', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0},
+    es10CuadroGene : {SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0},
+    es10CuadroTotal: 0,
+    cabeceraSegumientoEvaluacion : [{valor: 1, periodo: '2018 - II'},{valor: 2, periodo: '2019 - I'},{valor: 3, periodo: '2019 - II'}
+  ,{valor: 4, periodo: '2020 - I'},{valor: 5, periodo: '2020 - II'},{valor: 6, periodo: '2021 - I'}],
+    zonageofraficanacional : [{GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456",NPORCENTAJE:100}],
+    zonageofrafica : [{GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456",NPORCENTAJE:100}],
+    actividadEconomicaCuadroSisFinan: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaCuadroIndustria: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaCuadroEnsenansa: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaCuadroEntidades: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaCuadroOtros: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
+    actividadEconomicaTotal: 0
+}
+async DescargarReporte(){
+  let data:any = {}
+  data.NPERIODO_PROCESO = 20211231
+  let response = await this.userConfigService.getInformeKri(data)
+  this.es10 = response.es10
+  response.es10.forEach(data => {
+    this.es10Total =  this.es10Total + parseInt(data.nCantAsegurados)
+  })
+  this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "SIMPLIFICADO")
+  this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "GENERAL")
+   response.es10Cuadro.forEach(data => {
+     this.es10CuadroTotal =  this.es10CuadroTotal + parseInt(data.NCANT_ASEGURADOS)
+   })
+  
+  this.zonageofraficanacional  = response.zonasGeograficas.filter(it => it.GLS_REGION !== "MIAMI")
+  this.zonageofrafica = response.zonasGeograficas.filter(it => it.GLS_REGION == "MIAMI")
+  this.actividadEconomicaCuadroSisFinan =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "SF")
+  this.actividadEconomicaCuadroIndustria =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "industria")
+  this.actividadEconomicaCuadroEnsenansa =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "enseñanza")
+  this.actividadEconomicaCuadroEntidades =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "entidades")
+  this.actividadEconomicaCuadroOtros =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "otros")
+  response.actividadEconomicaCuadro.forEach(data => {
+    this.actividadEconomicaTotal =  this.actividadEconomicaTotal + parseInt(data.NCANTIDAD)
+  })
 
-DescargarReporte(){
+  this.Resultado = {
+    es10: this.es10,
+    es10Total: this.es10Total,
+    es10CuadroSimpli : this.es10CuadroSimpli,
+    es10CuadroGene : this.es10CuadroGene,
+    es10CuadroTotal: this.es10CuadroTotal,
+    cabeceraSegumientoEvaluacion : this.cabeceraSegumientoEvaluacion,
+    zonageofraficanacional : this.zonageofraficanacional,
+    zonageofrafica : this.zonageofrafica,
+    actividadEconomicaCuadroSisFinan: this.actividadEconomicaCuadroSisFinan,
+    actividadEconomicaCuadroIndustria: this.actividadEconomicaCuadroIndustria,
+    actividadEconomicaCuadroEnsenansa: this.actividadEconomicaCuadroEnsenansa,
+    actividadEconomicaCuadroEntidades: this.actividadEconomicaCuadroEntidades,
+    actividadEconomicaCuadroOtros: this.actividadEconomicaCuadroEntidades,
+    actividadEconomicaTotal: this.actividadEconomicaTotal
+  }
+
+ 
+  console.log(response)
   this.Export2Doc("ReportesGlobal","Reporte KRI") 
 }
 
