@@ -2231,6 +2231,17 @@ export class UserconfigService {
     })
   }
   
+  getInformeN1(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetInformeN1).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
 
 
 }

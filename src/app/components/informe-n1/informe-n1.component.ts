@@ -42,7 +42,7 @@ export class InformeN1Component implements OnInit {
   public PeriodoInforme
 
   async ngOnInit() {
-    await this.ListaInformes()
+    //await this.ListaInformes()
     this.Usuario = this.core.storage.get('usuario')
     this.PeriodoInforme =  localStorage.getItem("periodo")
   }
@@ -186,8 +186,8 @@ SwalGlobal(mensaje){
   return
 }
 
-DescargarReporte(){
- 
+async DescargarReporte(){
+ console.log('asdas', await this.userConfigService.getInformeN1())
 
 }
 
@@ -243,6 +243,9 @@ async Registrar(item,index){
 removeFile(item,index){
   this.ListaRegistros[index].SNOMBRE_ARCHIVO_CORTO = null
   this.ListaRegistros[index].SNOMBRE_ARCHIVO = null
-}
+  }
+  
+  
+  
 
 }
