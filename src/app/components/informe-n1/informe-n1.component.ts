@@ -243,6 +243,9 @@ async Registrar(item,index){
 removeFile(item,index){
   this.ListaRegistros[index].SNOMBRE_ARCHIVO_CORTO = null
   this.ListaRegistros[index].SNOMBRE_ARCHIVO = null
-}
+  }
+  
+  
+  
 
 }
