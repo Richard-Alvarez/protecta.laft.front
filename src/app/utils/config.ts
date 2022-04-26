@@ -5,8 +5,8 @@ class Rutas {
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
-  //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'https://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
   //private base: string = 'https://soatservicios.protectaseurity.pe/ApiLAFT/api/';
@@ -269,6 +269,7 @@ class Rutas {
   public urlGetRegistrarDatosZonaGeografica: string = this.base + "monitoreoSenales/GetRegistrarDatosZonaGeografica"
   public urlUpdZonasGeograficas: string = this.base + "monitoreoSenales/UpdZonasGeograficas"
   public urlgetInformeKri: string = this.base + "monitoreoSenales/getInformeKri"
+  public urlgetInformeN1: string = this.base + "monitoreoSenales/getInformeN1"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
