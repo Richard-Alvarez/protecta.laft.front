@@ -401,7 +401,7 @@ async DescargarReporteGeneral(item){
   this.ListaAlertaContraparte = await this.DataAlertas(4,item.NPERIODO_PROCESO)
   this.ListaAlertaClientesC1  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C1' )
   this.RespuestaAlertaC1 = this.ListaAlertaClientesC1[0].NIDRESPUESTA
-  
+  debugger
   this.ListaEmpresasC1 = await this.userConfigService.GetListaEmpresas({NPERIODO_PROCESO : item.NPERIODO_PROCESO})
   this.CantidadEmpresasC1 = this.ListaEmpresasC1.length
   this.ListaAlertaClientesC3  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C3' )
