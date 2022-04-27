@@ -187,8 +187,8 @@ SwalGlobal(mensaje){
 }
 
 async DescargarReporte(){
- console.log('asdas', await this.userConfigService.getInformeN1())
-
+ let response = await this.userConfigService.getInformeN1()
+ console.log("response",response)
 }
 
 
