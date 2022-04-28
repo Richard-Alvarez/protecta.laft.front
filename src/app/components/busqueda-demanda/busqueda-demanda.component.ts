@@ -69,7 +69,7 @@ export class BusquedaDemandaComponent implements OnInit {
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
   }
   async getLista() {
-
+    console.log(this.listafuentes)//
     this.listafuentes = await this.userConfigService.getListProveedor();
     this.listafuentes.forEach(element => {
       element.ISCHECK = true;
