@@ -268,13 +268,9 @@ class Rutas {
   public urlGetKriSearchZonaGeografica: string = this.base + "monitoreoSenales/GetKriSearchZonaGeografica"
   public urlGetRegistrarDatosZonaGeografica: string = this.base + "monitoreoSenales/GetRegistrarDatosZonaGeografica"
   public urlUpdZonasGeograficas: string = this.base + "monitoreoSenales/UpdZonasGeograficas"
-<<<<<<< HEAD
 
   //informe N1
   public urlGetInformeN1: string = this.base + "monitoreoSenales/getInformeN1"
-=======
-  public urlgetInformeKri: string = this.base + "monitoreoSenales/getInformeKri"
->>>>>>> 67f24d4dd6dcc51490546975e5c753681affd311
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
