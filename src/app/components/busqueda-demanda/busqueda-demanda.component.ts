@@ -165,26 +165,29 @@ export class BusquedaDemandaComponent implements OnInit {
     console.log('listas en las que buscara', this.listafuentes)
     let arrayprov: any = [];
     arrayprov = this.listafuentes.filter(t => t.ISCHECK).map(t => t.SDESPROVEEDOR)
-    
     // whoSearch = arrayprov.join(" - ");
-    
-    if (arrayprov.includes('WORLDCHECK') && this.nombreCompleto == '') {
-      this.listafuentes.filter( t => t.SDESPROVEEDOR == 'WORLDCHECK').forEach(e => {
-        e.ISCHECK = false;
-      });
-      arrayprov = this.listafuentes.filter(t => t.ISCHECK).map(t => t.SDESPROVEEDOR);
+    if (this.NBUSCAR_POR == 2) {
       whoSearch = arrayprov.join(" - ");
     }
-    else {
-      /*//si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-      if (this.numeroDoc != "" && this.nombreCompleto == '' && this.NBUSCAR_POR == 1) { 
-        whoSearch = 'IDECON y REGISTRO NEGATIVO'
+    else if (this.NBUSCAR_POR == 1) {
+      if (arrayprov.includes('WORLDCHECK') && this.nombreCompleto == "") {
+        this.listafuentes.filter(t => t.SDESPROVEEDOR == 'WORLDCHECK').forEach(e => {
+          e.ISCHECK = false;
+        });
+        arrayprov = this.listafuentes.filter(t => t.ISCHECK).map(t => t.SDESPROVEEDOR);
+        whoSearch = arrayprov.join(" - ");
       }
-      //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-      else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
-        whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
-      }*/
-      whoSearch = arrayprov.join(" - ");
+      else {
+        /*//si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
+        if (this.numeroDoc != "" && this.nombreCompleto == '' && this.NBUSCAR_POR == 1) { 
+          whoSearch = 'IDECON y REGISTRO NEGATIVO'
+        }
+        //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
+        else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
+          whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+        }*/
+        whoSearch = arrayprov.join(" - ");
+      }
     }
 
     return whoSearch;
