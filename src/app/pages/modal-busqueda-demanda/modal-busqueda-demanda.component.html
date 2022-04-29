@@ -1,0 +1,99 @@
+<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
+  <button type="button" class="swal2-close" (click)="closeModal('edit-modal')" aria-label="Close this dialog"
+    style="display: flex;outline:none;">x</button>
+</div>
+<div class="container-fluid">
+  <div class="d-flex">
+    <div class="Header">
+      <div class="">
+        <div class="col-lg-19">
+          <h4 class="TitleLine">Resultados de coincidencias</h4>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div class="d-flex">
+    <div class="col-xl-4 col-lg-6" style="padding: 0;">
+          <label class="fontText">Coincidencia:</label>
+          <select class="form-control buttonSinBorder colorButton" (change)="filterCoincidencia()" [(ngModel)]="COINCIDENCIA">
+            <option value="0" title="Todos">Todos</option>
+            <option value="1" title="DNI">CON COINCIDENCIA</option>
+            <option value="2" title="RUC">SIN COINCIDENCIA</option>
+          </select>
+    </div>
+  </div>
+  <div class="d-flex mt-3 table-responsive" style="max-height: 400px !important;">
+    <hr>
+    <table class="striped" style="font-size: 12px;height: 100%;">
+      <thead>
+        <tr>
+          <th class="columnGroup1" colspan="3">Datos de la Búsqueda</th>
+          <th class="columnGroup3" colspan="5">Coincidencia Encontrada</th>
+          <th class="columnGroup4" colspan="1"></th>
+        </tr>
+        <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif; ">
+          <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Lista</th>
+          <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Fuente</th>
+          <th class="columnGroup1" style="vertical-align: middle;">Búsqueda</th>
+          <th class="columnGroup3" style="vertical-align: middle;">Tipo y Número de Documento</th>
+          <th class="columnGroup3" style="vertical-align: middle;">Término</th>
+          <th class="columnGroup3" style="vertical-align: middle;text-align: left;">Nombre/Razón Social</th>
+          <th class="columnGroup3" style="vertical-align: middle;">% Coincidencia</th>
+          <th class="columnGroup3" style="vertical-align: middle;">Tipo de Coincidencia</th>
+          <th class="columnGroup4" style="vertical-align: middle;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="this.item.pageData.length == 0">
+          <td class="text-center" colspan="9">No se encontró coincidencias</td>
+        </tr>
+        <tr class="animated fadeIn" *ngFor="let item of this.item.pageData; let i = index;">
+          <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
+          <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
+          <td>{{item.scoincidencia == null || item.scoincidencia == '' ? '-': item.scoincidencia}}</td>
+          <td>
+            {{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO) }}
+          </td>
+          <td>
+            <div placement='top' ngbTooltip="{{item.snombrE_TERMINO}}">
+              {{cortarCararterNombre(item.snombrE_TERMINO == null || item.snombrE_TERMINO == '' ? '-': item.snombrE_TERMINO)}}
+            </div>
+          </td>
+          <td>
+            <div placement='top' ngbTooltip="{{item.snombrE_COMPLETO}}">
+              {{cortarCararterNombre(item.snombrE_COMPLETO == null || item.snombrE_COMPLETO == '' ? '-': item.snombrE_COMPLETO)}}
+            </div>
+          </td>
+          <td style="text-align: center;">
+            {{item.sporceN_COINCIDENCIA == null || item.sporceN_COINCIDENCIA == '' ? '-': item.sporceN_COINCIDENCIA}}
+          </td>
+          <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
+          <td class=" text-center">
+            <img src="assets/icons/pdf2.png" title="Descargar Pdf" alt=""
+              style="cursor: pointer;height:20px;width: 17px;" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex" style="margin-top: 0.75rem;">
+      <div class="col-sm-4">
+        <div class="row">
+          <button class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
+            Descargar Resultados
+          </button>
+        </div>
+    </div>
+    <ng-container *ngIf="this.item.pageData.length>0; then showPagination1"></ng-container>
+    <ng-template #showPagination1>
+        <div class="col-sm-4">
+            <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage" [collectionSize]="totalItems"
+              [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
+            </ngb-pagination>
+          </div>
+
+    </ng-template>
+  </div>
+</div>
+<br>

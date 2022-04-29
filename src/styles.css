@@ -346,3 +346,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
 .fadeIn {
   animation-name: fadeIn;
 }
+.light-blue-backdrop >div{
+      max-width: 1350px;
+    margin: 8.75rem auto;
+    height: 670px;
+}
+.light-blue-backdrop >div .modal-content{
+max-height: 670px;
+height: 100%;
+}
+.swal2-close{
+  color: #fd7e14;
+}

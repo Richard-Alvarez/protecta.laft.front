@@ -7,6 +7,9 @@ import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { DataBusqueda } from './interfaces/data.interface';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalBusquedaDemandaComponent } from 'src/app/pages/modal-busqueda-demanda/modal-busqueda-demanda.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 const PDF_EXTENSION = ".pdf";
 @Component({
@@ -23,7 +26,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
   encontroRespuesta: boolean = true;
   noEncontroRespuesta: boolean = false;
-  COINCIDENCIA : number = 0;
+  //COINCIDENCIA : number = 0;
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
   POR_INDIVIDUAL: number = 1;
@@ -44,7 +47,7 @@ export class BusquedaDemandaComponent implements OnInit {
   NombreArchivo: string = '';
   variableGlobalUser;
   DataUserLogin;
-
+  sCodGenerado : string ='';
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
 
   constructor(
@@ -52,6 +55,8 @@ export class BusquedaDemandaComponent implements OnInit {
     private core: CoreService,
     private userConfigService: UserconfigService,
     private excelService: ExcelService,
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
   ) { }
 
   async ngOnInit() {
@@ -185,11 +190,8 @@ export class BusquedaDemandaComponent implements OnInit {
       },
     }).then(async (result) => {
       if (result.isConfirmed) {
-        let id = this.idUsuario.toString();
-        let cod = this.GenerarCodigo();
-        let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
         let data: DataBusqueda = {};
-        data.P_SCODBUSQUEDA = id.concat(cod, fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
+        data.P_SCODBUSQUEDA = this.GenerateCodeDemanda();
         data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
         data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
         data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
@@ -219,11 +221,18 @@ export class BusquedaDemandaComponent implements OnInit {
           if (result) {
             /*inicio*/
             this.core.loader.show()
-            let respuestaService: any = await this.getBusquedaADemanda(data);
+          // let respuestaService: any ={}
+          // await this.getBusquedaADemanda(data).then(res=>{
+          //   respuestaService = res;
+          // }).finally(()=>{
+          //   this.eliminarDatosBusquedaDemanda();
+          // });
+            let respuestaService : any = JSON.parse(`{"mensaje":"Se generó el proceso correctamente","sMessage":null,"code":0,"nCode":0,"items":[{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":5,"sdestipolista":"LISTAS ESPECIALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":3,"sdesproveedor":"REGISTRO NEGATIVO","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":3,"sdestipolista":"LISTAS FAMILIAR PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":5,"sdestipolista":"LISTAS ESPECIALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":3,"sdesproveedor":"REGISTRO NEGATIVO","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"","nidtipolista":3,"sdestipolista":"LISTAS FAMILIAR PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"POZO GOMERO JOSE RENATO","snombrE_TERMINO":null,"snuM_DOCUMENTO":"46610806","sporceN_COINCIDENCIA":"100","sporceN_SCORE":null,"stipO_DOCUMENTO":"DNI","stipO_PERSONA":"PERSONA NATURAL","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"NOMBRE","snumdoC_BUSQUEDA":null,"scoincidencia":"CON COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":5,"sdestipolista":"LISTAS ESPECIALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":3,"sdesproveedor":"REGISTRO NEGATIVO","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":3,"sdestipolista":"LISTAS FAMILIAR PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":5,"sdestipolista":"LISTAS ESPECIALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":3,"sdesproveedor":"REGISTRO NEGATIVO","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"","nidtipolista":3,"sdestipolista":"LISTAS FAMILIAR PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"POZO GOMERO JOSE RENATO","snombrE_TERMINO":null,"snuM_DOCUMENTO":"46610806","sporceN_COINCIDENCIA":"79","sporceN_SCORE":null,"stipO_DOCUMENTO":"DNI","stipO_PERSONA":"PERSONA NATURAL","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"NOMBRE","snumdoC_BUSQUEDA":null,"scoincidencia":"CON COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":null,"nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":null,"snombrE_TERMINO":null,"snuM_DOCUMENTO":null,"sporceN_COINCIDENCIA":null,"sporceN_SCORE":null,"stipO_DOCUMENTO":null,"stipO_PERSONA":null,"susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":null,"snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":null,"nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":null,"snombrE_TERMINO":null,"snuM_DOCUMENTO":null,"sporceN_COINCIDENCIA":null,"sporceN_SCORE":null,"stipO_DOCUMENTO":null,"stipO_PERSONA":null,"susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":null,"snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":null,"nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":null,"snombrE_TERMINO":null,"snuM_DOCUMENTO":null,"sporceN_COINCIDENCIA":null,"sporceN_SCORE":null,"stipO_DOCUMENTO":null,"stipO_PERSONA":null,"susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":null,"snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":null,"nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":null,"snombrE_TERMINO":null,"snuM_DOCUMENTO":null,"sporceN_COINCIDENCIA":null,"sporceN_SCORE":null,"stipO_DOCUMENTO":null,"stipO_PERSONA":null,"susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":null,"snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"MIFARMA","snombrE_TERMINO":"MIFARMA","snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"92","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"EMPRESA  (PERSONA JURÍDICA)","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":"NOMBRE","snumdoC_BUSQUEDA":null,"scoincidencia":"CON COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"MI FARMA SAC","snombrE_TERMINO":"MI FARMA SAC","snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"90","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"EMPRESA  (PERSONA JURÍDICA)","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":"NOMBRE","snumdoC_BUSQUEDA":null,"scoincidencia":"CON COINCIDENCIA"}],"mensajeError":null}`);
+            console.log(respuestaService);
             if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
               this.resultadoFinal2 = respuestaService.items;
-              this.resultadoFinal = this.resultadoFinal2
-              this.filterCoincidencia();
+              this.resultadoFinal = this.getListForName(this.resultadoFinal2)
+              //this.filterCoincidencia();
             }
             /*si no existe respuesta o retorna codigo 1*/
             else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
@@ -257,15 +266,15 @@ export class BusquedaDemandaComponent implements OnInit {
       }
     })
   }
-  async filterCoincidencia(){
-    if(this.COINCIDENCIA == 1){
-      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("CON"));
-    }else if (this.COINCIDENCIA == 2){
-      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("SIN"))
-    }else{
-      this.resultadoFinal = this.resultadoFinal2
-    }
+  getListForName(data :any = []){
+    let _data : any = [];
+    _data = data.filter( (item : any, index, array:any =[])=>{
+      item.count = array.filter(t2=>t2.snombrE_BUSQUEDA ==item.snombrE_BUSQUEDA).length
+      return array.map(t=>t.snombrE_BUSQUEDA).indexOf(item.snombrE_BUSQUEDA) == index;
+    });
+    return _data;
   }
+  
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
   }
@@ -448,6 +457,13 @@ export class BusquedaDemandaComponent implements OnInit {
     var codigo = Math.floor(Math.random() * 999999)
     //console.log("codigo unico",codigo);
     return codigo.toString();
+  }
+  GenerateCodeDemanda(){
+    let id = this.idUsuario.toString();
+    let cod = this.GenerarCodigo();
+    let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
+    this.sCodGenerado = id.concat(cod,fecha);
+    return this.sCodGenerado;
   }
   /*ocultar controles individual/masivo*/
   hideControls() {
@@ -726,39 +742,24 @@ export class BusquedaDemandaComponent implements OnInit {
     uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
     uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
     await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-    let datosExcel: any = {}
-    datosExcel.RutaExcel = 'ARCHIVOS-DEMANDA' + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0];
-    datosExcel.VALIDADOR = 'DEMANDA'
-    this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
-    console.log("Resultado Excel", this.ResultadoExcel)
-    let datosEliminar: any = {}
-    datosEliminar.SCODBUSQUEDA = ''
-    datosEliminar.SNOMBREUSUARIO = ''
-    datosEliminar.SNOMBRE_COMPLETO = ''
-    datosEliminar.STIPO_DOCUMENTO = ''
-    datosEliminar.SNUM_DOCUMENTO = ''
-    datosEliminar.VALIDAR = 'DEL'
-    let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
-    console.log("respuesta de eliminar", responseEliminar);
-    for (let i = 0; i < this.ResultadoExcel.length; i++) {
-      let datosRegistroColaborador: any = {}
-      datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
-      datosRegistroColaborador.SNOMBREUSUARIO = this.nombreUsuario
-      datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
-      datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
-      datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
-      datosRegistroColaborador.VALIDAR = 'INS'
-
-      let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
-      console.log("respuesta de inserccion a tabla carga", response);
-    }
-
-
-    this.NombreArchivo = ''
+    let params: any = {}
+    params.RutaExcel = 'ARCHIVOS-DEMANDA' + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0];
+    params.VALIDADOR = 'DEMANDA'
+    params.SCODBUSQUEDA = obj.P_SCODBUSQUEDA;
+    params.SNOMBREUSUARIO = this.nombreUsuario;
+    this.ResultadoExcel = await this.userConfigService.setDataExcelDemanda(params)
     await this.reset()
     this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
   }
-
+  async eliminarDatosBusquedaDemanda(){
+    let params : any = {}
+    if(this.sCodGenerado != ""){
+      params.SCODBUSQUEDA = this.sCodGenerado
+      await this.userConfigService.DelEliminarDemanda(params).then( res =>{
+  
+      });
+    }
+  }
 
   SwalGlobal(mensaje) {
     swal.fire({
@@ -1102,6 +1103,23 @@ CrearPdf(item) {
     console.log(this.myInputVariable.nativeElement.files);
   }
 
+  ShowDetalle(item : any){
+  const modalRef = this.modalService.open(ModalBusquedaDemandaComponent, { size: 'xl', windowClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
+   
+    let data: any = [];
+    data = this.resultadoFinal2.filter(t=> t.snombrE_BUSQUEDA == item.snombrE_BUSQUEDA);
+    item.data = data;
+    modalRef.componentInstance.reference = modalRef;
+    modalRef.componentInstance.item = item;
+    //modalRef.componentInstance.ListaEmail = this.ListCorreo;
+    
+    modalRef.result.then(async (resp) => {
+      this.spinner.show();
+      this.spinner.hide();
 
+    }, (reason) => {
 
+      this.spinner.hide();
+    });
+  }
 }

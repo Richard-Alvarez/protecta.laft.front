@@ -558,3 +558,11 @@ background-color:#fd7e14;
 border-color: white;
 color: white;
 }
+.modal-dialog2 {
+    max-width: 1350px;
+    margin: 1.75rem auto;
+  }
+.light-blue-backdrop .modal-dialog {
+    max-width: 1350px;
+    margin: 1.75rem auto;
+  }

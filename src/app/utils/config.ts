@@ -223,7 +223,6 @@ class Rutas {
   //LEER DATOS DE UN EXCEL
   public urlLeerDataExcel: string = this.base + "monitoreoSenales/LeerDataExcel";
   public urlGetRegistrarDatosExcelGC: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
-  public urlGetRegistrarDatosExcelDemanda: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
   public urlGetClientsforRegimen: string = this.base + "monitoreoSenales/GetClientsforRegimen";
   public urlGetSearchClientsPep: string = this.base + "monitoreoSenales/GetSearchClientsPep";
   public urlGetSearchClientsPepSeacsa: string = this.base + "monitoreoSenales/GetSearchClientsPepSeacsa";
@@ -270,6 +269,8 @@ class Rutas {
   public urlUpdZonasGeograficas: string = this.base + "monitoreoSenales/UpdZonasGeograficas"
   public urlgetInformeKri: string = this.base + "monitoreoSenales/getInformeKri"
   public urlgetInformeN1: string = this.base + "monitoreoSenales/getInformeN1"
+  public urlSetDataExcelDemanda: string = this.base + "monitoreoSenales/setDataExcelDemanda"
+  public urlDelEliminarDemanda: string = this.base + "monitoreoSenales/DelEliminarDemanda"
 
   
   LimpiarDataGestor() {
