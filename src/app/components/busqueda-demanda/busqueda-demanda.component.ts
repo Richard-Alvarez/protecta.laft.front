@@ -7,7 +7,11 @@ import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { DataBusqueda } from './interfaces/data.interface';
+<<<<<<< HEAD
 import html2canvas from 'html2canvas';
+=======
+import { join } from 'path';
+>>>>>>> cabc319a092fcf0bc8e9a5331caf79a337624bd6
 
 const PDF_EXTENSION = ".pdf";
 @Component({
@@ -31,8 +35,8 @@ export class BusquedaDemandaComponent implements OnInit {
   POR_MASIVA: number = 2;
 
   NPERIODO_PROCESO: number;
-  nombreCompleto: string = null;
-  numeroDoc: string = null;
+  nombreCompleto: string = '';
+  numeroDoc: string = '';
   idUsuario: number;
   nombreUsuario: string;
   listafuentes : any = [];
@@ -71,12 +75,11 @@ export class BusquedaDemandaComponent implements OnInit {
     document.getElementById('reporte').classList.add('ocultarReporte')
   }
   async getLista() {
-
     this.listafuentes = await this.userConfigService.getListProveedor();
     this.listafuentes.forEach(element => {
       element.ISCHECK = true;
     });
-    console.log(this.listafuentes)
+    console.log('obtenido', this.listafuentes)//
     return this.listafuentes;
   }
   archivoExcel: File;
@@ -88,9 +91,7 @@ export class BusquedaDemandaComponent implements OnInit {
   /* lo ejecuta el boton buscar [individual]*/
   async validarNulos() {
     /*si no ingresa almenos un campo muestra mensaje*/
-    
-     if (this.NBUSCAR_POR == 1 && ((this.nombreCompleto == null || this.nombreCompleto == "") && (this.numeroDoc == null || this.numeroDoc == ""))) {
-  
+    if (this.NBUSCAR_POR == 1 && (this.nombreCompleto == "" && this.numeroDoc == "")) {
       swal.fire({
         title: 'Búsqueda a Demanda',
         icon: 'warning',
@@ -108,21 +109,21 @@ export class BusquedaDemandaComponent implements OnInit {
       await this.BusquedaADemandaMixta();
     }
     /*si ingresa solo nombre o nombre y documento valida que almenos el nombre contenga 3 datos y llama al servicio de busqueda*/
-    else if (this.NBUSCAR_POR == 1 && !(this.nombreCompleto == null || this.nombreCompleto == "")) {
+    else if (this.NBUSCAR_POR == 1 && this.nombreCompleto != "") {
       /*expresion regular que asegura ingreso 3 nombres*/
       const reg = /[a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+ [a-zA-Z\u00f1\u00d1]+/;
       let pr = reg.test(this.nombreCompleto);
       /*si coincide el formato con la expresion regular ingresa*/
       if (pr) {
-        /*si el campo de documento es diferente a nulo o vacio [""] entra a verificar la cantidad de digitos*/
-        if (!(this.numeroDoc == null || this.numeroDoc == "")) {
+        /*si el campo de documento es diferente a vacio [""] entra a verificar la cantidad de digitos*/
+        if (this.numeroDoc != "") {
           let cantCorr = this.validarDigitosIngresados()
           /*si es correcta la contidad de caracter con  el tipo de documento ingresa a llamar al servicio de busqueda*/
           if (cantCorr) {
             await this.BusquedaADemandaMixta();
           }
         }
-        /*en caso el campo de documento sea nulo o vacio [""] llamara al servicio de busqueda*/
+        /*en caso el campo de documento sea vacio [""] llamara al servicio de busqueda*/
         else {
           await this.BusquedaADemandaMixta();
         }
@@ -162,14 +163,34 @@ export class BusquedaDemandaComponent implements OnInit {
 
   async provBusquedaReali() {
     let whoSearch: string = '';
-    //si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
-    if (!(this.numeroDoc == null || this.numeroDoc == "") && (this.nombreCompleto == null || this.nombreCompleto == '') && this.NBUSCAR_POR == 1) {
-      whoSearch = 'IDECON y REGISTRO NEGATIVO'
+    console.log('listas en las que buscara', this.listafuentes)
+    let arrayprov: any = [];
+    arrayprov = this.listafuentes.filter(t => t.ISCHECK).map(t => t.SDESPROVEEDOR)
+    // whoSearch = arrayprov.join(" - ");
+    if (this.NBUSCAR_POR == 2) {
+      whoSearch = arrayprov.join(" - ");
     }
-    //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
-    else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
-      whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+    else if (this.NBUSCAR_POR == 1) {
+      if (arrayprov.includes('WORLDCHECK') && this.nombreCompleto == "") {
+        this.listafuentes.filter(t => t.SDESPROVEEDOR == 'WORLDCHECK').forEach(e => {
+          e.ISCHECK = false;
+        });
+        arrayprov = this.listafuentes.filter(t => t.ISCHECK).map(t => t.SDESPROVEEDOR);
+        whoSearch = arrayprov.join(" - ");
+      }
+      else {
+        /*//si ingresa documento y no ingresa nombre, hara la busqueda solamente por idecon
+        if (this.numeroDoc != "" && this.nombreCompleto == '' && this.NBUSCAR_POR == 1) { 
+          whoSearch = 'IDECON y REGISTRO NEGATIVO'
+        }
+        //caso contrario, si ingresa nombre y/o documento, hará la busqueda por WC e IDECON
+        else if (this.NBUSCAR_POR == 2 || this.NBUSCAR_POR == 1) {
+          whoSearch = 'WC, IDECON y REGISTRO NEGATIVO'
+        }*/
+        whoSearch = arrayprov.join(" - ");
+      }
     }
+
     return whoSearch;
   }
   /*servicio de busqueda*/
@@ -198,6 +219,7 @@ export class BusquedaDemandaComponent implements OnInit {
         data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
         data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
         data.P_TIPOBUSQUEDA = this.NBUSCAR_POR;
+        
         data.LFUENTES = this.listafuentes;
         if (this.NBUSCAR_POR == 1) {
           data.P_SNOMCOMPLETO = this.nombreCompleto;//'RAMON MORENO MADELEINE JUANA',
@@ -1111,7 +1133,7 @@ CrearPdf(item) {
   dataUser:any = {}
   convertirPdfMixta() {
     document.getElementById('reporte').classList.add('mostrarReporte')
-    
+
     document.getElementById("fecha").innerHTML = "prueba";
     document.getElementById("nombre").innerHTML = this.DataUserLogin.NOMBRECOMPLETO;
     document.getElementById("perfil").innerHTML = this.DataUserLogin.SNAME;
