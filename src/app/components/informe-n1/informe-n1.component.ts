@@ -282,7 +282,7 @@ export class InformeN1Component implements OnInit {
       ],
       "productos": [
           {
-              "PRODUCTO": "ACCIDENTES PERSONALES         ",
+              "PRODUCTO": "ACCIDENTES PERSONALES",
               "NUMERO_POLIZAS": 33,
               "NUMERO_CONTRATANTES": 20,
               "NUMERO_ASEGURADOS": 115623,
@@ -291,7 +291,7 @@ export class InformeN1Component implements OnInit {
               "MONTO_PRIMA": 1083405.068942
           },
           {
-              "PRODUCTO": "DESGRAVAMEN                   ",
+              "PRODUCTO": "DESGRAVAMEN",
               "NUMERO_POLIZAS": 39,
               "NUMERO_CONTRATANTES": 18,
               "NUMERO_ASEGURADOS": 65386,
@@ -336,7 +336,7 @@ export class InformeN1Component implements OnInit {
               "MONTO_PRIMA": 159310385.06
           },
           {
-              "PRODUCTO": "SCTR                          ",
+              "PRODUCTO": "SCTR",
               "NUMERO_POLIZAS": 4489,
               "NUMERO_CONTRATANTES": 4206,
               "NUMERO_ASEGURADOS": 76789,
@@ -345,7 +345,7 @@ export class InformeN1Component implements OnInit {
               "MONTO_PRIMA": 2561492.28
           },
           {
-              "PRODUCTO": "SEPELIO DE CORTO PLAZO        ",
+              "PRODUCTO": "SEPELIO DE CORTO PLAZO",
               "NUMERO_POLIZAS": 3,
               "NUMERO_CONTRATANTES": 2,
               "NUMERO_ASEGURADOS": 9565,
@@ -354,7 +354,7 @@ export class InformeN1Component implements OnInit {
               "MONTO_PRIMA": 471566.83117
           },
           {
-              "PRODUCTO": "SOAT                          ",
+              "PRODUCTO": "SOAT",
               "NUMERO_POLIZAS": 77877,
               "NUMERO_CONTRATANTES": 65463,
               "NUMERO_ASEGURADOS": 0,
@@ -408,7 +408,7 @@ export class InformeN1Component implements OnInit {
               "MONTO_PRIMA": 5689295.03
           },
           {
-              "PRODUCTO": "VIDA GRUPO PARTICULAR         ",
+              "PRODUCTO": "VIDA GRUPO PARTICULAR",
               "NUMERO_POLIZAS": 26,
               "NUMERO_CONTRATANTES": 12,
               "NUMERO_ASEGURADOS": 7519,
@@ -426,7 +426,7 @@ export class InformeN1Component implements OnInit {
               "MONTO_PRIMA": 73430.009345
           },
           {
-              "PRODUCTO": "VIDA LEY EX-TRABAJADORES      ",
+              "PRODUCTO": "VIDA LEY EX-TRABAJADORES",
               "NUMERO_POLIZAS": 3,
               "NUMERO_CONTRATANTES": 3,
               "NUMERO_ASEGURADOS": 3,
@@ -435,7 +435,7 @@ export class InformeN1Component implements OnInit {
               "MONTO_PRIMA": 3692.75
           },
           {
-              "PRODUCTO": "VIDA LEY TRABAJADORES         ",
+              "PRODUCTO": "VIDA LEY TRABAJADORES",
               "NUMERO_POLIZAS": 2372,
               "NUMERO_CONTRATANTES": 2303,
               "NUMERO_ASEGURADOS": 30716,
@@ -515,6 +515,26 @@ export class InformeN1Component implements OnInit {
     data.clientesJuridico = this.dataReporte.clientes_character_client.find(it => it.TIPO_CLIENTES == "EMPRESA (PERSONA JURÍDICA)")
     data.clientesNatural = this.dataReporte.clientes_character_client.find(it => it.TIPO_CLIENTES == "PERSONA NATURAL")
     data.clientesPep = this.dataReporte.clientes_character_client.find(it => it.TIPO_CLIENTES == "PERSONAS EXPUESTAS POLITICAMENTE (PEP)")
+
+    //Productos
+    data.productoAccPersonales  = this.dataReporte.productos.find(it => it.PRODUCTO == "ACCIDENTES PERSONALES")
+    data.productoDesgravamen  = this.dataReporte.productos.find(it => it.PRODUCTO == "DESGRAVAMEN")
+    //data.productoIvalidezParcial  = this.dataReporte.productos.find(it => it.PRODUCTO == "INVALIDEZ PARCIAL")
+    //data.productoIvalidezTotal  = this.dataReporte.productos.find(it => it.PRODUCTO == "INVALIDEZ TOTAL")
+    //data.productoJubilacionAnticipada  = this.dataReporte.productos.find(it => it.PRODUCTO == "JUBILACION ANTICIPADA")
+    //data.productoSCTR  = this.dataReporte.productos.find(it => it.PRODUCTO == "SCTR")
+    data.productoSepelio = this.dataReporte.productos.find(it => it.PRODUCTO == "SEPELIO DE CORTO PLAZO")
+    data.productoSOAT  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOAT")
+    data.productoSobrevivencia = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA")
+    //data.productoSobrevivenciaTotal  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA DE INV. TOTAL")
+    //data.productoSobrevivenciaParcial  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA DE INV.PARCIAL")
+    //data.productoSobrevivenciaAnticipada  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA DE JUB. ANTICIPADA")
+    //data.productoSobrevivenciaLegal  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA DE JUB. LEGAL")
+    //data.productoVidaParticular  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA GRUPO PARTICULAR")
+    //data.productoIndividualCorto  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA INDIVIDUAL DE CORTO PLAZO")
+    data.productoVidaLeyExTrabajadores = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA LEY EX-TRABAJADORES")
+    data.productoVidaLeyTrabajadores  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA LEY TRABAJADORES")
+
     await this.userConfigService.GetSetearDataExcel(data)
    }
    
