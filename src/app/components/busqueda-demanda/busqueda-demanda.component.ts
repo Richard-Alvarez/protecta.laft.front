@@ -7,11 +7,8 @@ import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { DataBusqueda } from './interfaces/data.interface';
-<<<<<<< HEAD
 import html2canvas from 'html2canvas';
-=======
 import { join } from 'path';
->>>>>>> cabc319a092fcf0bc8e9a5331caf79a337624bd6
 
 const PDF_EXTENSION = ".pdf";
 @Component({
