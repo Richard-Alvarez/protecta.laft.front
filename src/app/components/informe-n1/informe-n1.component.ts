@@ -536,6 +536,11 @@ export class InformeN1Component implements OnInit {
     data.productoVidaLeyTrabajadores  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA LEY TRABAJADORES")
 
     await this.userConfigService.GetSetearDataExcel(data)
+    let ruta = "/PLANTILLAS/N1/Generado/Formato-N1-Plantilla.xlsx"
+    let rutaElimina = "PLANTILLAS/N1/Generado"
+    let nombreArchivo = 'Formato-N1-Plantilla.xlsx'
+    await this.DescargarArchivo(ruta,nombreArchivo)
+    await this.EliminarArchivo(rutaElimina)
    }
    
 
@@ -571,6 +576,11 @@ export class InformeN1Component implements OnInit {
       console.error("el error en descargar archivo: ", error)
     }
 
+  }
+
+  async EliminarArchivo(ruta){
+    let data:any =  { ruta: ruta}
+    await this.userConfigService.GetEliminarArchivo(data)
   }
 
   async AgregarAdjunto(evento,item,index){

@@ -270,6 +270,7 @@ class Rutas {
   public urlUpdZonasGeograficas: string = this.base + "monitoreoSenales/UpdZonasGeograficas"
   public urlgetInformeKri: string = this.base + "monitoreoSenales/getInformeKri"
   public urlgetInformeN1: string = this.base + "monitoreoSenales/getInformeN1"
+  public urlGetEliminarArchivo: string = this.base + "monitoreoSenales/GetEliminarArchivo"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

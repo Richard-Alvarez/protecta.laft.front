@@ -558,3 +558,41 @@ background-color:#fd7e14;
 border-color: white;
 color: white;
 }
+
+.ocultarReporte{
+    display:none;
+}
+.mostrarReporte{
+    display:block;
+}
+
+.image {
+  
+    margin:33px 1px 11px 465px;
+}
+
+.ReportGrupal{
+    width: 760px !important;
+
+}
+
+.title p {
+    font-size: 25px;
+}
+
+.TitleLine2 {
+    padding-bottom: 1%;
+    position: relative;
+    z-index: 1;
+}
+
+.TitleLine2:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1pxs;
+    width: 100%;
+    /* or 100px */
+    border-bottom: 2px solid black;
+}
