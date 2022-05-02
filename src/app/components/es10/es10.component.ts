@@ -238,7 +238,7 @@ export class Es10Component implements OnInit {
     if (this.NPERIODO_PROCESO == 0){
       Swal.fire({
       title: 'Anexo Es10',
-      icon: 'info',
+      icon: 'warning',
       text: 'Seleccionar un período para realizar la búsqueda',
       showCancelButton: false,
       showConfirmButton: true,

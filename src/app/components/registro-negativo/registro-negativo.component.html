@@ -145,16 +145,16 @@
                  <ng-template #showGrid>
                 <tbody>
                     <tr *ngFor="let item of this.listNegativa | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let ind = index;">
-                        <td>{{item.SNUMIDENTIDAD}}</td>
-                        <td>{{item.SNOM_COMPLETO}}</td>
-                        <td>{{item.SSENAL_LAFT}}</td>
-                        <td>{{item.SFILTRO1}}</td>
+                        <td  style="width: 12%;" >{{item.SNUMIDENTIDAD}}</td>
+                        <td style="width: 27%;">{{item.SNOM_COMPLETO}}</td>
+                        <td style="width: 7%;">{{item.SSENAL_LAFT}}</td>
+                        <td style="width: 7%;">{{item.SFILTRO1}}</td>
                         
                         
-                        <td>{{item.STIPOPERSONA}}</td>
-                        <td>{{item.SDOCREFERENCIA}}</td>
-                        <td>{{item.STIPOLISTA}}</td>
-                        <td>{{item.SFEDESCUBRIMIENTO}}</td>
+                        <td style="width: 8%;">{{item.STIPOPERSONA}}</td>
+                        <td style="width: 10%;">{{item.SDOCREFERENCIA}}</td>
+                        <td style="width: 10%;">{{item.STIPOLISTA}}</td>
+                        <td style="width: 11%;">{{item.SFEDESCUBRIMIENTO}}</td>
                         <td>{{item.STIPODOC_PAIS}}</td>
                         
                         
