@@ -124,7 +124,7 @@
               <tr>
                 <th>Periodo</th>
                 <th>Ramo</th>
-                <th>Riego</th>
+                <th>Riesgo</th>
                 <th>Código riesgo</th>
                 <th>Código registro</th>
                 <th>Nombre comercial</th>
@@ -139,15 +139,15 @@
                 <td colspan="10">No se han encontrado resultados</td>
               </tr>              
               <tr *ngFor="let item of ListEs10">
-                <td>{{item.nPeriodoProceso}}</td>
-                <td>{{item.sRamo}}</td>
-                <td>{{item.sRiesgo}}</td>
-                <td>{{item.nCodRiesgo}}</td>
-                <td>{{item.sCodRegistro}}</td>
-                <td>{{item.sNomComercial}}</td>
-                <td>{{item.sMoneda}}</td>
-                <td>{{item.sFechaIniComercial}}</td>
-                <td>{{item.nCantAsegurados}}</td>
+                <td style="width: 0%;">{{item.nPeriodoProceso}}</td>
+                <td style="width: 8%;">{{item.sRamo}}</td>
+                <td style="width: 12%;">{{item.sRiesgo}}</td>
+                <td style="width: 8%;">{{item.nCodRiesgo}}</td>
+                <td style="width: 12%;">{{item.sCodRegistro}}</td>
+                <td style="width: 23%;">{{item.sNomComercial}}</td>
+                <td style="width: 5%;">{{item.sMoneda}}</td>
+                <td style="width: 13%;">{{item.sFechaIniComercial}}</td>
+                <td style="width: 8%;">{{item.nCantAsegurados}}</td>
                 <td>{{item.sRegimen}}</td>
               </tr>
             </tbody>
