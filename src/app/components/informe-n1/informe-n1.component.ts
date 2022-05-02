@@ -419,8 +419,13 @@ export class InformeN1Component implements OnInit {
 
   async DescargarReporte(){
     //let response = await this.userConfigService.getInformeN1()
+   
     console.log("response",this.dataReporte.mesagge)
-
+    if(this.dataReporte.code == 1){
+      let mensaje = this.dataReporte.mesagge
+      this.SwalGlobal(mensaje)
+      return
+    }
     let data:any = {}
     data.zonasNacional = this.dataReporte.zonas_geograficas.filter(it => it.ZONA_GEOGRAFICA != 'EXTRANJERO')
     console.log(" data.zonasNacional", data.zonasNacional )

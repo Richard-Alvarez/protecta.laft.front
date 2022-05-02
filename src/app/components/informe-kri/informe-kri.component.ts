@@ -253,6 +253,11 @@ async DescargarReporte(){
   let data:any = {}
   data.NPERIODO_PROCESO = 20211231
   let response = await this.userConfigService.getInformeKri(data)
+  if(response.code == 1){
+    let mensaje = response.mesagge
+    this.SwalGlobal(mensaje)
+    return
+  }
   this.es10 = response.es10
   response.es10.forEach(data => {
     this.es10Total =  this.es10Total + parseInt(data.nCantAsegurados)
