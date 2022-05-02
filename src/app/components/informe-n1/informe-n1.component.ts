@@ -534,7 +534,7 @@ export class InformeN1Component implements OnInit {
     //data.productoIndividualCorto  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA INDIVIDUAL DE CORTO PLAZO")
     data.productoVidaLeyExTrabajadores = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA LEY EX-TRABAJADORES")
     data.productoVidaLeyTrabajadores  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA LEY TRABAJADORES")
-
+debugger
     await this.userConfigService.GetSetearDataExcel(data)
     let ruta = "/PLANTILLAS/N1/Generado/Formato-N1-Plantilla.xlsx"
     let rutaElimina = "PLANTILLAS/N1/Generado"
