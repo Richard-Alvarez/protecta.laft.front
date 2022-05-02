@@ -272,6 +272,7 @@ class Rutas {
   public urlSetDataExcelDemanda: string = this.base + "monitoreoSenales/setDataExcelDemanda"
   public urlDelEliminarDemanda: string = this.base + "monitoreoSenales/DelEliminarDemanda"
 
+  public urlGetEliminarArchivo: string = this.base + "monitoreoSenales/GetEliminarArchivo"
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

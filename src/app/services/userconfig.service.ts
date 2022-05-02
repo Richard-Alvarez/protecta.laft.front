@@ -2231,6 +2231,19 @@ export class UserconfigService {
     });
   }
 
+  GetEliminarArchivo(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetEliminarArchivo, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  
+
   getDeleteRegistrosNegativos(): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

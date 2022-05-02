@@ -17,15 +17,15 @@
     </div>
     <div class="row" style="padding: 0px 150px;">
       <div class="col">
-        <div class="textoCabecera" style="background: #E6E6E6;">Fecha/Hora &nbsp; &nbsp; &nbsp; : 4/16/2022 8:28:08 PM
+        <div  class="textoCabecera" style="background: #E6E6E6;">Fecha/Hora &nbsp; &nbsp; &nbsp; : <label id="RGfecha">4/16/2022 8:28:08 PM</label>
         </div>
-        <div class="textoCabecera">Usuario &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: {{dataUser.nombre}}
+        <div class="textoCabecera">Usuario &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: <label id="RGnombre"></label>
         </div>
         <div class="textoCabecera" style="background: #E6E6E6;">Perfil &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp; : {{dataUser.perfil}}</div>
-        <div class="textoCabecera">Cargo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : {{dataUser.cargo}}</div>
+          &nbsp; &nbsp; : <label id="RGperfil"></label></div>
+        <div class="textoCabecera">Cargo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : <label id="RGcargo"></label></div>
         <div class="textoCabecera" style="background: #E6E6E6;">Correo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp;: {{dataUser.email}}</div>
+          &nbsp;: <label id="RGemail"></label></div>
       </div>
 
 
@@ -35,18 +35,21 @@
     </div>
 
 
-    <div class="row" style="padding-left: 10px;padding-right: 6px;">
-      <div class="col">
-        <div class="textoCabecera" style="background: #E6E6E6;">Tipo de Documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; -</div>
-        <div class="textoCabecera">Número de documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;
-          -</div>
-        <div class="textoCabecera" style="background: #E6E6E6;">Nombre / Razón Social &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp; &nbsp; : &nbsp; MI FARMA SAC</div>
-        <div class="textoCabecera">Cantidad coincidencias &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
-          &nbsp; 2</div>
-
-      </div>
+   <div class="row" style="padding-left: 10px;padding-right: 6px;">
+                          <div class="col">
+                            <div class="textoCabecera" style="background: #E6E6E6;">Tipo de Documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; <label id="tipobusqueda"></label></div>
+                            <div class="textoCabecera">Número de documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;
+                              <label id="numerodocbusq"></label></div>
+                            <div class="textoCabecera" style="background: #E6E6E6;">Nombre / Razón Social &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                              &nbsp; &nbsp; &nbsp; : &nbsp; <label id="nombrebusq"></label></div>
+                            <div class="textoCabecera">Cantidad coincidencias &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
+                              &nbsp; <label id="cantidadbusq"></label></div>
+                    
+                          </div>
+                    
+                    
+                        </div>
 
 
     </div>
@@ -54,7 +57,6 @@
     <p style="padding-left: 10px;">Coincidencia encontrada</p>
 
   </div>
-</div>
 <!-- <div class="body" id="body">
   <div class="table pt-4 m-5" style="width: 92%;">
     <table class="table table-bordered" id="table42">
