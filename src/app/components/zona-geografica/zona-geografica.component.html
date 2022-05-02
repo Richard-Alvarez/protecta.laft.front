@@ -47,20 +47,20 @@
                     <div class="col-xs-12 col-sm-12">
                       <select class="form-control buttonSinBorder colorButton" [(ngModel)]="NPERIODO_PROCESO">
                         <option value="0">
-                          --Seleccine--</option>
+                          --Seleccione--</option>
                         <option *ngFor="let item of this.listPeriodos" value="{{item}}">
                           {{item}}</option>
                       </select>
                     </div>
                   </div>
                 </div>
-                <div class="col-xlg-5 col-lg-3 d-flex py-1">
+                <div class="col-xlg-6 col-lg-5 d-flex py-1">
                   <div class="row col-12">
                     <div class="col-xs-12 col-sm-12">
-                      <label class="fontText">Buscar documento, nombre y apellido:</label>
+                      <label class="fontText">Buscar por documento y nombre completo:</label>
                     </div>
                     <div class="col-xs-12 col-sm-12">
-                      <input class="form-control buttonSinBorder colorButton" (keyup)="eventChange()" type="text" [(ngModel)]="SREGISTRO"  placeholder="Buscar documento, nombre y apellido">
+                      <input class="form-control buttonSinBorder colorButton" (keyup)="eventChange()" type="text" [(ngModel)]="SREGISTRO"  placeholder="Buscar por documento y nombre completo">
                     </div>
                   </div>
                 </div>
@@ -108,15 +108,15 @@
               <td colspan="10">No se han encontrado resultados</td>
             </tr>
             <tr *ngFor="let item of ListZonaGeo">
-              <td>{{item.nPeriodoProceso}}</td>
-              <td>{{item.sProducto}}</td>
-              <td>{{item.tipDoc}}</td>
-              <td>{{item.numDoc}}</td>
-              <td>{{item.primerNombre}}</td>
-              <td>{{item.segundoNombre}}</td>
-              <td>{{item.apellidoParterno}}</td>
-              <td>{{item.apellidoMaterno}}</td>
-              <td>{{item.region}}</td>
+              <td style="width: 0%;">{{item.nPeriodoProceso}}</td>
+              <td style="width: 8%;">{{item.sProducto}}</td>
+              <td style="width: 12%;">{{item.tipDoc}}</td>
+              <td style="width: 12%;">{{item.numDoc}}</td>
+              <td style="width: 10%;">{{item.primerNombre}}</td>
+              <td style="width: 10%;">{{item.segundoNombre}}</td>
+              <td style="width: 10%;">{{item.apellidoParterno}}</td>
+              <td style="width: 10%;">{{item.apellidoMaterno}}</td>
+              <td style="width: 8%;">{{item.region}}</td>
               <td class="text-center vertical" style="width: 6%;">
                 <img src="assets/icons/edit.png" color="blue" title="Editar alerta" alt=""
                     style="cursor: pointer;" (click)="UpdateItem(item)" />

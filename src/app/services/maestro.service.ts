@@ -92,7 +92,7 @@ export class MaestroService {
 
     let maestros: Maestros = this.core.storage.get('maestros');
     this.cargarDocumentoApi().then((response) => {
-      maestros.tiposDocumento = response[0];
+      maestros.tiposDocumento = response[0] ? null : [];
     });
     return maestros;
   }

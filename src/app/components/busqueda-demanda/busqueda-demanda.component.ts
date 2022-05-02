@@ -590,29 +590,34 @@ export class BusquedaDemandaComponent implements OnInit {
     }
   }
   /*en caso sea masiva, descargara una plantilla para guia de como se debe subir el archivo*/
-  DescargarPlantilla() {
-    let data = []
-    let dataExample: any = [
-      {
-        "Nombre": 'POZO GOMERO JOSE RENATO',
-        "Tipo_Documento": 'DNI',
-        "Documento": '46610806'
-      },
-      {
-        "Nombre": 'MI FARMA S.A.C',
-        "Tipo_Documento": 'RUC',
-        "Documento": '1425785698'
-      }
-    ]
-    dataExample.forEach(t => {
-      let _data = {
-        "Nombre": t.Nombre,
-        "Tipo de Documento": t.Tipo_Documento,
-        "Documento": t.Documento
-      }
-      data.push(_data);
-    });
-    this.excelService.exportAsExcelFile(data, "Plantilla Búsqueda a Demanda");
+  async DescargarPlantilla() {
+    let ruta = "/PLANTILLAS/DEMANDA/Plantilla-busqueda-demanda.xlsx"
+    
+    let nombreArchivo = 'Plantilla-Busqueda-Demanda.xlsx'
+    await this.DescargarArchivo(ruta,nombreArchivo)
+    
+    // let data = []
+    // let dataExample: any = [
+    //   {
+    //     "Nombre": 'POZO GOMERO JOSE RENATO',
+    //     "Tipo_Documento": 'DNI',
+    //     "Documento": '46610806'
+    //   },
+    //   {
+    //     "Nombre": 'MI FARMA S.A.C',
+    //     "Tipo_Documento": 'RUC',
+    //     "Documento": '1425785698'
+    //   }
+    // ]
+    // dataExample.forEach(t => {
+    //   let _data = {
+    //     "Nombre": t.Nombre,
+    //     "Tipo de Documento": t.Tipo_Documento,
+    //     "Documento": t.Documento
+    //   }
+    //   data.push(_data);
+    // });
+    // this.excelService.exportAsExcelFile(data, "Plantilla Búsqueda a Demanda");
   }
   /*descarga todos los resultados de la busqueda a demanda en formato excel*/
   exportListToExcel() {
@@ -1354,4 +1359,25 @@ CrearPdf(item) {
     .save();
     document.getElementById('reporteIndividual').classList.add('ocultarReporte')
 }
+
+async DescargarArchivo(ruta, nameFile) {
+    
+  try {
+    this.core.loader.show()
+    let data = { ruta: ruta }
+    let response = await this.userConfigService.DownloadUniversalFileByAlert(data)
+    response = await fetch(`data:application/octet-stream;base64,${response.base64}`)
+    const blob = await response.blob()
+    let url = URL.createObjectURL(blob)
+    let link = document.createElement('a')
+    link.href = url
+    link.download = (nameFile + ' ').trim()
+    link.click()
+    this.core.loader.hide()
+  } catch (error) {
+    console.error("el error en descargar archivo: ", error)
+  }
+
+}
+
 }
