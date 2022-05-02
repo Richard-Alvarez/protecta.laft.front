@@ -204,6 +204,7 @@ import { TemplateReporteBusquedaDemandaComponent } from './components/responsabl
 import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
 import { ModalZonaGeograficaComponent } from './pages/modal-zona-geografica/modal-zona-geografica.component';
 import { ModalActivadEconomicaComponent } from './pages/modal-activad-economica/modal-activad-economica.component';
+import { ConvertTextPipe } from './pipes/convert-text.pipe';
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -376,7 +377,8 @@ import { ModalActivadEconomicaComponent } from './pages/modal-activad-economica/
     ZonaGeograficaComponent,
     TemplateReporteBusquedaDemandaComponent,
     ModalZonaGeograficaComponent,
-    ModalActivadEconomicaComponent
+    ModalActivadEconomicaComponent,
+    ConvertTextPipe
 
    
     //Validaciones

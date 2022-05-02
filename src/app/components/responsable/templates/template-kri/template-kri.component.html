@@ -1449,7 +1449,7 @@ style="
     </tr>
     <tr *ngFor="let item of Resultado.zonageofraficanacional">
         <td style="width:105.0pt;border:solid windowtext 1.0pt;border-top:none;padding:  0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.GLS_REGION}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.GLS_REGION | convertText}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:"Arial",sans-serif;'>{{item.NVIDA_RENTA}}</span></p>

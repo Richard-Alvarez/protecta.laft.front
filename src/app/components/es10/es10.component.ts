@@ -275,7 +275,7 @@ export class Es10Component implements OnInit {
           const blobUrl = URL.createObjectURL(blob);
           const a = document.createElement('a')
           a.href = blobUrl
-          a.download = 'Reporte de Cotizaciones.xlsx'
+          a.download = 'Plantilla de Anexo ES10.xlsx'
           a.click()
         };
       });
@@ -307,16 +307,16 @@ export class Es10Component implements OnInit {
     let data: any = [];
     this.Response.ListEs10.forEach(t => {
       let _data: any = {}
-      _data["Periodo"] = t.nPeriodoProceso;
-      _data["Ramo"] = t.sRamo;
-      _data["Riego"] = t.sRiesgo;
-      _data["Código riesgo"] = t.nCodRiesgo;
-      _data["Código registro"] = t.sCodRegistro;
-      _data["Nombre comercial"] = t.sNomComercial;
-      _data["Moneda"] = t.sMoneda;
-      _data["Inicio de compra"] = t.sFechaIniComercial;
-      _data["N° asegurados"] = t.nCantAsegurados;
-      _data["Régimen"] = t.sRegimen;
+      _data["PERIODO"] = t.nPeriodoProceso;
+      _data["RAMO"] = t.sRamo;
+      _data["RIESGO"] = t.sRiesgo;
+      _data["CODIGO DE RIESGO"] = t.nCodRiesgo;
+      _data["CODIGO DE REGISTRO "] = t.sCodRegistro;
+      _data["NOMBRE COMERCIAL DEL PRODUCTO O POLIZA DE SEGURO"] = t.sNomComercial;
+      _data["MONEDA"] = t.sMoneda;
+      _data["FECHA DE INICIO DE COMERCIALIZACION "] = t.sFechaIniComercial;
+      _data["N DE ASEGURADOS"] = t.nCantAsegurados;
+      _data["REGIMEN"] = t.sRegimen;
       data.push(_data)
     });
     this.excelService.exportAsExcelFile(data, "Anexo ES10");
