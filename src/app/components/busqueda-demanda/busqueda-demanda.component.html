@@ -31,7 +31,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-xl-2 col-lg-6 d-flex py-1">
+                    <!-- <div class="col-xl-2 col-lg-6 d-flex py-1">
                       <div class="row col-12 col-sm-12 col-md-9 col-lg-12 col-xl-12" style="padding:0">
                         <div class="col-xs-12 col-sm-12" style="padding:0">
                           <label class="fontText">Coincidencia:</label>
@@ -45,7 +45,7 @@
                           </select>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <div [hidden]="hideIndividual" class="col-xl-2 col-lg-6 d-flex py-1">
                       <div class="row col-12 col-sm-12 col-md-9 col-lg-12 col-xl-12" style="padding:0">
                         <div class="col-xs-12 col-sm-12" style="padding:0">
@@ -69,8 +69,8 @@
                         </div>
                         <div class="col-xs-12 col-sm-12" style="padding:0">
                           <input id="doc" type="text" class="form-control buttonSinBorder colorButton"
-                            maxlength="{{validationCantidadCaracteres()}}" size="20" (keypress)="validaNumericos($event)"
-                            [(ngModel)]="numeroDoc" placeholder="Número de Documento">
+                             size="20" 
+                            [(ngModel)]="numeroDoc" placeholder="Número de Documento"><!-- maxlength="{{validationCantidadCaracteres()}}" (keypress)="validaNumericos($event)" -->
                         </div>
                       </div>
                     </div>
@@ -162,25 +162,26 @@
                     <table class="striped" style="font-size: 12px;">
                         <thead>
                             <tr>
-                                <th class="columnGroup1" colspan="5">Datos de la Búsqueda</th>
+                                <th class="columnGroup1" colspan="3">Datos de la Búsqueda</th>
                                 <th class="columnGroup2" colspan="2">Persona que se busca</th>
-                                <th class="columnGroup3" colspan="5">Coincidencia Encontrada</th>
-                                <th class="columnGroup4" colspan="5"></th>
+                                <!-- <th class="columnGroup3" colspan="5">Coincidencia Encontrada</th> -->
+                                <th class="columnGroup4" colspan="1"></th>
                             </tr>
                             <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif; ">
                                 <th class="columnGroup1" style="vertical-align: middle;">Fecha y Hora de Búsqueda</th>
                                 <th class="columnGroup1" style="vertical-align: middle;">Usuario que Realizó la Búsqueda</th>
-                                <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Lista</th>
-                                <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Fuente</th>
-                                <th class="columnGroup1" style="vertical-align: middle;">Búsqueda</th>
+                                <th class="columnGroup1" style="vertical-align: middle;">Cantidad</th>
+                                <!-- <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Lista</th> -->
+                                <!-- <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Fuente</th> -->
+                                <!-- <th class="columnGroup1" style="vertical-align: middle;">Búsqueda</th> -->
                                 <th class="columnGroup2" style="vertical-align: middle;">Tipo y Número de Documento</th>
                                 <th class="columnGroup2" style="vertical-align: middle;"> Nombre/Razón Social</th>
-                                <th class="columnGroup3" style="vertical-align: middle;">Tipo y Número de Documento</th>
-                                <th class="columnGroup3" style="vertical-align: middle;">Término</th>
-                                <th class="columnGroup3" style="vertical-align: middle;text-align: left;">Nombre/Razón Social</th>
-                                <th class="columnGroup3" style="vertical-align: middle;">% Coincidencia</th>
-                                <th class="columnGroup3" style="vertical-align: middle;">Tipo de Coincidencia</th>
-                                <th class="columnGroup4" style="vertical-align: middle;">Descargar</th>
+                                <!-- <th class="columnGroup3" style="vertical-align: middle;">Tipo y Número de Documento</th> -->
+                                <!-- <th class="columnGroup3" style="vertical-align: middle;">Término</th> -->
+                                <!-- <th class="columnGroup3" style="vertical-align: middle;text-align: left;">Nombre/Razón Social</th> -->
+                                <!-- <th class="columnGroup3" style="vertical-align: middle;">% Coincidencia</th> -->
+                                <!-- <th class="columnGroup3" style="vertical-align: middle;">Tipo de Coincidencia</th> -->
+                                <th class="columnGroup4" style="vertical-align: middle;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -190,25 +191,28 @@
                             <tr class="animated fadeIn" *ngFor="let item of resultadoFinal; let i = index;">
                                 <td>{{item.dfechA_BUSQUEDA}}</td>
                                 <td>{{item.susuariO_BUSQUEDA != '' ? item.susuariO_BUSQUEDA : '-'}}</td>
-                                <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
-                                <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
-                                <td>{{item.scoincidencia == null || item.scoincidencia == '' ? '-': item.scoincidencia}}</td>
+                                <td>{{item.count}}</td>
+                                <!-- <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td> -->
+                                <!-- <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td> -->
+                                <!-- <td>{{item.scoincidencia == null || item.scoincidencia == '' ? '-': item.scoincidencia}}</td> -->
                                 <td>{{item.snumdoC_BUSQUEDA == null || item.snumdoC_BUSQUEDA == '' ? '-': item.snumdoC_BUSQUEDA}}</td>
                                 <td>{{item.snombrE_BUSQUEDA == null || item.snombrE_BUSQUEDA == '' ? '-': item.snombrE_BUSQUEDA}}</td>
-                                <td>{{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO) }}</td>
-                                <td>
+                                <!-- <td>{{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO) }}</td> -->
+                                <!-- <td>
                                     <div placement='top' ngbTooltip="{{item.snombrE_TERMINO}}">
                                         {{cortarCararterNombre(item.snombrE_TERMINO == null || item.snombrE_TERMINO == '' ? '-': item.snombrE_TERMINO)}}</div>
-                                </td>
-                                <td>
+                                </td> -->
+                                <!-- <td>
                                     <div placement='top' ngbTooltip="{{item.snombrE_COMPLETO}}">
                                         {{cortarCararterNombre(item.snombrE_COMPLETO == null || item.snombrE_COMPLETO == '' ? '-': item.snombrE_COMPLETO)}}</div>
-                                </td>
-                                <td style="text-align: center;">{{item.sporceN_COINCIDENCIA == null || item.sporceN_COINCIDENCIA == '' ? '-': item.sporceN_COINCIDENCIA}}</td>
-                                <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
+                                </td> -->
+                                <!-- <td style="text-align: center;">{{item.sporceN_COINCIDENCIA == null || item.sporceN_COINCIDENCIA == '' ? '-': item.sporceN_COINCIDENCIA}}</td> -->
+                                <!-- <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td> -->
                                 <td class=" text-center">
-                                    <img (click)="CrearPdf(item)" src="assets/icons/pdf2.png" title="Descargar Pdf" alt=""
+                                    <img (click)="convertirPdfMixta(item)" src="assets/icons/pdf2.png" title="Descargar Pdf" alt=""
                                         style="cursor: pointer;height:20px;width: 17px;" />
+                                    <img src="assets/icons/view.png" color="blue" title="Ver Coincidencias" alt=""
+                                        style="cursor: pointer;" (click)="ShowDetalle(item)" />
                                 </td>
                             </tr>
                         </tbody>
@@ -221,9 +225,6 @@
                             </button>
                         </div>
                     </div>
-
-                    <!-- <button class="btn-dark btn-primary" (click)="convertirPdfMixta()">Descargar REporte Mixto</button>
-                    <button class="btn-dark btn-secundary" (click)="convertirPdfIndividual()">Descargar REporte Individual</button>
 
                   
 
@@ -241,10 +242,10 @@
                       </thead>
                       <tbody>
                           
-                          <tr class="animated fadeIn" *ngFor="let item of resultadoFinal; let i = index;">
-                               <td>{{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO) }}</td>
+                          <tr class="animated fadeIn" *ngFor="let item of pdfMasivo; let i = index;">
+                               <td>{{item.stipO_DOCUMENTO}}</td>
                               <td>{{item.snuM_DOCUMENTO}}</td>
-                              <td>{{item.snombrE_BUSQUEDA}}</td>
+                              <td>{{item.snombrE_COMPLETO}}</td>
                               <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
                               <td>{{item.sporceN_COINCIDENCIA}}</td>
                               <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
@@ -252,7 +253,7 @@
                               
                           </tr>
                       </tbody>
-                  </table> -->
+                  </table> 
                 </div>
             </div>
         </div>
@@ -261,8 +262,9 @@
 <br>
 
   
-   <app-template-reporte-busqueda-demanda id="reporteMixto" style="display: none;" [data]="dataUser"></app-template-reporte-busqueda-demanda> 
-   <app-template-report-demanda-individual id="reporteIndividual" style="display: none;" [data]="dataUser"></app-template-report-demanda-individual> 
+   <app-template-reporte-busqueda-demanda id="reporteMixto"  [data]="dataUser"></app-template-reporte-busqueda-demanda> 
+
+   <app-template-report-demanda-individual id="reporteIndividual" [data]="dataUser"></app-template-report-demanda-individual> 
   
 
 <app-footer></app-footer>

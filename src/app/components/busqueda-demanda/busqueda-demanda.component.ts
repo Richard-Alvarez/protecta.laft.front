@@ -7,6 +7,9 @@ import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { DataBusqueda } from './interfaces/data.interface';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalBusquedaDemandaComponent } from 'src/app/pages/modal-busqueda-demanda/modal-busqueda-demanda.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 import html2canvas from 'html2canvas';
 import { join } from 'path';
 import * as html2pdf from 'html2pdf.js'
@@ -26,12 +29,12 @@ export class BusquedaDemandaComponent implements OnInit {
 
   encontroRespuesta: boolean = true;
   noEncontroRespuesta: boolean = false;
-  COINCIDENCIA : number = 0;
+  //COINCIDENCIA : number = 0;
   NBUSCAR_POR: number = 1;
   NOMBRE_RAZON: number = 0;//2;
   POR_INDIVIDUAL: number = 1;
   POR_MASIVA: number = 2;
-
+  pdfMasivo : any = [];
   NPERIODO_PROCESO: number;
   nombreCompleto: string = '';
   numeroDoc: string = '';
@@ -47,7 +50,8 @@ export class BusquedaDemandaComponent implements OnInit {
   NombreArchivo: string = '';
   variableGlobalUser;
   DataUserLogin;
-
+  sCodGenerado : string ='';
+  objPdf : any = {}
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
 
   constructor(
@@ -55,6 +59,8 @@ export class BusquedaDemandaComponent implements OnInit {
     private core: CoreService,
     private userConfigService: UserconfigService,
     private excelService: ExcelService,
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
   ) { }
 
   async ngOnInit() {
@@ -116,11 +122,11 @@ export class BusquedaDemandaComponent implements OnInit {
       if (pr) {
         /*si el campo de documento es diferente a vacio [""] entra a verificar la cantidad de digitos*/
         if (this.numeroDoc != "") {
-          let cantCorr = this.validarDigitosIngresados()
-          /*si es correcta la contidad de caracter con  el tipo de documento ingresa a llamar al servicio de busqueda*/
-          if (cantCorr) {
+          /* let cantCorr = this.validarDigitosIngresados()
+          //si es correcta la contidad de caracter con  el tipo de documento ingresa a llamar al servicio de busqueda
+          if (cantCorr) { */
             await this.BusquedaADemandaMixta();
-          }
+          /* } */
         }
         /*en caso el campo de documento sea vacio [""] llamara al servicio de busqueda*/
         else {
@@ -153,10 +159,10 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     /*si ingresa solo documento procedera a llamar al servicio de busqueda*/
     else {
-      let cantCorr = this.validarDigitosIngresados()
-      if (cantCorr) {
+      /* let cantCorr = this.validarDigitosIngresados()
+      if (cantCorr) { */
         await this.BusquedaADemandaMixta()
-      }
+      /* } */
     }
   }
 
@@ -209,11 +215,8 @@ export class BusquedaDemandaComponent implements OnInit {
       },
     }).then(async (result) => {
       if (result.isConfirmed) {
-        let id = this.idUsuario.toString();
-        let cod = this.GenerarCodigo();
-        let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
         let data: DataBusqueda = {};
-        data.P_SCODBUSQUEDA = id.concat(cod, fecha) //(this.idUsuario.toString() + this.GenerarCodigo() + (this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss')).toString())
+        data.P_SCODBUSQUEDA = this.GenerateCodeDemanda();
         data.P_NPERIODO_PROCESO = this.NPERIODO_PROCESO;
         data.P_SNOMBREUSUARIO = this.nombreUsuario;//this.idUsuario;//ObjLista.P_NIDUSUARIO = this.nombreUsuario;
         data.P_NOMBRE_RAZON = this.NOMBRE_RAZON == 3 || this.NOMBRE_RAZON == 4 ? 2 : this.NOMBRE_RAZON;
@@ -236,7 +239,7 @@ export class BusquedaDemandaComponent implements OnInit {
           showCancelButton: false,
           showConfirmButton: false,
           showCloseButton: false,
-          timer: 5000,
+          timer: 2000,
           customClass: {
             closeButton: 'OcultarBorde'
           },
@@ -244,13 +247,20 @@ export class BusquedaDemandaComponent implements OnInit {
           if (result) {
             /*inicio*/
             this.core.loader.show()
-            let respuestaService: any = await this.getBusquedaADemanda(data);
+          let respuestaService: any ={}
+          await this.getBusquedaADemanda(data).then(res=>{
+            respuestaService = res;
+          }).finally(()=>{
+            this.eliminarDatosBusquedaDemanda();
+          });
+            //let respuestaService: any = await this.getBusquedaADemanda(data);
             //let respuestaService : any = JSON.parse(`{"mensaje":"Se generó el proceso correctamente","sMessage":null,"code":0,"nCode":0,"items":[{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":5,"sdestipolista":"LISTAS ESPECIALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":3,"sdesproveedor":"REGISTRO NEGATIVO","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":3,"sdestipolista":"LISTAS FAMILIAR PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":5,"sdestipolista":"LISTAS ESPECIALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":3,"sdesproveedor":"REGISTRO NEGATIVO","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"","nidtipolista":3,"sdestipolista":"LISTAS FAMILIAR PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"POZO GOMERO JOSE RENATO","snombrE_TERMINO":null,"snuM_DOCUMENTO":"46610806","sporceN_COINCIDENCIA":"100","sporceN_SCORE":null,"stipO_DOCUMENTO":"DNI","stipO_PERSONA":"PERSONA NATURAL","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"NOMBRE","snumdoC_BUSQUEDA":null,"scoincidencia":"CON COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":5,"sdestipolista":"LISTAS ESPECIALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":3,"sdesproveedor":"REGISTRO NEGATIVO","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":3,"sdestipolista":"LISTAS FAMILIAR PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":5,"sdestipolista":"LISTAS ESPECIALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":3,"sdesproveedor":"REGISTRO NEGATIVO","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"-","snombrE_TERMINO":null,"snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"-","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"-","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"-","snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"","nidtipolista":3,"sdestipolista":"LISTAS FAMILIAR PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":"POZO GOMERO JOSE RENATO","snombrE_TERMINO":null,"snuM_DOCUMENTO":"46610806","sporceN_COINCIDENCIA":"79","sporceN_SCORE":null,"stipO_DOCUMENTO":"DNI","stipO_PERSONA":"PERSONA NATURAL","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":1,"sdesproveedor":"IDECON","stipocoincidencia":"NOMBRE","snumdoC_BUSQUEDA":null,"scoincidencia":"CON COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":null,"nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":null,"snombrE_TERMINO":null,"snuM_DOCUMENTO":null,"sporceN_COINCIDENCIA":null,"sporceN_SCORE":null,"stipO_DOCUMENTO":null,"stipO_PERSONA":null,"susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":null,"snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":null,"nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"POZO GOMERO JOSE RENATO","snombrE_COMPLETO":null,"snombrE_TERMINO":null,"snuM_DOCUMENTO":null,"sporceN_COINCIDENCIA":null,"sporceN_SCORE":null,"stipO_DOCUMENTO":null,"stipO_PERSONA":null,"susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":null,"snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":null,"nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":null,"snombrE_TERMINO":null,"snuM_DOCUMENTO":null,"sporceN_COINCIDENCIA":null,"sporceN_SCORE":null,"stipO_DOCUMENTO":null,"stipO_PERSONA":null,"susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":null,"snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":null,"nidtipolista":2,"sdestipolista":"LISTAS PEP","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":null,"snombrE_TERMINO":null,"snuM_DOCUMENTO":null,"sporceN_COINCIDENCIA":null,"sporceN_SCORE":null,"stipO_DOCUMENTO":null,"stipO_PERSONA":null,"susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":null,"snumdoC_BUSQUEDA":null,"scoincidencia":"SIN COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"MIFARMA","snombrE_TERMINO":"MIFARMA","snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"92","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"EMPRESA  (PERSONA JURÍDICA)","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":"NOMBRE","snumdoC_BUSQUEDA":null,"scoincidencia":"CON COINCIDENCIA"},{"dfechA_BUSQUEDA":"28/04/2022 1:07:50 PM","scargo":"-","nidtipolista":1,"sdestipolista":"LISTAS INTERNACIONALES","snombrE_BUSQUEDA":"MI FARMA S.A.C","snombrE_COMPLETO":"MI FARMA SAC","snombrE_TERMINO":"MI FARMA SAC","snuM_DOCUMENTO":"-","sporceN_COINCIDENCIA":"90","sporceN_SCORE":null,"stipO_DOCUMENTO":"-","stipO_PERSONA":"EMPRESA  (PERSONA JURÍDICA)","susuariO_BUSQUEDA":"Graciela Sifuentes Alvarez","nidproveedor":4,"sdesproveedor":"WORDLCHECK","stipocoincidencia":"NOMBRE","snumdoC_BUSQUEDA":null,"scoincidencia":"CON COINCIDENCIA"}],"mensajeError":null}`);
             console.log(respuestaService)
+            debugger;
             if (Object.entries(respuestaService).length !== 0 && respuestaService.code == 0) {
               this.resultadoFinal2 = respuestaService.items;
-              this.resultadoFinal = this.resultadoFinal2
-              this.filterCoincidencia();
+              this.resultadoFinal = this.getListForName(this.resultadoFinal2)
+              //this.filterCoincidencia();
             }
             /*si no existe respuesta o retorna codigo 1*/
             else if (Object.entries(respuestaService).length !== 0 && respuestaService.code != 0) {
@@ -284,40 +294,40 @@ export class BusquedaDemandaComponent implements OnInit {
       }
     })
   }
-  async filterCoincidencia(){
-    if(this.COINCIDENCIA == 1){
-      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("CON"));
-    }else if (this.COINCIDENCIA == 2){
-      this.resultadoFinal = this.resultadoFinal2.filter(t=> (t.scoincidencia).startsWith("SIN"))
-    }else{
-      this.resultadoFinal = this.resultadoFinal2
-    }
+  getListForName(data :any = []){
+    let _data : any = [];
+    _data = data.filter( (item : any, index, array:any =[])=>{
+      item.count = array.filter(t2=>t2.snombrE_BUSQUEDA ==item.snombrE_BUSQUEDA).length
+      return array.map(t=>t.snombrE_BUSQUEDA).indexOf(item.snombrE_BUSQUEDA) == index;
+    });
+    return _data;
   }
+  
   async getBusquedaADemanda(obj) {
     return await this.userConfigService.BusquedaADemanda(obj)
   }
   /*valida que solo se pueda ingresar números*/
-  validaNumericos(event: any) {
+  // validaNumericos(event: any) {
 
-    if (event.charCode >= 48 && event.charCode <= 57) {
-      return true;
-    }
-    return false;
-  }
+  //   if (event.charCode >= 48 && event.charCode <= 57) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
   /*valida segun el tipo de documento, cuantos digitos puede ingresar*/
-  validationCantidadCaracteres() {
-    if (this.NOMBRE_RAZON == 1) {
-      return '11'
-    } else if (this.NOMBRE_RAZON == 2) {
-      return '8'
-    }
-    else if (this.NOMBRE_RAZON == 3) {
-      return '12'
-    }
-    else {
-      return '12'
-    }
-  }
+  // validationCantidadCaracteres() {
+  //   if (this.NOMBRE_RAZON == 1) {
+  //     return '11'
+  //   } else if (this.NOMBRE_RAZON == 2) {
+  //     return '8'
+  //   }
+  //   else if (this.NOMBRE_RAZON == 3) {
+  //     return '12'
+  //   }
+  //   else {
+  //     return '12'
+  //   }
+  // }
 
   ShowSelected() {
     let select = (document.getElementById('tipoDoc')) as HTMLSelectElement;
@@ -328,12 +338,12 @@ export class BusquedaDemandaComponent implements OnInit {
   }
 
   /*valido si la cantidad de digitos ingresados en el input de documento es el mismo que el permitido por el tipo de documento*/
-  validarDigitosIngresados() {
+  /* validarDigitosIngresados() {
     
     var numdoc = document.getElementById('doc')
     var maxlen = numdoc.getAttribute('maxlength')
     
-    /*valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento*/
+    //valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento
     if (this.ShowSelected() != 'Seleccione') {
       if (this.numeroDoc.length == Number(maxlen)) {
         //console.log(`${this.numeroDoc.length} es igual a ${Number(maxlen)}`)
@@ -344,9 +354,9 @@ export class BusquedaDemandaComponent implements OnInit {
       else {
         swal.fire({
           title: 'Búsqueda a Demanda',
-          text: `La cantidad de dígitos es incorrecto. ` +
-            `Ingresó ${this.numeroDoc.length} digito(s). ` +
-            `Debe ingresar ${maxlen} dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
+          text: `La cantidad de dígitos es incorrecto. 
+          Ingresó ${this.numeroDoc.length} digito(s).
+          Debe ingresar ${maxlen} dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
           icon: 'info',
           confirmButtonColor: '#FA7000',
           confirmButtonText: 'Aceptar',
@@ -358,12 +368,12 @@ export class BusquedaDemandaComponent implements OnInit {
         return false;
       }
     }
-    /*en caso este la opcion "seleccione" retorna true para aceptar la busqueda*/
+    //en caso este la opcion "seleccione" retorna true para aceptar la busqueda
     else {
       return true;
     }
     //}
-  }
+  } */
   /*valida que solo se pueda ingresar letras*/
   soloLetras(e) {
     let key = e.keyCode || e.which;
@@ -475,6 +485,13 @@ export class BusquedaDemandaComponent implements OnInit {
     var codigo = Math.floor(Math.random() * 999999)
     //console.log("codigo unico",codigo);
     return codigo.toString();
+  }
+  GenerateCodeDemanda(){
+    let id = this.idUsuario.toString();
+    let cod = this.GenerarCodigo();
+    let fecha = this.datepipe.transform(this.timestamp, 'ddMMyyyyhhmmss');
+    this.sCodGenerado = id.concat(cod,fecha);
+    return this.sCodGenerado;
   }
   /*ocultar controles individual/masivo*/
   hideControls() {
@@ -758,39 +775,24 @@ export class BusquedaDemandaComponent implements OnInit {
     uploadPararms.listFiles = this.ArchivoAdjunto.respPromiseFileInfo
     uploadPararms.listFileName = this.ArchivoAdjunto.listFileNameInform
     await this.userConfigService.UploadFilesUniversalByRuta(uploadPararms)
-    let datosExcel: any = {}
-    datosExcel.RutaExcel = 'ARCHIVOS-DEMANDA' + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0];
-    datosExcel.VALIDADOR = 'DEMANDA'
-    this.ResultadoExcel = await this.userConfigService.LeerDataExcel(datosExcel)
-    console.log("Resultado Excel", this.ResultadoExcel)
-    let datosEliminar: any = {}
-    datosEliminar.SCODBUSQUEDA = ''
-    datosEliminar.SNOMBREUSUARIO = ''
-    datosEliminar.SNOMBRE_COMPLETO = ''
-    datosEliminar.STIPO_DOCUMENTO = ''
-    datosEliminar.SNUM_DOCUMENTO = ''
-    datosEliminar.VALIDAR = 'DEL'
-    let responseEliminar = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosEliminar)
-    console.log("respuesta de eliminar", responseEliminar);
-    for (let i = 0; i < this.ResultadoExcel.length; i++) {
-      let datosRegistroColaborador: any = {}
-      datosRegistroColaborador.SCODBUSQUEDA = obj.P_SCODBUSQUEDA
-      datosRegistroColaborador.SNOMBREUSUARIO = this.nombreUsuario
-      datosRegistroColaborador.SNOMBRE_COMPLETO = this.ResultadoExcel[i].SNOMBRE_COMPLETO
-      datosRegistroColaborador.STIPO_DOCUMENTO = this.ResultadoExcel[i].STIPO_DOCUMENTO
-      datosRegistroColaborador.SNUM_DOCUMENTO = this.ResultadoExcel[i].SNUM_DOCUMENTO
-      datosRegistroColaborador.VALIDAR = 'INS'
-
-      let response = await this.userConfigService.GetRegistrarDatosExcelDemanda(datosRegistroColaborador)
-      console.log("respuesta de inserccion a tabla carga", response);
-    }
-
-
-    this.NombreArchivo = ''
-    await this.reset()
+    let params: any = {}
+    params.RutaExcel = 'ARCHIVOS-DEMANDA' + '/' + this.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0];
+    params.VALIDADOR = 'DEMANDA'
+    params.SCODBUSQUEDA = obj.P_SCODBUSQUEDA;
+    params.SNOMBREUSUARIO = this.nombreUsuario;
+    this.ResultadoExcel = await this.userConfigService.setDataExcelDemanda(params)
     this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }
+    await this.reset()
   }
-
+  async eliminarDatosBusquedaDemanda(){
+    let params : any = {}
+    if(this.sCodGenerado != ""){
+      params.SCODBUSQUEDA = this.sCodGenerado
+      await this.userConfigService.DelEliminarDemanda(params).then( res =>{
+  
+      });
+    }
+  }
 
   SwalGlobal(mensaje) {
     swal.fire({
@@ -1135,11 +1137,18 @@ CrearPdf(item) {
   }
  
   dataUser:any = {}
-  convertirPdfMixta() {
+  convertirPdfMixta(item) {
     document.getElementById('reporteMixto').classList.add('mostrarReporte')
+    debugger;
+    this.pdfMasivo = this.resultadoFinal2.filter(t=> t.snombrE_BUSQUEDA == item.snombrE_BUSQUEDA);
 
-    document.getElementById("RGfecha").innerHTML = "prueba";
-    document.getElementById("RGnombre").innerHTML = this.DataUserLogin.NOMBRECOMPLETO;
+    document.getElementById("tipobusqueda").innerHTML = "-";
+    document.getElementById("numerodocbusq").innerHTML = item.snumdoC_BUSQUEDA;
+    document.getElementById("nombrebusq").innerHTML = item.snombrE_BUSQUEDA;
+    document.getElementById("cantidadbusq").innerHTML = item.count;
+
+    document.getElementById("RGfecha").innerHTML = item.dfechA_BUSQUEDA;
+    document.getElementById("RGnombre").innerHTML = item.susuariO_BUSQUEDA;
     document.getElementById("RGperfil").innerHTML = this.DataUserLogin.SNAME;
     document.getElementById("RGcargo").innerHTML = this.DataUserLogin.SDESCARGO;
     document.getElementById("RGemail").innerHTML =  this.DataUserLogin.SEMAIL;
@@ -1249,36 +1258,57 @@ CrearPdf(item) {
       pdf.save(nameReport + PDF_EXTENSION)
     })
     
-   document.getElementById('reporteMixto').classList.remove('ocultarReporte')
+   document.getElementById('reporteMixto').classList.remove('mostrarReporte')
    
   }
 
-  convertirPdfIndividual() {
+  ShowDetalle(item : any){
+  const modalRef = this.modalService.open(ModalBusquedaDemandaComponent, { size: 'xl', windowClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
+   
+    let data: any = [];
+    data = this.resultadoFinal2.filter(t=> t.snombrE_BUSQUEDA == item.snombrE_BUSQUEDA);
+    item.data = data;
+    modalRef.componentInstance.reference = modalRef;
+    modalRef.componentInstance.contexto = this;
+    modalRef.componentInstance.item = item;
+    //modalRef.componentInstance.ListaEmail = this.ListCorreo;
+    
+    modalRef.result.then(async (resp) => {
+      this.spinner.show();
+      this.spinner.hide();
+
+    }, (reason) => {
+  
+
+      this.spinner.hide();
+    });
+  }
+  convertirPdfIndividual(item : any) {
     document.getElementById('reporteIndividual').classList.add('mostrarReporte')
 
     //cabecera
-    document.getElementById("RIfecha").innerHTML = "prueba";
-    document.getElementById("RInombre").innerHTML = this.DataUserLogin.NOMBRECOMPLETO;
+    document.getElementById("RIfecha").innerHTML = item.dfechA_BUSQUEDA;
+    document.getElementById("RInombre").innerHTML = item.susuariO_BUSQUEDA;
     document.getElementById("RIperfil").innerHTML = this.DataUserLogin.SNAME;
     document.getElementById("RIcargo").innerHTML = this.DataUserLogin.SDESCARGO;
     document.getElementById("RIemail").innerHTML =  this.DataUserLogin.SEMAIL;
 
     //Persona a quien realizo la bsuqueda
     document.getElementById("RItipoDoc").innerHTML = "-";
-    document.getElementById("RInumeroDoc").innerHTML =  "-";
-    document.getElementById("RIRazonDoc").innerHTML = "MI FARMA SAC";
-    document.getElementById("RIcantidadDoc").innerHTML =  "2";
+    document.getElementById("RInumeroDoc").innerHTML =  item.snumdoC_BUSQUEDA;
+    document.getElementById("RIRazonDoc").innerHTML = item.snombrE_BUSQUEDA;
 
     //Coincidencia encontrada
 
-    document.getElementById("RItipoDocCon").innerHTML = "-";
-    document.getElementById("RInumeroDocCon").innerHTML = "-";
-    document.getElementById("RIRazonDocCon").innerHTML = "MI FARMA SAC";
-    document.getElementById("RIRItipoListaCon").innerHTML =  "LISTAS INTERENACIONAL";
-    document.getElementById("RIporcentajeCon").innerHTML = "100"
-    document.getElementById("RIfuenteCon").innerHTML = "WORLDCHECK";
-    document.getElementById("RItipoCon").innerHTML = "NOMBRE";
-    document.getElementById("RIcargoCon").innerHTML =  "prueba de texto largo";
+    document.getElementById("RItipoDocCon").innerHTML = item.stipO_DOCUMENTO;
+    document.getElementById("RInumeroDocCon").innerHTML = item.snuM_DOCUMENTO;
+    document.getElementById("RIRazonDocCon").innerHTML =item.snombrE_COMPLETO;
+    document.getElementById("RIRItipoListaCon").innerHTML =  item.sdestipolista;
+    document.getElementById("RIporcentajeCon").innerHTML = item.sporceN_COINCIDENCIA
+    document.getElementById("RIfuenteCon").innerHTML = item.sdesproveedor;
+    document.getElementById("RItipoCon").innerHTML = item.stipocoincidencia;
+    document.getElementById("RIcargoCon").innerHTML =  item.scargo;
+    document.getElementById("RIInformacion").innerHTML =  item.sinformacion;
 
     var imgRefinitiv ='data:image/png;base64,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'
 
@@ -1328,7 +1358,7 @@ CrearPdf(item) {
     
     })
     .save();
-    document.getElementById('reporteIndividual').classList.add('ocultarReporte')
+    document.getElementById('reporteIndividual').classList.remove('mostrarReporte')
 }
 
 async DescargarArchivo(ruta, nameFile) {

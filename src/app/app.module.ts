@@ -204,6 +204,7 @@ import { TemplateReporteBusquedaDemandaComponent } from './components/responsabl
 import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
 import { ModalZonaGeograficaComponent } from './pages/modal-zona-geografica/modal-zona-geografica.component';
 import { ModalActivadEconomicaComponent } from './pages/modal-activad-economica/modal-activad-economica.component';
+import { ModalBusquedaDemandaComponent } from './pages/modal-busqueda-demanda/modal-busqueda-demanda.component';
 import { ConvertTextPipe } from './pipes/convert-text.pipe';
 //import { Validaciones } from './utils/validacionesRegex'
 
@@ -378,6 +379,7 @@ import { ConvertTextPipe } from './pipes/convert-text.pipe';
     TemplateReporteBusquedaDemandaComponent,
     ModalZonaGeograficaComponent,
     ModalActivadEconomicaComponent,
+    ModalBusquedaDemandaComponent,
     ConvertTextPipe
 
    
@@ -412,7 +414,7 @@ import { ConvertTextPipe } from './pipes/convert-text.pipe';
     NO_ERRORS_SCHEMA
   ],
   entryComponents: [AddCompanyDialogComponent, EditAlertDialogComponent, ModalBandejaComponent, ModalEmailProfileComponent, ModalConfirmGcComponent,ModalEmailAgregarComponent,ModalProfileMaintenanceComponent,ModalMantenimientoComplementoComponent,
-    ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent,ModalComplementoSinSennalComponent,ModalZonaGeograficaComponent,ModalActivadEconomicaComponent],
+    ModalValidarContrasennaComponent,ModalValidarCorreoComponent,ModalGestorLaftComponent,ModalConfirmacionCorreoComponent,ModalComplementoSinSennalComponent,ModalZonaGeograficaComponent,ModalActivadEconomicaComponent,ModalBusquedaDemandaComponent],
   providers: [UserconfigService, DatePipe],
   bootstrap: [AppComponent],
   exports: [BusquedaDemandaComponent]

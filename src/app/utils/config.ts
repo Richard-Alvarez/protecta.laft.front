@@ -1,11 +1,11 @@
 class Rutas {
 
-  //private base: string = 'http://localhost:5001/api/';
+  private base: string = 'http://localhost:5001/api/';
   //private base: string = 'http://localhost:5000/api/'; //docker
 
   //private base: string = 'http://190.216.170.173/ApiLAFT_Test/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT_QA/api/';
-  private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
+  //private base: string = 'http://190.216.170.173/ApiLAFT_Dev/api/';
   //private base: string = 'http://190.216.170.173/ApiLAFT/api/';
   //private base: string = 'https://rentas.protectasecurity.pe/ApiLAFT/api/' //PRDUCCION
   //private base: string = 'http://10.10.1.56/ApiLAFT/api/';
@@ -223,7 +223,6 @@ class Rutas {
   //LEER DATOS DE UN EXCEL
   public urlLeerDataExcel: string = this.base + "monitoreoSenales/LeerDataExcel";
   public urlGetRegistrarDatosExcelGC: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelGC";
-  public urlGetRegistrarDatosExcelDemanda: string = this.base + "monitoreoSenales/GetRegistrarDatosExcelDemanda";
   public urlGetClientsforRegimen: string = this.base + "monitoreoSenales/GetClientsforRegimen";
   public urlGetSearchClientsPep: string = this.base + "monitoreoSenales/GetSearchClientsPep";
   public urlGetSearchClientsPepSeacsa: string = this.base + "monitoreoSenales/GetSearchClientsPepSeacsa";
@@ -270,6 +269,9 @@ class Rutas {
   public urlUpdZonasGeograficas: string = this.base + "monitoreoSenales/UpdZonasGeograficas"
   public urlgetInformeKri: string = this.base + "monitoreoSenales/getInformeKri"
   public urlgetInformeN1: string = this.base + "monitoreoSenales/getInformeN1"
+  public urlSetDataExcelDemanda: string = this.base + "monitoreoSenales/setDataExcelDemanda"
+  public urlDelEliminarDemanda: string = this.base + "monitoreoSenales/DelEliminarDemanda"
+
   public urlGetEliminarArchivo: string = this.base + "monitoreoSenales/GetEliminarArchivo"
   
   LimpiarDataGestor() {

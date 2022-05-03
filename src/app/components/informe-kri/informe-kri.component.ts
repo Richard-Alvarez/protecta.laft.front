@@ -206,7 +206,8 @@ cabeceraSegumientoEvaluacion:any
 zonageofraficanacional
 zonageofraficanacionalSubTotal:any = {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PROCENTAJE:0}
 zonageofrafica
-zonageofraficaSubTotal:any
+zonageofraficaSubTotal:any = {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PROCENTAJE:0}
+validadorCuadroExtranjero = true
 actividadEconomicaCuadroSisFinan
 actividadEconomicaCuadroIndustria
 actividadEconomicaCuadroEnsenansa
@@ -236,6 +237,7 @@ Resultado = {
   ,{valor: 4, periodo: '2020 - I'},{valor: 5, periodo: '2020 - II'},{valor: 6, periodo: '2021 - I'}],
     zonageofraficanacional : [{GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456",NPORCENTAJE:100}],
     zonageofraficanacionalSubTotal: {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PROCENTAJE:0.0},
+    validadorCuadroExtranjero: true,
     zonageofrafica : [{GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456",NPORCENTAJE:100}],
     zonageofraficaSubTotal: {GLS_REGION: "MIAMI", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456",NPORCENTAJE:100},
     actividadEconomicaCuadroSisFinan: {SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100},
@@ -253,6 +255,11 @@ async DescargarReporte(){
   let data:any = {}
   data.NPERIODO_PROCESO = 20211231
   let response = await this.userConfigService.getInformeKri(data)
+  if(response.code == 1){
+    let mensaje = response.mesagge
+    this.SwalGlobal(mensaje)
+    return
+  }
   this.es10 = response.es10
   response.es10.forEach(data => {
     this.es10Total =  this.es10Total + parseInt(data.nCantAsegurados)
@@ -263,18 +270,38 @@ async DescargarReporte(){
      this.es10CuadroTotal =  this.es10CuadroTotal + parseInt(data.NCANT_ASEGURADOS)
    })
    
-  this.zonageofraficanacional  = response.zonasGeograficas.filter(it => it.GLS_REGION !== "MIAMI")
+  this.zonageofraficanacional  = response.zonasGeograficas.filter(it => it.BISNACIONAL == 1)
   this.zonageofraficanacional.forEach(data => {
-    this.zonageofraficanacionalSubTotal.VIDA_RENTA    =  this.zonageofraficanacionalSubTotal.VIDA_RENTA + parseInt(data.NVIDA_RENTA)
-    this.zonageofraficanacionalSubTotal.RENTA_TOTAL    =  this.zonageofraficanacionalSubTotal.RENTA_TOTAL + parseInt(data.NRENTA_TOTAL)
-    this.zonageofraficanacionalSubTotal.AHORRO_TOTAL   =  this.zonageofraficanacionalSubTotal.AHORRO_TOTAL + parseInt(data.NAHORRO_TOTAL)
-    this.zonageofraficanacionalSubTotal.SUBTOTAL   =  this.zonageofraficanacionalSubTotal.SUBTOTAL+ parseInt(data.NTOTAL)
-    this.zonageofraficanacionalSubTotal.PROCENTAJE      =  this.zonageofraficanacionalSubTotal.PROCENTAJE + data.NPORCENTAJE
+    this.zonageofraficanacionalSubTotal.VIDA_RENTA    =  Number(this.zonageofraficanacionalSubTotal.VIDA_RENTA) + parseInt(data.NVIDA_RENTA)
+    this.zonageofraficanacionalSubTotal.RENTA_TOTAL    =  Number(this.zonageofraficanacionalSubTotal.RENTA_TOTAL) + parseInt(data.NRENTA_TOTAL)
+    this.zonageofraficanacionalSubTotal.AHORRO_TOTAL   =  Number(this.zonageofraficanacionalSubTotal.AHORRO_TOTAL) + parseInt(data.NAHORRO_TOTAL)
+    this.zonageofraficanacionalSubTotal.SUBTOTAL   = Number( this.zonageofraficanacionalSubTotal.SUBTOTAL)+ parseInt(data.NTOTAL)
+    this.zonageofraficanacionalSubTotal.PROCENTAJE      =  Number(this.zonageofraficanacionalSubTotal.PROCENTAJE) + parseFloat(data.NPORCENTAJE)
   
   })
-  this.zonageofraficanacionalSubTotal.PROCENTAJE = this.zonageofraficanacionalSubTotal.PROCENTAJE.toFixed(2)
-  this.zonageofrafica = response.zonasGeograficas.filter(it => it.GLS_REGION == "MIAMI")
-  this.zonageofraficaSubTotal = response.zonasGeograficas.find(it => it.GLS_REGION == "MIAMI")
+this.zonageofraficanacionalSubTotal.PROCENTAJE = this.zonageofraficanacionalSubTotal.PROCENTAJE.toFixed(2)
+
+
+  this.zonageofrafica = response.zonasGeograficas.filter(it => it.BISNACIONAL == 0)
+  if(this.zonageofrafica.length == 0){
+    this.validadorCuadroExtranjero = false
+    this.zonageofrafica.PROCENTAJE = {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PROCENTAJE:0.0}
+  }else{
+    debugger
+    this.validadorCuadroExtranjero = true
+    this.zonageofrafica.forEach(data => {
+      this.zonageofraficaSubTotal.VIDA_RENTA    =  Number(this.zonageofraficaSubTotal.VIDA_RENTA) + parseInt(data.NVIDA_RENTA)
+      this.zonageofraficaSubTotal.RENTA_TOTAL    =  Number(this.zonageofraficaSubTotal.RENTA_TOTAL) + parseInt(data.NRENTA_TOTAL)
+      this.zonageofraficaSubTotal.AHORRO_TOTAL   =  Number(this.zonageofraficaSubTotal.AHORRO_TOTAL) + parseInt(data.NAHORRO_TOTAL)
+      this.zonageofraficaSubTotal.SUBTOTAL   =  Number(this.zonageofraficaSubTotal.SUBTOTAL) + parseInt(data.NTOTAL)
+      this.zonageofraficaSubTotal.PROCENTAJE      =  Number(this.zonageofraficaSubTotal.PROCENTAJE) + parseFloat(data.NPORCENTAJE)
+    
+    })
+    this.zonageofraficaSubTotal.PROCENTAJE =  this.zonageofraficaSubTotal.PROCENTAJE.toFixed(2)
+  }
+  
+
+
   this.actividadEconomicaCuadroOtros =  response.actividadEconomicaCuadro.find(it => it.SSECTOR == "OTROS")
   if(this.actividadEconomicaCuadroOtros == undefined) {this.actividadEconomicaCuadroOtros = {SSECTOR: 'OTROS', NCANTIDAD: '0', NPORCENTAJE:0}}
  
@@ -297,11 +324,11 @@ async DescargarReporte(){
 
 
   this.SumaZonaGeografica = {}
-  this.SumaZonaGeografica.VIDA_RENTA = Number(this.zonageofraficanacionalSubTotal.VIDA_RENTA) +  Number(this.zonageofraficaSubTotal.NVIDA_RENTA)
-  this.SumaZonaGeografica.RENTA_TOTAL = Number(this.zonageofraficanacionalSubTotal.RENTA_TOTAL) +  Number(this.zonageofraficaSubTotal.NRENTA_TOTAL)
-  this.SumaZonaGeografica.AHORRO_TOTAL = Number(this.zonageofraficanacionalSubTotal.AHORRO_TOTAL) +  Number(this.zonageofraficaSubTotal.NAHORRO_TOTAL)
-  this.SumaZonaGeografica.SUBTOTAL = Number(this.zonageofraficanacionalSubTotal.SUBTOTAL) +  Number(this.zonageofraficaSubTotal.NTOTAL)
-  this.SumaZonaGeografica.PORCENTAJE = Number(this.zonageofraficanacionalSubTotal.PROCENTAJE) +   Number(this.zonageofraficaSubTotal.NPORCENTAJE)
+  this.SumaZonaGeografica.VIDA_RENTA = Number(this.zonageofraficanacionalSubTotal.VIDA_RENTA) +  Number(this.zonageofraficaSubTotal.VIDA_RENTA)
+  this.SumaZonaGeografica.RENTA_TOTAL = Number(this.zonageofraficanacionalSubTotal.RENTA_TOTAL) +  Number(this.zonageofraficaSubTotal.RENTA_TOTAL)
+  this.SumaZonaGeografica.AHORRO_TOTAL = Number(this.zonageofraficanacionalSubTotal.AHORRO_TOTAL) +  Number(this.zonageofraficaSubTotal.AHORRO_TOTAL)
+  this.SumaZonaGeografica.SUBTOTAL = Number(this.zonageofraficanacionalSubTotal.SUBTOTAL) +  Number(this.zonageofraficaSubTotal.SUBTOTAL)
+  this.SumaZonaGeografica.PORCENTAJE = Number(this.zonageofraficanacionalSubTotal.PROCENTAJE) +   Number(this.zonageofraficaSubTotal.PROCENTAJE)
 
   this.Resultado = {
     es10: this.es10,
@@ -314,6 +341,7 @@ async DescargarReporte(){
     zonageofraficanacionalSubTotal: this.zonageofraficanacionalSubTotal,
     zonageofrafica : this.zonageofrafica,
     zonageofraficaSubTotal:this.zonageofraficaSubTotal,
+    validadorCuadroExtranjero: this.validadorCuadroExtranjero,
     actividadEconomicaCuadroSisFinan: this.actividadEconomicaCuadroSisFinan,
     actividadEconomicaCuadroIndustria: this.actividadEconomicaCuadroIndustria,
     actividadEconomicaCuadroEnsenansa: this.actividadEconomicaCuadroEnsenansa,

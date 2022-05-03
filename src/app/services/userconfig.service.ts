@@ -1452,6 +1452,28 @@ export class UserconfigService {
       }
     })
   }
+  setDataExcelDemanda(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlSetDataExcelDemanda, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+  DelEliminarDemanda(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlDelEliminarDemanda, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
   GetKriSearchZonaGeografica(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
@@ -1913,17 +1935,6 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.post(this.core.config.rest.urlGetRegistrarDatosExcelGC, data).subscribe((response) => {
-          return resolve(response);
-        });
-      } catch (error) {
-        return reject(error);
-      }
-    });
-  }
-  GetRegistrarDatosExcelDemanda(data: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      try {
-        this.laft.post(this.core.config.rest.urlGetRegistrarDatosExcelDemanda, data).subscribe((response) => {
           return resolve(response);
         });
       } catch (error) {

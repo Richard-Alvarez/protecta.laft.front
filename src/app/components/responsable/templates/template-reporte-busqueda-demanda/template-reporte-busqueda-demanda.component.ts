@@ -14,7 +14,7 @@ const PDF_EXTENSION = ".pdf";
 })
 export class TemplateReporteBusquedaDemandaComponent implements OnInit {
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
-  @ViewChild("pdfViewerAutoLoad", { static: true }) pdfViewerAutoLoad;
+  @ViewChild("pdfViewerAutoLoad", { static: true }) pdfViewerAutoLoad; 
   @Input() dataUser:any = {  
       nombre: '',
     perfil: '',
