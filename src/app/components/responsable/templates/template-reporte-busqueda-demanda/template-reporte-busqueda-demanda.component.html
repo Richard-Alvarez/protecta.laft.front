@@ -57,35 +57,32 @@
     <p style="padding-left: 10px;">Coincidencia encontrada</p>
 
   </div>
-<!-- <div class="body" id="body">
-  <div class="table pt-4 m-5" style="width: 92%;">
-    <table class="table table-bordered" id="table42">
-      <thead>
-        <tr>
-          <th scope="col">Tipo Documento</th>
-          <th scope="col">N° Documento</th>
-          <th scope="col">Nombre / Razón social</th>
-          <th scope="col">Tipo lista</th>
-          <th scope="col">% coincidencias</th>}
-          <th scope="col">Fuente</th>
-          <th scope="col">Tipo de coincidencia</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item  of  this.dataReporte.tabla">
-          <td>{{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO) }}</td>
-          <td>{{item.snuM_DOCUMENTO}}</td>
-          <td>{{item.snombrE_BUSQUEDA}}</td>
-          <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
-          <td>{{item.sporceN_COINCIDENCIA}}</td>
-          <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
-          <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-</div> -->
+<!-- <table class="striped" style="font-size: 12px;" id="table42" >
+                      <thead>
+                        <tr>
+                          <th scope="col">Tipo Documento</th>
+                          <th scope="col">N° Documento</th>
+                          <th scope="col">Nombre / Razón social</th>
+                          <th scope="col">Tipo lista</th>
+                          <th scope="col">% coincidencias</th>
+                          <th scope="col">Fuente</th>
+                          <th scope="col">Tipo de coincidencia</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          
+                          <tr class="animated fadeIn" *ngFor="let item of this.masivo; let i = index;">
+                               <td>{{item.stipO_DOCUMENTO}}</td>
+                              <td>{{item.snuM_DOCUMENTO}}</td>
+                              <td>{{item.snombrE_COMPLETO}}</td>
+                              <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
+                              <td>{{item.sporceN_COINCIDENCIA}}</td>
+                              <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
+                              <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
+                              
+                          </tr>
+                      </tbody>
+                  </table> -->
 
 
 <button class="btn-dark btn-primary" (click)="convertirPdf()">Descargar REporte busqueda</button>

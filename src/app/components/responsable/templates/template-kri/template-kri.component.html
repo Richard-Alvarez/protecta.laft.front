@@ -1491,7 +1491,7 @@ style="
 </tbody>
 </table>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:36.0pt;line-height:115%;font-size:15px;font-family:"Calibri",sans-serif;'><u><span style="font-size:7px;line-height:115%;"><span style="text-decoration:none;">&nbsp;</span></span></u></p>
-<table style="border: none;width:470.0pt;margin-left:5.4pt;border-collapse:collapse;">
+<table style="border: none;width:470.0pt;margin-left:5.4pt;border-collapse:collapse;" *ngIf="Resultado.validadorCuadroExtranjero == true">
 <tbody>
     <tr>
         <td style="width:105.0pt;border:solid windowtext 1.0pt;background:  #DBE5F1;padding:0cm 5.4pt 0cm 5.4pt;height:39.0pt;">
@@ -1515,7 +1515,7 @@ style="
     </tr>
     <tr *ngFor="let item of Resultado.zonageofrafica">
         <td style="width:105.0pt;border:solid windowtext 1.0pt;border-top:none;padding:  0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.GLS_REGION}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.GLS_REGION | convertText}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{item.NVIDA_RENTA}}</span></p>
@@ -1538,19 +1538,19 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>Subtotal</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#DBE5F1;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.NVIDA_RENTA}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.VIDA_RENTA}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#DBE5F1;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.NRENTA_TOTAL}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.RENTA_TOTAL}}</span></p>
         </td>
         <td style="width:80.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#DBE5F1;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.NAHORRO_TOTAL}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.AHORRO_TOTAL}}</span></p>
         </td>
         <td style="width:65.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#DBE5F1;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.NTOTAL}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.SUBTOTAL}}</span></p>
         </td>
         <td style="width:60.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#DBE5F1;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.NPORCENTAJE}}%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;color:black;'>{{Resultado.zonageofraficaSubTotal.PROCENTAJE}}%</span></p>
         </td>
     </tr>
 </tbody>
@@ -1603,19 +1603,19 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>Extranjero</span></p>
         </td>
         <td style="width: 77.95pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;height: 12.25pt;vertical-align: top;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.NVIDA_RENTA}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.VIDA_RENTA}}</span></p>
         </td>
         <td style="width: 77.95pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;height: 12.25pt;vertical-align: top;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.NRENTA_TOTAL}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.RENTA_TOTAL}}</span></p>
         </td>
         <td style="width: 77.95pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;height: 12.25pt;vertical-align: top;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.NAHORRO_TOTAL}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.AHORRO_TOTAL}}</span></p>
         </td>
         <td style="width: 70.9pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;height: 12.25pt;vertical-align: top;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.NTOTAL}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.SUBTOTAL}}</span></p>
         </td>
         <td style="width: 60.75pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;height: 12.25pt;vertical-align: top;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.NPORCENTAJE}}%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:13px;font-family:  "Arial",sans-serif;'>{{Resultado.zonageofraficaSubTotal.PROCENTAJE}}%</span></p>
         </td>
     </tr>
     <tr>

@@ -225,9 +225,9 @@
                             </button>
                         </div>
                     </div>
-
-                    <!-- <button class="btn-dark btn-primary" (click)="convertirPdfMixta()">Descargar REporte Mixto</button>
-                    <button class="btn-dark btn-secundary" (click)="convertirPdfIndividual()">Descargar REporte Individual</button> -->
+<!-- 
+                    <button class="btn-dark btn-primary"  (click)="convertirPdfMixta()">Descargar REporte Mixto</button>
+                    <button class="btn-dark btn-secundary " (click)="convertirPdfIndividual()">Descargar REporte Individual</button> -->
 
                   
 
@@ -265,8 +265,9 @@
 <br>
 
   
-   <app-template-reporte-busqueda-demanda id="reporteMixto" style="display: none;" [data]="dataUser"></app-template-reporte-busqueda-demanda> 
-   <app-template-report-demanda-individual id="reporteIndividual" style="display: none;" [data]="dataUser"></app-template-report-demanda-individual> 
+   <app-template-reporte-busqueda-demanda id="reporteMixto"  [data]="dataUser"></app-template-reporte-busqueda-demanda> 
+
+   <app-template-report-demanda-individual id="reporteIndividual" [data]="dataUser"></app-template-report-demanda-individual> 
   
 
 <app-footer></app-footer>

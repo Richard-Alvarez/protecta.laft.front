@@ -70,7 +70,7 @@
           </td>
           <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
           <td class=" text-center">
-            <img src="assets/icons/pdf2.png" title="Descargar Pdf" alt=""
+            <img src="assets/icons/pdf2.png" title="Descargar Pdf" (click)="generarPdfIndividual(item)" alt=""
               style="cursor: pointer;height:20px;width: 17px;" />
           </td>
         </tr>

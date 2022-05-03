@@ -13,6 +13,7 @@ export class ModalBusquedaDemandaComponent implements OnInit {
     private spinner: NgxSpinnerService) { }
   @Input() item: any;
   @Input() reference: any;
+  @Input() contexto: any;
   COINCIDENCIA :number = 0
   //pagindor
   currentPage = 1;
@@ -38,7 +39,6 @@ export class ModalBusquedaDemandaComponent implements OnInit {
     return ''
   }
   async filterCoincidencia(){
-    debugger;
     this.currentPage= 1
     if(this.COINCIDENCIA == 1){
       this.item.filterData = this.item.data.filter(t=> (t.scoincidencia).startsWith("CON"));
@@ -62,5 +62,8 @@ export class ModalBusquedaDemandaComponent implements OnInit {
       (this.currentPage - 1) * this.itemsPerPage,
       this.currentPage * this.itemsPerPage
     );
+  }
+  generarPdfIndividual(item){
+    this.contexto.convertirPdfIndividual(item);
   }
 }
