@@ -346,7 +346,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
 .fadeIn {
   animation-name: fadeIn;
 }
-<<<<<<< HEAD
 
 .swal2-header .swal2-info {
   border-color: #FA7000 !important;
@@ -355,7 +354,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
 /* .swal2-header .swal2-info .swal2-icon-content {
   color : #FA7000
 } */
-=======
 .light-blue-backdrop >div{
       max-width: 1350px;
     margin: 8.75rem auto;
@@ -368,4 +366,3 @@ height: 100%;
 .swal2-close{
   color: #fd7e14;
 }
->>>>>>> da67bb4f4f69e1a22ecea60fe27bcbf97faecaba
