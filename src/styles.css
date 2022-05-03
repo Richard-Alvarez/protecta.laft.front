@@ -346,3 +346,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
 .fadeIn {
   animation-name: fadeIn;
 }
+
+.swal2-header .swal2-info {
+  border-color: #FA7000 !important;
+    color: #FA7000 !important;
+}
+/* .swal2-header .swal2-info .swal2-icon-content {
+  color : #FA7000
+} */
