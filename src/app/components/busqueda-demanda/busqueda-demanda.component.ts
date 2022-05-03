@@ -112,11 +112,11 @@ export class BusquedaDemandaComponent implements OnInit {
       if (pr) {
         /*si el campo de documento es diferente a vacio [""] entra a verificar la cantidad de digitos*/
         if (this.numeroDoc != "") {
-          let cantCorr = this.validarDigitosIngresados()
-          /*si es correcta la contidad de caracter con  el tipo de documento ingresa a llamar al servicio de busqueda*/
-          if (cantCorr) {
+          /* let cantCorr = this.validarDigitosIngresados()
+          //si es correcta la contidad de caracter con  el tipo de documento ingresa a llamar al servicio de busqueda
+          if (cantCorr) { */
             await this.BusquedaADemandaMixta();
-          }
+          /* } */
         }
         /*en caso el campo de documento sea vacio [""] llamara al servicio de busqueda*/
         else {
@@ -149,10 +149,10 @@ export class BusquedaDemandaComponent implements OnInit {
     }
     /*si ingresa solo documento procedera a llamar al servicio de busqueda*/
     else {
-      let cantCorr = this.validarDigitosIngresados()
-      if (cantCorr) {
+      /* let cantCorr = this.validarDigitosIngresados()
+      if (cantCorr) { */
         await this.BusquedaADemandaMixta()
-      }
+      /* } */
     }
   }
 
@@ -291,27 +291,27 @@ export class BusquedaDemandaComponent implements OnInit {
     return await this.userConfigService.BusquedaADemanda(obj)
   }
   /*valida que solo se pueda ingresar números*/
-  validaNumericos(event: any) {
+  // validaNumericos(event: any) {
 
-    if (event.charCode >= 48 && event.charCode <= 57) {
-      return true;
-    }
-    return false;
-  }
+  //   if (event.charCode >= 48 && event.charCode <= 57) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
   /*valida segun el tipo de documento, cuantos digitos puede ingresar*/
-  validationCantidadCaracteres() {
-    if (this.NOMBRE_RAZON == 1) {
-      return '11'
-    } else if (this.NOMBRE_RAZON == 2) {
-      return '8'
-    }
-    else if (this.NOMBRE_RAZON == 3) {
-      return '12'
-    }
-    else {
-      return '12'
-    }
-  }
+  // validationCantidadCaracteres() {
+  //   if (this.NOMBRE_RAZON == 1) {
+  //     return '11'
+  //   } else if (this.NOMBRE_RAZON == 2) {
+  //     return '8'
+  //   }
+  //   else if (this.NOMBRE_RAZON == 3) {
+  //     return '12'
+  //   }
+  //   else {
+  //     return '12'
+  //   }
+  // }
 
   ShowSelected() {
     let select = (document.getElementById('tipoDoc')) as HTMLSelectElement;
@@ -322,12 +322,12 @@ export class BusquedaDemandaComponent implements OnInit {
   }
 
   /*valido si la cantidad de digitos ingresados en el input de documento es el mismo que el permitido por el tipo de documento*/
-  validarDigitosIngresados() {
+  /* validarDigitosIngresados() {
     
     var numdoc = document.getElementById('doc')
     var maxlen = numdoc.getAttribute('maxlength')
     
-    /*valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento*/
+    //valida que si no esta en la opcion "seleccione" ingrese la cantidad requerida para el tipo de documento
     if (this.ShowSelected() != 'Seleccione') {
       if (this.numeroDoc.length == Number(maxlen)) {
         //console.log(`${this.numeroDoc.length} es igual a ${Number(maxlen)}`)
@@ -338,9 +338,9 @@ export class BusquedaDemandaComponent implements OnInit {
       else {
         swal.fire({
           title: 'Búsqueda a Demanda',
-          text: `La cantidad de dígitos es incorrecto. ` +
-            `Ingresó ${this.numeroDoc.length} digito(s). ` +
-            `Debe ingresar ${maxlen} dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
+          text: `La cantidad de dígitos es incorrecto. 
+          Ingresó ${this.numeroDoc.length} digito(s).
+          Debe ingresar ${maxlen} dígitos para el tipo de documento seleccionado [${this.ShowSelected()}]`,
           icon: 'info',
           confirmButtonColor: '#FA7000',
           confirmButtonText: 'Aceptar',
@@ -352,12 +352,12 @@ export class BusquedaDemandaComponent implements OnInit {
         return false;
       }
     }
-    /*en caso este la opcion "seleccione" retorna true para aceptar la busqueda*/
+    //en caso este la opcion "seleccione" retorna true para aceptar la busqueda
     else {
       return true;
     }
     //}
-  }
+  } */
   /*valida que solo se pueda ingresar letras*/
   soloLetras(e) {
     let key = e.keyCode || e.which;
