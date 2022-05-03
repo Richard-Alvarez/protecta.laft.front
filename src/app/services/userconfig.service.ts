@@ -1452,6 +1452,28 @@ export class UserconfigService {
       }
     })
   }
+  setDataExcelDemanda(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlSetDataExcelDemanda, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+  DelEliminarDemanda(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlDelEliminarDemanda, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
   GetKriSearchZonaGeografica(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
@@ -1920,17 +1942,6 @@ export class UserconfigService {
       }
     });
   }
-  GetRegistrarDatosExcelDemanda(data: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      try {
-        this.laft.post(this.core.config.rest.urlGetRegistrarDatosExcelDemanda, data).subscribe((response) => {
-          return resolve(response);
-        });
-      } catch (error) {
-        return reject(error);
-      }
-    });
-  }
 
 
   GetValidarExisteCorreo(data: any): Promise<any> {
@@ -2219,6 +2230,19 @@ export class UserconfigService {
       }
     });
   }
+
+  GetEliminarArchivo(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlGetEliminarArchivo, data).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+  
 
   getDeleteRegistrosNegativos(): Promise<any> {
     return new Promise((resolve, reject) => {

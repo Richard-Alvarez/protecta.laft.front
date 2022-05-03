@@ -90,12 +90,12 @@
               <td colspan="9">No se han encontrado resultados</td>
             </tr>
             <tr *ngFor="let item of ListResponse">
-              <td>{{item.NPERIODO_PROCESO}}</td>
-              <td>{{item.SDESCRIPTION}}</td>
-              <td>{{item.SNUM_RUC}}</td>
-              <td>{{item.STIPOCONTRIBUYENTE}}</td>
-              <td>{{item.SACTIVITYECONOMY}}</td>
-              <td>{{item.SSECTOR}}</td>
+              <td style="width: 0%;">{{item.NPERIODO_PROCESO}}</td>
+              <td style="width: 20%;">{{item.SDESCRIPTION}}</td>
+              <td style="width: 9%;">{{item.SNUM_RUC}}</td>
+              <td style="width: 12%;">{{item.STIPOCONTRIBUYENTE}}</td>
+              <td  style="width: 38%;">{{item.SACTIVITYECONOMY}}</td>
+              <td  style="width: 8%;">{{item.SSECTOR}}</td>
               <td class="text-center vertical" style="width: 6%;">
                 <img src="assets/icons/edit.png" color="blue" title="Editar alerta" alt=""
                     style="cursor: pointer;" (click)="UpdateItem(item)" />

@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import {jsPDF} from 'jspdf';
 import html2canvas from 'html2canvas';
 import * as html2pdf from 'html2pdf.js'
 import autoTable from "jspdf-autotable";
+
 const PDF_EXTENSION = ".pdf";
 
 
@@ -13,7 +14,13 @@ const PDF_EXTENSION = ".pdf";
 })
 export class TemplateReporteBusquedaDemandaComponent implements OnInit {
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
-  @ViewChild("pdfViewerAutoLoad", { static: true }) pdfViewerAutoLoad;
+  @ViewChild("pdfViewerAutoLoad", { static: true }) pdfViewerAutoLoad; 
+  @Input() dataUser:any = {  
+      nombre: '',
+    perfil: '',
+    cargo: '',
+    email: '',
+  }
   data = [
     {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', porcentaje : 100 , coincidencia : 'NOMBRE' ,fuente : 'IDECON',nombre:'Richard Alvarez Ruiz Richard Alvarez Ruiz Richard Alvarez RuizRichard Alvarez Ruiz' } ,
     {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', porcentaje : 100 , coincidencia : 'NOMBRE' ,fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
@@ -67,8 +74,10 @@ export class TemplateReporteBusquedaDemandaComponent implements OnInit {
 
   ]
   constructor() { }
+  
 
   ngOnInit() {
+   
   }
 
   convertirPdf() {
@@ -341,9 +350,9 @@ public print() {
   doc.text('RESULTADO DE LA BÚSQUEDA222222222222222222222', 60, 40);
   //doc.text("PAGE");
   autoTable(doc, {
-    // head: columns,
-    // body: data,
-    html: "#table42",
+     head: columns,
+     body: data,
+    //html: "#table42",
     startY: 50,
     theme: "grid",
     didDrawPage: (dataArg) => {
