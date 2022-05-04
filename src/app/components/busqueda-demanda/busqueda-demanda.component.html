@@ -164,23 +164,14 @@
                             <tr>
                                 <th class="columnGroup1" colspan="3">Datos de la Búsqueda</th>
                                 <th class="columnGroup2" colspan="2">Persona que se busca</th>
-                                <!-- <th class="columnGroup3" colspan="5">Coincidencia Encontrada</th> -->
                                 <th class="columnGroup4" colspan="1"></th>
                             </tr>
                             <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif; ">
                                 <th class="columnGroup1" style="vertical-align: middle;">Fecha y Hora de Búsqueda</th>
                                 <th class="columnGroup1" style="vertical-align: middle;">Usuario que Realizó la Búsqueda</th>
                                 <th class="columnGroup1" style="vertical-align: middle;">Cantidad</th>
-                                <!-- <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Lista</th> -->
-                                <!-- <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Fuente</th> -->
-                                <!-- <th class="columnGroup1" style="vertical-align: middle;">Búsqueda</th> -->
                                 <th class="columnGroup2" style="vertical-align: middle;">Tipo y Número de Documento</th>
                                 <th class="columnGroup2" style="vertical-align: middle;"> Nombre/Razón Social</th>
-                                <!-- <th class="columnGroup3" style="vertical-align: middle;">Tipo y Número de Documento</th> -->
-                                <!-- <th class="columnGroup3" style="vertical-align: middle;">Término</th> -->
-                                <!-- <th class="columnGroup3" style="vertical-align: middle;text-align: left;">Nombre/Razón Social</th> -->
-                                <!-- <th class="columnGroup3" style="vertical-align: middle;">% Coincidencia</th> -->
-                                <!-- <th class="columnGroup3" style="vertical-align: middle;">Tipo de Coincidencia</th> -->
                                 <th class="columnGroup4" style="vertical-align: middle;">Acciones</th>
                             </tr>
                         </thead>
@@ -192,22 +183,8 @@
                                 <td>{{item.dfechA_BUSQUEDA}}</td>
                                 <td>{{item.susuariO_BUSQUEDA != '' ? item.susuariO_BUSQUEDA : '-'}}</td>
                                 <td>{{item.count}}</td>
-                                <!-- <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td> -->
-                                <!-- <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td> -->
-                                <!-- <td>{{item.scoincidencia == null || item.scoincidencia == '' ? '-': item.scoincidencia}}</td> -->
                                 <td>{{item.snumdoC_BUSQUEDA == null || item.snumdoC_BUSQUEDA == '' ? '-': item.snumdoC_BUSQUEDA}}</td>
                                 <td>{{item.snombrE_BUSQUEDA == null || item.snombrE_BUSQUEDA == '' ? '-': item.snombrE_BUSQUEDA}}</td>
-                                <!-- <td>{{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO) }}</td> -->
-                                <!-- <td>
-                                    <div placement='top' ngbTooltip="{{item.snombrE_TERMINO}}">
-                                        {{cortarCararterNombre(item.snombrE_TERMINO == null || item.snombrE_TERMINO == '' ? '-': item.snombrE_TERMINO)}}</div>
-                                </td> -->
-                                <!-- <td>
-                                    <div placement='top' ngbTooltip="{{item.snombrE_COMPLETO}}">
-                                        {{cortarCararterNombre(item.snombrE_COMPLETO == null || item.snombrE_COMPLETO == '' ? '-': item.snombrE_COMPLETO)}}</div>
-                                </td> -->
-                                <!-- <td style="text-align: center;">{{item.sporceN_COINCIDENCIA == null || item.sporceN_COINCIDENCIA == '' ? '-': item.sporceN_COINCIDENCIA}}</td> -->
-                                <!-- <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td> -->
                                 <td class=" text-center">
                                     <img (click)="convertirPdfMixta(item)" src="assets/icons/pdf2.png" title="Descargar Pdf" alt=""
                                         style="cursor: pointer;height:20px;width: 17px;" />
