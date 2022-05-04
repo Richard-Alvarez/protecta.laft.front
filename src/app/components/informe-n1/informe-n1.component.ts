@@ -426,40 +426,8 @@ export class InformeN1Component implements OnInit {
       this.SwalGlobal(mensaje)
       return
     }
-    let data:any = {}
-    data.zonasNacional = this.dataReporte.zonas_geograficas.filter(it => it.ZONA_GEOGRAFICA != 'EXTRANJERO')
-    console.log(" data.zonasNacional", data.zonasNacional )
-    data.zonasExtranjero =  this.dataReporte.zonas_geograficas.find(it => it.ZONA_GEOGRAFICA == 'EXTRANJERO')
-    data.tipoClienteGeneral =  this.dataReporte.clientes_type_regimen.find(it => it.TIPO_REGIMEN == 'RÉGIMEN GENERAL')
-    data.tipoClienteReforzado =  this.dataReporte.clientes_type_regimen.find(it => it.TIPO_REGIMEN == 'RÉGIMEN REFORZADO')
-    data.tipoClienteSimplificado =  this.dataReporte.clientes_type_regimen.find(it => it.TIPO_REGIMEN == 'RÉGIMEN SIMPLIFICADO')
-
-    data.clientesExtranjero = this.dataReporte.clientes_character_client.find(it => it.TIPO_CLIENTES == "Clientes Extranjeros")
-    data.clientesNacional = this.dataReporte.clientes_character_client.find(it => it.TIPO_CLIENTES == "Clientes Nacionales")
-    data.clientesJuridico = this.dataReporte.clientes_character_client.find(it => it.TIPO_CLIENTES == "EMPRESA (PERSONA JURÍDICA)")
-    data.clientesNatural = this.dataReporte.clientes_character_client.find(it => it.TIPO_CLIENTES == "PERSONA NATURAL")
-    data.clientesPep = this.dataReporte.clientes_character_client.find(it => it.TIPO_CLIENTES == "PERSONAS EXPUESTAS POLITICAMENTE (PEP)")
-
-    //Productos
-    data.productoAccPersonales  = this.dataReporte.productos.find(it => it.PRODUCTO == "ACCIDENTES PERSONALES")
-    data.productoDesgravamen  = this.dataReporte.productos.find(it => it.PRODUCTO == "DESGRAVAMEN")
-    //data.productoIvalidezParcial  = this.dataReporte.productos.find(it => it.PRODUCTO == "INVALIDEZ PARCIAL")
-    //data.productoIvalidezTotal  = this.dataReporte.productos.find(it => it.PRODUCTO == "INVALIDEZ TOTAL")
-    //data.productoJubilacionAnticipada  = this.dataReporte.productos.find(it => it.PRODUCTO == "JUBILACION ANTICIPADA")
-    data.productoSCTR  = this.dataReporte.productos.find(it => it.PRODUCTO == "SCTR")
-    data.productoSepelio = this.dataReporte.productos.find(it => it.PRODUCTO == "SEPELIO DE CORTO PLAZO")
-    data.productoSOAT  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOAT")
-       //data.productoSobrevivencia = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA")
-    //data.productoSobrevivenciaTotal  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA DE INV. TOTAL")
-    //data.productoSobrevivenciaParcial  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA DE INV.PARCIAL")
-    //data.productoSobrevivenciaAnticipada  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA DE JUB. ANTICIPADA")
-    //data.productoSobrevivenciaLegal  = this.dataReporte.productos.find(it => it.PRODUCTO == "SOBREVIVENCIA DE JUB. LEGAL")
-    data.productoVidaParticular  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA GRUPO PARTICULAR")
-    data.productoIndividualCorto  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA INDIVIDUAL DE CORTO PLAZO")
-    data.productoVidaLeyExTrabajadores = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA LEY EX-TRABAJADORES")
-    data.productoVidaLeyTrabajadores  = this.dataReporte.productos.find(it => it.PRODUCTO == "VIDA LEY TRABAJADORES")
-debugger
-    await this.userConfigService.GetSetearDataExcel(data)
+    
+    await this.userConfigService.GetSetearDataExcel({periodo: '20211231'})
     let ruta = "/PLANTILLAS/N1/Generado/Formato-N1-Plantilla.xlsx"
     let rutaElimina = "PLANTILLAS/N1/Generado"
     let nombreArchivo = 'Formato-N1-Plantilla.xlsx'

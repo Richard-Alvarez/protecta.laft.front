@@ -64,6 +64,7 @@ export class ModalBusquedaDemandaComponent implements OnInit {
     );
   }
   generarPdfIndividual(item){
-    this.contexto.convertirPdfIndividual(item);
+    //this.contexto.convertirPdfIndividual(item);
+    this.contexto.GenerarPDFIndividual(item)
   }
 }

@@ -64,3 +64,11 @@
         width: 100px;
         word-wrap: break-word;
     } */
+
+    .ocultarReporte{
+        display:none;
+    }
+    .mostrarReporte{
+        display:block;
+    }
+    
