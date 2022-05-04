@@ -80,7 +80,7 @@
   <div class="d-flex" style="margin-top: 0.75rem;">
       <div class="col-sm-4">
         <div class="row">
-          <button class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
+          <button class="btn btn-outline-info form-control  buttonSinBorder colorButton" (click)="descargarExcel()"><i class="fas fa-download"></i>
             Descargar Resultados
           </button>
         </div>
@@ -94,6 +94,13 @@
           </div>
 
     </ng-template>
+    <div class="col-sm-4">
+      <div class="row">
+        <button class="btn btn-outline-info form-control  buttonSinBorder colorButton" (click)="generarPdfAll()"><i class="fas fa-download"></i>
+          Descargar todos los PDF
+        </button>
+      </div>
+  </div>
   </div>
 </div>
 <br>
