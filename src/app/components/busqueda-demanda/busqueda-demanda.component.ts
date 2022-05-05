@@ -86,7 +86,7 @@ export class BusquedaDemandaComponent implements OnInit {
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
     //document.getElementById('CargoPep').classList.add('ocultarReporte')
     document.getElementById('reporteMixto').classList.add('ocultarReporte')
-    document.getElementById('reporteIndividual').classList.add('ocultarReporte')
+    document.getElementById('ListaReporteIndividual').classList.add('ocultarReporte')
     
   }
   sliceAlertsArray(arreglo) {
@@ -134,20 +134,20 @@ export class BusquedaDemandaComponent implements OnInit {
       })
     }
     else if (this.NBUSCAR_POR == 2) {
-      if (this.NombreArchivo == '')
-        swal.fire({
-          title: 'Búsqueda a Demanda',
-          icon: 'warning',
-          text: 'Debe seleccionar un excel para la búsqueda',
-          showCancelButton: false,
-          confirmButtonColor: '#FA7000',
-          confirmButtonText: 'Aceptar',
-          showCloseButton: true,
-          customClass: {
-            closeButton: 'OcultarBorde'
-          },
-        })
-      else
+      // if (this.NombreArchivo == '')
+      //   swal.fire({
+      //     title: 'Búsqueda a Demanda',
+      //     icon: 'warning',
+      //     text: 'Debe seleccionar un excel para la búsqueda',
+      //     showCancelButton: false,
+      //     confirmButtonColor: '#FA7000',
+      //     confirmButtonText: 'Aceptar',
+      //     showCloseButton: true,
+      //     customClass: {
+      //       closeButton: 'OcultarBorde'
+      //     },
+      //   })
+      // else
         await this.BusquedaADemandaMixta();
     }
     /*si ingresa solo nombre o nombre y documento valida que almenos el nombre contenga 3 datos y llama al servicio de busqueda*/
@@ -1347,8 +1347,19 @@ export class BusquedaDemandaComponent implements OnInit {
 
     document.getElementById('reporteMixto').classList.remove('mostrarReporte')
   }
-
+  RegistrosIndividualPDF:any = {}
+  RegistrosUnitarios:any = {}
   ShowDetalle(item: any) {
+    console.log("item",item)
+    this.RegistrosIndividualPDF = item
+    this.RegistrosUnitarios= {
+      userName: this.DataUserLogin.SNAME,
+      userCargo: this.DataUserLogin.SDESCARGO,
+      userEmail: this.DataUserLogin.SEMAIL
+
+    }
+
+
     const modalRef = this.modalService.open(ModalBusquedaDemandaComponent, { size: 'xl', windowClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
 
     
@@ -1370,46 +1381,56 @@ export class BusquedaDemandaComponent implements OnInit {
     });
   }
 
-  GenerarPDFAll(data : any){
-    data.forEach(item => {
-      this.convertirPdfIndividual(item,1);
-    });
-  }
-  convertirPdfIndividual(item : any, validador) {
-    let imagen = ''
-    document.getElementById('reporteIndividual').classList.add('mostrarReporte')
-    document.getElementById('CargoPep').style.display = 'none'
-
-    //cabecera
-    document.getElementById("RIfecha").innerHTML = item.dfechA_BUSQUEDA;
-    document.getElementById("RInombre").innerHTML = item.susuariO_BUSQUEDA;
-    document.getElementById("RIperfil").innerHTML = this.DataUserLogin.SNAME;
-    document.getElementById("RIcargo").innerHTML = this.DataUserLogin.SDESCARGO;
-    document.getElementById("RIemail").innerHTML = this.DataUserLogin.SEMAIL;
-
-    //Persona a quien realizo la bsuqueda
-    document.getElementById("RItipoDoc").innerHTML = "-";
-    document.getElementById("RInumeroDoc").innerHTML = item.snumdoC_BUSQUEDA;
-    document.getElementById("RIRazonDoc").innerHTML = item.snombrE_BUSQUEDA;
-
-    //Coincidencia encontrada
-
-    document.getElementById("RItipoDocCon").innerHTML = item.stipO_DOCUMENTO;
-    document.getElementById("RInumeroDocCon").innerHTML = item.snuM_DOCUMENTO;
-    document.getElementById("RIRazonDocCon").innerHTML = item.snombrE_COMPLETO;
-    document.getElementById("RIRItipoListaCon").innerHTML = item.sdestipolista;
-    document.getElementById("RIporcentajeCon").innerHTML = item.sporceN_COINCIDENCIA
-    document.getElementById("RIfuenteCon").innerHTML = item.sdesproveedor;
-    document.getElementById("RItipoCon").innerHTML = item.stipocoincidencia;
-    document.getElementById("RIInformacion").innerHTML = item.sinformacion == undefined ? '-' :item.sinformacion ;
+   async GenerarPDFAll(data : any){
     
-    if(item.sdestipolista == "LISTAS PEP" && item.stipO_DOCUMENTO == "DNI" ){
-    document.getElementById('CargoPep').style.display = 'block'
-      
-      document.getElementById("RIcargoCon").innerHTML =  item.scargo;
-    }else{
-      document.getElementById('CargoPep').style.display = 'none'
+    document.getElementById('ListaReporteIndividual').classList.add('mostrarReporte')
+    for(let i = 0; i < data.length ; i++){
+      let nombre = 'ReportInvidivual' + i
+       await this.convertirPdfIndividual(data[i],1,nombre);
+        
+     
+     
     }
+    document.getElementById('ListaReporteIndividual').classList.remove('mostrarReporte')
+    // data.forEach(item => {
+    //   this.convertirPdfIndividual(item,1);
+    // });
+  }
+  async convertirPdfIndividual(item : any, validador,nombre) {
+   
+    // //document.getElementById('reporteIndividual').classList.add('mostrarReporte')
+    // document.getElementById('CargoPep').style.display = 'none'
+
+    // //cabecera
+    // document.getElementById("RIfecha").innerHTML = item.dfechA_BUSQUEDA;
+    // document.getElementById("RInombre").innerHTML = item.susuariO_BUSQUEDA;
+    // document.getElementById("RIperfil").innerHTML = this.DataUserLogin.SNAME;
+    // document.getElementById("RIcargo").innerHTML = this.DataUserLogin.SDESCARGO;
+    // document.getElementById("RIemail").innerHTML = this.DataUserLogin.SEMAIL;
+
+    // //Persona a quien realizo la bsuqueda
+    // document.getElementById("RItipoDoc").innerHTML = "-";
+    // document.getElementById("RInumeroDoc").innerHTML = item.snumdoC_BUSQUEDA;
+    // document.getElementById("RIRazonDoc").innerHTML = item.snombrE_BUSQUEDA;
+
+    // //Coincidencia encontrada
+
+    // document.getElementById("RItipoDocCon").innerHTML = item.stipO_DOCUMENTO;
+    // document.getElementById("RInumeroDocCon").innerHTML = item.snuM_DOCUMENTO;
+    // document.getElementById("RIRazonDocCon").innerHTML = item.snombrE_COMPLETO;
+    // document.getElementById("RIRItipoListaCon").innerHTML = item.sdestipolista;
+    // document.getElementById("RIporcentajeCon").innerHTML = item.sporceN_COINCIDENCIA
+    // document.getElementById("RIfuenteCon").innerHTML = item.sdesproveedor;
+    // document.getElementById("RItipoCon").innerHTML = item.stipocoincidencia;
+    // document.getElementById("RIInformacion").innerHTML = item.sinformacion == undefined ? '-' :item.sinformacion ;
+    
+    // if(item.sdestipolista == "LISTAS PEP" && item.stipO_DOCUMENTO == "DNI" ){
+    // document.getElementById('CargoPep').style.display = 'block'
+      
+    //   document.getElementById("RIcargoCon").innerHTML =  item.scargo;
+    // }else{
+    //   document.getElementById('CargoPep').style.display = 'none'
+    // }
     
     
       var imgIdecon = 
@@ -1448,7 +1469,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
     }
 
-    const content: Element = document.getElementById('ReportInvidivual');
+    const content: Element = document.getElementById(nombre);
 
     html2pdf()
       .from(content)
@@ -1472,7 +1493,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
       })
       .save();
-    document.getElementById('reporteIndividual').classList.remove('mostrarReporte')
+   // document.getElementById('reporteIndividual').classList.remove('mostrarReporte')
   }
 
   async DescargarArchivo(ruta, nameFile) {
@@ -1493,6 +1514,37 @@ export class BusquedaDemandaComponent implements OnInit {
       console.error("el error en descargar archivo: ", error)
     }
 
+  }
+
+   LimpiarData(){
+
+    //cabecera
+    document.getElementById("RIfecha").innerHTML =''
+    document.getElementById("RInombre").innerHTML = ''
+    document.getElementById("RIperfil").innerHTML = ''
+    document.getElementById("RIcargo").innerHTML = ''
+    document.getElementById("RIemail").innerHTML = ''
+
+    //Persona a quien realizo la bsuqueda
+    document.getElementById("RItipoDoc").innerHTML = "";
+    document.getElementById("RInumeroDoc").innerHTML = ''
+    document.getElementById("RIRazonDoc").innerHTML = ''
+
+    //Coincidencia encontrada
+
+    document.getElementById("RItipoDocCon").innerHTML = ''
+    document.getElementById("RInumeroDocCon").innerHTML = ''
+    document.getElementById("RIRazonDocCon").innerHTML = ''
+    document.getElementById("RIRItipoListaCon").innerHTML = ''
+    document.getElementById("RIporcentajeCon").innerHTML =''
+    document.getElementById("RIfuenteCon").innerHTML = ''
+    document.getElementById("RItipoCon").innerHTML = ''
+    document.getElementById("RIInformacion").innerHTML = ''
+    
+  }
+
+  CrearComponente(){
+    document.getElementById("prueba22").innerHTML = '<app-template-report-demanda-individual id="reporteIndividual" [data]="dataUser"></app-template-report-demanda-individual> '
   }
 
 }

@@ -242,11 +242,18 @@
     </div>
 </main>
 <br>
-
+{{RegistrosIndividualPDF.data}}
   
    <app-template-reporte-busqueda-demanda id="reporteMixto"  [data]="dataUser"></app-template-reporte-busqueda-demanda> 
-
-   <app-template-report-demanda-individual id="reporteIndividual" [data]="dataUser"></app-template-report-demanda-individual> 
+  
+   <div id="ListaReporteIndividual" >
+    <div *ngFor="let item of RegistrosIndividualPDF.data;let i = index; " >
+    
+      <app-template-report-demanda-individual id="{{'reporteIndividual' + i}}" [data]="item" [RegistrosUnitarios]="RegistrosUnitarios" [index]="i"></app-template-report-demanda-individual>
+     </div>
+     <!-- <app-template-report-demanda-individual id="reporteIndividual" [data]="dataUser"></app-template-report-demanda-individual>  -->
+    
+   </div>
   
 
 <app-footer></app-footer>

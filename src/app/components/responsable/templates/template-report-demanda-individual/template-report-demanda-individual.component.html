@@ -1,4 +1,4 @@
-<div id="ReportInvidivual" class="ReportInvidivual">
+<div id="{{'ReportInvidivual'+index}}" class="ReportInvidivual">
   <div class="header">
     <!-- <div class="image">
 
@@ -17,15 +17,15 @@
     </div>
     <div class="row" style="padding: 0px 150px;">
       <div class="col">
-        <div class="textoCabecera" style="background: #E6E6E6;">Fecha/Hora &nbsp; &nbsp; &nbsp; : <label id="RIfecha">4/16/2022 8:28:08 PM</label>
+        <div class="textoCabecera" style="background: #E6E6E6;">Fecha/Hora &nbsp; &nbsp; &nbsp; : <label id="RIfecha">{{data.dfechA_BUSQUEDA}}</label>
         </div>
-        <div class="textoCabecera">Usuario &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: <label id="RInombre"></label>
+        <div class="textoCabecera">Usuario &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: <label id="RInombre">{{data.susuariO_BUSQUEDA}}</label>
         </div>
         <div class="textoCabecera" style="background: #E6E6E6;">Perfil &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp; : <label id="RIperfil"></label></div>
-        <div class="textoCabecera">Cargo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : <label id="RIcargo"></label></div>
+          &nbsp; &nbsp; : <label id="RIperfil">{{RegistrosUnitarios.userName}}</label></div>
+        <div class="textoCabecera">Cargo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : <label id="RIcargo">{{RegistrosUnitarios.userCargo}}</label></div>
         <div class="textoCabecera" style="background: #E6E6E6;">Correo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp;: <label id="RIemail"></label></div>
+          &nbsp;: <label id="RIemail">{{RegistrosUnitarios.userEmail}}</label></div>
       </div>
 
 
@@ -40,11 +40,11 @@
       <div class="row" style="padding-right: 6px;">
         <div class="col">
           <div class="textoCabecera" style="background: #E6E6E6;">Tipo de Documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; <label id="RItipoDoc"></label></div>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; <label id="RItipoDoc">-</label></div>
           <div class="textoCabecera">Número de documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;
-            <label id="RInumeroDoc"></label></div>
+            <label id="RInumeroDoc">{{data.snumdoC_BUSQUEDA}}</label></div>
           <div class="textoCabecera" style="background: #E6E6E6;">Nombre / Razón Social &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; : &nbsp; <label id="RIRazonDoc"></label></div>
+            &nbsp; &nbsp; &nbsp; : &nbsp; <label id="RIRazonDoc">{{data.snombrE_BUSQUEDA}}</label></div>
         
   
         </div>
@@ -60,26 +60,26 @@
       <!-- <div class="row" style="padding-right: 6px;">
         <div class="col"> -->
           <div class="textoCabecera" style="background: #E6E6E6;">Tipo de Documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; <label id="RItipoDocCon"></label></div>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; <label id="RItipoDocCon">{{data.stipO_DOCUMENTO == null ? '-' : data.stipO_DOCUMENTO}}</label></div>
           <div class="textoCabecera">Número de documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;
-            <label id="RInumeroDocCon"></label></div>
+            <label id="RInumeroDocCon">{{data.snuM_DOCUMENTO == null ? '-' : data.snuM_DOCUMENTO}}</label></div>
           <div class="textoCabecera" style="background: #E6E6E6;">Nombre / Razón Social &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; : &nbsp; <label id="RIRazonDocCon"></label></div>
+            &nbsp; &nbsp; &nbsp; : &nbsp; <label id="RIRazonDocCon">{{data.snombrE_COMPLETO == null ? '-' : data.snombrE_COMPLETO}}</label></div>
           <div class="textoCabecera">Tipo lista &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
-            &nbsp; <label id="RIRItipoListaCon"></label></div>
+            &nbsp; <label id="RIRItipoListaCon">{{data.sdestipolista == null ? '-' : data.sdestipolista}}</label></div>
           <div class="textoCabecera" style="background: #E6E6E6;">Porcentaje coincidencia &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
-            &nbsp; <label id="RIporcentajeCon"></label></div>
+            &nbsp; <label id="RIporcentajeCon">{{data.sporceN_COINCIDENCIA == null ? '-' : data.sporceN_COINCIDENCIA}}</label></div>
   
           <div class="textoCabecera">Fuente &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
-            &nbsp; <label id="RIfuenteCon"></label></div>
+            &nbsp; <label id="RIfuenteCon">{{data.sdesproveedor == null ? '-' : data.sdesproveedor}}</label></div>
           <div class="textoCabecera" style="background: #E6E6E6;">Tipo Coincidencia &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
-            &nbsp; <label id="RItipoCon"></label></div>
+            &nbsp; <label id="RItipoCon">{{data.stipocoincidencia == null ? '-' : data.stipocoincidencia}}</label></div>
 
             <div class="textoCabecera">Información &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
-              &nbsp; <label id="RIInformacion"></label></div>
+              &nbsp; <label id="RIInformacion">{{data.sinformacion == null ? '-' : data.sinformacion}}</label></div>
     
-          <div class="textoCabecera" style="background: #E6E6E6;" id="CargoPep">Cargo Pep &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
-            &nbsp; <label id="RIcargoCon"></label></div>
+           <div *ngIf="(data.sdestipolista == 'LISTAS PEP' && data.stipO_DOCUMENTO == 'DNI')" class="textoCabecera" style="background: #E6E6E6;" id="CargoPep">Cargo Pep &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
+            &nbsp; <label id="RIcargoCon">{{data.scargo == null ? '-' : data.scargo}}</label></div>
           
         <!-- </div>
     </div> -->
