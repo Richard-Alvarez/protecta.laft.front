@@ -123,7 +123,7 @@
                                          
                                          
                                         <div   style="float:left;width: 33.3%;" placement='top' ngbTooltip="Descargar informe N1">
-                                            <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporte()"></i></a>
+                                            <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporte(cob)"></i></a>
                                         </div>
                                         <div style="float: right;width: 33.3%;"  placement='top' ngbTooltip="Registrar">
                                             <a *ngIf="cob.SESTADO == 1"><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer"  (click)="Registrar(cob,index)"></i></a>

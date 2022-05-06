@@ -417,9 +417,9 @@ export class InformeN1Component implements OnInit {
     this.PeriodoInforme =  localStorage.getItem("periodo")
   }
 
-  async DescargarReporte(){
+  async DescargarReporte(item){
     //let response = await this.userConfigService.getInformeN1()
-   
+    console.log("item",item)
     console.log("response",this.dataReporte.mesagge)
     if(this.dataReporte.code == 1){
       let mensaje = this.dataReporte.mesagge

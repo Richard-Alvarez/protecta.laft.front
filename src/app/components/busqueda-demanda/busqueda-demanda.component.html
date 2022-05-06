@@ -206,6 +206,12 @@
                             [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
                           </ngb-pagination>
                         </div>
+                        <div class="col-sm-4">
+                          <button (click)="exportListToExcel()"
+                              class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
+                              Descargar PDF Masivo
+                          </button>
+                      </div>
                     </div>
 
                   
@@ -242,11 +248,13 @@
     </div>
 </main>
 <br>
-{{RegistrosIndividualPDF.data}}
+
+  <div style="padding-top: 100%;" id="reporteMixto" >
+    <app-template-reporte-busqueda-demanda  [data]="dataUser"></app-template-reporte-busqueda-demanda> 
+  </div>
+   
   
-   <app-template-reporte-busqueda-demanda id="reporteMixto"  [data]="dataUser"></app-template-reporte-busqueda-demanda> 
-  
-   <div id="ListaReporteIndividual" >
+   <div id="ListaReporteIndividual" style="padding-top: 100%;">
     <div *ngFor="let item of RegistrosIndividualPDF.data;let i = index; " >
     
       <app-template-report-demanda-individual id="{{'reporteIndividual' + i}}" [data]="item" [RegistrosUnitarios]="RegistrosUnitarios" [index]="i"></app-template-report-demanda-individual>
