@@ -1,4 +1,4 @@
-<div id="ReportGrupal" class="ReportGrupal">
+<div id="{{'reporteMasivo'+index}}" class="ReportGrupal">
   <div class="header">
     <div class="image">
 
@@ -17,15 +17,15 @@
     </div>
     <div class="row" style="padding: 0px 150px;">
       <div class="col">
-        <div  class="textoCabecera" style="background: #E6E6E6;">Fecha/Hora &nbsp; &nbsp; &nbsp; : <label id="RGfecha">4/16/2022 8:28:08 PM</label>
+        <div  class="textoCabecera" style="background: #E6E6E6;">Fecha/Hora &nbsp; &nbsp; &nbsp; : <label id="RGfecha">{{data[0].dfechA_BUSQUEDA}}</label>
         </div>
-        <div class="textoCabecera">Usuario &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: <label id="RGnombre"></label>
+        <div class="textoCabecera">Usuario &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: <label id="RGnombre">{{data[0].susuariO_BUSQUEDA}}</label>
         </div>
         <div class="textoCabecera" style="background: #E6E6E6;">Perfil &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp; : <label id="RGperfil"></label></div>
-        <div class="textoCabecera">Cargo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : <label id="RGcargo"></label></div>
+          &nbsp; &nbsp; : <label id="RGperfil">{{RegistrosUnitarios.SNAME}}</label></div>
+        <div class="textoCabecera">Cargo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : <label id="RGcargo">{{RegistrosUnitarios.SDESCARGO}}</label></div>
         <div class="textoCabecera" style="background: #E6E6E6;">Correo &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp;: <label id="RGemail"></label></div>
+          &nbsp;: <label id="RGemail">{{RegistrosUnitarios.SEMAIL}}</label></div>
       </div>
 
 
@@ -38,13 +38,13 @@
    <div class="row" style="padding-left: 10px;padding-right: 6px;">
                           <div class="col">
                             <div class="textoCabecera" style="background: #E6E6E6;">Tipo de Documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; <label id="tipobusqueda"></label></div>
+                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; <label id="tipobusqueda">-</label></div>
                             <div class="textoCabecera">Número de documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;
-                              <label id="numerodocbusq"></label></div>
+                              <label id="numerodocbusq">{{data[0].snumdoC_BUSQUEDA}}</label></div>
                             <div class="textoCabecera" style="background: #E6E6E6;">Nombre / Razón Social &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                              &nbsp; &nbsp; &nbsp; : &nbsp; <label id="nombrebusq"></label></div>
+                              &nbsp; &nbsp; &nbsp; : &nbsp; <label id="nombrebusq">{{data[0].snombrE_BUSQUEDA}}</label></div>
                             <div class="textoCabecera">Cantidad coincidencias &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
-                              &nbsp; <label id="cantidadbusq"></label></div>
+                              &nbsp; <label id="cantidadbusq">{{data.cantidad}}</label></div>
                     
                           </div>
                     

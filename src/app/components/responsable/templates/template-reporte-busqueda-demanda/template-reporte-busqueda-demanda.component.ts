@@ -13,6 +13,13 @@ const PDF_EXTENSION = ".pdf";
   styleUrls: ['./template-reporte-busqueda-demanda.component.css']
 })
 export class TemplateReporteBusquedaDemandaComponent implements OnInit {
+
+  @Input() data:any
+  @Input() index:any
+  @Input() RegistrosUnitarios:any
+  
+
+
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
   @ViewChild("pdfViewerAutoLoad", { static: true }) pdfViewerAutoLoad; 
   @Input() dataUser:any = {  
@@ -21,7 +28,7 @@ export class TemplateReporteBusquedaDemandaComponent implements OnInit {
     cargo: '',
     email: '',
   }
-  data = [
+  data2 = [
     {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', porcentaje : 100 , coincidencia : 'NOMBRE' ,fuente : 'IDECON',nombre:'Richard Alvarez Ruiz Richard Alvarez Ruiz Richard Alvarez RuizRichard Alvarez Ruiz' } ,
     {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', porcentaje : 100 , coincidencia : 'NOMBRE' ,fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
     {tipoDoc: 'DNI', numeroDoc : '12345678',lista : 'LISTAS PEP', porcentaje : 100 , coincidencia : 'NOMBRE' ,fuente : 'IDECON',nombre:'Richard Alvarez Ruiz' } ,
