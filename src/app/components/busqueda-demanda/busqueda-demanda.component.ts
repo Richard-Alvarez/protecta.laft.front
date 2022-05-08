@@ -1220,6 +1220,7 @@ export class BusquedaDemandaComponent implements OnInit {
       
       let dataProveedor : any =  itemsCliente.filter(t=> t.nidproveedor == _nidProveedor);
       dataProveedor.cantidad = dataProveedor.length
+      dataProveedor.provGeneral = _nidProveedor
       console.log("dataProveedor",dataProveedor)
       this.listaProveedor.push(dataProveedor)
       //await this.convertirPdfMixta(item , dataProveedor , _nidProveedor).then(()=> {setTimeout(() =>{} ,1000)});
@@ -1227,12 +1228,15 @@ export class BusquedaDemandaComponent implements OnInit {
     console.log("dataProveedor",this.listaProveedor)
     
     setTimeout(async () =>{
-      
+      //Idecon == 1
+      //"WORDLCHECK" == 4
+      //REGISTRO NEGATIVO == 3
       for(let i =0; this.listaProveedor.length ;i++){
         let nombre = '#reporteMasivo'+i
         let tabla = '#table42'+i
+        let codImagen = this.listaProveedor[i].provGeneral
         
-        await this.convertirPdfMixta(nombre,1,tabla)
+        await this.convertirPdfMixta(nombre,codImagen,tabla)
         
       }
       //document.getElementById('reporteMixto').classList.remove('mostrarReporte')
@@ -1411,11 +1415,12 @@ export class BusquedaDemandaComponent implements OnInit {
   }
 
    async GenerarPDFAll(data : any){
+     this.spinner.show()
     console.log("data para imprimir",data)
     document.getElementById('ListaReporteIndividual').classList.add('mostrarReporte')
     for(let i = 0; i < data.length ; i++){
       let nombre = 'ReportInvidivual' + i
-        let response = await this.convertirPdfIndividual(data[i],1,nombre);
+        let response = await this.convertirPdfIndividual(data[i],data[i].nidproveedor,nombre);
       //  console.log("cantidad",i)
      
       // if(response.codigo == 1){
@@ -1438,8 +1443,9 @@ export class BusquedaDemandaComponent implements OnInit {
     // data.forEach(item => {
     //   this.convertirPdfIndividual(item,1);
     // });
+    this.spinner.hide()
   }
-  async convertirPdfIndividual(item : any, validador,nombre) {
+  async convertirPdfIndividual(item : any, codImg,nombre) {
    
     // //document.getElementById('reporteIndividual').classList.add('mostrarReporte')
     // document.getElementById('CargoPep').style.display = 'none'
@@ -1524,9 +1530,28 @@ export class BusquedaDemandaComponent implements OnInit {
             pdf.addImage(imgProtecta, 'JPEG', 4.05, 0.1, 3.5, 1);
           }
 
+
+          if (codImg == 3) {
+            pdf.setFontSize(10);
+          pdf.setTextColor(150);
+          pdf.addImage(imgRn, 'JPEG', 6.5, 10.5);
+          }
+         
+         else if (codImg == 4) {
           pdf.setFontSize(10);
           pdf.setTextColor(150);
           pdf.addImage(imgRefinitiv, 'JPEG', 5.2, 10.5);
+          }
+
+          else if (codImg == 1) {
+
+            pdf.setFontSize(10);
+            pdf.setTextColor(150);
+            //pdf.addImage(imgIdecon, 'JPEG',5,5, 5.2, 10.5);
+            pdf.addImage(imgIdecon, 'JPEG',5,10.5, 2.5, 0.6);
+        }
+
+         
         }
 
       })
