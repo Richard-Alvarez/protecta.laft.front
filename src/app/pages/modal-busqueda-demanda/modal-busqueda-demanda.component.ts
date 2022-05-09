@@ -65,7 +65,8 @@ export class ModalBusquedaDemandaComponent implements OnInit {
   }
   generarPdfIndividual(item){
     //this.contexto.convertirPdfIndividual(item);
-    this.contexto.convertirPdfIndividual(item)
+    let nombre = 'ReportInvidivual' + 0 ;
+    this.contexto.convertirPdfIndividual(item,item.nidproveedor,nombre)
   }
   generarPdfAll(){
     //this.contexto.convertirPdfIndividual(item);

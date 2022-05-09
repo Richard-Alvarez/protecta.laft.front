@@ -1314,10 +1314,10 @@ export class BusquedaDemandaComponent implements OnInit {
 
           0: { cellWidth: 100 },
           1: { cellWidth: 100 },
-          2: { cellWidth: 196 },
-          3: { cellWidth: 100 },
+          2: { cellWidth: 206 },
+          3: { cellWidth: 140 },
           4: { cellWidth: 100 },
-          5: { cellWidth: 70 },
+          // 5: { cellWidth: 70 },
           6: { cellWidth: 78, },
 
         },
