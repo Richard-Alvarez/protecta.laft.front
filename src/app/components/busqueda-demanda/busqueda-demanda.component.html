@@ -215,33 +215,35 @@
                     </div>
 
                   
-
-                    <table class="striped" style="font-size: 12px;display:none" id="table42" >
-                      <thead>
-                        <tr>
-                          <th scope="col">Tipo Documento</th>
-                          <th scope="col">N° Documento</th>
-                          <th scope="col">Nombre / Razón social</th>
-                          <th scope="col">Tipo lista</th>
-                          <th scope="col">% coincidencias</th>
-                          <th scope="col">Fuente</th>
-                          <th scope="col">Tipo de coincidencia</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          
-                          <tr class="animated fadeIn" *ngFor="let item of pdfMasivo; let i = index;">
-                               <td>{{item.stipO_DOCUMENTO}}</td>
-                              <td>{{item.snuM_DOCUMENTO}}</td>
-                              <td>{{item.snombrE_COMPLETO}}</td>
-                              <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
-                              <td>{{item.sporceN_COINCIDENCIA}}</td>
-                              <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
-                              <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
-                              
+                    <div *ngFor="let lista of this.listaProveedor;let i = index ">
+                      <table class="striped" style="font-size: 12px; display: none;" id="{{'table42'+i}}" >
+                        <thead>
+                          <tr>
+                            <th scope="col">Tipo Documento</th>
+                            <th scope="col">N° Documento</th>
+                            <th scope="col">Nombre / Razón social</th>
+                            <th scope="col">Tipo lista</th>
+                            <th scope="col">% coincidencias</th>
+                            <th scope="col">Fuente</th>
+                            <th scope="col">Tipo de coincidencia</th>
                           </tr>
-                      </tbody>
-                  </table> 
+                        </thead>
+                        <tbody>
+                            
+                            <tr class="animated fadeIn" *ngFor="let item of lista; let i = index;">
+                                 <td>{{item.stipO_DOCUMENTO}}</td>
+                                <td>{{item.snuM_DOCUMENTO}}</td>
+                                <td>{{item.snombrE_COMPLETO}}</td>
+                                <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
+                                <td>{{item.sporceN_COINCIDENCIA}}</td>
+                                <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
+                                <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table> 
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -249,9 +251,12 @@
 </main>
 <br>
 
-  <div style="padding-top: 100%;" id="reporteMixto" >
-    <app-template-reporte-busqueda-demanda  [data]="dataUser"></app-template-reporte-busqueda-demanda> 
-  </div>
+<div  id="reporteMixto" > 
+    <div *ngFor="let lista of this.listaProveedor;let i = index " style="padding-top: 100%;">
+      <app-template-reporte-busqueda-demanda  [data]="lista" [index]="i" [RegistrosUnitarios]="DataUserLogin"></app-template-reporte-busqueda-demanda> 
+    </div>
+    
+ </div> 
    
   
    <div id="ListaReporteIndividual" style="padding-top: 100%;">
