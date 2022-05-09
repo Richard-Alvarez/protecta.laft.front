@@ -45,10 +45,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="this.item.pageData.length == 0">
+        <tr *ngIf="this.item.filterData.length == 0">
           <td class="text-center" colspan="9">No se encontró coincidencias</td>
         </tr>
-        <tr class="animated fadeIn" *ngFor="let item of this.item.pageData; let i = index;">
+        <tr class="animated fadeIn" *ngFor="let item of this.item.filterData; let i = index;">
           <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
           <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
           <td>{{item.scoincidencia == null || item.scoincidencia == '' ? '-': item.scoincidencia}}</td>

@@ -176,10 +176,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngIf="this.resultadoFinal3.length == 0">
+                            <tr *ngIf="this.resultadoFinal.length == 0">
                                 <td class="text-center" colspan="13">No se encontró coincidencias</td>
                             </tr>
-                            <tr class="animated fadeIn" *ngFor="let item of resultadoFinal3; let i = index;">
+                            <tr class="animated fadeIn" *ngFor="let item of this.resultadoFinal; let i = index;">
                                 <td>{{item.dfechA_BUSQUEDA}}</td>
                                 <td>{{item.susuariO_BUSQUEDA != '' ? item.susuariO_BUSQUEDA : '-'}}</td>
                                 <td>{{item.count}}</td>
@@ -194,7 +194,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div *ngIf="this.resultadoFinal3.length > 0" class="row mt-4">
+                    <div *ngIf="this.resultadoFinal.length > 0" class="row mt-4">
                         <div class="col-sm-4">
                             <button (click)="exportListToExcel()"
                                 class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
@@ -206,12 +206,12 @@
                             [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
                           </ngb-pagination>
                         </div>
-                        <div class="col-sm-4">
+                        <!-- <div class="col-sm-4">
                           <button (click)="exportListToExcel()"
                               class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
                               Descargar PDF Masivo
                           </button>
-                      </div>
+                      </div> -->
                     </div>
 
                   
