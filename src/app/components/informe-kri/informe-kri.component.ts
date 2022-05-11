@@ -251,9 +251,9 @@ zonaGeograficaCuadroFinalOtros:{SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE: 85.
 zonaGeograficaCuadroFinalExtranjero:{SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE: 85.05},
 SumaZonaGeografica: {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PORCENTAJE:0}
 }
-async DescargarReporte(){
+async DescargarReporte( _NPERIODO_PROCESO){
   let data:any = {}
-  data.NPERIODO_PROCESO = 20211231
+  data.NPERIODO_PROCESO = _NPERIODO_PROCESO
   let response = await this.userConfigService.getInformeKri(data)
   if(response.code == 1){
     let mensaje = response.mesagge
