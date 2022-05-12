@@ -65,7 +65,7 @@ export class InformeKRIComponent implements OnInit {
   async ListaInformes() {
     this.core.loader.show()
     let data: any = {}
-    data.VALIDADOR = 2
+    //data.VALIDADOR = 2
     data.INFORME = 'KRI'
     this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
     
