@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { EBUSY } from 'constants';
 
 const PDF_EXTENSION = ".pdf";
 
@@ -230,7 +231,7 @@ Resultado = {
     sRegimen: null,
     sRiesgo: null}],
     es10Total: 0,
-    es10CuadroSimpli : {SREGIMEN: 'GENERAL', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0},
+    es10CuadroSimpli : {SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0},
     es10CuadroGene : {SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0},
     es10CuadroTotal: 0,
     cabeceraSegumientoEvaluacion : [{valor: 1, periodo: '2018 - II'},{valor: 2, periodo: '2019 - I'},{valor: 3, periodo: '2019 - II'}
@@ -252,6 +253,7 @@ zonaGeograficaCuadroFinalExtranjero:{SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE
 SumaZonaGeografica: {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PORCENTAJE:0}
 }
 async DescargarReporte( _NPERIODO_PROCESO){
+  this.limpiarVariables()
   let data:any = {}
   data.NPERIODO_PROCESO = _NPERIODO_PROCESO
   let response = await this.userConfigService.getInformeKri(data)
@@ -265,10 +267,18 @@ async DescargarReporte( _NPERIODO_PROCESO){
     this.es10Total =  this.es10Total + parseInt(data.nCantAsegurados)
   })
   this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "SIMPLIFICADO")
+debugger
+  if(this.es10CuadroSimpli == undefined) {this.es10CuadroSimpli =  {SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0}}
+
   this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "GENERAL")
-   response.es10Cuadro.forEach(data => {
-     this.es10CuadroTotal =  this.es10CuadroTotal + parseInt(data.NCANT_ASEGURADOS)
-   })
+  if(this.es10CuadroGene == undefined){
+    this.es10CuadroGene = {SREGIMEN: 'GENERAL', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0}
+  }else{
+    response.es10Cuadro.forEach(data => {
+      this.es10CuadroTotal =  this.es10CuadroTotal + parseInt(data.NCANT_ASEGURADOS)
+    })
+  }
+ 
    
   this.zonageofraficanacional  = response.zonasGeograficas.filter(it => it.BISNACIONAL == 1)
   this.zonageofraficanacional.forEach(data => {
@@ -357,6 +367,13 @@ this.zonageofraficanacionalSubTotal.PROCENTAJE = this.zonageofraficanacionalSubT
  
   console.log(response)
   this.Export2Doc("ReportesGlobal","Reporte KRI") 
+}
+
+limpiarVariables(){
+  this.zonageofraficanacionalSubTotal = {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PROCENTAJE:0}
+  this.zonageofraficaSubTotal = {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PROCENTAJE:0}
+  this.SumaZonaGeografica={VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PORCENTAJE:0}
+  this.es10Total= 0
 }
 
 
