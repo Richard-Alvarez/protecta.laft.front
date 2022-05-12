@@ -158,7 +158,7 @@ const routes: Routes = [
   { path: 'warning-sign4-work-module', component: WarningSign4WorkModuleComponent },
   { path: 'warning-signs-tray', component: WarningSignsTrayComponent },
   { path: 'view-warningc2-database', component: ViewWarningc2DatabaseComponent },
-  { path: 'view-warningrg2-database', component: ViewWarningrg2DatabaseComponent }, 
+  { path: 'view-warningrg2-database', component: ViewWarningrg2DatabaseComponent },
   { path: 'international-list-maintenance', component: InternationalListMaintenanceComponent },
   { path: 'profile-maintenance', component: ProfileMaintenanceComponent }, 
   { path: 'view-customer', component: ViewCustomerComponent },
