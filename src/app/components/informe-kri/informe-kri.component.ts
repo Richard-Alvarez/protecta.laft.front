@@ -267,10 +267,10 @@ async DescargarReporte( _NPERIODO_PROCESO){
     this.es10Total =  this.es10Total + parseInt(data.nCantAsegurados)
   })
   this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "SIMPLIFICADO")
-debugger
   if(this.es10CuadroSimpli == undefined) {this.es10CuadroSimpli =  {SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0}}
 
   this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "GENERAL")
+
   if(this.es10CuadroGene == undefined){
     this.es10CuadroGene = {SREGIMEN: 'GENERAL', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0}
   }else{
