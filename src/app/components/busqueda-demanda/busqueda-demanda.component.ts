@@ -1303,7 +1303,7 @@ export class BusquedaDemandaComponent implements OnInit {
         // head: columns,
         // body: data,
         html: tabla,//"#table42",
-        startY: 670,
+        startY: 715,
         // styles: {fillColor: [100, 255, 255]},
         headStyles: {
           fillColor: [230, 230, 230],

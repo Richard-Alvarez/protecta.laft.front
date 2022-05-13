@@ -252,6 +252,7 @@ zonaGeograficaCuadroFinalExtranjero:{SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE
 SumaZonaGeografica: {VIDA_RENTA:0,RENTA_TOTAL:0,AHORRO_TOTAL:0,SUBTOTAL:0,PORCENTAJE:0}
 }
 async DescargarReporte(){
+  this.limpiarVariable()
   let data:any = {}
   data.NPERIODO_PROCESO = 20211231
   let response = await this.userConfigService.getInformeKri(data)
@@ -357,6 +358,30 @@ this.zonageofraficanacionalSubTotal.PROCENTAJE = this.zonageofraficanacionalSubT
  
   console.log(response)
   this.Export2Doc("ReportesGlobal","Reporte KRI") 
+}
+
+limpiarVariable(){
+  this.es10 = []
+  this.es10Total = 0,
+  this.es10CuadroSimpli = {}
+  this.es10CuadroGene = {}
+  this.es10CuadroTotal = 0
+  this.cabeceraSegumientoEvaluacion = []
+  this.zonageofraficanacional = []
+  this.zonageofraficanacionalSubTotal = {}
+  this.zonageofrafica = []
+  this.zonageofraficaSubTotal = {}
+  this.validadorCuadroExtranjero = true
+  this.actividadEconomicaCuadroSisFinan= {}
+  this.actividadEconomicaCuadroIndustria = {}
+  this.actividadEconomicaCuadroEnsenansa = {}
+  this.actividadEconomicaCuadroEntidades = {}
+  this.actividadEconomicaCuadroOtros = {}
+  this.actividadEconomicaTotal = 0
+  this.zonaGeograficaCuadroFinalLima = {}
+  this.zonaGeograficaCuadroFinalOtros = {}
+  this.zonaGeograficaCuadroFinalExtranjero = {}
+  this.SumaZonaGeografica = {}
 }
 
 
