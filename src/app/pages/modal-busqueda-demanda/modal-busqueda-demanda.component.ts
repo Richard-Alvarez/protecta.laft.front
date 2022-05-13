@@ -75,6 +75,6 @@ export class ModalBusquedaDemandaComponent implements OnInit {
     this.contexto.GenerarPDFAll(this.item.filterData)
   }
   descargarExcel(){
-    this.contexto.exportListToExcelIndividual()
+    this.contexto.exportListToExcelIndividual(this.item.filterData)
   }
 }

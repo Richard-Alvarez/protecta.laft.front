@@ -592,9 +592,9 @@ export class BusquedaDemandaComponent implements OnInit {
     return ''
   }
   /*en desuso, descargaba la fila del resultado en formato excel*/
-  exportListToExcelIndividual() {
+  exportListToExcelIndividual(data) {
     let resultado: any = []
-    resultado = this.resultadoModal
+    resultado = data
     
     let Newresultado: any = []
     if (resultado != null && resultado.length > 0) {
