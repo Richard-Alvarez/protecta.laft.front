@@ -380,7 +380,7 @@
                                                    <td>
                                                     <input type="checkbox" [(ngModel)]="unchekAllList[incCli]"
                                                     [disabled]="item.SESTADO_REVISADO == 1"
-                                                        (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)">
+                                                        (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,objCoinList.NIDTIPOLISTA-1,item.NIDREGIMEN)">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -427,7 +427,7 @@
                                                    <td>
                                                     <input type="checkbox" [(ngModel)]="unchekAllList[incCli]"
                                                     [disabled]="item.SESTADO_REVISADO == 1"
-                                                        (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,itemCli.NIDTIPOLISTA-1,item.NIDREGIMEN)">
+                                                        (change)="onCategoriaPressed(NewListCheck[incCli],$event.target.checked,incCli,objCoinList.NIDTIPOLISTA-1,item.NIDREGIMEN)">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -896,7 +896,7 @@
                             style="margin-left: -15px; padding-top: 0px!important">No se encontró revisiones</div>
                     </div>
                     <div
-                    *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == 4)">
+                    *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == '4')">
                     <div class="row mb-2 mt-2">
                         <div class="Header">
                             <div class="col-lg-12">
@@ -1068,7 +1068,7 @@
                             style="margin-left: -15px; padding-top: 0px!important">No se encontró revisiones</div>
                     </div>
                     <div
-                        *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == 4)">
+                        *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == '4')">
                         <div class="row mb-2 mt-2">
                             <div class="Header">
                                 <div class="col-lg-12">
@@ -1642,7 +1642,7 @@
                                 style="margin-left: -15px; padding-top: 0px!important">No se encontró revisiones</div>
                         </div>
                         <div
-                        *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == 4)">
+                        *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == '4')">
                         <div class="row mb-2 mt-2">
                             <div class="Header">
                                 <div class="col-lg-12">
@@ -1902,7 +1902,7 @@
                                 style="margin-left: -15px; padding-top: 0px!important">No se encontró revisiones</div>
                         </div>
                         <div
-                        *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == 4)">
+                        *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == '4')">
                         <div class="row mb-2 mt-2">
                             <div class="Header">
                                 <div class="col-lg-12">
@@ -2163,7 +2163,7 @@
                                 style="margin-left: -15px; padding-top: 0px!important">No se encontró revisiones</div>
                         </div>
                         <div
-                        *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == 4)">
+                        *ngIf="(this.SESTADOCOINCIDENCIA == 'CRF' && this.NIDPROVEEDOR == '4')">
                         <div class="row mb-2 mt-2">
                             <div class="Header">
                                 <div class="col-lg-12">

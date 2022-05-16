@@ -1110,7 +1110,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       // }
       this.paramCliente.NBUSCAR_POR = this.NBUSCAR_POR
       localStorage.setItem("paramCliente", JSON.stringify(this.paramCliente))
-      this.router.navigate(["/c2-detail"]);
+      this.router.navigate(["/c2-detailv2"]);
     } catch (error) {
       console.error("error en el go to : ", error)
     }
@@ -1302,7 +1302,7 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     localStorage.setItem("NACIONALIDAD", item.NACIONALIDAD)
     localStorage.setItem("CARGO", item.CARGO)
     this.spinner.hide()
-    this.router.navigate(['/c2-detail'])
+    this.router.navigate(['/c2-detailv2'])
   }
 
   async getBusquedaManual(obj) {

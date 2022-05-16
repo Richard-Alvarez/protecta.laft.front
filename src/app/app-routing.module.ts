@@ -97,6 +97,7 @@ import { InformeKRIComponent } from './components/informe-kri/informe-kri.compon
 import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geografica.component';
 import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
 import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
+import { C2Detailv2Component } from './pages/forms/c2-detailv2/c2-detailv2.component';
 
 //fin formularios antiguos
 
@@ -139,6 +140,7 @@ const routes: Routes = [
   { path: 'c1-form', component: C1FormComponent },
   { path: 'c2-form', component: C2FormComponent },
   { path: 'c2-detail', component: C2DetailComponent },
+  { path: 'c2-detailv2', component: C2Detailv2Component },
   { path: 'c3-form', component: C3FormComponent },
   { path: 'rg-form', component: RgFormComponent },
   { path: 'proveedor',component: ProveedorComponent},
@@ -156,7 +158,7 @@ const routes: Routes = [
   { path: 'warning-sign4-work-module', component: WarningSign4WorkModuleComponent },
   { path: 'warning-signs-tray', component: WarningSignsTrayComponent },
   { path: 'view-warningc2-database', component: ViewWarningc2DatabaseComponent },
-  { path: 'view-warningrg2-database', component: ViewWarningrg2DatabaseComponent }, 
+  { path: 'view-warningrg2-database', component: ViewWarningrg2DatabaseComponent },
   { path: 'international-list-maintenance', component: InternationalListMaintenanceComponent },
   { path: 'profile-maintenance', component: ProfileMaintenanceComponent }, 
   { path: 'view-customer', component: ViewCustomerComponent },

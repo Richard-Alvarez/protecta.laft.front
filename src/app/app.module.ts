@@ -206,6 +206,7 @@ import { ModalZonaGeograficaComponent } from './pages/modal-zona-geografica/moda
 import { ModalActivadEconomicaComponent } from './pages/modal-activad-economica/modal-activad-economica.component';
 import { ModalBusquedaDemandaComponent } from './pages/modal-busqueda-demanda/modal-busqueda-demanda.component';
 import { ConvertTextPipe } from './pipes/convert-text.pipe';
+import { C2Detailv2Component } from './pages/forms/c2-detailv2/c2-detailv2.component';
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -380,7 +381,8 @@ import { ConvertTextPipe } from './pipes/convert-text.pipe';
     ModalZonaGeograficaComponent,
     ModalActivadEconomicaComponent,
     ModalBusquedaDemandaComponent,
-    ConvertTextPipe
+    ConvertTextPipe,
+    C2Detailv2Component
 
    
     //Validaciones

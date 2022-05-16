@@ -41,12 +41,13 @@
                             <table class="table table-hover table-striped " id="tableCobertura" style="width:100%;">
                                 <thead style="color: #26296DB3">
                                   <tr class="htable headgrid" style="background:transparent;">
-                                    <th class="text-center">Período</th>
-                                    <th class="text-center">Fecha de Movimiento</th>
-                                    <th class="text-center">Usuario</th>
-                                    <th class="text-center">Estado</th>
-                                    <th class="text-center">Archivo Adjunto</th>
-                                    <th class="text-center">Acciones</th>
+                                    <tr class="htable headgrid" style="background:transparent;">
+                                        <th class="text-center" style="width: 14%;">Período</th>
+                                        <th class="text-center" style="width: 12%;">Fecha de Movimiento</th>
+                                        <th class="text-center" style="width: 25%;">Usuario</th>
+                                        <th class="text-center" style="width: 12%;">Estado</th>
+                                        <th class="text-center" style="width: 25%;">Archivo Adjunto</th>
+                                        <th class="text-center" style="width: 12%;">Acciones</th>
                                    
                                     
                                   </tr>
@@ -80,7 +81,7 @@
                                          </div>
                                          
                                         <div   style="float:left;width: 33.3%;" placement='top' ngbTooltip="Descargar informe KRI">
-                                            <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporte()"></i></a>
+                                            <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporte(cob.NPERIODO_PROCESO)"></i></a>
                                         </div>
                                         <div style="float: right;width: 33.3%;"  placement='top' ngbTooltip="Registrar">
                                             <a *ngIf="cob.SESTADO == 1"><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer"  (click)="Registrar(cob,index)"></i></a>

@@ -901,7 +901,7 @@ async setDataFile(event) {
   async ListaInformes(){
     this.core.loader.show()
      let data:any = {}
-     data.VALIDADOR = 2
+     //data.VALIDADOR = 2
      data.INFORME = 'GENERAL'
    this.ListaRegistros = await this.userConfigService.GetListaInformes(data)
     let listaAlertas
