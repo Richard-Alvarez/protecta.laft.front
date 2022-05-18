@@ -1215,7 +1215,7 @@ export class BusquedaDemandaComponent implements OnInit {
     document.getElementById('reporteMixto').classList.remove('ocultarReporte')
     //document.getElementById('reporteMixto').classList.add('mostrarReporte')
     document.getElementById('reporteMixto').style.display = 'block'
-    let nombreDescarga= ''
+    let nombreDescarga = ''
     if(item.snumdoC_BUSQUEDA == "" || item.snumdoC_BUSQUEDA == null || item.snumdoC_BUSQUEDA == "-"){
       nombreDescarga = item.snombrE_BUSQUEDA
     }else { 
