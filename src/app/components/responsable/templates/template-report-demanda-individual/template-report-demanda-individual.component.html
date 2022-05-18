@@ -70,7 +70,7 @@
           <div class="textoCabecera" style="background: #E6E6E6;">Tipo Coincidencia &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
             &nbsp; <label id="RItipoCon">{{data.stipocoincidencia == null ? '-' : data.stipocoincidencia}}</label></div>
 
-            <div class="textoCabecera">Información &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
+            <div class="textoCabecera" *ngIf="(data.nidproveedor == 4)">Información &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
               &nbsp; <label id="RIInformacion">{{data.sinformacion == null ? '-' : data.sinformacion}}</label></div>
     
            <div *ngIf="(data.sdestipolista == 'LISTAS PEP' && data.stipO_DOCUMENTO == 'DNI')" class="textoCabecera" style="background: #E6E6E6;" id="CargoPep">Cargo Pep &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:

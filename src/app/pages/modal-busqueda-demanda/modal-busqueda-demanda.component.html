@@ -1,4 +1,5 @@
-<div class="modal-header" id="edit-modal" style="padding-bottom: 30px">
+<div class="modal-header pb-1" id="edit-modal" style="padding-bottom: 30px">
+  <label style="font-weight: bold;">{{item.snombrE_BUSQUEDA || item.snumdoC_BUSQUEDA}} </label>
   <button type="button" class="swal2-close" (click)="closeModal('edit-modal')" aria-label="Close this dialog"
     style="display: flex;outline:none;">x</button>
 </div>
@@ -28,20 +29,20 @@
     <table class="striped" style="font-size: 12px;height: 100%;">
       <thead>
         <tr>
-          <th class="columnGroup1" colspan="3">Datos de la Búsqueda</th>
-          <th class="columnGroup3" colspan="5">Coincidencia Encontrada</th>
-          <th class="columnGroup4" colspan="1"></th>
+          <th class="columnGroup1" colspan="3" style="width:36%;">Datos de la Búsqueda</th>
+          <th class="columnGroup3" colspan="5" style="width:56%;">Coincidencia Encontrada</th>
+          <th class="columnGroup4" colspan="1" style="width:8%;"></th>
         </tr>
         <tr style="color: rgba(38, 41, 109, 0.6);font-family: 'Roboto', sans-serif; ">
-          <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Lista</th>
-          <th class="columnGroup1" style="vertical-align: middle;text-align: left;">Fuente</th>
-          <th class="columnGroup1" style="vertical-align: middle;">Búsqueda</th>
-          <th class="columnGroup3" style="vertical-align: middle;">Tipo y Número de Documento</th>
-          <th class="columnGroup3" style="vertical-align: middle;">Término</th>
-          <th class="columnGroup3" style="vertical-align: middle;text-align: left;">Nombre/Razón Social</th>
-          <th class="columnGroup3" style="vertical-align: middle;">% Coincidencia</th>
-          <th class="columnGroup3" style="vertical-align: middle;">Tipo de Coincidencia</th>
-          <th class="columnGroup4" style="vertical-align: middle;">Acciones</th>
+          <th class="columnGroup1" style="width:14%;vertical-align: middle;text-align: left;">Lista</th>
+          <th class="columnGroup1" style="width:8%;vertical-align: middle;text-align: left;">Fuente</th>
+          <th class="columnGroup1" style="width:14%;vertical-align: middle;">Búsqueda</th>
+          <th class="columnGroup3" style="width:13%;vertical-align: middle;">Tipo y Número de Documento</th>
+          <th class="columnGroup3" style="width:10%;vertical-align: middle;">Término</th>
+          <th class="columnGroup3" style="width:15%;vertical-align: middle;text-align: left;">Nombre/Razón Social</th>
+          <th class="columnGroup3" style="width:8%;vertical-align: middle;">% Coincidencia</th>
+          <th class="columnGroup3" style="width:10%;vertical-align: middle;">Tipo de Coincidencia</th>
+          <th class="columnGroup4" style="width:8%;vertical-align: middle;">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -49,27 +50,27 @@
           <td class="text-center" colspan="9">No se encontró coincidencias</td>
         </tr>
         <tr class="animated fadeIn" *ngFor="let item of this.item.pageData; let i = index;">
-          <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
-          <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
-          <td>{{item.scoincidencia == null || item.scoincidencia == '' ? '-': item.scoincidencia}}</td>
-          <td>
+          <td style="width:14%;">{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
+          <td style="width:8%;">{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td>
+          <td style="width:14%;">{{item.scoincidencia == null || item.scoincidencia == '' ? '-': item.scoincidencia}}</td>
+          <td style="width:13%">
             {{(item.stipO_DOCUMENTO == null && item.snuM_DOCUMENTO == null || item.stipO_DOCUMENTO == '-' && item.snuM_DOCUMENTO == '-')  ? "-" : ( item.stipO_DOCUMENTO + " " + item.snuM_DOCUMENTO) }}
           </td>
-          <td>
+          <td style="width:10%">
             <div placement='top' ngbTooltip="{{item.snombrE_TERMINO}}">
               {{cortarCararterNombre(item.snombrE_TERMINO == null || item.snombrE_TERMINO == '' ? '-': item.snombrE_TERMINO)}}
             </div>
           </td>
-          <td>
+          <td style="width:15%">
             <div placement='top' ngbTooltip="{{item.snombrE_COMPLETO}}">
               {{cortarCararterNombre(item.snombrE_COMPLETO == null || item.snombrE_COMPLETO == '' ? '-': item.snombrE_COMPLETO)}}
             </div>
           </td>
-          <td style="text-align: center;">
+          <td style="text-align: center;width:8%;">
             {{item.sporceN_COINCIDENCIA == null || item.sporceN_COINCIDENCIA == '' ? '-': item.sporceN_COINCIDENCIA}}
           </td>
-          <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
-          <td class=" text-center">
+          <td style="width:10%;">{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
+          <td style="width:8%;" class=" text-center">
             <img src="assets/icons/pdf2.png" title="Descargar Pdf" (click)="generarPdfIndividual(item,item.nidproveedor,i)" alt=""
               style="cursor: pointer;height:20px;width: 17px;" />
           </td>
