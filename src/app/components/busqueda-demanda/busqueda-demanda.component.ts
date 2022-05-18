@@ -59,7 +59,7 @@ export class BusquedaDemandaComponent implements OnInit {
       currentPage = 1;
       rotate = true;
       maxSize = 5;
-      itemsPerPage = 10;
+      itemsPerPage = 8;
       totalItems = 0;
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
 
@@ -179,7 +179,7 @@ export class BusquedaDemandaComponent implements OnInit {
           text: 'Para un busqueda más exacta ingrese tres datos del nombre completo',
           showCancelButton: true,
           cancelButtonText: 'Modificar',
-          cancelButtonColor: '#2b245b',
+          //cancelButtonColor: '#2b245b',
           confirmButtonColor: '#FA7000',
           confirmButtonText: 'Continuar',
           showCloseButton: true,
@@ -245,7 +245,7 @@ export class BusquedaDemandaComponent implements OnInit {
       text: '¿Realizar Búsqueda?',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#2b245b',
+      //cancelButtonColor: '#2b245b',
       confirmButtonColor: '#FA7000',
       confirmButtonText: 'Aceptar',
       showCloseButton: true,
