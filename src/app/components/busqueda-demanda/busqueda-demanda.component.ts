@@ -1218,9 +1218,10 @@ export class BusquedaDemandaComponent implements OnInit {
     let nombreDescarga= ''
     if(item.snumdoC_BUSQUEDA == "" || item.snumdoC_BUSQUEDA == null || item.snumdoC_BUSQUEDA == "-"){
       nombreDescarga = item.snombrE_BUSQUEDA
-    }else if(item.snombrE_BUSQUEDA = "" || item.snombrE_BUSQUEDA == null || item.snombrE_BUSQUEDA == "-"){
+    }else { 
       nombreDescarga = item.snumdoC_BUSQUEDA
     }
+    debugger
     let itemsCliente = this.resultadoFinal2.filter(t=> t.snombrE_BUSQUEDA == item.snombrE_BUSQUEDA);
     let nidproveedor : any = itemsCliente.map(t=> t.nidproveedor).filter((item,index,array) => {return array.indexOf(item) == index});
     if(this.listaProveedor.length != 0){
