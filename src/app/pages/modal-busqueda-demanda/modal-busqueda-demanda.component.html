@@ -1,5 +1,4 @@
-<div class="modal-header pb-1" id="edit-modal" style="padding-bottom: 30px">
-  <label style="font-weight: bold;">{{item.snombrE_BUSQUEDA || item.snumdoC_BUSQUEDA}} </label>
+<div class="modal-header " id="edit-modal" style="padding-bottom: 30px">
   <button type="button" class="swal2-close" (click)="closeModal('edit-modal')" aria-label="Close this dialog"
     style="display: flex;outline:none;">x</button>
 </div>
@@ -13,6 +12,9 @@
       </div>
     </div>
     <br>
+  </div>
+  <div class="d-flex mt-2"> 
+    <label class="fontText">PERSONA BUSCADA: {{item.snombrE_BUSQUEDA || item.snumdoC_BUSQUEDA}} </label>
   </div>
   <div class="d-flex">
     <div class="col-xl-4 col-lg-6" style="padding: 0;">
