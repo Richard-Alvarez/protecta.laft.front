@@ -59,7 +59,7 @@ export class BusquedaDemandaComponent implements OnInit {
       currentPage = 1;
       rotate = true;
       maxSize = 5;
-      itemsPerPage = 10;
+      itemsPerPage = 8;
       totalItems = 0;
   @ViewChild('myInput', { static: false }) myInputVariable: ElementRef;
 
