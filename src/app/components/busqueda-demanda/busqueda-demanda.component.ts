@@ -13,6 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import html2canvas from 'html2canvas';
 import { join } from 'path';
 import * as html2pdf from 'html2pdf.js'
+import { GlobalVariable } from 'src/app/utils/variables/variablesGlobales';
 
 const PDF_EXTENSION = ".pdf";
 @Component({
@@ -69,6 +70,7 @@ export class BusquedaDemandaComponent implements OnInit {
     private excelService: ExcelService,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
+
   ) { }
 
   async ngOnInit() {
@@ -286,7 +288,7 @@ export class BusquedaDemandaComponent implements OnInit {
             this.core.loader.show()
             let respuestaService: any = {}
             await this.getBusquedaADemanda(data).then(res => {
-              debugger;
+             
               respuestaService = res;
             }).finally(async () => {
               if (this.NBUSCAR_POR == 2) {
@@ -947,7 +949,7 @@ export class BusquedaDemandaComponent implements OnInit {
     var SeparacionCabecera = 50;
 
 
-    doc.addImage(imgData, 'JPEG', 125, 10, 60, 14);
+    doc.addImage(GlobalVariable.IMG_PROTECTA, 'JPEG', 125, 10, 60, 14);
 
     doc.setFontSize(16);
     doc.text('RESULTADO DE LA BÚSQUEDA', 60, 40);
@@ -1401,7 +1403,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
     const modalRef = this.modalService.open(ModalBusquedaDemandaComponent, { size: 'xl', windowClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
 
-    debugger;
+  
     this.resultadoModal = this.resultadoFinal2.filter(t => t.snombrE_BUSQUEDA == item.snombrE_BUSQUEDA);
     this.resultadoModal = this.resultadoModal.sort( function (a,b) { 
         let _a = a.sporceN_COINCIDENCIA;
@@ -1463,7 +1465,7 @@ export class BusquedaDemandaComponent implements OnInit {
     this.spinner.hide()
   }
   async convertirPdfIndividual(item : any, codImg,nombre) {
-   debugger
+ 
     // //document.getElementById('reporteIndividual').classList.add('mostrarReporte')
     // document.getElementById('CargoPep').style.display = 'none'
 
@@ -1544,7 +1546,7 @@ export class BusquedaDemandaComponent implements OnInit {
           var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
           pdf.setPage(i);
           if (i == 1) {
-            pdf.addImage(imgProtecta, 'JPEG', 4.05, 0.1, 3.5, 1);
+            pdf.addImage(GlobalVariable.IMG_PROTECTA, 'JPEG', 4.05, 0.1, 3.5, 1);
           }
 
 
@@ -1565,7 +1567,7 @@ export class BusquedaDemandaComponent implements OnInit {
             pdf.setFontSize(10);
             pdf.setTextColor(150);
             //pdf.addImage(imgIdecon, 'JPEG',5,5, 5.2, 10.5);
-            pdf.addImage(imgIdecon, 'JPEG',5,10.5, 2.5, 0.6);
+            pdf.addImage(imgIdecon, 'JPEG',5.8,10.5, 1.8, 0.5);
         }
 
          
