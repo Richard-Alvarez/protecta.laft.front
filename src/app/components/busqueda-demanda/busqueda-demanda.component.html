@@ -156,10 +156,10 @@
                   </div>
                 </div>
               </div>
-                <div class="" style="overflow-y:none;">
+                <div class="d-flex mt-3 table-responsive" style="max-height: 550px !important;">
                 <!-- overflow-y:none; -->
                     <hr>
-                    <table class="striped" style="font-size: 12px;">
+                    <table class="striped" style="font-size: 12px;height: 100%;">
                         <thead>
                             <tr>
                                 <th class="columnGroup1" colspan="3">Datos de la Búsqueda</th>
@@ -194,57 +194,58 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div *ngIf="this.resultadoFinal3.length > 0" class="row mt-4">
-                        <div class="col-sm-4">
-                            <button (click)="exportListToExcel()"
-                                class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
-                                Descargar Resultados
-                            </button>
-                        </div>
-                        <div class="col-sm-4">
-                          <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage" [collectionSize]="totalItems"
-                            [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
-                          </ngb-pagination>
-                        </div>
-                        <!-- <div class="col-sm-4">
-                          <button (click)="exportListToExcel()"
-                              class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
-                              Descargar PDF Masivo
-                          </button>
-                      </div> -->
-                    </div>
-
-                  
-                    <div *ngFor="let lista of this.listaProveedor;let i = index ">
-                      <table class="striped" style="font-size: 12px; display: none;" id="{{'table42'+i}}" >
-                        <thead>
-                          <tr>
-                            <th scope="col">Tipo Documento</th>
-                            <th scope="col">N° Documento</th>
-                            <th scope="col">Nombre / Razón social</th>
-                            <th scope="col">Tipo lista</th>
-                            <th scope="col">% coincidencias</th>
-                            <!-- <th scope="col">Fuente</th> -->
-                            <th scope="col">Tipo de coincidencia</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            
-                            <tr class="animated fadeIn" *ngFor="let item of lista; let i = index;">
-                                 <td>{{item.stipO_DOCUMENTO}}</td>
-                                <td>{{item.snuM_DOCUMENTO}}</td>
-                                <td>{{item.snombrE_COMPLETO}}</td>
-                                <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
-                                <td>{{item.sporceN_COINCIDENCIA}}</td>
-                                <!-- <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td> -->
-                                <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
-                                
-                            </tr>
-                        </tbody>
-                    </table> 
-                    </div>
                     
                 </div>
+                <div *ngIf="this.resultadoFinal3.length > 0" class="row mt-4">
+                  <div class="col-sm-4">
+                      <button (click)="exportListToExcel()"
+                          class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
+                          Descargar Resultados
+                      </button>
+                  </div>
+                  <div class="col-sm-4">
+                    <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage" [collectionSize]="totalItems"
+                      [maxSize]="maxSize" aria-label="Default pagination" (pageChange)="pageChanged(currentPage)">
+                    </ngb-pagination>
+                  </div>
+                  <!-- <div class="col-sm-4">
+                    <button (click)="exportListToExcel()"
+                        class="btn btn-outline-info form-control  buttonSinBorder colorButton"><i class="fas fa-download"></i>
+                        Descargar PDF Masivo
+                    </button>
+                </div> -->
+              </div>
+
+            
+              <div *ngFor="let lista of this.listaProveedor;let i = index ">
+                <table class="striped" style="font-size: 12px; display: none;" id="{{'table42'+i}}" >
+                  <thead>
+                    <tr>
+                      <th scope="col">Tipo Documento</th>
+                      <th scope="col">N° Documento</th>
+                      <th scope="col">Nombre / Razón social</th>
+                      <th scope="col">Tipo lista</th>
+                      <th scope="col">% coincidencias</th>
+                      <!-- <th scope="col">Fuente</th> -->
+                      <th scope="col">Tipo de coincidencia</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      
+                      <tr class="animated fadeIn" *ngFor="let item of lista; let i = index;">
+                           <td>{{item.stipO_DOCUMENTO}}</td>
+                          <td>{{item.snuM_DOCUMENTO}}</td>
+                          <td>{{item.snombrE_COMPLETO}}</td>
+                          <td>{{item.sdestipolista == null || item.sdestipolista == '' ? '-': item.sdestipolista}}</td>
+                          <td>{{item.sporceN_COINCIDENCIA}}</td>
+                          <!-- <td>{{item.sdesproveedor == null || item.sdesproveedor == '' ? '-': item.sdesproveedor}}</td> -->
+                          <td>{{item.stipocoincidencia == null || item.stipocoincidencia == '' ? '-': item.stipocoincidencia}}</td>
+                          
+                      </tr>
+                  </tbody>
+              </table> 
+              </div>
+              
             </div>
         </div>
     </div>
