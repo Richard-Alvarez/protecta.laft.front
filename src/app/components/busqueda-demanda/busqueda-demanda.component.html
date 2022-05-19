@@ -251,8 +251,8 @@
 </main>
 <br>
 
-<div  id="reporteMixto" > 
-    <div *ngFor="let lista of this.listaProveedor;let i = index " style="padding-top: 100%;">
+<div  id="reporteMixto" style="padding-top: 100%;" > 
+    <div *ngFor="let lista of this.listaProveedor;let i = index ">
       <app-template-reporte-busqueda-demanda  [data]="lista" [index]="i" [RegistrosUnitarios]="DataUserLogin"></app-template-reporte-busqueda-demanda> 
     </div>
     

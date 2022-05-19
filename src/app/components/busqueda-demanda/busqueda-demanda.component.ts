@@ -85,8 +85,8 @@ export class BusquedaDemandaComponent implements OnInit {
     /*obtiene el nombre de usuario del historial de sesion*/
     this.nombreUsuario = JSON.parse(sessionStorage.getItem("usuario")).fullName
     //document.getElementById('CargoPep').classList.add('ocultarReporte')
-    document.getElementById('reporteMixto').classList.add('ocultarReporte')
-    document.getElementById('ListaReporteIndividual').classList.add('ocultarReporte')
+    //document.getElementById('reporteMixto').classList.add('ocultarReporte')
+    //document.getElementById('ListaReporteIndividual').classList.add('ocultarReporte')
     
   }
   sliceAlertsArray(arreglo) {
@@ -286,7 +286,7 @@ export class BusquedaDemandaComponent implements OnInit {
             this.core.loader.show()
             let respuestaService: any = {}
             await this.getBusquedaADemanda(data).then(res => {
-              debugger;
+             
               respuestaService = res;
             }).finally(async () => {
               if (this.NBUSCAR_POR == 2) {
@@ -1401,7 +1401,7 @@ export class BusquedaDemandaComponent implements OnInit {
 
     const modalRef = this.modalService.open(ModalBusquedaDemandaComponent, { size: 'xl', windowClass: 'light-blue-backdrop', backdrop: 'static', keyboard: false });
 
-    debugger;
+  
     this.resultadoModal = this.resultadoFinal2.filter(t => t.snombrE_BUSQUEDA == item.snombrE_BUSQUEDA);
     this.resultadoModal = this.resultadoModal.sort( function (a,b) { 
         let _a = a.sporceN_COINCIDENCIA;
@@ -1463,7 +1463,7 @@ export class BusquedaDemandaComponent implements OnInit {
     this.spinner.hide()
   }
   async convertirPdfIndividual(item : any, codImg,nombre) {
-   debugger
+   
     // //document.getElementById('reporteIndividual').classList.add('mostrarReporte')
     // document.getElementById('CargoPep').style.display = 'none'
 
