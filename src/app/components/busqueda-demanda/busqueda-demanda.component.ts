@@ -1242,7 +1242,7 @@ export class BusquedaDemandaComponent implements OnInit {
       //Idecon == 1
       //"WORDLCHECK" == 4
       //REGISTRO NEGATIVO == 3
-      for(let i =0; i > this.listaProveedor.length  ;i++){
+      for(let i =0; i < this.listaProveedor.length  ;i++){
         let nombre = '#reporteMasivo'+i
         let tabla = '#table42'+i
         let codImagen = this.listaProveedor[i].provGeneral
