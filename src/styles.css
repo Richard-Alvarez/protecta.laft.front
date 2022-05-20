@@ -357,10 +357,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; 
 .light-blue-backdrop >div{
       max-width: 1350px;
     margin: 8.75rem auto;
-    height: 675px;
+    height: 710px;
 }
 .light-blue-backdrop >div .modal-content{
-max-height: 675px;
+max-height: 710px;
 height: 100%;
 }
 .swal2-close{
