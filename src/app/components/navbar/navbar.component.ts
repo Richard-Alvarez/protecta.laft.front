@@ -85,18 +85,19 @@ public text: String;
   clickInside($event) {
     this.text = "clicked inside";
     $event.stopPropagation();
-    
+    console.log("prueba2")
   }
   
   @HostListener('document:click')
   clickout() {
       this.text = "clicked outside";
-      
+      console.log("prueba")
       this.closeNav()
   }
 
   opened: boolean;
   clickOutside() {
+ 
     this.opened = !this.opened;
     
   }
