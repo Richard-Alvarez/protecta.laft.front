@@ -366,7 +366,11 @@ this.zonageofraficanacionalSubTotal.PROCENTAJE = this.zonageofraficanacionalSubT
 
  
   console.log(response)
-  this.Export2Doc("ReportesGlobal","Reporte KRI") 
+  let dia =  _NPERIODO_PROCESO.toString().substr(6,2)
+  let mes =  _NPERIODO_PROCESO.toString().substr(4,2)
+  let anno = _NPERIODO_PROCESO.toString().substr(0,4) 
+  let fechaPeriodo= dia + '-' + mes + '-' + anno
+  this.Export2Doc("ReportesGlobal","Reporte KRI",fechaPeriodo) 
 }
 
 limpiarVariables(){
@@ -430,7 +434,7 @@ removeFile(item,index){
 }
 
 
-Export2Doc(element, filename = ''){
+Export2Doc(element, filename = '',periodo){
  
   setTimeout(function(){
  
@@ -443,7 +447,7 @@ Export2Doc(element, filename = ''){
     });
   
     var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
-    filename = filename?filename+'.doc': 'document.doc';
+    filename = filename?filename+' - '+periodo+'.doc': 'document.doc';
     var downloadLink = document.createElement("a");
     document.body.appendChild(downloadLink);
     downloadLink.href = url;
