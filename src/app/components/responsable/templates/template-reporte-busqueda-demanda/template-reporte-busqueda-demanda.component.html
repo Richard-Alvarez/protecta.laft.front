@@ -31,7 +31,7 @@
 
     </div>
     <div style="padding-bottom: 10px;padding-left: 10px;">
-      <h5>Persona que se realizó la búsqueda</h5>
+      <h5>Datos de la Búsqueda</h5>
     </div>
 
 
@@ -42,7 +42,7 @@
                             <div class="textoCabecera">Número de documento &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;
                               <label id="numerodocbusq">{{data[0].snumdoC_BUSQUEDA}}</label></div>
                             <div class="textoCabecera" style="background: #E6E6E6;">Nombre / Razón Social &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                              &nbsp; &nbsp; &nbsp; : &nbsp; <label id="nombrebusq">{{data[0].snombrE_BUSQUEDA}}</label></div>
+                              &nbsp; &nbsp; &nbsp; : &nbsp; <label id="nombrebusq">{{data[0].snombrE_BUSQUEDA == '' ? '-' : data[0].snombrE_BUSQUEDA}}</label></div>
                             <div class="textoCabecera">Cantidad coincidencias &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:
                               &nbsp; <label id="cantidadbusq">{{data.cantidad}}</label></div>
                             <div class="textoCabecera" style="background: #E6E6E6;">Fuente &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
