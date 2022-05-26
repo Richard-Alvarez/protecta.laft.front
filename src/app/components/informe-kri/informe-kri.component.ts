@@ -283,7 +283,7 @@ export class InformeKRIComponent implements OnInit {
     })
     this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "SIMPLIFICADO")
     if (this.es10CuadroSimpli == undefined) {
-      this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "REGIMEN SIMPLIFICADO")
+      this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "RÉGIMEN SIMPLIFICADO")
       if (this.es10CuadroSimpli == undefined) {
         this.es10CuadroSimpli = { SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0 }
 
@@ -294,7 +294,7 @@ export class InformeKRIComponent implements OnInit {
     this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "GENERAL")
     debugger
     if (this.es10CuadroGene == undefined) {
-      this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "REGIMEN GENERAL")
+      this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "RÉGIMEN GENERAL")
       if (this.es10CuadroGene == undefined) {
         this.es10CuadroGene = { SREGIMEN: 'GENERAL', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0 }
 
@@ -312,10 +312,10 @@ export class InformeKRIComponent implements OnInit {
     }
 
     this.conclusion1 = this.obtenerMayor(response.es10Cuadro, response.es10Cuadro[0].NPORCENTAJE)
-    if (this.conclusion1.SREGIMEN == "GENERAL" || this.conclusion1.SREGIMEN == "REGIMEN GENERAL") {
+    if (this.conclusion1.SREGIMEN == "GENERAL" || this.conclusion1.SREGIMEN == "RÉGIMEN GENERAL") {
       this.conclusion1.SREGIMEN = 'Régimen General'
     }
-    if (this.conclusion1.SREGIMEN == "SIMPLIFICADO" || this.conclusion1.SREGIMEN == "REGIMEN SIMPLIFICADO") {
+    if (this.conclusion1.SREGIMEN == "SIMPLIFICADO" || this.conclusion1.SREGIMEN == "RÉGIMEN SIMPLIFICADO") {
       this.conclusion1.SREGIMEN = 'Régimen Simplificado'
     }
 
