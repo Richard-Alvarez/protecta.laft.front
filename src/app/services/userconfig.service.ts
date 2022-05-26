@@ -2268,10 +2268,10 @@ export class UserconfigService {
     })
   }
 
-  getInformeN1(): Promise<any> {
+  getInformeN1(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
-        this.laft.get(this.core.config.rest.urlgetInformeN1).subscribe(response => {
+        this.laft.post(this.core.config.rest.urlgetInformeN1, data).subscribe(response => {
           return resolve(response)
         })
       } catch (error) {
