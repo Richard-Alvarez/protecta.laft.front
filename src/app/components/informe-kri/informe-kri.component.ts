@@ -390,7 +390,7 @@ async Registrar(item,index){
    
     swal.fire({
       title: 'Informe',
-      text: `Está seguro de registrar el Informe KRI del periodo ${fechaPeriodo}?`,
+      text: `Está seguro de registrar el Informe KRI del período ${fechaPeriodo}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#FA7000',
@@ -425,8 +425,8 @@ async Registrar(item,index){
 }
 
 removeFile(item,index){
-  this.ListaRegistros[index].SNOMBRE_ARCHIVO_CORTO = ''
-  this.ListaRegistros[index].SNOMBRE_ARCHIVO = ''
+  this.ListaRegistros[index].SNOMBRE_ARCHIVO_CORTO = null//''
+  this.ListaRegistros[index].SNOMBRE_ARCHIVO = null//''
 }
 
 
