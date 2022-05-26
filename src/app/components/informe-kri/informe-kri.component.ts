@@ -460,7 +460,7 @@ export class InformeKRIComponent implements OnInit {
 
       swal.fire({
         title: 'Informe',
-        text: `Está seguro de registrar el Informe KRI del periodo ${fechaPeriodo}?`,
+        text: `Está seguro de registrar el Informe KRI del período ${fechaPeriodo}?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#FA7000',
