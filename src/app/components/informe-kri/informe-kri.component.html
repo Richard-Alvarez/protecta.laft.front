@@ -81,7 +81,7 @@
                                          </div>
                                          
                                         <div   style="float:left;width: 33.3%;" placement='top' ngbTooltip="Descargar informe KRI">
-                                            <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporte(cob.NPERIODO_PROCESO)"></i></a>
+                                            <a><i  class="fas fa-file-download" style="color:green;cursor:pointer" (click)="DescargarReporte(cob.NPERIODO_PROCESO,cob.FECHA_PERIODO)"></i></a>
                                         </div>
                                         <div style="float: right;width: 33.3%;"  placement='top' ngbTooltip="Registrar">
                                             <a *ngIf="cob.SESTADO == 1"><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer"  (click)="Registrar(cob,index)"></i></a>
@@ -112,7 +112,7 @@
                         </div>
                         
                         <div id="ReportesGlobal">
-                            <app-template-kri [Resultado]="Resultado" style="display: none" ></app-template-kri>  
+                            <app-template-kri [Resultado]="Resultado" style="display: none;font-size: 11px !important;font-family:Calibri imn !important ;" ></app-template-kri>  
                             <!-- <app-template-kri [Resultado]="Resultado"  ></app-template-kri>  -->
                         </div>
                         
