@@ -62,9 +62,9 @@ export class InformeN1Component implements OnInit {
     
     await this.userConfigService.GetSetearDataExcel(JSON.parse(this.dataReporte))
     //await this.userConfigService.GetSetearDataExcel({NPERIODO_PROCESO: 20211231  })
-    let ruta = "/PLANTILLAS/N1/Generado/Formato-N1-Plantilla.xlsx"
+    let ruta = "/PLANTILLAS/N1/Generado/Reporte-N1-Plantilla.xlsx"
     let rutaElimina = "PLANTILLAS/N1/Generado"
-    let nombreArchivo = 'Formato-N1-Plantilla.xlsx'
+    let nombreArchivo = 'Reporte-N1-Plantilla.xlsx'
     await this.DescargarArchivo(ruta,nombreArchivo)
     await this.EliminarArchivo(rutaElimina)
    }
