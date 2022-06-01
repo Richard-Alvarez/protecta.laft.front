@@ -8,6 +8,7 @@ import html2canvas from 'html2canvas';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { EBUSY } from 'constants';
 import { IgxExpansionPanelBodyComponent } from 'igniteui-angular';
+import { ItemPropertyValueChanged } from 'igniteui-angular/lib/grids/column-chooser-item-base';
 
 const PDF_EXTENSION = ".pdf";
 
@@ -46,7 +47,9 @@ export class InformeKRIComponent implements OnInit {
   IDListAnnoGlobal: number = 0
   public Usuario
   public PeriodoInforme
-
+  headerEs10 :any = [];
+  headerActividadEconomica :any = [];
+  headersZonaGeografica :any = [];
 
   async ngOnInit() {
 
@@ -221,11 +224,12 @@ export class InformeKRIComponent implements OnInit {
   zonaGeograficaCuadroFinalExtranjero
   actividadEconomicaTotal = 0
   SumaZonaGeografica: any
-  conclusion1: any
-  conclusion2: any
-  conclusion21: any
-  conclusion3: any
+  conclusion1: any = {}
+  conclusion2: any = {}
+  conclusion21: any = {}
+  conclusion3: any = {}
   fechaPeriodo:string
+  es10Historial :any =[]
   Resultado = {
     es10: [{
       nCantAsegurados: 9130,
@@ -240,30 +244,33 @@ export class InformeKRIComponent implements OnInit {
       sRiesgo: null
     }],
     es10Total: 0,
-    es10CuadroSimpli: { SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0 },
-    es10CuadroGene: { SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0 },
+    es10CuadroSimpli: { SREGIMEN: 'SIMPLIFICADO', NTOTAL: '0', SPORCENTAJE: 0 },
+    es10CuadroGene: { SREGIMEN: 'SIMPLIFICADO', NTOTAL: '0', SPORCENTAJE: 0 },
     es10CuadroTotal: 0,
+    headersES10 :[],
+    headersActividadEconomica :[],
+    headersZonaGeografica :[],
     cabeceraSegumientoEvaluacion: [{ valor: 1, periodo: '2018 - II' }, { valor: 2, periodo: '2019 - I' }, { valor: 3, periodo: '2019 - II' }
       , { valor: 4, periodo: '2020 - I' }, { valor: 5, periodo: '2020 - II' }, { valor: 6, periodo: '2021 - I' }],
-    zonageofraficanacional: [{ GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456", NPORCENTAJE: 100 }],
+    zonageofraficanacional: [{ GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456", SPORCENTAJE: 100 }],
     zonageofraficanacionalSubTotal: { VIDA_RENTA: 0, RENTA_TOTAL: 0, AHORRO_TOTAL: 0, SUBTOTAL: 0, PROCENTAJE: 0.0 },
     validadorCuadroExtranjero: true,
-    zonageofrafica: [{ GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456", NPORCENTAJE: 100 }],
-    zonageofraficaSubTotal: { GLS_REGION: "MIAMI", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456", NPORCENTAJE: 100 },
-    actividadEconomicaCuadroSisFinan: { SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100 },
-    actividadEconomicaCuadroIndustria: { SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100 },
-    actividadEconomicaCuadroEnsenansa: { SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100 },
-    actividadEconomicaCuadroEntidades: { SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100 },
-    actividadEconomicaCuadroOtros: { SSECTOR: "enseñanza", NCANTIDAD: "26", NPORCENTAJE: 100 },
+    zonageofrafica: [{ GLS_REGION: "LIMA", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456", SPORCENTAJE: 100 }],
+    zonageofraficaSubTotal: { GLS_REGION: "MIAMI", NAHORRO_TOTAL: "198", NRENTA_TOTAL: "1253", NVIDA_RENTA: "5", NTOTAL: "1456", SPORCENTAJE: 100 },
+    actividadEconomicaCuadroSisFinan: { SDESCRIPCION: "enseñanza", NTOTAL: "26", SPORCENTAJE: 100 },
+    actividadEconomicaCuadroIndustria: { SDESCRIPCION: "enseñanza", NTOTAL: "26", SPORCENTAJE: 100 },
+    actividadEconomicaCuadroEnsenansa: { SDESCRIPCION: "enseñanza", NTOTAL: "26", SPORCENTAJE: 100 },
+    actividadEconomicaCuadroEntidades: { SDESCRIPCION: "enseñanza", NTOTAL: "26", SPORCENTAJE: 100 },
+    actividadEconomicaCuadroOtros: { SDESCRIPCION: "enseñanza", NTOTAL: "26", SPORCENTAJE: 100 },
     actividadEconomicaTotal: 0,
-    zonaGeograficaCuadroFinalLima: { SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE: 85.05 },
-    zonaGeograficaCuadroFinalOtros: { SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE: 85.05 },
-    zonaGeograficaCuadroFinalExtranjero: { SREGION: 'LIMA', TOTAL: '1456', NPORCENTAJE: 85.05 },
+    zonaGeograficaCuadroFinalLima: { SREGION: 'LIMA', TOTAL: '1456', SPORCENTAJE: 85.05 },
+    zonaGeograficaCuadroFinalOtros: { SREGION: 'LIMA', TOTAL: '1456', SPORCENTAJE: 85.05 },
+    zonaGeograficaCuadroFinalExtranjero: { SREGION: 'LIMA', TOTAL: '1456', SPORCENTAJE: 85.05 },
     SumaZonaGeografica: { VIDA_RENTA: 0, RENTA_TOTAL: 0, AHORRO_TOTAL: 0, SUBTOTAL: 0, PORCENTAJE: 0 },
-    conclusion1: { SREGIMEN: '', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0 },
-    conclusion2: { SSECTOR: "", NCANTIDAD: "", NPORCENTAJE: 0 },
-    conclusion21: { SSECTOR: "", NCANTIDAD: "", NPORCENTAJE: 0 },
-    conclusion3: { SSECTOR: "", NCANTIDAD: "", NPORCENTAJE: 0 },
+    conclusion1: { SREGIMEN: '', NTOTAL: '0', SPORCENTAJE: 0 },
+    conclusion2: { SDESCRIPCION: "", NTOTAL: "", SPORCENTAJE: 0 },
+    conclusion21: { SDESCRIPCION: "", NTOTAL: "", SPORCENTAJE: 0 },
+    conclusion3: { SDESCRIPCION: "", NTOTAL: "", SPORCENTAJE: 0 },
     fecha: '',
     fechaPeriodo: ''
   }
@@ -281,44 +288,47 @@ export class InformeKRIComponent implements OnInit {
     response.es10.forEach(data => {
       this.es10Total = this.es10Total + parseInt(data.nCantAsegurados)
     })
-    this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "SIMPLIFICADO")
+    this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SDESCRIPCION == "RÉGIMEN SIMPLIFICADO" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO)
     if (this.es10CuadroSimpli == undefined) {
-      this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "RÉGIMEN SIMPLIFICADO")
+      this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SDESCRIPCION == "RÉGIMEN SIMPLIFICADO" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO)
       if (this.es10CuadroSimpli == undefined) {
-        this.es10CuadroSimpli = { SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0 }
+        this.es10CuadroSimpli = { SDESCRIPCION: 'SIMPLIFICADO', NTOTAL: '0', SPORCENTAJE: 0 }
+
       }
-
     }
-
-    this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "GENERAL")
-    debugger
+    
+    this.es10CuadroGene = response.es10Cuadro.find(it => it.SDESCRIPCION == "RÉGIMEN GENERAL" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO)
     if (this.es10CuadroGene == undefined) {
-      this.es10CuadroGene = response.es10Cuadro.find(it => it.SREGIMEN == "RÉGIMEN GENERAL")
+      this.es10CuadroGene = response.es10Cuadro.find(it => it.SDESCRIPCION == "RÉGIMEN GENERAL" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO)
       if (this.es10CuadroGene == undefined) {
-        this.es10CuadroGene = { SREGIMEN: 'GENERAL', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0 }
-
+        this.es10CuadroGene = { SDESCRIPCION: 'GENERAL', NTOTAL: '0', SPORCENTAJE: 0 }
       }
 
     }
 
     if (this.es10CuadroGene != undefined || this.es10CuadroSimpli != undefined) {
-      response.es10Cuadro.forEach(data => {
-        this.es10CuadroTotal = this.es10CuadroTotal + parseInt(data.NCANT_ASEGURADOS)
-      })
-
+      this.es10CuadroTotal = Number.parseFloat(this.es10CuadroGene.NTOTAL) + Number.parseFloat(this.es10CuadroSimpli.NTOTAL);
+      this.headerEs10 = this.createHeader( _NPERIODO_PROCESO);
+      for(let i = 0; i < this.headerEs10.length ; i++){
+        let objGen = response.es10Cuadro.find(t=> t.NPERIODO_PROCESO == this.headerEs10[i].NPERIODO_PROCESO && t.SDESCRIPCION == "RÉGIMEN GENERAL")
+        let objSim = response.es10Cuadro.find(t=> t.NPERIODO_PROCESO == this.headerEs10[i].NPERIODO_PROCESO && t.SDESCRIPCION == "RÉGIMEN SIMPLIFICADO")
+        this.headerEs10[i].NTOTAL = Number.parseFloat(objGen.NTOTAL) + Number.parseFloat(objSim.NTOTAL);
+        this.headerEs10[i].SPORCENTAJEGEN = objGen.SPORCENTAJE;
+        this.headerEs10[i].SPORCENTAJESIN = objSim.SPORCENTAJE;
+      }
     } else {
       this.es10CuadroTotal = 0
     }
 
-    this.conclusion1 = this.obtenerMayor(response.es10Cuadro, response.es10Cuadro[0].NPORCENTAJE)
-    if (this.conclusion1.SREGIMEN == "GENERAL" || this.conclusion1.SREGIMEN == "RÉGIMEN GENERAL") {
-      this.conclusion1.SREGIMEN = 'Régimen General'
+    this.conclusion1 = this.obtenerMayor(response.es10Cuadro.filter(t => t.NPERIODO_PROCESO == _NPERIODO_PROCESO), response.es10Cuadro[0].SPORCENTAJE)
+    if (this.conclusion1.SDESCRIPCION == "RÉGIMEN GENERAL") {
+      this.conclusion1.SDESCRIPCION = 'Régimen General'
     }
-    if (this.conclusion1.SREGIMEN == "SIMPLIFICADO" || this.conclusion1.SREGIMEN == "RÉGIMEN SIMPLIFICADO") {
-      this.conclusion1.SREGIMEN = 'Régimen Simplificado'
+    if (this.conclusion1.SDESCRIPCION == "RÉGIMEN SIMPLIFICADO") {
+      this.conclusion1.SDESCRIPCION = 'Régimen Simplificado'
     }
 
-    this.conclusion3 = this.obtenerMayor(response.zonasGeograficas, response.zonasGeograficas[0].NPORCENTAJE)
+    this.conclusion3 = this.obtenerMayor(response.zonasGeograficas, response.zonasGeograficas[0].SPORCENTAJE)
     this.conclusion3.GLS_REGION = this.convertirMayus(this.conclusion3.GLS_REGION)
 
     this.zonageofraficanacional = response.zonasGeograficas.filter(it => it.BISNACIONAL == 1)
@@ -338,7 +348,6 @@ export class InformeKRIComponent implements OnInit {
       this.validadorCuadroExtranjero = false
       this.zonageofrafica.PROCENTAJE = { VIDA_RENTA: 0, RENTA_TOTAL: 0, AHORRO_TOTAL: 0, SUBTOTAL: 0, PROCENTAJE: 0.0 }
     } else {
-      debugger
       this.validadorCuadroExtranjero = true
       this.zonageofrafica.forEach(data => {
         this.zonageofraficaSubTotal.VIDA_RENTA = Number(this.zonageofraficaSubTotal.VIDA_RENTA) + parseInt(data.NVIDA_RENTA)
@@ -352,36 +361,71 @@ export class InformeKRIComponent implements OnInit {
     }
 
    
-    this.actividadEconomicaCuadroOtros = response.actividadEconomicaCuadro.find(it => it.SSECTOR == "OTROS")
-    if (this.actividadEconomicaCuadroOtros == undefined) { this.actividadEconomicaCuadroOtros = { SSECTOR: 'OTROS', NCANTIDAD: '0', NPORCENTAJE: 0 } }
-
-    this.actividadEconomicaCuadroSisFinan = response.actividadEconomicaCuadro.find(it => it.SSECTOR == "FINANCIERO")
-    if (this.actividadEconomicaCuadroSisFinan == undefined) { this.actividadEconomicaCuadroSisFinan = { SSECTOR: 'FINANCIERO', NCANTIDAD: '0', NPORCENTAJE: 0 } }
-    this.actividadEconomicaCuadroIndustria = response.actividadEconomicaCuadro.find(it => it.SSECTOR == "INDUSTRIA")
-    if (this.actividadEconomicaCuadroIndustria == undefined) { this.actividadEconomicaCuadroIndustria = { SSECTOR: 'INDUSTRIA', NCANTIDAD: '0', NPORCENTAJE: 0 } }
-    this.actividadEconomicaCuadroEnsenansa = response.actividadEconomicaCuadro.find(it => it.SSECTOR == "EDUCATIVO")
-    if (this.actividadEconomicaCuadroEnsenansa == undefined) { this.actividadEconomicaCuadroEnsenansa = { SSECTOR: 'EDUCATIVO', NCANTIDAD: '0', NPORCENTAJE: 0 } }
-    this.actividadEconomicaCuadroEntidades = response.actividadEconomicaCuadro.find(it => it.SSECTOR == "INSTITUCIONES PUBLICAS")
-    if (this.actividadEconomicaCuadroEntidades == undefined) { this.actividadEconomicaCuadroEntidades = { SSECTOR: 'INSTITUCIONES PUBLICAS', NCANTIDAD: '0', NPORCENTAJE: 0 } }
+    this.actividadEconomicaCuadroOtros = response.actividadEconomicaCuadro.find(it => it.SDESCRIPCION == "OTROS" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO)
+    if (this.actividadEconomicaCuadroOtros == undefined) { this.actividadEconomicaCuadroOtros = { SDESCRIPCION: 'OTROS', NTOTAL: '0', SPORCENTAJE: 0 } }
+    this.actividadEconomicaCuadroSisFinan = response.actividadEconomicaCuadro.find(it => it.SDESCRIPCION == "FINANCIERO" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO) 
+    if (this.actividadEconomicaCuadroSisFinan == undefined) { this.actividadEconomicaCuadroSisFinan = { SDESCRIPCION: 'FINANCIERO', NTOTAL: '0', SPORCENTAJE: 0 } }
+    this.actividadEconomicaCuadroIndustria = response.actividadEconomicaCuadro.find(it => it.SDESCRIPCION == "INDUSTRIA" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO)
+    if (this.actividadEconomicaCuadroIndustria == undefined) { this.actividadEconomicaCuadroIndustria = { SDESCRIPCION: 'INDUSTRIA', NTOTAL: '0', SPORCENTAJE: 0 } }
+    this.actividadEconomicaCuadroEnsenansa = response.actividadEconomicaCuadro.find(it => it.SDESCRIPCION == "EDUCATIVO" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO)
+    if (this.actividadEconomicaCuadroEnsenansa == undefined) { this.actividadEconomicaCuadroEnsenansa = { SDESCRIPCION: 'EDUCATIVO', NTOTAL: '0', SPORCENTAJE: 0 } }
+    this.actividadEconomicaCuadroEntidades = response.actividadEconomicaCuadro.find(it => it.SDESCRIPCION == "INSTITUCIONES PUBLICAS" && it.NPERIODO_PROCESO == _NPERIODO_PROCESO)
+    if (this.actividadEconomicaCuadroEntidades == undefined) { this.actividadEconomicaCuadroEntidades = { SDESCRIPCION: 'INSTITUCIONES PUBLICAS', NTOTAL: '0', SPORCENTAJE: 0 } }
 
     response.actividadEconomicaCuadro.forEach(data => {
-      this.actividadEconomicaTotal = this.actividadEconomicaTotal + parseInt(data.NCANTIDAD)
+      this.actividadEconomicaTotal = this.actividadEconomicaTotal + parseInt(data.NTOTAL)
     })
-
-    this.conclusion2 = this.obtenerMayor(response.actividadEconomicaCuadro, response.actividadEconomicaCuadro[0].NPORCENTAJE)
-    this.conclusion2.SSECTOR = this.convertirMayus(this.conclusion2.SSECTOR)
+    let listCoclusion = response.actividadEconomicaCuadro.filter(t=>t.NPERIODO_PROCESO == _NPERIODO_PROCESO).sort((a,b) => {return a.NTOTAL - b.NTOTAL}).reverse()
+    //this.conclusion2 = this.obtenerMayor(response.actividadEconomicaCuadro.filter(t=>t.NPERIODO_PROCESO == _NPERIODO_PROCESO), response.actividadEconomicaCuadro[0].SPORCENTAJE)
+    this.conclusion2.SDESCRIPCION = listCoclusion[0].SDESCRIPCION
+    this.conclusion2.SPORCENTAJE = listCoclusion[0].SPORCENTAJE
+    this.conclusion21.SDESCRIPCION = listCoclusion[1].SDESCRIPCION
+    this.conclusion21.SPORCENTAJE = listCoclusion[1].SPORCENTAJE
+    if (response.actividadEconomicaCuadro.length> 0){
+      this.headerActividadEconomica = this.createHeader( _NPERIODO_PROCESO);
+      for(let i = 0; i < this.headerActividadEconomica.length ; i++){
+        let objOtros = response.actividadEconomicaCuadro.find(t=> t.NPERIODO_PROCESO == this.headerActividadEconomica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "OTROS")
+        let objFinanciero = response.actividadEconomicaCuadro.find(t=> t.NPERIODO_PROCESO == this.headerActividadEconomica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "FINANCIERO")
+        let objIndustria = response.actividadEconomicaCuadro.find(t=> t.NPERIODO_PROCESO == this.headerActividadEconomica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "INDUSTRIA")
+        let objEducativo = response.actividadEconomicaCuadro.find(t=> t.NPERIODO_PROCESO == this.headerActividadEconomica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "EDUCATIVO")
+        let objInsPublicas = response.actividadEconomicaCuadro.find(t=> t.NPERIODO_PROCESO == this.headerActividadEconomica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "INSTITUCIONES PUBLICAS")
+        this.headerActividadEconomica[i].NTOTAL = response.actividadEconomicaCuadro.filter(t=> t.NPERIODO_PROCESO == this.headerActividadEconomica[i].NPERIODO_PROCESO ).map(t=> Number.parseFloat(t.NTOTAL)).reduce(
+          (previousValue, currentValue) => previousValue + currentValue, 0
+        );
+        this.headerActividadEconomica[i].SVALORESOTROS = (objOtros ?  objOtros.NTOTAL : 0) + " (" + (objOtros ? objOtros.SPORCENTAJE : 0)  + ")%";
+        this.headerActividadEconomica[i].SVALORESFINANCIERO = (objFinanciero ?  objFinanciero.NTOTAL : 0)  + " (" + (objFinanciero ?  objFinanciero.SPORCENTAJE : 0) + ")%";
+        this.headerActividadEconomica[i].SVALORESINDUSTRIA = (objIndustria ? objIndustria.NTOTAL : 0) + " (" + (objIndustria ?  objIndustria.SPORCENTAJE : 0) + ")%";
+        this.headerActividadEconomica[i].SVALORESEDUCATIVO = (objEducativo ?  objEducativo.NTOTAL : 0)  + " (" + (objEducativo ?  objEducativo.SPORCENTAJE : 0) + ")%";
+        this.headerActividadEconomica[i].SVALORESINSPUBLICAS = (objInsPublicas ?  objInsPublicas.NTOTAL : 0)  + " (" + (objInsPublicas ?  objInsPublicas.SPORCENTAJE : 0) + ")%";
+      }
+    }
+    //this.conclusion2.SDESCRIPCION = this.convertirMayus(this.conclusion2.SDESCRIPCION)
     let newArray = response.actividadEconomicaCuadro.slice()
-    let indice = newArray.findIndex(it => it.SSECTOR == this.conclusion2.SSECTOR)
+    let indice = newArray.findIndex(it => it.SDESCRIPCION == this.conclusion2.SDESCRIPCION)
     newArray.splice(indice, 1)
-    this.conclusion21 = this.obtenerMayor(newArray, newArray[0].NPORCENTAJE)
+    //this.conclusion21 = this.obtenerMayor(newArray, newArray[0].SPORCENTAJE)
    
-    this.conclusion21.SSECTOR = this.convertirMayus(this.conclusion21.SSECTOR)
+    //this.conclusion21.SDESCRIPCION = this.convertirMayus(this.conclusion21.SDESCRIPCION)
 
     this.zonaGeograficaCuadroFinalLima = response.zonaGeograficaCuadro.find(it => it.SREGION == "LIMA")
     this.zonaGeograficaCuadroFinalOtros = response.zonaGeograficaCuadro.find(it => it.SREGION == "OTROS")
     this.zonaGeograficaCuadroFinalExtranjero = response.zonaGeograficaCuadro.find(it => it.SREGION == "EXTRANJERO")
-
-    
+    if(response.zonaGeograficaCuadro.length > 0 ){
+      debugger;
+      this.headersZonaGeografica = this.createHeader( _NPERIODO_PROCESO);
+      for(let i = 0; i < this.headersZonaGeografica.length ; i++){
+        let objOtros = response.zonaGeograficaCuadro.find(t=> t.NPERIODO_PROCESO == this.headersZonaGeografica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "OTROS")
+        let objLima = response.zonaGeograficaCuadro.find(t=> t.NPERIODO_PROCESO == this.headersZonaGeografica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "LIMA")
+        let objExtranjero = response.zonaGeograficaCuadro.find(t=> t.NPERIODO_PROCESO == this.headersZonaGeografica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "EXTRANJERO")
+        this.headersZonaGeografica[i].NTOTAL = response.zonaGeograficaCuadro.filter(t=> t.NPERIODO_PROCESO == this.headersZonaGeografica[i].NPERIODO_PROCESO ).map(t=> Number.parseFloat(t.NTOTAL)).reduce(
+          (previousValue, currentValue) => previousValue + currentValue, 0
+        );
+        this.headersZonaGeografica[i].SVALORESOTROS = (objOtros ?  objOtros.SPORCENTAJE : '0');
+        this.headersZonaGeografica[i].SVALORESLIMA = (objLima ?  objLima.SPORCENTAJE : '0');
+        this.headersZonaGeografica[i].SVALORESEXTRANJERO = (objExtranjero ? objExtranjero.SPORCENTAJE : '0');
+      }
+    }
+    console.log(this.headersZonaGeografica)
     this.SumaZonaGeografica = {}
     this.SumaZonaGeografica.VIDA_RENTA = Number(this.zonageofraficanacionalSubTotal.VIDA_RENTA) + Number(this.zonageofraficaSubTotal.VIDA_RENTA)
     this.SumaZonaGeografica.RENTA_TOTAL = Number(this.zonageofraficanacionalSubTotal.RENTA_TOTAL) + Number(this.zonageofraficaSubTotal.RENTA_TOTAL)
@@ -397,13 +441,16 @@ export class InformeKRIComponent implements OnInit {
    
     let fechaHasta =  this.convertirMayus(_FECHA_HASTA)
     let newFecha = fechaHasta.replace("Al", "Al : ")
-    this.fechaPeriodo = "Del : "+ newFecha
+    this.fechaPeriodo = "Del : "+ newFecha;
 
     this.Resultado = {
       es10: this.es10,
       es10Total: this.es10Total,
       es10CuadroSimpli: this.es10CuadroSimpli,
       es10CuadroGene: this.es10CuadroGene,
+      headersES10 : this.headerEs10,
+      headersActividadEconomica : this.headerActividadEconomica,
+      headersZonaGeografica : this.headersZonaGeografica,
       es10CuadroTotal: this.es10CuadroTotal,
       cabeceraSegumientoEvaluacion: this.cabeceraSegumientoEvaluacion,
       zonageofraficanacional: this.zonageofraficanacional,
@@ -436,6 +483,26 @@ export class InformeKRIComponent implements OnInit {
     let anno = _NPERIODO_PROCESO.toString().substr(0, 4)
     let fechaPeriodo = dia + '-' + mes + '-' + anno
     this.Export2Doc("ReportesGlobal", "Reporte KRI", fechaPeriodo)
+  }
+  createHeader(_NPERIODO_PROCESO): any {
+    let headers = []
+    let year = 0
+    let mouth = 0
+    year = Number.parseInt(_NPERIODO_PROCESO.toString().substr(0,4))
+    mouth = Number.parseInt(_NPERIODO_PROCESO.toString().substr(4,2))
+      for(let i = 0 ; i < 7; i++){
+        let etapa = ( i % 2 == (mouth == 12 ? 0 : 1) ? 'II' : 'I')
+        let año = (i < ( mouth == 12 ? 2 : 1 ) ? year : i< (mouth == 12 ? 4 : 3) ? (year -1 ) : i< (mouth == 12 ? 6 : 5) ? year -2 : year -3)
+        let periodo = año + "" + (etapa == 'I' ? '06' : '12') + "" + (etapa == 'II' ? '31' : '30')
+        let obj : any = {}
+        obj.NPERIODO_PROCESO = periodo;
+        obj.SDESCRIPTION = año + " - " + etapa;
+        obj.NTOTAL = 0 ;
+        obj.SPORCENTAJEGEN = 0 ;
+        obj.SPORCENTAJESIN = 0 ;
+        headers.push(obj);
+      }
+    return headers.reverse();
   }
 
   limpiarVariables() {
@@ -527,10 +594,10 @@ export class InformeKRIComponent implements OnInit {
   }
 
   obtenerMayor(array, campovalidar) {
-    let mayor = campovalidar
+    let mayor = Number.parseFloat(campovalidar)
     let obj = array[0]
     for (let x = 1; x < array.length; x++) {
-      let numeroactual = array[x].NPORCENTAJE
+      let numeroactual = Number.parseFloat(array[x].SPORCENTAJE)
       let newobj = array[x]
       if (numeroactual > mayor) {
         mayor = numeroactual
