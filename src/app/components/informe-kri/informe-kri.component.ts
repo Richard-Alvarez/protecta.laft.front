@@ -286,7 +286,6 @@ export class InformeKRIComponent implements OnInit {
       this.es10CuadroSimpli = response.es10Cuadro.find(it => it.SREGIMEN == "RÉGIMEN SIMPLIFICADO")
       if (this.es10CuadroSimpli == undefined) {
         this.es10CuadroSimpli = { SREGIMEN: 'SIMPLIFICADO', NCANT_ASEGURADOS: '0', NPORCENTAJE: 0 }
-
       }
 
     }
