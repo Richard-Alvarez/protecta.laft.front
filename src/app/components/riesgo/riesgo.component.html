@@ -40,7 +40,7 @@
                 </div>
                 
                 <div class="tab-content">
-                    <div class="container-fluid tab-pane container active" id="Zona">
+                    <div class="container-fluid tab-pane  active" id="Zona">
                 
                 
                         <div class="row">
@@ -52,8 +52,9 @@
                                             <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Editar</div>
                                     </div>
             
-                                  
+                                    
                                     <div class="row animated fadeIn" *ngFor="let item of listGeografica; let i = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
+                                        
                                         <div class="col-5 text-left txtDetalle">{{item.nombre}}</div>
                                         <div *ngIf="item.valid" class="col-5 text-left txtDetalle">
                                             {{item.riesgo == null? 0 : item.riesgo}} 
@@ -67,14 +68,14 @@
                                       
                                         <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
                                             <img src="assets/icons/edit.png" title="Editar" alt=""
-                                               (click)="update(item,i,'Geografica')"  style="cursor: pointer;width: 24px;" />
+                                               (click)="update(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                         <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
                                             <img src="assets/icons/accept.png" title="Editar" alt=""
-                                               (click)="save(item.countRiesgo,i,'Geografica')"  style="cursor: pointer;width: 24px;" />
+                                               (click)="save(item.countRiesgo,i,'GEOGRAFICA',item.id)"  style="cursor: pointer;width: 24px;" />
 
                                                <img src="assets/icons/cancelar.png" title="Editar" alt=""
-                                               (click)="cancelar(item,i,'Geografica')"  style="cursor: pointer;width: 24px;" />
+                                               (click)="cancelar(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                     </div>
                             </div>
@@ -94,16 +95,29 @@
                                     </div>
             
                                   
-                                    <div class="row animated fadeIn" *ngFor="let item of listProducto; let index = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
+                                    <div class="row animated fadeIn" *ngFor="let item of listProducto; let i = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
                                         <div class="col-7 text-left txtDetalle">{{item.nombre}}</div>
-                                        <div class="col-3 text-left txtDetalle">{{item.riesgo == null? 0 : item.riesgo}}</div>
+                                        <div *ngIf="item.valid" class="col-3 text-left txtDetalle">
+                                            {{item.riesgo == null? 0 : item.riesgo}} 
+                                            
+                                        </div>
+                                        <div *ngIf="!item.valid" class="col-3 text-left txtDetalle">
+                                            
+                                            <input maxlength="1" onkeypress="return (event.charCode >=49 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
+                                        </div>
                                         
                                       
-                                        <div class="col-2 text-center txtDetalle">
-                                    
+                                        <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
                                             <img src="assets/icons/edit.png" title="Editar" alt=""
-                                               (click)="update(item)"  style="cursor: pointer;width: 24px;" />
+                                               (click)="update(item,i,'PRODUCTO')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
+                                        <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
+                                            <img src="assets/icons/accept.png" title="Editar" alt=""
+                                               (click)="save(item.countRiesgo,i,'PRODUCTO',item.id)"  style="cursor: pointer;width: 24px;" />
+
+                                               <img src="assets/icons/cancelar.png" title="Editar" alt=""
+                                               (click)="cancelar(item,i,'PRODUCTO')"  style="cursor: pointer;width: 24px;" />
+                                        </div>
                                     </div>
                             </div>
                         </div>
@@ -114,24 +128,36 @@
                     <div class="container-fliud tab-pane fade" id="Cliente"> 
                         <div class="row">
                             <div class="borderFormat col-12">
-                                    <div class="row" style="border-bottom: 2px solid #26296D;">
-                                            <div class="col-7 txtCabecera" style="font-size: 14px;">Nombre</div>
-                                            <div class="col-3 txtCabecera" style="font-size: 14px;">Número de Riesgo </div>
-                                           
-                                            <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Editar</div>
-                                    </div>
+                                <div class="row" style="border-bottom: 2px solid #26296D;">
+                                    <div class="col-7 txtCabecera" style="font-size: 14px;">Nombre</div>
+                                    <div class="col-3 txtCabecera" style="font-size: 14px;">Número de Riesgo </div>
+                                   
+                                    <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Editar</div>
+                            </div>
             
                                   
-                                    <div class="row animated fadeIn" *ngFor="let item of listCliente; let index = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
+                                    <div class="row animated fadeIn" *ngFor="let item of listCliente; let i = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
                                         <div class="col-7 text-left txtDetalle">{{item.nombre}}</div>
-                                        <div class="col-3 text-left txtDetalle">{{item.riesgo == null? 0 : item.riesgo}}</div>
-                                        
+                                        <div *ngIf="item.valid" class="col-3 text-left txtDetalle">
+                                            {{item.riesgo == null? 0 : item.riesgo}} 
+                                            
+                                        </div>
+                                        <div *ngIf="!item.valid" class="col-3 text-left txtDetalle">
+                                            
+                                            <input maxlength="1" onkeypress="return (event.charCode >=49 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
+                                        </div>
                                       
-                                        <div class="col-2 text-center txtDetalle">
-                                    
+                                        <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
                                             <img src="assets/icons/edit.png" title="Editar" alt=""
-                                               (click)="update(item)"  style="cursor: pointer;width: 24px;" />
+                                               (click)="update(item,i,'CLIENTE')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
+                                        <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
+                                            <img src="assets/icons/accept.png" title="Editar" alt=""
+                                               (click)="save(item.countRiesgo,i,'CLIENTE',item.id)"  style="cursor: pointer;width: 24px;" />
+
+                                               <img src="assets/icons/cancelar.png" title="Editar" alt=""
+                                               (click)="cancelar(item,i,'CLIENTE')"  style="cursor: pointer;width: 24px;" />
+                                        </div>
                                     </div>
                             </div>
                         </div>
