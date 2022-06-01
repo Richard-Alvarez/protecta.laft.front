@@ -116,6 +116,19 @@ border-bottom:2px solid #FA7000;
 .buttonSinBorder{
   border-radius : 20px;
 }
+
+.colorButton{
+  color: #B4B5D9 !important;
+  border: 1px solid #B4B5D9 !important;
+}
+.colorButton:hover{
+  background: transparent !important;
+
+}
+.colorButton::placeholder{
+  color: #B4B5D9 !important;
+
+}
 .nobor {
   border: 2px solid transparent !important;
 }
