@@ -70,11 +70,14 @@
                                                (click)="update(item,i,'Geografica')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                         <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
-                                            <img src="assets/icons/accept.png" title="Editar" alt=""
-                                               (click)="save(item.countRiesgo,i,'Geografica')"  style="cursor: pointer;width: 24px;" />
+                                            <div style="padding-top: 5px;">
+                                                <img src="assets/icons/check-mark.png" title="Aceptar" alt=""
+                                               (click)="save(item.countRiesgo,i,'Geografica')"  style="cursor: pointer;width: 24px; float: left;" />
 
-                                               <img src="assets/icons/cancelar.png" title="Editar" alt=""
-                                               (click)="cancelar(item,i,'Geografica')"  style="cursor: pointer;width: 24px;" />
+                                               <img src="assets/icons/cross.png" title="Eliminar" alt=""
+                                               (click)="cancelar(item,i,'Geografica')"  style="cursor: pointer;width: 24px;float: right;" />
+                                            </div>
+                                            
                                         </div> 
                                     </div>
                             </div>
