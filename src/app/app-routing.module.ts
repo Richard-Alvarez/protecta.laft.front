@@ -204,6 +204,7 @@ const routes: Routes = [
   { path: 'report2', component: TemplateReportDemandaIndividualComponent},
   { path: 'riesgo', component: RiesgoComponent},
   
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes), RecaptchaModule.forRoot()],

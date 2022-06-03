@@ -276,7 +276,8 @@ class Rutas {
   public urlGetListaGeograficaRiesgo: string = this.base + "monitoreoSenales/getListaGeograficaRiesgo"
   public urlGetListaProductoRiesgo: string = this.base + "monitoreoSenales/getListaProductoRiesgo"
   public urlGetListaClienteRiesgo: string = this.base + "monitoreoSenales/getListaClienteRiesgo"
- 
+  public urlUpdateRisgo: string = this.base + "monitoreoSenales/getUpdateRiesgo"
+  
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')
