@@ -62,7 +62,7 @@
                                         </div>
                                         <div *ngIf="!item.valid" class="col-5 text-left txtDetalle">
                                             
-                                            <input maxlength="1" onkeypress="return (event.charCode >=49 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
+                                            <input maxlength="1" onkeypress="return (event.charCode >=48 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
                                         </div>
                                         
                                       
@@ -71,10 +71,10 @@
                                                (click)="update(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                         <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
-                                            <img src="assets/icons/accept.png" title="Editar" alt=""
+                                            <img src="assets/icons/accept.png" title="Guardar" alt=""
                                                (click)="save(item.countRiesgo,i,'GEOGRAFICA',item.id)"  style="cursor: pointer;width: 24px;" />
 
-                                               <img src="assets/icons/cancelar.png" title="Editar" alt=""
+                                               <img src="assets/icons/cancelar.png" title="Eliminar" alt=""
                                                (click)="cancelar(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                     </div>
@@ -103,7 +103,7 @@
                                         </div>
                                         <div *ngIf="!item.valid" class="col-3 text-left txtDetalle">
                                             
-                                            <input maxlength="1" onkeypress="return (event.charCode >=49 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
+                                            <input maxlength="1" onkeypress="return (event.charCode >=48 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
                                         </div>
                                         
                                       
@@ -112,10 +112,10 @@
                                                (click)="update(item,i,'PRODUCTO')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                         <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
-                                            <img src="assets/icons/accept.png" title="Editar" alt=""
+                                            <img src="assets/icons/accept.png" title="Guardar" alt=""
                                                (click)="save(item.countRiesgo,i,'PRODUCTO',item.id)"  style="cursor: pointer;width: 24px;" />
 
-                                               <img src="assets/icons/cancelar.png" title="Editar" alt=""
+                                               <img src="assets/icons/cancelar.png" title="Eliminar" alt=""
                                                (click)="cancelar(item,i,'PRODUCTO')"  style="cursor: pointer;width: 24px;" />
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                         </div>
                                         <div *ngIf="!item.valid" class="col-3 text-left txtDetalle">
                                             
-                                            <input maxlength="1" onkeypress="return (event.charCode >=49 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
+                                            <input maxlength="1" onkeypress="return (event.charCode >=48 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
                                         </div>
                                       
                                         <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
@@ -152,10 +152,10 @@
                                                (click)="update(item,i,'CLIENTE')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                         <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
-                                            <img src="assets/icons/accept.png" title="Editar" alt=""
+                                            <img src="assets/icons/accept.png" title="Guardar" alt=""
                                                (click)="save(item.countRiesgo,i,'CLIENTE',item.id)"  style="cursor: pointer;width: 24px;" />
 
-                                               <img src="assets/icons/cancelar.png" title="Editar" alt=""
+                                               <img src="assets/icons/cancelar.png" title="Eliminar" alt=""
                                                (click)="cancelar(item,i,'CLIENTE')"  style="cursor: pointer;width: 24px;" />
                                         </div>
                                     </div>
