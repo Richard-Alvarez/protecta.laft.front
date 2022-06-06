@@ -862,7 +862,6 @@ export class C2Detailv2Component implements OnInit, OnDestroy {
             if (this.tipoClienteGC == 'C2-BANDEJA') {
 
 
-                debugger
                 if (this.IdLista == 1) {
                     this.internationalList = await this.userConfigService.getInternationalLists(dataService)
                     this.internationalList.forEach((it, i) => {
@@ -925,7 +924,6 @@ export class C2Detailv2Component implements OnInit, OnDestroy {
                 })
                 return arrayCoincidList
             } else if (this.tipoClienteGC == 'ACEPTA-COINCID') {
-                debugger
                 this.uncheckInternationalLists = []
                 this.uncheckSacList = []
                 this.uncheckPepLists = []
@@ -1145,7 +1143,6 @@ export class C2Detailv2Component implements OnInit, OnDestroy {
 
 
             else {
-                debugger
                 respListasWithCoincid = await this.userConfigService.GetListaResultadosCoincid(dataService)
                 let indice = 0
                 let array: any[] = respListasWithCoincid.filter((obj, index, array) => {
@@ -1217,7 +1214,6 @@ export class C2Detailv2Component implements OnInit, OnDestroy {
                 objNewLista.SDESTIPOLISTA = lis.SDESTIPOLISTA
                 let respClientesCoincid = respListasWithCoincid.filter(it => {
                     if (it.NIDTIPOLISTA == lis.NIDTIPOLISTA) {
-                        debugger;
                         let objClienteCoin: any = {}
                         objClienteCoin.SNOM_COMPLETO = it.SNOM_COMPLETO
                         objClienteCoin.NACEPTA_COINCIDENCIA = it.NACEPTA_COINCIDENCIA

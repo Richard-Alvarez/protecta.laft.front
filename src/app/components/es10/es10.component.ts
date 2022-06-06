@@ -72,7 +72,6 @@ export class Es10Component implements OnInit {
     if ( this.SRIEGO == "0" && this.SMONEDA == "0" && this.SPOLIZA == "0" && this.SREGISTRO == ""){
       this.Response.ListEs10 = this.Response.es10
     }else{
-      debugger;
       if(this.SRIEGO != "0")
       {
         this.Response.ListEs10 = this.Response.ListEs10.filter(t=>t.sRiesgo == this.SRIEGO)
