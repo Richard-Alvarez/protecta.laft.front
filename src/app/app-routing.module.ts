@@ -98,6 +98,7 @@ import { ZonaGeograficaComponent } from './components/zona-geografica/zona-geogr
 import { TemplateReporteBusquedaDemandaComponent } from './components/responsable/templates/template-reporte-busqueda-demanda/template-reporte-busqueda-demanda.component';
 import { TemplateReportDemandaIndividualComponent } from './components/responsable/templates/template-report-demanda-individual/template-report-demanda-individual.component';
 import { C2Detailv2Component } from './pages/forms/c2-detailv2/c2-detailv2.component';
+import { RiesgoComponent } from './components/riesgo/riesgo.component';
 
 //fin formularios antiguos
 
@@ -201,6 +202,7 @@ const routes: Routes = [
   { path: 'informe-KRI', component: InformeKRIComponent},
   { path: 'report', component: TemplateReporteBusquedaDemandaComponent},
   { path: 'report2', component: TemplateReportDemandaIndividualComponent},
+  { path: 'riesgo', component: RiesgoComponent},
   
   
 ];

@@ -1,0 +1,180 @@
+<app-navbar></app-navbar>
+<main class="container-fluid app-main " style="padding-left: 7rem;padding-right: 7rem;">
+    <div class="row">
+        <button class="btn btn-link text-secondary" style="padding-left: 6px;" routerLink="/home" title="Regresar al Pantalla Principal">
+            <span class="fas fa-chevron-left"></span>  Pantalla Principal
+        </button>
+    </div>
+
+        
+    <div class="row mb-2 mt-2 pb-3">
+        <div class="Header">
+            <div class="col-lg-12" style="padding-left: 0px;">
+                <h4 class="TitleLine">Mantenimiento de Riesgos</h4>
+            </div>
+        </div>
+    </div>
+    
+        
+        <div class="row mb-2 mt-2 pb-3" style="display: flex;justify-content: center;">
+            <div class="col-12 Header">
+
+
+                <div class="card-header bordesCabecera" style="background: white;">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="nav-item">
+                            <a class="colorLetra nav-link active" data-toggle="tab" href="#Zona"
+                                style="font-size:17px;">Zona Geográfica</a>
+                        </li>
+    
+                        <li class="nav-item">
+                            <a class="colorLetra nav-link" data-toggle="tab" href="#Producto"
+                                style="font-size:17px;">Productos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="colorLetra nav-link" data-toggle="tab" href="#Cliente"
+                                style="font-size:17px;">Clientes</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="container-fluid tab-pane  active" id="Zona">
+                
+                
+                        <div class="row">
+                            <div class="borderFormat col-12">
+                                    <div class="row" style="border-bottom: 2px solid #26296D;">
+                                            <div class="col-5 txtCabecera" style="font-size: 14px;">Nombre</div>
+                                            <div class="col-5 txtCabecera" style="font-size: 14px;">Número de Riesgo</div>
+                                           
+                                            <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Editar</div>
+                                    </div>
+            
+                                    
+                                    <div class="row animated fadeIn" *ngFor="let item of listGeografica; let i = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
+                                        
+                                        <div class="col-5 text-left txtDetalle">{{item.nombre}}</div>
+                                        <div *ngIf="item.valid" class="col-5 text-left txtDetalle">
+                                            {{item.riesgo == null? 0 : item.riesgo}} 
+                                            
+                                        </div>
+                                        <div *ngIf="!item.valid" class="col-5 text-left txtDetalle">
+                                            <div>
+                                                <input maxlength="1" onkeypress="return (event.charCode >=49 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                      
+                                        <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
+                                            <img src="assets/icons/edit.png" title="Editar" alt=""
+                                               (click)="update(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
+                                        </div> 
+                                        <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
+                                            <div style="padding-top: 5px;">
+                                                
+                                                <a><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer;font-size: 24px;padding-right: 15px;"  (click)="save(item.countRiesgo,i,'GEOGRAFICA',item.id)" ></i></a>
+                                               <a><i class="far fa-times-circle" style="color:black;cursor:pointer;font-size: 24px;"  (click)="cancelar(item,i,'GEOGRAFICA')"  ></i></a> 
+                                                
+                                               
+                                            </div>
+                                            
+                                        </div> 
+                                    </div>
+                            </div>
+                        </div>
+                       
+                        <br><br>
+                    </div> 
+                    
+                    <div class="container-fliud tab-pane fade" id="Producto"> 
+                        <div class="row">
+                            <div class="borderFormat col-12">
+                                    <div class="row" style="border-bottom: 2px solid #26296D;">
+                                            <div class="col-7 txtCabecera" style="font-size: 14px;">Nombre</div>
+                                            <div class="col-3 txtCabecera" style="font-size: 14px;">Número de Riesgo </div>
+                                           
+                                            <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Editar</div>
+                                    </div>
+            
+                                  
+                                    <div class="row animated fadeIn" *ngFor="let item of listProducto; let i = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
+                                        <div class="col-7 text-left txtDetalle">{{item.nombre}}</div>
+                                        <div *ngIf="item.valid" class="col-3 text-left txtDetalle">
+                                            {{item.riesgo == null? 0 : item.riesgo}} 
+                                            
+                                        </div>
+                                        <div *ngIf="!item.valid" class="col-3 text-left txtDetalle">
+                                            
+                                            <input maxlength="1" onkeypress="return (event.charCode >=49 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
+                                        </div>
+                                        
+                                      
+                                        <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
+                                            <img src="assets/icons/edit.png" title="Editar" alt=""
+                                               (click)="update(item,i,'PRODUCTO')"  style="cursor: pointer;width: 24px;" />
+                                        </div> 
+                                        <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
+                                        
+                                               <a><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer;font-size: 24px;padding-right: 15px;"  (click)="save(item.countRiesgo,i,'PRODUCTO',item.id)" ></i></a>
+                                               <a><i class="far fa-times-circle" style="color:black;cursor:pointer;font-size: 24px;"  (click)="cancelar(item,i,'PRODUCTO')"  ></i></a> 
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                       
+                        <br><br>
+                    </div>
+
+                    <div class="container-fliud tab-pane fade" id="Cliente"> 
+                        <div class="row">
+                            <div class="borderFormat col-12">
+                                <div class="row" style="border-bottom: 2px solid #26296D;">
+                                    <div class="col-7 txtCabecera" style="font-size: 14px;">Nombre</div>
+                                    <div class="col-3 txtCabecera" style="font-size: 14px;">Número de Riesgo </div>
+                                   
+                                    <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Editar</div>
+                            </div>
+            
+                                  
+                                    <div class="row animated fadeIn" *ngFor="let item of listCliente; let i = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
+                                        <div class="col-7 text-left txtDetalle">{{item.nombre}}</div>
+                                        <div *ngIf="item.valid" class="col-3 text-left txtDetalle">
+                                            {{item.riesgo == null? 0 : item.riesgo}} 
+                                            
+                                        </div>
+                                        <div *ngIf="!item.valid" class="col-3 text-left txtDetalle">
+                                            
+                                            <input maxlength="1" onkeypress="return (event.charCode >=49 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
+                                        </div>
+                                      
+                                        <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
+                                            <img src="assets/icons/edit.png" title="Editar" alt=""
+                                               (click)="update(item,i,'CLIENTE')"  style="cursor: pointer;width: 24px;" />
+                                        </div> 
+                                        <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
+                                           <a><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer;font-size: 24px;padding-right: 15px;"  (click)="save(item.countRiesgo,i,'CLIENTE',item.id)" ></i></a>
+                                               <a><i class="far fa-times-circle" style="color:black;cursor:pointer;font-size: 24px;"  (click)="cancelar(item,i,'CLIENTE')"  ></i></a> 
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                       
+                        <br><br>
+                    </div>
+                </div>
+
+               
+        </div>
+    </div>
+    <div class="" style="padding-bottom: 80px;"> 
+
+
+
+    </div>
+</main>
+
+
+<app-footer></app-footer>

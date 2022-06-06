@@ -273,6 +273,11 @@ class Rutas {
   public urlDelEliminarDemanda: string = this.base + "monitoreoSenales/DelEliminarDemanda"
 
   public urlGetEliminarArchivo: string = this.base + "monitoreoSenales/GetEliminarArchivo"
+  public urlGetListaGeograficaRiesgo: string = this.base + "monitoreoSenales/getListaGeograficaRiesgo"
+  public urlGetListaProductoRiesgo: string = this.base + "monitoreoSenales/getListaProductoRiesgo"
+  public urlGetListaClienteRiesgo: string = this.base + "monitoreoSenales/getListaClienteRiesgo"
+  public urlUpdateRisgo: string = this.base + "monitoreoSenales/getUpdateRiesgo"
+  
   
   LimpiarDataGestor() {
     localStorage.removeItem('DataGuardada')

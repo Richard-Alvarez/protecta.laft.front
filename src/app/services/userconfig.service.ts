@@ -2278,9 +2278,60 @@ export class UserconfigService {
         return reject(error)
       }
     })
+
   }
 
+  UpdateRiesgo(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.post(this.core.config.rest.urlUpdateRisgo, data).subscribe(response => {
+          return resolve(response)
+        })
+      } catch (error) {
+        return reject(error)
+      }
+    })
 
+  }
+
+  
+
+  GetListaGeograficaRiesgo(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetListaGeograficaRiesgo).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  
+  GetListaClientesRiesgo(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetListaClienteRiesgo).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  GetListaProductoRiesgo(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.laft.get(this.core.config.rest.urlGetListaProductoRiesgo).subscribe((response) => {
+          return resolve(response);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
 
 
 }
