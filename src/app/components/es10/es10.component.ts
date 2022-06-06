@@ -278,7 +278,14 @@ export class Es10Component implements OnInit {
           a.download = 'Plantilla de Anexo ES10.xlsx'
           a.click()
         };
+        var source = 'assets/img/instrutivo.png';
+        var b = document.createElement('a');
+        b.download = 'Instrutivo de plantilla Anexo ES10.png';
+        b.target = '_blank';
+        b.href= source;
+        b.click();
       });
+
     } catch (error) {
 
       Swal.fire('Información', 'Error al descargar Excel', 'error');
