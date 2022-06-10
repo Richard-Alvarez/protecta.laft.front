@@ -37,7 +37,7 @@ export class RiesgoComponent implements OnInit {
     //let response = 
     await this.userConfig.GetListaGeograficaRiesgo().then(async (response) =>{
       this.listGeografica = response.lista
-      this.listGeografica.forEach(it =>{ it.valid = true,it.countRiesgo = '0'})
+      this.listGeografica.forEach(it =>{ it.valid = true,it.countRiesgo = it.riesgo})
     })
    
     console.log(this.listGeografica)
@@ -47,7 +47,7 @@ export class RiesgoComponent implements OnInit {
    // let response = 
     await this.userConfig.GetListaClientesRiesgo().then(async (response) =>{
       this.listCliente = response.lista
-      this.listCliente.forEach(it =>{ it.valid = true, it.countRiesgo = '0'})
+      this.listCliente.forEach(it =>{ it.valid = true, it.countRiesgo = it.riesgo})
     })
     console.log(this.listCliente)
   }
@@ -56,7 +56,7 @@ export class RiesgoComponent implements OnInit {
     //let response = 
     await this.userConfig.GetListaProductoRiesgo().then(async (response) =>{
       this.listProducto = response.lista
-      this.listProducto.forEach(it =>{it.valid = true,it.countRiesgo = '0'})
+      this.listProducto.forEach(it =>{it.valid = true,it.countRiesgo = it.riesgo})
     })
     console.log(this.listProducto)
     

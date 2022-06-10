@@ -38,6 +38,8 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class="pt-3"><strong>Considerando el nivel de riesgo : 1 como menos riesgoso , 5 como más riesgoso y 0 para no considerarlo.</strong> </div>
                 
                 <div class="tab-content">
                     <div class="container-fluid tab-pane  active" id="Zona">
@@ -61,8 +63,10 @@
                                             
                                         </div>
                                         <div *ngIf="!item.valid" class="col-5 text-left txtDetalle">
+                                            <div>
+                                                <input maxlength="1" onkeypress="return (event.charCode >=48 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton"  style="width: 120px;height: 30px;" value="{{item.riesgo}}" >
+                                            </div>
                                             
-                                            <input maxlength="1" onkeypress="return (event.charCode >=48 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton" value="{{item.riesgo == null? 0 : item.riesgo}}" >
                                         </div>
                                         
                                       
@@ -71,11 +75,14 @@
                                                (click)="update(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                         <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
-                                            <img src="assets/icons/accept.png" title="Guardar" alt=""
-                                               (click)="save(item.countRiesgo,i,'GEOGRAFICA',item.id)"  style="cursor: pointer;width: 24px;" />
-
-                                               <img src="assets/icons/cancelar.png" title="Eliminar" alt=""
-                                               (click)="cancelar(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
+                                            <div style="padding-top: 5px;">
+                                                
+                                                <a><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer;font-size: 24px;padding-right: 15px;"  (click)="save(item.countRiesgo,i,'GEOGRAFICA',item.id)" ></i></a>
+                                               <a><i class="far fa-times-circle" style="color:black;cursor:pointer;font-size: 24px;"  (click)="cancelar(item,i,'GEOGRAFICA')"  ></i></a> 
+                                                
+                                               
+                                            </div>
+                                            
                                         </div> 
                                     </div>
                             </div>
@@ -112,11 +119,9 @@
                                                (click)="update(item,i,'PRODUCTO')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                         <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
-                                            <img src="assets/icons/accept.png" title="Guardar" alt=""
-                                               (click)="save(item.countRiesgo,i,'PRODUCTO',item.id)"  style="cursor: pointer;width: 24px;" />
-
-                                               <img src="assets/icons/cancelar.png" title="Eliminar" alt=""
-                                               (click)="cancelar(item,i,'PRODUCTO')"  style="cursor: pointer;width: 24px;" />
+                                        
+                                               <a><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer;font-size: 24px;padding-right: 15px;"  (click)="save(item.countRiesgo,i,'PRODUCTO',item.id)" ></i></a>
+                                               <a><i class="far fa-times-circle" style="color:black;cursor:pointer;font-size: 24px;"  (click)="cancelar(item,i,'PRODUCTO')"  ></i></a> 
                                         </div>
                                     </div>
                             </div>
@@ -152,11 +157,8 @@
                                                (click)="update(item,i,'CLIENTE')"  style="cursor: pointer;width: 24px;" />
                                         </div> 
                                         <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
-                                            <img src="assets/icons/accept.png" title="Guardar" alt=""
-                                               (click)="save(item.countRiesgo,i,'CLIENTE',item.id)"  style="cursor: pointer;width: 24px;" />
-
-                                               <img src="assets/icons/cancelar.png" title="Eliminar" alt=""
-                                               (click)="cancelar(item,i,'CLIENTE')"  style="cursor: pointer;width: 24px;" />
+                                           <a><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer;font-size: 24px;padding-right: 15px;"  (click)="save(item.countRiesgo,i,'CLIENTE',item.id)" ></i></a>
+                                               <a><i class="far fa-times-circle" style="color:black;cursor:pointer;font-size: 24px;"  (click)="cancelar(item,i,'CLIENTE')"  ></i></a> 
                                         </div>
                                     </div>
                             </div>
