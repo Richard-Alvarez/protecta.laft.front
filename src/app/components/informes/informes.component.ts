@@ -358,7 +358,6 @@ async DescargarReporteGeneral(item){
   let nombreMesFin = item.FECHA_PERIODO.substr(17,2)
   let resultadoInicio = this.NombreMeses.filter(it => it.mes == nombreMesInicio)
   let resultadoFin = this.NombreMeses.filter(it => it.mes == nombreMesFin)
-  debugger
   this.mesIncio = resultadoInicio[0].nombre
   this.mesFin = resultadoFin[0].nombre
   console.log("this.mesIncio",this.mesIncio)
@@ -401,7 +400,6 @@ async DescargarReporteGeneral(item){
   this.ListaAlertaContraparte = await this.DataAlertas(4,item.NPERIODO_PROCESO)
   this.ListaAlertaClientesC1  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C1' )
   this.RespuestaAlertaC1 = this.ListaAlertaClientesC1[0].NIDRESPUESTA
-  debugger
   this.ListaEmpresasC1 = await this.userConfigService.GetListaEmpresas({NPERIODO_PROCESO : item.NPERIODO_PROCESO})
   this.CantidadEmpresasC1 = this.ListaEmpresasC1.length
   this.ListaAlertaClientesC3  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'C3' )

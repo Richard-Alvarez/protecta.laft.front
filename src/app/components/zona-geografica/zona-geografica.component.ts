@@ -68,7 +68,6 @@ export class ZonaGeograficaComponent implements OnInit {
     datosExcel.NPERIODO_PROCESO = this.NPERIODO_PROCESO;
     datosExcel.VALIDADOR = 'ZONAGEOGRAFICA'
     this.ResultadoExcel = await this.userConfigService.GetRegistrarDatosZonaGeografica(datosExcel)
-    debugger;
     this.NombreArchivo = ''
     await this.reset()
     this.ArchivoAdjunto = { respPromiseFileInfo: [], listFileNameCortoInform: [], arrFiles: [], listFileNameInform: [] }

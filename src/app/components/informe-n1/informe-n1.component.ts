@@ -239,7 +239,6 @@ async Registrar(item,index){
     }).then(async (result) => {
       if (!result.dismiss) {
         this.core.loader.show()
-        debugger
         let data:any={}
         data.NPERIODO_PROCESO = item.NPERIODO_PROCESO
         data.SRUTA_ARCHIVO = 'INFORMES-N1' + '/' + item.NPERIODO_PROCESO + '/' + this.ArchivoAdjunto.listFileNameInform[0]

@@ -99,7 +99,6 @@ export class InformeKRIComponent implements OnInit {
   }
 
   async AgregarAdjunto(evento, item, index) {
-    debugger
     console.log("entro en el agregar")
 
     this.ListaRegistros[index].FILE = "file"
@@ -411,7 +410,6 @@ export class InformeKRIComponent implements OnInit {
     this.zonaGeograficaCuadroFinalOtros = response.zonaGeograficaCuadro.find(it => it.SREGION == "OTROS")
     this.zonaGeograficaCuadroFinalExtranjero = response.zonaGeograficaCuadro.find(it => it.SREGION == "EXTRANJERO")
     if(response.zonaGeograficaCuadro.length > 0 ){
-      debugger;
       this.headersZonaGeografica = this.createHeader( _NPERIODO_PROCESO);
       for(let i = 0; i < this.headersZonaGeografica.length ; i++){
         let objOtros = response.zonaGeograficaCuadro.find(t=> t.NPERIODO_PROCESO == this.headersZonaGeografica[i].NPERIODO_PROCESO && t.SDESCRIPCION == "OTROS")

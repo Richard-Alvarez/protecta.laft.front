@@ -1885,7 +1885,6 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.get(this.core.config.rest.urlObtenerPlantillaEs10).subscribe(response => {
-          debugger;
           return resolve(response)
         })
       } catch (error) {
@@ -1897,7 +1896,6 @@ export class UserconfigService {
     return new Promise((resolve, reject) => {
       try {
         this.laft.get(this.core.config.rest.urlGetKriListContratantes).subscribe(response => {
-          debugger;
           return resolve(response)
         })
       } catch (error) {

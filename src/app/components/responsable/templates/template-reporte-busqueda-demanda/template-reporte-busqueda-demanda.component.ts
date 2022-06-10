@@ -154,7 +154,6 @@ export class TemplateReporteBusquedaDemandaComponent implements OnInit {
         theme: "grid",
         didDrawPage: (dataArg) => {
           console.log("dataArg",dataArg)
-          debugger
          
           const pages = dataArg.table.pageCount;
           pdf.setFontSize(20);
