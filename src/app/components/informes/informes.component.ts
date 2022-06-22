@@ -883,6 +883,7 @@ async setDataFile(event) {
             data.listFileName =  this.ArchivoAdjunto.listFileNameInform
             
             await this.userConfigService.UpdInformes(data)
+            
             await this.userConfigService.UploadFilesUniversalByRuta(data)
             await this.ListaInformes()
             this.core.loader.hide()

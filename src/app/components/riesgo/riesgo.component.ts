@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { data } from 'jquery';
+import { TabHeadingDirective } from 'ng-uikit-pro-standard';
 import { CoreService } from './../../../app/services/core.service';
 import { UserconfigService } from './../../../app/services/userconfig.service';
 import { DataRiesgo } from './interfaces/riesgo.interface';
@@ -16,6 +17,7 @@ export class RiesgoComponent implements OnInit {
   listProducto:DataRiesgoModel[] = []
   listCliente:DataRiesgoModel[] = []
   riesgoCount = 0
+  validSkeleton = true;
   constructor(
     private core: CoreService,
     private userConfig: UserconfigService,
@@ -36,8 +38,10 @@ export class RiesgoComponent implements OnInit {
     
     //let response = 
     await this.userConfig.GetListaGeograficaRiesgo().then(async (response) =>{
+      this.validSkeleton = false;
       this.listGeografica = response.lista
       this.listGeografica.forEach(it =>{ it.valid = true,it.countRiesgo = it.riesgo})
+     
     })
    
     console.log(this.listGeografica)

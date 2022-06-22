@@ -25,19 +25,7 @@ export class InformeN1Component implements OnInit {
   ArchivoAdjunto:any
   NombreArchivo:string = ''
   ListaRegistros: any = []
-  // [{
-  //   DFECHA_ESTADO: "04/04/2022",
-  //   'DFECHA_REGISTRO': "04/04/2022",
-  //   'FECHA_PERIODO': "01/01/2022 al 16/03/2022",
-  //   'FILE': "file",
-  //   'NIDUSUARIO_MODIFICA': null,
-  //   'NOMBRECOMPLETO': null,
-  //   'NPERIODO_PROCESO': 20220316,
-  //   'SESTADO': "1",
-  //   'SNOMBRE_ARCHIVO': null,
-  //   'SNOMBRE_ARCHIVO_CORTO': null,
-  //   'SRUTA_ARCHIVO': null
-  // }]
+
   IDListAnnoGlobal: number = 0
   public Usuario
   public PeriodoInforme
@@ -51,17 +39,10 @@ export class InformeN1Component implements OnInit {
   }
 
   async DescargarReporte(item){
-    //let response = await this.userConfigService.getInformeN1()
-    // console.log("item",item)
-    // console.log("response",this.dataReporte.mesagge)
-    // if(this.dataReporte.code == 1){
-    //   let mensaje = this.dataReporte.mesagge
-    //   this.SwalGlobal(mensaje)
-    //   return
-    // }
+    console.log(item)
+    //await this.userConfigService.GetSetearDataExcel(JSON.parse(this.dataReporte))
+    await this.userConfigService.GetSetearDataExcel({NPERIODO_PROCESO: item.NPERIODO_PROCESO})
     
-    await this.userConfigService.GetSetearDataExcel(JSON.parse(this.dataReporte))
-    //await this.userConfigService.GetSetearDataExcel({NPERIODO_PROCESO: 20211231  })
     let ruta = "/PLANTILLAS/N1/Generado/Reporte-N1-Plantilla.xlsx"
     let rutaElimina = "PLANTILLAS/N1/Generado"
     let nombreArchivo = 'Reporte-N1-Plantilla.xlsx'

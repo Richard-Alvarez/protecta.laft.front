@@ -53,38 +53,41 @@
                                            
                                             <div class="col-2 txtCabecera text-center" style="font-size: 14px;">Editar</div>
                                     </div>
-            
                                     
-                                    <div class="row animated fadeIn" *ngFor="let item of listGeografica; let i = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;">   
+                                    <app-skeleton-table *ngIf="validSkeleton"></app-skeleton-table>
+                                    
+                                        <div class="row animated fadeIn" *ngFor="let item of listGeografica; let i = index"  id="pintaGrilla"  style="padding-top: 1.1rem; padding-bottom: 1.1rem;" >   
                                         
-                                        <div class="col-5 text-left txtDetalle">{{item.nombre}}</div>
-                                        <div *ngIf="item.valid" class="col-5 text-left txtDetalle">
-                                            {{item.riesgo == null? 0 : item.riesgo}} 
-                                            
-                                        </div>
-                                        <div *ngIf="!item.valid" class="col-5 text-left txtDetalle">
-                                            <div>
-                                                <input maxlength="1" onkeypress="return (event.charCode >=48 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton"  style="width: 120px;height: 30px;" value="{{item.riesgo}}" >
+                                            <div class="col-5 text-left txtDetalle">{{item.nombre}}</div>
+                                            <div *ngIf="item.valid" class="col-5 text-left txtDetalle">
+                                                {{item.riesgo == null? 0 : item.riesgo}} 
+                                                
+                                            </div>
+                                            <div *ngIf="!item.valid" class="col-5 text-left txtDetalle">
+                                                <div>
+                                                    <input maxlength="1" onkeypress="return (event.charCode >=48 && event.charCode <=53)" style="width: min-content;" [(ngModel)]="item.countRiesgo" type="text" class="form-control buttonSinBorder colorButton"  style="width: 120px;height: 30px;" value="{{item.riesgo}}" >
+                                                </div>
+                                                
                                             </div>
                                             
+                                          
+                                            <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
+                                                <img src="assets/icons/edit.png" title="Editar" alt=""
+                                                   (click)="update(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
+                                            </div> 
+                                            <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
+                                                <div style="padding-top: 5px;">
+                                                    
+                                                    <a><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer;font-size: 24px;padding-right: 15px;"  (click)="save(item.countRiesgo,i,'GEOGRAFICA',item.id)" ></i></a>
+                                                   <a><i class="far fa-times-circle" style="color:black;cursor:pointer;font-size: 24px;"  (click)="cancelar(item,i,'GEOGRAFICA')"  ></i></a> 
+                                                    
+                                                   
+                                                </div>
+                                                
+                                            </div> 
                                         </div>
-                                        
-                                      
-                                        <div *ngIf="item.valid" class="col-2 text-center txtDetalle">
-                                            <img src="assets/icons/edit.png" title="Editar" alt=""
-                                               (click)="update(item,i,'GEOGRAFICA')"  style="cursor: pointer;width: 24px;" />
-                                        </div> 
-                                        <div *ngIf="!item.valid"  class="col-2 text-center txtDetalle">
-                                            <div style="padding-top: 5px;">
-                                                
-                                                <a><i class="far fa-check-circle" style="color:#FA7000;cursor:pointer;font-size: 24px;padding-right: 15px;"  (click)="save(item.countRiesgo,i,'GEOGRAFICA',item.id)" ></i></a>
-                                               <a><i class="far fa-times-circle" style="color:black;cursor:pointer;font-size: 24px;"  (click)="cancelar(item,i,'GEOGRAFICA')"  ></i></a> 
-                                                
-                                               
-                                            </div>
-                                            
-                                        </div> 
-                                    </div>
+                                    
+                                   
                             </div>
                         </div>
                        

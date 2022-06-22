@@ -1,0 +1,95 @@
+.head-section {
+  width: 100%;
+  height: 120px;
+  background-color: rgb(182, 183, 250);
+}
+
+.banner-text {
+  color: #ffffff;
+  margin: 30px auto;
+}
+
+.profile-img-section {
+  margin: 50px auto;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: solid 1px #cccccc;
+}
+
+.profile-img {
+  border-radius: 50%;
+}
+
+.profile-details-section {
+  margin: 15px auto;
+  /* height: 100px; */
+}
+
+.profile-details-section .row {
+  padding-bottom: 20px;
+}
+
+.text1 {
+  height: 25px;
+  margin-top: 30px;
+  width: 50%;
+}
+
+.text2 {
+  height: 25px;
+  margin-top: 30px;
+  width: 65%;
+}
+
+.text3 {
+  height: 25px;
+  margin-top: 30px;
+  width: 80%;
+}
+
+.text4 {
+  height: 25px;
+  margin-top: 30px;
+  width: 95%;
+}
+
+.text5 {
+  height: 35px;
+  margin-top: 10px;
+  width: 90%;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.head-section:empty,
+.profile-img-section,
+.text1:empty,
+.text2:empty,
+.text3:empty,
+.text4:empty,
+.text5:empty {
+  animation: loading 1.1s infinite linear;
+  background: #dedfe1;
+  background-image: -webkit-linear-gradient(to right,
+      #dedfe1 0%,
+      #f2f3f5 20%,
+      #dedfe1 40%,
+      #dedfe1 100%);
+  background-image: linear-gradient(to right,
+      #dedfe1 0%,
+      #f2f3f5 20%,
+      #dedfe1 40%,
+      #dedfe1 100%);
+  background-repeat: no-repeat;
+}
+
+@keyframes loading {
+  0% {
+    background-position: -100px;
+  }
+
+  100% {
+    background-position: 200px;
+  }
+}

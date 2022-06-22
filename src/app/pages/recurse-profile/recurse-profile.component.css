@@ -274,7 +274,7 @@ a{
   padding-left: 0px;
   padding-right: 0px;
   height: auto;
-  max-height: 500px;
+  /* max-height: 500px; */
   
 }
 /* .colorButton{

@@ -208,6 +208,7 @@ import { ModalBusquedaDemandaComponent } from './pages/modal-busqueda-demanda/mo
 import { ConvertTextPipe } from './pipes/convert-text.pipe';
 import { C2Detailv2Component } from './pages/forms/c2-detailv2/c2-detailv2.component';
 import { RiesgoComponent } from './components/riesgo/riesgo.component';
+import { SkeletonTableComponent } from './skeleton-table/skeleton-table.component';
 //import { Validaciones } from './utils/validacionesRegex'
 
 @NgModule({
@@ -384,7 +385,8 @@ import { RiesgoComponent } from './components/riesgo/riesgo.component';
     ModalBusquedaDemandaComponent,
     ConvertTextPipe,
     C2Detailv2Component,
-    RiesgoComponent
+    RiesgoComponent,
+    SkeletonTableComponent
 
    
     //Validaciones
