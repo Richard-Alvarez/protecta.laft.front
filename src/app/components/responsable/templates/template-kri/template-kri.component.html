@@ -873,7 +873,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 14.5px">{{item.nCantAsegurados}}</span>
+        <span style="font-size: 14.5px" >{{item.nCantAsegurados | number:'':'es'}}</span>
       </p>
     </td>
     <td style="border: none; padding: 0cm 0cm 0cm 0cm">
@@ -892,10 +892,6 @@ style="
       </p>
     </td>
   </tr>
-  
-  
-  
-  
   
   <tr>
     <td style="border: none; padding: 0cm 0cm 0cm 0cm">
@@ -967,7 +963,7 @@ style="
           text-align: center;
         "
       >
-        <span style="font-size: 14.5px">{{Resultado.es10Total}}</span>
+        <span style="font-size: 14.5px">{{Resultado.es10Total | number:'':'es'}}</span>
       </p>
     </td>
     <td style="border: none; padding: 0cm 0cm 0cm 0cm">
@@ -1031,13 +1027,13 @@ style="
                 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{Resultado.es10CuadroSimpli.NTOTAL}}</span></p>
             </td>
             <td style="width:99.1pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt;">
-                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{Resultado.es10CuadroSimpli.SPORCENTAJE}}%</span></p>
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{Resultado.es10CuadroSimpli.SPORCENTAJE | number:'1.2-2'}}%</span></p>
             </td>
             <td style="width:77.15pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt;">
                 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{Resultado.es10CuadroGene.NTOTAL}}</span></p>
             </td>
             <td style="width:88.05pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt;">
-                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{Resultado.es10CuadroGene.SPORCENTAJE}}%</span></p>
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{Resultado.es10CuadroGene.SPORCENTAJE | number:'1.2-2'}}%</span></p>
             </td>
         </tr>
     </tbody>
@@ -1253,7 +1249,7 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;'><span style="font-size:14.5px;">Sistema Financiero</span></p>
         </td>
         <td *ngFor="let item of Resultado.headersActividadEconomica" style="width:10.62%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{item.SVALORESFINANCIERO}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">&nbsp;&nbsp;&nbsp;{{item.SVALORESFINANCIERO}}</span></p>
         </td>
         <!-- <td style="width:12.92%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">0</span></p>
@@ -1279,7 +1275,7 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;'><span style="font-size:14.5px;">Industria</span></p>
         </td>
         <td *ngFor="let item of Resultado.headersActividadEconomica" style="width:10.62%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;"> {{item.SVALORESINDUSTRIA}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">&nbsp;&nbsp;&nbsp;{{item.SVALORESINDUSTRIA}}</span></p>
         </td>
         <!-- <td style="width:12.92%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">0</span></p>
@@ -1305,7 +1301,7 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;'><span style="font-size:14.5px;">Entidades Estado</span></p>
         </td>
         <td *ngFor="let item of Resultado.headersActividadEconomica" style="width:10.62%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{item.SVALORESINSPUBLICAS}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">&nbsp;&nbsp;&nbsp;{{item.SVALORESINSPUBLICAS}}</span></p>
         </td>
         <!-- <td style="width:12.92%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">0</span></p>
@@ -1331,7 +1327,7 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;'><span style="font-size:14.5px;">Ense&ntilde;anza</span></p>
         </td>
         <td *ngFor="let item of Resultado.headersActividadEconomica" style="width:10.62%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{item.SVALORESEDUCATIVO}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">&nbsp;&nbsp;&nbsp;{{item.SVALORESEDUCATIVO}}</span></p>
         </td>
         <!-- <td style="width:12.92%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">0</span></p>
@@ -1357,7 +1353,7 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;'><span style="font-size:14.5px;">Otros</span></p>
         </td>
         <td *ngFor="let item of Resultado.headersActividadEconomica" style="width:10.62%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">{{item.SVALORESOTROS}}</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">&nbsp;&nbsp;&nbsp;{{item.SVALORESOTROS}}</span></p>
         </td>
         <!-- <td style="width:12.92%;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style="font-size:14.5px;">0</span></p>
@@ -1428,7 +1424,7 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:14.5px;font-family:"Calibri",sans-serif;'>{{item.NTOTAL}}</span></p>
         </td>
         <td style="width:60.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.5pt 0cm 3.5pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:14.5px;font-family:"Calibri",sans-serif;'>{{item.NPORCENTAJE}}%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:14.5px;font-family:"Calibri",sans-serif;'>{{item.NPORCENTAJE | number:'1.2-2'}}%</span></p>
         </td>
     </tr>
     
@@ -1449,7 +1445,7 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style='font-size:14.5px;font-family:"Calibri",sans-serif;color:black;'>{{Resultado.zonageofraficanacionalSubTotal.SUBTOTAL}}</span></strong></p>
         </td>
         <td style="width:60.0pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#DBE5F1;padding:0cm 3.5pt 0cm 3.5pt;height:13.5pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style='font-size:14.5px;font-family:"Calibri",sans-serif;color:black;'>{{Resultado.zonageofraficanacionalSubTotal.PROCENTAJE}}%</span></strong></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style='font-size:14.5px;font-family:"Calibri",sans-serif;color:black;'>{{Resultado.zonageofraficanacionalSubTotal.PROCENTAJE | number:'1.2-2'}}%</span></strong></p>
         </td>
     </tr>
 </tbody>
@@ -1494,7 +1490,7 @@ style="
             <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:14.5px;font-family:  "Calibri",sans-serif;'>{{item.NTOTAL}}</span></p>
         </td>
         <td style="width:60.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt;">
-            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:14.5px;font-family:  "Calibri",sans-serif;'>{{item.NPORCENTAJE}}%</span></p>
+            <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:14.5px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:14.5px;font-family:  "Calibri",sans-serif;'>{{item.NPORCENTAJE | number:'1.2-2'}}%</span></p>
         </td>
     </tr>
     <tr>
