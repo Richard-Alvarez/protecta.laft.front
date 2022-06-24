@@ -238,7 +238,7 @@
                                   </div>
                              </div>
                              <div class="desplace2">
-                                 <div class="d-flex form-group animated fadeIn"  id="pintaGrillaHistory" *ngFor="let item of arrayResponseHistory">
+                                 <div class="d-flex form-group animated fadeIn"  id="pintaGrillaHistory" *ngFor="let item of arrayResponseHistory | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let index = index ">
                                      <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sProfileName}}</div>
                                      <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sOpcion}}</div>
                                      <div class="txtDetalle2" style="text-align:left ;width: 20%;">{{item.sAccion}}</div>
@@ -272,6 +272,23 @@
                                     </div>
                                 </div>            
                             </div>
+
+                            <ng-container *ngIf="arrayResponseHistory!=null && arrayResponseHistory.length>0; then showPagination"></ng-container>
+                            <ng-template #showPagination>
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                         <!-- <ngb-pagination [(page)]="currentPage" [pageSize]="itemsPerPage"
+                                            [collectionSize]="totalItems" [maxSize]="maxSize" aria-label="Default pagination"
+                                            (pageChange)="pageChanged(currentPage)"> 
+                                            
+                                        </ngb-pagination>  -->
+                                        <ngb-pagination [collectionSize]="arrayResponseHistory.length" [(page)]="page" [maxSize]="5"
+                                        aria-label="Default pagination"></ngb-pagination>
+                                        <!-- <ngb-pagination [collectionSize]="processlistToShow.length" [(page)]="page" [maxSize]="5"
+                            aria-label="Default pagination"></ngb-pagination> -->
+                                    </div>
+                                </div>
+                            </ng-template>
                         </div>
                             <!-- <div class="row">
                                 <div class="col-lg-14 borderFormat">
