@@ -1,11 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import es from '@angular/common/locales/es';
 
 @Component({
   selector: 'app-template-kri',
   templateUrl: './template-kri.component.html',
   styleUrls: ['./template-kri.component.css']
 })
-export class TemplateKRIComponent implements OnInit {
+
+
+export class TemplateKRIComponent implements OnInit  {
 
   @Input() Resultado:any = {}
   dataResolucion = [
@@ -62,6 +66,6 @@ export class TemplateKRIComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    registerLocaleData( es );
   }
-
 }
