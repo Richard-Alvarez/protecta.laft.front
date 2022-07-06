@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
-import es from '@angular/common/locales/es';
+/* import es from '@angular/common/locales/es'; */
+/* import fr from '@angular/common/locales/fr'; */
+import en from '@angular/common/locales/en';
 
 @Component({
   selector: 'app-template-kri',
@@ -66,6 +68,8 @@ export class TemplateKRIComponent implements OnInit  {
   constructor() { }
 
   ngOnInit() {
-    registerLocaleData( es );
+    /* registerLocaleData( es ); */
+    registerLocaleData( en );
+    /* registerLocaleData( fr ); */
   }
 }

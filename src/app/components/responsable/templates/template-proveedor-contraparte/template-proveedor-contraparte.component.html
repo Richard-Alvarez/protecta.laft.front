@@ -1,4 +1,4 @@
-<div id="proveedor" style="font-size:14.0pt">
+<div id="proveedor" style="font-size:11.0pt">
 
    
     <img *ngIf="Validar !== 2" src="http://plataformasplaft.protectasecurity.pe/assets/img/protecta.png" width="200" height="50"> 
@@ -7,14 +7,14 @@
     </div>
     
 
-<div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" >
+<div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética; font-size: 14.5px;" >
     <p> 
         <strong style="font-family: arial Narrow, serif;">1.3 Señales de alerta - Relativas a los proveedores y contrapartes</strong>
       </p>   
     <div>  
        <div>
            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt">
+                <FONT FACE="Arial Narrow, serif" style="font-size:11.0pt">
                     <tbody>
                         <tr>
                             <td width="50px" style="padding-left: 10px; text-align: center;">
@@ -105,8 +105,8 @@
     </div>
 
     <div>
-        <div class="container" style="padding: 0px 200px;">
-            <br> 
+        <br>
+        <div class="container" style="padding: 0px 200px; font-size: 14.5px;">
             <p>
                 <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta P1, P2, P3</strong>
             </p>
@@ -139,8 +139,7 @@
         </div>
     </div>
     <div>
-        <div class="container" style="padding: 0px 200px;">
-            <br> 
+        <div class="container" style="padding: 0px 200px; font-size: 14.5px;">
             <p>
                 <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta P4, P5</strong>
             </p>
@@ -158,7 +157,7 @@
                 <strong style="font-family: arial Narrow, serif;"> Resultados:</strong> 
 
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="ListaUsufructuariosCon !=0;else SinData">
                         Con relación a la señal de alerta P4: Se revisó a las contrapartes correspondientes de la base de usufructuarios,
                          contra las listas especiales, listas internacionales y listas PEP. En el resultado se identificó {{ListaUsufructuariosCon.length}} coincidencias por usufructuarios.  
                     </li>
@@ -166,7 +165,7 @@
               
                 <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaUsufructuariosCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
                                 <tr>
                                     <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -228,23 +227,19 @@
                             </tbody>
                         </FONT>
                     </table>
-                    <br>
                 </div>
-                <br>
 
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="ListaRepresentantesAccionistasUsufructuariosCon >=0;else SinData">
                         Con relación a la señal de alerta P4: Se revisó a las contrapartes correspondientes de la base de representante legales y accionistas de 
                         usufructuarios, contra las listas especiales, listas internacionales y listas PEP, a los accionistas, socios o asociados que tengan directa o 
                         indirectamente más del 25% del capital social. En el resultado se identificó {{ListaRepresentantesAccionistasUsufructuariosCon.length}} coincidencias por representante legales y accionistas de usufructuarios. 
                     </li>
                 </ul>
-
-                <br>
                 
                 <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaRepresentantesAccionistasUsufructuariosCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
                                 <tr>
                                     <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -314,13 +309,11 @@
                             </tbody>
                         </FONT>
                     </table>
-                    <br>
                 </div>
-                <br>
                
 
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="ListaArrendatariosCon !=0;else SinData">
                         Con relación a la señal de alerta P4: Se revisó a las contrapartes correspondientes de la base de arrendatarios, contra las listas
                          especiales, listas internacionales y listas PEP. En el resultado se identificó {{ListaArrendatariosCon.length}}  coincidencias por arrendatarios.  
                     </li>
@@ -328,7 +321,7 @@
               
                 <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaArrendatariosCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
                                 <tr>
                                     <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -390,12 +383,10 @@
                             </tbody>
                         </FONT>
                     </table>
-                    <br>
                 </div>
-                <br>
 
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="ListaRepresentantesAccionistasArrendatariosCon !=0;else SinData">
                         Con relación a la señal de alerta P4: Se revisó a las contrapartes correspondientes de la base de representante legales y accionistas
                          de arrendatarios, contra las listas especiales, listas internacionales y listas PEP, a los accionistas, socios o asociados que tengan 
                          directa o indirectamente más del 25% del capital social. En el resultado se identificó {{ListaRepresentantesAccionistasArrendatariosCon.length}}  coincidencias por
@@ -405,7 +396,7 @@
               
                 <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaRepresentantesAccionistasArrendatariosCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
                                 <tr>
                                     <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -467,13 +458,11 @@
                             </tbody>
                         </FONT>
                     </table>
-                    <br>
                 </div>
-                <br>
                 
 
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="ListaCanalesCon !=0;else SinData">
                         Con relación a la señal de alerta P4: Se revisó a las contrapartes correspondientes de la base de canales, 
                         contra las listas especiales, listas internacionales y listas PEP. En el resultado se identificó {{ListaCanalesCon.length}} coincidencias por  
                     </li>
@@ -481,7 +470,7 @@
               
                 <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaCanalesCon !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
                                 <tr>
                                     <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -543,12 +532,10 @@
                             </tbody>
                         </FONT>
                     </table>
-                    <br>
                 </div>
-                <br>
 
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="ListaRroveedoresPro !=0;else SinData">
                         •Con relación a la señal de alerta P4: Se revisó a los proveedores correspondientes de la base de proveedores, 
                         contra las listas especiales, listas internacionales y listas PEP. En el resultado se identificó {{ListaRroveedoresPro.length}} coincidencias por proveedores. 
                     </li>
@@ -556,7 +543,7 @@
               
                 <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaRroveedoresPro !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
                                 <tr>
                                     <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -618,12 +605,10 @@
                             </tbody>
                         </FONT>
                     </table>
-                    <br>
                 </div>
-                <br>
               
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="ListaProveedoresCriticosPro !=0;else SinData">
                         Con relación a la señal de alerta P4: Se revisó a los proveedores correspondientes de la base de proveedores críticos, contra las listas especiales, listas internacionales y
                          listas PEP. En el resultado se identificó {{ListaProveedoresCriticosPro.length}} coincidencias por proveedores críticos. 
                     </li>
@@ -631,7 +616,7 @@
               
                 <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaProveedoresCriticosPro !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
                                 <tr>
                                     <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
@@ -693,12 +678,10 @@
                             </tbody>
                         </FONT>
                     </table>
-                    <br>
                 </div>
-                <br>
                 
                 <ul>
-                    <li style="font-family: arial Narrow, serif; text-align: justify">
+                    <li style="font-family: arial Narrow, serif; text-align: justify" *ngIf="ListaRepresentantesAccionistasPro !=0;else SinData">
                         Con relación a la señal de alerta P4: Se revisó a los proveedores correspondientes de la base de representante legales y accionistas de proveedores, 
                         contra las listas especiales, listas internacionales y listas PEP, a los accionistas, socios o asociados que tengan directa o indirectamente más del 25% del capital social.
                          En el resultado se identificó {{ListaRepresentantesAccionistasPro.length}} coincidencias por representante legales y accionistas de proveedores. 
@@ -707,9 +690,14 @@
               
                 <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="ListaRepresentantesAccionistasPro !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
                                 <tr>
+                                    <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
+                                        <p>
+                                            <strong>Nro.</strong>
+                                        </p>
+                                    </td>
                                     <td width="14%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;">
                                         <p>
                                             <strong>TIPO DOC.</strong>
@@ -737,7 +725,12 @@
                                         </p>
                                     </td>
                                 </tr> 
-                                <tr *ngFor="let item of ListaRepresentantesAccionistasPro">
+                                <tr *ngFor="let item of ListaRepresentantesAccionistasPro;let i = index ">
+                                    <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                        <p>
+                                            {{ i + 1 }}
+                                        </p>
+                                    </td>   
                                     <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
                                         <p>
                                             {{item.TD_SDESCRIP}}
@@ -769,10 +762,62 @@
                             </tbody>
                         </FONT>
                     </table>
-                    <br>
+                </div>
+                <!-- *************************************************************************************************************************************************** -->
+                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                        <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
+                            <tbody>
+                                <tr>
+                                     <td width="9%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                        <p>
+                                            <strong>TIPO DOC.</strong>
+                                        </p>
+                                    </td>
+                                    <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                        <p>
+                                            <strong>N&ordm; DOC.</strong>
+                                        </p>
+                                    </td>
+                                    <td width="25%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                        <p>
+                                            <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                        </p>
+                                    </td>
+                                    <td width="300px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                        <p>
+                                            <strong>INFORMACI&Oacute;N ADICIONAL</strong>
+                                        </p>
+                                    </td> 
+                                </tr>
+                                <tr>
+                                    <td width="9%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
+                                        <p>
+                                           <br>
+                                        </p>
+                                    </td>
+                                    <td width="15%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
+                                        <p>
+                                            <br>
+                                        </p>
+                                    </td>
+                                    <td width="25%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
+                                        <p>
+                                            <br>
+                                        </p>
+                                    </td>
+                                    <td width="300px" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
+                                        <p>
+                                            <br>
+                                        </p>
+                                    </td> 
+                                </tr>
+                            </tbody>
+                        </FONT>
+                    </table>
                 </div>
                 <br>
-
+                <!-- *************************************************************************************************************************************************** -->
 
                 <ul>
                     <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -787,13 +832,13 @@
 
     </ng-template>
 </div>
-<p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: </p>
+<p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: </p>
 <ul>
-  <li style="font-family: arial Narrow, serif; text-align: justify"> 
+  <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"> 
     <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a>
   </li>
-  <li style="font-family: arial Narrow, serif; text-align: justify"> 
-    	P:\19. RIESGOS OPERATIVOS Y LAVADO DE ACTIVOS\19.04 SPLAFT\100.001 LAFT\37. Bases de datos
+  <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"> 
+    P:\19. RIESGOS OPERATIVOS Y LAVADO DE ACTIVOS\19.04 SPLAFT\19.04.04 LAFT\05.Informes Trimestrales Protecta
   </li>
 </ul>
 </div>

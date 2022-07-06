@@ -102,6 +102,10 @@ mesFin:string = ''
 
  }
 
+ 
+
+ 
+
  Export2Doc(element, filename = ''){
  
   setTimeout(function(){
@@ -369,13 +373,13 @@ async DescargarReporteGeneral(item){
     return
   }
   
-  this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
+   this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
   if(this.ValidadorRespondidoClientes.length > 0){
     let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
     this.SwalGlobal(mensaje)
     return
-  }
-  this.ValidadorRespondidoColaborador = await this.ValidardorRespuestas(2,item.NPERIODO_PROCESO)
+  } 
+   this.ValidadorRespondidoColaborador = await this.ValidardorRespuestas(2,item.NPERIODO_PROCESO)
   if(this.ValidadorRespondidoColaborador.length > 0){
     let mensaje = 'Debe cerrar todas las señales del grupo Colaborador'
     this.SwalGlobal(mensaje)
@@ -392,7 +396,7 @@ async DescargarReporteGeneral(item){
     let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
     this.SwalGlobal(mensaje)
     return
-  }
+  } 
 
   this.ListaAlertaClientes = await this.DataAlertas(1,item.NPERIODO_PROCESO)
   this.ListaAlertaColaborador = await this.DataAlertas(2,item.NPERIODO_PROCESO)
@@ -580,6 +584,8 @@ async DataAlertas(idgrupo,perido){
   Periodo:string = ''
   listaMasivos:any = []
   listaRenta:any = []
+  listaSimplificada:any = []
+  listaGeneral:any = []
   listaPepMasivos:any = []
   listaPepSoat:any = []
   listaPepRenta:any = []
@@ -613,17 +619,36 @@ async DataReporteC2Global(item){
       this.arrayDataResultadoGeneral =  await this.userConfigService.GetListaResultado(dataRG)
       this.arrayDataResultadoSimplificado =  await this.userConfigService.GetListaResultado(dataRS)
       this.core.loader.hide()
+      /* **************************************************************************************************** */
+      this.listaSimplificada = this.arrayDataResultadoSimplificado.filter(it => 
+        (it.NIDTIPOLISTA == 5 && it.RAMO == 76) ||
+        (it.NIDTIPOLISTA == 5 && it.RAMO == 66) ||
+        (it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76) || 
+        (it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 ) ||
+        (it.NIDTIPOLISTA == 2 && it.RAMO == 66) ||
+        (it.NIDTIPOLISTA == 2 && it.RAMO == 76) ||
+        (it.NIDTIPOLISTA == 2 && it.RAMO == 71));
+
+      this.listaGeneral = this.arrayDataResultadoGeneral.filter(it => 
+        (it.NIDTIPOLISTA == 5 && it.RAMO == 75) ||
+        (it.NIDTIPOLISTA == 2 && it.RAMO == 75) ||
+        (it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4) ||
+        (it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1));
+      /* **************************************************************************************************** */
 
       this.listaRenta = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
       this.listaMasivos = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76)
       this.listaEspecialSoat =  this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 66)
       this.listaEspecialRenta = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 76)
+
       this.listaPepRentaParticular = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 75)
       this.listaPepMasivos =  this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 )
       this.listaPepSoat =  this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 66)
       this.listaPepRenta = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 2 && it.RAMO == 76)
+      
       this.listaInternacionalRentaParticularWC = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4)
       this.listaInternacionalRentaParticularIDECON = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1)
+        
     console.log("listaPepRenta",this.listaPepRenta)
     
     
@@ -654,6 +679,7 @@ async DataReporteC2Global(item){
   this.listaSoat = []
   this.listaMasivos = []
   this.listaRenta = []
+  this.listaSimplificada = []
   this.listaAhorro = []
   this.listaPep = []
   this.listaEspecial = []
@@ -962,11 +988,11 @@ async setDataFile(event) {
   async prueba(evento,item,index){
     let listaAlertas = await this.userConfigService.GetAlertaResupuesta({ NPERIODO_PROCESO : item.NPERIODO_PROCESO, VALIDADOR : 1, INFORME : 'GENERAL'})
     let ValidadorCantidad = listaAlertas.filter(it => it.SESTADO == 1 )
-      if(ValidadorCantidad.length > 0){
+       if(ValidadorCantidad.length > 0){
         let mensaje = 'Debe generarse el reporte general para adjuntar el archivo '
         this.SwalGlobal(mensaje)
         return
-      }
+      } 
       
   }
  

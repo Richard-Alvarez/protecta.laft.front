@@ -8,24 +8,24 @@
 
     <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;font-size:14.0pt;" >
         <p> 
-          <strong style="font-family: arial Narrow, serif;">1.1.6	Devolución por depósito errado</strong>
+          <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">1.1.6	Devolución por depósito errado</strong>
         </p>
           
         <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
-            <FONT FACE="Arial Narrow, serif" style="font-size:14.0pt;">
+            <FONT FACE="Arial Narrow, serif" style="font-size:11.0pt;">
                 <tbody>
                     <tr>
-                        <td width="50px" style="padding-left: 10px;">
+                        <td width="50px" style="padding-left: 10px; text-align: center;">
                             <p>
                                 <strong>CÓDIGO</strong>
                             </p>
                         </td>
-                        <td width="400px" style="padding-left: 10px;">
+                        <td width="400px" style="padding-left: 10px; text-align: center;">
                             <p>
                                 <strong>SEÑAL DE ALERTA</strong>
                             </p>
                         </td>
-                        <td width="250px">
+                        <td width="250px" style="padding-left: 10px; text-align: center;">
                             <p align="center">
                                 <strong>PRODUCTO</strong>
                             </p>
@@ -52,7 +52,7 @@
         <br>
     </div>
 
-    <div class="container" style="padding: 0px 200px;font-size:14.0pt;">
+    <div class="container" style="padding: 0px 200px;font-size:11.0pt;">
         <p>
             <strong style="font-family: arial Narrow, serif; text-align: justify">Monitoreo Señales de alerta S3</strong>
         </p>
@@ -106,20 +106,88 @@
             <div *ngIf="Validar ==2">
                 <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of ObjListaAlertasS3">
                     El {{item.SPERFIL}} informo que {{item.NIDRESPUESTA == 1 ? 'si' : 'no'}} se identificaron pagos de una prima superior a la establecida con posterior 
-                    devolución de la diferencia por depósito errado.
+                    devolución de la diferencia por depósito errado al cierre del {{parent.Periodo}}.
                     </li>
             </div>
-           
         </ul> 
-        <br>       
-       
+        <br>  
+        <!-- ***************************************************************************************************************************************** -->  
+
+        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+            <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
+                <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
+                    <tbody>
+                        <tr>
+                            <td  width="10%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                <p>
+                                    <strong>N&ordm;</strong>
+                                </p>
+                            </td> 
+                             <td width="9%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                <p>
+                                    <strong>PRODUCTO</strong>
+                                </p>
+                            </td>
+                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                <p>
+                                    <strong>MONTO DEVUELTO S/.</strong>
+                                </p>
+                            </td>
+                            <td width="25%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                <p>
+                                    <strong>DOCUMENTO</strong>
+                                </p>
+                            </td>
+                            <td width="300px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                <p>
+                                    <strong>NOMBRE COMPLETO / RAZON SOCIAL</strong>
+                                </p>
+                            </td> 
+                        </tr>
+                        <!-- <tr *ngFor="let i = index "> -->
+                        <tr>
+                            <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                <p>
+                                    <!-- {{ i + 1 }} -->
+                                    <br>
+                                </p>
+                            </td>  
+                            <td width="9%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
+                                <p>
+                                   <br>
+                                </p>
+                            </td>
+                            <td width="15%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
+                                <p>
+                                    <br>
+                                </p>
+                            </td>
+                            <td width="25%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
+                                <p>
+                                    <br>
+                                </p>
+                            </td>
+                            <td width="300px" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
+                                <p>
+                                    <br>
+                                </p>
+                            </td> 
+                        </tr>
+                    </tbody>
+                </FONT>
+            </table>
+            <br>
+        </div>   
+        <!-- ***************************************************************************************************************************************** --> 
+        <p style="font-family: arial Narrow, serif; text-align: justify">Se concluye que los casos presentados no corresponden a operaciones inusuales.</p> 
+
         <p style="font-family: arial Narrow, serif; text-align: justify">Los archivos de trabajo se ubican en: </p>
         <ul>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
             <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a>
           </li>
           <li style="font-family: arial Narrow, serif; text-align: justify"> 
-            P:\19. RIESGOS OPERATIVOS Y LAVADO DE ACTIVOS\19.04 SPLAFT\100.001 LAFT\05.Informes Trimestrales Protecta\2021\INFORME TRIMESTRAL\3° Trimestre\1. PRODUCTOS
+            P:\19. RIESGOS OPERATIVOS Y LAVADO DE ACTIVOS\19.04 SPLAFT\19.04.04 LAFT\05.Informes Trimestrales Protecta
           </li>
         </ul>
        </div>
