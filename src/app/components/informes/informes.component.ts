@@ -373,7 +373,7 @@ async DescargarReporteGeneral(item){
     return
   }
   
-   this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
+/*    this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
   if(this.ValidadorRespondidoClientes.length > 0){
     let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
     this.SwalGlobal(mensaje)
@@ -396,7 +396,7 @@ async DescargarReporteGeneral(item){
     let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
     this.SwalGlobal(mensaje)
     return
-  } 
+  }  */
 
   this.ListaAlertaClientes = await this.DataAlertas(1,item.NPERIODO_PROCESO)
   this.ListaAlertaColaborador = await this.DataAlertas(2,item.NPERIODO_PROCESO)
@@ -581,10 +581,12 @@ async DataAlertas(idgrupo,perido){
   
   arrayDataResultadoGeneral:any = []
   arrayDataResultadoSimplificado:any = []
+  arrayAccionSimplificada:any = []
   Periodo:string = ''
   listaMasivos:any = []
   listaRenta:any = []
   listaSimplificada:any = []
+  listaACCIONSimplificada:any = []
   listaGeneral:any = []
   listaPepMasivos:any = []
   listaPepSoat:any = []
@@ -618,6 +620,7 @@ async DataReporteC2Global(item){
       this.core.loader.show()
       this.arrayDataResultadoGeneral =  await this.userConfigService.GetListaResultado(dataRG)
       this.arrayDataResultadoSimplificado =  await this.userConfigService.GetListaResultado(dataRS)
+      this.arrayAccionSimplificada = await this.userConfigService.GetListaResultado(dataRS)
       this.core.loader.hide()
       /* **************************************************************************************************** */
       this.listaSimplificada = this.arrayDataResultadoSimplificado.filter(it => 
@@ -635,6 +638,9 @@ async DataReporteC2Global(item){
         (it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4) ||
         (it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1));
       /* **************************************************************************************************** */
+      /* this.listaACCIONSimplificada = this.arrayAccionSimplificada.filter(it=>
+        ()); */
+
 
       this.listaRenta = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)
       this.listaMasivos = this.arrayDataResultadoSimplificado.filter(it => it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76)
