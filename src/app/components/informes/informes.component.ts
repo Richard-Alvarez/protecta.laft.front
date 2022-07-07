@@ -396,7 +396,9 @@ async DescargarReporteGeneral(item){
     let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
     this.SwalGlobal(mensaje)
     return
-  }  */
+  }  
+  
+  asd*/
 
   this.ListaAlertaClientes = await this.DataAlertas(1,item.NPERIODO_PROCESO)
   this.ListaAlertaColaborador = await this.DataAlertas(2,item.NPERIODO_PROCESO)
