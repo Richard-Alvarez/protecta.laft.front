@@ -1454,7 +1454,6 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
 
 
   async setDataFile(event) {
-
     let files = event.target.files;
 
     let arrFiles = Array.from(files)
@@ -1469,6 +1468,26 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
       let nameFile = item.split(".")
       if (nameFile.length > 2 || nameFile.length < 2) {
         statusFormatFile = true
+        if (statusFormatFile = true) {
+          swal.fire({
+            title: 'ERROR DE SUBIDA',
+            icon: 'warning',
+            text: 'El archivo no tiene el formato necesario, evitar poner puntos al nombre del archivo',
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonColor: '#FA7000',
+            confirmButtonText: 'Aceptar',
+            showCloseButton: true,
+            customClass: {
+              closeButton: 'OcultarBorde'
+            },
+    
+          }).then(async (result) => {
+    
+          }).catch(err => {
+    
+          })
+        }
         return
       }
       let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
