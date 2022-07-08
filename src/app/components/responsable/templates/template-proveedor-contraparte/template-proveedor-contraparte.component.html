@@ -764,7 +764,7 @@
                     </table>
                 </div>
                 <!-- *************************************************************************************************************************************************** -->
-                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
+                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="arrayDataP4 !=0;else SinData">
                     <table border="1" cellspacing="0" cellpadding="0" align="left" width="800px">
                         <FONT FACE="Arial Narrow, serif" style="font-size:9.0pt;">
                             <tbody>
@@ -790,25 +790,25 @@
                                         </p>
                                     </td> 
                                 </tr>
-                                <tr>
+                                <tr *ngFor="let item of arrayDataP4">
                                     <td width="9%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
                                         <p>
-                                           <br>
+                                            {{item.STIPO_DOCUMENTO}}
                                         </p>
                                     </td>
                                     <td width="15%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
                                         <p>
-                                            <br>
+                                            {{item.SNUM_DOCUMENTO_BUSQ}}
                                         </p>
                                     </td>
                                     <td width="25%" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
                                         <p>
-                                            <br>
+                                            {{item.SNOM_COMPLETO_BUSQ}}
                                         </p>
                                     </td>
                                     <td width="300px" style="padding:0cm 5.4pt 0cm 5.4pt;height:23.1pt; text-align: justify">
                                         <p>
-                                            <br>
+                                            <!-- {{item.SREPORT_COINCIDENCE}} -->
                                         </p>
                                     </td> 
                                 </tr>

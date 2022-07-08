@@ -188,6 +188,9 @@ class Rutas {
   public urlConsulta360Previous: string = this.base + "monitoreoSenales/Consulta360Previous";
   public urlConsultaWC: string = this.base + "monitoreoSenales/ConsultaWC";
   public urlGetListaResultado: string = this.base + "monitoreoSenales/GetListaResultado";
+  public urlGetListaAcciones: string = this.base + "monitoreoSenales/GetListaAcciones"; 
+  public urlGetListaNegativoCoincidencia: string = this.base + "monitoreoSenales/GetListaNegativoCoincidencia"; 
+  public urlGetListaP4: string = this.base + "monitoreoSenales/GetListaP4"; 
   public urlGetGrupoXSenal: string = this.base + "monitoreoSenales/GetGrupoXSenal";
   public urlGetListaAlertaComplemento: string = this.base + "monitoreoSenales/GetListaAlertaComplemento";
   public urlInsertUpdateComplemento: string = this.base + "monitoreoSenales/InsertUpdateComplemento";

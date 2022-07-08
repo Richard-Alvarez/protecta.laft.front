@@ -396,9 +396,7 @@ async DescargarReporteGeneral(item){
     let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
     this.SwalGlobal(mensaje)
     return
-  }  
-  
-  asd*/
+  } */
 
   this.ListaAlertaClientes = await this.DataAlertas(1,item.NPERIODO_PROCESO)
   this.ListaAlertaColaborador = await this.DataAlertas(2,item.NPERIODO_PROCESO)
@@ -448,6 +446,10 @@ async DescargarReporteGeneral(item){
       this.ListaCanalesCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 1) 
       this.ListaArrendatariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 4) 
       this.ListaRepresentantesAccionistasArrendatariosCon = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 4 && it.NIDSUBGRUPOSEN == 5) 
+
+      let dataListaP4:any = {}
+      dataListaP4.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
+      this.arrayDataP4 = await this.userConfigService.GetListaP4(dataListaP4) 
 
       
       this.ListaRroveedoresPro = this.listaProveedoresContraparte.filter(it => it.NIDGRUPOSENAL == 3 && it.NIDSUBGRUPOSEN == 0)
@@ -584,11 +586,17 @@ async DataAlertas(idgrupo,perido){
   arrayDataResultadoGeneral:any = []
   arrayDataResultadoSimplificado:any = []
   arrayAccionSimplificada:any = []
+  arrayAccionGeneral:any = []
+  arrayCoincidenceRegNeg:any = []
+  arrayDataP4:any = []
   Periodo:string = ''
   listaMasivos:any = []
   listaRenta:any = []
   listaSimplificada:any = []
   listaACCIONSimplificada:any = []
+  listaACCIONGeneral:any = []
+  listaCoincidenceRegNeg:any = []
+  listaDataP4:any = []
   listaGeneral:any = []
   listaPepMasivos:any = []
   listaPepSoat:any = []
@@ -619,10 +627,38 @@ async DataReporteC2Global(item){
     dataRS.NIDALERTA = 2
     dataRS.NIDREGIMEN = 2
 
+
+    let dataAccionRS:any = {}
+    dataAccionRS.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
+    dataAccionRS.NIDALERTA = 2
+    dataAccionRS.NIDREGIMEN = 2
+    dataAccionRS.PASO1 = 'corruption'
+    dataAccionRS.PASO2 = 'laundering'
+    dataAccionRS.PASO3 = 'terrorism'
+
+    let dataAccionRG:any = {}
+    dataAccionRG.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
+    dataAccionRG.NIDALERTA = 2
+    dataAccionRG.NIDREGIMEN = 1
+    dataAccionRG.PASO1 = 'corruption'
+    dataAccionRG.PASO2 = 'laundering'
+    dataAccionRG.PASO3 = 'terrorism'
+
+    let dataRegistroNegativoCoincidenceRS:any = {}
+    dataRegistroNegativoCoincidenceRS.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
+
+    let dataListaP4:any = {}
+    dataListaP4.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
+ 
       this.core.loader.show()
       this.arrayDataResultadoGeneral =  await this.userConfigService.GetListaResultado(dataRG)
       this.arrayDataResultadoSimplificado =  await this.userConfigService.GetListaResultado(dataRS)
-      this.arrayAccionSimplificada = await this.userConfigService.GetListaResultado(dataRS)
+
+      this.arrayAccionSimplificada = await this.userConfigService.GetListaAcciones(dataAccionRS) 
+      this.arrayAccionGeneral = await this.userConfigService.GetListaAcciones(dataAccionRG) 
+
+      this.arrayCoincidenceRegNeg = await this.userConfigService.GetListaNegativoCoincidencia(dataRegistroNegativoCoincidenceRS) 
+      this.arrayDataP4 = await this.userConfigService.GetListaP4(dataListaP4) 
       this.core.loader.hide()
       /* **************************************************************************************************** */
       this.listaSimplificada = this.arrayDataResultadoSimplificado.filter(it => 
@@ -640,8 +676,30 @@ async DataReporteC2Global(item){
         (it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4) ||
         (it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1));
       /* **************************************************************************************************** */
-      /* this.listaACCIONSimplificada = this.arrayAccionSimplificada.filter(it=>
-        ()); */
+        this.listaACCIONSimplificada = this.arrayAccionSimplificada.filter(it => 
+          (it.NIDTIPOLISTA == 5 && it.RAMO == 76) ||
+          (it.NIDTIPOLISTA == 5 && it.RAMO == 66) ||
+          (it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76) || 
+          (it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 ) ||
+          (it.NIDTIPOLISTA == 2 && it.RAMO == 66) ||
+          (it.NIDTIPOLISTA == 2 && it.RAMO == 76) ||
+          (it.NIDTIPOLISTA == 2 && it.RAMO == 71));  
+
+        this.listaACCIONGeneral = this.arrayAccionGeneral.filter(it => 
+            (it.NIDTIPOLISTA == 5 && it.RAMO == 75) ||
+            (it.NIDTIPOLISTA == 2 && it.RAMO == 75));
+      
+      /* **************************************************************************************************** */
+      this.listaCoincidenceRegNeg = this.arrayCoincidenceRegNeg.filter(it => 
+        (it.NIDTIPOLISTA == 5 && it.RAMO == 76) ||
+        (it.NIDTIPOLISTA == 5 && it.RAMO == 66) ||
+        (it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76) || 
+        (it.NIDTIPOLISTA == 2  && it.RAMO !== 75  && it.RAMO !== 76 && it.RAMO !== 66 ) ||
+        (it.NIDTIPOLISTA == 2 && it.RAMO == 66) ||
+        (it.NIDTIPOLISTA == 2 && it.RAMO == 76) ||
+        (it.NIDTIPOLISTA == 2 && it.RAMO == 71));
+
+
 
 
       this.listaRenta = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)

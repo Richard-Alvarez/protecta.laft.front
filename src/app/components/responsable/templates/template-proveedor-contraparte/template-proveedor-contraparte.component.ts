@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { InformesComponent } from '../../../../components/informes/informes.component'
 
 @Component({
   selector: 'app-template-proveedor-contraparte',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TemplateProveedorContraparteComponent implements OnInit {
 
-
+  @Input() parent:InformesComponent
   @Input() CargosConcatenadosContraparte
   @Input() RespuestaGlobalContraparteP5
   @Input() RespuestaGlobalContraparte
@@ -23,7 +24,7 @@ export class TemplateProveedorContraparteComponent implements OnInit {
   @Input() ListaCanalesCon
   @Input() ListaArrendatariosCon
   @Input() ListaRepresentantesAccionistasArrendatariosCon
-  
+  @Input() arrayDataP4
   @Input() ListaRroveedoresPro
   @Input() ListaProveedoresCriticosPro
   @Input() ListaRepresentantesAccionistasPro
