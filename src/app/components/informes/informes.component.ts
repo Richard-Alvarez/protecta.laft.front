@@ -437,7 +437,8 @@ async DescargarReporteGeneral(item){
       }
       
       //LISTAR COINCIDENCIAS ACEPTADAS EN PROVEEDOR Y CONTRAPARTE
-      this.listaProveedoresContraparte = await this.userConfigService.GetListaResultadoProveedorContraparte({NPERIODO_PROCESO : this.IDListPeriodoGlobal})
+      //debugger;
+      this.listaProveedoresContraparte = await this.userConfigService.GetListaResultadoProveedorContraparte({NPERIODO_PROCESO : item.NPERIODO_PROCESO})
       this.cantidadProveedoresContraparte = this.listaProveedoresContraparte.length
       console.log("lista de coincidencias",this.listaProveedoresContraparte)
 
