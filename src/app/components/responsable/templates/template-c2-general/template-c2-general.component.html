@@ -173,160 +173,157 @@
                 y registro negativo e Idecon con la base de clientes vigente al cierre del {{parent.Periodo}}.
                 </li>
             </ul>
-                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaSimplificada.length !=0; else SinData">
-                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="1000px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
-                            <tbody>
-                                <tr>
-                                    <td  width="10%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>N&ordm;</strong>
-                                        </p>
-                                    </td> 
-                                    <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>TIPO DOC.</strong>
-                                        </p>
-                                    </td>
-                                    <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>N&ordm; DOC.</strong>
-                                        </p>
-                                    </td>
-                                    <td width="250px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>NOMBRE COMPLETO</strong>
-                                        </p>
-                                    </td>
-                                    <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>CONDICI&Oacute;N PEP</strong>
-                                        </p>
-                                    </td>
-                                    <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>PRODUCTO</strong>
-                                        </p>
-                                    </td>
-                                    <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>FUENTE DE INFORMACI&Oacute;N</strong>
-                                        </p>
-                                    </td>
-                                    <td style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;width: 300px;">
-                                        <p>
-                                            <strong>COMENTARIO</strong>
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr *ngFor="let item of parent.listaSimplificada;let i = index">
-                                    <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{ i + 1 }}
-                                        </p>
-                                    </td>   
-                                    <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.STIPO_DOCUMENTO}}
-                                        </p>
-                                    </td>
-                                    <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SNUM_DOCUMENTO_BUSQ}}
-                                        </p>
-                                    </td>
-                                    <td width="250px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SNOM_COMPLETO_BUSQ}}
-                                        </p>
-                                    </td>
-                                    <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SORIGEN == 'PEP LATEST' ? 'Si' : 'No' && item.SORIGEN == 'PEP' ? 'Si' : 'No' && item.SORIGEN == 'CONSULADO PEP' ? 'Si' : 'No' }}
-                                        </p>
-                                    </td>
-                                    <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SDESPRODUCTO}}
-                                        </p>
-                                    </td>
-                                    <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SORIGEN}}
-                                        </p>
-                                    </td>
-                                    <td style="padding-left: 5px; padding-right: 10px; text-align: justify; width: 300px;">
-                                        <p>
-                                            {{item.SREPORT_COINCIDENCE}}
-                                        </p>
-                                        <p>
-                                            {{item.SDOC_REFERENCIA}}
-                                        </p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </FONT>
-                    </table>
-                    <br>
-                </div>
-        </div>
-        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">Acción a realizar del Régimen Simplificado</p>
 
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
-        <!-- <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;"> -->
-            <table border="1" cellspacing="0" cellpadding="0" align="left" width="1000px">
+            <table border="solid windowtext 1pt" style="border: solid windowtext 1pt;width: 551.9pt;margin-left: -60.3pt;border-collapse: collapse;margin-right: 10%;">
                 <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
                     <tbody>
                         <tr>
-                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                <p>
-                                    <strong>TIPO DOC.</strong>
+                            <td style="width: 35pt;border: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">N&ordm;</span></strong>
                                 </p>
                             </td>
-                            <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                <p>
-                                    <strong>N&ordm; DOC.</strong>
+                            <td style="width: 24.1pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">TIPO DOC.</span></strong>
                                 </p>
                             </td>
-                            <td width="250px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                <p>
-                                    <strong>NOMBRE COMPLETO</strong>
+                            <td colspan="3" style="width: 44.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">N&ordm; DOC.</span></strong>
                                 </p>
                             </td>
-                            <td style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;width: 300px;">
-                                <p>
-                                    <strong>INFORMACION ADICIONAL</strong>
+                            <td colspan="2" style="width: 145.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;font-family: 'Arial Narrow', sans-serif;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">NOMBRE COMPLETO</span></strong>
+                                </p>
+                            </td>
+                            <td style="width: 25.35pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">CONDICI&Oacute;N PEP</span></strong>
+                                </p>
+                            </td>
+                            <td colspan="2" style="width: 60.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">PRODUCTO</span></strong>
+                                </p>
+                            </td>
+                            <td style="width: 105.05pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">FUENTE DE INFORMACI&Oacute;N</span></strong>
+                                </p>
+                            </td>
+                            <td style="width: 205.05pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color:white">COMENTARIO</span></strong>
                                 </p>
                             </td>
                         </tr>
-                        <tr *ngFor="let item of parent.listaACCIONSimplificada">
-                            <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                <p>
-                                    {{item.STIPO_DOCUMENTO}}
+                        <tr *ngFor="let item of parent.listaSimplificada;let i = index">
+                            <td style="width: 35pt;border-right: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-left: solid windowtext 1pt;border-image: initial;border-top: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px">{{ i + 1 }}</span>
                                 </p>
                             </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                <p>
-                                    {{item.SNUM_DOCUMENTO_BUSQ}}
+                            <td style="width: 24.1pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px">{{item.STIPO_DOCUMENTO}}</span>
                                 </p>
                             </td>
-                            <td width="250px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                <p>
-                                    {{item.SNOM_COMPLETO_BUSQ}}
+                            <td colspan="3" style="width: 44.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 14.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px">{{item.SNUM_DOCUMENTO_BUSQ}}</span>
                                 </p>
                             </td>
-                            <td style="padding-left: 5px; padding-right: 10px; text-align: justify; width: 300px;">
-                                <p>
-                                    <!-- {{item.SREPORT_COINCIDENCE}} -->
+                            <td colspan="2" style="width: 145.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px">{{item.SNOM_COMPLETO_BUSQ}}</span>
+                                </p>
+                            </td>
+                            <td style="width: 25.35pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px"> {{item.SORIGEN == 'PEP LATEST' ? 'Si' : 'No' && item.SORIGEN == 'PEP' ? 'Si' : 'No' && item.SORIGEN == 'CONSULADO PEP' ? 'Si' : 'No' }}</span>
+                                </p>
+                            </td>
+                            <td colspan="2" style="width: 60.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px"> {{item.SDESPRODUCTO}}</span>
+                                </p>
+                            </td>
+                            <td style="width: 105.05pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px" > {{item.SORIGEN}}</span>
+                                </p>
+                            </td>
+                            <td style="width: 205.05pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px" >{{item.SREPORT_COINCIDENCE}}</span>
+                                </p>
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px" > {{item.SDOC_REFERENCIA}}</span>
                                 </p>
                             </td>
                         </tr>
+  
                     </tbody>
                 </FONT>
             </table>
             <br>
         </div>
-    
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">Acción a realizar del Régimen Simplificado</p>
+
+        <table border="solid windowtext 1pt" style="border: solid windowtext 1pt;width: 551.9pt;margin-left: -60.3pt;border-collapse: collapse;margin-right: 10%;">
+            <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
+                <tbody>
+                    <tr>
+                        <td style="width: 24.1pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">TIPO DOC.</span></strong>
+                            </p>
+                        </td>
+                        <td colspan="3" style="width: 26.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">N&ordm; DOC.</span></strong>
+                            </p>
+                        </td>
+                        <td colspan="2" style="width: 105.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;font-family: 'Arial Narrow', sans-serif;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">NOMBRE COMPLETO</span></strong>
+                            </p>
+                        </td>
+                        <td style="width: 225.35pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">INFORMACI&Oacute;N ADICIONAL</span></strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let item of parent.listaACCIONSimplificada">
+                        <td style="width: 24.1pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                <span style="font-size: 11.5px">{{item.STIPO_DOCUMENTO}}</span>
+                            </p>
+                        </td>
+                        <td colspan="3" style="width: 26.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 14.5px;text-align: justify;">
+                                <span style="font-size: 11.5px">{{item.SNUM_DOCUMENTO_BUSQ}}</span>
+                            </p>
+                        </td>
+                        <td colspan="2" style="width: 105.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                <span style="font-size: 11.5px">{{item.SNOM_COMPLETO_BUSQ}}</span>
+                            </p>
+                        </td>
+                        <td style="width: 225.35pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                <span style="font-size: 11.5px"> </span>
+                            </p>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </FONT>
+        </table>
+
         <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"> </p>
         <ul>
             <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">
@@ -343,160 +340,155 @@
                 y registro negativo, Idecon con la base de clientes vigente al cierre del {{parent.Periodo}}.  
                 </li>
             </ul>
-                <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaGeneral.length !=0; else SinData">
-                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="1000px">
-                        <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
-                            <tbody>
-                                <tr>
-                                    <td  width="10%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>N&ordm;</strong>
-                                        </p>
-                                    </td> 
-                                    <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>TIPO DOC.</strong>
-                                        </p>
-                                    </td>
-                                    <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>N&ordm; DOC.</strong>
-                                        </p>
-                                    </td>
-                                    <td width="250px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
-                                        </p>
-                                    </td>
-                                    <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>CONDICI&Oacute;N PEP</strong>
-                                        </p>
-                                    </td>
-                                    <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>PRODUCTO</strong>
-                                        </p>
-                                    </td>
-                                    <td width="20%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>FUENTE DE INFORMACI&Oacute;N</strong>
-                                        </p>
-                                    </td>
-                                    <td width="300px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                        <p>
-                                            <strong>COMENTARIO</strong>
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr *ngFor="let item of parent.listaGeneral;let i = index ">
-                                    <td width="10%" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{ i + 1 }}
-                                        </p>
-                                    </td>   
-                                    <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.STIPO_DOCUMENTO}}
-                                        </p>
-                                    </td>
-                                    <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SNUM_DOCUMENTO_BUSQ}}
-                                        </p>
-                                    </td>
-                                    <td width="250ppx" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SNOM_COMPLETO_BUSQ}}
-                                        </p>
-                                    </td>
-                                    <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SORIGEN == 'PEP LATEST' ? 'Si' : 'No' && item.SORIGEN == 'PEP' ? 'Si' : 'No' && item.SORIGEN == 'CONSULADO PEP' ? 'Si' : 'No' }}
-                                        </p>
-                                    </td>
-                                    <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SDESPRODUCTO}}
-                                        </p>
-                                    </td>
-                                    <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SORIGEN}}
-                                        </p>
-                                    </td>
-                                    <td width="300px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                        <p>
-                                            {{item.SREPORT_COINCIDENCE}}
-                                        </p>
-                                        <p>
-                                            {{item.SDOC_REFERENCIA}}
-                                        </p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </FONT>
-                    </table>
-                    <br>
-                </div>
+           <!--  *ngIf="parent.listaGeneral.length !=0; else SinData" -->
+            <table border="solid windowtext 1pt" style="border: solid windowtext 1pt;width: 551.9pt;margin-left: -60.3pt;border-collapse: collapse;margin-right: 10%;">
+                <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
+                    <tbody>
+                        <tr>
+                            <td style="width: 35pt;border: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">N&ordm;</span></strong>
+                                </p>
+                            </td>
+                            <td style="width: 24.1pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">TIPO DOC.</span></strong>
+                                </p>
+                            </td>
+                            <td colspan="3" style="width: 44.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">N&ordm; DOC.</span></strong>
+                                </p>
+                            </td>
+                            <td colspan="2" style="width: 145.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;font-family: 'Arial Narrow', sans-serif;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">NOMBRE COMPLETO</span></strong>
+                                </p>
+                            </td>
+                            <td style="width: 25.35pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">CONDICI&Oacute;N PEP</span></strong>
+                                </p>
+                            </td>
+                            <td colspan="2" style="width: 60.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">PRODUCTO</span></strong>
+                                </p>
+                            </td>
+                            <td style="width: 105.05pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color: white">FUENTE DE INFORMACI&Oacute;N</span></strong>
+                                </p>
+                            </td>
+                            <td style="width: 205.05pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 26.45pt;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                    <strong><span style="font-size: 11.5px; color:white">COMENTARIO</span></strong>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of parent.listaGeneral;let i = index ">
+                            <td style="width: 35pt;border-right: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-left: solid windowtext 1pt;border-image: initial;border-top: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px">{{ i + 1 }}</span>
+                                </p>
+                            </td>
+                            <td style="width: 24.1pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px">{{item.STIPO_DOCUMENTO}}</span>
+                                </p>
+                            </td>
+                            <td colspan="3" style="width: 44.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 14.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px">{{item.SNUM_DOCUMENTO_BUSQ}}</span>
+                                </p>
+                            </td>
+                            <td colspan="2" style="width: 145.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px">{{item.SNOM_COMPLETO_BUSQ}}</span>
+                                </p>
+                            </td>
+                            <td style="width: 25.35pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px"> {{item.SORIGEN == 'PEP LATEST' ? 'Si' : 'No' && item.SORIGEN == 'PEP' ? 'Si' : 'No' && item.SORIGEN == 'CONSULADO PEP' ? 'Si' : 'No' }}</span>
+                                </p>
+                            </td>
+                            <td colspan="2" style="width: 60.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px"> {{item.SDESPRODUCTO}}</span>
+                                </p>
+                            </td>
+                            <td style="width: 105.05pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px" > {{item.SORIGEN}}</span>
+                                </p>
+                            </td>
+                            <td style="width: 205.05pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px" >{{item.SREPORT_COINCIDENCE}}</span>
+                                </p>
+                                <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                    <span style="font-size: 11.5px" > {{item.SDOC_REFERENCIA}}</span>
+                                </p>
+                            </td>
+                        </tr>
+  
+                    </tbody>
+                </FONT>
+            </table>
         </div>
         
         <p style="font-size: 14.5px; font-family: arial Narrow, serif;">Adicionalmente, se incluye la siguiente información:</p>
 
-        <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;">
-        <!-- <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;"> -->
-            <table border="1" cellspacing="0" cellpadding="0" align="left" width="1000px">
-                <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
-                    <tbody>
-                        <tr>
-                            <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                <p>
-                                    <strong>TIPO DOC.</strong>
-                                </p>
-                            </td>
-                            <td width="13%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                <p>
-                                    <strong>N&ordm; DOC.</strong>
-                                </p>
-                            </td>
-                            <td width="250px" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
-                                <p>
-                                    <strong>NOMBRE COMPLETO</strong>
-                                </p>
-                            </td>
-                            <td style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;width: 300px;">
-                                <p>
-                                    <strong>INFORMACION ADICIONAL</strong>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr *ngFor="let item of parent.listaACCIONGeneral">
-                            <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                <p>
-                                    {{item.STIPO_DOCUMENTO}}
-                                </p>
-                            </td>
-                            <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                <p >
-                                    {{item.SNUM_DOCUMENTO_BUSQ}}
-                                </p>
-                            </td>
-                            <td width="250px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
-                                <p>
-                                    {{item.SNOM_COMPLETO_BUSQ}}
-                                </p>
-                            </td>
-                            <td style="padding-left: 5px; padding-right: 10px; text-align: justify; width: 300px;">
-                                <p>
-                                    <!-- {{item.SREPORT_COINCIDENCE}} -->
-                                </p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </FONT>
-            </table>
-            <br>
-        </div>
+        <table border="solid windowtext 1pt" style="border: solid windowtext 1pt;width: 551.9pt;margin-left: -60.3pt;border-collapse: collapse;margin-right: 10%;">
+            <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
+                <tbody>
+                    <tr>
+                        <td style="width: 24.1pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">TIPO DOC.</span></strong>
+                            </p>
+                        </td>
+                        <td colspan="3" style="width: 26.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">N&ordm; DOC.</span></strong>
+                            </p>
+                        </td>
+                        <td colspan="2" style="width: 105.5pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;font-family: 'Arial Narrow', sans-serif;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">NOMBRE COMPLETO</span></strong>
+                            </p>
+                        </td>
+                        <td style="width: 225.35pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">INFORMACI&Oacute;N ADICIONAL</span></strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let item of parent.listaACCIONGeneral">
+                        <td style="width: 24.1pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                <span style="font-size: 11.5px">{{item.STIPO_DOCUMENTO}}</span>
+                            </p>
+                        </td>
+                        <td colspan="3" style="width: 26.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 14.5px;text-align: justify;">
+                                <span style="font-size: 11.5px">{{item.SNUM_DOCUMENTO_BUSQ}}</span>
+                            </p>
+                        </td>
+                        <td colspan="2" style="width: 105.5pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                <span style="font-size: 11.5px">{{item.SNOM_COMPLETO_BUSQ}}</span>
+                            </p>
+                        </td>
+                        <td style="width: 225.35pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                <span style="font-size: 11.5px"> </span>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </FONT>
+        </table>
 
         <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">Conclusión: </strong>
         <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify;">
