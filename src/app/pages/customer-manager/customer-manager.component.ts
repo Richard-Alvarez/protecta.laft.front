@@ -1482,13 +1482,15 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
               closeButton: 'OcultarBorde'
             },
     
-          }).then(async (result) => {
+          }).then(async (result) => {   
     
           }).catch(err => {
     
           })
         }
-        return
+        debugger;
+        return listFileNameInform.splice(0,1)
+
       }
       let fileItem = item && nameFile[0].length > 15 ? nameFile[0].substr(0, 15) + '....' + nameFile[1] : item
       //listFileNameCortoInform.push(fileItem)
@@ -1524,7 +1526,6 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     } else {
       this.NombreArchivo = listFileNameCortoInform[0]
     }
-
     return this.ArchivoAdjunto = { respPromiseFileInfo: respPromiseFileInfo, listFileNameCortoInform: listFileNameCortoInform, arrFiles: arrFiles, listFileNameInform: listFileNameInform }
   }
 

@@ -219,9 +219,9 @@ async DescargarReporte(ValidadorIdGrupo){
    
    
     if(respuestaC3.length == 0){
-      this.RespuestaGlobalC3 = 'no'
+      this.RespuestaGlobalC3 = 'No'
     }else{
-      this.RespuestaGlobalC3 = 'sí'
+      this.RespuestaGlobalC3 = 'Sí'
     }
     let dia =  this.IDListPeriodoxGrupo.toString().substr(6,2)
     let mes =  this.IDListPeriodoxGrupo.toString().substr(4,2)
@@ -273,9 +273,9 @@ async DescargarReporte(ValidadorIdGrupo){
             let validarRespuesta = listarespuestas.filter(it=> it.NIDRESPUESTA == 1)
            
             if(validarRespuesta.length == 0){
-              respuesta = 'no'
+              respuesta = 'No'
             }else{
-             respuesta = 'sí'
+             respuesta = 'Sí'
             }
             let data:any ={}
             data.SCARGO = element.SCARGO
@@ -410,9 +410,9 @@ async DescargarReporteGeneral(item){
   let respuestaC3 = this.ListaAlertaClientesC3.filter((it,inc) => it.NIDRESPUESTA == 1)
   await this.DataReporteC2Global(item)
   if(respuestaC3.length == 0){
-    this.RespuestaGlobalC3 = 'no'
+    this.RespuestaGlobalC3 = 'No'
   }else{
-    this.RespuestaGlobalC3 = 'sí'
+    this.RespuestaGlobalC3 = 'Sí'
   }
 
   this.ListaAlertaClientesS2  = this.ListaAlertaClientes.filter(it => it.SNOMBRE_ALERTA == 'S2' )
@@ -494,9 +494,9 @@ async DescargarReporteGeneral(item){
               let validarRespuesta = listarespuestas.filter(it=> it.NIDRESPUESTA == 1)
              
               if(validarRespuesta.length == 0){
-                respuesta = 'no'
+                respuesta = 'No'
               }else{
-               respuesta = 'sí'
+               respuesta = 'Sí'
               }
               let data:any ={}
               data.SNOMBRE_ALERTA = element.SNOMBRE_ALERTA
@@ -542,9 +542,9 @@ async DescargarReporteGeneral(item){
               let validarRespuesta = listarespuestas.filter(it=> it.NIDRESPUESTA == 1)
              
               if(validarRespuesta.length == 0){
-                respuesta = 'no'
+                respuesta = 'No'
               }else{
-               respuesta = 'sí'
+               respuesta = 'Sí'
               }
               let data:any ={}
               data.SNOMBRE_ALERTA = element.SNOMBRE_ALERTA
@@ -596,7 +596,8 @@ async DataAlertas(idgrupo,perido){
   listaSimplificada:any = []
   listaACCIONSimplificada:any = []
   listaACCIONGeneral:any = []
-  listaCoincidenceRegNeg:any = []
+  listaCoincidenceRegNegSF:any = []
+  listaCoincidenceRegNegGN:any = []
   listaDataP4:any = []
   listaGeneral:any = []
   listaPepMasivos:any = []
@@ -691,7 +692,7 @@ async DataReporteC2Global(item){
             (it.NIDTIPOLISTA == 2 && it.RAMO == 75));
       
       /* **************************************************************************************************** */
-      this.listaCoincidenceRegNeg = this.arrayCoincidenceRegNeg.filter(it => 
+      this.listaCoincidenceRegNegSF = this.arrayCoincidenceRegNeg.filter(it => 
         (it.NIDTIPOLISTA == 5 && it.RAMO == 76) ||
         (it.NIDTIPOLISTA == 5 && it.RAMO == 66) ||
         (it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76) || 
@@ -699,8 +700,12 @@ async DataReporteC2Global(item){
         (it.NIDTIPOLISTA == 2 && it.RAMO == 66) ||
         (it.NIDTIPOLISTA == 2 && it.RAMO == 76) ||
         (it.NIDTIPOLISTA == 2 && it.RAMO == 71));
-
-
+      
+      this.listaCoincidenceRegNegGN = this.arrayCoincidenceRegNeg.filter(it => 
+        (it.NIDTIPOLISTA == 5 && it.RAMO == 75) ||
+        (it.NIDTIPOLISTA == 2 && it.RAMO == 75) ||
+        (it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4) ||
+        (it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1));
 
 
       this.listaRenta = this.arrayDataResultadoGeneral.filter(it => it.NIDTIPOLISTA == 5 && it.RAMO == 75)

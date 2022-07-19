@@ -15,4 +15,7 @@ export class TemplateC2GeneralComponent implements OnInit {
   ngOnInit() {
   }
 
+  
+
 }
+

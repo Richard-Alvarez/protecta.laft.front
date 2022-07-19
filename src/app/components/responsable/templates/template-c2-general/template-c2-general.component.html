@@ -69,7 +69,7 @@
                     la búsqueda del Registro Negativo y base de PEP y Familiares de PEP contra la base de clientes con la finalidad
                     de identificar la señal de alerta en cuestión. Para esto, la Oficialía de Cumplimiento es responsable de cargar en el sistema LAFT la lista de nombres contenidos en dicho registro.
                 </li>
-                <li style="font-size: 14.5px;font-family: arial Narrow, serif; text-align: justify">Complementariamente, esta señal de alerta se revisa
+                <li style="font-size: 14.5px;font-family: arial Narrow, serif; text-align: justify">Esta señal de alerta se revisa
                     mediante el “Procedimiento para el monitoreo de Listas Especiales de Seguridad” según lo indicado en el documento
                     Sistema de Monitoreo de Operaciones – SPLAFT.
                 </li>
@@ -83,7 +83,7 @@
             <strong style="font-size: 14.5px;font-family: arial Narrow, serif;"> Resultados Señales de alerta C2</strong>
         </div>
         <br>
-        <strong style="font-family: arial Narrow, serif;font-size: 14.5px;"> 1.	 LISTAS ESPECIALES DE SEGURIDAD</strong>
+        <!-- <strong style="font-family: arial Narrow, serif;font-size: 14.5px;"> 1.	 LISTAS ESPECIALES DE SEGURIDAD</strong>
 
         <div>
             <ul>
@@ -160,8 +160,8 @@
             <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">
                 P:\19. RIESGOS OPERATIVOS Y LAVADO DE ACTIVOS\19.04 SPLAFT\19.04.04 LAFT\05.Informes Trimestrales Protecta 
             </li>
-        </ul>
-        <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">2.	REVISIÓN DE CLIENTES PROTECTA</strong>
+        </ul> -->
+        <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">1.	REVISIÓN DE CLIENTES PROTECTA</strong>
         <br>
         <br>
         <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">REVISIÓN CLIENTES REGIMEN SIMPLIFICADO</strong>
@@ -252,7 +252,7 @@
                             </td>
                             <td style="width: 105.05pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
                                 <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
-                                    <span style="font-size: 11.5px" > {{item.SORIGEN}}</span>
+                                    <span style="font-size: 11.5px" > {{item.SDESPROVEEDOR}}</span>
                                 </p>
                             </td>
                             <td style="width: 205.05pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
@@ -270,7 +270,23 @@
             </table>
             <br>
         </div>
-        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">Acción a realizar del Régimen Simplificado</p>
+
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"><strong><u>Comentario Régimen Simplificado</u></strong></p>
+
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"> </p>
+            <ul>
+                <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">
+                    De los {{parent.listaSimplificada.length}} clientes, reportados por el sistema LAFT, solo se identificaron {{parent.listaCoincidenceRegNegSF.length}} coincidencias exactas entre el Registro Negativo al 
+                    cierre del {{parent.Periodo}}, de los {{parent.listaSimplificada.length - parent.listaCoincidenceRegNegSF.length}} clientes restantes, se ha realizado las búsquedas masivas en el sistema LAFT, en fuentes 
+                    públicas, worldcheck y no se encontró información. 
+                </li>
+                <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">
+                    Asimismo, se identificó a {{parent.listaACCIONSimplificada.length}} clientes que registran información negativa relacionado al presunto delito de Lavado de Activos, se detalla: 
+                </li>
+            </ul>
+        
+
+        <!-- <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">Acción a realizar del Régimen Simplificado</p> -->
 
         <table border="solid windowtext 1pt" style="border: solid windowtext 1pt;width: 551.9pt;margin-left: -60.3pt;border-collapse: collapse;margin-right: 10%;">
             <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
@@ -324,14 +340,25 @@
             </FONT>
         </table>
 
-        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"> </p>
+        <!-- <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"> 
         <ul>
             <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">
                 De los {{parent.listaCoincidenceRegNeg.length}} clientes restantes, se ha realizado las búsquedas en fuentes públicas y worldcheck y no se encontró información. 
                 Asimismo, en la base de registro negativo solo se encuentra el nombre y/o documento, más no el detalle que genera su inclusión en dicho registro.
             </li>
         </ul>
-
+        </p> -->
+        <p><br></p>
+        <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">Conclusión Régimen Simplificado </strong>
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify;">
+            Las coincidencias de identificación de clientes con el registro negativo no configuran como operación inusual, pues los productos son 
+            de bajo riesgo, las características guardan relación con la actividad económica del cliente, las operaciones cuentan con fundamento económico 
+            y las características de las operaciones no conducen razonablemente a sospechar de LAFT.
+        </p>
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify;">
+            De acuerdo a la evaluación realizada, no se consideran señales de alertas. Se mantiene el nivel de riesgo.
+        </p>
+        
         <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">REVISION CLIENTES REGIMEN GENERAL</strong>
         <div>
             <ul>
@@ -419,7 +446,7 @@
                             </td>
                             <td style="width: 105.05pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
                                 <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
-                                    <span style="font-size: 11.5px" > {{item.SORIGEN}}</span>
+                                    <span style="font-size: 11.5px" > {{item.SDESPROVEEDOR}}</span>
                                 </p>
                             </td>
                             <td style="width: 205.05pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
@@ -436,8 +463,22 @@
                 </FONT>
             </table>
         </div>
+
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"><strong><u>Comentario Régimen General</u></strong></p>
+
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify"> </p>
+            <ul>
+                <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">
+                    De los {{parent.listaGeneral.length}} clientes, reportados por el sistema LAFT, solo se identificaron {{parent.listaCoincidenceRegNegGN.length}} coincidencias exactas entre el Registro Negativo al cierre del {{parent.Periodo}}, 
+                    de los {{parent.listaGeneral.length - parent.listaCoincidenceRegNegGN.length}} clientes restantes, se ha realizado las búsquedas masivas en el sistema LAFT, en fuentes públicas y worldcheck y no se encontró información. 
+                </li>
+                <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">
+                    Asimismo, se identificó a {{parent.listaACCIONGeneral.length}} clientes que registran información negativa relacionado al presunto delito de Lavado de Activos, se detalla:
+                </li>
+            </ul>
         
-        <p style="font-size: 14.5px; font-family: arial Narrow, serif;">Adicionalmente, se incluye la siguiente información:</p>
+        
+       <!--  <p style="font-size: 14.5px; font-family: arial Narrow, serif;">Adicionalmente, se incluye la siguiente información:</p> -->
 
         <table border="solid windowtext 1pt" style="border: solid windowtext 1pt;width: 551.9pt;margin-left: -60.3pt;border-collapse: collapse;margin-right: 10%;">
             <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px; ">
@@ -489,7 +530,19 @@
                 </tbody>
             </FONT>
         </table>
+        <p><br></p>
 
+        <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">Conclusión Régimen General </strong>
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify;">
+            Las coincidencias de identificación de clientes con el registro negativo no configuran como operación inusual, pues los productos son de riesgo medio, 
+            las características guardan relación con la actividad económica del cliente, las operaciones cuentan con fundamento, sustento económico y 
+            las características de las operaciones no conducen razonablemente a sospechar de LAFT.
+        </p>
+        <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify;">
+            De acuerdo a la evaluación realizada, no se consideran señales de alertas. Se mantiene el nivel de riesgo.
+        </p>
+
+<!-- 
         <strong style="font-size: 14.5px; font-family: arial Narrow, serif;">Conclusión: </strong>
         <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify;">
             Las coincidencias de identificación de clientes con el registro negativo no configuran como operación inusual, pues los productos son de bajo riesgo, 
@@ -502,10 +555,82 @@
         <p style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify;">
             De este grupo, se ha identificado a XX cliente(s) de régimen reforzado que registra también información negativa: XXXXX (DNI XXXXX), 
             respecto a este cliente y como parte de una debida diligencia se gestionó una DJ del cliente.
-        </p>
+        </p> -->
+
+        <strong style="font-family: arial Narrow, serif;font-size: 14.5px;"> LISTAS ESPECIALES DE SEGURIDAD</strong>
+
+        <div>
+            <ul>
+                <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">   
+                    {{parent.listaInternacionalRentaParticularIDECON.length >= '1' ? 'Sí' : 'No'}} se identificaron señales de alerta. Para mayor detalle revisar el anexo “Listas especiales – al cierre del {{parent.Periodo}}.
+                </li>
+                <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">   
+                    Por lo tanto, se concluye que por la señal de alerta “C2” no se identificaron casos. 
+                </li>
+            </ul>
+
+            <div class="container" style="padding: 0px 200px; font-family:courier,arial,helvética;" *ngIf="parent.listaInternacionalRentaParticularIDECON.length !=0;else SinData">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" width="1000px">
+                    <FONT FACE="Arial Narrow, serif" style="font-size: 11.5px;">
+                        <tbody>
+                            <tr>
+                                <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                     <p>
+                                        <strong>TIPO DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="15%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                    <p>
+                                        <strong>NRO. DOC.</strong>
+                                    </p>
+                                </td>
+                                <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                    <p>
+                                        <strong>NOMBRE COMPLETO / RAZÓN SOCIAL</strong>
+                                    </p>
+                                </td>
+                                <td width="35%" style="padding-left: 5px; padding-right: 5px; background-color:#002060;text-align: center;">
+                                    <p>
+                                        <strong>PRODUCTO</strong>
+                                    </p>
+                                </td>
+                                
+                            </tr>
+                            <tr *ngFor="let item of parent.listaInternacionalRentaParticularIDECON">
+                                <td width="120px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        {{item.STIPO_DOCUMENTO}}
+                                    </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        {{item.SNUM_DOCUMENTO_BUSQ}}
+                                    </p>
+                                </td>
+                                <td width="180px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        {{item.SNOM_COMPLETO_BUSQ}}
+                                    </p>
+                                </td>
+                                <td width="100px" style="padding-left: 5px; padding-right: 10px; text-align: justify">
+                                    <p>
+                                        {{item.DESRAMO}}
+                                    </p>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </FONT>
+                </table>
+                <br>
+            </div>
+        </div>
 
         <p style="font-size: 14.5px; font-family: arial Narrow, serif;">La información se encuentra en la siguiente ruta:</p>
         <ul>
+            <li style="font-size: 14.5px; font-family: arial Narrow, serif; text-align: justify">
+                <a href="http://plataformasplaft.protectasecurity.pe/"> http://plataformasplaft.protectasecurity.pe/</a>
+            </li>
             <li style="font-size: 14.5px; font-family: arial Narrow, serif;">
                 P:\19. RIESGOS OPERATIVOS Y LAVADO DE ACTIVOS\19.04 SPLAFT\19.04.04 LAFT\05.Informes Trimestrales Protecta
             </li>

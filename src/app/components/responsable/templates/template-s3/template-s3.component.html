@@ -71,14 +71,6 @@
         </ol>
         <br>
 
-        <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta S3</strong>
-        <ul>
-            <li style="font-family: arial Narrow, serif; text-align: justify">
-               El área de Operaciones si/no reportó ningún caso sobre pago de una prima superior a la establecida con 
-                posterior devolución de la diferencia por depósito errado al cierre del {{parent.Periodo}}.
-            </li>
-        </ul>
-
         <strong style="font-family: arial Narrow, serif;">Consulta al área de Cobranzas</strong>
         <ol type="a">
             <li style="font-family: arial Narrow, serif; text-align: justify">
@@ -95,9 +87,17 @@
             </li>    
         </ol>
 
+        <!-- <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta S3</strong>
+        <ul>
+            <li style="font-family: arial Narrow, serif; text-align: justify">
+               El área de Operaciones si/no reportó ningún caso sobre pago de una prima superior a la establecida con 
+                posterior devolución de la diferencia por depósito errado al cierre del {{parent.Periodo}}.
+            </li>
+        </ul> -->
+
         <strong style="font-family: arial Narrow, serif;">Resultados Señales de alerta S3</strong>
         <ul>
-            <div *ngIf="Validar ==1">
+            <!-- <div *ngIf="Validar ==1">
                 <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of parent.arrayDataSenal">
                     El {{item.Cargo}} informo que {{item.Respuesta}} se identificaron pagos de una prima superior a la establecida con posterior 
                     devolución de la diferencia por depósito errado.
@@ -108,6 +108,11 @@
                     El {{item.SPERFIL}} informo que {{item.NIDRESPUESTA == 1 ? 'si' : 'no'}} se identificaron pagos de una prima superior a la establecida con posterior 
                     devolución de la diferencia por depósito errado al cierre del {{parent.Periodo}}.
                     </li>
+            </div> -->
+            <div>
+                <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of ObjListaAlertasS3">
+                    El área de Cobranza informó los casos sobre pagos de una prima superior a la establecida con posterior devolución de la diferencia por depósito errado al cierre del {{parent.Periodo}}.
+                </li>
             </div>
         </ul> 
         <br>  
@@ -131,9 +136,14 @@
                                 <strong><span style="font-size: 11.5px; color: white">DOCUMENTO</span></strong>
                             </p>
                         </td>
-                        <td style="width: 225.35pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                        <td style="width: 150.35pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
                             <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
                                 <strong><span style="font-size: 11.5px; color: white">NOMBRE COMPLETO / RAZON SOCIAL</span></strong>
+                            </p>
+                        </td>
+                        <td style="width: 150.35pt;border: solid windowtext 1pt;border-left: solid windowtext 1pt;background-color:#002060;padding-left: 5px; padding-right: 5px;height: 0;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: center;">
+                                <strong><span style="font-size: 11.5px; color: white">MOTIVO</span></strong>
                             </p>
                         </td>
                     </tr>
@@ -153,7 +163,12 @@
                                 <span style="font-size: 11.5px"> </span>
                             </p>
                         </td>
-                        <td style="width: 225.35pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                        <td style="width: 150.35pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
+                            <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
+                                <span style="font-size: 11.5px"> </span>
+                            </p>
+                        </td>
+                        <td style="width: 150.35pt;border-top: solid windowtext 1pt;border-left: solid windowtext 1pt;border-bottom: solid windowtext 1pt;border-right: solid windowtext 1pt;padding-left: 5px; padding-right: 10px;height: 12.75pt;vertical-align: top;">
                             <p style="margin-top: 0cm;margin-right: 0cm;margin-bottom: 0cm;margin-left: 0cm;line-height: normal;font-size: 11.5px;text-align: justify;">
                                 <span style="font-size: 11.5px"> </span>
                             </p>
