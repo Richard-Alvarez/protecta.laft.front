@@ -588,7 +588,8 @@ async DataAlertas(idgrupo,perido){
   arrayDataResultadoSimplificado:any = []
   arrayAccionSimplificada:any = []
   arrayAccionGeneral:any = []
-  arrayCoincidenceRegNeg:any = []
+  arrayCoincidenceRegNegRS:any = []
+  arrayCoincidenceRegNegRG:any = []
   arrayDataP4:any = []
   Periodo:string = ''
   listaMasivos:any = []
@@ -608,6 +609,8 @@ async DataAlertas(idgrupo,perido){
   listaPepRentaParticular:any = []
   listaInternacionalRentaParticularWC:any = []
   listaInternacionalRentaParticularIDECON:any = []
+
+  dniPRUEBA:any=[]
 
 async DataReporteC2Global(item){
   console.log("el valor del seleccionado",item)
@@ -632,22 +635,19 @@ async DataReporteC2Global(item){
 
     let dataAccionRS:any = {}
     dataAccionRS.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
-    dataAccionRS.NIDALERTA = 2
     dataAccionRS.NIDREGIMEN = 2
-    dataAccionRS.PASO1 = 'corruption'
-    dataAccionRS.PASO2 = 'laundering'
-    dataAccionRS.PASO3 = 'terrorism'
 
     let dataAccionRG:any = {}
     dataAccionRG.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
-    dataAccionRG.NIDALERTA = 2
     dataAccionRG.NIDREGIMEN = 1
-    dataAccionRG.PASO1 = 'corruption'
-    dataAccionRG.PASO2 = 'laundering'
-    dataAccionRG.PASO3 = 'terrorism'
 
     let dataRegistroNegativoCoincidenceRS:any = {}
     dataRegistroNegativoCoincidenceRS.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
+    dataRegistroNegativoCoincidenceRS.NIDREGIMEN = 2
+
+    let dataRegistroNegativoCoincidenceRG:any = {}
+    dataRegistroNegativoCoincidenceRG.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
+    dataRegistroNegativoCoincidenceRG.NIDREGIMEN = 1
 
     let dataListaP4:any = {}
     dataListaP4.NPERIODO_PROCESO = item.NPERIODO_PROCESO//this.IDListPeriodoGlobal
@@ -657,11 +657,15 @@ async DataReporteC2Global(item){
       this.arrayDataResultadoSimplificado =  await this.userConfigService.GetListaResultado(dataRS)
 
       this.arrayAccionSimplificada = await this.userConfigService.GetListaAcciones(dataAccionRS) 
-      this.arrayAccionGeneral = await this.userConfigService.GetListaAcciones(dataAccionRG) 
+      this.arrayAccionGeneral = await this.userConfigService.GetListaAccionesGeneral(dataAccionRG) 
 
-      this.arrayCoincidenceRegNeg = await this.userConfigService.GetListaNegativoCoincidencia(dataRegistroNegativoCoincidenceRS) 
+      this.arrayCoincidenceRegNegRS = await this.userConfigService.GetListaNegativoCoincidencia(dataRegistroNegativoCoincidenceRS) 
+      this.arrayCoincidenceRegNegRG = await this.userConfigService.GetListaNegativoCoincidencia(dataRegistroNegativoCoincidenceRG) 
+
       this.arrayDataP4 = await this.userConfigService.GetListaP4(dataListaP4) 
       this.core.loader.hide()
+
+
       /* **************************************************************************************************** */
       this.listaSimplificada = this.arrayDataResultadoSimplificado.filter(it => 
         (it.NIDTIPOLISTA == 5 && it.RAMO == 76) ||
@@ -689,10 +693,12 @@ async DataReporteC2Global(item){
 
         this.listaACCIONGeneral = this.arrayAccionGeneral.filter(it => 
             (it.NIDTIPOLISTA == 5 && it.RAMO == 75) ||
-            (it.NIDTIPOLISTA == 2 && it.RAMO == 75));
+            (it.NIDTIPOLISTA == 2 && it.RAMO == 75) ||
+            (it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4) ||
+            (it => it.NIDTIPOLISTA == 1 && it.RAMO == 75  && it.NIDPROVEEDOR == 1));
       
       /* **************************************************************************************************** */
-      this.listaCoincidenceRegNegSF = this.arrayCoincidenceRegNeg.filter(it => 
+      this.listaCoincidenceRegNegSF = this.arrayCoincidenceRegNegRS.filter(it => 
         (it.NIDTIPOLISTA == 5 && it.RAMO == 76) ||
         (it.NIDTIPOLISTA == 5 && it.RAMO == 66) ||
         (it.NIDTIPOLISTA == 5  && it.RAMO !== 75 && it.RAMO !== 66 && it.RAMO !== 76) || 
@@ -701,7 +707,7 @@ async DataReporteC2Global(item){
         (it.NIDTIPOLISTA == 2 && it.RAMO == 76) ||
         (it.NIDTIPOLISTA == 2 && it.RAMO == 71));
       
-      this.listaCoincidenceRegNegGN = this.arrayCoincidenceRegNeg.filter(it => 
+      this.listaCoincidenceRegNegGN = this.arrayCoincidenceRegNegRG.filter(it => 
         (it.NIDTIPOLISTA == 5 && it.RAMO == 75) ||
         (it.NIDTIPOLISTA == 2 && it.RAMO == 75) ||
         (it.NIDTIPOLISTA == 1 && it.RAMO == 75 && it.NIDPROVEEDOR == 4) ||
