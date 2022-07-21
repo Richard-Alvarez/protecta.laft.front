@@ -122,21 +122,25 @@
                 países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC.
               </li>
           </div> -->
-          <div>
+          <!-- <div>
             <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">El área Comercial Masivos y Operaciones informaron que {{item.Respuesta}} se identificaron clientes domiciliados 
               en/o que han modificado su domicilio a: países considerados paraísos fiscales o países donde existe conocida actividad terrorista, considerados como no cooperantes 
               por el GAFI o sujetos a sanciones OFAC.
+
               El área Comercial Masivos y Operaciones informaron que {{item.Respuesta}} se identificaron clientes domiciliados en/o que han modificado su domicilio a: países considerados paraísos fiscales o países donde existe conocida actividad 
               terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC. 
             </li>
-          </div>
 
+          </div> -->
           <div>
-            <li style="font-family: arial Narrow, serif; text-align: justify">El área de operaciones informó que se registraron 
-              endosos únicamente sobre cambio en cuentas de pago, por tanto, no se registró modificación de domicilio a países considerados paraísos fiscales o países 
+            <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">El área de operaciones informó que se registraron 
+              endosos únicamente sobre cambio en cuentas de pago, por tanto, {{item.Respuesta}} se registró modificación de domicilio a países considerados paraísos fiscales o países 
               donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a sanciones OFAC, en clientes de rentas.
-
-              El área de Operaciones informó que se registraron endosos únicamente sobre cambio en cuentas de pago, por tanto, no se registró modificación de domicilio 
+            </li>
+          </div>
+          <div>
+            <li style="font-family: arial Narrow, serif; text-align: justify" *ngFor="let item of arrayDataSenal">
+              El área de Operaciones informó que se registraron endosos únicamente sobre cambio en cuentas de pago, por tanto, {{item.Respuesta}} se registró modificación de domicilio 
               a países considerados paraísos fiscales o países donde existe conocida actividad terrorista, considerados como no cooperantes por el GAFI o sujetos a 
               sanciones OFAC, en clientes de rentas. 
             </li>

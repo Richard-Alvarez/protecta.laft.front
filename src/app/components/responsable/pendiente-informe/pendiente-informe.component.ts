@@ -870,7 +870,6 @@ async DescargarReporte(item){
     this.RespuestaGlobal = 'Sí'
   }
 
-
   item.arrUsuariosForm.forEach((t,inc) => { 
     let data:any = {}
        data.Alerta = item.SNOMBRE_ALERTA

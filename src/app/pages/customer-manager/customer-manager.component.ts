@@ -1488,7 +1488,6 @@ export class CustomerManagerComponent implements OnInit, OnDestroy {
     
           })
         }
-        debugger;
         return listFileNameInform.splice(0,1)
 
       }
