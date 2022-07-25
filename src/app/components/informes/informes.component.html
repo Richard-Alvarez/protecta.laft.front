@@ -333,7 +333,7 @@
                                         <div [hidden]="cob.SESTADO == 2 || (cob.SESTADO == 1 && (cob.SNOMBRE_ARCHIVO_CORTO == null || cob.SNOMBRE_ARCHIVO_CORTO == ''))" style="float:right;width: 10%;" placement='top' ngbTooltip="Eliminar archivo"><i class="far fa-times-circle" style="cursor:pointer;" (click)="removeFile(cob,index)"></i></div>
                                     </td>
                                     <td class="text-center"  style="padding-left: 30px;padding-right: 30px;">
-                                        <div *ngIf="cob.VALIDAR_CANTIDAD == 0" style="float:left;width: 33.3%;" ></div>
+                                        <div *ngIf="cob.VALIDAR_CANTIDAD == 0" style="float:left;width: 33.3%;" >
                                        <!--  <div style="float:left;width: 33.3%;" > -->
                                             
                                             <!-- <input type="file" name="file" id="adjunto{{index}}" class="inputfile"  (change)="AgregarAdjunto($event,cob,index)"/>
