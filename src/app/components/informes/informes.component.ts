@@ -373,7 +373,7 @@ async DescargarReporteGeneral(item){
     return
   }
   
- /*   this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
+   this.ValidadorRespondidoClientes = await this.ValidardorRespuestas(1,item.NPERIODO_PROCESO)
   if(this.ValidadorRespondidoClientes.length > 0){
     let mensaje = 'Debe cerrar todas las señales del grupo Clientes'
     this.SwalGlobal(mensaje)
@@ -396,7 +396,7 @@ async DescargarReporteGeneral(item){
     let mensaje = 'Debe cerrar todas las señales del grupo Contraparte'
     this.SwalGlobal(mensaje)
     return
-  } */
+  }
 
   this.ListaAlertaClientes = await this.DataAlertas(1,item.NPERIODO_PROCESO)
   this.ListaAlertaColaborador = await this.DataAlertas(2,item.NPERIODO_PROCESO)
